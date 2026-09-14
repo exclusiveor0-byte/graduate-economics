@@ -1,0 +1,36 @@
+# Chapter 0 · 미시경제이론의 수학적 언어와 존재 논리
+*집합·대응·위상·볼록성·최적화·분리·고정점*
+
+미시경제이론은 서로 다른 경제적 문제를 다루지만, 그 논증에는 반복되는 공통 구조가 있다.
+        소비자 수요, 기업 공급, 게임의 최적반응, Walrasian 균형, 파레토 효율성의 가격지지는 모두
+        실행가능한 선택집합을 정하고, 그 위에서 최적화를 수행하며, 선택의 안정성을 확인한 뒤,
+        고정점정리 또는 분리정리를 적용하는 과정으로 연결된다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- 0.1–0.3 수학적 언어: 집합·논리·표기
+- 0.4–0.6 위상·대응·볼록성
+- 0.7–0.8 최적화와 선택대응
+- 0.9–0.11 존재·가격지지·핵심 수학 문법의 연결
+:::
+
+## Sections
+
+- [0.1 경제모형의 공통 구조](01-model-structure.qmd)
+- [0.2 표기법, 기본 연산, 논리](02-notation-logic.qmd)
+- [0.3 유클리드 공간, 집합, 곱공간](03-euclidean-space-sets.qmd)
+- [0.4 위상, 수렴, 연속성, 콤팩트성](04-topology-convergence.qmd)
+- [0.5 함수와 대응](05-functions-correspondences.qmd)
+- [0.6 볼록성, 오목성, 준볼록성, 준오목성](06-convexity.qmd)
+- [0.7 행렬미분, 최적화, KKT](07-matrix-calculus-optimization-kkt.qmd)
+- [0.8 모수화된 최적화, Berge 최대정리, Envelope 정리](08-parameterized-optimization.qmd)
+- [0.9 고정점과 균형의 존재](09-fixed-point-existence.qmd)
+- [0.10 분리정리와 지지가격](10-separation-supporting-prices.qmd)
+- [0.11 핵심 수학 문법과 정리의 연결](11-math-map.qmd)
+- [연습문제](exercises.qmd)
+- [참고문헌](references.qmd)
+
+::: {.callout-tip title="협업 단위"}
+각 Section은 독립 페이지와 URL을 갖습니다. 내용 수정은 가능하면 Section 단위 Pull Request로 진행합니다.
+:::

@@ -1,0 +1,7 @@
+# 참고문헌
+
+Jehle, G. A., and P. J. Reny. *Advanced Microeconomic Theory*, 3rd ed., Chapter 3.
+
+Mas-Colell, A., M. D. Whinston, and J. R. Green. *Microeconomic Theory*, Chapters 5–6.
+
+Varian, H. R. *Microeconomic Analysis*, 3rd ed., Chapters 1–5. 생산기술, 비용함수, 이윤함수의 duality를 위한 보조 참고문헌.

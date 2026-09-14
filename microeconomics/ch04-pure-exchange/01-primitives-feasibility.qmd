@@ -1,0 +1,129 @@
+# 4.1 순수교환경제의 primitive와 feasibility
+
+> 순수교환경제에서는 재화가 생산되지 않는다. 경제 전체에 존재하는 재화의 총량은 초기부존의 합으로 이미 주어져 있고, 분석의 대상은 그 재화를 소비자 사이에 어떻게 재배분할 것인가와 어떤 상대가격이 그 재배분을 지지하는가다.
+
+::: {.callout-tip title="이 장의 기본 구조"}
+
+$$
+\text{preferences and endowments}
+\longrightarrow
+\text{individual demand}
+\longrightarrow
+\text{market clearing}
+\longrightarrow
+\text{Walrasian equilibrium}
+\longrightarrow
+\text{welfare and core}.
+$$
+
+소비자 소득은 외생적으로 고정되지 않는다. 각 소비자의 소득은 자신의 초기부존이 가격에서 갖는 가치로 결정된다. 이 점이 Chapter 3의 부분균형과 순수교환 일반균형을 가르는 핵심 차이다.
+:::
+
+### 4.1.1 Consumers, preferences, endowments
+
+소비자 집합은 유한한 집합
+$I=\{1,\ldots,m\}$
+이고, 재화 수는 $n$이라고 하자. 소비자 $i$의 소비집합, 선호, 초기부존을 각각
+
+
+$$
+X_i=\mathbb R_+^n,
+            \qquad
+            \succeq_i,
+            \qquad
+            e_i\in\mathbb R_+^n
+$$
+
+
+로 쓴다. 이 장의 순수교환경제는
+
+
+$$
+\mathcal E
+            =
+            \bigl((X_i,\succeq_i,e_i)\bigr)_{i\in I}
+$$
+
+
+로 표시한다. 총부존은
+
+
+$$
+\bar e=\sum_{i\in I}e_i
+$$
+
+
+이다. 이 장에서는 각 $\succeq_i$가 complete, transitive, continuous하다고 가정한다. $X_i=\mathbb R_+^n$는 separable metric space이므로, Debreu representation theorem에 의해 각 선호에 대해 연속 효용표현
+
+$$
+u_i:X_i\to\mathbb R
+$$
+
+을 하나 택할 수 있다. 이후 demand correspondence를 $u_i$로 쓰는 것은 이 표현을 고정한 뒤의 표기다.
+
+::: {.callout-note appearance="simple" title="선호 가정과 이 장에서의 역할"}
+- **complete, transitive, continuous** — 연속 효용표현의 존재와 선호 비교의 기본 정합성을 보장한다.
+- **convexity** — demand correspondence의 convex-valuedness와 supporting-price argument에 쓰인다.
+- **strict convexity** — truncation-removal에서 원래 예산집합의 strict improvement를 truncated budget set 안으로 옮긴 뒤에도 strict improvement가 유지되도록 한다.
+- **local nonsatiation** — budget exhaustion과 Walras law의 핵심 가정이다.
+- **strict monotonicity** — 이 장에서 strict monotonicity는 $x>y\Rightarrow x\succeq_i y$ 및 $x\gg y\Rightarrow x\succ_i y$를 뜻한다. 첫 조건은 weak monotonicity를 직접 포함하며, strict convexity와 함께 zero-price exclusion 및 positive-price conclusion에 쓰인다.
+:::
+
+이후의 존재성 증명에서는 $e_i\gg0$를 사용한다. 이는 각 소비자가 모든 재화를 양의 양으로 보유한다는 뜻이며, 특히 모든 정규화된 가격 $p\in\Delta$에 대해 $p\cdot e_i\gt0$를 보장한다.
+
+::: {.callout-note title="PURE EXCHANGE · 기본 객체"}
+생산경제와 달리 생산집합, 이윤, 기업소유지분은 없다. 이 장의 모든 결과는 소비자의 선호와 초기부존, 그리고 시장청산 조건으로부터 나온다.
+
+- **preference** — $\succeq_i$ 소비자 $i$가 bundle들을 순위화하는 관계다.
+- **endowment** — $e_i\in\mathbb R_+^n$ 교환 이전에 소비자 $i$가 보유한 재화묶음이다.
+- **aggregate endowment** — $\bar e=\sum_i e_i$ 생산이 없으므로 경제 전체에서 이용 가능한 재화의 총량이다.
+- **allocation** — $x=(x_i)_{i\in I}$ 각 소비자에게 배정되는 소비 bundle의 profile이다.
+:::
+
+### 4.1.2 Feasible allocations와 free disposal
+
+allocation $x=(x_i)_{i\in I}\in\prod_iX_i$가 물리적으로 feasible하다는 것은 소비자들의 총소비가 총부존을 초과하지 않는다는 뜻이다. 다만 순수교환경제의 기본 resource balance와 existence proof에서 편리한 free-disposal version을 구분해 두는 것이 좋다.
+
+
+$$
+\mathcal F(\bar e)
+            =
+            \left\{
+              x\in\prod_{i\in I}X_i:
+              \sum_{i\in I}x_i=\bar e
+            \right\},
+$$
+
+
+$$
+\mathcal F^{\le}(\bar e)
+            =
+            \left\{
+              x\in\prod_{i\in I}X_i:
+              \sum_{i\in I}x_i\leq\bar e
+            \right\}.
+$$
+
+
+::: {.callout-note appearance="simple" title="두 feasible set의 역할"}
+- **$\mathcal F(\bar e)$** — 표준 순수교환경제의 resource balance다. 생산이 없고 재화가 버려지지 않는 경우 총소비는 총부존과 정확히 같아야 한다.
+- **$\mathcal F^{\le}(\bar e)$** — Kakutani proof에서 먼저 얻는 truncated equilibrium의 feasibility 조건이다. 일부 재화의 가격이 0일 수 있으므로, proof의 중간 단계에서는 남는 재화의 disposal을 허용한다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · resource balance와 positive prices"}
+allocation이 $\mathcal F^{\le}(\bar e)$에만 속하더라도 local nonsatiation 아래 각 소비자는 예산을 소진한다. 따라서 Walras law는 양의 가격을 갖는 재화에 대해서는 정확한 시장청산을 준다. 모든 가격이 양수라면 free-disposal inequality는 equality로 강화된다.
+:::
+
+### 4.1.3 Edgeworth box의 위치
+
+두 소비자·두 재화의 경우
+
+
+$$
+m=2,
+            \qquad
+            n=2
+$$
+
+
+에는 $\bar e$를 가로·세로 길이로 하는 Edgeworth box가 유용하다. 그러나 Edgeworth box는 정의가 아니라 시각화다. 일반적인 $m$-소비자 $n$-재화 경제에서 효율배분과 균형의 정의는 allocation space와 feasibility 조건으로 주어지며, contract curve도 본질적으로는 Pareto efficient allocation의 집합이다.

@@ -1,0 +1,236 @@
+# 2.2 생산기술의 기하와 규모
+
+> 기술은 두 가지 다른 방향에서 읽을 수 있다. 하나는 주어진 output을 생산할 때 input을 어떻게 조합하는가의 문제이고, 다른 하나는 모든 input을 함께 확대할 때 output이 얼마나 변하는가의 문제다. 전자는 isoquant와 MRTS, 후자는 returns to scale의 언어로 다룬다.
+
+### 2.2.1 Isoquant, MRTS, 그리고 비용최소화의 KKT 조건
+
+목표산출량 $y$에 대한 isoquant는
+
+
+$$
+Q(y)=\{x\in\mathbb R_+^n:f(x)=y\}
+$$
+
+
+로 정의한다. $Q(y)$는 정확히 $y$를 생산하는 input bundle의 집합이다. 반면 $\mathcal V(y)$는 $y$ 이상을 생산하는 bundle 전체이므로, isoquant는 $\mathcal V(y)$의 생산 frontier에 해당한다.
+
+::: {.callout-important title="THEOREM 2.1 · target-output binding"}
+$f$가 continuous하고 $f(\mathbf0)=0$이라고 하자. $w\gg0$, $y\gt0$에서 $x^c\in X^c(w,y)$이면
+
+
+$$
+f(x^c)=y.
+$$
+
+
+즉 비용최소화에서는 목표산출량 제약이 binding된다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · target-output binding"}
+반대로 $f(x^c)\gt y$라고 하자. $y\gt0$이므로 $x^c\ne\mathbf0$다. 함수 $\alpha\mapsto f(\alpha x^c)$는 $[0,1]$에서 연속이고 $f(x^c)\gt y$이므로 $\alpha\lt1$을 1에 충분히 가깝게 택하면
+
+$$
+f(\alpha x^c)\ge y
+$$
+
+가 성립한다. 그러나 $w\gg0$, $x^c\ne\mathbf0$이므로
+
+$$
+w\cdot(\alpha x^c)=\alpha w\cdot x^c\lt w\cdot x^c.
+$$
+
+따라서 $\alpha x^c$는 더 낮은 비용으로 목표산출량을 달성하여 최소성에 모순이다. □
+:::
+
+$f\in C^1$이고 비용최소 input bundle $x^c\gg0$가 내부해라 하자. 라그랑지안을
+
+
+$$
+\mathcal L(x,\lambda,\mu)
+            =w\cdot x+\lambda\bigl(y-f(x)\bigr)-\mu\cdot x,
+            \qquad
+            \lambda\ge0,\quad \mu\ge0
+$$
+
+
+로 두면 KKT 조건은
+
+
+$$
+w-\lambda\nabla f(x^c)-\mu=0,
+            \qquad
+            \lambda\bigl(y-f(x^c)\bigr)=0,
+            \qquad
+            \mu_i x_i^c=0.
+$$
+
+
+내부해에서는 $\mu=0$이고 target-output binding 아래 $\lambda\gt0$이므로
+
+
+$$
+w_i=\lambda f_i(x^c),
+            \qquad
+            \frac{f_i(x^c)}{f_j(x^c)}=\frac{w_i}{w_j}
+            \quad\text{whenever }f_j(x^c)\ne0.
+$$
+
+
+좌변은 두 input 사이의 marginal rate of technical substitution, 즉
+
+
+$$
+MRTS_{ij}(x)=\frac{f_i(x)}{f_j(x)}
+$$
+
+
+이다. 그러나 $MRTS_{ij}=w_i/w_j$는 미분가능한 내부해에서만 성립한다. corner solution에서는 사용되지 않는 input $i$에 대해
+
+
+$$
+f_i(x^c)\le\frac{w_i}{\lambda}
+$$
+
+
+라는 KKT 부등식이 남는다. Leontief technology처럼 kink를 갖는 경우에는 MRTS 자체가 정의되지 않을 수 있다.
+
+### 2.2.2 한계생산, 평균생산, returns to varying proportions
+
+$f\in C^1$일 때 input $i$의 marginal product와 average product는 각각
+
+
+$$
+MP_i(x)=\frac{\partial f(x)}{\partial x_i},
+            \qquad
+            AP_i(x)=\frac{f(x)}{x_i}
+            \quad(x_i\gt0)
+$$
+
+
+로 정의한다. 다른 input을 고정하고 $x_i$만 늘릴 때 $MP_i$가 감소하는 현상은 diminishing marginal product다. 이는 모든 input을 함께 확대하는 returns to scale과 다른 개념이다.
+
+::: {.callout-note appearance="simple" title="REMARK · varying proportions와 scale의 구분"}
+diminishing marginal product는 $x_{-i}$를 고정한 채 한 input만 변화시키는 국소적 성질이다. 반면 returns to scale은 $x$의 모든 성분을 같은 비율로 변화시키는 전역적 성질이다. 예컨대 Cobb–Douglas technology는 constant returns to scale을 가지면서도 각 input에 대해 diminishing marginal product를 가질 수 있다.
+:::
+
+input $i$의 output elasticity는
+
+
+$$
+\varepsilon_i^f(x)
+            =\frac{\partial f(x)}{\partial x_i}\frac{x_i}{f(x)}
+            =\frac{MP_i(x)}{AP_i(x)}
+$$
+
+
+로 쓴다. 이 값은 input $i$를 1% 변화시킬 때, 다른 input을 고정한 상태에서 output이 몇 % 변하는지를 나타낸다.
+
+### 2.2.3 Returns to scale, homogeneity, concavity
+
+::: {.callout-note title="DEFINITION · returns to scale"}
+모든 $x\gg0$과 $t\gt1$에 대해 다음으로 정의한다.
+
+
+$$
+f(tx)=tf(x)
+              \quad\Longrightarrow\quad
+              \text{constant returns to scale (CRS)},
+$$
+
+
+$$
+f(tx)\gt tf(x)
+              \quad\Longrightarrow\quad
+              \text{increasing returns to scale (IRS)},
+$$
+
+
+$$
+f(tx)\lt tf(x)
+              \quad\Longrightarrow\quad
+              \text{decreasing returns to scale (DRS)}.
+$$
+
+:::
+
+::: {.callout-note title="DEFINITION · homogeneous technology"}
+$f$가 degree $\alpha\gt0$ homogeneous라는 것은 모든 $t\gt0$에 대해
+
+
+$$
+f(tx)=t^\alpha f(x)
+$$
+
+
+가 성립한다는 뜻이다. $\alpha=1$이면 CRS, $\alpha\gt1$이면 IRS, $0\lt\alpha\lt1$이면 DRS다.
+:::
+
+::: {.callout-important title="THEOREM 2.2 · Euler theorem for homogeneous production functions"}
+$f\in C^1$이고 degree $\alpha$ homogeneous이면 모든 $x\gg0$에 대해
+
+
+$$
+\sum_{i=1}^n f_i(x)x_i=\alpha f(x).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$g(t)=f(tx)$라고 두자. homogeneity로 $g(t)=t^\alpha f(x)$다. 사슬법칙으로
+
+$$
+g'(t)=\sum_{i=1}^n f_i(tx)x_i,
+$$
+
+한편 $g'(t)=\alpha t^{\alpha-1}f(x)$이다. $t=1$을 대입하면 결과를 얻는다. □
+:::
+
+::: {.callout-important title="THEOREM 2.3 · homogeneous quasiconcave technology의 concavity"}
+$f$가 monotone, quasiconcave이고 degree $\alpha\in(0,1]$ homogeneous이면 $f$는 concave하다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$g=f^{1/\alpha}$로 두자. $r\mapsto r^{1/\alpha}$는 strictly increasing이므로 $g$는 quasiconcave이고,
+$g(tx)=t g(x)$이므로 degree-one homogeneous다. 먼저 $g$가 concave임을 보이자.
+
+$a=g(x)\gt0$, $b=g(z)\gt0$라고 하고
+
+$$
+M=ta+(1-t)b,
+\qquad
+\lambda=\frac{ta}{M}
+$$
+
+로 두자. 그러면
+
+$$
+\frac{tx+(1-t)z}{M}
+=
+\lambda\frac{x}{a}
++(1-\lambda)\frac{z}{b}.
+$$
+
+homogeneity로 $g(x/a)=g(z/b)=1$이고, quasiconcavity로 우변에서의 $g$-값은 적어도 1이다.
+다시 degree-one homogeneity를 적용하면
+
+$$
+g\bigl(tx+(1-t)z\bigr)\ge M=tg(x)+(1-t)g(z).
+$$
+
+$a=0$ 또는 $b=0$인 경우에는 monotonicity와 homogeneity로 같은 부등식이 직접 따른다.
+따라서 $g$는 concave하다.
+
+이제 $r\mapsto r^\alpha$는 $\alpha\in(0,1]$에서 increasing and concave이므로
+
+$$
+f\bigl(tx+(1-t)z\bigr)
+=
+g\bigl(tx+(1-t)z\bigr)^\alpha
+\ge
+\bigl[tg(x)+(1-t)g(z)\bigr]^\alpha
+\ge
+t g(x)^\alpha+(1-t)g(z)^\alpha.
+$$
+
+마지막 항은 $tf(x)+(1-t)f(z)$이므로 $f$는 concave하다. □
+:::

@@ -1,0 +1,557 @@
+# 2.5 경쟁기업
+
+> 경쟁기업은 산출물 가격과 요소가격을 주어진 것으로 받아들인다. 기업의 문제는 어떤 input-output plan을 택할지 결정하는 것이며, 이 문제는 비용최소화와 output choice의 두 단계로 분해된다.
+
+### 2.5.1 Two-stage profit maximisation
+
+::: {.callout-note title="DEFINITION · profit maximisation"}
+경쟁기업의 이윤은
+
+
+$$
+\pi(y,x;p,w)=py-w\cdot x
+$$
+
+
+이고, profit function은
+
+
+$$
+\Pi(p,w)
+              =
+              \sup_{x\in\mathbb R_+^n,\ y\ge0}
+              \{py-w\cdot x:f(x)\ge y\}
+              \in\mathbb R\cup\{+\infty\}
+$$
+
+
+로 정의한다. increasing returns to scale처럼 이윤을 임의로 크게 만들 수 있는 기술에서는
+$\Pi(p,w)=+\infty$일 수 있으며, 이 경우 finite profit-maximising plan은 존재하지 않는다.
+:::
+
+::: {.callout-note title="DEFINITION · supply correspondence와 unconditional factor demand"}
+profit-maximising production plan의 집합을
+
+
+$$
+\mathcal F(p,w)
+              =
+              \operatorname{arg\,max}_{x\in\mathbb R_+^n,\ y\ge0}
+              \{py-w\cdot x:f(x)\ge y\}
+$$
+
+
+로 둔다. 이로부터 output supply correspondence와 unconditional factor-demand correspondence를 각각
+
+
+$$
+Y^s(p,w)=\{y:\exists x\text{ with }(y,x)\in\mathcal F(p,w)\},
+              \qquad
+              X^u(p,w)=\{x:\exists y\text{ with }(y,x)\in\mathcal F(p,w)\}
+$$
+
+
+로 정의한다. 두 correspondence가 singleton일 때 각각 $y^s(p,w)$, $x^u(p,w)$로 쓴다.
+:::
+
+| 객체 | 고정된 변수 | 무엇을 선택하는가 |
+| --- | --- | --- |
+| $X^c(w,y)$ | 요소가격 $w$, output target $y$ | 그 target을 가장 싸게 생산하는 input bundle |
+| $X^u(p,w)$ | 산출물 가격 $p$, 요소가격 $w$ | 이윤을 가장 크게 만드는 input bundle |
+| $Y^s(p,w)$ | 산출물 가격 $p$, 요소가격 $w$ | 이윤을 가장 크게 만드는 output scale |
+
+::: {.callout-important title="THEOREM 2.10 · two-stage decomposition"}
+모든 $p\gt0$, $w\gg0$에 대해
+
+
+$$
+\Pi(p,w)
+              =
+              \sup_{y\ge0}
+              \{py-c(w,y)\}.
+$$
+
+
+또한 $(y^*,x^*)$가 profit-maximising이면 $x^*\in X^c(w,y^*)$다. 즉 이윤극대화 기업은 자신이 선택한 output scale을 생산하는 데 가장 낮은 비용의 input bundle을 사용한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+임의의 feasible $(y,x)$에 대해 $x\in\mathcal V(y)$이므로 $w\cdot x\ge c(w,y)$다. 따라서
+
+$$
+py-w\cdot x
+\le py-c(w,y)
+\le\sup_{\tilde y\ge0}\{p\tilde y-c(w,\tilde y)\}.
+$$
+
+feasible plan 전체에 대해 supremum을 취하면
+
+$$
+\Pi(p,w)
+\le\sup_{y\ge0}\{py-c(w,y)\}.
+$$
+
+반대로 $y\in\mathcal Y_f$이면 $x\in X^c(w,y)$를 택할 수 있고, $(y,x)$는 feasible이며 그 이윤은 $py-c(w,y)$다.
+$y\notin\mathcal Y_f$에서는 extended-value convention에 의해 $py-c(w,y)=-\infty$이므로 supremum에 영향을 주지 않는다.
+따라서 반대 부등식도 성립한다.
+
+이제 $(y^*,x^*)$가 profit-maximising인데 $x^*\notin X^c(w,y^*)$라고 하자. 그러면 어떤 $\tilde x\in\mathcal V(y^*)$가 $w\cdot\tilde x\lt w\cdot x^*$를 만족한다. $(y^*,\tilde x)$는 feasible이며 더 높은 이윤을 주므로 모순이다. □
+:::
+
+### 2.5.2 Direct profit maximisation과 output choice
+
+$p\gt0$이면 주어진 input $x$에서 기업은 $y=f(x)$를 선택하는 것이 최선이다. 따라서 direct problem은
+
+
+$$
+\max_{x\in\mathbb R_+^n}\{p f(x)-w\cdot x\}
+$$
+
+
+로 쓸 수 있다. 이 표현은 factor price와 marginal product의 관계를 주고, two-stage representation은 output price와 marginal cost의 관계를 준다.
+
+::: {.callout-important title="THEOREM · direct profit maximisation의 KKT 조건"}
+$f\in C^1$이고 concave하며, $x^*$가 direct profit problem의 해라고 하자. 그러면 모든 $i$에 대해
+
+$$
+p f_i(x^*)\le w_i,
+\qquad
+x_i^*\gt0
+\Longrightarrow
+p f_i(x^*)=w_i.
+$$
+
+반대로 이 조건을 만족하는 $x^*$는 concavity 아래 전역적인 이윤극대해다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+목적함수 $x\mapsto pf(x)-w\cdot x$는 concave하다. 비음수 제약의 KKT 조건을 성분별로 쓰면
+
+$$
+p f_i(x^*)-w_i+\mu_i=0,
+\qquad
+\mu_i\ge0,
+\qquad
+\mu_i x_i^*=0.
+$$
+
+따라서 $p f_i(x^*)=w_i-\mu_i\le w_i$이고, $x_i^*\gt0$이면 $\mu_i=0$이므로 등호가 성립한다.
+concave maximisation에서 KKT 조건은 충분조건이기도 하다. □
+:::
+
+::: {.callout-important title="PROPOSITION · output supply와 marginal cost의 일반형"}
+two-stage decomposition에 의해
+
+$$
+Y^s(p,w)
+=
+\operatorname{arg\,max}_{y\ge0}\{py-c(w,y)\},
+\qquad
+X^u(p,w)
+=
+\bigcup_{y\in Y^s(p,w)}X^c(w,y).
+$$
+
+고정된 $w$에 대해 extended-value cost를
+
+$$
+\bar c_w(y)
+=
+\begin{cases}
+c(w,y), & y\in\mathcal Y_f\cap\mathbb R_+,\\
++\infty, & \text{otherwise}
+\end{cases}
+$$
+
+로 두고, $\bar c_w$가 proper convex라고 하자. 그러면
+
+$$
+y^*\in Y^s(p,w)
+\quad\Longleftrightarrow\quad
+p\in\partial\bar c_w(y^*),
+$$
+
+여기서
+
+$$
+\partial\bar c_w(y^*)
+=
+\left\{
+s:\ \bar c_w(y)\ge \bar c_w(y^*)+s(y-y^*)
+\text{ for every }y
+\right\}.
+$$
+
+특히 $y^*\in\operatorname{int}(\mathcal Y_f\cap\mathbb R_+)$이고 $c(w,\cdot)$가 $y^*$에서 미분가능하면
+
+$$
+p=\frac{\partial c(w,y^*)}{\partial y}.
+$$
+
+산출량 0, capacity boundary, 또는 비미분가능점에서는 이 등식 대신 subgradient condition을 사용해야 한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$y^*$가 이윤극대해라는 것은 모든 $y$에 대해
+
+$$
+py^*-\bar c_w(y^*)
+\ge
+py-\bar c_w(y)
+$$
+
+가 성립한다는 뜻이다. 이를 재배열하면
+
+$$
+\bar c_w(y)
+\ge
+\bar c_w(y^*)+p(y-y^*)
+\qquad\text{for every }y,
+$$
+
+즉 $p\in\partial\bar c_w(y^*)$다. 역방향도 같은 부등식을 거꾸로 읽으면 된다. 내부 미분가능점에서는 convex subdifferential이 $\{c_y(w,y^*)\}$이므로 등식형 marginal-cost condition이 따른다. □
+:::
+
+### 2.5.3 Returns to scale와 profit maximiser의 존재
+
+기업이 long run에서 모든 input을 조정할 수 있으면 returns to scale은 이윤극대화 문제의 존재 여부 자체를 좌우한다. 특히 CRS와 IRS는 규모 선택을 근본적으로 다르게 만든다.
+
+::: {.callout-important title="THEOREM 2.11 · CRS technology와 영이윤 조건"}
+$f$가 CRS이고 $\mathcal V(1)\ne\varnothing$이라고 하자. 그러면 모든 $y\ge0$가 기술적으로 달성 가능하고 $c(w,y)=yc(w,1)$이며
+
+
+$$
+\Pi(p,w)
+              =
+              \sup_{y\ge0}y\bigl[p-c(w,1)\bigr].
+$$
+
+
+따라서 다음 세 경우가 성립한다.
+
+
+$$
+p\lt c(w,1)
+              \Longrightarrow
+              y^*=0,
+$$
+
+
+$$
+p=c(w,1)
+              \Longrightarrow
+              \Pi(p,w)=0
+              \ \text{and every }y\ge0\text{ maximises profit},
+$$
+
+
+$$
+p\gt c(w,1)
+              \Longrightarrow
+              \Pi(p,w)=+\infty.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+CRS cost scaling을 two-stage formula에 대입하면
+
+$$
+\Pi(p,w)=\sup_{y\ge0}\{py-yc(w,1)\}=\sup_{y\ge0}y[p-c(w,1)].
+$$
+
+괄호 안의 계수가 음수이면 $y=0$이 유일한 maximiser다. 계수가 0이면 모든 $y$에서 이윤이 0이다. 계수가 양수이면 $y\to\infty$로 보내 이윤을 무한히 키울 수 있다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · IRS와 long-run competitive equilibrium"}
+IRS가 있는 기술에서는 어떤 양의 output level에서 양의 이윤을 얻을 수 있으면 scale을 확대하여 이윤을 계속 높일 수 있는 경우가 많다. 따라서 finite profit maximiser가 존재하지 않을 수 있다. 이는 단순한 비용곡선의 모양 문제가 아니라, 경쟁기업의 장기 공급을 정의하기 어렵게 만드는 구조적 문제다.
+:::
+
+### 2.5.4 Profit function과 Hotelling lemma
+
+::: {.callout-important title="PROPOSITION · profit function의 성질"}
+profit function $\Pi:\mathbb R_{++}\times\mathbb R_{++}^n\to\mathbb R\cup\{+\infty\}$는
+extended-value sense에서 $(p,w)$에 대해 다음 성질을 가진다.
+
+
+$$
+\Pi(\lambda p,\lambda w)=\lambda\Pi(p,w)
+              \qquad(\lambda\gt0),
+$$
+
+
+$$
+p'\ge p\Longrightarrow\Pi(p',w)\ge\Pi(p,w),
+              \qquad
+              w'\ge w\Longrightarrow\Pi(p,w')\le\Pi(p,w),
+$$
+
+
+$$
+\Pi\ \text{is convex in }(p,w).
+$$
+
+
+$\Pi$가 유한한 가격영역에서는 이는 통상적인 실수값 profit function의 성질로 읽으면 된다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+동차성은 목적함수 전체를 $\lambda$배 하면 supremum도 $\lambda$배가 된다는 사실에서 따른다. output price가 상승하면 모든 feasible plan의 이윤이 약하게 증가하고, factor price가 상승하면 모든 feasible plan의 이윤이 약하게 감소하므로 단조성도 따른다.
+
+각 feasible plan $(y,x)$에 대해 $(p,w)\mapsto py-w\cdot x$는 affine하다. profit function은 이 affine 함수들의 pointwise supremum이므로 convex하다. □
+:::
+
+::: {.callout-important title="THEOREM 2.12 · Hotelling lemma"}
+$(p,w)$의 어떤 근방에서 $\Pi$가 finite이고 profit-maximising output-input plan이 유일하며 그 maximiser가 연속적으로 선택된다고 하자. 또한 $\Pi$가 미분가능하다고 하자. 유일한 output supply를 $y^s(p,w)$, unconditional factor demand를 $x^u(p,w)$로 쓰면
+
+
+$$
+\frac{\partial\Pi(p,w)}{\partial p}
+              =y^s(p,w),
+              \qquad
+              \frac{\partial\Pi(p,w)}{\partial w_i}
+              =-x_i^u(p,w).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · envelope argument"}
+$(y^*,x^*)$를 $(p,w)$에서의 유일한 maximiser라 하자. $t\gt0$에 대해 $(y^*,x^*)$는 $(p+t,w)$에서도 feasible이므로
+
+$$
+\Pi(p+t,w)
+\ge
+(p+t)y^*-w\cdot x^*
+=\Pi(p,w)+ty^*.
+$$
+
+반대로 $(y^t,x^t)$를 $(p+t,w)$의 maximiser라 하면 $(y^t,x^t)$는 $(p,w)$에서도 feasible이므로
+
+$$
+\Pi(p,w)
+\ge
+py^t-w\cdot x^t
+=\Pi(p+t,w)-ty^t.
+$$
+
+따라서
+
+$$
+y^t
+\le
+\frac{\Pi(p+t,w)-\Pi(p,w)}{t}
+\le y^*.
+$$
+
+maximiser의 연속성과 $t\to0$을 쓰면 $\Pi_p=y^*$를 얻는다. $w_i$에 대해서도 같은 논증을 적용하면 부호만 바뀌어 $\Pi_{w_i}=-x_i^*$가 나온다. □
+:::
+
+net supply vector를
+
+
+$$
+z(p,w)
+            =
+            \begin{pmatrix}
+              y^s(p,w)\\
+              -x^u(p,w)
+            \end{pmatrix}
+$$
+
+
+로 두면 Hotelling lemma는 $z(p,w)=\nabla\Pi(p,w)$라고 쓸 수 있다. $\Pi\in C^2$이면
+
+
+$$
+D z(p,w)
+            =
+            D^2\Pi(p,w)
+            =D^2\Pi(p,w)^\top
+            \succeq0.
+$$
+
+
+이는 순공급의 가격미분행렬이 symmetric positive semidefinite임을 뜻한다. cost minimisation의 conditional factor-demand matrix가 negative semidefinite인 것과 대조적이다.
+
+::: {.callout-important title="PROPOSITION · Hotelling 비교정태와 reciprocity"}
+$\Pi\in C^2$이고 profit-maximising plan이 단일값이라고 하자. 그러면
+
+
+$$
+\frac{\partial y^s(p,w)}{\partial p}
+      =\Pi_{pp}(p,w)\ge0,
+      \qquad
+      \frac{\partial x_i^u(p,w)}{\partial w_i}
+      =-\Pi_{w_iw_i}(p,w)\le0,
+$$
+
+
+$$
+\frac{\partial y^s(p,w)}{\partial w_i}
+      =
+      -\frac{\partial x_i^u(p,w)}{\partial p}.
+$$
+
+
+즉 산출물 자체가격이 오르면 공급은 약하게 증가하고, 각 요소의 자체가격이 오르면 그 요소의 unconditional demand는 약하게 감소한다.
+마지막 식은 output price가 요소수요에 미치는 효과와 factor price가 output supply에 미치는 효과 사이의 reciprocity다.
+서로 다른 두 요소가격 사이의 교차효과는 일반적으로 부호가 정해지지 않는다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+Hotelling lemma로 $\Pi_p=y^s$, $\Pi_{w_i}=-x_i^u$다. $\Pi$의 convexity와 $C^2$ 정칙성으로
+Hessian은 positive semidefinite이므로 $\Pi_{pp}\ge0$, $\Pi_{w_iw_i}\ge0$이다.
+또한 혼합편도함수의 대칭성 $\Pi_{pw_i}=\Pi_{w_ip}$를 사용하면
+
+$$
+\frac{\partial y^s}{\partial w_i}
+=
+\Pi_{pw_i}
+=
+\Pi_{w_ip}
+=
+-\frac{\partial x_i^u}{\partial p}.
+$$
+
+□
+:::
+
+### 2.5.5 Short run과 restricted cost
+
+short run에서는 일부 input이 고정되어 있다. variable input을 $x_v$, 고정 input을 $\bar x_f$라고 하고 production function을 $f(x_v,\bar x_f)$로 쓰자.
+
+::: {.callout-note title="DEFINITION · restricted cost와 short-run profit"}
+
+$$
+VC(w_v,y;\bar x_f)
+              =
+              \min_{x_v\ge0}
+              \{w_v\cdot x_v:f(x_v,\bar x_f)\ge y\},
+$$
+
+
+$$
+C^{SR}(w_v,y;\bar x_f,w_f)
+              =w_f\cdot\bar x_f+VC(w_v,y;\bar x_f),
+$$
+
+
+$$
+\Pi^{SR}(p,w_v;\bar x_f,w_f)
+              =
+              \sup_{y\ge0}
+              \{py-C^{SR}(w_v,y;\bar x_f,w_f)\}.
+$$
+
+:::
+
+$y\gt0$일 때 average cost, average variable cost, marginal cost를
+
+
+$$
+AC(y)=\frac{C^{SR}(w_v,y;\bar x_f,w_f)}{y},
+            \qquad
+            AVC(y)=\frac{VC(w_v,y;\bar x_f)}{y},
+            \qquad
+            MC(y)=\frac{\partial C^{SR}(w_v,y;\bar x_f,w_f)}{\partial y}
+$$
+
+
+로 둔다. 고정비는 $AC$에는 들어가지만 $MC$에는 들어가지 않는다. 따라서 단기 산출량 선택은 variable cost의 기울기와 관련되고, 고정비는 이미 발생한 비용이라는 점에서 별도의 역할을 한다.
+
+::: {.callout-important title="PROPOSITION · average cost의 기울기와 marginal cost"}
+$C(y)$가 $y>0$에서 미분가능하고 $AC(y)=C(y)/y$, $MC(y)=C'(y)$라고 하자. 그러면
+
+$$
+AC'(y)
+=
+\frac{yC'(y)-C(y)}{y^2}
+=
+\frac{MC(y)-AC(y)}{y}.
+$$
+
+따라서
+
+$$
+MC(y)<AC(y)\Longrightarrow AC'(y)<0,
+\qquad
+MC(y)>AC(y)\Longrightarrow AC'(y)>0.
+$$
+
+내부의 평균비용 최소점에서는 $MC=AC$지만, 경계 최소점이나 비미분가능점에서는 이 등식이 필요하지 않다.
+:::
+
+fixed cost $FC=w_f\cdot\bar x_f$가 이미 발생하여 회수할 수 없는 sunk cost라면,
+
+$$
+\Pi^{SR}(p,w_v;\bar x_f,w_f)
+=
+\sup_{y\ge0}\{py-VC(w_v,y;\bar x_f)\}-FC.
+$$
+
+따라서 $FC$는 total profit에는 영향을 주지만, 단기 output choice와 shutdown choice에는 영향을 주지 않는다.
+단기 shutdown과 장기 exit을 구분해야 한다. 단기에는 고정 input을 이미 보유한 채 생산을 멈출지 결정하고,
+장기에는 고정 input 자체를 피할 수 있으므로 total cost를 기준으로 시장에 남을지를 결정한다.
+
+::: {.callout-important title="THEOREM · short-run shutdown과 long-run exit의 구분"}
+$VC(0)=0$이고 $VC(\cdot)$가 convex, continuous라고 하자. 단기 공급은
+
+$$
+\operatorname{arg\,max}_{y\ge0}\{py-VC(y)\}
+$$
+
+로 정해진다. 따라서
+
+$$
+p\lt\inf_{y\gt0}\frac{VC(y)}{y}
+=
+\inf_{y\gt0}AVC(y)
+\Longrightarrow
+y^{SR}=0.
+$$
+
+반면 장기에는 모든 input이 조정 가능하므로 long-run cost는
+
+$$
+c(w_v,w_f,y)
+=
+\inf_{\bar x_f\ge0}
+C^{SR}(w_v,y;\bar x_f,w_f)
+$$
+
+로 주어진다. 장기 entry·exit은 $AVC$가 아니라 total long-run average cost
+
+$$
+AC^{LR}(y)=\frac{c(w,y)}{y}
+$$
+
+와 비교해야 한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$p\lt AVC(y)$가 모든 $y\gt0$에 대해 성립하면
+
+$$
+py-VC(y)
+=
+y[p-AVC(y)]
+\lt0
+\qquad(y\gt0).
+$$
+
+반면 $y=0$에서는 값이 0이므로 shutdown이 최적이다. $FC$는 모든 $y$에 공통으로 더해지는 상수이므로
+argmax를 바꾸지 않는다. 장기비용 식은 모든 input을 variable로 취급하는 long-run cost minimisation을,
+먼저 $\bar x_f$를 고정한 short-run problem들 위에서 다시 최소화한 것으로부터 따른다.
+□
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · $p=MC$의 범위"}
+interior positive-output solution에서 $C^{SR}$가 미분가능하면 short-run profit의 first-order condition은
+
+$$
+p=\frac{\partial C^{SR}(w_v,y;\bar x_f,w_f)}{\partial y}
+=MC(y)
+$$
+
+이다. 그러나 이는 output이 양수이고 내부해이며 cost function이 미분가능하고 second-order condition이 충족될 때의 조건이다. shutdown corner나 비미분가능한 cost에서는 이 등식만으로 기업의 최적 output을 특징지을 수 없다.
+:::

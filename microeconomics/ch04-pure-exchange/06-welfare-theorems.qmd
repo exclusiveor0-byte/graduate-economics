@@ -1,0 +1,264 @@
+# 4.6 Welfare theorems
+
+> 후생경제학의 두 정리는 반대 방향의 명제다. First Welfare Theorem은 시장균형이 효율적임을 말하고, Second Welfare Theorem은 효율적인 배분을 적절한 재분배 후 시장균형으로 구현할 수 있음을 말한다. 두 정리는 사용하는 가정과 수학적 도구가 다르다.
+
+### 4.6.1 First Welfare Theorem
+
+::: {.callout-important title="THEOREM 4.8 · First Welfare Theorem"}
+각 소비자의 선호가 locally nonsatiated라고 하자. $(p^*,x^*)$가 Walrasian equilibrium이면 $x^*$는 Pareto efficient하다.
+
+
+$$
+(p^*,x^*)\text{ is Walrasian}
+              \quad\Longrightarrow\quad
+              x^*\in\mathcal P(\bar e).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+반대로 어떤 $y\in\mathcal F^{\le}(\bar e)$가 $x^*$를 Pareto dominate한다고 하자. 먼저 $y_i\succeq_i x_i^*$이면
+
+$$
+p^*\cdot y_i\ge p^*\cdot e_i
+$$
+
+이다. 만약 strict inequality의 반대인 $p^*\cdot y_i\lt p^*\cdot e_i$가 성립하면, $y_i$는 budget interior다. local nonsatiation으로 $y_i$ 근처에서 $y_i$보다 strictly preferred하면서 여전히 budget feasible한 bundle을 잡을 수 있다. 이는 $x_i^*$의 optimality에 모순이다.
+
+어떤 $j$에 대해서는 $y_j\succ_j x_j^*$이므로
+
+$$
+p^*\cdot y_j\gt p^*\cdot e_j.
+$$
+
+따라서 모든 소비자에 대해 합하면
+
+$$
+p^*\cdot\sum_i y_i
+\gt
+p^*\cdot\sum_i e_i.
+$$
+
+그러나 $y\in\mathcal F^{\le}(\bar e)$, $p^*\ge0$이므로
+
+$$
+p^*\cdot\sum_i y_i
+\le
+p^*\cdot\bar e
+=
+p^*\cdot\sum_i e_i.
+$$
+
+모순이다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · First Welfare Theorem은 공정성 명제가 아니다"}
+정리는 Pareto efficiency만 말한다. 초기부존이 매우 불평등하면 균형은 효율적이면서도 분배적으로 매우 불평등할 수 있다. 따라서 효율성과 분배는 분리되어야 한다는 것이 Second Welfare Theorem의 출발점이다.
+:::
+
+### 4.6.2 Supporting price, quasi-equilibrium, Second Welfare Theorem
+
+Pareto efficient allocation을 market equilibrium으로 decentralise하는 논리는 다음 세 단계로 분리된다.
+
+
+$$
+\text{Pareto efficiency}
+            \Longrightarrow
+            \text{supporting price and quasi-equilibrium}
+            \Longrightarrow
+            \text{Walrasian equilibrium under a wealth condition}.
+$$
+
+
+첫 번째 화살표는 strict upper contour sets와 free-disposal cone을 분리하는 convex-separation argument다. 두 번째 화살표는 equality-price bundle을 strict-budget bundle로 섞을 수 있는 소비집합의 convexity와 positive-wealth condition을 사용한다.
+
+::: {.callout-important title="THEOREM 4.9 · Second Welfare Theorem: supporting price와 quasi-equilibrium"}
+소비자와 재화의 수가 유한하고, 각 $X_i\subseteq\mathbb R_+^n$가 convex라고 하자. 각 $\succeq_i$가 complete, transitive, continuous, convex, locally nonsatiated라고 하자. Equality-feasible allocation $x^*\in\mathcal F(\bar e)$가 free-disposal feasible set $\mathcal F^{\le}(\bar e)$에 대해 Pareto efficient라고 하자. 그러면 어떤
+
+$$
+p\in\mathbb R_+^n\setminus\{0\}
+$$
+
+가 존재하여 모든 소비자 $i$에 대해
+
+$$
+y_i\succeq_i x_i^*
+\quad\Longrightarrow\quad
+p\cdot y_i\ge p\cdot x_i^*.
+$$
+
+특히
+
+$$
+y_i\succ_i x_i^*
+\quad\Longrightarrow\quad
+p\cdot y_i\ge p\cdot x_i^*,
+$$
+
+이므로 $(p,x^*)$는 endowment를 $x_i^*$로 재분배한 경제의 price quasi-equilibrium이다. 앞 절의 weak monotonicity가 유지되는 현재 순수교환환경에서는 $x^*\in\mathcal P(\bar e)$만 가정해도 바로 앞 proposition에 의해 free-disposal efficiency가 따른다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · strict improvement set의 분리"}
+각 소비자에 대해 strict upper contour set을
+
+$$
+P_i(x_i^*)
+=
+\{y_i\in X_i:y_i\succ_i x_i^*\}
+$$
+
+로 두고, aggregate improvement set을
+
+$$
+A(x^*)
+=
+\sum_{i\in I}P_i(x_i^*)+\mathbb R_+^n
+$$
+
+로 정의한다. 선호의 continuity로 $P_i(x_i^*)$는 $X_i$의 상대위상에서 open이고, convexity로 convex다. Local nonsatiation으로 각 $P_i(x_i^*)$는 nonempty이며 $x_i^*\in\operatorname{cl}P_i(x_i^*)$다. 따라서 $A(x^*)$는 nonempty convex set이고
+
+$$
+A(x^*)+\mathbb R_+^n=A(x^*).
+$$
+
+또한 각 소비자에 대해 $y_i^k\succ_i x_i^*$, $y_i^k\to x_i^*$인 수열을 동시에 택하면 $\sum_i y_i^k\to\bar e$이므로
+
+$$
+\bar e\in\operatorname{cl}A(x^*).
+$$
+
+
+$\bar e\in A(x^*)$라면 어떤 $y_i\succ_i x_i^*$와 $r\ge0$가 존재하여
+
+$$
+\bar e=\sum_i y_i+r.
+$$
+
+그러면 $(y_i)_i\in\mathcal F^{\le}(\bar e)$가 모든 소비자를 엄격히 개선하므로 free-disposal Pareto efficiency에 모순이다. 따라서 $\bar e\notin A(x^*)$다.
+
+$A(x^*)$가 convex이고 $\bar e\in\operatorname{cl}A(x^*)\setminus A(x^*)$이므로, $\bar e$는 closed convex set $\operatorname{cl}A(x^*)$의 경계점이다. Supporting-hyperplane theorem에 의해 어떤 $p\ne0$가 존재하여
+
+$$
+p\cdot a\ge p\cdot\bar e
+\qquad\text{for every }a\in\operatorname{cl}A(x^*),
+$$
+
+특히 모든 $a\in A(x^*)$에 대해 같은 부등식이 성립한다.
+$A(x^*)$가 $\mathbb R_+^n$ 방향으로 upper comprehensive이므로 $p$에 음의 성분이 있을 수 없다. 실제로 $p_\ell<0$이면 임의의 $a\in A(x^*)$에 대해 $a+t\mathbf e^\ell\in A(x^*)$인데, $t\to\infty$에서 $p\cdot(a+t\mathbf e^\ell)\to-\infty$가 되어 분리부등식에 모순이다. 따라서 $p\ge0$.
+
+이제 $y_i\succ_i x_i^*$를 고정하자. 각 $j\ne i$에 대해 local nonsatiation으로 $y_j^k\succ_j x_j^*$이면서 $y_j^k\to x_j^*$인 수열을 택할 수 있다. 그러면
+
+$$
+y_i+\sum_{j\ne i}y_j^k\in A(x^*)
+$$
+
+이므로
+
+$$
+p\cdot y_i+\sum_{j\ne i}p\cdot y_j^k
+\ge
+p\cdot\bar e
+=
+\sum_jp\cdot x_j^*.
+$$
+
+$k\to\infty$로 보내면
+
+$$
+p\cdot y_i\ge p\cdot x_i^*.
+$$
+
+
+마지막으로 $y_i\succeq_i x_i^*$라고 하자. Local nonsatiation으로 $z_i^k\succ_i y_i$이면서 $z_i^k\to y_i$인 수열을 택할 수 있다. Transitivity로 $z_i^k\succ_i x_i^*$이고, 방금 얻은 부등식을 적용한 뒤 극한을 취하면
+
+$$
+p\cdot y_i\ge p\cdot x_i^*.
+$$
+
+□
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · 이 정리가 제거한 별도 가정"}
+이 증명은 weak upper contour sets의 Minkowski sum이 closed라고 별도로 가정하지 않는다. 대신 convex한 strict upper contour sets의 aggregate improvement set을 만들고 그 closure의 경계점에서 supporting hyperplane을 적용한다. 또한 Pareto efficiency와 free-disposal efficiency의 차이는 앞 proposition에서 weak monotonicity를 통해 명시적으로 연결했다. Separation이 직접 주는 결론은 nonnegative supporting price와 quasi-equilibrium이며, ordinary Walrasian equilibrium으로의 승격에는 아래의 wealth condition이 별도로 필요하다.
+:::
+
+::: {.callout-note title="DEFINITION · quasi-equilibrium"}
+$m_i=p\cdot x_i^*$라고 하자. $x_i^*$가 $p$와 $m_i$에서 quasi-demand라는 것은
+
+
+$$
+y_i\succ_i x_i^*
+              \quad\Longrightarrow\quad
+              p\cdot y_i\ge m_i
+$$
+
+
+가 성립한다는 뜻이다. supporting-price inequality는 바로 이 quasi-equilibrium 조건을 준다. 그러나 equality가 허용되므로, 이 단계만으로는 ordinary budget maximisation이 아직 보장되지 않는다.
+:::
+
+::: {.callout-important title="PROPOSITION · quasi-equilibrium에서 ordinary equilibrium으로"}
+$X_i$가 convex이고, $\succeq_i$가 continuous하며, $x_i^*$가 $p,m_i$에서 quasi-demand라고 하자. 또한
+
+
+$$
+m_i\gt 
+              \underline m_i(p)
+              :=
+              \inf_{x_i\in X_i}p\cdot x_i.
+$$
+
+
+그러면 $x_i^*$는 ordinary budget set $\{x_i:p\cdot x_i\le m_i\}$에서 optimal하다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+반대로 $y_i\succ_i x_i^*$와 $p\cdot y_i\le m_i$가 있다고 하자. $p\cdot y_i\lt m_i$이면 quasi-demand 조건에 즉시 모순이다. 따라서 $p\cdot y_i=m_i$여야 한다. wealth condition에 의해 $p\cdot \hat x_i\lt m_i$인 $\hat x_i\in X_i$를 잡을 수 있다. continuity로 strict upper contour set $\{z_i:z_i\succ_i x_i^*\}$는 open이므로, $\lambda\lt 1$를 충분히 1에 가깝게 택하면
+
+$$
+z_i^\lambda
+=
+\lambda y_i+(1-\lambda)\hat x_i
+\succ_i x_i^*.
+$$
+
+한편
+
+$$
+p\cdot z_i^\lambda
+=
+\lambda m_i+(1-\lambda)p\cdot\hat x_i
+\lt m_i.
+$$
+
+이는 quasi-demand 조건에 모순이다. □
+:::
+
+::: {.callout-important title="COROLLARY · redistribution and decentralisation"}
+Theorem 4.9의 supporting price $p$에 대해
+
+
+$$
+m_i=p\cdot x_i^*
+              \gt 
+              \inf_{x_i\in X_i}p\cdot x_i
+              \qquad
+              \text{for every }i
+$$
+
+
+가 성립한다고 하자. $\sum_i\tilde e_i=\bar e$와
+
+
+$$
+p\cdot\tilde e_i=p\cdot x_i^*
+              \qquad
+              \text{for every }i
+$$
+
+
+를 만족하는 재분배된 endowment profile $(\tilde e_i)_i$를 택하면, $(p,x^*)$는 그 경제의 Walrasian equilibrium이다. $X_i=\mathbb R_+^n$이면 $\inf_{x_i\in X_i}p\cdot x_i=0$이므로 충분조건은 $p\cdot x_i^*\gt 0$이다. 이 wealth condition이 충족되지 않으면 separation argument가 보장하는 결론은 일반적으로 quasi-equilibrium까지다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · $\tilde e_i=x_i^*$의 의미"}
+가장 단순한 재분배는 $\tilde e_i=x_i^*$다. 이는 특정 정책을 권고한다는 뜻이 아니라, Pareto efficient allocation이 적절한 wealth distribution 아래 market equilibrium으로 구현될 수 있음을 보이는 논리적 구성이다.
+:::

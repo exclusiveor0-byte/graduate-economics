@@ -1,0 +1,348 @@
+[
+  {
+    "file": "microeconomics/ch00-foundations/01-model-structure.qmd",
+    "source_ids": [
+      "ch0-s01"
+    ],
+    "title": "0.1 경제모형의 공통 구조",
+    "chars": 1427
+  },
+  {
+    "file": "microeconomics/ch00-foundations/02-notation-logic.qmd",
+    "source_ids": [
+      "ch0-s02"
+    ],
+    "title": "0.2 표기법, 기본 연산, 논리",
+    "chars": 5069
+  },
+  {
+    "file": "microeconomics/ch00-foundations/03-euclidean-space-sets.qmd",
+    "source_ids": [
+      "ch0-s03"
+    ],
+    "title": "0.3 유클리드 공간, 집합, 곱공간",
+    "chars": 2148
+  },
+  {
+    "file": "microeconomics/ch00-foundations/04-topology-convergence.qmd",
+    "source_ids": [
+      "ch0-s04"
+    ],
+    "title": "0.4 위상, 수렴, 연속성, 콤팩트성",
+    "chars": 5157
+  },
+  {
+    "file": "microeconomics/ch00-foundations/05-functions-correspondences.qmd",
+    "source_ids": [
+      "ch0-s05"
+    ],
+    "title": "0.5 함수와 대응",
+    "chars": 5143
+  },
+  {
+    "file": "microeconomics/ch00-foundations/06-convexity.qmd",
+    "source_ids": [
+      "ch0-s06"
+    ],
+    "title": "0.6 볼록성, 오목성, 준볼록성, 준오목성",
+    "chars": 5877
+  },
+  {
+    "file": "microeconomics/ch00-foundations/07-matrix-calculus-optimization-kkt.qmd",
+    "source_ids": [
+      "ch0-s07"
+    ],
+    "title": "0.7 행렬미분, 최적화, KKT",
+    "chars": 6122
+  },
+  {
+    "file": "microeconomics/ch00-foundations/08-parameterized-optimization.qmd",
+    "source_ids": [
+      "ch0-s08"
+    ],
+    "title": "0.8 모수화된 최적화, Berge 최대정리, Envelope 정리",
+    "chars": 4142
+  },
+  {
+    "file": "microeconomics/ch00-foundations/09-fixed-point-existence.qmd",
+    "source_ids": [
+      "ch0-s09"
+    ],
+    "title": "0.9 고정점과 균형의 존재",
+    "chars": 1556
+  },
+  {
+    "file": "microeconomics/ch00-foundations/10-separation-supporting-prices.qmd",
+    "source_ids": [
+      "ch0-s10"
+    ],
+    "title": "0.10 분리정리와 지지가격",
+    "chars": 1830
+  },
+  {
+    "file": "microeconomics/ch00-foundations/11-math-map.qmd",
+    "source_ids": [
+      "ch0-s11"
+    ],
+    "title": "0.11 핵심 수학 문법과 정리의 연결",
+    "chars": 1138
+  },
+  {
+    "file": "microeconomics/ch00-foundations/exercises.qmd",
+    "source_ids": [
+      "ch0-exercises"
+    ],
+    "title": "연습문제",
+    "chars": 3909
+  },
+  {
+    "file": "microeconomics/ch00-foundations/references.qmd",
+    "source_ids": [
+      "ch0-references"
+    ],
+    "title": "참고문헌",
+    "chars": 318
+  },
+  {
+    "file": "microeconomics/ch01-consumer/01-components.qmd",
+    "source_ids": [
+      "ch1-s11"
+    ],
+    "title": "1.1 소비자 선택모형의 구성요소",
+    "chars": 3315
+  },
+  {
+    "file": "microeconomics/ch01-consumer/02-preferences-utility.qmd",
+    "source_ids": [
+      "ch1-s12",
+      "ch1-consumer-assumptions"
+    ],
+    "title": "1.2 선호와 효용",
+    "chars": 13542
+  },
+  {
+    "file": "microeconomics/ch01-consumer/03-consumer-problem.qmd",
+    "source_ids": [
+      "ch1-s13"
+    ],
+    "title": "1.3 소비자의 문제",
+    "chars": 9894
+  },
+  {
+    "file": "microeconomics/ch01-consumer/04-indirect-utility-expenditure.qmd",
+    "source_ids": [
+      "ch1-s14"
+    ],
+    "title": "1.4 간접효용과 지출",
+    "chars": 19381
+  },
+  {
+    "file": "microeconomics/ch01-consumer/05-demand-properties.qmd",
+    "source_ids": [
+      "ch1-s15",
+      "ch1-s155"
+    ],
+    "title": "1.5 소비자수요의 성질",
+    "chars": 19444
+  },
+  {
+    "file": "microeconomics/ch01-consumer/supplement-standard-utility.qmd",
+    "source_ids": [
+      "ch1-examples"
+    ],
+    "title": "표준 효용함수와 수요대응",
+    "chars": 5181
+  },
+  {
+    "file": "microeconomics/ch01-consumer/exercises.qmd",
+    "source_ids": [
+      "ch1-exercises"
+    ],
+    "title": "1.6 연습문제",
+    "chars": 3260
+  },
+  {
+    "file": "microeconomics/ch01-consumer/references.qmd",
+    "source_ids": [
+      "ch1-references"
+    ],
+    "title": "참고문헌",
+    "chars": 349
+  },
+  {
+    "file": "microeconomics/ch02-producer/01-firm-technology.qmd",
+    "source_ids": [
+      "ch2-s21"
+    ],
+    "title": "2.1 기업과 기술",
+    "chars": 8149
+  },
+  {
+    "file": "microeconomics/ch02-producer/02-geometry-scale.qmd",
+    "source_ids": [
+      "ch2-s22"
+    ],
+    "title": "2.2 생산기술의 기하와 규모",
+    "chars": 5127
+  },
+  {
+    "file": "microeconomics/ch02-producer/03-cost-minimization.qmd",
+    "source_ids": [
+      "ch2-s23"
+    ],
+    "title": "2.3 비용최소화",
+    "chars": 9698
+  },
+  {
+    "file": "microeconomics/ch02-producer/04-production-duality.qmd",
+    "source_ids": [
+      "ch2-s24"
+    ],
+    "title": "2.4 생산의 duality",
+    "chars": 7472
+  },
+  {
+    "file": "microeconomics/ch02-producer/05-competitive-firm.qmd",
+    "source_ids": [
+      "ch2-s25"
+    ],
+    "title": "2.5 경쟁기업",
+    "chars": 12206
+  },
+  {
+    "file": "microeconomics/ch02-producer/supplement-standard-technologies.qmd",
+    "source_ids": [
+      "ch2-examples"
+    ],
+    "title": "표준 기술과 비용·이윤",
+    "chars": 2682
+  },
+  {
+    "file": "microeconomics/ch02-producer/exercises.qmd",
+    "source_ids": [
+      "ch2-exercises"
+    ],
+    "title": "2.6 연습문제",
+    "chars": 2874
+  },
+  {
+    "file": "microeconomics/ch02-producer/references.qmd",
+    "source_ids": [
+      "ch2-references"
+    ],
+    "title": "참고문헌",
+    "chars": 282
+  },
+  {
+    "file": "microeconomics/ch03-partial-equilibrium/01-perfect-competition.qmd",
+    "source_ids": [
+      "ch3-s31"
+    ],
+    "title": "3.1 완전경쟁시장",
+    "chars": 9657
+  },
+  {
+    "file": "microeconomics/ch03-partial-equilibrium/02-market-conduct.qmd",
+    "source_ids": [
+      "ch3-s32"
+    ],
+    "title": "3.2 같은 시장, 다른 conduct",
+    "chars": 19932
+  },
+  {
+    "file": "microeconomics/ch03-partial-equilibrium/03-equilibrium-welfare.qmd",
+    "source_ids": [
+      "ch3-s33"
+    ],
+    "title": "3.3 균형과 후생",
+    "chars": 7646
+  },
+  {
+    "file": "microeconomics/ch03-partial-equilibrium/04-linear-model-exercises.qmd",
+    "source_ids": [
+      "ch3-s34"
+    ],
+    "title": "3.4 표준 선형 모형과 연습문제",
+    "chars": 3892
+  },
+  {
+    "file": "microeconomics/ch03-partial-equilibrium/references.qmd",
+    "source_ids": [
+      "ch3-references"
+    ],
+    "title": "참고문헌",
+    "chars": 301
+  },
+  {
+    "file": "microeconomics/ch04-pure-exchange/01-primitives-feasibility.qmd",
+    "source_ids": [
+      "ch4-s41"
+    ],
+    "title": "4.1 순수교환경제의 primitive와 feasibility",
+    "chars": 3905
+  },
+  {
+    "file": "microeconomics/ch04-pure-exchange/02-prices-income-demand.qmd",
+    "source_ids": [
+      "ch4-s42"
+    ],
+    "title": "4.2 가격, endowment income, individual demand",
+    "chars": 3716
+  },
+  {
+    "file": "microeconomics/ch04-pure-exchange/03-walrasian-equilibrium-law.qmd",
+    "source_ids": [
+      "ch4-s43"
+    ],
+    "title": "4.3 Walrasian equilibrium과 Walras law",
+    "chars": 3174
+  },
+  {
+    "file": "microeconomics/ch04-pure-exchange/04-existence-truncated-economy.qmd",
+    "source_ids": [
+      "ch4-s44"
+    ],
+    "title": "4.4 Walrasian equilibrium의 존재: truncated economy",
+    "chars": 9883
+  },
+  {
+    "file": "microeconomics/ch04-pure-exchange/05-pareto-contract-set.qmd",
+    "source_ids": [
+      "ch4-s45"
+    ],
+    "title": "4.5 Pareto efficiency와 contract set",
+    "chars": 2973
+  },
+  {
+    "file": "microeconomics/ch04-pure-exchange/06-welfare-theorems.qmd",
+    "source_ids": [
+      "ch4-s46"
+    ],
+    "title": "4.6 Welfare theorems",
+    "chars": 7419
+  },
+  {
+    "file": "microeconomics/ch04-pure-exchange/07-core-competitive-limit.qmd",
+    "source_ids": [
+      "ch4-s47"
+    ],
+    "title": "4.7 Core와 competitive limit",
+    "chars": 7039
+  },
+  {
+    "file": "microeconomics/ch04-pure-exchange/supplement-examples-exercises.qmd",
+    "source_ids": [
+      "ch4-s48"
+    ],
+    "title": "4.8 표준 예제와 연습문제",
+    "chars": 4906
+  },
+  {
+    "file": "microeconomics/ch04-pure-exchange/references.qmd",
+    "source_ids": [
+      "ch4-references"
+    ],
+    "title": "참고문헌",
+    "chars": 311
+  }
+]

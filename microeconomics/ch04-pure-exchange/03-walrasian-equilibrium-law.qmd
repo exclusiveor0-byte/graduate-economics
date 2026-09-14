@@ -1,0 +1,159 @@
+# 4.3 Walrasian equilibrium과 Walras law
+
+> Walrasian equilibrium은 개별 최적화와 시장청산을 동시에 만족하는 가격·배분 쌍이다. 균형의 핵심은 가격 하나가 아니라, 동일한 가격이 모든 소비자의 budget set을 정의하고 그 선택들이 전체 resource balance와 양립한다는 점이다.
+
+### 4.3.1 Definition과 aggregate excess demand
+
+::: {.callout-note title="DEFINITION · Walrasian equilibrium"}
+$p^*\in\Delta$와 allocation $x^*=(x_i^*)_{i\in I}$가 Walrasian equilibrium을 이룬다는 것은
+
+
+$$
+x_i^*\in D_i(p^*)
+              \qquad
+              \text{for every }i\in I,
+$$
+
+
+$$
+\sum_{i\in I}x_i^*=\bar e
+$$
+
+
+가 동시에 성립한다는 뜻이다. $\sum_i x_i^*\le\bar e$만 요구하는 경우에는 Walrasian equilibrium with free disposal이라고 부른다.
+:::
+
+individual demand가 다가값일 수 있으므로 aggregate excess demand도 correspondence로 정의하는 편이 정확하다.
+
+
+$$
+Z(p)
+            =
+            \left\{
+              \sum_{i\in I}x_i-\bar e:
+              x_i\in D_i(p)
+              \text{ for every }i\in I
+            \right\}.
+$$
+
+
+모든 $D_i(p)$가 singleton이면 $d_i(p)$로 쓰고,
+
+
+$$
+z(p)=\sum_{i\in I}d_i(p)-\bar e
+$$
+
+
+라는 vector-valued excess demand function을 사용한다. 균형은 $0\in Z(p^*)$, 또는 단일값인 경우 $z(p^*)=0$으로 표현된다.
+
+### 4.3.2 Budget exhaustion과 Walras law
+
+::: {.callout-important title="THEOREM 4.1 · budget exhaustion"}
+$\succeq_i$가 locally nonsatiated이고 $x_i^*\in D_i(p)$라고 하자. 그러면
+
+
+$$
+p\cdot x_i^*=p\cdot e_i.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+반대로 $p\cdot x_i^*\lt p\cdot e_i$라고 하자. budget slack이 양수이므로 $x_i^*$의 충분히 작은 근방에 있는 bundle은 여전히 budget feasible하다. local nonsatiation에 의해 그 근방에는 $x_i^*$보다 strictly preferred한 bundle이 존재한다. 이는 $x_i^*$의 최적성에 모순이다. □
+:::
+
+::: {.callout-important title="THEOREM 4.2 · Walras law"}
+local nonsatiation 아래 $z\in Z(p)$이면
+
+
+$$
+p\cdot z=0.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$z=\sum_i x_i-\bar e$이고 $x_i\in D_i(p)$라고 하자. Theorem 4.1에 의해 $p\cdot x_i=p\cdot e_i$이므로
+
+$$
+p\cdot z
+=
+\sum_i p\cdot x_i-\sum_i p\cdot e_i
+=0.
+$$
+
+□
+:::
+
+::: {.callout-caution title="WARNING · Walras law는 market clearing이 아니다"}
+
+$$
+p\cdot z=0
+\not\Longrightarrow
+z=0.
+$$
+
+Walras law는 초과수요 vector의 시장가치가 0이라는 하나의 scalar restriction일 뿐이다. 다만 $p\gg0$이고 $z\le0$가 이미 얻어졌다면, $p\cdot z=0$은 각 좌표에 대해 $z_\ell=0$을 강제한다.
+:::
+
+### 4.3.3 Aggregate excess demand의 성질
+
+::: {.callout-important title="PROPOSITION · aggregate excess demand의 표준 성질"}
+ordinary demand가 $\mathbb R_{++}^n$에서 single-valued라고 하자. 그러면
+
+
+$$
+z(p)
+              =
+              \sum_{i\in I}d_i\bigl(p,p\cdot e_i\bigr)-\bar e
+$$
+
+
+는 다음 두 성질을 가진다.
+
+
+$$
+z(\lambda p)=z(p)
+              \qquad
+              \text{for every }\lambda\gt0,
+$$
+
+
+$$
+p\cdot z(p)=0.
+$$
+
+
+첫 식의 근거는 individual Marshallian demand의 joint degree-zero homogeneity와 endowment income의 degree-one homogeneity를 함께 쓰는 데 있다. 즉
+
+
+$$
+d_i(\lambda p,\lambda m)=d_i(p,m),
+              \qquad
+              (\lambda p)\cdot e_i=\lambda(p\cdot e_i).
+$$
+
+
+따라서
+
+
+$$
+d_i\bigl(\lambda p,(\lambda p)\cdot e_i\bigr)
+              =
+              d_i\bigl(p,p\cdot e_i\bigr),
+$$
+
+
+이고, 이를 소비자 전체에 합하면 $z(\lambda p)=z(p)$가 따른다. 둘째 식은 Walras law다. 따라서 $p\gg0$일 때 $n-1$개의 시장이 청산되면 마지막 시장도 자동으로 청산된다. 실제로
+
+
+$$
+z_1(p)=\cdots=z_{n-1}(p)=0
+              \quad\Longrightarrow\quad
+              p_nz_n(p)=0
+              \quad\Longrightarrow\quad
+              z_n(p)=0.
+$$
+
+:::

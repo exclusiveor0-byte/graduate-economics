@@ -1,0 +1,25 @@
+<script>
+// Keep wide tables within the reading column, with keyboard-accessible scrolling.
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("main table").forEach((table) => {
+    if (table.closest(".table-scroll")) return;
+    const wrapper = document.createElement("div");
+    wrapper.className = "table-scroll";
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute("role", "region");
+    wrapper.setAttribute("aria-label", "표 — 내용이 넓으면 좌우로 스크롤하세요");
+    table.before(wrapper);
+    wrapper.append(table);
+  });
+  const labelMath = () => document.querySelectorAll('mjx-container[display="true"]').forEach((math) => {
+    if (math.scrollWidth > math.clientWidth + 1) {
+      math.tabIndex = 0;
+      math.setAttribute("title", "긴 수식 — 좌우로 스크롤할 수 있습니다");
+    }
+  });
+  document.addEventListener("shown.bs.collapse", labelMath);
+  window.addEventListener("resize", labelMath);
+  if (window.MathJax?.startup?.promise) window.MathJax.startup.promise.then(labelMath);
+  else window.addEventListener("load", labelMath, { once: true });
+});
+</script>

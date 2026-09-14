@@ -1,0 +1,3 @@
+# Econometrics Migration Overview
+
+현재는 구조 placeholder입니다. 이후 OLS → GLS → IV → GMM → MLE → Asymptotics 및 time-series 구조를 마이그레이션할 수 있습니다.

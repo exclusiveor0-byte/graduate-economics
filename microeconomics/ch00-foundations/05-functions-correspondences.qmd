@@ -1,0 +1,200 @@
+# 0.5 함수와 대응
+
+함수는 각 입력에 하나의 출력을 대응시킨다. 그러나 경제이론의 최적화 문제에서는 최적해의 유일성이 일반적으로 보장되지 않는다. 선호가 단지 볼록할 수 있고, 이윤함수는 평평한 구간을 가질 수 있으며, 경기자는 여러 개의 최적반응을 가질 수 있다. 이때 선택규칙은 함수가 아니라 집합값 사상, 곧 대응(correspondence)으로 나타내야 한다.
+
+
+$$
+f:X\to Y
+            \quad\text{is a function,}
+            \qquad
+            F:X\rightrightarrows Y
+            \quad\text{is a correspondence.}
+$$
+
+
+::: {.callout-note title="DEFINITION · 대응의 graph"}
+$F:X\rightrightarrows Y$의 graph는
+
+
+$$
+\operatorname{gph}F
+              =
+              \{(x,y)\in X\times Y:y\in F(x)\}
+$$
+
+
+로 정의된다. 대응의 연속성과 closed graph 성질은 이 graph의 기하학을 통해 이해할 수 있다.
+:::
+
+::: {.callout-note title="DEFINITION · 대응의 값 성질"}
+$F:X\rightrightarrows Y$에 대해 다음 용어를 점별로 사용한다.
+
+
+$$
+F\text{ is nonempty-valued}
+              \Longleftrightarrow
+              F(x)\ne\varnothing\quad\text{for all }x\in X,
+$$
+
+
+$$
+F\text{ is closed-valued}
+              \Longleftrightarrow
+              F(x)\text{ is closed for all }x\in X,
+$$
+
+
+$$
+F\text{ is compact-valued}
+              \Longleftrightarrow
+              F(x)\text{ is compact for all }x\in X,
+$$
+
+
+$$
+F\text{ is convex-valued}
+              \Longleftrightarrow
+              F(x)\text{ is convex for all }x\in X.
+$$
+
+
+이 성질들은 Kakutani 정리의 가정에 직접 들어간다. 특히 $F(x)$가 compact이면 $F(x)$는 closed이다. 그러나 각 값집합이 closed하다는 사실과 $F$ 전체의 graph가 closed라는 사실은 서로 다른 명제이므로 구분해야 한다.
+:::
+
+### 0.5.1 합성, 선택함수, 곱대응
+
+함수 $f:X\to Y$, $g:Y\to Z$의 합성은 $(g\circ f)(x)=g(f(x))$로 정의한다. $A\subseteq X$에 대한 제한함수는 $f|_A:A\to Y$로 쓴다. 이 표기는 간접효용, 가치함수, 최적반응의 합성 구조를 읽을 때 필요하다.
+
+::: {.callout-note title="DEFINITION · 선택함수와 곱대응"}
+대응 $F:X\rightrightarrows Y$의 선택함수(selection)는
+
+
+$$
+f(x)\in F(x)
+    \qquad\text{for every }x\in X
+$$
+
+
+를 만족하는 함수 $f:X\to Y$다. 또한 $F_i:X\rightrightarrows Y_i$에 대해 곱대응은
+
+
+$$
+F(x)=\prod_{i\in I}F_i(x)
+$$
+
+
+로 정의한다. Nash 균형의 존재증명에서는 $BR(s)=\prod_iBR_i(s_{-i})$가 바로 이 형식이다.
+:::
+
+::: {.callout-important title="PROPOSITION · 유한 곱대응의 보존성"}
+유한한 $I$에 대해 각 $F_i:X\rightrightarrows Y_i$가 nonempty compact convex-valued이고 UHC이면, $F=\prod_iF_i$도 nonempty compact convex-valued이고 UHC이다. 따라서 개별 최적반응대응의 성질을 확인하면 곱대응에 Kakutani 정리를 적용할 수 있다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · 함수와 대응은 vertical section으로 구별한다"}
+graph의 각 $x$-단면을 보면 함수와 대응의 차이를 수식으로 확인할 수 있다. 함수 $f:X\to Y$는
+
+
+$$
+\operatorname{gph}f\cap\bigl(\{x\}\times Y\bigr)
+      =
+      \{(x,f(x))\}
+$$
+
+
+처럼 모든 $x$에서 정확히 한 점을 갖는다. 반면 correspondence $F:X\rightrightarrows Y$는
+
+
+$$
+\operatorname{gph}F\cap\bigl(\{x\}\times Y\bigr)
+      =
+      \{x\}\times F(x)
+$$
+
+
+이므로 한 $x$에 여러 값이 가능하다. 예를 들어 $X=Y=[0,1]$이고
+
+
+$$
+F(x)=[0,x]
+      \qquad\Longrightarrow\qquad
+      \operatorname{gph}F
+      =
+      \{(x,y)\in[0,1]^2:0\le y\le x\}.
+$$
+
+
+각 $F(x)$는 nonempty compact convex set이며, 이 예의 graph는 closed다. 공역이 compact하므로
+$F$는 UHC이고, $x>0$에서의 임의의 값 근처는 작은 $x$ 변화 뒤에도 유지되므로 LHC도 성립한다.
+수요나 최적반응이 유일하지 않을 때 경제이론이 함수 대신 대응을 사용하는 이유가 바로 여기에 있다.
+:::
+
+### 0.5.2 closed graph, UHC, LHC
+
+대응의 연속성은 함수의 연속성과 달리 두 방향을 구분해 다룬다. upper hemicontinuity는 가까운 모수 변화가 기존 값집합 바깥의 새로운 값을 갑자기 만들어 내지 않는 성질이고, lower hemicontinuity는 기존 값집합의 근방에 있던 값이 갑자기 사라지지 않는 성질이다.
+
+::: {.callout-note title="DEFINITION · UHC와 LHC"}
+$F:X\rightrightarrows Y$가 $x\in X$에서 upper hemicontinuous라 함은, $F(x)$를 포함하는 임의의 open set $V\subseteq Y$에 대해 $x$의 어떤 근방 $U$가 존재하여 모든 $x'\in U$에 대해 $F(x')\subseteq V$가 성립하는 것이다. lower hemicontinuity는 $F(x)\cap V\ne\varnothing$인 임의의 open set $V$에 대해, $x$에 충분히 가까운 모든 $x'$에 대하여 $F(x')\cap V\ne\varnothing$가 성립하는 성질이다.
+:::
+
+대응 $F$가 continuous하다는 것은 UHC와 LHC를 모두 만족한다는 뜻이다. closed graph와 UHC의 관계는 공역의 콤팩트성 또는 국소적 유계성 없이 사용하면 안 된다.
+
+::: {.callout-important title="PROPOSITION · compact codomain에서 closed graph와 UHC"}
+$X\subseteq\mathbb R^m$, $Y\subseteq\mathbb R^n$라 하고 $Y$가 compact하다고 하자. $F:X\rightrightarrows Y$가 nonempty closed-valued이면 다음 두 조건은 동치다.
+
+
+$$
+F\text{ is UHC}
+              \quad\Longleftrightarrow\quad
+              \operatorname{gph}F\text{ is closed}.
+$$
+
+
+따라서 $Y$가 compact한 유한차원 공역에서는 다음의 수열 조건으로 UHC를 확인할 수 있다.
+
+
+$$
+x^k\to x,\qquad y^k\to y,\qquad y^k\in F(x^k)
+              \quad\Longrightarrow\quad
+              y\in F(x).
+$$
+
+:::
+
+::: {.callout-caution title="CAUTION · closed graph만으로는 UHC가 아니다"}
+공역이 compact하지 않으면 closed graph만으로 UHC를 결론낼 수 없다. 예를 들어 $F(0)=\{0\}$, $F(t)=\{1/|t|\}$ for $t\ne0$는 각 점에서 compact-valued이고 graph도 closed이지만, $t\to0$에서 값이 무한히 멀어지므로 $0$에서 UHC가 아니다. 공역 전체가 compact하지 않은 경우에는 적어도 $x$의 근방에서 $F(x')$들이 하나의 공통 compact set 안에 머무르는 local compact containment, 또는 이에 상응하는 국소적 유계 조건이 추가로 필요하다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · 그림보다 수열 조건이 우선이다"}
+UHC와 LHC는 그림만으로 외우기보다 open-set 정의와 수열 조건을 함께 읽는 편이 안전하다. 이후 수요대응과 최적반응대응에서는 compact한 선택공간 또는 local compact containment를 먼저 확보한 뒤 closed graph를 검증하는 순서가 표준적이다.
+:::
+
+### 0.5.3 경제학에서의 대응
+
+예산대응은 주어진 가격과 소득 아래에서 선택 가능한 소비묶음의 집합을 정한다.
+
+
+$$
+B(p,m)=\{x\in X:p\cdot x\le m\}.
+$$
+
+
+효용극대화 문제의 해집합으로 Walrasian 수요대응이 정의된다.
+
+
+$$
+D(p,m)
+            =
+            \operatorname{arg\,max}_{x\in B(p,m)}u(x).
+$$
+
+
+같은 방식으로 기업의 공급대응과 게임의 최적반응대응도 정의된다.
+
+
+$$
+S(p)=\operatorname{arg\,max}_{y\in Y}p\cdot y,
+            \qquad
+            BR_i(s_{-i})
+            =
+            \operatorname{arg\,max}_{s_i\in S_i}u_i(s_i,s_{-i}).
+$$

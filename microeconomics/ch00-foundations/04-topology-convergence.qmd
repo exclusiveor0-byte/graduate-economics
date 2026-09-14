@@ -1,0 +1,154 @@
+# 0.4 위상, 수렴, 연속성, 콤팩트성
+
+경제모형에서 “상황이 조금 바뀌면 결과도 갑자기 달라지지 않는다”는 직관은 위상적 언어로 정식화된다. 폐집합은 수열의 극한을 보존하고, 콤팩트 집합은 수열이 무한히 멀어지는 것을 막으며, 연속함수는 입력의 작은 변화가 함수값의 작은 변화로 이어지게 한다.
+
+### 0.4.1 열린집합, 폐집합, 수열
+
+집합 $A\subseteq\mathbb R^n$가 open이라는 것은 모든 $x\in A$에 대해 어떤 $\varepsilon>0$가 존재하여 $B_\varepsilon(x)\subseteq A$가 되는 것이다. $A$가 closed라는 것은 여집합 $\mathbb R^n\setminus A$가 open이라는 뜻이다. 유한차원 공간에서는 다음의 수열적 특징화가 특히 유용하다.
+
+::: {.callout-important title="THEOREM · 폐집합의 수열적 특징화"}
+$A\subseteq\mathbb R^n$가 closed일 필요충분조건은, 임의의 수열 $(x^k)_{k\ge 1}\subseteq A$가 $x^k\to x$를 만족하면 항상 $x\in A$가 성립하는 것이다.
+:::
+
+이 특징화는 대응의 closed graph, 예산대응의 graph, 실행가능 배분집합의 closedness를 보일 때 자주 쓰인다. 증명은 대개 수열 $(x^k,y^k)$를 잡고 극한을 취한 뒤, 부등식이나 등식이 극한에서도 보존됨을 확인하는 형태로 진행된다.
+
+::: {.callout-note appearance="simple" title="REMARK · 열린집합과 폐집합을 판정하는 두 증명 template"}
+열린집합을 보일 때에는 임의의 $x\in A$를 고정한 뒤, $A$ 밖으로 나가지 않는 반지름
+$\varepsilon>0$를 구성한다. 폐집합을 보일 때에는 반대로 임의의 수열
+$(x^k)\subseteq A$와 그 극한 $x^k\to x$를 잡고 $x\in A$를 확인한다.
+
+예를 들어 $A=(0,1)$은 $x^k=1-1/k\in A$이지만 $x^k\to1\notin A$이므로 closed가 아니다.
+반면 $C=[0,1]$에서 $x^k\in C$, $x^k\to x$이면 모든 $k$에 대해
+
+
+$$
+0\le x^k\le1.
+$$
+
+
+부등식의 극한 보존성으로 $0\le x\le1$, 즉 $x\in C$가 된다. 일반균형의 feasibility set,
+예산대응의 graph, 최적반응대응의 graph도 대부분 이와 같은 “부등식에 극한을 취하는” 형식으로
+closedness를 확인한다.
+:::
+
+### 0.4.2 상대위상, 상대내부, 폐포, 경계
+
+소비집합처럼 $X\subseteq\mathbb R^n$ 자체가 경계를 가질 때, $X$ 위의 모든 위상적 개념은 $X$에 대한 상대위상으로 이해한다. 즉 $x\in X$의 상대근방은 $B_\varepsilon(x)\cap X$다. 별도 아래첨자가 없으면 $\mathbb R^n$에서의 개념을 뜻하고, $A\subseteq X$에 대한 상대 개념은 아래와 같이 쓴다.
+
+
+$$
+\operatorname{int}_X A
+  =
+  \{x\in A:\exists\varepsilon>0,\ B_\varepsilon(x)\cap X\subseteq A\},
+$$
+
+
+$$
+\operatorname{cl}_X A=X\cap\operatorname{cl}A,
+  \qquad
+  \partial_X A=\operatorname{cl}_X A\setminus\operatorname{int}_X A.
+$$
+
+
+예를 들어 $\mathbb R_{++}^n=\operatorname{int}_{\mathbb R^n}(\mathbb R_+^n)$이고, 이는 0.6에서 정의할 $\operatorname{ri}(\mathbb R_+^n)$와도 일치한다. 반면 $\operatorname{int}_{\mathbb R_+^n}(\mathbb R_+^n)=\mathbb R_+^n$이다. 즉 주변공간을 $\mathbb R^n$으로 둘 것인지, $\mathbb R_+^n$으로 둘 것인지에 따라 내부의 의미가 달라진다. 이 구분은 내부해와 경계해를 정확하게 서술할 때 필요하다.
+
+### 0.4.3 수열적 연속성과 반연속성
+
+::: {.callout-note title="DEFINITION · 수열적 연속성"}
+$f:X\to Y$가 $x\in X$에서 연속이라는 것은, 임의의 수열 $(x^k)\subseteq X$에 대해
+
+
+$$
+x^k\to x
+    \Longrightarrow
+    f(x^k)\to f(x)
+$$
+
+
+가 성립하는 것이다. 유한차원 유클리드 공간에서는 이 수열적 정의가 $\varepsilon$-$\delta$ 정의와 동치다.
+:::
+
+::: {.callout-note title="DEFINITION · 상반연속성과 하반연속성"}
+실수값 함수 $f:X\to\mathbb R$가 $x$에서 upper semicontinuous(USC)라는 것은 모든 $x^k\to x$에 대해
+
+
+$$
+\limsup_{k\to\infty}f(x^k)\le f(x)
+$$
+
+
+가 성립하는 것이고, lower semicontinuous(LSC)라는 것은
+
+
+$$
+f(x)\le\liminf_{k\to\infty}f(x^k)
+$$
+
+
+가 성립하는 것이다. 연속성은 USC와 LSC를 모두 함의하지만, 역은 일반적으로 성립하지 않는다.
+:::
+
+### 0.4.4 콤팩트성과 순차콤팩트성
+
+$K\subseteq\mathbb R^n$가 compact하다는 것은 임의의 열린 덮개가 유한 부분덮개를 가진다는 위상적 정의로 출발한다. 그러나 유한차원 유클리드 공간에서는 다음 Heine–Borel 정리가 실용적인 판정기준을 제공한다.
+
+::: {.callout-important title="THEOREM · Heine–Borel 정리"}
+$K\subseteq\mathbb R^n$가 compact일 필요충분조건은 $K$가 closed이고 bounded한 것이다.
+:::
+
+::: {.callout-important title="THEOREM · 유한차원에서의 순차콤팩트성"}
+$K\subseteq\mathbb R^n$가 compact일 필요충분조건은, $K$ 안의 모든 수열 $(x^k)$가 어떤 $x\in K$로 수렴하는 부분수열 $(x^{k_r})$을 가진다는 것이다.
+:::
+
+경제학에서 boundedness는 선택이 무한히 커지는 방향으로 도망가지 못하게 하고, closedness는 경계에 가까워지는 선택이 실제로 실행가능한 선택으로 남게 한다. 표준 소비집합 $X=\mathbb R_+^n$에서 $p\gg0$, $m>0$이면 예산집합이 콤팩트한 이유도 바로 이 두 성질 때문이다. Weierstrass 정리와 최대정리의 수열증명은 바로 이 순차콤팩트성을 사용한다.
+
+::: {.callout-important title="PROPOSITION · 콤팩트 집합의 연속상"}
+$K\subseteq\mathbb R^n$가 compact이고 $f:K\to\mathbb R^m$가 continuous이면 $f(K)$도 compact하다. Weierstrass 최대정리에서는 이 명제로부터 $f(K)\subseteq\mathbb R$가 bounded함을 얻는다.
+:::
+
+### 0.4.5 최대값·최소값의 존재
+
+::: {.callout-important title="THEOREM 0.4.1 · Weierstrass 최대정리"}
+$K\subseteq\mathbb R^n$가 공집합이 아닌 콤팩트 집합이고 $f:K\to\mathbb R$가 연속이면, 어떤 $x^*\in K$가 존재하여
+
+
+$$
+f(x^*)=\max_{x\in K}f(x).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$f$가 연속이고 $K$가 compact하므로 $f(K)\subseteq\mathbb R$도 compact하다. 따라서 $f(K)$는 bounded하고 $\alpha=\sup f(K)\in\mathbb R$가 잘 정의된다. 상한의 정의에 따라 각 $k$에 대해 $f(x^k)>\alpha-1/k$를 만족하는 $x^k\in K$를 고를 수 있다. 순차콤팩트성에 의해 $(x^k)$에는 어떤 $x^*\in K$로 수렴하는 부분수열 $(x^{k_r})$이 존재한다. $f$의 연속성에 의해
+
+
+$$
+f(x^*)
+              =
+              \lim_{r\to\infty}f(x^{k_r})
+              =
+              \alpha.
+$$
+
+
+따라서 $x^*$는 $f$의 최대값을 달성한다. □
+:::
+
+::: {.callout-important title="PROPOSITION · 반연속 Weierstrass 정리"}
+$K\subseteq\mathbb R^n$가 공집합이 아닌 콤팩트 집합이고 $f:K\to\mathbb R$가 USC이면 $f$는 $K$에서 최대값을 달성한다. 대칭적으로 $f$가 LSC이면 $f$는 $K$에서 최소값을 달성한다. 연속성은 두 결론을 동시에 주는 충분조건이다.
+:::
+
+이 정리는 소비자 문제에서 효용함수의 연속성과 예산집합의 콤팩트성으로부터 수요의 존재를 보일 때 직접 적용된다. 기업의 비용최소화와 이윤극대화, 게임에서의 최적반응의 존재도 같은 논리를 따른다.
+
+::: {.callout-caution title="CAUTION · Weierstrass 가정이 각각 실패할 때"}
+연속 목적함수만으로는 최적해가 보장되지 않는다. 어떤 가정이 빠졌는지에 따라 실패 방식도 다르다.
+
+| 실패한 가정 | 예시 | 무슨 일이 일어나는가 |
+| --- | --- | --- |
+| closedness | $K=(0,1)$, $f(x)=x$ | $\sup_K f=1$이지만 $1\notin K$이므로 $\max_K f$는 존재하지 않는다. |
+| boundedness | $K=[0,\infty)$, $f(x)=x$ | $f$가 위로 유계가 아니어서 $\sup_K f=+\infty$이며 최대값이 없다. |
+| upper semicontinuity | $K=[0,1]$, $f(x)=x$ for $x<1$, $f(1)=0$ | $K$는 compact하지만 $\sup_K f=1$은 달성되지 않는다. $1$에서 USC가 실패한다. |
+
+따라서 최대화 문제에서는 “목적함수의 연속성”과 “실행가능집합의 콤팩트성”을 함께 확인해야 하며,
+더 일반적으로는 목적함수의 USC가 최대값 존재에 충분하다.
+:::

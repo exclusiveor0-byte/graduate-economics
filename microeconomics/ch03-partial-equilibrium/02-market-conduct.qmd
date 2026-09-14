@@ -1,0 +1,812 @@
+# 3.2 같은 시장, 다른 conduct
+
+> 불완전경쟁은 수요곡선과 비용함수가 바뀌는 이론이 아니다. 기업이 자신의 행동이 시장가격, 소비자 수요배분, 경쟁자의 이윤에 미치는 영향을 인식하기 시작하는 경우다. 시장구조의 차이는 기업의 행동변수와 perceived residual demand, 그리고 개별 최적화를 함께 닫는 equilibrium condition에서 나타난다.
+
+### 3.2.1 Action, residual demand, equilibrium closure
+
+기업 $i$의 행동변수를 $a_i$, 다른 기업의 행동을 $a_{-i}$로 쓰자. 시장제도는 행동 profile $a=(a_i)_{i\in I}$를 실현 가격과 수량으로 전환한다.
+
+
+$$
+a
+            \longmapsto
+            \bigl(p_i(a),q_i(a)\bigr)_{i\in I}.
+$$
+
+
+그러면 기업의 일반적 이윤은
+
+
+$$
+\pi_i(a_i,a_{-i})
+            =
+            p_i(a_i,a_{-i})q_i(a_i,a_{-i})
+            -C_i\bigl(q_i(a_i,a_{-i})\bigr)
+$$
+
+
+로 쓸 수 있다. 완전경쟁에서는 $a_i=q_i$이지만 기업은 $p_i=p$가 자신의 산출량에 의존하지 않는다고 본다. Cournot에서는 $a_i=q_i$이지만 $p_i=P(q_i+Q_{-i})$를 인식한다. Bertrand에서는 $a_i=p_i$이고 자신의 가격이 수요배분을 바꾼다는 점을 인식한다.
+
+::: {.callout-important title="THEOREM 3.4 · conduct의 일반적 최적화 조건"}
+$p_i(a)$, $q_i(a)$, $C_i$가 미분가능하고 $a_i^*$가 기업 $i$의 내부 최적행동이라고 하자. 그러면
+
+
+$$
+\frac{\partial\pi_i(a)}{\partial a_i}
+              =
+              q_i(a)\frac{\partial p_i(a)}{\partial a_i}
+              +
+              \left[
+                p_i(a)-MC_i(q_i(a))
+              \right]
+              \frac{\partial q_i(a)}{\partial a_i}
+              =0.
+$$
+
+
+이 식은 모든 시장구조에서 동일하다. 달라지는 것은 $a_i$, 그리고 행동 $a_i$가 가격과 판매량을 바꾸는 방식뿐이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$\pi_i(a)=p_i(a)q_i(a)-C_i(q_i(a))$를 $a_i$에 대해 미분하고 chain rule을 적용하면 된다. □
+:::
+
+::: {.callout-note appearance="simple" title="공통 first-order condition의 시장구조별 특수화"}
+- **Perfect competition** — 기업은 $\partial p_i/\partial q_i=0$로 인식하므로 $p=MC_i(q_i)$.
+- **Monopoly** — $a=Q$, $p=P(Q)$, $q=Q$이므로 $P(Q)+QP'(Q)=MC(Q)$.
+- **Cournot** — $a_i=q_i$, $p_i=P(q_i+Q_{-i})$이므로 $P(Q)+q_iP'(Q)=MC_i(q_i)$.
+- **Differentiated Bertrand** — $a_i=p_i$이므로 $q_i+[p_i-MC_i(q_i)]\,\partial q_i/\partial p_i=0$.
+:::
+
+| 시장구조 | 행동변수 | 기업이 인식하는 수요환경 | equilibrium closure |
+| --- | --- | --- | --- |
+| 완전경쟁 | 산출량 $q_i$ | 가격 $p$는 외생적 | market clearing |
+| 독점 | 총산출량 $Q$ 또는 가격 | 전체 inverse demand $P(Q)$ | 단일 기업의 최적화 |
+| Cournot | 산출량 $q_i$ | $P(q_i+Q_{-i})$ | best response의 fixed point |
+| Bertrand | 가격 $p_i$ | $d_i(p_i,p_{-i})$ | best response의 fixed point |
+| Monopolistic competition | 가격 또는 산출량 | 차별화된 residual demand | Nash condition + free entry |
+
+::: {.callout-note appearance="simple" title="REMARK · 분석메커니즘의 통일성"}
+모든 경우에 해법은 같은 다섯 단계로 진행된다. 먼저 수요와 비용을 고정한다. 그다음 기업의 행동변수와 residual demand를 정한다. 이어서 이윤극대화 조건을 구한다. 그 조건들을 market clearing 또는 best-response consistency로 닫는다. 마지막으로 같은 welfare criterion 아래 결과를 비교한다. 시장구조마다 달라지는 것은 이 논리의 형식이 아니라 기업이 내부화하는 market effect의 크기다.
+:::
+
+### 3.2.2 Pure monopoly
+
+독점기업이 동질재 시장 전체를 공급한다고 하자. inverse market demand를 $P(Q)$, 비용을 $C(Q)$로 두면 독점기업은
+
+
+$$
+\max_{Q\ge0}
+            \left\{
+              P(Q)Q-C(Q)
+            \right\}
+$$
+
+
+를 푼다. 총수입과 marginal revenue는
+
+
+$$
+R(Q)=P(Q)Q,
+            \qquad
+            MR(Q)=P(Q)+QP'(Q)
+$$
+
+
+이다.
+
+::: {.callout-important title="THEOREM 3.5 · monopoly output"}
+$P$와 $C$가 미분가능하고, $Q^m\gt 0$가 독점기업의 내부 최적산출량이라고 하자. 그러면
+
+
+$$
+MR(Q^m)=MC(Q^m),
+              \qquad
+              P(Q^m)+Q^mP'(Q^m)=C'(Q^m).
+$$
+
+
+$P'(Q)\lt 0$이면 $MR(Q)\lt P(Q)$이므로, 독점의 내부해는 일반적으로
+
+
+$$
+P(Q^m)\gt MC(Q^m)
+$$
+
+
+를 만족한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+독점이윤 $\pi(Q)=P(Q)Q-C(Q)$를 미분하면
+
+$$
+\pi'(Q)=P(Q)+QP'(Q)-C'(Q).
+$$
+
+내부 최적점에서는 $\pi'(Q^m)=0$이다. $P'(Q^m)\lt 0$이면 $Q^mP'(Q^m)\lt 0$이므로 $MR(Q^m)\lt P(Q^m)$다. $MR=MC$와 결합하면 $P(Q^m)\gt MC(Q^m)$를 얻는다. □
+:::
+
+::: {.callout-important title="PROPOSITION · Lerner index"}
+가격탄력성을
+
+
+$$
+\varepsilon(Q)
+              =
+              \frac{dQ}{dP}\frac{P(Q)}{Q}
+              \lt 0
+$$
+
+
+로 두면, 독점의 내부해는
+
+
+$$
+\frac{P(Q^m)-MC(Q^m)}{P(Q^m)}
+              =
+              -\frac{1}{\varepsilon(Q^m)}
+$$
+
+
+를 만족한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$MR=MC$를 $P+QP'=MC$로 쓰고 $P$로 나누면
+
+$$
+\frac{P-MC}{P}
+=-\frac{QP'}{P}.
+$$
+
+$\varepsilon=(dQ/dP)(P/Q)=P/(QP')$이므로 $-QP'/P=-1/\varepsilon$다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · monopoly supply curve가 없는 이유"}
+경쟁기업은 가격을 주어진 것으로 받고 $p=MC(q)$에서 공급을 결정하므로 공급 correspondence를 가격의 함수로 쓸 수 있다. 독점은 $MR(Q)=MC(Q)$를 풀며, $MR$은 현재 가격뿐 아니라 demand curve 전체의 기울기 $P'(Q)$에 의존한다. 따라서 일반적으로 독점의 산출량을 가격 하나만의 함수 $S^m(p)$로 정의할 수 없다.
+:::
+
+::: {.callout-important title="PROPOSITION · monopoly FOC의 충분조건과 장기 지속성"}
+독점이윤 $\pi(Q)=P(Q)Q-C(Q)$에 대해
+
+
+$$
+\pi''(Q)
+              =
+              2P'(Q)+QP''(Q)-C''(Q)
+              \lt 0
+              \qquad
+              \text{for every feasible }Q
+$$
+
+
+이면 $\pi$는 strictly concave하므로 $MR=MC$는 유일한 global optimum을 특징짓는다. 장기에도 독점이 유지되려면 $MR=MC$만으로는 충분하지 않다. 특허, 법적 보호, 핵심 input의 배타적 통제, 자연독점 비용구조처럼 진입을 막는 mechanism이 추가로 필요하다.
+:::
+
+### 3.2.3 Cournot quantity competition
+
+$N$개의 기업이 동시에 수량 $q_i$를 선택하고 총산출량이
+
+
+$$
+Q=\sum_{j=1}^Nq_j
+$$
+
+
+라고 하자. 기업 $i$는 경쟁기업의 총산출량 $Q_{-i}=\sum_{j\ne i}q_j$를 주어진 것으로 보고
+
+
+$$
+\pi_i(q_i,q_{-i})
+            =
+            P(q_i+Q_{-i})q_i-C_i(q_i)
+$$
+
+
+를 최대화한다.
+
+::: {.callout-note title="DEFINITION · Cournot equilibrium"}
+quantity profile $q^*=(q_1^*,\ldots,q_N^*)$가 Cournot equilibrium이라는 것은 모든 $i$에 대해
+
+
+$$
+q_i^*\in BR_i(q_{-i}^*)
+              =
+              \operatorname{arg\,max}_{q_i\ge0}\pi_i(q_i,q_{-i}^*)
+$$
+
+
+가 성립한다는 뜻이다.
+:::
+
+::: {.callout-important title="THEOREM 3.6 · Cournot first-order condition"}
+$P$와 $C_i$가 미분가능하고 $q_i^*\gt 0$가 Cournot equilibrium의 내부해라고 하자. 그러면
+
+
+$$
+P(Q^*)+q_i^*P'(Q^*)=MC_i(q_i^*).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$Q_{-i}$를 고정하고 $q_i$에 대해 $\pi_i$를 미분하면
+
+$$
+\frac{\partial\pi_i}{\partial q_i}
+=P(q_i+Q_{-i})+q_iP'(q_i+Q_{-i})-C_i'(q_i).
+$$
+
+내부 best response에서 이 미분값은 0이다. equilibrium에서는 $Q^*=q_i^*+Q_{-i}^*$이므로 결과를 얻는다. □
+:::
+
+::: {.callout-important title="PROPOSITION · Cournot equilibrium의 존재"}
+각 기업의 action set이 nonempty compact convex interval
+
+
+$$
+A_i=[0,\bar q_i],
+              \qquad
+              \bar q_i\gt 0
+$$
+
+
+이고, payoff $\pi_i(q_i,q_{-i})$가 $A=\prod_iA_i$에서 continuous하며, 모든 $q_{-i}$에 대해 $q_i\mapsto\pi_i(q_i,q_{-i})$가 concave하다고 하자. 그러면 Cournot equilibrium이 존재한다. 또한 own-action에 대한 strict concavity가 성립하면 각 기업의 best response는 singleton이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+compactness와 continuity에 의해 각 best-response correspondence $BR_i$는 nonempty compact-valued이고, concavity에 의해 convex-valued다. Berge maximum theorem에 따라 $BR_i$는 upper hemicontinuous하다. 따라서 product correspondence
+
+$$
+BR(q)=\prod_{i=1}^N BR_i(q_{-i})
+$$
+
+는 $A$에서 자기 자신으로 가는 nonempty compact convex-valued upper hemicontinuous correspondence다. Kakutani fixed-point theorem으로 $q^*\in BR(q^*)$인 fixed point가 존재한다. strict concavity는 각 $BR_i(q_{-i})$의 유일성을 준다. □
+:::
+
+::: {.callout-important title="THEOREM 3.7 · symmetric linear Cournot equilibrium"}
+inverse demand와 비용이
+
+
+$$
+P(Q)=a-bQ,
+              \qquad
+              C_i(q_i)=cq_i,
+              \qquad
+              a\gt c,
+              \quad b\gt 0
+$$
+
+
+로 주어지고 기업들이 대칭적이면, 유일한 Cournot equilibrium은
+
+
+$$
+q_i^C=\frac{a-c}{b(N+1)},
+              \qquad
+              Q^C=\frac{N(a-c)}{b(N+1)},
+$$
+
+
+$$
+P^C=\frac{a+Nc}{N+1}.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+기업 $i$의 일차조건은
+
+$$
+a-b(q_i+Q_{-i})-bq_i-c=0
+$$
+
+이므로
+
+$$
+q_i=\frac{a-c-bQ_{-i}}{2b}
+$$
+
+이다. 대칭균형에서 $q_i=q$, $Q_{-i}=(N-1)q$이므로
+
+$$
+q=\frac{a-c-b(N-1)q}{2b}.
+$$
+
+이를 정리하면 $q=(a-c)/[b(N+1)]$이고, 나머지 식은 $Q=Nq$, $P=a-bQ$를 대입하면 얻는다. □
+:::
+
+::: {.callout-important title="THEOREM 3.8 · 비대칭 비용 선형 Cournot equilibrium"}
+inverse demand가 $P(Q)=a-bQ$, 기업 $i$의 비용이 $C_i(q_i)=c_iq_i$라고 하자. 활동 기업 집합을 $A\subseteq\{1,\ldots,N\}$, 그 크기를 $m=|A|$로 둔다. 다음 가격을 정의하자.
+
+
+$$
+p_A
+              =
+              \frac{a+\sum_{j\in A}c_j}{m+1}.
+$$
+
+
+$A$가 equilibrium의 활동 기업 집합일 필요충분조건은
+
+
+$$
+c_i\lt p_A
+              \quad\text{for every }i\in A,
+              \qquad
+              c_k\ge p_A
+              \quad\text{for every }k\notin A.
+$$
+
+
+이 조건 아래 equilibrium output은
+
+
+$$
+q_i^A
+              =
+              \frac{p_A-c_i}{b}
+              \quad(i\in A),
+              \qquad
+              q_k^A=0
+              \quad(k\notin A).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+활동 기업 $i$의 일차조건은 $a-bQ-bq_i-c_i=0$, 즉 $p_A-c_i=bq_i$다. 이를 $i\in A$에 대해 합하면
+
+$$
+Q
+=
+\frac{ma-\sum_{j\in A}c_j}{b(m+1)}.
+$$
+
+따라서 $p_A=a-bQ=(a+\sum_{j\in A}c_j)/(m+1)$이고 $q_i^A=(p_A-c_i)/b$를 얻는다. 활동하지 않는 기업의 최적 반응이 0이 되려면 해당 기업의 한계비용이 $p_A$ 이상이어야 한다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · 비대칭 비용이 만드는 두 가지 왜곡"}
+비대칭 비용 Cournot에서는 저비용 기업이 더 많이 생산하지만, 활동 기업들의 한계비용은 일반적으로 같아지지 않는다. 따라서 비효율은 총산출량이 경쟁수준보다 낮다는 output distortion뿐 아니라, 주어진 총산출량을 기업 사이에 비용최소적으로 배분하지 못한다는 production-allocation distortion도 포함한다.
+:::
+
+::: {.callout-important title="PROPOSITION · Cournot markup과 market share"}
+시장수요의 가격탄력성을
+
+$$
+\varepsilon(Q)=\frac{dQ}{dP}\frac{P(Q)}{Q}\lt 0
+$$
+
+로 두고 기업 $i$의 market share를 $s_i=q_i/Q$라고 하자. 내부 Cournot equilibrium에서는
+
+
+$$
+\frac{P(Q)-MC_i(q_i)}{P(Q)}
+              =
+              -\frac{s_i}{\varepsilon(Q)}.
+$$
+
+
+독점은 $s_i=1$인 특수한 경우이고, 대칭 $N$-기업 Cournot에서는 $s_i=1/N$이다. 따라서 시장점유율이 작아질수록 markup은 경쟁적 기준점에 가까워진다.
+:::
+
+#### Long-run Cournot with free entry
+
+이제 각 기업의 비용이 fixed cost를 포함한다고 하자.
+
+
+$$
+P(Q)=a-bQ,
+            \qquad
+            C(q)=F+cq,
+            \qquad
+            F\gt 0.
+$$
+
+
+$n$개의 대칭 기업이 있을 때 conduct equilibrium은 이전과 같고, 기업당 이윤은
+
+
+$$
+q_n=\frac{a-c}{b(n+1)},
+            \qquad
+            p_n=\frac{a+nc}{n+1},
+            \qquad
+            \pi_n
+            =
+            \frac{(a-c)^2}{b(n+1)^2}-F.
+$$
+
+
+::: {.callout-note title="DEFINITION · integer free-entry Cournot equilibrium"}
+정수 기업 수 $n^*$가 장기 자유진입 Cournot equilibrium이라는 것은
+
+
+$$
+\pi_{n^*}\ge0,
+              \qquad
+              \pi_{n^*+1}\le0
+$$
+
+
+를 만족한다는 뜻이다. 기존 기업은 exit할 유인이 없고, 하나 더 진입한 기업은 음의 이윤을 얻는다.
+:::
+
+기업 수를 연속적으로 근사하면 $\pi_n=0$에서
+
+
+$$
+n^*
+            =
+            \frac{a-c}{\sqrt{bF}}-1,
+            \qquad
+            q^*
+            =
+            \sqrt{\frac{F}{b}},
+            \qquad
+            p^*-c
+            =
+            \sqrt{bF}.
+$$
+
+
+다만 이 연속 근사가 실제 활동 기업을 갖는 정수 equilibrium을 묘사하려면 적어도 한 기업이 비용을 회수할 수 있어야 한다. 이는
+
+
+$$
+\pi_1
+            =
+            \frac{(a-c)^2}{4b}-F
+            \ge0
+            \quad\Longleftrightarrow\quad
+            a-c\ge2\sqrt{bF}
+$$
+
+
+와 동치다. 이 조건이 성립하면 위의 연속 해는 $n^*\ge1$을 가지며, 실제 장기 기업 수는 앞서 정의한 정수 no-entry condition으로 결정된다. 이 조건이 실패하면 주어진 수요와 fixed cost 아래에서는 활동 기업을 포함하는 free-entry Cournot equilibrium이 존재하지 않는다.
+
+따라서 long-run Cournot equilibrium은 zero profit을 가지면서도 일반적으로 $p^*\gt MC=c$를 유지한다. 이는 long-run perfect competition의 $p=MC=AC$와 구별된다.
+
+이 선형 benchmark에서는 $N\to\infty$일 때
+
+
+$$
+Q^C\to\frac{a-c}{b},
+            \qquad
+            P^C\to c.
+$$
+
+
+즉 Cournot competition은 기업 수가 늘어날수록 competitive benchmark에 접근한다.
+
+### 3.2.4 Bertrand price competition
+
+Bertrand competition에서는 기업들이 수량이 아니라 가격을 동시에 선택한다. 동질재, constant marginal cost, capacity constraint 없음, 소비자가 더 싼 기업에서만 구매하고 동가격이면 수요를 균등 분할한다는 표준 환경을 먼저 둔다.
+
+::: {.callout-important title="THEOREM 3.9 · homogeneous-good Bertrand equilibrium"}
+두 기업이 동일한 constant marginal cost $c$로 동질재를 생산한다고 하자. 시장수요 $D(p)$는 $p\gt c$에서 양이고 weakly decreasing이라고 하자. 위의 수요배분 규칙 아래 유일한 Nash equilibrium price profile은
+
+
+$$
+p_1^*=p_2^*=c.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+먼저 어떤 기업이 $p_i\lt c$를 택하면 양의 판매가 발생하는 경우 단위당 손실을 보므로, $p_i=c$로 올리는 편이 약하게 낫다. 따라서 equilibrium에서 $p_i\lt c$는 불가능하다.
+
+다음으로 $p_1=p_2=p\gt c$이면 어느 한 기업이 $p-\varepsilon$로 아주 조금 낮추어 전체 시장수요를 얻고도 양의 margin을 유지할 수 있으므로 균형이 아니다. 이제 비대칭 가격을 보자. $p_1\gt p_2\gt c$이면 고가 기업 1은 기존에 판매량과 이윤이 모두 0이다. 이때
+
+$$
+\tilde p_1\in(c,p_2)
+$$
+
+를 택하면 기업 1은 유일한 저가 기업이 되어 전체 수요 $D(\tilde p_1)$를 판매하고
+
+$$
+(\tilde p_1-c)D(\tilde p_1)>0
+$$
+
+의 이윤을 얻는다. 따라서 이 가격쌍은 균형이 아니다. 더 미묘한 경우인
+
+$$
+p_1\gt p_2=c
+$$
+
+에서도, $\tilde p_2\in(c,p_1)$를 택하면 기업 2는 계속 유일한 저가 기업으로서 전체 수요 $D(\tilde p_2)$를 얻고
+
+$$
+(\tilde p_2-c)D(\tilde p_2)>0
+$$
+
+의 이윤을 얻는다. 기존의 이윤은 0이므로 이 역시 균형일 수 없다. 대칭적으로 $p_2\gt p_1=c$도 배제된다. 따라서 유일한 후보는 $(c,c)$다. 이때 어느 기업도 $c$보다 낮은 가격을 택해 이윤을 높일 수 없고, 높은 가격을 택하면 수요를 잃는다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · Bertrand result의 범위"}
+$p=c$ 결론은 가격경쟁 일반의 결론이 아니다. 동질재, 충분한 생산능력, 즉각적인 가격비교, 동일한 한계비용, winner-takes-all 수요배분 규칙에 의존한다. 재화가 차별화되거나 capacity constraint가 있으면 기업별 residual demand가 완전히 사라지지 않으므로 일반적으로 $p_i\gt MC_i$가 가능하다.
+:::
+
+::: {.callout-caution title="WARNING · 비대칭 비용 동질재 Bertrand의 미묘함"}
+$c_1\lt c_2$인 동질재 Bertrand에서 “저비용 기업이 $c_2$에 가격을 맞춘다”는 설명은 직관적으로는 맞지만, 연속적인 가격공간과 동가격 수요분할 규칙 아래에서는 일반적으로 pure-strategy equilibrium을 바로 주지 않는다. $p_1=p_2=c_2$이면 기업 1은 아주 작은 폭으로 undercut하여 전체 수요를 얻을 유인이 있고, $p_1\lt c_2$이면 기업 1은 가격을 올릴 유인이 있기 때문이다. 가격단위 $\delta\gt 0$가 있는 discrete-price model에서는 적절한 조건 아래
+
+
+$$
+p_1=c_2-\delta,
+              \qquad
+              p_2=c_2
+$$
+
+
+가 저비용 기업의 limit-pricing outcome을 나타낸다. 따라서 비용비대칭 Bertrand은 differentiated-product benchmark에서 다루는 편이 더 안정적이다.
+:::
+
+#### 비대칭 비용 differentiated Bertrand
+
+두 기업이 차별화된 재화를 공급하고, 각 기업의 가격 선택집합은 $p_i\in\mathbb R_+$라고 하자.
+선형식이 경제적으로 음의 수요를 만들지 않도록 실제 수요는
+
+
+$$
+q_1(p_1,p_2)
+            =
+            \max\{0,a_1-b_1p_1+d_1p_2\},
+            \qquad
+            q_2(p_1,p_2)
+            =
+            \max\{0,a_2-b_2p_2+d_2p_1\},
+$$
+
+
+$$
+C_i(q_i)=F_i+c_iq_i,
+            \qquad
+            F_i\ge0,\quad c_i\ge0,\quad b_i\gt 0,\quad d_i\ge0
+$$
+
+
+로 주어진다고 하자. $d_i\gt 0$는 경쟁기업 가격상승이 기업 $i$의 수요를 늘리는 substitute relationship을 뜻한다.
+아래에서는 두 기업이 모두 양의 수요를 갖는 interior region을 먼저 분석한다.
+
+::: {.callout-important title="THEOREM 3.10 · differentiated Bertrand best response와 비대칭 비용"}
+양의 수요가 실현되는 interior region에서는 각 기업의 best-response function이
+
+
+$$
+p_1
+              =
+              \frac{a_1+d_1p_2+b_1c_1}{2b_1},
+              \qquad
+              p_2
+              =
+              \frac{a_2+d_2p_1+b_2c_2}{2b_2}.
+$$
+
+
+$4b_1b_2-d_1d_2\gt 0$이면 이 best-response system의 유일한 대수적 해는
+
+
+$$
+p_1^*
+              =
+              \frac{
+                2b_2(a_1+b_1c_1)
+                +
+                d_1(a_2+b_2c_2)
+              }{
+                4b_1b_2-d_1d_2
+              },
+$$
+
+
+$$
+p_2^*
+              =
+              \frac{
+                d_2(a_1+b_1c_1)
+                +
+                2b_1(a_2+b_2c_2)
+              }{
+                4b_1b_2-d_1d_2
+              }.
+$$
+
+
+또한
+
+
+$$
+p_i^*>0,
+              \qquad
+              a_i-b_ip_i^*+d_ip_j^*>0
+              \qquad
+              (i=1,2)
+$$
+
+
+가 성립하면, 위 가격쌍은 두 기업 모두 양의 수요를 갖는 interior region에서 first-order conditions를 만족하는 유일한 가격쌍이며, 각 기업의 목적함수가 그 region에서 자신의 가격에 대해 strictly concave하므로 그 restricted interior game의 유일한 Nash equilibrium이다.
+다만 실제 수요가 $\max\{0,\cdot\}$로 절단되어 있으므로, 이 계산만으로 $p_i\in\mathbb R_+$ 전체에서 boundary equilibrium이 존재하지 않는다고 결론낼 수는 없다. 전역 유일성을 주장하려면 zero-demand 구간을 포함한 piecewise best-response correspondence의 모든 고정점을 별도로 배제해야 한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+양의 수요 영역에서 기업 $i$의 이윤은
+
+$$
+\pi_i=(p_i-c_i)\bigl(a_i-b_ip_i+d_ip_j\bigr)-F_i
+$$
+
+다. $q_i$를 $p_i$에 대해 미분하면 $\partial q_i/\partial p_i=-b_i$이므로, 일차조건
+
+$$
+q_i+(p_i-c_i)\frac{\partial q_i}{\partial p_i}=0
+$$
+
+에 선형수요를 대입하면 두 best-response 식을 얻는다. 이 두 선형식을 연립하면 위의 대수적 해가 나온다.
+$4b_1b_2-d_1d_2\gt 0$은 연립방정식의 역행렬이 존재하는 조건이다.
+
+$a_i-b_ip_i^*+d_ip_j^*>0$이면 해는 zero-demand boundary가 아닌 interior region에 놓인다.
+또한 일차조건은
+
+$$
+q_i(p_i^*,p_j^*)
+=
+b_i(p_i^*-c_i)
+$$
+
+를 함의한다. 따라서 $q_i(p_i^*,p_j^*)>0$이면 $p_i^*>c_i$이고 equilibrium operating profit은
+
+$$
+(p_i^*-c_i)q_i(p_i^*,p_j^*)
+=
+\frac{q_i(p_i^*,p_j^*)^2}{b_i}
+>0
+$$
+
+이다. 반면, 경쟁기업의 가격을 $p_j^*$로 고정한 상태에서 zero-demand price를 택하면 operating profit은 0이다. 따라서 후보가격은 같은 $p_j^*$에 대한 zero-demand deviation보다 엄격히 우월하다. 그러나 이는 다른 경쟁기업 가격에서 나타날 수 있는 boundary fixed point까지 배제하는 논증은 아니다.
+$b_i>0$이므로 양의 수요 영역에서 이윤은 자신의 가격에 대해 strictly concave하고, restricted interior best response는 유일하다. 고정비 $F_i$는 진입 후 모든 가격선택에 공통인 경우 가격 first-order condition을 바꾸지 않지만, total profit과 entry decision에는 영향을 준다. □
+:::
+
+::: {.callout-important title="PROPOSITION · 비용상승의 전략적 가격효과"}
+위 조건 아래
+
+
+$$
+\frac{\partial p_1^*}{\partial c_1}
+              =
+              \frac{2b_1b_2}{4b_1b_2-d_1d_2}
+              \gt 0,
+              \qquad
+              \frac{\partial p_2^*}{\partial c_1}
+              =
+              \frac{b_1d_2}{4b_1b_2-d_1d_2}
+              \ge0.
+$$
+
+
+따라서 기업 1의 비용상승은 자기 가격뿐 아니라 기업 2의 가격도 높인다. differentiated Bertrand에서 가격은 strategic complements다.
+:::
+
+### 3.2.5 Monopolistic competition: CES large-group benchmark
+
+monopolistic competition은 product differentiation과 free entry를 결합한 구조다. 기업은 각자의 variety에 대해 downward-sloping residual demand를 마주하지만, 장기에는 신규 variety의 진입이 기존 기업의 demand environment를 바꾼다. 이를 가장 투명하게 보여 주는 대표적 benchmark는 CES preference와 fixed cost를 결합한 large-group, 또는 price-index-taking model이다.
+
+
+$$
+U
+            =
+            \left(
+              \sum_{i=1}^N
+              q_i^{\frac{\sigma-1}{\sigma}}
+            \right)^{\frac{\sigma}{\sigma-1}},
+            \qquad
+            \sigma\gt 1,
+$$
+
+
+$$
+C_i(q_i)=F+cq_i,
+            \qquad
+            F\gt 0.
+$$
+
+
+각 기업은 자신의 가격변화가 aggregate price index에는 미미한 영향을 준다고 보고, elasticity of substitution $\sigma$를 주어진 것으로 받아들인다.
+따라서 아래의 own-price elasticity $-\sigma$는 유한한 $N$-기업 CES game의 정확한 elasticity가 아니라,
+기업이 aggregate price index를 주어진 것으로 취급하는 large-group 근사에서의 elasticity다.
+
+::: {.callout-important title="THEOREM 3.11 · CES large-group monopolistic competition의 markup과 free entry"}
+대칭적 CES monopolistic-competition equilibrium에서 기업의 가격설정은
+
+
+$$
+p
+              =
+              \frac{\sigma}{\sigma-1}c
+$$
+
+
+를 주고, free-entry zero-profit condition은
+
+
+$$
+(p-c)q=F
+$$
+
+
+를 준다. 따라서 기업당 산출량과, 총지출 $E$가 주어졌을 때의 variety 수의 연속 근사는
+
+
+$$
+q
+              =
+              \frac{F(\sigma-1)}{c},
+              \qquad
+              N
+              =
+              \frac{E}{\sigma F}.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+large-group approximation에서 CES demand의 own-price elasticity는 $-\sigma$이다. 가격선택 first-order condition은 Lerner rule
+
+$$
+\frac{p-c}{p}=\frac1{\sigma}
+$$
+
+를 주므로 $p=\sigma c/(\sigma-1)$이다. zero profit은 $(p-c)q=F$이므로 위의 $q$가 나온다. 대칭상태에서는 각 기업의 revenue가 $E/N$이고, zero profit으로 $pq=\sigma F$이므로 $E/N=\sigma F$, 즉 $N=E/(\sigma F)$다. 여기서 $N$은 variety의 질량 또는 연속 근사다. 실제 기업 수를 정수로 모델링하려면 Cournot의 integer free-entry condition과 같은 별도의 정수 진입 조건을 추가해야 한다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · markup과 zero profit은 모순되지 않는다"}
+이 benchmark에서는 장기에도 $p\gt MC=c$가 성립한다. 그러나 fixed cost를 포함한 평균비용은 zero-profit condition으로 인해 $p=AC$를 만족한다. 따라서 monopolistic competition은 market power와 free entry가 공존하는 구조다. variety의 사회적 수준이 과다인지 과소인지는 preference, business-stealing effect, fixed cost의 구조에 따라 달라지므로 이 장에서는 별도의 일반 정리로 주장하지 않는다.
+:::
+
+### 3.2.6 Long-run imperfect competition: conduct equilibrium + entry closure
+
+불완전경쟁의 long run은 단기 conduct equilibrium에 entry와 exit을 추가한 문제다. $n$개의 활동 기업이 있을 때 conduct equilibrium action profile을 $a^n=(a_1^n,\ldots,a_n^n)$이라고 하자. 첫 번째 층은
+
+
+$$
+a_i^n
+            \in
+            BR_i(a_{-i}^n;n)
+            \qquad
+            \text{for every active firm }i
+$$
+
+
+이다. 두 번째 층은 잠재적 진입자의 이윤으로 정의되는 entry closure다.
+
+
+$$
+\pi^E(n)
+            =
+            \max_{a_E}
+            \pi_E(a_E,a^n;n+1).
+$$
+
+
+::: {.callout-note title="DEFINITION · long-run imperfect-competition equilibrium"}
+정수 $n^*$와 action profile $a^{n^*}$가 long-run equilibrium을 이룬다는 것은 conduct equilibrium이 성립하고, 기존 기업에 대해 exit incentive가 없으며, 잠재적 진입자에 대해
+
+
+$$
+\pi_i(a^{n^*};n^*)\ge0
+              \quad\text{for every active }i,
+              \qquad
+              \pi^E(n^*)\le0
+$$
+
+
+가 성립한다는 뜻이다. 대칭적이고 기업 수를 연속 변수로 근사하는 경우 이 조건은 보통 $\pi(n^*)=0$으로 축약된다.
+:::
+
+| 시장구조 | given-$n$ conduct closure | 장기 entry closure | 장기 가격·이윤의 특징 |
+| --- | --- | --- | --- |
+| Perfect competition | price-taking + market clearing | $\sup_q\{pq-C(q)\}=0$ | $p=MC=AC$ at MES, profit $0$ |
+| Monopoly | $MR=MC$ | entry barrier가 필요 | 보통 $p\gt MC$, profit 양수 가능 |
+| Cournot | best-response fixed point | no entry / no exit | free entry여도 보통 $p\gt MC$, profit $0$ 가능 |
+| Homogeneous Bertrand | price Nash, 표준모형에서 $p=MC$ | fixed cost가 있으면 active free-entry closure가 어려움 | fixed cost가 없으면 profit $0$; $F\gt 0$이면 $p=MC$로 $F$를 회수하지 못함 |
+| Monopolistic competition | differentiated-price Nash | entry until zero profit | 보통 $p\gt MC$, $p=AC$, profit $0$ |

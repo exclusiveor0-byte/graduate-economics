@@ -1,0 +1,156 @@
+# 4.2 가격, endowment income, individual demand
+
+> 순수교환경제에서 소비자는 초기부존을 시장가격으로 평가한 가치만큼의 구매력을 가진다. 따라서 가격은 단순한 교환비율이 아니라, 초기부존을 소득으로 변환하는 장치다.
+
+### 4.2.1 Price simplex와 normalization
+
+가격벡터 $p\in\mathbb R_+^n\setminus\{0\}$는 양의 scalar multiplication에 대해 같은 budget sets를 만든다.
+
+
+$$
+p\sim\lambda p
+            \qquad
+            \text{for every }\lambda\gt0.
+$$
+
+
+따라서 가격을 compact simplex 위에서 정규화한다.
+
+
+$$
+\Delta
+            =
+            \left\{
+              p\in\mathbb R_+^n:
+              \sum_{\ell=1}^n p_\ell=1
+            \right\},
+            \qquad
+            \Delta_{++}
+            =
+            \Delta\cap\mathbb R_{++}^n.
+$$
+
+
+::: {.callout-note appearance="simple" title="REMARK · $\Delta$와 $\Delta_{++}$의 역할"}
+$\Delta$는 compact convex set이므로 Kakutani fixed-point theorem의 domain으로 적합하다. 반면 $\Delta_{++}$는 모든 재화가격이 양수인 내부 가격영역이다. 소비자 demand의 표준 성질은 종종 $\Delta_{++}$에서 가장 자연스럽지만, 존재성 증명은 compactness를 위해 boundary price까지 포함한 $\Delta$에서 시작한다.
+:::
+
+### 4.2.2 Endowment income과 budget correspondence
+
+가격 $p$에서 소비자 $i$의 wealth는 외생적 상수 $m_i$가 아니라 자기 초기부존의 시장가치다.
+
+
+$$
+m_i(p)=p\cdot e_i.
+$$
+
+
+이에 따라 budget set과 demand correspondence는
+
+
+$$
+B_i(p)
+            =
+            \left\{
+              x_i\in X_i:
+              p\cdot x_i\leq p\cdot e_i
+            \right\},
+$$
+
+
+$$
+D_i(p)
+            =
+            \operatorname{arg\,max}_{x_i\in B_i(p)}u_i(x_i)
+$$
+
+
+로 정의된다. Chapter 1의 Marshallian demand correspondence를 $D_i^M(p,m)$로 쓰면 순수교환경제의 individual demand는
+
+
+$$
+D_i(p)
+            =
+            D_i^M\bigl(p,p\cdot e_i\bigr).
+$$
+
+
+즉 초기부존의 시장가치 $m_i(p)=p\cdot e_i$를 Marshallian demand에 합성한 것이다. demand가 single-valued인 경우에는 $d_i^{GE}(p)=d_i^M(p,p\cdot e_i)$라고 쓸 수 있다. 부분균형과의 차이는 이 객체가 독립적인 소득 $m_i$를 고정한 수요가 아니라는 데 있다. 일반균형에서는 가격이 변하면 relative prices뿐 아니라 각 소비자의 endowment income도 동시에 변한다.
+
+::: {.callout-tip title="부분균형과의 차이"}
+
+$$
+\text{partial equilibrium: }m_i\text{ is fixed},
+\qquad
+\text{pure exchange equilibrium: }m_i(p)=p\cdot e_i.
+$$
+
+그래서 가격변화는 substitution effect뿐 아니라 endowment composition에 의해 결정되는 wealth effect를 동반한다.
+:::
+
+### 4.2.3 Boundary prices와 zero-price goods
+
+어떤 $p_\ell=0$이면 $\ell$번 재화의 소비는 budget inequality에 비용을 만들지 않는다. 그러면 $B_i(p)$는 그 재화 방향으로 unbounded할 수 있고 ordinary demand가 존재하지 않을 수 있다.
+
+::: {.callout-important title="PROPOSITION · zero-price exclusion"}
+$\succeq_i$가 strictly convex하고 strict monotonicity를 만족한다고 하자. 이 노트의 strict monotonicity는
+
+
+$$
+x>y
+              \quad\Longrightarrow\quad
+              x\succeq_i y,
+              \qquad
+              x\gg y
+              \quad\Longrightarrow\quad
+              x\succ_i y.
+$$
+
+
+를 뜻한다. 만약 $p_\ell=0$이면 $B_i(p)$ 위에서 utility maximiser는 존재할 수 없다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$p_\ell=0$이고 $x_i\in B_i(p)$라고 하자. 임의의 $t\gt0$에 대해
+
+$$
+y_i=x_i+t\mathbf e^\ell
+$$
+
+로 두면
+
+$$
+p\cdot y_i=p\cdot x_i\le p\cdot e_i,
+$$
+
+이므로 $y_i\in B_i(p)$다. 또한 $y_i>x_i$이다. strict monotonicity의 첫 번째 조건에 의해
+
+$$
+y_i\succeq_i x_i
+$$
+
+가 직접 따른다.
+
+이제 $y_i\neq x_i$이므로 strict convexity에 의해 임의의 $\lambda\in(0,1)$에 대해
+
+$$
+x_i^\lambda
+=(1-\lambda)x_i+\lambda y_i
+=x_i+\lambda t\mathbf e^\ell
+\succ_i x_i.
+$$
+
+그런데 $p_\ell=0$이므로 $x_i^\lambda\in B_i(p)$다. 따라서 $x_i$는 최적일 수 없다. $x_i\in B_i(p)$가 임의였으므로 $B_i(p)$ 위에는 utility maximiser가 존재하지 않는다. □
+:::
+
+::: {.callout-caution title="WARNING · 세 가정의 결합"}
+strict monotonicity만으로는 한 재화만 증가한 $x_i+t\mathbf e^\ell$가 $x_i$보다 strictly preferred하다고 말할 수 없다. 그러나 이 노트의 strict monotonicity는 $x_i+t\mathbf e^\ell>x_i$로부터 곧바로 $x_i+t\mathbf e^\ell\succeq_i x_i$를 준다. 이어 strict convexity가 이 weak improvement를
+
+$$
+x_i+\lambda t\mathbf e^\ell\succ_i x_i
+\qquad
+(\lambda\in(0,1))
+$$
+
+라는 strict improvement로 강화한다. 따라서 zero-price exclusion의 직접 논리에는 strict monotonicity와 strict convexity가 쓰이며, continuity는 필요하지 않다.
+:::

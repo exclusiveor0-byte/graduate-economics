@@ -1,0 +1,344 @@
+# 2.3 비용최소화
+
+> 기업의 비용최소화는 주어진 output target을 달성하는 input bundle 중에서 가장 낮은 비용의 bundle을 찾는 문제다. 이는 생산자이론의 핵심 최적화 문제이며, conditional factor demand와 cost function을 동시에 만든다.
+
+### 2.2.1 Conditional factor demand와 cost function
+
+::: {.callout-note title="DEFINITION · achievable output set, conditional factor demand, cost function"}
+먼저 기술적으로 달성 가능한 output target의 집합을
+
+
+$$
+\mathcal Y_f
+              =
+              \{y\in\mathbb R_+:\mathcal V(y)\ne\varnothing\}
+              =
+              \left\{
+                y\in\mathbb R_+:
+                \exists x\in\mathbb R_+^n\text{ with }f(x)\ge y
+              \right\}
+$$
+
+
+로 둔다. $y\in\mathcal Y_f$, $w\gg0$에 대해 conditional factor demand correspondence는
+
+
+$$
+X^c(w,y)
+              =
+              \operatorname{arg\,min}_{x\in\mathcal V(y)}
+              w\cdot x
+$$
+
+
+로 정의한다. cost function은 infeasible target까지 함께 다루기 위해 extended-value convention으로
+
+
+$$
+c(w,y)
+              =
+              \inf_{x\in\mathcal V(y)}w\cdot x
+              \in\mathbb R_+\cup\{+\infty\},
+              \qquad
+              \inf\varnothing=+\infty
+$$
+
+
+로 둔다. 따라서 $y\notin\mathcal Y_f$이면 $c(w,y)=+\infty$이고 $X^c(w,y)$는 정의하지 않는다.
+$y\in\mathcal Y_f$에서 최소점이 유일할 때에만 그 원소를 $x^c(w,y)$로 표기한다.
+:::
+
+::: {.callout-note title="COST MINIMISATION · 한눈에 보기"}
+conditional factor demand는 input choice를, cost function은 그 choice에서 발생하는 최소비용을 나타낸다. 둘은 같은 최적화 문제의 solution correspondence와 value function이다.
+
+- **입력** — $w\in\mathbb R_{++}^n,\ y\in\mathcal Y_f$ 요소가격과 기술적으로 달성 가능한 목표산출량이 주어진다. $y\notin\mathcal Y_f$이면 extended-value cost는 $+\infty$다.
+- **feasible set** — $\mathcal V(y)=\{x:f(x)\ge y\}$ 목표 output을 달성할 수 있는 input bundle 전체다.
+- **선택 correspondence** — $X^c(w,y)=\arg\min_{x\in\mathcal V(y)}w\cdot x$ 여러 최소비용 bundle이 있을 수 있으므로 처음에는 correspondence로 둔다.
+- **값함수** — $c(w,y)=\inf_{x\in\mathcal V(y)}w\cdot x$ output $y$를 생산하는 데 필요한 최소비용이며, infeasible target에서는 $+\infty$로 둔다.
+:::
+
+::: {.callout-important title="THEOREM 2.4 · conditional factor demand의 존재와 유일성"}
+$f$가 continuous하고 $f(\mathbf0)=0$, $\mathcal V(y)\ne\varnothing$라고 하자. $w\gg0$이면 $X^c(w,y)$는 공집합이 아닌 compact set이다. $y\gt0$이고 $f$가 strictly quasiconcave이면 $X^c(w,y)$는 singleton이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 존재와 유일성"}
+$\bar x\in\mathcal V(y)$를 택하자. 비용최소화는
+
+$$
+K=\{x\in\mathbb R_+^n:f(x)\ge y,\ w\cdot x\le w\cdot\bar x\}
+$$
+
+위로 제한해도 된다. $f$의 continuity로 $\mathcal V(y)$는 closed이고, $w\gg0$이므로 $w\cdot x\le w\cdot\bar x$는 각 좌표에 유한한 상한을 준다. 따라서 $K$는 공집합이 아닌 compact set이다. 연속함수 $w\cdot x$는 $K$에서 최소점을 가지므로 $X^c(w,y)$는 공집합이 아니다. 또한 최소점 집합은 $K$의 closed subset이므로 compact하다.
+
+이제 $f$가 strictly quasiconcave라고 하자. 서로 다른 두 최소비용 input bundle $x^1,x^2\in X^c(w,y)$가 존재한다고 가정하자. 그러면 target-output binding에 의해 $f(x^1)=f(x^2)=y$이고 strict quasiconcavity로
+
+$$
+f\left(\frac{x^1+x^2}{2}\right)\gt y.
+$$
+
+두 bundle의 평균은 비용이 여전히 $c(w,y)$이지만 output을 초과한다. Theorem 2.1의 비례축소 논증으로 평균 bundle보다 더 낮은 비용으로 $y$를 생산할 수 있어 모순이다. 따라서 최소비용 bundle은 유일하다. □
+:::
+
+::: {.callout-important title="PROPOSITION · conditional factor demand의 가격 동차성"}
+모든 $\lambda\gt0$에 대해
+
+
+$$
+X^c(\lambda w,y)=X^c(w,y).
+$$
+
+
+따라서 $X^c(w,y)=\{x^c(w,y)\}$이면 $x^c(\lambda w,y)=x^c(w,y)$다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$\lambda\gt0$이면 모든 feasible input bundle $x,x'\in\mathcal V(y)$에 대해
+
+$$
+w\cdot x\le w\cdot x'
+\quad\Longleftrightarrow\quad
+\lambda w\cdot x\le\lambda w\cdot x'.
+$$
+
+따라서 두 minimisation problem의 minimiser 집합이 같다. □
+:::
+
+::: {.callout-important title="THEOREM · conditional factor demand와 cost function의 정칙성"}
+$f$가 continuous하고 strictly input monotone이라고 하자. $y^0\gt0$, $\mathcal V(y^0)\ne\varnothing$, $w^0\gg0$를 고정하자.
+그러면 $(w^0,y^0)$의 어떤 열린 근방 $N\subseteq\mathbb R_{++}^n\times\mathbb R_{++}$가 존재하여,
+모든 $(w,y)\in N$에 대해 $\mathcal V(y)\ne\varnothing$이고 $X^c(w,y)$는 nonempty compact-valued이며 UHC이다.
+또한 extended-value cost function은 이 근방에서 유한값을 가지며 continuous하다.
+그 근방에서 $X^c(w,y)$가 singleton이면 유일한 conditional factor demand
+
+$$
+x^c(w,y)
+$$
+
+는 continuous하다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · local compact containment, UHC, continuity"}
+$\bar x\in\mathcal V(y^0)$를 택하고 $\varepsilon\gt0$을 택하자. $\bar x+\varepsilon\mathbf1\gg\bar x$이므로
+strict input monotonicity에 의해
+
+$$
+f(\bar x+\varepsilon\mathbf1)\gt f(\bar x)\ge y^0.
+$$
+
+따라서 $y$가 $y^0$에 충분히 가까우면 $\bar x+\varepsilon\mathbf1\in\mathcal V(y)$다.
+특히 $y^0$의 어떤 열린 근방은 $\mathcal Y_f$ 안에 들어간다. 한편 $w$가 $w^0$에 충분히 가까우면
+각 성분에 대해 $w_i\ge w_i^0/2$이고 $w\cdot(\bar x+\varepsilon\mathbf1)$는 공통 상한을 갖는다.
+그러므로 모든 $x\in X^c(w,y)$는 하나의 고정 compact box 안에 놓인다.
+
+이제 $(w^k,y^k)\to(w,y)$, $x^k\in X^c(w^k,y^k)$, $x^k\to x$라 하자.
+$f(x^k)\ge y^k$와 $f$의 연속성으로 $x\in\mathcal V(y)$다.
+임의의 $z\in\mathcal V(y)$와 $\delta\gt0$에 대해 $z_\delta=z+\delta\mathbf1$로 두면
+$z_\delta\gg z$이므로 strict input monotonicity에 의해
+
+$$
+f(z_\delta)\gt f(z)\ge y.
+$$
+
+따라서 충분히 큰 $k$에 대해 $z_\delta\in\mathcal V(y^k)$이고, $x^k$의 최소성으로
+
+$$
+w^k\cdot x^k\le w^k\cdot z_\delta.
+$$
+
+극한을 취한 뒤 $\delta\downarrow0$으로 보내면 $w\cdot x\le w\cdot z$다.
+$z$가 임의였으므로 $x\in X^c(w,y)$. 따라서 $X^c$는 UHC다.
+
+$x^0\in X^c(w^0,y^0)$를 택하고 $\varepsilon\gt0$에 대해
+$x^\varepsilon=x^0+\varepsilon\mathbf1$로 두자. $x^\varepsilon\gg x^0$이므로
+strict input monotonicity에 의해 $f(x^\varepsilon)\gt y^0$이다. 따라서 충분히 큰 $k$에 대해
+$x^\varepsilon\in\mathcal V(y^k)$이고,
+
+$$
+c(w^k,y^k)\le w^k\cdot x^\varepsilon.
+$$
+
+$k\to\infty$ 후 $\varepsilon\downarrow0$을 취하면
+
+$$
+\limsup_{k\to\infty}c(w^k,y^k)\le w^0\cdot x^0=c(w^0,y^0)
+$$
+
+이다. 반대로 최소해열의 임의의 수렴부분열은 앞의 공통 compact box 안에 있고,
+그 극한은 UHC에 의해 $X^c(w^0,y^0)$에 속한다. 따라서
+
+$$
+\liminf_{k\to\infty}c(w^k,y^k)\ge c(w^0,y^0).
+$$
+
+두 부등식을 합치면 $c$의 연속성이 따른다. 마지막으로 singleton-valued correspondence의 모든 수렴부분열 극한이
+$x^c(w^0,y^0)$ 하나뿐이므로 $x^c$는 continuous하다. □
+:::
+
+### 2.2.2 Cost function의 성질
+
+::: {.callout-note appearance="simple" title="COST FUNCTION $c(w,y)$의 성질"}
+- **output 단조성** — $y,y'\in\mathcal Y_f$와 $y'\ge y$이면 $\mathcal V(y')\subseteq\mathcal V(y)$이므로 $c(w,y')\ge c(w,y)$다.
+- **요소가격 단조성** — $w'\ge w$이면 모든 feasible bundle의 비용이 약하게 증가하므로 $c(w',y)\ge c(w,y)$다.
+- **가격의 1차 동차성** — 모든 요소가격을 $\lambda$배 하면 최소비용도 $\lambda$배가 된다.$c(\lambda w,y)=\lambda c(w,y)$
+- **가격에 대한 concavity** — 각 feasible bundle의 비용은 $w$의 선형함수이고, $c$는 이 선형함수들의 점별 infimum이므로 $c(\cdot,y)$는 concave하다.
+- **output에 대한 convexity** — $f$가 concave이면 output target을 평균내는 데 필요한 최소비용은 평균 최소비용을 넘지 않는다.$c(w,ty_1+(1-t)y_2)\le tc(w,y_1)+(1-t)c(w,y_2)$
+:::
+
+::: {.callout-important title="THEOREM 2.5 · cost function의 기본 성질"}
+모든 $w,w'\gg0$, $y,y'\in\mathcal Y_f$에 대해 다음이 성립한다.
+
+
+$$
+y'\ge y\Longrightarrow c(w,y')\ge c(w,y),
+              \qquad
+              w'\ge w\Longrightarrow c(w',y)\ge c(w,y),
+$$
+
+
+$$
+c(\lambda w,y)=\lambda c(w,y)
+              \qquad(\lambda\gt0),
+$$
+
+
+$$
+c(tw+(1-t)w',y)
+              \ge
+              tc(w,y)+(1-t)c(w',y)
+              \qquad(t\in[0,1]).
+$$
+
+
+추가로 $f$가 concave이면 $c(w,\cdot)$는 convex하다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · cost function의 곡률과 동차성"}
+$y'\ge y$이면 $\mathcal V(y')\subseteq\mathcal V(y)$이므로 output 단조성이 따른다. $w'\ge w$이면 모든 $x\in\mathbb R_+^n$에 대해 $w'\cdot x\ge w\cdot x$이므로 요소가격 단조성도 따른다.
+
+$\lambda\gt0$이면
+
+$$
+c(\lambda w,y)
+=\inf_{x\in\mathcal V(y)}\lambda w\cdot x
+=\lambda c(w,y).
+$$
+
+또 임의의 $x\in\mathcal V(y)$에 대해
+
+$$
+[tw+(1-t)w']\cdot x
+=t(w\cdot x)+(1-t)(w'\cdot x)
+\ge tc(w,y)+(1-t)c(w',y).
+$$
+
+좌변에 $x\in\mathcal V(y)$에 대한 infimum을 취하면 price concavity가 나온다.
+
+마지막으로 $f$가 concave하다고 하자. $x^r\in X^c(w,y_r)$, $r=1,2$를 택하면 concavity로
+
+$$
+f\bigl(tx^1+(1-t)x^2\bigr)
+\ge
+tf(x^1)+(1-t)f(x^2)
+=ty_1+(1-t)y_2.
+$$
+
+따라서 $tx^1+(1-t)x^2$는 target $ty_1+(1-t)y_2$에 feasible이고
+
+$$
+c\bigl(w,ty_1+(1-t)y_2\bigr)
+\le
+w\cdot[tx^1+(1-t)x^2]
+=tc(w,y_1)+(1-t)c(w,y_2).
+$$
+
+이로써 output convexity가 증명된다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · 가격과 output에 대한 곡률의 방향"}
+같은 cost function이라도 $w$에 대해서는 concave이고 $y$에 대해서는 일반적으로 convex하다. 가격을 평균내면 기업은 각 가격에서의 최소비용 input bundle 중 유리한 것을 선택할 수 있으므로 cost는 평균보다 높아질 수 없다. 반면 output target을 평균내면, concave technology 아래 두 생산계획을 섞는 방식이 평균 output을 달성하므로 cost는 평균비용보다 높아질 수 없다.
+:::
+
+### 2.2.3 Shephard lemma와 conditional factor-demand restrictions
+
+::: {.callout-important title="THEOREM 2.6 · Shephard lemma의 supergradient 형식"}
+$X^c(w,y)\ne\varnothing$라고 하자. 임의의 $x^c\in X^c(w,y)$와 모든 $v\gg0$에 대해
+
+$$
+c(v,y)
+\le
+c(w,y)+x^c\cdot(v-w).
+$$
+
+따라서
+
+$$
+X^c(w,y)\subseteq\partial_w^+c(w,y),
+$$
+
+여기서 $\partial_w^+c(w,y)$는 가격에 대해 concave한 $c(\cdot,y)$의 superdifferential이다. 특히 $c(\cdot,y)$가 $w$에서 미분가능하면
+
+$$
+X^c(w,y)=\{\nabla_wc(w,y)\},
+\qquad
+\frac{\partial c(w,y)}{\partial w_i}=x_i^c(w,y).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · factor-demand continuity를 사용하지 않는 증명"}
+$x^c\in X^c(w,y)$를 고정하자. 이 input bundle은 요소가격이 $v$로 바뀌어도 output target $y$를 달성하므로
+
+$$
+c(v,y)
+\le v\cdot x^c
+=w\cdot x^c+(v-w)\cdot x^c
+=c(w,y)+(v-w)\cdot x^c.
+$$
+
+따라서 $x^c\in\partial_w^+c(w,y)$다. $c$가 $w$에서 미분가능하면, 각 좌표방향 $w\pm te_i$에 위 부등식을 적용하고 $t\downarrow0$으로 보내 Chapter 1의 Shephard lemma와 동일하게
+
+$$
+x_i^c=\frac{\partial c(w,y)}{\partial w_i}
+$$
+
+를 얻는다. 이는 모든 minimiser에 대해 성립하므로 minimiser는 유일하고 $X^c(w,y)=\{\nabla_wc(w,y)\}$다. □
+:::
+
+::: {.callout-important title="THEOREM 2.7 · conditional factor-demand matrix의 성질"}
+$c(\cdot,y)\in C^2(\mathbb R_{++}^n)$이고 conditional factor demand가 단일값이라고 하자. 그러면
+
+
+$$
+D_wx^c(w,y)
+              =D_wx^c(w,y)^\top,
+              \qquad
+              D_wx^c(w,y)\preceq0,
+              \qquad
+              D_wx^c(w,y)w=0.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+Shephard lemma로 $x^c(w,y)=\nabla_w c(w,y)$이고,
+
+$$
+D_wx^c(w,y)=\nabla^2_{ww}c(w,y).
+$$
+
+cost function은 $w$에 대해 concave하므로 Hessian은 negative semidefinite이고, $C^2$ 정칙성으로 Hessian은 symmetric하다.
+
+마지막으로 conditional factor demand의 0차 동차성
+
+$$
+x^c(\lambda w,y)=x^c(w,y)
+$$
+
+를 $\lambda$에 대해 미분하고 $\lambda=1$을 대입하면
+
+$$
+D_wx^c(w,y)w=0
+$$
+
+이다. □
+:::

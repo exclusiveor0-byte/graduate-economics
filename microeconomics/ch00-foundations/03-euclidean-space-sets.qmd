@@ -1,0 +1,81 @@
+# 0.3 유클리드 공간, 집합, 곱공간
+
+유한차원 미시이론의 대부분은 $\mathbb R^n$의 부분집합 위에서 전개된다. 소비집합은 보통 $\mathbb R_+^n$의 부분집합이고, 생산집합은 $\mathbb R^n$의 부분집합이며, 가격벡터는 $\mathbb R_+^n$에 속한다. 따라서 경제적 가정의 실질적 내용은 이 집합들의 기하학적 성질에 크게 좌우된다.
+
+### 0.3.1 거리와 근방
+
+$x,y\in\mathbb R^n$에 대하여 유클리드 거리는 $\lVert x-y\rVert$로 쓴다. 중심이 $x$이고 반지름이 $\varepsilon>0$인 열린 공은 다음과 같다.
+
+
+$$
+B_\varepsilon(x)
+            =
+            \{y\in\mathbb R^n:\lVert y-x\rVert<\varepsilon\}.
+$$
+
+
+어떤 성질이 $x$의 충분히 작은 근방에서 성립한다는 말은, 어떤 $\varepsilon>0$가 존재하여 $B_\varepsilon(x)$의 모든 점에서 그 성질이 성립한다는 뜻이다. 국지적 비포만성, 연속성, 내부해의 개념은 모두 근방의 언어로 표현된다.
+
+### 0.3.2 곱공간, 유한 곱, Minkowski 합
+
+여러 소비자나 여러 경기자의 선택을 함께 다룰 때는 데카르트곱을 사용한다. $A_i\subseteq\mathbb R^{n_i}$에 대해
+
+
+$$
+\prod_{i\in I}A_i
+  =
+  \{(a_i)_{i\in I}:a_i\in A_i\text{ for every }i\in I\}
+$$
+
+
+를 $A_i$들의 곱공간이라고 한다. 일반균형의 배분공간과 게임이론의 전략공간은 이 형식을 갖는다.
+
+::: {.callout-important title="PROPOSITION · 유한 곱의 콤팩트성과 볼록성"}
+유한한 지표집합 $I$에 대해 각 $K_i\subseteq\mathbb R^{n_i}$가 공집합이 아닌 콤팩트한 볼록집합이면,
+
+
+$$
+K=\prod_{i\in I}K_i
+$$
+
+
+도 공집합이 아닌 콤팩트한 볼록집합이다. 따라서 유한 전략 게임의 혼합전략공간 $\prod_i\Delta(S_i)$와 소비자별 선택집합의 곱은 Kakutani 정리의 정의역 후보가 된다.
+:::
+
+같은 차원의 집합 $A_1,\dots,A_I\subseteq\mathbb R^n$의 Minkowski 합은
+
+
+$$
+\sum_{i\in I}A_i
+  =
+  \left\{\sum_{i\in I}a_i:a_i\in A_i\text{ for every }i\in I\right\}
+$$
+
+
+로 정의한다. 각 $A_i$가 볼록이면 $\sum_iA_i$도 볼록이고, 각 $A_i$가 콤팩트하면 $\sum_iA_i$도 콤팩트하다. 이는 총수요, 총부존량, 생산가능집합, Pareto 개선집합의 집계에서 사용된다.
+
+### 0.3.3 가격 simplex와 정규화
+
+$\lambda>0$이면 가격벡터 $p$와 $\lambda p$는 같은 상대가격 체계를 나타낸다. 실제로 가격과 소득을 같은 양의 상수로 곱해도 예산집합은 변하지 않는다.
+
+
+$$
+\{x\in X:p\cdot x\le m\}
+            =
+            \{x\in X:(\lambda p)\cdot x\le \lambda m\}.
+$$
+
+
+따라서 일반균형이론에서는 가격공간을 정규화하여 다룰 수 있다. 가장 널리 쓰이는 정규화가 가격 simplex다.
+
+
+$$
+\Delta
+            =
+            \left\{p\in\mathbb R_+^n:\sum_{\ell=1}^n p_\ell=1\right\}.
+$$
+
+
+::: {.callout-note appearance="simple" title="REMARK · 가격 simplex의 역할"}
+$\Delta$는 양의 scalar배에 의해 동일시되는 비영 가격벡터마다 하나의 대표점을 택해 모아 둔 가격공간이다. $\Delta$가 닫혀 있고 bounded하다는 사실은 Heine–Borel 정리에 의해 콤팩트성을 준다. $\Delta$의 볼록성은 0.6에서 convex combination을 정의한 뒤 확인한다. 초과수요와 price-adjustment correspondence가 정의된 뒤에야 simplex의 경제적 기하학이 완성되므로, 실제 가격조정 대응과 고정점 도식은 일반균형 존재정리 장에서 다룬다.
+:::

@@ -1,0 +1,314 @@
+# 1.3 소비자의 문제
+
+> 이제 선호와 시장환경을 결합한다. 가격벡터와 소득이 주어졌을 때 소비자는 예산집합 안에서 가장 선호되는 소비묶음을 고른다.
+> 이 절에서는 이 선택이 존재하는지, 유일한지, 그리고 가격과 소득이 변할 때 안정적으로 변하는지를 살핀다.
+
+### 1.3.1 예산집합과 Marshallian demand
+
+가격은 $p\in\mathbb R_{++}^n$, 소득은 $m\gt 0$으로 둔다. 가격의 엄격한 양의성은 일반균형에서는 별도의 논증이 필요한 경제적 가정이다.
+다만 부분균형 소비자문제에서는 예산집합의 boundedness를 확보하는 표준 가정으로 사용한다.
+
+
+$$
+B(p,m)
+            =
+            \{x\in X:p\cdot x\le m\}.
+$$
+
+
+::: {.callout-important title="PROPOSITION 1.3 · 예산집합의 기하학"}
+$X\subseteq\mathbb R_+^n$가 closed이고 $\mathbf 0\in X$, $p\gg0$, $m\gt 0$이면 $B(p,m)$는 공집합이 아닌 compact set이다.
+추가로 $X$가 convex이면 $B(p,m)$도 convex다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$\mathbf 0\in X$이고 $p\cdot\mathbf 0=0\le m$이므로 $B(p,m)\ne\varnothing$다.
+$B(p,m)=X\cap\{x:p\cdot x\le m\}$이고 두 집합은 closed이므로 $B(p,m)$는 closed다.
+또한 $x\in B(p,m)$이면 모든 $\ell$에 대해
+
+
+$$
+0\le x_\ell\le\frac{m}{p_\ell},
+$$
+
+
+이므로 $B(p,m)$는 bounded다. Heine–Borel 정리에 의해 compact하다. 마지막으로 $x,y\in B(p,m)$, $t\in[0,1]$이면
+$tx+(1-t)y\in X$이고 $p\cdot[tx+(1-t)y]\le m$이므로 볼록성도 따른다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · 예산선·예산집합·접선조건의 역할 구분"}
+$B(p,m)$는 반공간 $\{x:p\cdot x\le m\}$와 소비집합 $X$의 교집합이다. 여기서 경계는 소비집합 $X$에 대한 상대경계로 읽어야 한다.
+일반적인 $X$에 대해서는 항상
+
+$$
+\partial_X B(p,m)
+\subseteq
+X\cap\{x:p\cdot x=m\}
+$$
+
+만을 단정할 수 있다. 예를 들어 $X$ 전체가 예산 반공간 안에 들어가면 $B(p,m)=X$이고 상대경계는 공집합일 수 있다.
+이 장의 표준 소비집합 $X=\mathbb R_+^n$, $p\gg0$, $m\gt0$ 아래에서는 반대로 예산선 위의 각 점에서 $X$ 안의 안쪽과 바깥쪽 점을 모두 만들 수 있으므로
+
+$$
+\partial_X B(p,m)
+=
+\{x\in X:p\cdot x=m\}.
+$$
+
+이 집합은 예산을 모두 쓰는 소비묶음들로 이루어진다. $\mathbb R^n$에서의 절대경계를 쓰면 소비집합 자체의 경계점이 추가될 수 있으므로,
+이 구분은 일반 소비집합을 다룰 때 중요하다. local nonsatiation은 최적점이 이 경계 위에 놓인다는 사실만 보장한다.
+반면
+
+$$
+\nabla u(x^*)=\lambda p
+\qquad\text{또는}\qquad
+MRS_{ij}(x^*)=\frac{p_i}{p_j}
+$$
+
+는 $u\in C^1$, $x^*\gg0$, 양의 한계효용 및 KKT 정칙성을 추가한 *내부해의 미분가능한 특징화*이다.
+즉 예산소진은 일반 정리이고, 접선조건은 그보다 훨씬 좁은 경우의 정리다.
+:::
+
+::: {.callout-note title="DEFINITION · Marshallian demand correspondence"}
+효용함수 $u$가 선호를 표현할 때, Marshallian demand correspondence는
+
+
+$$
+D(p,m)
+              =
+              \operatorname{arg\,max}_{x\in B(p,m)}u(x)
+$$
+
+
+로 정의한다. Assumption 1.2 아래에서는 최적해가 유일하므로 이를 단일값 수요함수 $d(p,m)$로 표기한다. strict convexity를 가정하지 않는 예제에서는 $D(p,m)$를 그대로 유지한다.
+:::
+
+::: {.callout-note title="MARSHALLIAN DEMAND · 한눈에 보기"}
+Marshallian demand는 가격과 소득이 주어졌을 때 소비자가 실제로 고르는 소비묶음이다. 아래에서는 먼저 어떤 객체가 정의되는지를 정리하고, 이어 존재·유일성·연속성·동차성·예산소진을 각각 어떤 가정에서 얻는지 분리한다.
+
+- **입력** — $p\in\mathbb R_{++}^n,\ m\in\mathbb R_{++}$ 가격과 소득이 예산집합 $B(p,m)$를 정한다.
+- **선택문제** — $D(p,m)=\operatorname{arg\,max}_{x\in B(p,m)}u(x)$ 최적 소비묶음이 여러 개일 수 있으므로 처음에는 correspondence로 둔다.
+- **값함수** — $v(p,m)=\max_{x\in B(p,m)}u(x)$ 같은 문제의 최대효용값은 뒤에서 간접효용함수로 따로 정리한다.
+- **단일값 표기** — $D(p,m)=\{d(p,m)\}$ strict convexity가 최적해의 유일성을 보장할 때에만 $d$를 함수로 쓴다.
+:::
+
+::: {.callout-note appearance="simple" title="MARSHALLIAN DEMAND의 성질: 가정과 결론"}
+- **존재** — $B(p,m)$의 compactness와 $u$의 continuity로 최적해가 존재한다.
+- **유일성** — 선호의 strict convexity가 있으면 서로 다른 두 최적해의 혼합이 더 선호되어 모순이 생긴다.
+- **연속성** — 예산 correspondence의 연속성과 Berge maximum theorem으로 $D$는 UHC이다. 유일성이 더해지면 $d$는 continuous하다.
+- **0차 동차성** — $p$와 $m$을 같은 비율로 바꾸어도 예산집합이 변하지 않는다.$D(\lambda p,\lambda m)=D(p,m)\quad(\lambda\gt0)$
+- **예산소진** — local nonsatiation 아래 최적점에 예산여유가 남아 있으면 근방에서 더 선호되는 묶음을 고를 수 있다.$x\in D(p,m)\ \Longrightarrow\ p\cdot x=m$
+:::
+
+::: {.callout-important title="THEOREM 1.3 · Marshallian demand의 존재와 유일성"}
+$X$가 Assumption 1.1을 만족하고 $u:X\to\mathbb R$가 continuous라고 하자. 그러면 모든 $(p,m)\in\mathbb R_{++}^n\times\mathbb R_{++}$에 대해 $D(p,m)$는 공집합이 아닌 compact set이다.
+선호가 convex이면 $D(p,m)$의 값은 convex하고, 선호가 strictly convex이면 $D(p,m)$는 singleton이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 존재와 유일성의 역할 분리"}
+Proposition 1.3에 의해 $B(p,m)$는 공집합이 아닌 compact set이고 $u$는 연속이므로 Weierstrass 정리에 의해 최대해가 존재한다.
+$D(p,m)$는 연속함수의 최대점 집합이므로 $B(p,m)$의 closed subset이고, 따라서 compact하다.
+선호가 convex이면 두 최적점의 convex combination도 적어도 같은 효용을 주므로 최적점 집합은 convex하다.
+strict convexity를 가정하면 서로 다른 두 최적점의 비자명한 볼록결합이 두 점보다 엄격히 선호되어 모순이므로 최적점은 유일하다. □
+:::
+
+::: {.callout-important title="THEOREM 1.4 · 예산소진"}
+선호가 locally nonsatiated이면 모든 $x^*\in D(p,m)$에 대해
+
+
+$$
+p\cdot x^*=m
+$$
+
+
+가 성립한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+반대로 $p\cdot x^*\lt m$이라고 하자. $\delta=m-p\cdot x^*\gt 0$이다. $\varepsilon\gt 0$를 $\lVert p\rVert\varepsilon\lt \delta$가 되도록 잡는다.
+local nonsatiation에 의해 $\lVert y-x^*\rVert\lt \varepsilon$이고 $y\succ x^*$인 $y\in X$가 존재한다. Cauchy–Schwarz 부등식으로
+
+
+$$
+p\cdot y
+              \le p\cdot x^*+\lVert p\rVert\lVert y-x^*\rVert
+              \lt p\cdot x^*+\delta=m.
+$$
+
+
+따라서 $y\in B(p,m)$이고 $y\succ x^*$이므로 $x^*$의 최적성에 모순이다. □
+:::
+
+### 1.3.2 수요대응의 연속성, 동차성, KKT
+
+수요의 존재만으로는 비교정태를 할 수 없다. 가격과 소득이 조금 변할 때 선택이 안정적으로 변하는지는 예산 correspondence의 연속성과 Berge maximum theorem에서 따른다.
+
+::: {.callout-important title="PROPOSITION · 예산대응의 연속성"}
+$X$가 closed, convex이고 $\mathbf0\in X$라고 하자. $(p,m)\in\mathbb R_{++}^n\times\mathbb R_{++}$에서
+
+$$
+(p,m)\mapsto B(p,m)
+$$
+
+는 각 점에서 공집합이 아닌 compact 집합을 값으로 가지며, UHC와 LHC를 모두 만족한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 예산대응의 UHC와 LHC"}
+파라미터 공간을 $\Theta=\mathbb R_{++}^n\times\mathbb R_{++}$로 쓴다. 고정한 $\theta=(p,m)\in\Theta$의 충분히 작은 근방 $N$을 택하여
+
+$$
+p'_{\ell}\ge\frac{p_\ell}{2}\quad(\ell=1,\dots,n),
+\qquad
+m'\le2m
+\qquad\text{for all }(p',m')\in N
+$$
+
+이 되게 할 수 있다. 그러면 $x\in B(p',m')$인 모든 $x$에 대해
+
+$$
+0\le x_\ell\le\frac{m'}{p'_\ell}\le\frac{4m}{p_\ell}.
+$$
+
+따라서 이 근방에서 모든 예산집합은 하나의 고정 compact box
+
+$$
+K=\prod_{\ell=1}^n\left[0,\frac{4m}{p_\ell}\right]
+$$
+
+안에 들어간다.
+
+**UHC.** $(p^k,m^k)\to(p,m)$, $x^k\to x$, $x^k\in B(p^k,m^k)$라 하자. $X$가 closed이므로 $x\in X$이고, 내적의 연속성으로
+
+$$
+p\cdot x=\lim_{k\to\infty}p^k\cdot x^k
+\le\lim_{k\to\infty}m^k=m.
+$$
+
+즉 graph$(B)$는 closed다. 위에서 보인 근방 내 공통 compact box 포함성과 closed graph 성질을 함께 쓰면 $B$는 UHC다.
+
+**LHC: 예산 내부점.** $x\in B(p,m)$이고 $p\cdot x\lt m$라 하자. $\eta=m-p\cdot x\gt 0$라 두면 함수
+$(p',m')\mapsto m'-p'\cdot x$의 연속성으로 충분히 가까운 $(p',m')$에서는 $m'-p'\cdot x\gt \eta/2\gt 0$이다. 따라서 같은 $x$가 계속 예산집합에 속한다.
+
+**LHC: 예산 경계점.** $p\cdot x=m$이고 $V$가 $x$의 임의의 상대근방이라고 하자. $\alpha\in(0,1)$를 1에 충분히 가깝게 택하여 $\alpha x\in V$가 되게 한다. $0,x\in X$와 $X$의 convexity로 $\alpha x\in X$이며,
+
+$$
+p\cdot(\alpha x)=\alpha m\lt m.
+$$
+
+따라서 앞의 내부점 논증을 $\alpha x$에 적용하면, 충분히 가까운 모든 $(p',m')$에 대해 $\alpha x\in B(p',m')\cap V$다. 이는 LHC의 정의를 만족한다.
+
+여기서 $\mathbf0\in X$와 convexity는 경계점을 원점 방향으로 축소해 $X$ 안에 남게 하는 데만 쓰인다. 이 두 가정이 없으면 LHC는 일반적으로 실패할 수 있다. □
+:::
+
+::: {.callout-important title="THEOREM 1.5 · 수요대응의 UHC와 수요함수의 연속성"}
+$u$가 continuous이면 $D$는 각 점에서 공집합이 아닌 compact 집합을 값으로 가지며 UHC이다. 선호가 strictly convex이면 $D$는 singleton이므로,
+이를 $d:\mathbb R_{++}^n\times\mathbb R_{++}\to X$로 쓰면 $d$는 continuous하다.
+:::
+
+이 결과는 Berge maximum theorem을 예산 correspondence에 적용한 것이다. 핵심은 strict convexity가 수요의 존재가 아니라
+*유일성*을 보장한다는 점이다. 존재와 UHC는 compactness, 연속성, Berge maximum theorem에서 나온다.
+
+::: {.callout-tip collapse="true" title="PROOF · 수요대응의 UHC와 단일값 수요의 연속성"}
+$(p^k,m^k)\to(p,m)$, $x^k\in D(p^k,m^k)$, $x^k\to x$라 하자. 예산대응의 closed graph 성질로 $x\in B(p,m)$이다. 임의의 $y\in B(p,m)$를 고정하자. 예산대응의 LHC에 의해, 충분히 큰 $k$에 대해 $y^k\in B(p^k,m^k)$이면서 $y^k\to y$인 수열을 택할 수 있다. $x^k$의 최적성으로
+
+$$
+u(x^k)\ge u(y^k)
+\qquad\text{for every sufficiently large }k.
+$$
+
+$u$의 연속성을 사용하여 극한을 취하면 $u(x)\ge u(y)$다. $y\in B(p,m)$가 임의였으므로 $x\in D(p,m)$이다. 따라서 $D$는 closed graph를 갖는다. 앞서 보인 예산대응의 근방 내 공통 compact box 포함성과 $D(p,m)\subseteq B(p,m)$를 사용하면 $D$도 같은 성질을 가지며, 따라서 $D$는 UHC다.
+
+strict convexity를 가정하면 $D(p,m)=\{d(p,m)\}$다. $(p^k,m^k)\to(p,m)$이라 하자. 위의 근방 내 공통 compact box 포함성에 의해 $d(p^k,m^k)$의 모든 부분수열은 다시 수렴부분수열을 갖는다. 그 임의의 수렴부분수열의 극한은 UHC로 $D(p,m)=\{d(p,m)\}$에 속한다. 따라서 모든 수렴부분수열의 극한이 $d(p,m)$이고, 수열 전체가 $d(p,m)$으로 수렴한다. 그러므로 $d$는 연속이다. □
+:::
+
+::: {.callout-important title="PROPOSITION · 0차 동차성과 Walras law"}
+모든 $\lambda\gt 0$에 대해
+
+
+$$
+D(\lambda p,\lambda m)=D(p,m).
+$$
+
+
+또한 선호가 locally nonsatiated이면
+
+
+$$
+x\in D(p,m)
+              \Longrightarrow
+              p\cdot x=m.
+$$
+
+:::
+
+첫 결과는 $B(\lambda p,\lambda m)=B(p,m)$에서 즉시 따른다. 둘째 결과는 Theorem 1.4의 예산소진이다.
+이 두 성질은 이후의 모든 demand restriction의 출발점이 된다.
+
+#### 미분가능한 경우: KKT와 내부해
+
+이제 $X=\mathbb R_+^n$, $u\in C^1$이고 필요하면 concavity를 가정하자. 소비자문제의 라그랑지안은
+
+
+$$
+\mathcal L(x,\lambda,\mu)
+            =
+            u(x)+\lambda(m-p\cdot x)+\sum_{\ell=1}^n\mu_\ell x_\ell,
+            \qquad
+            \lambda\ge0,\ \mu\ge0.
+$$
+
+
+여기서 $m\gt 0$, $p\gg0$이므로 충분히 작은 $\varepsilon\gt 0$를 택하면
+$\varepsilon\mathbf 1\gg0$이고 $p\cdot(\varepsilon\mathbf 1)\lt m$이다. 따라서 엄격한 feasible point가 존재한다. 이는 이 문제에서 Slater condition이 성립함을 뜻한다. 따라서 미분가능한 효용의 국소최대해는 다음 KKT 조건을 만족한다.
+
+최적해 $x^*$에서 KKT 조건은
+
+
+$$
+\nabla u(x^*)-\lambda^*p+\mu^*=0,
+            \qquad
+            \lambda^*(m-p\cdot x^*)=0,
+            \qquad
+            \mu_\ell^*x_\ell^*=0\quad(\ell=1,\ldots,n).
+$$
+
+
+$u$가 concave이면 이 조건은 전역최적성을 위한 충분조건이기도 하다. $x^*\gg0$인 내부해에서는 $\mu^*=0$이고,
+예산이 binding되며 $\lambda^*\gt 0$인 경우
+
+
+$$
+\frac{\partial u(x^*)}{\partial x_i}
+            =\lambda^*p_i,
+            \qquad
+            \frac{MU_i(x^*)}{MU_j(x^*)}
+            =\frac{p_i}{p_j}
+            \quad\text{whenever }MU_j(x^*)\gt 0.
+$$
+
+
+::: {.callout-caution title="CAUTION · MRS = 상대가격은 일반 원리가 아니다"}
+이 등식에는 미분가능성, 양의 가격, 내부해, 분모의 양의 한계효용, 그리고 KKT 정칙성이 필요하다.
+perfect substitutes의 corner solution, Leontief의 kink, 포만점, 영가격이 가능한 문제에서는 이 식만으로 최적해를 구할 수 없다.
+:::
+
+::: {.callout-note appearance="simple" title="CORNER CONDITIONS · 0 소비량 재화의 한계조건"}
+stationarity를 성분별로 쓰면
+
+$$
+\frac{\partial u(x^*)}{\partial x_\ell}
+=\lambda^*p_\ell-\mu_\ell^*.
+$$
+
+따라서 $x_\ell^*=0$이면 $\mu_\ell^*\ge0$이므로
+
+$$
+\frac{\partial u(x^*)}{\partial x_\ell}\le\lambda^*p_\ell.
+$$
+
+즉 corner에서 소비하지 않는 재화의 한계효용/가격 비율은 실제로 소비하는 재화에서의 공통 비율보다 클 수 없다. 내부해의 등식은 이 부등식이 모든 재화에서 등호가 되는 특수한 경우다.
+:::
+
+::: {.callout-note appearance="simple" title="SUFFICIENCY · KKT가 전역해를 특징화하는 조건"}
+$u$가 concave이고 feasible set $B(p,m)$가 convex이면, 위 KKT 조건을 만족하는 점은 전역최대해다. 반대로 $u$가 비오목이면 KKT는 일반적으로 국소조건일 뿐이며, stationarity만으로 전역최적성을 주장할 수 없다. 이 구분은 이후 CES·Cobb–Douglas 같은 표준 예제에서 해를 확인할 때 중요하다.
+:::

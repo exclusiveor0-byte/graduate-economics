@@ -1,0 +1,30 @@
+# Chapter 2 · 생산자이론
+*기술·비용·production duality·이윤극대화·Hotelling lemma·공급과 요소수요*
+
+생산자이론은 기업이 무엇을 생산할 수 있는지를 기술하고, 주어진 산출량을 가장 낮은 비용으로 생산하는 input bundle을 찾으며,
+      산출물 가격과 요소가격이 주어졌을 때 이윤을 극대화하는 생산계획을 분석한다. 이 장의 중심은 생산함수 자체가 아니라,
+      기술이 비용함수를 결정하고 비용함수와 산출물 가격이 기업의 공급 및 요소수요를 결정한다는 구조다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- 2.1 기업·기술·생산가능집합
+- 2.2 isoquant·MRTS·규모수익
+- 2.3 비용최소화·cost function
+- 2.4–2.6 duality·경쟁기업·표준 기술
+:::
+
+## Sections
+
+- [2.1 기업과 기술](01-firm-technology.qmd)
+- [2.2 생산기술의 기하와 규모](02-geometry-scale.qmd)
+- [2.3 비용최소화](03-cost-minimization.qmd)
+- [2.4 생산의 duality](04-production-duality.qmd)
+- [2.5 경쟁기업](05-competitive-firm.qmd)
+- [표준 기술과 비용·이윤](supplement-standard-technologies.qmd)
+- [2.6 연습문제](exercises.qmd)
+- [참고문헌](references.qmd)
+
+::: {.callout-tip title="협업 단위"}
+각 Section은 독립 페이지와 URL을 갖습니다. 내용 수정은 가능하면 Section 단위 Pull Request로 진행합니다.
+:::

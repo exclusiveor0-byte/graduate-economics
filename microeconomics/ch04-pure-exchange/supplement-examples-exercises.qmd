@@ -1,0 +1,181 @@
+# 4.8 표준 예제와 연습문제
+
+> 이 절은 순수교환경제의 일반 정리를 대표적 preference classes에 연결한다. 2소비자·2재화 예제는 계산과 그림을 위해 유용하지만, 본문의 일반 정의와 정리는 소비자 수와 재화 수에 의존하지 않는다.
+
+### 4.8.1 Cobb–Douglas exchange economy
+
+두 소비자·두 재화 경제에서
+
+
+$$
+u_1(x_1)=x_{11}^{\alpha}x_{12}^{1-\alpha},
+            \qquad
+            u_2(x_2)=x_{21}^{\beta}x_{22}^{1-\beta},
+$$
+
+
+$$
+0\lt\alpha\lt1,
+            \qquad
+            0\lt\beta\lt1,
+            \qquad
+            \bar e=(A,B)
+$$
+
+
+라고 하자. 가격을 $p=(q,1)$로 정규화하면 consumer $i$의 wealth는 $m_i=qe_{i1}+e_{i2}$이고, demands는
+
+
+$$
+x_1(q)
+            =
+            \left(
+              \frac{\alpha m_1}{q},
+              (1-\alpha)m_1
+            \right),
+            \qquad
+            x_2(q)
+            =
+            \left(
+              \frac{\beta m_2}{q},
+              (1-\beta)m_2
+            \right).
+$$
+
+
+1번 재화 market clearing은 equilibrium relative price
+
+
+$$
+q^*
+            =
+            \frac{
+              \alpha e_{12}+\beta e_{22}
+            }{
+              (1-\alpha)e_{11}+(1-\beta)e_{21}
+            }
+$$
+
+
+를 준다. 균형 allocation은 각 consumer의 MRS가 $q^*$와 일치하므로 contract set 위에 있다.
+
+### 4.8.2 Leontief preferences와 supporting prices
+
+$\bar e=(1,1)$이고 두 소비자가
+
+
+$$
+u_i(x_i)=\min\{x_{i1},x_{i2}\}
+            \qquad
+            (i=1,2)
+$$
+
+
+를 가진다고 하자. Pareto efficient allocations는
+
+
+$$
+x_1=(t,t),
+            \qquad
+            x_2=(1-t,1-t),
+            \qquad
+            0\le t\le1
+$$
+
+
+의 형태다. 각 $t\in[0,1]$에 대해 재분배된 initial endowment profile을
+
+
+$$
+\tilde e_1=(t,t),
+            \qquad
+            \tilde e_2=(1-t,1-t),
+            \qquad
+            p=(1,1)
+$$
+
+
+로 두자. 그러면 $p\cdot\tilde e_1=2t$, $p\cdot\tilde e_2=2(1-t)$이고, 각 소비자의 Leontief demand는 각각 $(t,t)$, $(1-t,1-t)$다. 따라서 위 Pareto-efficient allocation은 이 *재분배된* 경제에서 Walrasian equilibrium으로 support된다. 원래의 individual endowment profile을 고정하면 모든 $t$가 같은 방식으로 equilibrium이 되는 것은 아니다. 이 예제에서는 kink에서 MRS가 하나의 수로 정의되지 않지만, supporting price는 미분가능한 접선기울기보다 일반적인 upper contour geometry의 법선벡터로 이해하는 편이 정확하다.
+
+### 4.8.3 Linear preferences, corner allocations, and demand correspondences
+
+두 소비자·두 재화 경제에서
+
+
+$$
+u_1(x_1)=x_{11}+x_{12},
+            \qquad
+            u_2(x_2)=2x_{21}+x_{22},
+            \qquad
+            \bar e=(1,1)
+$$
+
+
+라고 하자. feasible allocation을
+
+
+$$
+x_1=(a,b),
+            \qquad
+            x_2=(1-a,1-b),
+            \qquad
+            (a,b)\in[0,1]^2
+$$
+
+
+로 쓰자. $a\gt0$이고 $b\lt1$이면, 충분히 작은 $\varepsilon\gt0$에 대해 1번 재화 $\varepsilon$을 소비자 1에서 소비자 2에게 옮기고 2번 재화 $\varepsilon$을 소비자 2에서 소비자 1에게 옮길 수 있다. 즉
+
+
+$$
+(a,b)
+            \longmapsto
+            (a-\varepsilon,b+\varepsilon).
+$$
+
+
+이 변화는 소비자 1의 효용을 그대로 두면서 소비자 2의 효용을 $\varepsilon$만큼 높인다. 따라서 Pareto efficient allocation의 집합은 정확히
+
+
+$$
+\mathcal P
+            =
+            \left\{
+              x_1=(0,b),\ x_2=(1,1-b):0\le b\le1
+            \right\}
+            \cup
+            \left\{
+              x_1=(a,1),\ x_2=(1-a,0):0\le a\le1
+            \right\}.
+$$
+
+
+즉 1번 재화는 소비자 2에게 모두 배정되는 경우뿐 아니라, 2번 재화를 소비자 1에게 모두 배정한 경우에도 Pareto improvement가 더 이상 가능하지 않다. 이 예제에서는 indifference curve가 직선이고 strict convexity가 없으므로, smooth interior MRS equality가 Pareto set을 유일하게 결정하지 않는다. 또한 예를 들어 $p=(2,1)$에서는 소비자 2가 예산선 위의 모든 bundle에 무차별하므로 demand를 correspondence로 다루는 이유도 드러난다.
+
+### 4.8.4 연습문제
+
+#### A. 존재성
+
+1. $\bar X_i=\{x_i\in\mathbb R_+^n:x_i\le\bar e+\mathbf1\}$가 compact convex set임을 보이라.
+2. $e_i\gg0$를 사용하여 $\bar B_i$의 LHC를 직접 증명하라. budget boundary case에서 왜 radial contraction이 필요한지 설명하라.
+3. $\bar D_i$가 convex-valued인 이유를 preference convexity와 budget-set convexity로 설명하라.
+4. $h(x)=\operatorname{arg\,max}_{q\in\Delta}q\cdot z(x)$에 대해 $\max_{q\in\Delta}q\cdot z(x)=\max_\ell z_\ell(x)$를 증명하라.
+5. Kakutani fixed point에서 $z^*\le0$가 나오는 논리를 $p^*\cdot z^*\le0$과 price-response optimality를 사용하여 전개하라.
+6. strict convexity가 없을 때 truncation-removal proof에서 어느 단계가 약해지는지 설명하라.
+
+#### B. 후생
+
+1. local nonsatiation이 budget exhaustion을 보장하는 이유를 엄밀히 증명하라.
+2. Walras law가 모든 시장의 clearing을 뜻하지 않는 예를 만들어라.
+3. $p\gg0$이고 $n-1$개의 시장이 청산될 때 Walras law가 마지막 시장의 clearing을 보장함을 증명하라.
+4. First Welfare Theorem에서 $y_i\succeq_i x_i^*\Rightarrow p^*\cdot y_i\ge p^*\cdot e_i$를 보이는 정확한 논리를 서술하라.
+5. upper contour set들의 Minkowski sum이 무엇을 경제적으로 나타내는지 설명하고, supporting hyperplane이 가격벡터가 되는 이유를 설명하라.
+6. Second Welfare Theorem에서 equilibrium과 quasi-equilibrium을 구분해야 하는 이유를 설명하라.
+
+#### C. Core와 replication
+
+1. weak blocking과 strict blocking convention을 비교하고, $\operatorname{Core}(\mathcal E)\subseteq\mathcal P(\bar e)$의 진술이 어떻게 달라지는지 설명하라.
+2. Walrasian allocation이 어떤 coalition에도 block되지 않음을 가격평가 논리로 증명하라.
+3. core allocation이 individual rationality $x_i\succeq_i e_i$를 만족함을 singleton coalition을 사용하여 증명하라.
+4. $r$-replica economy와 equal-treatment allocation을 정확히 정의하라.
+5. 모든 $s\ge r$에 대해 $C^s(\mathcal E)\subseteq C^r(\mathcal E)$가 성립함을, $\mathcal E^r$의 blocking coalition을 $\mathcal E^s$ 안에 포함시키는 방식으로 설명하라.
+6. Debreu–Scarf theorem의 역포함에서 weighted coalition과 정수 coalition approximation이 어떤 역할을 하는지 서술하라.

@@ -1,0 +1,226 @@
+# 0.6 볼록성, 오목성, 준볼록성, 준오목성
+
+볼록성은 두 선택의 혼합 또는 다양화가 다시 허용되는지를 나타낸다. 소비자의 볼록선호, 기업의 볼록 생산집합, 혼합전략 simplex, Pareto 효율성의 가격지지는 모두 볼록성의 경제학적 표현이다. 그러나 볼록집합, 볼록함수, 볼록선호는 서로 다른 개념이므로 엄밀히 구분해야 한다.
+
+### 0.6.1 볼록결합, affine hull, convex hull
+
+::: {.callout-note title="DEFINITION · 볼록결합과 볼록집합"}
+$x,y\in\mathbb R^n$와 $t\in[0,1]$에 대해 $tx+(1-t)y$를 $x$와 $y$의 볼록결합(convex combination)이라 한다. $C\subseteq\mathbb R^n$가 볼록이라는 것은 모든 $x,y\in C$와 모든 $t\in[0,1]$에 대해
+
+
+$$
+tx+(1-t)y\in C
+$$
+
+
+가 성립하는 것이다.
+:::
+
+집합 $A\subseteq\mathbb R^n$의 affine hull과 convex hull은 각각 $A$를 포함하는 가장 작은 affine set과 가장 작은 convex set이다.
+
+
+$$
+\operatorname{aff}A
+  =
+  \left\{
+  \sum_{r=1}^m\alpha_ra^r:
+  m\in\mathbb N,\ a^r\in A,\ \alpha_r\in\mathbb R,\ \sum_{r=1}^m\alpha_r=1
+  \right\},
+$$
+
+
+$$
+\operatorname{co}A
+  =
+  \left\{
+  \sum_{r=1}^m\lambda_ra^r:
+  m\in\mathbb N,\ a^r\in A,\ \lambda_r\ge0,\ \sum_{r=1}^m\lambda_r=1
+  \right\}.
+$$
+
+
+볼록집합 $C$의 relative interior는 $\operatorname{ri}C=\operatorname{int}_{\operatorname{aff}C}C$로 정의한다. 차원이 낮은 simplex나 예산초평면 위의 내부점을 다룰 때는 $\operatorname{int}C$보다 $\operatorname{ri}C$가 적절한 개념이다.
+
+### 0.6.2 오목성, 준볼록성, 준오목성
+
+함수 $f:C\to\mathbb R$가 concave하다는 것은
+
+
+$$
+f(tx+(1-t)y)
+  \ge
+  tf(x)+(1-t)f(y)
+  \qquad\text{for all }x,y\in C,\ t\in[0,1]
+$$
+
+
+가 성립하는 것이다. convexity는 위 부등식의 방향을 반대로 한 성질이다. 그러나 최적화에서 항상 오목성이나 볼록성이 필요한 것은 아니다. 수준집합의 기하학만으로 충분한 경우에는 준볼록성과 준오목성을 사용한다.
+
+::: {.callout-note title="DEFINITION · 수준집합과 준볼록성·준오목성"}
+$\alpha\in\mathbb R$에 대한 하위수준집합과 상위수준집합은 각각
+
+
+$$
+L_\alpha(f)=\{x\in C:f(x)\le\alpha\},
+    \qquad
+    U_\alpha(f)=\{x\in C:f(x)\ge\alpha\}
+$$
+
+
+로 정의한다. $f$가 quasiconvex라는 것은 모든 $\alpha$에 대해 $L_\alpha(f)$가 볼록이라는 뜻이고, $f$가 quasiconcave라는 것은 모든 $\alpha$에 대해 $U_\alpha(f)$가 볼록이라는 뜻이다. 동치로,
+
+
+$$
+f(tx+(1-t)y)\le\max\{f(x),f(y)\}
+    \quad\Longleftrightarrow\quad
+    f\text{ is quasiconvex},
+$$
+
+
+$$
+f(tx+(1-t)y)\ge\min\{f(x),f(y)\}
+    \quad\Longleftrightarrow\quad
+    f\text{ is quasiconcave}.
+$$
+
+:::
+
+이 노트에서는 $x\ne y$, $t\in(0,1)$이면 $f(x)$와 $f(y)$의 동일 여부와 관계없이 각각의 부등식이 엄격해야 한다는 강한 strict quasiconvexity 및 strict quasiconcavity의 관례를 채택한다. 이는 일부 교과서에서 쓰는 더 약한 strict quasiconcavity convention보다 강하다. 따라서 닫힌 비음수 영역에서는 경계 위의 예제를 이 정의에 맞추어 별도로 점검해야 한다. 볼록 실행가능집합 위에서 quasiconvex 함수의 최소해집합은 볼록이고, quasiconcave 함수의 최대해집합은 볼록이다. 이 강한 strict quasiconvexity는 최소해의 비유일성을, 강한 strict quasiconcavity는 최대해의 비유일성을 각각 배제한다. 단, 존재는 별도의 콤팩트성 또는 coercivity 조건을 필요로 한다.
+
+::: {.callout-note appearance="simple" title="REMARK · 함의와 비함의"}
+affine 함수는 convex이면서 concave이고, convex 함수는 quasiconvex이며, concave 함수는 quasiconcave하다. strictly concave한 함수는 strictly quasiconcave하다. 그러나 이 함의들의 역은 일반적으로 성립하지 않는다. 특히 준오목성은 해집합의 볼록성을 보장하는 순서적 성질이지, KKT 충분조건을 보장하는 곡률 조건은 아니다.
+:::
+
+### 0.6.3 볼록선호와 효용표현
+
+::: {.callout-note title="DEFINITION · 볼록선호"}
+소비자 $i$의 선호 $\succeq_i$가 convex하다는 것은, 모든 $x,y,z\in X_i$와 모든 $t\in[0,1]$에 대하여
+
+
+$$
+x\succeq_i z,\qquad y\succeq_i z
+              \quad\Longrightarrow\quad
+              tx+(1-t)y\succeq_i z
+$$
+
+
+가 성립하는 것이다. 동치로, 모든 $z\in X_i$에 대한 상위윤곽집합
+
+
+$$
+U_i(z)=\{x\in X_i:x\succeq_i z\}
+$$
+
+
+이 convex하면 된다.
+:::
+
+$u_i$가 $\succeq_i$를 표현하면 $U_i(z)=\{x\in X_i:u_i(x)\ge u_i(z)\}$다. 따라서 효용표현을 사용하면 볼록선호는 준오목성으로 번역된다.
+
+
+$$
+u_i\text{ is quasiconcave}
+  \quad\Longleftrightarrow\quad
+  \{x\in X_i:u_i(x)\ge\bar u\}
+  \text{ is convex for every }\bar u\in\mathbb R.
+$$
+
+
+::: {.callout-note appearance="simple" title="REMARK · 충분하지만 필요하지는 않다"}
+$u$가 concave하면 $u$는 quasiconcave하고, 따라서 $u$가 표현하는 선호는 convex하다. 그러나 convex preference가 있다고 해서 그 선호를 표현하는 모든 효용함수가 concave할 필요는 없다. 선호의 순서정보와 효용함수의 수치적 형태는 구분해야 한다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · 순서적 성질과 수치적 곡률"}
+$v=\phi\circ u$이고 $\phi$가 strictly increasing이면 $u$와 $v$는 같은 선호를 표현한다. 정확히는 모든 $\bar u\in u(X)$에 대해
+
+$$
+\{x:(\phi\circ u)(x)\ge\phi(\bar u)\}
+=
+\{x:u(x)\ge\bar u\}.
+$$
+
+따라서 두 효용표현이 생성하는 상위수준집합의 족은 같고, quasiconcavity는 보존된다. 반면 concavity는 일반적인 증가변환 아래 보존되지 않는다. 따라서 볼록선호와 준오목성은 순서적 성질이고, 오목성은 특정 효용표현의 수치적 곡률 성질이다.
+:::
+
+::: {.callout-important title="PROPOSITION · Cobb–Douglas upper contour set의 convexity"}
+$u(x_1,x_2)=\sqrt{x_1x_2}$를 $\mathbb R_{++}^2$ 위에서 생각하자. $\bar u>0$에 대한
+상위윤곽집합은
+
+
+$$
+U_{\bar u}
+      =
+      \left\{(x_1,x_2)\in\mathbb R_{++}^2:
+      \sqrt{x_1x_2}\ge\bar u\right\}
+      =
+      \left\{(x_1,x_2)\in\mathbb R_{++}^2:
+      x_2\ge\frac{\bar u^2}{x_1}\right\}.
+$$
+
+
+함수 $x_1\mapsto \bar u^2/x_1$는 $\mathbb R_{++}$에서 convex하므로, $U_{\bar u}$는 그
+epigraph로서 convex하다. 동치로, $\sqrt{x_1x_2}$가 concave이므로 모든 상위윤곽집합이
+convex하다고 볼 수도 있다.
+
+따라서 $x\succeq z$, $y\succeq z$이면 $x$와 $y$는 같은 상위윤곽집합에 속하고,
+
+
+$$
+tx+(1-t)y\succeq z
+      \qquad
+      \text{for every }t\in[0,1].
+$$
+
+
+이것이 “다양화가 나쁘지 않다”는 경제적 직관을 기하학적 볼록성으로 번역한 형태다.
+:::
+
+### 0.6.4 선형성, affine성, 동차성
+
+함수 $f:C\to\mathbb R$가 affine이라는 것은 어떤 $a\in\mathbb R^n$, $b\in\mathbb R$가 존재하여 $f(x)=a\cdot x+b$로 쓸 수 있는 경우다. $b=0$이면 $f$는 linear하다. affine 함수는 동시에 convex이면서 concave하다.
+
+::: {.callout-note title="DEFINITION · 동차함수와 Euler 정리"}
+$C\subseteq\mathbb R^n$가 열린 원뿔, 즉 모든 $x\in C$, $\lambda>0$에 대해 $\lambda x\in C$인 열린집합이라고 하자. $f:C\to\mathbb R$가 $k$차 동차(homogeneous of degree $k$)라는 것은
+
+
+$$
+f(\lambda x)=\lambda^k f(x)
+    \qquad
+    \text{for every }x\in C,\ \lambda>0
+$$
+
+
+가 성립하는 것이다. 특히 $k=0$이면 비율만을 반영하고, $k=1$이면 규모에 비례한다. $f\in C^1(C)$가 $k$차 동차이면 Euler 정리에 의해
+
+
+$$
+x\cdot\nabla f(x)=k f(x)
+$$
+
+
+가 성립한다.
+:::
+
+Marshallian 수요의 가격·소득에 대한 0차 동차성, 지출함수·비용함수·이윤함수의 가격에 대한 1차 동차성은 이후 소비자이론과 생산자이론에서 반복된다. 소비집합 $X$가 원뿔일 때 선호 $\succeq$가 homothetic하다는 것은 모든 $x,y\in X$, $\lambda>0$에 대해
+
+
+$$
+x\succeq y
+  \quad\Longleftrightarrow\quad
+  \lambda x\succeq \lambda y
+$$
+
+
+가 성립하는 것이다. 더 일반적으로는 $x,y,\lambda x,\lambda y\in X$인 경우에 이 동치가 성립한다고 정의한다. 이는 선호의 경제적 성질이며, 함수 자체의 동차성과는 구분해야 한다.
+
+### 0.6.5 초평면과 반공간
+
+$p\ne0$와 $c\in\mathbb R$에 대하여
+
+
+$$
+H(p,c)=\{x\in\mathbb R^n:p\cdot x=c\}
+$$
+
+
+는 초평면(hyperplane)이다. 이에 대응하는 두 반공간(half-space)은 $p\cdot x\le c$와 $p\cdot x\ge c$로 주어진다. 예산선과 예산초평면, 생산가능집합의 지지평면, 제2후생정리의 가격벡터는 모두 이 기하학에 기반한다.

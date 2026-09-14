@@ -1,0 +1,115 @@
+project:
+  type: book
+  output-dir: _book
+  resources:
+    - assets/**
+    - supplements/interactive/**
+    - supplements/r/**
+    - supplements/matlab/**
+lang: ko
+bibliography: references.bib
+number-sections: false
+toc-depth: 3
+book:
+  site-url: https://exclusiveor0-byte.github.io/graduate-economics/
+  repo-url: https://github.com/exclusiveor0-byte/graduate-economics
+  repo-branch: main
+  repo-actions: [edit, issue]
+  title: 대학원 경제학 정리노트
+  subtitle: Graduate Economics Knowledge Base
+  page-navigation: true
+  search: true
+  sidebar:
+    title: Economics Notes
+    style: docked
+    collapse-level: 1
+  chapters:
+  - index.qmd
+  - collaboration.qmd
+  - microeconomics/index.qmd
+  - part: microeconomics/ch00-foundations/index.qmd
+    chapters:
+    - microeconomics/ch00-foundations/01-model-structure.qmd
+    - microeconomics/ch00-foundations/02-notation-logic.qmd
+    - microeconomics/ch00-foundations/03-euclidean-space-sets.qmd
+    - microeconomics/ch00-foundations/04-topology-convergence.qmd
+    - microeconomics/ch00-foundations/05-functions-correspondences.qmd
+    - microeconomics/ch00-foundations/06-convexity.qmd
+    - microeconomics/ch00-foundations/07-matrix-calculus-optimization-kkt.qmd
+    - microeconomics/ch00-foundations/08-parameterized-optimization.qmd
+    - microeconomics/ch00-foundations/09-fixed-point-existence.qmd
+    - microeconomics/ch00-foundations/10-separation-supporting-prices.qmd
+    - microeconomics/ch00-foundations/11-math-map.qmd
+    - microeconomics/ch00-foundations/exercises.qmd
+    - microeconomics/ch00-foundations/references.qmd
+  - part: microeconomics/ch01-consumer/index.qmd
+    chapters:
+    - microeconomics/ch01-consumer/01-components.qmd
+    - microeconomics/ch01-consumer/02-preferences-utility.qmd
+    - microeconomics/ch01-consumer/03-consumer-problem.qmd
+    - microeconomics/ch01-consumer/04-indirect-utility-expenditure.qmd
+    - microeconomics/ch01-consumer/05-demand-properties.qmd
+    - microeconomics/ch01-consumer/supplement-standard-utility.qmd
+    - microeconomics/ch01-consumer/exercises.qmd
+    - microeconomics/ch01-consumer/references.qmd
+  - part: microeconomics/ch02-producer/index.qmd
+    chapters:
+    - microeconomics/ch02-producer/01-firm-technology.qmd
+    - microeconomics/ch02-producer/02-geometry-scale.qmd
+    - microeconomics/ch02-producer/03-cost-minimization.qmd
+    - microeconomics/ch02-producer/04-production-duality.qmd
+    - microeconomics/ch02-producer/05-competitive-firm.qmd
+    - microeconomics/ch02-producer/supplement-standard-technologies.qmd
+    - microeconomics/ch02-producer/exercises.qmd
+    - microeconomics/ch02-producer/references.qmd
+  - part: microeconomics/ch03-partial-equilibrium/index.qmd
+    chapters:
+    - microeconomics/ch03-partial-equilibrium/01-perfect-competition.qmd
+    - microeconomics/ch03-partial-equilibrium/02-market-conduct.qmd
+    - microeconomics/ch03-partial-equilibrium/03-equilibrium-welfare.qmd
+    - microeconomics/ch03-partial-equilibrium/04-linear-model-exercises.qmd
+    - microeconomics/ch03-partial-equilibrium/references.qmd
+  - part: microeconomics/ch04-pure-exchange/index.qmd
+    chapters:
+    - microeconomics/ch04-pure-exchange/01-primitives-feasibility.qmd
+    - microeconomics/ch04-pure-exchange/02-prices-income-demand.qmd
+    - microeconomics/ch04-pure-exchange/03-walrasian-equilibrium-law.qmd
+    - microeconomics/ch04-pure-exchange/04-existence-truncated-economy.qmd
+    - microeconomics/ch04-pure-exchange/05-pareto-contract-set.qmd
+    - microeconomics/ch04-pure-exchange/06-welfare-theorems.qmd
+    - microeconomics/ch04-pure-exchange/07-core-competitive-limit.qmd
+    - microeconomics/ch04-pure-exchange/supplement-examples-exercises.qmd
+    - microeconomics/ch04-pure-exchange/references.qmd
+  - macroeconomics/index.qmd
+  - part: Macroeconomics · Migration
+    chapters:
+    - macroeconomics/overview.qmd
+  - econometrics/index.qmd
+  - part: Econometrics · Migration
+    chapters:
+    - econometrics/overview.qmd
+  - part: supplements/index.qmd
+    chapters:
+    - supplements/visualization-guide.qmd
+  - references.qmd
+  page-footer:
+    center: Collaborative graduate economics knowledge base
+format:
+  html:
+    theme:
+    - cosmo
+    - styles/notes.scss
+    toc: true
+    toc-title: 이 페이지에서
+    grid:
+      sidebar-width: 280px
+      body-width: 820px
+      margin-width: 220px
+      gutter-width: 1.5rem
+    callout-icon: false
+    code-copy: true
+    code-fold: true
+    code-summary: Code
+    smooth-scroll: false
+    html-math-method: mathjax
+    include-after-body: styles/reading.html

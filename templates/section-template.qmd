@@ -1,0 +1,39 @@
+# X.X Section Title
+
+### Overview
+
+이 절의 목적과 핵심 질문을 2–4문장으로 설명합니다.
+
+::: {.callout-note title="Definition"}
+정의
+:::
+
+::: {.callout-note title="Assumption"}
+가정
+:::
+
+::: {.callout-important title="Proposition"}
+명제 또는 정리
+:::
+
+::: {.callout-tip collapse="true" title="Proof"}
+증명
+:::
+
+::: {.callout-note appearance="simple" title="Remark"}
+해석 또는 주의할 점
+:::
+
+::: {.callout-caution title="Caution"}
+경계조건, 오해하기 쉬운 점, 적용범위
+:::
+
+### Example
+
+예제
+
+### Key Relations
+
+$$
+\text{핵심 식}
+$$

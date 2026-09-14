@@ -1,0 +1,131 @@
+# 표준 기술과 비용·이윤
+
+> 다음 예제는 단순 계산용이 아니다. 각각은 내부해, fixed proportion, corner solution, CRS, 그리고 이윤극대화의 존재 문제가 어떻게 달라지는지를 보여 준다.
+
+### 1. Cobb–Douglas technology
+
+$A\gt0$, $0\lt\alpha\lt1$에 대해
+
+
+$$
+f(x_1,x_2)=A x_1^\alpha x_2^{1-\alpha}
+$$
+
+
+이 기술은 CRS이며 $\mathbb R_{++}^2$ 위에서 strictly quasiconcave하다.
+$y\gt0$인 비용최소화에서는 해가 내부에 놓이고 유일하므로, conditional factor demand를 함수로 쓸 수 있다.
+cost-minimising input ratio는
+
+
+$$
+\frac{x_1^c(w,y)}{x_2^c(w,y)}
+            =
+            \frac{\alpha}{1-\alpha}\frac{w_2}{w_1}.
+$$
+
+
+conditional factor demand와 cost function은
+
+
+$$
+c(w,y)
+            =
+            \frac{y}{A}
+            \left(\frac{w_1}{\alpha}\right)^\alpha
+            \left(\frac{w_2}{1-\alpha}\right)^{1-\alpha},
+$$
+
+
+$$
+x_1^c(w,y)=\frac{\alpha c(w,y)}{w_1},
+            \qquad
+            x_2^c(w,y)=\frac{(1-\alpha)c(w,y)}{w_2}.
+$$
+
+
+cost shares가 각각 $\alpha$, $1-\alpha$로 일정하다는 점과 $c(w,y)=yc(w,1)$라는 점이 함께 나타난다. CRS이므로 $p=c(w,1)$에서만 finite positive scale의 경쟁기업을 유지할 수 있다.
+
+### 2. Leontief technology
+
+
+$$
+f(x_1,x_2)
+            =
+            \min\left\{\frac{x_1}{a},\frac{x_2}{b}\right\},
+            \qquad a,b\gt0.
+$$
+
+
+output $y$를 생산하려면 반드시 $x_1\ge ay$, $x_2\ge by$여야 한다. 따라서 conditional factor demand는
+
+
+$$
+x^c(w,y)=(ay,by),
+            \qquad
+            c(w,y)=(aw_1+bw_2)y.
+$$
+
+
+이 기술은 CRS이며 input complementarity를 나타낸다. isoquant가 kink를 가지므로 미분가능한 MRTS 조건은 사용할 수 없지만, 비용최소화와 Shephard lemma의 일반 논리는 그대로 적용된다.
+
+### 3. Perfect-substitutes technology
+
+
+$$
+f(x_1,x_2)=a x_1+b x_2,
+            \qquad a,b\gt0.
+$$
+
+
+output $y$를 생산하는 비용은 가장 싼 effective input 하나만 사용하면 되므로
+
+
+$$
+c(w,y)
+            =
+            y\min\left\{\frac{w_1}{a},\frac{w_2}{b}\right\}.
+$$
+
+
+$w_1/a\lt w_2/b$이면 $x^c(w,y)=(y/a,0)$, 반대이면 $x^c(w,y)=(0,y/b)$다. 두 effective price가 같으면 conditional factor demand는 다가값이다.
+
+
+$$
+\frac{w_1}{a}=\frac{w_2}{b}
+            \quad\Longrightarrow\quad
+            X^c(w,y)=\{(x_1,x_2)\in\mathbb R_+^2:a x_1+b x_2=y\}.
+$$
+
+
+이 예제는 continuous technology가 있어도 conditional factor demand가 자동으로 함수가 되지 않음을 보여 준다.
+
+### 4. CES technology
+
+
+$$
+f(x_1,x_2)
+            =
+            A\left[\alpha x_1^\rho+(1-\alpha)x_2^\rho\right]^{1/\rho},
+            \qquad
+            0\lt\alpha\lt1,\quad \rho\lt1,\quad \rho\ne0.
+$$
+
+
+$\rho\lt0$을 허용하면 이 식은 $\mathbb R_{++}^2$에서 정의해야 한다.
+$\rho\in(0,1)$인 경우에는 경계까지 자연스럽게 확장할 수 있다.
+
+interior cost minimisation에서는
+
+
+$$
+\frac{x_1^c}{x_2^c}
+            =
+            \left[
+              \frac{\alpha}{1-\alpha}\frac{w_2}{w_1}
+            \right]^{\sigma},
+            \qquad
+            \sigma=\frac{1}{1-\rho}.
+$$
+
+
+$\sigma$는 factor-price ratio 변화에 대한 conditional input ratio의 반응을 측정하는 elasticity of substitution이다. $\rho\to0$이면 Cobb–Douglas technology로 수렴한다.

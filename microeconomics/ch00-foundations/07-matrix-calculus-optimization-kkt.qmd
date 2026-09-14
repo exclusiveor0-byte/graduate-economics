@@ -1,0 +1,300 @@
+# 0.7 행렬미분, 최적화, KKT
+
+최적화의 출발점은 전역최적성이다. $x^*\in C$가 $f$의 전역최대해라는 말은
+
+
+$$
+f(x^*)\ge f(x)
+            \qquad\text{for every }x\in C
+$$
+
+
+를 뜻한다. 미분가능성은 이 전역적 정의를 국소적 미분조건으로 번역하는 도구다. 그러나 1계조건(FOC)은 일반적으로 필요조건일 뿐이며, 내부해 여부와 제약의 구조를 확인하지 않으면 최적해를 특징짓지 못한다.
+
+### 0.7.1 행렬과 미분의 기본 표기
+
+$A\in\mathbb R^{m\times n}$의 전치행렬은 $A^\top$, $n$차 항등행렬은 $I_n$, 계수는 $\operatorname{rank}(A)$로 쓴다. 대칭행렬 $H$에 대해
+
+
+$$
+H\succeq0
+  \quad\Longleftrightarrow\quad
+  z^\top Hz\ge0\text{ for every }z,
+  \qquad
+  H\preceq0
+  \quad\Longleftrightarrow\quad
+  z^\top Hz\le0\text{ for every }z.
+$$
+
+
+여기서 $\succeq$, $\preceq$는 행렬의 양의 준정부호 순서이며, 소비자 선호 $\succeq_i$와는 전혀 다른 기호 사용이다.
+
+
+$$
+\nabla f(x)
+  =
+  \begin{pmatrix}
+    \partial f(x)/\partial x_1\\
+    \vdots\\
+    \partial f(x)/\partial x_n
+  \end{pmatrix},
+  \qquad
+  D F(x)
+  =
+  \left[\frac{\partial F_r(x)}{\partial x_\ell}\right]_{r,\ell},
+  \qquad
+  \nabla^2f(x)=D^2f(x).
+$$
+
+
+$\nabla f(x)$는 scalar-valued 함수의 gradient, $DF(x)$는 vector-valued 함수의 Jacobian, $\nabla^2f(x)$는 Hessian이다. 방향 $d$에 대한 방향미분은 $Df(x)[d]=\nabla f(x)^\top d$로 쓴다. 합성법칙은
+
+
+$$
+D(g\circ f)(x)=Dg(f(x))Df(x)
+$$
+
+
+이다. $C$가 열린 볼록집합이고 $f\in C^2(C)$이면,
+
+$$
+f\text{ is concave on }C
+\quad\Longleftrightarrow\quad
+\nabla^2f(x)\preceq0
+\text{ for every }x\in C.
+$$
+
+즉 Hessian의 음의 준정부호성은 이 조건 아래 오목성의 필요충분조건이다.
+
+### 0.7.2 제약 없는 문제
+
+::: {.callout-important title="THEOREM · 내부해의 1계조건"}
+$C\subseteq\mathbb R^n$가 open이고 $f:C\to\mathbb R$가 $x^*\in C$에서 미분가능하다고 하자. $x^*$가 $f$의 국소최대해이면
+
+
+$$
+\nabla f(x^*)=0.
+$$
+
+:::
+
+추가로 $C$가 convex하고 $f$가 concave하면 $\nabla f(x^*)=0$은 전역최대의 충분조건이다. $f$가 strictly concave하면 최대해는 존재할 경우 유일하다. 따라서 concavity는 단지 곡선의 모양에 대한 가정이 아니라, 국소조건을 전역결론으로 끌어올리는 가정이다.
+
+### 0.7.3 부등식 제약과 KKT
+
+다음 제약최대화 문제를 생각하자.
+
+
+$$
+\max_{x\in\mathbb R^n} f(x)
+            \quad\text{subject to}\quad
+            g_j(x)\ge0,
+            \qquad j=1,\dots,J.
+$$
+
+
+실행가능집합을 $C=\{x\in\mathbb R^n:g_j(x)\ge0,\ j=1,\dots,J\}$로 두고, 라그랑지안을
+
+
+$$
+\mathcal L(x,\lambda)
+            =
+            f(x)+\sum_{j=1}^J\lambda_j g_j(x)
+$$
+
+
+로 정의한다. 다음 정리는 KKT 조건이 필요한 조건이 되기 위해 어떤 정규성 가정이 필요한지를 명시한다.
+
+::: {.callout-important title="THEOREM 0.7.2 · KKT 필요조건"}
+$f,g_1,\dots,g_J$가 $x^*$의 근방에서 continuously differentiable하다고 하자. $x^*\in C$가 국소최대해이고, 활성 제약지표집합
+
+
+$$
+\mathcal A(x^*)=\{j:g_j(x^*)=0\}
+$$
+
+
+에 대해 Mangasarian–Fromovitz constraint qualification이 성립한다고 하자. 즉 어떤 $d\in\mathbb R^n$가 존재하여
+
+
+$$
+\nabla g_j(x^*)\cdot d>0
+              \qquad\text{for every }j\in\mathcal A(x^*)
+$$
+
+
+가 성립한다고 하자. 그러면 어떤 $\lambda^*\in\mathbb R_+^J$가 존재하여
+
+
+$$
+\nabla f(x^*)+\sum_{j=1}^J\lambda_j^*\nabla g_j(x^*)=0,
+$$
+
+
+$$
+\lambda_j^*\ge0,
+              \qquad
+              g_j(x^*)\ge0,
+              \qquad
+              \lambda_j^*g_j(x^*)=0
+              \qquad (j=1,\dots,J)
+$$
+
+
+가 성립한다. 마지막 조건은 complementary slackness다.
+:::
+
+::: {.callout-important title="PROPOSITION · KKT 충분조건"}
+$f$와 모든 $g_j$가 concave하다고 하자. 따라서 $C$는 convex하다. 어떤 feasible한 $x^*$와 $\lambda^*\in\mathbb R_+^J$가 위 KKT 조건을 만족하면, $x^*$는 $C$ 위의 전역최대해다. $f$가 strictly concave이면 전역최대해는 유일하다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 충분조건의 논리"}
+임의의 $x\in C$에 대해 $f$의 concavity와 stationarity로부터
+
+
+$$
+f(x)-f(x^*)
+              \le
+              \nabla f(x^*)\cdot(x-x^*)
+              =-
+              \sum_{j=1}^J\lambda_j^*\nabla g_j(x^*)\cdot(x-x^*).
+$$
+
+
+각 $g_j$의 concavity는 $\nabla g_j(x^*)\cdot(x-x^*)\ge g_j(x)-g_j(x^*)$를 준다. 실행가능성 $g_j(x)\ge0$, 승수의 비음수성, complementary slackness를 결합하면 우변은 0 이하가 된다. 따라서 $f(x)\le f(x^*)$다. □
+:::
+
+### 0.7.4 등식제약과 implicit function theorem
+
+자원제약과 시장청산은 등식제약으로 나타나는 경우가 많다. 일반형
+
+
+$$
+\max_x f(x,\theta)
+  \quad\text{subject to}\quad
+  g_j(x,\theta)\ge0\ (j=1,\dots,J),
+  \qquad
+  h_r(x,\theta)=0\ (r=1,\dots,R)
+$$
+
+
+에 대해 라그랑지안은
+
+
+$$
+\mathcal L(x,\lambda,\mu;\theta)
+  =
+  f(x,\theta)+\sum_{j=1}^J\lambda_jg_j(x,\theta)+\sum_{r=1}^R\mu_rh_r(x,\theta)
+$$
+
+
+로 정의한다. 등식제약의 승수 $\mu_r$는 부호 제약을 받지 않는다. 등식제약이 있을 때의 MFCQ는 활성 부등식에 대해 엄격히 증가하면서 모든 등식제약의 접공간에 머무르는 방향이 존재하고, 등식제약 gradient들이 선형독립이라는 조건으로 쓸 수 있다. 이 정규성 아래 KKT stationarity는
+
+
+$$
+\nabla_x\mathcal L(x^*,\lambda^*,\mu^*;\theta)=0,
+  \qquad
+  \lambda_j^*\ge0,
+  \qquad
+  \lambda_j^*g_j(x^*,\theta)=0,
+  \qquad
+  h_r(x^*,\theta)=0
+$$
+
+
+로 주어진다. 충분조건을 적용하려면 $f$와 $g_j$의 오목성뿐 아니라 등식제약이 affine하여 실행가능집합이 볼록이라는 점도 확인해야 한다.
+
+::: {.callout-important title="THEOREM · implicit function theorem의 유한차원 작업형"}
+$U\subseteq\mathbb R^q$, $V\subseteq\mathbb R^r$가 열린집합이고 $\Phi:U\times V\to\mathbb R^r$가 $C^1$ 함수라고 하자. $\Phi(x^*,y^*)=0$이고 $D_y\Phi(x^*,y^*)$가 가역이면, $x^*$의 근방에서 $\Phi(x,y)=0$을 만족하는 $y$를 유일한 $C^1$ 함수 $y=g(x)$로 쓸 수 있다. 이때
+
+
+$$
+Dg(x)
+    =
+    -\bigl[D_y\Phi(x,g(x))\bigr]^{-1}D_x\Phi(x,g(x)).
+$$
+
+
+이 정리는 Marshallian 수요, Cournot 반응함수, 시장청산계의 국소 비교정태를 얻는 기본 도구다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · interior FOC와 corner KKT를 구별하는 진단 절차"}
+소비자 문제
+
+
+$$
+\max_{x\ge0}u(x)
+      \qquad\text{subject to}\qquad
+      p\cdot x\le m
+$$
+
+
+에서 라그랑지안을
+
+
+$$
+\mathcal L(x,\lambda,\mu)
+      =
+      u(x)+\lambda(m-p\cdot x)+\sum_{\ell=1}^n\mu_\ell x_\ell
+$$
+
+
+로 쓰자. KKT stationarity와 complementary slackness는
+
+
+$$
+MU_\ell(x^*)-\lambda^*p_\ell+\mu_\ell^*=0,
+      \qquad
+      \mu_\ell^*x_\ell^*=0,
+      \qquad
+      \mu_\ell^*\ge0.
+$$
+
+
+따라서 $x_\ell^*>0$이면 $\mu_\ell^*=0$이고
+$MU_\ell(x^*)=\lambda^*p_\ell$가 된다. 반면 $x_\ell^*=0$인 corner에서는
+
+
+$$
+MU_\ell(x^*)\le\lambda^*p_\ell
+$$
+
+
+만 요구된다. 그러므로 MRS와 상대가격의 equality는 모든 재화를 양으로 소비하는 interior solution에서의
+특징화일 뿐이며, corner solution에서는 부등식과 complementary slackness가 이를 대체한다.
+:::
+
+### 0.7.5 소비자 문제의 해석
+
+소비자의 효용극대화 문제는
+
+
+$$
+\max_{x\in\mathbb R_+^n}u(x)
+            \quad\text{subject to}\quad
+            p\cdot x\le m
+$$
+
+
+이다. $x^*\gg0$, $p\gg0$이고, 효용함수가 $x^*$에서 미분가능하며, 국소적 비포만성에 의해 예산제약이 binding된다고 하자. 그러면 라그랑지안의 1계조건은
+
+
+$$
+\frac{\partial u(x^*)}{\partial x_\ell}
+            =
+            \lambda^*p_\ell,
+            \qquad \ell=1,\dots,n.
+$$
+
+
+특히 두 재화에 대해 $\partial u(x^*)/\partial x_1>0$, $\partial u(x^*)/\partial x_2>0$이면 비율을 취할 수 있어
+
+
+$$
+\frac{MU_1(x^*)}{MU_2(x^*)}
+            =
+            \frac{p_1}{p_2}
+$$
+
+
+를 얻는다. 이 등식은 소비자선택의 정의가 아니라, 앞의 추가 가정이 충족될 때 도출되는 특징화 조건이다. 영가격, 포만점, 한계효용이 0인 경우, 완전보완재, 비미분가능 선호, corner solution에서는 이 식만으로 문제를 풀 수 없다.

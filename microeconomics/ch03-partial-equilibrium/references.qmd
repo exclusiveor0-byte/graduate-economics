@@ -1,0 +1,7 @@
+# 참고문헌
+
+Jehle, G. A., and P. J. Reny. *Advanced Microeconomic Theory*, 3rd ed., Chapter 4.
+
+Mas-Colell, A., M. D. Whinston, and J. R. Green. *Microeconomic Theory*, Chapters 10–12.
+
+Varian, H. R. *Intermediate Microeconomics*, market structure and welfare chapters. 부분균형의 표준 선형 benchmark를 위한 보조 참고문헌.

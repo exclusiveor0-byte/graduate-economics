@@ -1,0 +1,7 @@
+# 참고문헌
+
+Jehle, G. A., and P. J. Reny. *Advanced Microeconomic Theory*, 3rd ed. Mathematical Appendices A1–A2.
+
+Mas-Colell, A., M. D. Whinston, and J. R. Green. *Microeconomic Theory*. Mathematical Appendix; Chapters 3, 17, and 18.
+
+Tao, T. *Analysis I* and *Analysis II*. 집합, 수열, 콤팩트성, 연속성, 유한차원 분리정리의 기초를 위한 보조 참고문헌.

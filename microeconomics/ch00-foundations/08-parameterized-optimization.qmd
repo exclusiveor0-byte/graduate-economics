@@ -1,0 +1,153 @@
+# 0.8 모수화된 최적화, Berge 최대정리, Envelope 정리
+
+경제이론의 최적화문제는 가격, 소득, 상대방의 전략, 정책변수와 같은 외생변수 $\theta$에 의존하는 경우가 많다. 일반형은 다음과 같다.
+
+
+$$
+v(\theta)
+            =
+            \max_{x\in B(\theta)} f(x,\theta),
+            \qquad
+            D(\theta)
+            =
+            \operatorname{arg\,max}_{x\in B(\theta)}f(x,\theta).
+$$
+
+
+여기서 $B(\theta)$는 실행가능 대응, $v(\theta)$는 가치함수, $D(\theta)$는 해 대응이다. 중요한 것은 각 $\theta$에서 최대값이 존재하는지에 그치지 않는다. 모수 변화에 대해 가치함수가 연속인지, 해 대응이 UHC인지도 확인해야 한다.
+
+::: {.callout-important title="THEOREM 0.8.1 · Berge 최대정리"}
+$\Theta\subseteq\mathbb R^q$, $X\subseteq\mathbb R^m$가 닫힌 집합이라고 하자. $B:\Theta\rightrightarrows X$가 nonempty compact-valued이고 continuous, 즉 UHC와 LHC를 모두 만족한다고 하자. 또한 $f:X\times\Theta\to\mathbb R$가 연속이라고 하자. 그러면
+
+
+$$
+D(\theta)
+              =
+              \operatorname{arg\,max}_{x\in B(\theta)}f(x,\theta)
+$$
+
+
+는 공집합이 아닌 콤팩트값을 가지며 UHC이고,
+
+
+$$
+v(\theta)=\max_{x\in B(\theta)}f(x,\theta)
+$$
+
+
+는 연속이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF SKETCH · 세 단계"}
+**1단계: 존재와 콤팩트값성.** 각 $\theta$에서 $B(\theta)$가 콤팩트하고 $f(\cdot,\theta)$가 연속이므로 Weierstrass 최대정리에 의해 $D(\theta)\ne\varnothing$다. $D(\theta)$는 $B(\theta)$의 closed subset이므로 compact하다.
+
+**2단계: 가치함수의 연속성.** $\theta^k\to\theta$라 하자. UHC와 $B(\theta)$의 콤팩트성은 $k$가 충분히 클 때 $B(\theta^k)$들이 하나의 공통 compact set 안에 머물게 한다. 따라서 $x^k\in D(\theta^k)$의 수렴 부분수열을 취할 수 있다. 이와 반대로, $x^*\in D(\theta)$를 고정하면 LHC는 $x^k\in B(\theta^k)$, $x^k\to x^*$인 선택을 제공한다. 두 방향의 부등식을 결합하면 $v(\theta^k)\to v(\theta)$를 얻는다.
+
+**3단계: 해 대응의 UHC.** $\theta^k\to\theta$, $x^k\in D(\theta^k)$, $x^k\to x$라 하자. $B$가 UHC이고 compact-valued이므로 각 값은 closed이며 $\operatorname{gph}B$는 closed이다. 따라서 $x\in B(\theta)$다. 연속성 및 2단계에서 얻은 $v$의 연속성으로
+
+
+$$
+f(x,\theta)
+              =\lim_k f(x^k,\theta^k)
+              =\lim_k v(\theta^k)
+              =v(\theta),
+$$
+
+
+따라서 $x\in D(\theta)$다. 즉 $\operatorname{gph}D$가 closed이고, 위의 local compact containment와 결합하여 $D$는 UHC다.
+:::
+
+::: {.callout-tip collapse="true" title="연속성 증명의 부등식 구조"}
+$\limsup_k v(\theta^k)$를 실현하는 부분수열을 택하고, 해당 부분수열에서 $x^k\in D(\theta^k)$를 고른다. 공통 compact set 안에서 다시 부분수열을 취하면 $x^k\to x\in B(\theta)$이고, 따라서
+
+
+$$
+\limsup_k v(\theta^k)
+                =f(x,\theta)
+                \le v(\theta).
+$$
+
+
+반대로 $x^*\in D(\theta)$에 대해 LHC가 주는 $x^k\in B(\theta^k)$, $x^k\to x^*$를 택하면
+
+
+$$
+\liminf_k v(\theta^k)
+                \ge \lim_k f(x^k,\theta^k)
+                =f(x^*,\theta)
+                =v(\theta).
+$$
+
+
+두 부등식이 가치함수의 연속성을 준다.
+:::
+
+### 0.8.2 Envelope 정리
+
+Berge 최대정리가 값과 해 대응의 연속성을 다룬다면, Envelope 정리는 최적화된 값이 모수에 따라 어떻게 미분되는지를 다룬다. 먼저 실행가능집합이 모수에 의존하지 않는 경우를 보자.
+
+::: {.callout-important title="THEOREM · Envelope 정리"}
+$\Theta\subseteq\mathbb R^q$를 열린 집합, $K\subseteq\mathbb R^m$를 실행가능집합이라 하자. $f$가 $\{(x^*(\theta),\theta):\theta\in\Theta\}$의 열린 근방에서 $C^1$이고, $x^*:\Theta\to\operatorname{int}K$가 $C^1$ 함수라고 하자. 또한 모든 $\theta\in\Theta$에 대하여
+
+
+$$
+x^*(\theta)\in\operatorname{arg\,max}_{x\in K}f(x,\theta)
+$$
+
+
+가 성립한다고 하자. 그러면 $x^*(\theta)$는 전역 가치함수
+
+
+$$
+v(\theta)
+    =
+    \max_{x\in K}f(x,\theta)
+    =
+    f(x^*(\theta),\theta)
+$$
+
+
+를 결정한다. $x^*(\theta)\in\operatorname{int}K$이므로
+
+
+$$
+\nabla_x f(x^*(\theta),\theta)=0
+$$
+
+
+이고, 따라서 $v$는 미분가능하며
+
+
+$$
+D_\theta v(\theta)=D_\theta f(x^*(\theta),\theta)
+$$
+
+
+가 성립한다. $x^*$의 $C^1$ 성질은 이후 implicit function theorem을 KKT 또는 1계조건 체계에 적용하여 확보하는 것이 표준적이다.
+:::
+
+::: {.callout-important title="THEOREM · 제약문제의 Envelope 정리"}
+$f,g_j,h_r$가 해와 승수의 그래프의 열린 근방에서 $C^1$이고, $\bigl(x^*(\theta),\lambda^*(\theta),\mu^*(\theta)\bigr)$가 국소적으로 $C^1$이며 각 $\theta$에서 KKT 조건을 만족한다고 하자. 또한 모든 관련 $\theta$에 대하여 $x^*(\theta)$가 제약문제의 전역 해 대응 $D(\theta)$에 속한다고 하자. 즉
+
+
+$$
+x^*(\theta)\in D(\theta)
+    =
+    \operatorname{arg\,max}_{x\in B(\theta)}f(x,\theta).
+$$
+
+
+그러면 $x^*(\theta)$는 전역 가치함수 $v(\theta)$를 결정하고,
+
+
+$$
+D_\theta v(\theta)
+    =
+    D_\theta\mathcal L\bigl(x^*(\theta),\lambda^*(\theta),\mu^*(\theta);\theta\bigr).
+$$
+
+
+즉 값함수의 1차 변화는 최적 선택과 승수의 변화율을 직접 포함하지 않고, 라그랑지안의 모수에 대한 편미분으로 주어진다.
+:::
+
+소비자이론에서는 $\theta=(p,m)$, $B(\theta)=B(p,m)$, $f(x,\theta)=u(x)$로 두면 된다. 게임이론에서는 $\theta=s_{-i}$, $B(\theta)=S_i$, $f(s_i,\theta)=u_i(s_i,s_{-i})$로 두면 최적반응대응의 성질을 얻는다.

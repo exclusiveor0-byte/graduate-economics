@@ -1,0 +1,669 @@
+# 1.4 간접효용과 지출
+
+> 같은 선호와 가격체계 아래 소비자문제는 두 방향에서 기술할 수 있다. 하나는 주어진 소득 아래 효용을 최대화하는 문제이고,
+> 다른 하나는 주어진 효용수준을 달성하는 데 필요한 지출을 최소화하는 문제다. 이 두 문제를 잇는 관계가 duality다.
+
+### 1.4.1 간접효용함수와 지출함수
+
+- **Marshallian problem** — $\max_{x\in X}u(x)\quad\text{s.t.}\quad p\cdot x\le m$ 소득 $m$이 주어졌을 때 달성할 수 있는 가장 높은 효용을 찾는다. 선택은 $D(p,m)$, 값은 $v(p,m)$이다.
+- **Hicksian problem** — $\min_{x\in X}p\cdot x\quad\text{s.t.}\quad u(x)\ge\bar u$ 목표효용 $\bar u$가 주어졌을 때 이를 달성하는 데 필요한 최소지출을 찾는다. 선택은 $H(p,\bar u)$, 값은 $e(p,\bar u)$다.
+
+::: {.callout-note title="DEFINITION · 간접효용함수"}
+직접효용함수 $u$가 주어질 때, 간접효용함수는
+
+
+$$
+v(p,m)
+              =
+              \max_{x\in B(p,m)}u(x)
+$$
+
+
+로 정의된다. 기본 정의역은 $p\in\mathbb R_{++}^n$, $m\in\mathbb R_+$이다.
+다만 아래의 continuity, Berge maximum theorem, 미분가능성 결과는 우선
+
+$$
+(p,m)\in\mathbb R_{++}^n\times\mathbb R_{++}
+$$
+
+의 내부 영역에서 읽는다. $v(p,m)$는 가격 $p$와 소득 $m$ 아래 달성 가능한 최대 효용이다.
+:::
+
+::: {.callout-note appearance="simple" title="BOUNDARY CASE · $m=0$"}
+$X=\mathbb R_+^n$, $p\gg0$이면
+
+$$
+B(p,0)=\{\mathbf0\},
+\qquad
+v(p,0)=u(\mathbf0).
+$$
+
+따라서 $m=0$은 duality의 경계 경우를 포함하기 위해 정의역에 남겨 둔다.
+그러나 수요의 연속성, KKT, Roy's identity처럼 양의 소득을 전제로 하는 결과는
+$\mathbb R_{++}^n\times\mathbb R_{++}$에서만 사용한다.
+:::
+
+::: {.callout-important title="PROPOSITION · 간접효용함수의 성질"}
+$u$가 continuous이면 $v$는
+
+$$
+\mathbb R_{++}^n\times\mathbb R_{++}
+$$
+
+에서 continuous다. 또한 모든 $\lambda\gt0$에 대해
+
+
+$$
+v(\lambda p,\lambda m)=v(p,m).
+$$
+
+
+선호가 locally nonsatiated이면 $m'\gt m\gt0$에 대해
+
+$$
+v(p,m')\gt v(p,m)
+$$
+
+이다.
+:::
+
+::: {.callout-note appearance="simple" title="간접효용함수 $v$의 성질"}
+- **연속성** — 연속적인 예산 correspondence 위에서 continuous utility를 최대화하므로 $v$는 continuous하다.
+- **0차 동차성** — 명목가격과 명목소득을 같은 비율로 바꾸어도 소비자의 기회집합은 같다.$v(\lambda p,\lambda m)=v(p,m)$
+- **소득 단조성** — $m'\ge m$이면 예산집합이 커지므로 $v(p,m')\ge v(p,m)$이다. local nonsatiation까지 가정하면 부등식은 엄격해진다.
+- **경제적 의미** — $v$는 효용함수의 변형이 아니라, 시장환경 $(p,m)$이 주어졌을 때 소비자가 달성할 수 있는 효용의 상한이다.
+:::
+
+연속성은 예산 correspondence의 연속성과 Berge maximum theorem에서 따른다. 0차 동차성은 명목가격과 명목소득을 같은 비율로 바꾸어도
+예산집합이 변하지 않는다는 사실을 반영한다. 소득에 대한 엄격한 증가성은 소득이 늘어나면 기존 최적점 주변에서 더 선호되는 소비묶음을 선택할 수 있다는 local nonsatiation에서 따른다.
+
+::: {.callout-tip collapse="true" title="PROOF · 간접효용의 소득 단조성"}
+$m'\gt m$을 고정하고 $x\in D(p,m)$를 택하자. 예산소진으로 $p\cdot x=m\lt m'$이다. $\delta=m'-m\gt 0$라 하자.
+local nonsatiation에 의해 $x$의 임의의 근방에는 $y\succ x$가 존재한다. 그 근방을 충분히 작게 택하면
+
+$$
+p\cdot y
+\le p\cdot x+\lVert p\rVert\lVert y-x\rVert
+\lt m+\delta=m'.
+$$
+
+따라서 $y\in B(p,m')$이고 $u(y)\gt u(x)=v(p,m)$이므로 $v(p,m')\gt v(p,m)$이다. 이 증명에서 local nonsatiation은 단순히 예산집합이 넓어진다는 사실을 넘어, 효용이 엄격히 증가함을 보장하는 역할을 한다. □
+:::
+
+::: {.callout-note title="DEFINITION · 지출함수와 Hicksian demand"}
+달성 가능한 효용수준의 집합을 $\mathcal U=u(X)$라 하자. $\bar u\in\mathcal U$에 대해 지출함수는
+
+
+$$
+e(p,\bar u)
+              =
+              \min_{x\in X}
+              \{p\cdot x:u(x)\ge\bar u\}
+$$
+
+
+로 정의하며, 이 문제의 해집합을 Hicksian demand correspondence라고 부른다.
+
+
+$$
+H(p,\bar u)
+              =
+              \operatorname{arg\,min}_{x\in X}
+              \{p\cdot x:u(x)\ge\bar u\}.
+$$
+
+:::
+
+Marshallian demand가 “소득 $m$으로 얼마나 높은 효용을 달성할 것인가”를 묻는다면, Hicksian demand는 “효용 $\bar u$를 유지하려면 최소 얼마를 지출해야 하는가”를 묻는다.
+두 문제에서는 목적함수와 제약의 역할이 서로 바뀐다.
+
+::: {.callout-note title="가정의 사용처: Marshallian과 Hicksian"}
+**Marshallian problem.** local nonsatiation은 예산소진과 $v$의 소득에 대한 엄격한 증가성을 보장한다.
+**Hicksian problem.** 이 장의 $X=\mathbb R_+^n$, continuous strict monotonicity 아래에서는 목표효용을 초과하는 최소지출 묶음을 $\alpha h$로 비례축소해 비용을 더 낮출 수 있다.
+따라서 목표효용 제약이 binding되고, 이 사실이 exact duality의 핵심 단계가 된다.
+
+여기서 필요한 것은 단 하나의 재화 증가가 언제나 strict improvement라는 더 강한 가정이 아니다.
+현재의 strict monotonicity는 $\mathbf0$이 최소 선호수준임을 보장하고, continuity는 $\alpha<1$을 충분히 1에 가깝게 택했을 때 목표효용을 유지하게 한다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · Hicksian demand와 보상"}
+초기 상태가 $(p^0,m)$이고 $u^0=v(p^0,m)$라고 하자. 가격이 $p^1$로 바뀐 뒤
+
+
+$$
+h(p^1,u^0)
+$$
+
+
+는 새 가격 아래에서 초기 효용수준을 유지하도록 소득을 조정한 소비자의 선택이다. 필요한 소득은 외생적으로 주어지는 것이 아니라
+
+
+$$
+m^c=e(p^1,u^0)
+$$
+
+
+로 정해진다. 아래의 duality 결과가 성립하면
+
+
+$$
+h(p^1,u^0)=d(p^1,m^c).
+$$
+
+
+따라서 Hicksian demand는 가격변화 후 소득을 그대로 둔 실제 선택 $d(p^1,m)$이 아니라,
+초기 효용수준을 유지하도록 보상한 가상의 선택이다. 이 차이가 이후 Hicksian substitution effect와 income effect를 분리할 수 있게 한다.
+:::
+
+- **UTILITY MAXIMISATION** — $\max_{x\in X}u(x)$ subject to $p\cdot x\le m$.  
+solution correspondence: $D(p,m)$; value function: $v(p,m)$.
+- **EXPENDITURE MINIMISATION** — $\min_{x\in X}p\cdot x$ subject to $u(x)\ge\bar u$.  
+solution correspondence: $H(p,\bar u)$; value function: $e(p,\bar u)$.
+
+::: {.callout-note title="HICKSIAN DEMAND · 무엇이 고정되고 무엇이 조정되는가"}
+Hicksian demand에서는 목표효용 $\bar u$가 고정되고, 가격이 바뀔 때 그 목표를 유지하는 데 필요한 최소지출이 함께 조정된다.
+따라서 이 수요는 소득변화를 제거한 가격반응, 곧 substitution effect를 기술하는 객체다. 다만 $H$는 처음부터 correspondence이며,
+유일성이 확인된 경우에만 $h$로 쓴다.
+
+- **입력** — $p\in\mathbb R_{++}^n,\quad \bar u\in\mathcal U$ 소득 $m$이 아니라 가격과 목표효용이 주어진다. 목표효용은 소비자가 유지해야 할 선호수준을 표시한다.
+- **선택** — $H(p,\bar u)=\operatorname{arg\,min}\{p\cdot x:u(x)\ge\bar u\}$ 목표효용을 달성하는 소비묶음 중 지출이 가장 작은 묶음을 고른다.
+- **보상소득** — $m^c=e(p,\bar u)$ 보상은 임의의 현금이 아니라, 목표효용을 유지하기 위해 필요한 최소소득으로 정확히 정해진다.
+- **목표효용의 binding** — $u(h)=\bar u$ continuous strict monotonicity 아래 최소지출 묶음은 목표효용을 초과할 수 없다. 초과하면 비례축소로 지출을 더 줄일 수 있기 때문이다.
+:::
+
+::: {.callout-note appearance="simple" title="Hicksian demand $H$, $h$의 성질"}
+- **correspondence와 함수** — 여러 최소지출 묶음이 있을 수 있으므로 일반적으로는 $H(p,\bar u)$로 쓴다. 이 장의 continuous strict monotonicity는 target binding을 보장하고, strictly convex preference까지 더하면 $H(p,\bar u)=\{h(p,\bar u)\}$를 얻는다.
+- **무엇이 보상되는가** — 보상되는 것은 초기 소비묶음이 아니라 초기 효용수준이다. 따라서 Hicksian compensation은 Slutsky compensation과 다르다. 후자는 초기 묶음의 구매 가능성을 유지한다.
+- **가격의 0차 동차성** — 모든 가격을 같은 비율로 바꾸어도 지출순위는 변하지 않으므로 선택묶음은 변하지 않는다.$H(\lambda p,\bar u)=H(p,\bar u)\quad(\lambda\gt0)$
+- **효용표현에 대한 불변성** — 목표효용의 숫자는 ordinal utility representation에 따라 바뀔 수 있다. 그러나 같은 선호수준을 가리키도록 목표를 함께 변환하면 feasible set 자체가 같으므로 Hicksian demand와 지출은 변하지 않는다.
+- **가격변화의 해석** — 목표효용을 고정하고 $p$만 바꾸면, 그 변화는 순수한 상대가격 변화에 대한 반응이다. 매끄러운 경우 이 반응의 Jacobian이 Slutsky matrix가 된다.
+- **Marshallian demand와의 연결** — exact duality 아래에서 최소지출 $e(p,\bar u)$를 소득으로 주면, Hicksian demand는 그 소득에서의 Marshallian demand와 일치한다.$H(p,\bar u)=D\bigl(p,e(p,\bar u)\bigr)$
+:::
+
+::: {.callout-note appearance="simple" title="지출함수 $e$의 성질: Hicksian problem의 값함수"}
+- **효용에 대한 단조성** — 더 높은 효용을 요구하면 feasible set이 작아지므로 필요한 최소지출은 감소하지 않는다.
+- **가격에 대한 단조성** — 가격이 성분별로 상승하면 같은 소비묶음의 비용이 증가하므로 $e$도 감소하지 않는다.
+- **1차 동차성** — 모든 가격을 $\lambda$배 하면 최소비용도 $\lambda$배가 된다.$e(\lambda p,\bar u)=\lambda e(p,\bar u)$
+- **가격에 대한 concavity** — 각 feasible 소비묶음의 비용은 가격의 선형함수이고, $e$는 그 선형함수들의 점별 infimum이므로 concave하다.
+- **미분가능할 때** — Hicksian demand가 단일값이고 $e$가 미분가능하면 가격미분이 Hicksian demand를 준다.$\nabla_p e(p,\bar u)=h(p,\bar u)$
+:::
+
+::: {.callout-important title="THEOREM 1.6 · Hicksian demand의 존재와 목표효용 제약의 binding"}
+$X=\mathbb R_+^n$이고, $u$가 continuous하며 $u$가 표현하는 선호가 strict monotonicity를 만족한다고 하자. $\mathcal U=u(X)$에 대해 모든 $p\gg0$, $\bar u\in\mathcal U$에서
+$H(p,\bar u)$는 공집합이 아닌 compact set이다. 또한 모든 $h\in H(p,\bar u)$는
+
+
+$$
+u(h)=\bar u
+$$
+
+
+를 만족한다. 즉 지출최소화에서는 목표효용 제약이 정확히 binding된다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · Hicksian demand의 존재와 목표효용 binding"}
+$\bar u\in u(X)$이므로 $u(\bar x)\ge\bar u$인 $\bar x\in X$가 존재한다. 최소화는
+
+$$
+K=\{x\in X:u(x)\ge\bar u,\ p\cdot x\le p\cdot\bar x\}
+$$
+
+로 제한해도 된다. $u$의 연속성으로 $\{x:u(x)\ge\bar u\}$는 닫혀 있고, $p\gg0$이므로 $p\cdot x\le p\cdot\bar x$는 각 좌표에 유한한 상한을 준다. 따라서 $K$는 공집합이 아닌 compact set이다. 선형함수 $x\mapsto p\cdot x$는 연속이므로 Weierstrass 정리에 의해 최소점을 가지며, $H(p,\bar u)$는 공집합이 아닌 compact set이다.
+
+이제 $h\in H(p,\bar u)$인데 $u(h)\gt\bar u$라고 하자. $\bar u\in u(X)$이므로 어떤 $\bar x\in X$에 대해 $u(\bar x)=\bar u$다. $\bar x\ge\mathbf0$이고 strict monotonicity의 약한 부분과 reflexivity를 함께 쓰면 $u(\bar x)\ge u(\mathbf0)$이므로 $\bar u\ge u(\mathbf0)$다. 따라서 $u(h)\gt\bar u\ge u(\mathbf0)$이므로 $h\neq\mathbf0$다. 함수 $\alpha\mapsto u(\alpha h)$는 $[0,1]$에서 연속이고 $u(h)\gt\bar u$이므로, $\alpha\lt 1$을 1에 충분히 가깝게 택하면 $u(\alpha h)\ge\bar u$다. 그러나
+
+$$
+p\cdot(\alpha h)=\alpha p\cdot h\lt p\cdot h,
+$$
+
+따라서 $\alpha h$는 더 낮은 지출로 목표효용을 달성한다. 이는 $h$의 최소성에 모순이다. 따라서 $u(h)=\bar u$다. □
+:::
+
+::: {.callout-important title="PROPOSITION · Hicksian demand의 가격 동차성"}
+모든 $\lambda\gt0$, $p\gg0$, $\bar u\in\mathcal U$에 대해
+
+
+$$
+H(\lambda p,\bar u)=H(p,\bar u).
+$$
+
+
+특히 $H(p,\bar u)=\{h(p,\bar u)\}$이면
+
+$$
+h(\lambda p,\bar u)=h(p,\bar u).
+$$
+
+즉 Hicksian demand는 가격수준이 아니라 상대가격에만 의존한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 가격 동차성"}
+$F(\bar u)=\{x\in X:u(x)\ge\bar u\}$라 하자. $\lambda\gt0$이므로 모든 $x,y\in F(\bar u)$에 대해
+
+$$
+p\cdot x\le p\cdot y
+\quad\Longleftrightarrow\quad
+\lambda p\cdot x\le\lambda p\cdot y.
+$$
+
+따라서 $F(\bar u)$ 안에서 $p\cdot x$를 최소화하는 묶음들과 $\lambda p\cdot x$를 최소화하는 묶음들이 정확히 일치한다. 곧
+
+$$
+H(\lambda p,\bar u)=H(p,\bar u).
+$$
+
+단일값인 경우에는 두 correspondence의 유일한 원소가 같으므로 $h(\lambda p,\bar u)=h(p,\bar u)$다. □
+:::
+
+::: {.callout-important title="PROPOSITION · 효용표현의 변경과 Hicksian demand"}
+$\tilde u=\phi\circ u$이고 $\phi$가 $u(X)$ 위에서 strictly increasing이라고 하자. 그러면 모든 $\bar u\in u(X)$에 대해
+
+
+$$
+\{x:\tilde u(x)\ge\phi(\bar u)\}
+              =
+              \{x:u(x)\ge\bar u\}.
+$$
+
+
+따라서
+
+
+$$
+H_{\tilde u}\bigl(p,\phi(\bar u)\bigr)=H_u(p,\bar u),
+              \qquad
+              e_{\tilde u}\bigl(p,\phi(\bar u)\bigr)=e_u(p,\bar u).
+$$
+
+
+목표효용의 숫자 자체는 효용표현에 의존하지만, 같은 선호수준을 유지하는 보상수요와 최소지출은 선호관계만으로 결정된다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 효용표현 변경에 대한 불변성"}
+$\phi$가 strictly increasing이므로 모든 $x\in X$에 대해
+
+$$
+\tilde u(x)\ge\phi(\bar u)
+\quad\Longleftrightarrow\quad
+\phi(u(x))\ge\phi(\bar u)
+\quad\Longleftrightarrow\quad
+u(x)\ge\bar u.
+$$
+
+따라서 두 지출최소화 문제의 feasible set이 같다. 목적함수 $p\cdot x$도 같으므로 최적해집합과 최소값이 모두 일치한다. □
+:::
+
+::: {.callout-important title="THEOREM 1.7 · 지출함수의 성질"}
+위 가정 아래 $e:\mathbb R_{++}^n\times\mathcal U\to\mathbb R_+$는 상대위상에서 continuous이며,
+$\bar u$에 대해 nondecreasing, 각 가격성분에 대해 nondecreasing, 가격에 대해 1차 동차이고 concave하다.
+
+
+$$
+e(\lambda p,\bar u)=\lambda e(p,\bar u)
+              \qquad(\lambda\gt 0),
+$$
+
+
+$$
+e(tp+(1-t)q,\bar u)
+              \ge
+              te(p,\bar u)+(1-t)e(q,\bar u)
+              \qquad(t\in[0,1]).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 지출함수의 기본 성질"}
+목표효용 $\bar u$를 고정하고 $U_{\bar u}=\{x\in X:u(x)\ge\bar u\}$라 하자. $\bar u'\ge\bar u$이면 $U_{\bar u'}\subseteq U_{\bar u}$이므로
+
+$$
+e(p,\bar u')=\inf_{x\in U_{\bar u'}}p\cdot x
+\ge\inf_{x\in U_{\bar u}}p\cdot x=e(p,\bar u).
+$$
+
+즉 $e$는 $\bar u$에 대해 nondecreasing이다. 또한 $q\ge p$이면 모든 $x\ge0$에 대해 $q\cdot x\ge p\cdot x$이므로 $e(q,\bar u)\ge e(p,\bar u)$다.
+
+$\lambda\gt 0$이면
+
+$$
+e(\lambda p,\bar u)
+=\inf_{x\in U_{\bar u}}\lambda p\cdot x
+=\lambda e(p,\bar u),
+$$
+
+이므로 1차 동차성도 따른다. 그리고 임의의 $x\in U_{\bar u}$에 대해
+
+$$
+[tp+(1-t)q]\cdot x
+=t(p\cdot x)+(1-t)(q\cdot x)
+\ge te(p,\bar u)+(1-t)e(q,\bar u).
+$$
+
+좌변의 $x$에 대한 infimum을 취하면
+
+$$
+e(tp+(1-t)q,\bar u)
+\ge te(p,\bar u)+(1-t)e(q,\bar u),
+$$
+
+이므로 $e(\cdot,\bar u)$는 concave하다.
+
+이제 $(p^k,\bar u^k)\to(p,\bar u)$라고 하자. $h\in H(p,\bar u)$를 택하면 앞 정리에 의해 $u(h)=\bar u$다. $\varepsilon\gt 0$에 대해 $z_\varepsilon=h+\varepsilon\mathbf1$로 두면 $z_\varepsilon\gg h$이므로 strict monotonicity로 $u(z_\varepsilon)\gt\bar u$이다. 따라서 충분히 큰 $k$에 대해 $u(z_\varepsilon)\ge\bar u^k$이고,
+
+$$
+e(p^k,\bar u^k)\le p^k\cdot z_\varepsilon.
+$$
+
+$k\to\infty$ 후 $\varepsilon\downarrow0$을 취하면
+
+$$
+\limsup_{k\to\infty}e(p^k,\bar u^k)\le p\cdot h=e(p,\bar u).
+$$
+
+
+반대로 $\liminf e(p^k,\bar u^k)$에 수렴하는 부분수열을 택하고, 그 지출최소해를 $h^k\in H(p^k,\bar u^k)$라 하자. 위 상계로 $p^k\cdot h^k$는 유계이고, $p^k\to p\gg0$이므로 $h^k$는 하나의 공통 compact box 안에 있다. 다시 부분수열을 택하여 $h^k\to h^*$라 하자. $u(h^k)\ge\bar u^k$와 $u$의 연속성으로 $u(h^*)\ge\bar u$이고, 내적의 연속성으로
+
+$$
+\liminf_{k\to\infty}e(p^k,\bar u^k)
+=p\cdot h^*
+\ge e(p,\bar u).
+$$
+
+상극한과 하극한의 부등식을 결합하면 $e(p^k,\bar u^k)\to e(p,\bar u)$다. 따라서 $e$는 상대위상에서 연속이다. □
+:::
+
+::: {.callout-important title="PROPOSITION · Hicksian correspondence의 정칙성"}
+$X=\mathbb R_+^n$이고, $u$가 continuous하며 $u$가 표현하는 선호가 strict monotonicity를 만족한다고 하자. 또한 $(p,\bar u)$의 어떤 근방에서 각 목표효용을 달성하는 소비묶음의 지출이 하나의 공통 상한으로 제한된다고 하자.
+
+$$
+H(p,\bar u)=\operatorname{arg\,min}\{p\cdot x:u(x)\ge\bar u\}
+$$
+
+는 각 점에서 공집합이 아닌 compact 집합을 값으로 가지며 UHC다. continuous strict monotonicity 아래 목표효용 제약은 binding되고, 선호가 strictly convex이면 $H(p,\bar u)$는 singleton이다. 이때 유일한 선택 $h$는 continuous하다.
+
+목표효용 제약의 binding은 유일성 증명에서 핵심이다. continuous strict monotonicity는 먼저 $u(h)=\bar u$를 보장한다. 그러면 서로 다른 두 최소지출 묶음의 혼합은 strict convexity에 의해 $\bar u$보다 엄격히 높은 효용을 주고, 비례축소를 통해 더 낮은 지출로 $\bar u$를 달성할 수 있어 모순이 된다. 핵심은 Marshallian 문제와 마찬가지로 지출최소화 문제도 각 기준점의 근방에서 하나의 공통 compact box로 제한한 뒤 Berge maximum theorem을 적용한다는 데 있다. 따라서 Hicksian demand의 연속성은 Shephard lemma나 미분가능성보다 앞서 성립하는 correspondence 결과다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · Hicksian correspondence의 UHC와 단일값 연속성"}
+$(p^k,\bar u^k)\to(p,\bar u)$이고 $h^k\in H(p^k,\bar u^k)$라고 하자. 가정한 공통 비용상한과 $p^k\to p\gg0$에 따라 $h^k$는 하나의 공통 compact box 안에 놓인다. 따라서 임의의 수렴부분수열에 대해 다시 부분수열을 택하여 $h^k\to h$라고 둘 수 있다. $u(h^k)\ge\bar u^k$와 $u$의 연속성으로 $u(h)\ge\bar u$다.
+
+이제 임의의 $y\in X$가 $u(y)\ge\bar u$를 만족한다고 하자. $\varepsilon\gt 0$에 대해 $y_\varepsilon=y+\varepsilon\mathbf1$로 두면 $u(y_\varepsilon)\gt\bar u$다. 따라서 충분히 큰 $k$에 대해 $u(y_\varepsilon)\ge\bar u^k$이고, $h^k$의 최소성으로
+
+$$
+p^k\cdot h^k\le p^k\cdot y_\varepsilon.
+$$
+
+극한을 취하면 $p\cdot h\le p\cdot y_\varepsilon$이다. $\varepsilon\downarrow0$으로 보내면 $p\cdot h\le p\cdot y$다. $y$가 임의였으므로 $h\in H(p,\bar u)$다. 따라서 $H$는 UHC다.
+
+strict convexity를 추가하자. 서로 다른 $h^1,h^2\in H(p,\bar u)$가 있다고 하자. 앞 정리에 의해 $u(h^1)=u(h^2)=\bar u$다. strict convexity로 $\tilde h=\tfrac12(h^1+h^2)$는 $u(\tilde h)\gt\bar u$를 만족하고, 선형성으로 $p\cdot\tilde h=e(p,\bar u)$다. Theorem 1.6에서 쓴 비례축소 논증을 적용하면 $\tilde h$보다 낮은 비용으로 $\bar u$를 달성할 수 있어 모순이다. 따라서 $H(p,\bar u)$는 singleton이다. UHC와 근방에서의 공통 compact box 포함성을 함께 쓰면 singleton-valued correspondence $H$는 continuous function이 된다. 따라서 $h$는 continuous하다. □
+:::
+
+::: {.callout-important title="THEOREM 1.8 · Shephard lemma의 supergradient 형식"}
+$H(p,\bar u)\ne\varnothing$라고 하자. 임의의 $h\in H(p,\bar u)$와 모든 $q\gg0$에 대해
+
+$$
+e(q,\bar u)
+\le
+e(p,\bar u)+h\cdot(q-p).
+$$
+
+따라서 모든 Hicksian minimiser는 가격에 대해 concave한 함수 $e(\cdot,\bar u)$의 supergradient다. 즉
+
+$$
+H(p,\bar u)
+\subseteq
+\partial_p^+e(p,\bar u),
+$$
+
+여기서
+
+$$
+\partial_p^+e(p,\bar u)
+=
+\left\{
+g:\ e(q,\bar u)\le e(p,\bar u)+g\cdot(q-p)
+\text{ for every }q\gg0
+\right\}.
+$$
+
+특히 $e(\cdot,\bar u)$가 $p$에서 미분가능하면
+
+$$
+H(p,\bar u)
+=
+\{\nabla_pe(p,\bar u)\},
+\qquad
+\frac{\partial e(p,\bar u)}{\partial p_i}
+=h_i(p,\bar u).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 주변 Hicksian demand의 연속성을 사용하지 않는 증명"}
+$h\in H(p,\bar u)$를 고정하자. $h$는 가격이 $q$로 바뀌어도 목표효용 $\bar u$를 달성하는 feasible bundle이므로
+
+$$
+e(q,\bar u)
+\le q\cdot h
+=p\cdot h+(q-p)\cdot h
+=e(p,\bar u)+(q-p)\cdot h.
+$$
+
+따라서 $h\in\partial_p^+e(p,\bar u)$다.
+
+이제 $e$가 $p$에서 미분가능하다고 하자. $e_i$를 $i$번째 단위벡터라 하고, 충분히 작은 $t>0$을 택하여 $p\pm te_i\gg0$라 하자. supergradient inequality를 각각 $q=p+te_i$와 $q=p-te_i$에 적용하면
+
+$$
+\frac{e(p+te_i,\bar u)-e(p,\bar u)}{t}\le h_i,
+$$
+
+
+$$
+\frac{e(p,\bar u)-e(p-te_i,\bar u)}{t}\ge h_i.
+$$
+
+$t\downarrow0$으로 보내면 미분가능성에 의해 두 극한이 모두 $\partial e(p,\bar u)/\partial p_i$이므로
+
+$$
+h_i=\frac{\partial e(p,\bar u)}{\partial p_i}
+$$
+
+다. 이는 모든 $h\in H(p,\bar u)$에 대해 성립하므로 $H(p,\bar u)$는 singleton이고 그 원소가 $\nabla_pe(p,\bar u)$다. □
+:::
+
+### 1.4.2 두 소비자문제의 duality
+
+두 최적화 문제는 형식만 비슷한 문제가 아니다. 같은 선호를 서로 다른 방향에서 기술하지만, 정확한 역관계를 이룬다.
+아래에서는 $u$가 표현하는 선호가 strict monotonicity를 만족한다고 가정한다. 이 장의 $X=\mathbb R_+^n$ 및 연속성과 결합하면 예산제약과 목표효용 제약이 각각 binding된다.
+
+::: {.callout-important title="THEOREM 1.9 · Order-duality와 exact duality relations"}
+$u$가 continuous하고 $u$가 표현하는 선호가 strict monotonicity를 만족한다고 하자. 간접효용은 $m\in\mathbb R_+$에서 정의한다.
+그러면 모든 $p\gg0$, $m\ge0$, $\bar u\in\mathcal U$에 대해
+
+
+$$
+v(p,m)\ge\bar u
+              \quad\Longleftrightarrow\quad
+              e(p,\bar u)\le m.
+$$
+
+
+따라서 두 값함수는 generalized inverse 관계에 있으며,
+
+
+$$
+v(p,m)
+              =
+              \sup\{\tilde u\in\mathcal U:e(p,\tilde u)\le m\},
+              \qquad
+              e(p,\bar u)
+              =
+              \inf\{\tilde m\in\mathbb R_+:v(p,\tilde m)\ge\bar u\}.
+$$
+
+
+특히 $m\gt0$이면
+
+
+$$
+e\bigl(p,v(p,m)\bigr)=m,
+              \qquad
+              v\bigl(p,e(p,\bar u)\bigr)=\bar u.
+$$
+
+
+수요 correspondence도 다음과 같이 연결된다.
+
+
+$$
+H\bigl(p,v(p,m)\bigr)=D(p,m),
+              \qquad
+              D\bigl(p,e(p,\bar u)\bigr)=H(p,\bar u).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · order-duality와 exact duality"}
+먼저 $v(p,m)\ge\bar u$라고 하자. $d\in D(p,m)$를 택하면 $p\cdot d\le m$이고
+$u(d)=v(p,m)\ge\bar u$이므로 $d$는 지출최소화 문제의 제약을 만족한다. 따라서
+
+$$
+e(p,\bar u)\le p\cdot d\le m.
+$$
+
+반대로 $e(p,\bar u)\le m$이면 $h\in H(p,\bar u)$에 대해
+$p\cdot h=e(p,\bar u)\le m$ 및 $u(h)\ge\bar u$이다. 즉 $h\in B(p,m)$이므로
+
+$$
+v(p,m)\ge u(h)\ge\bar u.
+$$
+
+이로써 order-duality가 증명된다. 위의 두 식은 각각 주어진 예산으로 달성 가능한 효용수준과 주어진 효용수준을 달성하는 데 필요한 최소지출을 같은 순서로 기술하므로, generalized inverse 표현도 바로 따른다.
+
+이제 $m\gt0$이라 하자. $d\in D(p,m)$이면 $u(d)=v(p,m)$이고 예산소진으로 $p\cdot d=m$이다.
+따라서 $d$는 효용목표 $v(p,m)$을 달성하는 지출최소화 문제의 제약을 만족하므로
+
+$$
+e\bigl(p,v(p,m)\bigr)\le m.
+$$
+
+반대로 $e(p,v(p,m))\lt m$이라고 하자. 지출최소해 $h$는 $u(h)=v(p,m)$을 만족하고 예산여유가 있다.
+strict monotonicity는 이 장의 $X=\mathbb R_+^n$에서 local nonsatiation을 함의하므로, $h$의 충분히 작은 근방에서 $y\succ h$이면서
+$p\cdot y\le m$인 $y$를 택할 수 있다. 그러면 $u(y)\gt v(p,m)$이 되어 $v$의 정의와 모순이다.
+따라서
+
+$$
+e\bigl(p,v(p,m)\bigr)=m.
+$$
+
+
+다음으로 $h\in H(p,\bar u)$이면 목표효용 제약의 binding으로 $u(h)=\bar u$이고
+$p\cdot h=e(p,\bar u)$이므로
+
+$$
+v\bigl(p,e(p,\bar u)\bigr)\ge\bar u.
+$$
+
+만약 좌변이 $\bar u$보다 크다면, 예산 $e(p,\bar u)$ 아래의 어떤 최적점 $d$는 $u(d)\gt\bar u$를 만족한다.
+연속성에 의해 $\alpha\lt1$을 1에 충분히 가깝게 택하면 $u(\alpha d)\ge\bar u$이고,
+
+$$
+p\cdot(\alpha d)\lt p\cdot d=e(p,\bar u)
+$$
+
+이다. 이는 $e(p,\bar u)$의 최소성에 모순이다. 따라서
+
+$$
+v\bigl(p,e(p,\bar u)\bigr)=\bar u.
+$$
+
+마지막 두 correspondence 등식은 위 값함수 등식과 각 최적화 문제의 정의를 함께 적용하면 얻어진다. □
+:::
+
+::: {.callout-tip title="duality의 정확한 읽기"}
+$e(p,v(p,m))=m$은 “예산 $m$으로 달성한 최고효용을 새로 최소비용으로 달성하려 해도 비용을 줄일 수 없다”는 명제다.
+$v(p,e(p,\bar u))=\bar u$은 “목표효용을 달성하는 최소비용을 소득으로 주면 그보다 높은 효용은 얻을 수 없다”는 명제다.
+전자는 Marshallian 문제에서 Hicksian 문제로, 후자는 Hicksian 문제에서 Marshallian 문제로 돌아가는 방향이다. 두 식 모두 예산소진, 목표효용 제약의 binding, 그리고 이 장의 strict monotonicity가 주는 local nonsatiation을 사용한다.
+:::
+
+### 1.4.3 Roy's identity
+
+Shephard lemma가 지출함수의 가격미분에서 Hicksian demand를 얻는 결과라면, Roy's identity는 간접효용함수의 가격·소득 미분에서 Marshallian demand를 얻는 결과다.
+이 결과는 내부해와 미분가능성을 가정한 국소 결과다.
+
+::: {.callout-important title="THEOREM 1.10 · Roy's identity"}
+$(p,m)$의 근방에서 Marshallian demand $d$와 Lagrange multiplier $\lambda$가 미분가능하고, 최적점이 내부해이며,
+
+$$
+\nabla u(d(p,m))=\lambda(p,m)p,
+\qquad
+p\cdot d(p,m)=m,
+\qquad
+\lambda(p,m)\gt0
+$$
+
+라고 하자. 그러면
+
+
+$$
+\frac{\partial v(p,m)}{\partial p_i}
+              =
+              -\lambda(p,m)d_i(p,m),
+              \qquad
+              \frac{\partial v(p,m)}{\partial m}
+              =
+              \lambda(p,m),
+$$
+
+
+$$
+d_i(p,m)
+              =
+              -\frac{v_{p_i}(p,m)}{v_m(p,m)}.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · Roy's identity"}
+$v(p,m)=u(d(p,m))$이므로 사슬법칙과 내부해의 1차 조건을 사용하면
+
+$$
+\frac{\partial v}{\partial p_i}
+=
+\nabla u(d(p,m))\cdot\frac{\partial d(p,m)}{\partial p_i}
+=
+\lambda(p,m)p\cdot\frac{\partial d(p,m)}{\partial p_i}.
+$$
+
+예산등식 $p\cdot d(p,m)=m$을 $p_i$에 대해 미분하면
+
+$$
+d_i(p,m)+p\cdot\frac{\partial d(p,m)}{\partial p_i}=0.
+$$
+
+따라서
+
+$$
+\frac{\partial v(p,m)}{\partial p_i}
+=
+-\lambda(p,m)d_i(p,m).
+$$
+
+같은 예산등식을 $m$에 대해 미분하면
+
+$$
+p\cdot\frac{\partial d(p,m)}{\partial m}=1.
+$$
+
+그러므로
+
+$$
+\frac{\partial v(p,m)}{\partial m}
+=
+\nabla u(d(p,m))\cdot\frac{\partial d(p,m)}{\partial m}
+=
+\lambda(p,m).
+$$
+
+$\lambda(p,m)\gt0$이므로 두 식을 나누면 Roy's identity가 나온다. □
+:::

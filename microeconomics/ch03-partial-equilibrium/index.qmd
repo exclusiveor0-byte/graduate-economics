@@ -1,0 +1,25 @@
+# Chapter 3 · 부분균형분석
+*완전경쟁·시장구조·균형·후생*
+
+Chapter 2가 주어진 가격 아래 기업이 어떤 생산계획을 택하는지를 분석했다면, 이 장은 소비자 수요와 기업 공급이 한 시장에서 결합하여 가격과 거래량을 어떻게 결정하는지를 다룬다. 완전경쟁, 독점, Cournot, Bertrand, monopolistic competition은 서로 다른 primitive를 쓰는 이론이 아니다. 동일한 수요와 비용 위에서 기업이 자신의 행동이 시장결과에 미치는 영향을 어떻게 인식하는지가 달라질 뿐이다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- 3.1 완전경쟁시장과 market clearing
+- 3.2 같은 시장, 다른 conduct
+- 3.3 공통 후생기준과 비교
+- 3.4 선형 benchmark와 연습문제
+:::
+
+## Sections
+
+- [3.1 완전경쟁시장](01-perfect-competition.qmd)
+- [3.2 같은 시장, 다른 conduct](02-market-conduct.qmd)
+- [3.3 균형과 후생](03-equilibrium-welfare.qmd)
+- [3.4 표준 선형 모형과 연습문제](04-linear-model-exercises.qmd)
+- [참고문헌](references.qmd)
+
+::: {.callout-tip title="협업 단위"}
+각 Section은 독립 페이지와 URL을 갖습니다. 내용 수정은 가능하면 Section 단위 Pull Request로 진행합니다.
+:::

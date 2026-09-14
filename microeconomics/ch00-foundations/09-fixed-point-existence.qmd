@@ -1,0 +1,29 @@
+# 0.9 고정점과 균형의 존재
+
+균형은 각 행위자가 주어진 환경에서 최적화했을 때, 그 선택들의 조합이 다시 동일한 환경과 양립하는 상태다. 따라서 균형은 대개 어떤 사상의 고정점(fixed point)으로 표현된다. 함수 $f:K\to K$의 fixed point는 $x^*=f(x^*)$를 만족하는 점이고, correspondence $F:K\rightrightarrows K$의 fixed point는 $x^*\in F(x^*)$를 만족하는 점이다.
+
+
+$$
+x^*=f(x^*),
+            \qquad\text{or}\qquad
+            x^*\in F(x^*).
+$$
+
+
+::: {.callout-important title="THEOREM · Brouwer 고정점정리"}
+$K\subseteq\mathbb R^n$가 공집합이 아닌 콤팩트한 볼록집합이고 $f:K\to K$가 연속이면, 어떤 $x^*\in K$가 존재하여 $x^*=f(x^*)$를 만족한다.
+:::
+
+::: {.callout-important title="THEOREM 0.9.1 · Kakutani 고정점정리"}
+$K\subseteq\mathbb R^n$가 공집합이 아닌 콤팩트한 볼록집합이고 $F:K\rightrightarrows K$가 UHC이며, 모든 $x\in K$에 대해 $F(x)$가 공집합이 아닌 콤팩트한 볼록집합이면, 어떤 $x^*\in K$가 존재하여 $x^*\in F(x^*)$를 만족한다.
+:::
+
+Nash equilibrium의 존재증명에서는 $K$를 혼합전략들의 곱집합으로, $F$를 모든 경기자의 최적반응대응의 곱으로 둔다. Walrasian equilibrium의 존재증명에서는 가격 simplex 위에 가격조정 대응을 구성한다. 두 증명은 경제적 대상은 다르지만 Kakutani 정리의 조건을 하나씩 검증한다는 점에서 같은 구조를 가진다.
+
+::: {.callout-note appearance="simple" title="REMARK · 존재증명에 쓰이는 대응은 일반균형 장에서 구성한다"}
+일반균형 존재증명에서 사용하는 가격조정 대응은 초과수요 $z(p)$, Walras' law, 가격 simplex가 정의된 뒤에 구성해야 한다. 이 장에서는 Kakutani 정리의 조건과 고정점의 의미만 정리하고, 실제 $h$의 구성과 그 기하학은 순수교환경제의 존재정리에서 다룬다.
+:::
+
+::: {.callout-tip collapse="true" title="Kakutani 정리의 조건이 경제모형에서 나타나는 방식"}
+콤팩트성은 대개 가격의 정규화 또는 혼합전략 simplex에서 나온다. convexity는 소비자의 convex preference, 기업의 convex production set, 혼합전략의 확률혼합에서 나온다. UHC는 최대정리 또는 closed graph argument에서 얻는다. nonempty-valuedness는 콤팩트한 실행가능집합 위에서 연속 목적함수가 최대값을 달성한다는 사실에서 나온다. 따라서 고정점정리의 조건은 임의로 덧붙인 기술적 장식이 아니라, 개별 최적화와 집합의 기하학에서 누적된 결론이다.
+:::

@@ -1,0 +1,49 @@
+# 0.10 분리정리와 지지가격
+
+효율적 배분의 가격지지 논리는 미분가능성이나 MRS 조건에서 출발하지 않는다. 핵심은 주어진 효율적 배분보다 모든 소비자에게 적어도 나쁘지 않고, 그중 적어도 한 소비자에게 엄격히 더 나은 실행가능 배분이 존재하지 않는다는 사실이다. 이 부존재 명제는 두 집합의 교집합이 공집합이라는 말로 바꿀 수 있고, 볼록성 조건 아래에서는 hyperplane이 이 두 집합을 분리한다.
+
+::: {.callout-important title="THEOREM · 강한 분리정리"}
+$A,B\subseteq\mathbb R^n$가 공집합이 아닌 서로소인 볼록집합이고, $A$가 compact하며 $B$가 closed하다고 하자. 그러면 어떤 $p\ne0$와 $\alpha<\beta$가 존재하여
+
+
+$$
+p\cdot a\le \alpha<\beta\le p\cdot b
+              \qquad\text{for every }a\in A,\ b\in B.
+$$
+
+:::
+
+::: {.callout-important title="THEOREM · 지지초평면정리"}
+$C\subseteq\mathbb R^n$가 공집합이 아닌 closed convex set이고 $x^*\in\partial C$라 하자. 그러면 어떤 $p\ne0$가 존재하여
+
+
+$$
+p\cdot x\le p\cdot x^*
+              \qquad\text{for every }x\in C.
+$$
+
+
+즉 $p\cdot x=p\cdot x^*$는 $x^*$에서 $C$를 지지하는 초평면이다.
+:::
+
+경제학적으로 이러한 법선벡터 $p$는 가격벡터의 후보가 된다. 후생정리에서는 실행가능 배분의 집합과 Pareto 개선을 나타내는 적절한 상위윤곽집합을 분리하여, 효율적 배분을 지지하는 예산초평면을 구성한다.
+
+
+$$
+\text{Pareto efficiency}
+            \quad\Longrightarrow\quad
+            \text{no feasible strict improvement}
+            \quad\Longrightarrow\quad
+            \text{separation}
+            \quad\Longrightarrow\quad
+            \text{supporting price }p.
+$$
+
+
+::: {.callout-note appearance="simple" title="REMARK · 가격지지의 기하학은 후생정리에서 다시 구성한다"}
+지지초평면(supporting hyperplane)을 가격으로 해석하려면 어떤 실행가능집합과 어떤 upper contour construction을 분리하는지를 정확히 지정해야 한다. 이 구성은 파레토 효율성과 재분배가 정의된 뒤에야 경제적 의미를 갖는다. 또한 분리정리가 주는 $p\ne0$가 자동으로 $p\in\mathbb R_+^n$, 더 나아가 $p\gg0$임을 뜻하지는 않는다. 가격의 비음수성 또는 엄격한 양의성에는 자유처분, 단조성, 양의 총부존량과 같은 추가 경제적 가정이 필요하다. 따라서 여기서는 분리정리의 수학적 형식과 조건만 정리하고, 가격지지 도식은 제2후생정리 절에서 사용한다.
+:::
+
+::: {.callout-caution title="CAUTION · 가격지지와 균형 구현은 같은 말이 아니다"}
+어떤 초평면이 효율적 배분을 지지한다는 사실만으로 곧바로 그 배분이 경쟁균형이라는 결론이 나오지는 않는다. 각 소비자의 예산집합, 초기부존량 또는 재분배, 기업의 이윤분배, 가격벡터의 양의성, 시장청산을 별도로 확인해야 한다. 분리정리는 제2후생정리의 한 단계일 뿐, 전체 결론 자체가 아니다.
+:::

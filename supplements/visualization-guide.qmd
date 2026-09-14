@@ -1,0 +1,25 @@
+# Visualization & Computational Supplements
+
+## 선택 기준
+
+| 목적 | 권장 형식 |
+|---|---|
+| 정적 관계 설명 | PNG / SVG |
+| 짧은 변화 과정 | GIF |
+| 길거나 고화질 애니메이션 | MP4 |
+| 사용자가 parameter를 직접 조작 | Interactive |
+| R 기반 탐색 | htmlwidgets / OJS / 필요시 Shinylive |
+| MATLAB 기반 계산 | 산출 데이터 + OJS, interactive HTML, GIF/MP4 |
+
+## v1 CI 원칙
+
+초기 GitHub Actions는 Quarto 렌더만 수행합니다.
+
+R/MATLAB 계산 결과는 우선 로컬에서 생성한 뒤 asset으로 commit합니다.
+
+팀이 workflow에 익숙해진 뒤:
+- R package environment
+- MATLAB Actions
+- computational freeze/cache
+
+를 단계적으로 추가합니다.

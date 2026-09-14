@@ -1,0 +1,214 @@
+# 0.2 표기법, 기본 연산, 논리
+
+대학원 미시이론의 증명은 수식이 많아서만 어려운 것이 아니다. 양화사와 조건문의 순서가 엄격하기 때문에, 하나의 정리가 무엇을 가정하고 무엇을 결론으로 주장하는지를 분리해 읽는 습관이 필요하다.
+
+### 0.2.1 기본 표기
+
+
+$$
+\mathbb R_+=\{t\in\mathbb R:t\ge 0\},
+            \qquad
+            \mathbb R_{++}=\{t\in\mathbb R:t>0\},
+$$
+
+
+$$
+\mathbb R_+^n
+            =
+            \{x\in\mathbb R^n:x_\ell\ge 0\text{ for every }\ell=1,\dots,n\}.
+$$
+
+
+재화의 수는 유한한 정수 $n$으로 둔다. 재화벡터 $x\in\mathbb R_+^n$의 $\ell$번째 성분은 $x_\ell$로 표기한다. 소비자 집합은 $I=\{1,\dots,m\}$, 기업 집합은 $J=\{1,\dots,q\}$로 쓴다. 소비자 $i$의 소비묶음, 소비집합, 초기부존량, 효용함수는 각각 $x_i$, $X_i$, $e_i$, $u_i$로 표기한다.
+
+
+$$
+x_i\in X_i\subseteq\mathbb R_+^n,
+            \qquad
+            e_i\in\mathbb R_+^n,
+            \qquad
+            u_i:X_i\to\mathbb R.
+$$
+
+
+### 0.2.2 벡터 연산, 집계, 곱공간
+
+벡터의 선형결합, 내적, 노름은 예산제약, 이윤, 거리, 미분, 분리초평면에서 반복해서 사용된다. 아래에서는 벡터를 열벡터로 이해한다.
+
+
+$$
+\alpha x+\beta y
+  =
+  (\alpha x_1+\beta y_1,\dots,\alpha x_n+\beta y_n),
+  \qquad
+  x\cdot y=x^\top y=\sum_{\ell=1}^n x_\ell y_\ell,
+$$
+
+
+$$
+\lVert x\rVert
+  =
+  \left(\sum_{\ell=1}^n x_\ell^2\right)^{1/2},
+  \qquad
+  \mathbf 0=(0,\dots,0),
+  \qquad
+  \mathbf 1=(1,\dots,1).
+$$
+
+
+$\ell$번째 표준기저는 초기부존량 $e_i$와 구분하여 $\mathbf e^{\,\ell}$로 쓴다. 즉 $\mathbf e^{\,\ell}$의 $\ell$번째 성분은 1이고 나머지 성분은 0이다. 소비자별 소비묶음의 프로파일은
+
+
+$$
+x=(x_i)_{i\in I}\in\prod_{i\in I}X_i,
+  \qquad
+  \sum_{i\in I}x_i
+  =
+  \left(\sum_{i\in I}x_{i1},\dots,\sum_{i\in I}x_{in}\right)
+$$
+
+
+로 쓴다. 게임이론에서는 $s_{-i}=(s_j)_{j\ne i}$가 경기자 $i$를 제외한 모든 경기자의 전략 프로파일을 뜻한다.
+
+벡터의 순서는 성분별로 정의한다. $x\ge y$는 모든 재화 $\ell$에 대하여 $x_\ell\ge y_\ell$임을 뜻하고, $x\gg y$는 모든 재화 $\ell$에 대하여 $x_\ell>y_\ell$임을 뜻한다. $x\ge y$와 $x\ne y$만으로 $x\gg y$가 따라오지는 않는다.
+
+
+$$
+x\ge y
+            \quad\Longleftrightarrow\quad
+            x_\ell\ge y_\ell\quad\text{for every }\ell,
+$$
+
+
+$$
+x\gg y
+            \quad\Longleftrightarrow\quad
+            x_\ell>y_\ell\quad\text{for every }\ell.
+$$
+
+
+::: {.callout-note appearance="simple" title="REMARK · 벡터의 순서, 선호, 그리고 이 노트의 strict monotonicity"}
+$x\ge y$, $x>y$, $x\gg y$는 소비묶음의 물리적 성분을 비교하는 벡터 순서다. 반면
+$x\succeq_i y$, $x\succ_i y$, $x\sim_i y$는 소비자 $i$의 선호관계다.
+단조성은 두 종류의 객체를 연결하는 선호 가정이다. 이 노트에서는
+
+
+$$
+x>y
+      \quad\Longleftrightarrow\quad
+      x\ge y,\quad x\ne y,
+$$
+
+
+$$
+x>y
+      \quad\Longrightarrow\quad
+      x\succeq_i y,
+      \qquad
+      x\gg y
+      \quad\Longrightarrow\quad
+      x\succ_i y
+$$
+
+
+를 strict monotonicity로 둔다. 즉 어떤 재화도 줄지 않고 적어도 하나의 재화가 증가하면
+소비자는 약하게는 더 선호하며, 모든 재화가 엄격히 증가하면 엄격히 더 선호한다.
+따라서 $x\ge y$이면 $x=y$일 때는 reflexivity를, $x>y$일 때는 첫 번째 함의를 사용하여
+
+
+$$
+x\ge y
+      \quad\Longrightarrow\quad
+      x\succeq_i y
+$$
+
+
+를 얻는다. 이 결론에 continuity는 필요하지 않다. Chapter 4에서는 이 약한 개선과 strict convexity를
+결합하여 zero-price good을 배제하고 양의 균형가격을 도출한다.
+:::
+
+### 0.2.3 집합 연산과 최적화 표기
+
+문맥에서 주변공간 $X$가 정해져 있을 때, 집합 $A,B\subseteq X$에 대해 합집합, 교집합, 차집합, 여집합, 데카르트곱은 각각 $A\cup B$, $A\cap B$, $A\setminus B$, $A^c=X\setminus A$, $A\times B$로 쓴다. 함수 $f:X\to Y$와 $A\subseteq X$, $B\subseteq Y$에 대해 상과 원상은
+
+
+$$
+f(A)=\{f(x):x\in A\},
+  \qquad
+  f^{-1}(B)=\{x\in X:f(x)\in B\}
+$$
+
+
+로 정의한다. 여기서 $f^{-1}(B)$는 원상이며, $f$가 일대일 대응일 때의 역함수와는 구별해야 한다. $X$는 정의역(domain), $Y$는 공역(codomain), $f(X)\subseteq Y$는 상(image; range)이다.
+
+::: {.callout-note title="DEFINITION · $\sup$, $\inf$, $\max$, $\arg\max$"}
+$f:K\to\mathbb R$에 대해 $\sup_{x\in K}f(x)$와 $\inf_{x\in K}f(x)$는 각각 상한과 하한의 값이다. 반면 $\max$와 $\min$은 그 값이 실제로 달성될 때만 사용한다. 최적점들의 집합은
+
+
+$$
+\operatorname{arg\,max}_{x\in K}f(x)
+    =
+    \{x^*\in K:f(x^*)\ge f(x)\text{ for every }x\in K\},
+$$
+
+
+$$
+\operatorname{arg\,min}_{x\in K}f(x)
+    =
+    \{x^*\in K:f(x^*)\le f(x)\text{ for every }x\in K\}.
+$$
+
+
+$\max_{x\in K}f(x)$는 값이고 $\operatorname{arg\,max}_{x\in K}f(x)$는 점들의 집합이다. 최적점이 존재하지 않으면 후자는 공집합일 수 있다.
+:::
+
+### 0.2.4 양화사와 조건문
+
+$\forall$는 “모든”, $\exists$는 “적어도 하나의”, $\exists!$는 “유일하게 하나의”를 뜻한다. 다음 두 문장은 서로 다른 주장이다.
+
+
+$$
+\forall x\in X,\ \exists y\in Y\text{ such that }R(x,y),
+$$
+
+
+$$
+\exists y\in Y\text{ such that }\forall x\in X,\ R(x,y).
+$$
+
+
+첫 번째 문장에서는 $x$가 달라지면 $y$도 달라질 수 있다. 두 번째 문장에서는 하나의 동일한 $y$가 모든 $x$에 대해 성립해야 한다. 효용표현, 균형 존재, 비교정태에서는 이러한 양화사 순서가 결론의 강도를 좌우한다.
+
+::: {.callout-note title="DEFINITION · 필요조건과 충분조건"}
+명제 $P\Rightarrow Q$에서 $P$는 $Q$의 충분조건이고, $Q$는 $P$의 필요조건이다. $P\Longleftrightarrow Q$는 두 방향의 함의가 모두 성립함을 뜻한다. 증명에서 “if”와 “only if”를 구분하지 않으면 필요조건을 충분조건으로 오인하기 쉽다.
+:::
+
+$P\Rightarrow Q$를 보일 때에는 대우 $\neg Q\Rightarrow\neg P$를 증명해도 된다. 반면 역명제 $Q\Rightarrow P$는 대우가 아니라 별도의 주장이다. 보편명제 $\forall x\in X,\ P(x)$를 반박하려면 이를 만족하지 않는 단 하나의 $x\in X$를 제시하면 충분하다.
+
+::: {.callout-note appearance="simple" title="REMARK · 성분별 순서의 세 경우"}
+두 재화의 경우 $y=(1,1)$, $z=(1,2)$, $x=(2,2)$를 생각하자. 그러면
+
+
+$$
+z>y,\qquad z\not\gg y,
+      \qquad\text{while}\qquad
+      x\gg y.
+$$
+
+
+따라서 strict monotonicity는 $z\succeq_i y$를 주지만, $z\succ_i y$까지는 직접 보장하지 않는다.
+반면 $x\gg y$이면 $x\succ_i y$다. 이 구분은 단조성 가정을 읽을 때 결정적이다.
+이어서 strict convexity가 더해지면 $z\ne y$ 및 $z\succeq_i y$로부터 $y$와 $z$의
+비자명한 convex combination은 $y$보다 엄격히 선호된다.
+
+
+$$
+z\succeq_i y,\ z\ne y,\ \lambda\in(0,1)
+      \quad\Longrightarrow\quad
+      (1-\lambda)y+\lambda z\succ_i y.
+$$
+
+
+이 논리는 단순한 표기 구분이 아니라, 영가격 재화가 있는 예산집합에서 왜 최적해가 존재할 수 없는지를
+보이는 핵심 단계가 된다.
+:::

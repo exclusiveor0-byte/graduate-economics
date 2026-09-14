@@ -1,0 +1,206 @@
+# 표준 효용함수와 수요대응
+
+> 다음 예제는 단순한 계산 연습이 아니다. 각각은 내부해, corner solution, 비미분가능성, Hicksian demand, duality가 어떻게 작동하는지를 보여 준다.
+
+### 1. Cobb–Douglas
+
+$0\lt \alpha\lt 1$에 대해
+
+
+$$
+u(x_1,x_2)=x_1^\alpha x_2^{1-\alpha}.
+$$
+
+
+이 효용은 $\mathbb R_+^2$ 전체에서 이 노트의 strict monotonicity와 quasiconcavity를 만족한다.
+다만 이 노트가 채택한 강한 strict quasiconcavity는 $\mathbb R_+^2$ 전체에서는 성립하지 않는다. 실제로
+
+$$
+u(1,0)=u(2,0)=u\bigl(t(1,0)+(1-t)(2,0)\bigr)=0
+\qquad (t\in(0,1))
+$$
+
+이다. 반면 $\mathbb R_{++}^2$에서는 이 강한 strict quasiconcavity가 성립한다.
+$p\gg0$, $m\gt0$, $0\lt\alpha\lt1$이면 경계의 효용은 0인 반면 양의 두 재화를 소비하는 feasible bundle은 양의 효용을 주므로 Marshallian optimum은 $\mathbb R_{++}^2$의 내부해다. 따라서 수요는 다음과 같다.
+
+
+$$
+d_1(p,m)=\frac{\alpha m}{p_1},
+            \qquad
+            d_2(p,m)=\frac{(1-\alpha)m}{p_2}.
+$$
+
+
+::: {.callout-tip collapse="true" title="Cobb–Douglas 수요를 직접 유도하기"}
+$u(x_1,x_2)=x_1^\alpha x_2^{1-\alpha}$는 로그를 취해도 같은 선호를 표현하므로, 내부해에서
+
+$$
+\max_{x_1,x_2\gt 0}\ \alpha\log x_1+(1-\alpha)\log x_2
+\quad\text{s.t.}\quad p_1x_1+p_2x_2=m
+$$
+
+를 풀어도 된다. 라그랑지안의 일계조건은
+
+$$
+\frac{\alpha}{x_1}=\lambda p_1,
+\qquad
+\frac{1-\alpha}{x_2}=\lambda p_2.
+$$
+
+따라서 $p_1x_1=\alpha/\lambda$, $p_2x_2=(1-\alpha)/\lambda$이고, 예산소진으로 $1/\lambda=m$이다. 결과적으로 각 재화에 소득의 일정 비율을 지출한다.
+
+Marshallian demand를 $u$에 대입하면 간접효용이 나오고, $v(p,m)=\bar u$를 $m$에 대해 풀면 지출함수 $e(p,\bar u)$를 얻는다. 마지막으로
+
+$$
+h_i(p,\bar u)=d_i\bigl(p,e(p,\bar u)\bigr)
+$$
+
+를 대입하면 Hicksian demand가 나온다. 이 예제는 $d\to v\to e\to h$의 연결을 계산으로 확인할 수 있는 기본 사례다.
+:::
+
+간접효용, 지출함수, Hicksian demand는 각각
+
+
+$$
+v(p,m)
+            =
+            \alpha^\alpha(1-\alpha)^{1-\alpha}
+            \frac{m}{p_1^\alpha p_2^{1-\alpha}},
+$$
+
+
+$$
+e(p,\bar u)
+            =
+            \bar u
+            \left(\frac{p_1}{\alpha}\right)^\alpha
+            \left(\frac{p_2}{1-\alpha}\right)^{1-\alpha},
+$$
+
+
+$$
+h_1(p,\bar u)=\frac{\alpha e(p,\bar u)}{p_1},
+            \qquad
+            h_2(p,\bar u)=\frac{(1-\alpha)e(p,\bar u)}{p_2}.
+$$
+
+
+Shephard lemma는 위 지출함수를 가격에 대해 미분하여 Hicksian demand를 정확히 복원한다.
+
+::: {.callout-note appearance="simple" title="REMARK · 표준 예제에서 확인할 항목"}
+각 효용함수 예제에서는 공식을 암기하는 데 그치지 말고 다음 순서로 살펴보자.
+
+$$
+\text{선호의 성질}
+\longrightarrow
+\text{최적점의 위치(내부/경계)}
+\longrightarrow
+\text{수요가 함수인지 대응인지}
+\longrightarrow
+\text{indirect utility, expenditure, and Hicksian demand}.
+$$
+
+Cobb–Douglas는 매끄러운 내부해와 일정한 예산점유율을, perfect substitutes는 다가값 수요와 corner solution을, Leontief는 비미분가능하지만 유일한 수요를 보여 준다.
+:::
+
+### 2. CES preferences와 대체탄력성
+
+
+$$
+u(x_1,x_2)
+            =
+            \left[
+              \alpha x_1^\rho+(1-\alpha)x_2^\rho
+            \right]^{1/\rho},
+            \qquad
+            0\lt \alpha\lt 1,\quad \rho\lt 1,\quad \rho\ne0.
+$$
+
+
+이 식은 $\rho\lt0$을 포함하므로, 이 예제에서는 효용함수를 $\mathbb R_{++}^2$ 위에서 정의한다.
+$\rho\in(0,1)$이면 $\mathbb R_+^2$로 자연스럽게 확장할 수 있지만, $\rho\lt0$에서는 경계점에서 $x_i^\rho$가 실수값으로 정의되지 않는다.
+내부해에서 1차 조건은 소비비율을 상대가격의 함수로 준다.
+
+
+$$
+\frac{x_1}{x_2}
+            =
+            \left[
+              \frac{\alpha}{1-\alpha}\frac{p_2}{p_1}
+            \right]^{\sigma},
+            \qquad
+            \sigma=\frac{1}{1-\rho}.
+$$
+
+
+$\sigma$는 Hicksian 소비비율의 상대가격에 대한 대체탄력성이다. $\rho\to0$이면 CES 선호는 Cobb–Douglas 선호로 수렴하고,
+$\sigma\to1$이 된다. 이 예제는 Slutsky 분해에서 대체효과가 단지 부호만의 문제가 아니라, 선호의 곡률에 따라 그 크기까지 달라진다는 점을 보여 준다.
+
+### 3. Perfect substitutes
+
+
+$$
+u(x_1,x_2)=a x_1+b x_2,
+            \qquad a,b\gt 0.
+$$
+
+
+소비자는 화폐 한 단위당 한계효용 $a/p_1$, $b/p_2$를 비교한다. $a/p_1\gt b/p_2$이면 모든 소득을 재화 1에 쓰고,
+$a/p_1\lt b/p_2$이면 모든 소득을 재화 2에 쓴다. 동률이면 예산선 전체가 최적이다.
+
+
+$$
+\frac{a}{p_1}=\frac{b}{p_2}
+            \quad\Longrightarrow\quad
+            D(p,m)=\{x\in\mathbb R_+^2:p_1x_1+p_2x_2=m\}.
+$$
+
+
+이 예제는 continuous utility가 존재하더라도 Marshallian demand가 자동으로 함수가 되는 것은 아님을 보여 준다. 선호는 convex이지만 strictly convex하지 않다.
+
+### 4. Leontief preferences
+
+
+$$
+u(x_1,x_2)=\min\left\{\frac{x_1}{a},\frac{x_2}{b}\right\},
+            \qquad a,b\gt 0.
+$$
+
+
+효용함수는 kink를 가지므로 일반적으로 미분가능하지 않다. 그러나 최적선택은 $x_1/a=x_2/b$의 고정비율을 만족해야 하며,
+
+
+$$
+d_1(p,m)=\frac{am}{ap_1+bp_2},
+            \qquad
+            d_2(p,m)=\frac{bm}{ap_1+bp_2}.
+$$
+
+
+$$
+e(p,\bar u)=(ap_1+bp_2)\bar u,
+            \qquad
+            h(p,\bar u)=(a\bar u,b\bar u).
+$$
+
+
+이 예제는 MRS 조건을 쓸 수 없는 상황에서도 선호·예산·최적화의 일반 논리가 작동함을 보여 준다. 또한 strictly convex preference는 수요 유일성의 충분조건일 뿐 필요조건은 아니다.
+
+### 5. Marshallian demand와 Hicksian demand의 비교
+
+아래 표는 표준 예제에서 어떤 객체가 소득을 인수로 쓰고, 어떤 객체가 목표효용을 인수로 쓰는지를 한 번 더 정리한다.
+특히 perfect substitutes에서는 두 수요 모두 correspondence가 될 수 있지만, 다가값이 생기는 조건과 해집합의 모양은 서로 다르다.
+
+| 선호 | Marshallian demand | Hicksian demand | 읽을 점 |
+| --- | --- | --- | --- |
+| Cobb–Douglas | $d_i(p,m)$는 소득 $m$에 비례하고, 각 재화의 지출점유율이 일정하다. | $h_i(p,\bar u)$는 목표효용 $\bar u$에 비례하며, $e(p,\bar u)$를 통해 $d_i$와 연결된다. | 두 수요의 차이는 소득 $m$과 목표효용 $\bar u$ 중 무엇을 고정하는가에 있다. |
+| Leontief | 고정비율 $x_1:x_2=a:b$를 유지하며, 유일하다. | $h(p,\bar u)=(a\bar u,b\bar u)$로 고정비율을 유지하며, 가격은 최소지출에만 영향을 준다. | 비미분가능해도 $H$, $e$, duality는 잘 정의될 수 있다. |
+| Perfect substitutes | 한 단위 소득당 효용이 더 큰 재화에 전부 지출한다. 비율이 같으면 예산선 전체가 최적이다. | 
+$$
+e(p,\bar u)=\bar u\min\left\{\frac{p_1}{a},\frac{p_2}{b}\right\}.
+$$
+ $\frac{p_1}{a} \lt \frac{p_2}{b}$이면 $(\bar u/a,0)$, 반대이면 $(0,\bar u/b)$, 같으면 
+$$
+H(p,\bar u)=\{x\in\mathbb R_+^2:a x_1+b x_2=\bar u\}.
+$$
+ | Marshallian 쪽의 다가값은 예산선 위에서, Hicksian 쪽의 다가값은 목표효용선 위에서 나타난다. |

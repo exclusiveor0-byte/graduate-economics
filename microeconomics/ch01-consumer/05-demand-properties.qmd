@@ -1,0 +1,761 @@
+# 1.5 소비자수요의 성질
+
+이 절에서는 효용극대화에서 나온 수요가 어떤 관측 가능한 제약을 만족하는지 정리한다. 핵심은 가격변화에 따른 총수요 변화가 상대가격 변화에 따른 대체효과와 구매력 변화에 따른 소득효과로 분해된다는 점이다.
+
+### 1.5.1 상대가격과 실질소득
+
+수요와 간접효용의 0차 동차성은 소비자가 명목단위 자체가 아니라 상대가격과 실질소득에 반응한다는 뜻이다.
+어떤 $\lambda\gt 0$에 대해서도 모든 가격과 소득을 $\lambda$배 하면 예산집합은 바뀌지 않는다.
+
+
+$$
+B(\lambda p,\lambda m)=B(p,m),
+            \qquad
+            D(\lambda p,\lambda m)=D(p,m),
+            \qquad
+            v(\lambda p,\lambda m)=v(p,m).
+$$
+
+
+예를 들어 $p_n$을 numeraire price로 잡으면, 수요는 다음처럼 상대가격과 실질소득으로 표현할 수 있다.
+
+
+$$
+d(p,m)
+            =
+            d\left(
+              \frac{p_1}{p_n},\ldots,\frac{p_{n-1}}{p_n},1,\frac{m}{p_n}
+            \right).
+$$
+
+
+::: {.callout-note appearance="simple" title="REMARK · money illusion의 부재"}
+모든 가격과 소득을 같은 비율로 바꾸는 것은 소비자의 기회집합을 바꾸지 않는다. 소비자이론에서 이 결과는 흔히 money illusion의 부재라고 불린다.
+다만 이는 가격과 소득이 같은 비율로 움직이는, 즉 명목단위만 바꾸는 비교정태다.
+:::
+
+### 1.5.2 소득효과와 대체효과
+
+초기 상태를 $(p^0,m)$, 그때의 간접효용을 $u^0=v(p^0,m)$라 하자. 가격이 $p^0$에서 $p^1$으로 바뀌면 Marshallian demand의 총변화는
+
+
+$$
+d(p^1,m)-d(p^0,m)
+$$
+
+
+이다. 새 가격 $p^1$ 아래에서 초기 효용 $u^0$를 유지하도록 소득을 조정하면, 필요한 보상소득은 $e(p^1,u^0)$이고 그때의 선택은 Hicksian demand $h(p^1,u^0)$다.
+따라서 Hicksian decomposition은
+
+
+$$
+d(p^1,m)-d(p^0,m)
+            =
+            \underbrace{\bigl[h(p^1,u^0)-d(p^0,m)\bigr]}_{\text{substitution effect}}
+            +
+            \underbrace{\bigl[d(p^1,m)-h(p^1,u^0)\bigr]}_{\text{income effect}}.
+$$
+
+
+첫 항은 효용수준을 고정한 상태에서 상대가격 변화에 반응하는 부분이다. 둘째 항은 새 가격에서 초기 효용을 유지하는 데 필요한 소득과 실제 소득 $m$의 차이, 즉 실질구매력 변화에서 나오는 부분이다.
+
+::: {.callout-important title="PROPOSITION · 유한 변화의 Hicksian decomposition"}
+초기 상태를 $(p^0,m)$, $u^0=v(p^0,m)$로 두고 새 가격을 $p^1$이라 하자. 보상소득을
+
+$$
+m^c=e(p^1,u^0)
+$$
+
+로 정의하면, duality 관계에 의해
+
+$$
+h(p^1,u^0)=d(p^1,m^c).
+$$
+
+따라서 총수요 변화는 항등적으로
+
+$$
+d(p^1,m)-d(p^0,m)
+=
+\underbrace{\bigl[d(p^1,m^c)-d(p^0,m)\bigr]}_{\text{Hicksian substitution effect}}
++
+\underbrace{\bigl[d(p^1,m)-d(p^1,m^c)\bigr]}_{\text{income effect}}
+$$
+
+로 분해된다. 첫 항에서는 효용수준 $u^0$가 유지되고, 둘째 항에서는 가격을 $p^1$에 고정한 채 소득이 $m^c$에서 $m$으로 변한다.
+
+특히 $p^1\le p^0$이면 초기 선택 $d(p^0,m)$ 자체가 새 가격에서 $u^0$를 달성하는 소비묶음이므로
+
+$$
+e(p^1,u^0)\le m.
+$$
+
+어떤 재화 $j$에 대해 $p_j^1\lt p_j^0$이고 초기 선택의 그 재화 소비가 양수이면,
+
+$$
+p^1\cdot d(p^0,m)\lt p^0\cdot d(p^0,m)=m,
+$$
+
+따라서 $e(p^1,u^0)\lt m$이다. 이 엄격부등식은 가격하락만으로는 자동으로 성립하지 않는다. 가격이 하락한 재화가 초기 묶음에서 실제로 소비되었다는 조건이 추가로 필요하다.
+:::
+
+::: {.callout-important title="PROPOSITION · 유한 변화의 Slutsky decomposition"}
+초기 선택을
+
+$$
+x^0=d(p^0,m)
+$$
+
+라 하자. 새 가격 $p^1$에서 초기 묶음 $x^0$가 정확히 구매 가능하도록 만드는 소득을
+
+$$
+m^S
+=
+p^1\cdot x^0
+=
+m+(p^1-p^0)\cdot x^0
+$$
+
+로 정의한다. 그러면
+
+$$
+d(p^1,m)-d(p^0,m)
+=
+\underbrace{\bigl[d(p^1,m^S)-d(p^0,m)\bigr]}_{\text{Slutsky substitution effect}}
++
+\underbrace{\bigl[d(p^1,m)-d(p^1,m^S)\bigr]}_{\text{income effect}}.
+$$
+
+
+이 분해에서 $p^1\cdot x^0=m^S$이므로 초기 묶음은 새 가격에서도 정확히 구매할 수 있다. 그러나 일반적으로
+
+$$
+v(p^1,m^S)\ne v(p^0,m).
+$$
+
+따라서 이는 초기 효용을 유지하는 Hicksian compensation과는 다른 보상 규칙이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 유한 변화의 Slutsky decomposition"}
+우변의 두 대괄호를 더하면 중간항 $d(p^1,m^S)$가 소거되어
+
+$$
+d(p^1,m)-d(p^0,m)
+$$
+
+가 된다. 또한 예산소진으로 $p^0\cdot x^0=m$이므로
+
+$$
+p^1\cdot x^0
+=
+p^0\cdot x^0+(p^1-p^0)\cdot x^0
+=
+m+(p^1-p^0)\cdot x^0
+=
+m^S.
+$$
+
+따라서 첫 항은 초기 묶음을 구매할 수 있게 유지한 상태에서의 가격반응이고, 둘째 항은 새 가격을 고정한 상태에서의 소득반응이다. □
+:::
+
+::: {.callout-note appearance="simple" title="CAUTION · Hicksian decomposition과 Slutsky equation의 구분"}
+Hicksian decomposition은 초기 효용 $u^0$를 유지한다. 바로 앞의 유한 변화 Slutsky decomposition은 초기 묶음 $x^0$를 새 가격에서도 구매할 수 있게 유지한다.
+아래에서 도출하는 Slutsky equation은 가격변화가 무한소일 때의 미분 항등식이다. 세 결과는 모두 가격효과를 분해하지만, 보상 규칙과 적용 범위가 서로 다르다.
+:::
+
+::: {.callout-important title="THEOREM · Law of compensated demand"}
+모든 $p^0,p^1\gg0$, $\bar u\in\mathcal U$, 그리고
+$h^r\in H(p^r,\bar u)$ $(r=0,1)$에 대해
+
+
+$$
+(p^1-p^0)\cdot(h^1-h^0)\le0.
+$$
+
+
+이는 미분가능성이나 Hicksian demand의 유일성을 가정하지 않고도 성립하는 compensated law of demand다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · Law of compensated demand"}
+$h^0$는 가격 $p^0$에서, $h^1$는 가격 $p^1$에서 각각 같은 목표효용 $\bar u$를 최소비용으로 달성한다. 따라서
+
+$$
+p^0\cdot h^0\le p^0\cdot h^1,
+\qquad
+p^1\cdot h^1\le p^1\cdot h^0.
+$$
+
+두 부등식을 더하고 항을 정리하면
+
+$$
+p^1\cdot(h^1-h^0)
+\le
+p^0\cdot(h^1-h^0),
+$$
+
+곧
+
+$$
+(p^1-p^0)\cdot(h^1-h^0)\le0
+$$
+
+이다. □
+:::
+
+이제 $(p,m)$의 한 근방에서 Marshallian demand $d$가 $C^1$이고, 목표효용 $\bar u$의 근방에서 Hicksian demand가 단일값이며,
+지출함수 $e$가 가격에 대해 미분가능하다고 하자. 이 정칙성 아래에서는 duality 관계로부터
+
+
+$$
+h_i(p,\bar u)=d_i\bigl(p,e(p,\bar u)\bigr)
+$$
+
+
+이다. 이를 $p_j$에 대해 미분하고 Shephard lemma $\partial e/\partial p_j=h_j$를 쓰면
+
+
+$$
+\frac{\partial h_i(p,\bar u)}{\partial p_j}
+            =
+            \frac{\partial d_i(p,e(p,\bar u))}{\partial p_j}
+            +
+            \frac{\partial d_i(p,e(p,\bar u))}{\partial m}
+            h_j(p,\bar u).
+$$
+
+
+::: {.callout-tip collapse="true" title="DERIVATION · duality에서 Slutsky equation까지"}
+출발점은 두 수요의 항등식
+
+$$
+h_i(p,\bar u)=d_i\bigl(p,e(p,\bar u)\bigr)
+$$
+
+이다. 여기서 좌변은 가격이 $h_i$에 직접 미치는 효과를, 우변은 가격이 $d_i$에 미치는 직접효과와 지출함수 $e$를 통해 소득 인수에 미치는 간접효과를 함께 담고 있다.
+사슬법칙을 적용하면
+
+$$
+\frac{\partial h_i(p,\bar u)}{\partial p_j}
+=\underbrace{\frac{\partial d_i(p,e(p,\bar u))}{\partial p_j}}_{\text{가격의 직접효과}}
++\underbrace{\frac{\partial d_i(p,e(p,\bar u))}{\partial m}}_{\text{소득 민감도}}
+\underbrace{\frac{\partial e(p,\bar u)}{\partial p_j}}_{\text{목표효용 유지 비용의 변화}}.
+$$
+
+Shephard lemma로 마지막 인수를 $h_j(p,\bar u)$로 바꾸고, $\bar u=v(p,m)$에서 $h=d$를 대입하면 Marshallian 총 가격효과를 보상가격효과와 소득효과로 분해하는 식을 얻는다.
+:::
+
+여기서 $\bar u=u^*=v(p,m)$를 대입하면 $h(p,u^*)=d(p,m)$이므로 Slutsky equation은 각 $i,j$에 대해
+
+
+$$
+\frac{\partial d_i(p,m)}{\partial p_j}
+            =
+            \frac{\partial h_i(p,u^*)}{\partial p_j}
+            -d_j(p,m)\frac{\partial d_i(p,m)}{\partial m}.
+$$
+
+
+좌변은 Marshallian 총 가격효과, 첫 항은 Hicksian substitution effect, 둘째 항은 income effect다.
+행렬형으로 Slutsky matrix를
+
+
+$$
+S(p,m)
+            =
+            D_p d(p,m)+D_m d(p,m)d(p,m)^\top
+            =D_p h\bigl(p,v(p,m)\bigr)
+$$
+
+
+로 둔다. 대칭성과 음의 준정부호성은 단지 $D_ph$의 존재만으로 나오는 것이 아니라, $D_ph$가 지출함수의 Hessian이라는 사실에서 나온다.
+
+::: {.callout-important title="THEOREM 1.11 · Slutsky matrix의 성질"}
+$(p,m)$의 근방에서 $d\in C^1$이고, $\bar u=v(p,m)$의 근방에서 Hicksian demand가 단일값이며
+$e(\cdot,\bar u)\in C^2(\mathbb R_{++}^n)$라고 하자. 그러면
+
+
+$$
+S(p,m)=S(p,m)^\top,
+              \qquad
+              S(p,m)\preceq0,
+              \qquad
+              S(p,m)p=0.
+$$
+
+
+대칭성까지 결합하면 $p^\top S(p,m)=0$도 성립한다. 실제로 Shephard lemma에 의해 $h(p,\bar u)=\nabla_p e(p,\bar u)$이고,
+$D_ph(p,\bar u)=\nabla_{pp}^2e(p,\bar u)$다. $e(\cdot,\bar u)$의 concavity는 Hessian의 음의 준정부호성을 보장하고,
+$C^2$ 정칙성이 혼합편도함수의 대칭성을 보장한다. 마지막 제약은 Hicksian demand의 0차 동차성에서 나온다. 특히 자기가격에 대한 compensated effect는 nonpositive다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · Slutsky matrix의 symmetry와 negative semidefiniteness"}
+$\bar u=v(p,m)$로 두자. duality 관계와 Shephard lemma에 의해
+
+$$
+S(p,m)=D_p h(p,\bar u)=\nabla^2_{pp}e(p,\bar u).
+$$
+
+$e(\cdot,\bar u)\in C^2$이므로 Schwarz 정리에 따라 Hessian은 대칭이다. 또한 앞에서 보인 대로 $e(\cdot,\bar u)$는 concave하다. $C^2$ concave 함수의 Hessian은 모든 점에서 negative semidefinite이므로 임의의 $z\in\mathbb R^n$에 대해
+
+$$
+z^\top S(p,m)z
+=z^\top\nabla^2_{pp}e(p,\bar u)z
+\le0.
+$$
+
+따라서 $S(p,m)=S(p,m)^\top$이며 $S(p,m)\preceq0$다.
+
+마지막으로 Hicksian demand의 0차 동차성
+
+$$
+h(\lambda p,\bar u)=h(p,\bar u)
+\qquad(\lambda\gt0)
+$$
+
+를 $\lambda$에 대해 미분하고 $\lambda=1$을 대입하면
+
+$$
+D_ph(p,\bar u)\,p=0.
+$$
+
+$S(p,m)=D_ph(p,\bar u)$이므로 $S(p,m)p=0$이다. 대칭성으로 $p^\top S(p,m)=0$도 따른다. □
+:::
+
+이 결과가 Marshallian own-price effect가 항상 음수라는 뜻은 아니다. Giffen good이 가능한 이유는 income effect가 substitution effect를 압도할 수 있기 때문이다.
+음의 준정부호성은 효용수준을 고정한 Hicksian response, 즉 순수대체효과에 대한 제약이다.
+
+::: {.callout-note title="DEFINITION · normal good, inferior good, Giffen good"}
+미분가능한 Marshallian demand에서 재화 $i$에 대해
+
+$$
+\frac{\partial d_i(p,m)}{\partial m}\gt0
+\quad\Longrightarrow\quad
+\text{normal good},
+\qquad
+\frac{\partial d_i(p,m)}{\partial m}\lt0
+\quad\Longrightarrow\quad
+\text{inferior good}
+$$
+
+이라고 한다. 또한 $d_i(p,m)\gt0$인 점에서
+
+$$
+\frac{\partial d_i(p,m)}{\partial p_i}\gt0
+$$
+
+이면 재화 $i$를 Giffen good이라고 한다.
+:::
+
+::: {.callout-important title="PROPOSITION · Giffen good은 inferior good이다"}
+$d_i(p,m)\gt0$이고 Slutsky equation이 성립한다고 하자. 재화 $i$가 Giffen good이면 반드시 inferior good이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+자기가격에 대한 compensated effect는
+
+$$
+\frac{\partial h_i(p,u^*)}{\partial p_i}\le0
+$$
+
+이다. Slutsky equation은
+
+$$
+\frac{\partial d_i(p,m)}{\partial p_i}
+=
+\frac{\partial h_i(p,u^*)}{\partial p_i}
+-
+d_i(p,m)\frac{\partial d_i(p,m)}{\partial m}
+$$
+
+이다. 만약 $\partial d_i/\partial m\ge0$이면 우변은 $0$ 이하이므로 Giffen effect는 불가능하다.
+따라서 $\partial d_i/\partial p_i\gt0$이면
+
+$$
+\frac{\partial d_i(p,m)}{\partial m}\lt0
+$$
+
+이어야 한다. 즉 Giffen good은 inferior good이다. 역은 일반적으로 성립하지 않는다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · gross/net substitutes와 complements"}
+$i\ne j$에 대해
+
+$$
+\frac{\partial d_i(p,m)}{\partial p_j}\gt0
+\quad\text{이면 gross substitutes},
+\qquad
+\frac{\partial h_i(p,\bar u)}{\partial p_j}\gt0
+\quad\text{이면 net substitutes}
+$$
+
+라고 한다. 음수이면 각각 gross complements와 net complements다. Marshallian 교차가격효과에는 소득효과가 섞이므로,
+선호가 만들어 내는 순수한 대체관계를 볼 때에는 Hicksian, 즉 net 개념을 사용한다.
+:::
+
+### 1.5.3 CV와 EV
+
+가격변화가 소비자에게 미치는 영향을 효용수준의 차이만으로 직접 측정할 수는 없다. 효용은 ordinal이므로
+$u^1-u^0$의 크기 자체에는 화폐적 의미나 복지 비교의 의미가 없다. 반면 지출함수는 같은 효용수준을 서로 다른 가격체계에서 달성하는 데 필요한 최소지출을 화폐단위로 비교할 수 있게 해 준다.
+이하에서는 Compensating Variation을 CV, Equivalent Variation을 EV로 표기한다. 둘 다 가격변화의 화폐적 후생효과를 측정하는 표준 지표다.
+
+::: {.callout-note title="SETUP · 가격변화와 두 효용수준"}
+초기 상태를 $(p^0,m)$, 최종 상태를 $(p^1,m)$로 둔다. 소득은 편의상 동일한 $m$으로 고정하고,
+각각의 간접효용을
+
+
+$$
+u^0=v(p^0,m),
+              \qquad
+              u^1=v(p^1,m)
+$$
+
+
+로 둔다. 아래의 정의는 동일한 소비자에게 발생한 가격변화 $p^0\to p^1$를 평가한다. 소득도 함께 변화하는 경우는
+$m^0,m^1$로 확장할 수 있지만, 핵심 논리는 가격변화만으로도 드러난다.
+:::
+
+- **COMPENSATING VARIATION (CV)** — 최종 가격 $p^1$에서 초기 효용 $u^0$를 회복하려면 필요한 소득조정이다. 
+$$
+\operatorname{CV}_{0\to1}
+                =e(p^1,u^0)-e(p^1,u^1)
+                =e(p^1,u^0)-m.
+$$
+
+- **EQUIVALENT VARIATION (EV)** — 초기 가격 $p^0$에서 최종 효용 $u^1$과 같아지도록 조정할 수 있는 소득의 크기다. 
+$$
+\operatorname{EV}_{0\to1}
+                =e(p^0,u^0)-e(p^0,u^1)
+                =m-e(p^0,u^1).
+$$
+
+
+위에서는 **부호까지 포함하는 signed convention**을 사용한다. $\operatorname{CV}_{0\to1}\gt 0$이면 가격변화 뒤 소비자에게
+그만큼의 돈을 *지급해야* 초기 효용을 회복할 수 있다는 뜻이다. $\operatorname{EV}_{0\to1}\gt 0$이면 가격변화 전 소비자에게서 그만큼의 돈을 *차감해도* 최종 효용수준 $u^1$은 유지된다는 뜻이다.
+
+::: {.callout-important title="PROPOSITION · 두 측도의 정확한 transfer 해석"}
+continuous하고 strictly monotonic한 선호 아래에서는 다음 등식이 성립한다.
+
+
+$$
+v\bigl(p^1,m+\operatorname{CV}_{0\to1}\bigr)=u^0,
+              \qquad
+              v\bigl(p^0,m-\operatorname{EV}_{0\to1}\bigr)=u^1.
+$$
+
+
+따라서 CV는 *사후 가격체계* $p^1$에서 초기 효용을 회복시키는 데 필요한 보상이고, EV는 *사전 가격체계* $p^0$에서 최종 효용과 같아지도록 하는 소득차감이다.
+둘은 같은 가격변화를 평가하지만, 화폐효과를 계산하는 기준가격이 다르다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$e(p^1,u^1)=e(p^1,v(p^1,m))=m$이므로
+
+$$
+m+\operatorname{CV}_{0\to1}
+=m+e(p^1,u^0)-e(p^1,u^1)
+=e(p^1,u^0).
+$$
+
+Theorem 1.9의 두 번째 duality 등식 $v(p,e(p,\bar u))=\bar u$을 쓰면 첫 등식이 나온다. 마찬가지로
+
+$$
+m-\operatorname{EV}_{0\to1}
+=m-e(p^0,u^0)+e(p^0,u^1)
+=e(p^0,u^1)
+$$
+
+이므로 두 번째 등식도 얻는다. □
+:::
+
+| 측도 | 평가기준 가격 | 질문 | 유해한 가격변화에서의 양의 값의 뜻 |
+| --- | --- | --- | --- |
+| $\operatorname{CV}_{0\to1}$ | 사후 가격 $p^1$ | “변화가 일어난 뒤, 얼마를 더 주어야 $u^0$로 돌아가는가?” | 사후 보상으로 지급해야 할 금액 |
+| $\operatorname{EV}_{0\to1}$ | 사전 가격 $p^0$ | “변화가 일어나기 전, 얼마를 빼면 $u^1$로 내려가는가?” | 변화를 피하기 위해 사전에 지불할 수 있는 최대금액 |
+
+::: {.callout-important title="PROPOSITION · 가격상승·가격하락에서의 부호"}
+지출함수의 가격단조성과 $e(p^0,u^0)=e(p^1,u^1)=m$을 사용하면,
+
+
+$$
+p^1\ge p^0
+              \Longrightarrow
+              u^1\le u^0,
+              \qquad
+              \operatorname{CV}_{0\to1}\ge0,
+              \quad
+              \operatorname{EV}_{0\to1}\ge0,
+$$
+
+
+$$
+p^1\le p^0
+              \Longrightarrow
+              u^1\ge u^0,
+              \qquad
+              \operatorname{CV}_{0\to1}\le0,
+              \quad
+              \operatorname{EV}_{0\to1}\le0.
+$$
+
+
+예컨대 가격상승에서는 CV가 사후에 지급해야 할 보상이고, EV는 그 가격상승을 피하기 위해 사전에 지불할 수 있는 최대금액이다.
+가격하락에서는 두 값이 음수가 되며, $-\operatorname{CV}$는 사후에 회수할 수 있는 금액, $-\operatorname{EV}$는 가격하락과 동등한 사전 보조금의 크기로 읽을 수 있다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 가격변화에 따른 CV와 EV의 부호"}
+$p^1\ge p^0$라고 하자. 그러면 $B(p^1,m)\subseteq B(p^0,m)$이므로
+
+$$
+u^1=v(p^1,m)\le v(p^0,m)=u^0.
+$$
+
+지출함수는 목표효용에 대해 nondecreasing이므로
+
+$$
+\operatorname{CV}_{0\to1}
+=e(p^1,u^0)-e(p^1,u^1)\ge0,
+\qquad
+\operatorname{EV}_{0\to1}
+=e(p^0,u^0)-e(p^0,u^1)\ge0.
+$$
+
+$p^1\le p^0$인 경우에는 예산집합 포함관계가 반대가 되어 $u^1\ge u^0$이고, 같은 논리로 두 값은 모두 $0$ 이하가 된다. □
+:::
+
+::: {.callout-important title="THEOREM · Shephard 적분표현"}
+가격경로 $p(t)=p^0+t(p^1-p^0)$, $t\in[0,1]$, 가 $\mathbb R_{++}^n$ 안에 있고,
+$e(\cdot,u^0)$, $e(\cdot,u^1)$가 이 경로의 근방에서 미분가능하다고 하자. 그러면
+
+
+$$
+\operatorname{CV}_{0\to1}
+              =\int_0^1 h\bigl(p(t),u^0\bigr)\cdot\bigl(p^1-p^0\bigr)\,dt,
+$$
+
+
+$$
+\operatorname{EV}_{0\to1}
+              =\int_0^1 h\bigl(p(t),u^1\bigr)\cdot\bigl(p^1-p^0\bigr)\,dt.
+$$
+
+
+즉 CV와 EV는 같은 가격변화를 적분하지만, 전자는 *초기 효용수준* $u^0$에서의 Hicksian demand를,
+후자는 *최종 효용수준* $u^1$에서의 Hicksian demand를 쓴다는 점에서 다르다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+Shephard lemma와 사슬법칙으로
+
+$$
+\frac{d}{dt}e\bigl(p(t),u^0\bigr)
+=h\bigl(p(t),u^0\bigr)\cdot\bigl(p^1-p^0\bigr).
+$$
+
+이를 $[0,1]$에서 적분하면
+
+$$
+e(p^1,u^0)-e(p^0,u^0)
+=\int_0^1 h\bigl(p(t),u^0\bigr)\cdot(p^1-p^0)\,dt.
+$$
+
+그런데 $e(p^0,u^0)=m$이므로 좌변은 CV다. EV도 $u^1$를 고정하여 동일하게 얻는다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · CV와 EV는 일반적으로 같지 않다"}
+두 값의 차이는 소득효과에서 나온다. 예를 들어 $p^1\ge p^0$인 가격상승을 생각하자. 가격이 변하는 모든 성분 $j$에 대해
+경로 전체에서 $u\mapsto h_j(p,u)$가 nondecreasing이라고 가정하자. 이는 목표효용이 높을수록 해당 재화의 Hicksian demand도 weakly 증가한다는 뜻이다.
+이때 $u^0\ge u^1$이므로 Shephard 적분표현에서
+
+$$
+\operatorname{CV}_{0\to1}\ge\operatorname{EV}_{0\to1}\ge0.
+$$
+
+그러나 이러한 순서가 일반적으로 자동으로 성립하는 것은 아니다. 소득효과에 대한 이 조건이 없으면 CV와 EV 중 어느 것이 더 큰지는 정해지지 않는다.
+
+반대로 quasi-linear utility
+
+$$
+u(x)=\tilde u(x_1,\ldots,x_{n-1})+x_n,
+\qquad p_n\equiv1,
+$$
+
+에서 가격변화가 $p_1,\ldots,p_{n-1}$에만 일어난다고 하자. 필요한 내부해 조건 아래 이 재화들의 Hicksian demand는 목표효용에 의존하지 않는다.
+$h_n$은 효용수준에 따라 달라질 수 있지만 $dp_n=0$이므로 적분에는 영향을 주지 않는다. 따라서
+
+$$
+\operatorname{CV}_{0\to1}
+=\operatorname{EV}_{0\to1}
+=\int_0^1 h\bigl(p(t)\bigr)\cdot(p^1-p^0)\,dt.
+$$
+
+관련 재화의 Marshallian demand가 소득에 의존하지 않으면, 적절한 정칙성 아래 Marshallian consumer surplus는 CV와 EV의 정확한 후생측도가 된다. quasi-linear utility는 이를 보장하는 대표적 충분조건이다. 일반적인 선호에서는 Marshallian demand 아래의 면적을
+CV나 EV와 동일시해서는 안 된다.
+:::
+
+::: {.callout-important title="EXAMPLE · Cobb–Douglas에서의 CV와 EV"}
+두 재화 Cobb–Douglas utility $u(x)=x_1^\alpha x_2^{1-\alpha}$, $0\lt \alpha\lt 1$, 에 대해
+
+$$
+P(p)=p_1^\alpha p_2^{1-\alpha}
+$$
+
+라고 두자. 앞 절의 지출함수로부터 $e(p,u)$는 $P(p)$에 비례한다. 따라서 초기 소득 $m$을 고정한 가격변화 $p^0\to p^1$에서는
+
+$$
+\operatorname{CV}_{0\to1}
+=m\left[\frac{P(p^1)}{P(p^0)}-1\right],
+\qquad
+\operatorname{EV}_{0\to1}
+=m\left[1-\frac{P(p^0)}{P(p^1)}\right].
+$$
+
+가격상승으로 $P(p^1)\gt P(p^0)$이면 두 값은 모두 양수이고 $\operatorname{CV}_{0\to1}\ge\operatorname{EV}_{0\to1}$이다.
+이 예제에서는 소득효과가 사라지지 않으므로, CV와 EV가 일반적으로 다르다는 점이 명시적으로 드러난다.
+:::
+
+::: {.callout-note appearance="simple" title="LOCAL APPROXIMATION · 작은 가격변화"}
+$e$가 충분히 매끄럽고 $\Delta p=p^1-p^0$가 작으면, CV와 EV는 같은 1차 근사를 갖는다.
+
+
+$$
+\operatorname{CV}_{0\to1}
+              =h(p^0,u^0)\cdot\Delta p+o(\lVert\Delta p\rVert),
+              \qquad
+              \operatorname{EV}_{0\to1}
+              =h(p^0,u^0)\cdot\Delta p+o(\lVert\Delta p\rVert).
+$$
+
+
+따라서 가격변화가 작으면 미분형 Slutsky 분석만으로는 CV·EV의 차이를 1차항에서 포착할 수 없다. 두 측도의 차이는 유한한 가격변화와 소득효과가 함께 드러날 때 중요해진다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · Marshallian consumer surplus"}
+다른 가격과 소득을 고정한 채 재화 $1$의 가격만 $p_1^0$에서 $p_1^1$로 바뀐다고 하자.
+후생증가에 양(+)의 부호를 부여하는 convention에서 Marshallian consumer surplus의 변화는
+
+$$
+\Delta CS_{0\to1}
+=
+-\int_{p_1^0}^{p_1^1}
+d_1(s,p_{-1},m)\,ds
+$$
+
+로 쓸 수 있다. 이 식은 관찰 가능한 Marshallian demand만으로 계산된다는 장점이 있지만, 일반적으로는 CV나 EV와 같지 않다.
+
+관련 재화의 Marshallian demand가 가격경로 전체에서 소득에 의존하지 않으면, 그 demand는 해당 방향에서 Hicksian demand와 일치한다.
+이때 적절한 부호 convention에서 $\Delta CS$는 CV 및 EV와 같은 화폐단위의 후생변화를 측정한다. quasi-linear utility는 이러한 조건을 보장하는 대표적 충분조건이다.
+:::
+
+### 1.5.4 탄력성과 집계 제약
+
+$d_i(p,m)\gt 0$라고 하자. 가격탄력성과 소득탄력성을 각각
+
+
+$$
+\varepsilon_{ij}(p,m)
+            =
+            \frac{\partial d_i(p,m)}{\partial p_j}\frac{p_j}{d_i(p,m)},
+            \qquad
+            \eta_i(p,m)
+            =
+            \frac{\partial d_i(p,m)}{\partial m}\frac{m}{d_i(p,m)}
+$$
+
+
+로 정의한다. 예산점유율은 $s_i(p,m)=p_id_i(p,m)/m$이다. Walras law와 0차 동차성을 미분하면 다음 세 제약을 얻는다.
+
+::: {.callout-important title="THEOREM 1.12 · Engel·Cournot·homogeneity restrictions"}
+
+$$
+\sum_{i=1}^n s_i\eta_i=1
+              \qquad\text{(Engel aggregation)},
+$$
+
+
+$$
+\sum_{i=1}^n s_i\varepsilon_{ij}=-s_j
+              \qquad\text{for every }j
+              \qquad\text{(Cournot aggregation)},
+$$
+
+
+$$
+\sum_{j=1}^n\varepsilon_{ij}+\eta_i=0
+              \qquad\text{for every }i
+              \qquad\text{(homogeneity restriction)}.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · 세 탄력성 제약의 완전한 도출"}
+**Engel aggregation.** Walras law $\sum_i p_i d_i(p,m)=m$를 $m$에 대해 미분하면
+
+$$
+\sum_{i=1}^n p_i\frac{\partial d_i}{\partial m}=1.
+$$
+
+정의 $s_i=p_i d_i/m$, $\eta_i=(\partial d_i/\partial m)(m/d_i)$를 대입하면
+
+$$
+\sum_i s_i\eta_i
+=\sum_i\frac{p_id_i}{m}\frac{\partial d_i}{\partial m}\frac{m}{d_i}
+=\sum_i p_i\frac{\partial d_i}{\partial m}=1.
+$$
+
+
+**Cournot aggregation.** 같은 Walras law를 $p_j$에 대해 미분하면
+
+$$
+d_j(p,m)+\sum_{i=1}^n p_i\frac{\partial d_i(p,m)}{\partial p_j}=0.
+$$
+
+이를 $m$으로 나누고 $\varepsilon_{ij}=(\partial d_i/\partial p_j)(p_j/d_i)$를 대입하면
+
+$$
+\sum_i s_i\varepsilon_{ij}
+=\sum_i\frac{p_id_i}{m}\frac{\partial d_i}{\partial p_j}\frac{p_j}{d_i}
+=\frac{p_j}{m}\sum_i p_i\frac{\partial d_i}{\partial p_j}
+=-\frac{p_jd_j}{m}=-s_j.
+$$
+
+
+**Homogeneity restriction.** 0차 동차성 $d(\lambda p,\lambda m)=d(p,m)$를 $\lambda$에 대해 미분하고 $\lambda=1$을 대입하면 Euler 식
+
+$$
+\sum_{j=1}^n p_j\frac{\partial d_i}{\partial p_j}
++m\frac{\partial d_i}{\partial m}=0
+$$
+
+을 얻는다. 이를 $d_i\gt 0$로 나누면
+
+$$
+\sum_{j=1}^n\varepsilon_{ij}+\eta_i=0
+$$
+
+이다. □
+:::
+
+::: {.callout-tip title="해석"}
+이 세 식은 추정된 수요체계가 동시에 만족해야 하는 회계적 제약이다. 수요함수의 각 편미분을 서로 독립적으로 정할 수는 없다.
+예산소진·동차성·효용극대화라는 구조가 이들 사이에 강한 연결을 부과하기 때문이다.
+:::
+
+### 1.5.5가정·정리·결론의 의존관계
+
+소비자이론의 결과는 하나의 가정만으로 한꺼번에 나오지 않는다. 아래 표는 이 장에서 반복되는 가정이 어떤 결론으로 이어지는지 정리한다. 문제를 풀 때 어떤 정리를 적용할 수 있는지 점검하는 기준으로 사용할 수 있다.
+
+| 출발점 | 중간 도구 | 결론 | 추가로 필요한 가정 |
+| --- | --- | --- | --- |
+| $X$ closed, $p\gg0$ | Heine–Borel | $B(p,m)$ compact | $0\in X$이면 nonempty |
+| $B$ compact, $u$ continuous | Weierstrass | Marshallian demand 존재 | 없음 |
+| convex preference | 상위윤곽집합의 볼록성 | $D(p,m)$ convex-valued | 예산집합 convex |
+| strictly convex preference | 비자명한 혼합의 엄격개선 | Marshallian 수요 유일; target binding이 있으면 Hicksian 수요 유일 | 해 존재; Hicksian의 경우 continuous strict monotonicity |
+| local nonsatiation | 예산 여유의 근방개선 | Walras law, $v$의 소득 엄격증가 | $p\gg0$, 해 존재 |
+| continuous strict monotonicity | 목표효용 초과 시 비례축소 | Hicksian target binding과 exact duality | $\bar u\in u(X)$; 현재 표준 소비집합 |
+| continuous $B$, continuous $u$ | Berge maximum theorem | $D$ UHC, $v$ continuous | compact-valuedness |
+| $H(p,\bar u)\ne\varnothing$ | supporting inequality | $H(p,\bar u)\subseteq\partial_p^+e(p,\bar u)$ | $e$가 미분가능하면 $H=\{\nabla_pe\}$ |
+| interior Marshallian optimum + 미분가능성 | 예산등식의 미분 | Roy's identity | $d,\lambda$의 국소 미분가능성 |
+| 같은 목표효용의 지출최소화 | 두 최소화 부등식의 합 | law of compensated demand | 미분가능성 불필요 |
+| 초기 묶음의 구매 가능성 유지 | $m^S=p^1\cdot d(p^0,m)$ | finite Slutsky decomposition | Marshallian demand의 정의 |
+| duality + $e$의 가격미분 | $e(p^1,u^0)-e(p^0,u^0)$ 적분 | CV·EV의 transfer·적분표현 | continuous strict monotonicity; 경로의 양가격성 |
+| $e\in C^2$ | $D_ph=\nabla^2_{pp}e$ | Slutsky symmetry, $S\preceq0$, $Sp=0$ | Hicksian demand 단일값; Hicksian 0차 동차성 |

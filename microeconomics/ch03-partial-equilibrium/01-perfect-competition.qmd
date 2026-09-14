@@ -1,0 +1,416 @@
+# 3.1 완전경쟁시장
+
+> 부분균형분석은 한 시장의 가격과 거래량을 내생적으로 분석하되, 다른 시장의 가격·소득·기술은 외생적으로 고정하는 방법이다. 이 절의 목적은 개별 소비자와 개별 기업의 선택을 단순히 더하는 데 있지 않다. 각 선택이 같은 가격 아래에서 동시에 양립하는 market-clearing allocation을 정의하는 데 있다.
+
+::: {.callout-tip title="이 장의 공통 구조"}
+모든 시장구조는 동일한 두 primitive에서 출발한다.
+
+$$
+P(Q)\quad\text{or}\quad D(p),
+\qquad
+\{C_i(q_i)\}_{i=1}^N.
+$$
+
+수요와 비용은 고정한 채, 기업이 어떤 행동변수를 선택하고 자신의 행동이 가격·수요·경쟁자 행동에 미치는 영향을 어느 정도 내부화하는지를 바꾸면 서로 다른 시장구조가 나온다.
+:::
+
+### 3.1.1 Partial-equilibrium environment
+
+하나의 동질재를 수량으로 측정하고, 다른 모든 재화를 numéraire로 둔다. 해당 재화의 가격을 $p\in\mathbb R_{++}$로 쓴다. 소비자 $h\in H$의 소득은 $m_h$이고, Chapter 1에서 정의한 Marshallian demand를
+
+
+$$
+d_h(p,m_h)
+$$
+
+
+로 쓴다. 여기서 $m_h$와 다른 재화의 가격은 부분균형 환경에서 외생적으로 고정한다. 기업 $i\in I$의 기술과 요소가격은 Chapter 2의 long-run cost function
+
+
+$$
+C_i(q_i)=c_i(w,q_i)
+$$
+
+
+로 요약한다. 따라서 이 장에서는 $w$를 매번 명시하지 않고 비용함수 $C_i$ 속에 흡수한다.
+Chapter 2의 extended-value convention을 유지하여, 기술적으로 달성할 수 없는 산출량에 대해서는
+
+$$
+C_i(q)=+\infty
+$$
+
+로 둔다. 아래에서 supply correspondence를 쓸 때에는 해당 가격에서 이윤함수가 유한하고
+maximiser를 갖는 경우를 전제한다. CRS 또는 IRS 기술에서는 어떤 가격에서
+$\sup_{q\ge0}\{pq-C_i(q)\}=+\infty$일 수 있으므로 이 전제는 실질적이다.
+
+::: {.callout-note title="DEFINITION · partial-equilibrium environment"}
+부분균형 환경은 한 재화시장의 가격 $p$, 소비자 수요, 기업 공급을 동시에 결정하되, 다른 시장의 가격, 소득분포, 요소가격, 기술 파라미터는 주어진 것으로 취급하는 분석 환경이다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · 부분균형의 범위"}
+부분균형은 다른 시장을 존재하지 않는 것으로 취급한다는 뜻이 아니다. 오히려 해당 시장의 변동이 다른 시장의 가격·소득·기술을 바꾸는 피드백을 현재의 분석에서 고정한다는 뜻이다. 이 피드백을 내생화하는 문제는 Chapter 4의 일반균형 분석으로 넘어간다.
+:::
+
+### 3.1.2 Market demand, industry supply, market clearing
+
+::: {.callout-note title="PARTIAL EQUILIBRIUM · 기본 객체"}
+시장은 수요함수와 기업별 공급 correspondence를 연결한다. 완전경쟁 균형은 모든 소비자와 기업이 같은 가격을 주어진 것으로 받아들인 상태에서, 이 선택들이 하나의 거래량으로 양립하는 상황이다.
+
+- **market demand** — $D(p)=\sum_{h\in H}d_h(p,m_h)$ 가격 $p$에서 소비자들이 원하는 총수량이다.
+- **firm supply** — $Y_i^s(p)=\operatorname{arg\,max}_{q_i\ge0}\{pq_i-C_i(q_i)\}$ 기업 $i$가 가격수용자로서 선택하는 산출량 correspondence다.
+- **industry supply** — $S(p)=\sum_{i\in I}y_i^s(p)$ 단일값 공급이 존재할 때의 시장공급이다.
+- **market clearing** — $D(p^*)=S(p^*)=Q^*$ 원하는 총구매량과 공급하려는 총산출량이 일치한다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · industry supply는 correspondence일 수 있다"}
+기업별 공급 $Y_i^s(p)$가 다가값일 수 있으므로, 일반적으로 industry supply도 함수가 아니라 correspondence로 정의하는 편이 정확하다.
+
+
+$$
+\mathcal S(p)
+              =
+              \left\{
+                \sum_{i\in I}q_i:
+                q_i\in Y_i^s(p)
+                \text{ for every }i\in I
+              \right\}.
+$$
+
+
+각 $Y_i^s(p)$가 singleton이면 $\mathcal S(p)=\{S(p)\}$로 쓰며,
+
+$$
+S(p)=\sum_{i\in I}y_i^s(p).
+$$
+
+따라서 함수형 market-clearing equation $D(p)=S(p)$은 단일값 공급이 존재하는 경우의 축약형이다.
+:::
+
+::: {.callout-note title="DEFINITION · competitive partial equilibrium"}
+가격 $p^*$, 소비자별 수요 $(q_h^*)_{h\in H}$, 기업별 산출량 $(q_i^*)_{i\in I}$가 competitive partial equilibrium을 이룬다는 것은 다음이 동시에 성립한다는 뜻이다.
+
+
+$$
+q_h^*=d_h(p^*,m_h)
+              \qquad\text{for every }h\in H,
+$$
+
+
+$$
+q_i^*\in Y_i^s(p^*)
+              \qquad\text{for every }i\in I,
+$$
+
+
+$$
+\sum_{h\in H}q_h^*
+              =
+              \sum_{i\in I}q_i^*.
+$$
+
+:::
+
+마지막 식은 market-clearing condition이다. 단일값 market demand와 industry supply가 존재하면 이를 더 압축하여
+
+
+$$
+D(p^*)=S(p^*)=Q^*
+$$
+
+
+로 쓴다. 여기서 $p=MC$는 개별 기업의 최적화 조건이며, $D(p)=S(p)$는 시장 전체의 일관성 조건이다. 둘은 서로 대체되지 않는다.
+
+::: {.callout-important title="PROPOSITION · competitive firm의 subgradient condition"}
+기업 $i$의 feasible output domain을 $D_i\subseteq\mathbb R_+$라 하고, extended-value cost를
+
+$$
+\bar C_i(q)
+=
+\begin{cases}
+C_i(q), & q\in D_i,\\
++\infty, & q\notin D_i
+\end{cases}
+$$
+
+로 두자. $\bar C_i$가 proper convex이면
+
+$$
+q_i^*\in\operatorname{arg\,max}_{q\ge0}\{p^*q-\bar C_i(q)\}
+\quad\Longleftrightarrow\quad
+p^*\in\partial\bar C_i(q_i^*).
+$$
+
+특히 $q_i^*\in\operatorname{int}D_i$이고 $C_i$가 $q_i^*$에서 미분가능하면
+
+$$
+p^*=C_i'(q_i^*)=MC_i(q_i^*).
+$$
+
+양의 산출량이라는 사실만으로는 capacity boundary를 배제할 수 없으므로, 등식형 $p=MC$에는 산출량 영역의 내부조건이 필요하다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$q_i^*$가 이윤극대해라는 것은 모든 $q$에 대해
+
+$$
+p^*q_i^*-\bar C_i(q_i^*)
+\ge
+p^*q-\bar C_i(q)
+$$
+
+가 성립한다는 뜻이다. 이를 재배열하면
+
+$$
+\bar C_i(q)
+\ge
+\bar C_i(q_i^*)+p^*(q-q_i^*)
+\qquad\text{for every }q,
+$$
+
+즉 $p^*\in\partial\bar C_i(q_i^*)$다. 역방향도 동일하다. 내부 미분가능점에서는 subdifferential이 미분계수 하나로 축약된다. □
+:::
+
+### 3.1.3 Short-run competitive equilibrium
+
+short run에서는 기업 수와 일부 input이 고정되어 있다. Chapter 2의 restricted cost를 사용하여 기업 $i$의 variable cost를 $VC_i(q_i)$, fixed cost를 $FC_i$라고 쓰자. 이미 발생한 fixed cost는 현재의 산출량 선택에 영향을 주지 않으므로, 단기 공급은
+
+
+$$
+Y_i^{SR}(p)
+            =
+            \operatorname{arg\,max}_{q_i\ge0}
+            \{pq_i-VC_i(q_i)\}
+$$
+
+
+로 정의한다.
+
+::: {.callout-important title="THEOREM 3.1 · short-run supply와 shutdown"}
+$VC_i:[0,\infty)\to\mathbb R_+$가 continuous and convex이고 $VC_i(0)=0$라고 하자. 또한 모든 유한한 가격 $p\ge0$에 대해 이윤극대화 해가 존재하도록
+
+
+$$
+\lim_{q_i\to\infty}
+              \frac{VC_i(q_i)}{q_i}
+              =
+              +\infty
+$$
+
+
+를 가정하자. 그러면 모든 $p\ge0$에서
+
+
+$$
+Y_i^{SR}(p)
+              =
+              \operatorname{arg\,max}_{q_i\ge0}
+              \{pq_i-VC_i(q_i)\}
+$$
+
+
+는 nonempty compact-valued correspondence다. 특히
+
+
+$$
+p
+              \lt \inf_{q_i\gt 0}\frac{VC_i(q_i)}{q_i}
+              =
+              \inf_{q_i\gt 0}AVC_i(q_i)
+              \quad\Longrightarrow\quad
+              Y_i^{SR}(p)=\{0\}.
+$$
+
+
+양의 내부 산출량에서 $VC_i$가 미분가능하면 $p=VC_i'(q_i)=MC_i^{SR}(q_i)$가 성립한다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+고정된 $p$에 대해 가정된 성장조건은
+
+$$
+pq_i-VC_i(q_i)\to-\infty
+\qquad\text{as }q_i\to\infty
+$$
+
+를 보장한다. 목적함수는 continuous이므로 충분히 큰 compact interval 밖에서는 더 작은 값을 가지며, Weierstrass theorem에 따라 argmax는 nonempty and compact하다. $VC_i$의 convexity로 목적함수는 concave하다.
+
+모든 $q_i\gt 0$에 대해 $p\lt AVC_i(q_i)$이면
+
+$$
+pq_i-VC_i(q_i)
+=q_i[p-AVC_i(q_i)]
+\lt 0.
+$$
+
+반면 $q_i=0$에서 목적함수 값은 0이므로 shutdown이 최적이다. $q_i\gt 0$의 내부해에서는 concave objective의 일차조건이 $p-VC_i'(q_i)=0$을 준다. □
+:::
+
+고정된 기업 집합 $I$ 아래 short-run industry supply는 기업별 공급을 수평합하여
+
+
+$$
+S^{SR}(p)=\sum_{i\in I}y_i^{SR}(p)
+$$
+
+
+로 쓴다. 이 식은 각 기업이 같은 시장가격 $p$를 주어진 것으로 받는다는 사실에 의존한다.
+
+### 3.1.4 Existence, uniqueness, comparative statics
+
+market excess demand를
+
+
+$$
+Z(p)=D(p)-S(p)
+$$
+
+
+로 둔다. 균형가격은 $Z(p^*)=0$을 만족하는 가격이다.
+
+::: {.callout-important title="THEOREM 3.2 · competitive equilibrium의 존재와 유일성"}
+$D,S:[\underline p,\overline p]\to\mathbb R_+$가 continuous라고 하자. 다음이 성립하면 competitive equilibrium price $p^*\in[\underline p,\overline p]$가 존재한다.
+
+
+$$
+Z(\underline p)\gt 0,
+              \qquad
+              Z(\overline p)\lt 0.
+$$
+
+
+또한 $D$가 strictly decreasing이고 $S$가 weakly increasing이면 균형가격은 유일하다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$Z=D-S$는 continuous하다. 경계조건에 의해 $Z$는 $\underline p$에서 양수, $\overline p$에서 음수이므로 intermediate value theorem에 따라 어떤 $p^*$에서 $Z(p^*)=0$이다.
+
+한편 $p_2\gt p_1$이면 strict decrease of $D$와 weak increase of $S$로
+
+$$
+Z(p_2)=D(p_2)-S(p_2)
+\lt D(p_1)-S(p_1)=Z(p_1).
+$$
+
+따라서 $Z$는 strictly decreasing이고 영점을 둘 이상 가질 수 없다. □
+:::
+
+::: {.callout-important title="PROPOSITION · local comparative statics"}
+외생 parameter $\theta$가 수요 또는 공급을 움직이고 균형이
+
+
+$$
+F(p,\theta)
+              =D(p;\theta)-S(p;\theta)
+              =0
+$$
+
+
+으로 주어진다고 하자. $F$가 $C^1$이고 $F_p(p^*,\theta)\ne0$이면,
+
+
+$$
+\frac{dp^*}{d\theta}
+              =
+              -\frac{F_\theta(p^*,\theta)}{F_p(p^*,\theta)}.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+implicit function theorem에 따라 균형식 $F(p^*(\theta),\theta)=0$이 국소적으로 미분가능한 균형가격 함수를 정의한다. 양변을 $\theta$에 대해 미분하면
+
+$$
+F_p\frac{dp^*}{d\theta}+F_\theta=0
+$$
+
+이고, $F_p\ne0$이므로 식을 정리하면 된다. □
+:::
+
+예를 들어 수요 parameter $\theta$가 커질수록 모든 가격에서 수요가 증가하여 $D_\theta\gt 0$이고 $F_p\lt 0$이면 $dp^*/d\theta\gt 0$이다. 비용상승처럼 공급을 왼쪽으로 이동시키는 변화도 같은 식으로 분석할 수 있다.
+
+### 3.1.5 Long-run equilibrium, entry, zero profit
+
+long run에서는 모든 input이 조정 가능하고 기업의 entry와 exit도 가능하다. identical firm이 존재하고 자유진입이 가능하다고 하자. 대표기업의 cost function을 $C(q)$로 쓰면, 양의 산출량을 생산하는 기업은
+
+
+$$
+\max_{q\ge0}\{pq-C(q)\}
+$$
+
+
+를 푼다. 자유진입이 가능한 장기균형에서는 양의 이윤이 남아 있으면 진입이 계속되므로, 활동 중인 기업의 이윤은 0이어야 한다.
+
+::: {.callout-important title="THEOREM 3.3 · free entry와 long-run competitive equilibrium"}
+대표기업의 long-run cost function을 $C$라고 하자. 가격 $p$에서 활동 기업이 $q^*\gt 0$를 생산하는 free-entry long-run equilibrium은
+
+
+$$
+q^*
+              \in
+              \operatorname{arg\,max}_{q\ge0}
+              \{pq-C(q)\},
+              \qquad
+              \sup_{q\ge0}\{pq-C(q)\}=0
+$$
+
+
+를 만족한다. 두 번째 식은 활동 중인 기업이 zero profit을 얻고, 어떤 잠재적 진입자도 양의 이윤을 얻을 수 없다는 no-entry condition이다. 따라서
+
+
+$$
+p
+              =
+              \min_{q\gt 0}AC(q),
+              \qquad
+              q^*
+              \in
+              \operatorname{arg\,min}_{q\gt 0}AC(q).
+$$
+
+
+또한 $C$가 $q^*$에서 미분가능하고 $q^*$가 내부해이면
+
+
+$$
+p=MC(q^*)=AC(q^*).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+no-entry condition은 모든 $q\ge0$에 대해 $pq-C(q)\le0$임을 뜻한다. $q\gt 0$로 나누면
+
+$$
+p\le\frac{C(q)}{q}=AC(q)
+\qquad\text{for every }q\gt 0.
+$$
+
+활동 기업의 zero-profit condition은 $pq^*-C(q^*)=0$이므로 $p=AC(q^*)$를 준다. 따라서 $p$는 $AC$의 전역 최솟값이고 $q^*$는 그 minimiser다. 마지막으로 $q^*$가 기업의 내부 이윤극대화 해이면 일차조건 $p=C'(q^*)=MC(q^*)$가 성립한다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · CRS와 natural monopoly의 정확한 비용조건"}
+CRS technology에서는 $C(q)=cq$이고 $AC(q)=MC(q)=c$다. 따라서 $p=c$에서는 모든 scale이 zero profit을 주므로 개별 기업의 규모는 기술만으로 정해지지 않는다.
+
+단일산출 비용함수 $C$가 관련 산출범위에서 *subadditive*하다는 것은 임의의 유한한 양의 분할 $Q=\sum_{k=1}^mQ_k$, $Q_k\gt0$에 대해
+
+$$
+C(Q)
+\le
+\sum_{k=1}^m C(Q_k)
+$$
+
+가 성립한다는 뜻이다. 시장수요의 관련 범위에서 이 조건이 성립하면 한 기업이 총산출량을 생산하는 비용이 여러 기업으로 분할하는 비용보다 크지 않으며, 이를 natural monopoly의 비용측 정의로 사용한다.
+
+$C(0)=0$이고 $AC(q)=C(q)/q$가 관련 범위에서 nonincreasing이면 subadditivity가 따른다. 실제로 $Q_k\le Q$이므로 $AC(Q_k)\ge AC(Q)$이고,
+
+$$
+\sum_k C(Q_k)
+=
+\sum_k Q_kAC(Q_k)
+\ge
+AC(Q)\sum_kQ_k
+=C(Q).
+$$
+
+따라서 declining average cost는 단일산출 환경에서 natural monopoly의 대표적 충분조건이지 정의 자체는 아니다.
+:::

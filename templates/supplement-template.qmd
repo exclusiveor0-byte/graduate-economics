@@ -1,0 +1,38 @@
+# Supplement Title
+
+::: {.callout-note title="Purpose"}
+이 Supplement가 본문의 어떤 직관 또는 계산을 보완하는지 설명합니다.
+:::
+
+## Main Result
+
+설명
+
+## Visual
+
+::: {.panel-tabset}
+
+### Interactive
+
+Interactive 구현이 있는 경우 삽입합니다.
+
+### Animation
+
+GIF 또는 MP4 fallback을 삽입합니다.
+
+```markdown
+![Animation description](../../assets/gif/example.gif)
+```
+
+### Static
+
+PDF/인쇄용 대표 정적 그림을 삽입합니다.
+
+:::
+
+## Reproducibility
+
+- Source: R / MATLAB / OJS / other
+- Input data:
+- Parameters:
+- Output asset:

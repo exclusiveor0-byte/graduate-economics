@@ -1,0 +1,304 @@
+# 2.1 기업과 기술
+
+> 소비자이론에서 출발점이 소비집합과 선호관계였다면, 생산자이론의 출발점은 기술이다. 기술은 어떤 input bundle로 어떤 output을 생산할 수 있는지를 규정한다.
+> 비용과 이윤은 기술 위에서 정의되는 최적화 문제의 값이다.
+
+::: {.callout-tip title="이 장의 논리"}
+생산자이론의 핵심 객체는 다음 순서로 연결된다.
+
+$$
+f\ \text{or}\ \mathcal T
+\longrightarrow
+\mathcal V(y)
+\longrightarrow
+X^c(w,y)
+\longrightarrow
+c(w,y)
+\longrightarrow
+\Pi(p,w)
+\longrightarrow
+\bigl(y^s(p,w),x^u(p,w)\bigr).
+$$
+
+기술이 output target을 달성할 수 있는 input set을 정하고, 그 집합 위의 비용최소화가 cost function을 정한다. 기업의 이윤극대화는 이 cost function 위에서 output scale을 선택하는 문제로 환원된다.
+:::
+
+### 2.1.1 생산계획과 기술의 표현
+
+하나의 산출물과 $n$개의 투입물을 우선 생각하자. input bundle은
+$x=(x_1,\ldots,x_n)\in\mathbb R_+^n$, output은 $y\in\mathbb R_+$로 쓴다.
+산출물 가격은 $p\in\mathbb R_{++}$, 요소가격은 $w=(w_1,\ldots,w_n)\in\mathbb R_{++}^n$이다.
+
+::: {.callout-note title="DEFINITION · production function과 technology set"}
+production function은
+
+
+$$
+f:\mathbb R_+^n\to\mathbb R_+
+$$
+
+
+로서 input bundle $x$로 생산 가능한 최대 output을 나타낸다. 이에 대응하는 input-output technology set은
+
+
+$$
+\mathcal T
+              =
+              \left\{
+                (x,y)\in\mathbb R_+^n\times\mathbb R_+:
+                y\le f(x)
+              \right\}
+$$
+
+
+로 정의한다. 즉 $(x,y)\in\mathcal T$이면 $x$로 $y$를 생산하는 것이 기술적으로 가능하다.
+:::
+
+일반균형에서는 생산계획을 standard net-output vector로 쓰는 편이 편리하다.
+첫 번째 성분은 산출물의 순산출, 나머지 성분은 input의 순산출로 둔다.
+실제로 생산한 output과 사용한 input이 각각 $(y,x)$이면 operational plan은
+$z=(y,-x)$로 쓴다. 다만 net-output production set 자체에는 output disposal까지 포함하기 위해
+첫 번째 성분이 음수인 계획도 허용한다.
+
+
+$$
+Y
+  =
+  \left\{
+    z=(z_0,z_1,\ldots,z_n)\in
+    \mathbb R\times(-\mathbb R_+^n):
+    z_0\le f(-z_1,\ldots,-z_n)
+  \right\}.
+$$
+
+
+$z=(y,-x)$ with $y\ge0$인 실제 생산계획에서는 $z_0=y$, $z_i=-x_i$이고,
+가격벡터 $q=(p,w_1,\ldots,w_n)$에 대해
+
+$$
+q\cdot z
+=
+py-w\cdot x
+$$
+
+가 된다. $z_0\lt0$을 허용하는 것은 생산한 output의 폐기를 net-output notation 안에 포함하기 위해서이며,
+$p\gt0$인 이윤극대화에서는 그러한 계획이 최적으로 선택되지 않는다.
+
+
+$$
+q\cdot z
+            =py-w\cdot x
+$$
+
+
+가 된다. 따라서 경쟁기업의 이윤극대화는 $Y$ 위에서 value $q\cdot z$를 최대화하는 문제다.
+
+::: {.callout-important title="PROPOSITION · free disposal"}
+$f$가 monotone이면 $(x,y)\in\mathcal T$, $x'\ge x$, $0\le y'\le y$일 때
+$(x',y')\in\mathcal T$다. 즉 input-output representation에서는 기업이 input을 더 사용하거나 생산한 양의 output 일부를 폐기할 수 있다.
+output을 전부 폐기한 뒤 순산출이 음수가 되는 계획까지 포함하려면 net-output production set을 사용하며, 이 성질은
+
+$$
+Y-\mathbb R_+^{n+1}\subseteq Y
+$$
+
+로 쓴다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$(x,y)\in\mathcal T$이면 $y\le f(x)$다. $x'\ge x$와 monotonicity로
+$f(x')\ge f(x)\ge y\ge y'$이므로 $(x',y')\in\mathcal T$다.
+이제 $z\in Y$, $r\in\mathbb R_+^{n+1}$라고 하자. $z-r$의 input 성분은 더 작아지므로
+대응하는 input use는 약하게 커지고, output 성분은 약하게 줄어든다. 따라서 $Y$의 정의와 방금 보인 input-output free disposal에 의해
+$z-r\in Y$다. □
+:::
+
+::: {.callout-important title="THEOREM · production set의 기하"}
+$f:\mathbb R_+^n\to\mathbb R_+$에 대해 다음이 성립한다.
+
+
+$$
+f\text{가 continuous}
+      \Longrightarrow
+      \mathcal T\text{와 }Y\text{는 closed},
+$$
+
+
+$$
+f\text{가 concave}
+      \Longleftrightarrow
+      \mathcal T\text{와 }Y\text{는 convex},
+$$
+
+
+$$
+f(\mathbf0)=0
+      \Longrightarrow
+      Y\cap\mathbb R_+^{n+1}=\{\mathbf0\}.
+$$
+
+
+마지막 조건은 input을 전혀 사용하지 않고 양의 순산출을 얻는 계획이 없다는 no-free-lunch 조건이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · closedness, convexity, no free lunch"}
+$f$가 continuous이고 $(x^k,y^k)\in\mathcal T$, $(x^k,y^k)\to(x,y)$라 하자.
+$y^k\le f(x^k)$와 연속성으로 $y\le f(x)$이므로 $(x,y)\in\mathcal T$다. 따라서 $\mathcal T$는 closed이다.
+
+$z^k\in Y$, $z^k\to z$라 하자. 각 $k$에 대해 input 성분은 $z_i^k\le0$이므로 극한에서도 $z_i\le0$이다.
+$x^k=(-z_1^k,\ldots,-z_n^k)$, $x=(-z_1,\ldots,-z_n)$로 두면
+
+$$
+z_0^k\le f(x^k).
+$$
+
+$f$의 연속성과 $z^k\to z$로 $z_0\le f(x)$가 따른다. 따라서 $z\in Y$이고, $Y$도 closed이다.
+
+$f$가 concave라 하자. $(x^r,y^r)\in\mathcal T$, $r=1,2$, $t\in[0,1]$이면
+
+$$
+ty^1+(1-t)y^2
+\le
+tf(x^1)+(1-t)f(x^2)
+\le
+f\bigl(tx^1+(1-t)x^2\bigr).
+$$
+
+따라서 $\mathcal T$는 convex이고, 선형 좌표변환으로 정의된 $Y$도 convex하다.
+반대로 $\mathcal T$가 convex하면 $(x^r,f(x^r))\in\mathcal T$이고, 위의 포함관계를 역으로 읽어
+
+$$
+f\bigl(tx^1+(1-t)x^2\bigr)
+\ge
+tf(x^1)+(1-t)f(x^2)
+$$
+
+를 얻으므로 $f$는 concave하다.
+
+마지막으로 $z\in Y\cap\mathbb R_+^{n+1}$라 하자. $z_i\le0$인 input 성분과 $z_i\ge0$가 동시에 성립하므로
+모든 input 성분은 0이다. 그러면 $0\le z_0\le f(\mathbf0)=0$이므로 $z=\mathbf0$다.
+□
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · production function과 production set의 역할"}
+하나의 산출물과 여러 input을 다룰 때에는 $f$가 직관적이다. 그러나 여러 산출물, joint production, 폐기(disposal), 혹은 일반균형의 생산경제를 다룰 때에는 production set $Y$가 더 기본적인 객체다. 이 장에서는 계산과 비용최소화를 위해 $f$를 주로 쓰되, net-output notation을 함께 유지한다.
+:::
+
+### 2.1.2 Input-requirement correspondence
+
+산출량 $y$가 주어졌을 때 그 output을 생산할 수 있는 input bundle 전체를 다음과 같이 둔다.
+
+::: {.callout-note title="DEFINITION · input-requirement correspondence"}
+
+$$
+\mathcal V(y)
+              =
+              \{x\in\mathbb R_+^n:f(x)\ge y\}.
+$$
+
+
+$\mathcal V(y)$는 output target $y$를 달성할 수 있는 모든 input bundle의 집합이다.
+:::
+
+이 correspondence는 소비자이론의 upper contour set
+
+
+$$
+\{x:u(x)\ge\bar u\}
+$$
+
+
+와 구조적으로 같다. 소비자의 expenditure minimisation이 목표효용 $\bar u$를 달성하는 소비묶음 중 최소지출 묶음을 찾는 문제였다면, 기업의 cost minimisation은 목표산출량 $y$를 달성하는 input bundle 중 최소비용 묶음을 찾는 문제다.
+
+| 소비자이론 | 생산자이론 | 공통 구조 |
+| --- | --- | --- |
+| 목표효용 $\bar u$ | 목표산출량 $y$ | 외생적으로 주어진 target |
+| $\{x:u(x)\ge\bar u\}$ | $\mathcal V(y)=\{x:f(x)\ge y\}$ | target을 달성하는 feasible set |
+| Hicksian demand $H(p,\bar u)$ | conditional factor demand $X^c(w,y)$ | 비용을 최소화하는 choice correspondence |
+| expenditure function $e(p,\bar u)$ | cost function $c(w,y)$ | 최적화 문제의 value function |
+
+### 2.1.3 기술 가정의 역할
+
+::: {.callout-note title="ASSUMPTION 2.1 · 표준 생산기술"}
+별도의 언급이 없는 한, production function $f:\mathbb R_+^n\to\mathbb R_+$에 대해 다음을 구분하여 사용한다.
+
+
+$$
+f(\mathbf0)=0,
+              \qquad
+              f\text{ is continuous},
+$$
+
+
+$$
+x'\ge x\Longrightarrow f(x')\ge f(x),
+              \qquad
+              x'\gg x\Longrightarrow f(x')\gt f(x).
+$$
+
+
+마지막 두 조건을 각각 input monotonicity와 strict input monotonicity라고 부른다.
+필요한 정리에서 quasiconcavity, strict quasiconcavity, concavity, homogeneity를 별도로 추가한다.
+:::
+
+| 가정 | 기하학적 의미 | 이 장에서의 역할 |
+| --- | --- | --- |
+| $f(\mathbf0)=0$ | input 없이 양의 output을 생산할 수 없다. | 정상적인 원점 정규화; scale 해석의 기준점 |
+| continuity | 기술적으로 가능한 생산계획이 극한에서 보존된다. | cost-minimising input bundle의 존재; 국소적 엄격확장과 결합하면 conditional factor demand와 cost function의 정칙성 |
+| input monotonicity | input을 더 사용한다고 생산가능 output이 줄지는 않는다. | input disposal과 net-output free disposal |
+| strict input monotonicity | $x'\gg x\Rightarrow f(x')\gt f(x)$ | 모든 input을 조금씩 늘려 target output을 국소적으로 엄격히 초과하게 하며, conditional factor demand와 cost function의 연속성 논증에 사용 |
+| quasiconcavity | $\mathcal V(y)$가 convex하다. | cost minimisation의 convex feasible set |
+| strict quasiconcavity | isoquant의 비자명한 선분이 상위 output 영역으로 들어간다. | conditional factor demand의 유일성 |
+| concavity | production set이 convex하다. | profit maximisation의 concavity, output cost의 convexity |
+| homogeneity | 규모를 바꿀 때 기술이 일정한 power law를 따른다. | returns to scale와 cost scaling |
+
+::: {.callout-note appearance="simple" title="REMARK · input monotonicity와 strict input monotonicity의 구분"}
+input monotonicity는 input을 더 사용해도 생산가능 output이 줄지 않음을 뜻하며, free disposal을 보장한다.
+strict input monotonicity는 모든 input이 엄격히 증가할 때 output도 엄격히 증가함을 뜻한다.
+즉
+
+$$
+x'>x\Longrightarrow f(x')\gt f(x)
+$$
+
+같은 더 강한 가정은 이 장의 정칙성 논증에 필요하지 않다. 이 구분은 Leontief technology처럼 한 input만
+늘려서는 output이 증가하지 않을 수 있는 표준기술을 포함하기 위해 중요하다.
+
+target-output binding 자체에는 continuity와 $f(\mathbf0)=0$만 사용한다.
+반면
+
+$$
+(w,y)\mapsto X^c(w,y),\qquad (w,y)\mapsto c(w,y)
+$$
+
+의 연속성을 보일 때에는 $x+\varepsilon\mathbf1\gg x$가 만드는 국소적 엄격확장이 필요하므로
+strict input monotonicity를 추가한다.
+:::
+
+::: {.callout-important title="PROPOSITION · quasiconcavity와 input-requirement set의 convexity"}
+$f$가 quasiconcave일 필요충분조건은 모든 $y\ge0$에 대해 $\mathcal V(y)$가 convex한 것이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$f$가 quasiconcave라고 하자. $x^1,x^2\in\mathcal V(y)$이면 $f(x^1),f(x^2)\ge y$이다. 모든 $t\in[0,1]$에 대해 quasiconcavity로
+
+$$
+f\bigl(tx^1+(1-t)x^2\bigr)
+\ge
+\min\{f(x^1),f(x^2)\}
+\ge y.
+$$
+
+따라서 $tx^1+(1-t)x^2\in\mathcal V(y)$이고 $\mathcal V(y)$는 convex하다.
+
+반대로 모든 $\mathcal V(y)$가 convex하다고 하자. $a=\min\{f(x^1),f(x^2)\}$로 두면 $x^1,x^2\in\mathcal V(a)$다. convexity로
+$tx^1+(1-t)x^2\in\mathcal V(a)$이므로
+
+$$
+f\bigl(tx^1+(1-t)x^2\bigr)
+\ge a
+=\min\{f(x^1),f(x^2)\}.
+$$
+
+이는 $f$의 quasiconcavity다. □
+:::

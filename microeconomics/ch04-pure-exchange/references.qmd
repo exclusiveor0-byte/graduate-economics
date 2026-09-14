@@ -1,0 +1,7 @@
+# 참고문헌
+
+Debreu, G., and H. Scarf. “A Limit Theorem on the Core of an Economy.” *International Economic Review*, 1963.
+
+Jehle, G. A., and P. J. Reny. *Advanced Microeconomic Theory*, 3rd ed., general equilibrium chapters.
+
+Mas-Colell, A., M. D. Whinston, and J. R. Green. *Microeconomic Theory*, Chapters 15–18.

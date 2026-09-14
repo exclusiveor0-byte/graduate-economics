@@ -1,0 +1,214 @@
+# 4.7 Core와 competitive limit
+
+> Core는 가격을 사용하지 않는 안정성 개념이다. 어떤 coalition도 자기 구성원들의 초기부존만으로 현재 allocation보다 더 나은 배분을 만들 수 없다면, 그 allocation은 core에 속한다. core convergence theorem은 경제를 복제할수록 이 가격 없는 안정성 개념이 경쟁균형과 수렴한다는 사실을 보여 준다.
+
+### 4.7.1 Blocking conventions와 core
+
+공집합이 아닌 coalition $S\subseteq I$의 총부존은
+
+
+$$
+e(S)=\sum_{i\in S}e_i
+$$
+
+
+이다. 이 장에서는 weak blocking convention을 기본으로 쓴다. 즉 $S$가 feasible allocation $x$를 block한다는 것은 어떤 $(y_i)_{i\in S}$가 존재하여
+
+
+$$
+\sum_{i\in S}y_i\le e(S),
+$$
+
+
+$$
+y_i\succeq_i x_i
+            \qquad\text{for every }i\in S,
+$$
+
+
+$$
+y_j\succ_j x_j
+            \qquad\text{for some }j\in S
+$$
+
+
+를 만족하는 것이다. core는 어떤 coalition에도 block되지 않는 feasible allocations의 집합이다.
+
+
+$$
+\operatorname{Core}(\mathcal E)
+            =
+            \left\{
+              x\in\mathcal F(\bar e):
+              x\text{ is not blocked by any }S\subseteq I
+            \right\}.
+$$
+
+
+::: {.callout-caution title="WARNING · strict blocking convention"}
+일부 문헌은 $y_i\succ_i x_i$ for every $i\in S$를 요구하는 strict blocking을 사용한다. 두 convention은 비슷하지만, $\operatorname{Core}(\mathcal E)\subseteq\mathcal P(\bar e)$ 같은 포함관계의 정확한 진술에 차이를 만든다. 이 장의 weak blocking convention에서는 전체 coalition $I$의 Pareto improvement가 바로 blocking이므로 core allocation은 Pareto efficient하다.
+:::
+
+::: {.callout-important title="THEOREM 4.10 · Walrasian allocation, core, Pareto set"}
+local nonsatiation 아래 다음 포함관계가 성립한다.
+
+
+$$
+W(\mathcal E)
+              \subseteq
+              \operatorname{Core}(\mathcal E)
+              \subseteq
+              \mathcal P(\bar e),
+$$
+
+
+여기서 $W(\mathcal E)$는 Walrasian allocations의 집합이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$x^*\in W(\mathcal E)$라고 하자. coalition $S$가 $x^*$를 weakly block한다고 가정하면, First Welfare Theorem proof와 같은 individual-optimality 논리로
+
+$$
+p^*\cdot y_i\ge p^*\cdot e_i
+\quad\text{for every }i\in S,
+\qquad
+p^*\cdot y_j\gt p^*\cdot e_j
+\quad\text{for some }j\in S
+$$
+
+를 얻는다. 합하면 $p^*\cdot\sum_{i\in S}y_i\gt p^*\cdot e(S)$다. 하지만 coalition feasibility와 $p^*\ge0$는 반대 부등식을 주므로 모순이다. 따라서 $W(\mathcal E)\subseteq\operatorname{Core}(\mathcal E)$다.
+
+다음으로 $x\in\operatorname{Core}(\mathcal E)$가 Pareto efficient하지 않으면, 전체 coalition $I$가 Pareto-improving allocation으로 $x$를 weakly block한다. 이는 core 정의에 모순이다. 따라서 $\operatorname{Core}(\mathcal E)\subseteq\mathcal P(\bar e)$다. □
+:::
+
+::: {.callout-important title="PROPOSITION · core의 individual rationality"}
+complete preference 아래
+
+
+$$
+x\in\operatorname{Core}(\mathcal E)
+              \quad\Longrightarrow\quad
+              x_i\succeq_i e_i
+              \qquad
+              \text{for every }i\in I.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+어떤 $i$에 대해 $e_i\succ_i x_i$라고 하자. singleton coalition $\{i\}$는 자신의 부존 $e_i$를 그대로 소비하면 되므로 $x$를 block한다. 이는 $x\in\operatorname{Core}(\mathcal E)$와 모순이다. completeness에 의해 $e_i\not\succ_i x_i$이면 $x_i\succeq_i e_i$다. □
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · core nonemptiness"}
+Theorem 4.7의 존재성과 Theorem 4.10의 $W(\mathcal E)\subseteq\operatorname{Core}(\mathcal E)$를 결합하면, 존재정리의 가정 아래
+
+$$
+W(\mathcal E)\neq\varnothing
+\quad\Longrightarrow\quad
+\operatorname{Core}(\mathcal E)\neq\varnothing.
+$$
+
+즉 competitive equilibrium의 존재는 price-mediated allocation의 존재뿐 아니라 cooperative stability의 nonemptiness도 준다.
+:::
+
+### 4.7.2 Replica economy와 Debreu–Scarf theorem
+
+자연수 $r\ge1$에 대해 $r$-replica economy $\mathcal E^r$는 각 consumer type $i$를 $r$명씩 복제한 경제다. 소비자 $(i,k)$는 $i$형의 선호와 부존을 그대로 가진다.
+
+
+$$
+I^r
+            =
+            \{(i,k):i\in I,\ k=1,\ldots,r\},
+$$
+
+
+$$
+\succeq_{ik}=\succeq_i,
+            \qquad
+            e_{ik}=e_i.
+$$
+
+
+원래 경제의 allocation $x=(x_i)_{i\in I}$를 equal-treatment 방식으로 복제하면
+
+
+$$
+\tilde x_{ik}^r=x_i
+            \qquad
+            \text{for every }(i,k)\in I^r.
+$$
+
+
+이다. 원래 allocation space에서 비교하기 위해
+
+
+$$
+C^r(\mathcal E)
+            =
+            \left\{
+              x\in\mathcal F(\bar e):
+              \tilde x^r\in\operatorname{Core}(\mathcal E^r)
+            \right\}
+$$
+
+
+를 정의한다.
+
+::: {.callout-important title="PROPOSITION 4.11 · Walrasian allocations survive every replication"}
+$x\in W(\mathcal E)$이면
+
+
+$$
+x\in C^r(\mathcal E)
+              \qquad
+              \text{for every }r\ge1.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$x$를 지지하는 Walrasian price를 $p$라고 하자. $r$-replica economy에서 각 복제 소비자 $(i,k)$는 원래 소비자 $i$와 동일한 preference와 endowment를 가지므로, 같은 가격 $p$에서 $x_i$를 demand한다. 따라서 $(p,\tilde x^r)$는 $\mathcal E^r$의 Walrasian equilibrium이다. Theorem 4.10을 복제경제에 적용하면 $\tilde x^r\in\operatorname{Core}(\mathcal E^r)$다. 정의에 의해 $x\in C^r(\mathcal E)$다. □
+:::
+
+::: {.callout-important title="THEOREM 4.12 · Debreu–Scarf theorem (stated result)"}
+다음은 이 장의 weak blocking convention과 $C^r(\mathcal E)$라는 equal-treatment core projection에 대해 사용하는 Debreu–Scarf 정리를 외부 결과로 진술한 것이다. 소비자 type과 재화의 수가 유한하고, $X_i=\mathbb R_+^n$, $e_i\gg0$, 그리고 각 $\succeq_i$가 complete, transitive, continuous, convex이며 strict monotonicity를 만족한다고 하자. 이 절에서는 이 standard pure-exchange formulation 아래의 equal-treatment Debreu–Scarf result를 사용하며, 역포함은 여기서 재증명하지 않는다. strict monotonicity와 reflexivity는 weak monotonicity를 주므로, coalition feasibility를 $\sum_{i\in S}y_i\le e(S)$로 쓰는 free-disposal convention과 equality-feasibility convention은 같은 blocking allocation을 준다. 남는 재화가 있으면 coalition의 한 구성원에게 배정하여 feasibility equality를 만들 수 있고, 그 소비자는 적어도 나빠지지 않으며 기존의 strict improvement는 보존되기 때문이다.
+
+
+$$
+W(\mathcal E)
+              =
+              \bigcap_{r=1}^{\infty}C^r(\mathcal E).
+$$
+
+
+즉 모든 replica economy에서 equal-treatment core에 남는 allocation은 Walrasian allocation이며, $W(\mathcal E)\subseteq\bigcap_{r\ge1}C^r(\mathcal E)$는 Proposition 4.11에서 직접 증명했다. 반대 포함은 이 장의 weak-blocking convention에 대한 Debreu–Scarf의 external result로 사용한다.
+:::
+
+::: {.callout-note appearance="simple" title="역포함의 논리와 proof scope"}
+- **직접 증명한 포함** — $\displaystyle W(\mathcal E)\subseteq\bigcap_{r\ge1}C^r(\mathcal E)$. 경쟁가격은 모든 복제경제의 coalition block을 가격평가로 배제한다.
+- **Debreu–Scarf의 역포함** — $\displaystyle \bigcap_{r\ge1}C^r(\mathcal E)\subseteq W(\mathcal E)$. non-Walrasian allocation은 weighted coalition의 개선을 허용하고, 충분히 큰 replica economy에서는 그 가중치를 정수 명수의 coalition으로 근사할 수 있어 block된다.
+- **이 장에서의 처리** — 역포함의 완전한 증명은 balanced collections와 replica approximation을 필요로 하므로, 본문에서는 정리의 정확한 statement와 proof mechanism을 제시하고 전체 증명은 Debreu–Scarf의 결과로 인용한다.
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · core가 줄어든다는 말의 정확한 의미"}
+모든 $s\ge r$에 대해
+
+$$
+C^s(\mathcal E)\subseteq C^r(\mathcal E).
+$$
+
+실제로 $x\notin C^r(\mathcal E)$라면 $\mathcal E^r$에서 $\tilde x^r$를 block하는 coalition이 존재한다. 이 coalition을 $\mathcal E^s$의 처음 $r$개 복제본 안의 동일한 소비자 집합으로 보면, 같은 endowment와 같은 개선 allocation으로 $\tilde x^s$도 block된다. 따라서
+
+$$
+C^1(\mathcal E)\supseteq C^2(\mathcal E)\supseteq\cdots\supseteq C^r(\mathcal E)\supseteq\cdots.
+$$
+
+이 단조성은 replica economy가 커질수록 available coalition이 더 세밀해진다는 뜻이다. 다만 이 장에서의 “convergence”는 우선 equal-treatment core projection의 set-theoretic characterization
+
+$$
+W(\mathcal E)=\bigcap_{r\ge1}C^r(\mathcal E)
+$$
+
+을 뜻한다. Hausdorff metric 등의 topology를 지정한 별도의 set convergence를 이 문장으로 주장하지는 않는다.
+:::

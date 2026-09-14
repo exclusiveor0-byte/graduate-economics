@@ -1,0 +1,86 @@
+# 3.4 표준 선형 모형과 연습문제
+
+> 선형 benchmark는 여러 시장구조의 분석기법이 서로 다르지 않다는 점을 가장 투명하게 보여 준다. 수요 $P(Q)=a-bQ$와 constant marginal cost $c$를 그대로 유지한 채, 기업이 가격을 외생적으로 받는지, 시장수요를 내부화하는지, 경쟁자의 수량 또는 가격을 내부화하는지만 바꾸면 각 결과가 나온다.
+
+### 3.3.1 Common linear benchmark
+
+::: {.callout-note title="DEFINITION · linear benchmark"}
+
+$$
+P(Q)=a-bQ,
+              \qquad
+              a\gt c,
+              \quad b\gt 0,
+              \qquad
+              C_i(q_i)=cq_i.
+$$
+
+:::
+
+| 구조 | 총산출량 | 가격 | deadweight loss |
+| --- | --- | --- | --- |
+| Perfect competition | $Q^c=(a-c)/b$ | $P^c=c$ | $0$ |
+| Monopoly | $Q^m=(a-c)/(2b)$ | $P^m=(a+c)/2$ | $(a-c)^2/(8b)$ |
+| $N$-firm Cournot | $Q^C=N(a-c)/[b(N+1)]$ | $P^C=(a+Nc)/(N+1)$ | $(a-c)^2/[2b(N+1)^2]$ |
+| Homogeneous-good Bertrand | $Q^B=(a-c)/b$ | $P^B=c$ | $0$ |
+
+Cournot의 $N=1$은 monopoly formula와 일치하고, $N\to\infty$이면 competitive formula로 수렴한다. 따라서 이 benchmark에서는 시장구조가 경쟁에서 독점으로 분절되어 있는 것이 아니라, 기업들이 internalise하는 market effect의 정도가 연속적으로 변한다고 읽을 수 있다.
+
+::: {.callout-note appearance="simple" title="REMARK · 비대칭 비용 benchmark"}
+선형수요 아래 비용이 $c_i$로 서로 다르면, 활동 기업 집합 $A$의 equilibrium price는
+
+
+$$
+p_A
+              =
+              \frac{a+\sum_{i\in A}c_i}{|A|+1},
+              \qquad
+              q_i
+              =
+              \frac{p_A-c_i}{b}
+              \quad(i\in A).
+$$
+
+
+따라서 비대칭 비용은 단지 기업별 산출량을 바꾸는 것이 아니라, equilibrium에서 활동하는 기업의 집합 자체를 바꿀 수 있다.
+:::
+
+### 3.3.2 연습문제
+
+#### A. 완전경쟁시장
+
+1. 소비자 $h$의 demand $d_h(p,m_h)$에서 market demand $D(p)$를 정의하고, 어떤 조건 아래 $D$가 연속인지 설명하라.
+2. 기업별 supply correspondence $Y_i^s(p)$를 이용하여 competitive partial equilibrium의 세 조건을 정확히 쓰라.
+3. $D$가 strictly decreasing이고 $S$가 weakly increasing일 때 competitive equilibrium price가 유일함을 증명하라.
+4. $D(p;\theta)-S(p)=0$이 균형을 정의한다고 하자. $D_\theta\gt 0$, $D_p-S_p\lt 0$이면 $dp^*/d\theta\gt 0$임을 보이라.
+5. short-run firm supply를 $VC$로부터 유도하고, shutdown condition이 $AC$가 아니라 $AVC$에 의해 결정되는 이유를 설명하라.
+6. free entry와 zero-profit condition으로부터 long-run equilibrium에서 $p=MC=AC$가 나오는 과정을 증명하라.
+
+#### B. 같은 시장, 다른 conduct
+
+1. 완전경쟁, 독점, Cournot, Bertrand에서 기업의 행동변수와 perceived residual demand를 표로 정리하라.
+2. 독점기업이 $\max_Q\{P(Q)Q-C(Q)\}$를 풀 때 $MR=MC$가 나오는 과정을 유도하라.
+3. 독점기업의 supply curve가 일반적으로 정의되지 않는 이유를 $MR(Q)=MC(Q)$와 $P'(Q)$를 사용하여 설명하라.
+4. 선형 inverse demand와 constant marginal cost 아래 $N$-firm Cournot equilibrium을 유도하라.
+5. 비대칭 비용 $C_i(q_i)=c_iq_i$ 아래 active set $A$를 고정하고, $p_A$와 $q_i^A$를 유도하라. 어떤 기업이 inactive가 되는지의 조건도 제시하라.
+6. fixed cost $F$를 포함한 대칭 Cournot에서 integer free-entry condition $\pi_n\ge0$, $\pi_{n+1}\le0$를 유도하라. 왜 장기에도 $p\gt MC$가 가능할 수 있는지 설명하라.
+7. 동질재 Bertrand game에서 $(p_1,p_2)=(c,c)$가 유일한 Nash equilibrium임을 보이라.
+8. $c_1\lt c_2$인 연속 가격 동질재 Bertrand에서 $p_1=p_2=c_2$가 왜 엄밀한 pure equilibrium이 아닐 수 있는지 설명하라.
+9. 차별화된 Bertrand competition에서 가격의 first-order condition을 유도하고, 왜 일반적으로 $p_i=MC_i$가 아닌지 설명하라.
+10. 선형 differentiated Bertrand 수요 아래 best response를 유도하고, $\partial p_2^*/\partial c_1\ge0$의 경제적 의미를 설명하라.
+11. CES monopolistic competition에서 $p=\sigma c/(\sigma-1)$, $(p-c)q=F$, $N=E/(\sigma F)$를 유도하라.
+
+#### C. 후생 비교
+
+1. CV와 EV를 expenditure function으로 정의하고, quasi-linear utility 아래 consumer-surplus change와의 관계를 설명하라.
+2. industry cost function $C^I(Q)$를 정의하고, identical convex-cost firms가 있는 경우 cost-minimising production allocation의 조건을 구하라.
+3. $W(Q)=\int_0^Q P(z)dz-C^I(Q)$를 최대화하여 사회적으로 효율적인 산출량 조건을 유도하라.
+4. competitive equilibrium에서 $P(Q^c)=MC^I(Q^c)$가 성립하는 논리를 서술하라.
+5. 독점 deadweight loss를 $\int_{Q^m}^{Q^c}[P(Q)-MC(Q)]dQ$로 유도하라.
+6. 선형 benchmark에서 monopoly와 $N$-firm Cournot의 deadweight loss를 계산하고 $N$에 따른 변화를 분석하라.
+
+#### D. 종합문제
+
+1. $P(Q)=100-Q$, $C_i(q_i)=20q_i$인 시장을 생각하자. 완전경쟁, 독점, 두 기업 Cournot, 동질재 Bertrand의 가격·기업별 산출량·총산출량을 계산하고 후생을 비교하라.
+2. 두 기업의 비용이 $C_1(q)=cq$, $C_2(q)=cq+F$일 때, short run과 long run에서 producer surplus, profit, entry incentive이 어떻게 다른지 설명하라.
+3. free entry가 가능한 시장에서 최소평균비용이 지속적으로 하락하는 경우 왜 표준 competitive equilibrium 논리가 어려워지는지 natural monopoly의 언어로 설명하라.

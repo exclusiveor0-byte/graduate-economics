@@ -1,0 +1,319 @@
+# 2.4 생산의 duality
+
+> cost function은 단지 비용을 계산하는 함수가 아니다. closed, convex, free-disposal 기술 아래에서는 cost function이 기술을 지지하는 가격함수들의 모음이며, 충분한 조건 아래 기술 자체를 복원할 수 있다.
+
+### 2.4.1 Cost function에서 기술의 복원
+
+::: {.callout-important title="THEOREM 2.8 · cost duality"}
+고정한 $y\ge0$에 대해 $\mathcal V(y)\subseteq\mathbb R_+^n$가 nonempty, closed, convex이고 upper comprehensive하다고 하자. 즉 $x\in\mathcal V(y)$, $x'\ge x$이면 $x'\in\mathcal V(y)$라고 하자. cost function
+
+
+$$
+c(w,y)=\inf_{x\in\mathcal V(y)}w\cdot x
+$$
+
+
+으로부터 $\mathcal V(y)$는 다음과 같이 복원된다.
+
+
+$$
+\mathcal V(y)
+              =
+              \left\{
+                x\in\mathbb R_+^n:
+                w\cdot x\ge c(w,y)
+                \ \text{for every }w\in\mathbb R_{++}^n
+              \right\}.
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · separating hyperplane argument"}
+$x\in\mathcal V(y)$이면 정의상 모든 $w\gg0$에 대해 $w\cdot x\ge c(w,y)$이므로 좌변은 우변에 포함된다.
+
+반대로 $x\notin\mathcal V(y)$라고 하자. $\mathcal V(y)$는 closed convex set이므로 separating hyperplane theorem에 의해 어떤 $a\ne0$, $\beta$가 존재하여
+
+$$
+a\cdot x\lt \beta\le a\cdot z
+\qquad\text{for every }z\in\mathcal V(y).
+$$
+
+$\mathcal V(y)$가 upper comprehensive이므로 $a$의 어떤 성분이 음수이면 $z+te_i\in\mathcal V(y)$에 대해 $t\to\infty$로 보내는 순간 $a\cdot z$가 아래로 발산하여 위 부등식과 모순이다. 따라서 $a\ge0$이다.
+
+$a$가 일부 영성분을 가질 수 있으므로 $w_\varepsilon=a+\varepsilon\mathbf1\gg0$를 둔다. 분리간격을
+
+$$
+\delta
+=
+\inf_{z\in\mathcal V(y)}a\cdot z-a\cdot x
+\gt0
+$$
+
+로 두자. $z\in\mathbb R_+^n$이므로
+
+$$
+c(w_\varepsilon,y)
+=
+\inf_{z\in\mathcal V(y)}\{a\cdot z+\varepsilon\mathbf1\cdot z\}
+\ge
+\inf_{z\in\mathcal V(y)}a\cdot z.
+$$
+
+한편 $w_\varepsilon\cdot x=a\cdot x+\varepsilon\mathbf1\cdot x$다. 따라서
+
+$$
+0<\varepsilon<\frac{\delta}{1+\mathbf1\cdot x}
+$$
+
+로 택하면
+
+$$
+w_\varepsilon\cdot x
+<
+\inf_{z\in\mathcal V(y)}a\cdot z
+\le
+c(w_\varepsilon,y).
+$$
+
+그러므로 $x$는 우변의 집합에 속하지 않는다. 따라서 두 집합은 같다. □
+:::
+
+이 정리는 cost function이 모든 positive factor-price vector에서 기술의 supporting cost를 기록한다는 뜻이다. convexity가 없으면 cost minimisation은 input-requirement set의 convexified boundary만 반영할 수 있으므로, 일반적으로 원래 기술 전체를 복원할 수 없다.
+
+### 2.4.2 Profit function에서 production set의 복원
+
+::: {.callout-important title="THEOREM · extended-value profit duality"}
+$Y\subseteq\mathbb R^{n+1}$가 nonempty, closed, convex이며 free disposal
+
+$$
+Y-\mathbb R_+^{n+1}\subseteq Y
+$$
+
+을 만족한다고 하자. nonnegative price vector $q\in\mathbb R_+^{n+1}$에 대해
+extended-value profit function을
+
+$$
+\Pi(q)=\sup_{z\in Y}q\cdot z
+\in\mathbb R\cup\{+\infty\}
+$$
+
+로 정의하자. 그러면 production set은
+
+$$
+Y
+=
+\left\{
+z\in\mathbb R^{n+1}:
+q\cdot z\le\Pi(q)
+\ \text{for every }q\in\mathbb R_+^{n+1}
+\right\}
+$$
+
+로 복원된다. $\Pi(q)=+\infty$인 가격벡터는 위 부등식에 실질적 제약을 추가하지 않을 뿐이며,
+모든 $q$에서 finiteness를 가정할 필요는 없다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF · supporting-profit representation"}
+$z\in Y$이면 정의상 모든 $q\ge0$에 대해 $q\cdot z\le\sup_{\tilde z\in Y}q\cdot\tilde z=\Pi(q)$이므로
+좌변의 집합은 우변에 포함된다.
+
+반대로 $z\notin Y$라 하자. $Y$가 closed convex이므로 strong separation theorem에 의해 어떤
+$a\ne0$와 $\beta$가 존재하여
+
+$$
+a\cdot z\gt\beta\ge a\cdot \tilde z
+\qquad\text{for every }\tilde z\in Y.
+$$
+
+free disposal 때문에 $a$가 음의 성분을 가지면, $\tilde z-r\in Y$ $(r\ge0)$에서 해당 성분의
+$r$을 무한히 키워 $a\cdot(\tilde z-r)$를 무한히 크게 만들 수 있다. 이는 위의 상계와 모순이다.
+따라서 $a\ge0$. 또한 분리부등식이 $\sup_{\tilde z\in Y}a\cdot\tilde z\le\beta<\infty$를 주므로
+$\Pi(a)$는 이 경우 유한하다. 그러므로
+
+$$
+a\cdot z\gt\Pi(a),
+$$
+
+이고 $z$는 우변의 교집합에 속하지 않는다. □
+:::
+
+cost duality가 고정한 output target $y$에서 input-requirement set $\mathcal V(y)$를 복원한다면,
+profit duality는 모든 output-input plan을 한꺼번에 담은 net-output production set $Y$를 복원한다.
+전자는 cost minimisation의 duality이고, 후자는 경쟁기업의 공급행동을 포함한 production duality다.
+
+### 2.4.3 Conditional factor demand의 integrability
+
+::: {.callout-important title="THEOREM · smooth conditional factor demand의 cost integrability"}
+output target $y$를 고정하자. $C^1$ 함수
+
+$$
+\widehat x(\cdot,y):\mathbb R_{++}^n\to\mathbb R_+^n
+$$
+
+가 다음을 만족한다고 하자.
+
+
+$$
+\widehat x(\lambda w,y)=\widehat x(w,y)
+      \qquad(\lambda\gt0),
+$$
+
+
+$$
+D_w\widehat x(w,y)
+      =
+      D_w\widehat x(w,y)^\top,
+      \qquad
+      D_w\widehat x(w,y)\preceq0.
+$$
+
+
+그러면
+
+$$
+\widehat c(w,y)=w\cdot\widehat x(w,y)
+$$
+
+는 가격에 대해 concave하고 degree-one homogeneous이며,
+
+$$
+\nabla_w\widehat c(w,y)=\widehat x(w,y)
+$$
+
+를 만족한다. 따라서 $\widehat x(\cdot,y)$는 고정된 output target $y$에서 concave·degree-one homogeneous cost potential의 가격미분으로 integrable하다. 이 결론만으로 모든 output target을 하나의 production function에 통합할 수 있는 것은 아니다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+0차 동차성을 $\lambda$에 대해 미분하고 $\lambda=1$을 대입하면
+
+$$
+D_w\widehat x(w,y)\,w=0.
+$$
+
+Jacobian의 대칭성으로 $D_w\widehat x(w,y)^\top w=0$도 성립한다. 따라서
+
+$$
+\nabla_w\widehat c(w,y)
+=
+\widehat x(w,y)+D_w\widehat x(w,y)^\top w
+=
+\widehat x(w,y).
+$$
+
+다시 미분하면
+
+$$
+\nabla^2_{ww}\widehat c(w,y)=D_w\widehat x(w,y)\preceq0,
+$$
+
+이므로 $\widehat c(\cdot,y)$는 concave하다. 또한 $\widehat x$의 0차 동차성으로
+
+$$
+\widehat c(\lambda w,y)
+=
+\lambda w\cdot\widehat x(\lambda w,y)
+=
+\lambda\widehat c(w,y).
+$$
+
+□
+:::
+
+::: {.callout-note appearance="simple" title="REMARK · 하나의 production function으로의 통합"}
+위 정리는 고정된 $y$에서의 factor-price behaviour를 cost function으로 적분하는 결과다.
+서로 다른 $y$에 대해 하나의 production function을 복원하려면,
+
+$$
+y'\ge y
+\Longrightarrow
+\mathcal V(y')\subseteq\mathcal V(y)
+$$
+
+에 대응하는 output 방향의 정합성, 즉 $\widehat c(w,y)$의 output 단조성·연속성·적절한 convexity를 추가로 요구해야 한다.
+그 조건이 갖추어지면 앞의 cost duality로 input-requirement correspondence를, 다시 production function을 복원할 수 있다.
+:::
+
+### 2.4.4 Homothetic technology와 homogeneous technology
+
+::: {.callout-note title="DEFINITION · homothetic technology"}
+technology가 homothetic이라는 것은 degree-one homogeneous한 function $g$와,
+$g(\mathbb R_+^n)$의 relevant range에서 strictly increasing인 function $\psi$가 존재하여
+
+
+$$
+f(x)=\psi(g(x))
+$$
+
+
+로 쓸 수 있다는 뜻이다. strict increase는 relevant output range에서 $\psi^{-1}$를 사용할 수 있게 하며, 이때 output scale과 cost-minimising input proportion을 분리할 수 있다.
+:::
+
+::: {.callout-important title="PROPOSITION · homothetic technology와 비용의 scale 분리"}
+$f=\psi\circ g$이고 $\psi$가 $g(\mathbb R_+^n)$의 relevant range에서 strictly increasing하며,
+$g$가 degree-one homogeneous라고 하자. 각 $y\in\mathcal Y_f$에 대해
+$h(y)=\psi^{-1}(y)$로 두면
+
+
+$$
+\mathcal V_f(y)=\{x:g(x)\ge h(y)\},
+              \qquad
+              c_f(w,y)=h(y)c_g(w,1).
+$$
+
+
+따라서 homothetic technology에서는 output target이 conditional factor demand의 규모만 바꾸고, 주어진 $w$에서의 비용최소 input proportion은 output scale과 독립적이다.
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$\psi$가 strictly increasing이므로 $f(x)\ge y\Longleftrightarrow g(x)\ge\psi^{-1}(y)=h(y)$다. $g$의 degree-one homogeneity로 $g(x)\ge h(y)$인 bundle은 $h(y)$배한 unit-output requirement set과 일치한다. 따라서 비용최소화에서 비용도 $h(y)$배가 된다. □
+:::
+
+::: {.callout-important title="THEOREM 2.9 · homogeneous technology의 cost scaling"}
+$f$가 degree $\alpha\gt0$ homogeneous이고 $\mathcal V(1)\ne\varnothing$, conditional factor demand가 단일값이라고 하자. 그러면
+
+
+$$
+c(w,y)=y^{1/\alpha}c(w,1),
+              \qquad
+              x^c(w,y)=y^{1/\alpha}x^c(w,1)
+              \qquad(y\gt0).
+$$
+
+
+특히 CRS, 즉 $\alpha=1$이면
+
+
+$$
+c(w,y)=yc(w,1),
+              \qquad
+              x^c(w,y)=y x^c(w,1).
+$$
+
+:::
+
+::: {.callout-tip collapse="true" title="PROOF"}
+$x\in\mathcal V(1)$이면 $f(x)\ge1$이다. homogeneity로
+
+$$
+f\bigl(y^{1/\alpha}x\bigr)
+=y f(x)
+\ge y,
+$$
+
+이므로 $y^{1/\alpha}x\in\mathcal V(y)$다. 따라서
+
+$$
+c(w,y)
+\le y^{1/\alpha}c(w,1).
+$$
+
+반대로 $z\in\mathcal V(y)$이면 $y^{-1/\alpha}z\in\mathcal V(1)$이므로
+
+$$
+w\cdot z
+=y^{1/\alpha}w\cdot\bigl(y^{-1/\alpha}z\bigr)
+\ge y^{1/\alpha}c(w,1).
+$$
+
+양변의 infimum을 취하면 등식이 성립한다. 유일한 minimiser에 대한 식도 같은 scaling correspondence에서 바로 따른다. □
+:::

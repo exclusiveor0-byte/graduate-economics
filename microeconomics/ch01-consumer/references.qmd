@@ -1,0 +1,7 @@
+# 참고문헌
+
+Jehle, G. A., and P. J. Reny. *Advanced Microeconomic Theory*, 3rd ed., Chapter 1 and Mathematical Appendices A1–A2.
+
+Mas-Colell, A., M. D. Whinston, and J. R. Green. *Microeconomic Theory*, Chapters 1–3; Mathematical Appendix M.
+
+Varian, H. R. *Microeconomic Analysis*, 3rd ed., Chapters 7–10. 수요이론의 duality, CV·EV, Slutsky 분해를 위한 보조 참고문헌.

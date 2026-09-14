@@ -1,0 +1,22 @@
+# Part I. Microeconomics {.unnumbered}
+
+## 대학원 미시경제이론
+
+**선택, 생산, 시장, 균형, 그리고 후생**
+
+현재 마이그레이션 범위는 **Chapter 0–4**이며, 수학적 기초 → 소비자이론 → 생산자이론 → 부분균형 → 순수교환 일반균형의 순서로 구성합니다.
+
+## Chapter 선택
+
+| Chapter | 내용 |
+|---|---|
+| [Chapter 0](ch00-foundations/index.qmd) | 미시경제이론의 수학적 언어와 존재 논리 |
+| [Chapter 1](ch01-consumer/index.qmd) | 소비자이론 |
+| [Chapter 2](ch02-producer/index.qmd) | 생산자이론 |
+| [Chapter 3](ch03-partial-equilibrium/index.qmd) | 부분균형분석 |
+| [Chapter 4](ch04-pure-exchange/index.qmd) | 순수교환경제 |
+
+::: {.callout-note title="Source migration"}
+기존 통합 미시경제학 정리노트의 내용과 수식을 Section 단위 독립 페이지로 옮겼습니다.
+Quarto Book에서는 각 Section을 개별 URL로 읽고 검토할 수 있습니다.
+:::

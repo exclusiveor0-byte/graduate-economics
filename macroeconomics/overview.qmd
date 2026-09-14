@@ -1,0 +1,3 @@
+# Macroeconomics Migration Overview
+
+현재는 구조 placeholder입니다. 기존 Chapter 0–13 및 Appendix 체계를 Section 단위 파일로 옮길 예정입니다.

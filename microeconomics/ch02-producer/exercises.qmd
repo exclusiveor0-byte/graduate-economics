@@ -1,0 +1,44 @@
+# 2.6 연습문제
+
+### A. 기술과 규모
+
+1. $f$가 quasiconcave일 필요충분조건이 모든 input-requirement set $\mathcal V(y)$의 convexity임을 보이라.
+2. $f$가 degree $\alpha$ homogeneous이고 $C^1$일 때 Euler theorem을 유도하라.
+3. $f(x_1,x_2)=x_1^{1/3}x_2^{2/3}$의 returns to scale, 각 input의 marginal product, output elasticity를 구하라.
+4. CRS와 diminishing marginal product가 동시에 성립할 수 있음을 Cobb–Douglas technology로 보이라.
+5. $f$가 quasiconcave이고 degree $\alpha\in(0,1]$ homogeneous이면 concave임을 증명하라.
+6. Leontief technology와 perfect-substitutes technology의 isoquant를 비교하고, 어느 경우 MRTS가 정의되지 않거나 다가값이 되는지 설명하라.
+7. $f$의 continuity, concavity, $f(\mathbf0)=0$이 각각 $\mathcal T,Y$의 closedness, convexity, no-free-lunch를 보장함을 증명하라.
+
+### B. Cost minimisation
+
+1. $f$가 continuous이고 $w\gg0$일 때 conditional factor demand가 존재함을 compact restriction argument로 보이라.
+2. strictly quasiconcave technology 아래 conditional factor demand가 유일함을 보이라.
+3. continuous technology와 $f(\mathbf0)=0$ 아래 비용최소 input bundle이 정확히 $y$를 생산함을 보이라.
+4. $c(w,y)$가 $w$에 대해 1차 동차이고 concave함을 보이라.
+5. $f$가 concave이면 $c(w,y)$가 $y$에 대해 convex함을 보이라.
+6. conditional factor demand의 0차 동차성에서 $D_wx^c(w,y)w=0$을 유도하라.
+7. Shephard lemma를 이용하여 Cobb–Douglas cost function에서 conditional factor demand를 복원하라.
+8. strict input monotonicity 아래 $(w,y)\mapsto X^c(w,y)$의 UHC와 $c(w,y)$의 연속성을 local compact containment 논증으로 보이라.
+
+### C. Duality와 경쟁기업
+
+1. closed, convex, upper comprehensive한 $\mathcal V(y)$에 대해 cost duality theorem을 separating hyperplane theorem으로 증명하라.
+2. $f$가 degree $\alpha$ homogeneous이면 $c(w,y)=y^{1/\alpha}c(w,1)$임을 보이라.
+3. two-stage decomposition $\Pi(p,w)=\sup_{y\ge0}\{py-c(w,y)\}$을 증명하라.
+4. CRS technology에서 $p\lt c(w,1)$, $p=c(w,1)$, $p\gt c(w,1)$의 세 경우를 비교하라.
+5. profit function이 $(p,w)$에 대해 convex이고 degree one homogeneous임을 보이라.
+6. Hotelling lemma를 envelope argument로 유도하라.
+7. $\Pi\in C^2$일 때 net supply Jacobian이 symmetric positive semidefinite임을 보이고, 이는 consumer Slutsky matrix와 어떤 점에서 대조되는지 설명하라.
+8. closed, convex, free-disposal production set에서 profit duality $Y=\{z:q\cdot z\le \Pi(q)\ \forall q\ge0\}$를 증명하라.
+9. smooth conditional factor demand의 0차 동차성, symmetry, negative semidefiniteness가 cost integrability를 보장하는 이유를 보이라.
+10. concave differentiable technology에서 $pf_i(x^*)\le w_i$ 및 $x_i^*\gt0\Rightarrow pf_i(x^*)=w_i$를 유도하라.
+11. short-run shutdown 조건과 long-run exit 조건이 각각 $AVC$, $AC$에 의해 결정되는 이유를 설명하라.
+
+### D. 표준 기술
+
+1. Cobb–Douglas technology $f(x_1,x_2)=A x_1^\alpha x_2^{1-\alpha}$의 conditional factor demand와 cost function을 처음부터 유도하라.
+2. Leontief technology의 cost function이 선형임을 보이고, CRS 경쟁기업의 profit maximisation을 분석하라.
+3. perfect-substitutes technology에서 conditional factor demand가 correspondence가 되는 factor-price ratio를 구하라.
+4. fixed input $\bar x_2$를 갖는 short-run Cobb–Douglas technology를 하나 설정하고, variable cost와 short-run profit problem을 작성하라.
+5. IRS technology의 예를 하나 제시하고, 양의 이윤이 가능한 경우 long-run profit maximiser가 존재하지 않을 수 있음을 보이라.
