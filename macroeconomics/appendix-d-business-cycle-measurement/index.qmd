@@ -1,0 +1,5 @@
+# Appendix D · 경기변동 측정과 모형평가 {.unnumbered}
+
+Business-Cycle Measurement and Model Evaluation
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)

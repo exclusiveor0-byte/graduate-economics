@@ -6,6 +6,7 @@ project:
     - supplements/interactive/**
     - supplements/r/**
     - supplements/matlab/**
+    - styles/macro-content.scss
 lang: ko
 bibliography: references.bib
 number-sections: false
@@ -81,7 +82,63 @@ book:
     - microeconomics/ch04-pure-exchange/supplement-examples-exercises.qmd
     - microeconomics/ch04-pure-exchange/references.qmd
   - macroeconomics/index.qmd
-  - macroeconomics/overview.qmd
+  - part: macroeconomics/ch00-macro-map/index.qmd
+    chapters:
+    - macroeconomics/ch00-macro-map/contents.qmd
+  - part: macroeconomics/ch01-solow-growth/index.qmd
+    chapters:
+    - macroeconomics/ch01-solow-growth/contents.qmd
+  - part: macroeconomics/ch02-ramsey-olg/index.qmd
+    chapters:
+    - macroeconomics/ch02-ramsey-olg/contents.qmd
+  - part: macroeconomics/ch03-endogenous-growth/index.qmd
+    chapters:
+    - macroeconomics/ch03-endogenous-growth/contents.qmd
+  - part: macroeconomics/ch04-development-accounting/index.qmd
+    chapters:
+    - macroeconomics/ch04-development-accounting/contents.qmd
+  - part: macroeconomics/ch05-real-business-cycles/index.qmd
+    chapters:
+    - macroeconomics/ch05-real-business-cycles/contents.qmd
+  - part: macroeconomics/ch06-nominal-rigidity/index.qmd
+    chapters:
+    - macroeconomics/ch06-nominal-rigidity/contents.qmd
+  - part: macroeconomics/ch07-new-keynesian-dsge/index.qmd
+    chapters:
+    - macroeconomics/ch07-new-keynesian-dsge/contents.qmd
+  - part: macroeconomics/ch08-monetary-policy/index.qmd
+    chapters:
+    - macroeconomics/ch08-monetary-policy/contents.qmd
+  - part: macroeconomics/ch09-consumption-risk/index.qmd
+    chapters:
+    - macroeconomics/ch09-consumption-risk/contents.qmd
+  - part: macroeconomics/ch10-investment/index.qmd
+    chapters:
+    - macroeconomics/ch10-investment/contents.qmd
+  - part: macroeconomics/ch11-complete-markets/index.qmd
+    chapters:
+    - macroeconomics/ch11-complete-markets/contents.qmd
+  - part: macroeconomics/ch12-financial-frictions/index.qmd
+    chapters:
+    - macroeconomics/ch12-financial-frictions/contents.qmd
+  - part: macroeconomics/ch13-incomplete-markets/index.qmd
+    chapters:
+    - macroeconomics/ch13-incomplete-markets/contents.qmd
+  - part: macroeconomics/appendix-a-dynamic-optimization/index.qmd
+    chapters:
+    - macroeconomics/appendix-a-dynamic-optimization/contents.qmd
+  - part: macroeconomics/appendix-b-linear-rational-expectations/index.qmd
+    chapters:
+    - macroeconomics/appendix-b-linear-rational-expectations/contents.qmd
+  - part: macroeconomics/appendix-c-perturbation/index.qmd
+    chapters:
+    - macroeconomics/appendix-c-perturbation/contents.qmd
+  - part: macroeconomics/appendix-d-business-cycle-measurement/index.qmd
+    chapters:
+    - macroeconomics/appendix-d-business-cycle-measurement/contents.qmd
+  - part: macroeconomics/appendix-e-growth-empirics/index.qmd
+    chapters:
+    - macroeconomics/appendix-e-growth-empirics/contents.qmd
   - econometrics/index.qmd
   - econometrics/overview.qmd
   - supplements/index.qmd
@@ -95,6 +152,7 @@ format:
     theme:
     - cosmo
     - styles/notes.scss
+    - styles/macro-content.scss
     toc: true
     toc-title: 이 페이지에서
     grid:

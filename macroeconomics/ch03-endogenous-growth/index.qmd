@@ -1,0 +1,5 @@
+# Chapter 03 · 지식축적과 내생적 성장 {.unnumbered}
+
+Knowledge Accumulation, Innovation, and the Limits of Endogenous Growth
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)

@@ -1,0 +1,5 @@
+# Chapter 05 · 실물경기변동 {.unnumbered}
+
+Real Business Cycles: Shocks, Propagation, Recursive Equilibrium, and the Limits of the Walrasian Benchmark
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)

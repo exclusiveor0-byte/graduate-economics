@@ -1,0 +1,5 @@
+# Chapter 10 · 투자수요 {.unnumbered}
+
+Investment Demand, Capital Adjustment, and the Shadow Value of Installed Capital
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)

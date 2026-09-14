@@ -1,0 +1,1625 @@
+---
+title: >-
+  투자수요, 자본조정,그리고 \(q\) 이론
+description: >-
+  Investment Demand, Capital Adjustment, and the Shadow Value of Installed Capital
+---
+
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::::::: {#ch10-opening .section}
+Chapter 01--02에서 자본축적은 경제 전체의 성장경로를 설명하는 축이었다.
+이 장에서는 관점을 기업으로 옮긴다. 기업은 현재의 설치자본을 즉시 바꿀
+수 없고, 미래의 한계이윤과 자본조정 비용을 비교하면서 투자속도를
+선택한다. 따라서 투자는 단순히 산출 중 소비되지 않은 부분이 아니라, 이미
+설치된 자본stock을 원하는 자본stock으로 옮기는 forward-looking
+control이다.
+
+:::::: model-contrast
+::: {}
+[CHAPTER 01--02]{.tag}
+
+### 경제 전체의 자본축적
+
+저축·인구·기술진보가 자본과 소비의 장기경로를 어떻게 결정하는지
+분석한다.
+:::
+
+::: arrow
+→
+:::
+
+::: {}
+[CHAPTER 10]{.tag}
+
+### 기업의 자본조정
+
+기업이 현재 설치자본을 원하는 자본stock으로 왜, 얼마나 빠르게, 어떤
+경로를 따라 조정하는지 분석한다.
+:::
+::::::
+
+::: math-display
+$$
+        \boxed{
+        \text{investment is a forward-looking adjustment of a predetermined capital stock}.}
+        $$
+:::
+
+::: thesis
+이 장의 중심 명제
+
+user cost는 기업이 장기적으로 원하는 자본량을 설명한다. 그러나 자본을
+설치·확장·축소하는 데 실물비용이 든다면, 원하는 자본량과 실제 자본량은
+분리된다. 조정비용, 설치자본의 재화단위 그림자가치 $\lambda_t^K$, 그리고
+그 replacement cost 비율인 marginal $q_t^m$가 바로 그 간극과 전이동학을
+설명한다.
+:::
+:::::::::
+
+:::::::::: {#ch10-s01 .section}
+## [10.1]{.section-number}투자라는 객체: 자본stock, gross investment, net investment
+
+물적투자는 미래 생산에 쓰일 자본을 새로 생산·구매·설치하는 실물자원
+사용이다. 금융자산 거래와는 구분되어야 하며, gross investment·net
+investment·capital stock도 서로 다른 시간적 객체다.
+
+### 10.1.1 시간규약
+
+::: math-display
+$$
+          K_{t+1}=(1-\delta)K_t+I_t,
+          \qquad \delta\in[0,1].
+          \tag{10.1}
+        $$
+:::
+
+$K_t$는 $t$기 초에 이미 설치되어 생산에 투입될 수 있는 자본stock이고,
+$I_t$는 $t$기에 선택하는 gross investment flow다. 감가상각은 기존 자본을
+$\delta K_t$만큼 줄인다. 따라서 순자본축적은
+
+::: math-display
+$$
+          K_{t+1}-K_t=I_t-\delta K_t.
+          \tag{10.2}
+        $$
+:::
+
+::::: {.statement .remark}
+::: statement-head
+확률적 timing과 정보집합
+:::
+
+불확실성 아래에서는 모든 확률변수를 여과확률공간
+$(\Omega,\mathcal F,\{\mathcal F_t\}_{t\ge0},P)$ 위에서 정의한다고 둔다.
+$\mathcal F_t$는 $t$기에 기업이 알고 있는 정보를 나타내고,
+$E_t[\cdot]$는 $E[\cdot\mid\mathcal F_t]$를 뜻한다. 이 장의 기준
+timing에서는 $t$기 초 설치자본 $K_t$, 외생상태 $z_t$, 자본재 가격
+$p_t^I$가 이미 알려져 있고, 기업은 그 정보에 기초해 $I_t$와 $K_{t+1}$를
+선택한다.
+
+::: math-display
+$$
+            K_t,z_t,p_t^I,I_t,K_{t+1}\in\mathcal F_t,
+            \qquad
+            z_{t+1}\in\mathcal F_{t+1}.
+            \tag{10.2a}
+          $$
+:::
+
+따라서 $E_t[V(K_{t+1},z_{t+1})]$에서 $K_{t+1}$는 $t$기에 선택된 값이고,
+불확실성은 주로 다음 기 외생상태 $z_{t+1}$에서 온다. 이 measurability
+조건이 $K_t$는 predetermined state이고 $I_t$는 현재 control이라는 구분을
+수학적으로 고정한다.
+:::::
+
+::: display-table-wrap
+  객체                     정의                                                      이 장에서의 역할
+  ------------------------ --------------------------------------------------------- -------------------------------------------
+  capital stock $K_t$      이미 설치되어 $t$기에 생산능력을 제공하는 자본.           predetermined state variable.
+  gross investment $I_t$   새 자본의 구매·생산·설치에 투입되는 당기 flow.            기업의 동태적 control variable.
+  net investment           $I_t-\delta K_t$.                                         자본stock이 실제로 늘거나 줄어드는 정도.
+  financial asset trade    기존 claim의 소유권 이전.                                 그 자체로 설치자본을 늘리지 않을 수 있다.
+  physical investment      설비·구조물·소프트웨어·조직자본을 새로 만드는 실물활동.   미래 생산가능집합을 바꾼다.
+:::
+
+::: math-display
+$$
+          \boxed{
+          \text{physical investment}
+          \neq
+          \text{financial asset trade},
+          \qquad
+          I_t
+          \neq
+          I_t-\delta K_t
+          \neq
+          K_t.}
+        $$
+:::
+
+Chapter 01의 $I_t=sY_t$는 거시 자원제약을 압축하는 유용한 표현이지만,
+기업의 투자수요함수는 아니다. 그것은 투자율을 외생적으로 주고, 기업이 왜
+특정한 속도로 자본을 조정하는지 설명하지 않는다. Chapter 10의 출발점은
+투자 $I_t$를 자본stock의 변화를 선택하는 독립적인 동태 통제로 복원하는
+데 있다.
+::::::::::
+
+::::::::::::::: {#ch10-s02 .section}
+## [10.2]{.section-number}desired capital stock과 user cost of capital
+
+조정비용이 없는 기준점에서는 기업이 현재 자본을 한 단위 더 보유하는
+한계수익과 자본을 보유하는 유효비용을 비교한다. 이 비교는 desired
+capital stock을 정의하지만, 실제 투자의 속도는 아직 설명하지 않는다.
+
+### 10.2.1 정태적 기준점
+
+노동, 중간재, 산출가격, 임금 등 자본 이외의 정태적 선택을 이미 최적화한
+뒤의 operating profit을 $\pi(K,z)$로 쓰자. $z$는
+생산성·수요·산출가격·임금·세제 등 기업의 수익기회를 요약하는 외생상태다.
+마찰 없는 기준문제는
+
+::: math-display
+$$
+          \max_K\left\{\pi(K,z)-u_KK\right\}.
+          \tag{10.3}
+        $$
+:::
+
+내부해에서는 desired capital stock $K^d$가
+
+::: math-display
+$$
+          \pi_K(K^d,z)=u_K
+          \tag{10.4}
+        $$
+:::
+
+로 정해진다. $K^d$는 실제 보유자본이 아니라, 주어진 수익성 및
+자본사용비용 아래 기업이 보유하고 싶어 하는 자본량이다.
+
+:::: math-case
+CONTINUOUS-TIME USER-COST BOX
+
+자본재 한 단위의 가격을 $p_I(t)$, 순간 실질이자율을 $r(t)$라고 하면,
+연속시간의 표준 user cost는
+
+::: math-display
+$$
+          u_K(t)=\left[r(t)+\delta-\frac{\dot p_I(t)}{p_I(t)}\right]p_I(t).
+          \tag{10.5}
+          $$
+:::
+
+이는 자본 구매자금의 기회비용 $rp_I$, 감가상각 $\delta p_I$, 그리고 보유
+중 발생하는 예상 자본이득 $-\dot p_I$을 합친 것이다. 이 식은
+desired-capital benchmark를 해석하는 보조표기이며, 본문의 discrete-time
+$\lambda_t^K$\--$q_t^m$ system과 기계적으로 섞어 쓰지 않는다.
+::::
+
+### 10.2.2 세제 wedge와 자본재 상대가격
+
+법인세율을 $\tau$, 투자세액공제를 $ITC$, 세법상 감가상각공제의
+현재가치를 $Z$, 자본재 상대가격 상승률을 $\pi_I=\dot p_I/p_I$로 두면,
+대표적인 Hall\--Jorgenson식 user cost는 단순화하여
+
+::: math-display
+$$
+          u_K
+          \approx
+          p_I(r+\delta-\pi_I)
+          \frac{1-ITC-\tau Z}{1-\tau}.
+          \tag{10.5a}
+        $$
+:::
+
+정확한 세제식은 과세대상 이윤, 공제 timing, 감가상각 규칙,
+투자세액공제의 적용범위에 따라 달라진다. 여기서 필요한 핵심은 세제가
+자본의 유효 구매가격과 보유비용을 바꾸어 desired capital을 움직인다는
+점이다.
+
+::: math-display
+$$
+          \boxed{
+          \text{tax policy changes investment incentives by changing the effective purchase price and user cost of capital}.}
+          \tag{10.5b}
+        $$
+:::
+
+:::::: {.statement .remark}
+::: statement-head
+자본재 가격과 investment-specific technology shock의 구분
+:::
+
+$p_t^I\downarrow$는 새 자본재 한 단위를 얻기 위해 필요한 산출재 비용이
+낮아지는 상대가격 변화다. 반면 investment-specific technology shock은
+같은 투자지출이 더 많은 효율자본을 만들게 하는 기술변화로 쓸 수 있다.
+
+::: math-display
+$$
+            K_{t+1}
+            =(1-\delta)K_t+\Upsilon_t I_t.
+            \tag{10.5c}
+          $$
+:::
+
+두 표현은 관측상 비슷해 보일 수 있지만, 하나는 자본재 상대가격의
+변화이고 다른 하나는 투자재를 효율자본으로 전환하는 기술의 변화다. 후속
+DSGE 문헌에서는 두 객체가 서로 다른 충격으로 들어갈 수 있다. 식
+(10.5c)를 유지하면 현재 투자 한 단위가 $\Upsilon_t$ 단위의 설치자본을
+만들기 때문에 interior FOC는 다음과 같다.
+
+::: math-display
+$$
+            p_t^I+\Phi_I(I_t,K_t)
+            =\Upsilon_t\lambda_t^K.
+            \tag{10.5d}
+          $$
+:::
+
+따라서 뒤의 식 (10.10b)--(10.18)은 $\Upsilon_t=1$인 baseline을 사용한다.
+investment-specific technology를 유지할 때에는 marginal value와 투자율
+식에 $\Upsilon_t$가 빠지지 않아야 한다.
+::::::
+
+:::: {.statement .theorem}
+::: statement-head
+desired capital과 실제 투자속도의 구분
+:::
+
+$u_K\downarrow\Rightarrow K^d\uparrow$는 원하는 자본stock의 비교정태다.
+이것만으로 $I_t$가 어느 크기로, 얼마나 빨리 변하는지는 알 수 없다.
+투자속도는 자본을 조정하는 데 드는 비용과 미래 수익성에 대한 기대를
+추가로 필요로 한다.
+::::
+:::::::::::::::
+
+:::::::::: {#ch10-s03 .section}
+## [10.3]{.section-number}마찰 없는 자본조정 benchmark와 그 실패
+
+자본을 즉시·무비용으로 매입, 매각, 설치할 수 있다면 실제 설치자본은
+원하는 자본stock으로 매우 빠르게 이동한다. 다만 이 장의 기준
+timing에서는 $K_t$가 $t$기 초 predetermined state이므로, $t$기에 직접
+선택되는 것은 $K_t$가 아니라 $I_t$와 $K_{t+1}$이다.
+
+::: math-display
+$$
+          K_{t+1}=K_{t+1}^d
+          \qquad
+          \text{under costless period-}t\text{ adjustment}.
+          \tag{10.6}
+        $$
+:::
+
+만약 기간 내 생산 전에 자본을 즉시 설치할 수 있는 다른 timing을 채택하면
+$K_t=K_t^d$라고 쓸 수 있다. 그러나 본 장의 순차 timing에서는 $K_t$가
+이미 정해져 있으므로, 마찰 없는 benchmark는 "오늘 충격을 본 뒤 다음 기
+설치자본을 즉시 원하는 수준으로 맞춘다"는 식 (10.6)으로 읽는 것이
+일관적이다.
+
+생산성, 수요, 세제, 할인율 또는 자본재 가격이 갑자기 변하면
+$K_{t+1}^d$도 불연속적으로 움직일 수 있다. 이 수준을 즉시 달성하려면
+
+::: math-display
+$$
+          I_t
+          =
+          K_{t+1}^d-(1-\delta)K_t
+          \tag{10.7}
+        $$
+:::
+
+가 되어야 한다. desired capital이 크게 변하면 투자 또는 투자축소가
+비경제적으로 매우 커질 수 있고, 바로 이 극단적 결론이 조정비용을
+도입해야 하는 이유를 보여 준다.
+
+::::: formula-pair
+::: {}
+[INTERNAL ADJUSTMENT COST]{.tag}
+
+### 기업 내부의 조정마찰
+
+설치, 훈련, 조직개편, 생산중단, 기존 설비와의 통합에서 발생하는
+비용이다. 본문의 기준모형은 이 비용을 $\Phi(I,K)$로 둔다.
+:::
+
+::: {}
+[EXTERNAL ADJUSTMENT COST]{.tag}
+
+### 자본재 공급의 조정마찰
+
+특정 자본재의 공급이 단기에 비탄력적이면, 전체 투자증가가 자본재
+상대가격을 올릴 수 있다. 이는 느린 조정의 다른 미시기초다.
+:::
+:::::
+
+:::: {.statement .remark}
+::: statement-head
+이 절의 결론
+:::
+
+user cost는 원하는 자본수준을 설명하고, adjustment cost는 그 수준으로
+가는 경로를 설명한다. Chapter 10의 핵심은 이 두 역할을 혼동하지 않는
+것이다.
+::::
+::::::::::
+
+::: part-divider
+PART II THE CORE q-THEORY MODEL: dynamic firm choice, shadow value, and
+capital transition
+:::
+
+:::::::::: {#ch10-s04 .section}
+## [10.4]{.section-number}조정비용이 있는 기업의 동태문제
+
+기준모형은 자금조달 마찰이 없고, 기업이 주어진 intertemporal pricing
+rule 아래 투자결정을 내리는 환경이다. 우선 결정론적 또는 위험중립적
+benchmark를 사용해 $\beta E_t[\cdot]$로 기업가치를 평가한다. aggregate
+risk가 가격화되는 일반형에서는 $\beta$가 Chapter 09의 SDF 또는 pricing
+kernel로 대체된다.
+
+### 10.4.1 재귀적 상태와 feasible set
+
+$z_t$가 Markov transition $Q(\cdot\mid z_t)$를 따른다고 하자. 상태
+$z_t$는 생산성·수요·산출가격·임금·세제뿐 아니라 자본재 상대가격을
+결정하는 모든 외생조건을 포함한다. 따라서
+
+::: math-display
+$$
+        p_t^I=p^I(z_t).
+        $$
+:::
+
+이 표기 아래 가치함수의 상태는 $(K_t,z_t)$로 닫힌다. 투자 선택은
+자본전이식과 정의역 제약을 동시에 만족해야 한다. 이를
+
+::: math-display
+$$
+          \Gamma(K,z)
+          =
+          \left\{
+          I:
+          K'=(1-\delta)K+I\in\mathcal K,\
+          I\in\mathcal I(K,z),\
+          p^I(z)I+\Phi(I,K)<\infty
+          \right\}
+          \tag{10.7a}
+        $$
+:::
+
+로 쓰자. $\mathcal K$는 허용 가능한 자본공간이고, $\mathcal I(K,z)$는
+비가역성·투자상한·disinvestment 하한 같은 제약을 포함할 수 있다. 단순한
+convex-adjustment benchmark에서는 $\mathcal I(K,z)$를 넓게 두지만,
+$K'\ge0$와 조정비용의 정의역은 여전히 확인해야 한다.
+
+### 10.4.2 위험중립 또는 결정론적 benchmark
+
+기준 Bellman equation은
+
+::: math-display
+$$
+          V(K_t,z_t)
+          =
+          \max_{I_t\in\Gamma(K_t,z_t)}
+          \left\{
+          \pi(K_t,z_t)-p^I(z_t) I_t-\Phi(I_t,K_t)
+          +\beta E_t\left[V(K_{t+1},z_{t+1})\right]
+          \right\},
+          \tag{10.8}
+        $$ $$
+          \text{subject to}\qquad
+          K_{t+1}=(1-\delta)K_t+I_t.
+          \tag{10.9}
+        $$
+:::
+
+$K_t$는 predetermined state, $I_t$는 control variable이다. $\Phi(I,K)$는
+설치·조직개편·훈련·생산차질·철거와 매각에 따르는 실물비용을 요약한다.
+$z_t$가 다음 기의 수익성·자본재 가격·세제를 예측하는 데 필요한 정보를
+모두 담을 때에만 $(K_t,z_t)$는 충분한 재귀적 상태다.
+
+### 10.4.3 일반 pricing-kernel 표현
+
+Chapter 09의 SDF 언어를 사용하면, aggregate risk가 가격화되는 일반형은
+
+::: math-display
+$$
+          V(K_t,z_t)
+          =
+          \max_{I_t\in\Gamma(K_t,z_t)}
+          \left\{
+          \pi(K_t,z_t)-p_t^I I_t-\Phi(I_t,K_t)
+          +E_t\!\left[
+          M_{t,t+1}V(K_{t+1},z_{t+1})
+          \right]
+          \right\}.
+          \tag{10.9a}
+        $$
+:::
+
+$M_{t,t+1}$는 $t+1$기 payoff를 $t$기 재화단위 가치로 바꾸는 stochastic
+discount factor다. 식 (10.8)은 $M_{t,t+1}=\beta$인 특수한 경우로 볼 수
+있다. 이 구분을 해두면 $q$ theory가 Chapter 09의 소비 SDF 및 Chapter
+11의 state-price system과 어떻게 연결되는지 명확해진다.
+
+:::: {.statement .warning}
+::: statement-head
+금융마찰은 아직 넣지 않는다
+:::
+
+식 (10.8)과 (10.9a)는 기업이 외부자금을 얼마나 비싸게 조달하는지가
+순자산이나 담보에 따라 달라지는 문제를 포함하지 않는다. 그런 환경에서는
+투자결정에 순자산·담보·external finance premium이 직접 들어가며, 이는
+Chapter 12의 금융마찰 블록에서 다룬다.
+::::
+
+### 10.4.4 장기 경계: admissibility와 terminal condition
+
+무한기간 문제에서는 admissible policy class와 terminal condition이
+필요하다. 그러나 그 조건의 정확한 수식은 가치함수의 단위, 가격의 timing,
+위험의 가격화 방식, 자본의 처분가치에 따라 달라진다. 따라서 이 장은
+no-Ponzi condition, no-bubble restriction, transversality condition을
+하나의 보편식으로 제시하지 않는다.
+
+핵심은 최적경로가 먼 미래의 자본 또는 continuation value를 이용해
+현재가치를 인위적으로 무한히 키우지 않아야 한다는 점이다. 이후의 FOC와
+전이동학은 이러한 admissibility 조건을 만족하는 interior path에서
+해석한다.
+
+::: source-note
+Ljungqvist--Sargent와의 연결
+
+미래 가격·수요·생산성이 집계상태의 법칙에 의존한다면 기업은 그 법칙을
+예측해야 한다. 재귀적 경쟁균형에서는 개별 기업이 사용하는 perceived law
+of motion과 모든 기업의 정책함수가 만들어 내는 actual law of motion이
+일치해야 한다. 여기서는 그 정합성만 명시하고, Chapter 05에서 다룬
+complete recursive-equilibrium fixed point는 반복하지 않는다.
+:::
+::::::::::
+
+::::::::::::: {#ch10-s05 .section}
+## [10.5]{.section-number}설치자본의 그림자가치, marginal $q$, 그리고 투자규칙
+
+투자이론에서 먼저 구분해야 할 것은 재화 단위의 그림자가치와 Tobin의 $q$
+비율이다. 전자는 설치자본 한 단위가 기업가치를 얼마나 높이는지를
+나타내고, 후자는 그 가치를 자본 취득가격으로 나눈 비율이다. 또한 오늘
+투자결정에 들어가는 한계가치와 이미 설치된 현재 자본의 한계가치는
+timing상 구분된다.
+
+### 10.5.1 투자 marginal value와 투자 FOC
+
+현재 투자 $I_t$가 만들어 내는 다음 기 설치자본 한 단위의 $t$기 재화단위
+그림자가치를
+
+::: math-display
+$$
+          \lambda_t^K
+          \equiv
+          E_t\!\left[
+          M_{t,t+1}V_K(K_{t+1},z_{t+1})
+          \right]
+          \tag{10.10}
+        $$
+:::
+
+로 정의하자. 위험중립 또는 결정론적 benchmark에서는
+$M_{t,t+1}=\beta$이므로
+
+::: math-display
+$$
+          \lambda_t^K
+          =
+          \beta E_t\!\left[V_K(K_{t+1},z_{t+1})\right].
+          \tag{10.10a}
+        $$
+:::
+
+interior 투자 FOC는
+
+::: math-display
+$$
+          \lambda_t^K
+          =
+          p_t^I+\Phi_I(I_t,K_t).
+          \tag{10.10b}
+        $$
+:::
+
+따라서 한 단위의 다음 기 설치자본을 더 만들기 위해서는 자본재 구매가격과
+한계조정비용을 합한 만큼의 현재가치가 필요하다.
+
+### 10.5.2 investment marginal $q$와 installed-capital marginal $q$
+
+오늘의 투자 FOC에 들어가는 marginal $q$는 다음처럼 정의한다.
+
+::: math-display
+$$
+          q_t^m
+          \equiv
+          \frac{\lambda_t^K}{p_t^I}
+          =
+          1+\frac{\Phi_I(I_t,K_t)}{p_t^I}.
+          \tag{10.11}
+        $$
+:::
+
+이는 한계적으로 추가 설치되는 자본의 현재가치를 새 자본 한 단위의
+replacement cost로 나눈 비율이다. 자본재 가격을 $p_t^I=1$로 정규화한
+경우에만 $\lambda_t^K=q_t^m$가 되어, 재화단위 그림자가치와 $q$ 비율을
+같은 기호처럼 써도 된다.
+
+반면 이미 설치된 현재 자본의 한계가치는
+
+::: math-display
+$$
+          q_t^K
+          \equiv
+          \frac{V_K(K_t,z_t)}{p_t^I}.
+          \tag{10.11a}
+        $$
+:::
+
+이다. $q_t^m$는 오늘 투자로 만들어지는 $K_{t+1}$의 할인된 한계가치이고,
+$q_t^K$는 현재 설치자본 $K_t$의 가치함수 기울기다. 시간규약이 단순하거나
+정상상태에서는 두 개념이 가까워 보일 수 있지만, average $q$와의 동차성
+정리는 주로 $V_K(K_t,z_t)$와 $V(K_t,z_t)/K_t$의 관계를 말한다.
+
+::: math-display
+$$
+          \text{capital-goods purchase price}
+          +
+          \text{marginal adjustment cost}
+          =
+          \text{investment marginal value of installed capital}.
+        $$
+:::
+
+### 10.5.3 미래 한계이윤으로의 재귀
+
+envelope condition을 사용하면 현재 설치자본의 한계가치는
+
+::: math-display
+$$
+          V_K(K_t,z_t)
+          =
+          \pi_K(K_t,z_t)-\Phi_K(I_t,K_t)
+          +(1-\delta)\lambda_t^K.
+          \tag{10.11b}
+        $$
+:::
+
+이다. 이를 한 기 앞으로 보내 식 (10.10)에 대입하면, 투자 marginal
+value는 미래 한계영업이윤, 미래 조정비용의 자본효과, 그리고 감가상각 뒤
+남는 설치자본의 continuation value로 재귀적으로 표현된다.
+
+::: math-display
+$$
+          \lambda_t^K
+          =
+          E_t\!\left[
+          M_{t,t+1}
+          \left\{
+          \pi_K(K_{t+1},z_{t+1})
+          -\Phi_K(I_{t+1},K_{t+1})
+          +(1-\delta)\lambda_{t+1}^K
+          \right\}
+          \right].
+          \tag{10.12}
+        $$
+:::
+
+식 (10.12)는 Chapter 09의 SDF와 Chapter 10의 $q$ theory를 직접 연결한다.
+위험중립 benchmark에서는 $M_{t,t+1}=\beta$가 되어 기존의
+$\beta E_t[\cdot]$ 식으로 돌아간다.
+
+:::: {.statement .remark}
+::: statement-head
+표기의 경계
+:::
+
+Chapter 09의 $q_t^j$는 일반 금융자산 $j$의 가격이다. 이 장의
+$\lambda_t^K$는 현재 투자로 만들어지는 설치자본의 재화단위
+그림자가치이고, $q_t^m$은 그 가치를 replacement cost로 나눈 investment
+marginal Tobin's $q$다. $q_t^K$는 현재 설치자본의 가치함수 기울기를
+replacement cost로 나눈 비율이다. 세 객체는 모두 미래 payoff의
+현재가치와 관련되지만, 정의·단위·timing이 다르므로 자동으로 동일시할 수
+없다.
+::::
+:::::::::::::
+
+::::::::::: {#ch10-s06 .section}
+## [10.6]{.section-number}convex adjustment costs, marginal $q$, 그리고 자본전이
+
+조정비용이 투자율에 대해 엄격히 convex하면, marginal $q$가 높을수록
+투자율은 더 높아진다. 이때 $q$ 이론은 설치자본의 한계가치를 실제
+투자율에 연결한다. Chapters 06--08의 순명목금리 $i_t$와 구분하기 위해 이
+장의 물적 투자율은 $\iota_t\equiv I_t/K_t$로 표기한다.
+
+### 10.6.1 homogeneous adjustment cost
+
+::: math-display
+$$
+          \Phi(I_t,K_t)
+          =K_t\phi\!\left(\frac{I_t}{K_t}\right),
+          \qquad
+          \phi''(\cdot)>0.
+          \tag{10.13}
+        $$
+:::
+
+투자율을 $\iota_t\equiv I_t/K_t$로 정의하면, $I_t$를 고정하고 $K_t$에
+대해 미분할 때
+
+::: math-display
+$$
+          \Phi_I(I_t,K_t)=\phi'(\iota_t),
+          \qquad
+          \Phi_K(I_t,K_t)=\phi(\iota_t)-\iota_t\phi'(\iota_t).
+          \tag{10.14}
+        $$
+:::
+
+자본재 가격을 $p_t^I=1$로 정규화하면 식 (10.11)은
+
+::: math-display
+$$
+          q_t^m=1+\phi'(\iota_t).
+          \tag{10.15}
+        $$
+:::
+
+strict convexity 때문에 $\phi'$는 증가함수다. interior branch에서
+역함수가 존재하면
+
+::: math-display
+$$
+          \iota_t=\mathcal I(q_t^m),
+          \qquad
+          \mathcal I'(q_t^m)>0.
+          \tag{10.16}
+        $$
+:::
+
+가 된다. 이것이 marginal $q$-investment rule이다.
+
+### 10.6.2 centred quadratic benchmark
+
+순자본축적과 marginal $q$의 관계를 가장 투명하게 보이기 위해 기준
+조정비용을
+
+::: math-display
+$$
+          \phi(\iota)=\frac{\varphi}{2}(\iota-\delta)^2,
+          \qquad
+          \varphi>0.
+          \tag{10.17}
+        $$
+:::
+
+로 둔다. 이 specification은 replacement investment $\iota=\delta$에서
+조정비용과 한계조정비용이 모두 0이 되도록 중심화되어 있다. 그러면
+
+::: math-display
+$$
+          \frac{K_{t+1}-K_t}{K_t}
+          =\iota_t-\delta
+          =\frac{q_t^m-1}{\varphi}.
+          \tag{10.18}
+        $$
+:::
+
+:::: {.statement .theorem}
+::: statement-head
+$q_t^m>1$의 정확한 의미
+:::
+
+centred benchmark에서 $q_t^m>1$은 $I_t>\delta K_t$, 즉 gross
+investment가 감가상각을 넘어서 $K_{t+1}>K_t$가 된다는 뜻이다. 단순히
+$I_t>0$을 뜻하지 않는다. replacement investment가 필요한 경제에서 양의
+gross investment는 자본stock 감소와 양립할 수 있다.
+::::
+:::::::::::
+
+::::::::::::::::::: {#ch10-s07 .section}
+## [10.7]{.section-number}전이동학, saddle path, 기대와 정책충격
+
+자본stock은 이미 설치되어 있으므로 점프할 수 없다. 반면 미래 한계이윤과
+할인조건을 압축하는 설치자본의 그림자가치는 새로운 정보가 도착하면 즉시
+재평가될 수 있다. 단, $q$를 독립적인 jump variable로 읽는 것은 결정론적
+perfect-foresight 전이문제의 표현이며, stochastic recursive
+formulation에서는 $q_t^m=q^m(K_t,z_t)$가 state에 의존하는 value-policy
+object다.
+
+::: math-display
+$$
+          K_t:\ \text{predetermined state},
+          \qquad
+          \lambda_t^K\ \text{or}\ q_t^m:
+          \text{forward-looking value object}.
+        $$
+:::
+
+### 10.7.1 stationary benchmark
+
+결정론적 stationary environment에서 $p_t^I=1$, $z_t=z^\ast$, centred
+adjustment cost를 두자. 정상상태에서는 $I^\ast=\delta K^\ast$,
+$q^{m\ast}=1$, 그리고 $\Phi_K(I^\ast,K^\ast)=0$이다. 식 (10.12)는
+
+::: math-display
+$$
+          \pi_K(K^\ast,z^\ast)
+          =\beta^{-1}-(1-\delta).
+          \tag{10.19}
+        $$
+:::
+
+를 준다. $R=\beta^{-1}=1+r$로 두면 우변은 $r+\delta$다. 즉 장기적으로는
+desired-capital benchmark의 user-cost condition이 되돌아온다. 조정비용은
+정상상태 user cost를 대체하는 것이 아니라, 그 상태로 가는 경로를
+내생화한다.
+
+### 10.7.2 saddle-path logic
+
+결정론적 전이실험에서 구체적인 $\pi$, $\phi$, 그리고 exogenous path가
+주어지면 식 (10.18)과 (10.12)는 $(K_t,q_t^m)$의 2차원 동학계를 이룬다.
+정상상태 주변에서는 이를 예컨대
+
+::: math-display
+$$
+          \begin{pmatrix}
+          \widehat K_{t+1}\\
+          \widehat q_{t+1}^{m}
+          \end{pmatrix}
+          =
+          A
+          \begin{pmatrix}
+          \widehat K_t\\
+          \widehat q_t^{m}
+          \end{pmatrix}
+          +
+          B\widehat z_t
+          \tag{10.19a}
+        $$
+:::
+
+와 같은 선형화된 형태로 쓸 수 있다. 통상적인 오목성·convexity·국소
+안정성 조건 아래, $K_t$가 predetermined이고 $q_t^m$가 jump variable인
+체계는 explosive root를 제거하는 $q_t^m$의 선택을 통해 유일한 안정경로를
+갖는다. stochastic recursive model에서는 이 saddle representation 대신
+$q_t^m=q^m(K_t,z_t)$ 같은 가치함수·정책함수의 고정점을 푼다.
+
+:::::::::::: phase-map
+::::: phase-row
+::: left
+$K_{t+1}=K_t$
+:::
+
+::: right
+centred benchmark에서는 $q_t^m=1$. 이 선 위에서는 gross investment가
+정확히 감가상각을 대체한다.
+:::
+:::::
+
+::::: phase-row
+::: left
+$q_{t+1}^m=q_t^m$
+:::
+
+::: right
+결정론적 no-shock diagram에서 미래 한계이윤, 감가상각, 조정비용의
+자본효과, 할인조건이 현재 marginal $q$와 일치하는 locus다.
+:::
+:::::
+
+::::: phase-row
+::: left
+stable path
+:::
+
+::: right
+현재 $K_t$에 대해 $q_t^m$가 적절히 jump하여, admissibility와 양립하는
+안정적 전이경로를 선택한다.
+:::
+:::::
+::::::::::::
+
+### 10.7.3 기대와 정책충격
+
+::: math-display
+$$
+          \text{expected marginal profitability}
+          \to q_t^m
+          \to \frac{I_t}{K_t}
+          \to K_{t+1}.
+          \tag{10.20}
+        $$
+:::
+
+현재 또는 기대 미래의 생산성·수요·산출가격·마크업·세후이윤이 높아지면
+미래 한계이윤의 현재가치가 높아지고, 일반적으로 $\lambda_t^K$, $q_t^m$,
+그리고 투자율을 올린다. 반대로 실질이자율 또는 할인율 상승은 미래
+한계이윤을 더 강하게 할인해 이 값들을 낮추는 방향으로 작동한다.
+
+중요한 것은 announcement effect다. 미래의 투자세액공제나 생산성 개선이
+오늘 이미 알려져 있다면, $K_t$는 아직 변하지 않아도 $\lambda_t^K$,
+$q_t^m$, 그리고 $I_t/K_t$는 announcement 시점에 즉시 반응할 수 있다.
+surprise shock은 정보가 도착한 시점에 같은 조정을 유발하지만,
+anticipated shock은 실현 전에 이미 전이경로를 바꾼다.
+
+:::: {.statement .warning}
+::: statement-head
+부분균형과 일반균형의 구분
+:::
+
+"실질이자율 상승은 투자를 낮춘다"는 문장은 주어진 이윤기회와 부분균형
+할인조건 아래의 비교정태다. 일반균형에서는 이자율 자체가
+생산성·위험·가계저축·통화정책과 함께 움직인다. 따라서 관측된 이자율과
+투자의 상관만으로 user-cost mechanism을 식별할 수는 없다.
+::::
+:::::::::::::::::::
+
+::: part-divider
+PART III FROM q THEORY TO RISK, LUMPINESS, AND DATA: observability,
+irreversibility, and empirical interpretation
+:::
+
+::::::::: {#ch10-s08 .section}
+## [10.8]{.section-number}marginal $q$, average $q$, 그리고 관측가능성
+
+이론의 marginal $q$는 한계 설치자본의 가치와 replacement cost의
+비율이다. 반면 실증에서 흔히 관측하는 것은 기업의 생산자산 가치와 그
+replacement cost의 비율인 average $q$다. 두 객체가 같다는 주장은 추가
+가정 없이는 성립하지 않는다.
+
+::: math-display
+$$
+          \bar q_t
+          \equiv
+          \frac{\mathcal V_t}{p_t^I K_t},
+          \qquad
+          q_t^K
+          \equiv
+          \frac{V_K(K_t,z_t)}{p_t^I},
+          \qquad
+          q_t^m
+          \equiv
+          \frac{E_t[M_{t,t+1}V_K(K_{t+1},z_{t+1})]}{p_t^I}.
+          \tag{10.20a}
+        $$
+:::
+
+여기서 $\mathcal V_t$는 생산자산이 만들어 내는 기업가치이며, 실제
+자료에서 이를 대체하려면 부채·현금·비생산자산 등 가치 측정의 범위를 자본
+replacement cost와 정합적으로 맞춰야 한다. $q_t^K$는 현재 설치자본의
+한계가치이고, $q_t^m$는 오늘 투자 FOC에 들어가는 할인된 한계가치다.
+
+::: display-table-wrap
+  객체                                 정의                                                                                        직접 관측 가능성
+  ------------------------------------ ------------------------------------------------------------------------------------------- --------------------------------------------------------------------
+  investment marginal $q_t^m$          오늘 투자로 만들어지는 다음 기 설치자본의 할인된 한계가치를 replacement cost로 나눈 비율.   일반적으로 직접 관측 불가. 투자 FOC에 들어가는 shadow-value ratio.
+  installed-capital marginal $q_t^K$   현재 설치자본 한 단위의 가치함수 기울기를 replacement cost로 나눈 비율.                     일반적으로 직접 관측 불가. Hayashi 정리의 marginal object.
+  average $\bar q_t$                   생산자산의 총 가치를 총 replacement cost $p_t^I K_t$로 나눈 비율.                           시장가치·회계자본·replacement cost 자료로 proxy 가능.
+  market-to-book ratio                 시장가치와 회계장부가치의 비율.                                                             average $q$의 불완전한 proxy일 수 있으나, 정의상 동일하지는 않다.
+:::
+
+::: math-display
+$$
+          \boxed{
+          \text{investment marginal }q
+          \neq
+          \text{installed-capital marginal }q
+          \neq
+          \text{average }q
+          \quad\text{in general}.}
+          \tag{10.20b}
+        $$
+:::
+
+### 10.8.1 Hayashi 정리의 충분조건
+
+average $q$와 marginal $q$가 같아지는 대표적 충분조건은 가치함수가 관련
+생산자산에 대해 1차 동차가 되는 경우다. 예컨대 operating profit과
+adjustment cost가 관련 규모변수에 대해 constant returns를 이루고,
+금융정책이 기업가치에 별도 wedge를 만들지 않으며, 가치측정의 범위가
+replacement cost의 범위와 일치한다고 하자. 그러면
+
+::: math-display
+$$
+          V(\alpha K,z)=\alpha V(K,z),
+          \qquad \alpha>0.
+          \tag{10.20c}
+        $$
+:::
+
+Euler의 동차함수 정리에 의해
+
+::: math-display
+$$
+          V_K(K,z)K=V(K,z).
+          \tag{10.20d}
+        $$
+:::
+
+따라서 생산자산 가치 $\mathcal V_t$가 $V(K_t,z_t)$와 일치한다면
+
+::: math-display
+$$
+          q_t^K
+          =
+          \frac{V_K(K_t,z_t)}{p_t^I}
+          =
+          \frac{V(K_t,z_t)}{p_t^IK_t}
+          =
+          \bar q_t.
+          \tag{10.20e}
+        $$
+:::
+
+이것은 표준적인 충분조건이지 자동적 사실이 아니다. fixed costs, market
+power rents, intangible capital mismatch, 비생산자산, 세제 wedge,
+financing constraints, 측정오차가 있으면 average $q$와 marginal $q$의
+일치는 깨질 수 있다. 따라서 실증에서 $\bar q$와 투자의 관계가 약하다고
+해서 이론적 marginal-$q$ rule이 곧바로 기각되는 것은 아니다.
+:::::::::
+
+::::::: {#ch10-s09 .section}
+## [10.9]{.section-number}불확실성, 위험가격, 비가역성, 기다림의 옵션가치
+
+불확실성은 기대 이윤의 분산 하나로 요약되지 않는다. 위험이 설치자본의
+가치에 미치는 효과는 payoff가 나쁜 상태에서 발생하는지, 자본을 되돌리는
+데 얼마나 큰 비용이 드는지, 그리고 기다릴 수 있는 선택권이 있는지에 달려
+있다.
+
+### 10.9.1 위험가격의 경계
+
+결정론적 baseline에서는 미래 한계이윤을 주어진 할인율로 할인했다. 위험이
+존재하면 설치자본의 재화단위 그림자가치는 보다 일반적으로
+
+::: math-display
+$$
+          \lambda_t^K
+          =
+          E_t\!\left[
+          \sum_{\tau=t+1}^{\infty}
+          M_{t,\tau}\,
+          \mathcal{CF}_{\tau}^{K}
+          \right]
+          \quad\text{(schematic representation)}.
+          \tag{10.21}
+        $$
+:::
+
+로 읽을 수 있다. $M_{t,\tau}$는 $t$기 재화 단위로 표시한 intertemporal
+pricing kernel이고, $\mathcal{CF}_{\tau}^{K}$는 $\tau$기의 한계
+설치자본이 만들어 내는 순 현금흐름으로서, 해당 convention 아래
+조정비용의 자본효과와 continuation 또는 처분가치를 포함한다. marginal
+$q$는 $q_t^m=\lambda_t^K/p_t^I$다. 이는 Chapter 09의 SDF 언어와
+연결되지만, state prices와 complete-market equilibrium의 완전한 도출은
+Chapter 11의 과제다.
+
+::: math-display
+$$
+          \boxed{
+          \text{uncertainty}
+          \not\Rightarrow
+          \text{investment always falls}.}
+        $$
+:::
+
+idiosyncratic risk와 aggregate marginal utility에 공분산을 갖는 risk는
+다른 가격효과를 가진다. 또한 위험의 변화는 기대수익성, option value,
+차입가능성, 자본매각 가능성을 함께 바꿀 수 있다.
+
+### 10.9.2 partial irreversibility와 waiting
+
+투자 후 설비를 원래 가격으로 되팔 수 없거나, 투자축소가 매우 비싸면
+기업은 나쁜 news가 실현될 때의 손실을 피하기 위해 투자결정을 미룰 수
+있다.
+
+::: math-display
+$$
+          \text{irreversibility}
+          +
+          \text{uncertainty}
+          \Longrightarrow
+          \text{option value of waiting}.
+          \tag{10.22}
+        $$
+:::
+
+가장 단순한 비가역성 제약을 $I_t\ge0$로 쓰면, smooth convex cost가 있는
+경우의 KKT 조건은
+
+::: math-display
+$$
+          \lambda_t^K-p_t^I-\Phi_I(I_t,K_t)\le0,
+          \qquad
+          I_t\ge0,
+          \qquad
+          I_t\{\lambda_t^K-p_t^I-\Phi_I(I_t,K_t)\}=0.
+          \tag{10.22a}
+        $$
+:::
+
+내부해에서는 기존의 equality가 회복된다. 그러나 $I_t=0$인 inaction
+boundary에서는 설치자본의 한계가치가 구매가격과 한계조정비용을 넘지
+못해야 한다. 불확실성과 결합하면, 기업은 오늘 투자해 되돌릴 수 없는
+비용을 부담하기보다 추가 정보를 기다리는 선택권을 가치 있게 평가할 수
+있다.
+
+하지만 식 (10.22)는 기다림의 가치가 생길 수 있다는 구조적 가능성을 말할
+뿐, 불확실성이 높아질 때 투자가 언제나 감소한다는 보편정리는 아니다. 그
+결론을 얻으려면 비가역성의 형태, 수익성의 확률과정, 자본재 처분시장,
+그리고 위험가격 구조를 구체적으로 명시해야 한다.
+:::::::
+
+:::::::::::::: {#ch10-s10 .section}
+## [10.10]{.section-number}smooth, asymmetric, kinked, fixed, and lagged-investment adjustment costs
+
+"조정비용"은 하나의 모형이 아니다. 비용의 형태에 따라 정책함수의 매끈함,
+inaction region의 존재, 필요한 상태변수, 그리고 기업 수준과 집계 수준의
+투자동학이 달라진다.
+
+::: display-table-wrap
+  구조                               대표 형태                        핵심 함의
+  ---------------------------------- -------------------------------- -------------------------------------------------------
+  smooth convex capital adjustment   $K\phi(I/K)$                     투자율은 marginal $q^m$의 매끈한 증가함수.
+  asymmetric adjustment              매입과 매각의 한계비용이 다름.   investment와 disinvestment의 반응이 비대칭.
+  kinked costs                       $C'(0^+)>0,\ C'(0^-)<0$.         작은 충격에 대해 투자하지 않는 inaction region 가능.
+  fixed costs                        $C(I)>0$ for $I\neq0$.           기업 수준의 lumpy investment와 간헐적 조정 가능.
+  lagged-investment adjustment       $\Phi(I_t,I_{t-1})$.             $I_{t-1}$가 상태가 되며, 투자flow 자체의 관성이 발생.
+:::
+
+### 10.10.1 aggregation의 경계
+
+fixed cost가 있다고 해서 aggregate investment가 반드시 lumpy해지는 것은
+아니다. 동질기업과 constant returns가 결합하면 기업별 불연속 조정이
+집계에서 상쇄될 수 있다. 반대로 기업이 이질적이거나 독점경쟁 때문에 어떤
+기업이 조정하는지가 중요하면, 기업 수준의 inaction과 lumpy investment가
+aggregate dynamics에도 남을 수 있다.
+
+### 10.10.2 lagged-investment adjustment cost
+
+다음 형태는 standard capital-adjustment $q$ theory와 다르다.
+
+::: math-display
+$$
+          K_{t+1}
+          =(1-\delta)K_t
+          +I_t\left[1-\frac{\chi}{2}
+          \left(\frac{I_t}{I_{t-1}}-1\right)^2\right].
+          \tag{10.23}
+        $$
+:::
+
+여기서는 투자율 $I_t/K_t$ 자체가 아니라 투자flow의 변화가 비용을 만든다.
+따라서 $I_{t-1}$가 추가 상태변수가 된다. 역사적으로 Jorgenson의 핵심
+공헌은 user cost와 desired capital을 중심으로 한 신고전파 투자이론이다.
+식 (10.23) 같은 형태는 더 정확하게는 *lagged-investment adjustment cost*
+또는 *investment-flow adjustment cost*라고 부르는 편이 맞으며,
+investment-specific technology shock과도 구분해야 한다.
+
+이 specification의 FOC는 현재 $I_t$가 $K_{t+1}$을 직접 바꾸는 효과만
+포함하지 않는다. $I_t$는 다음 기에 $I_{t+1}/I_t$의 분모가 되므로, 미래
+조정효율에도 영향을 준다. 이를 도식적으로 쓰면
+
+::: math-display
+$$
+          0
+          =
+          -p_t^I
+          +\lambda_t^K
+          \frac{\partial K_{t+1}}{\partial I_t}
+          +E_t\!\left[
+          M_{t,t+1}\lambda_{t+1}^K
+          \frac{\partial K_{t+2}}{\partial I_t}
+          \right]
+          \quad\text{(schematic FOC)}.
+          \tag{10.23a}
+        $$
+:::
+
+따라서 $I_{t-1}$가 단순한 과거 관측치가 아니라 현재 상태변수가 되며,
+투자flow 자체의 관성이 생긴다. 이 점은 자본축적식의 1차 근사와 투자
+FOC의 1차 근사가 서로 다른 정보를 담는다는 사실에서도 확인된다.
+
+::::::::: math-case
+LOG-LINEARIZATION OF LAGGED-INVESTMENT ADJUSTMENT
+
+식 (10.23)의 비선형 투자효율항을
+
+::: math-display
+$$
+            G(I_t,I_{t-1})
+            \equiv
+            I_t\left[1-\frac{\chi}{2}
+            \left(\frac{I_t}{I_{t-1}}-1\right)^2\right],
+            \qquad
+            K_{t+1}=(1-\delta)K_t+G(I_t,I_{t-1})
+            \tag{10.23b}
+          $$
+:::
+
+로 두자. 정상상태에서는
+
+::: math-display
+$$
+            \bar I=\delta\bar K,
+            \qquad
+            G(\bar I,\bar I)=\bar I.
+            \tag{10.23c}
+          $$
+:::
+
+$\nu_t\equiv I_t/I_{t-1}-1$라고 쓰면 두 편미분은
+
+::: math-display
+$$
+          \begin{aligned}
+            G_1(I_t,I_{t-1})
+            &\equiv
+            \frac{\partial G(I_t,I_{t-1})}{\partial I_t}
+            =
+            1-\frac{\chi}{2}\nu_t^2
+            -\chi\frac{I_t}{I_{t-1}}\nu_t,\\
+            G_2(I_t,I_{t-1})
+            &\equiv
+            \frac{\partial G(I_t,I_{t-1})}{\partial I_{t-1}}
+            =
+            \chi\left(\frac{I_t}{I_{t-1}}\right)^2\nu_t.
+          \end{aligned}
+          \tag{10.23d}
+          $$
+:::
+
+따라서 정상상태에서
+
+::: math-display
+$$
+            G_1(\bar I,\bar I)=1,
+            \qquad
+            G_2(\bar I,\bar I)=0.
+            \tag{10.23e}
+          $$
+:::
+
+자본축적식 자체의 1차 변화는
+
+::: math-display
+$$
+            dK_{t+1}
+            =
+            (1-\delta)dK_t+dI_t.
+            \tag{10.23f}
+          $$
+:::
+
+$\widehat X_t\equiv\log X_t-\log\bar X$로 정의하면
+$dX_t=\bar X\widehat X_t$이고, $\bar I/\bar K=\delta$이므로
+
+::: math-display
+$$
+            \widehat K_{t+1}
+            =(1-\delta)\widehat K_t
+            +\delta\widehat I_t.
+            \tag{10.24}
+          $$
+:::
+
+이 식에서 $\chi$와 $\widehat I_{t-1}$가 사라지는 이유는 조정손실항이
+정상상태에서 제곱항으로 시작하기 때문이다. 즉 $I_t/I_{t-1}=1$ 주변에서
+자본축적식의 수준효과는 2차부터 나타난다.
+:::::::::
+
+그러나 이것이 lagged-investment adjustment cost가 1차 동학에서
+무관하다는 뜻은 아니다. 투자 FOC는 자본축적식의 수준이 아니라 한계효율
+$G_1$과 미래 한계효율 $G_2$를 포함한다. 정상상태 주변에서
+
+::: math-display
+$$
+          G_1(I_t,I_{t-1})
+          =
+          1-\chi(\widehat I_t-\widehat I_{t-1})+o(\|\widehat I\|),
+          \qquad
+          G_2(I_t,I_{t-1})
+          =
+          \chi(\widehat I_t-\widehat I_{t-1})+o(\|\widehat I\|).
+          \tag{10.24a}
+        $$
+:::
+
+따라서 식 (10.23a)의 선형화에는 $\chi$와 투자증가율의 변화가 남는다.
+결론적으로 식 (10.24)는 자본stock의 1차 전이법칙이고, 식 (10.23a)와
+(10.24a)는 투자flow가 왜 매끄럽고 관성적으로 움직이는지를 설명하는
+최적성 조건의 구성요소다.
+::::::::::::::
+
+:::::::::::: {#ch10-s11 .section}
+## [10.11]{.section-number}empirical interpretation과 다음 블록으로의 연결
+
+관측된 $q$와 투자 사이의 관계는 이론을 직접 관찰하는 것이 아니라,
+한계가치·기대수익성·조정비용·금융조건을 불완전하게 투영한 결과다. 따라서
+단순 회귀계수 하나를 특정 마찰의 단독 증거로 읽어서는 안 된다.
+
+### 10.11.1 empirical $q$-investment relation
+
+::: math-display
+$$
+          \frac{I_{it}}{K_{it}}
+          =
+          \alpha_0+\alpha_1\bar q_{it}+\varepsilon_{it}.
+          \tag{10.25}
+        $$
+:::
+
+이 회귀는 개념적으로 유용하지만 구조해석은 제한적이다. $\bar q$의 낮은
+설명력은 average $q$가 marginal $q$의 불완전한 proxy인 경우, intangible
+capital 또는 replacement cost의 측정오차, 기대수익성 누락, 비선형·이질적
+조정비용, 시장가치의 mispricing, 또는 외부금융마찰과 모두 양립할 수
+있다.
+
+계량적으로는 관측된 $\bar q$ 자체가 구조적 marginal $q$의 noisy proxy일
+수 있다.
+
+::: math-display
+$$
+          \bar q_{it}
+          =
+          q_{it}^{m}
+          +\text{measurement error}
+          +\text{rents}
+          +\text{intangible-capital mismatch}
+          +\text{mispricing}.
+          \tag{10.25a}
+        $$
+:::
+
+따라서 cash flow를 추가한 회귀
+
+::: math-display
+$$
+          \frac{I_{it}}{K_{it}}
+          =
+          \alpha_0+\alpha_1\bar q_{it}
+          +\alpha_2 CF_{it}
+          +\varepsilon_{it}
+          \tag{10.25b}
+        $$
+:::
+
+에서 $\alpha_2$가 유의하더라도, 그것만으로 금융제약이 식별되지는 않는다.
+
+::: math-display
+$$
+          \boxed{
+          \text{cash-flow coefficient}
+          \neq
+          \text{unique evidence of financing constraints}.}
+        $$
+:::
+
+cash flow는 외부금융제약을 반영할 수 있지만, 관측되지 않은 투자기회,
+$q$의 측정오차, 내생적 현금흐름, 산업별 demand shock, 내부자금과
+미래수익성의 동시변화를 반영할 수도 있다. 금융제약을 주장하려면 자금조달
+가격·담보·순자산·대출공급에 관한 추가 구조와 식별전략이 필요하다.
+
+### 10.11.2 다음 장으로의 연결
+
+:::::: flow
+::: node
+**CHAPTER 11 · COMPLETE MARKETS**미래 한계이윤이 어떤 state price로
+할인되어 $\lambda_t^K$와 $q_t^m$가 되는지, Arrow securities와
+complete-market equilibrium의 언어로 확장한다.
+:::
+
+::: arrow
+→
+:::
+
+::: node
+**CHAPTER 12 · FINANCIAL FRICTIONS**순자산·담보·대출한도·external
+finance premium이 직접 투자에 들어오면, $q_t^m$만으로 투자정책을 요약할
+수 없게 된다.
+:::
+::::::
+
+::: math-display
+$$
+          \text{future marginal profit}
+          \to
+          \text{state price}
+          \to
+          \lambda_t^K
+          \to
+          q_t^m,
+          \qquad
+          q_t^m\text{ alone}
+          \not\Rightarrow I_t
+          \ \text{under financial frictions}.
+          \tag{10.26}
+        $$
+:::
+
+Chapter 10은 설치자본의 가치와 자본조정의 기업 측 문제를 닫는다. Chapter
+11은 그 가치가 일반균형 가격체계에서 어떻게 결정되는지를, Chapter 12는
+그 가격체계와 자금조달이 왜 기업마다 달라질 수 있는지를 다룬다.
+::::::::::::
+
+:::::::::::::::::::: {#ch10-conclusion .section}
+## [결론]{.section-number}원하는 자본stock에서 투자동학으로
+
+투자수요는 기업이 원하는 자본량을 정하는 정태적 문제에서 시작하지만,
+실제 경제에서 자본은 설치·확장·축소하는 데 시간이 걸린다. $q$ 이론은
+미래 한계이윤의 현재가치와 자본조정의 한계비용을 연결하여 이 느린 조정을
+설명한다.
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+desired capital
+:::
+
+::: right
+user cost와 한계영업이윤의 비교가 장기적으로 원하는 자본stock을 정한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+adjustment friction
+:::
+
+::: right
+실제 자본이 원하는 자본으로 즉시 점프하지 못하게 하며, 투자속도를 별도
+선택문제로 만든다.
+:::
+:::::
+
+::::: chain-row
+::: left
+$\lambda_t^K$ and $q_t^m$
+:::
+
+::: right
+$\lambda_t^K$는 설치자본의 재화단위 그림자가치이고,
+$q_t^m=\lambda_t^K/p_t^I$는 replacement cost로 정규화한 marginal Tobin's
+$q$다.
+:::
+:::::
+
+::::: chain-row
+::: left
+transition
+:::
+
+::: right
+결정론적 전이문제에서 $K_t$는 predetermined이고 $q_t^m$는
+forward-looking jump variable이므로, 기대와 announcement가 현재 투자율을
+즉시 움직일 수 있다.
+:::
+:::::
+
+::::: chain-row
+::: left
+limits
+:::
+
+::: right
+average $q$, cash flow, 불확실성은 각각 추가적인 측정·시장구조·위험가격
+가정 없이는 하나의 마찰을 단독 식별하지 않는다.
+:::
+:::::
+::::::::::::::::::
+
+::: conclusion-block
+Chapter 10의 최종 정리
+
+투자란 현재 설치된 predetermined capital stock을 원하는 자본경로로
+조정하는 미래지향적 선택이다. user cost는 그 목적지를 설명하고,
+adjustment costs·$\lambda_t^K$·marginal $q_t^m$는 도달 속도와 경로를
+설명한다. 다음 장은 미래 한계이윤을 할인하는 state-price system을, 그
+다음 장은 자금조달 마찰이 투자정책을 어떻게 바꾸는지를 분석한다.
+:::
+::::::::::::::::::::
+
+::: {#ch10-check .section}
+## Learning Check
+
+1.  physical investment와 financial asset trade를 구분하라. gross
+    investment, net investment, capital stock의 관계를 식
+    (10.1)--(10.2)를 이용해 설명하라.
+2.  desired capital stock $K^d$를 정의하고, user cost가 하락할 때
+    $K^d$가 왜 상승하는지 설명하라.
+3.  user cost가 원하는 자본stock을 설명하지만 투자속도를 설명하지 못하는
+    이유를 설명하라.
+4.  internal adjustment cost와 external adjustment cost를 구분하라.
+5.  식 (10.8)--(10.9)의 기업문제에서 state variable과 control variable을
+    식별하라. $p_t^I=p^I(z_t)$가 필요한 이유를 설명하라.
+6.  $\lambda_t^K$와 $q_t^m$를 정의하고, 둘이 $p_t^I=1$일 때에만 수치상
+    일치한다는 점을 설명하라.
+7.  식 (10.10)--(10.12)를 경제적으로 해석하라.
+8.  homogeneous convex adjustment cost 아래에서 왜 $I_t/K_t$가 $q_t^m$의
+    증가함수가 되는가?
+9.  centred quadratic benchmark에서 $q_t^m>1$이 $K_{t+1}>K_t$를 뜻하는
+    이유를 보이라.
+10. 결정론적 saddle-path 표현에서의 jump variable과 stochastic recursive
+    formulation에서의 value-policy object를 구분하라.
+11. marginal $q$와 average $q$를 구분하라. 두 값이 일치할 수 있는
+    충분조건을 나열하라.
+12. 불확실성이 항상 투자를 감소시키지 않는 이유와 partial
+    irreversibility가 option value of waiting을 만드는 논리를 설명하라.
+13. smooth, kinked, fixed, lagged-investment adjustment cost가 각각 어떤
+    상태변수와 투자동학을 만드는지 비교하라.
+14. 식 (10.23)을 1차 log-linearize하여 식 (10.24)를 도출하고, 왜
+    $\chi$와 $I_{t-1}$는 자본축적식의 1차 근사에서는 사라지지만 투자
+    FOC의 선형화에는 남는지 설명하라.
+15. cash-flow sensitivity가 financing constraint의 단독 증거가 아닌
+    이유를 설명하라.
+16. 이 장의 timing에서 $K_t$와 $K_{t+1}$ 중 무엇이 predetermined이고
+    무엇이 $t$기에 선택되는지 설명하라.
+17. $\beta E_t[\cdot]$ benchmark와 $E_t[M_{t,t+1}\cdot]$ pricing-kernel
+    표현의 차이를 설명하라.
+18. Hayashi 정리에서 average $q$와 marginal $q$가 일치하기 위한 동차성
+    조건을 증명하라.
+19. 비가역성 제약 $I_t\ge0$ 아래 KKT 조건 식 (10.22a)의 부호를
+    경제적으로 해석하라.
+:::
+
+:::::::::::::::::::::::::::::::: {#ch10-glossary .section}
+## 핵심 용어
+
+::::::::::::::::::::::::::::::: definition-list
+:::: definition-row
+::: term
+desired capital stock
+:::
+
+주어진 수익성·user cost 아래 기업이 보유하고 싶어 하는 자본stock. 실제
+설치자본이나 당기 투자flow와 동일하지 않다.
+::::
+
+:::: definition-row
+::: term
+user cost of capital
+:::
+
+자본을 한 기간 보유하는 유효비용. 기회비용, 감가상각, 예상 자본이득 또는
+손실, 세제 wedge를 포함한다.
+::::
+
+:::: definition-row
+::: term
+internal adjustment cost
+:::
+
+기업 내부의 설치·훈련·조직개편·생산차질·매각에서 발생하는 비용.
+기준모형에서는 $\Phi(I,K)$로 표현된다.
+::::
+
+:::: definition-row
+::: term
+$\lambda_t^K$: shadow value
+:::
+
+$t$기의 재화단위로 평가한 다음 기 설치자본 한 단위의 그림자가치.
+interior FOC에서 구매가격과 한계조정비용의 합에 해당한다.
+::::
+
+:::: definition-row
+::: term
+marginal $q_t^m$
+:::
+
+한계 설치자본의 그림자가치를 replacement cost로 나눈 비율:
+$q_t^m=\lambda_t^K/p_t^I$. $p_t^I=1$로 정규화할 때에만 $\lambda_t^K$와
+수치상 같다.
+::::
+
+:::: definition-row
+::: term
+average $q$
+:::
+
+생산자산의 총 가치를 총 replacement cost로 나눈 비율. constant returns와
+적절한 가치측정 등 제한적인 조건 아래에서만 marginal $q$와 일치할 수
+있다.
+::::
+
+:::: definition-row
+::: term
+saddle path
+:::
+
+결정론적 전이문제에서 predetermined state와 forward-looking jump
+variable이 함께 있을 때, admissibility와 양립하는 안정적 전이경로.
+::::
+
+:::: definition-row
+::: term
+partial irreversibility
+:::
+
+한번 설치한 자본을 원래 가격으로 되팔거나 축소하기 어려운 성질. 불확실성
+아래에서 기다림의 옵션가치를 만들 수 있다.
+::::
+
+:::: definition-row
+::: term
+lagged-investment adjustment cost
+:::
+
+자본stock이 아니라 투자flow 자체의 변화에 비용이 붙는 구조. $I_{t-1}$가
+추가 상태변수가 되며, 자본축적식의 1차 근사에서는 조정모수 $\chi$가
+사라질 수 있지만 투자 FOC의 선형화에는 한계효율 변화로 남는다.
+investment-specific technology shock과 구분해야 한다.
+::::
+
+:::: definition-row
+::: term
+cash-flow sensitivity
+:::
+
+투자와 cash flow의 조건부 관계. 금융제약의 가능성을 시사할 수 있으나,
+투자기회 누락이나 $q$의 측정오차도 설명이 될 수 있다.
+::::
+
+:::: definition-row
+::: term
+investment marginal $q$
+:::
+
+오늘 투자로 만들어지는 다음 기 설치자본의 할인된 한계가치를 replacement
+cost로 나눈 비율. 투자 FOC에 직접 들어가는 $q_t^m$다.
+::::
+
+:::: definition-row
+::: term
+installed-capital marginal $q$
+:::
+
+현재 설치자본의 가치함수 기울기 $V_K(K_t,z_t)$를 replacement cost로 나눈
+비율. average $q$와의 동차성 정리를 논할 때 기준이 되는 marginal
+object다.
+::::
+
+:::: definition-row
+::: term
+pricing kernel
+:::
+
+미래 payoff를 현재 재화단위 가치로 할인하는 확률적 가격체계 $M_{t,t+1}$.
+위험중립 benchmark의 $\beta$를 일반화한다.
+::::
+
+:::: definition-row
+::: term
+Hayashi theorem
+:::
+
+생산자산 가치가 관련 자본에 대해 1차 동차이고 가치측정 범위가 일치할 때
+average $q$와 installed-capital marginal $q$가 일치한다는 결과.
+::::
+:::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::
+
+::: {#ch10-references .section}
+## 참조 문헌
+
+이 장의 경제학적 기준축은 Romer의 investment chapter이며, user cost,
+adjustment costs, Tobin's $q$, 불확실성, kinked/fixed costs의 구성을
+따른다. 재귀적 상태·정책함수·perceived law와 actual law의 정합성은
+Ljungqvist--Sargent의 recursive competitive equilibrium 및
+adjustment-cost 예제를 참조한다.
+
+- Romer, David. *Advanced Macroeconomics*, 5th ed., Chapter 9,
+  "Investment." McGraw-Hill Education, 2019.
+- Ljungqvist, Lars, and Thomas J. Sargent. *Recursive Macroeconomic
+  Theory*, 4th ed., Chapter 7, especially the adjustment-cost example.
+  MIT Press, 2018.
+- Jorgenson, Dale W. "Capital Theory and Investment Behavior." *American
+  Economic Review* 53(2), 247--259, 1963.
+- Hayashi, Fumio. "Tobin's Marginal q and Average q: A Neoclassical
+  Interpretation." *Econometrica* 50(1), 1982.
+- Abel, Andrew B., and Janice C. Eberly. "A Unified Model of Investment
+  under Uncertainty." *American Economic Review* 84(5), 1994.
+:::

@@ -1,0 +1,1865 @@
+---
+title: >-
+  동태적 New Keynesian DSGE가격재설정, 기대, 그리고 균형결정
+description: >-
+  Dynamic New Keynesian DSGE: Staggered Pricing, Expectations, and Equilibrium Determination
+---
+
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::::::: {#ch07-opening .section}
+Chapter 06은 고정가격, menu cost, real rigidity, 사전설정 계약,
+불완전정보를 구분하여 명목비중립성이 가능한 논리적 통로를 해부했다.
+Chapter 07은 그중 독점적 경쟁과 staggered price-setting을 선택해,
+가계·기업·정책당국의 선택이 서로 정합적인 동태적 균형을 만든다는 것을
+보인다.
+
+:::::: model-contrast
+::: {}
+[CHAPTER 06 · LOCAL MECHANISMS]{.tag}
+
+### 왜 수요가 실질을 바꿀 수 있는가
+
+가격과 임금의 조정이 불완전할 때, 총수요 변화가 산출·노동으로 전환되는
+조건을 분해했다.
+:::
+
+::: arrow
+→
+:::
+
+::: {}
+[CHAPTER 07 · DYNAMIC EQUILIBRIUM]{.tag}
+
+### 그 불완전조정은 어떻게 지속되는가
+
+미래의 수요·한계비용·가격수준에 대한 기대가 현재 가격과 현재 산출을
+동시에 결정한다.
+:::
+::::::
+
+::: math-display
+$$
+        \boxed{
+        \text{nominal rigidity}
+        \;\Longrightarrow\;
+        \text{a dynamic price-setting problem}
+        \;\Longrightarrow\;
+        \text{an expectations-dependent equilibrium}.}
+        \tag{7.1}
+        $$
+:::
+
+::: thesis
+이 장의 중심 명제
+
+Calvo 기업은 "이번 기 가격"만 선택하지 않는다. 가격을 재설정한 기업은 그
+가격이 미래 여러 기간에 유지될 수 있음을 알고, 미래의
+수요·실질한계비용·집계가격·할인인자를 함께 고려한다. 따라서 New
+Keynesian Phillips curve의 미래 인플레이션 항은 임의로 추가된 기대항이
+아니라 동태적 이윤극대화의 결과다.
+:::
+:::::::::
+
+::::::::::::::::::::: {#ch07-s01 .section}
+## [7.1]{.section-number}경제환경, timing, 균형객체, 그리고 선형화의 위치
+
+New Keynesian DSGE는 "IS--Phillips--Taylor"라는 세 식 자체가 아니다. 그
+식들은 원시경제의 가계 선택, 독점적 경쟁기업의 가격설정, 시장청산,
+정책규칙, 외생충격의 전이과정을 정상상태 주변에서 근사한 결과다. 따라서
+이 장에서는 먼저 비선형 경제와 그 1차 근사인 canonical system을
+분리한다.
+
+### 7.1.1 기준경제의 구성요소
+
+기준모형은 의도적으로 최소한으로 구성한다. 대표가계는
+소비·노동·명목채권을 선택하고, 연속체 $i\in[0,1]$의 기업은 차별화된
+재화를 생산한다. 최종재 조립자는 CES 방식으로 개별재를 결합하며, 기업은
+Calvo 확률에 따라 가격을 재설정할 기회를 얻는다. 중앙은행은 명목이자율
+정책규칙을 따른다.
+
+::::::: details-grid
+::: {}
+[HOUSEHOLD]{.tag}
+
+### 기간 간 선택
+
+소비와 명목채권을 통해 시점 간 자원을 배분하고, 노동공급과 실질임금의
+관계를 제공한다.
+:::
+
+::: {}
+[FIRMS]{.tag}
+
+### 독점적 경쟁과 가격설정
+
+개별 기업은 하향 기울어진 수요곡선에 직면하고, 가격재설정 기회가 왔을 때
+미래 이윤을 고려한다.
+:::
+
+::: {}
+[TECHNOLOGY]{.tag}
+
+### 단순 생산기술
+
+기준모형에서는 $Y_{it}=A_tN_{it}$를 두며, 대칭적 노동시장 아래
+실질한계비용은 $mc_t=W_t/(A_tP_t)$로 쓸 수 있다.
+:::
+
+::: {}
+[POLICY]{.tag}
+
+### 명목 기준점
+
+정책규칙은 명목이자율을 결정하는 closure다. 가계·기업의 최적화조건이
+아니다.
+:::
+:::::::
+
+비선형 기준경제의 균형객체는 단순히 $(x_t,\pi_t,i_t)$가 아니다. 원시경제
+수준에서는 각 역사 또는 상태에 대해
+
+::: math-display
+$$
+          \left\{
+          C_t,N_t,B_t,Y_t,
+          \{Y_{it},P_{it}\}_{i\in[0,1]},
+          P_t,W_t,i_t
+          \right\}_{t\ge0}
+          \tag{7.1a}
+        $$
+:::
+
+가 가계 최적화, 기업의 수요 및 가격설정, CES 최종재 조립, 채권시장 청산,
+재화시장 청산, 노동시장 청산, 통화정책규칙, 외생충격의 전이법칙을 동시에
+만족해야 한다. 채권은 대표가계 내부에서 순공급이 0인 명목채권으로 두므로
+
+::: math-display
+$$
+          B_t=0.
+          \tag{7.1b}
+        $$
+:::
+
+정부지출과 자본을 제거한 canonical benchmark에서는 재화시장 청산이
+$Y_t=C_t$로 닫힌다. 정부지출, 투자, 자본축적을 도입하면 이 조건은
+대응하는 총자원제약으로 바뀌며, 그 경우 자연산출과 자연실질이자율도 함께
+달라진다.
+
+::: math-display
+$$
+          R_t\equiv1+i_t,
+          \qquad
+          \pi_t\equiv\log P_t-\log P_{t-1},
+          \qquad
+          \mathfrak r_t\equiv\log R_t-E_t\pi_{t+1},
+          \qquad
+          x_t\equiv\log Y_t-\log Y_t^n.
+        $$
+:::
+
+$i_t$는 net nominal interest rate, $R_t=1+i_t$는 gross nominal rate,
+$\mathfrak r_t$는 사전적 expected log real return이다. Zero-inflation
+정상상태의 채권 Euler equation은
+
+::: math-display
+$$
+          \bar R=1+\bar i=\frac{1}{\beta},
+          \qquad
+          \bar i=\frac{1}{\beta}-1,
+          \qquad
+          \bar{\mathfrak r}^{\,n}=\log\bar R=-\log\beta
+          \quad\text{when }\bar\pi=0.
+          \tag{7.2}
+        $$
+:::
+
+Canonical Euler equation은 gross nominal rate의 로그편차로 써야 계수가
+정확하다. 따라서 다음 표기를 고정한다.
+
+::: math-display
+$$
+          \widetilde i_t\equiv\log R_t-\log\bar R,
+          \qquad
+          \widetilde{\mathfrak r}_t^n\equiv\mathfrak r_t^n-\bar{\mathfrak r}^{\,n},
+          \qquad
+          \widetilde{\mathfrak r}_t
+          =
+          \widetilde i_t-E_t\pi_{t+1}.
+          \tag{7.2a}
+        $$
+:::
+
+Net-rate percentage-point deviation을 사용하려면
+$\widetilde i_t\approx(i_t-\bar i)/(1+\bar i)$로 변환하고 Taylor-rule
+coefficients와 policy shocks도 같은 단위로 재조정해야 한다. 이 표기에서
+$\mathfrak r_t^n$은 log 자연실질이자율, $\widetilde{\mathfrak r}_t^n$은
+canonical system에 들어가는 정상상태 편차다. Chapter 05의 자본 순수익률
+$r_t=q_t^K-\delta$와는 별개의 객체다.
+
+### 7.1.2 timing은 무엇을 뜻하는가
+
+다음 timing은 명목적으로 "정책이 먼저, 가격이 나중"이라는 단순한 순서를
+강제하는 장치가 아니다. 현재지향 Taylor rule을 사용할 때 정책금리도 현재
+인플레이션과 산출갭을 포함한 균형 안에서 함께 결정된다. timing의 목적은
+각 기업이 가격을 선택할 때 무엇을 알고 있으며, 어떤 가격이 과거로부터
+상속되는지를 명확히 하는 데 있다.
+
+::::::: {.timeline aria-label="Dynamic New Keynesian timing"}
+::: {}
+[INHERITED STATE]{.time}
+
+외생 상태와 이미 설정된 가격분포가 경제에 들어온다.
+:::
+
+::: {}
+[SHOCKS & EXPECTATIONS]{.time}
+
+현재 충격이 관측되고, 경제주체는 조건부 미래경로를 예측한다.
+:::
+
+::: {}
+[PRICE RESET]{.time}
+
+일부 기업만 가격을 재설정하며, 나머지는 기존 가격을 유지한다.
+:::
+
+::: {}
+[MARKET CLEARING]{.time}
+
+소비·노동·재화시장이 청산되고, 정책규칙과 함께 현재 균형이 성립한다.
+:::
+:::::::
+
+### 7.1.3 비선형 경제와 canonical 선형 체계는 다르다
+
+비선형 Calvo 경제에서는 상속된 상대가격의 분포와 가격분산이 실제
+자원제약과 후생에 영향을 줄 수 있다. 반면 zero-inflation 정상상태 주변의
+1차 로그선형 근사에서는 가격분산의 자원왜곡이 보통 2차로 나타나며,
+canonical three-equation model에서는 직접적으로 사라진다.
+
+::: math-display
+$$
+          \boxed{
+          \text{canonical NK system}
+          \neq
+          \text{underlying nonlinear Calvo economy}.}
+        $$
+:::
+
+따라서 "가격분산이 선형식에 없으니 중요하지 않다"는 결론은 틀리다.
+그것은 작은 충격에 대한 1차 근사의 범위 안에서만 직접적으로 보이지
+않는다는 뜻이다.
+
+:::: {.statement .remark}
+::: statement-head
+상태의 언어
+:::
+
+비선형 경제의 상태에는 외생충격뿐 아니라 상속된 가격분포가 들어갈 수
+있다. 이 장의 canonical 선형화에서는 그 분포가 1차에서 생략된다. 뒤에서
+정책교란을 지속적인 과정 $v_t$로 두면, 외생 Markov state는
+$s_t=(\widetilde{\mathfrak r}_t^n,u_t,v_t)$가 된다. 반면 $x_t$와
+$\pi_t$는 predetermined state가 아니라 forward-looking equilibrium
+object다.
+::::
+:::::::::::::::::::::
+
+:::::::::::: {#ch07-s02 .section}
+## [7.2]{.section-number}가계의 기간 간 선택, 자연배분, 그리고 동태적 IS 관계
+
+Chapter 06의 IS 관계는 총수요의 축약형이었다. 여기서는 이를 대표가계의
+소비--저축 선택에서 다시 얻는다. 핵심은 명목이자율 자체가 아니라,
+기대인플레이션을 제거한 사전적 실질이자율이 현재 소비와 미래 소비의
+상대가격을 바꾼다는 점이다.
+
+### 7.2.1 가계의 목적함수와 예산제약
+
+기준 선호를 다음처럼 둔다.
+
+::: math-display
+$$
+          E_0\sum_{t=0}^{\infty}\beta^t
+          \left[
+          \frac{C_t^{1-\sigma}-1}{1-\sigma}
+          -
+          \frac{N_t^{1+\varphi}}{1+\varphi}
+          \right],
+          \qquad
+          \beta\in(0,1),\quad \sigma>0,\quad \varphi>0.
+          \tag{7.3}
+        $$
+:::
+
+$\sigma=1$일 때 소비효용 항은 위 식의 연속극한인 $\log C_t$로 정의한다.
+따라서 CRRA 표기는 $\sigma>0$ 전체를 포괄하지만, 표시된 분수형 자체는
+$\sigma\neq1$에서 읽어야 한다.
+
+$B_t$를 시점 $t$에 단위가격으로 매입하여 다음 기에 $1+i_t$를 지급하는
+명목 1기 채권의 보유액이라고 하자. 가계의 명목 예산제약은
+
+::: math-display
+$$
+          P_tC_t+B_t
+          \le
+          W_tN_t+(1+i_{t-1})B_{t-1}+\mathcal D_t^f-T_t.
+          \tag{7.4}
+        $$
+:::
+
+$\mathcal D_t^f$는 기업이윤의 귀속분이고 $T_t$는 정액세 또는 이전을
+포함한 순재정항이다. 이 장에서는 재정정책의 독립적인 동학을 분석하지
+않으므로, 재정상태의 효과는 자연배분과 canonical wedge에 흡수한다.
+
+### 7.2.2 Euler equation과 노동공급
+
+명목채권에 대한 일차조건은
+
+::: math-display
+$$
+          C_t^{-\sigma}
+          =
+          \beta E_t\left[
+          C_{t+1}^{-\sigma}
+          (1+i_t)\frac{P_t}{P_{t+1}}
+          \right].
+          \tag{7.5}
+        $$
+:::
+
+이 식은 정확한 명목채권 Euler equation이다. 노동공급의 일차조건은
+
+::: math-display
+$$
+          \frac{W_t}{P_t}
+          =
+          C_t^{\sigma}N_t^{\varphi}.
+          \tag{7.6}
+        $$
+:::
+
+식 (7.5)는 소비의 한계효용이 실질할인수익률과 정합적이어야 함을, 식
+(7.6)는 실질임금이 소비--여가의 한계대체율과 일치해야 함을 뜻한다.
+
+### 7.2.3 자연산출과 자연실질이자율
+
+$Y_t^n$은 동일한 실물·재정·선호·markup 상태를 유지한 채 가격이 충분히
+유연할 때의 산출이다. $Y_t^{\mathrm{eff}}$는 planner가 실질왜곡까지
+고려해 선택하는 효율산출이다. 시장력, 세금, 외부성이 있으면 두 객체는
+일치할 필요가 없다. Chapter 06의 $y_t$와 이 장의 $x_t$는 동일한 자연산출
+기준 gap이며, Chapter 08은 여기에 효율산출 기준 gap $\widetilde x_t$를
+추가한다.
+
+::: math-display
+$$
+          x_t\equiv \log Y_t-\log Y_t^n,
+          \qquad
+          \text{and in general}\qquad
+          Y_t^n\neq Y_t^{\mathrm{eff}}.
+          \tag{7.7}
+        $$
+:::
+
+수준 $\mathfrak r_t^n$의 자연실질이자율은 중앙은행이 직접 선택하는
+금리가 아니다. 주어진 상태에서 유연가격 배분, 즉 $x_t=0$, 을 지지하는
+사전적 실질이자율이다. 이하 선형 canonical system에서는
+$\widetilde{\mathfrak r}_t^n$만 사용한다.
+
+이 정의는 Euler equation에서 직접 나온다. 로그 실질수익률 근사를 쓰고
+$Y_t=C_t$인 benchmark에서 유연가격 소비를 $C_t^n=Y_t^n$라고 하면,
+자연실질이자율은 유연가격 Euler equation을 만족하는 실질수익률이다.
+
+::: math-display
+$$
+          \mathfrak r_t^n
+          \approx
+          \rho+\sigma E_t\Delta y_{t+1}^n,
+          \qquad
+          \rho\equiv-\log\beta,
+          \tag{7.7a}
+        $$ $$
+          \widetilde{\mathfrak r}_t^n
+          =
+          \sigma E_t\Delta\widetilde y_{t+1}^n
+          \quad
+          \text{in the no-government, no-preference-shock benchmark.}
+          \tag{7.7b}
+        $$
+:::
+
+선호충격, 정부지출, 투자, 금융마찰이 들어가면 식 (7.7a)의 우변에 해당
+상태변수의 항이 추가된다. 따라서 canonical system의
+$\widetilde{\mathfrak r}_t^n$은 임의의 잔여항이 아니라, 유연가격 배분이
+요구하는 기간 간 상대가격의 편차다.
+
+### 7.2.4 동태적 IS 관계
+
+기준모형에서 자본·투자·정부지출을 일단 제거하면 $Y_t=C_t$가 성립한다.
+Euler equation을 정상상태 주변에서 로그선형화하고 자연배분을 빼면,
+
+::: math-display
+$$
+          x_t
+          =
+          E_t x_{t+1}
+          -
+          \frac{1}{\sigma}
+          \left(
+          \widetilde i_t-E_t\pi_{t+1}-\widetilde{\mathfrak r}_t^n
+          \right).
+          \tag{7.8}
+        $$
+:::
+
+이 식의 핵심은 현재 산출갭이 *현재 실질이자율의 정상상태 편차와
+자연실질이자율 편차의 괴리*뿐 아니라 미래 산출갭 기대에도 의존한다는
+점이다. 따라서 현재의 수요는 미래 정책과 미래 인플레이션에 대한 기대가
+변하면 즉시 바뀔 수 있다.
+
+:::: {.statement .theorem}
+::: statement-head
+해석의 경계
+:::
+
+식 (7.8)은 "중앙은행이 명목금리를 1%포인트 올리면 산출이 정확히
+$1/\sigma$만큼 하락한다"는 단순한 인과식이 아니다. $E_t\pi_{t+1}$,
+$E_tx_{t+1}$, 그리고 $\widetilde{\mathfrak r}_t^n$은 동시에 변할 수
+있다. 이 식은 균형조건이며, 충격의 효과는 정책규칙과 기대 형성을 포함한
+전체 시스템을 풀어야 알 수 있다.
+::::
+::::::::::::
+
+::::::: {#ch07-s03 .section}
+## [7.3]{.section-number}가격조정의 시간구조: Fischer, Taylor, Calvo
+
+"가격경직성"은 하나의 timing 가정이 아니다. 가격이 충격 전에 정해지는가,
+정해진 기간 동안 고정되는가, 아니면 무작위로 재설정 기회가 도착하는가에
+따라 동학과 기대의 역할이 달라진다.
+
+::: display-table-wrap
+  모형      가격조정의 핵심 가정                                                                         이 장에서의 역할
+  --------- -------------------------------------------------------------------------------------------- -------------------------------------------------------------------
+  Fischer   가격 또는 임금이 충격 전에 설정되지만, 계약구조에 따라 매기 다시 설정될 수 있다.             사전계약과 예상·예상외 충격의 구분을 보인다.
+  Taylor    가격은 정해진 기간 동안 고정되고, 서로 다른 시점에 가격을 설정한 cohort가 공존한다.          staggered contract의 직관과 평균가격 관성을 보여 준다.
+  Calvo     각 기업은 매기 외생확률로 가격을 재설정할 기회를 얻고, 그렇지 않으면 기존 가격을 유지한다.   미래지향적 가격설정과 NKPC를 가장 간결하게 도출하는 기준모형이다.
+:::
+
+### 7.3.1 Calvo timing
+
+$\vartheta\in(0,1)$를 한 기업이 이번 기 가격을 재설정하지 못할
+확률이라고 하자. 그러면 가격재설정 기회가 도착할 확률은 $1-\vartheta$다.
+
+::: math-display
+$$
+          \Pr(\text{no reset at }t)=\vartheta,
+          \qquad
+          \Pr(\text{reset at }t)=1-\vartheta.
+          \tag{7.9}
+        $$
+:::
+
+Calvo 가정에서 가격을 재설정한 기업은 같은 재설정가격 $\widetilde P_t$를
+선택한다. 이는 기업이 실제로 같은 가격을 택한다는 강한 현실
+주장이라기보다, 대칭적 기업과 동일한 조건부 문제 아래 집계가 단순해지는
+기준점이다.
+
+:::: {.statement .remark}
+::: statement-head
+Calvo의 지위
+:::
+
+Calvo 모형은 가격조정 현실의 문자적 묘사로 읽으면 안 된다. 핵심은 가격
+cohort가 공존하고, 재설정기업이 미래 여러 기간의 이윤을 고려한다는
+점이다. 이 두 요소가 New Keynesian Phillips curve의 미래지향성을 만든다.
+::::
+:::::::
+
+::::::::::::::::::::: {#ch07-s04 .section}
+## [7.4]{.section-number}Calvo 가격설정, 가격지수, 가격분산, 그리고 New Keynesian Phillips Curve
+
+이 절은 Chapter 07의 수학적 중심이다. CES 수요체계는 개별기업의 가격선택
+문제를 만들고, Calvo timing은 그 선택을 동태적으로 만든다.
+집계가격지수와 재설정기업의 일차조건을 선형화하면 New Keynesian Phillips
+curve가 나온다.
+
+### 7.4.1 차별화된 재화와 가격지수
+
+최종재 조립자가 연속체 $i\in[0,1]$의 개별재를 CES 방식으로 결합한다고
+하자.
+
+::: math-display
+$$
+          Y_t=
+          \left[
+          \int_0^1Y_{it}^{\frac{\varepsilon-1}{\varepsilon}}\,di
+          \right]^{\frac{\varepsilon}{\varepsilon-1}},
+          \qquad
+          \varepsilon>1.
+          \tag{7.10}
+        $$ $$
+          Y_{it}
+          =
+          \left(\frac{P_{it}}{P_t}\right)^{-\varepsilon}Y_t,
+          \qquad
+          P_t=
+          \left[
+          \int_0^1P_{it}^{1-\varepsilon}di
+          \right]^{\frac{1}{1-\varepsilon}}.
+          \tag{7.11}
+        $$
+:::
+
+$\varepsilon$은 재화 간 대체탄력성이다. 각 기업은 measure-zero 가정 아래
+$P_t$와 $Y_t$를 자신의 가격결정에 대해 주어진 것으로 본다. 기준의 선형
+생산기술 $Y_{it}=A_tN_{it}$와 공통 임금 $W_t$ 아래 실질한계비용은
+$mc_t=W_t/(A_tP_t)$이며, 이 단순화에서는 기업별 한계비용이 공통이다.
+
+### 7.4.2 재설정 기업의 동태적 문제와 정확한 일차조건
+
+기업은 대표가계가 소유하므로, 미래의 실질이윤을 가계의 확률적 할인인자로
+할인한다. CRRA 선호 아래 이 할인인자는
+
+::: math-display
+$$
+          Q_{t,t+k}
+          \equiv
+          \beta^k\frac{C_{t+k}^{-\sigma}}{C_t^{-\sigma}}.
+          \tag{7.12a}
+        $$
+:::
+
+$mc_{t+k}$를 실질한계비용이라고 하자. 시점 $t$에 가격을 재설정한 기업은
+그 가격이 $k$기 뒤까지 유지될 확률 $\vartheta^k$를 고려해
+
+::: math-display
+$$
+          \max_{\widetilde P_t}
+          E_t\sum_{k=0}^{\infty}
+          \vartheta^k Q_{t,t+k}
+          \left[
+          \left(
+          \frac{\widetilde P_t}{P_{t+k}}
+          \right)-mc_{t+k}
+          \right]
+          \left(
+          \frac{\widetilde P_t}{P_{t+k}}
+          \right)^{-\varepsilon}
+          Y_{t+k}.
+          \tag{7.12b}
+        $$
+:::
+
+이 문제의 정확한 일차조건은 다음과 같이 쓸 수 있다.
+
+::: math-display
+$$
+          \widetilde P_t
+          =
+          \frac{\varepsilon}{\varepsilon-1}
+          \frac{
+          E_t\sum_{k=0}^{\infty}
+          \vartheta^k Q_{t,t+k}
+          mc_{t+k}P_{t+k}^{\varepsilon}Y_{t+k}}
+          {
+          E_t\sum_{k=0}^{\infty}
+          \vartheta^k Q_{t,t+k}
+          P_{t+k}^{\varepsilon-1}Y_{t+k}}.
+          \tag{7.12c}
+        $$
+:::
+
+따라서 현재 재설정가격은 현재 한계비용만의 함수가 아니다. 미래에 가격을
+다시 바꾸지 못할 수 있으므로, 예상되는 미래 한계비용·수요·집계가격과 그
+미래 이윤의 할인가치를 모두 반영한다.
+
+비선형 해를 쓸 때는 식 (7.12c)를 다음 보조변수로 재귀적으로 표현하는
+편이 안정적이다. 여기서 $\Pi_{t+1}\equiv P_{t+1}/P_t$는 gross
+inflation이며, 가계예산의 기업배당 $\mathcal D_t^f$와 다른 객체다.
+$Q_{t,t+1}=\beta C_{t+1}^{-\sigma}/C_t^{-\sigma}$라고 두면,
+
+::: math-display
+$$
+          S_t
+          =
+          mc_tY_t
+          +
+          \vartheta E_t
+          \left[
+          Q_{t,t+1}\Pi_{t+1}^{\varepsilon}S_{t+1}
+          \right],
+          \tag{7.12d}
+        $$ $$
+          F_t
+          =
+          Y_t
+          +
+          \vartheta E_t
+          \left[
+          Q_{t,t+1}\Pi_{t+1}^{\varepsilon-1}F_{t+1}
+          \right],
+          \tag{7.12e}
+        $$ $$
+          \frac{\widetilde P_t}{P_t}
+          =
+          \frac{\varepsilon}{\varepsilon-1}\frac{S_t}{F_t}.
+          \tag{7.12f}
+        $$
+:::
+
+이 재귀표현은 선형 NKPC의 추가 가정이 아니라, 비선형 Calvo 가격설정
+문제를 계산 가능한 상태공간으로 옮기는 방법이다.
+
+### 7.4.3 Calvo 집계, 재설정가격, 그리고 NKPC의 중간 단계
+
+이번 기 재설정기업은 비중 $1-\vartheta$, 기존 가격을 유지하는 기업은
+비중 $\vartheta$다. 따라서 CES 가격지수는
+
+::: math-display
+$$
+          P_t^{1-\varepsilon}
+          =
+          (1-\vartheta)\widetilde P_t^{\,1-\varepsilon}
+          +
+          \vartheta P_{t-1}^{\,1-\varepsilon}.
+          \tag{7.13}
+        $$
+:::
+
+다음 선형 NKPC 도출은 명시적으로
+
+::: math-display
+$$
+          \bar\pi=0,
+          \qquad
+          \text{no indexation},
+          \qquad
+          \text{constant desired markup},
+          \qquad
+          \text{first-order approximation}
+          \tag{7.13a}
+        $$
+:::
+
+을 기준으로 한다. 추세인플레이션, indexation, firm-specific capital,
+Kimball 수요, input-output linkage가 들어가면 계수와 상태공간이
+달라진다. $p_t\equiv\log P_t$, $\widetilde p_t\equiv\log\widetilde P_t$,
+그리고 $\widehat{mc}_t\equiv\log(mc_t/\bar{mc})$라고 하자. 여기서
+$\bar{mc}=(\varepsilon-1)/\varepsilon$은 constant desired markup을 갖는
+zero-inflation 대칭 정상상태의 실질한계비용이다. indexation이 없는 표준
+Calvo 환경에서 식 (7.12c)를 1차 로그선형화하면
+
+::: math-display
+$$
+          \widetilde p_t
+          =
+          (1-\beta\vartheta)
+          \sum_{k=0}^{\infty}(\beta\vartheta)^k
+          E_t\!\left[p_{t+k}+\widehat{mc}_{t+k}\right].
+          \tag{7.13b}
+        $$ $$
+          \pi_t
+          =
+          (1-\vartheta)
+          \left(\widetilde p_t-p_{t-1}\right).
+          \tag{7.13c}
+        $$
+:::
+
+첫 식은 재설정가격이 미래 가격수준과 미래 한계비용의 할인기대임을
+보이고, 둘째 식은 재설정기업의 가격이 집계가격을 부분적으로만 움직인다는
+것을 보인다. 두 식을 결합하면 바로 다음의 한계비용형 NKPC가 나온다.
+
+### 7.4.4 NKPC: 한계비용형과 산출갭형
+
+::: math-display
+$$
+          \pi_t
+          =
+          \beta E_t\pi_{t+1}
+          +
+          \lambda_p\widehat{mc}_t,
+          \qquad
+          \lambda_p\equiv
+          \frac{(1-\vartheta)(1-\beta\vartheta)}{\vartheta}>0.
+          \tag{7.14}
+        $$
+:::
+
+식 (7.14)의 $\widehat{mc}_t$는 정상상태의 desired real marginal
+cost로부터의 편차다. 이 식을 산출갭형으로 쓰려면 한계비용의 움직임을
+자연산출과 실제산출의 괴리로 분해해야 한다. 일반적으로는
+
+::: math-display
+$$
+          \widehat{mc}_t
+          =
+          \chi x_t+\xi_t^{mc},
+          \qquad
+          u_t\equiv\lambda_p\xi_t^{mc},
+          \qquad
+          \kappa\equiv\lambda_p\chi>0,
+          \tag{7.15}
+        $$ $$
+          \boxed{
+          \pi_t
+          =
+          \beta E_t\pi_{t+1}
+          +
+          \kappa x_t
+          +
+          u_t.}
+          \tag{7.16}
+        $$
+:::
+
+$\xi_t^{mc}$는 산출갭으로 환원되지 않는 실질한계비용 또는 원하는
+markup의 wedge다. 노동만 사용하는 표준 CRRA--separable-labor benchmark와
+constant desired markup 아래에서는 $\chi=\sigma+\varphi$가 된다. 이
+결과는 다음처럼 직접 확인된다. $Y_t=A_tN_t$, $C_t=Y_t$, 그리고
+노동공급조건 $W_t/P_t=C_t^\sigma N_t^\varphi$를 쓰면
+
+::: math-display
+$$
+          mc_t=\frac{W_t}{A_tP_t},
+          \qquad
+          \log mc_t
+          =
+          \sigma\log C_t+\varphi\log N_t-\log A_t,
+          \tag{7.15a}
+        $$ $$
+          \log mc_t
+          =
+          (\sigma+\varphi)\log Y_t-(1+\varphi)\log A_t.
+          \tag{7.15b}
+        $$
+:::
+
+같은 생산성 상태에서 유연가격 자연배분을 빼면 기술항이 소거되므로
+
+::: math-display
+$$
+          \widehat{mc}_t-\widehat{mc}_t^n
+          =
+          (\sigma+\varphi)
+          \bigl(\log Y_t-\log Y_t^n\bigr)
+          =
+          (\sigma+\varphi)x_t.
+          \tag{7.15c}
+        $$
+:::
+
+따라서 이 benchmark에서
+
+::: math-display
+$$
+          \kappa
+          =
+          \frac{(1-\vartheta)(1-\beta\vartheta)}{\vartheta}
+          (\sigma+\varphi).
+          \tag{7.16a}
+        $$
+:::
+
+정상상태 monopoly distortion을 subsidy로 제거하는 가정은 자연산출과
+효율산출을 일치시키는 데에는 중요하지만, $\chi=\sigma+\varphi$라는
+국소적 한계비용--산출갭 관계 자체에 필수조건은 아니다. 반면 Kimball
+수요, firm-specific capital, 투입-산출 연결, real rigidity, 임금경직성은
+$\chi$, $\lambda_p$, 또는 둘 모두를 바꾸므로 $\kappa$는 모형의 구조에
+의존한다.
+
+:::: {.statement .theorem}
+::: statement-head
+미래 인플레이션 항의 경제적 의미
+:::
+
+$E_t\pi_{t+1}$은 "기대가 중요하니 넣은 항"이 아니다. 재설정기업이 오늘의
+가격을 미래에도 사용할 수 있다는 Calvo timing 때문에 생긴다. 미래에
+가격수준이 더 오르거나 미래 한계비용이 높아질 것으로 예상되면, 오늘
+재설정가격을 더 높게 설정하려는 유인이 생긴다.
+::::
+
+### 7.4.5 가격분산과 자원왜곡
+
+비선형 경제에서는 상대가격의 분산이 생산 효율성을 떨어뜨린다. 노동만을
+쓰는 선형 생산기술 $Y_{it}=A_tN_{it}$에서 가격분산을
+
+::: math-display
+$$
+          \Delta_t
+          \equiv
+          \int_0^1
+          \left(
+          \frac{P_{it}}{P_t}
+          \right)^{-\varepsilon}di
+          \tag{7.17}
+        $$
+:::
+
+로 두면 집계노동과 산출은
+
+::: math-display
+$$
+          N_t
+          =
+          \Delta_t\frac{Y_t}{A_t},
+          \qquad
+          \text{equivalently}\qquad
+          Y_t=\frac{A_tN_t}{\Delta_t}.
+          \tag{7.18}
+        $$
+:::
+
+$\Delta_t\ge1$이고, 모든 상대가격이 같을 때에만 $\Delta_t=1$이다. 따라서
+가격분산은 같은 산출을 얻는 데 필요한 노동을 늘린다. 또한 가격분산은
+과거 가격분포를 상속하는 상태변수다. Calvo pricing에서는
+
+::: math-display
+$$
+          \Delta_t
+          =
+          (1-\vartheta)
+          \left(\frac{\widetilde P_t}{P_t}\right)^{-\varepsilon}
+          +
+          \vartheta
+          \left(\frac{P_{t-1}}{P_t}\right)^{-\varepsilon}
+          \Delta_{t-1}.
+          \tag{7.18a}
+        $$
+:::
+
+즉 현재 가격분산은 새로 재설정한 가격의 상대가격 왜곡과, 과거에 설정되어
+현재까지 유지되는 가격들의 왜곡을 모두 포함한다. 1차 로그선형화에서 이
+왜곡이 직접 나타나지 않는다고 해서, 비선형 동학이나 복지분석에서
+사라지는 것은 아니다.
+:::::::::::::::::::::
+
+::: part-divider
+PART II DIAGNOSIS: 가격조정 가정과 실증적 규율
+:::
+
+:::::::::::: {#ch07-s05 .section}
+## [7.5]{.section-number}time-dependent pricing과 state-dependent pricing
+
+Calvo는 가격재설정 timing이 기업의 현재 가격오차와 무관한 순수한
+time-dependent pricing이다. 그러나 Chapter 06의 menu cost 논리는
+가격변경 여부가 가격오차와 충격크기에 반응하는 state-dependent pricing의
+가능성을 제기한다.
+
+:::::: model-contrast
+::: {}
+[TIME-DEPENDENT]{.tag}
+
+### Calvo benchmark
+
+가격을 바꿀 기회의 도착시점은 외생적이다. 기업은 기회가 왔을 때만 상태에
+반응한다.
+:::
+
+::: arrow
+↔
+:::
+
+::: {}
+[STATE-DEPENDENT]{.tag}
+
+### menu-cost logic
+
+가격오차와 충격이 커질수록 가격변경의 사적 이득이 커지고, 변경 여부
+자체가 상태에 반응한다.
+:::
+::::::
+
+### 7.5.1 두 개의 집계효과
+
+::::: details-grid
+::: {}
+[FREQUENCY EFFECT]{.tag}
+
+### 조정기업 비중의 변화
+
+큰 집계충격일수록 가격을 바꾸는 기업의 비중이 증가할 수 있다. 평균
+변경빈도가 일정하지 않다.
+:::
+
+::: {}
+[SELECTION EFFECT]{.tag}
+
+### 조정기업 구성의 변화
+
+가격오차가 특히 큰 기업이 선택적으로 가격을 조정하면, 같은 변경빈도
+아래에서도 집계가격은 더 빨리 반응할 수 있다.
+:::
+:::::
+
+따라서 평균적인 가격지속기간만으로 Calvo의 $\vartheta$를 경제 전체의
+구조적 가격경직성으로 해석하는 것은 위험하다. time-dependent와
+state-dependent 모형은 동일한 평균 빈도를 재현하더라도 충격의 크기에
+대한 비선형 반응이 다를 수 있다.
+
+순수한 Calvo 모형 안에서는 가격지속기간 $D$가 기하분포를 따른다.
+
+::: math-display
+$$
+          \Pr(D=j)
+          =
+          (1-\vartheta)\vartheta^{j-1},
+          \qquad
+          j=1,2,\ldots,
+          \qquad
+          E[D]=\frac{1}{1-\vartheta}.
+          \tag{7.19a}
+        $$
+:::
+
+이 식은 모형 내부의 산술관계다. 관측된 평균 가격지속기간을 곧바로 구조적
+Calvo rigidity로 해석할 수 있다는 뜻은 아니다. 할인, 품질변화, 제품교체,
+가격오차의 선택적 조정, 집계충격의 크기에 따른 조정확률 변화가 모두
+자료의 가격지속기간에 섞인다.
+
+::: math-display
+$$
+          \boxed{
+          \text{average price duration}
+          \not\Rightarrow
+          \text{a sufficient statistic for aggregate nominal rigidity}.}
+          \tag{7.19}
+        $$
+:::
+::::::::::::
+
+::::::::::::::::::: {#ch07-s06 .section}
+## [7.6]{.section-number}가격조정 자료의 규율: 무엇이 $\vartheta$를 직접 식별하지 못하는가
+
+미시 가격자료는 가격경직성의 이론을 제한하지만, 가격변경 빈도 하나만으로
+Calvo parameter를 읽어 내게 해 주지는 않는다. 개별가격의 수정과
+집계가격의 반응은 서로 다른 객체이며, 무엇이 가격변경으로 관측되는지도
+자료 구성에 민감하다.
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+빈도
+:::
+
+::: right
+한 품목의 가격이 얼마나 자주 바뀌는가는 개별 조정의 빈도다. 집계충격에
+대한 수정의 빈도와 같을 필요가 없다.
+:::
+:::::
+
+::::: chain-row
+::: left
+규모
+:::
+
+::: right
+가격변경이 잦아도 규모가 작거나 상쇄되면 집계가격은 느리게 반응할 수
+있다.
+:::
+:::::
+
+::::: chain-row
+::: left
+선택
+:::
+
+::: right
+가격오차가 큰 기업이 선택적으로 바꾸는 경우, 동일한 평균 빈도라도
+충격반응은 Calvo와 달라진다.
+:::
+:::::
+
+::::: chain-row
+::: left
+측정
+:::
+
+::: right
+할인, 품질조정, 제품교체, 표본 교체가 관측된 가격변경에 섞일 수 있다.
+:::
+:::::
+
+::::: chain-row
+::: left
+집계
+:::
+
+::: right
+개별가격의 평균 지속기간과 CPI 또는 GDP deflator의 동학은 가중치와
+공통충격의 구조를 거쳐 연결된다.
+:::
+:::::
+::::::::::::::::::
+
+이 절의 결론은 Calvo 모형을 버리자는 것이 아니다. $\vartheta$는 모든
+가격행동을 문자 그대로 묘사하는 보편적 추정치가 아니라, 특정
+time-dependent pricing 근사 안에서 가격재설정 지연을 요약하는 *모형특정
+parameter*로 읽어야 한다. 집계 가격경직성을 식별하려면 가격변경의 빈도뿐
+아니라 규모·선택·충격별 반응·가격지수의 구성까지 함께 보아야 한다.
+:::::::::::::::::::
+
+::::::::::: {#ch07-s07 .section}
+## [7.7]{.section-number}inflation inertia와 staggered price adjustment의 대안
+
+기본 NKPC는 순수하게 forward-looking하다. 그러나 실제 인플레이션에는
+종종 더 강한 지속성이 관찰된다. 이 절의 목적은 관성항을 기계적으로
+덧붙이는 것이 아니라, $\pi_{t-1}$이 왜 가격설정 문제에 나타나는지 묻는
+것이다.
+
+### 7.7.1 hybrid NKPC는 축약형이다
+
+::: math-display
+$$
+          \pi_t
+          =
+          \gamma_b\pi_{t-1}
+          +
+          \gamma_fE_t\pi_{t+1}
+          +
+          \kappa x_t
+          +
+          u_t.
+          \tag{7.20}
+        $$
+:::
+
+식 (7.20)은 유용한 경험적 근사일 수 있지만, 그 자체가 미시기초는 아니다.
+$\gamma_b>0$의 근거는 별도로 주어져야 한다.
+
+::::::: details-grid
+::: {}
+[INDEXATION]{.tag}
+
+### 과거 인플레이션에 연동된 가격
+
+가격을 재설정하지 못한 기업의 가격이 과거 인플레이션에 기계적으로
+연동되면 지연된 인플레이션이 직접 들어갈 수 있다.
+:::
+
+::: {}
+[INFORMATION]{.tag}
+
+### 느린 정보갱신
+
+기업이 가격을 자주 바꾸더라도 모든 기업이 동시에 최신 거시정보를
+처리하지 않으면 과거 기대가 현재 가격에 남을 수 있다.
+:::
+
+::: {}
+[RULE-OF-THUMB]{.tag}
+
+### 비최적 가격설정자
+
+일부 기업이 과거 인플레이션이나 단순 규칙에 의존하면 순수한 미래지향성이
+약화될 수 있다.
+:::
+
+::: {}
+[CONTRACTS]{.tag}
+
+### 복합 계약구조
+
+Fischer·Taylor형 계약과 다양한 indexation rule이 함께 있으면 인플레이션
+관성이 나타날 수 있다.
+:::
+:::::::
+
+:::: {.statement .warning}
+::: statement-head
+해석의 경계
+:::
+
+$\pi_{t-1}$이 데이터에서 유의하다고 해서 특정한 한 미시기초가 자동으로
+확인되는 것은 아니다. indexation, 정보마찰, 계약구조, 측정오차, 정책체계
+변화가 서로 비슷한 reduced-form persistence를 만들 수 있다.
+::::
+:::::::::::
+
+::: part-divider
+PART III EQUILIBRIUM: 정책규칙, 결정성, 충격전달
+:::
+
+:::::::::: {#ch07-s08 .section}
+## [7.8]{.section-number}canonical three-equation New Keynesian model
+
+이제 가계의 Euler equation, Calvo 가격설정, 정책규칙을 하나의 선형
+동태시스템으로 묶는다. 이 세 식은 모두 서로 다른 출처를 가진다. IS
+관계는 가계의 기간 간 선택, NKPC는 기업의 동태적 가격선택, Taylor rule은
+정책당국의 closure다.
+
+::: math-display
+$$
+          x_t
+          =
+          E_t x_{t+1}
+          -
+          \frac{1}{\sigma}
+          \left(
+          \widetilde i_t-E_t\pi_{t+1}-\widetilde{\mathfrak r}_t^n
+          \right),
+          \tag{7.21}
+        $$ $$
+          \pi_t
+          =
+          \beta E_t\pi_{t+1}
+          +
+          \kappa x_t
+          +
+          u_t,
+          \tag{7.22}
+        $$ $$
+          \widetilde i_t
+          =
+          \phi_\pi\pi_t
+          +
+          \phi_x x_t
+          +
+          v_t.
+          \tag{7.23}
+        $$
+:::
+
+식 (7.23)은 이 장의 결정성 분석을 위한 **현재지향적** 기준규칙이다.
+이것은 실제 중앙은행이 동시점 $\pi_t$와 $x_t$를 완전하게 관측한다는
+주장도, Romer가 소개하는 forward-looking rule을 그대로 복제한다는 뜻도
+아니다. 여기서는 정책 closure와 Blanchard--Kahn 논리를 가장 투명하게
+보이기 위한 국소적 기준점으로 쓴다.
+
+### 7.8.1 canonical wedges와 primitive shocks를 구분하기
+
+::: display-table-wrap
+  canonical wedge 또는 disturbance   직접 진입 위치   경제적 역할
+  ---------------------------------- ---------------- --------------------------------------------------------------------------------------------------------------------
+  $\widetilde{\mathfrak r}_t^n$      IS relation      현재 실질이자율과 비교되는 자연실질이자율의 편차. 유연가격 배분을 지지하는 intertemporal-price benchmark를 바꾼다.
+  $u_t$                              NKPC             산출갭만으로 환원되지 않는 한계비용·원하는 markup·조세·공급조건의 cost-push wedge.
+  $v_t$                              policy rule      체계적 정책반응에서 벗어난 명목금리 disturbance. 지속성이 있으면 정책상태가 된다.
+:::
+
+:::: {.statement .remark}
+::: statement-head
+wedge decomposition의 의미
+:::
+
+$(\widetilde{\mathfrak r}_t^n,u_t,v_t)$는 canonical NK system의 방정식별
+decomposition이다. 이것이 primitive shock과 일대일로 대응한다는 뜻은
+아니다. 예를 들어 생산성·재정·선호 변화는 구조에 따라
+$\widetilde{\mathfrak r}_t^n$과 $u_t$를 동시에 움직일 수 있다. 순서는
+$\text{primitive shocks}\to\text{equilibrium wedges}\to\text{canonical equations}$이다.
+::::
+
+### 7.8.2 외생상태의 전이
+
+선형 해와 IRF를 위해 세 disturbance를 다음과 같은 stationary Markov
+과정으로 두자.
+
+::: math-display
+$$
+          \widetilde{\mathfrak r}_t^n
+          =\rho_r\widetilde{\mathfrak r}_{t-1}^n+\varepsilon_t^r,
+          \qquad
+          u_t=\rho_u u_{t-1}+\varepsilon_t^u,
+          \qquad
+          v_t=\rho_v v_{t-1}+\varepsilon_t^i,
+          \tag{7.24}
+        $$ $$
+          |\rho_r|<1,\qquad |\rho_u|<1,\qquad |\rho_v|<1,
+          \qquad
+          E_{t-1}\varepsilon_t^j=0\ \ (j\in\{r,u,i\}).
+        $$
+:::
+
+기준 IRF에서는 $\varepsilon_t^r,\varepsilon_t^u,\varepsilon_t^i$를 서로
+직교하는 innovation으로 둘 수 있다. 상관된 primitive shock을 연구하려면
+그 공분산구조를 별도로 명시해야 한다. 이 설정에서 외생 Markov state는
+$s_t=(\widetilde{\mathfrak r}_t^n,u_t,v_t)$다.
+
+:::: {.statement .theorem}
+::: statement-head
+Taylor rule의 지위
+:::
+
+Taylor rule은 가계 또는 기업의 최적화 조건이 아니다. 그것은 특정
+통화정책체제에서 명목이자율을 어떤 함수로 설정하는지를 나타내는 policy
+closure다. 따라서 식 (7.23)만으로 그 규칙이 후생적으로 최적인지 결론낼
+수 없다.
+::::
+::::::::::
+
+:::::::::::::::::::::: {#ch07-s09 .section}
+## [7.9]{.section-number}합리적 기대균형, 결정성, 해법, 그리고 impulse responses
+
+세 식을 나열하는 것과 균형을 푸는 것은 다르다. $x_t$와 $\pi_t$가
+미래기대에 의존하므로, 같은 현재 상태에서 여러 자기실현적 경로가
+가능한지, 혹은 유일한 bounded equilibrium이 존재하는지를 별도로 판별해야
+한다.
+
+### 7.9.1 결정성의 출발점
+
+우선 $\widetilde{\mathfrak r}_t^n=u_t=v_t=0$이고 정책규칙에 금리관성이
+없다고 하자. 식 (7.21)--(7.23)을 재정리하면
+
+::: math-display
+$$
+          E_t
+          \begin{pmatrix}
+          x_{t+1}\\
+          \pi_{t+1}
+          \end{pmatrix}
+          =
+          \begin{pmatrix}
+          1+\dfrac{\phi_x}{\sigma}+\dfrac{\kappa}{\sigma\beta}
+          &
+          \dfrac{\phi_\pi}{\sigma}-\dfrac{1}{\sigma\beta}\\[8pt]
+          -\dfrac{\kappa}{\beta}
+          &
+          \dfrac{1}{\beta}
+          \end{pmatrix}
+          \begin{pmatrix}
+          x_t\\
+          \pi_t
+          \end{pmatrix}.
+          \tag{7.25}
+        $$
+:::
+
+$x_t$와 $\pi_t$는 기준모형에서 forward-looking variable이다.
+Blanchard--Kahn 논리는 bounded rational-expectations equilibrium의
+유일성을 위해 단위원 밖 고유값의 수가 forward-looking variable의 수와
+같아야 한다고 말한다.
+
+::: math-display
+$$
+          \boxed{
+          \#\{\text{unstable roots}\}
+          =
+          \#\{\text{forward-looking variables}\}.}
+          \tag{7.26}
+        $$
+:::
+
+:::: {.statement .remark}
+::: statement-head
+Count condition의 적용범위
+:::
+
+식 (7.26)은 정규적인 선형화, 단위원 위 root의 부재, 그리고 관련
+deflating subspace가 predetermined coordinates 위의 단일값 graph를
+이룬다는 projection-rank 조건을 전제로 한다. 현재의 비특이 $2\times2$
+benchmark에는 predetermined endogenous variable이 없으므로 조건이 두
+root 모두 단위원 밖에 있다는 판정으로 축약된다. Descriptor system이나
+predetermined block이 있는 일반모형에서는 Appendix B의
+regular-pencil·root-count·graph-rank 조건을 함께 확인해야 한다.
+::::
+
+외생상태를 포함하면 해법은 다음의 state-space 문제로 정리된다.
+
+::: math-display
+$$
+          z_t\equiv
+          \begin{pmatrix}
+          x_t\\
+          \pi_t
+          \end{pmatrix},
+          \qquad
+          s_t\equiv
+          \begin{pmatrix}
+          \widetilde{\mathfrak r}_t^n\\
+          u_t\\
+          v_t
+          \end{pmatrix},
+          \tag{7.26a}
+        $$ $$
+          A E_t z_{t+1}
+          =
+          Bz_t+Cs_t,
+          \qquad
+          s_t=Ps_{t-1}+\varepsilon_t.
+          \tag{7.26b}
+        $$
+:::
+
+결정성이 성립하면 $z_t=Hs_t$ 꼴의 유일한 bounded linear decision rule이
+존재한다. 식 (7.26b)의 $s_t=Ps_{t-1}+\varepsilon_t$는 Appendix B의
+$s_{t+1}=Ps_t+\varepsilon_{t+1}$와 단순한 한 기 index shift로 같은
+timing이다. 즉 $\varepsilon_t$가 시점 $t$에 실현되어 $s_t$에 포함된 뒤
+$x_t,\pi_t$가 결정된다. 계산상으로는 generalized Schur, 즉 QZ
+decomposition을 통해 단위원 밖 generalized eigenvalue의 개수와 jump
+variable의 개수를 비교한다. 여기서 $x_t,\pi_t$는 jump variables이고
+$s_t$는 외생 Markov state다.
+
+### 7.9.2 Taylor principle의 정확한 위치
+
+$\phi_\pi>1$이라는 Taylor principle의 직관은 인플레이션 상승에 대해
+명목금리가 일대일보다 더 반응하여 실질이자율을 상승시키는 데 있다.
+
+::: math-display
+$$
+          \pi_t\uparrow
+          \Rightarrow
+          \widetilde i_t\uparrow
+          \Rightarrow
+          \widetilde i_t-E_t\pi_{t+1}\uparrow
+          \Rightarrow
+          x_t\downarrow
+          \Rightarrow
+          \pi_t\downarrow.
+          \tag{7.27}
+        $$
+:::
+
+그러나 식 (7.27)은 결정성의 증명이 아니다. 현재지향적 정책규칙, 금리관성
+없음, $\beta\in(0,1)$, $\sigma>0$, $\kappa>0$, 그리고
+$\phi_\pi,\phi_x\ge0$라는 현재 기준모형에서는 결정성의 필요충분조건을
+다음처럼 쓸 수 있다.
+
+::: math-display
+$$
+          \boxed{
+          \kappa(\phi_\pi-1)+(1-\beta)\phi_x>0,}
+          \qquad
+          \text{equivalently}\qquad
+          \boxed{
+          \phi_\pi+\frac{1-\beta}{\kappa}\phi_x>1.}
+          \tag{7.27a}
+        $$
+:::
+
+따라서 $\phi_\pi>1$과 $\phi_x\ge0$은 충분조건이지만, 이 단순한
+기준모형에서는 필요조건은 아니다. 반대로 금리관성, indexation, 자본,
+임금경직성, 금융마찰이 추가되면 식 (7.27a)를 그대로 적용할 수 없고
+고유값 조건을 다시 계산해야 한다.
+
+실제 응용에서는 금리관성을 포함한 정책규칙을 자주 쓴다.
+
+::: math-display
+$$
+          \widetilde i_t
+          =
+          \rho_{\mathrm{sm}}\widetilde i_{t-1}
+          +(1-\rho_{\mathrm{sm}})
+          \left(\phi_\pi\pi_t+\phi_x x_t\right)
+          +v_t,
+          \qquad 0\le\rho_{\mathrm{sm}}<1.
+          \tag{7.27b}
+        $$
+:::
+
+여기서 $\rho_v$는 정책충격 $v_t$ 자체의 지속성이고,
+$\rho_{\mathrm{sm}}$은 체계적 금리평활 계수다. 두 계수는
+경제적·통계적으로 별개의 모수다. 이 경우 $\widetilde i_{t-1}$은
+predetermined policy state가 되며, 상태벡터와 generalized eigenvalue
+문제가 바뀐다. 따라서 금리관성 모형의 결정성은 식 (7.27a)를 기계적으로
+적용하지 말고 확장된 시스템에서 다시 판별해야 한다.
+
+### 7.9.3 결정규칙과 IRF
+
+결정성이 성립하고 외생 상태가
+$s_t=(\widetilde{\mathfrak r}_t^n,u_t,v_t)$라면, 선형 근사 해는
+
+::: math-display
+$$
+          x_t=\mathcal X(s_t),
+          \qquad
+          \pi_t=\mathcal P_{\pi}(s_t),
+          \qquad
+          \widetilde i_t=\mathcal I(s_t)
+        $$
+:::
+
+와 같은 결정규칙으로 표현된다. shock vector
+$\varepsilon_t=(\varepsilon_t^r,\varepsilon_t^u,\varepsilon_t^i)$의 한
+성분에 대한 impulse response는 Chapter 05의 timing 규율을 유지해
+
+::: math-display
+$$
+          IRF_z(h;\varepsilon)
+          =
+          E\!\left[
+          z_{t+h}\mid s_{t-1}=s^\ast,\varepsilon_t=\varepsilon
+          \right]
+          -
+          E\!\left[
+          z_{t+h}\mid s_{t-1}=s^\ast,\varepsilon_t=0
+          \right].
+          \tag{7.28}
+        $$
+:::
+
+두 조건부 기대에서 현재 충격 외의 innovation과 미래 innovation은 동일한
+확률법칙을 따라야 한다. 그래야 IRF가 현재의 특정 innovation 하나가
+추가로 만드는 효과를 뜻한다. 식 (7.28)은 엄밀히는 zero-innovation
+response다. 현재 장의 선형·가법적·평균 0 충격모형에서는 conventional
+linear IRF 및 Appendix D의 generalized IRF와 일치하지만,
+비선형모형에서는 zero-innovation response와 KPP generalized IRF를
+구분해야 한다.
+
+:::::::::: flow
+::: node
+**POLICY INNOVATION**$\varepsilon_t^i>0$가 $v_t$를 올림
+:::
+
+::: arrow
+→
+:::
+
+::: node
+**REAL-RATE
+GAP**$\widetilde i_t-E_t\pi_{t+1}-\widetilde{\mathfrak r}_t^n$ 상승
+:::
+
+::: arrow
+→
+:::
+
+::: node
+**DEMAND**산출갭 하락
+:::
+
+::: arrow
+→
+:::
+
+::: node
+**INFLATION**현재·기대 인플레이션 하락
+:::
+::::::::::
+
+이 전달경로는 정책 innovation의 기준적 직관이다. 반면 cost-push wedge
+$u_t$의 상승은 인플레이션을 직접 높인다. 중앙은행이 이를 억제하려면
+산출갭 하락을 감수해야 하므로, 자연이자율 충격과 달리 inflation-output
+stabilization trade-off가 발생한다.
+
+::: math-display
+$$
+          u_t>0
+          \Rightarrow
+          \pi_t\uparrow,
+          \qquad
+          \text{stabilizing }\pi_t
+          \Rightarrow
+          x_t\downarrow.
+          \tag{7.28a}
+        $$
+:::
+
+이 대비가 Chapter 08의 최적 통화정책 문제로 넘어가는 핵심 연결고리다.
+::::::::::::::::::::::
+
+::::::: {#ch07-s10 .section}
+## [7.10]{.section-number}forward guidance puzzle
+
+canonical NK model은 미래의 실질이자율 경로가 현재 소비와 가격설정에
+즉시 영향을 준다고 말한다. 이 성질은 통화정책의 기대경로를 분석하는 데
+필요하지만, 먼 미래의 정책금리 변화가 현재 산출과 인플레이션에 지나치게
+큰 효과를 내는 경우를 만든다.
+
+식 (7.21)을 반복 대입하면 현재 산출갭이 미래의 실질이자율 갭 경로 전체에
+의존한다는 사실이 드러난다. boundedness 조건 아래
+
+::: math-display
+$$
+          x_t
+          =
+          -\frac{1}{\sigma}
+          E_t\sum_{j=0}^{\infty}
+          \left(
+          \widetilde i_{t+j}
+          -
+          \pi_{t+j+1}
+          -
+          \widetilde{\mathfrak r}_{t+j}^n
+          \right).
+          \tag{7.29a}
+        $$
+:::
+
+기준모형에서는 미래 실질이자율 갭이 이 합에 명시적 할인 없이 들어간다.
+따라서 아주 먼 시점의 금리인하 약속도 현재 소비의 기간 간 대체를
+자극하고, 가격재설정기업은 그 미래 수요를 오늘 가격에 반영한다.
+
+::: math-display
+$$
+          \boxed{
+          \text{distant future interest-rate news}
+          \;\Longrightarrow\;
+          \text{current effects that may fail to decay plausibly with the horizon}.}
+          \tag{7.29}
+        $$
+:::
+
+이것이 forward guidance puzzle이다. 이는 "미래 정책은 현재에 전혀 영향을
+주지 않는다"는 반론이 아니다. 문제는 기준모형의 완전한 기간 간 최적화와
+순수한 미래지향적 가격설정이, 몇 년 뒤의 정책변화에 대해 비현실적으로 큰
+현재 반응을 생성할 수 있다는 점이다. 이 절의 정책경로는 우선 canonical
+rule의 외생 disturbance $v_t$ 또는 알려진 미래 정책경로로 해석하며,
+제로하한·forward-looking rule·정책 commitment의 상세한 문제는 다음
+장에서 분리한다.
+
+:::: {.statement .remark}
+::: statement-head
+모형 진단으로 읽기
+:::
+
+forward guidance puzzle은 canonical NK model이 쓸모없다는 결론을 주지
+않는다. 오히려 이질적 가계, 불완전시장, 제한된 주의, 정보마찰, 금융제약,
+가격설정의 관성 등 어떤 추가 구조가 수요와 기대의 전달을 약화시키는지
+묻는 진단 문제다.
+::::
+:::::::
+
+:::::::::: {#ch07-s11 .section}
+## [7.11]{.section-number}비선형 경제, 가격분산, 확장 지도, 그리고 Chapter 08의 경계
+
+Chapter 07은 가격재설정과 기대가 인플레이션·산출·정책금리의 동태를 함께
+결정하는 기준모형을 완성한다. 그러나 이 모형이 곧 현대 경제 전체를
+포괄하는 것은 아니다. 확장은 단순한 "현실성 추가"가 아니라,
+상태변수·결정성·충격전달·후생평가를 바꾸는 구조 변경이다.
+
+### 7.11.1 가격분산과 후생
+
+가격분산 $\Delta_t$는 상대가격 왜곡을 통해 생산의 자원비용을 높인다.
+따라서 작은 정상상태 주변에서 1차 선형식만으로 정책을 평가하면,
+인플레이션 변동이 야기하는 비선형 자원왜곡을 과소평가할 수 있다.
+
+::: math-display
+$$
+          \text{price dispersion}
+          \Rightarrow
+          \text{resource misallocation}
+          \Rightarrow
+          \text{potential welfare loss}.
+          \tag{7.30}
+        $$
+:::
+
+그렇다고 Chapter 07에서 Ramsey policy나 중앙은행의 손실함수를 완전하게
+도출하지는 않는다. 다만 효율 정상상태 또는 적절한 보조금으로 정상상태
+monopoly distortion을 제거한 기준에서는, 대표가계 후생의 2차 근사가
+대체로 다음 형태의 local loss로 이어진다.
+
+::: math-display
+$$
+          \mathcal L
+          \propto
+          E_0\sum_{t=0}^{\infty}\beta^t
+          \left[
+          \pi_t^2+\lambda_x x_t^2
+          \right],
+          \qquad
+          \lambda_x>0.
+          \tag{7.30a}
+        $$
+:::
+
+이 식은 중앙은행이 임의로 선택한 손실함수가 아니라,
+선호·기술·가격분산·정상상태 왜곡을 둘러싼 2차 근사에서 나오는 객체다.
+여기서 $x_t$를 그대로 welfare-relevant gap으로 사용할 수 있는 것은
+subsidy 등으로 $Y_t^n=Y_t^{\mathrm{eff}}$가 성립하는 benchmark에
+한정된다. 일반적으로는 Chapter 08의
+$\widetilde x_t=\log Y_t-\log Y_t^{\mathrm{eff}}$를 사용해야 하며,
+정상상태 왜곡, cost-push wedge, 추세인플레이션, 임금경직성, 금융마찰이
+있으면 손실함수의 항과 계수도 달라진다. 우선 이 장에서는 "주어진
+정책규칙 아래 어떤 균형이 나오는가"를 완성하고, "어떤 정책이
+바람직한가"는 다음 장으로 넘긴다.
+
+### 7.11.2 확장요소의 지도
+
+::: display-table-wrap
+  확장                     바뀌는 핵심 객체                                           후속 위치
+  ------------------------ ---------------------------------------------------------- -------------------------
+  자본·투자조정비용        predetermined capital state, Tobin\'s $q$, 투자 전달경로   투자 블록
+  임금경직성과 실업        임금 Phillips curve, 노동수요, 고용·실업의 분리            노동시장·탐색·매칭 블록
+  금융마찰                 외부금융 premium, 차입제약, 정책전달의 이질성              금융마찰·위기 블록
+  이질적 가계·불완전시장   MPC 분포, 재분배, 통화정책의 소득경로                      HANK·사회보험 블록
+  제로하한·비선형 정책     occasionally binding constraint, 전역해, 기대의 비선형성   통화정책 심화 블록
+:::
+
+:::::: model-contrast
+::: {}
+[CHAPTER 07]{.tag}
+
+### 정책규칙이 주어질 때
+
+Euler equation, NKPC, policy rule이 어떤 기대균형과 충격반응을 만드는지
+분석한다.
+:::
+
+::: arrow
+→
+:::
+
+::: {}
+[CHAPTER 08]{.tag}
+
+### 정책규칙을 어떻게 선택할 것인가
+
+후생, stabilization trade-off, commitment, discretion, credibility를
+통해 정책의 선택문제로 넘어간다.
+:::
+::::::
+::::::::::
+
+::::: {#ch07-conclusion .section}
+## [결론]{.section-number}Chapter 08로의 연결: 균형결정에서 안정화정책으로
+
+Chapter 07의 canonical NK model은 세 가지 질문에 답했다. 첫째, 가계의
+기간 간 선택이 왜 실질이자율 갭을 산출갭과 연결하는가. 둘째, Calvo
+가격설정이 왜 현재 인플레이션을 기대인플레이션과 한계비용에 연결하는가.
+셋째, 정책규칙이 왜 균형의 유일성과 충격전달을 좌우하는가.
+
+::: math-display
+$$
+          \boxed{
+          \text{Chapter 07: given a policy rule, what equilibrium follows?}}
+        $$ $$
+          \boxed{
+          \text{Chapter 08: which policy rule or policy plan should be chosen?}}
+        $$
+:::
+
+::: conclusion-block
+Chapter 07의 최종 정리
+
+New Keynesian DSGE는 가격이 느리게 조정된다는 가정 하나가 아니다. 그것은
+미시적 가격설정, 미래지향적 가계 선택, 정책규칙, 시장청산, 합리적 기대를
+결합한 동태적 일반균형이다. 이 구조는 명목충격의 실질효과와 통화정책의
+전달을 분석할 수 있게 하지만, 동시에 결정성·인플레이션 관성·forward
+guidance·비선형 후생이라는 엄격한 진단 과제를 남긴다.
+:::
+:::::
+
+::: {#ch07-check .section}
+## Learning Check
+
+1.  왜 canonical three-equation NK model은 underlying nonlinear Calvo
+    economy와 같지 않은가? 가격분산과 상속된 가격분포의 역할을 포함해
+    설명하라.
+2.  수준 자연실질이자율 $\mathfrak r_t^n$와 그 정상상태 편차
+    $\widetilde{\mathfrak r}_t^n$를 구분하라. 왜 canonical IS 관계에는
+    후자가 들어가는가?
+3.  가계의 명목채권 Euler equation에서 동태적 IS 관계가 어떻게 나오는지
+    설명하라. 식 (7.8)을 단순한 정책금리의 인과식으로 읽으면 왜
+    틀리는가?
+4.  자연산출 $Y_t^n$과 효율산출 $Y_t^{\mathrm{eff}}$이 달라질 수 있는
+    이유를 설명하라.
+5.  Fischer, Taylor, Calvo 가격조정 가정의 차이를 timing 관점에서
+    비교하라. Calvo 모형이 tractable benchmark라는 말의 의미는 무엇인가?
+6.  식 (7.12a)--(7.13c)를 이용하여, 재설정기업의 동태적 문제에서 미래
+    가격수준·미래 한계비용·미래 인플레이션 기대가 현재 재설정가격에
+    들어가는 경로를 설명하라.
+7.  식 (7.14)의 한계비용형 NKPC와 식 (7.16)의 산출갭형 NKPC를 구분하라.
+    $\xi_t^{mc}$와 $u_t$는 어떤 역할을 하는가?
+8.  time-dependent pricing과 state-dependent pricing의 frequency effect
+    및 selection effect를 각각 설명하라.
+9.  평균 가격변경 빈도만으로 $\vartheta$를 직접 식별할 수 없는 이유를 네
+    가지 이상 제시하라.
+10. 왜 hybrid NKPC의 $\pi_{t-1}$ 항은 자동으로 미시기초를 갖지 않는가?
+11. canonical wedge $(\widetilde{\mathfrak r}_t^n,u_t,v_t)$와 primitive
+    shock의 차이를 설명하라. 하나의 생산성 충격이 둘 이상의 wedge를
+    움직일 수 있는 이유는 무엇인가?
+12. 현재지향·무관성 Taylor rule 아래 식 (7.27a)의 결정성 조건과 Taylor
+    principle의 직관을 비교하라. 왜 확장모형에는 같은 조건을 기계적으로
+    적용할 수 없는가?
+13. 정책 innovation, natural-rate wedge, cost-push wedge가 canonical
+    model의 어느 식에 들어가며, 왜 서로 다른 안정화문제를 만드는지
+    설명하라.
+14. forward guidance puzzle이 canonical NK model의 어떤 가정들을
+    시험하는지 설명하라. 식 (7.29a)의 반복대입식을 사용해 설명하라.
+15. 비선형 Calvo 경제의 균형객체와 canonical 선형체계의 변수
+    $(x_t,\pi_t,\widetilde i_t)$를 구분하라.
+16. zero-inflation, no-indexation benchmark에서 $\lambda_p$와 $\kappa$가
+    어떻게 구성되는지 설명하고, 왜 $\kappa$가 모형의 구조에 의존하는지
+    논하라.
+17. 가격분산 $\Delta_t$의 law of motion을 쓰고, 왜 $\Delta_t$가 비선형
+    경제의 상태변수인지 설명하라.
+18. 금리관성 정책규칙에서 왜 기존의 단순 Taylor principle 조건을 그대로
+    적용할 수 없는지 설명하라.
+:::
+
+:::::::::::::::::::::::::::::::::: {#ch07-glossary .section}
+## 핵심 용어
+
+::::::::::::::::::::::::::::::::: definition-list
+:::: definition-row
+::: term
+New Keynesian DSGE
+:::
+
+독점적 경쟁, 명목가격의 불완전조정, 기간 간 최적화, 합리적 기대,
+정책규칙을 결합한 동태적 일반균형 모형군.
+::::
+
+:::: definition-row
+::: term
+output gap
+:::
+
+$x_t=\log Y_t-\log Y_t^n$. 실제산출과 동일한 실물상태에서 유연가격이
+지지하는 자연산출의 로그 차이.
+::::
+
+:::: definition-row
+::: term
+natural real rate
+:::
+
+수준 $\mathfrak r_t^n$은 현재 상태에서 자연산출을 지지하는 사전적
+실질이자율이다.
+$\widetilde{\mathfrak r}_t^n=\mathfrak r_t^n-\bar{\mathfrak r}^{\,n}$은
+canonical 선형체계에 쓰는 정상상태 편차다.
+::::
+
+:::: definition-row
+::: term
+Calvo pricing
+:::
+
+기업이 외생확률로만 가격을 재설정할 기회를 얻고, 기회가 없으면 기존
+가격을 유지하는 time-dependent pricing 가정.
+::::
+
+:::: definition-row
+::: term
+reset price
+:::
+
+$\widetilde P_t$. 이번 기 가격조정 기회를 얻은 기업이 미래 이윤을
+고려하여 선택하는 가격.
+::::
+
+:::: definition-row
+::: term
+New Keynesian Phillips curve
+:::
+
+$\pi_t=\beta E_t\pi_{t+1}+\kappa x_t+u_t$. 동태적 가격설정의 1차
+근사에서 나오는 인플레이션 방정식.
+::::
+
+:::: definition-row
+::: term
+canonical wedges
+:::
+
+$\widetilde{\mathfrak r}_t^n$, $u_t$, $v_t$. 각각 IS, NKPC, 정책규칙에
+직접 들어가는 축약된 균형쐐기 또는 disturbance이며 primitive shock과
+일대일 대응하지 않는다.
+::::
+
+:::: definition-row
+::: term
+price dispersion
+:::
+
+$\Delta_t$. 기업별 상대가격의 분포가 만드는 자원왜곡. 동일한 산출을 얻는
+데 필요한 노동량을 늘릴 수 있다.
+::::
+
+:::: definition-row
+::: term
+Taylor principle
+:::
+
+표준적 정책규칙에서 인플레이션 상승에 대해 명목금리가 일대일보다 크게
+반응해야 한다는 직관. 단순 기준모형의 정확한 결정성 조건과는 구분해야
+한다.
+::::
+
+:::: definition-row
+::: term
+determinacy
+:::
+
+주어진 상태와 정책규칙 아래 유일한 bounded rational-expectations
+equilibrium이 존재하는 성질.
+::::
+
+:::: definition-row
+::: term
+forward guidance puzzle
+:::
+
+먼 미래의 정책금리 변화에 대한 예상이 canonical NK model에서
+비현실적으로 큰 현재 효과를 낼 수 있다는 진단 문제.
+::::
+
+:::: definition-row
+::: term
+gross, net, and log interest rate
+:::
+
+Gross nominal rate는 $R_t=1+i_t$, net nominal rate는 $i_t$, canonical
+정책금리 편차는 $\widetilde i_t=\log R_t-\log\bar R$다. Net-rate
+percentage-point deviation을 쓰면 $(1+\bar i)^{-1}$ scaling을 반영해야
+한다.
+::::
+
+:::: definition-row
+::: term
+reset-price auxiliary variables
+:::
+
+$S_t,F_t$. 비선형 Calvo 재설정가격을 현재와 미래의 한계비용, 수요,
+인플레이션, 할인인자의 재귀식으로 표현하는 보조변수.
+::::
+
+:::: definition-row
+::: term
+interest-rate smoothing
+:::
+
+정책금리가 과거 금리에 부분적으로 의존하는 정책규칙. 이 경우 과거
+정책금리가 predetermined state가 되며 결정성 조건을 다시 계산해야 한다.
+::::
+
+:::: definition-row
+::: term
+local welfare loss
+:::
+
+효율 정상상태 주변에서 대표가계 후생을 2차 근사해 얻는 정책평가 기준.
+보통 인플레이션 변동과 산출갭 변동을 포함하지만, 계수와 항은 모형 구조에
+의존한다.
+::::
+:::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::
+
+::: {#ch07-references .section}
+## 참조 문헌
+
+이 장은 Romer의 Chapter 7을 동태적 가격조정, Calvo NKPC, state-dependent
+pricing, 가격조정의 미시증거, inflation inertia, canonical model,
+forward guidance puzzle의 기준축으로 사용한다. Canonical three-equation
+system은 Clarida--Galí--Gertler 계열의 현재지향적 기준규칙으로 명시하며,
+Chapter 06의 표기 규율과 "자연배분과 효율배분의 구분"을 그대로 유지한다.
+
+- Romer, David. *Advanced Macroeconomics*, 5th ed., Chapter 7, "Dynamic
+  Stochastic General Equilibrium Models of Fluctuations." McGraw-Hill
+  Education, 2019.
+- Calvo, Guillermo A. "Staggered Prices in a Utility-Maximizing
+  Framework." *Journal of Monetary Economics* 12(3), 1983.
+- Taylor, John B. "Staggered Wage Setting in a Macro Model." *American
+  Economic Review* 69(2), 1979.
+- Fischer, Stanley. "Long-Term Contracts, Rational Expectations, and the
+  Optimal Money Supply Rule." *Journal of Political Economy* 85(1),
+  1977.
+- Roberts, John M. "New Keynesian Economics and the Phillips Curve."
+  *Journal of Money, Credit and Banking* 27(4), 1995.
+- Clarida, Richard, Jordi Galí, and Mark Gertler. "The Science of
+  Monetary Policy: A New Keynesian Perspective." *Journal of Economic
+  Literature* 37(4), 1999.
+- Caplin, Andrew, and Daniel Spulber. "Menu Costs and the Neutrality of
+  Money." *Quarterly Journal of Economics* 102(4), 1987.
+- Caplin, Andrew, and John Leahy. "State-Dependent Pricing and the
+  Dynamics of Money and Output." *Quarterly Journal of Economics*
+  106(3), 1991.
+- Christiano, Lawrence J., Martin Eichenbaum, and Charles L. Evans.
+  "Nominal Rigidities and the Dynamic Effects of a Shock to Monetary
+  Policy." *Journal of Political Economy* 113(1), 2005.
+- Mankiw, N. Gregory, and Ricardo Reis. "Sticky Information versus
+  Sticky Prices." *Quarterly Journal of Economics* 117(4), 2002.
+- Galí, Jordi. *Monetary Policy, Inflation, and the Business Cycle*, 2nd
+  ed. Princeton University Press, 2015.
+- Woodford, Michael. *Interest and Prices: Foundations of a Theory of
+  Monetary Policy*. Princeton University Press, 2003.
+:::

@@ -1,0 +1,5 @@
+# Chapter 13 · 불완전시장과 부의 분포 {.unnumbered}
+
+Incomplete Markets, Self-Insurance, and Wealth Distribution
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)

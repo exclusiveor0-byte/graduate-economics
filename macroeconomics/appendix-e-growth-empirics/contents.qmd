@@ -1,0 +1,1477 @@
+---
+title: >-
+  성장회계·개발회계와 국가 간 성장실증
+description: >-
+  Growth Accounting, Development Accounting, and Cross-Country Empirics
+---
+
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::: {#appE-opening .section}
+성장회계와 development accounting은 생산함수와 자료를 이용해 관측된 성장
+또는 소득격차를 구성항으로 분해한다. 이 분해는 경제적으로 유용하지만, 각
+구성항의 원인을 식별하거나 정책변화의 일반균형 효과를 자동으로
+제공하지는 않는다.
+
+::: thesis
+중심 원칙
+
+자료를 측정하는 단계, 생산함수에 따라 회계적으로 분해하는 단계,
+회귀계수를 추정하는 단계, 인과효과를 식별하는 단계를 분리한다. 특히
+Solow residual과 국가 간 TFP residual은 순수기술의 직접관측치가 아니라
+사용한 생산함수와 투입측정에 조건부인 잔차다.
+:::
+
+::: math-display
+$$\boxed{\text{measurement}\neq\text{accounting}\neq\text{statistical association}\neq\text{causal explanation}.}\tag{E.1}$$
+:::
+:::::
+
+::: part-divider
+PART I Measurement and Production-Accounting Foundations
+:::
+
+:::::::::::::::::::::::: {#appE-e01 .section}
+## [E.1]{.section-number}분석대상, 범위, 입력과 산출물
+
+Appendix E는 장기성장과 국가 간 소득격차를 측정·분해하고, 해당 분해와
+성장회귀의 해석조건을 감사하는 실증 부록이다.
+
+### E.1.1 입력
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+산출자료
+:::
+
+::: right
+실질 GDP, 실질 부가가치, 노동자·인구·시간당 산출.
+:::
+:::::
+
+::::: chain-row
+::: left
+물적자본
+:::
+
+::: right
+투자, 감가상각, 자산가격, 자본 stock과 capital services.
+:::
+:::::
+
+::::: chain-row
+::: left
+노동투입
+:::
+
+::: right
+취업자, 총근로시간, 교육·경력별 노동구성, 임금자료.
+:::
+:::::
+
+::::: chain-row
+::: left
+가격·소득
+:::
+
+::: right
+노동·자본소득, 세금·보조금, PPP와 deflator.
+:::
+:::::
+
+::::: chain-row
+::: left
+구조가정
+:::
+
+::: right
+생산함수, 생산탄력성, markup, 규모수익, 인적자본 함수.
+:::
+:::::
+::::::::::::::::::
+
+### E.1.2 산출물
+
+::::::: details-grid
+::: {}
+[GROWTH]{.tag}
+
+### 성장기여도
+
+자본·노동·노동질·생산성의 산출성장 기여.
+:::
+
+::: {}
+[LEVELS]{.tag}
+
+### 소득수준 분해
+
+물적자본·인적자본·TFP의 국가 간 격차.
+:::
+
+::: {}
+[CONVERGENCE]{.tag}
+
+### 수렴통계
+
+β·σ 수렴, 국소 수렴속도와 half-life.
+:::
+
+::: {}
+[AUDIT]{.tag}
+
+### 식별·민감도
+
+측정오차, 내생성, 모형·자료 선택 민감도.
+:::
+:::::::
+
+### E.1.3 범위 경계
+
+기업수준 생산함수 추정, 완전한 동태패널 점근이론, 모든 cross-country
+causal design과 개발경제학 일반론은 다루지 않는다. IV·GMM·패널추론의
+일반이론은 계량경제학 노트로 넘기고, 여기서는 장기성장 응용에서 필요한
+조건과 실패지점을 명시한다.
+::::::::::::::::::::::::
+
+::::::::: {#appE-e02 .section}
+## [E.2]{.section-number}산출, 부가가치, 소득과 PPP의 측정
+
+같은 GDP라는 명칭 아래에서도 생산·소득·지출 측정과 국제가격 변환은 서로
+다른 경제적 객체를 만들 수 있다.
+
+::: math-display
+$$\boxed{\text{gross output}\neq\text{value added}\neq\text{national income}\neq\text{welfare}.}\tag{E.2}$$
+:::
+
+### E.2.1 Gross output과 value added
+
+명목금액에서는 산업 또는 기업의 부가가치를
+
+::: math-display
+$$VA_t^{nom}=GO_t^{nom}-M_t^{nom}\tag{E.3}$$
+:::
+
+로 정의할 수 있다. 여기서 $M_t$는 중간투입이다. 그러나 서로 다른
+deflator와 chain weighting이 적용된 실질 gross output과 실질
+intermediate input의 단순 차가 공식 실질부가가치와 일치하는 것은 아니다.
+
+:::: {.statement .warning}
+::: statement-head
+중복투입
+:::
+
+부가가치 생산함수 $VA=F(K,L)$를 사용할 때 중간재를 다시 독립투입으로
+넣으면 중복계산이 된다. Gross-output 생산함수 $GO=F(K,L,M)$와
+value-added 생산함수는 별도의 회계체계다.
+::::
+
+### E.2.2 총량과 분모
+
+::: math-display
+$$y_t^{pc}=\frac{Y_t}{N_t},\qquad y_t^{pw}=\frac{Y_t}{L_t},\qquad y_t^{ph}=\frac{Y_t}{H_t}.\tag{E.4}$$
+:::
+
+총인구 $N_t$, 취업자 $L_t$, 총근로시간 $H_t$은 다른 분모다. 세 지표의
+관계는
+
+::: math-display
+$$\frac{Y_t}{N_t}=\frac{Y_t}{H_t}\frac{H_t}{L_t}\frac{L_t}{N_t},\qquad \frac{Y_t}{L_t}=\frac{Y_t}{H_t}\frac{H_t}{L_t}.$$
+:::
+
+따라서 output per capita에는 시간당 노동생산성, 근로자 1인당 노동시간,
+고용률의 차이가 모두 들어간다. Output per worker는 고용률 차이는
+제거하지만 근로자 1인당 노동시간 차이는 여전히 포함하며, output per
+hour가 노동시간 차이까지 제거한다.
+
+### E.2.3 PPP
+
+국가 간 실질수준 비교에는 시장환율보다 PPP 가격이 적절한 경우가 많다.
+다만 expenditure-side real GDP, output-side real GDP, 소비기준
+생활수준은 서로 다른 목적을 가진다. PPP 수준은 국제가격, 기준연도,
+품질조정과 자료개정에 의존한다.
+:::::::::
+
+::::::::::: {#appE-e03 .section}
+## [E.3]{.section-number}생산함수, 기술개념과 성장률 표기
+
+성장회계 잔차의 해석은 어떤 형태의 기술변화를 가정하는지에 달려 있다.
+
+### E.3.1 생산기술
+
+::: math-display
+$$Y_t=F(K_t,L_t,t).\tag{E.5}$$
+:::
+
+Hicks-neutral 기술을 분리하면
+
+::: math-display
+$$Y_t=A_tF(K_t,L_t).\tag{E.6}$$
+:::
+
+Harrod-neutral과 Solow-neutral 표현은 각각
+
+::: math-display
+$$Y_t=F(K_t,A_tL_t),\qquad Y_t=F(A_tK_t,L_t).\tag{E.7}$$
+:::
+
+이다. 동일한 자료라도 기술의 진입방식에 따라 $A_t$의 단위와 성장기여도가
+달라진다.
+
+### E.3.2 Cobb--Douglas benchmark
+
+::: math-display
+$$Y_t=A_tK_t^{\alpha}L_t^{1-\alpha}.\tag{E.8}$$
+:::
+
+이 표현은 규모수익불변과 Hicks-neutral 기술을 동시에 부과한다. 실증에서
+이를 선택하면 탄력성, 요소분배율과 TFP 잔차에 구조적 제한이 들어간다.
+
+### E.3.3 성장률
+
+::: math-display
+$$g_X(t)=\frac{\dot X_t}{X_t}=\frac{d\log X_t}{dt},\qquad \Delta\log X_t=\log X_t-\log X_{t-1}.\tag{E.9}$$
+:::
+
+정확한 이산 비율성장률은 $(X_t-X_{t-1})/X_{t-1}$이다. 로그차분은 작은
+변화에서 비율성장률에 가깝고 기간가산성이 있지만, 큰 변화에서는 수치가
+다르다.
+
+::::: {.statement .remark}
+::: statement-head
+Chapter 01--04와의 전역 표기 연결
+:::
+
+이 부록의 식 (E.6), (E.8), (E.31)--(E.43)에서 $A$는 Hicks-neutral TFP다.
+반면 Chapter 01--02의 $A^L$는 노동증대형 효율성이고, Cobb--Douglas 기술
+아래 두 표현은
+
+::: math-display
+$$
+Y=(A^L L)^{1-\alpha}K^\alpha
+=A^H K^\alpha L^{1-\alpha},
+\qquad
+A^H=(A^L)^{1-\alpha}
+$$
+:::
+
+로 연결된다. Chapter 04의 노동증대형 회계잔차 $A_i^{\mathrm{acct}}$와 이
+부록의 Hicks-neutral TFP도 $A_i^H=(A_i^{\mathrm{acct}})^{1-\alpha}$의
+관계를 가진다. Chapter 03의 지식 stock $A_t$ 역시 식 (3.3)에서는
+노동증대적으로 들어가므로, 연구배분비율이 고정된 경우 measured
+Hicks-neutral TFP 성장률은 $(1-\alpha)g_{A,t}$다.
+
+상태변수의 단위도 구분한다. Chapter 01--02의 $k=K/(A^L L)$,
+$y=Y/(A^L L)$는 효율노동 단위 변수다. 반면 이 부록의 development
+accounting에서 $k_i=K_i/L_i$, $y_i=Y_i/L_i$는 노동자 1인당 변수다.
+따라서 같은 소문자 $k,y$가 등장하더라도 분모가 다르며, Chapter 04는
+자본--산출비율을 $\kappa_i=K_i/Y_i$로 별도 표기한다.
+
+노동투입 표기도 구분한다. 이 부록의 $H_t$는 총근로시간이며, 노동질을
+반영한 서비스는 $L_t^Q$로 쓴다. Chapter 04의 $H_i$ 또는
+$H_i^{\mathrm{svc}}$는 인적자본을 반영한 노동서비스이므로 총근로시간과
+동일하지 않다.
+:::::
+:::::::::::
+
+::::::: {#appE-e04 .section}
+## [E.4]{.section-number}생산탄력성, 요소분배율과 markup
+
+관측되는 revenue share를 생산탄력성으로 사용하는 것은 회계의 핵심
+단계이자 가장 강한 가정 중 하나다.
+
+### E.4.1 생산탄력성
+
+::: math-display
+$$\varepsilon_{K,t}=\frac{\partial\log Y_t}{\partial\log K_t}=\frac{F_KK_t}{Y_t},\qquad \varepsilon_{L,t}=\frac{\partial\log Y_t}{\partial\log L_t}=\frac{F_LL_t}{Y_t}.\tag{E.10}$$
+:::
+
+### E.4.2 관측 요소분배율
+
+::: math-display
+$$s_{K,t}=\frac{r_tK_t}{P_tY_t},\qquad s_{L,t}=\frac{w_tL_t}{P_tY_t}.\tag{E.11}$$
+:::
+
+완전경쟁, 요소시장왜곡 부재, 정확한 factor payments와 생산투입 측정
+아래에서는 요소가격이 한계생산물과 일치하여 $\varepsilon_i=s_i$가 된다.
+규모수익불변이면 탄력성 합도 1이다.
+
+### E.4.3 Markup
+
+$\mu_t=P_t/MC_t$이고 기업이 주어진 산출량을 비용최소화하며 요소별
+wedge가 없다면
+
+::: math-display
+$$s_{i,t}=\frac{\varepsilon_{i,t}}{\mu_t},\qquad \varepsilon_{i,t}=\mu_ts_{i,t}.\tag{E.12}$$
+:::
+
+가 성립한다. 여기서는 모든 관련 가변투입이 포함되고 동일한 산출가격과
+공통 marginal cost가 적용된다고 가정한다. 따라서 revenue share의 합은
+일반적으로
+
+::: math-display
+$$\sum_i s_{i,t}=\frac{\gamma_t}{\mu_t},\qquad \gamma_t\equiv\sum_i\varepsilon_{i,t}\tag{E.13}$$
+:::
+
+이다. 이 관계는 생산세, 요소세, 조정비용, 경제적 이윤, 기업별 markup
+이질성과 집계오류가 있으면 수정된다.
+:::::::
+
+::: part-divider
+PART II Growth Accounting and Productivity Measurement
+:::
+
+:::::: {#appE-e05 .section}
+## [E.5]{.section-number}연속시간 성장회계
+
+성장회계는 생산함수의 전미분으로 산출성장을 투입성장과 잔차로 분해한다.
+
+### E.5.1 일반식
+
+Hicks-neutral 생산함수 $Y=A F(K,L)$에 로그미분을 적용하면
+
+::: math-display
+$$g_{Y,t}=g_{A,t}+\varepsilon_{K,t}g_{K,t}+\varepsilon_{L,t}g_{L,t}.\tag{E.14}$$
+:::
+
+따라서
+
+::: math-display
+$$\boxed{g_{A,t}=g_{Y,t}-\varepsilon_{K,t}g_{K,t}-\varepsilon_{L,t}g_{L,t}.}\tag{E.15}$$
+:::
+
+### E.5.2 다수 투입
+
+::: math-display
+$$g_{Y,t}=g_{A,t}+\sum_{j=1}^{J}\varepsilon_{j,t}g_{X_j,t}.\tag{E.16}$$
+:::
+
+완전경쟁 benchmark에서는 $\varepsilon_{j,t}$를 관측 factor share로
+대체한다. 자본기여도는 $\varepsilon_Kg_K$, 노동기여도는
+$\varepsilon_Lg_L$이다.
+
+### E.5.3 기여도와 기여율
+
+기여도는 산출성장률과 같은 단위를 가진다. 이를 $g_Y$로 나눈 기여율은
+산출성장이 0에 가깝거나 음수일 때 발산하거나 부호가 뒤집힐 수 있으므로,
+원래 기여도와 함께 제시한다.
+::::::
+
+::::: {#appE-e06 .section}
+## [E.6]{.section-number}이산시간 Divisia--Törnqvist 성장회계
+
+실제 연간·분기 자료에서는 시점 사이에 변하는 요소분배율을 반영하는
+이산지수식이 필요하다.
+
+### E.6.1 평균분배율
+
+::: math-display
+$$\bar s_{j,t}=\frac12(s_{j,t}+s_{j,t-1}).\tag{E.17}$$
+:::
+
+### E.6.2 Törnqvist residual
+
+::: math-display
+$$\boxed{\Delta\log \widehat A_t^{GA}\equiv\Delta\log Y_t-\sum_{j=1}^{J}\bar s_{j,t}\Delta\log X_{j,t}.}\tag{E.18}$$
+:::
+
+여기서 $\widehat A_t^{GA}$는 관측된 share weights로 계산한 measured
+growth-accounting residual이다. 가중치가 관련 생산탄력성과 일치하고
+output·input quantity indices가 같은 기술과 가격체계에 대응하는
+benchmark에서만 이를 구조적 Hicks-neutral TFP 성장 $\Delta\log A_t$와
+동일시한다. Törnqvist index는 적절한 translog aggregator와 일치하는
+탄력성 또는 비용분배율을 사용할 때 exact index가 되며, 보다 일반적인
+매끄러운 aggregator에는 2차 국소근사로 해석한다.
+
+### E.6.3 분배율 합의 불일치
+
+관측분배율 합이 1이 아니면 간접세·보조금, 자영업 혼합소득,
+토지·무형자본, 경제적 이윤, markup 또는 자료 불일치를 점검한다. 합을
+기계적으로 1로 재정규화하면 누락요소와 이윤의 정보를 제거할 수 있다.
+:::::
+
+::::::::::: {#appE-e07 .section}
+## [E.7]{.section-number}Solow residual의 의미와 식별한계
+
+Solow residual은 계산상 남는 항이며, 순수기술이 되려면 투입과 탄력성이
+올바르게 측정되어야 한다.
+
+::: math-display
+$$SR_t\equiv\Delta\log Y_t-\sum_j\bar s_{j,t}\Delta\log X_{j,t}.\tag{E.19}$$
+:::
+
+표준 완전경쟁 benchmark에서는 $SR_t=\Delta\log A_t$다. 일반적으로
+생산탄력성 $\varepsilon_j$와 revenue share $s_j$가 다르면
+
+::: math-display
+$$SR_t\approx\Delta\log A_t+\sum_j(\bar\varepsilon_{j,t}-\bar s_{j,t})\Delta\log X_{j,t}.\tag{E.20}$$
+:::
+
+이 식은 인접 두 시점의 평균탄력성을 사용하는 2차 index-number 근사이며,
+생략된 고차항과 집계오차가 있을 수 있다. 모든 관련 투입에 공통인 markup
+관계 $\varepsilon_j=\mu s_j$를 적용하면 추가항은 기간평균 markup을
+사용해 근사적으로 $(\mu-1)\sum_js_j\Delta\log X_j$가 된다.
+
+### E.7.1 잔차에 섞일 수 있는 효과
+
+::::::: details-grid
+::: {}
+[INTENSITY]{.tag}
+
+### 이용강도
+
+자본가동률과 노동노력이 관측투입에 빠질 수 있다.
+:::
+
+::: {}
+[MARKET POWER]{.tag}
+
+### Markup·wedge
+
+revenue share가 생산탄력성과 달라진다.
+:::
+
+::: {}
+[AGGREGATION]{.tag}
+
+### 재배분
+
+산업·기업 간 자원 이동이 aggregate residual에 들어간다.
+:::
+
+::: {}
+[MEASUREMENT]{.tag}
+
+### 측정·모형오류
+
+품질·무형투자·가격지수와 생산함수 오류가 잔차에 남는다.
+:::
+:::::::
+
+::: math-display
+$$\boxed{\text{measured TFP}\neq\text{pure technology in general}.}\tag{E.21}$$
+:::
+:::::::::::
+
+::::::: {#appE-e08 .section}
+## [E.8]{.section-number}자본 stock, capital services와 user cost
+
+생산에 기여하는 자본투입은 장부상 자산 stock과 동일하지 않다.
+자산구성·가동률·임대가격을 함께 고려해야 한다.
+
+### E.8.1 Perpetual inventory method
+
+::: math-display
+$$K_t=(1-\delta_t)K_{t-1}+I_t.\tag{E.22}$$
+:::
+
+장기 투자성장률 $g_I$와 감가상각률 $\delta$가 일정하고
+$K_t=(1+g_I)K_{t-1}$인 균형성장경로라면, (E.22)의 dating 아래
+
+::: math-display
+$$K_{t-1}=\frac{I_t}{g_I+\delta},\qquad K_t=\frac{(1+g_I)I_t}{g_I+\delta}.\tag{E.23}$$
+:::
+
+따라서 흔히 쓰는 $K_0\approx I_0/(g_I+\delta)$는 $I_0$와 시작시점 자본을
+어떻게 대응시키는지에 따른 convention이다. 사용한 dating을 명시하고,
+초기값·초기 성장률·감가상각률에 대한 민감도를 보고해야 한다.
+
+### E.8.2 Capital services
+
+자산별 서비스량을 $K_{j,t}$, 사용자비용 가중치를 $v_{j,t}$라 하면
+aggregate capital-service growth는 보통 Törnqvist 방식으로
+
+::: math-display
+$$v_{j,t}=\frac{c_{j,t}K_{j,t}}{\sum_m c_{m,t}K_{m,t}},\qquad \Delta\log K_t^S=\sum_j\bar v_{j,t}\Delta\log K_{j,t},\qquad \sum_j\bar v_{j,t}=1.\tag{E.24}$$
+:::
+
+여기서 $\bar v_{j,t}=(v_{j,t}+v_{j,t-1})/2$는 인접 두 시점의 평균
+user-cost share다.
+
+### E.8.3 User cost
+
+세금과 위험을 생략한 근사 rental price는
+
+::: math-display
+$$c_{j,t}\approx P_{j,t}^K\left(r_t+\delta_j-E_t\pi_{j,t+1}^K\right).\tag{E.25}$$
+:::
+
+여기서 $r_t$는 요구 실질수익률, $\pi_{j,t+1}^K$는 자본재의 실질가격
+상승률이다. 법인세, 투자세액공제, 위험 premium과 자본이득 과세가 있으면
+식을 조정한다.
+:::::::
+
+:::::: {#appE-e09 .section}
+## [E.9]{.section-number}노동시간, 노동질과 인적자본 서비스
+
+취업자수만으로 노동투입을 측정하면 근로시간과 노동구성 변화가 생산성
+잔차로 이동한다.
+
+### E.9.1 총근로시간
+
+::: math-display
+$$H_t=\sum_{g=1}^{G}H_{g,t}.\tag{E.26}$$
+:::
+
+### E.9.2 노동서비스 지수
+
+::: math-display
+$$s_{g,t}^{L}=\frac{w_{g,t}H_{g,t}}{\sum_m w_{m,t}H_{m,t}},\qquad \Delta\log L_t^Q=\sum_{g=1}^{G}\bar s_{g,t}^{L}\Delta\log H_{g,t},\qquad \sum_g\bar s_{g,t}^{L}=1.\tag{E.27}$$
+:::
+
+여기서 $\bar s_{g,t}^{L}=(s_{g,t}^{L}+s_{g,t-1}^{L})/2$는 집단 $g$의
+평균 노동보상 비중이다. 노동질 증가를
+
+::: math-display
+$$\Delta\log Q_t^L\equiv\Delta\log L_t^Q-\Delta\log H_t\tag{E.28}$$
+:::
+
+로 정의하면 산출성장에서 총시간과 구성변화의 기여를 분리할 수 있다.
+
+### E.9.3 임금가중치의 조건
+
+교육·경력별 임금차이를 한계생산성 차이로 해석하려면 경쟁적 노동시장,
+차별과 search friction의 부재, 정확한 시간·보상 측정이 필요하다.
+자영업자의 혼합소득은 노동과 자본소득으로 별도 배분해야 한다.
+::::::
+
+::::: {#appE-e10 .section}
+## [E.10]{.section-number}가동률, 규모수익, 재배분과 aggregate productivity
+
+관측되지 않은 이용강도와 생산단위 간 재배분은 aggregate TFP의 단기·장기
+움직임을 모두 바꿀 수 있다.
+
+### E.10.1 자본가동률
+
+::: math-display
+$$\widetilde K_t=u_tK_t,\qquad \Delta\log\widetilde K_t=\Delta\log K_t+\Delta\log u_t.\tag{E.29}$$
+:::
+
+가동률을 생략하면 Solow residual에 $\varepsilon_K\Delta\log u_t$가
+들어간다. 노동노력 또는 시간당 강도에도 같은 논리가 적용된다.
+
+### E.10.2 규모수익
+
+::: math-display
+$$\gamma_t\equiv\sum_j\varepsilon_{j,t}.\tag{E.30}$$
+:::
+
+$\gamma=1$은 규모수익불변이다. Aggregate data에서는 markup과 규모수익이
+factor shares에 비슷한 방식으로 작용하여 별도의 식별전략 없이 분리하기
+어렵다.
+
+### E.10.3 재배분
+
+Aggregate productivity 변화는 생산단위 내부의 기술변화뿐 아니라 높은
+한계생산성을 가진 단위로의 투입 이동, 진입·퇴출, 산업구성 변화에
+의존한다. 특정 within--between decomposition은 선택한 기준시점,
+가격·고용 가중치와 gross-output/value-added 체계에 따라 달라지므로
+보편적인 단일 공식으로 취급하지 않는다.
+:::::
+
+::: part-divider
+PART III Development Accounting
+:::
+
+::::::: {#appE-e11 .section}
+## [E.11]{.section-number}국가 간 소득수준 분해
+
+Development accounting은 동일한 생산함수 아래 국가 간 노동자 1인당
+산출격차를 물적자본·인적자본·TFP로 분해한다.
+
+::: math-display
+$$Y_i=A_iK_i^{\alpha}(h_iL_i)^{1-\alpha}.\tag{E.31}$$
+:::
+
+$y_i=Y_i/L_i$, $k_i=K_i/L_i$라 두면
+
+::: math-display
+$$\boxed{y_i=A_ik_i^{\alpha}h_i^{1-\alpha}.}\tag{E.32}$$
+:::
+
+로그형은
+
+::: math-display
+$$\log y_i=\log A_i+\alpha\log k_i+(1-\alpha)\log h_i.\tag{E.33}$$
+:::
+
+기준국 $b$와의 격차는
+
+::: math-display
+$$\log\frac{y_i}{y_b}=\log\frac{A_i}{A_b}+\alpha\log\frac{k_i}{k_b}+(1-\alpha)\log\frac{h_i}{h_b}.\tag{E.34}$$
+:::
+
+이다. 이 식은 관측된 수준격차의 회계적 분해이며, $A_i,k_i,h_i$를
+결정하는 인과구조를 제공하지 않는다.
+:::::::
+
+::::::: {#appE-e12 .section}
+## [E.12]{.section-number}자본--산출비율 표현과 정상상태 증폭
+
+자본--노동비율 대신 자본--산출비율을 사용하면 생산성 차이가 자본집약도와
+함께 산출에 반영되는 구조를 볼 수 있다.
+
+$k_i=(K_i/Y_i)y_i$를 (E.32)에 대입하면
+
+::: math-display
+$$y_i^{1-\alpha}=A_i\left(\frac{K_i}{Y_i}\right)^{\alpha}h_i^{1-\alpha}.\tag{E.35}$$
+:::
+
+따라서
+
+::: math-display
+$$\boxed{y_i=A_i^{1/(1-\alpha)}\left(\frac{K_i}{Y_i}\right)^{\alpha/(1-\alpha)}h_i.}\tag{E.36}$$
+:::
+
+:::: {.statement .remark}
+::: statement-head
+대수적 항등식과 정상상태 해석
+:::
+
+(E.36)은 Cobb--Douglas 식의 정확한 대수적 재표현이며 그 자체가 정상상태
+조건은 아니다. 이를 "정상상태 증폭"으로 해석하려면
+저축·감가상각·인구성장 등이 자본--산출비율을 결정하는 별도의 축적모형이
+필요하다.
+::::
+
+자본--산출비율이 내생적이면 이를 외생적 설명변수처럼 고정한 회계적
+반사실도 정책반사실과 다르다.
+:::::::
+
+:::::: {#appE-e13 .section}
+## [E.13]{.section-number}인적자본 측정
+
+평균 교육연수를 생산적인 인적자본으로 바꾸려면 교육수익률과 집계구조가
+필요하다.
+
+### E.13.1 Mincer형 지수
+
+::: math-display
+$$h_i=\exp\{\phi(s_i)\},\tag{E.37}$$
+:::
+
+여기서 $s_i$는 평균 교육연수다. 교육구간별 수익률이 다르면
+
+::: math-display
+$$\phi(s)=\begin{cases}r_1s,&0\le s\le s_1,\\r_1s_1+r_2(s-s_1),&s_1<s\le s_2,\\r_1s_1+r_2(s_2-s_1)+r_3(s-s_2),&s>s_2.\end{cases}\tag{E.38}$$
+:::
+
+### E.13.2 해석한계
+
+임금회귀의 사적 교육수익률이 생산함수의 사회적 인적자본 탄력성과 같다는
+보장은 없다. 능력 selection, credential effect, 교육의 질, 건강, 경력,
+국가별 노동시장왜곡, 외부성과 이민이 측정을 바꾼다.
+
+### E.13.3 평균의 비선형성
+
+개인 인적자본이 $h_j=\exp\{\phi(s_j)\}$라면 일반적으로
+
+::: math-display
+$$E[h_j]\neq\exp\{\phi(E[s_j])\}.\tag{E.39}$$
+:::
+
+따라서 평균 교육연수만으로 구성한 대표근로자 지수에는 집계오차가 발생할
+수 있다.
+::::::
+
+:::::::: {#appE-e14 .section}
+## [E.14]{.section-number}TFP 수준, 정규화와 자료민감도
+
+국가별 TFP 수준은 산출과 투입을 관측한 뒤 생산함수에서 역산한
+residual이다.
+
+::: math-display
+$$A_i=\frac{y_i}{k_i^{\alpha}h_i^{1-\alpha}}.\tag{E.40}$$
+:::
+
+기준국 $b$ 대비 정규화는
+
+::: math-display
+$$\widetilde A_i=\frac{A_i}{A_b}.\tag{E.41}$$
+:::
+
+### E.14.1 탄력성 민감도
+
+단위에 의존하지 않는 기준국 대비 로그 TFP는
+
+::: math-display
+$$\log\frac{A_i}{A_b}=\log\frac{y_i}{y_b}-\alpha\log\frac{k_i}{k_b}-(1-\alpha)\log\frac{h_i}{h_b}.\tag{E.42}$$
+:::
+
+측정된 $y_i/y_b$, $k_i/k_b$, $h_i/h_b$를 고정한 부분민감도는
+
+::: math-display
+$$\frac{\partial\log(A_i/A_b)}{\partial\alpha}=\log\frac{h_i}{h_b}-\log\frac{k_i}{k_b}=-\log\left[\frac{k_i/k_b}{h_i/h_b}\right].\tag{E.43}$$
+:::
+
+이 식은 $\alpha$ 선택이 상대 TFP 격차를 얼마나 이동시키는지 보여준다.
+자본과 인적자본 수준은 동일한 효율단위와 기준국 정규화를 사용해야 한다.
+
+### E.14.2 주요 민감도
+
+PPP 종류, $\alpha$, 초기자본, 감가상각, 노동시간, 인적자본 함수,
+천연자원소득, 비시장생산, markup, 산업구성과 가격왜곡에 대한 결과범위를
+보고한다.
+
+::: math-display
+$$\boxed{\text{TFP level}=\text{residual conditional on technology and measurement assumptions}.}\tag{E.44}$$
+:::
+::::::::
+
+::::: {#appE-e15 .section}
+## [E.15]{.section-number}기여도, 분산분해와 회계적 반사실
+
+소득격차의 설명비율은 구성항 사이의 공분산 때문에 유일하게 정해지지
+않는다.
+
+$a_i=\log A_i$, $k_i^c=\alpha\log k_i$, $h_i^c=(1-\alpha)\log h_i$라
+두면
+
+::: math-display
+$$\begin{aligned}\operatorname{Var}(\log y)={}&\operatorname{Var}(a)+\operatorname{Var}(k^c)+\operatorname{Var}(h^c)\\&+2\operatorname{Cov}(a,k^c)+2\operatorname{Cov}(a,h^c)+2\operatorname{Cov}(k^c,h^c).\end{aligned}\tag{E.45}$$
+:::
+
+공분산항을 어느 구성요소에 배분하는지에 따라 설명비율이 달라진다. Direct
+variance--covariance reporting, 순차적 반사실, Shapley allocation 가운데
+사용한 규칙을 명시한다.
+
+### E.15.1 회계적 반사실
+
+::: math-display
+$$y_i^{cf}=A_i k_b^{\alpha}h_b^{1-\alpha}.\tag{E.46}$$
+:::
+
+이는 국가 $i$의 TFP를 고정하고 기준국의 factor levels를 대입한 산술적
+반사실이다. 자본축적·교육·TFP·가격·제도의 공동변화와 전이동학을 반영하지
+않으므로 일반균형 정책반사실이 아니다.
+:::::
+
+::: part-divider
+PART IV Convergence and Cross-Country Growth Empirics
+:::
+
+::::::: {#appE-e16 .section}
+## [E.16]{.section-number}Absolute·conditional β-convergence와 σ-convergence
+
+초기소득과 이후 성장의 음의 관계와 국가 간 소득분산의 축소는 서로 다른
+수렴개념이다.
+
+### E.16.1 Absolute β-convergence
+
+::: math-display
+$$\frac1T\log\frac{y_{i,T}}{y_{i,0}}=a-b\log y_{i,0}+u_i.\tag{E.47}$$
+:::
+
+$b>0$이면 낮은 초기소득과 높은 이후성장이 연결된다. 모든 경제가 같은
+장기정상상태를 가진다는 강한 해석은 별도의 구조가정이다.
+
+### E.16.2 Conditional β-convergence
+
+::: math-display
+$$\frac1T\log\frac{y_{i,T}}{y_{i,0}}=a-b\log y_{i,0}+\gamma'X_i+u_i.\tag{E.48}$$
+:::
+
+$X_i$는 서로 다른 정상상태를 대리한다. 통제변수의 내생성과 측정오차가
+있으면 conditional convergence coefficient도 인과적 수렴속도로 자동
+해석되지 않는다.
+
+### E.16.3 σ-convergence
+
+::: math-display
+$$\operatorname{Dispersion}(\log y_{i,T})<\operatorname{Dispersion}(\log y_{i,0}).\tag{E.49}$$
+:::
+
+::: math-display
+$$\boxed{\beta\text{-convergence}\not\Rightarrow\sigma\text{-convergence}.}\tag{E.50}$$
+:::
+
+지속적인 국가별 shock, 정상상태 이질성과 분포의 극단부 이동이 있으면
+평균적으로 가난한 국가가 빨리 성장해도 전체분산은 증가할 수 있다.
+:::::::
+
+::::::: {#appE-e17 .section}
+## [E.17]{.section-number}Solow 수렴속도와 회귀계수
+
+수렴회귀의 초기소득 계수를 구조적 수렴속도로 바꾸려면 종속변수의 단위와
+국소선형화 convention을 맞춰야 한다.
+
+### E.17.1 국소전이식
+
+기술진보가 있는 Solow 모형에서는 raw output per worker가 아니라 공통
+balanced-growth trend를 제거한 $\widetilde y_i(t)$, 또는 그
+balanced-growth path에 대한 로그격차를 사용한다. 정상상태 주변의
+국소선형화는
+
+::: math-display
+$$\log \widetilde y_i(t)-\log \widetilde y_i^*\approx e^{-\lambda t}\left[\log \widetilde y_i(0)-\log \widetilde y_i^*\right].\tag{E.51}$$
+:::
+
+따라서 $T$기간의 detrended 총 로그성장은
+
+::: math-display
+$$\log\frac{\widetilde y_i(T)}{\widetilde y_i(0)}=(1-e^{-\lambda T})\left[\log \widetilde y_i^*-\log \widetilde y_i(0)\right].\tag{E.52}$$
+:::
+
+연속시간 Cobb--Douglas Solow benchmark에서 effective-worker capital이
+$\dot k=s k^\alpha-(n+g+\delta)k$를 따르면 국소 수렴률은
+$\lambda=(1-\alpha)(n+g+\delta)$다. 모든 국가에 공통인 기술추세를 raw
+소득에 남겨두면 그 추세는 회귀절편으로 들어가지만, 국가별 추세가 다르면
+아래 coefficient mapping은 더 이상 그대로 성립하지 않는다.
+
+### E.17.2 연평균 성장률 회귀
+
+종속변수가 $T^{-1}\log[\widetilde y_i(T)/\widetilde y_i(0)]$이고
+초기소득 계수가 $-b$이면
+
+::: math-display
+$$b=\frac{1-e^{-\lambda T}}{T},\qquad \boxed{\lambda=-\frac1T\log(1-bT)},\quad 0<bT<1.\tag{E.53}$$
+:::
+
+종속변수가 총 로그성장이면 coefficient의 절댓값은 $1-e^{-\lambda T}$다.
+
+### E.17.3 Half-life
+
+::: math-display
+$$t_{1/2}=\frac{\log2}{\lambda}.\tag{E.54}$$
+:::
+
+이 해석은 정상상태 주변에서 일정한 $\lambda$, 올바른 steady-state
+controls와 식별된 회귀계수를 전제로 한다.
+:::::::
+
+:::::: {#appE-e18 .section}
+## [E.18]{.section-number}횡단면 성장회귀와 초기소득 측정오차
+
+성장회귀는 조건부 상관을 추정하며, 초기소득이 성장률의 분모와 종속변수
+차분에 동시에 들어가 특수한 측정오차 문제가 발생한다.
+
+### E.18.1 일반 회귀
+
+::: math-display
+$$g_i=\beta_0+\beta_1\log y_{i,0}+X_i'\gamma+u_i.\tag{E.55}$$
+:::
+
+인과해석에는 최소한 $E[u_i\mid\log y_{i,0},X_i]=0$이 필요하다. 역인과,
+누락변수, 공간적 파급, 공통 global shock, 표본선택과 specification
+search가 이를 위반할 수 있다.
+
+### E.18.2 기계적 음의 상관
+
+실제 로그소득을 $x_{i,t}$, 관측오차를 $e_{i,t}$라 두면
+
+::: math-display
+$$x_{i,t}^{obs}=x_{i,t}+e_{i,t},\qquad g_i^{obs}=\frac{x_{i,T}-x_{i,0}}{T}+\frac{e_{i,T}-e_{i,0}}{T}.\tag{E.56}$$
+:::
+
+측정오차가 실제 소득과 독립이고 초기·말기 오차가 서로 독립이라면
+
+::: math-display
+$$\operatorname{Cov}(x_{i,0}^{obs},g_i^{obs})=\operatorname{Cov}\!\left(x_{i,0},\frac{x_{i,T}-x_{i,0}}{T}\right)-\frac{\operatorname{Var}(e_{i,0})}{T}.\tag{E.57}$$
+:::
+
+따라서 실제 수렴관계가 없어도 초기소득 계수에 음의 방향이 생길 수 있다.
+초기·말기 측정오차가 상관되면 $\operatorname{Cov}(e_{i,0},e_{i,T})/T$가
+추가된다.
+::::::
+
+::::: {#appE-e19 .section}
+## [E.19]{.section-number}Panel growth regressions와 분포동학
+
+패널은 불변 국가특성을 통제할 수 있지만 lagged dependent variable과 짧은
+시간차원 때문에 새로운 편의가 발생한다.
+
+### E.19.1 동태패널
+
+::: math-display
+$$\log y_{i,t}=\rho\log y_{i,t-1}+X_{i,t}'\gamma+\alpha_i+\tau_t+u_{i,t}.\tag{E.58}$$
+:::
+
+고정효과 변환 후 lagged dependent variable이 변환오차와 상관되어 짧은
+$T$에서 Nickell bias가 발생한다.
+
+### E.19.2 Difference와 system GMM
+
+Difference GMM은 적절한 serial-correlation·초기조건 아래 lagged levels를
+도구로 사용한다. System GMM은 추가적인 level equation과
+stationarity-type moment restrictions를 사용한다. Persistent
+series에서는 약한 도구가, 긴 시차목록에서는 instrument proliferation이
+문제가 된다.
+
+### E.19.3 공통충격과 분포동학
+
+국가 간 cross-sectional dependence가 강하면 단순 country
+clustering만으로 충분하지 않을 수 있다. Club convergence, threshold,
+mixture와 transition-density 분석은 평균회귀가 포착하지 못하는
+다봉성·극화·이동성을 다루지만, 사후적인 club 선택은 overfitting과
+selection bias를 낳는다.
+
+::: math-display
+$$\boxed{\text{average convergence coefficient}\neq\text{full distribution dynamics}.}\tag{E.59}$$
+:::
+:::::
+
+::: part-divider
+PART V Identification, Inference, and Robustness
+:::
+
+::::::::: {#appE-e20 .section}
+## [E.20]{.section-number}회계분해, 통계관계와 인과효과의 구분
+
+같은 변수들이 식에 등장해도 회계항등식, 회귀계수와 정책반사실은 서로
+다른 estimand다.
+
+::::: formula-pair
+::: {}
+[ACCOUNTING]{.tag}
+
+### 기여도 분해
+
+생산함수와 측정가정 아래 관측성장을 구성항으로 나눈다.
+:::
+
+::: {}
+[ASSOCIATION]{.tag}
+
+### 조건부 통계관계
+
+지정한 회귀식과 표본에서 partial correlation을 측정한다.
+:::
+:::::
+
+:::: {.statement .theorem}
+::: statement-head
+인과 estimand
+:::
+
+정책·제도·투입을 달리했을 때의 잠재결과 또는 구조적 반사실이다.
+회계식이나 OLS 계수만으로는 식별되지 않는다.
+::::
+
+::: math-display
+$$\boxed{\begin{aligned}\text{accounting identity}&:\ \text{decomposition},\\\text{regression coefficient}&:\ \text{conditional association},\\\text{causal parameter}&:\ \text{counterfactual effect under identification assumptions}.\end{aligned}}\tag{E.60}$$
+:::
+:::::::::
+
+::::::::::::::::::::: {#appE-e21 .section}
+## [E.21]{.section-number}내생성, 도구변수, 제도·지리 변수
+
+성장회귀에서 제도·교육·무역·금융은 성장의 원인이면서 동시에 성장의
+결과일 수 있다.
+
+::: math-display
+$$y_i=X_i'\beta+u_i,\qquad E[X_iu_i]\neq0.\tag{E.61}$$
+:::
+
+IV는 도구 $Z_i$에 대해 relevance와
+
+::: math-display
+$$E[Z_iu_i]=0\tag{E.62}$$
+:::
+
+을 요구한다.
+
+### E.21.1 감사항목
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+Relevance
+:::
+
+::: right
+First-stage strength와 weak-identification robust 진단.
+:::
+:::::
+
+::::: chain-row
+::: left
+Exclusion
+:::
+
+::: right
+도구가 결과에 영향을 주는 다른 역사·지리·제도경로의 배제.
+:::
+:::::
+
+::::: chain-row
+::: left
+Heterogeneity
+:::
+
+::: right
+효과이질성이 있을 때 IV estimand의 population과 weighting.
+:::
+:::::
+
+::::: chain-row
+::: left
+Spillovers
+:::
+
+::: right
+국가 간 무역·이주·전쟁·지역효과로 SUTVA가 실패할 가능성.
+:::
+:::::
+
+::::: chain-row
+::: left
+Controls
+:::
+
+::: right
+post-treatment control과 bad-control 가능성.
+:::
+:::::
+::::::::::::::::::
+
+"역사적" 또는 "지리적" 변수라는 명칭은 외생성의 증명이 아니다. 경제적
+exclusion argument와 대안경로 검증이 필요하다.
+:::::::::::::::::::::
+
+::::: {#appE-e22 .section}
+## [E.22]{.section-number}측정오차, 추론과 모형불확실성
+
+성장·TFP 결과는 자료와 생산함수 선택에 민감하므로 단일 point
+estimate보다 민감도 범위를 보고해야 한다.
+
+### E.22.1 측정오차 원천
+
+GDP와 PPP, 투자 deflator, 초기자본, 감가상각, 근로시간, 자영업 혼합소득,
+교육연수, 비공식경제, 천연자원 rent와 무형자본을 점검한다.
+
+### E.22.2 추론
+
+횡단면에서는 heteroskedasticity와 spatial correlation, 패널에서는
+country·time dependence를 고려한다. Bootstrap은 재표본추출 단위가 자료의
+dependence structure와 맞아야 한다. IV에서는 conventional Wald
+interval뿐 아니라 weak-IV robust inference를 병행한다.
+
+### E.22.3 모형불확실성
+
+::: math-display
+$$\alpha\in[\underline\alpha,\overline\alpha],\qquad \delta\in[\underline\delta,\overline\delta],\qquad r_s\in[\underline r_s,\overline r_s].\tag{E.63}$$
+:::
+
+Cobb--Douglas와 CES, Hicks-neutral과 factor-augmenting technology,
+노동질 함수, markup·규모수익·가동률·무형자본의 대안을 비교한다.
+
+::: math-display
+$$\boxed{\text{statistical significance}\neq\text{economic magnitude}\neq\text{causal credibility}.}\tag{E.64}$$
+:::
+:::::
+
+::: part-divider
+PART VI Applications, Validation, and Integration
+:::
+
+:::::::::::: {#appE-e23 .section}
+## [E.23]{.section-number}성장회계·개발회계·수렴회귀 완전예제
+
+세 예제는 동일한 숫자가 어떤 가정 아래 회계·수준분해·수렴속도로 바뀌는지
+검산한다.
+
+### E.23.1 성장회계
+
+다음 연간 로그성장률과 평균분배율을 가정한다.
+
+::: math-display
+$$\Delta\log Y=.035,\quad \Delta\log K=.040,\quad \Delta\log H=.010,\quad \bar s_K=.35,\quad \bar s_L=.65.\tag{E.65}$$
+:::
+
+기준 residual은
+
+::: math-display
+$$\Delta\log A=.035-.35(.040)-.65(.010)=.0145.\tag{E.66}$$
+:::
+
+::: display-table-wrap
+  구성항          기여도
+  --------------- --------
+  Capital stock   0.0140
+  Total hours     0.0065
+  Measured TFP    0.0145
+  합계            0.0350
+:::
+
+가동률 증가가 $\Delta\log u=.015$라면 capital-service growth는 .055이고,
+다른 항을 유지한 조정 residual은
+
+::: math-display
+$$\Delta\log A^{adj}=.035-.35(.055)-.65(.010)=.00925.\tag{E.67}$$
+:::
+
+따라서 원래 residual의 .00525는 관측되지 않은 가동률 기여였다.
+
+### E.23.2 Development accounting
+
+::: math-display
+$$\frac{k_i}{k_b}=.25,\qquad \frac{h_i}{h_b}=.80,\qquad \alpha=\frac13.\tag{E.68}$$
+:::
+
+요소투입만으로 예측되는 산출비율은
+
+::: math-display
+$$\left(.25\right)^{1/3}\left(.80\right)^{2/3}=0.542884.\tag{E.69}$$
+:::
+
+실제 $y_i/y_b=.30$이면
+
+::: math-display
+$$\frac{A_i}{A_b}=\frac{.30}{.542884}=0.552605.\tag{E.70}$$
+:::
+
+이는 사용한 Cobb--Douglas 회계 아래 factor inputs가 소득격차를 전부
+설명하지 못한다는 뜻이지, 남은 격차가 특정 제도의 인과효과라는 뜻은
+아니다.
+
+### E.23.3 수렴속도
+
+공통 balanced-growth trend를 절편에서 통제한 20년 연평균 성장률 회귀에서
+초기소득 계수의 절댓값이 $b=.015$라고 하자. 그러면
+
+::: math-display
+$$\lambda=-\frac1{20}\log(1-20\times.015)=0.017834.\tag{E.71}$$
+:::
+
+Half-life는
+
+::: math-display
+$$t_{1/2}=\frac{\log2}{0.017834}=38.87\ \text{years}.\tag{E.72}$$
+:::
+
+이 수치는 회귀계수의 식별, 일정한 국소수렴속도와 올바른 종속변수
+normalization을 전제로 한다.
+::::::::::::
+
+::::::::::::::::::::: {#appE-e24 .section}
+## [E.24]{.section-number}통합 workflow, 실패진단과 본문 연결
+
+최종 결과는 계산표보다 가정·자료·식별의 추적가능성이 중요하다.
+
+### E.24.1 Workflow
+
+::: math-display
+$$\boxed{\begin{aligned}1.&\ \text{경제적 객체와 estimand를 정의한다.}\\2.&\ \text{산출·자본·노동·PPP 자료를 정렬한다.}\\3.&\ \text{생산함수와 탄력성 가정을 명시한다.}\\4.&\ \text{capital services와 labor services를 구축한다.}\\5.&\ \text{기준 성장·개발회계를 계산한다.}\\6.&\ \text{utilization, markup, labor quality를 감사한다.}\\7.&\ \text{회계결과와 인과해석을 분리한다.}\\8.&\ \text{수렴회귀의 단위와 coefficient mapping을 고정한다.}\\9.&\ \text{내생성·측정오차·공통충격을 진단한다.}\\10.&\ \text{자료·모형·표본 민감도를 보고한다.}\end{aligned}}\tag{E.73}$$
+:::
+
+### E.24.2 대표 실패진단
+
+::: display-table-wrap
+  실패                                        교정
+  ------------------------------------------- ---------------------------------------------------
+  Revenue share = elasticity                  경쟁·markup·wedge 조건을 먼저 확인한다.
+  Capital stock = services                    자산별 user cost와 utilization을 반영한다.
+  Solow residual = technology                 이용강도·시장력·재배분·측정오차를 분리한다.
+  TFP residual = institutions                 회계잔차와 제도의 인과효과를 구분한다.
+  β-convergence = σ-convergence               초기소득 회귀와 분포분산을 별도로 계산한다.
+  Accounting counterfactual = policy effect   내생적 조정과 일반균형 전이를 명시한다.
+  Negative coefficient = causal convergence   측정오차·내생성·steady-state controls를 감사한다.
+:::
+
+### E.24.3 본문·Appendix 연결
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+Chapter 01--02
+:::
+
+::: right
+Solow 모형, 자본축적과 수렴속도의 자료해석.
+:::
+:::::
+
+::::: chain-row
+::: left
+Chapter 03--04
+:::
+
+::: right
+내생성장, 인적자본, 생산성과 국가 간 소득격차.
+:::
+:::::
+
+::::: chain-row
+::: left
+Chapter 05
+:::
+
+::: right
+경기변동 Solow residual과 장기 TFP의 구분.
+:::
+:::::
+
+::::: chain-row
+::: left
+Appendix D
+:::
+
+::: right
+자료정의, finite-sample 변환과 불확실성 보고 원칙.
+:::
+:::::
+
+::::: chain-row
+::: left
+계량경제학 노트
+:::
+
+::: right
+IV, GMM, 패널, 측정오차와 식별의 일반이론.
+:::
+:::::
+::::::::::::::::::
+:::::::::::::::::::::
+
+::::::: {#appE-conclusion .section}
+## 결론
+
+성장회계, development accounting과 성장회귀는 장기성장을 바라보는
+상호보완적 도구지만 서로 다른 질문에 답한다.
+
+::: math-display
+$$\boxed{\text{growth accounting}=\text{decomposition of output growth}.}$$
+:::
+
+::: math-display
+$$\boxed{\text{development accounting}=\text{decomposition of income-level gaps}.}$$
+:::
+
+::: math-display
+$$\boxed{\text{growth empirics}=\text{statistical analysis under explicit identification assumptions}.}$$
+:::
+
+::: conclusion-block
+Appendix 체계의 완결
+
+Appendix A는 최적화, B는 선형균형, C는 고차근사, D는 경기변동의 관측과
+평가, E는 장기성장과 국가 간 격차의 측정·분해를 담당한다. 다섯 부록은
+이론모형에서 자료기반 평가까지의 계산언어를 완결한다.
+:::
+:::::::
+
+::: {#appE-check .section}
+## Learning Check
+
+1.  Gross output과 value added 생산함수의 투입구성을 비교하라.
+2.  Hicks-, Harrod-, Solow-neutral 기술변화의 차이를 설명하라.
+3.  생산탄력성과 revenue share가 일치하는 조건을 제시하라.
+4.  Markup 아래 $s_i=\varepsilon_i/\mu$를 비용최소화에서 도출하라.
+5.  연속시간 성장회계식 (E.14)을 도출하라.
+6.  Törnqvist residual과 단순 고정가중 residual을 비교하라.
+7.  Solow residual에 utilization이 들어가는 과정을 보이라.
+8.  Perpetual inventory 초기값의 dating convention을 설명하라.
+9.  Capital stock과 capital services를 구분하라.
+10. 노동질 지수와 총근로시간의 차이를 계산하라.
+11. 국가 간 소득수준 분해 (E.34)를 도출하라.
+12. 자본--산출비율 표현 (E.36)이 대수적 항등식임을 보이라.
+13. 평균 교육연수로 인적자본을 측정할 때 Jensen 문제가 발생하는 이유를
+    설명하라.
+14. TFP의 $\alpha$ 민감도 (E.43)를 도출하라.
+15. 공분산항 때문에 설명비율이 유일하지 않은 이유를 설명하라.
+16. β-convergence와 σ-convergence를 비교하라.
+17. 수렴회귀 계수에서 $\lambda$와 half-life를 계산하라.
+18. 초기소득 측정오차가 기계적인 음의 상관을 만드는 식 (E.57)을
+    도출하라.
+19. 동태패널에서 Nickell bias와 instrument proliferation을 설명하라.
+20. 회계적 반사실과 인과적 정책반사실을 구분하라.
+21. 제도변수 IV에서 exclusion restriction의 대안경로를 열거하라.
+22. 성장회계 예제의 utilization-adjusted residual을 재계산하라.
+:::
+
+:::::::::::::::::::::::::::::::::::: {#appE-glossary .section}
+## 핵심 용어
+
+::::::::::::::::::::::::::::::::::: definition-list
+:::: definition-row
+::: term
+Growth accounting
+:::
+
+생산함수와 투입탄력성을 사용해 산출성장을 투입기여와 잔차로 분해하는
+절차.
+::::
+
+:::: definition-row
+::: term
+Divisia index
+:::
+
+연속시간의 지출·소득분배율 가중 로그성장 지수.
+::::
+
+:::: definition-row
+::: term
+Törnqvist index
+:::
+
+인접 두 시점의 평균분배율을 사용하는 이산시간 superlative index.
+::::
+
+:::: definition-row
+::: term
+Production elasticity
+:::
+
+다른 투입을 고정했을 때 특정 투입 1% 변화에 대한 산출의 백분율 변화.
+::::
+
+:::: definition-row
+::: term
+Factor income share
+:::
+
+요소보상이 총산출가치 또는 요소소득에서 차지하는 비중.
+::::
+
+:::: definition-row
+::: term
+Solow residual
+:::
+
+산출성장에서 측정된 투입성장 기여를 뺀 회계잔차.
+::::
+
+:::: definition-row
+::: term
+Capital services
+:::
+
+자본자산이 생산에 제공하는 서비스 흐름을 user-cost weights로 집계한
+투입.
+::::
+
+:::: definition-row
+::: term
+User cost
+:::
+
+자산 한 단위를 한 기간 사용하는 기회비용 또는 암묵적 임대가격.
+::::
+
+:::: definition-row
+::: term
+Labor quality
+:::
+
+교육·경력·직종 등 노동구성 변화가 노동서비스에 미치는 효과.
+::::
+
+:::: definition-row
+::: term
+Development accounting
+:::
+
+국가 간 소득수준 차이를 물적자본·인적자본·TFP로 분해하는 회계절차.
+::::
+
+:::: definition-row
+::: term
+PPP
+:::
+
+국가별 가격수준 차이를 보정하여 실질수준을 비교하기 위한 구매력평가
+환산.
+::::
+
+:::: definition-row
+::: term
+β-convergence
+:::
+
+낮은 초기소득과 높은 이후성장 사이의 음의 조건부 관계.
+::::
+
+:::: definition-row
+::: term
+σ-convergence
+:::
+
+경제들 사이 소득분산 또는 다른 dispersion measure가 감소하는 현상.
+::::
+
+:::: definition-row
+::: term
+Convergence speed
+:::
+
+경제가 국소적으로 정상상태 격차를 축소하는 지수감쇠율 $\lambda$.
+::::
+
+:::: definition-row
+::: term
+Nickell bias
+:::
+
+짧은 동태패널의 fixed-effects estimator에서 lagged dependent variable
+때문에 생기는 편의.
+::::
+
+:::: definition-row
+::: term
+Model uncertainty
+:::
+
+생산함수·탄력성·인적자본·자료변환 등 분석모형 선택에 따른 결과불확실성.
+::::
+:::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::
+
+:::: {#appE-references .section}
+## 참조 문헌
+
+- Solow, R. M. (1957), "Technical Change and the Aggregate Production
+  Function," *Review of Economics and Statistics* 39(3), 312--320.
+- Denison, E. F. (1962), *The Sources of Economic Growth in the United
+  States and the Alternatives Before Us*, Committee for Economic
+  Development.
+- Jorgenson, D. W., and Z. Griliches (1967), "The Explanation of
+  Productivity Change," *Review of Economic Studies* 34(3), 249--283.
+- Hall, R. E. (1988), "The Relation between Price and Marginal Cost in
+  U.S. Industry," *Journal of Political Economy* 96(5), 921--947.
+- Basu, S., and J. G. Fernald (1997), "Returns to Scale in U.S.
+  Production: Estimates and Implications," *Journal of Political
+  Economy* 105(2), 249--283.
+- Young, A. (1995), "The Tyranny of Numbers: Confronting the Statistical
+  Realities of the East Asian Growth Experience," *Quarterly Journal of
+  Economics* 110(3), 641--680.
+- Mankiw, N. G., D. Romer, and D. N. Weil (1992), "A Contribution to the
+  Empirics of Economic Growth," *Quarterly Journal of Economics* 107(2),
+  407--437.
+- Barro, R. J., and X. Sala-i-Martin (2004), *Economic Growth*, 2nd ed.,
+  MIT Press.
+- Hall, R. E., and C. I. Jones (1999), "Why Do Some Countries Produce So
+  Much More Output per Worker than Others?" *Quarterly Journal of
+  Economics* 114(1), 83--116.
+- Klenow, P. J., and A. Rodríguez-Clare (1997), "The Neoclassical
+  Revival in Growth Economics: Has It Gone Too Far?" *NBER
+  Macroeconomics Annual* 12, 73--103.
+- Caselli, F. (2005), "Accounting for Cross-Country Income Differences,"
+  in *Handbook of Economic Growth*, Vol. 1A, 679--741.
+- Hsieh, C.-T., and P. J. Klenow (2009), "Misallocation and
+  Manufacturing TFP in China and India," *Quarterly Journal of
+  Economics* 124(4), 1403--1448.
+- Arellano, M., and S. Bond (1991), "Some Tests of Specification for
+  Panel Data," *Review of Economic Studies* 58(2), 277--297.
+- Blundell, R., and S. Bond (1998), "Initial Conditions and Moment
+  Restrictions in Dynamic Panel Data Models," *Journal of Econometrics*
+  87(1), 115--143.
+- Feenstra, R. C., R. Inklaar, and M. P. Timmer (2015), "The Next
+  Generation of the Penn World Table," *American Economic Review*
+  105(10), 3150--3182.
+- Romer, D. (2019), *Advanced Macroeconomics*, 5th ed., McGraw--Hill
+  Education.
+- Ljungqvist, L., and T. J. Sargent (2018), *Recursive Macroeconomic
+  Theory*, 4th ed., MIT Press.
+
+::: source-note
+표기 원칙
+
+시간성장률은 연속시간에서 $g_X=\dot X/X$, 이산시간에서 $\Delta\log X$로
+구분한다. 요소분배율은 revenue share, 생산탄력성은 생산함수의
+로그도함수로 정의한다. 국가 간 수준분해는 노동자 1인당을 기준으로 하며,
+회귀의 수렴속도 변환에서는 종속변수가 총성장인지 연평균성장인지 반드시
+명시한다.
+:::
+::::
