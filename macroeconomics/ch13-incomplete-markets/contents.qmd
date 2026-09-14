@@ -1,0 +1,2007 @@
+---
+title: >-
+  불완전시장, 자기보험, 그리고 부의 분포
+description: >-
+  Incomplete Markets, Self-Insurance, and Wealth Distribution
+---
+
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::::::::::::::: {#ch13-s01 .section}
+## [13.1]{.section-number}완전보험에서 자기보험으로
+
+완전시장의 핵심은 미래의 모든 date--state payoff를 거래할 수 있다는 데
+있다. 불완전시장에서는 개별소득 충격이 발생한 뒤 상태별 이전을 완전히
+조정할 수 없으므로, 현재의 자산축적이 미래 소비위험에 대한 제한된
+보험장치가 된다.
+
+### 13.1.1 완전보험 benchmark
+
+동일한 효용함수 $u$를 가진 가계 $i$의 Pareto weight를 $\omega_i>0$라
+하자. 완전시장 또는 사회계획자의 상태별 자원배분에서는 각 상태 $s$에서
+
+::: math-display
+$$
+  \omega_i u'\!\left(c_i(s)\right)=\Lambda(s)
+  \qquad\text{for all }i
+  \tag{13.1}
+$$
+:::
+
+가 성립한다. 따라서 개별가계의 한계효용은 그 가계의 현재소득이 아니라
+aggregate resource와 Pareto weight에 의해 결정된다. 동일한 Pareto weight
+아래에서는 개별소득 충격이 소비로 직접 전달되지 않는다.
+
+### 13.1.2 제한된 자산메뉴
+
+상태가 $S$개이고 거래 가능한 자산의 상태별 payoff를 열벡터로 모은 행렬을
+$X\in\mathbb R^{S\times J}$라 하자. 자산메뉴가 모든 상태별 payoff를
+생성하려면
+
+::: math-display
+$$
+  X\in\mathbb R^{S\times J},
+  \qquad
+  \operatorname{rank}(X)=S
+  \quad(J\ge S).
+  \tag{13.2}
+$$
+:::
+
+가 필요하다. 반대로 $\operatorname{rank}(X)<S$이면 모든 contingent
+consumption plan을 구현할 수 없다. 이 장의 baseline에서는 상태별 Arrow
+security 대신 하나의 무위험자산만 거래할 수 있다.
+
+:::: {.statement .theorem}
+::: statement-head
+완전보험과 자기보험의 구분
+:::
+
+**Complete insurance**는 충격상태별로 소비를 직접 이전하는 제도다.
+**Self-insurance**는 충격이 오기 전에 비상태의존적 자산을 축적하여
+미래의 낮은 소득상태에서 소비를 유지하는 방식이다. 후자는 상태별 보험이
+아니므로 소비위험을 제거하지 못하고 완화할 뿐이다.
+::::
+
+### 13.1.3 역사 의존성과 부의 이질성
+
+::: math-display
+$$
+  \text{income history}
+  \longrightarrow
+  a_t
+  \longrightarrow
+  c_t
+  \longrightarrow
+  \text{cross-sectional wealth and consumption dispersion}.
+  \tag{13.3}
+$$
+:::
+
+동일한 선호와 동일한 현재 생산성 $z_t$를 가진 가계도 과거 소득충격의
+이력이 다르면 현재 자산 $a_t$가 다르다. 따라서 현재 소비와 미래의
+제약가능성도 달라진다. Ex ante identical households가 ex post
+heterogeneous households로 변하는 이유가 여기에 있다.
+
+### 13.1.4 본 장의 baseline
+
+::::::::::: definition-grid
+:::: definition-row
+::: term
+가계
+:::
+
+연속체의 무한생애 가계. 선호와 소득과정은 ex ante 동일하다.
+::::
+
+:::: definition-row
+::: term
+위험
+:::
+
+가계별 idiosyncratic labor-income risk. Aggregate shock은 없다.
+::::
+
+:::: definition-row
+::: term
+자산
+:::
+
+한 기간 무위험자산 하나. 상태별 contingent claim은 거래되지 않는다.
+::::
+
+:::: definition-row
+::: term
+균형개념
+:::
+
+시간불변 가격과 invariant cross-sectional distribution을 갖는 stationary
+recursive competitive equilibrium.
+::::
+:::::::::::
+
+Aggregate uncertainty, lifecycle structure, endogenous labor supply,
+default, illiquid assets, entrepreneurial risk, HANK monetary
+transmission은 이 장의 baseline에서 제외한다.
+:::::::::::::::::
+
+:::::::::: {#ch13-s02 .section}
+## [13.2]{.section-number}Bewley 경제의 환경과 타이밍
+
+불완전시장 모형에서는 같은 경제를 서로 다른 타이밍으로 쓰면 natural debt
+limit, Euler equation, 균형자산수요의 표기가 달라진다. 따라서 먼저
+상태변수와 현금흐름의 시점을 고정한다.
+
+### 13.2.1 선호와 소득과정
+
+가계의 기대효용은
+
+::: math-display
+$$
+  \mathbb E_0
+  \sum_{t=0}^\infty
+  \beta^t u(c_t),
+  \qquad
+  0<\beta<1,
+  \tag{13.4}
+$$
+:::
+
+이다. 기간효용은 $u:(0,\infty)\to\mathbb R$이고 $C^3$, $u'(c)>0$,
+$u''(c)<0$라고 가정한다. 필요하면 경계값을
+$u(0)\equiv\lim_{c\downarrow0}u(c)\in\mathbb R\cup\{-\infty\}$로
+확장한다. 개별 생산성 또는 고용상태는 유한상태 Markov chain을 따른다.
+
+::: math-display
+$$
+  z_{t+1}\sim\Pi(\cdot\mid z_t),
+  \qquad
+  z_t\in\mathcal Z=\{z_1,\ldots,z_m\}.
+  \tag{13.5}
+$$
+:::
+
+$\Pi$는 전이행렬이다. 유한상태공간에서 irreducibility는 고유한 invariant
+distribution $\pi$의 존재를 보장하고, aperiodicity를 추가하면 임의의
+초기분포에서 $\pi$로의 수렴을 보장한다. Baseline에서는 두 조건을 모두
+둔다.
+
+### 13.2.2 예산제약과 타이밍
+
+시점 $t$에 가계는 전기에서 선택한 자산 $a_t$와 현재 생산성 $z_t$를
+관측한 뒤 소비 $c_t$와 다음 기 자산 $a_{t+1}$를 선택한다.
+
+::: math-display
+$$
+  c_t+a_{t+1}
+  =
+  wz_t+(1+r)a_t.
+  \tag{13.6}
+$$
+:::
+
+여기서 $r$은 자산의 순수익률이고 $R\equiv1+r$는 gross return, $w$는
+효율노동 한 단위의 임금이다. 이 장의 $a_{t+1}$는 시점 $t$에 재화 1단위로
+매입하고 다음 기에 $R a_{t+1}$을 지급하는 *principal-unit asset*이다.
+Chapter 09의 payoff-unit claim을 $b_{t+1}$라 쓰면
+
+::: math-display
+$$
+  b_t=Ra_t,
+  \qquad
+  b_{t+1}=Ra_{t+1},
+  \qquad
+  q^f=R^{-1},
+$$ $$
+  c_t+q^fb_{t+1}=b_t+wz_t
+  \quad\Longleftrightarrow\quad
+  c_t+a_{t+1}=wz_t+Ra_t.
+  \tag{13.6a}
+$$
+:::
+
+따라서 두 장의 예산제약은 경제적으로 같지만 자산의 단위가 다르다.
+Natural debt limit과 terminal asset term을 비교할 때에는 이 $b=Ra$
+변환을 먼저 적용해야 한다. 현재의 cash on hand를
+
+::: math-display
+$$
+  m(a,z)\equiv wz+(1+r)a
+  \tag{13.7}
+$$
+:::
+
+라고 쓰면 $c=m-a'$다.
+
+### 13.2.3 상태와 통제
+
+::: math-display
+$$
+  \text{individual state }x=(a,z),
+  \qquad
+  \text{control }a',
+  \qquad
+  c=m(a,z)-a'.
+  \tag{13.8}
+$$
+:::
+
+현재 소비를 직접 통제변수로 함께 써도 되지만, 예산제약으로 소비를
+제거하면 선택은 다음 기 자산 하나로 축약된다.
+
+### 13.2.4 개별위험과 집계위험
+
+가계가 연속체이고 개별충격이 조건부 독립이며 적절한 exact law of large
+numbers가 적용되면 개별 $z_t$는 확률적이지만 횡단면 분포와 총효율노동은
+결정적일 수 있다.
+
+::: math-display
+$$
+  L_t
+  =
+  \int z\,d\mu_t(a,z).
+  \tag{13.9}
+$$
+:::
+
+Stationary equilibrium에서는 $\mu_t=\mu^*$이므로 $L_t=L^*$와 가격이
+시간불변이다. 개인의 불확실성과 aggregate uncertainty를 혼동해서는 안
+된다.
+::::::::::
+
+::::::::::::: {#ch13-s03 .section}
+## [13.3]{.section-number}차입한도, solvency, feasible set
+
+Bellman equation을 쓰기 전에 어떤 자산선택이 허용되는지를 정해야 한다.
+외생적 차입한도, natural debt limit, No-Ponzi condition은 서로 관련되어
+있지만 동일한 개념이 아니다.
+
+### 13.3.1 외생적 차입한도
+
+::: math-display
+$$
+  a_{t+1}\ge\underline a.
+  \tag{13.10}
+$$
+:::
+
+$\underline a$는 제도적 신용한도, 담보제약, 법적 채무한도처럼 모형
+외부에서 주어질 수 있다. $\underline a=0$이면 unsecured borrowing을
+금지한다.
+
+### 13.3.2 Natural debt limit
+
+Natural debt limit은 최악의 도달가능한 소득경로에서도 비음의 소비를
+유지하면서 상환할 수 있는 최대채무다. 현재 상태 $z$에서 도달가능한
+미래이력의 집합을 $\mathcal H(z)$라 하면, 현재의 타이밍 아래 다음 기
+자산에 대한 자연채무한도는 개념적으로
+
+::: math-display
+$$
+  \underline a^{\,N}(z)
+  =
+  -
+  \inf_{\{z_{t+j}\}_{j\ge1}\in\mathcal H(z)}
+  \sum_{j=1}^\infty
+  \frac{wz_{t+j}}{(1+r)^j},
+  \qquad r>0.
+  \tag{13.11}
+$$
+:::
+
+로 쓸 수 있다. 이 식은 현재 선택한 $a_{t+1}$가 시점 $t+1$부터의 최악의
+노동소득 현재가치를 초과해 차입하지 못하도록 한다.
+
+최저 생산성 $\underline z$가 존재하고, 현재 상태에서
+$z_{t+j}=\underline z$가 모든 $j\ge1$에 대해 지속되는 경로가 도달가능한
+최악경로라면
+
+::: math-display
+$$
+  \underline a^{\,N}
+  =
+  -\sum_{j=1}^\infty
+  \frac{w\underline z}{(1+r)^j}
+  =
+  -\frac{w\underline z}{r}.
+  \tag{13.12}
+$$
+:::
+
+식 (13.12)는 $r>0$과 위의 최악경로 가정 아래 성립하는 특수결과다.
+Chapter 09의 payoff-unit 하한을 $\underline b_{t+1}^{\mathrm{nat}}$, 이
+장의 principal-unit 하한을 $\underline a_{t+1}^{N}$라 쓰면
+
+::: math-display
+$$
+  \underline b_{t+1}^{\mathrm{nat}}(z)
+  =R\,\underline a_{t+1}^{N}(z).
+  \tag{13.12a}
+$$
+:::
+
+따라서 Chapter 09의 합이 $j=0$에서 시작하고 식 (13.11)의 합이 $j=1$에서
+시작하는 것은 모순이 아니라 자산단위의 차이다. $r>0$이고 영구적인 영소득
+경로가 가능하면 최악의 소득현재가치는 0이므로 $\underline a^{\,N}=0$:
+차입능력이 전혀 없다. 반대로 $r=0$이고 모든 도달가능한 경로에서
+미래소득의 합이 무한하면 자연채무한도는 $-\infty$가 되어 유한한 하한이
+존재하지 않는다. 일반적으로 유한성은 식 (13.11)의 최악경로
+할인현재가치가 유한한지에 의해 결정된다.
+
+### 13.3.3 No-Ponzi condition
+
+식 (13.6)을 시점 0부터 $T$까지 반복하면 이 장의 principal-unit
+convention에서는
+
+::: math-display
+$$
+  \sum_{j=0}^{T}R^{-j}c_j
+  +R^{-T}a_{T+1}
+  =Ra_0+\sum_{j=0}^{T}R^{-j}wz_j.
+  \tag{13.13a}
+$$
+:::
+
+따라서 무한히 새로운 채무를 발행하여 기존채무를 상환하는 계획을 배제하는
+한 가지 순차적 solvency condition은
+
+::: math-display
+$$
+  \liminf_{T\to\infty}
+  \frac{a_{T+1}}{R^{T}}
+  \ge0,
+  \qquad R=1+r.
+  \tag{13.13}
+$$
+:::
+
+이다. Chapter 09의 payoff-unit 자산 $b_{T+1}=Ra_{T+1}$를 사용하면 같은
+terminal term은 $R^{-(T+1)}b_{T+1}$로 나타난다. $R>1$이고 상태와 무관한
+외생적 하한이
+$\underline a\ge\sup_{z\in\mathcal Z}\underline a^{\,N}(z)>-\infty$를
+만족하여 모든 기간에 적용되면, $a_{T+1}/R^T$의 하방극한은 0보다 작을 수
+없으므로 식 (13.13)이 확보된다. 그러나 매기 차입한도는 선택집합에 직접
+들어가는 제약이고, No-Ponzi condition은 무한기간 경계조건이라는 점에서
+구분해야 한다.
+
+### 13.3.4 Feasible correspondence
+
+::: math-display
+$$
+  \Gamma(a,z)
+  =
+  \left\{
+  a'\in\mathcal A:
+  a'\ge\underline a,\;
+  wz+(1+r)a-a'\ge0
+  \right\}.
+  \tag{13.14}
+$$
+:::
+
+$\Gamma(a,z)\neq\varnothing$이려면 적어도 $\underline a\le wz+(1+r)a$가
+모든 허용상태에서 성립해야 한다. 상태공간은 정책을 적용한 뒤에도
+$a'\in\mathcal A$가 유지되도록 invariant하게 선택한다. 효용이 로그 또는
+CRRA이고 $u(0)=-\infty$이면 유한효용을 주는 최적선택은 $c>0$인 영역에
+놓여야 한다. 계산에서는 자산공간을
+
+::: math-display
+$$
+  \mathcal A=[\underline a,\bar a]
+  \tag{13.15}
+$$
+:::
+
+로 절단하는 경우가 많다. $\bar a$는 대개 수치적 truncation이며 원시적인
+경제적 자산상한과 구분해야 한다.
+
+:::: {.statement .warning}
+::: statement-head
+수치격자와 경제모형의 구분
+:::
+
+상단격자 $\bar a$에 정책함수 또는 정상분포의 질량이 쌓이면 계산영역이
+지나치게 작다는 신호다. 이를 자산상한이 실제로 binding되는 경제적 결과로
+해석해서는 안 된다.
+::::
+:::::::::::::
+
+::::: {#ch13-part2 .part-divider}
+::: part-no
+PART II
+:::
+
+::: part-title
+HOUSEHOLD OPTIMIZATION AND SELF-INSURANCE
+:::
+:::::
+
+::::::::::: {#ch13-s04 .section}
+## [13.4]{.section-number}가계의 recursive problem과 해의 존재
+
+가격 $(r,w)$가 주어졌을 때 가계는 현재 자산과 생산성을 상태로 하는
+동태계획문제를 푼다. 이후의 일반균형은 이 개별정책이 유도한 분포와
+시장가격을 다시 일치시키는 문제다.
+
+### 13.4.1 Bellman equation
+
+::: math-display
+$$
+  V(a,z)
+  =
+  \max_{a'\in\Gamma(a,z)}
+  \left\{
+  u\!\left(wz+(1+r)a-a'\right)
+  +
+  \beta\sum_{z'\in\mathcal Z}
+  \Pi(z'|z)V(a',z')
+  \right\}.
+  \tag{13.16}
+$$
+:::
+
+Bellman operator를
+
+::: math-display
+$$
+  (TV)(a,z)
+  =
+  \max_{a'\in\Gamma(a,z)}
+  \left\{
+  u(m(a,z)-a')
+  +
+  \beta\mathbb E[V(a',z')\mid z]
+  \right\}
+  \tag{13.17}
+$$
+:::
+
+로 정의한다.
+
+### 13.4.2 Compact benchmark에서의 존재와 유일성
+
+::::: {.statement .theorem}
+::: statement-head
+명제 13.1 · Compact bounded benchmark의 Bellman fixed point
+:::
+
+상태공간 $X\equiv\mathcal A\times\mathcal Z$가 compact metric space이고,
+$\Gamma:X\rightrightarrows\mathcal A$가
+nonempty·compact-valued·continuous라고 하자. 또한 one-period return
+$R_0(a,z,a')\equiv u(wz+(1+r)a-a')$가 $\operatorname{graph}\Gamma$
+위에서 bounded and continuous라고 하자. 그러면 Bellman operator
+$T:C(X)\to C(X)$는 sup norm에서 modulus $\beta$인 contraction이다.
+
+::: math-display
+$$
+  \|TV-TW\|_\infty
+  \le
+  \beta\|V-W\|_\infty.
+  \tag{13.18}
+$$
+:::
+
+따라서 $C(X)$에 유일한 fixed point $V^*$가 존재하고, 임의의
+$V_0\in C(X)$에서 $T^nV_0\to V^*$가 uniform하게 성립한다. 이 명제는
+$u(0)=-\infty$이거나 자산공간이 비유계인 원래 문제에 직접 적용되는
+정리가 아니다.
+:::::
+
+### 13.4.3 비유계 상태와 CRRA 효용의 경계
+
+자연채무한도와 비유계 상단 자산공간을 사용하거나 $u(c)\to-\infty$ as
+$c\downarrow0$인 로그·CRRA 효용을 사용하면 bounded-function contraction
+theorem을 그대로 적용할 수 없다. 이 경우에는 weighted sup norm, drift
+condition, value-function growth bound 또는 별도의 verification
+theorem이 필요하다.
+
+:::: {.statement .warning}
+::: statement-head
+정리의 적용범위
+:::
+
+수치적으로 compact grid를 사용했다는 사실만으로 원래의 비유계 경제에서
+해의 존재와 정상분포의 존재가 증명되는 것은 아니다. 이론적 문제와 계산된
+근사문제를 구분해야 한다.
+::::
+
+### 13.4.4 정책함수
+
+$\Gamma(a,z)$가 convex이고 continuation value $V(\cdot,z')$가
+concave이며 $u$가 strictly concave이면 Bellman objective는 $a'$에 대해
+strictly concave하다. 따라서 최적 다음 기 자산은 feasible set이 비어
+있지 않은 모든 상태에서 유일하다.
+
+::: math-display
+$$
+  a'=g(a,z),
+  \qquad
+  c(a,z)=wz+(1+r)a-g(a,z).
+  \tag{13.19}
+$$
+:::
+
+Maximum theorem과 argmax의 단일값성은 적절한 조건 아래 $g$와 $c$의
+연속성을 준다. 다만 차입제약이 binding되는 경계에서는 미분가능성이
+실패할 수 있다.
+:::::::::::
+
+::::::::::::::: {#ch13-s05 .section}
+## [13.5]{.section-number}Euler inequality, envelope condition, 정책함수의 성질
+
+차입제약이 있으면 표준 Euler equation은 모든 상태에서 등식으로 성립하지
+않는다. Kuhn--Tucker 조건은 소비평탄화의 실패가 어떤 방향으로
+나타나는지를 정확히 보여 준다.
+
+### 13.5.1 Kuhn--Tucker 조건
+
+하한제약 $a_{t+1}\ge\underline a$의 승수를 $\mu_t^{a}\ge0$라 하자.
+위첨자 $a$는 Chapter 09의 Euler wedge와 같은 경제적 객체임을 나타내며,
+횡단면 분포 $\mu_t$와 구분한다. 내부 소비와 적절한 미분가능성 아래
+일차조건은
+
+::: math-display
+$$
+  u'(c_t)
+  =
+  \beta\mathbb E_t[V_a(a_{t+1},z_{t+1})]
+  +
+  \mu_t^{a},
+  \tag{13.20a}
+$$ $$
+  \mu_t^{a}\ge0,
+  \qquad
+  a_{t+1}-\underline a\ge0,
+  \qquad
+  \mu_t^{a}(a_{t+1}-\underline a)=0.
+  \tag{13.20b}
+$$
+:::
+
+### 13.5.2 Envelope condition과 Euler inequality
+
+::: math-display
+$$
+  V_a(a,z)
+  =
+  (1+r)u'\!\left(c(a,z)\right)
+  \tag{13.21}
+$$
+:::
+
+를 이용하면
+
+::: math-display
+$$
+  u'(c_t)
+  =
+  \beta(1+r)
+  \mathbb E_t[u'(c_{t+1})]
+  +
+  \mu_t^{a}.
+  \tag{13.22}
+$$
+:::
+
+따라서
+
+::: math-display
+$$
+  \boxed{
+  u'(c_t)
+  \ge
+  \beta(1+r)
+  \mathbb E_t[u'(c_{t+1})].
+  }
+  \tag{13.23}
+$$
+:::
+
+차입제약이 느슨하면 $\mu_t^{a}=0$이고 표준 Euler equation이 성립한다.
+제약이 binding이면 현재소비의 한계효용이 할인된 미래 한계효용보다 크다.
+가계는 미래소비를 줄이고 현재소비를 늘리고 싶지만 추가차입이 불가능하다.
+
+### 13.5.3 Euler equation만으로는 충분하지 않다
+
+Euler/KKT 조건은 국소적 필요조건이다. 무한기간 계획의 최적성을
+확보하려면 feasibility, borrowing limit 또는 No-Ponzi condition, 그리고
+적절한 terminal condition을 함께 확인해야 한다. 비음의 자산과 interior
+tail을 갖는 표준 오목문제에서 흔히 사용되는 충분한 transversality
+condition의 한 형태는
+
+::: math-display
+$$
+  \lim_{T\to\infty}
+  \beta^T
+  \mathbb E_0
+  \left[
+  u'(c_T)a_{T+1}
+  \right]
+  =0.
+  \tag{13.24}
+$$
+:::
+
+이다. 이는 비음의 자산, interior tail, 오목성 등 추가조건 아래 사용하는
+benchmark sufficient condition이다. 음의 자산을 허용하거나
+자연채무한도가 상태의존적이면 terminal term은 채무한도와 함께 다시
+정의해야 하며, 식 (13.24)를 기계적으로 적용하지 않고 해당 문제의
+verification theorem을 사용해야 한다.
+
+### 13.5.4 Impatience condition
+
+::: math-display
+$$
+  \beta(1+r)<1.
+  \tag{13.25}
+$$
+:::
+
+이 조건은 비유계 상단 자산공간에서 impatience가 위험 없는 gross return을
+지배하도록 한다. 유한한 자산수요와 stationary distribution을 확보하는
+표준 가정의 일부지만, compact-grid Bellman 문제의 contraction에는
+필요하지 않으며, 비유계 원래 문제의 존재·ergodicity를 단독으로
+보장하지도 않는다.
+
+### 13.5.5 정책함수의 단조성
+
+::::: {.statement .theorem}
+::: statement-head
+명제 13.2 · 자산과 소비정책의 단조성
+:::
+
+$\mathcal A$가 interval이고
+$\Gamma(a,z)=[\underline a,\min\{\bar a,wz+(1+r)a\}]$라고 하자.
+$u\in C^2$, $u'>0$, $u''<0$, $V(\cdot,z')$가 concave이고 최적정책이
+단일값이라고 하자. 그러면 saving policy $g(a,z)$는 $a$에 대해
+nondecreasing이다. 또한 $V$가 $a$에 대해 differentiable한 영역에서는
+consumption policy $c(a,z)$도 nondecreasing이다.
+
+::: math-display
+$$
+  a_2\ge a_1
+  \quad\Longrightarrow\quad
+  g(a_2,z)\ge g(a_1,z),
+  \qquad
+  c(a_2,z)\ge c(a_1,z).
+  \tag{13.26}
+$$
+:::
+:::::
+
+::::: proof
+::: proof-title
+증명 개요
+:::
+
+Bellman objective를 $F(a,a';z)$라 하면 feasible set은 $a$가 증가할수록
+확장되고
+
+::: math-display
+$$
+  \frac{\partial^2F(a,a';z)}{\partial a\,\partial a'}
+  =
+  -(1+r)u''\!\left(wz+(1+r)a-a'\right)
+  >0.
+  \tag{13.26a}
+$$
+:::
+
+따라서 $F$는 $(a,a')$에 대해 increasing differences를 가지므로 monotone
+maximum theorem에 의해 $g(\cdot,z)$가 nondecreasing이다. 한편
+$V(\cdot,z)$의 concavity는 $V_a$가 nonincreasing임을 뜻하고, envelope
+condition $V_a=(1+r)u'(c)$와 $u'$의 strict decrease를 결합하면
+differentiability 영역에서 $c(\cdot,z)$가 nondecreasing이다.
+:::::
+
+Strict monotonicity와 global differentiability는 추가조건 없이 보장되지
+않는다. 차입제약의 kink에서는 정책함수의 미분가능성이 실패할 수 있다.
+:::::::::::::::
+
+::::::::::::::: {#ch13-s06 .section}
+## [13.6]{.section-number}Prudence, precautionary saving, buffer-stock behavior
+
+위험회피는 위험한 소비계획을 싫어한다는 성질이고, prudence는 미래위험에
+대응해 현재저축을 늘리는 한계효용의 곡률과 관련된다. 두 개념은 서로
+다르다.
+
+### 13.6.1 Absolute prudence
+
+::: math-display
+$$
+  P(c)
+  \equiv
+  -\frac{u'''(c)}{u''(c)}.
+  \tag{13.27}
+$$
+:::
+
+$u''<0$은 risk aversion을, $u'''>0$은 한계효용 $u'$의 convexity를
+뜻한다. CRRA 효용
+
+::: math-display
+$$
+  u(c)
+  =
+  \begin{cases}
+  \dfrac{c^{1-\sigma}-1}{1-\sigma},
+  & \sigma>0,\ \sigma\ne1,\\[4pt]
+  \log c,
+  & \sigma=1,
+  \end{cases}
+$$
+:::
+
+에서는
+
+::: math-display
+$$
+  P(c)
+  =
+  \frac{\sigma+1}{c}
+  >0.
+  \tag{13.28}
+$$
+:::
+
+### 13.6.2 두 기간의 정식 비교
+
+현재저축 $s$를 선택하는 두 기간 문제를 생각하자.
+
+::: math-display
+$$
+  \max_s
+  \left\{
+  u(y_0-s)
+  +
+  \beta\mathbb E
+  \left[
+  u\!\left(y_1+(1+r)s+\varepsilon\right)
+  \right]
+  \right\},
+  \qquad
+  \mathbb E[\varepsilon]=0.
+  \tag{13.29}
+$$
+:::
+
+내부해의 FOC는
+
+::: math-display
+$$
+  u'(y_0-s)
+  =
+  \beta(1+r)
+  \mathbb E
+  \left[
+  u'\!\left(y_1+(1+r)s+\varepsilon\right)
+  \right].
+  \tag{13.30}
+$$
+:::
+
+:::: {.statement .theorem}
+::: statement-head
+명제 13.3 · Additive risk와 예방적 저축
+:::
+
+위험 없는 문제의 유일한 내부해를 $s_0$라 하자. $\varepsilon$는
+$\mathbb E[\varepsilon]=0$이고 $y_1+(1+r)s+\varepsilon>0$ a.s.이며,
+위험이 있는 목적함수도 strictly concave라고 하자. $u'$가 convex, 즉
+$u'''(c)\ge0$이면 위험하의 최적저축 $s_\varepsilon$는
+$s_\varepsilon\ge s_0$를 만족한다. $u'$가 strictly convex이고
+$\varepsilon$가 비퇴화이면 부등식은 엄격하다.
+::::
+
+::::: proof
+::: proof-title
+증명
+:::
+
+위험 없는 해 $s_0$에서 위험이 있는 목적함수의 도함수는
+
+::: math-display
+$$
+  J_\varepsilon'(s_0)
+  =
+  \beta(1+r)
+  \left\{
+  \mathbb E\!\left[u'(c_1^0+\varepsilon)\right]
+  -
+  u'(c_1^0)
+  \right\}
+  \ge0,
+  \qquad
+  c_1^0\equiv y_1+(1+r)s_0,
+  \tag{13.30a}
+$$
+:::
+
+이다. 부등식은 Jensen inequality에서 따른다. $J_\varepsilon$가 strictly
+concave이므로 그 도함수는 감소하고, $J_\varepsilon'(s_0)\ge0$이면 새로운
+유일해는 $s_\varepsilon\ge s_0$에 놓인다.
+:::::
+
+### 13.6.3 해석의 범위
+
+::: math-display
+$$
+  u''<0
+  \;\not\Rightarrow\;
+  \text{all increases in risk raise saving},
+  \tag{13.31a}
+$$ $$
+  u'''>0
+  \;\Rightarrow\;
+  \text{precautionary response under suitable risk comparisons}.
+  \tag{13.31b}
+$$
+:::
+
+위험의 변화가 additive mean-preserving spread인지, 수익률위험인지,
+노동소득과 자산수익의 상관이 어떤지에 따라 결과가 달라질 수 있다.
+Prudence를 모든 불확실성 변화에 대한 무조건적 저축증가 명제로 해석해서는
+안 된다.
+
+### 13.6.4 차입제약과 buffer stock
+
+현재 차입제약이 느슨하더라도 미래의 낮은 소득상태에서 제약이 binding될
+가능성은 현재저축의 shadow value를 높인다.
+
+::: math-display
+$$
+  \text{future constraint risk}
+  \longrightarrow
+  \mathbb E_t[u'(c_{t+1})]\uparrow
+  \longrightarrow
+  a_{t+1}\uparrow.
+  \tag{13.32}
+$$
+:::
+
+자산이 낮을 때는 precautionary motive가 강하고, 자산이 높을 때는
+impatience가 저축을 억제할 수 있다. 두 힘이 교차하면 buffer-stock
+target이 나타날 수 있다. 그러나 모든 효용·소득과정에서 유일한 target
+wealth가 존재하는 것은 아니다.
+:::::::::::::::
+
+::::: {#ch13-part3 .part-divider}
+::: part-no
+PART III
+:::
+
+::: part-title
+DISTRIBUTION DYNAMICS AND STATIONARY EQUILIBRIUM
+:::
+:::::
+
+::::::::::: {#ch13-s07 .section}
+## [13.7]{.section-number}정책함수가 유도하는 분포동학
+
+가계의 정책함수는 개별상태의 전이법칙을 결정하고, 이 전이법칙은 횡단면
+분포를 움직인다. 불완전시장 일반균형에서는 분포가 단순한 사후통계가
+아니라 가격과 집계량을 결정하는 균형객체다.
+
+### 13.7.1 Induced Markov kernel
+
+주어진 정책 $g$ 아래
+
+::: math-display
+$$
+  a'=g(a,z),
+  \qquad
+  z'\sim\Pi(\cdot\mid z).
+  \tag{13.33}
+$$
+:::
+
+Borel set $A\in\mathcal B(\mathcal A)$와 $B\subseteq\mathcal Z$에 대해
+induced transition kernel은
+
+::: math-display
+$$
+  P_g\!\left((a,z),A\times B\right)
+  =
+  \mathbf 1\!\left\{g(a,z)\in A\right\}
+  \sum_{z'\in B}\Pi(z'|z).
+  \tag{13.34}
+$$
+:::
+
+### 13.7.2 분포의 운동법칙
+
+$\mu_t$를 $(a,z)$의 횡단면 확률측도라고 하자.
+
+::: math-display
+$$
+  \mu_{t+1}
+  =
+  \mathcal T_g\mu_t,
+  \tag{13.35a}
+$$ $$
+  \mu_{t+1}(A\times B)
+  =
+  \int
+  \mathbf 1\!\left\{g(a,z)\in A\right\}
+  \left[
+  \sum_{z'\in B}\Pi(z'|z)
+  \right]
+  d\mu_t(a,z).
+  \tag{13.35b}
+$$
+:::
+
+### 13.7.3 Invariant distribution
+
+::: math-display
+$$
+  \mu^*
+  =
+  \mathcal T_g\mu^*.
+  \tag{13.36}
+$$
+:::
+
+Invariant distribution은 정책함수와 소득전이가 유도하는 분포변환의
+고정점이다. Stationary equilibrium에서는 가계가 매기 자산을 조정하지만
+횡단면 전체의 분포는 변하지 않는다.
+
+### 13.7.4 존재·유일성·ergodicity의 분리
+
+:::: {.statement .theorem}
+::: statement-head
+명제 13.4 · Invariant distribution의 존재
+:::
+
+상태공간이 compact metric space이고 $P_g$가 Feller kernel이면 적어도
+하나의 invariant probability measure가 존재한다.
+::::
+
+이 명제는 유일성이나 임의의 초기분포로부터의 수렴을 보장하지 않는다.
+유일성과 전역수렴에는 $\psi$-irreducibility, aperiodicity, mixing, 또는
+비유계 상태공간에서 Foster--Lyapunov drift와 minorization 같은
+추가조건이 필요하다. 따라서 invariant distribution의 존재, 유일성,
+ergodicity는 별개의 주장이다.
+
+### 13.7.5 정상분포와 aggregate state
+
+Aggregate shock이 없는 stationary equilibrium에서는 $\mu^*$가
+시간불변이다. Aggregate shock이나 transition dynamics를 도입하면
+
+::: math-display
+$$
+  \mu_t
+  \quad\text{itself becomes a time-varying aggregate state.}
+  \tag{13.37}
+$$
+:::
+
+따라서 "분포가 aggregate state다"라는 문장은 정상상태 그 자체보다 비정상
+전이 또는 aggregate uncertainty가 있는 확장환경에서 더 직접적인 의미를
+가진다.
+
+### 13.7.6 집계량
+
+::: math-display
+$$
+  A(\mu)
+  =
+  \int a\,d\mu(a,z),
+  \qquad
+  C(\mu)
+  =
+  \int c(a,z)\,d\mu(a,z),
+  \qquad
+  L(\mu)
+  =
+  \int z\,d\mu(a,z).
+  \tag{13.38}
+$$
+:::
+
+동일한 평균자산을 가진 두 분포도 차입제약 비율, 소비위험, 한계효용의
+분포와 후생이 다를 수 있다. 평균집계량만으로 불완전시장 경제의 상태를
+요약할 수 없다.
+:::::::::::
+
+::::::::::: {#ch13-s08 .section}
+## [13.8]{.section-number}Huggett의 순수교환경제
+
+Huggett 경제에서는 생산이 없고 하나의 무위험채권만 거래된다. 이자율은
+개별가계의 precautionary asset demand와 채권의 순공급을 일치시키는
+가격이다.
+
+### 13.8.1 경제환경
+
+- 개별 endowment $e(z)$가 Markov process를 따른다.
+- 한 기간 무위험채권의 순수익률은 $r$이다.
+- 채권은 가계 사이의 private IOU이므로 aggregate net supply는 정확히
+  0이다.
+- 가격은 시간불변이며 aggregate uncertainty는 없다.
+
+양의 순공급의 outside asset이나 정부채권을 도입하려면 발행주체의
+예산제약과 상환재원을 추가해야 한다. 그것은 표준 pure-credit Huggett
+baseline과 별도의 확장이다.
+
+가계예산은
+
+::: math-display
+$$
+  c+a'
+  =
+  e(z)+(1+r)a,
+  \qquad
+  a'\ge\underline a.
+  \tag{13.39}
+$$
+:::
+
+### 13.8.2 정상경쟁균형
+
+::::: {.statement .theorem}
+::: statement-head
+정의 13.1 · Huggett stationary equilibrium
+:::
+
+정상경쟁균형은 $(r,g,\mu^*)$의 묶음으로서 다음을 만족한다.
+
+1.  주어진 $r$에서 $g$는 가계의 최적 자산정책이다.
+2.  $\mu^*$는 $g$와 $\Pi$가 유도하는 invariant distribution이다.
+3.  자산시장이 청산된다.
+
+::: math-display
+$$
+  \boxed{
+  \int a\,d\mu^*(a,z)=0.
+  }
+  \tag{13.40}
+$$
+:::
+:::::
+
+정상성과 적분가능성 아래
+
+::: math-display
+$$
+  \int g(a,z)\,d\mu^*(a,z)
+  =
+  \int a\,d\mu^*(a,z)
+  =
+  0.
+  \tag{13.41}
+$$
+:::
+
+### 13.8.3 Aggregate asset demand
+
+::: math-display
+$$
+  \mathcal A(r)
+  \equiv
+  \int g(a,z;r)\,d\mu^*(a,z;r).
+  \tag{13.42}
+$$
+:::
+
+균형이자율은
+
+::: math-display
+$$
+  \boxed{
+  \mathcal A(r^*)=0.
+  }
+  \tag{13.43}
+$$
+:::
+
+를 만족한다. $r$가 상승하면 저축의 대체효과는 자산수요를 늘릴 수 있지만,
+소득효과와 차입자의 반응 때문에 $\mathcal A(r)$의 전역단조성은
+자동적이지 않다.
+
+### 13.8.4 이자율의 상한
+
+비유계 상단 자산공간을 가진 표준 Huggett 경제의 존재분석에서는
+허용이자율을 $1+r<\beta^{-1}$인 구간으로 제한하는 것이 일반적이다.
+비퇴화한 소득위험, 유한한 invariant first moment, 적절한 차입한도와
+regularity 아래 정상균형은
+
+::: math-display
+$$
+  r^*
+  <
+  \frac1\beta-1
+  \tag{13.44}
+$$
+:::
+
+을 만족한다. 우변은 deterministic Euler equation의 steady-state rate다.
+$1+r\ge\beta^{-1}$이면 충분히 부유한 비제약가계의 자산축적을 제한하는
+impatience가 사라져 유한한 stationary asset demand가 실패할 수 있다.
+따라서 식 (13.44)는 단순한 직관적 "precautionary premium" 공식이 아니라,
+표준 존재정리의 조건들과 함께 해석해야 한다.
+
+### 13.8.5 존재와 유일성의 경계
+
+균형의 존재는 흔히 $\mathcal A(r)$의 연속성, 허용이자율 구간 양끝에서의
+초과수요 부호, invariant distribution의 존재를 이용해 보인다. 그러나
+equilibrium uniqueness는 aggregate asset demand의 엄격단조성 없이는
+일반적으로 보장되지 않는다.
+:::::::::::
+
+::::::::::::: {#ch13-s09 .section}
+## [13.9]{.section-number}Aiyagari의 생산경제
+
+Aiyagari 경제는 Huggett의 자기보험 문제에 경쟁적 생산부문을 결합한다.
+가계의 총자산공급이 물적자본이 되고, 자본이 다시 임금과 이자율을
+결정한다.
+
+### 13.9.1 기업
+
+대표적 경쟁기업은 constant-returns production function $F(K,L)$을
+사용한다.
+
+::: math-display
+$$
+  Y=F(K,L),
+  \qquad
+  r+\delta=F_K(K,L),
+  \qquad
+  w=F_L(K,L).
+  \tag{13.45}
+$$
+:::
+
+$r$은 감가상각을 차감한 순수익률이다.
+
+### 13.9.2 가계
+
+::: math-display
+$$
+  c+a'
+  =
+  wz+(1+r)a,
+  \qquad
+  a'\ge\underline a.
+  \tag{13.46}
+$$
+:::
+
+이제 가격 $(r,w)$가 자본 $K$와 효율노동 $L$에 의해 내생적으로 결정된다.
+
+### 13.9.3 정상경쟁균형
+
+::::: {.statement .theorem}
+::: statement-head
+정의 13.2 · Aiyagari stationary equilibrium
+:::
+
+정상경쟁균형은 $(K,L,r,w,g,\mu^*)$의 묶음으로서 다음을 만족한다.
+
+1.  주어진 $(r,w)$에서 $g$는 가계의 최적정책이다.
+2.  기업의 일차조건 식 (13.45)가 성립한다.
+3.  $\mu^*$는 가계정책과 소득과정의 invariant distribution이다.
+4.  자본시장과 노동시장이 청산된다.
+
+::: math-display
+$$
+  K
+  =
+  \int a\,d\mu^*(a,z),
+  \qquad
+  L
+  =
+  \int z\,d\mu^*(a,z).
+  \tag{13.47}
+$$
+:::
+:::::
+
+### 13.9.4 일반균형 고정점
+
+::: math-display
+$$
+  K
+  \longrightarrow
+  \left(r(K),w(K)\right)
+  \longrightarrow
+  g(\cdot;K)
+  \longrightarrow
+  \mu^*(K)
+  \longrightarrow
+  K^s(K)
+  \equiv
+  \int a\,d\mu^*(a,z;K).
+  \tag{13.48}
+$$
+:::
+
+균형은
+
+::: math-display
+$$
+  \boxed{
+  K^s(K^*)=K^*.
+  }
+  \tag{13.49}
+$$
+:::
+
+를 만족하는 fixed point다.
+
+### 13.9.5 Representative-agent benchmark와 비교
+
+완전보험 대표가계의 정상상태에서는 통상
+
+::: math-display
+$$
+  1
+  =
+  \beta\left(1+F_K(K,L)-\delta\right)
+  \tag{13.50}
+$$
+:::
+
+가 성립한다. 불완전보험에서는 precautionary saving이 총자산공급을 늘리고
+균형이자율을 낮추는 경향이 있다. 그러나
+
+::: math-display
+$$
+  K_{\mathrm{incomplete}}
+  >
+  K_{\mathrm{complete}}
+  \tag{13.51}
+$$
+:::
+
+를 가정 없는 보편명제로 둘 수는 없다. 차입한도, 소득위험, 노동공급,
+세금, 자산공급과 일반균형 가격반응에 따라 자본축적 효과가 달라질 수
+있다.
+
+### 13.9.6 분포가 가격을 결정하는 경로
+
+::: math-display
+$$
+  \mu^*
+  \longrightarrow
+  K
+  \longrightarrow
+  (r,w)
+  \longrightarrow
+  g
+  \longrightarrow
+  \mu^*.
+  \tag{13.52}
+$$
+:::
+
+전체 분포는 가계의 aggregate saving을 통해 균형자본 $K=\int a\,d\mu^*$를
+결정한다. 그러나 주어진 $(K,L)$ 아래 경쟁기업의 요소가격은 식 (13.45)에
+의해 $K$와 $L$에만 직접 의존하며, 분포의 고차모멘트에 직접 의존하지
+않는다. Baseline에서 $z$의 stationary marginal이 $\pi$이면
+$L=\sum_z\pi(z)z$는 자산분포와 독립적으로 고정된다.
+:::::::::::::
+
+::::::::::: {#ch13-s10 .section}
+## [13.10]{.section-number}부와 소비의 분포, 불평등, 후생
+
+불완전시장 모형의 목적은 평균자본만 계산하는 데 있지 않다. 보험의
+불완전성은 소비위험, 차입제약의 빈도, 부의 집중도와 정책의 분배효과를
+함께 결정한다.
+
+### 13.10.1 주변분포와 분포통계
+
+::: math-display
+$$
+  \mu_a(A)
+  =
+  \mu(A\times\mathcal Z),
+  \qquad
+  \mu_c(C)
+  =
+  \mu\!\left(
+  \left\{(a,z):c(a,z)\in C\right\}
+  \right).
+  \tag{13.53}
+$$
+:::
+
+평균, 분산, quantile share, Gini coefficient, 자산하한에 놓인 질량
+
+::: math-display
+$$
+  m_{\mathrm{constrained}}
+  =
+  \mu^*\!\left(
+  \left\{(a,z):g(a,z)=\underline a\right\}
+  \right).
+  \tag{13.54}
+$$
+:::
+
+을 구분해 본다.
+
+### 13.10.2 소비보험의 측정
+
+실증적으로 개별소득 변화가 소비로 전달되는 정도를
+
+::: math-display
+$$
+  \Delta\log c_{it}
+  =
+  \phi\,
+  \Delta\log y_{it}
+  +
+  \varepsilon_{it}
+  \tag{13.55}
+$$
+:::
+
+같은 reduced-form pass-through coefficient로 요약할 수 있다. $\phi=0$이
+완전보험을 뜻한다는 해석은 충격의 영구성, 측정오차, 공동충격 통제와
+선호이질성을 명시한 뒤에만 가능하다.
+
+### 13.10.3 후생기준
+
+주어진 초기분포 $\mu_0$에서 ex ante welfare는
+
+::: math-display
+$$
+  W(\mu_0)
+  =
+  \int V(a,z)\,d\mu_0(a,z).
+  \tag{13.56}
+$$
+:::
+
+정책 $A$와 $B$의 consumption-equivalent variation $\lambda$는 정책 $B$의
+모든 소비를 비례조정해 정책 $A$의 후생과 같게 만드는 수로 정의할 수
+있다.
+
+::: math-display
+$$
+  \mathbb E
+  \sum_{t=0}^\infty
+  \beta^t
+  u\!\left((1+\lambda)c_t^B\right)
+  =
+  \mathbb E
+  \sum_{t=0}^\infty
+  \beta^t
+  u(c_t^A).
+  \tag{13.57}
+$$
+:::
+
+### 13.10.4 효율성의 경계
+
+:::: {.statement .warning}
+::: statement-head
+Constrained efficiency를 말하기 위한 조건
+:::
+
+불완전시장 경쟁균형이 일반적으로 Pareto efficient라고 주장할 수 없다.
+반대로 비효율적이라고 주장하려면 planner가 사용할 수 있는 정보, 자산,
+이전, 집행수단을 명시해야 한다. 경쟁균형보다 더 많은 상태별 이전을
+허용하는 planner와의 비교는 constrained-efficiency 검정이 아니다.
+::::
+
+### 13.10.5 정책실험
+
+::: table-wrap
+  정책            직접경로                        일반균형 경로
+  --------------- ------------------------------- -------------------------------------------------------------
+  차입한도 완화   제약가계의 현재소비·부채 증가   예방적 자산수요와 균형이자율 변화
+  실업보험·이전   저소득상태의 소비하락 완화      precautionary saving과 자본축적 변화
+  자본소득세      저축수익률 하락                 자본·임금·세수환급과 분포 변화
+  정부채권 공급   안전자산의 순공급 증가          정부예산제약·세금·이자율과 민간자본 crowding-out의 공동변화
+:::
+
+정책평가는 평균소비나 총자본뿐 아니라 가격, 보험, 분포, 후생의
+공동변화를 포함해야 한다.
+:::::::::::
+
+::::: {#ch13-part4 .part-divider}
+::: part-no
+PART IV
+:::
+
+::: part-title
+COMPUTATION, VALIDATION, AND EXTENSIONS
+:::
+:::::
+
+:::::::::::: {#ch13-s11 .section}
+## [13.11]{.section-number}수치해법과 균형계산
+
+불완전시장 모형은 정책함수, invariant distribution, 시장가격을 함께
+계산해야 한다. 알고리즘은 세 층위---가계문제, 분포, 시장청산---를 분리해
+구성하는 것이 안정적이다.
+
+### 13.11.1 소득과정의 이산화
+
+연속 AR(1) 생산성과정을 finite-state Markov chain으로 근사할 때는
+Tauchen 또는 Rouwenhorst 방법을 사용할 수 있다. Persistence가 높을 때
+Rouwenhorst가 조건부 분산과 자기상관을 더 안정적으로 보존하는 경우가
+많다. 이산화 후에는 최소한
+
+::: math-display
+$$
+  \mathbb E[z],
+  \qquad
+  \operatorname{Var}(z),
+  \qquad
+  \operatorname{Corr}(z_t,z_{t-1})
+  \tag{13.58}
+$$
+:::
+
+가 목표과정과 가까운지 확인한다.
+
+### 13.11.2 Value Function Iteration
+
+::: math-display
+$$
+  V_{n+1}=TV_n.
+  \tag{13.59}
+$$
+:::
+
+1.  자산격자와 생산성격자를 설정한다.
+2.  각 상태에서 feasible $a'$에 대해 Bellman RHS를 계산한다.
+3.  최댓값과 argmax를 저장한다.
+4.  $\|V_{n+1}-V_n\|_\infty$가 허용오차 아래가 될 때까지 반복한다.
+
+### 13.11.3 Policy iteration과 Howard improvement
+
+정책을 고정한 가치평가와 정책개선을 분리하면 VFI보다 빠르게 수렴할 수
+있다. 단, discrete grid에서의 정책평가 오차와 interpolation scheme을
+점검해야 한다.
+
+### 13.11.4 Endogenous Grid Method
+
+CRRA 효용과 연속자산을 사용하는 경우 Euler equation을 역으로 풀어
+endogenous cash-on-hand grid를 구성할 수 있다. 다음 기 자산격자 $a'$에
+대해
+
+::: math-display
+$$
+  c
+  =
+  (u')^{-1}
+  \left(
+  \beta(1+r)
+  \sum_{z'}
+  \Pi(z'|z)
+  u'\!\left(c'(a',z')\right)
+  \right),
+  \tag{13.60a}
+$$ $$
+  m=c+a'
+  \tag{13.60b}
+$$
+:::
+
+여기서 $c'(a',z')$는 다음 기 cash on hand $m'=wz'+(1+r)a'$에서의
+소비정책이다. 식 (13.60a)--(13.60b)를 계산한 뒤 endogenous $m$-grid에서
+정책을 보간한다. 차입제약이 binding되는 영역은 Euler equality를 사용하지
+않고 $a'=\underline a$, $c=m-\underline a$를 직접 적용해야 한다.
+
+### 13.11.5 정상분포 계산
+
+이산화된 상태공간에서 정책 $g$가 유도하는 전이행렬을 $P_g$라 하면
+row-vector convention에서
+
+::: math-display
+$$
+  \mu^*
+  =
+  \mu^*P_g,
+  \qquad
+  \mu^*\mathbf 1=1.
+  \tag{13.61}
+$$
+:::
+
+Forward iteration, 고유벡터 계산, sparse linear solver를 사용할 수 있다.
+Off-grid policy를 인접격자에 분할배정할 때 확률질량 보존을 확인해야
+한다.
+
+### 13.11.6 Huggett 균형 알고리즘
+
+::: math-display
+$$
+  r
+  \longrightarrow
+  g(\cdot;r)
+  \longrightarrow
+  \mu^*(r)
+  \longrightarrow
+  \mathcal A(r).
+  \tag{13.62}
+$$
+:::
+
+1.  허용구간 $r\in(r_{\min},1/\beta-1)$에서 후보이자율을 선택한다.
+2.  가계문제를 풀고 정책 $g(\cdot;r)$를 구한다.
+3.  정상분포 $\mu^*(r)$를 계산한다.
+4.  순자산수요 $\mathcal A(r)$를 계산한다.
+5.  부호변화와 연속성이 확인되면 bisection 또는 robust root finder로
+    갱신한다.
+
+### 13.11.7 Aiyagari 균형 알고리즘
+
+::: math-display
+$$
+  K
+  \longrightarrow
+  \bigl(r(K),w(K)\bigr)
+  \longrightarrow
+  g(\cdot;K)
+  \longrightarrow
+  \mu^*(K)
+  \longrightarrow
+  K^s(K)-K.
+  \tag{13.63}
+$$
+:::
+
+균형자본은 $K^s(K)=K$의 근이다. Cobb--Douglas
+$F(K,L)=K^\alpha L^{1-\alpha}$에서는 가격함수를 폐쇄형으로 계산할 수
+있다.
+
+### 13.11.8 Numerical diagnostics
+
+::: math-display
+$$
+  \text{Bellman residual}
+  =
+  \|V-TV\|_\infty,
+  \tag{13.64a}
+$$ $$
+  \mathcal E(a,z)
+  \equiv
+  1-
+  \frac{\beta(1+r)\mathbb E[u'(c')\mid z]}{u'(c)},
+  \tag{13.64b}
+$$ $$
+  \text{distribution residual}
+  =
+  \|\mu^*-\mu^*P_g\|_1,
+  \tag{13.64c}
+$$ $$
+  \text{Huggett clearing error}
+  =
+  \left|
+  \int a\,d\mu^*
+  \right|,
+  \tag{13.64d}
+$$ $$
+  \text{Aiyagari clearing error}
+  =
+  \left|
+  \int a\,d\mu^*-K
+  \right|.
+  \tag{13.64e}
+$$
+:::
+
+정확한 KKT 진단은 $\mathcal E(a,z)=0$ when $g(a,z)>\underline a$,
+$\mathcal E(a,z)\ge0$ when $g(a,z)=\underline a$, 그리고
+$\mathcal E(a,z)\,[g(a,z)-\underline a]=0$을 함께 확인하는 것이다.
+
+:::: {.statement .warning}
+::: statement-head
+필수 수치검증
+:::
+
+정상분포의 총질량, 음의 확률, 상단격자 질량, 정책함수의 feasibility,
+소비의 양성, 시장청산 오차를 동시에 확인해야 한다. Value-function
+convergence만으로 균형계산의 정확성이 보장되지 않는다.
+::::
+::::::::::::
+
+:::::::::::::::::: {#ch13-s12 .section}
+## [13.12]{.section-number}통합, 장의 경계, 확장방향
+
+이 장의 핵심은 개별가계의 자기보험 선택과 횡단면 분포, 균형가격을 하나의
+fixed-point system으로 결합하는 데 있다.
+
+### 13.12.1 전체 논리
+
+::: math-display
+$$
+  (r,w)
+  \longrightarrow
+  g
+  \longrightarrow
+  P_g
+  \longrightarrow
+  \mu^*
+  \longrightarrow
+  (A,L)
+  \longrightarrow
+  (r,w).
+  \tag{13.65}
+$$
+:::
+
+Huggett에서는 마지막 연결이 자산시장 청산을 통한 이자율 결정이고,
+Aiyagari에서는 기업의 한계생산성과 자본시장 청산을 통한 $(r,w)$
+결정이다.
+
+### 13.12.2 기존 장과의 연결
+
+::::::::::::::: logic-chain
+::::: chain-row
+::: left
+Chapter 09
+:::
+
+::: right
+개별 소비·저축과 위험 아래 Euler equation의 기초.
+:::
+:::::
+
+::::: chain-row
+::: left
+Chapter 11
+:::
+
+::: right
+완전시장, state prices, 완전보험의 benchmark.
+:::
+:::::
+
+::::: chain-row
+::: left
+Chapter 12
+:::
+
+::: right
+기업과 금융중개기관의 계약·담보·유동성 제약.
+:::
+:::::
+
+::::: chain-row
+::: left
+Chapter 13
+:::
+
+::: right
+불완전한 보험 아래 가계의 self-insurance와 내생적 부의 분포.
+:::
+:::::
+:::::::::::::::
+
+### 13.12.3 본 장에서 제외한 내용
+
+- Aggregate shocks와 transition dynamics
+- Lifecycle and demographic heterogeneity
+- Endogenous labor supply와 human capital
+- Default, bankruptcy, unsecured credit pricing
+- 여러 liquid·illiquid assets와 portfolio choice
+- Entrepreneurial risk와 firm heterogeneity
+- Nominal rigidity와 HANK monetary transmission
+
+### 13.12.4 자연스러운 확장
+
+::: math-display
+$$
+  \text{aggregate shocks}
+  +
+  \text{distribution as an aggregate state}
+  \longrightarrow
+  \text{Krusell--Smith}.
+  \tag{13.66a}
+$$ $$
+  \text{heterogeneous households}
+  +
+  \text{nominal rigidity}
+  \longrightarrow
+  \text{HANK}.
+  \tag{13.66b}
+$$
+:::
+
+Aggregate shock가 추가되면 가계의 예측법칙은 현재 aggregate state와
+분포에 의존한다. 이때 단일 정상분포를 계산하는 문제는 함수공간상의
+aggregate law of motion을 근사하는 문제로 확장된다.
+::::::::::::::::::
+
+:::::::::::::::::::: {#ch13-conclusion .section}
+## [결론]{.section-number}자기보험은 어떻게 분포와 가격을 만든다
+
+불완전시장에서는 자산이 단순한 기간간 이전수단이 아니라 보험의
+대체물이다. 동일한 idiosyncratic risk에 노출된 가계들의 저축결정이 모여
+부의 분포를 만들고, 그 분포가 다시 균형이자율과 자본축적을 결정한다.
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+incomplete insurance
+:::
+
+::: right
+상태별 소비이전이 충분하지 않아 개별소득 충격이 소비와 한계효용에
+남는다.
+:::
+:::::
+
+::::: chain-row
+::: left
+self-insurance
+:::
+
+::: right
+가계는 비상태의존적 자산을 축적해 미래 저소득상태의 소비하락을 완화한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+borrowing constraint
+:::
+
+::: right
+Euler equation을 inequality로 바꾸고 현재소비의 shadow value를 높인다.
+:::
+:::::
+
+::::: chain-row
+::: left
+distribution dynamics
+:::
+
+::: right
+정책함수와 소득전이가 횡단면 자산·소비분포의 운동법칙을 만든다.
+:::
+:::::
+
+::::: chain-row
+::: left
+general equilibrium
+:::
+
+::: right
+정상분포의 총자산이 자산시장과 자본시장을 통해 이자율·임금·총자본을
+결정한다.
+:::
+:::::
+::::::::::::::::::
+
+::: math-display
+$$
+  \boxed{
+  \text{household policy}
+  \to
+  \text{wealth distribution}
+  \to
+  \text{prices}
+  \to
+  \text{household policy}.
+  }
+$$
+:::
+::::::::::::::::::::
+
+::: {#ch13-check .section}
+## Learning Check
+
+1.  완전보험 조건 식 (13.1)과 하나의 무위험자산만 있는 자기보험 경제의
+    차이를 설명하라.
+2.  예산제약 식 (13.6)의 principal-unit asset을 Chapter 09의 payoff-unit
+    claim으로 변환하고, 그 타이밍에서 상수 최저소득 아래 natural debt
+    limit 식 (13.12)와 terminal term 식 (13.13a)를 도출하라.
+3.  외생적 차입한도, natural debt limit, No-Ponzi condition을 구분하라.
+4.  Bellman operator가 contraction이 되는 조건과 로그·CRRA 비유계
+    문제에서 필요한 추가주의를 설명하라.
+5.  Kuhn--Tucker 조건으로부터 Euler inequality 식 (13.23)을 도출하고
+    경제적 방향을 해석하라.
+6.  Risk aversion과 prudence를 구분하고 두 기간 additive-risk 모형에서
+    precautionary saving을 도출하라.
+7.  정책함수 $g$가 유도하는 Markov kernel과 분포의 운동법칙을 작성하라.
+8.  Invariant distribution의 존재·유일성·ergodicity가 서로 다른 명제인
+    이유를 설명하라.
+9.  표준 pure-credit Huggett stationary equilibrium의 세 구성요소를
+    쓰고, private IOU의 순공급이 0인 이유를 설명하라.
+10. Aiyagari equilibrium의 fixed-point mapping 식 (13.48)을 설명하라.
+11. 완전보험 대표가계와 Aiyagari 경제의 정상상태 이자율을 비교할 때
+    필요한 조건을 논하라.
+12. EGM에서 endogenous cash-on-hand grid가 어떻게 생성되는지 설명하고
+    차입제약 영역의 처리방식을 제시하라.
+13. Bellman residual, KKT/Euler residual, distribution residual,
+    Huggett와 Aiyagari의 시장청산오차가 서로 다른 계산오차를 진단하는
+    이유를 설명하라.
+:::
+
+:::::::::::::::::::::::::::::::::::::: {#ch13-glossary .section .glossary}
+## 핵심 용어
+
+::::::::::::::::::::::::::::::::::::: definition-grid
+:::: definition-row
+::: term
+incomplete markets
+:::
+
+거래 가능한 자산 payoff가 모든 date--state commodity를 span하지 못하는
+시장구조.
+::::
+
+:::: definition-row
+::: term
+self-insurance
+:::
+
+상태별 보험계약 대신 비상태의존적 자산을 축적하여 미래소득 충격의
+소비효과를 완화하는 행동.
+::::
+
+:::: definition-row
+::: term
+asset-unit convention
+:::
+
+자산을 현재 원금단위로 기록하는지 다음 기 payoff 단위로 기록하는지에
+관한 표기규약. 두 단위는 $b_{t+1}=Ra_{t+1}$로 연결되며 natural debt
+limit과 terminal term의 할인지수를 바꾼다.
+::::
+
+:::: definition-row
+::: term
+natural debt limit
+:::
+
+최악의 도달가능한 미래소득 경로에서도 비음의 소비와 상환가능성을 유지할
+수 있는 최대채무.
+::::
+
+:::: definition-row
+::: term
+Euler inequality
+:::
+
+차입제약의 Kuhn--Tucker multiplier 때문에 현재 한계효용이 할인된 기대
+미래 한계효용보다 크거나 같은 조건.
+::::
+
+:::: definition-row
+::: term
+prudence
+:::
+
+한계효용의 convexity와 예방적 저축반응을 나타내는 고차곡률. Absolute
+prudence는 $-u'''/u''$.
+::::
+
+:::: definition-row
+::: term
+precautionary saving
+:::
+
+미래소비 또는 소득위험에 대비해 위험이 없는 경우보다 더 많은 자산을
+보유하려는 저축동기.
+::::
+
+:::: definition-row
+::: term
+buffer-stock saving
+:::
+
+낮은 자산에서 강한 예방적 동기와 높은 자산에서의 impatience가 결합해
+완충자산을 유지하는 행동.
+::::
+
+:::: definition-row
+::: term
+policy function
+:::
+
+현재 개별상태 $(a,z)$를 최적 다음 기 자산 $a'=g(a,z)$에 대응시키는 함수.
+::::
+
+:::: definition-row
+::: term
+induced Markov kernel
+:::
+
+정책함수와 외생상태 전이확률이 함께 생성하는 개별상태의 조건부 전이법칙.
+::::
+
+:::: definition-row
+::: term
+invariant distribution
+:::
+
+정책함수가 유도하는 분포변환을 적용해도 변하지 않는 횡단면 확률분포.
+::::
+
+:::: definition-row
+::: term
+Huggett equilibrium
+:::
+
+순수교환경제에서 가계정책, invariant distribution, 채권시장 청산을
+동시에 만족시키는 정상균형.
+::::
+
+:::: definition-row
+::: term
+Aiyagari equilibrium
+:::
+
+생산경제에서 가계최적화, 기업최적화, 분포불변성, 자본·노동시장 청산을
+동시에 만족시키는 정상경쟁균형.
+::::
+
+:::: definition-row
+::: term
+Feller kernel
+:::
+
+연속 bounded function의 조건부기댓값을 다시 연속함수로 보내는 Markov
+transition kernel.
+::::
+
+:::: definition-row
+::: term
+ergodicity
+:::
+
+장기시간평균 또는 분포가 초기상태에 의존하지 않고 고유한 invariant
+distribution과 일치하는 성질.
+::::
+
+:::: definition-row
+::: term
+Endogenous Grid Method
+:::
+
+Euler equation을 역으로 사용해 현재 cash-on-hand grid를 내생적으로
+구성하는 소비·저축 문제의 수치해법.
+::::
+
+:::: definition-row
+::: term
+consumption-equivalent variation
+:::
+
+한 정책의 소비경로를 일정 비율로 조정해 다른 정책의 기대후생과 같게
+만드는 후생비교 단위.
+::::
+:::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::
+
+::: {#ch13-references .section}
+## 참조 문헌
+
+이 장은 Bewley형 자기보험 경제, Huggett의 순수교환 정상균형, Aiyagari의
+생산경제를 하나의 재귀적 구조로 연결한다. 존재·분포·수치해법의 경계는
+아래 문헌의 표준결과를 기준으로 정리했다.
+
+- Ljungqvist, Lars, and Thomas J. Sargent. *Recursive Macroeconomic
+  Theory*, 4th ed. MIT Press, 2018. Chapters 17--18.
+- Bewley, Truman F. "Stationary Monetary Equilibrium with a Continuum of
+  Independently Fluctuating Consumers." In *Contributions to
+  Mathematical Economics in Honor of Gérard Debreu*, 1986.
+- Huggett, Mark. "The Risk-Free Rate in Heterogeneous-Agent
+  Incomplete-Insurance Economies." *Journal of Economic Dynamics and
+  Control* 17, 1993.
+- Aiyagari, S. Rao. "Uninsured Idiosyncratic Risk and Aggregate Saving."
+  *Quarterly Journal of Economics* 109(3), 1994.
+- Deaton, Angus. "Saving and Liquidity Constraints." *Econometrica*
+  59(5), 1991.
+- Carroll, Christopher D. "Buffer-Stock Saving and the Life
+  Cycle/Permanent Income Hypothesis." *Quarterly Journal of Economics*
+  112(1), 1997.
+- Kimball, Miles S. "Precautionary Saving in the Small and in the
+  Large." *Econometrica* 58(1), 1990.
+- Stokey, Nancy L., Robert E. Lucas Jr., and Edward C. Prescott.
+  *Recursive Methods in Economic Dynamics*. Harvard University Press,
+  1989.
+- Carroll, Christopher D. "The Method of Endogenous Gridpoints for
+  Solving Dynamic Stochastic Optimization Problems." *Economics Letters*
+  91(3), 2006.
+- Krusell, Per, and Anthony A. Smith Jr. "Income and Wealth
+  Heterogeneity in the Macroeconomy." *Journal of Political Economy*
+  106(5), 1998.
+:::

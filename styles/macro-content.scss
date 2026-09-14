@@ -1,0 +1,22 @@
+/* Source-compatible presentation for imported macroeconomics chapter bodies. */
+/*-- scss:rules --*/
+.topic-opening { margin: 0 0 1.6rem; padding-left: 1rem; border-left: 3px solid #8aa8b2; color: #334753; font-size: 1.06rem; }
+.chapter-thesis, .thesis, .conclusion-block, .source-note { max-width: 47rem; margin: 1.7rem 0; padding: 1rem 1.15rem; border: 1px solid var(--notes-rule); background: #f7fafb; }
+.statement { max-width: 47rem; margin: 1.7rem 0; padding: .25rem 0 .25rem 1.1rem; border-left: 4px solid #315f82; }
+.statement.theorem { border-left-color: #7a4e20; }
+.statement.remark { border-left-color: #596b50; }
+.statement.warning { border-left-color: #94443a; }
+.statement-head, .kicker, .tag { color: #315f82; font-size: .82rem; font-weight: 700; letter-spacing: .04em; }
+.definition-row { max-width: 47rem; display: grid; grid-template-columns: minmax(9rem, .32fr) 1fr; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--notes-rule); }
+.definition-row .term { font-weight: 700; color: #315f82; }
+.definition-row p { margin: 0; }
+.display-table-wrap { max-width: 100%; overflow-x: auto; margin: 1.4rem 0; }
+.exercise-list { max-width: 47rem; padding-left: 1.45rem; }
+.exercise-list li + li { margin-top: .7rem; }
+.logic-chain, .comparison-grid, .details-grid, .formula-pair, .macro-grid { max-width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin: 1.4rem 0; }
+.chain-row, .logic-chain > div, .comparison-grid > div, .details-grid > div, .formula-pair > div, .macro-grid > div { padding: .9rem; border: 1px solid var(--notes-rule); background: #fff; }
+.math-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; margin: 1.2rem 0; padding: .3rem; }
+.section-number { color: #176b68; font-size: .78em; font-weight: 750; margin-right: .35em; }
+@media (max-width: 700px) {
+  .definition-row, .logic-chain, .comparison-grid, .details-grid, .formula-pair, .macro-grid { grid-template-columns: 1fr; }
+}

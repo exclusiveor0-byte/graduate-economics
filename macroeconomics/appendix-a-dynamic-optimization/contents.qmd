@@ -1,0 +1,1907 @@
+---
+title: >-
+  동태최적화와 재귀적 방법
+description: >-
+  Dynamic Optimization and Recursive Methods
+---
+
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::: {#appA-opening .section}
+동태최적화는 현재의 선택이 미래의 상태와 선택가능집합을 바꾸는 문제를
+다룬다. 핵심은 단순히 시점별 일계조건을 구하는 것이 아니라, 상태가
+과거의 관련 정보를 충분히 요약하는지, 후보경로가 무한기간 제약을
+만족하는지, 그리고 국소적 필요조건이 전역 최적성을 보장하는지를 함께
+확인하는 데 있다.
+
+::: thesis
+중심 원칙
+
+Euler equation, costate equation, Bellman equation은 서로 밀접하지만
+무조건적으로 동치이지 않다. 이들의 대응에는 충분한 상태표현, 적절한
+미분가능성, interiority 또는 KKT regularity, 경계조건, 그리고
+verification이 필요하다.
+:::
+
+::: math-display
+$$\boxed{\text{problem formulation}\to\text{necessary conditions}\to\text{boundary conditions}\to\text{sufficiency}\to\text{recursive representation}\to\text{computation and verification}.}\tag{A.1}$$
+:::
+:::::
+
+::: part-divider
+PART I Problem Formulation and Static Foundations
+:::
+
+::::::::::: {#appA-a01 .section}
+## [A.1]{.section-number}동태최적화 문제의 구성
+
+동태문제의 정확성은 상태와 통제의 선택, 정보시점, 전이법칙,
+허용가능집합을 처음부터 일관되게 정의하는 데서 시작한다.
+
+### A.1.1 기준 확률적 문제
+
+::: math-display
+$$\sup_{\{u_t\}_{t\ge0}}E_0\sum_{t=0}^{\infty}\beta^t r(x_t,u_t,z_t)\tag{A.2}$$
+:::
+
+subject to
+
+::: math-display
+$$x_{t+1}=g(x_t,u_t,z_t,\varepsilon_{t+1}),\qquad u_t\in\Gamma(x_t,z_t),\qquad u_t\ \text{is }\mathcal F_t\text{-measurable}.\tag{A.3}$$
+:::
+
+$x_t$는 내생상태, $z_t$는 외생상태, $u_t$는 통제, $\Gamma$는 상태별
+feasible correspondence다. 충격 $\varepsilon_{t+1}$은 $t$기 선택 뒤에
+실현되는 innovation으로 두었다. 다른 timing을 쓰면 조건부기대의 위치와
+정책함수의 정의도 함께 바뀌어야 한다.
+
+### A.1.2 state의 충분성
+
+::::: {.statement .theorem}
+::: statement-head
+정의 · 충분한 상태
+:::
+
+현재 상태 $s_t$가 충분하다는 것은, 허용 가능한 현재 행동이 주어졌을 때
+미래의 payoff와 feasible set의 조건부분포가 과거 전체가 아니라 $s_t$에만
+의존한다는 뜻이다.
+
+::: math-display
+$$P(s_{t+1},r_t\mid s^t,u^t)=P(s_{t+1},r_t\mid s_t,u_t).\tag{A.4}$$
+:::
+:::::
+
+상태는 물리적 stock에 한정되지 않는다. 자본·부채 외에도 persistent
+shock, lagged control, belief, promised utility, 정부의 과거 약속과
+연결된 multiplier, 전체 자산분포가 상태가 될 수 있다. 이 부록에서는
+이러한 확장을 소개하되 recursive-contract와 distribution-valued state의
+완전한 계산은 다루지 않는다.
+
+### A.1.3 변수분류
+
+::: display-table-wrap
+  객체                역할                                                             대표 예                               주의
+  ------------------- ---------------------------------------------------------------- ------------------------------------- ----------------------------------------------------
+  Endogenous state    과거 선택에 의해 현재값이 고정되고 미래 feasible set을 바꾼다.   설치된 자본, 자산, 부채.              시점 convention을 명시한다.
+  Exogenous state     외생 전이법칙을 따르며 의사결정 시점에 주어진다.                 생산성, 소득상태, 정책 shock state.   당기 shock 관측 전·후를 구분한다.
+  Control             현재의 feasible choice다.                                        소비, 투자, 노동, 다음 기 자산.       control bound와 corner를 확인한다.
+  Static variable     독립적 상태전이 없이 당기 조건으로 복원된다.                     정적 노동공급, 당기 가격.             control과 algebraic variable을 혼동하지 않는다.
+  Information state   미래 분포에 관한 필요한 정보를 요약한다.                         posterior belief, filter estimate.    물리적 상태와 구분하되 함께 state vector에 넣는다.
+:::
+
+:::: {.statement .warning}
+::: statement-head
+최소 state와 충분한 state
+:::
+
+상태벡터가 최소차원일 필요는 없다. 중복 state는 계산비용을 높이지만 해를
+반드시 바꾸지는 않는다. 반면 필요한 state를 누락하면 Bellman equation과
+Markov policy 자체가 잘못된다.
+::::
+:::::::::::
+
+::::::::::: {#appA-a02 .section}
+## [A.2]{.section-number}Feasibility, admissibility, 그리고 해의 개념
+
+제약식을 시점별로 만족하는 경로와 최적화문제에서 허용되는 경로는
+동일하지 않을 수 있다. 무한기간 문제에서는 적응성, 적분가능성,
+solvency와 tail behavior가 추가된다.
+
+### A.2.1 세 단계의 구분
+
+::: math-display
+$$\boxed{\text{feasible}\not\Rightarrow\text{admissible}\not\Rightarrow\text{optimal}.}\tag{A.5}$$
+:::
+
+::::::: details-grid
+::: {}
+[FEASIBLE]{.tag}
+
+### 제약충족
+
+초기조건, 전이법칙, 자원제약, 비음성 및 기술적 제약을 모든 시점에서
+만족한다.
+:::
+
+::: {}
+[ADMISSIBLE]{.tag}
+
+### 허용가능성
+
+feasibility에 더해 measurability, 목적함수의 정의 가능성, solvency,
+적분가능성 등 문제별 tail 조건을 만족한다.
+:::
+
+::: {}
+[LOCAL OPTIMUM]{.tag}
+
+### 국소 최적
+
+정해진 topology에서 충분히 가까운 admissible 경로보다 목적값이 작지
+않다.
+:::
+
+::: {}
+[GLOBAL OPTIMUM]{.tag}
+
+### 전역 최적
+
+모든 admissible 경로와 비교하여 목적값이 최대다.
+:::
+:::::::
+
+### A.2.2 최적성 기준
+
+할인합이 유한하게 정의되는 경우에는 discounted-sum criterion을 사용한다.
+$\beta=1$이거나 효용합이 개별적으로 발산하는 경우에는 장기 부분합의
+차이를 비교하는 overtaking 또는 weak-overtaking criterion이 필요할 수
+있다. 이 기준들은 서로 다른 문제를 정의하므로 임의로 교환할 수 없다.
+
+### A.2.3 존재와 유일성
+
+supremum이 유한하더라도 이를 달성하는 경로가 존재하지 않을 수 있다.
+최적해 존재에는 보통 feasible set의 폐쇄성·compactness 또는 coercivity,
+목적함수의 upper semicontinuity, 적절한 tail control이 필요하다.
+유일성에는 추가적인 strict concavity가 흔히 사용된다.
+
+:::: {.statement .remark}
+::: statement-head
+Stationary policy와 stationary distribution
+:::
+
+시간불변 정책 $u_t=\pi(x_t)$이 존재한다는 사실과 그 정책 아래 상태과정이
+stationary distribution을 갖는다는 사실은 별개다. 후자는 전이과정의
+recurrence와 ergodicity 조건을 추가로 요구한다.
+::::
+:::::::::::
+
+:::::::::::: {#appA-a03 .section}
+## [A.3]{.section-number}정적 제약최적화, KKT, 그리고 envelope theorem
+
+동태적 일계조건과 Bellman maximization은 매 시점의 제약최적화에
+기반한다. 따라서 부호 convention, constraint qualification, 필요조건과
+충분조건을 먼저 고정한다.
+
+### A.3.1 부호 convention
+
+::: math-display
+$$\max_z f(z;\theta)\quad\text{subject to}\quad h(z;\theta)=0,\qquad g(z;\theta)\ge0.\tag{A.6}$$
+:::
+
+::: math-display
+$$\mathcal L(z,\lambda,\mu;\theta)=f(z;\theta)+\lambda'h(z;\theta)+\mu'g(z;\theta),\qquad\mu\ge0.\tag{A.7}$$
+:::
+
+### A.3.2 KKT 조건
+
+::: math-display
+$$\nabla_z\mathcal L=0,\qquad h(z;\theta)=0,\qquad g(z;\theta)\ge0,\qquad\mu\ge0,\qquad\mu_i g_i(z;\theta)=0.\tag{A.8}$$
+:::
+
+KKT multiplier의 존재를 보장하려면 적절한 constraint qualification이
+필요하다. LICQ와 MFCQ는 널리 쓰이는 충분조건이지만 그 자체가 필요조건은
+아니다. 어떤 constraint qualification도 성립하지 않으면 최적점에서도
+multiplier가 존재하지 않거나 정상적인 KKT 표현이 실패할 수 있다.
+
+### A.3.3 전역 충분조건
+
+:::: {.statement .theorem}
+::: statement-head
+Concave-program sufficiency
+:::
+
+목적함수 $f$가 concave, equality constraints가 affine, 각 $g_i$가
+concave이면 feasible set은 convex다. 이때 KKT 조건을 만족하는 feasible
+point는 전역 최적이다. 목적함수가 feasible set에서 strictly concave이면
+최적 선택은 유일하다.
+::::
+
+일반 비선형문제에서 KKT는 국소 필요조건일 뿐이다. second-order
+condition은 active constraints의 tangent space 위에서 Lagrangian
+Hessian의 부호를 검사한다.
+
+### A.3.4 Envelope theorem
+
+가치함수를
+
+::: math-display
+$$W(\theta)=\max_z f(z;\theta)\quad\text{subject to}\quad h(z;\theta)=0,\quad g(z;\theta)\ge0\tag{A.9}$$
+:::
+
+로 정의하자. 유일한 regular optimum과 필요한 미분가능성이 성립하면
+
+::: math-display
+$$W_\theta(\theta)=f_\theta+\lambda'h_\theta+\mu'g_\theta,\tag{A.10}$$
+:::
+
+이며 우변은 최적점에서 평가한다. 선택변수의 간접효과가 사라지는 이유는
+stationarity와 complementary slackness가 이를 상쇄하기 때문이다.
+
+:::: {.statement .warning}
+::: statement-head
+비유일 최적점과 kink
+:::
+
+optimizer가 여러 개이면 가치함수는 미분불가능할 수 있다. 이 경우 Danskin
+정리에 따른 방향미분 또는 subgradient를 사용해야 하며, 하나의
+optimizer에서 계산한 미분값을 전체 gradient로 단정할 수 없다.
+::::
+::::::::::::
+
+::: part-divider
+PART II Discrete-Time Sequential Methods
+:::
+
+::::::::: {#appA-a04 .section}
+## [A.4]{.section-number}유한기간 sequence problem과 경계조건
+
+유한기간 문제는 multiplier의 시점과 terminal condition을 가장 투명하게
+보여 준다. 무한기간 조건은 이 구조를 이해한 뒤 별도로 다루어야 한다.
+
+### A.4.1 문제와 Lagrangian
+
+::: math-display
+$$\max_{\{u_t\}_{t=0}^{T}}\left\{\sum_{t=0}^{T}\beta^t r(x_t,u_t)+\beta^{T+1}\Phi(x_{T+1})\right\}\tag{A.11}$$
+:::
+
+subject to $x_{t+1}=g(x_t,u_t)$ and given $x_0$. $t$기 transition에
+present-value multiplier $\xi_{t+1}$를 붙이면
+
+::: math-display
+$$\mathcal L=\sum_{t=0}^{T}\beta^t r(x_t,u_t)+\beta^{T+1}\Phi(x_{T+1})+\sum_{t=0}^{T}\xi_{t+1}'[g(x_t,u_t)-x_{t+1}].\tag{A.12}$$
+:::
+
+### A.4.2 일계조건
+
+::: math-display
+$$\beta^t r_u(x_t,u_t)+g_u(x_t,u_t)'\xi_{t+1}=0,\qquad t=0,\ldots,T,\tag{A.13}$$
+:::
+
+::: math-display
+$$\xi_t=\beta^t r_x(x_t,u_t)+g_x(x_t,u_t)'\xi_{t+1},\qquad t=1,\ldots,T,\tag{A.14}$$
+:::
+
+::: math-display
+$$\xi_{T+1}=\beta^{T+1}\Phi_x(x_{T+1}).\tag{A.15}$$
+:::
+
+(A.15)는 free terminal state와 terminal payoff가 있는 경우의 조건이다.
+terminal state가 고정되어 있으면 $x_{T+1}$에 대한 variation이 허용되지
+않으므로 이 조건을 부과하지 않는다.
+
+### A.4.3 경계조건의 종류
+
+::: display-table-wrap
+  Terminal specification                   결과
+  ---------------------------------------- ----------------------------------------------------------------------------------
+  Free $x_{T+1}$, terminal payoff $\Phi$   $\xi_{T+1}=\beta^{T+1}\Phi_x(x_{T+1})$.
+  Free $x_{T+1}$, $\Phi\equiv0$            $\xi_{T+1}=0$.
+  Fixed $x_{T+1}=\bar x_T$                 terminal state constraint의 multiplier가 생기며 $\xi_{T+1}=0$을 요구하지 않는다.
+  Inequality terminal constraint           terminal complementary slackness가 추가된다.
+:::
+:::::::::
+
+:::::::::::::::::::::: {#appA-a05 .section}
+## [A.5]{.section-number}Present-value와 current-value multiplier
+
+할인요인이 multiplier에 포함되는가를 명시하지 않으면 Euler equation과
+costate equation에서 $\beta$가 누락되거나 시점이 한 기 이동한다.
+
+### A.5.1 변환
+
+current-value costate를
+
+::: math-display
+$$p_t\equiv\beta^{-t}\xi_t\tag{A.16}$$
+:::
+
+로 정의하면 (A.13)--(A.15)는
+
+::: math-display
+$$0=r_u(x_t,u_t)+\beta g_u(x_t,u_t)'p_{t+1},\tag{A.17}$$
+:::
+
+::: math-display
+$$p_t=r_x(x_t,u_t)+\beta g_x(x_t,u_t)'p_{t+1},\tag{A.18}$$
+:::
+
+::: math-display
+$$p_{T+1}=\Phi_x(x_{T+1})\tag{A.19}$$
+:::
+
+로 바뀐다. $p_t$는 $t$기 state를 한 단위 늘릴 때의 $t$기 가치단위 shadow
+value다.
+
+### A.5.2 시점 해석
+
+::::::::::::::: logic-chain
+::::: chain-row
+::: left
+$\xi_{t+1}$
+:::
+
+::: right
+$t$기에 선택한 transition이 만드는 $t+1$기 state의 present-value shadow
+value.
+:::
+:::::
+
+::::: chain-row
+::: left
+$p_{t+1}$
+:::
+
+::: right
+동일한 다음 기 state의 $t+1$기 가치단위 shadow value.
+:::
+:::::
+
+::::: chain-row
+::: left
+$\beta p_{t+1}$
+:::
+
+::: right
+다음 기 shadow value를 $t$기 가치단위로 할인한 값.
+:::
+:::::
+
+::::: chain-row
+::: left
+$p_t$
+:::
+
+::: right
+현재 state의 직접 payoff 효과와 미래상태를 통한 간접효과의 합.
+:::
+:::::
+:::::::::::::::
+
+:::: {.statement .warning}
+::: statement-head
+Convention 의존성
+:::
+
+일부 문헌은 $t$기 transition에 $p_t$를 붙이거나 제약식을
+$x_{t+1}-g=0$으로 쓴다. 식의 부호와 index는 달라질 수 있지만 경제적
+내용은 동일해야 한다. 한 문서 안에서는 하나의 convention을 끝까지
+유지해야 한다.
+::::
+::::::::::::::::::::::
+
+::::::::: {#appA-a06 .section}
+## [A.6]{.section-number}Costate system, Euler equation, 그리고 동태 KKT
+
+동태적 canonical system은 state law, control optimality, costate
+recursion으로 이루어진다. Euler equation은 이 시스템에서 costate를
+제거한 축약식이다.
+
+### A.6.1 Deterministic canonical system
+
+::: math-display
+$$\boxed{\begin{aligned}x_{t+1}&=g(x_t,u_t),\\0&=r_u(x_t,u_t)+\beta g_u(x_t,u_t)'p_{t+1},\\p_t&=r_x(x_t,u_t)+\beta g_x(x_t,u_t)'p_{t+1}.\end{aligned}}\tag{A.20}$$
+:::
+
+### A.6.2 Stochastic conditional system
+
+다음 기 충격이 $t$기에 알려지지 않는 경우, 미분과 기대의 교환이
+정당화되는 regularity 아래에서
+
+::: math-display
+$$0=r_u(x_t,u_t,z_t)+\beta E_t[g_u(x_t,u_t,z_t,\varepsilon_{t+1})'p_{t+1}],\tag{A.21}$$
+:::
+
+::: math-display
+$$p_t=r_x(x_t,u_t,z_t)+\beta E_t[g_x(x_t,u_t,z_t,\varepsilon_{t+1})'p_{t+1}].\tag{A.22}$$
+:::
+
+### A.6.3 Euler equation의 범위
+
+:::: {.statement .warning}
+::: statement-head
+Euler equation은 완전한 해조건이 아니다
+:::
+
+costate를 제거한 Euler equation은 일반적으로 interior optimum의
+필요조건이다. feasibility, initial condition, complementary slackness,
+terminal condition 또는 TVC, 그리고 전역 최적성을 별도로 확인해야 한다.
+::::
+
+### A.6.4 Inequality constraints
+
+예를 들어 다음 기 자산에 하한이 있으면
+
+::: math-display
+$$a_{t+1}\ge\underline a,\qquad\mu_t\ge0,\qquad\mu_t(a_{t+1}-\underline a)=0.\tag{A.23}$$
+:::
+
+Euler equality는 일반적으로 inequality로 바뀐다. 비가역투자, 용량제약,
+소비 비음성, state constraint에서도 같은 원칙이 적용된다.
+:::::::::
+
+::::::::::::::::::::::: {#appA-a07 .section}
+## [A.7]{.section-number}무한기간 admissibility와 intertemporal solvency
+
+무한기간 일계조건은 유한기간 조건에 단순히 $T=\infty$를 대입해서 얻을 수
+없다. 목적함수와 허용경로의 tail behavior를 먼저 정의해야 한다.
+
+### A.7.1 점검해야 할 항목
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+목적함수
+:::
+
+::: right
+할인효용합이 유한하거나 well-defined extended real value를 갖는가.
+:::
+:::::
+
+::::: chain-row
+::: left
+적응성
+:::
+
+::: right
+정책이 사용 가능한 정보에 대해 measurable한가.
+:::
+:::::
+
+::::: chain-row
+::: left
+시점별 feasibility
+:::
+
+::: right
+모든 자원·기술·비음성 제약을 만족하는가.
+:::
+:::::
+
+::::: chain-row
+::: left
+Solvency
+:::
+
+::: right
+부채를 영구적으로 rollover하여 현재 자원을 무제한 조달하는 경로를
+배제하는가.
+:::
+:::::
+
+::::: chain-row
+::: left
+최적해 존재
+:::
+
+::: right
+supremum이 실제 admissible 경로에 의해 달성되는가.
+:::
+:::::
+::::::::::::::::::
+
+### A.7.2 No-Ponzi restriction
+
+시점 $0$에서 시점 $t$ 재화 한 단위의 가격을
+
+::: math-display
+$$Q_t\equiv\prod_{s=0}^{t-1}R_s^{-1},\qquad Q_0=1\tag{A.24}$$
+:::
+
+로 두자. 자산 $a_t$가 양수이면 순자산이라는 convention에서 대표적인
+No-Ponzi restriction은
+
+::: math-display
+$$\liminf_{T\to\infty}Q_{T+1}a_{T+1}\ge0.\tag{A.25}$$
+:::
+
+이다. 이는 특정 자산구조의 한 표현이며, 위험자산·state-contingent
+claims·불확실한 금리에서는 적절한 stochastic discount factor와 statewise
+solvency 조건으로 바뀐다.
+
+### A.7.3 Natural borrowing limit
+
+constant gross return $R>1$, 소비 비음성, 모든 시점의 소득 하한
+$y_t\ge\underline y\ge0$, 예산식
+
+::: math-display
+$$c_t+\frac{a_{t+1}}{R}=a_t+y_t\tag{A.26}$$
+:::
+
+아래에서 자연차입한도는 최저소득의 현재가치만으로 상환 가능한
+최대부채다.
+
+::: math-display
+$$\underline a^{\,N}=-\sum_{j=0}^{\infty}\frac{\underline y}{R^j}=-\frac{R}{R-1}\underline y.\tag{A.27}$$
+:::
+
+실제 소득과정이 Markov이거나 state-dependent lower support를 가지면
+natural limit도 현재상태의 함수가 된다. 임의로 정한 ad hoc limit와
+구분해야 한다.
+:::::::::::::::::::::::
+
+::::::::: {#appA-a08 .section}
+## [A.8]{.section-number}Transversality condition과 최적성 검증
+
+TVC는 Euler equation에 의해 규정되지 않는 장기 경계행동을 제한한다.
+그러나 하나의 등식이 모든 무한기간 문제에 적용되는 것은 아니다.
+
+### A.8.1 세 조건의 구분
+
+::: math-display
+$$\boxed{\text{feasibility}\neq\text{No-Ponzi condition}\neq\text{transversality condition}.}\tag{A.28}$$
+:::
+
+feasibility와 No-Ponzi restriction은 admissible set을 정의하는 제약이다.
+TVC는 후보 최적경로의 terminal shadow-value behavior에 관한 조건이다.
+특정 concave 모형에서는 서로 함의할 수 있지만 일반적인 동치가 아니다.
+
+### A.8.2 대표적인 benchmark TVC
+
+비음성 state와 interior concave problem에서 자주 쓰이는 equality형
+조건은
+
+::: math-display
+$$\lim_{T\to\infty}\beta^{T+1}p_{T+1}'x_{T+1}=0.\tag{A.29}$$
+:::
+
+이다. 이는 사용되지 않은 terminal state의 할인된 shadow value가 양수로
+남지 않는다는 뜻이다. 다만 벡터 state에서는 각 성분의 부호가 통제되지
+않으면 내적의 상쇄 때문에 이 등식만으로 충분한 경계정보를 주지 못할 수
+있다. 또한 state가 음수가 될 수 있거나 terminal disposal이 불가능하거나
+최적성 기준이 overtaking인 경우에는 다른 형태가 필요하다.
+
+### A.8.3 Concavity-based sufficiency
+
+:::::: {.statement .theorem}
+::: statement-head
+이산시간 충분조건의 한 형태
+:::
+
+후보경로 $(x_t^*,u_t^*)$가 feasible하고, current-value Hamiltonian
+
+::: math-display
+$$H_t(x,u;p_{t+1}^*)\equiv r(x,u)+\beta p_{t+1}^{*'}g(x,u)\tag{A.30}$$
+:::
+
+이 $(x,u)$에 대해 concave이고 feasible graph가 convex이며, 후보가 각
+시점에서 충분한 KKT 조건과 costate equation을 만족한다고 하자. 또한 모든
+admissible alternative $x_t$에 대해
+
+::: math-display
+$$\liminf_{T\to\infty}\beta^{T+1}p_{T+1}^{*'}(x_{T+1}-x_{T+1}^*)\ge0\tag{A.31}$$
+:::
+
+이면 후보경로는 전역 최적이다.
+::::::
+
+(A.31)은 비교경로를 포함하는 충분 transversality inequality다. 단순한
+(A.29)는 추가적인 비음성·boundedness 조건 아래 이를 확인하는 편리한
+방법일 수 있다.
+
+### A.8.4 비볼록 문제
+
+fixed cost, 비볼록 조정비용, 여러 정상상태, 불연속 통제가 있으면
+Euler--TVC 조합만으로 전역 최적성을 보장할 수 없다. 가능한 regime의
+가치비교, Bellman verification 또는 전역 수치해법이 필요하다.
+:::::::::
+
+::::::::::: {#appA-a09 .section}
+## [A.9]{.section-number}이산시간 소비--저축 문제: 순차적 방법과 재귀적 방법
+
+차입제약이 있는 소비--저축 문제는 Euler equality, Euler inequality,
+natural borrowing limit, Bellman envelope가 한 모형 안에서 어떻게
+연결되는지 보여 준다.
+
+### A.9.1 환경
+
+::: math-display
+$$\max_{\{c_t,a_{t+1}\}}E_0\sum_{t=0}^{\infty}\beta^t u(c_t)\tag{A.32}$$
+:::
+
+subject to
+
+::: math-display
+$$c_t+\frac{a_{t+1}}{R}=a_t+y_t,\qquad c_t\ge0,\qquad a_{t+1}\ge\underline a.\tag{A.33}$$
+:::
+
+여기서 $R>0$은 $t$기에 알려진 constant gross return이고 $y_t$는 Markov
+income state다.
+
+### A.9.2 Bellman equation
+
+::: math-display
+$$V(a,y)=\max_{a'\ge\underline a}\left\{u\!\left(a+y-\frac{a'}{R}\right)+\beta E[V(a',y')\mid y]\right\}.\tag{A.34}$$
+:::
+
+### A.9.3 KKT와 Euler inequality
+
+현재소비가 양수여서 $c_t\ge0$ 제약이 비구속적이라고 하고, 자산 하한제약
+multiplier를 $\mu_t\ge0$로 두면
+
+::: math-display
+$$-\frac{u'(c_t)}{R}+\beta E_t[V_a(a_{t+1},y_{t+1})]+\mu_t=0,\tag{A.35}$$
+:::
+
+::: math-display
+$$\mu_t\ge0,\qquad a_{t+1}-\underline a\ge0,\qquad\mu_t(a_{t+1}-\underline a)=0.\tag{A.36}$$
+:::
+
+interior envelope condition $V_a(a_t,y_t)=u'(c_t)$를 사용하면
+
+::: math-display
+$$u'(c_t)\ge\beta R E_t[u'(c_{t+1})],\tag{A.37}$$
+:::
+
+이며 $a_{t+1}>\underline a$이면 equality다.
+
+:::: {.statement .remark}
+::: statement-head
+경제적 해석
+:::
+
+제약이 구속되면 가계는 다음 기 자산을 더 줄여 현재소비를 늘리고 싶지만
+그렇게 할 수 없다. 따라서 현재소비의 한계효용이 저축의 기대할인수익보다
+높다.
+::::
+
+### A.9.4 순차적 표현과 Bellman 표현의 일치
+
+순차적 Lagrangian의 자산 costate는 smooth interior 영역에서 Bellman
+derivative $V_a$와 일치한다. 그러나 가치함수가 kink를 갖거나 제약이
+전환되는 점에서는 classical derivative 대신 one-sided derivative 또는
+subgradient가 필요하다.
+:::::::::::
+
+::: part-divider
+PART III Continuous-Time Optimal Control
+:::
+
+:::::::::: {#appA-a10 .section}
+## [A.10]{.section-number}Pontryagin 최대원리
+
+연속시간 문제에서는 state differential equation과 costate differential
+equation이 결합된 two-point boundary-value problem이 나타난다.
+
+### A.10.1 유한기간 문제
+
+::: math-display
+$$\max_{u(\cdot)}\left\{\int_0^T e^{-\rho t}r(x(t),u(t))\,dt+e^{-\rho T}\Phi(x(T))\right\}\tag{A.38}$$
+:::
+
+subject to
+
+::: math-display
+$$\dot x(t)=f(x(t),u(t)),\qquad x(0)=x_0,\qquad u(t)\in U.\tag{A.39}$$
+:::
+
+### A.10.2 Present-value Hamiltonian
+
+::: math-display
+$$\mathcal H^p(x,u,\mu,t)=e^{-\rho t}r(x,u)+\mu'f(x,u).\tag{A.40}$$
+:::
+
+::::: {.statement .theorem}
+::: statement-head
+Maximum principle · normal benchmark
+:::
+
+적절한 regularity 아래에서 interior normal optimum에는 absolutely
+continuous costate $\mu(t)$가 존재하여 거의 모든 $t$에서
+
+::: math-display
+$$\dot x=\mathcal H^p_\mu=f(x,u),\qquad\dot\mu=-\mathcal H^p_x,\qquad u(t)\in\arg\max_{v\in U}\mathcal H^p(x(t),v,\mu(t),t)\tag{A.41}$$
+:::
+
+를 만족한다.
+:::::
+
+control set의 interior에서 Hamiltonian이 미분가능하면 maximum
+condition은 $\mathcal H_u^p=0$으로 축약된다. corner나 비볼록 control
+set에서는 pointwise maximization 자체를 유지해야 한다. state-dependent
+mixed constraints가 있으면 해당 제약의 multiplier와 보완조건을 추가해야
+한다.
+
+### A.10.3 Terminal conditions
+
+::: math-display
+$$\mu(T)=e^{-\rho T}\Phi_x(x(T)).\tag{A.42}$$
+:::
+
+는 free terminal state의 조건이다. fixed terminal state 또는 terminal
+manifold가 있으면 대응하는 transversality relation이 달라진다.
+::::::::::
+
+::::::::::: {#appA-a11 .section}
+## [A.11]{.section-number}Present-value와 current-value Hamiltonian
+
+할인요인을 Hamiltonian에 직접 포함할지 costate에 흡수할지에 따라 식의
+형태가 달라진다. 두 표현을 혼용해서는 안 된다.
+
+### A.11.1 변환
+
+::: math-display
+$$\lambda(t)\equiv e^{\rho t}\mu(t),\qquad\mathcal H^c(x,u,\lambda)\equiv r(x,u)+\lambda'f(x,u).\tag{A.43}$$
+:::
+
+그러면 current-value canonical system은
+
+::: math-display
+$$\dot x=\mathcal H^c_\lambda=f(x,u),\qquad\dot\lambda=\rho\lambda-\mathcal H^c_x,\qquad u\in\arg\max_{v\in U}\mathcal H^c(x,v,\lambda).\tag{A.44}$$
+:::
+
+### A.11.2 Terminal condition
+
+::: math-display
+$$\lambda(T)=\Phi_x(x(T)).\tag{A.45}$$
+:::
+
+::::: formula-pair
+::: {}
+[PRESENT VALUE]{.tag}
+
+### $\mu(t)$
+
+시점 0의 가치단위로 측정된 state shadow value다. 할인요인은
+Hamiltonian의 flow payoff에 직접 나타난다.
+:::
+
+::: {}
+[CURRENT VALUE]{.tag}
+
+### $\lambda(t)$
+
+시점 $t$의 가치단위로 측정된 shadow value다. 할인율 $\rho$가 costate
+equation에 나타난다.
+:::
+:::::
+
+:::: {.statement .warning}
+::: statement-head
+Current-value Hamiltonian의 시간의존성
+:::
+
+문제가 비자율적이거나 할인율·기술·가격이 시간에 직접 의존하면
+current-value Hamiltonian도 명시적으로 $t$에 의존할 수 있다. "current
+value"가 자동으로 autonomous system을 뜻하지 않는다.
+::::
+:::::::::::
+
+::::::: {#appA-a12 .section}
+## [A.12]{.section-number}연속시간 TVC와 충분조건
+
+무한기간 maximum principle은 local differential conditions만 제공한다.
+장기경계와 전역 최적성은 별도의 조건을 요구한다.
+
+### A.12.1 대표적인 TVC
+
+비음성 state와 표준 concave 성장문제에서 자주 사용하는 형태는
+
+::: math-display
+$$\lim_{t\to\infty}e^{-\rho t}\lambda(t)'x(t)=0,\tag{A.46}$$
+:::
+
+또는 동치인 present-value 표현 $\lim_{t\to\infty}\mu(t)'x(t)=0$이다.
+벡터 state에서는 성분별 부호나 비교가능성이 확보되지 않으면 내적의
+상쇄를 별도로 점검해야 한다. 이는 benchmark 조건이며, 모든 연속시간
+문제의 보편적 필요조건이 아니다.
+
+### A.12.2 충분조건의 한 형태
+
+::::: {.statement .theorem}
+::: statement-head
+Concave Hamiltonian verification
+:::
+
+후보경로가 feasible하고 maximum principle을 만족하며, control set이
+convex이고 current-value Hamiltonian이 $(x,u)$에 대해 concave라고 하자.
+또한 모든 admissible alternative $x(t)$에 대해
+
+::: math-display
+$$\liminf_{T\to\infty}e^{-\rho T}\lambda^*(T)'[x(T)-x^*(T)]\ge0\tag{A.47}$$
+:::
+
+이면 후보경로는 전역 최적이다.
+:::::
+
+### A.12.3 경계사례
+
+state가 양·음 값을 모두 가질 수 있거나 terminal state를 자유롭게 폐기할
+수 없거나 state constraint가 경계에 붙는 경우에는 (A.46)을 기계적으로
+사용할 수 없다. overtaking criterion, state-constraint multiplier,
+complementary slackness형 terminal condition이 필요할 수 있다.
+:::::::
+
+::::::::::::: {#appA-a13 .section}
+## [A.13]{.section-number}Ramsey--Cass--Koopmans 모형의 완전한 최적제어
+
+RCK 모형은 state--control 분류, current-value Hamiltonian, Euler
+equation, saddle path, TVC와 concavity-based optimality를 한 번에 보여
+주는 기준예제다.
+
+### A.13.1 Planner problem
+
+::: math-display
+$$\max_{c(\cdot)}\int_0^{\infty}e^{-\rho t}u(c(t))\,dt\tag{A.48}$$
+:::
+
+subject to
+
+::: math-display
+$$\dot k(t)=f(k(t))-c(t)-\delta k(t),\qquad k(0)=k_0>0,\qquad c(t)\ge0,\qquad k(t)\ge0.\tag{A.49}$$
+:::
+
+$u'>0,u''<0$, $f'>0,f''<0$, $\rho>0$를 가정한다.
+
+### A.13.2 Hamiltonian과 canonical system
+
+다음 식은 후보 최적경로가 $c(t)>0$, $k(t)>0$인 interior 영역에 머물고
+state constraint multiplier가 활성화되지 않는 경우에 해당한다.
+
+::: math-display
+$$\mathcal H^c=u(c)+\lambda[f(k)-c-\delta k].\tag{A.50}$$
+:::
+
+::: math-display
+$$u'(c)=\lambda,\qquad\dot\lambda=\lambda[\rho+\delta-f'(k)],\qquad\dot k=f(k)-c-\delta k.\tag{A.51}$$
+:::
+
+상대위험회피계수를
+
+::: math-display
+$$\sigma(c)\equiv-\frac{cu''(c)}{u'(c)}>0\tag{A.52}$$
+:::
+
+로 정의하고 $u'(c)=\lambda$를 시간미분하면
+
+::: math-display
+$$\frac{\dot c}{c}=\frac{f'(k)-\delta-\rho}{\sigma(c)}.\tag{A.53}$$
+:::
+
+### A.13.3 정상상태와 saddle path
+
+::: math-display
+$$f'(k^*)=\rho+\delta,\qquad c^*=f(k^*)-\delta k^*.\tag{A.54}$$
+:::
+
+초기자본 $k_0$는 predetermined이고 소비 $c_0$는 jump variable이다.
+canonical system의 정상상태가 saddle이면 주어진 $k_0$에 대해 TVC를
+만족하는 $c_0$가 일반적으로 하나 선택된다.
+
+### A.13.4 TVC
+
+::: math-display
+$$\lim_{t\to\infty}e^{-\rho t}\lambda(t)k(t)=0.\tag{A.55}$$
+:::
+
+Euler equation만 만족하는 과잉축적 경로나 폭발경로는 (A.55) 또는
+admissibility를 위반할 수 있다. concavity 가정 아래 canonical
+conditions와 적절한 TVC는 전역 최적성을 보장한다.
+
+### A.13.5 기술진보와 인구증가
+
+노동증가와 노동증대형 기술진보가 있으면 먼저 per-effective-worker
+variable로 정상화한다. state equation의 dilution term과 효용의 유효
+할인항은 선호의 집계방식과 normalization에 따라 달라지므로, $n$과 $g$를
+단순히 한 식에 기계적으로 더하지 말고 원래 welfare objective에서 다시
+도출해야 한다.
+
+:::: {.statement .remark}
+::: statement-head
+투자와 marginal $q$
+:::
+
+조정비용이 있는 투자문제에서는 capital costate가 설치자본의 marginal
+value를 나타내며, 적절한 normalization 아래 marginal $q$로 해석된다.
+투자 FOC는 이 shadow value와 투자의 한계설치비용을 일치시킨다.
+::::
+:::::::::::::
+
+::: part-divider
+PART IV Dynamic Programming
+:::
+
+:::::: {#appA-a14 .section}
+## [A.14]{.section-number}최적성 원리와 재귀적 state
+
+동적계획법은 전체 미래계획을 한 번에 선택하는 문제를 현재 보상과
+continuation value의 반복적인 선택으로 바꾼다. 이 변환의 핵심은 충분한
+state다.
+
+### A.14.1 Principle of optimality
+
+최적계획의 첫 행동과 다음 상태가 주어졌을 때, 그 이후의 tail plan은 해당
+다음 상태에서 시작하는 continuation problem의 최적계획이어야 한다.
+그렇지 않으면 tail plan을 더 나은 계획으로 교체하여 원래 계획을 개선할
+수 있다.
+
+### A.14.2 유한기간 recursion
+
+::: math-display
+$$V_t(x)=\sup_{u\in\Gamma_t(x)}\{r_t(x,u)+\beta E_t[V_{t+1}(x')]\},\qquad V_{T+1}(x)=\Phi(x).\tag{A.56}$$
+:::
+
+### A.14.3 state augmentation
+
+habit, adjustment cost, policy smoothing, learning, 약속의 이행처럼
+과거가 미래 payoff에 직접 영향을 주면 해당 과거정보를 state에 추가한다.
+commitment problem에서는 physical state만으로 정부의 continuation
+incentives를 요약할 수 없고, 과거 약속의 multiplier 또는 promised
+value가 state가 될 수 있다.
+
+:::: {.statement .warning}
+::: statement-head
+Time consistency와 recursivity
+:::
+
+어떤 계획이 time-consistent하다는 것과 어떤 문제를 확장된 state로
+재귀화할 수 있다는 것은 구분해야 한다. commitment plan은 원래
+physical-state 공간에서는 time-inconsistent하지만, 약속 또는
+multiplier를 state로 추가하면 recursive representation을 가질 수 있다.
+::::
+::::::
+
+::::::: {#appA-a15 .section}
+## [A.15]{.section-number}Deterministic와 stochastic Bellman equation
+
+Bellman equation의 기대연산자는 행동과 충격의 timing을 반영해야 한다.
+충격을 관측한 뒤 선택하는 문제와 관측하기 전 선택하는 문제는 서로 다른
+연산자를 가진다.
+
+### A.15.1 Stationary deterministic problem
+
+::: math-display
+$$V(x)=\sup_{u\in\Gamma(x)}\{r(x,u)+\beta V(g(x,u))\}.\tag{A.57}$$
+:::
+
+### A.15.2 Markov stochastic problem
+
+::: math-display
+$$V(x,z)=\sup_{u\in\Gamma(x,z)}\left\{r(x,u,z)+\beta\int V(x',z')P(dx',dz'\mid x,z,u)\right\}.\tag{A.58}$$
+:::
+
+### A.15.3 Shock timing
+
+::: display-table-wrap
+  Timing                                Bellman 구조
+  ------------------------------------- -----------------------------------------------------------------------------------------------------------
+  현재 shock $z$를 관측한 뒤 $u$ 선택   state에 $z$를 포함하고 $\max_u$가 다음 기 기대 바깥에 놓인다.
+  현재 shock를 관측하기 전 $u$ 선택     현재 shock에 대한 기대가 $\max_u$의 목적함수 안에 들어가며 정책은 더 작은 정보집합에 measurable해야 한다.
+  행동 뒤 다음 shock 실현               다음 상태에 대한 transition kernel이 continuation value에 적용된다.
+:::
+
+### A.15.4 Value와 policy correspondence
+
+::: math-display
+$$G_V(x)\equiv\arg\max_{u\in\Gamma(x)}\{r(x,u)+\beta E[V(x')\mid x,u]\}.\tag{A.59}$$
+:::
+
+가치함수는 scalar function이지만 최적정책은 correspondence일 수 있다.
+단일값 정책을 사용하려면 선택정리 또는 strict concavity가 필요하다.
+:::::::
+
+::::::::::::: {#appA-a16 .section}
+## [A.16]{.section-number}Bellman operator, Blackwell 조건, 그리고 contraction
+
+할인된 bounded-return benchmark에서 Bellman operator는 contraction이므로
+가치함수의 유일성과 value iteration의 수렴을 얻을 수 있다.
+
+### A.16.1 Bellman operator
+
+::: math-display
+$$(Tv)(x)=\sup_{u\in\Gamma(x)}\{r(x,u)+\beta E[v(x')\mid x,u]\}.\tag{A.60}$$
+:::
+
+### A.16.2 Blackwell sufficient conditions
+
+::::: formula-pair
+::: {}
+[MONOTONICITY]{.tag}
+
+### 순서보존
+
+$v\le w$이면 $Tv\le Tw$.
+:::
+
+::: {}
+[DISCOUNTING]{.tag}
+
+### 상수이동의 할인
+
+상수 $a\ge0$에 대해 $T(v+a)\le Tv+\beta a$. 표준 expected-value
+operator에서는 equality가 성립한다.
+:::
+:::::
+
+::::: {.statement .theorem}
+::: statement-head
+Contraction theorem · bounded benchmark
+:::
+
+$T$가 bounded functions의 complete sup-norm space를 자기 자신으로 보내고
+Blackwell 조건을 만족하며 $0\lt\beta\lt1$이면
+
+::: math-display
+$$\|Tv-Tw\|_\infty\le\beta\|v-w\|_\infty.\tag{A.61}$$
+:::
+
+따라서 유일한 fixed point $V=TV$가 존재하고, 임의의 bounded $v_0$에 대해
+$T^n v_0\to V$다.
+:::::
+
+::: math-display
+$$\|T^n v_0-V\|_\infty\le\beta^n\|v_0-V\|_\infty.\tag{A.62}$$
+:::
+
+:::: {.statement .warning}
+::: statement-head
+Compactness의 역할
+:::
+
+compact state/action space는 contraction의 일반적인 필요조건이 아니다.
+contraction은 함수공간과 할인구조에 관한 결과다. compactness와
+continuity는 주로 supremum의 달성, 정책의 존재, 가치함수의 연속성을
+보이는 데 사용된다.
+::::
+:::::::::::::
+
+:::::: {#appA-a17 .section}
+## [A.17]{.section-number}Policy existence, maximum theorem, measurable selection
+
+가치함수의 fixed point가 존재해도 각 state에서 supremum을 달성하는
+measurable policy가 자동으로 존재하는 것은 아니다.
+
+### A.17.1 Compact--continuous benchmark
+
+:::: {.statement .theorem}
+::: statement-head
+Berge maximum theorem의 적용
+:::
+
+state space와 action space가 metric space이고, $\Gamma(x)$가 nonempty
+compact-valued이며 continuous correspondence, 현재보상과 continuation
+objective가 연속이면 value function은 연속이고 argmax correspondence는
+nonempty, compact-valued, upper hemicontinuous다.
+::::
+
+### A.17.2 Measurable policy
+
+일반 Borel state space에서는 argmax correspondence의 graph
+measurability와 measurable-selection theorem을 이용해 measurable
+selector $\pi(x)\in G_V(x)$를 얻는다. continuity만 서술하고
+measurability를 생략하면 확률적 정책의 정의가 불완전하다.
+
+### A.17.3 Value uniqueness와 policy uniqueness
+
+::: math-display
+$$\boxed{\text{unique value function}\not\Rightarrow\text{unique optimal policy}.}\tag{A.63}$$
+:::
+
+여러 행동이 같은 현재보상과 같은 continuation value를 줄 수 있기
+때문이다. strict concavity, convex feasible set, single-valued argmax가
+추가되면 정책 유일성을 얻을 수 있다.
+::::::
+
+::::::::: {#appA-a18 .section}
+## [A.18]{.section-number}Bellman envelope, Benveniste--Scheinkman, 그리고 Euler equation
+
+smooth interior 영역에서 Bellman FOC와 envelope condition은 sequence
+method의 control FOC와 costate recursion을 재현한다.
+
+### A.18.1 Smooth stochastic benchmark
+
+::: math-display
+$$V(x)=\max_u\left\{r(x,u)+\beta E[V(g(x,u,\varepsilon'))]\right\}.\tag{A.64}$$
+:::
+
+최적정책이 interior이고 미분과 기대의 교환이 정당화되면 control FOC는
+
+::: math-display
+$$0=r_u(x,u)+\beta E[g_u(x,u,\varepsilon')'V_x(x')],\tag{A.65}$$
+:::
+
+envelope condition은
+
+::: math-display
+$$V_x(x)=r_x(x,u)+\beta E[g_x(x,u,\varepsilon')'V_x(x')].\tag{A.66}$$
+:::
+
+### A.18.2 Costate--value derivative correspondence
+
+::: math-display
+$$\boxed{p_t=V_x(x_t)}\tag{A.67}$$
+:::
+
+는 smooth interior optimum과 일관된 current-value normalization 아래
+성립한다. (A.65)--(A.66)에 (A.67)을 대입하면 (A.21)--(A.22)를 얻는다.
+
+### A.18.3 Benveniste--Scheinkman의 역할
+
+가치함수가 사전에 미분가능하다고 가정하기 어려운 경우, 최적정책이
+interior이고 objective가 적절히 concave·smooth하면 최적경로를 지지하는
+smooth continuation function을 이용해 value derivative를 식별할 수 있다.
+
+:::: {.statement .warning}
+::: statement-head
+비미분가능한 경우
+:::
+
+차입제약의 전환점, fixed cost, discrete choice에서는 $V$가 kink를 가질
+수 있다. 이때 classical Euler equation을 모든 state에서 적용하지 말고
+subgradient, variational inequality, discrete global maximization을
+사용한다.
+::::
+:::::::::
+
+:::::::::: {#appA-a19 .section}
+## [A.19]{.section-number}Verification theorem과 비유계 동적계획 문제
+
+Bellman equation은 후보정책을 모든 feasible current action과 비교하므로
+Euler equation보다 강한 global verification 도구다. 다만 bounded
+contraction theorem의 범위를 넘는 문제에서는 별도의 함수공간과 tail
+조건이 필요하다.
+
+### A.19.1 Verification의 기본 논리
+
+:::: {.statement .theorem}
+::: statement-head
+Bellman verification · 개념적 형태
+:::
+
+후보함수 $v$가 Bellman equation $v=Tv$를 만족하고, measurable policy
+$\pi$가 각 state에서 supremum을 달성하며, $\pi$가 생성하는 경로가
+admissible이고 continuation tail이 소멸하면 $v$는 가치함수이고 $\pi$는
+최적정책이다.
+::::
+
+### A.19.2 비유계 문제가 어려운 이유
+
+성장·자산축적 문제에서는 state space가 비compact하고 가치함수가
+bounded하지 않을 수 있다. log utility는 소비가 0에 접근할 때 아래로
+발산하며, CRRA utility와 생산기술의 성장률에 따라 reward가 위로 비유계일
+수 있다. 따라서 $T$가 bounded-function space를 보존하지 않아 sup-norm
+contraction을 바로 사용할 수 없다.
+
+### A.19.3 대표적인 확장도구
+
+::::::: details-grid
+::: {}
+[WEIGHTED NORM]{.tag}
+
+### 가중 sup norm
+
+state 성장률을 지배하는 weight function으로 가치함수의 크기를
+정규화한다.
+:::
+
+::: {}
+[DRIFT CONDITION]{.tag}
+
+### 상태의 장기통제
+
+transition이 weight의 기대값을 충분히 제한하도록 한다.
+:::
+
+::: {}
+[MONOTONE CONCAVE]{.tag}
+
+### 순서·오목성
+
+contraction 대신 단조성과 오목성, bounding sequence로 fixed point를
+구축한다.
+:::
+
+::: {}
+[DIRECT VERIFICATION]{.tag}
+
+### 후보함수 검증
+
+Bellman inequality와 tail condition을 직접 확인한다.
+:::
+:::::::
+
+이 부록에서는 일반적인 비유계 동적계획 정리를 완전히 증명하지 않고,
+bounded benchmark를 적용할 수 있는지 판단하는 기준과 필요한 추가구조를
+명시한다.
+::::::::::
+
+::::::::: {#appA-a20 .section}
+## [A.20]{.section-number}수치 동적계획과 residual diagnostics
+
+수치알고리즘이 종료되었다는 사실과 경제적 최적해가 계산되었다는 사실은
+다르다. Bellman, Euler, feasibility, complementary slackness를
+독립적으로 검사해야 한다.
+
+### A.20.1 기본 알고리즘
+
+    Value function iteration
+    1. Choose grid, interpolation rule, and initial v0.
+    2. For each state x, solve the Bellman maximization.
+    3. Set v_{n+1} = T v_n.
+    4. Stop only after value, policy, and residual criteria are met.
+
+    Policy iteration / Howard improvement
+    1. Start from an admissible policy π.
+    2. Evaluate V_π from the fixed-policy Bellman equation.
+    3. Improve π by maximizing r + β E[V_π(x')].
+    4. Repeat until no meaningful policy improvement remains.
+
+### A.20.2 Bellman residual
+
+::: math-display
+$$r_B(x)\equiv(T\widetilde V)(x)-\widetilde V(x).\tag{A.68}$$
+:::
+
+$\widetilde V$가 같은 complete function space에 속하고 residual이
+근사연산자가 아니라 정확한 Bellman operator $T$로 계산된 bounded
+contraction benchmark에서는
+
+::: math-display
+$$\|\widetilde V-V\|_\infty\le\frac{\|r_B\|_\infty}{1-\beta}.\tag{A.69}$$
+:::
+
+### A.20.3 Euler와 KKT residual
+
+::: math-display
+$$r_E(x)=u'(c(x))-\beta E[R'u'(c(x'))]\tag{A.70}$$
+:::
+
+는 interior state에서만 equality residual로 해석한다. constraint가
+구속되는 state에서는 Euler inequality와 complementary slackness
+residual을 검사해야 한다.
+
+### A.20.4 필수 진단
+
+::: display-table-wrap
+  진단                         확인하는 오류
+  ---------------------------- -------------------------------------------------------
+  Bellman residual             global one-step deviation에 대한 value inconsistency.
+  Euler/KKT residual           interior FOC와 binding constraint 처리 오류.
+  Feasibility residual         자원제약·전이법칙·비음성 위반.
+  Policy improvement           현재 정책보다 나은 당기 action이 남아 있는지.
+  Grid refinement              discretization과 interpolation 의존성.
+  Boundary frequency           state-space truncation이 해를 인위적으로 결정하는지.
+  Simulation-domain residual   실제로 방문되는 상태에서의 정확도.
+:::
+
+:::: {.statement .warning}
+::: statement-head
+작은 Euler residual의 한계
+:::
+
+Euler residual이 작아도 잘못된 branch, 비전역적 local maximum, 차입제약
+위반, grid 밖 extrapolation이 남을 수 있다. Bellman residual과
+feasibility를 함께 검사해야 한다.
+::::
+:::::::::
+
+::: part-divider
+PART V Equivalence and Linear--Quadratic Methods
+:::
+
+:::::::::::::::::::::::: {#appA-a21 .section}
+## [A.21]{.section-number}Sequence method, Bellman equation, 그리고 HJB의 대응
+
+세 방법은 같은 경제문제를 서로 다른 방식으로 표현하지만, 대응은 충분한
+state와 regularity 아래에서 성립한다.
+
+### A.21.1 이산시간 대응
+
+::: math-display
+$$\begin{aligned}\text{Bellman FOC:}\quad0&=r_u+\beta E[g_u'V_x(x')],\\\text{Bellman envelope:}\quad V_x(x)&=r_x+\beta E[g_x'V_x(x')].\end{aligned}\tag{A.71}$$
+:::
+
+$p_t=V_x(x_t)$로 식별하면 sequence Lagrangian의 control FOC와 costate
+recursion을 얻는다.
+
+### A.21.2 연속시간 HJB
+
+autonomous infinite-horizon problem의 stationary HJB equation은
+
+::: math-display
+$$\rho V(x)=\max_u\{r(x,u)+V_x(x)'f(x,u)\}.\tag{A.72}$$
+:::
+
+smooth interior optimum에서 $\lambda(t)=V_x(x(t))$로 두면
+
+::: math-display
+$$0=r_u+f_u'\lambda,\qquad\dot\lambda=\rho\lambda-r_x-f_x'\lambda=\rho\lambda-\mathcal H_x^c,\tag{A.73}$$
+:::
+
+를 얻어 current-value maximum principle과 일치한다.
+
+### A.21.3 대응에 필요한 조건
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+State sufficiency
+:::
+
+::: right
+continuation problem이 현재 state만으로 정의되어야 한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+Value finiteness
+:::
+
+::: right
+Bellman value와 기대가 well-defined여야 한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+Smoothness
+:::
+
+::: right
+classical derivative를 쓸 수 있거나 generalized derivative로 대체해야
+한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+Interiority/KKT
+:::
+
+::: right
+corner에서는 equality FOC 대신 variational inequality가 필요하다.
+:::
+:::::
+
+::::: chain-row
+::: left
+Verification
+:::
+
+::: right
+FOC뿐 아니라 admissibility와 terminal/tail condition을 만족해야 한다.
+:::
+:::::
+::::::::::::::::::
+
+:::: {.statement .warning}
+::: statement-head
+범위
+:::
+
+확률미분방정식의 diffusion HJB에는 Itô generator와 2차 미분항이
+추가된다. stochastic maximum principle, viscosity solution과 함께 본
+부록의 범위에서 제외한다.
+::::
+::::::::::::::::::::::::
+
+::::::::::: {#appA-a22 .section}
+## [A.22]{.section-number}Linear--quadratic regulator와 Riccati equation
+
+LQ 문제는 선형 전이법칙과 이차 목적함수 아래에서 가치함수와 정책함수를
+정확히 계산할 수 있는 핵심 benchmark다.
+
+### A.22.1 문제
+
+::: math-display
+$$\min_{\{u_t\}}E_0\sum_{t=0}^{\infty}\beta^t(x_t'Qx_t+2x_t'Nu_t+u_t'Ru_t)\tag{A.74}$$
+:::
+
+subject to
+
+::: math-display
+$$x_{t+1}=Ax_t+Bu_t+C\varepsilon_{t+1},\qquad E_t\varepsilon_{t+1}=0,\qquad E_t[\varepsilon_{t+1}\varepsilon_{t+1}']=\Omega.\tag{A.75}$$
+:::
+
+$R\succ0$이고 stage cost block이 convex하도록
+
+::: math-display
+$$\begin{bmatrix}Q&N\\N'&R\end{bmatrix}\succeq0\tag{A.76}$$
+:::
+
+를 기준가정으로 둔다.
+
+### A.22.2 Quadratic value conjecture와 feedback
+
+::: math-display
+$$V(x)=x'Px+v_0.\tag{A.77}$$
+:::
+
+Bellman FOC에서
+
+::: math-display
+$$u_t=-Fx_t,\qquad F=(R+\beta B'PB)^{-1}(N'+\beta B'PA).\tag{A.78}$$
+:::
+
+### A.22.3 Algebraic Riccati equation
+
+::: math-display
+$$\boxed{P=Q+\beta A'PA-(N+\beta A'PB)(R+\beta B'PB)^{-1}(N'+\beta B'PA).}\tag{A.79}$$
+:::
+
+closed-loop transition은
+
+::: math-display
+$$x_{t+1}=(A-BF)x_t+C\varepsilon_{t+1}.\tag{A.80}$$
+:::
+
+### A.22.4 Finite-horizon Riccati recursion
+
+terminal cost $x_{T+1}'P_{T+1}x_{T+1}$에서 시작하여 (A.79)의 우변에
+$P_{t+1}$을 넣어 $P_t$를 backward recursion으로 계산한다. 무한기간
+algebraic solution은 적절한 안정성 조건 아래 이 recursion의 limit로
+얻어진다.
+
+### A.22.5 Shock의 가치상수
+
+state가 완전히 관측되고, additive zero-mean shock의 조건부 공분산이
+일정하며 정책과 독립이고, 선택된 $P$가 할인된 가치함수를 유한하게 만드는
+경우에는 $P$와 $F$가 deterministic problem과 같고 가치함수의 상수항은
+
+::: math-display
+$$v_0=\frac{\beta}{1-\beta}\operatorname{tr}(PC\Omega C')\tag{A.81}$$
+:::
+
+가 된다. 이는 아래 certainty-equivalence 조건에 의존한다.
+:::::::::::
+
+::::::::::::::::: {#appA-a23 .section}
+## [A.23]{.section-number}Stability, certainty equivalence, 그리고 Ramsey-policy bridge
+
+Riccati 방정식의 대수적 해가 존재한다는 사실만으로 경제적으로 관련 있는
+해가 선택된 것은 아니다. stabilizing solution과 certainty equivalence의
+적용조건을 따로 확인해야 한다.
+
+### A.23.1 Stabilizing solution
+
+undiscounted $N=0$ benchmark에서 흔히 사용하는 조건은
+
+:::::::::::: logic-chain
+::::: chain-row
+::: left
+Stabilizability
+:::
+
+::: right
+$(A,B)$의 불안정 mode를 control로 안정화할 수 있다.
+:::
+:::::
+
+::::: chain-row
+::: left
+Detectability
+:::
+
+::: right
+비용행렬이 보지 못하는 mode가 이미 안정적이다. 보통 $(Q^{1/2},A)$에 대해
+표현한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+Positive control cost
+:::
+
+::: right
+$R\succ0$로 현재 통제의 최소화가 well-defined다.
+:::
+:::::
+::::::::::::
+
+discounted problem은 $\widetilde A=\sqrt\beta A$,
+$\widetilde B=\sqrt\beta B$로 변환하여 안정성 조건을 해석할 수 있다.
+따라서 할인된 비용의 유한성과 Riccati 안정화에 직접 대응하는 조건은
+일반적으로 $\rho\!\left(\sqrt\beta\,(A-BF)\right)<1$이다. 상태과정
+자체의 covariance stationarity까지 요구하려면 더 강한 $\rho(A-BF)<1$을
+별도로 확인해야 한다. 여러 algebraic Riccati solution 가운데 해당 안정성
+조건을 만족하는 stabilizing solution을 선택한다.
+
+### A.23.2 Certainty equivalence
+
+:::: {.statement .theorem}
+::: statement-head
+LQ certainty equivalence · 적용범위
+:::
+
+state가 완전히 관측되고, 전이법칙이 선형이며, 목적함수가 기대
+이차비용이고, shock가 additive·평균 0이며 covariance가 state와 control에
+의존하지 않으면 optimal state-feedback matrix는 shock가 없는
+deterministic LQ 문제와 같다. 불확실성은 가치함수의 상수항을 바꾸지만
+$P$와 $F$를 바꾸지 않는다. 부분관측 문제에서는 별도의 filtering 문제와
+separation 조건이 필요하다.
+::::
+
+다음에서는 일반적으로 실패한다.
+
+::: display-table-wrap
+  구조                                   실패 이유
+  -------------------------------------- --------------------------------------------------------------------------
+  Nonquadratic utility                   variance와 higher moments가 marginal utility를 통해 정책에 영향을 준다.
+  Multiplicative shock                   shock가 state/control coefficient를 바꾸어 Riccati 항 자체를 변화시킨다.
+  Control-dependent variance             통제가 위험을 바꾸므로 covariance term이 FOC에 들어간다.
+  Risk-sensitive 또는 robust criterion   기대값만이 아니라 tail risk나 model distortion이 정책에 반영된다.
+  Occasionally binding constraints       정책함수가 전역적으로 선형이 아니고 regime switching이 발생한다.
+:::
+
+### A.23.3 Appendix B·C와의 경계
+
+::: math-display
+$$\boxed{\begin{aligned}\text{Appendix A}:&\ \text{exact dynamic optimization and LQ control},\\\text{Appendix B}:&\ \text{linear equilibrium, determinacy, and QZ},\\\text{Appendix C}:&\ \text{perturbation and quadratic welfare approximation}.\end{aligned}}\tag{A.82}$$
+:::
+
+Ramsey policy에서 선형화된 제약과 2차 후생목적을 결합하면 LQ 구조가
+나타날 수 있다. 그러나 비선형모형의 2차 welfare approximation을 만드는
+과정은 Appendix C에서 다룬다.
+:::::::::::::::::
+
+::: part-divider
+PART VI Integration, Applications, and Validation
+:::
+
+:::::::::::::::::::::::::::::: {#appA-a24 .section}
+## [A.24]{.section-number}통합 풀이 절차와 본문 연결
+
+실제 동태최적화 문제를 풀 때에는 특정 공식을 먼저 선택하기보다 문제의
+정보구조와 경계조건부터 고정해야 한다.
+
+### A.24.1 통합 절차
+
+::: math-display
+$$\boxed{\begin{aligned}1.&\ \text{의사결정자와 목적함수를 명시한다.}\\2.&\ \text{state, control, exogenous state를 분류한다.}\\3.&\ \text{timing과 정보집합을 고정한다.}\\4.&\ \text{feasible set과 inequality constraints를 명시한다.}\\5.&\ \text{finite 또는 infinite horizon을 구분한다.}\\6.&\ \text{sequence, Hamiltonian, Bellman 표현을 선택한다.}\\7.&\ \text{FOC/KKT와 costate 또는 envelope 조건을 도출한다.}\\8.&\ \text{Euler equation을 도출하되 제약조건을 보존한다.}\\9.&\ \text{terminal condition, No-Ponzi condition, TVC를 구분한다.}\\10.&\ \text{concavity 또는 verification으로 최적성을 확인한다.}\\11.&\ \text{steady state와 국소동학을 분석한다.}\\12.&\ \text{feasibility, Euler, Bellman residual을 검사한다.}\end{aligned}}\tag{A.83}$$
+:::
+
+### A.24.2 본문과의 연결
+
+::: display-table-wrap
+  본문         Appendix A의 역할                                                   주요 객체
+  ------------ ------------------------------------------------------------------- -------------------------------------------------------------------------
+  Chapter 02   Ramsey--Cass--Koopmans와 OLG의 동태최적화 기반.                     Hamiltonian, Euler equation, TVC, saddle path.
+  Chapter 05   RBC planner problem과 stochastic household problem의 재귀적 표현.   Bellman equation, policy function, envelope condition.
+  Chapter 08   commitment와 Ramsey 안정화정책의 동태적 정책문제.                   multiplier state, commitment, LQ approximation bridge.
+  Chapter 09   소비--저축, borrowing constraint, precautionary saving.             Euler inequality, natural borrowing limit, value curvature.
+  Chapter 10   조정비용 투자와 Tobin's $q$.                                        capital costate, marginal $q$, investment FOC.
+  Chapter 13   불완전시장 가계의 자기보험과 자산정책.                              stochastic Bellman equation, borrowing constraint, policy verification.
+:::
+
+### A.24.3 대표적인 실패유형
+
+::::::::::::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+State 누락
+:::
+
+::: right
+history dependence를 무시하여 Bellman equation이 잘못됨.
+:::
+:::::
+
+::::: chain-row
+::: left
+Timing 오류
+:::
+
+::: right
+현재 shock 관측 전·후 선택을 혼동함.
+:::
+:::::
+
+::::: chain-row
+::: left
+Multiplier index 오류
+:::
+
+::: right
+$\beta$ 또는 다음 기 shadow value가 잘못 배치됨.
+:::
+:::::
+
+::::: chain-row
+::: left
+Euler equality 오용
+:::
+
+::: right
+binding constraint에서 inequality와 complementarity를 누락함.
+:::
+:::::
+
+::::: chain-row
+::: left
+TVC 혼동
+:::
+
+::: right
+No-Ponzi와 TVC를 동일시하거나 benchmark TVC를 보편식으로 사용함.
+:::
+:::::
+
+::::: chain-row
+::: left
+Sufficiency 과장
+:::
+
+::: right
+concavity가 없는 문제에서 FOC를 전역 최적성으로 해석함.
+:::
+:::::
+
+::::: chain-row
+::: left
+Policy uniqueness 오해
+:::
+
+::: right
+value fixed point의 유일성을 정책의 유일성으로 잘못 해석함.
+:::
+:::::
+
+::::: chain-row
+::: left
+수치검증 부족
+:::
+
+::: right
+Euler residual만 확인하고 Bellman·feasibility·boundary 진단을 생략함.
+:::
+:::::
+:::::::::::::::::::::::::::
+
+### A.24.4 Appendix 경계
+
+QZ와 선형 합리적 기대균형은 Appendix B, 고차 perturbation과 welfare
+approximation은 Appendix C, IRF·이론모멘트·모형평가는 Appendix D에서
+다룬다. 이 부록은 이 계산들의 기반이 되는 최적화 구조와 검증조건에
+집중한다.
+::::::::::::::::::::::::::::::
+
+::::: {#appA-conclusion .section}
+## 결론
+
+동태최적화의 핵심은 Euler equation 하나가 아니라, 문제의 상태표현에서
+최적성 검증까지 이어지는 전체 논리다. 순차적 방법, 최대원리, Bellman
+방법은 같은 경제적 구조를 비추지만, 각각의 적용조건과 경계조건을
+명시해야 한다.
+
+::: math-display
+$$\boxed{\text{optimization problem}\to\text{FOC/KKT}\to\text{costate and boundary conditions}\to\text{Bellman representation}\to\text{policy computation}\to\text{verification}.}$$
+:::
+
+::: conclusion-block
+다음 Appendix로의 연결
+
+Appendix B는 이 부록에서 얻은 최적화·균형조건을 1차 선형시스템으로 풀고
+결정성을 판정한다. Appendix C는 비선형 시스템의 고차근사와 위험보정을,
+Appendix D는 계산된 state-space solution의 경기변동 통계와 모형평가를
+담당한다.
+:::
+:::::
+
+::: {#appA-check .section}
+## Learning Check
+
+1.  유한기간 문제 (A.11)에서 Lagrangian을 직접 미분하여 (A.13)--(A.15)를
+    도출하고 multiplier index를 설명하라.
+2.  present-value costate $\xi_t$와 current-value costate $p_t$의
+    변환에서 $\beta$가 control FOC와 costate equation에 들어가는 위치를
+    검산하라.
+3.  차입제약 $a_{t+1}\ge\underline a$가 있는 소비--저축 문제에서 Euler
+    inequality와 complementary slackness를 도출하라.
+4.  시점별 예산제약을 만족하지만 No-Ponzi restriction을 위반하는
+    부채경로를 구성하고 두 조건이 다른 이유를 설명하라.
+5.  대표 TVC (A.29)가 보편적이지 않은 이유를 state의 부호와 terminal
+    disposal 관점에서 설명하라.
+6.  RCK 모형에서 current-value Hamiltonian, costate equation, 소비성장식
+    (A.53)을 도출하라.
+7.  RCK Euler equation을 만족하지만 TVC 또는 feasibility를 위반하는
+    후보경로가 왜 최적이 아닌지 설명하라.
+8.  Bellman operator의 monotonicity와 discounting을 이용하여 contraction
+    inequality (A.61)을 증명하라.
+9.  유일한 가치함수와 여러 최적정책이 동시에 존재하는 간단한 동적문제를
+    구성하라.
+10. 소비--저축 Bellman equation에서 envelope condition을 사용하여 Euler
+    equality 또는 inequality를 복원하라.
+11. Bellman residual error bound (A.69)를 contraction property에서
+    도출하라.
+12. LQ 문제에서 feedback rule (A.78)과 Riccati equation (A.79)을
+    완전제곱 또는 Bellman FOC로 도출하라.
+13. additive zero-mean shock가 feedback rule을 바꾸지 않고 가치상수만
+    바꾸는 조건을 설명하라.
+14. multiplicative shock 또는 control-dependent variance에서 certainty
+    equivalence가 실패하는 이유를 보이라.
+:::
+
+:::::::::::::::::::::::::::::::::::: {#appA-glossary .section}
+## 핵심 용어
+
+::::::::::::::::::::::::::::::::::: definition-list
+:::: definition-row
+::: term
+State
+:::
+
+현재와 미래의 payoff 및 feasible set에 필요한 과거정보를 요약하는 변수.
+::::
+
+:::: definition-row
+::: term
+Control
+:::
+
+현재 정보집합 아래 의사결정자가 선택하는 행동.
+::::
+
+:::: definition-row
+::: term
+Feasible plan
+:::
+
+초기조건과 모든 기술·자원·비음성 제약을 만족하는 계획.
+::::
+
+:::: definition-row
+::: term
+Admissible plan
+:::
+
+feasibility에 더해 measurability, integrability, solvency와 문제별 tail
+조건을 만족하는 계획.
+::::
+
+:::: definition-row
+::: term
+Costate
+:::
+
+state 한 단위의 한계가치를 나타내는 동태적 multiplier.
+::::
+
+:::: definition-row
+::: term
+Hamiltonian
+:::
+
+현재 flow payoff와 state transition의 shadow value를 결합한 함수.
+::::
+
+:::: definition-row
+::: term
+No-Ponzi condition
+:::
+
+부채를 무한히 rollover하여 현재자원을 무제한 조달하는 경로를 배제하는
+solvency restriction.
+::::
+
+:::: definition-row
+::: term
+Transversality condition
+:::
+
+후보 최적경로의 장기 shadow-value behavior를 제한하는 경계조건.
+::::
+
+:::: definition-row
+::: term
+Bellman operator
+:::
+
+후보 continuation value를 한 번의 최적화로 새로운 가치함수에 보내는
+연산자.
+::::
+
+:::: definition-row
+::: term
+Contraction
+:::
+
+함수 간 거리를 일정한 계수보다 작게 줄이는 연산자 성질.
+::::
+
+:::: definition-row
+::: term
+Policy correspondence
+:::
+
+각 state에서 Bellman objective를 최대화하는 행동들의 집합.
+::::
+
+:::: definition-row
+::: term
+Verification theorem
+:::
+
+후보 가치함수와 정책이 Bellman equation 및 tail 조건을 만족할 때
+최적성을 확인하는 결과.
+::::
+
+:::: definition-row
+::: term
+Riccati equation
+:::
+
+LQ 문제의 quadratic value matrix를 결정하는 비선형 행렬방정식.
+::::
+
+:::: definition-row
+::: term
+Stabilizability
+:::
+
+불안정한 동태 mode를 control로 안정화할 수 있는 성질.
+::::
+
+:::: definition-row
+::: term
+Detectability
+:::
+
+비용 또는 관측에서 보이지 않는 mode가 이미 안정적인 성질.
+::::
+
+:::: definition-row
+::: term
+Certainty equivalence
+:::
+
+특정 LQ 환경에서 불확실성을 조건부기대값으로 대체해도 optimal feedback가
+변하지 않는 성질.
+::::
+:::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::
+
+:::: {#appA-references .section}
+## 참조 문헌
+
+- Bellman, R. (1957), *Dynamic Programming*, Princeton University Press.
+- Blackwell, D. (1965), "Discounted Dynamic Programming," *Annals of
+  Mathematical Statistics* 36(1), 226--235.
+- Benveniste, L. M., and J. A. Scheinkman (1979), "On the
+  Differentiability of the Value Function in Dynamic Models of
+  Economics," *Econometrica* 47(3), 727--732.
+- Pontryagin, L. S., V. G. Boltyanskii, R. V. Gamkrelidze, and E. F.
+  Mishchenko (1962), *The Mathematical Theory of Optimal Processes*.
+- Stokey, N. L., R. E. Lucas, Jr., with E. C. Prescott (1989),
+  *Recursive Methods in Economic Dynamics*, Harvard University Press.
+- Ljungqvist, L., and T. J. Sargent (2018), *Recursive Macroeconomic
+  Theory*, 4th ed., especially Chapters 3--5 and Technical Appendix A.
+- Bertsekas, D. P. (2017), *Dynamic Programming and Optimal Control*,
+  Vol. I, 4th ed., Athena Scientific.
+- Kamien, M. I., and N. L. Schwartz (1991), *Dynamic Optimization: The
+  Calculus of Variations and Optimal Control in Economics and
+  Management*, 2nd ed., North-Holland.
+- Romer, D. (2019), *Advanced Macroeconomics*, 5th ed., especially the
+  Ramsey model, RBC theory, consumption, investment, and fiscal policy
+  chapters.
+
+::: source-note
+표기 원칙
+
+이 문서는 이산시간에서 $t$기 transition에 $t+1$기 state의 multiplier를
+붙이고, current-value costate를 $p_t=\beta^{-t}\xi_t$로 정의한다.
+연속시간에서는 $\lambda(t)=e^{\rho t}\mu(t)$를 사용한다. 다른 문헌의
+index와 부호 convention을 비교할 때에는 정의부터 변환해야 한다.
+:::
+::::

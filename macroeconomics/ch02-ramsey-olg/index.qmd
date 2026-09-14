@@ -1,0 +1,5 @@
+# Chapter 02 · 내생적 저축과 세대구조 {.unnumbered}
+
+Optimization, Equilibrium, and Dynamic Efficiency
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)

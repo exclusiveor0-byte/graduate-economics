@@ -1,0 +1,1502 @@
+---
+title: >-
+  경기변동 측정과 모형평가
+description: >-
+  Business-Cycle Measurement and Model Evaluation
+---
+
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::: {#appD-opening .section}
+모형을 푸는 것과 모형을 자료와 비교하는 것은 별개의 단계다. 정책함수의
+residual이 작더라도 관측방정식, 단위변환, 시간집계, 추세제거,
+표본통계량의 정의가 자료와 다르면 비교는 무효다. 반대로 일부
+표본모멘트가 잘 맞더라도 충격식별과 잠재상태 추정이 불안정하면 구조적
+해석은 성립하지 않는다.
+
+::: thesis
+중심 원칙
+
+모형의 population implication을 실제 표본통계량과 직접 동일시하지
+않는다. 경제적 객체를 observable로 변환하고, 자료와 모형에 같은
+finite-sample transformation을 적용한 뒤,
+sampling·simulation·parameter·approximation uncertainty를 분리하여
+평가한다.
+:::
+
+::: math-display
+$$\boxed{\text{model solution}\to\text{measurement map}\to\text{common transformation}\to\text{moments and responses}\to\text{latent-state inference}\to\text{uncertainty-aware evaluation}.}\tag{D.1}$$
+:::
+:::::
+
+::: part-divider
+PART I Measurement, Observables, and Business-Cycle Objects
+:::
+
+:::::::::: {#appD-d01 .section}
+## [D.1]{.section-number}분석대상, 범위, 입력과 산출물
+
+Appendix D는 이미 계산된 동태해를 자료와 비교 가능한 객체로 바꾸는
+정량평가 단계다. 입력과 출력의 단위·timing·근사차수를 처음부터 고정해야
+한다.
+
+### D.1.1 입력
+
+::: math-display
+$$s_t=As_{t-1}+B\varepsilon_t,\qquad q_t=Cs_t+D\varepsilon_t,\qquad E[\varepsilon_t\varepsilon_t']=\Omega.\tag{D.2}$$
+:::
+
+이는 Appendix B의 선형 상태공간 표현이다. Appendix C의 2차해를 사용할
+때에는
+
+::: math-display
+$$s_t^p=\bar s+\sigma_p s_t^{(1)}+\frac12\sigma_p^2s_t^{(2)}\tag{D.3}$$
+:::
+
+와 pruned recursion을 입력으로 사용한다. 여기서 $\sigma_p$는 Appendix
+C에서 $\sigma$로 표기한 perturbation bookkeeping scale이며, 아래 New
+Keynesian 예제의 역 EIS와 구분하기 위해 첨자를 붙였다. 추가 입력은
+measurement equation, 자료의 정의와 빈도, 표본기간, 변환규칙, shock
+normalization, parameter vector다.
+
+### D.1.2 산출물
+
+::::::: details-grid
+::: {}
+[OBSERVABLES]{.tag}
+
+### 자료호환 변수
+
+모형변수를 기록자료의 정의·단위·빈도로 변환한 series.
+:::
+
+::: {}
+[MOMENTS]{.tag}
+
+### Population과 표본통계
+
+Lyapunov moments, finite-sample simulated moments, sampling
+distributions.
+:::
+
+::: {}
+[DYNAMICS]{.tag}
+
+### 동태반응
+
+IRF, GIRF, spectrum, FEVD와 shock contribution.
+:::
+
+::: {}
+[INFERENCE]{.tag}
+
+### 잠재상태
+
+filtered·smoothed states, disturbances, historical decomposition.
+:::
+:::::::
+
+### D.1.3 범위
+
+Kalman filter와 innovation likelihood, moment matching과 local
+identification은 다루지만 완전한 Bayesian DSGE estimation, particle
+filtering, nonlinear filtering 일반론은 범위 밖으로 둔다. 모형해의
+계산은 Appendix B·C를 전제로 한다.
+::::::::::
+
+:::::::: {#appD-d02 .section}
+## [D.2]{.section-number}경제적 변수, 모형 관측변수, 실제 자료
+
+모형의 기호와 통계기관의 series 이름이 같아도 경제적 정의는 다를 수
+있다. 비교 전에 관측사상을 명시해야 한다.
+
+::: math-display
+$$\boxed{\text{latent economic object}\neq\text{model-implied observable}\neq\text{recorded data series}.}\tag{D.4}$$
+:::
+
+### D.2.1 일반 관측사상
+
+::: math-display
+$$d_t=\mathcal M(q_t;\theta)+\nu_t,\tag{D.5}$$
+:::
+
+여기서 \\,$q_t$는 모형의 경제적 변수, \\,$\mathcal M$은 정의·단위·집계
+mapping, \\,$\nu_t$는 측정오차다. 선형 benchmark는
+
+::: math-display
+$$d_t=a+Zs_t+\nu_t.\tag{D.6}$$
+:::
+
+### D.2.2 GDP의 예
+
+모형의 생산함수 산출은 국민계정의 실질 GDP와 자동으로 동일하지 않다.
+정부생산, 재고, 주거서비스, chain weighting, 계절조정, 자료개정과
+비공식경제의 처리방식이 다를 수 있다.
+
+### D.2.3 비교대상의 정확한 정의
+
+자료에 finite-sample transformation $\mathcal T_T$와 statistic $M_T$를
+적용하면
+
+::: math-display
+$$\widehat m_T^d=M_T\!\left(\mathcal T_T(d_{1:T})\right).\tag{D.7}$$
+:::
+
+공정한 모형대상은 상황에 따라 population moment가 아니라
+
+::: math-display
+$$m_T^m(\theta)=E_\theta\!\left[M_T\!\left(\mathcal T_T(d_{1:T}^m)\right)\right]\tag{D.8}$$
+:::
+
+이다. 일반적으로 $m_T^m(\theta)\neq m_\infty^m(\theta)$다.
+::::::::
+
+::::::: {#appD-d03 .section}
+## [D.3]{.section-number}자료정의, 단위, 빈도, 시간집계
+
+시간집계와 단위변환은 경제적 객체의 종류에 따라 달라진다. flow, stock,
+rate를 같은 방식으로 집계해서는 안 된다.
+
+### D.3.1 Nominal, real, quantity index
+
+고정가중 benchmark에서는 실질값을 nominal value와 deflator로 연결할 수
+있지만, chain-weighted quantity index에서는 구성항의 실질값이 정확히
+가산적이지 않을 수 있다. 모형의 자원제약과 자료의 chain-weighted
+components를 기계적으로 대조하지 않는다.
+
+### D.3.2 Total과 인구기준
+
+::: math-display
+$$y_t^{pc}=\frac{Y_t}{N_t},\qquad y_t^{pw}=\frac{Y_t}{L_t},\qquad y_t^{ph}=\frac{Y_t}{H_t}.\tag{D.9}$$
+:::
+
+총인구, 생산가능인구, 취업자, 총근로시간은 서로 다른 분모다.
+
+### D.3.3 Stock, flow, rate
+
+::: display-table-wrap
+  객체    저빈도 집계                      예
+  ------- -------------------------------- ----------------------
+  Flow    기간합계 또는 평균 유량          GDP, 소비, 투자
+  Stock   말기값 또는 기간평균             자본, 부채, 통화잔액
+  Rate    기간평균, 복리집계 또는 말기값   금리, 인플레이션
+:::
+
+### D.3.4 Growth와 annualization
+
+::: math-display
+$$g_t^q=\Delta\log Y_t,\qquad g_t^{ann,approx}=400\,\Delta\log Y_t.\tag{D.10}$$
+:::
+
+한 분기의 gross growth factor가 이후 세 분기에도 동일하게 반복된다고
+환산한 exact annualized rate는
+
+::: math-display
+$$g_t^{ann}=100\left[\left(\frac{Y_t}{Y_{t-1}}\right)^4-1\right].\tag{D.11}$$
+:::
+
+이는 실제 전년동기비 성장률과는 다른 환산값이다. percent와 percentage
+point, quarterly decimal과 annualized percent를 구분한다.
+
+### D.3.5 계절조정과 vintage
+
+seasonally adjusted와 unadjusted series를 혼합하지 않는다. 실시간
+정책평가에서는 당시 이용 가능했던 vintage를 사용하며, 수정자료로 얻은
+ex-post 결과와 구분한다.
+:::::::
+
+:::::::::::::::::::::: {#appD-d04 .section}
+## [D.4]{.section-number}추세와 순환의 정의
+
+추세와 순환은 자료에서 자동으로 주어지지 않는다. 분해규칙이 분석대상을
+정의한다.
+
+::: math-display
+$$y_t=\tau_t+c_t.\tag{D.12}$$
+:::
+
+이 등식만으로 $\tau_t$와 $c_t$는 식별되지 않는다.
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+Deterministic trend
+:::
+
+::: right
+시간의 함수로 추세를 제한한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+Stochastic trend
+:::
+
+::: right
+unit root 또는 common trend가 영구성분을 만든다.
+:::
+:::::
+
+::::: chain-row
+::: left
+BN decomposition
+:::
+
+::: right
+장기예측에 기초해 permanent와 transitory component를 나눈다.
+:::
+:::::
+
+::::: chain-row
+::: left
+Frequency definition
+:::
+
+::: right
+지정한 주파수대역의 변동을 cycle로 정의한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+Model-implied trend
+:::
+
+::: right
+balanced-growth path 또는 구조적 permanent shock가 추세를 규정한다.
+:::
+:::::
+::::::::::::::::::
+
+:::: {.statement .warning}
+::: statement-head
+분해는 중립적 전처리가 아니다
+:::
+
+추세제거법이 달라지면 변동성, 지속성, lead--lag relation과 모형순위가
+바뀔 수 있다. filter 선택 자체가 substantive assumption이다.
+::::
+::::::::::::::::::::::
+
+::::::: {#appD-d05 .section}
+## [D.5]{.section-number}추세제거와 finite-sample filtering
+
+population filter와 실제 유한표본에서 구현한 filter는 다를 수 있다.
+endpoint와 sample extension을 포함한 연산자 전체를 비교해야 한다.
+
+### D.5.1 Linear trend와 first difference
+
+::: math-display
+$$y_t=a+bt+c_t,\qquad \Delta y_t=y_t-y_{t-1}.\tag{D.13}$$
+:::
+
+trend residual과 first difference는 서로 다른 cycle을 정의한다.
+structural break가 있으면 단일 선형추세는 장기성장을 왜곡할 수 있다.
+
+### D.5.2 HP filter
+
+::: math-display
+$$\min_{\{\tau_t\}}\left\{\sum_{t=1}^{T}(y_t-\tau_t)^2+\lambda\sum_{t=2}^{T-1}(\Delta\tau_{t+1}-\Delta\tau_t)^2\right\}.\tag{D.14}$$
+:::
+
+2차 차분행렬을 $K$라 하면
+
+::: math-display
+$$\widehat\tau=(I+\lambda K'K)^{-1}y,\qquad \widehat c=\left[I-(I+\lambda K'K)^{-1}\right]y.\tag{D.15}$$
+:::
+
+### D.5.3 Band-pass와 one-sided filter
+
+이상적 band-pass filter는 무한한 양방향 가중치를 요구한다. 유한표본
+구현은 truncation, endpoint weights와 leakage를 수반한다. one-sided
+filter는 실시간 사용이 가능하지만 two-sided estimate와 다른 객체다.
+
+### D.5.4 동일 변환 원칙
+
+::: math-display
+$$\boxed{\mathcal T_T^{data}=\mathcal T_T^{model}.}\tag{D.16}$$
+:::
+
+log/level, sample length, filter parameter, endpoint treatment,
+aggregation, missing-data rule, annualization을 동일하게 적용한다.
+무한길이 population spectrum에 filter의 이상적 frequency response만 곱한
+결과와 짧은 표본에 실제 행렬 filter를 적용한 결과는 일반적으로 동일하지
+않다.
+:::::::
+
+::: part-divider
+PART II State-Space Dynamics, Moments, and Simulation
+:::
+
+::::: {#appD-d06 .section}
+## [D.6]{.section-number}경기변동 통계와 비교항목
+
+모멘트의 정의와 lag convention을 먼저 고정해야 자료와 모형의 표가 재현
+가능하다.
+
+::: math-display
+$$\sigma_x=\sqrt{\operatorname{Var}(x_t)},\qquad \operatorname{relvol}(x;y)=\frac{\sigma_x}{\sigma_y}.\tag{D.17}$$
+:::
+
+::: math-display
+$$\rho_x(h)=\operatorname{Corr}(x_{t+h},x_t),\qquad \rho_{xy}(h)=\operatorname{Corr}(x_{t+h},y_t).\tag{D.18}$$
+:::
+
+여기서 $h\gt0$이면 $y$가 $x$를 $h$기 선행한다는 convention을 사용한다.
+
+### D.6.1 대표 변수
+
+output, consumption, investment, hours, employment, labor productivity,
+TFP residual, real wage, inflation, interest rate, markup, credit
+spread를 비교할 수 있다.
+
+### D.6.2 해석상 주의
+
+"소비는 산출보다 덜 변동적이다" 같은 stylized fact는
+국가·기간·자료정의·filter에 따라 달라질 수 있다. 문헌의 한 수치를
+보편상수로 취급하지 않는다.
+:::::
+
+::::: {#appD-d07 .section}
+## [D.7]{.section-number}선형 state-space와 timing convention
+
+state와 observable에 같은 당기 shock가 들어갈 때 timing을 명시하지
+않으면 impact response와 covariance가 잘못 계산된다.
+
+::: math-display
+$$s_t=As_{t-1}+B\varepsilon_t,\qquad q_t=Cs_t+D\varepsilon_t.\tag{D.19}$$
+:::
+
+### D.7.1 MA representation
+
+::: math-display
+$$q_t=\sum_{j=0}^{\infty}\Psi_j\varepsilon_{t-j},\qquad \Psi_0=CB+D,\qquad \Psi_j=CA^jB\quad(j\ge1).\tag{D.20}$$
+:::
+
+### D.7.2 직접충격항
+
+$D\varepsilon_t$는 현재 state를 통하지 않는 당기효과다. 같은 shock가
+$B\varepsilon_t$를 통해 state에 영향을 주면서 동시에 $D\varepsilon_t$로
+observable에 직접 들어가는 것은 정당할 수 있다. 금지되는 것은 서로 다른
+두 전달경로를 포함하는 것이 아니라, 하나의 물리적 효과를 $B$와 $D$에
+중복 코딩하는 것이다.
+
+### D.7.3 Appendix B와의 mapping
+
+Appendix B의 $x_{t+1}=Px_t+H\varepsilon_{t+1}$를 한 기 이동하면 $A=P$,
+$B=H$다. 정책·정적변수를 복원하는 행렬이 $C,D$를 구성한다.
+:::::
+
+::::: {#appD-d08 .section}
+## [D.8]{.section-number}안정성, 정상성, invariant distribution, ergodicity
+
+고유근이 단위원 안에 있다는 조건과 표본평균이 population moment로
+수렴한다는 조건은 같은 명제가 아니다.
+
+::: math-display
+$$\boxed{\text{stability}\neq\text{stationarity}\neq\text{ergodicity}.}\tag{D.21}$$
+:::
+
+### D.8.1 안정한 선형시스템
+
+$\rho(A)\lt1$이고 innovation에 적절한 모멘트가 있으면 causal solution은
+
+::: math-display
+$$s_t=\sum_{j=0}^{\infty}A^jB\varepsilon_{t-j}.\tag{D.22}$$
+:::
+
+양방향 iid innovation sequence의 measurable causal function으로 정의하고
+stationary initialization을 사용하면 이 해는 strictly stationary이며
+ergodic이다. $E\|\varepsilon_t\|^2<\infty$이면 covariance stationary다.
+임의의 비정상 초기값에서 시작한 유한표본 경로가 곧바로 strictly
+stationary인 것은 아니다.
+
+### D.8.2 Unit root
+
+unit root가 있으면 unconditional covariance와 stationary
+initialization을 일반적으로 사용할 수 없다. 차분, cointegration, exact
+diffuse initialization 또는 permanent--transitory representation이
+필요하다.
+
+### D.8.3 Nonlinear pruned system
+
+1차 transition의 안정성은 second-order mean 계산의 필요조건이지만, 고차
+polynomial의 전역 안정성을 뜻하지 않는다. Appendix C의 pruning과
+local-domain audit를 유지한다.
+:::::
+
+:::::::: {#appD-d09 .section}
+## [D.9]{.section-number}이론모멘트와 discrete Lyapunov equation
+
+안정한 선형해의 unconditional covariance는 시뮬레이션 없이 계산할 수
+있다.
+
+### D.9.1 State covariance
+
+::: math-display
+$$\boxed{\Sigma_s=A\Sigma_sA'+B\Omega B'.}\tag{D.23}$$
+:::
+
+::: math-display
+$$\operatorname{vec}(\Sigma_s)=\left[I-A\otimes A\right]^{-1}\operatorname{vec}(B\Omega B').\tag{D.24}$$
+:::
+
+$\rho(A)\lt1$이면 $I-A\otimes A$는 가역이다. 구현에서는 큰 Kronecker
+inverse를 만들기보다 stable discrete-Lyapunov solver를 사용한다.
+
+### D.9.2 Observable covariance
+
+$\operatorname{Cov}(s_t,\varepsilon_t)=B\Omega$이므로
+
+::: math-display
+$$\Gamma_q(0)=C\Sigma_sC'+CB\Omega D'+D\Omega B'C'+D\Omega D'.\tag{D.25}$$
+:::
+
+$h\ge1$에서
+
+::: math-display
+$$\Gamma_q(h)=E[q_{t+h}q_t']=CA^h\left(\Sigma_sC'+B\Omega D'\right),\qquad \Gamma_q(-h)=\Gamma_q(h)'.\tag{D.26}$$
+:::
+
+동일한 결과는 MA coefficients로
+
+::: math-display
+$$\Gamma_q(h)=\sum_{j=0}^{\infty}\Psi_{j+h}\Omega\Psi_j',\qquad h\ge0\tag{D.27}$$
+:::
+
+라고 쓸 수 있다.
+
+### D.9.3 Measurement error
+
+관측오차가 state와 독립이고 serially uncorrelated이면 lag 0
+covariance에만 $R_\nu$가 추가된다. serially correlated measurement
+error는 별도 state로 편입한다.
+::::::::
+
+:::::: {#appD-d10 .section}
+## [D.10]{.section-number}Population moments와 sample moments
+
+이론모멘트는 확률법칙의 함수이고, 표본모멘트는 유한한 관측치의 함수다.
+둘은 기대값 수준에서도 같지 않을 수 있다.
+
+::: math-display
+$$\Gamma(h)=E[(q_{t+h}-\mu)(q_t-\mu)'].\tag{D.28}$$
+:::
+
+::: math-display
+$$\bar q_T=\frac1T\sum_{t=1}^{T}q_t,\qquad \widehat\Gamma_T(h)=\frac1{T-h}\sum_{t=1}^{T-h}(q_{t+h}-\bar q_T)(q_t-\bar q_T)'.\tag{D.29}$$
+:::
+
+### D.10.1 Convention 의존성
+
+분모 $T$, $T-h$, true mean, sample mean 중 어떤 정의를 쓰는지 기록한다.
+통계 software의 기본설정이 서로 다를 수 있다.
+
+### D.10.2 Finite-sample distortion
+
+persistent process의 sample autocorrelation, ratio of standard
+deviations, sample quantile와 filtered moments는 유의한 bias를 가질 수
+있다.
+
+::: math-display
+$$E_\theta[\widehat m_T]\neq m_\infty(\theta)\quad\text{in general}.\tag{D.30}$$
+:::
+
+따라서 실제 표본과 같은 길이의 simulated sample distribution을 병행한다.
+::::::
+
+::::: {#appD-d11 .section}
+## [D.11]{.section-number}선형 및 pruned simulation
+
+시뮬레이션 설계는 단순한 코드설정이 아니라 비교통계량의 일부다.
+
+### D.11.1 초기화
+
+Gaussian linear model이고 $\rho(A)\lt1$이면
+
+::: math-display
+$$s_0\sim N(0,\Sigma_s)\tag{D.31}$$
+:::
+
+로 stationary initialization을 할 수 있다. non-Gaussian shocks에서는
+stationary distribution이 일반적으로 Gaussian이 아니며, long burn-in
+또는 정확한 distributional draw가 필요하다.
+
+### D.11.2 Monte Carlo
+
+::: math-display
+$$\overline m_R=\frac1R\sum_{r=1}^{R}\widehat m_T^{(r)},\qquad \operatorname{MCSE}(\overline m_R)=\sqrt{\frac{\widehat{\operatorname{Var}}(\widehat m_T^{(r)})}{R}}.\tag{D.32}$$
+:::
+
+(D.32)의 MCSE 식은 replication들이 서로 독립이라는 benchmark에 해당한다.
+seed, burn-in, sample length, repetitions와 shock distribution을
+기록한다. 모형·정책 간 차이를 비교할 때에는 각 replication 안에서 common
+random numbers를 공유하되, replication 간에는 독립성을 유지하면 차이의
+Monte Carlo variance를 줄일 수 있다.
+
+### D.11.3 고차해
+
+Appendix C의 pruned recursion을 사용한다. naive second-order iteration,
+log-to-level correction 누락, deterministic steady state로의 임의
+재중심화를 피한다.
+:::::
+
+::: part-divider
+PART III Dynamic Responses, Frequency Domain, and Shock Attribution
+:::
+
+:::::: {#appD-d12 .section}
+## [D.12]{.section-number}선형 impulse responses
+
+IRF는 특정 shock innovation에 대한 조건부 동태반응이다. shock의 크기와
+방향을 명시하지 않은 IRF는 정의가 불완전하다.
+
+::: math-display
+$$\operatorname{IRF}_q(h;\delta)=\Psi_h\delta.\tag{D.33}$$
+:::
+
+### D.12.1 Normalization
+
+unit shock, one-standard-deviation shock, 25-basis-point shock와
+1-percentage-point annualized shock를 구분한다. $\Omega=LL'$,
+$\varepsilon_t=Lu_t$, $E[u_tu_t']=I$이면 orthogonal shock $j$의 방향은
+$Le_j$다.
+
+### D.12.2 Identification과 normalization
+
+::: math-display
+$$\boxed{\text{shock-size normalization}\neq\text{shock identification}.}\tag{D.34}$$
+:::
+
+상관된 reduced-form innovations에서 $L$은 유일하지 않다. Cholesky
+factor는 ordering에 의존한다. DSGE의 primitive shocks가 독립으로
+구조화되어 있다면 그 구조가 identification을 제공하지만, 이 역시
+모형가정이다.
+
+### D.12.3 누적반응
+
+성장률의 level response는
+
+::: math-display
+$$\operatorname{CIRF}_{y}(h)=\sum_{j=0}^{h}\operatorname{IRF}_{\Delta y}(j).\tag{D.35}$$
+:::
+
+다만 log difference와 exact percentage change의 차이를 유지한다.
+::::::
+
+:::::: {#appD-d13 .section}
+## [D.13]{.section-number}비선형 generalized impulse responses
+
+고차모형에서 반응은 초기상태, shock 부호와 크기, 미래충격분포에
+의존한다. 또한 "무충격 경로"와 "현재 충격을 평균낸 기준경로"는
+비선형모형에서 서로 다른 benchmark다.
+
+### D.13.1 Koop--Pesaran--Potter형 GIRF
+
+::: math-display
+$$\operatorname{GIRF}(h;\delta,s)=E[q_{t+h}\mid\varepsilon_t=\delta,s_{t-1}=s]-E[q_{t+h}\mid s_{t-1}=s].\tag{D.36}$$
+:::
+
+두 번째 항은 현재 충격과 미래 충격의 분포를 적분한 조건부 기준경로다.
+실무에서 자주 쓰는 zero-innovation response는
+
+::: math-display
+$$\operatorname{ZIRF}(h;\delta,s)=E[q_{t+h}\mid\varepsilon_t=\delta,s_{t-1}=s]-E[q_{t+h}\mid\varepsilon_t=0,s_{t-1}=s]$$
+:::
+
+로 별도 정의한다. 선형 mean-zero 모형에서는 두 정의가 일치하지만,
+비선형모형에서는 Jensen effect 때문에 일반적으로 다르다.
+
+### D.13.2 계산
+
+shock 경로 간 Monte Carlo variance를 줄이기 위해 동일한 미래 shock
+draws를 사용하고 Appendix C의 pruned recursion으로 평균낸다. KPP형
+GIRF에서는 기준항의 현재 충격도 그 조건부분포에 대해 적분해야 한다.
+state-conditional GIRF와 invariant distribution에 대해 초기상태를 평균낸
+ergodic GIRF를 구분한다.
+
+### D.13.3 비선형성
+
+::: math-display
+$$\operatorname{GIRF}(h;2\delta,s)\neq2\operatorname{GIRF}(h;\delta,s),\qquad \operatorname{GIRF}(h;-\delta,s)\neq-\operatorname{GIRF}(h;\delta,s)\tag{D.37}$$
+:::
+
+가 일반적이다. shock 규모와 초기상태를 바꾸어 robustness를 보고한다.
+::::::
+
+::::::: {#appD-d14 .section}
+## [D.14]{.section-number}MA representation, spectral density, coherence
+
+시간영역의 autocovariance와 주파수영역의 spectrum은 같은 2차 동학을 서로
+다른 좌표로 표현한다.
+
+### D.14.1 Transfer function
+
+::: math-display
+$$\Psi(z)=D+C(I-Az)^{-1}B.\tag{D.38}$$
+:::
+
+::: math-display
+$$f_q(\omega)=\frac1{2\pi}\Psi(e^{-i\omega})\Omega\Psi(e^{-i\omega})^*,\qquad \omega\in[-\pi,\pi].\tag{D.39}$$
+:::
+
+별표는 conjugate transpose다.
+
+### D.14.2 Cross-spectrum
+
+::: math-display
+$$\operatorname{coh}_{ij}(\omega)=\frac{|f_{ij}(\omega)|^2}{f_{ii}(\omega)f_{jj}(\omega)},\qquad \operatorname{phase}_{ij}(\omega)=\arg f_{ij}(\omega).\tag{D.40}$$
+:::
+
+coherence는 $f_{ii}(\omega)f_{jj}(\omega)>0$인 주파수에서 정의되며
+주파수별 선형연관의 크기를 나타낸다. phase의 부호와 lead--lag 해석은
+Fourier transform과 cross-spectrum의 순서 convention에 의존하므로 이를
+함께 명시한다.
+
+### D.14.3 Filtered spectrum
+
+선형 filter $H(L)$를 적용하면
+
+::: math-display
+$$f_{\widetilde q}(\omega)=H(e^{-i\omega})f_q(\omega)H(e^{-i\omega})^*.\tag{D.41}$$
+:::
+
+finite-sample endpoint와 spectral leakage는 이 population identity만으로
+포착되지 않는다.
+:::::::
+
+:::::::: {#appD-d15 .section}
+## [D.15]{.section-number}Forecast-error variance와 FEVD
+
+FEVD는 지정된 forecast horizon의 예측오차를 식별된 shock directions에
+배분한다.
+
+::: math-display
+$$q_{t+h}-E_tq_{t+h}=\sum_{k=0}^{h-1}\Psi_k\varepsilon_{t+h-k},\qquad h\ge1.\tag{D.42}$$
+:::
+
+::: math-display
+$$\mathcal V_q(h)=\sum_{k=0}^{h-1}\Psi_k\Omega\Psi_k'.\tag{D.43}$$
+:::
+
+(D.42)--(D.43)은 현재 state $s_t$가 알려진 structural information set을
+기준으로 한다. latent-state model에서 $d_{1:t}$만을 조건으로 한
+recorded-data forecast error에는 현재 state의 filtering uncertainty와
+미래 measurement error가 추가된다.
+
+### D.15.1 Orthogonal FEVD
+
+$\Omega=LL'$이고 $u_t$가 orthonormal structural shocks이면 변수 $i$에
+대한 shock $j$의 비중은
+
+::: math-display
+$$\theta_{ij}(h)=\frac{\sum_{k=0}^{h-1}(e_i'\Psi_kLe_j)^2}{e_i'\mathcal V_q(h)e_i}.\tag{D.44}$$
+:::
+
+분모가 양수이고 $LL'=\Omega$를 만족하는 모든 orthogonal shock
+directions를 포함하며 별도 measurement error가 없으면 $j$에 대한 비중의
+합은 1이다. recorded-data forecast error를 분해하려면 measurement
+error의 예측오차분산도 분모와 별도 기여항에 포함해야 한다.
+
+### D.15.2 상관된 shock
+
+Cholesky FEVD는 ordering-dependent다. generalized FEVD는
+orthogonalization을 피하지만 shock contributions가 자동으로 1에 합해지지
+않아 normalization이 필요할 수 있다. sign restriction은 set-valued
+decomposition을 낳는다.
+
+:::: {.statement .warning}
+::: statement-head
+구조적 해석
+:::
+
+분산기여율은 shock identification이 주어졌을 때의 회계적 분해다. 그 숫자
+자체가 identification의 타당성을 증명하지 않는다.
+::::
+::::::::
+
+::: part-divider
+PART IV Measurement Equations, Filtering, and Historical Decomposition
+:::
+
+:::::: {#appD-d16 .section}
+## [D.16]{.section-number}Measurement equation과 data mapping
+
+measurement equation은 모형해와 실제 관측치를 연결하는 중심식이다.
+
+::: math-display
+$$s_t=As_{t-1}+w_t,\qquad d_t=a+Zs_t+\nu_t.\tag{D.45}$$
+:::
+
+::: math-display
+$$E[w_tw_t']=Q,\qquad E[\nu_t\nu_t']=R,\qquad E[w_t\nu_t']=S.\tag{D.46}$$
+:::
+
+### D.16.1 Baseline
+
+아래 filter 식은 $(w_t',\nu_t')'$가 시간에 걸쳐 serially
+uncorrelated이고 과거 정보와 직교하며,
+
+::: math-display
+$$\begin{bmatrix}Q&S\\S'&R\end{bmatrix}\succeq0$$
+:::
+
+인 benchmark를 전제로 한다. 표준 Kalman 식은 $S=0$을 기준으로 한다. 당기
+structural shock가 state innovation과 measurement disturbance $\nu_t$에
+동시에 직접 들어가면 $S\neq0$인 correlated-disturbance filter를
+사용하거나 state를 적절히 확장한다. exact conditional-mean 해석과
+likelihood의 정규형에는 joint Gaussianity가 추가로 필요하다.
+
+### D.16.2 Intercept와 loading
+
+$a$에는 steady-state growth, 평균 인플레이션·금리, annualization
+constant가 들어갈 수 있다. $Z$는 observable 선택, log·percent scaling,
+aggregation과 차분을 구현한다. lagged variable이 필요하면 state를
+augment한다.
+
+### D.16.3 Observability
+
+모든 state가 매 시점 관측될 필요는 없지만, pair $(A,Z)$의 비관측 mode가
+잠재상태 추정을 불가능하게 하거나 likelihood를 약하게 식별할 수 있다.
+detectability와 numerical observability를 점검한다.
+::::::
+
+::::::::: {#appD-d17 .section}
+## [D.17]{.section-number}Kalman filter와 innovation likelihood
+
+선형 Gaussian state-space에서 Kalman filter는 조건부평균과
+조건부공분산을 재귀적으로 계산한다.
+
+### D.17.1 Prediction
+
+::: math-display
+$$\widehat s_{t|t-1}=A\widehat s_{t-1|t-1},\qquad P_{t|t-1}=AP_{t-1|t-1}A'+Q.\tag{D.47}$$
+:::
+
+### D.17.2 Innovation과 update
+
+::: math-display
+$$e_t^d=d_t-a-Z\widehat s_{t|t-1},\qquad F_t=ZP_{t|t-1}Z'+R.\tag{D.48}$$
+:::
+
+::: math-display
+$$K_t=P_{t|t-1}Z'F_t^{-1},\qquad \widehat s_{t|t}=\widehat s_{t|t-1}+K_te_t^d.\tag{D.49}$$
+:::
+
+::: math-display
+$$P_{t|t}=(I-K_tZ)P_{t|t-1}(I-K_tZ)'+K_tRK_t'.\tag{D.50}$$
+:::
+
+마지막 Joseph form은 대수적으로 단순 update와 같지만 finite
+precision에서 대칭성과 양의 준정부호성을 더 잘 보존한다.
+
+### D.17.3 Correlated disturbances
+
+$S\neq0$이면
+
+::: math-display
+$$\begin{aligned}F_t&=ZP_{t|t-1}Z'+R+ZS+S'Z',\\K_t&=(P_{t|t-1}Z'+S)F_t^{-1},\\P_{t|t}&=P_{t|t-1}-(P_{t|t-1}Z'+S)F_t^{-1}(ZP_{t|t-1}+S').\end{aligned}\tag{D.51}$$
+:::
+
+따라서 $S\neq0$인 경우에는 (D.50)의 $S=0$ Joseph form을 그대로
+사용해서는 안 된다. 수치적으로는 correlated-noise model을 등가의
+uncorrelated representation으로 변환하거나 square-root implementation을
+사용할 수 있다.
+
+### D.17.4 Innovation likelihood
+
+::: math-display
+$$\ell(\theta)=-\frac12\sum_{t=1}^{T}\left[n_t\log(2\pi)+\log\det F_t+(e_t^d)'F_t^{-1}e_t^d\right].\tag{D.52}$$
+:::
+
+proper Gaussian initial distribution, nonsingular innovation covariance,
+올바른 missing-data 차원 $n_t$ 아래에서는 exact likelihood다. 비Gaussian
+선형모형에서는 일반적으로 Gaussian quasi-likelihood다. diffuse
+initialization에서는 초기 diffuse 단계에 대한 별도의 exact-diffuse
+likelihood correction이 필요하다. explicit inverse보다 Cholesky
+factorization과 linear solve를 사용한다.
+:::::::::
+
+::::::: {#appD-d18 .section}
+## [D.18]{.section-number}Smoothing, missing data, initialization
+
+filter는 현재까지의 자료를, smoother는 전체표본을 사용한다. 두 결과를
+실시간 분석에서 혼동하면 안 된다.
+
+### D.18.1 RTS smoother
+
+다음 recursion은 $S=0$인 표준 state-space 또는 그와 동등하게 변환된
+표현을 기준으로 한다. contemporaneously correlated disturbances를 원래
+표현 그대로 유지하면 대응하는 cross-covariance를 반영한 smoother를
+사용해야 한다.
+
+::: math-display
+$$J_t=P_{t|t}A'P_{t+1|t}^{-1}.\tag{D.53}$$
+:::
+
+::: math-display
+$$\widehat s_{t|T}=\widehat s_{t|t}+J_t(\widehat s_{t+1|T}-\widehat s_{t+1|t}).\tag{D.54}$$
+:::
+
+::: math-display
+$$P_{t|T}=P_{t|t}+J_t(P_{t+1|T}-P_{t+1|t})J_t'.\tag{D.55}$$
+:::
+
+::: math-display
+$$\widehat s_{t|t}=E[s_t\mid d_{1:t}],\qquad \widehat s_{t|T}=E[s_t\mid d_{1:T}].\tag{D.56}$$
+:::
+
+### D.18.2 Initialization
+
+안정한 stationary block은 Lyapunov covariance로 초기화할 수 있다. known
+initial state, diffuse prior와 unit-root block은 서로 다른 초기화가
+필요하다. unit root를 임의의 매우 큰 covariance로 처리하는 approximate
+diffuse method와 exact diffuse method를 구분한다.
+
+### D.18.3 Missing data
+
+시점 $t$에 관측된 행만 선택하여 innovation update를 수행한다. 임의 보간
+후 filter를 돌리는 것과 동일하지 않다.
+:::::::
+
+:::::::::: {#appD-d19 .section}
+## [D.19]{.section-number}Shock recovery와 historical decomposition
+
+역사적 분해는 관측자료에서 추정한 상태와 shock를 이용해 각 shock의
+시간별 기여를 재구성한다.
+
+### D.19.1 정확한 선형분해
+
+$\varepsilon_t=Lu_t$이고 시작시점을 0으로 두면
+
+::: math-display
+$$q_t=CA^ts_0+\sum_{r=1}^{t}\Psi_{t-r}Lu_r.\tag{D.57}$$
+:::
+
+shock $j$의 기여는
+
+::: math-display
+$$q_t^{(j)}=\sum_{r=1}^{t}\Psi_{t-r}Le_j\,u_{j,r}.\tag{D.58}$$
+:::
+
+(D.57)은 실제 초기상태와 실제 structural shocks가 주어졌을 때의 정확한
+잠재변수 항등식이다. 추정된 shocks를 넣은 historical decomposition은
+일반적으로 conditional-mean decomposition이며, raw data를 정확히
+재구성하려면 intercept, deterministic trend, measurement-error
+contribution과 초기조건을 모두 포함해야 한다.
+
+### D.19.2 Shock recovery
+
+state가 완전히 관측되지 않으면 $u_t$는 filter 또는 disturbance
+smoother로 추정한다. 단순히 state residual을 역행렬로 나누는 방법은
+$B$가 정방·가역일 때만 가능하며 measurement error가 있으면 부적절하다.
+
+### D.19.3 Filtered와 smoothed decomposition
+
+::::: formula-pair
+::: {}
+[REAL TIME]{.tag}
+
+### Filtered
+
+고정된 parameter와 data vintage 아래 시점 $t$까지의 정보만 사용한다.
+미래 관측치를 추가해도 $\widehat s_{t|t}$ 자체는 바뀌지 않지만,
+parameter 재추정이나 과거자료 revision이 있으면 실시간 estimate는 수정될
+수 있다.
+:::
+
+::: {}
+[EX POST]{.tag}
+
+### Smoothed
+
+전체표본의 미래자료를 사용하므로 $\widehat s_{t|T}$는 새 관측치가 추가될
+때 과거값도 수정된다. 사후설명에는 적합하지만 실시간 진단은 아니다.
+:::
+:::::
+
+:::: {.statement .warning}
+::: statement-head
+인과해석
+:::
+
+historical decomposition은 지정된 구조모형과 shock identification 아래의
+회계적 분해다. 구조가 잘못 식별되었다면 decomposition도 구조적
+인과효과가 아니다.
+::::
+::::::::::
+
+:::::: {#appD-d20 .section}
+## [D.20]{.section-number}Filtering과 measurement uncertainty
+
+서로 다른 불확실성을 하나의 신뢰구간으로 섞지 않는다.
+
+::: math-display
+$$\boxed{\begin{aligned}&\text{trend-filter uncertainty},\\&\text{state-filter uncertainty},\\&\text{measurement and revision uncertainty},\\&\text{structural-model uncertainty}.\end{aligned}}\tag{D.59}$$
+:::
+
+### D.20.1 Trend-filter uncertainty
+
+HP parameter, band limits, endpoint, sample extension과 자료추가에 따른
+revision을 점검한다.
+
+### D.20.2 State uncertainty
+
+$P_{t|t}$와 $P_{t|T}$는 선형 Gaussian benchmark에서 state estimation
+uncertainty를 나타낸다. parameter uncertainty를 조건부공분산에 자동으로
+포함하지는 않는다.
+
+### D.20.3 Recorded-data uncertainty
+
+국민계정 revision, survey sampling error, seasonal adjustment,
+deflator와 chain weighting, unobserved utilization을 구분한다.
+
+:::: {.statement .remark}
+::: statement-head
+HP filter와 Kalman filter
+:::
+
+둘 다 "filter"라 불리지만 전자는 선택한 smoothness penalty로 추세를
+분해하고, 후자는 명시된 확률모형에서 잠재상태의 조건부분포를 계산한다.
+::::
+::::::
+
+::: part-divider
+PART V Calibration, Identification, and Quantitative Evaluation
+:::
+
+::::::: {#appD-d21 .section}
+## [D.21]{.section-number}Calibration, estimation, local identification
+
+parameter를 선택하는 방식과 선택된 parameter에서 모형을 평가하는 방식을
+분리한다.
+
+### D.21.1 Calibration
+
+steady-state ratios, 외부 미시증거, 장기평균과 기존문헌을 이용해
+$\theta^{cal}$을 제한한다. calibration도 민감도와 비식별 문제에서
+자유롭지 않다.
+
+### D.21.2 Estimation의 기본구조
+
+innovation likelihood, GMM, SMM과 Bayesian estimation의 목적을 구분한다.
+SMM benchmark는
+
+::: math-display
+$$\widehat\theta=\arg\min_\theta\left[\widehat m_T^d-\widehat m_{T,R}^m(\theta)\right]'W\left[\widehat m_T^d-\widehat m_{T,R}^m(\theta)\right].\tag{D.60}$$
+:::
+
+### D.21.3 Local identification
+
+moment-based identification은
+
+::: math-display
+$$G_m(\theta)=\frac{\partial m(\theta)}{\partial\theta'}\tag{D.61}$$
+:::
+
+가 full column rank인지와 singular values를 본다. likelihood-based
+identification은 score와 information matrix의 rank·curvature를 점검한다.
+
+:::: {.statement .warning}
+::: statement-head
+Rank와 실질적 식별
+:::
+
+적절한 regularity 아래 full column rank는 regular first-order local
+identification의 충분조건이다. 그러나 nonlinear mapping에서는 rank
+failure가 곧 비식별을 뜻하지 않으며 higher-order identification이 가능할
+수 있다. 반대로 매우 작은 singular value는 first-order sensitivity가
+약하다는 신호지만, 그 크기는 parameter와 moment scaling에 의존하므로
+scaling-invariant 진단과 함께 해석해야 한다.
+::::
+:::::::
+
+:::::: {#appD-d22 .section}
+## [D.22]{.section-number}Target moments, evaluation moments, loss functions
+
+맞추도록 설계한 통계량과 모형의 독립적 예측을 같은 성공지표로 계산하지
+않는다.
+
+::: math-display
+$$m^{target}\quad\text{versus}\quad m^{eval}.\tag{D.62}$$
+:::
+
+두 집합이 반드시 완전히 disjoint일 필요는 없지만, target moment의
+적합도를 out-of-sample success처럼 제시해서는 안 된다.
+
+### D.22.1 평가표
+
+::: display-table-wrap
+  열                    내용
+  --------------------- --------------------------------------------------------
+  Data                  estimate와 sampling interval
+  Model population      이론적 장기모멘트
+  Model finite sample   동일 $T$·filter의 Monte Carlo mean와 interval
+  Discrepancy           absolute·relative·standardized gap
+  Status                targeted, calibrated externally, untargeted evaluation
+:::
+
+### D.22.2 Loss function
+
+::: math-display
+$$J(\theta)=[m^d-m^m(\theta)]'W[m^d-m^m(\theta)].\tag{D.63}$$
+:::
+
+$W$는 단순한 수치안정화 장치가 아니라 어떤 실패방향을 더 중요하게 보는지
+결정한다. 서로 다른 단위의 moment를 scale 없이 합치지 않는다.
+::::::
+
+:::::::::: {#appD-d23 .section}
+## [D.23]{.section-number}표본·simulation·parameter·model uncertainty
+
+모형--자료 차이의 원인을 한 종류의 오차로 환원하지 않는다.
+
+::::::: details-grid
+::: {}
+[SAMPLING]{.tag}
+
+### 자료 표본오차
+
+HAC, moving-block bootstrap, stationary bootstrap 또는 모형기반
+asymptotics.
+:::
+
+::: {}
+[SIMULATION]{.tag}
+
+### 시뮬레이션오차
+
+finite length, repetitions, burn-in, seed와 rare-event sampling.
+:::
+
+::: {}
+[PARAMETER]{.tag}
+
+### 모수불확실성
+
+추정량 또는 posterior의 분산이 모형함수에 전달된다.
+:::
+
+::: {}
+[APPROXIMATION]{.tag}
+
+### 해법오차
+
+linearization, perturbation order, pruning, quadrature와 solver
+residual.
+:::
+:::::::
+
+### D.23.1 Delta-method benchmark
+
+::: math-display
+$$\operatorname{Var}[m(\widehat\theta)]\approx M_\theta\operatorname{Var}(\widehat\theta)M_\theta',\qquad M_\theta=\frac{\partial m(\theta)}{\partial\theta'}.\tag{D.64}$$
+:::
+
+### D.23.2 Model discrepancy
+
+측정방정식의 오류, 누락된 메커니즘, shock distribution
+misspecification과 구조 자체의 부적합은 parameter uncertainty로 흡수되지
+않는다.
+
+### D.23.3 최종 평가
+
+점모멘트뿐 아니라 finite-sample distribution, posterior predictive
+check, out-of-sample forecast, density forecast와 tail discrepancy를
+함께 본다.
+
+::: math-display
+$$\boxed{\text{solution accuracy}\neq\text{statistical approximation accuracy}\neq\text{empirical fit}.}\tag{D.65}$$
+:::
+::::::::::
+
+::: part-divider
+PART VI Applications and Reproducibility
+:::
+
+:::::::::::::::::: {#appD-d24 .section}
+## [D.24]{.section-number}AR(1), RBC, New Keynesian 적용과 통합 보고서
+
+세 예제는 analytical moments, DSGE measurement mapping, shock
+normalization과 latent-state inference를 순차적으로 검증한다.
+
+### D.24.1 Scalar AR(1)
+
+::: math-display
+$$x_t=\rho x_{t-1}+\sigma_{\varepsilon}\varepsilon_t,\qquad E\varepsilon_t=0,\quad E\varepsilon_t^2=1,\quad |\rho|\lt1.\tag{D.66}$$
+:::
+
+::: math-display
+$$\operatorname{Var}(x_t)=\frac{\sigma_{\varepsilon}^2}{1-\rho^2},\qquad \operatorname{Cov}(x_{t+h},x_t)=\rho^h\frac{\sigma_{\varepsilon}^2}{1-\rho^2}.\tag{D.67}$$
+:::
+
+::: math-display
+$$\operatorname{IRF}(h)=\rho^h\sigma_{\varepsilon},\qquad f_x(\omega)=\frac{\sigma_{\varepsilon}^2}{2\pi|1-\rho e^{-i\omega}|^2}.\tag{D.68}$$
+:::
+
+$\rho=.9$, $\sigma_{\varepsilon}=.01$이면
+$\operatorname{Var}(x)=5.26316\times10^{-4}$, 표준편차는 약 $0.02294$다.
+하나의 구조충격만 있으므로 FEVD는 모든 양의 forecast horizon에서 1이다.
+finite sample의 sample autocorrelation은 이 population value와
+일반적으로 같지 않다.
+
+### D.24.2 RBC 모형
+
+Appendix B·C의 calibration을 사용한다.
+
+::: math-display
+$$s_t=\begin{bmatrix}\widehat k_t\\ \widehat a_t\end{bmatrix},\quad A=\begin{bmatrix}0.9652764&0.07537183\\0&0.95\end{bmatrix},\quad B=\begin{bmatrix}0\\0.01\end{bmatrix}.\tag{D.69}$$
+:::
+
+output, consumption, investment의 1차 log-deviation mapping은
+
+::: math-display
+$$q_t=Cs_t,\qquad C=\begin{bmatrix}0.36&1\\0.61824657&0.30524296\\-0.38894404&3.01487339\end{bmatrix}.\tag{D.70}$$
+:::
+
+마지막 행은 수준 자원제약 $I_t=Y_t-C_t$를 정상상태에서 로그선형화한
+결과다.
+
+::: math-display
+$$\bar I=\delta\bar k=\bar y-\bar c,\qquad \widehat I_t=\frac{\bar y}{\bar I}\widehat y_t-\frac{\bar c}{\bar I}\widehat c_t.\tag{D.70a}$$
+:::
+
+따라서 로그편차에서는 $\widehat I_t=\widehat Y_t-\widehat C_t$가
+일반적으로 성립하지 않는다. 또한 여기의 $I_t$는 물적투자이며 Chapter
+07의 명목정책금리 $\widetilde i_t$와 다른 객체다.
+
+::: math-display
+$$\Sigma_s=\begin{bmatrix}0.001972322&0.000884944\\0.000884944&0.001025641\end{bmatrix}.\tag{D.71}$$
+:::
+
+아래 표는 HP 또는 band-pass filter를 적용하지 않은 stationary
+log-deviation process의 population moments다. 자료와의 경기변동
+비교에서는 동일한 finite-sample filter를 모형경로에도 적용해야 한다.
+
+::: display-table-wrap
+  변수          표준편차   산출대비 변동성   1기 자기상관
+  ------------- ---------- ----------------- --------------
+  Output        0.043800   1.000             0.973585
+  Consumption   0.034401   0.785422          0.995757
+  Investment    0.086865   1.983228          0.937827
+:::
+
+1-standard-deviation technology shock에 대한 log-point IRF는 다음과
+같다.
+
+::: display-table-wrap
+  horizon   Output     Consumption   Investment
+  --------- ---------- ------------- ------------
+  0         0.010000   0.003052      0.030149
+  4         0.009098   0.004123      0.023526
+  8         0.008238   0.004780      0.018268
+  20        0.005978   0.005204      0.008222
+:::
+
+기술충격 하나만 존재하므로 모든 observable의 FEVD가 100%인 것은
+모형구조의 기계적 결과이며 경험적 성공이 아니다. 실제 자료비교에는 같은
+표본길이와 filter를 적용하고 Appendix C의 second-order mean correction을
+보존한다.
+
+### D.24.3 Canonical New Keynesian 예제
+
+기준모형은
+
+::: math-display
+$$x_t=E_tx_{t+1}-\frac1{\sigma_c}(\widetilde i_t-E_t\pi_{t+1}-\widetilde{\mathfrak r}_t^n),\qquad \pi_t=\beta E_t\pi_{t+1}+\kappa x_t+u_t,\qquad \widetilde i_t=\phi_\pi\pi_t+\phi_x x_t+v_t.\tag{D.72}$$
+:::
+
+여기서 $\sigma_c$는 Chapter 07의 역 EIS $\sigma$에 해당하며 perturbation
+scale $\sigma_p$와 다른 모수다. 외생 shock state를
+$s_t^{NK}=(\widetilde{\mathfrak r}_t^n,u_t,v_t)'$로 두고
+
+::: math-display
+$$s_t^{NK}=P_{NK}s_{t-1}^{NK}+B_{NK}\xi_t,\quad P_{NK}=\operatorname{diag}(0.8,0.5,0),\quad B_{NK}=\operatorname{diag}(0.0025,0.001,0.0025),\quad E[\xi_t\xi_t']=I.\tag{D.73}$$
+:::
+
+$\beta=.99$, $\sigma_c=1$, $\kappa=.1$, $\phi_\pi=1.5$,
+$\phi_x=.125$에서 natural-rate, cost-push, monetary-policy shocks에 대한
+정책행렬은
+
+::: math-display
+$$\begin{bmatrix}x_t\\\pi_t\\\widetilde i_t\end{bmatrix}=\begin{bmatrix}1.511628&-2.406015&-0.784314\\0.726744&1.503759&-0.078431\\1.279070&1.954887&0.784314\end{bmatrix}s_t^{NK}.\tag{D.74}$$
+:::
+
+자료가 output gap percent, annualized inflation percent, annualized
+policy rate percent라면 measurement scaling은
+
+::: math-display
+$$d_t=\operatorname{diag}(100,400,400)\begin{bmatrix}x_t\\\pi_t\\\widetilde i_t\end{bmatrix}+\nu_t.\tag{D.75}$$
+:::
+
+분기 log gross-rate deviation에 0.0025만큼 더해지는 monetary-policy
+shock(1차 단순 연율화 기준 1 percentage point)의 impact response는
+output gap $-0.1961$ percentage points, annualized inflation $-0.0784$
+percentage points, annualized nominal rate $0.7843$ percentage points다.
+이 수치는 shock가 persistence 0인 illustrative normalization의 결과다.
+
+독립 shock 기준 20-quarter FEVD는
+
+::: display-table-wrap
+  Observable     Natural-rate   Cost-push   Policy
+  -------------- -------------- ----------- --------
+  Output gap     0.7743         0.1507      0.0750
+  Inflation      0.7502         0.2467      0.0031
+  Nominal rate   0.7606         0.1365      0.1030
+:::
+
+실제 적용에서는 output gap이 latent일 수 있으므로 measurement error와
+additional observables를 포함한 Kalman filter가 필요하다.
+
+### D.24.4 재현성 보고서
+
+::: display-table-wrap
+  범주             필수 기록
+  ---------------- -------------------------------------------------------
+  Data             출처, vintage, 표본기간, 빈도, 계절조정
+  Definition       nominal/real, total/per-capita, stock/flow
+  Transformation   log, growth, detrending, filter와 endpoint
+  Model            parameter, steady state, solution order, residual
+  Shocks           covariance, normalization, identification
+  Simulation       seed, burn-in, sample length, repetitions
+  Moments          definition, divisor, lag convention
+  IRF·FEVD         shock size, horizon, initial state, orthogonalization
+  Filtering        measurement equation, initialization, missing data
+  Evaluation       target/evaluation 구분과 uncertainty intervals
+:::
+::::::::::::::::::
+
+:::::: {#appD-conclusion .section}
+## 결론
+
+정량적 거시모형은 상태공간 해만으로 자료와 비교되지 않는다. observable
+definition, measurement equation, finite-sample transformation과
+uncertainty accounting이 해와 자료 사이를 연결한다.
+
+::: math-display
+$$\boxed{\text{model solution}\neq\text{observable implication}\neq\text{finite-sample statistic}.}$$
+:::
+
+::: math-display
+$$\boxed{\text{measurement}\to\text{identical transformation}\to\text{finite-sample statistic}\to\text{uncertainty-aware comparison}.}$$
+:::
+
+::: conclusion-block
+Appendix 체계의 완결
+
+Appendix A는 최적화, B는 선형 균형과 결정성, C는 고차근사와 위험보정,
+D는 경기변동의 관측·통계·평가, E는 성장회계·발전회계와 국가 간 실증을
+담당한다. 다섯 부록은 이론해법, 정량검증, 장기성장 실증을 하나의
+계산체계로 연결한다.
+:::
+::::::
+
+::: {#appD-check .section}
+## Learning Check
+
+1.  latent economic object, model observable, recorded series의 차이를
+    예를 들어 설명하라.
+2.  flow, stock, rate의 분기--연간 집계연산자를 각각 구성하라.
+3.  HP filter의 행렬해와 cycle matrix를 도출하라.
+4.  two-sided filter의 endpoint revision이 발생하는 이유를 설명하라.
+5.  자료와 모형의 동일 변환 원칙을 위반하는 비교사례를 구성하라.
+6.  Lyapunov equation과 vectorized solution을 도출하라.
+7.  직접충격항 $D\varepsilon_t$가 있는 observable covariance를 도출하라.
+8.  population autocovariance와 sample autocovariance를 구분하라.
+9.  stationary initialization과 burn-in의 차이를 설명하라.
+10. unit shock와 one-standard-deviation IRF를 비교하라.
+11. GIRF가 초기상태와 shock sign에 의존하는 이유를 보이라.
+12. transfer function에서 spectral density를 도출하라.
+13. orthogonal FEVD를 도출하고 contributions가 1에 합하는 조건을
+    제시하라.
+14. 상관된 shocks에서 FEVD가 유일하지 않은 이유를 설명하라.
+15. Kalman prediction, innovation, update equations를 도출하라.
+16. correlated process·measurement disturbances에서 gain을 수정하라.
+17. filtered와 smoothed historical decomposition을 비교하라.
+18. target moment와 evaluation moment를 구분하라.
+19. sampling, simulation, parameter, approximation uncertainty를
+    분리하라.
+20. RBC 예제의 output·consumption·investment covariance를 직접 계산하라.
+:::
+
+:::::::::::::::::::::::::::::::::::: {#appD-glossary .section}
+## 핵심 용어
+
+::::::::::::::::::::::::::::::::::: definition-list
+:::: definition-row
+::: term
+Model observable
+:::
+
+경제적 state와 control을 자료의 단위·집계규칙에 맞게 변환한 모형상
+관측변수.
+::::
+
+:::: definition-row
+::: term
+Measurement equation
+:::
+
+latent state와 recorded data를 연결하는 확률적 관측식.
+::::
+
+:::: definition-row
+::: term
+Finite-sample filter
+:::
+
+주어진 표본길이와 endpoint rule에서 실제 구현되는 추세·순환 분해연산자.
+::::
+
+:::: definition-row
+::: term
+Invariant distribution
+:::
+
+transition 아래 한 기 진행해도 변하지 않는 상태분포.
+::::
+
+:::: definition-row
+::: term
+Ergodicity
+:::
+
+장기표본평균이 population object로 수렴하게 하는 성질.
+::::
+
+:::: definition-row
+::: term
+Lyapunov equation
+:::
+
+안정한 선형상태의 invariant covariance를 결정하는 행렬방정식.
+::::
+
+:::: definition-row
+::: term
+IRF
+:::
+
+지정된 shock innovation에 대한 선형 조건부반응.
+::::
+
+:::: definition-row
+::: term
+GIRF
+:::
+
+초기상태와 미래충격분포를 조건으로 한 비선형 반응차이.
+::::
+
+:::: definition-row
+::: term
+Spectral density
+:::
+
+분산을 주파수별로 분해한 행렬값 함수.
+::::
+
+:::: definition-row
+::: term
+FEVD
+:::
+
+forecast-error variance를 식별된 shock directions에 배분한 비중.
+::::
+
+:::: definition-row
+::: term
+Kalman filter
+:::
+
+선형상태공간에서 현재정보 조건부상태를 재귀적으로 추정하는 알고리즘.
+::::
+
+:::: definition-row
+::: term
+Smoother
+:::
+
+전체표본을 이용해 과거 latent state의 조건부분포를 갱신하는 알고리즘.
+::::
+
+:::: definition-row
+::: term
+Historical decomposition
+:::
+
+관측경로를 초기조건과 식별된 shocks의 시간별 기여로 분해한 결과.
+::::
+
+:::: definition-row
+::: term
+Target moment
+:::
+
+parameter 선택에 사용된 통계량.
+::::
+
+:::: definition-row
+::: term
+Evaluation moment
+:::
+
+선택된 parameter에서 모형의 독립적 함의를 평가하는 통계량.
+::::
+
+:::: definition-row
+::: term
+Model discrepancy
+:::
+
+parameter uncertainty만으로 환원되지 않는 구조모형과 자료생성과정의
+차이.
+::::
+:::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::
+
+:::: {#appD-references .section}
+## 참조 문헌
+
+- Hodrick, R. J., and E. C. Prescott (1997), "Postwar U.S. Business
+  Cycles: An Empirical Investigation," *Journal of Money, Credit and
+  Banking* 29(1), 1--16.
+- Baxter, M., and R. G. King (1999), "Measuring Business Cycles:
+  Approximate Band-Pass Filters for Economic Time Series," *Review of
+  Economics and Statistics* 81(4), 575--593.
+- Christiano, L. J., and T. J. Fitzgerald (2003), "The Band Pass
+  Filter," *International Economic Review* 44(2), 435--465.
+- Hamilton, J. D. (2018), "Why You Should Never Use the
+  Hodrick--Prescott Filter," *Review of Economics and Statistics*
+  100(5), 831--843.
+- Kalman, R. E. (1960), "A New Approach to Linear Filtering and
+  Prediction Problems," *Journal of Basic Engineering* 82(1), 35--45.
+- Harvey, A. C. (1989), *Forecasting, Structural Time Series Models and
+  the Kalman Filter*, Cambridge University Press.
+- Durbin, J., and S. J. Koopman (2012), *Time Series Analysis by State
+  Space Methods*, 2nd ed., Oxford University Press.
+- Koop, G., M. H. Pesaran, and S. M. Potter (1996), "Impulse Response
+  Analysis in Nonlinear Multivariate Models," *Journal of Econometrics*
+  74(1), 119--147.
+- Lütkepohl, H. (2005), *New Introduction to Multiple Time Series
+  Analysis*, Springer.
+- Kydland, F. E., and E. C. Prescott (1982), "Time to Build and
+  Aggregate Fluctuations," *Econometrica* 50(6), 1345--1370.
+- Cooley, T. F., ed. (1995), *Frontiers of Business Cycle Research*,
+  Princeton University Press.
+- King, R. G., and S. T. Rebelo (1999), "Resuscitating Real Business
+  Cycles," in *Handbook of Macroeconomics*, Vol. 1B.
+- Ljungqvist, L., and T. J. Sargent (2018), *Recursive Macroeconomic
+  Theory*, 4th ed.
+- Romer, D. (2019), *Advanced Macroeconomics*, 5th ed.
+
+::: source-note
+표기 원칙
+
+선형 state timing은 $s_t=As_{t-1}+B\varepsilon_t$로 고정한다. IRF
+horizon 0은 당기 observable response이며, cross-correlation은
+$\operatorname{Corr}(x_{t+h},y_t)$ convention을 사용한다. 분기 decimal
+rate의 annualized percent 변환에는 400을 사용한다.
+:::
+::::

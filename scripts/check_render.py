@@ -53,7 +53,9 @@ def main():
             errors.append(f"Callout count: {source}: {page.callouts}/{expected_callouts}")
         if page.proofs != expected_proofs:
             errors.append(f"Collapsed block count: {source}: {page.proofs}/{expected_proofs}")
-        if len(re.findall(r"^\s*\$\$\s*$", text, re.M)) % 2:
+        # Display delimiters can sit beside prose inside imported callouts.
+        # Count every delimiter rather than only delimiters on their own line.
+        if text.count("$$") % 2:
             errors.append(f"Unbalanced display delimiters: {source}")
         rows.append({"source": source, "math": page.math, "callouts": page.callouts, "collapsed": page.proofs})
     for path, page in pages.items():

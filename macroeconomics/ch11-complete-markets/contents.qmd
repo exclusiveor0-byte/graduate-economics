@@ -1,0 +1,1739 @@
+---
+title: >-
+  완전시장, 상태가격,그리고 자산가격의 기초
+description: >-
+  Complete Markets, State Prices, Risk Sharing, and the Foundations of Asset Valuation
+---
+
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::::::: {#ch11-opening .section}
+Chapter 09는 가계가 미래소비를 어떻게 한계평가하는지, Chapter 10은
+기업이 미래 한계이윤을 어떻게 설치자본의 가치로 압축하는지를 다루었다.
+그러나 그 할인규칙이 시장에서 어떻게 정해지는지는 아직 열려 있었다.
+Chapter 11은 미래의 서로 다른 상태에서 지급되는 재화를 별개의
+commodity로 보고, 가계의 한계평가·기업 payoff·자산시장 청산이 함께
+state-price system을 결정하는 과정을 분석한다.
+
+:::::: model-contrast
+::: {}
+[CHAPTER 09--10]{.tag}
+
+### 개별 최적화의 가치
+
+가계의 한계효용과 기업의 미래 한계이윤이 자산가격과 투자에 왜
+관련되는지를 설명한다.
+:::
+
+::: arrow
+→
+:::
+
+::: {}
+[CHAPTER 11]{.tag}
+
+### 일반균형 가격체계
+
+상태조건부 claim의 거래와 시장청산이 risk sharing, state prices, asset
+valuation을 어떻게 동시에 결정하는지 분석한다.
+:::
+::::::
+
+::: math-display
+$$
+          \boxed{
+          \text{household marginal valuation}
+          +
+          \text{firm payoff}
+          +
+          \text{asset-market clearing}
+          \Longrightarrow
+          \text{equilibrium state-price system}.}
+        $$
+:::
+
+::: thesis
+이 장의 중심 명제
+
+완전시장은 단순히 자산이 많이 존재하는 환경이 아니다. 그것은 계약가능한
+모든 contingent payoff가 직접 거래되거나 거래자산의 payoff로 복제될 수
+있는 *spanning property*다. 이 성질이 성립할 때, date\--state
+consumption의 상대가격은 위험분담과 모든 자산의 valuation을 하나의
+체계로 묶는다.
+:::
+:::::::::
+
+:::::::::: {#ch11-s01 .section}
+## [11.1]{.section-number}미래의 날짜뿐 아니라 상태까지 왜 가격화해야 하는가
+
+Chapter 09의 안전자산은 "다음 기에 한 단위 지급하는 claim"이었다.
+불확실성이 있으면 이 설명만으로 payoff를 완전히 기술할 수 없다. 같은
+날짜의 한 단위 소비라도 어느 상태에서 지급되는지에 따라 경제적 가치가
+다르기 때문이다.
+
+::: math-display
+$$
+          \text{one unit at }t+1\text{ in a recession}
+          \neq
+          \text{one unit at }t+1\text{ in a boom}.
+          \tag{11.1}
+        $$
+:::
+
+불황에서 지급되는 소비는 그 상태의 한계효용이 높다면 강한 보험가치를
+가진다. 따라서 미래 재화를 가격화하려면 단지 지급 날짜가 아니라, 그
+재화가 인도되는 history까지 지정해야 한다.
+
+::: math-display
+$$
+          \boxed{
+          \text{a commodity is indexed by date and realized history}.}
+        $$
+:::
+
+::::: formula-pair
+::: {}
+[PHYSICAL PROBABILITY]{.tag}
+
+### 확률
+
+어떤 successor state가 발생할 물리적 가능성이다. 이는 실현빈도 또는
+beliefs의 객체다.
+:::
+
+::: {}
+[STATE PRICE]{.tag}
+
+### 가격
+
+특정 상태에서 한 단위 소비를 지급받기 위해 현재 포기해야 하는 재화의
+양이다. 확률뿐 아니라 그 상태의 한계가치를 반영한다.
+:::
+:::::
+
+:::: {.statement .warning}
+::: statement-head
+첫 번째 경계
+:::
+
+상태가격은 물리적 확률이 아니다. $$
+          \mathcal Q_t(s^{t+1}\mid s^t)
+          \neq
+          \pi(s^{t+1}\mid s^t).
+          $$ 낮은 확률의 상태라도 그 상태에서 소비의 한계가치가 충분히
+높다면, 그 상태 claim은 높은 가격을 가질 수 있다.
+::::
+::::::::::
+
+::::::::: {#ch11-s02 .section}
+## [11.2]{.section-number}event tree, date\--state commodity, contractibility, 그리고 market completeness
+
+상태조건부 거래를 정확히 쓰려면 불확실성의 시간구조를 event tree로
+표현해야 한다. 각 node는 특정한 과거가 실현된 시점이며, 그 node에서의
+소비와 자산거래는 다른 node의 객체와 구별된다.
+
+### 11.2.1 histories와 date\--state commodities
+
+::: math-display
+$$
+          s^t=(s_0,\ldots,s_t),
+          \qquad
+          c_{it}(s^t)
+          =\text{agent }i\text{의 node }s^t\text{에서의 소비}.
+          \tag{11.2}
+        $$
+:::
+
+같은 달력시점이라도 history가 다르면 다른 node다. 따라서 소비계획은
+단순한 시계열 $\{c_{it}\}$가 아니라 event tree 위에 정의된 contingent
+consumption plan이다.
+
+::: math-display
+$$
+          \pi(s^t)
+          \equiv
+          \Pr(s^t)
+          =
+          \prod_{\tau=0}^{t-1}
+          \pi(s_{\tau+1}\mid s^\tau),
+          \qquad
+          \pi(s^{t+1}\mid s^t)>0
+          \ \text{for every reachable successor node}.
+          \tag{11.3}
+        $$
+:::
+
+본 장은 각 도달 가능한 node에서 successor-state 집합이 유한하고, 모든
+reachable successor node가 양의 조건부 확률을 갖는 infinite-horizon
+event-tree benchmark를 사용한다. 확률이 0인 node는 $\mathcal Q_t/\pi$로
+pricing kernel을 정의하는 표현에서 제외하거나 별도로 처리해야 한다.
+$\pi(s^0)=1$이며, $s^{t+1}$은 history $s^t$를 한 단계 연장한 history다.
+
+### 11.2.2 완전시장의 두 구현 방식
+
+::: math-display
+$$
+          \boxed{
+          \text{all date--state claims are directly tradable}}
+          \qquad\text{or}\qquad
+          \boxed{
+          \text{traded asset payoffs span every contingent payoff}.}
+          \tag{11.4}
+        $$
+:::
+
+첫 번째는 Arrow\--Debreu contingent claims를 time 0에 직접 거래하는 구현
+방식이다. 두 번째는 각 도달 가능한 비말단 node에서 실제 거래되는 자산의
+payoff 조합으로 다음 기 모든 contingent payoff를 복제하고, 시장을
+순차적으로 재개하는 구현 방식이다. 표준적인 집행·solvency 조건 아래 두
+방식은 같은 allocation을 구현할 수 있다. 핵심은 자산 개수가 아니라
+지급벡터의 span이다.
+
+::: display-table-wrap
+  객체                      거래 시점   지급 구조                                           역할
+  ------------------------- ----------- --------------------------------------------------- -----------------------------------------------------------
+  Arrow\--Debreu security   time 0      특정 미래 date-history에서만 1 단위 지급.           전체 contingent consumption plan을 한 번에 구매하는 표현.
+  Arrow security            현재 node   특정 successor state에서 다음 기 1 단위 지급.       순차거래를 통해 동일 allocation을 구현하는 basis claim.
+  일반 금융자산             현재 node   여러 successor state에서 서로 다른 payoff를 지급.   Arrow securities의 선형결합으로 해석될 수 있는 claim.
+:::
+
+:::: {.statement .remark}
+::: statement-head
+완전성은 contractibility와 별개다
+:::
+
+market completeness는 계약가능한 payoff space가 span되는가에 관한
+명제다. 그러나 private information, limited enforcement, 또는 관측
+불가능한 state가 있으면 계약 자체가 경제적으로 실행되지 않을 수 있다.
+따라서 이 장은 payoff spanning과 public observability·enforcement를
+분리된 가정으로 둔다.
+::::
+:::::::::
+
+::::::::: {#ch11-s03 .section}
+## [11.3]{.section-number}Pareto allocation과 완전한 위험분담의 기준
+
+완전시장 경쟁균형의 핵심 위험분담 관계를 가장 투명하게 보기 위해 먼저
+planner benchmark를 둔다. 이 순서는 분권화된 거래제도보다 allocation의
+본질을 먼저 보여 준다.
+
+### 11.3.1 사회계획가 문제
+
+::: math-display
+$$
+        \max_{\{c_{it}(s^t)\}}
+        \sum_i \omega_i
+        \sum_{t,s^t}
+        \beta^t\pi(s^t)
+        u_i\!\left(c_{it}(s^t)\right)
+        \tag{11.5}
+        $$ $$
+        \text{subject to}\qquad
+        \sum_i c_{it}(s^t)
+        =
+        \sum_i e_{it}(s^t)
+        \equiv e_t(s^t)
+        \quad\text{for every }t,s^t.
+        \tag{11.6}
+        $$
+:::
+
+$\omega_i>0$는 time 0에서 주어진 Pareto weight다. 본문의 기준환경에서는
+common beliefs와 common discount factor를 두므로, weights는 history에
+따라 다시 협상되거나 재정의되지 않는다.
+
+### 11.3.2 weighted marginal utilities의 평등화
+
+node $s^t$의 resource constraint에 붙는 원래 Lagrange multiplier를
+$\eta_t(s^t)$라고 쓰면, interior allocation의 FOC는
+
+::: math-display
+$$
+          \omega_i\beta^t\pi(s^t)u_i'\!\left(c_{it}(s^t)\right)
+          =
+          \eta_t(s^t)
+          \qquad
+          \text{for every }i,t,s^t.
+        $$
+:::
+
+확률과 할인인자를 제거한 node multiplier를
+$\Lambda_t(s^t)\equiv \eta_t(s^t)/[\beta^t\pi(s^t)]$로 정규화하면,
+
+::: math-display
+$$
+          \omega_i u_i'\!\left(c_{it}(s^t)\right)
+          =
+          \Lambda_t(s^t)
+          \qquad
+          \text{for every }i,t,s^t.
+          \tag{11.7}
+        $$
+:::
+
+따라서 $\Lambda_t(s^t)$는 원래 resource multiplier가 아니라,
+$\beta^t\pi(s^t)$를 흡수해 정규화한 node-specific marginal resource
+value다. 완전한 위험분담의 정확한 내용은 소비수준의 동일화가 아니라, 각
+node에서 *weighted marginal utilities*가 일치한다는 것이다.
+
+::: math-display
+$$
+          \boxed{
+          \text{under an interior Pareto allocation, complete risk sharing}
+          \Longleftrightarrow
+          \text{weighted marginal utilities are equalized state by state}.}
+        $$
+:::
+
+### 11.3.3 소비의 동일화가 아닌 위험분담
+
+동일한 CRRA 효용 $u(c)=c^{1-\gamma}/(1-\gamma)$과 동일 할인인자를 갖는
+경우에는
+
+::: math-display
+$$
+          \frac{c_{it}(s^t)}{c_{jt}(s^t)}
+          =
+          \left(\frac{\omega_i}{\omega_j}\right)^{1/\gamma},
+          \tag{11.8}
+        $$
+:::
+
+이라는 상태불변 소비비율이 나온다. 그러나 이것은 동일한 CRRA 구조라는
+추가 가정의 결과다. 일반적으로는
+
+::: math-display
+$$
+          \text{complete markets}
+          \neq
+          c_{it}(s^t)=c_{jt}(s^t),
+          \qquad
+          \text{complete markets}
+          \neq
+          c_{it}(s^t)\text{ independent of }s^t.
+        $$
+:::
+
+특히 aggregate bad state에서 경제 전체의 resources가 줄어들면, 완전한
+위험분담 아래에서도 모든 가계의 소비가 함께 하락할 수 있다. 완전시장은
+idiosyncratic risk를 효율적으로 나누지만 aggregate risk 자체를 제거하지
+않는다.
+:::::::::
+
+::::::::::: {#ch11-s04 .section}
+## [11.4]{.section-number}Arrow\--Debreu equilibrium: time-0 trading, 예산제약, 그리고 시장청산
+
+Arrow\--Debreu 표현에서는 모든 미래 date\--state commodity를 time 0에
+거래한다. 이 표현은 각 노드에서의 소비가 하나의 완전한 price vector로
+어떻게 연결되는지를 가장 직접적으로 보여 준다.
+
+### 11.4.1 time-0 budget set
+
+$\mathcal Q_0(s^t)$를 node $s^t$에서 지급되는 한 단위 소비의 date-0
+가격으로 두고, $\mathcal Q_0(s^0)=1$로 numeraire를 정규화하자. 가계
+$i$의 문제는
+
+::: math-display
+$$
+        \max_{\{c_{it}(s^t)\}}
+        \sum_{t,s^t}
+        \beta^t\pi(s^t)u_i\!\left(c_{it}(s^t)\right)
+        \tag{11.9}
+        $$ $$
+        \text{subject to}\qquad
+        \sum_{t,s^t}
+        \mathcal Q_0(s^t)c_{it}(s^t)
+        \le
+        \sum_{t,s^t}
+        \mathcal Q_0(s^t)e_{it}(s^t).
+        \tag{11.10}
+        $$
+:::
+
+오른쪽은 가계가 보유한 contingent endowment의 date-0 wealth다. 초기
+endowment 또는 initial claims의 분포는 어떤 효율적 allocation을
+선택하는지를 바꾸지만, state-price system이 존재하는 기본 논리 자체와는
+구분된다.
+
+:::: {.statement .remark}
+::: statement-head
+무한기간 예산집합의 admissibility
+:::
+
+무한 event tree에서는 식 (11.10)의 양변이 유한하도록 admissible plan을
+제한해야 한다. 즉 소비계획과 endowment stream은 $$
+            \sum_{t,s^t}\mathcal Q_0(s^t)c_{it}(s^t)<\infty,
+            \qquad
+            \sum_{t,s^t}\mathcal Q_0(s^t)e_{it}(s^t)<\infty
+          $$ 를 만족하는 범위에서 비교한다. 이 조건이 없으면 time-0
+budget set이나 later sequential wealth의 현재가치 표현이 잘 정의되지
+않을 수 있다.
+::::
+
+### 11.4.2 가계 FOC와 시장청산
+
+::: math-display
+$$
+          \beta^t\pi(s^t)u_i'\!\left(c_{it}(s^t)\right)
+          =
+          \mu_i\mathcal Q_0(s^t),
+          \tag{11.11}
+        $$ $$
+          \sum_i c_{it}(s^t)
+          =
+          \sum_i e_{it}(s^t)
+          \quad\text{for every }t,s^t.
+          \tag{11.12}
+        $$
+:::
+
+식 (11.11)은 각 가계가 모든 date\--state commodity의 한계효용 가치를
+공통 price system에 맞춘다는 뜻이다. 식 (11.12)은 각 node에서 재화시장이
+청산된다는 뜻이다. 경쟁균형에서 모든 가계 예산제약과 모든 시장청산식을
+독립적으로 세울 필요는 없다. Walras\'s law 때문에 하나의 예산·시장
+조건은 다른 조건들의 함의가 될 수 있다.
+
+경쟁균형 FOC를 두 가계 $i,j$에 대해 나누면 공통 가격과 공통
+$\beta^t\pi(s^t)$가 소거되어
+
+::: math-display
+$$
+          \frac{u_i'\!\left(c_{it}(s^t)\right)}
+          {u_j'\!\left(c_{jt}(s^t)\right)}
+          =
+          \frac{\mu_i}{\mu_j}.
+          \tag{11.12a}
+        $$
+:::
+
+반면 planner FOC (11.7)는
+$u_i'(c_{it})/u_j'(c_{jt})=\omega_j/\omega_i$를 준다. 따라서 같은
+interior allocation을 분권화하려면
+
+::: math-display
+$$
+          \omega_i\propto \frac{1}{\mu_i}.
+          \tag{11.12b}
+        $$
+:::
+
+초기 자산 또는 lump-sum transfer는 가계별 wealth multiplier $\mu_i$를
+바꾸며, 그 결과 분권화되는 Pareto weight를 선택한다. 이 관계가 welfare
+theorem의 FOC 수준 핵심이다.
+
+:::: {.statement .theorem}
+::: statement-head
+Pareto allocation의 분권화
+:::
+
+표준적인 convexity, local nonsatiation, complete contingent claims,
+competitive pricing 조건 아래 Arrow\--Debreu equilibrium allocation은
+Pareto efficient이고, 적절한 initial wealth transfer를 통해 planner
+allocation을 분권화할 수 있다. 이는 효율성 명제이지 분배적 정당성의
+명제가 아니다.
+::::
+:::::::::::
+
+::: part-divider
+PART II PRICES, SPANNING, AND IMPLEMENTATION: from contingent claims to
+sequential markets
+:::
+
+:::::::::::::::::: {#ch11-s05 .section}
+## [11.5]{.section-number}상태가격, marginal valuation, 그리고 stochastic discount factor
+
+absolute date-0 prices와 현재 node에서의 one-period state prices는 같은
+price system을 다른 단위로 표현한 것이다. 이 연결이 state price와
+stochastic discount factor의 관계를 만든다.
+
+### 11.5.1 absolute price에서 conditional price로
+
+::: math-display
+$$
+          \mathcal Q_t(s^{t+1}\mid s^t)
+          =
+          \frac{\mathcal Q_0(s^{t+1})}{\mathcal Q_0(s^t)}
+          =
+          \pi(s^{t+1}\mid s^t)
+          M_{t,t+1}(s^{t+1}\mid s^t).
+          \tag{11.13}
+        $$
+:::
+
+$\mathcal Q_t$는 current-node 재화 단위로 표현된 one-period
+Arrow-security price이고, $M_{t,t+1}$는 $t\to t+1$ equilibrium
+stochastic discount factor다. 이는 Chapter 09의 소비 Euler kernel 및
+Chapter 10의 기업가치 할인kernel과 같은 객체다. 따라서 상태가격은 확률에
+한계평가를 곱한 객체다.
+
+::: display-table-wrap
+  객체                              단위                        의미
+  --------------------------------- --------------------------- ----------------------------------------------------------------------------------
+  $\mathcal Q_0(s^t)$               time-0 소비재               node $s^t$에서 한 단위를 지급하는 Arrow\--Debreu claim의 date-0 가격.
+  $\mathcal Q_t(s^{t+1}\mid s^t)$   current-node $s^t$ 소비재   successor node $s^{t+1}$에서 한 단위를 지급하는 one-period Arrow-security price.
+  $M_{t,t+1}(s^{t+1}\mid s^t)$      무차원 kernel               조건부 상태가격을 물리적 조건부확률로 나눈 equilibrium marginal valuation.
+:::
+
+::: math-display
+$$
+          \boxed{
+          \text{state price}
+          =
+          \text{physical probability}
+          \times
+          \text{equilibrium stochastic discount factor}.}
+        $$
+:::
+
+### 11.5.2 개별 MRS와 equilibrium kernel
+
+대표가계 환경 또는 가계 $i$가 Arrow security를 interior하게 거래하는
+node에서는
+
+::: math-display
+$$
+          M_{t,t+1}(s^{t+1}\mid s^t)
+          =
+          \beta
+          \frac{u_i'\!\left(c_{i,t+1}(s^{t+1})\right)}
+          {u_i'\!\left(c_{it}(s^t)\right)}.
+          \tag{11.14}
+        $$
+:::
+
+다가계 경제에서 $M_{t,t+1}$을 임의의 대표가계가 항상 존재한다고 가정하여
+정의하면 안 된다. 더 기본적인 정의는 equilibrium state-price system에서
+$\mathcal Q_t/\pi$로 얻는 kernel이며, interior allocation에서는 모든
+가계의 적절히 정규화된 MRS가 그것과 일치한다.
+
+::: math-display
+$$
+          \boxed{
+          \text{complete markets}
+          \not\Rightarrow
+          \text{a representative-agent utility exists automatically}.}
+        $$
+:::
+
+대표가계 SDF가 존재하려면 선호의 집계가능성, 공통 할인구조, 고정 Pareto
+weights, interior risk sharing 같은 추가 조건이 필요하다. 완전시장의
+기본 객체는 대표가계 효용이 아니라 equilibrium state-price kernel이다.
+또한 이 장은 common-beliefs benchmark를 사용한다. beliefs가 가계별로
+다르면 가계 $i$의 FOC는
+$\beta^t\pi_i(s^t)u_i'(c_{it})=\mu_i\mathcal Q_0(s^t)$가 되어,
+risk-sharing condition에 belief ratio가 들어간다.
+
+### 11.5.3 두 상태 endowment benchmark: 상태가격의 직접 계산
+
+상태가격의 단위와 확률·한계가치의 구분은 가장 작은 두 상태 경제에서도
+명확히 드러난다. 한 대표 household가 있고, 현재재 소비를 $C_0$, 다음 기
+상태를 $s\in\{H,L\}$라 하자. 물리적 확률은 $\pi_H\in(0,1)$,
+$\pi_L=1-\pi_H$이고, 순수 endowment 경제의 균형소비는
+
+::: math-display
+$$
+          C_0=Y_0,
+          \qquad
+          C_1(H)=Y_H,
+          \qquad
+          C_1(L)=Y_L.
+          \tag{11.14a}
+        $$
+:::
+
+이 두 상태 경제를 contingent-claim 보유량의 언어로 쓰면 더 직접적이다.
+먼저 현재 보유한 초기 금융부를 $B_0$로 허용하여 일반식을 쓰고, 아래의
+순수 endowment benchmark에서는 최종적으로 $B_0=0$인 경우를 기준으로
+둔다. 가계가 현재에 상태별 Arrow claim $B_1(H),B_1(L)$를 가격
+$P(H),P(L)$에 거래하면 예산제약은
+
+::: math-display
+$$
+    C_0+P(H)B_1(H)+P(L)B_1(L)=Y_0+B_0,
+    \qquad
+    C_1(s)=Y_s+B_1(s),\quad s\in\{H,L\}.
+    \tag{11.14a-1}
+  $$
+:::
+
+순수 endowment benchmark에서 $B_0=0$을 두고 $B_1(s)=C_1(s)-Y_s$를
+대입하면, 같은 예산집합을 contingent consumption의 현재가치 제약으로 쓸
+수 있다.
+
+::: math-display
+$$
+    C_0+P(H)C_1(H)+P(L)C_1(L)
+    =
+    Y_0+P(H)Y_H+P(L)Y_L.
+    \tag{11.14a-2}
+  $$
+:::
+
+내부해에서는
+
+::: math-display
+$$
+    u'(C_0)=\lambda,
+    \qquad
+    \beta\pi_s u'(C_1(s))=\lambda P(s),
+    \qquad s\in\{H,L\}.
+    \tag{11.14a-3}
+  $$
+:::
+
+따라서 상태별 Arrow claim 가격은
+
+::: math-display
+$$
+    P(s)
+    =
+    \beta\pi_s
+    \frac{u'(C_1(s))}{u'(C_0)},
+    \qquad s\in\{H,L\}.
+    \tag{11.14a-4}
+  $$
+:::
+
+순수 endowment 경제의 autarkic allocation에서는 순거래가 0이므로
+$B_1(H)=B_1(L)=0$이고, 식 (11.14a)의 소비배분이 그대로 나온다. 그러면
+$P(s)$는 아래의 equilibrium state price $\mathcal Q(s)$와 일치한다.
+
+현재재를 numeraire로 두면, 각 상태에서 다음 기 한 단위를 지급하는 Arrow
+claim의 가격은
+
+::: math-display
+$$
+          \mathcal Q(H)
+          =
+          \pi_H\beta
+          \frac{u'(Y_H)}{u'(Y_0)},
+          \qquad
+          \mathcal Q(L)
+          =
+          \pi_L\beta
+          \frac{u'(Y_L)}{u'(Y_0)}.
+          \tag{11.14b}
+        $$
+:::
+
+CRRA 효용 $u(C)=C^{1-\gamma}/(1-\gamma)$에서는
+
+::: math-display
+$$
+          \mathcal Q(H)
+          =
+          \pi_H\beta
+          \left(\frac{Y_H}{Y_0}\right)^{-\gamma},
+          \qquad
+          \mathcal Q(L)
+          =
+          \pi_L\beta
+          \left(\frac{Y_L}{Y_0}\right)^{-\gamma}.
+          \tag{11.14c}
+        $$
+:::
+
+따라서 $Y_L<Y_H$이면 낮은 endowment 상태의 한계효용이 높아지고, 그 상태
+claim은 확률만으로 설명되지 않는 보험가치를 갖는다. 이 절에서는
+$\pi_H,\pi_L$를 상태확률 기호로 고정한다. $\sigma$-notation으로
+$u(C)=C^{1-1/\sigma}/(1-1/\sigma)$를 쓰면 $\gamma=1/\sigma$로 읽으면
+된다.
+
+::: math-display
+$$
+          P_0(X)
+          =
+          \mathcal Q(H)X(H)+\mathcal Q(L)X(L),
+          \qquad
+          q^f=\mathcal Q(H)+\mathcal Q(L),
+          \qquad
+          R^f=\frac{1}{q^f}.
+          \tag{11.14d}
+        $$
+:::
+
+식 (11.14d)는 모든 one-period payoff 가격이 상태가격의 선형결합으로
+계산된다는 점을 보여 준다. 위험 없는 claim은 두 상태 모두에서 1을
+지급하므로 그 가격이 상태가격의 합이고, 특정 상태에서만 지급하는 Arrow
+claim의 가격은 바로 그 상태가격이다.
+
+:::: {.statement .warning}
+::: statement-head
+두 번째 경계
+:::
+
+$$
+          \text{low probability}
+          \not\Rightarrow
+          \text{low state price}.
+          $$ 드문 재난상태의 payoff가 높은 가격을 가질 수 있는 이유는,
+해당 상태에서 소비의 한계가치가 매우 클 수 있기 때문이다. 상태가격은
+확률적 희소성만이 아니라 보험가치를 반영한다.
+::::
+::::::::::::::::::
+
+:::::::::::::::::::: {#ch11-s06 .section}
+## [11.6]{.section-number}asset spanning, law of one price, no arbitrage, 그리고 Arrow securities
+
+완전성은 payoff space의 차원에 관한 명제다. 어떤 payoff가 거래자산의
+선형결합으로 복제될 수 있는지를 보면, 직접 모든 Arrow claim을 거래하지
+않아도 시장이 완전한지 판단할 수 있다.
+
+### 11.6.1 payoff matrix와 state-price representation
+
+현 node $s^t$에서 다음 기 successor state 수를 $\#\mathcal S(s^t)$,
+거래자산 수를 $J$라고 하자.
+$X_t(s^t)\in\mathbb R^{\#\mathcal S(s^t)\times J}$의 열 $j$는 자산 $j$의
+successor-state payoff vector다. 현재 자산가격 벡터를
+$\mathbf p_t(s^t)\in\mathbb R^J$, conditional state-price vector를
+$\boldsymbol{\mathcal Q}_t(s^t)\equiv\bigl(\mathcal Q_t(s^{t+1}\mid s^t)\bigr)_{s_{t+1}\in\mathcal S(s^t)}$
+로 쓴다.
+
+::: math-display
+$$
+          \mathbf p_t(s^t)
+          =
+          X_t(s^t)^\top\boldsymbol{\mathcal Q}_t(s^t).
+          \tag{11.15}
+        $$
+:::
+
+즉 모든 자산가격은 상태가격과 payoff의 내적으로 표현된다. 동일 payoff를
+가진 두 portfolio는 동일 가격을 가져야 한다. 이것이 law of one price다.
+
+### 11.6.2 spanning과 no arbitrage의 차이
+
+::: math-display
+$$
+          \operatorname{rank}\!\bigl(X_t(s^t)\bigr)
+          =
+          \#\mathcal S(s^t)
+          \quad
+          \text{for every reachable nonterminal history }s^t.
+          \tag{11.16}
+        $$
+:::
+
+여기서 $\mathcal S(s^t)$는 node $s^t$의 successor-state 집합이다. 각
+도달 가능한 비말단 node에서 이 full-row-rank condition이 성립하고 시장이
+다음 기에 다시 열리면, 모든 유한기한 history-contingent payoff가
+순차거래를 통해 복제된다. 이때 arbitrage-free price system이 존재한다면,
+$X_t(s^t)^\top\boldsymbol{\mathcal Q}_t(s^t)=\mathbf p_t(s^t)$를
+만족하는 state-price vector는 유일하다.
+
+유한상태 one-period node에서는 admissible state-price set을 다음처럼 쓸
+수 있다.
+
+::: math-display
+$$
+          \mathcal Q_t^{\mathrm{adm}}(s^t)
+          =
+          \left\{
+          q\in\mathbb R^{\#\mathcal S(s^t)}_{++}:
+          X_t(s^t)^\top q=\mathbf p_t(s^t)
+          \right\}.
+          \tag{11.16a}
+        $$
+:::
+
+표준 finite-state 조건 아래 no arbitrage는 이 집합이 공집합이 아님을
+의미하고, market completeness는 이 집합이 하나의 원소만 갖도록 payoff
+span이 충분하다는 뜻이다. 따라서 completeness는 가격식의 존재가 아니라
+가격식의 *유일성*까지 요구한다.
+
+::::::::::::::: logic-chain
+::::: chain-row
+::: left
+law of one price
+:::
+
+::: right
+$Xh=0\Rightarrow \mathbf p\cdot h=0$. 즉 같은 payoff를 만드는
+포트폴리오는 같은 가격을 가져야 하며, payoff span 위의 선형 가격함수를
+보장한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+no arbitrage
+:::
+
+::: right
+유한상태 one-period 환경에서 $Xh\ge0$, $\mathbf p\cdot h\le0$이고 하나가
+엄격한 공짜 이익 포트폴리오가 없다는 조건이다. 표준 조건 아래 이는
+$\mathbf p=X^\top q$를 만족하는 strictly positive state-price vector
+$q\gg0$의 존재와 동치다.
+:::
+:::::
+
+::::: chain-row
+::: left
+market completeness
+:::
+
+::: right
+$\operatorname{rank}(X)=S$이면 모든 $\mathbb R^S$ payoff가 span되고,
+존재하는 state-price vector는 유일하다.
+:::
+:::::
+
+::::: chain-row
+::: left
+핵심 결론
+:::
+
+::: right
+arbitrage가 없더라도 payoff span이 부족하면 state-price vector는 여러
+개일 수 있다. 따라서 no arbitrage는 completeness보다 약하다.
+:::
+:::::
+:::::::::::::::
+
+no arbitrage는 law of one price를 함의하지만, law of one price만으로는
+모든 양의 payoff가 양의 가격을 갖는다는 조건까지 보장하지 않는다. 따라서
+분석 순서는 $$
+          \text{no arbitrage}
+          \Rightarrow
+          \text{law of one price},
+          \qquad
+          \text{market completeness}
+          \Rightarrow
+          \text{unique state-price vector}
+        $$ 로 구분하는 편이 안전하다.
+
+::: math-display
+$$
+          \boxed{
+          \text{no arbitrage}
+          \not\Rightarrow
+          \text{market completeness}.}
+        $$
+:::
+
+Arrow security는 특정 successor state에서만 1을 지급하고 다른
+state에서는 0을 지급하는 basis claim이다. 위험 없는 채권, 보험 claim,
+주식 payoff는 모두 이 basis claims의 선형결합으로 해석될 수 있다.
+::::::::::::::::::::
+
+::::::::::: {#ch11-s07 .section}
+## [11.7]{.section-number}sequential Arrow-security trading, 금융부, debt limits, 그리고 구현 동치
+
+Arrow\--Debreu 표현은 모든 미래 거래를 time 0에 압축한다. 실제
+동태모형에서는 매 node에서 one-period Arrow securities를 다시 거래하는
+sequential representation이 더 자연스럽다. 두 표현은 일정 조건 아래 같은
+allocation을 구현하지만, continuation wealth와 부채제약의 처리 방식은
+다르다.
+
+### 11.7.1 순차 예산제약
+
+::: math-display
+$$
+        c_{it}(s^t)
+        +
+        \sum_{s_{t+1}}
+        \mathcal Q_t(s^{t+1}\mid s^t)
+        a_{i,t+1}(s^{t+1})
+        =
+        e_{it}(s^t)+a_{it}(s^t).
+        \tag{11.17}
+        $$
+:::
+
+$a_{it}(s^t)$는 전기에 매입한 Arrow claims가 현재 node에서 지급하는
+금융자원이다. 가계는 현재 endowment와 현시점 금융부를 사용해 소비하고,
+다음 기의 각 successor state에서 지급될 claims portfolio를 매입한다.
+
+주어진 Arrow\--Debreu allocation $\{c_i,e_i\}$를 sequential system으로
+구현할 때, continuation financial wealth는 미래 순거래의 조건부
+현재가치로 쓸 수 있다.
+
+::: math-display
+$$
+          a_{it}(s^t)
+          =
+          \sum_{\tau=t}^{\infty}
+          \sum_{s^\tau\succeq s^t}
+          \mathcal Q_t(s^\tau\mid s^t)
+          \left[c_{i\tau}(s^\tau)-e_{i\tau}(s^\tau)\right].
+          \tag{11.17a}
+        $$
+:::
+
+즉 $a_{it}=c_{it}-e_{it}+\sum_{s_{t+1}}\mathcal Q_t a_{i,t+1}$가 되고,
+이는 식 (11.17)과 동일하다. 따라서 순차적 금융부는 임의의 외생상수가
+아니라, 미래 net trades를 현재 node 재화로 평가한 continuation wealth다.
+식 (11.17a)의 무한합 표현에는 다음 terminal-wealth condition이 필요하다.
+
+::: math-display
+$$
+          \lim_{T\to\infty}
+          \sum_{s^{T+1}\succeq s^t}
+          \mathcal Q_t(s^{T+1}\mid s^t)
+          a_{i,T+1}(s^{T+1})
+          =0.
+          \tag{11.17b}
+        $$
+:::
+
+이 조건은 natural debt limit이나 no-Ponzi restriction과 정의상 같은
+문장이 아니다. present-value sums의 유한성, solvency, 최적성 조건과
+결합될 때 tail term의 소멸을 정당화한다.
+
+### 11.7.2 natural debt limit과 solvency
+
+무한기간 순차거래에서는 현재 금융부가 미래 contractible endowment로 상환
+가능한 범위를 넘지 않도록 상태의존적 solvency restriction을 둔다. 아래
+표현은 관련 conditional present value가 유한한 benchmark를 전제한다.
+$t$기 node $s^t$에서 $\tau$기 descendant node $s^\tau\succeq s^t$의
+소비재를 사는 조건부 Arrow\--Debreu 가격을
+$\mathcal Q_t(s^\tau\mid s^t)$라 하자.
+$\mathcal Q_t(s^t\mid s^t)=1$이고, $\tau>t$이면 이 가격은 중간 node의
+one-period Arrow-security prices의 곱이다.
+
+::: math-display
+$$
+          A_i(s^t)
+          \equiv
+          \sum_{\tau=t}^{\infty}
+          \sum_{s^\tau\succeq s^t}
+          \mathcal Q_t(s^\tau\mid s^t)\,
+          e_{i\tau}(s^\tau),
+          \tag{11.18}
+        $$ $$
+          a_{it}(s^t)\ge -A_i(s^t).
+          \tag{11.19}
+        $$
+:::
+
+$A_i(s^t)$는 현재 node부터의 contingent endowment tail의 조건부
+현재가치다. 따라서 $A_i(s^t)$에는 현재 node의 endowment $e_{it}(s^t)$도
+포함된다. 이 표현은 $A_i(s^t)<\infty$, $e_{i\tau}(s^\tau)\ge0$,
+$c_{i\tau}(s^\tau)\ge0$이고 해당 endowment stream이 contractible 또는
+pledgeable하다는 기준환경을 전제한다. 식 (11.19)는 다른 소득원·담보가
+없고 소비의 하한이 0인 기준환경에서, 이후 모든 history에서
+endowment만으로 상환 가능한 최대 부채를 나타내는 natural debt limit이다.
+이는 임의의 고정 credit limit과 다르며, no-Ponzi restriction과도 동일한
+문장이 아니다. no-Ponzi restriction은 장기 부채 rollover를 제한하는
+transversality 성격의 조건이고, natural debt limit은 예산집합에 직접
+부과되는 상태의존적 solvency bound다.
+
+::: math-display
+$$
+          \sum_i a_{i,t+1}(s^{t+1})=0
+          \qquad
+          \text{for every successor node }s^{t+1},
+          \tag{11.20}
+        $$
+:::
+
+pure-exchange Arrow securities는 zero net supply다. 한 가계의 금융자산은
+다른 가계의 금융부채에 대응하며, 자산거래 자체가 aggregate resources를
+만들지는 않는다.
+
+### 11.7.3 allocation equivalence와 그 조건
+
+::: math-display
+$$
+          \boxed{
+          \text{Arrow--Debreu allocation}
+          =
+          \text{sequential Arrow-security allocation}.}
+        $$
+:::
+
+이 결과는 제도적 동일성이 아니라 allocation equivalence다. 동치가
+성립하려면 contingent claims가 충분히 거래되어야 하고, histories가
+관측·계약 가능해야 하며, 시장이 각 node에서 reopen되고, 거래비용이나
+natural debt limit보다 더 강한 추가적인 외생 포트폴리오 제약이 없어야
+한다. 또한 순차거래에서는 continuation wealth와 solvency가 명확히
+정의되어야 한다.
+
+:::: {.statement .remark}
+::: statement-head
+natural debt limit의 역할
+:::
+
+식 (11.18)--(11.19)의 natural debt limit은 가계가 모든 가능한 후속
+history에서 상환할 수 있는 범위를 넘어서 부채를 누적하지 못하게 하는
+endogenous solvency bound다. 이는 임의의 고정 부채상한과 다르며,
+Arrow\--Debreu allocation을 sequentially implement할 때 continuation
+wealth의 적법성을 보장하는 핵심 제약이다.
+::::
+:::::::::::
+
+:::::::::::: {#ch11-s08 .section}
+## [11.8]{.section-number}recursive complete-markets equilibrium과 Markov state-price kernel
+
+Arrow\--Debreu 표현은 전체 history를 한꺼번에 나열한다. Markov
+structure가 있을 때는 현재 state와 policy functions, 그리고 conditional
+state-price kernel로 같은 경제를 재귀적으로 표현할 수 있다.
+
+::: math-display
+$$
+          \mathcal Q(z,z')
+          =
+          \pi(z'\mid z)M(z,z').
+          \tag{11.21}
+        $$
+:::
+
+$z_t$는 aggregate exogenous state이며 $\pi(z'\mid z)$는 Markov
+transition이다. complete-markets equilibrium은 현재 state가 주어질 때
+소비, asset positions, prices, 그리고 다음 기 state-price kernel을 함께
+정하는 policy functions로 표현될 수 있다.
+
+고정 Pareto weights와 common beliefs가 있고 aggregate resource가
+$e(z)$로 주어지는 Markov complete-market benchmark에서는 allocation이
+다음 system으로 요약된다.
+
+::: math-display
+$$
+          \omega_i u_i'\!\left(c_i(z)\right)=\Lambda(z),
+          \qquad
+          \sum_i c_i(z)=e(z).
+          \tag{11.21a}
+        $$
+:::
+
+따라서 interior allocation에서 equilibrium SDF는 normalized aggregate
+marginal resource value의 비율로 표현된다.
+
+::: math-display
+$$
+          M(z,z')
+          =
+          \beta\frac{\Lambda(z')}{\Lambda(z)}
+          =
+          \beta
+          \frac{u_i'\!\left(c_i(z')\right)}{u_i'\!\left(c_i(z)\right)}
+          \quad\text{for any interior-trading household }i.
+          \tag{11.21b}
+        $$
+:::
+
+::: math-display
+$$
+          \mathcal Q(z,z')
+          =
+          \pi(z'\mid z)\beta\frac{\Lambda(z')}{\Lambda(z)}.
+          \tag{11.21c}
+        $$
+:::
+
+::::: reference-grid
+::: {}
+[TIME-0 / PLANNER REPRESENTATION]{.label}
+
+고정된 Pareto weights와 외생 histories가 allocation을 요약한다. 개별
+금융부는 planner allocation을 계산하는 데 직접 상태로 들어가지 않을 수
+있다.
+:::
+
+::: {}
+[SEQUENTIAL DECENTRALIZED REPRESENTATION]{.label}
+
+각 가계의 continuation budget set을 요약하기 위해 individual financial
+wealth가 endogenous state로 나타날 수 있다.
+:::
+:::::
+
+두 표현은 같은 allocation을 구현할 수 있지만, state variable의 경제적
+해석은 다르다. 이 구분은 이후 incomplete markets에서 개인자산 분포가
+aggregate state가 되는 이유를 이해하는 데 중요하다.
+
+:::: {.statement .warning}
+::: statement-head
+recursive representation의 경계
+:::
+
+Markov transition을 쓴다는 사실만으로 equilibrium이 자동으로
+finite-dimensional recursive form을 갖는 것은 아니다. 충분한 state는
+미래 payoff와 continuation budget set에 영향을 주는 모든 정보를 포함해야
+한다. 이 장에서는 complete-markets benchmark의 구조를 설명하고,
+recursive-equilibrium computation algorithm 자체를 새로 전개하지 않는다.
+::::
+::::::::::::
+
+::: part-divider
+PART III ASSET VALUATION AND INVESTMENT: pricing claims and closing the
+Chapter 10 investment problem
+:::
+
+:::::::::::: {#ch11-s09 .section}
+## [11.9]{.section-number}위험 없는 claim, 위험자산, equity, 그리고 term claims의 가격
+
+state-price kernel이 주어지면, 임의 payoff의 가격은 그 payoff가 지급되는
+상태에서의 한계가치로 결정된다. 이 절은 안전자산, 위험자산, equity,
+zero-coupon claim을 하나의 pricing equation으로 묶는다.
+
+### 11.9.1 일반 payoff의 가격
+
+::: math-display
+$$
+          P_t(X_{t+1})
+          =
+          E_t\!\left[M_{t,t+1}X_{t+1}\right].
+          \tag{11.22}
+        $$
+:::
+
+$X_{t+1}$은 다음 기의 임의 state-contingent payoff다. payoff가 bad
+state에서 높을수록 보험가치가 커져, 같은 기대지급액이라도 현재가격이
+높아질 수 있다.
+
+### 11.9.2 risk-free and risky claims
+
+::: math-display
+$$
+          q_t^f=E_t[M_{t,t+1}],
+          \qquad
+          R_{t+1}^f=\frac{1}{q_t^f},
+          \tag{11.23}
+        $$ $$
+          1=E_t\!\left[M_{t,t+1}R_{t+1}^j\right].
+          \tag{11.24}
+        $$
+:::
+
+위험 없는 claim은 모든 successor state에서 한 단위를 지급한다.
+위험자산은 return과 pricing kernel의 공분산을 통해 expected return
+premium을 갖는다.
+
+::: math-display
+$$
+          E_t[R_{t+1}^j]-R_{t+1}^f
+          =
+          -\frac{\operatorname{Cov}_t(M_{t,t+1},R_{t+1}^j)}{E_t[M_{t,t+1}]}.
+          \tag{11.25}
+        $$
+:::
+
+bad state에서 낮은 payoff를 주는 자산은 $M_{t,t+1}$과 음의 공분산을
+가지기 쉽다. 그 자산을 보유하려면 보상으로 더 높은 expected return이
+요구된다. 반대로 bad state payoff가 높은 claim은 보험수단이므로 낮은
+expected return을 가질 수 있다.
+
+### 11.9.3 equity and term claims
+
+::: math-display
+$$
+          P_t^e
+          =
+          E_t\!\left[
+          M_{t,t+1}\left(D_{t+1}+P_{t+1}^e\right)
+          \right],
+          \tag{11.26}
+        $$ $$
+          P_t^{(n)}
+          =
+          E_t\!\left[\mathcal M_{t,t+n}\right],
+          \qquad
+          \mathcal M_{t,t+n}
+          =
+          \prod_{j=1}^{n}M_{t+j-1,t+j}.
+          \tag{11.27}
+        $$
+:::
+
+$P_t^e$는 $t$기 dividend가 이미 지급된 뒤의 ex-dividend equity price로
+해석한다. 따라서 다음 기 payoff는 $D_{t+1}+P_{t+1}^e$이다. $P_t^{(n)}$는
+$t+n$기에 한 단위를 지급하는 zero-coupon claim의 가격이다. 식 (11.26)을
+$T$기간 반복대입하면
+
+::: math-display
+$$
+          P_t^e
+          =
+          E_t\!\left[
+          \sum_{j=1}^{T}\mathcal M_{t,t+j}D_{t+j}
+          +
+          \mathcal M_{t,t+T}P_{t+T}^e
+          \right].
+          \tag{11.26a}
+        $$
+:::
+
+no-bubble 또는 transversality condition
+
+::: math-display
+$$
+          \lim_{T\to\infty}
+          E_t\!\left[\mathcal M_{t,t+T}P_{t+T}^e\right]=0
+          \tag{11.26b}
+        $$
+:::
+
+이 성립할 때에만 무한 dividend present-value formula
+
+::: math-display
+$$
+          P_t^e
+          =
+          E_t\!\left[
+          \sum_{j=1}^{\infty}\mathcal M_{t,t+j}D_{t+j}
+          \right]
+          \tag{11.26c}
+        $$
+:::
+
+를 사용할 수 있다. bubble component $B_t$가 존재한다면 그것은
+$B_t=E_t[M_{t,t+1}B_{t+1}]$를 만족하는 homogeneous pricing equation의
+해다.
+
+zero-coupon claim도 같은 kernel로 재귀적으로 가격화된다.
+
+::: math-display
+$$
+          P_t^{(1)}=E_t[M_{t,t+1}],
+          \qquad
+          P_t^{(n)}=E_t\!\left[M_{t,t+1}P_{t+1}^{(n-1)}\right],
+          \quad n\ge2.
+          \tag{11.27a}
+        $$
+:::
+
+::: math-display
+$$
+          R_t^{(n)}=\left(P_t^{(n)}\right)^{-1/n},
+          \qquad
+          y_t^{(n)}=-\frac1n\log P_t^{(n)}.
+          \tag{11.27b}
+        $$
+:::
+
+여기서 $R_t^{(n)}$는 gross yield, $y_t^{(n)}$는 continuously compounded
+yield다.
+::::::::::::
+
+::::::::::::::::::::: {#ch11-s10 .section}
+## [11.10]{.section-number}완전시장 하의 기업가치, 투자, 그리고 marginal $q$
+
+Chapter 10에서는 기업의 미래 한계이윤을 할인하는 규칙을 주어진 것으로
+두었다. 이제 그 할인규칙은 complete-markets equilibrium이 만들어 내는
+state-price kernel이다. 따라서 설치자본의 그림자가치와 투자는 가계의
+risk sharing 및 asset-market clearing과 연결된다.
+
+### 11.10.1 equilibrium kernel로 평가된 설치자본
+
+::: math-display
+$$
+        \lambda_t^K
+        =
+        E_t\!\left[
+        M_{t,t+1}
+        \left\{
+        \pi_K(K_{t+1},z_{t+1})
+        -\Phi_K(I_{t+1},K_{t+1})
+        +(1-\delta)\lambda_{t+1}^K
+        \right\}
+        \right].
+        \tag{11.28}
+        $$
+:::
+
+$\lambda_t^K$는 다음 기 설치자본 한 단위의 재화단위 그림자가치다. 수익이
+bad state에서 발생하는지, good state에서 발생하는지에 따라 같은 expected
+marginal profit도 서로 다른 $\lambda_t^K$를 만들 수 있다.
+
+::: math-display
+$$
+          q_t^m
+          =
+          \frac{\lambda_t^K}{p_t^I}.
+          \tag{11.29}
+        $$
+:::
+
+Chapter 10의 marginal Tobin\'s $q$는 이제 단순한 기업 내부의
+shadow-value ratio가 아니라, state-price system이 가격화한 미래 한계
+payoff의 요약값이다.
+
+::: math-display
+$$
+          q_t^K
+          \equiv
+          \frac{V_K(K_t,z_t)}{p_t^I}
+          \tag{11.29a}
+        $$
+:::
+
+$q_t^m$는 오늘 투자로 만들어지는 다음 기 설치자본의 한계가치를 현재
+자본재 가격으로 나눈 investment marginal $q$다. 반면 $q_t^K$는 이미
+설치된 현재 자본의 marginal value ratio다. 두 객체는 같은 가치함수에서
+나오지만 timing이 다르며, Chapter 10의 조정비용 FOC에 직접 들어가는 것은
+$q_t^m$다.
+
+### 11.10.2 두 기간 project economy
+
+two-period benchmark에서 project $i$가 $K_i\ge0$ 단위의 현재 투자재를
+투입하여 state $s$에서 $x_{is}K_i$ 단위의 산출을 만드는 freely scalable
+constant-returns project라고 하자. $\mathcal Q_s$는 state $s$의 time-0
+state price이고, 자본재 한 단위의 현재가격은 $p_I$다. 무한한 arbitrage가
+없기 위한 경쟁적 project selection의 complementarity condition은
+
+::: math-display
+$$
+          K_i\ge0,
+          \qquad
+          p_I-\sum_s\mathcal Q_s x_{is}\ge0,
+          \qquad
+          K_i\left(p_I-\sum_s\mathcal Q_s x_{is}\right)=0.
+          \tag{11.30}
+        $$
+:::
+
+project의 expected payoff가 아니라, *state-price discounted payoff*가
+현재 투자비용과 비교된다. project capacity 또는 diminishing returns가
+있으면 $x_{is}$는 $K_i$의 한계 payoff로 바뀌고, 조건은 $$
+        \sum_s\mathcal Q_s\frac{\partial Y_{is}}{\partial K_i}=p_I
+        $$ 와 상한 제약의 Kuhn\--Tucker conditions로 대체된다. 이 점이
+금융시장과 실물투자의 일반균형 연결이다.
+
+freely scalable constant-returns project에서
+$\sum_s\mathcal Q_s x_{is}>p_I$이면 무한한 투자수요가 발생한다. 따라서
+균형을 닫으려면 전체 date-0 투자재 제약이나 project별
+capacity/decreasing-returns 구조가 필요하다.
+
+::: math-display
+$$
+          \sum_i p_I K_i\le \bar I_0,
+          \qquad
+          0\le K_i\le \bar K_i
+          \quad\text{or diminishing marginal products.}
+          \tag{11.30a}
+        $$
+:::
+
+::::::::::::::: logic-chain
+::::: chain-row
+::: left
+future marginal payoff
+:::
+
+::: right
+각 state에서 자본 한 단위가 추가로 만드는 이윤·처분가치·조정비용 효과.
+:::
+:::::
+
+::::: chain-row
+::: left
+state-price kernel
+:::
+
+::: right
+그 payoff가 어느 state에서 지급되는지를 반영하여 현재가치를 계산한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+$\lambda_t^K$ and $q_t^m$
+:::
+
+::: right
+설치자본의 그림자가치와 replacement-cost ratio가 투자속도를 요약한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+investment
+:::
+
+::: right
+조정비용이 있는 기업은 marginal $q$와 투자율의 관계를 통해 자본stock을
+점진적으로 조정한다.
+:::
+:::::
+:::::::::::::::
+:::::::::::::::::::::
+
+:::::::::::: {#ch11-s11 .section}
+## [11.11]{.section-number}완전시장 benchmark의 한계와 금융마찰·불완전시장으로의 연결
+
+완전시장은 강력한 benchmark지만, 그것은 매우 강한 거래·정보·집행 구조를
+요구한다. 다음 장의 목적은 이 benchmark가 왜, 어떤 방식으로, 그리고 어떤
+거시적 결과와 함께 무너지는지를 분석하는 것이다.
+
+::: math-display
+$$
+          \text{spanning}
+          +
+          \text{public observability}
+          +
+          \text{contractibility}
+          +
+          \text{enforcement}
+          +
+          \text{frictionless competitive trading}.
+        $$
+:::
+
+:::::: flow
+::: node
+**CHAPTER 12 · FINANCIAL FRICTIONS**asymmetric information, collateral,
+net worth, external finance premium, banking, liquidity mismatch,
+financial distress가 투자와 자산가격에 직접 들어온다.
+:::
+
+::: arrow
+→
+:::
+
+::: node
+**LATER · INCOMPLETE MARKETS**contingent claims가 제한되면 가계는
+완전보험 대신 제한된 asset menu와 self-insurance에 의존하며, 개인자산
+분포가 macro state가 된다.
+:::
+::::::
+
+::: math-display
+$$
+          \text{complete contingent claims}
+          \to
+          \text{restricted asset menu}
+          \to
+          \text{self-insurance}
+          \to
+          \text{wealth distribution}.
+        $$
+:::
+
+payoff span이 부족하면 관측된 거래자산 가격을 설명하는 state-price
+vectors가 여러 개일 수 있다. 한 node에서 traded payoff matrix가 $X$,
+자산가격이 $p$라면 incomplete markets에서는 일반적으로
+
+::: math-display
+$$
+          \mathcal Q^{\mathrm{adm}}
+          =
+          \left\{
+          q\in\mathbb R^S_{++}:
+          p=X^\top q
+          \right\},
+          \qquad
+          \#\mathcal Q^{\mathrm{adm}}>1
+          \text{ if the payoff span is incomplete.}
+          \tag{11.31}
+        $$
+:::
+
+따라서 거래자산 가격만으로 모든 비거래위험의 한계가치를 유일하게 복원할
+수 없다. 이것이 complete-markets state-price system과 incomplete-markets
+asset-pricing restrictions의 차이다.
+
+:::: {.statement .warning}
+::: statement-head
+세 번째 경계
+:::
+
+complete markets는 complete information과 동의어가 아니며, no
+arbitrage와도 동의어가 아니다. 완전시장은 state-contingent payoff의
+spanning property이고, 이 장의 risk-sharing 결과는 observability,
+contractibility, enforcement가 함께 성립하는 기준환경에서만 나온다.
+::::
+::::::::::::
+
+:::::::::::::::::::: {#ch11-conclusion .section}
+## [결론]{.section-number}상태조건부 가격에서 기업가치와 투자까지
+
+완전시장 이론의 핵심은 자산가격 공식을 외우는 데 있지 않다. 어떤 미래
+payoff가 어느 state에서 지급되는지를 분리하고, 그 state의 한계가치를
+반영하는 가격체계를 구축하는 데 있다.
+
+:::::::::::::::::: logic-chain
+::::: chain-row
+::: left
+date\--state commodity
+:::
+
+::: right
+미래재화는 날짜와 history에 의해 구별되며, 동일 날짜의 지급도 state에
+따라 다른 경제적 객체다.
+:::
+:::::
+
+::::: chain-row
+::: left
+risk sharing
+:::
+
+::: right
+완전시장 allocation에서는 weighted marginal utilities가 node별로
+일치한다. 이는 equal consumption이나 aggregate risk의 제거와 다르다.
+:::
+:::::
+
+::::: chain-row
+::: left
+state prices
+:::
+
+::: right
+conditional state price는 physical probability와 equilibrium SDF의
+곱이다.
+:::
+:::::
+
+::::: chain-row
+::: left
+spanning and implementation
+:::
+
+::: right
+Arrow\--Debreu time-0 trade와 sequential Arrow-security trade는 일정
+조건 아래 같은 allocation을 구현한다.
+:::
+:::::
+
+::::: chain-row
+::: left
+asset and firm valuation
+:::
+
+::: right
+모든 payoff와 설치자본의 한계가치는 state-price kernel로 할인되며, 이
+가치가 marginal $q$와 투자로 연결된다.
+:::
+:::::
+::::::::::::::::::
+
+::: conclusion-block
+Chapter 11의 최종 정리
+
+완전시장은 state-contingent payoffs의 spanning property다. 그것은 가계의
+위험분담, 자산가격, 기업의 미래 한계이윤 평가를 하나의 equilibrium
+state-price system으로 묶는다. 다음 장은 순자산·담보·정보·은행·유동성
+구조가 이 benchmark를 어떻게 바꾸는지 분석한다.
+:::
+::::::::::::::::::::
+
+::: {#ch11-check .section}
+## Learning Check
+
+1.  왜 "다음 기 한 단위 소비"라는 표현만으로는 불확실성 아래 payoff를
+    완전히 정의할 수 없는가?
+2.  physical probability와 state price를 구분하라. 낮은 확률이 반드시
+    낮은 state price를 뜻하지 않는 이유를 설명하라.
+3.  Arrow\--Debreu security와 Arrow security를 거래시점과 지급구조의
+    관점에서 구분하라.
+4.  market completeness를 직접거래와 payoff spanning의 언어로 각각
+    정의하라.
+5.  planner problem의 FOC에서 weighted marginal utility equalization이
+    어떻게 나오는지 설명하라.
+6.  complete risk sharing이 equal consumption이나 aggregate risk 제거를
+    뜻하지 않는 이유를 설명하라.
+7.  Arrow\--Debreu household budget set과 node-by-node market-clearing
+    condition을 써라.
+8.  $\mathcal Q_t=\pi M$ 관계를 해석하라. 다가계 경제에서 $M$을 어떤
+    순서로 정의해야 하는가?
+9.  두 상태 endowment benchmark에서 contingent-claim 보유량 $B_1(s)$와
+    가격 $P(s)$로 예산제약을 쓴 뒤, $\mathcal Q(H)$, $\mathcal Q(L)$,
+    $q^f$, $R^f$를 계산하고, 낮은 endowment 상태 claim이 높은 가격을
+    가질 수 있는 이유를 설명하라.
+10. 각 reachable nonterminal history에서 payoff matrix $X_t(s^t)$의 rank
+    condition이 market completeness와 어떻게 연결되는가?
+11. no arbitrage가 market completeness를 함의하지 않는 이유를 설명하라.
+12. 순차 Arrow-security 예산제약에서 $a_{it}(s^t)$의 경제적 의미를
+    설명하라.
+13. Arrow\--Debreu allocation과 sequential Arrow-security allocation의
+    동치가 왜 allocation equivalence이지 institutional identity가
+    아닌가?
+14. natural debt limit을 conditional present value of endowment로 써
+    보고, 이것과 no-Ponzi restriction을 구분하라.
+15. risk-free claim, risky return, equity claim, zero-coupon claim의
+    pricing equation을 각각 써라.
+16. Chapter 10의 $\lambda_t^K$와 $q_t^m$가 complete-markets state-price
+    kernel과 어떻게 연결되는지 설명하라.
+17. planner FOC와 Arrow\--Debreu household FOC를 비교하여
+    $\omega_i\propto1/\mu_i$ 관계를 도출하라.
+18. continuation wealth 식 (11.17a)를 이용하여 sequential budget
+    constraint (11.17)을 도출하라.
+19. equity pricing equation을 반복대입하여 no-bubble present-value
+    formula가 필요한 조건을 설명하라.
+20. incomplete markets에서 동일한 거래자산 가격과 양립하는 state-price
+    vector가 여러 개일 수 있는 이유를 payoff matrix의 rank로 설명하라.
+:::
+
+:::::::::::::::::::::::::::::::::::: {#ch11-glossary .section}
+## 핵심 용어
+
+::::::::::::::::::::::::::::::::::: definition-list
+:::: definition-row
+::: term
+date\--state commodity
+:::
+
+특정 날짜와 실현된 history에서 인도되는 소비재. 불확실성 아래
+commodity는 날짜만으로 완전히 규정되지 않는다.
+::::
+
+:::: definition-row
+::: term
+Arrow\--Debreu security
+:::
+
+time 0에 거래되며, 특정 미래 date-history에서 한 단위를 지급하는
+contingent claim.
+::::
+
+:::: definition-row
+::: term
+Arrow security
+:::
+
+현재 node에서 거래되며, 특정 successor state에서만 다음 기 한 단위를
+지급하는 one-period basis claim.
+::::
+
+:::: definition-row
+::: term
+state price $\mathcal Q_t$
+:::
+
+현재 node에서 특정 successor state의 다음 기 소비 한 단위를 지급받기
+위한 가격. physical probability와 SDF의 곱으로 표현된다.
+::::
+
+:::: definition-row
+::: term
+stochastic discount factor $M_{t,t+1}$
+:::
+
+상태조건부 payoff를 현재가치로 환산하는 equilibrium kernel. interior
+Arrow-security trade에서는 적절히 정규화된 가계 MRS와 일치한다.
+::::
+
+:::: definition-row
+::: term
+complete markets
+:::
+
+계약가능한 모든 contingent payoff가 직접 거래되거나 거래자산의 payoff로
+복제되는 상태. 단순한 자산 수나 complete information과 동의어가 아니다.
+::::
+
+:::: definition-row
+::: term
+asset spanning
+:::
+
+거래자산의 payoff vectors가 모든 contingent payoff를 생성하는 성질. 각
+비말단 node의 finite-state setting에서는 payoff matrix의 full row rank로
+표현되며, 동태경제에서는 이 조건이 모든 도달 가능한 비말단 node에서
+성립해야 한다.
+::::
+
+:::: definition-row
+::: term
+law of one price
+:::
+
+동일한 state-contingent payoff를 가진 모든 portfolio는 동일한 현재가격을
+가져야 한다는 무차익 원리.
+::::
+
+:::: definition-row
+::: term
+natural debt limit
+:::
+
+가계가 모든 후속 history에서 상환할 수 있는 범위를 넘지 않도록
+endogenously 정해지는 부채하한. 임의의 고정 credit limit과 다르다.
+::::
+
+:::: definition-row
+::: term
+marginal $q_t^m$
+:::
+
+설치자본의 재화단위 그림자가치 $\lambda_t^K$를 자본 replacement cost로
+나눈 비율. complete markets에서는 state-price kernel로 평가된 future
+marginal payoff를 반영한다.
+::::
+
+:::: definition-row
+::: term
+continuation wealth
+:::
+
+현재 node에서 보았을 때 미래 순거래 $c-e$의 조건부 현재가치. 순차
+Arrow-security 예산제약에서 상속 금융부와 다음 기 claim 선택을 연결한다.
+::::
+
+:::: definition-row
+::: term
+no-bubble condition
+:::
+
+자산가격을 미래 payoff의 현재가치로 표현하기 위해 필요한 장기 경계조건.
+homogeneous pricing equation의 bubble component를 배제한다.
+::::
+
+:::: definition-row
+::: term
+admissible state-price set
+:::
+
+불완전시장 환경에서 거래자산 가격 $p$와 payoff matrix $X$를 만족하는
+양의 state-price vectors의 집합. payoff span이 부족하면 일반적으로
+단일하지 않다.
+::::
+
+:::: definition-row
+::: term
+contingent-claim 보유량
+:::
+
+특정 미래 상태에서 지급되는 Arrow claim의 보유량. 두 상태 경제에서는
+$B_1(H),B_1(L)$가 각각 다음 기 $H,L$ 상태에서 지급되는 금융자원을
+나타내고, $B_0$는 현재 보유한 초기 금융부를 나타낸다. 보유량을 제거하면
+contingent consumption의 현재가치 예산제약이 된다.
+::::
+
+:::: definition-row
+::: term
+두 상태 endowment benchmark
+:::
+
+현재재와 두 개의 다음 기 상태를 가진 순수 endowment 경제. 상태가격
+$\mathcal Q(s)=\pi(s)\beta u'(Y_s)/u'(Y_0)$를 직접 계산하여, 확률과
+상태별 한계가치가 어떻게 결합되는지 보여 준다.
+::::
+
+:::: definition-row
+::: term
+ex-dividend price
+:::
+
+현재 배당이 지급된 뒤의 자산가격. equity pricing recursion에서 다음 기
+payoff를 $D_{t+1}+P_{t+1}^e$로 쓰려면 $P_t^e$를 ex-dividend price로
+해석한다.
+::::
+:::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::
+
+::: {#ch11-references .section}
+## 참조 문헌
+
+이 장은 state-contingent claims, Pareto risk sharing, Arrow\--Debreu and
+sequential trading, pricing kernel, recursive implementation을 하나의
+체계로 연결한다. 경제학적 기준축은 Romer의 완전금융시장 모형이며,
+거래제도·재귀적 표현·Arrow securities·term claims는
+Ljungqvist\--Sargent의 완전시장 장을 따른다.
+
+- Romer, David. *Advanced Macroeconomics*, 5th ed., Chapter 10,
+  "Financial Markets and Financial Crises," especially the model of
+  perfect financial markets. McGraw-Hill Education, 2019.
+- Ljungqvist, Lars, and Thomas J. Sargent. *Recursive Macroeconomic
+  Theory*, 4th ed., Chapter 8, "Equilibrium with Complete Markets." MIT
+  Press, 2018.
+- Arrow, Kenneth J. "The Role of Securities in the Optimal Allocation of
+  Risk-Bearing." *Review of Economic Studies* 31(2), 1964.
+- Debreu, Gérard. *The Theory of Value: An Axiomatic Analysis of
+  Economic Equilibrium.* Yale University Press, 1959.
+- Harrison, J. Michael, and David M. Kreps. "Martingales and Arbitrage
+  in Multiperiod Securities Markets." *Journal of Economic Theory*
+  20(3), 1979.
+:::

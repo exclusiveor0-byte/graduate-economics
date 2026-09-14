@@ -1,0 +1,5 @@
+# Chapter 07 · New Keynesian DSGE {.unnumbered}
+
+Dynamic New Keynesian DSGE: Staggered Pricing, Expectations, and Equilibrium Determination
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)

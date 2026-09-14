@@ -1,0 +1,5 @@
+# Chapter 12 · 금융마찰과 금융위기 {.unnumbered}
+
+Financial Frictions, Intermediation, and Crises
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)

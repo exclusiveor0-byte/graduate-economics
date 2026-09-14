@@ -1,0 +1,5 @@
+# Appendix C · 섭동법과 고차근사 {.unnumbered}
+
+Perturbation and Higher-Order Approximation
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)

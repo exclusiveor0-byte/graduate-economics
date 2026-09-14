@@ -1,0 +1,5 @@
+# Chapter 04 · 국가 간 소득격차 {.unnumbered}
+
+Cross-Country Income Differences: Development Accounting, Social Infrastructure, and Relative-Income Dynamics
+
+이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)
