@@ -81,16 +81,12 @@ book:
     - microeconomics/ch04-pure-exchange/supplement-examples-exercises.qmd
     - microeconomics/ch04-pure-exchange/references.qmd
   - macroeconomics/index.qmd
-  - part: Macroeconomics · Migration
-    chapters:
-    - macroeconomics/overview.qmd
+  - macroeconomics/overview.qmd
   - econometrics/index.qmd
-  - part: Econometrics · Migration
-    chapters:
-    - econometrics/overview.qmd
-  - part: supplements/index.qmd
-    chapters:
-    - supplements/visualization-guide.qmd
+  - econometrics/overview.qmd
+  - supplements/index.qmd
+  - supplements/visualization-guide.qmd
+  - supplements/slutsky-decomposition.qmd
   - references.qmd
   page-footer:
     center: Collaborative graduate economics knowledge base
