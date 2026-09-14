@@ -68,6 +68,8 @@ main :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
 .page-navigation .nav-page-text { min-width: 0; overflow-wrap: anywhere; }
 .page-navigation .pagination-link { min-width: 0; }
 :focus-visible { outline: 3px solid #176b68; outline-offset: 3px; }
+.interactive-frame { display: block; width: 100%; min-height: 48rem; border: 1px solid var(--notes-rule); border-radius: .75rem; background: #fff; }
+.supplement-fallback { max-width: 48rem; margin: 1.5rem auto; }
 @media (max-width: 991.98px) {
   #quarto-sidebar { width: min(320px, calc(100vw - 2.5rem)); max-width: calc(100vw - 2.5rem); }
 }
@@ -78,6 +80,7 @@ main :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
   div.callout.callout-style-default > .callout-body { padding: .6rem .65rem .2rem; }
   .callout { margin: 1.1rem 0; }
   table { font-size: .88rem; }
+  .interactive-frame { min-height: 58rem; }
 }
 @media print {
   body { background: white; color: black; }

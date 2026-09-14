@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slutsky와 Hicks 분해</title>
+  <style>
+    :root { --ink:#17212b; --muted:#56636b; --line:#d7dfe2; --teal:#087e8b; --red:#c2413b; --gold:#a16207; --paper:#fbfcfc; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { max-width:1000px; margin:auto; padding:1.25rem; }
+    h1 { margin:0 0 .25rem; font-size:1.45rem; }
+    .lead { margin:.1rem 0 1.1rem; color:var(--muted); }
+    .layout { display:grid; grid-template-columns:minmax(220px,.9fr) minmax(0,1.5fr); gap:1rem; align-items:start; }
+    .panel,.chart-card { background:#fff; border:1px solid var(--line); border-radius:.7rem; padding:1rem; }
+    fieldset { border:0; padding:0; margin:0 0 1rem; }
+    legend { font-weight:700; margin-bottom:.35rem; }
+    label { display:grid; grid-template-columns:1fr auto; gap:.5rem; margin:.65rem 0; font-weight:600; }
+    output { color:var(--teal); font-variant-numeric:tabular-nums; }
+    input[type="range"] { grid-column:1 / -1; width:100%; accent-color:var(--teal); }
+    .choices { display:flex; gap:.5rem; flex-wrap:wrap; }
+    .choice { flex:1; min-width:8.5rem; border:1px solid var(--line); border-radius:.45rem; padding:.55rem; cursor:pointer; }
+    .choice:has(input:checked) { border-color:var(--teal); background:#eef9f8; }
+    .choice input { margin-right:.35rem; }
+    svg { width:100%; height:auto; display:block; }
+    .line-initial { stroke:#68757c; } .line-new { stroke:var(--red); } .line-comp { stroke:var(--teal); stroke-dasharray:8 6; }
+    .curve { stroke:var(--gold); stroke-dasharray:5 5; } .axis { stroke:var(--ink); }
+    .chart-label { font-size:13px; fill:var(--ink); } .muted-label { fill:var(--muted); }
+    .dot-initial { fill:var(--ink); } .dot-comp { fill:var(--teal); } .dot-new { fill:var(--red); }
+    .summary { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; margin-top:.8rem; }
+    .metric { padding:.65rem; background:#f5f8f8; border-radius:.45rem; }
+    .metric strong { display:block; font-size:.82rem; color:var(--muted); }
+    .formula { margin:.85rem 0 0; padding:.75rem; border-left:4px solid var(--teal); background:#f1f8f8; font-size:.93rem; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media (max-width:700px) { main { padding:.8rem; } .layout { grid-template-columns:1fr; } .summary { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>가격 변화의 Slutsky / Hicks 분해</h1>
+    <p class="lead">p₂=1, u(x₁,x₂)=x₁ᵅx₂¹⁻ᵅ인 두 재화 소비자입니다.</p>
+    <div class="layout">
+      <section class="panel" aria-label="모형 설정">
+        <fieldset>
+          <legend>보상 규칙</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="rule" value="slutsky" checked>Slutsky</label>
+            <label class="choice"><input type="radio" name="rule" value="hicks">Hicks</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>모수</legend>
+          <label for="price">새 p₁ <output id="priceOut"></output><input id="price" type="range" min=".5" max="2" step=".05" value="1.5"></label>
+          <label for="income">소득 m <output id="incomeOut"></output><input id="income" type="range" min="40" max="200" step="5" value="100"></label>
+          <label for="alpha">지출비중 α <output id="alphaOut"></output><input id="alpha" type="range" min=".1" max=".9" step=".05" value=".5"></label>
+        </fieldset>
+        <p class="formula" id="ruleText"></p>
+      </section>
+      <section class="chart-card" aria-label="예산선과 수요점 그림">
+        <svg id="chart" viewBox="0 0 580 420" role="img" aria-labelledby="chartTitle chartDesc">
+          <title id="chartTitle">가격 변화 뒤 소비자수요의 분해</title>
+          <desc id="chartDesc">초기, 보상, 실제 수요와 각 예산선을 보인다.</desc>
+          <g class="axis" stroke-width="2"><line x1="56" y1="356" x2="550" y2="356"/><line x1="56" y1="356" x2="56" y2="24"/></g>
+          <path id="curve" class="curve" fill="none" stroke-width="2"/>
+          <line id="b0" class="line-initial" stroke-width="2.5"/>
+          <line id="bc" class="line-comp" stroke-width="2.5"/>
+          <line id="b1" class="line-new" stroke-width="2.5"/>
+          <g id="points"></g>
+          <g class="chart-label"><text x="540" y="382">x₁</text><text x="18" y="33">x₂</text><text x="47" y="379">0</text></g>
+          <g id="labels" class="chart-label"></g>
+        </svg>
+        <div class="summary" aria-label="계산 결과">
+          <div class="metric"><strong>초기 수요 x⁰</strong><span id="x0"></span></div>
+          <div class="metric"><strong>실제 수요 x¹</strong><span id="x1"></span></div>
+          <div class="metric"><strong>보상소득</strong><span id="mc"></span></div>
+          <div class="metric"><strong>대체효과 / 소득효과</strong><span id="effects"></span></div>
+        </div>
+        <p id="live" aria-live="polite" class="sr-only"></p>
+      </section>
+    </div>
+  </main>
+  <script>
+    (() => {
+      const $ = id => document.getElementById(id);
+      const els = { price:$("price"), income:$("income"), alpha:$("alpha"), priceOut:$("priceOut"), incomeOut:$("incomeOut"), alphaOut:$("alphaOut"), b0:$("b0"), b1:$("b1"), bc:$("bc"), curve:$("curve"), points:$("points"), labels:$("labels"), x0:$("x0"), x1:$("x1"), mc:$("mc"), effects:$("effects"), ruleText:$("ruleText"), live:$("live") };
+      const fmt = n => Number(n).toFixed(2);
+      const demand = (p,m,a) => [a*m/p,(1-a)*m];
+      const line = (node,m,p,scale) => { node.setAttribute("x1",56); node.setAttribute("y1",356-scale*m); node.setAttribute("x2",56+scale*m/p); node.setAttribute("y2",356); };
+      const dot = (x,y,cls,name,scale) => '<circle class="'+cls+'" cx="'+(56+scale*x)+'" cy="'+(356-scale*y)+'" r="5"/><text x="'+(64+scale*x)+'" y="'+(350-scale*y)+'">'+name+'</text>';
+      function render() {
+        const p = +els.price.value, m = +els.income.value, a = +els.alpha.value;
+        const rule = document.querySelector('input[name="rule"]:checked').value;
+        const x0 = demand(1,m,a), x1 = demand(p,m,a);
+        const u0 = Math.pow(x0[0],a)*Math.pow(x0[1],1-a);
+        const mS = p*x0[0]+x0[1];
+        const mH = u0*Math.pow(p,a)/(Math.pow(a,a)*Math.pow(1-a,1-a));
+        const mc = rule === "slutsky" ? mS : mH, xc = demand(p,mc,a);
+        const xmax = Math.max(m,m/p,mc,mc/p)*1.08;
+        const maxBudget = Math.max(m,mc);
+        const scale = Math.min(474/xmax,320/maxBudget);
+        line(els.b0,m,1,scale); line(els.b1,m,p,scale); line(els.bc,mc,p,scale);
+        let path = "";
+        for (let x=.5; x<=xmax; x+=xmax/100) { const y=Math.pow(u0/Math.pow(x,a),1/(1-a)); if (y<=m*1.2) path += (path ? "L" : "M")+(56+scale*x)+" "+(356-scale*y); }
+        els.curve.setAttribute("d",path);
+        els.points.innerHTML = dot(x0[0],x0[1],"dot-initial","x⁰",scale)+dot(xc[0],xc[1],"dot-comp","xᶜ",scale)+dot(x1[0],x1[1],"dot-new","x¹",scale);
+        els.labels.innerHTML = '<text class="muted-label" x="'+(56+scale*m*.76)+'" y="'+(356-scale*m*.22)+'">초기 예산선</text><text fill="#087e8b" x="'+(56+scale*mc/(p+1))+'" y="'+(356-scale*mc/(p+1)-8)+'">보상 예산선</text><text fill="#c2413b" x="'+(56+scale*(m/p)*.58)+'" y="'+(356-scale*m*.42)+'">새 예산선</text><text fill="#a16207" x="'+(56+scale*xmax*.63)+'" y="'+(356-scale*m*.92)+'">초기 무차별곡선</text>';
+        els.priceOut.value = fmt(p); els.incomeOut.value = fmt(m); els.alphaOut.value = fmt(a);
+        els.x0.textContent = "("+fmt(x0[0])+", "+fmt(x0[1])+")";
+        els.x1.textContent = "("+fmt(x1[0])+", "+fmt(x1[1])+")";
+        els.mc.textContent = (rule==="slutsky" ? "mˢ = " : "mᴴ = ")+fmt(mc);
+        els.effects.textContent = "("+fmt(xc[0]-x0[0])+", "+fmt(xc[1]-x0[1])+") / ("+fmt(x1[0]-xc[0])+", "+fmt(x1[1]-xc[1])+")";
+        els.ruleText.textContent = rule==="slutsky" ? "Slutsky: 새 가격에서 초기 묶음 x⁰을 살 수 있게 mˢ = p¹·x⁰를 보상합니다." : "Hicks: 초기 효용 u⁰를 유지하는 최소지출 mᴴ = e(p¹,u⁰)를 보상합니다.";
+        els.live.textContent = rule+" 보상소득은 "+fmt(mc)+"이며, 초기 수요는 "+els.x0.textContent+", 실제 수요는 "+els.x1.textContent+"입니다.";
+      }
+      document.querySelectorAll("input").forEach(input => input.addEventListener("input",render));
+      render();
+    })();
+  </script>
+</body>
+</html>

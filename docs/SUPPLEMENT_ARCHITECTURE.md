@@ -61,4 +61,8 @@ Shiny 서버가 필요한 앱과 서버 없이 실행되는 htmlwidgets/정적 J
 본문에서 사용한 정의를 확인한 뒤 interactive + 결과 표/정적 그림부터 만들고,
 애니메이션이 추가 설명에 도움이 되는 경우에만 GIF/MP4를 추가합니다.
 
-이 문서는 확장 구조이며, 아직 실행 검증된 R/MATLAB 계산 예제를 뜻하지 않습니다.
+첫 실제 구현은 supplements/interactive/slutsky-decomposition/에 있습니다. 이는 두 재화
+Cobb--Douglas 소비자의 Slutsky/Hicks 분해를 비교하는 독립형 도구입니다. Quarto 페이지는
+설명과 정적 대체 자료를 제공하고, iframe 안의 도구는 모수를 조작하게 합니다.
+
+도구는 외부 네트워크 요청이나 서버 없이 동작하며 Quarto 책과 함께 배포됩니다.

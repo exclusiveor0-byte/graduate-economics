@@ -1,5 +1,9 @@
 # Visualization & Computational Supplements
 
+## 현재 제공되는 보충자료
+
+- [Slutsky 분해: 가격변화와 두 보상 규칙](slutsky-decomposition.qmd): 두 재화 Cobb--Douglas 소비자에서 가격을 바꾸고 Slutsky 보상과 Hicks 보상을 비교합니다.
+
 ## 선택 기준
 
 | 목적 | 권장 형식 |

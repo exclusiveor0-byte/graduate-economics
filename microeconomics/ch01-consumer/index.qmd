@@ -21,6 +21,7 @@
 - [1.3 소비자의 문제](03-consumer-problem.qmd)
 - [1.4 간접효용과 지출](04-indirect-utility-expenditure.qmd)
 - [1.5 소비자수요의 성질](05-demand-properties.qmd)
+- [Interactive · 가격변화와 보상수요](../../supplements/slutsky-decomposition.qmd)
 - [표준 효용함수와 수요대응](supplement-standard-utility.qmd)
 - [1.6 연습문제](exercises.qmd)
 - [참고문헌](references.qmd)
