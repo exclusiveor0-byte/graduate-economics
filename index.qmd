@@ -9,29 +9,31 @@ subtitle: Graduate Economics Knowledge Base
 
 :::: {.study-grid}
 ::: {.study-card}
-### [미시경제학](microeconomics/index.qmd)
+### [미시경제학](microeconomics/index.html)
 수학적 기초 · 소비자이론 · 생산자이론 · 부분균형 · 순수교환경제
 
-[Chapter 0부터 읽기](microeconomics/ch00-foundations/index.qmd) →
+[Chapter 0부터 읽기](microeconomics/ch00-foundations/index.html) →
 
 [Chapter 0–4 · Section별 독립 페이지]{.status}
 :::
 ::: {.study-card}
-### [계산·탐색 보충자료](supplements/index.qmd)
+### [계산·탐색 보충자료](supplements/index.html)
 이론과 연결되는 계산, 모수 변화, R·MATLAB 산출물을 모읍니다.
 
-[보충자료 작성 안내](supplements/visualization-guide.qmd) →
+[보충자료 작성 안내](supplements/visualization-guide.html) →
 
 [확장 준비 중]{.status}
 :::
 ::: {.study-card}
-### [거시경제학](macroeconomics/index.qmd)
-기존 정리노트를 미시경제학과 같은 구조로 옮길 예정입니다.
+### [거시경제학](macroeconomics/index.html)
+성장 · 실물경기변동 · New Keynesian DSGE · 통화정책 · 금융마찰 · 불완전시장
 
-[본문 이관 예정]{.status}
+[Chapter 00부터 읽기](macroeconomics/ch00-macro-map/index.html) →
+
+[Chapter 00–13 · 기술 부록 A–E]{.status}
 :::
 ::: {.study-card}
-### [계량경제학](econometrics/index.qmd)
+### [계량경제학](econometrics/index.html)
 식별과 추정, 점근이론과 계산을 연결하는 정리노트를 준비합니다.
 
 [본문 이관 예정]{.status}
@@ -48,4 +50,4 @@ subtitle: Graduate Economics Knowledge Base
 ## 함께 고치기
 
 작은 오탈자부터 증명 보완까지, Section 하나씩 제안하고 검토합니다.
-처음 참여한다면 [협업 안내](collaboration.qmd)를 읽으세요.
+처음 참여한다면 [협업 안내](collaboration.html)를 읽으세요.
