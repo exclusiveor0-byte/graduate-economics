@@ -42,11 +42,11 @@ m^H=\frac{u^0 p_1^{\alpha}}
 
 ## 정적 그림
 
-상호작용을 사용할 수 없는 환경을 위한 기본 설정의 그림이다. 보상 규칙을
-Slutsky로 두면 청록 예산선은 초기 묶음을 지난다. Hicks로 바꾸면 청록점이
-초기 무차별곡선 위에 놓이도록 이동한다.
+상호작용을 사용할 수 없는 환경을 위한 기본 설정의 비교 그림이다. 왼쪽의
+Slutsky 보상선은 초기 묶음을 지나며, 오른쪽의 Hicks 보상점은 초기
+무차별곡선 위에 놓인다.
 
-![초기 예산선, 가격 변화 뒤 예산선, 보상 예산선과 세 수요점을 보이는 Slutsky 분해의 정적 그림](../assets/images/slutsky-decomposition-static.svg){.supplement-fallback fig-alt="Slutsky 분해의 정적 예산선 그림"}
+![초기 예산선, 가격 변화 뒤 예산선과 Slutsky 및 Hicks 보상을 나란히 비교하는 정적 그림](../assets/images/slutsky-decomposition-static.svg){.supplement-fallback fig-alt="Slutsky와 Hicks 보상을 나란히 비교하는 정적 예산선 그림"}
 
 ## 재현과 범위
 

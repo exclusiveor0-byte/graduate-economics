@@ -50,23 +50,25 @@
         </fieldset>
         <fieldset>
           <legend>모수</legend>
-          <label for="price">새 p₁ <output id="priceOut"></output><input id="price" type="range" min=".5" max="2" step=".05" value="1.5"></label>
-          <label for="income">소득 m <output id="incomeOut"></output><input id="income" type="range" min="40" max="200" step="5" value="100"></label>
-          <label for="alpha">지출비중 α <output id="alphaOut"></output><input id="alpha" type="range" min=".1" max=".9" step=".05" value=".5"></label>
+          <label for="price">새 p₁ <output id="priceOut"></output><input id="price" type="range" min=".8" max="1.5" step=".05" value="1.5"></label>
+          <label for="income">소득 m <output id="incomeOut"></output><input id="income" type="range" min="40" max="100" step="5" value="100"></label>
+          <label for="alpha">지출비중 α <output id="alphaOut"></output><input id="alpha" type="range" min=".3" max=".7" step=".05" value=".5"></label>
         </fieldset>
         <p class="formula" id="ruleText"></p>
       </section>
       <section class="chart-card" aria-label="예산선과 수요점 그림">
-        <svg id="chart" viewBox="0 0 580 420" role="img" aria-labelledby="chartTitle chartDesc">
+        <svg id="chart" viewBox="0 0 710 500" role="img" aria-labelledby="chartTitle chartDesc">
           <title id="chartTitle">가격 변화 뒤 소비자수요의 분해</title>
-          <desc id="chartDesc">초기, 보상, 실제 수요와 각 예산선을 보인다.</desc>
-          <g class="axis" stroke-width="2"><line x1="56" y1="356" x2="550" y2="356"/><line x1="56" y1="356" x2="56" y2="24"/></g>
+          <desc id="chartDesc">x1 축과 x2 축은 모두 0에서 150으로 고정되어 있다. 초기, 보상, 실제 수요와 각 예산선을 보인다.</desc>
+          <g class="axis" stroke-width="2"><line x1="64" y1="430" x2="664" y2="430"/><line x1="64" y1="430" x2="64" y2="30"/></g>
+          <g class="chart-label muted-label" text-anchor="middle"><text x="264" y="452">50</text><text x="464" y="452">100</text><text x="664" y="452">150</text></g>
+          <g class="chart-label muted-label" text-anchor="end"><text x="53" y="297">50</text><text x="53" y="163">100</text><text x="53" y="34">150</text></g>
           <path id="curve" class="curve" fill="none" stroke-width="2"/>
           <line id="b0" class="line-initial" stroke-width="2.5"/>
           <line id="bc" class="line-comp" stroke-width="2.5"/>
           <line id="b1" class="line-new" stroke-width="2.5"/>
           <g id="points"></g>
-          <g class="chart-label"><text x="540" y="382">x₁</text><text x="18" y="33">x₂</text><text x="47" y="379">0</text></g>
+          <g class="chart-label"><text x="670" y="452">x₁</text><text x="25" y="35">x₂</text><text x="55" y="452">0</text><text x="664" y="480" text-anchor="end" class="muted-label">고정 축: x₁ 0–150, x₂ 0–150</text></g>
           <g id="labels" class="chart-label"></g>
         </svg>
         <div class="summary" aria-label="계산 결과">
@@ -84,9 +86,12 @@
       const $ = id => document.getElementById(id);
       const els = { price:$("price"), income:$("income"), alpha:$("alpha"), priceOut:$("priceOut"), incomeOut:$("incomeOut"), alphaOut:$("alphaOut"), b0:$("b0"), b1:$("b1"), bc:$("bc"), curve:$("curve"), points:$("points"), labels:$("labels"), x0:$("x0"), x1:$("x1"), mc:$("mc"), effects:$("effects"), ruleText:$("ruleText"), live:$("live") };
       const fmt = n => Number(n).toFixed(2);
+      const left = 64, bottom = 430, xMax = 150, yMax = 150, xScale = 4, yScale = 8/3;
       const demand = (p,m,a) => [a*m/p,(1-a)*m];
-      const line = (node,m,p,scale) => { node.setAttribute("x1",56); node.setAttribute("y1",356-scale*m); node.setAttribute("x2",56+scale*m/p); node.setAttribute("y2",356); };
-      const dot = (x,y,cls,name,scale) => '<circle class="'+cls+'" cx="'+(56+scale*x)+'" cy="'+(356-scale*y)+'" r="5"/><text x="'+(64+scale*x)+'" y="'+(350-scale*y)+'">'+name+'</text>';
+      const px = x => left+x*xScale;
+      const py = y => bottom-y*yScale;
+      const line = (node,m,p) => { node.setAttribute("x1",left); node.setAttribute("y1",py(m)); node.setAttribute("x2",px(m/p)); node.setAttribute("y2",bottom); };
+      const dot = (x,y,cls,name) => '<circle class="'+cls+'" cx="'+px(x)+'" cy="'+py(y)+'" r="5"/><text x="'+(px(x)+8)+'" y="'+Math.max(42,py(y)-7)+'">'+name+'</text>';
       function render() {
         const p = +els.price.value, m = +els.income.value, a = +els.alpha.value;
         const rule = document.querySelector('input[name="rule"]:checked').value;
@@ -95,15 +100,12 @@
         const mS = p*x0[0]+x0[1];
         const mH = u0*Math.pow(p,a)/(Math.pow(a,a)*Math.pow(1-a,1-a));
         const mc = rule === "slutsky" ? mS : mH, xc = demand(p,mc,a);
-        const xmax = Math.max(m,m/p,mc,mc/p)*1.08;
-        const maxBudget = Math.max(m,mc);
-        const scale = Math.min(474/xmax,320/maxBudget);
-        line(els.b0,m,1,scale); line(els.b1,m,p,scale); line(els.bc,mc,p,scale);
+        line(els.b0,m,1); line(els.b1,m,p); line(els.bc,mc,p);
         let path = "";
-        for (let x=.5; x<=xmax; x+=xmax/100) { const y=Math.pow(u0/Math.pow(x,a),1/(1-a)); if (y<=m*1.2) path += (path ? "L" : "M")+(56+scale*x)+" "+(356-scale*y); }
+        for (let x=.5; x<=xMax; x+=xMax/160) { const y=Math.pow(u0/Math.pow(x,a),1/(1-a)); if (y<=yMax) path += (path ? "L" : "M")+px(x)+" "+py(y); }
         els.curve.setAttribute("d",path);
-        els.points.innerHTML = dot(x0[0],x0[1],"dot-initial","x⁰",scale)+dot(xc[0],xc[1],"dot-comp","xᶜ",scale)+dot(x1[0],x1[1],"dot-new","x¹",scale);
-        els.labels.innerHTML = '<text class="muted-label" x="'+(56+scale*m*.76)+'" y="'+(356-scale*m*.22)+'">초기 예산선</text><text fill="#087e8b" x="'+(56+scale*mc/(p+1))+'" y="'+(356-scale*mc/(p+1)-8)+'">보상 예산선</text><text fill="#c2413b" x="'+(56+scale*(m/p)*.58)+'" y="'+(356-scale*m*.42)+'">새 예산선</text><text fill="#a16207" x="'+(56+scale*xmax*.63)+'" y="'+(356-scale*m*.92)+'">초기 무차별곡선</text>';
+        els.points.innerHTML = dot(x0[0],x0[1],"dot-initial","x⁰")+dot(xc[0],xc[1],"dot-comp","xᶜ")+dot(x1[0],x1[1],"dot-new","x¹");
+        els.labels.innerHTML = '<text class="muted-label" x="'+px(m*.76)+'" y="'+py(m*.22)+'">초기 예산선</text><text fill="#087e8b" x="'+px(mc/(p+1))+'" y="'+Math.max(42,py(mc/(p+1)-8))+'">보상 예산선</text><text fill="#c2413b" x="'+px((m/p)*.58)+'" y="'+py(m*.42)+'">새 예산선</text><text fill="#a16207" x="'+px(xMax*.63)+'" y="'+py(Math.min(yMax-8,m*.92))+'">초기 무차별곡선</text>';
         els.priceOut.value = fmt(p); els.incomeOut.value = fmt(m); els.alphaOut.value = fmt(a);
         els.x0.textContent = "("+fmt(x0[0])+", "+fmt(x0[1])+")";
         els.x1.textContent = "("+fmt(x1[0])+", "+fmt(x1[1])+")";
