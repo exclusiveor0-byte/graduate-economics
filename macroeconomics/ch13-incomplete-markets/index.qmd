@@ -1,5 +1,38 @@
 # Chapter 13 · 불완전시장과 부의 분포 {.unnumbered}
+*Incomplete Markets, Self-Insurance, and Wealth Distribution*
 
-Incomplete Markets, Self-Insurance, and Wealth Distribution
+이 장에서는 **불완전시장과 부의 분포**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
 
-이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **13.1–13.5** 완전보험에서 자기보험으로 · Euler inequality, envelope condition, 정책함수의 성질
+- **13.6–13.9** Prudence, precautionary saving, buffer-stock behavior · Aiyagari의 생산경제
+- **13.10 및 결론 자기보험은 어떻게 분포와 가격을 만든다** 부와 소비의 분포, 불평등, 후생 · 결론 자기보험은 어떻게 분포와 가격을 만든다
+:::
+
+## Sections
+
+- [13.1 완전보험에서 자기보험으로](contents.html#ch13-s01)
+- [13.2 Bewley 경제의 환경과 타이밍](contents.html#ch13-s02)
+- [13.3 차입한도, solvency, feasible set](contents.html#ch13-s03)
+- [13.4 가계의 recursive problem과 해의 존재](contents.html#ch13-s04)
+- [13.5 Euler inequality, envelope condition, 정책함수의 성질](contents.html#ch13-s05)
+- [13.6 Prudence, precautionary saving, buffer-stock behavior](contents.html#ch13-s06)
+- [13.7 정책함수가 유도하는 분포동학](contents.html#ch13-s07)
+- [13.8 Huggett의 순수교환경제](contents.html#ch13-s08)
+- [13.9 Aiyagari의 생산경제](contents.html#ch13-s09)
+- [13.10 부와 소비의 분포, 불평등, 후생](contents.html#ch13-s10)
+- [13.11 수치해법과 균형계산](contents.html#ch13-s11)
+- [13.12 통합, 장의 경계, 확장방향](contents.html#ch13-s12)
+- [결론 자기보험은 어떻게 분포와 가격을 만든다](contents.html#ch13-conclusion)
+- [Learning Check](contents.html#ch13-check)
+- [참조 문헌](contents.html#ch13-references)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

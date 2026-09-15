@@ -1,5 +1,38 @@
 # Chapter 11 · 완전시장 {.unnumbered}
+*Complete Markets, State Prices, Risk Sharing, and the Foundations of Asset Valuation*
 
-Complete Markets, State Prices, Risk Sharing, and the Foundations of Asset Valuation
+이 장에서는 **완전시장**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
 
-이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **11.1–11.4** 미래의 날짜뿐 아니라 상태까지 왜 가격화해야 하는가 · Arrow\--Debreu equilibrium: time-0 trading, 예산제약, 그리고 시장청산
+- **11.5–11.8** 상태가격, marginal valuation, 그리고 stochastic discount factor · recursive complete-markets equilibrium과 Markov state-price kernel
+- **11.9 및 결론 상태조건부 가격에서 기업가치와 투자까지** 위험 없는 claim, 위험자산, equity, 그리고 term claims의 가격 · 결론 상태조건부 가격에서 기업가치와 투자까지
+:::
+
+## Sections
+
+- [11.1 미래의 날짜뿐 아니라 상태까지 왜 가격화해야 하는가](contents.html#ch11-s01)
+- [11.2 event tree, date\--state commodity, contractibility, 그리고 market completeness](contents.html#ch11-s02)
+- [11.3 Pareto allocation과 완전한 위험분담의 기준](contents.html#ch11-s03)
+- [11.4 Arrow\--Debreu equilibrium: time-0 trading, 예산제약, 그리고 시장청산](contents.html#ch11-s04)
+- [11.5 상태가격, marginal valuation, 그리고 stochastic discount factor](contents.html#ch11-s05)
+- [11.6 asset spanning, law of one price, no arbitrage, 그리고 Arrow securities](contents.html#ch11-s06)
+- [11.7 sequential Arrow-security trading, 금융부, debt limits, 그리고 구현 동치](contents.html#ch11-s07)
+- [11.8 recursive complete-markets equilibrium과 Markov state-price kernel](contents.html#ch11-s08)
+- [11.9 위험 없는 claim, 위험자산, equity, 그리고 term claims의 가격](contents.html#ch11-s09)
+- [11.10 완전시장 하의 기업가치, 투자, 그리고 marginal $q$](contents.html#ch11-s10)
+- [11.11 완전시장 benchmark의 한계와 금융마찰·불완전시장으로의 연결](contents.html#ch11-s11)
+- [결론 상태조건부 가격에서 기업가치와 투자까지](contents.html#ch11-conclusion)
+- [Learning Check](contents.html#ch11-check)
+- [핵심 용어](contents.html#ch11-glossary)
+- [참조 문헌](contents.html#ch11-references)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

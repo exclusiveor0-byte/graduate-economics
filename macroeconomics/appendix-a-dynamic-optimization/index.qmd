@@ -1,5 +1,52 @@
 # Appendix A · 동태최적화와 재귀적 방법 {.unnumbered}
+*Dynamic Optimization and Recursive Methods*
 
-Dynamic Optimization and Recursive Methods
+이 장에서는 **동태최적화와 재귀적 방법**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
 
-이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **A.1–A.7** 동태최적화 문제의 구성 · 무한기간 admissibility와 intertemporal solvency
+- **A.8–A.13** Transversality condition과 최적성 검증 · Ramsey--Cass--Koopmans 모형의 완전한 최적제어
+- **A.14–A.19** 최적성 원리와 재귀적 state · Verification theorem과 비유계 동적계획 문제
+- **A.20 및 결론** 수치 동적계획과 residual diagnostics · 결론
+:::
+
+## Sections
+
+- [A.1 동태최적화 문제의 구성](contents.html#appA-a01)
+- [A.2 Feasibility, admissibility, 그리고 해의 개념](contents.html#appA-a02)
+- [A.3 정적 제약최적화, KKT, 그리고 envelope theorem](contents.html#appA-a03)
+- [A.4 유한기간 sequence problem과 경계조건](contents.html#appA-a04)
+- [A.5 Present-value와 current-value multiplier](contents.html#appA-a05)
+- [A.6 Costate system, Euler equation, 그리고 동태 KKT](contents.html#appA-a06)
+- [A.7 무한기간 admissibility와 intertemporal solvency](contents.html#appA-a07)
+- [A.8 Transversality condition과 최적성 검증](contents.html#appA-a08)
+- [A.9 이산시간 소비--저축 문제: 순차적 방법과 재귀적 방법](contents.html#appA-a09)
+- [A.10 Pontryagin 최대원리](contents.html#appA-a10)
+- [A.11 Present-value와 current-value Hamiltonian](contents.html#appA-a11)
+- [A.12 연속시간 TVC와 충분조건](contents.html#appA-a12)
+- [A.13 Ramsey--Cass--Koopmans 모형의 완전한 최적제어](contents.html#appA-a13)
+- [A.14 최적성 원리와 재귀적 state](contents.html#appA-a14)
+- [A.15 Deterministic와 stochastic Bellman equation](contents.html#appA-a15)
+- [A.16 Bellman operator, Blackwell 조건, 그리고 contraction](contents.html#appA-a16)
+- [A.17 Policy existence, maximum theorem, measurable selection](contents.html#appA-a17)
+- [A.18 Bellman envelope, Benveniste--Scheinkman, 그리고 Euler equation](contents.html#appA-a18)
+- [A.19 Verification theorem과 비유계 동적계획 문제](contents.html#appA-a19)
+- [A.20 수치 동적계획과 residual diagnostics](contents.html#appA-a20)
+- [A.21 Sequence method, Bellman equation, 그리고 HJB의 대응](contents.html#appA-a21)
+- [A.22 Linear--quadratic regulator와 Riccati equation](contents.html#appA-a22)
+- [A.23 Stability, certainty equivalence, 그리고 Ramsey-policy bridge](contents.html#appA-a23)
+- [A.24 통합 풀이 절차와 본문 연결](contents.html#appA-a24)
+- [결론](contents.html#appA-conclusion)
+- [Learning Check](contents.html#appA-check)
+- [핵심 용어](contents.html#appA-glossary)
+- [참조 문헌](contents.html#appA-references)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

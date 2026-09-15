@@ -1,5 +1,37 @@
 # Chapter 08 · 통화정책 {.unnumbered}
+*Monetary Policy: Stabilization, Commitment, and Credible Implementation*
 
-Monetary Policy: Stabilization, Commitment, and Credible Implementation
+이 장에서는 **통화정책**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
 
-이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **8.1–8.4** 통화정책의 객체: 수단, 목표, 제약, 그리고 정책체제 · commitment 아래의 Ramsey 안정화정책
+- **8.5–8.8** 순차적 재량정책과 Markov discretion · 신뢰성의 제도: 규칙, 위임, 평판, 그리고 continuation values
+- **8.9 및 결론 통화안정화에서 재정·금융·이질성으로** effective lower bound와 occasionally binding constraint · 결론 통화안정화에서 재정·금융·이질성으로
+:::
+
+## Sections
+
+- [8.1 통화정책의 객체: 수단, 목표, 제약, 그리고 정책체제](contents.html#ch08-s01)
+- [8.2 효율산출, 가격분산, 그리고 국소적 후생기준](contents.html#ch08-s02)
+- [8.3 divine coincidence와 안정화 trade-off](contents.html#ch08-s03)
+- [8.4 commitment 아래의 Ramsey 안정화정책](contents.html#ch08-s04)
+- [8.5 순차적 재량정책과 Markov discretion](contents.html#ch08-s05)
+- [8.6 target criterion, instrument rule, 그리고 정책 구현](contents.html#ch08-s06)
+- [8.7 time inconsistency와 평균 인플레이션 편향](contents.html#ch08-s07)
+- [8.8 신뢰성의 제도: 규칙, 위임, 평판, 그리고 continuation values](contents.html#ch08-s08)
+- [8.9 effective lower bound와 occasionally binding constraint](contents.html#ch08-s09)
+- [8.10 화폐·재정 제약의 경계: cashless NK가 남기는 것](contents.html#ch08-s10)
+- [결론 통화안정화에서 재정·금융·이질성으로](contents.html#ch08-conclusion)
+- [Learning Check](contents.html#ch08-check)
+- [핵심 용어](contents.html#ch08-glossary)
+- [참조 문헌](contents.html#ch08-references)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

@@ -1,5 +1,34 @@
 # Chapter 03 · 지식축적과 내생적 성장 {.unnumbered}
+*Knowledge Accumulation, Innovation, and the Limits of Endogenous Growth*
 
-Knowledge Accumulation, Innovation, and the Limits of Endogenous Growth
+이 장에서는 **지식축적과 내생적 성장**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
 
-이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **3.1–3.3** Chapter 02 이후의 질문: $g$를 설명해야 한다 · 자본 없는 기준모형: 지식성장률의 동학
+- **3.4–3.6** 일반모형과 AK의 정확한 위치 · Romer형 variety-expansion 모형: 특허, 독점, 후생
+- **3.7–3.8** 실증적 규율과 scale effect · 결론: 세계 성장의 설명과 Chapter 04의 질문
+:::
+
+## Sections
+
+- [3.1 Chapter 02 이후의 질문: $g$를 설명해야 한다](contents.html#ch03-s01)
+- [3.2 환경, 표기, 그리고 연구부문의 분리](contents.html#ch03-s02)
+- [3.3 자본 없는 기준모형: 지식성장률의 동학](contents.html#ch03-s03)
+- [3.4 일반모형과 AK의 정확한 위치](contents.html#ch03-s04)
+- [3.5 지식의 성질과 R&D 자원배분](contents.html#ch03-s05)
+- [3.6 Romer형 variety-expansion 모형: 특허, 독점, 후생](contents.html#ch03-s06)
+- [3.7 실증적 규율과 scale effect](contents.html#ch03-s07)
+- [3.8 결론: 세계 성장의 설명과 Chapter 04의 질문](contents.html#ch03-s08)
+- [Learning Check](contents.html#ch03-check)
+- [핵심 용어](contents.html#ch03-glossary)
+- [참조 문헌](contents.html#ch03-references)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::
