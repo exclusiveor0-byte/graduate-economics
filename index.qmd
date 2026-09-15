@@ -4,37 +4,35 @@ subtitle: Graduate Economics Knowledge Base
 ---
 
 ::: {.home-hero}
-[GRADUATE ECONOMICS · COLLABORATIVE NOTES]{.home-hero__eyebrow}
+::: {.home-hero__lead}
+[ECONOMICS RESEARCH NOTEBOOK · VOL. 01]{.home-hero__eyebrow}
 
-선택에서 균형까지, 가정에서 증명까지. 함께 읽고 검토하며 축적하는
-경제학 지식베이스입니다.
-
-<div class="home-hero__formulae" aria-label="경제학 핵심 수식을 표현한 장식 요소">
-  <span>∂U/∂xᵢ = λpᵢ</span>
-  <span>Y = AK<sup>α</sup>L<sup>1−α</sup></span>
-  <span>E<sub>t</sub>[m<sub>t+1</sub>R<sub>t+1</sub>] = 1</span>
-</div>
+경제학을 서로 연결된 문제, 가정, 증명으로 읽는 공동 정리노트입니다.
+각 과목의 Chapter 지도에서 시작해 필요한 Section으로 바로 이동할 수 있습니다.
 
 ::: {.home-hero__actions}
 [정리노트 둘러보기](#정리노트-읽기){.home-button .home-button--primary}
 [협업 방식 보기](collaboration.html){.home-button}
 :::
-
-::: {.home-hero__metrics}
-::: {.home-metric}
-**3**
-
-과목 아카이브
 :::
-::: {.home-metric}
-**미시 0–4**
 
-독립 Section 구성
+::: {.home-hero__navigator}
+[CURRENT ARCHIVE]{.home-hero__eyebrow}
+
+::: {.home-archive-item}
+**미시경제학**
+
+Chapter 0–4 · 수학적 기초부터 순수교환경제
 :::
-::: {.home-metric}
-**계량 01–03**
+::: {.home-archive-item}
+**거시경제학**
 
-확률·식별까지 수록
+Chapter 00–13 · 기술 부록 A–E
+:::
+::: {.home-archive-item}
+**계량경제학**
+
+Chapter 01–03 · 기술, 확률모형, 식별
 :::
 :::
 :::
@@ -42,7 +40,10 @@ subtitle: Graduate Economics Knowledge Base
 ## 정리노트 읽기
 
 :::: {.study-grid}
-::: {.study-card}
+::: {.study-card .study-card--micro}
+::: {.study-card__number}
+01
+:::
 ::: {.study-card__eyebrow}
 THEORY
 :::
@@ -53,7 +54,10 @@ THEORY
 
 [Chapter 0–4 · Section별 독립 페이지]{.status}
 :::
-::: {.study-card}
+::: {.study-card .study-card--supplements}
+::: {.study-card__number}
+02
+:::
 ::: {.study-card__eyebrow}
 COMPUTATION
 :::
@@ -64,7 +68,10 @@ COMPUTATION
 
 [Interactive 2종 제공 · R 구현 시작 · MATLAB 확장 준비]{.status}
 :::
-::: {.study-card}
+::: {.study-card .study-card--macro}
+::: {.study-card__number}
+03
+:::
 ::: {.study-card__eyebrow}
 MACROECONOMICS
 :::
@@ -75,7 +82,10 @@ MACROECONOMICS
 
 [Chapter 00–13 · 기술 부록 A–E]{.status}
 :::
-::: {.study-card}
+::: {.study-card .study-card--econometrics}
+::: {.study-card__number}
+04
+:::
 ::: {.study-card__eyebrow}
 ECONOMETRICS
 :::
