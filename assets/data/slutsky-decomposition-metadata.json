@@ -9,6 +9,12 @@
     "slutsky": "mS = p1_new*x1_initial + p2*x2_initial",
     "hicks": "mH = e(p_new, u_initial)"
   },
+  "chartAxes": {
+    "x1Range": [0, 150],
+    "x2Range": [0, 150],
+    "rescaleWithInputs": false
+  },
+  "staticFigure": "Side-by-side comparison of Slutsky and Hicks compensation",
   "implementation": {
     "externalDependencies": false,
     "networkRequests": false
