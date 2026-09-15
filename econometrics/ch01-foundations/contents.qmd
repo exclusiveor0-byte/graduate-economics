@@ -1,0 +1,946 @@
+---
+title: "계량경제학의 구조"
+description: "Description · Causality · Identification · Estimation"
+---
+
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리합니다. -->
+
+::::::::::::::::::::: {#s11 .section}
+## [1.1]{.section-number}Description과 Causality: 계량경제학의 첫 번째 구분
+
+같은 데이터, 같은 회귀식, 같은 숫자도 *무엇을 질문하느냐*에 따라 의미가
+달라진다. 계량경제학의 첫 번째 작업은 통계기법을 고르는 것이 아니라
+질문을 분류하는 것이다. 우리는 관측세계의 패턴을 **기술**하려는가,
+아니면 어떤 변수에 개입했을 때 결과가 어떻게 달라지는지를 **인과적으로**
+알고 싶은가? 이 둘은 관련되어 있지만 동일하지 않다.
+
+::::::: target-grid
+:::: target-card
+DESCRIPTIVE QUESTION
+
+::: target-card__formula
+$\theta^{desc}=T(P_0^{obs})$
+:::
+
+관측된 변수들의 joint distribution이 어떤 패턴을 갖는가? 평균,
+조건부평균, quantile, covariance, projection coefficient가 여기에
+속한다.
+::::
+
+:::: target-card
+CAUSAL QUESTION
+
+::: target-card__formula
+$\tau=E[Y(1)-Y(0)]$
+:::
+
+같은 경제주체의 처치상태를 바꾸었더라면 결과가 어떻게 달라졌을까?
+intervention, counterfactual, structural response를 묻는다.
+::::
+:::::::
+
+### 1.1.1 두 종류의 질문 {#s111}
+
+직업훈련 참여 여부를 $D\in\{0,1\}$, 임금을 $Y$라 하자. 데이터에서 쉽게
+계산할 수 있는 양은
+
+::: math-display
+$$
+    \Delta^{obs}=E[Y\mid D=1]-E[Y\mid D=0].
+  $$
+:::
+
+이것은 "훈련 참가자와 비참가자의 평균임금이 얼마나 다른가?"라는 질문에
+답한다. 반면 정책적 관심이 "같은 사람이 훈련을 받았을 때와 받지 않았을
+때 임금이 얼마나 달라지는가?"라면 target은
+
+::: math-display
+$$
+    \tau_{ATE}=E[Y(1)-Y(0)]
+  $$
+:::
+
+이다. 첫 번째는 관측분포의 차이이고, 두 번째는 반사실적 비교다. 두
+수량은 우연히 같을 수도 있지만 정의상 같은 대상이 아니다.
+
+### 1.1.2 Descriptive interpretation: observed distribution을 요약한다 {#s112}
+
+:::: {.statement .definition}
+::: statement-head
+DEFINITION 1.1 · Descriptive target
+:::
+
+descriptive target은 관측자료의 분포 $P_0^{obs}$의 functional $$
+      \theta^{desc}=T(P_0^{obs})
+    $$ 로 정의되는 대상이다. 평균, 분산, CEF $E[Y\mid X=x]$, regression
+derivative, BLP/BLA coefficient 등은 기본적으로 이 층에 속한다.
+::::
+
+descriptive interpretation은 결코 "덜 중요한 해석"이 아니다. 예측,
+분포요약, inequality measurement, risk stratification, forecast, policy
+targeting 등 많은 경제분석은 descriptive target 자체가 연구목적이다.
+다만 descriptive statement는 *관측된 공동분포가 어떻게 생겼는가*를 말할
+뿐, 변수를 외생적으로 바꿨을 때 결과가 어떻게 변하는지까지 자동으로
+말하지 않는다.
+
+### 1.1.3 Causal interpretation: intervention과 counterfactual을 묻는다 {#s113}
+
+:::: {.statement .definition}
+::: statement-head
+DEFINITION 1.2 · Causal target
+:::
+
+causal target은 treatment, policy, price, institution 같은 변수에 대한
+intervention 또는 counterfactual state를 비교하는 scientific object다.
+binary treatment에서 평균처치효과는 $$
+      \tau_{ATE}=E[Y(1)-Y(0)]
+    $$ 이며, 개별 관측치에서 $Y(1)$과 $Y(0)$을 동시에 볼 수 없다는 점이
+causal problem의 핵심 난점이다.
+::::
+
+따라서 causality는 회귀계수에 붙이는 해석상의 수사가 아니라 **별도의
+target**이다. causal target을 정한 뒤에는 그 target이 관측 가능한 분포의
+어떤 functional과 같은지 보여야 한다. 이 단계가 identification이다.
+
+### 1.1.4 관측된 차이와 인과효과는 어떻게 달라지는가? {#s114}
+
+consistency $Y=DY(1)+(1-D)Y(0)$를 사용하면 관측된 평균차이를 다음처럼
+분해할 수 있다.
+
+::: math-display
+$$
+  \begin{aligned}
+    E[Y\mid D=1]-E[Y\mid D=0]
+    &=E[Y(1)\mid D=1]-E[Y(0)\mid D=0]\\
+    &=\underbrace{E[Y(1)-Y(0)\mid D=1]}_{\text{ATT}}
+      +\underbrace{\Big(E[Y(0)\mid D=1]-E[Y(0)\mid D=0]\Big)}_{\text{selection bias}}.
+  \end{aligned}
+  $$
+:::
+
+:::: {.statement .theorem}
+::: statement-head
+PROPOSITION 1.1 · Association = causal component + selection component
+:::
+
+단순한 집단평균 차이는 causal effect와 selection의 결합이다.
+무작위배정이나 적절한 조건부 독립성 같은 식별조건이 selection
+component를 제거하거나 관측 가능한 방식으로 조정하게 해 줄 때 비로소
+descriptive contrast가 causal target과 연결된다.
+::::
+
+### 1.1.5 Identification이라는 다리 {#s115}
+
+:::: chapter-summary
+::: chapter-summary__head
+THE CENTRAL BRIDGE
+:::
+
+**Causal target** $\tau=\Psi(P_0^{full})$ → **identification
+assumptions** $\mathcal A$ → **observed-data functional**
+$\phi(P_0^{obs})$ → **estimator** $\hat\tau_n$.
+::::
+
+이 도식이 이 장 전체의 중심이다. descriptive parameter는 처음부터
+$P_0^{obs}$의 functional이지만, causal parameter는 일반적으로 그렇지
+않다. 경제이론, 실험설계, institutional knowledge, exclusion
+restriction, exogeneity assumption 등이 causal target을 observed law의
+functional로 바꾸는 역할을 한다.
+
+:::: {.statement .identification}
+::: statement-head
+KEY PRINCIPLE · regression is descriptive first, causal only under
+identification
+:::
+
+회귀계수는 먼저 어떤 observed-data population object를 나타내는지를
+밝혀야 한다. 그 뒤에 추가 가정이 그 object를 causal effect와 같게
+만드는지를 검토한다. "regression coefficient"와 "causal effect"를 정의
+단계에서부터 동일시하면 이후의 endogeneity, IV, fixed effects, DiD,
+RDD의 필요성을 이해하기 어렵다.
+::::
+:::::::::::::::::::::
+
+::::::::::::::::::: {#s12 .section}
+## [1.2]{.section-number}Population, sample, target: 두 해석을 담는 공통 언어
+
+descriptive question과 causal question을 구분한 뒤에는 각각의 target이
+어느 확률세계에 속하는지 명확히 해야 한다. 계량경제학은 population
+target과 finite sample estimator를 분리하고, 그 사이에 identification과
+sampling theory를 놓는다.
+
+::::::::::: {.logic-chain aria-label="Core econometric logic"}
+::: logic-chain__step
+[01]{.logic-chain__num}[Question]{.logic-chain__text}[description or
+causality]{.logic-chain__sub}
+:::
+
+::: logic-chain__step
+[02]{.logic-chain__num}[Population]{.logic-chain__text}[확률법칙]{.logic-chain__sub}
+:::
+
+::: logic-chain__step
+[03]{.logic-chain__num}[Target]{.logic-chain__text}[scientific
+estimand]{.logic-chain__sub}
+:::
+
+::: logic-chain__step
+[04]{.logic-chain__num}[Identification]{.logic-chain__text}[observed
+law로 연결]{.logic-chain__sub}
+:::
+
+::: logic-chain__step
+[05]{.logic-chain__num}[Sample]{.logic-chain__text}[유한
+관측자료]{.logic-chain__sub}
+:::
+
+::: logic-chain__step
+[06]{.logic-chain__num}[Estimator]{.logic-chain__text}[표본의
+함수]{.logic-chain__sub}
+:::
+
+::: logic-chain__step
+[07]{.logic-chain__num}[Computation]{.logic-chain__text}[수치
+알고리즘]{.logic-chain__sub}
+:::
+
+::: logic-chain__step
+[08]{.logic-chain__num}[Inference]{.logic-chain__text}[불확실성]{.logic-chain__sub}
+:::
+:::::::::::
+
+### 1.2.1 Observed-data law와 full-data/structural law {#s121}
+
+실제로 관측하는 확률벡터를 $W$라 하고 그 분포를 $P_0^{obs}$라 하자.
+i.i.d. 횡단면에서는 $W_1,\ldots,W_n\overset{i.i.d.}{\sim}P_0^{obs}$로
+표현한다. descriptive target은 보통 $T(P_0^{obs})$로 직접 정의된다.
+
+causal analysis에서는 관측변수만으로 표현되지 않는 더 큰 확률구조를
+생각할 수 있다. 예를 들어 $(Y(1),Y(0),D,X)$의 joint law를
+$P_0^{full}$이라 하면 ATE는 $\Psi(P_0^{full})=E[Y(1)-Y(0)]$이다. 그러나
+실제 자료는 그 full-data law의 일부만 드러낸다. 그래서 causal
+identification은 $P_0^{full}$의 특징을 $P_0^{obs}$만으로 복원할 수
+있는지 묻는다.
+
+### 1.2.2 Parameter, estimand, estimator, estimate {#s122}
+
+:::: {.statement .definition}
+::: statement-head
+DEFINITION 1.3 · Population object와 sample object
+:::
+
+**Population object**는 확률법칙에 의해 결정되는 수량 또는 함수다.
+**Sample object**는 실현된 자료 $W_{1:n}$의 함수다. population object와
+sample object를 구분하지 않으면 identification과 estimation을 구분할 수
+없다.
+::::
+
+:::: {.statement .definition}
+::: statement-head
+DEFINITION 1.4 · Estimand, estimator, estimate
+:::
+
+**Estimand** $\theta_0$는 알고 싶은 population target이다. **Estimator**
+$\hat\theta_n=T_n(W_{1:n})$는 표본을 입력받는 확률변수이고,
+**estimate**는 실제 데이터에 estimator를 적용해 얻은 실현값이다.
+::::
+
+::: display-table-wrap
+  층                     대표 객체                          질문
+  ---------------------- ---------------------------------- --------------------------------------
+  Scientific target      $\tau$, $\theta_0$                 궁극적으로 무엇을 알고 싶은가?
+  Observed-data target   $T(P_0^{obs})$                     관측분포의 어떤 functional인가?
+  Estimator              $\hat\theta_n$                     finite sample에서 어떻게 학습하는가?
+  Sampling law           $\mathcal L_{P_0}(\hat\theta_n)$   추정오차를 어떻게 정량화하는가?
+:::
+
+### 1.2.3 Population statement와 sample statement를 섞지 않는다 {#s123}
+
+$E[X(Y-X'\beta_0)]=0$은 population characterization이고,
+$n^{-1}\sum_iX_i(Y_i-X_i'\hat\beta_n)=0$은 sample normal equation이다.
+전자는 target의 성질이고 후자는 estimator의 계산식이다. 마찬가지로
+causal identifying assumption과 sample regression identity도 전혀 다른
+층에 존재한다.
+
+:::: {.statement .warning}
+::: statement-head
+CAUTION · sample fit가 causal validity를 만들지 않는다
+:::
+
+높은 $R^2$, 작은 standard error, 정확한 sample orthogonality는 model의
+causal interpretation을 보장하지 않는다. causality는 표본적합도가 아니라
+target과 identification assumption의 문제다.
+::::
+:::::::::::::::::::
+
+:::::::::::::::: {#s13 .section}
+## [1.3]{.section-number}Conditional Expectation Function: descriptive regression의 기준점
+
+regression을 이해하는 가장 안정적인 출발점은 CEF다. CEF는 관측된
+$(Y,X)$의 joint distribution이 결정하는 population object이며,
+평균제곱오차 기준의 최적 predictor다. 따라서 CEF는 강력하지만 기본적으로
+descriptive object다.
+
+### 1.3.1 CEF와 best predictor {#s131}
+
+:::: {.statement .definition}
+::: statement-head
+DEFINITION 1.5 · Conditional Expectation Function
+:::
+
+$E[Y^2]<\infty$라 하자. $Y$의 $X$에 대한 CEF는 $$m_0(x)=E[Y\mid X=x]$$
+이다.
+::::
+
+CEF error $\varepsilon=Y-m_0(X)$는 정의상 $E[\varepsilon\mid X]=0$을
+만족한다.
+
+:::: {.statement .proposition}
+::: statement-head
+PROPOSITION 1.2 · CEF is the best mean-square predictor
+:::
+
+모든 square-integrable $g(X)$에 대해 $$
+      E[(Y-g(X))^2]
+      =E[(Y-m_0(X))^2]+E[(m_0(X)-g(X))^2].
+    $$ 따라서 $m_0(X)$는 $X$의 모든 measurable function 중 MSE를
+최소화한다.
+::::
+
+### 1.3.2 Linear CEF는 descriptive model restriction이다 {#s132}
+
+실제 conditional mean이 정확히 선형이면 $$
+    E[Y\mid X]=X'\beta_{CEF},\qquad Y=X'\beta_{CEF}+\varepsilon,\qquad E[\varepsilon\mid X]=0.
+  $$ 이때 $\beta_{CEF}$는 conditional mean의 slope parameter다. 그러나
+이 명제는 어디까지나 $P_{Y,X}$에 대한 restriction이다. $X$를 외생적으로
+바꾸었을 때 $Y$가 어떻게 변하는지까지 포함하지는 않는다.
+
+### 1.3.3 Regression derivative는 언제 causal derivative가 되는가? {#s133}
+
+미분가능한 CEF에서 $$
+    \nabla_x m_0(x)=\nabla_x E[Y\mid X=x]
+  $$ 는 conditional mean이 $x$에 따라 어떻게 변하는지를 나타낸다. 이것은
+기본적으로 descriptive derivative다.
+
+::::::::: comparison-grid
+:::: comparison-card
+CEF derivative
+
+::: comparison-card__formula
+$\partial_xE[Y\mid X=x]$
+:::
+
+관측된 conditional mean의 기울기. joint distribution의 특징.
+::::
+
+:::: comparison-card
+Structural derivative
+
+::: comparison-card__formula
+$\partial_x g(x,U)$
+:::
+
+경제주체의 structural response. model primitive에 가까운 객체.
+::::
+
+:::: comparison-card
+Causal derivative
+
+::: comparison-card__formula
+$\partial_x E[Y(x)]$
+:::
+
+intervention으로 $x$를 바꿀 때 평균 outcome의 변화.
+::::
+:::::::::
+
+:::: {.statement .identification}
+::: statement-head
+IDENTIFICATION QUESTION
+:::
+
+어떤 exogeneity 또는 structural restriction 아래에서 CEF derivative가
+causal derivative와 같아지는가? 이 질문에 답해야 regression derivative에
+causal interpretation을 부여할 수 있다.
+::::
+::::::::::::::::
+
+:::::::::::: {#s14 .section}
+## [1.4]{.section-number}Best Linear Predictor와 Best Linear Approximation: 회귀계수의 기본 해석
+
+CEF가 선형이 아닐 때에도 linear regression coefficient는 잘 정의된다.
+이때 가장 안전한 해석은 causal effect가 아니라 **population projection
+coefficient**이다. BLP/BLA는 misspecified linear regression에도 정확한
+descriptive meaning을 준다.
+
+### 1.4.1 Best Linear Predictor {#s141}
+
+:::: {.statement .definition}
+::: statement-head
+DEFINITION 1.6 · Best Linear Predictor
+:::
+
+$E[Y^2]<\infty$, $E\|X\|^2<\infty$, $E[XX']\succ0$라 하자. BLP
+coefficient는 $$
+      \beta^{LP}=\operatorname*{arg\,min}_{b\in\mathbb R^k}E[(Y-X'b)^2]
+    $$ 로 정의된다.
+::::
+
+FOC에서 $E[X(Y-X'\beta^{LP})]=0$이고 따라서
+$\beta^{LP}=E[XX']^{-1}E[XY]$이다.
+
+### 1.4.2 Best Linear Approximation {#s142}
+
+:::: {.statement .definition}
+::: statement-head
+DEFINITION 1.7 · Best Linear Approximation
+:::
+
+실제 CEF $m_0(X)=E[Y\mid X]$의 BLA coefficient는 $$
+      \beta^{BLA}=\operatorname*{arg\,min}_{b\in\mathbb R^k}E[(m_0(X)-X'b)^2]
+    $$ 로 정의된다.
+::::
+
+BLP는 $Y$를 선형적으로 예측하는 문제이고 BLA는 CEF를 선형함수로 근사하는
+문제다. 정의는 다르지만 coefficient는 같다.
+
+### 1.4.3 핵심 결과: BLP와 BLA는 같은 coefficient를 갖는다 {#s143}
+
+:::: {.statement .theorem}
+::: statement-head
+THEOREM 1.1 · $\beta^{LP}=\beta^{BLA}$
+:::
+
+$Y=m_0(X)+\varepsilon$, $E[\varepsilon\mid X]=0$를 이용하면 $$
+      E[(Y-X'b)^2]=E[\varepsilon^2]+E[(m_0(X)-X'b)^2].
+    $$ 첫 항은 $b$와 무관하므로 두 minimizer는 같다.
+::::
+
+### 1.4.4 BLP/BLA를 causal effect로 읽지 않는 것이 기본값이다 {#s144}
+
+:::: {.statement .identification}
+::: statement-head
+DESCRIPTIVE BASELINE
+:::
+
+population OLS coefficient는 언제나 먼저 BLP/BLA coefficient로 읽는다.
+이것은 observed distribution의 functional이다. 여기에 causal
+interpretation을 추가하려면 별도의 structural/assignment assumptions가
+필요하다.
+::::
+
+특히 CEF가 비선형이면 BLA coefficient는 $X$의 marginal distribution에
+의존한다. 같은 structural relation이라도 population의 regressor
+distribution이 달라지면 projection coefficient가 달라질 수 있다. 이런
+distribution dependence는 projection coefficient를 구조적 불변
+parameter와 구분해야 하는 중요한 이유다.
+
+::: display-table-wrap
+  객체            정의                            기본 해석                   causal?
+  --------------- ------------------------------- --------------------------- ---------------
+  CEF             $E[Y\mid X=x]$                  conditional mean            추가가정 필요
+  BLP             $\arg\min_bE[(Y-X'b)^2]$        best linear prediction      추가가정 필요
+  BLA             $\arg\min_bE[(m_0(X)-X'b)^2]$   best linear approximation   추가가정 필요
+  Causal target   예: $E[Y(1)-Y(0)]$              counterfactual effect       정의상 causal
+:::
+::::::::::::
+
+::::::::::::::::::::::::: {#s15 .section}
+## [1.5]{.section-number}Identification: descriptive object에서 causal interpretation으로
+
+계량경제학의 핵심은 "회귀를 돌리는 것"이 아니라 **관측분포가 scientific
+target을 결정하는가**를 보이는 것이다. descriptive target은 보통
+observed law의 functional로 직접 정의되지만, causal target은 추가 가정
+없이는 관측분포와 연결되지 않는다.
+
+### 1.5.1 Descriptive identification {#s151}
+
+:::: {.statement .definition}
+::: statement-head
+DEFINITION 1.8 · Point identification
+:::
+
+target $\theta$가 point identified라는 것은 허용된 model class에서
+동일한 observed-data law가 서로 다른 target 값을 허용하지 않는다는
+뜻이다. 즉 $$
+      P^{obs}=Q^{obs}\quad\Longrightarrow\quad \theta(P)=\theta(Q).
+    $$
+::::
+
+$E[Y]$, $E[Y\mid X=x]$, covariance, 적절한 full-rank 조건 아래 BLP
+coefficient처럼 관측분포의 functional로 직접 쓰이는 대상은 존재성과
+유일성 조건이 충족되면 descriptive sense에서 식별된다.
+
+### 1.5.2 Causal nonidentification: 관측분포만으로 충분하지 않을 수 있다 {#s152}
+
+ATE $E[Y(1)-Y(0)]$는 일반적으로 $(Y,D,X)$의 observed distribution만으로
+정해지지 않는다. 서로 다른 potential-outcome structures가 동일한
+observed-data law를 만들면서 서로 다른 ATE를 가질 수 있다. 이것이 causal
+nonidentification이다.
+
+:::: {.statement .theorem}
+::: statement-head
+THEOREM 1.2 · Nonidentification은 큰 표본으로 해결되지 않는다
+:::
+
+동일한 observed-data distribution을 생성하지만 target 값이 다른 두 DGP가
+model class에 존재하면, 어떤 estimator도 두 DGP 모두에서 각자의 target에
+consistent일 수 없다. 정보의 부재를 더 많은 동일한 종류의 데이터로
+극복할 수는 없다.
+::::
+
+### 1.5.3 식별가정은 causal target을 observed-data functional로 바꾼다 {#s153}
+
+binary treatment에서 consistency, conditional exchangeability, overlap을
+가정하자.
+
+::: math-display
+$$
+\begin{gathered}
+Y=DY(1)+(1-D)Y(0),\qquad (Y(1),Y(0))\perp D\mid X,\\
+0 < P(D=1\mid X=x) < 1.
+\end{gathered}
+$$
+:::
+
+위 조건 아래 $$
+      E[Y(1)-Y(0)]
+      =E\!\left[E[Y\mid D=1,X]-E[Y\mid D=0,X]\right].
+    $$ 좌변은 causal estimand이고 우변은 observed-data distribution의
+functional이다.
+
+이것이 identification의 본질이다. causal estimand를 추정 가능한
+statistical target으로 바꾼 뒤에야 regression, matching, weighting,
+doubly robust estimation 같은 estimation strategy를 논의할 수 있다.
+
+### 1.5.4 언제 regression coefficient가 causal coefficient가 되는가? {#s154}
+
+회귀계수에 causal meaning이 붙으려면 적어도 두 종류의 조건이 필요하다.
+첫째, treatment/exposure와 potential outcomes 사이의 confounding을
+제거하는 **design 또는 exogeneity condition**이 필요하다. 둘째, 우리가
+사용하는 regression coefficient가 원하는 causal estimand와 일치하도록
+하는 **functional-form 또는 weighting condition**이 필요할 수 있다.
+
+::::::::::::::::: case-study
+::: case-study__head
+CASE STUDY · 교육과 임금[DESCRIPTION → CAUSALITY]{.case-study__tag}
+:::
+
+::::::::::::::: case-study__body
+::::: case-study__step
+::: case-study__key
+Descriptive object
+:::
+
+::: case-study__val
+$E[Wage\mid Educ=x]$ 또는 그 linear projection slope는 교육수준과 임금의
+관측된 관계를 요약한다.
+:::
+:::::
+
+::::: case-study__step
+::: case-study__key
+Causal target
+:::
+
+::: case-study__val
+한 개인의 교육수준을 외생적으로 늘렸을 때 임금이 얼마나 바뀌는가를
+묻는다.
+:::
+:::::
+
+::::: case-study__step
+::: case-study__key
+Threat
+:::
+
+::: case-study__val
+ability, family background, preferences가 교육과 임금 모두에 영향을 주면
+descriptive slope는 causal return과 다르다.
+:::
+:::::
+
+::::: case-study__step
+::: case-study__key
+Identification route
+:::
+
+::: case-study__val
+충분한 controls, valid instrument, natural experiment 등은 서로 다른
+방식으로 causal target을 observed-data functional에 연결한다.
+:::
+:::::
+:::::::::::::::
+:::::::::::::::::
+
+### 1.5.5 Identification, estimation, precision을 구분한다 {#s155}
+
+:::: {.statement .warning}
+::: statement-head
+THREE DIFFERENT QUESTIONS
+:::
+
+**(i) Identification:** 무한한 관측정보가 있다면 target을 유일하게 알 수
+있는가?\
+**(ii) Estimation:** 유한표본에서 identified target을 잘 근사하는가?\
+**(iii) Precision:** estimator의 sampling uncertainty가 얼마나 큰가?\
+작은 standard error는 identification을 대신하지 못하고, identification은
+작은 standard error를 보장하지도 않는다.
+::::
+:::::::::::::::::::::::::
+
+:::::::: {#s16 .section}
+## [1.6]{.section-number}Exact model, misspecification, 그리고 pseudo-true parameter
+
+현실의 경제관계가 우리가 선택한 parametric model에 정확히 들어맞는
+경우는 드물다. 그럼에도 estimator는 어떤 population target으로 수렴할 수
+있다. pseudo-true parameter는 이 working-model target을 설명하지만, 그
+자체가 causal truth를 보장하지는 않는다.
+
+### 1.6.1 Correct specification {#s161}
+
+연구자가 $m(x,\theta)$라는 model class를 사용하고 실제 CEF가 어떤
+$\theta_0$에 대해 $$
+    E[Y\mid X=x]=m(x,\theta_0)
+  $$ 로 정확히 표현되면 conditional mean model은 correctly
+specified이다.
+
+그러나 correct specification은 여전히 statistical statement일 수 있다.
+$m(x,\theta_0)$가 실제 CEF를 정확히 표현한다는 것과 $\theta_0$가
+structural/causal parameter라는 것은 같은 명제가 아니다.
+
+### 1.6.2 Misspecification과 pseudo-true parameter {#s162}
+
+:::: {.statement .definition}
+::: statement-head
+DEFINITION 1.9 · Pseudo-true parameter
+:::
+
+일반적인 population risk $Q(\theta)=E[\rho(W,\theta)]$에 대해 model이
+misspecified되어도 $$
+      \theta^*=\operatorname*{arg\,min}_{\theta\in\Theta}Q(\theta)
+    $$ 가 유일하면 이를 선택한 model class와 loss에 대한 pseudo-true
+parameter라 한다.
+::::
+
+squared-error linear model에서는 $\theta^*$가 BLP/BLA coefficient이고,
+misspecified likelihood에서는 expected log-likelihood를 최대화하는
+quasi-MLE target이 된다.
+
+### 1.6.3 Pseudo-truth와 causal truth를 구분한다 {#s163}
+
+:::: {.statement .warning}
+::: statement-head
+CAUTION · 잘 정의된 pseudo-true parameter는 causal identification의
+대체물이 아니다
+:::
+
+$\theta^*$가 유일하고 estimator가 $\theta^*$에 consistent하더라도,
+연구자의 causal estimand와 $\theta^*$가 같다는 보장은 없다.
+pseudo-truth는 *선택한 criterion에서 가장 잘 맞는 statistical
+target*이지, 자동적인 structural truth가 아니다.
+::::
+
+이 점은 misspecified regression의 해석에서 특히 중요하다. CEF가
+비선형이거나 treatment effect가 heterogeneous하면 OLS coefficient는
+여전히 유용한 projection parameter일 수 있지만, 그 값이 ATE, ATT,
+marginal treatment effect 등 어떤 causal estimand와 일치하는지는 별도의
+분석이 필요하다.
+
+::: display-table-wrap
+  Population criterion     pseudo-true target     기본 의미                           causal 해석
+  ------------------------ ---------------------- ----------------------------------- ----------------
+  $E[(Y-m(X,\theta))^2]$   least-squares target   best squared-error approximation    추가 식별 필요
+  $E[|Y-m(X,\theta)|]$     LAD target             best absolute-error approximation   추가 식별 필요
+  $-E[\log f_\theta(W)]$   quasi-MLE target       best log-score approximation        추가 구조 필요
+:::
+::::::::
+
+:::::::: {#s17 .section}
+## [1.7]{.section-number}Population problem에서 sample problem으로
+
+descriptive 또는 causal target이 식별된 뒤에야 estimation이 시작된다.
+많은 estimator는 population characterization의 sample analogue로
+정의된다. 이 단계에서 최적화는 계량경제학의 중심 질문을 대체하는 것이
+아니라, target을 표본에서 구현하는 수학적 언어가 된다.
+
+### 1.7.1 Sample analogue principle {#s171}
+
+population target이
+
+::: math-display
+$$
+            \theta_0=\operatorname*{arg\,min}_{\theta\in\Theta}
+            Q(\theta),\qquad Q(\theta)=E[q(W,\theta)]
+          $$
+:::
+
+로 characterization된다고 하자. i.i.d. sample에서 expectation을 sample
+average로 바꾸면
+
+::: math-display
+$$
+            Q_n(\theta)=\frac1n\sum_{i=1}^nq(W_i,\theta)
+          $$
+:::
+
+를 얻고 extremum estimator는
+
+::: math-display
+$$
+            \hat\theta_n=\operatorname*{arg\,min}_{\theta\in\Theta}Q_n(\theta)
+          $$
+:::
+
+로 정의된다. M-estimation, nonlinear least squares, maximum likelihood,
+GMM의 상당 부분이 이 형식의 변형이다.
+
+### 1.7.2 Consistency의 논리: identification + uniform convergence {#s172}
+
+consistency를 이해할 때 핵심은 "표본 objective의 minimizer가 모집단
+objective의 minimizer를 따라간다"는 안정성이다. 개략적으로 다음 두
+조건이 필요하다.
+
+1.  **Identification:** $Q(\theta)$의 unique minimizer가 $\theta_0$이다.
+2.  **Uniform approximation:**
+    $\sup_{\theta\in\Theta}|Q_n(\theta)-Q(\theta)|\xrightarrow{p}0$.
+
+:::: {.statement .proposition}
+::: statement-head
+PROPOSITION 1.4 · Argmin consistency의 기본 형태
+:::
+
+적절한 compactness/continuity 조건과 위 두 조건 아래 $$
+              \hat\theta_n\xrightarrow{p}\theta_0.
+            $$ 따라서 consistency proof에서 identification은 단순한
+부가조건이 아니라 population target을 고정하는 핵심 단계다.
+::::
+::::::::
+
+::::::: {#s18 .section}
+## [1.8]{.section-number}OLS를 다시 읽기: descriptive baseline, causal special case
+
+OLS는 causality의 동의어가 아니다. 가장 일반적인 population
+interpretation은 BLP/BLA이고, linear CEF는 그 특별한 경우이며, causal
+interpretation은 추가 식별조건이 성립하는 더 특별한 경우다. 이 위계를
+이해하면 OLS의 장점과 한계를 동시에 명확히 볼 수 있다.
+
+### 1.8.1 Population OLS target은 먼저 descriptive parameter다 {#s181}
+
+실제 CEF가 선형인지 여부와 무관하게 $$
+    \beta_0=\operatorname*{arg\,min}_{b\in\mathbb R^k}E[(Y-X'b)^2]
+  $$ 를 정의할 수 있다. $E[XX']\succ0$이면 $$
+    \beta_0=E[XX']^{-1}E[XY].
+  $$ 이 $\beta_0$는 observed distribution이 결정하는 BLP/BLA
+coefficient다. 이것이 OLS coefficient의 기본값이다.
+
+### 1.8.2 Sample OLS estimator는 population target의 sample analogue다 {#s182}
+
+표본에서는 $$
+    \hat\beta_n=\operatorname*{arg\,min}_{b}\frac1n\sum_{i=1}^n(Y_i-X_i'b)^2
+  $$ 이고 normal equation은 $$
+    \frac1n\sum_{i=1}^nX_i(Y_i-X_i'\hat\beta_n)=0.
+  $$ full column rank 아래 $\hat\beta_n=(X'X)^{-1}X'Y$다. 이 식은
+estimator의 계산식이지 coefficient의 causal meaning을 정의하는 식이
+아니다.
+
+### 1.8.3 언제 OLS coefficient에 causal interpretation이 붙는가? {#s183}
+
+예를 들어 treatment $D$의 constant causal effect $\tau$를 갖는
+structural representation $$
+    Y=\tau D+g(X)+U
+  $$ 를 생각하자. 적절한 exogeneity condition $E[U\mid D,X]=0$과
+regression specification이 충분히 정확하다면 regression coefficient가
+causal effect $\tau$와 일치할 수 있다. 하지만 omitted confounding,
+simultaneity, measurement error, selection이 있으면 descriptive
+projection coefficient와 causal effect는 일반적으로 달라진다.
+
+:::: {.statement .identification}
+::: statement-head
+READING RULE · OLS coefficient의 세 층
+:::
+
+**1. Projection layer:** 항상 먼저 BLP/BLA coefficient로 읽는다.\
+**2. Conditional-mean layer:** linear CEF가 맞으면 conditional mean
+slope로 읽는다.\
+**3. Causal layer:** design/exogeneity와 functional-form assumptions가
+추가될 때 causal effect로 읽는다.
+::::
+
+### 1.8.4 Heterogeneity와 misspecification이 있으면 무엇을 추정하는가? {#s184}
+
+treatment effect가 사람마다 다르거나 CEF가 비선형이면 단일 OLS slope는
+여러 local/conditional effects를 특정 방식으로 평균낸 projection
+coefficient가 될 수 있다. 따라서 "OLS가 consistent하다"라는 말만으로는
+충분하지 않다. *무엇에 consistent한가?*를 물어야 한다. 그 probability
+limit가 단순한 descriptive pseudo-true parameter인지, 혹은 특정 causal
+estimand와 일치하는지를 별도로 밝혀야 한다.
+
+:::: {.statement .warning}
+::: statement-head
+CAUTION · consistency is target-relative
+:::
+
+estimator가 어떤 $\beta^*$에 consistent하다는 것은 통계적 성질이다.
+$\beta^*$가 연구자가 원하는 causal parameter인지 여부는 identification과
+interpretation의 문제다.
+::::
+:::::::
+
+:::::: {#s19 .section}
+## [1.9]{.section-number}Optimization과 numerical analysis는 어디에 위치하는가?
+
+최적화와 수치해석은 계량경제학의 중요한 도구지만, descriptive/causal
+target의 구분과 identification보다 앞에 오면 전체 논리가 뒤집힌다.
+올바른 순서는 population target을 먼저 정의하고, sample estimator를 만든
+뒤, 그 estimator를 안정적으로 계산하는 것이다.
+
+::: display-table-wrap
+  층           대표 객체                             질문                                           주요 도구
+  ------------ ------------------------------------- ---------------------------------------------- ----------------------------------------
+  Population   $\theta_0=\arg\min Q(\theta)$         무엇을 target으로 하는가?                      확률론, 경제이론, identification
+  Sample       $\hat\theta_n=\arg\min Q_n(\theta)$   유한표본에서 어떻게 추정하는가?                통계학, empirical process, asymptotics
+  Numerical    $\tilde\theta_{n,K}$                  정의된 estimator를 실제로 어떻게 계산하는가?   선형대수, 최적화, 수치해석
+:::
+
+OLS에서는 sample problem이 convex quadratic이므로 exact minimizer가
+행렬방정식으로 characterization된다. 그러나 실제 컴퓨터에서는
+$(X'X)^{-1}X'Y$를 문자 그대로 계산하는 것이 최선의 알고리즘이라는 뜻이
+아니다. normal equations는 condition number를 악화시킬 수 있어 QR
+decomposition이나 SVD가 더 안정적일 수 있다. 이 문제는 estimator의
+의미와 별개인 *numerical realization*의 문제다.
+
+:::: {.statement .algorithm}
+::: statement-head
+COMPUTATIONAL PRINCIPLE · estimator와 algorithm을 구분한다
+:::
+
+estimator는 통계적 정의이고 algorithm은 그것을 계산하는 절차다. 서로
+다른 algorithm이 같은 estimator를 계산할 수 있으며, finite tolerance에서
+얻은 numerical output은 exact estimator와 다를 수 있다. 통계적 오차와
+계산오차는 별도로 관리해야 한다.
+::::
+
+이 노트의 나머지 장에서도 같은 위계를 유지한다. 최적화는 population
+characterization과 sample estimation을 연결하는 언어로 사용하고,
+numerical analysis는 계산가능성과 안정성을 점검하는 마지막 층으로
+사용한다. 계량경제학적 의미는 언제나 description/causality의 구분과
+identification에서 먼저 결정된다.
+::::::
+
+:::::: {#s110 .section}
+## [1.10]{.section-number}전체 흐름: 먼저 기술하고, 그 다음 인과를 식별한다
+
+이 장의 핵심은 한 문장으로 요약된다. **회귀와 통계모형은 먼저 관측분포를
+기술하는 언어이며, causal interpretation은 별도의 scientific target과
+identification assumptions를 통해 추가된다.**
+
+:::: chapter-summary
+::: chapter-summary__head
+ECONOMETRIC SPINE
+:::
+
+**Economic question** → **descriptive or causal target** → **population
+object** → **identification** → **observed-data functional** → **sample
+analogue** → **estimator** → **computation** → **sampling theory** →
+**inference**.
+::::
+
+### 1.10.1 핵심 개념의 관계
+
+::: display-table-wrap
+  개념                       대표식                                    기본 지위                          causal meaning
+  -------------------------- ----------------------------------------- ---------------------------------- ----------------------
+  Observed mean difference   $E[Y\mid D=1]-E[Y\mid D=0]$               descriptive contrast               자동으로 없음
+  CEF                        $m_0(x)=E[Y\mid X=x]$                     descriptive population object      추가 식별 필요
+  BLP/BLA                    $\arg\min_bE[(Y-X'b)^2]$                  projection/approximation           추가 식별 필요
+  Causal estimand            $E[Y(1)-Y(0)]$                            counterfactual scientific target   정의상 causal
+  Identification             causal target = observed-law functional   population bridge                  causal 해석의 핵심
+  Pseudo-true parameter      $\arg\min_\theta E[\rho(W,\theta)]$       working-model optimum              자동으로 없음
+  Estimator                  $\hat\theta_n=T_n(W_{1:n})$               sample learning rule               target의 지위를 상속
+:::
+
+### 1.10.2 읽기 규칙
+
+- 실증결과를 보면 첫 번째로 "이 coefficient는 무엇을 **기술**하는가?"를
+  묻는다.
+- causal claim이 나오면 "counterfactual target은 정확히 무엇인가?"를
+  따로 적는다.
+- 그 다음 "어떤 가정이 descriptive object를 causal target과 같게
+  만드는가?"를 확인한다.
+- CEF, BLP, BLA, regression derivative는 기본적으로 observed
+  distribution의 object로 읽는다.
+- model이 근사라면 estimator가 어느 pseudo-true parameter를 target하는지
+  먼저 확인한다.
+- identification, consistency, precision, computation을 서로 다른 층으로
+  분리한다.
+- 수치 최적화는 causal validity를 만들지 않는다. 이미 정의된 estimator를
+  계산할 뿐이다.
+
+### 연습문제
+
+1.  $E[Y\mid D=1]-E[Y\mid D=0]$와 $E[Y(1)-Y(0)]$를 각각
+    descriptive/causal target으로 분류하고 차이를 설명하라.
+2.  관측된 평균차이를 ATT와 selection bias로 분해하라.
+3.  동일한 observed-data distribution이 서로 다른 ATE를 허용하는 예를
+    구성하여 causal nonidentification을 설명하라.
+4.  conditional exchangeability와 overlap 아래 ATE identification
+    formula를 유도하라.
+5.  CEF가 best predictor임을 보이고, 왜 이 결과 자체는 causal
+    statement가 아닌지 설명하라.
+6.  BLP와 BLA가 같은 coefficient를 갖는 이유를 증명하고, 왜 그
+    coefficient를 기본적으로 descriptive parameter로 읽어야 하는지
+    설명하라.
+7.  linear CEF가 정확하더라도 coefficient가 자동으로 causal effect가
+    아닌 이유를 예로 설명하라.
+8.  pseudo-true parameter가 유일하고 estimator가 consistent하더라도
+    causal estimand가 식별되지 않을 수 있는 이유를 설명하라.
+9.  OLS coefficient의 projection layer, conditional-mean layer, causal
+    layer를 하나의 예에서 구분하라.
+10. heterogeneous treatment effects 아래 단일 linear regression
+    coefficient가 ATE와 다를 수 있는 이유를 논하라.
+11. 한 실증논문을 골라 주요 coefficient마다 descriptive interpretation,
+    causal target, identification assumptions를 세 열로 정리하라.
+12. "standard error가 작다"와 "causal effect가 identified되었다"가 왜
+    다른 명제인지 설명하라.
+13. population OLS problem, sample OLS problem, numerical least-squares
+    problem을 각각 쓰고 세 문제의 역할을 구분하라.
+::::::
+
+:::::: {#references .section .references}
+## 참고문헌 및 다음 장
+
+Hansen, B. E. (2021). *Econometrics*. Conditional expectation, linear
+projection, causal effects, identification, nonlinear regression과
+pseudo-true value에 관한 절.
+
+Wooldridge, J. M. (2002). *Econometric Analysis of Cross Section and
+Panel Data*. Causal relationships and ceteris paribus analysis,
+conditional expectations, linear projections, identification에 관한 초기
+장.
+
+van der Vaart, A. W. (1998). *Asymptotic Statistics*. M- and
+Z-estimation, consistency, argmax/argmin 논리의 대표본 이론.
+
+Lehmann, E. L., and Casella, G. (1998). *Theory of Point Estimation*,
+2nd ed. Springer. Estimand, loss, risk, point estimation의 통계이론적
+관점.
+
+Wright, S. J., and Recht, B. (2022). *Optimization for Data Analysis*.
+Population/sample criterion 이후의 optimization과 computational
+viewpoint를 위한 참고자료.
+
+::::: callout-strip
+::: left
+NEXT
+:::
+
+::: right
+**Chapter 2. 확률모형, 정보집합, 데이터 배열.** 다음 장에서는
+$(\Omega,\mathcal F,\mathbb P)$, random element, conditional
+expectation, sigma-field, 그리고 횡단면·시계열·패널 자료의 확률구조를
+정식으로 다룬다. Chapter 1의 population object와 identification 논리를
+확률론적으로 뒷받침하는 것이 Chapter 2의 역할이다.
+:::
+:::::
+::::::

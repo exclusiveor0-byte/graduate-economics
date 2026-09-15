@@ -1,3 +1,16 @@
-# Econometrics Migration Overview
+# 계량경제학 Course Map
 
-현재는 구조 placeholder입니다. 이후 OLS → GLS → IV → GMM → MLE → Asymptotics 및 time-series 구조를 마이그레이션할 수 있습니다.
+## 현재 수록 내용
+
+- [Chapter 01 · 계량경제학의 구조](ch01-foundations/index.html): 기술적 설명과 인과적 해석, 식별, CEF, BLP/BLA, OLS, 표본추정의 논리를 연결합니다.
+
+## 확장 순서
+
+1. OLS와 선형모형
+2. GLS와 이분산성·상관구조
+3. IV와 약한 도구변수
+4. GMM과 MLE
+5. 점근이론과 추론
+6. 시계열과 패널 자료
+
+각 Chapter는 소개 페이지, 절 이동 링크, 보존 본문을 한 단위로 관리합니다.
