@@ -144,6 +144,9 @@ book:
   - part: econometrics/ch01-foundations/index.qmd
     chapters:
     - econometrics/ch01-foundations/contents.qmd
+  - part: econometrics/ch02-probability-information/index.qmd
+    chapters:
+    - econometrics/ch02-probability-information/contents.qmd
   - econometrics/overview.qmd
   - supplements/index.qmd
   - supplements/visualization-guide.qmd
