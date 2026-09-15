@@ -1,5 +1,38 @@
 # Chapter 12 · 금융마찰과 금융위기 {.unnumbered}
+*Financial Frictions, Intermediation, and Crises*
 
-Financial Frictions, Intermediation, and Crises
+이 장에서는 **금융마찰과 금융위기**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
 
-이 장은 원본 통합 강의노트에서 마이그레이션했습니다. [본문 전체 읽기](contents.qmd)
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **12.1–12.5** 완전시장 benchmark 이후의 질문 · Financial accelerator와 담보가격 피드백
+- **12.6–12.9** 금융중개기관의 대차대조표와 자본제약 · Run equilibrium, 유동성·지급불능, 그리고 위기정책
+- **12.10 및 결론 금융부문은 상태를 전달하는가, 아니면 상태를 만드는가** Contagion과 시스템위기 · 결론 금융부문은 상태를 전달하는가, 아니면 상태를 만드는가
+:::
+
+## Sections
+
+- [12.1 완전시장 benchmark 이후의 질문](contents.html#ch12-s01)
+- [12.2 금융계약과 대차대조표의 공통 언어](contents.html#ch12-s02)
+- [12.3 Costly state verification와 최적 부채계약](contents.html#ch12-s03)
+- [12.4 순자산, agency costs, 금융가능성과 투자선택](contents.html#ch12-s04)
+- [12.5 Financial accelerator와 담보가격 피드백](contents.html#ch12-s05)
+- [12.6 금융중개기관의 대차대조표와 자본제약](contents.html#ch12-s06)
+- [12.7 Limits to arbitrage, excess volatility, 그리고 fire sales](contents.html#ch12-s07)
+- [12.8 Diamond--Dybvig: 유동성보험과 은행계약](contents.html#ch12-s08)
+- [12.9 Run equilibrium, 유동성·지급불능, 그리고 위기정책](contents.html#ch12-s09)
+- [12.10 Contagion과 시스템위기](contents.html#ch12-s10)
+- [12.11 후생, 거시건전성 정책, 그리고 실증적 규율](contents.html#ch12-s11)
+- [12.12 통합: 계약마찰에서 시스템위기까지](contents.html#ch12-s12)
+- [결론 금융부문은 상태를 전달하는가, 아니면 상태를 만드는가](contents.html#ch12-conclusion)
+- [Learning Check](contents.html#ch12-check)
+- [참조 문헌](contents.html#ch12-references)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::
