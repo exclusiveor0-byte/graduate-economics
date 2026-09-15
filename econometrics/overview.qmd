@@ -4,10 +4,11 @@
 
 - [Chapter 01 · 계량경제학의 구조](ch01-foundations/index.html): 기술적 설명과 인과적 해석, 식별, CEF, BLP/BLA, OLS, 표본추정의 논리를 연결합니다.
 - [Chapter 02 · 확률모형, 정보집합, 그리고 자료배열](ch02-probability-information/index.html): full law와 observed law, 조건부기대값, 의존구조, empirical measure를 연결합니다.
+- [Chapter 03 · Target, Model, and Identification](ch03-target-model-identification/index.html): estimand, model restriction, observational equivalence, point·set identification을 연결합니다.
 
 ## 확장 순서
 
-1. Target과 identification
+1. Population optimization과 estimating equations
 2. OLS와 선형모형
 3. GLS와 이분산성·상관구조
 4. IV와 약한 도구변수

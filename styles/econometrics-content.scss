@@ -13,6 +13,15 @@
 .statement.remark { border-left-color: #596b50; }
 .statement-head { color: #315f82; font-size: .82rem; font-weight: 700; letter-spacing: .04em; }
 .topic-opening { max-width: 47rem; margin: 1.6rem 0; padding: .9rem 1rem; border-top: 1px solid var(--notes-rule); border-bottom: 1px solid var(--notes-rule); background: #f8fbfc; font-size: 1.04rem; }
+.formula-grid { max-width: 47rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin: 1.4rem 0; }
+.formula-grid--long { grid-template-columns: 1fr; }
+.formula-card { min-width: 0; padding: 1rem; border: 1px solid var(--notes-rule); background: #fbfcfd; }
+.formula-card .math-display { margin: .75rem 0 0; }
+.callout-strip { max-width: 47rem; display: grid; grid-template-columns: minmax(8rem, .32fr) 1fr; gap: 1rem; margin: 1.6rem 0; padding: .9rem 0; border-top: 1px solid var(--notes-rule); border-bottom: 1px solid var(--notes-rule); }
+.callout-strip .left { color: #315f82; font-weight: 700; }
+.callout-strip .right { color: #4c5d68; }
+.proof { max-width: 47rem; margin: 1.4rem 0; padding-left: 1.1rem; border-left: 2px solid #bac5cd; color: #263844; }
+.proof-label { color: #4f5f6d; font-size: .82rem; font-weight: 700; letter-spacing: .04em; }
 .logic-chain { max-width: 47rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .55rem; margin: 1.4rem 0; }
 .logic-chain__step { padding: .75rem; border: 1px solid var(--notes-rule); background: #fff; }
 .logic-chain__num { display: block; color: #176b68; font-size: .78rem; font-weight: 700; }
@@ -32,6 +41,6 @@
 .math-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; margin: 1.2rem 0; padding: .3rem; }
 .section-number { color: #176b68; font-size: .78em; font-weight: 750; margin-right: .35em; }
 @media (max-width: 700px) {
-  .target-grid, .comparison-grid, .logic-chain { grid-template-columns: 1fr; }
+  .target-grid, .comparison-grid, .formula-grid, .logic-chain, .callout-strip { grid-template-columns: 1fr; }
   .case-study__step { grid-template-columns: 1fr; gap: .3rem; }
 }

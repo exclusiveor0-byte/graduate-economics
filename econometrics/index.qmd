@@ -22,7 +22,16 @@ Full data와 observed data, 조건부기대값, 독립성, 자료배열, empiric
 
 [11개 절 · 표 5개 · 연습문제 포함]{.status}
 
+### [Chapter 03 · Target, Model, and Identification](ch03-target-model-identification/index.html)
+
+Estimand와 model restriction, observational equivalence, point·set·weak
+identification을 구분하고 causal·moment model의 식별 논리를 다룹니다.
+
+[Chapter 03 읽기](ch03-target-model-identification/index.html) →
+
+[11개 절 · 표 3개 · 연습문제 포함]{.status}
+
 ## Course Map
 
 - [계량경제학 전체 구성](overview.html)
-- 이후 Chapter는 target과 identification, OLS, GLS, IV, GMM, MLE, 점근이론과 시계열 순서로 확장합니다.
+- 이후 Chapter는 population optimization, OLS, GLS, IV, GMM, MLE, 점근이론과 시계열 순서로 확장합니다.

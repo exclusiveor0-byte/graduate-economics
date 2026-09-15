@@ -65,6 +65,31 @@ CHAPTERS = {
             ("references", "참고문헌 및 다음 장"),
         ],
     },
+    "3": {
+        "directory": "ch03-target-model-identification",
+        "heading": "Target, Model, and Identification",
+        "introduction": "이 장은 **estimand**, **model restrictions**, **observational equivalence**, **point·set identification**을 구분하고 causal·moment model의 식별 논리를 연결한다.",
+        "roadmap": [
+            "**3.1–3.3** target · model · identified set의 일반적 정의",
+            "**3.4–3.6** descriptive·causal identification · partial identification",
+            "**3.7–3.9** moment/rank · weak identification · pseudo-true parameter",
+            "**3.10–3.11** 식별·추정·최적화의 분리 · 연습문제",
+        ],
+        "sections": [
+            ("s31", "3.1 무엇을 식별하려는가: Target, Parameter, Estimand"),
+            ("s32", "3.2 Model은 무엇인가"),
+            ("s33", "3.3 Identification의 일반적 정의"),
+            ("s34", "3.4 Descriptive Targets와 Statistical Identification"),
+            ("s35", "3.5 Causal Targets와 Causal Identification"),
+            ("s36", "3.6 Observational Equivalence, Point Identification, Set Identification"),
+            ("s37", "3.7 Moment Restrictions와 Rank Identification"),
+            ("s38", "3.8 Global, Local, and Weak Identification"),
+            ("s39", "3.9 Misspecification과 Pseudo-True Parameter"),
+            ("s310", "3.10 Identification, Estimation, Optimization의 분리"),
+            ("s3110", "3.11 요약과 연습문제"),
+            ("references", "참고문헌 및 다음 장"),
+        ],
+    },
 }
 
 

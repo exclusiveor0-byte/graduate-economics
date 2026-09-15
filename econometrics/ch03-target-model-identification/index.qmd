@@ -1,0 +1,37 @@
+# Chapter 03 · Target, Model, and Identification {.unnumbered}
+*Estimands · Model Restrictions · Observational Equivalence · Identification*
+
+이 장은 **estimand**, **model restrictions**, **observational equivalence**, **point·set identification**을 구분하고 causal·moment model의 식별 논리를 연결한다. 아래 링크는 원본 본문의 해당 절로 이동한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **3.1–3.3** target · model · identified set의 일반적 정의
+- **3.4–3.6** descriptive·causal identification · partial identification
+- **3.7–3.9** moment/rank · weak identification · pseudo-true parameter
+- **3.10–3.11** 식별·추정·최적화의 분리 · 연습문제
+:::
+
+## Sections
+
+- [3.1 무엇을 식별하려는가: Target, Parameter, Estimand](contents.html#s31)
+- [3.2 Model은 무엇인가](contents.html#s32)
+- [3.3 Identification의 일반적 정의](contents.html#s33)
+- [3.4 Descriptive Targets와 Statistical Identification](contents.html#s34)
+- [3.5 Causal Targets와 Causal Identification](contents.html#s35)
+- [3.6 Observational Equivalence, Point Identification, Set Identification](contents.html#s36)
+- [3.7 Moment Restrictions와 Rank Identification](contents.html#s37)
+- [3.8 Global, Local, and Weak Identification](contents.html#s38)
+- [3.9 Misspecification과 Pseudo-True Parameter](contents.html#s39)
+- [3.10 Identification, Estimation, Optimization의 분리](contents.html#s310)
+- [3.11 요약과 연습문제](contents.html#s3110)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+수식·표·연습문제는 원본 구조를 보존한 [본문 전체](contents.html)에 있습니다.
+위의 Section 링크로 바로 이동하거나 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::
