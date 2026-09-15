@@ -65,8 +65,10 @@ td, th { min-width: 6rem; padding: .7rem !important; }
 .study-card .status { font-size: .8rem; color: #60726c; }
 .study-card__eyebrow, .home-hero__eyebrow { color: #176b68; font-size: .7rem; font-weight: 800; letter-spacing: .11em; }
 .study-card__link { margin-top: auto; font-weight: 700; text-decoration: none; }
-.home-hero { margin: .25rem 0 2.5rem; padding: clamp(1.6rem, 4vw, 3rem); border: 1px solid #d7e3de; border-radius: .85rem; background: radial-gradient(circle at 88% 15%, #e1f0e9 0, rgba(225, 240, 233, 0) 32%), linear-gradient(135deg, #f9fcfa 0%, #edf5f1 100%); box-shadow: 0 12px 30px rgba(30, 58, 51, .055); }
-.home-hero > p { max-width: 43rem; margin: .7rem 0 1.4rem; color: #29413e; font-size: clamp(1.12rem, 2vw, 1.35rem); line-height: 1.7; letter-spacing: -.025em; }
+.home-hero { position: relative; isolation: isolate; overflow: hidden; margin: .25rem 0 2.5rem; padding: clamp(1.6rem, 4vw, 3rem); border: 1px solid #d7e3de; border-radius: .85rem; background: radial-gradient(circle at 88% 15%, #e1f0e9 0, rgba(225, 240, 233, 0) 32%), linear-gradient(135deg, #f9fcfa 0%, #edf5f1 100%); box-shadow: 0 12px 30px rgba(30, 58, 51, .055); }
+.home-hero > :not(.home-hero__visual) { position: relative; z-index: 1; }
+.home-hero > p { max-width: 31rem; margin: .7rem 0 1.4rem; color: #29413e; font-size: clamp(1.12rem, 2vw, 1.35rem); line-height: 1.7; letter-spacing: -.025em; }
+.home-hero__visual { position: absolute; z-index: 0; top: .55rem; right: .35rem; width: min(42%, 18rem); height: auto; opacity: .78; }
 .home-hero__actions { display: flex; flex-wrap: wrap; gap: .65rem; }
 .home-button { display: inline-flex; align-items: center; min-height: 2.45rem; padding: .45rem .9rem; border: 1px solid #a6bdb4; border-radius: .42rem; color: #285449; font-size: .9rem; font-weight: 700; text-decoration: none; }
 .home-button:hover { background: #e5f0ea; color: #163f36; }
@@ -94,6 +96,8 @@ main :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
   .study-grid { grid-template-columns: 1fr; }
   .home-hero { margin-bottom: 2rem; }
   .home-hero__metrics { grid-template-columns: 1fr; gap: .55rem; }
+  .home-hero > p { max-width: 100%; }
+  .home-hero__visual { display: none; }
   div.callout.callout-style-default > .callout-body { padding: .6rem .65rem .2rem; }
   .callout { margin: 1.1rem 0; }
   table { font-size: .88rem; }

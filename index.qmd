@@ -9,6 +9,35 @@ subtitle: Graduate Economics Knowledge Base
 선택에서 균형까지, 가정에서 증명까지. 함께 읽고 검토하며 축적하는
 경제학 지식베이스입니다.
 
+<svg class="home-hero__visual" viewBox="0 0 300 210" role="img" aria-label="수요와 공급 곡선, 균형점, 효용곡선을 조합한 경제학 장식 도식">
+  <defs>
+    <pattern id="home-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#88aaa1" stroke-width="0.65" opacity="0.28"/>
+    </pattern>
+    <marker id="home-arrow" markerWidth="6" markerHeight="6" refX="4.5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6Z" fill="#477b70"/>
+    </marker>
+  </defs>
+  <rect x="8" y="8" width="284" height="194" rx="12" fill="url(#home-grid)"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M43 172 H258 M43 172 V34" stroke="#477b70" stroke-width="1.5" marker-end="url(#home-arrow)"/>
+    <path d="M67 63 C112 80 162 111 238 151" stroke="#a66147" stroke-width="3"/>
+    <path d="M69 157 C119 133 171 101 236 55" stroke="#176b68" stroke-width="3"/>
+    <path d="M98 172 V116 H171" stroke="#477b70" stroke-width="1" stroke-dasharray="4 5" opacity="0.75"/>
+    <path d="M174 185 C189 163 214 155 244 157" stroke="#5e827c" stroke-width="1.5" opacity="0.6"/>
+    <path d="M183 193 C203 168 235 161 273 165" stroke="#5e827c" stroke-width="1.5" opacity="0.38"/>
+  </g>
+  <circle cx="171" cy="116" r="5" fill="#183d40"/>
+  <g fill="#315952" font-family="Georgia, serif" font-size="12">
+    <text x="251" y="188">q</text><text x="29" y="40">p</text>
+    <text x="239" y="155" fill="#a66147">D</text><text x="239" y="58" fill="#176b68">S</text>
+    <text x="179" y="110" font-weight="700">E</text>
+    <text x="198" y="146" font-size="10" opacity="0.72">U₁</text>
+    <text x="235" y="174" font-size="10" opacity="0.55">U₂</text>
+    <text x="59" y="25" font-size="11" font-style="italic" opacity="0.8">∂U/∂xᵢ = λpᵢ</text>
+  </g>
+</svg>
+
 ::: {.home-hero__actions}
 [정리노트 둘러보기](#정리노트-읽기){.home-button .home-button--primary}
 [협업 방식 보기](collaboration.html){.home-button}
