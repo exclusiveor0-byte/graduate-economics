@@ -1,6 +1,8 @@
 <script>
 // Keep wide tables within the reading column, with keyboard-accessible scrolling.
 document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.toggle("home-page", Boolean(document.querySelector(".home-hero")));
+
   document.querySelectorAll("main table").forEach((table) => {
     if (table.closest(".table-scroll")) return;
     const wrapper = document.createElement("div");

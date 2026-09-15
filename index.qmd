@@ -3,48 +3,93 @@ title: 대학원 경제학 정리노트
 subtitle: Graduate Economics Knowledge Base
 ---
 
-선택에서 균형까지, 가정에서 증명까지. 함께 읽고 검토하며 축적하는 경제학 지식베이스입니다.
+::: {.home-hero}
+[GRADUATE ECONOMICS · COLLABORATIVE NOTES]{.home-hero__eyebrow}
+
+선택에서 균형까지, 가정에서 증명까지. 함께 읽고 검토하며 축적하는
+경제학 지식베이스입니다.
+
+::: {.home-hero__actions}
+[정리노트 둘러보기](#정리노트-읽기){.home-button .home-button--primary}
+[협업 방식 보기](collaboration.html){.home-button}
+:::
+
+::: {.home-hero__metrics}
+::: {.home-metric}
+**3**
+
+과목 아카이브
+:::
+::: {.home-metric}
+**미시 0–4**
+
+독립 Section 구성
+:::
+::: {.home-metric}
+**계량 01–03**
+
+확률·식별까지 수록
+:::
+:::
+:::
 
 ## 정리노트 읽기
 
 :::: {.study-grid}
 ::: {.study-card}
+::: {.study-card__eyebrow}
+THEORY
+:::
 ### [미시경제학](microeconomics/index.html)
 수학적 기초 · 소비자이론 · 생산자이론 · 부분균형 · 순수교환경제
 
-[Chapter 0부터 읽기](microeconomics/ch00-foundations/index.html) →
+[Chapter 0부터 읽기](microeconomics/ch00-foundations/index.html){.study-card__link} →
 
 [Chapter 0–4 · Section별 독립 페이지]{.status}
 :::
 ::: {.study-card}
+::: {.study-card__eyebrow}
+COMPUTATION
+:::
 ### [계산·탐색 보충자료](supplements/index.html)
 이론과 연결되는 계산, 모수 변화, R·MATLAB 산출물을 모읍니다.
 
-[보충자료 목록 보기](supplements/index.html) →
+[보충자료 목록 보기](supplements/index.html){.study-card__link} →
 
 [Interactive 2종 제공 · R 구현 시작 · MATLAB 확장 준비]{.status}
 :::
 ::: {.study-card}
+::: {.study-card__eyebrow}
+MACROECONOMICS
+:::
 ### [거시경제학](macroeconomics/index.html)
 성장 · 실물경기변동 · New Keynesian DSGE · 통화정책 · 금융마찰 · 불완전시장
 
-[Chapter 00부터 읽기](macroeconomics/ch00-macro-map/index.html) →
+[Chapter 00부터 읽기](macroeconomics/ch00-macro-map/index.html){.study-card__link} →
 
 [Chapter 00–13 · 기술 부록 A–E]{.status}
 :::
 ::: {.study-card}
+::: {.study-card__eyebrow}
+ECONOMETRICS
+:::
 ### [계량경제학](econometrics/index.html)
 식별과 추정, 확률모형과 계산을 연결하는 정리노트입니다.
 
-[Chapter 01–03 읽기](econometrics/index.html) →
+[Chapter 01–03 읽기](econometrics/index.html){.study-card__link} →
 
 [Chapter 01–03 · 기술·인과·확률모형·식별]{.status}
 :::
 ::::
 
+::: {.home-note}
+**처음 읽는다면** 과목 카드를 선택한 뒤 Chapter 소개 페이지에서 지도와
+절 링크를 확인하세요. Section의 주소는 그대로 공유할 수 있습니다.
+:::
+
 ## 읽는 방법
 
-- **왼쪽 목차**에서 Chapter와 Section을 선택합니다. 각 Section의 주소를 그대로 공유할 수 있습니다.
+- **홈의 왼쪽 목차**에서는 과목을 선택합니다. 각 과목 첫 화면에서 Chapter와 Section으로 이동합니다.
 - **이 페이지에서** 목차로 세부 내용을 찾습니다. 모바일에서는 메뉴를 열어 이동합니다.
 - **정리·명제**는 녹색, **정의·가정**은 청회색 상자로 구분합니다. 접힌 **증명**은 제목을 누르면 펼쳐집니다.
 - 긴 수식과 표는 해당 영역 안에서 좌우로 스크롤할 수 있습니다.
