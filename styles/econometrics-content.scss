@@ -10,7 +10,9 @@
 .statement.theorem, .statement.proposition { border-left-color: #7a4e20; }
 .statement.warning { border-left-color: #94443a; }
 .statement.identification { border-left-color: #176b68; }
+.statement.remark { border-left-color: #596b50; }
 .statement-head { color: #315f82; font-size: .82rem; font-weight: 700; letter-spacing: .04em; }
+.topic-opening { max-width: 47rem; margin: 1.6rem 0; padding: .9rem 1rem; border-top: 1px solid var(--notes-rule); border-bottom: 1px solid var(--notes-rule); background: #f8fbfc; font-size: 1.04rem; }
 .logic-chain { max-width: 47rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .55rem; margin: 1.4rem 0; }
 .logic-chain__step { padding: .75rem; border: 1px solid var(--notes-rule); background: #fff; }
 .logic-chain__num { display: block; color: #176b68; font-size: .78rem; font-weight: 700; }
@@ -25,6 +27,8 @@
 .display-table-wrap { max-width: 100%; overflow-x: auto; margin: 1.4rem 0; }
 .exercise-list { max-width: 47rem; padding-left: 1.45rem; }
 .exercise-list li + li { margin-top: .7rem; }
+.rule-list { max-width: 47rem; padding-left: 1.45rem; }
+.rule-list li + li { margin-top: .45rem; }
 .math-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; margin: 1.2rem 0; padding: .3rem; }
 .section-number { color: #176b68; font-size: .78em; font-weight: 750; margin-right: .35em; }
 @media (max-width: 700px) {
