@@ -68,4 +68,5 @@ GitHub Actions가 전체 렌더와 링크/블록 검사를 수행한 뒤 Pages�
 - Each Section/Supplement/Exercise/Reference: standalone `.qmd` page
 - Math: converted to Quarto/Pandoc `$...$` and `$$...$$` syntax
 - Definition/Theorem/Proposition/Proof/Remark/Caution: converted to Quarto callouts
-- R/MATLAB interactive supplements: structure prepared; content to be added separately
+- R supplement: Solow 성장모형 전이경로를 base R로 계산하고 정적 Pages 도구에 연결
+- MATLAB supplements: structure prepared; content to be added separately

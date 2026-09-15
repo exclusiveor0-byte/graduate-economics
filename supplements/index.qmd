@@ -2,6 +2,11 @@
 
 본문의 이해를 보조하는 계산·시각화·interactive 자료를 관리합니다.
 
+## 현재 제공되는 보충자료
+
+- [Slutsky 분해: 가격변화와 두 보상 규칙](slutsky-decomposition.qmd)
+- [Solow 성장모형: 자본축적과 전이경로](solow-growth.qmd) — R 계산 원본과 브라우저 탐색 도구
+
 원칙:
 - 핵심 직관에 직접 필요한 자료는 본문에서 링크 또는 embed
 - 계산량이 크거나 부가적인 자료는 Supplement로 분리

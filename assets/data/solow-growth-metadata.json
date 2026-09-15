@@ -1,0 +1,1 @@
+{"title":"Solow growth transition explorer","generator":"supplements/r/solow-growth.R","runtime":"R 4.5.3","units":"per effective worker","assumptions":{"production":"y = k^alpha","population_growth":0.01,"technology_growth":0.02,"alpha":0.33},"scenario_count":36}

@@ -66,3 +66,18 @@ Cobb--Douglas 소비자의 Slutsky/Hicks 분해를 비교하는 독립형 도구
 설명과 정적 대체 자료를 제공하고, iframe 안의 도구는 모수를 조작하게 합니다.
 
 도구는 외부 네트워크 요청이나 서버 없이 동작하며 Quarto 책과 함께 배포됩니다.
+
+## 첫 R 구현: Solow 성장모형
+
+`supplements/r/solow-growth.R`은 외부 패키지 없이 Solow 기준경제의 모수 격자를
+계산한다. 이 스크립트는 `assets/data/solow-growth-scenarios.json`, 실행 메타데이터,
+그리고 정적 SVG를 함께 생성한다. 브라우저 도구는 JSON에 포함된 시나리오만 선택해
+표시하므로 GitHub Pages에서 R 서버나 Shiny 서버가 필요하지 않다.
+
+R 스크립트, 생성된 JSON·SVG, 설명 페이지, interactive HTML은 반드시 같은 PR에서
+수정하고 검토한다. 모수 격자나 전이식을 바꾸면 프로젝트 루트에서 다음 명령을 실행한
+뒤 생성물도 함께 commit한다.
+
+```r
+Rscript supplements/r/solow-growth.R
+```

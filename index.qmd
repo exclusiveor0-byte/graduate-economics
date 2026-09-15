@@ -20,9 +20,9 @@ subtitle: Graduate Economics Knowledge Base
 ### [계산·탐색 보충자료](supplements/index.html)
 이론과 연결되는 계산, 모수 변화, R·MATLAB 산출물을 모읍니다.
 
-[Slutsky 분해 interactive 열기](supplements/slutsky-decomposition.html) →
+[보충자료 목록 보기](supplements/index.html) →
 
-[Interactive 1종 제공 · R/MATLAB 확장 준비]{.status}
+[Interactive 2종 제공 · R 구현 시작 · MATLAB 확장 준비]{.status}
 :::
 ::: {.study-card}
 ### [거시경제학](macroeconomics/index.html)
