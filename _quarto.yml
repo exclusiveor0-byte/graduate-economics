@@ -7,6 +7,7 @@ project:
     - supplements/r/**
     - supplements/matlab/**
     - styles/macro-content.scss
+    - styles/econometrics-content.scss
 lang: ko
 bibliography: references.bib
 number-sections: false
@@ -140,6 +141,9 @@ book:
     chapters:
     - macroeconomics/appendix-e-growth-empirics/contents.qmd
   - econometrics/index.qmd
+  - part: econometrics/ch01-foundations/index.qmd
+    chapters:
+    - econometrics/ch01-foundations/contents.qmd
   - econometrics/overview.qmd
   - supplements/index.qmd
   - supplements/visualization-guide.qmd
@@ -154,6 +158,7 @@ format:
     - cosmo
     - styles/notes.scss
     - styles/macro-content.scss
+    - styles/econometrics-content.scss
     toc: true
     toc-title: 이 페이지에서
     grid:

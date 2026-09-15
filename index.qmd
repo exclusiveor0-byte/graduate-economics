@@ -34,9 +34,11 @@ subtitle: Graduate Economics Knowledge Base
 :::
 ::: {.study-card}
 ### [계량경제학](econometrics/index.html)
-식별과 추정, 점근이론과 계산을 연결하는 정리노트를 준비합니다.
+식별과 추정, 점근이론과 계산을 연결하는 정리노트입니다.
 
-[본문 이관 예정]{.status}
+[Chapter 01부터 읽기](econometrics/ch01-foundations/index.html) →
+
+[Chapter 01 · 기술·인과·식별·추정]{.status}
 :::
 ::::
 

@@ -1,3 +1,19 @@
 # 계량경제학 {.unnumbered}
 
-계량경제학 정리노트와 identification/optimization 관점의 자료를 공동 관리합니다.
+관측분포의 기술, 인과적 해석, 식별, 추정과 계산을 분리해 읽는 계량경제학 정리노트입니다.
+
+## Chapters
+
+### [Chapter 01 · 계량경제학의 구조](ch01-foundations/index.html)
+
+Description · Causality · Identification · Estimation의 관계를 정리하고,
+CEF와 BLP/BLA, OLS의 기술적 기본값, 식별가정과 표본추정의 순서를 다룹니다.
+
+[Chapter 01 읽기](ch01-foundations/index.html) →
+
+[10개 절 · 표 5개 · 연습문제 포함]{.status}
+
+## Course Map
+
+- [계량경제학 전체 구성](overview.html)
+- 이후 Chapter는 OLS, GLS, IV, GMM, MLE, 점근이론과 시계열 순서로 확장합니다.
