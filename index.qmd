@@ -36,9 +36,9 @@ subtitle: Graduate Economics Knowledge Base
 ### [계량경제학](econometrics/index.html)
 식별과 추정, 확률모형과 계산을 연결하는 정리노트입니다.
 
-[Chapter 01–02 읽기](econometrics/index.html) →
+[Chapter 01–03 읽기](econometrics/index.html) →
 
-[Chapter 01–02 · 기술·인과·식별·확률모형]{.status}
+[Chapter 01–03 · 기술·인과·확률모형·식별]{.status}
 :::
 ::::
 

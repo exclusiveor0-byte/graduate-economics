@@ -147,6 +147,9 @@ book:
   - part: econometrics/ch02-probability-information/index.qmd
     chapters:
     - econometrics/ch02-probability-information/contents.qmd
+  - part: econometrics/ch03-target-model-identification/index.qmd
+    chapters:
+    - econometrics/ch03-target-model-identification/contents.qmd
   - econometrics/overview.qmd
   - supplements/index.qmd
   - supplements/visualization-guide.qmd
