@@ -104,3 +104,9 @@ matlab -batch "run('supplements/matlab/ols_geometry_monte_carlo.m')"
 $x$를 생성해 OLS와 2SLS의 표본분포를 비교한다. $\pi$는 첫 단계의 도구 강도, $\rho$는
 $x$와 구조오차의 내생성 정도다. 브라우저 도구는 이 두 값을 조절하고, 기준 MATLAB 산출물은
 CSV·metadata JSON·정적 PNG로 함께 보관한다.
+
+## 첫 MATLAB GIF 구현: IS–LM 재정충격
+
+`supplements/matlab/islm_fiscal_animation.m`은 재정지출이 증가할 때 IS 곡선과 단기 균형이
+이동하는 16장면 GIF를 만든다. 같은 모수의 정적 PNG와 균형 경로 CSV를
+함께 보관한다. 짧은 변화 과정에는 GIF를 쓰되, 설명에 필요한 기준 도표는 정적 그림으로 항상 제공한다.

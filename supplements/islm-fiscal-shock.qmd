@@ -1,0 +1,58 @@
+---
+title: "IS–LM 재정충격: 단기 균형의 이동"
+description: "MATLAB 애니메이션으로 재정지출 확대 뒤 IS–LM 단기 균형이 이동하는 과정을 읽는다."
+---
+
+## 목적
+
+재정지출 확대는 재화시장 수요를 늘려 IS 곡선을 오른쪽으로 이동시킵니다. 화폐공급이 고정된
+단기에는 산출과 이자율이 함께 변합니다. 이 보충자료는 충격 전 균형에서 충격 후 균형으로
+이동하는 과정을 한 장면씩 보여줍니다.
+
+관련 본문은 [Chapter 06 · Nominal Rigidity](../macroeconomics/ch06-nominal-rigidity/contents.qmd)와
+[Chapter 08 · Monetary Policy](../macroeconomics/ch08-monetary-policy/contents.qmd)입니다.
+
+## 기준 IS–LM 도표
+
+산출 $Y$, 이자율 $r$, 재정지출 충격 $G$를 다음처럼 둡니다.
+
+$$
+r_{IS}(Y;G)=\frac{A+G-Y}{b},
+\qquad
+r_{LM}(Y)=\frac{kY-m}{h}.
+$$
+
+두 식이 만나는 점이 단기 균형입니다. $G$가 증가하면 $r_{IS}$가 위·오른쪽으로 이동합니다.
+기준값은 $A=130$, $b=9$, $k=0.5$, $h=8$, $m=42$입니다.
+
+![재정지출 확대 전후의 IS 곡선, 고정된 LM 곡선, 두 단기 균형](../assets/images/islm-fiscal-static.png){.supplement-fallback fig-alt="IS 곡선이 오른쪽으로 이동하고, 산출과 이자율이 함께 상승하는 IS-LM 도표"}
+
+## 재정지출 확대의 애니메이션
+
+아래 GIF는 $G=0$에서 $G=24$까지 늘어날 때 IS 곡선과 균형점이 이동하는 16개 장면을 보여줍니다.
+각 장면의 우측 상단에는 해당 재정지출, 산출, 이자율이 표시됩니다.
+
+![재정지출 증가에 따라 IS 곡선과 IS-LM 균형점이 이동하는 MATLAB GIF](../assets/gif/islm-fiscal-expansion.gif){fig-alt="재정지출이 증가하면서 IS 곡선과 균형점이 오른쪽 위로 이동하는 애니메이션"}
+
+### 읽는 법
+
+- 재정지출이 늘면 같은 이자율에서 재화시장 수요가 커지므로 IS 곡선이 이동합니다.
+- LM 곡선은 실질화폐공급이 고정되어 있으므로 움직이지 않습니다.
+- 새 균형에서는 산출이 증가하고 화폐시장 균형을 위해 이자율도 상승합니다.
+- 이 그림은 가격수준과 기대가 단기에 고정된 비교정태 모형입니다. 이후의 물가 조정·통화정책 반응은 AD–AS 및 신케인지언 모형에서 별도로 다룹니다.
+
+## 재현과 범위
+
+- MATLAB 원본: [`supplements/matlab/islm_fiscal_animation.m`](matlab/islm_fiscal_animation.m)
+- 균형 경로: [`assets/data/islm-fiscal-path.csv`](../assets/data/islm-fiscal-path.csv)
+- 실행 메타데이터: [`assets/data/islm-fiscal-metadata.json`](../assets/data/islm-fiscal-metadata.json)
+- 권장 실행환경: MATLAB R2025b (base MATLAB, 별도 toolbox 없음)
+
+프로젝트 루트에서 아래 명령으로 정적 그림과 GIF를 다시 생성할 수 있습니다.
+
+```text
+matlab -batch "run('supplements/matlab/islm_fiscal_animation.m')"
+```
+
+이 자료는 폐쇄경제의 선형 IS–LM 비교정태를 시각화합니다. 투자·소비의 미시적 기초, 동학,
+가격수준 변화, 개방경제의 환율경로는 이 단순화된 그림에 포함하지 않습니다.

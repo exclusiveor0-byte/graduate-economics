@@ -178,6 +178,7 @@ book:
   - supplements/solow-growth.qmd
   - supplements/ols-geometry.qmd
   - supplements/iv-weak-instruments.qmd
+  - supplements/islm-fiscal-shock.qmd
   - references.qmd
   page-footer:
     center: Collaborative graduate economics knowledge base

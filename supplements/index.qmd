@@ -8,6 +8,7 @@
 - [Solow 성장모형: 자본축적과 전이경로](solow-growth.qmd) — R 계산 원본과 브라우저 탐색 도구
 - [OLS 표본 기하와 표본 변동](ols-geometry.qmd) — MATLAB 기준 계산과 브라우저 Monte Carlo 도구
 - [도구변수와 약한 도구변수](iv-weak-instruments.qmd) — MATLAB 기준 실험과 OLS·2SLS 비교 도구
+- [IS–LM 재정충격: 단기 균형의 이동](islm-fiscal-shock.qmd) — MATLAB 정적 도표와 재정지출 확대 GIF
 
 원칙:
 - 핵심 직관에 직접 필요한 자료는 본문에서 링크 또는 embed
