@@ -1,0 +1,33 @@
+# Chapter 07 · Sample Least Squares and Finite-Sample Geometry {.unnumbered}
+*OLS · Projection Matrix · FWL · Leverage · QR/SVD*
+
+population moments의 표본 analogue에서 시작해 OLS normal equations, Euclidean projection, FWL, hat matrix, rank deficiency와 QR·SVD 계산을 finite-sample geometry로 정리합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **7.1–7.4** empirical moments, least squares, rank, Euclidean projection
+- **7.5–7.7** fitted values, FWL, hat matrix와 leverage
+- **7.8–7.10** rank deficiency, pseudoinverse, QR/SVD, numerical conditioning
+- **7.11** 요약과 연습문제
+:::
+
+## Sections
+
+- [7.1 From Population Moments to Empirical Moments](contents.html#s71)
+- [7.2 The Least-Squares Criterion and Normal Equations](contents.html#s72)
+- [7.3 Rank, Existence, and Uniqueness](contents.html#s73)
+- [7.4 OLS as a Euclidean Projection](contents.html#s74)
+- [7.5 Fitted Values, Residuals, and Sum-of-Squares Decompositions](contents.html#s75)
+- [7.6 Sample Frisch–Waugh–Lovell and Residualization](contents.html#s76)
+- [7.7 The Hat Matrix and Leverage](contents.html#s77)
+- [7.8 Rank Deficiency, Pseudoinverses, and Nonunique Coefficients](contents.html#s78)
+- [7.9 Computing Least Squares: Normal Equations, QR, and SVD](contents.html#s79)
+- [7.10 Statistical Geometry versus Numerical Conditioning](contents.html#s710)
+- [7.11 요약과 연습문제](contents.html#s7110)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+:::
+

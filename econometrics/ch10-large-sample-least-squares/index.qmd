@@ -1,0 +1,33 @@
+# Chapter 10 · Large-Sample Theory for Least Squares {.unnumbered}
+*Consistency · Asymptotic Normality · Sandwich Variance · Wald Inference*
+
+least squares의 consistency·asymptotic linear representation·asymptotic normality를 전개하고 sandwich variance, HC covariance, delta method, Wald inference와 robust inference의 범위를 정리합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **10.1–10.3** large-sample theory의 목적, toolkit, consistency
+- **10.4–10.7** asymptotic linearity·normality, sandwich와 HC covariance
+- **10.8–10.11** delta method, Wald inference, exact/asymptotic comparison, robustness limits
+- **10.12** 요약과 연습문제
+:::
+
+## Sections
+
+- [10.1 Why Large-Sample Theory?](contents.html#s101)
+- [10.2 A Minimal Asymptotic Toolkit](contents.html#s102)
+- [10.3 Consistency of Least Squares](contents.html#s103)
+- [10.4 Asymptotic Linear Representation and the $\sqrt n$ Rate](contents.html#s104)
+- [10.5 Asymptotic Normality and the Sandwich Variance](contents.html#s105)
+- [10.6 Homoskedasticity as a Special Case](contents.html#s106)
+- [10.7 Heteroskedasticity-Consistent Covariance Estimation](contents.html#s107)
+- [10.8 Functions of Regression Parameters and the Delta Method](contents.html#s108)
+- [10.9 Asymptotic $t$-Statistics, Wald Tests, and Confidence Sets](contents.html#s109)
+- [10.10 Exact Inference versus Asymptotic Inference](contents.html#s1010)
+- [10.11 What Robust Inference Does—and Does Not—Robustify](contents.html#s1011x)
+- [10.12 요약과 연습문제](contents.html#s1012x)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+:::

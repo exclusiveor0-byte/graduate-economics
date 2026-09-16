@@ -1,0 +1,1443 @@
+---
+title: "Sampling Theory of Least Squares"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. -->
+
+:::::::::::::::::::::::::: {#s81}
+
+## [8.1]{.section-number}From OLS Algebra to Sampling Theory
+
+::: {.topic-opening}
+Chapter 7의 OLS formula는 주어진 데이터에 대한 deterministic statement였다.
+  Sampling theory에서는 같은 formula를 random data의 함수로 읽는다.
+  따라서 $\widehat\beta$는 하나의 숫자가 아니라 반복표본마다 값이 달라지는 random vector다.
+:::
+
+### 8.1.1 Estimator as a random variable {#s811}
+
+  표본을 $W_n=((Y_1,X_1),\ldots,(Y_n,X_n))$라 하면 estimator는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta
+=
+T_n(W_n)
+$$
+
+::::::::::::::::::::
+
+  처럼 random sample의 measurable function이다.
+  따라서 population law가 고정되어 있어도 hypothetical repeated sampling을 생각하면 $\widehat\beta$는 sampling distribution을 갖는다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{estimator}
+=
+\text{a random function of the sample}.
+}
+$$
+
+::::::::::::::::::::
+
+### 8.1.2 Conditional vs unconditional analysis {#s812}
+
+  regression sampling theory는 흔히 design matrix $X$를 조건부로 두고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[\widehat\beta\mid X],
+\qquad
+\operatorname{Var}(\widehat\beta\mid X)
+$$
+
+::::::::::::::::::::
+
+를 먼저 계산한다. 그 후 필요하면 law of iterated expectations와 total variance를 이용해 unconditional statement로 이동한다.
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+Chapter 7 → Chapter 8
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    Chapter 7은 “이 realization에서 OLS가 무엇을 계산하는가?”를 물었다.
+    Chapter 8은 “그 realization이 random하게 바뀔 때 OLS는 어떻게 변하는가?”를 묻는다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s82}
+
+## [8.2]{.section-number}The Stochastic Linear Regression Model
+
+::: {.topic-opening}
+Population linear projection과 finite-sample classical regression theory는 같은 가정을 사용하지 않는다.
+  이 절에서는 BLP의 orthogonality와 linear conditional-mean restriction을 명확히 분리한다.
+:::
+
+### 8.2.1 Projection model vs linear CEF model {#s821}
+
+:::::::::::::::::::: {.comparison-grid}
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Population projection model
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    Y=X'\beta^L+u,
+    \qquad
+    E[Xu]=0
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+      $\beta^L$는 best linear projection의 정의로 존재한다. Conditional mean zero는 필요하지 않다.
+    
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Linear CEF model
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    Y=X'\beta_0+\varepsilon,
+    \qquad
+    E[\varepsilon\mid X]=0
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+      CEF 자체가 linear이라는 stronger restriction이다. Classical conditional sampling theory의 핵심 출발점이다.
+    
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[\varepsilon\mid X]=0
+\Longrightarrow
+E[X\varepsilon]=0,
+\qquad
+\text{but not conversely}.
+}
+$$
+
+::::::::::::::::::::
+
+### 8.2.2 Conditional mean-zero restriction {#s822}
+
+  sample vector notation으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X\beta_0+\varepsilon
+$$
+
+::::::::::::::::::::
+
+라고 쓰고, 적절한 random-sampling setup에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[\varepsilon\mid X]=0.
+}
+$$
+
+::::::::::::::::::::
+
+  이 조건은 $X$를 알고 있을 때 regression error의 conditional mean이 0이라는 뜻이다.
+  따라서 sample realization별로 OLS estimation error의 조건부 평균을 제어할 수 있다.
+
+:::::::::::::::::::: {.statement .warning}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+주의 8.1 · BLP orthogonality만으로는 충분하지 않다
+
+:::::::::::::::::::
+
+  
+
+    $E[Xu]=0$은 population BLP residual의 defining property지만,
+    일반적으로 이것만으로 $E[\widehat\beta\mid X]=\beta^L$를 얻을 수는 없다.
+    finite-sample conditional unbiasedness는 더 강한 stochastic restriction을 요구한다.
+  
+
+::::::::::::::::::::
+
+### 8.2.3 Assumption ladder {#s823}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>추가 가정</th><th>추가로 얻는 결과</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>$E[\varepsilon\mid X]=0$</td>
+<td>conditional unbiasedness</td>
+</tr>
+<tr>
+<td>$+\operatorname{Var}(\varepsilon\mid X)=\Omega(X)$</td>
+<td>general conditional covariance formula</td>
+</tr>
+<tr>
+<td>$+\Omega(X)=\sigma^2I_n$</td>
+<td>classical homoskedastic variance formula, Gauss–Markov</td>
+</tr>
+<tr>
+<td>$+\varepsilon\mid X\sim N(0,\sigma^2I_n)$</td>
+<td>exact normal and chi-square sampling theory</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+  이 장의 모든 결론은 어떤 assumption이 추가될 때 어떤 result가 생기는지를 이 hierarchy에 맞추어 읽는다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s83}
+
+## [8.3]{.section-number}The Fundamental OLS Error Decomposition
+
+::: {.topic-opening}
+Sampling theory의 핵심은 OLS estimation error를 primitive error vector의 linear transformation으로 쓰는 것이다.
+:::
+
+### 8.3.1 Master equation {#s831}
+
+  $Y=X\beta_0+\varepsilon$를 OLS formula에 대입하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\widehat\beta
+&=(X'X)^{-1}X'Y\\
+&=(X'X)^{-1}X'(X\beta_0+\varepsilon)\\
+&=\beta_0+(X'X)^{-1}X'\varepsilon.
+\end{aligned}
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 8.1 · Fundamental OLS error decomposition
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \widehat\beta-\beta_0
+  =
+  (X'X)^{-1}X'\varepsilon.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 8.3.2 Linear transmission of noise {#s832}
+
+  design $X$를 조건부로 보면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+A_X=(X'X)^{-1}X'
+$$
+
+::::::::::::::::::::
+
+는 fixed matrix이고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta-\beta_0=A_X\varepsilon.
+$$
+
+::::::::::::::::::::
+
+  따라서 estimator의 stochastic behavior는 error vector의 mean, covariance, distribution이 linear map $A_X$를 통해 어떻게 전달되는지의 문제다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{mean of }\varepsilon
+\rightarrow
+\text{bias of }\widehat\beta,
+\qquad
+\text{variance of }\varepsilon
+\rightarrow
+\text{variance of }\widehat\beta,
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{distribution of }\varepsilon
+\rightarrow
+\text{distribution of }\widehat\beta.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s84}
+
+## [8.4]{.section-number}Conditional and Unconditional Unbiasedness
+
+::: {.topic-opening}
+OLS unbiasedness는 least-squares geometry 자체에서 나오지 않는다.
+  Master equation에 conditional mean-zero restriction을 결합할 때 얻어진다.
+:::
+
+### 8.4.1 Conditional unbiasedness {#s841}
+
+  $E[\varepsilon\mid X]=0$이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[\widehat\beta-\beta_0\mid X]
+&=
+(X'X)^{-1}X'E[\varepsilon\mid X]\\
+&=0.
+\end{aligned}
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[\widehat\beta\mid X]=\beta_0.
+}
+$$
+
+::::::::::::::::::::
+
+  여기서 unbiasedness는 “이 particular sample에서 $\widehat\beta=\beta_0$”라는 뜻이 아니다.
+  동일한 realized design을 유지하면서 error randomness를 반복했을 때 estimator의 conditional center가 $\beta_0$라는 뜻이다.
+
+### 8.4.2 Unconditional unbiasedness {#s842}
+
+  law of iterated expectations로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[\widehat\beta]
+&=
+E\!\left[E[\widehat\beta\mid X]\right]\\
+&=
+E[\beta_0]
+=
+\beta_0.
+\end{aligned}
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[\widehat\beta]=\beta_0.
+}
+$$
+
+::::::::::::::::::::
+
+### 8.4.3 Unbiasedness vs consistency {#s843}
+
+:::::::::::::::::::: {.comparison-grid}
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Unbiasedness
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    E[\widehat\beta_n]=\beta_0
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+fixed-$n$ expectation property.
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Consistency
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    \widehat\beta_n\overset p\longrightarrow\beta_0
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+$n\to\infty$ large-sample property.
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  두 개념은 논리적으로 다르다. finite-sample unbiasedness가 없어도 consistency가 가능하고,
+  unbiased estimator라고 해서 자동으로 variance가 작거나 consistent한 것도 아니다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s85}
+
+## [8.5]{.section-number}Conditional Variance under Heteroskedasticity
+
+::: {.topic-opening}
+Conditional mean은 estimator의 center를 결정하지만 precision을 결정하지는 않는다.
+  이제 error vector의 conditional covariance를 통해 OLS의 sampling variance를 계산한다.
+:::
+
+### 8.5.1 General conditional covariance {#s851}
+
+  일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega(X)
+=
+\operatorname{Var}(\varepsilon\mid X).
+$$
+
+::::::::::::::::::::
+
+  Master equation과 linear-transformation variance formula로부터
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 8.2 · General conditional covariance of OLS
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \operatorname{Var}(\widehat\beta\mid X)
+  =
+  (X'X)^{-1}
+  X'\Omega(X)X
+  (X'X)^{-1}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  이 식은 homoskedasticity를 가정하지 않는다.
+
+### 8.5.2 Heteroskedasticity {#s852}
+
+  cross-sectional setting에서 conditional variances가
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sigma_i^2
+=
+\operatorname{Var}(\varepsilon_i\mid X_i)
+$$
+
+::::::::::::::::::::
+
+처럼 $X_i$에 따라 달라지면 heteroskedasticity라 한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{Var}(\varepsilon_i\mid X_i)
+=
+\sigma^2(X_i).
+}
+$$
+
+::::::::::::::::::::
+
+  heteroskedasticity는 conditional variance structure에 관한 statement다.
+  unconditional variance가 “관측치마다 달라진다”는 식으로 이해하면 안 된다.
+
+### 8.5.3 Cross-sectional independence {#s853}
+
+  conditional cross-observation covariance가 0이라고 가정하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega(X)
+=
+\operatorname{diag}(\sigma_1^2,\ldots,\sigma_n^2).
+$$
+
+::::::::::::::::::::
+
+이 경우 general variance formula는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(\widehat\beta\mid X)
+=
+(X'X)^{-1}
+\left(
+\sum_{i=1}^n
+\sigma_i^2X_iX_i'
+\right)
+(X'X)^{-1}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+Default logic
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    이 장에서는 heteroskedasticity를 general case로 보고 homoskedasticity를 simplifying special case로 다룬다.
+    평균모형이 correct하더라도 conditional variance가 constant일 이유는 일반적으로 없다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s86}
+
+## [8.6]{.section-number}Homoskedasticity and the Classical Variance Formula
+
+::: {.topic-opening}
+Homoskedasticity를 추가하면 general covariance formula가 크게 단순화된다.
+  이 단순화가 classical standard error와 Gauss–Markov theorem의 기반이 된다.
+:::
+
+### 8.6.1 Homoskedastic special case {#s861}
+
+  homoskedasticity를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{Var}(\varepsilon\mid X)
+=
+\sigma^2I_n
+}
+$$
+
+::::::::::::::::::::
+
+로 둔다. 그러면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\operatorname{Var}(\widehat\beta\mid X)
+&=
+(X'X)^{-1}X'(\sigma^2I_n)X(X'X)^{-1}\\
+&=
+\sigma^2(X'X)^{-1}.
+\end{aligned}
+$$
+
+::::::::::::::::::::
+
+즉
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{Var}(\widehat\beta\mid X)
+=
+\sigma^2(X'X)^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+### 8.6.2 Regressor geometry and precision {#s862}
+
+  $X'X=V\Lambda V'$라 하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+(X'X)^{-1}
+=
+V\Lambda^{-1}V'.
+$$
+
+::::::::::::::::::::
+
+  따라서 design variation이 작은 eigen-direction은 coefficient variance가 큰 direction이 된다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\lambda_j(X'X)\text{ small}
+\quad\Longrightarrow\quad
+\lambda_j^{-1}\text{ large in the corresponding variance direction}.
+}
+$$
+
+::::::::::::::::::::
+
+  Chapter 7의 near-collinearity가 이제 단순 algebraic/numerical issue를 넘어 sampling precision과 연결된다.
+  하지만 numerical conditioning과 statistical variance는 여전히 다른 개념이다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s87}
+
+## [8.7]{.section-number}Gauss–Markov and the Meaning of Efficiency
+
+::: {.topic-opening}
+Gauss–Markov theorem은 OLS가 “항상 최적”이라고 말하는 정리가 아니다.
+  특정 model, comparison class, loss criterion 아래에서 OLS의 covariance optimality를 말한다.
+:::
+
+### 8.7.1 Comparison class {#s871}
+
+  다른 linear estimator를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widetilde\beta=A(X)Y
+$$
+
+::::::::::::::::::::
+
+라고 하자. 모든 $\beta$에 대해 conditionally unbiased하려면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[\widetilde\beta\mid X]
+=
+A(X)X\beta
+=
+\beta,
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+A(X)X=I_k.
+}
+$$
+
+::::::::::::::::::::
+
+### 8.7.2 Classical BLUE theorem {#s872}
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 8.3 · Classical Gauss–Markov theorem
+
+:::::::::::::::::::
+
+  
+
+    $E[\varepsilon\mid X]=0$과 $\operatorname{Var}(\varepsilon\mid X)=\sigma^2I_n$ 아래,
+    모든 linear conditionally unbiased estimator $\widetilde\beta=A(X)Y$에 대해
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \operatorname{Var}(\widetilde\beta\mid X)
+  -
+  \operatorname{Var}(\widehat\beta\mid X)
+  \succeq0.
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+따라서 OLS는 이 class에서 BLUE다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+  
+
+::::::::::::::::::: {.proof-label}
+
+Classical proof
+
+:::::::::::::::::::
+
+  
+
+    OLS matrix를 $A_0=(X'X)^{-1}X'$라 하고 $A=A_0+C$라 쓰자.
+    unbiasedness $AX=I$와 $A_0X=I$로부터 $CX=0$이다.
+    homoskedasticity 아래
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \begin{aligned}
+  \operatorname{Var}(\widetilde\beta\mid X)
+  &=
+  \sigma^2AA'\\
+  &=
+  \sigma^2(A_0+C)(A_0+C)'.
+  \end{aligned}
+  $$
+
+:::::::::::::::::::
+
+  
+
+    $CX=0$이므로 cross terms가 사라지고
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \operatorname{Var}(\widetilde\beta\mid X)
+  -
+  \operatorname{Var}(\widehat\beta\mid X)
+  =
+  \sigma^2CC'
+  \succeq0.
+  $$
+
+:::::::::::::::::::
+
+  
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 8.7.3 What “best” does not mean {#s873}
+
+:::::::::::::::::::: {.statement .warning}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+주의 8.2 · BLUE의 의미를 과장하지 말 것
+
+:::::::::::::::::::
+
+  
+
+    “Best”는 특정 unbiased linear estimator class에서 covariance matrix가 최소라는 뜻이다.
+    prediction error, bias-variance tradeoff, all-estimator optimality, causal validity, model correctness를 자동으로 의미하지 않는다.
+  
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{efficiency claim}
+=
+\text{comparison class}
++
+\text{assumptions}
++
+\text{criterion}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s88}
+
+## [8.8]{.section-number}Estimating the Error Variance
+
+::: {.topic-opening}
+Classical variance formula는 $\sigma^2$를 포함하지만 $\sigma^2$는 unknown이다.
+  OLS residual geometry를 이용하면 unbiased estimator를 만들 수 있다.
+:::
+
+### 8.8.1 Residual sum of squares {#s881}
+
+  Chapter 7의 residual maker $M_X=I-P_X$를 사용하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat e
+=
+M_XY
+=
+M_X(X\beta+\varepsilon)
+=
+M_X\varepsilon.
+$$
+
+::::::::::::::::::::
+
+  따라서 residual sum of squares는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+RSS
+=
+\widehat e'\widehat e
+=
+\varepsilon'M_X\varepsilon.
+$$
+
+::::::::::::::::::::
+
+### 8.8.2 Degrees of freedom {#s882}
+
+  full-column-rank design에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{rank}(P_X)=k,
+\qquad
+\operatorname{rank}(M_X)=n-k.
+$$
+
+::::::::::::::::::::
+
+또한 projection matrix의 trace는 rank와 같으므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{tr}(M_X)=n-k.
+}
+$$
+
+::::::::::::::::::::
+
+  homoskedasticity 아래 quadratic-form expectation을 사용하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[RSS\mid X]
+&=
+E[\varepsilon'M_X\varepsilon\mid X]\\
+&=
+\operatorname{tr}
+\left(
+M_XE[\varepsilon\varepsilon'\mid X]
+\right)\\
+&=
+\sigma^2\operatorname{tr}(M_X)\\
+&=
+\sigma^2(n-k).
+\end{aligned}
+$$
+
+::::::::::::::::::::
+
+### 8.8.3 Unbiased variance estimator {#s883}
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\sigma^2
+=
+\frac{RSS}{n-k}
+}
+$$
+
+::::::::::::::::::::
+
+는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[\widehat\sigma^2\mid X]=\sigma^2
+}
+$$
+
+::::::::::::::::::::
+
+  를 만족한다. 여기서 $n-k$는 단순한 관습적 보정이 아니라 residual subspace의 dimension이다.
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+Degrees of freedom = geometry
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    OLS가 $k$개의 fitted directions를 사용하면 $n$-dimensional outcome space에서 residual uncertainty가 남는 dimension은 $n-k$다.
+    $RSS/(n-k)$의 denominator는 projection geometry에서 나온다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s89}
+
+## [8.9]{.section-number}Exact Normal Sampling Theory
+
+::: {.topic-opening}
+지금까지 unbiasedness와 variance에는 normality가 필요하지 않았다.
+  Normality를 추가하면 finite sample에서 exact sampling distributions를 얻을 수 있다.
+:::
+
+### 8.9.1 Exact normal law for OLS {#s891}
+
+  추가 assumption으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\varepsilon\mid X
+\sim
+N(0,\sigma^2I_n)
+}
+$$
+
+::::::::::::::::::::
+
+를 둔다. Master equation이 normal vector의 linear transformation이므로
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 8.4 · Exact conditional distribution of OLS
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \widehat\beta\mid X
+  \sim
+  N\left(
+  \beta,
+  \sigma^2(X'X)^{-1}
+  \right).
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 8.9.2 Chi-square law for RSS {#s892}
+
+  $M_X$는 rank $n-k$의 symmetric idempotent matrix이므로 normal quadratic-form result에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac{RSS}{\sigma^2}
+=
+\frac{\varepsilon'M_X\varepsilon}{\sigma^2}
+\sim
+\chi^2_{n-k}.
+}
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac{(n-k)\widehat\sigma^2}{\sigma^2}
+\sim
+\chi^2_{n-k}.
+$$
+
+::::::::::::::::::::
+
+### 8.9.3 Independence and the road to $t$/$F$ {#s893}
+
+  normal model에서는 fitted-space component와 residual-space component가 orthogonal projection에 의해 분리된다.
+  Joint normality 아래 orthogonality는 independence를 준다. 따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta
+\perp
+RSS
+\mid X.
+}
+$$
+
+::::::::::::::::::::
+
+  이 independence와 exact normal/chi-square laws가 다음 장의 exact $t$- and $F$-statistics의 출발점이다.
+  여기서는 distribution theory까지만 구축하고 실제 testing과 confidence intervals는 Chapter 9로 넘긴다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s810}
+
+## [8.10]{.section-number}What Finite-Sample Theory Does Not Give Us
+
+::: {.topic-opening}
+Classical finite-sample theory는 강력하지만 적용범위가 명확하다.
+  특히 heteroskedasticity, model misspecification, nonnormality에서는 large-sample theory가 필요해진다.
+:::
+
+### 8.10.1 Heteroskedastic feasible inference {#s8101}
+
+  heteroskedasticity 아래 true conditional covariance는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+(X'X)^{-1}
+X'\Omega(X)X
+(X'X)^{-1}
+$$
+
+::::::::::::::::::::
+
+  이지만 $\Omega(X)$는 unknown이다.
+  따라서 실제 inference에서는 residuals를 이용해 covariance matrix를 추정해야 한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat V_{HC}
+=
+(X'X)^{-1}
+\left(
+\sum_{i=1}^n
+X_iX_i'\widehat e_i^2
+\right)
+(X'X)^{-1}
+$$
+
+::::::::::::::::::::
+
+  같은 estimator의 validity는 본질적으로 large-sample consistency argument에 의존한다.
+  따라서 이 장에서는 formula를 preview만 하고 정당화는 이후 asymptotic inference 장으로 미룬다.
+
+### 8.10.2 Misspecified linear CEF {#s8102}
+
+  CEF가 nonlinear이고 target이 Chapter 6의 BLP라면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[u\mid X]\neq0
+$$
+
+::::::::::::::::::::
+
+일 수 있다. 그러면 classical conditional-unbiasedness proof는 더 이상 그대로 사용할 수 없다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{finite-sample unbiasedness may fail}
+\qquad\text{while}\qquad
+\text{large-sample consistency may still hold}.
+}
+$$
+
+::::::::::::::::::::
+
+  이 사실은 왜 asymptotic theory가 단순한 기술적 부록이 아니라 misspecified-but-useful regression을 정당화하는 핵심 도구인지 보여준다.
+
+### 8.10.3 Normality is not identification {#s8103}
+
+  Normality assumption
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\varepsilon\mid X\sim N(0,\sigma^2I)
+$$
+
+::::::::::::::::::::
+
+  은 exact sampling distributions를 얻기 위한 distributional restriction이다.
+  이것이 economic target을 observed law로부터 identify하는 assumption과 같은 역할을 하는 것은 아니다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{identification assumptions}
+\neq
+\text{sampling-distribution assumptions}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s8110}
+
+## [8.11]{.section-number}요약과 연습문제
+
+### 8.11.1 Chapter map {#s8111}
+
+:::::::::::::::::::: {.chapter-summary}
+
+  
+
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 8 in one map
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \widehat\beta-\beta
+  =
+  (X'X)^{-1}X'\varepsilon.
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \begin{array}{ccc}
+  E[\varepsilon\mid X]=0
+  &\Longrightarrow&
+  E[\widehat\beta\mid X]=\beta
+  \\[7pt]
+  \operatorname{Var}(\varepsilon\mid X)=\Omega
+  &\Longrightarrow&
+  \operatorname{Var}(\widehat\beta\mid X)
+  =(X'X)^{-1}X'\Omega X(X'X)^{-1}
+  \\[7pt]
+  \Omega=\sigma^2I
+  &\Longrightarrow&
+  \operatorname{Var}(\widehat\beta\mid X)
+  =\sigma^2(X'X)^{-1}
+  \\[7pt]
+  \varepsilon\mid X\sim N(0,\sigma^2I)
+  &\Longrightarrow&
+  \widehat\beta\mid X
+  \sim N(\beta,\sigma^2(X'X)^{-1})
+  \end{array}
+  $$
+
+:::::::::::::::::::
+
+  
+
+    같은 OLS formula 위에 assumptions를 하나씩 추가할 때 conclusions가 계층적으로 강화된다.
+  
+
+::::::::::::::::::::
+
+### 8.11.2 Assumption-to-conclusion checklist {#s8112}
+
+<ol>
+  <li><strong>Target:</strong> $\beta$는 linear CEF coefficient인가, BLP coefficient인가?</li>
+  <li><strong>Mean restriction:</strong> $E[\varepsilon\mid X]=0$가 실제로 가정되는가?</li>
+  <li><strong>Variance structure:</strong> $\Omega(X)$는 unrestricted한가, diagonal인가, $\sigma^2I$인가?</li>
+  <li><strong>Conditioning:</strong> statement가 conditional on $X$인가 unconditional인가?</li>
+  <li><strong>Efficiency claim:</strong> 어떤 comparison class 안에서 무엇을 최소화하는가?</li>
+  <li><strong>Distributional assumption:</strong> exact normal theory를 위해 normality가 필요한가?</li>
+  <li><strong>Finite vs large sample:</strong> 결과가 fixed-$n$ exact result인가 asymptotic approximation인가?</li>
+</ol>
+
+### 연습문제 {#exercises}
+
+<ol class="exercise-list">
+  <li><strong>Master decomposition.</strong> $Y=X\beta+\varepsilon$에서 $\widehat\beta-\beta=(X'X)^{-1}X'\varepsilon$를 유도하라.</li>
+  <li><strong>Conditional unbiasedness.</strong> $E[\varepsilon\mid X]=0$이면 $E[\widehat\beta\mid X]=\beta$임을 증명하라.</li>
+  <li><strong>Unconditional unbiasedness.</strong> law of iterated expectations를 이용해 $E[\widehat\beta]=\beta$를 보이라.</li>
+  <li><strong>BLP vs linear CEF.</strong> $E[Xu]=0$이지만 $E[u\mid X]\neq0$인 예를 구성하고 finite-sample conditional unbiasedness 논리가 왜 깨지는지 설명하라.</li>
+  <li><strong>General covariance.</strong> $\Omega(X)=\operatorname{Var}(\varepsilon\mid X)$일 때 OLS conditional covariance formula를 유도하라.</li>
+  <li><strong>Heteroskedastic diagonal case.</strong> $\Omega=\operatorname{diag}(\sigma_1^2,\ldots,\sigma_n^2)$일 때 covariance를 summation form으로 쓰라.</li>
+  <li><strong>Homoskedastic simplification.</strong> $\Omega=\sigma^2I$이면 $\operatorname{Var}(\widehat\beta\mid X)=\sigma^2(X'X)^{-1}$임을 보이라.</li>
+  <li><strong>Precision and eigenvalues.</strong> $X'X=V\Lambda V'$를 이용해 작은 eigenvalue가 특정 coefficient directions의 sampling variance를 키우는 이유를 설명하라.</li>
+  <li><strong>Gauss–Markov.</strong> $\widetilde\beta=AY$, $AX=I$인 linear unbiased estimator에 대해 classical BLUE result를 증명하라.</li>
+  <li><strong>Meaning of BLUE.</strong> B, L, U, E가 각각 무엇을 뜻하는지 쓰고 “OLS is best”라는 문장이 왜 불완전한지 설명하라.</li>
+  <li><strong>Residual degrees of freedom.</strong> $\operatorname{tr}(M_X)=n-k$를 증명하고 residual-space dimension과 연결하라.</li>
+  <li><strong>Error variance.</strong> $E[\varepsilon'M_X\varepsilon\mid X]=\sigma^2(n-k)$를 증명하라.</li>
+  <li><strong>Exact normal law.</strong> normality 아래 $\widehat\beta\mid X$의 정확한 multivariate normal distribution을 유도하라.</li>
+  <li><strong>Chi-square RSS.</strong> $RSS/\sigma^2\sim\chi^2_{n-k}$가 projection matrix의 rank와 어떻게 연결되는지 설명하라.</li>
+  <li><strong>Unbiasedness vs consistency.</strong> 두 개념의 정의를 비교하고 한쪽이 다른 쪽을 자동으로 함의하지 않는 이유를 설명하라.</li>
+  <li><strong>Heteroskedasticity.</strong> $\sigma_i^2$가 $X_i$에 따라 달라질 때 classical variance formula가 왜 실패하는지 algebraically 보이라.</li>
+  <li><strong>Normality and identification.</strong> normality assumption과 causal/structural identification assumption의 역할 차이를 설명하라.</li>
+  <li><strong>Research reading exercise.</strong> empirical regression 하나를 골라 reported standard error가 homoskedastic, robust, clustered 중 무엇인지 확인하고 그 inference가 어떤 assumptions에 의존하는지 분리해 기술하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 다음 장
+
+  이 장은 OLS의 deterministic algebra 위에 stochastic assumptions를 단계적으로 추가하여
+  conditional unbiasedness, general heteroskedastic covariance, homoskedastic simplification,
+  Gauss–Markov efficiency, residual-variance estimation, exact normal sampling theory를 구축한다.
+  중요한 원칙은 projection orthogonality, conditional-mean restriction, variance restriction,
+  distributional assumption을 서로 다른 층위의 statements로 유지하는 것이다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+  
+
+::::::::::::::::::: {.chapter-summary__head}
+
+다음 장으로
+
+:::::::::::::::::::
+
+  
+
+    Chapter 8에서는 exact sampling distributions를 만들기 위한 ingredients를 확보했다.
+    Chapter 9에서는 이 분포들을 실제 inferential procedures로 변환한다.
+    single- and multiple-restriction hypothesis tests, confidence intervals, $t$-statistics와 $F$-statistics,
+    p-values, size와 power를 다루고, exact normal-theory inference와 이후 asymptotic inference를 명확히 구분한다.
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \text{sampling distribution}
+  \longrightarrow
+  \text{test statistic}
+  \longrightarrow
+  \text{confidence set}
+  \longrightarrow
+  \text{decision rule}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

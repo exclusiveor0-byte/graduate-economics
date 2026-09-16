@@ -1,0 +1,33 @@
+# Chapter 04 · Population Characterization and Optimization {.unnumbered}
+*Criterion Functions · Argmin · Estimating Equations · Constraints*
+
+식별된 population target을 criterion minimizer, estimating-equation root, constrained solution으로 표현하는 방법을 다룹니다. existence·uniqueness·convexity·KKT·misspecification·local geometry를 연결합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **4.1–4.3** characterization, argmin, existence·uniqueness·separation
+- **4.4–4.6** smooth/nonsmooth optimality와 population estimating equations
+- **4.7–4.10** moment restrictions, constraints, pseudo-true target, local geometry
+- **4.11** 핵심 개념과 연습문제
+:::
+
+## Sections
+
+- [4.1 Identification 이후의 질문: Characterization](contents.html#s41)
+- [4.2 Population Criterion과 Argmin Representation](contents.html#s42)
+- [4.3 Existence, Uniqueness, and Separation](contents.html#s43)
+- [4.4 Smooth Interior Problems: First- and Second-Order Conditions](contents.html#s44)
+- [4.5 Convexity, Strong Convexity, and Nonsmooth Optimality](contents.html#s45)
+- [4.6 Population Estimating Equations](contents.html#s46)
+- [4.7 Optimization과 Moment Restrictions의 통합](contents.html#s47)
+- [4.8 Constrained Population Problems](contents.html#s48)
+- [4.9 Misspecification과 Criterion-Dependent Targets](contents.html#s49)
+- [4.10 Local Geometry, Sensitivity, and Identification Strength](contents.html#s410)
+- [4.11 요약과 연습문제](contents.html#s4110)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+:::
+

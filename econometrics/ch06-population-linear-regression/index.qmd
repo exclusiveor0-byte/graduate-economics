@@ -1,0 +1,33 @@
+# Chapter 06 · Population Linear Regression and Linear Approximation {.unnumbered}
+*Best Linear Predictor · BLA · FWL · Omitted Variables*
+
+conditional expectation에서 linear approximation으로 이동해 BLP·BLA·population normal equations·FWL·omitted variables와 회귀계수의 descriptive·causal 해석을 분리합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **6.1–6.4** linear approximation, BLP, normal equations, BLP–BLA equivalence
+- **6.5–6.8** linear CEF, population FWL, coefficient interpretation, omitted variables
+- **6.9–6.10** descriptive·causal interpretation과 approximation limits
+- **6.11** 요약과 연습문제
+:::
+
+## Sections
+
+- [6.1 From Conditional Expectation to Linear Approximation](contents.html#s61)
+- [6.2 Best Linear Predictor and Population Normal Equations](contents.html#s62)
+- [6.3 Existence, Uniqueness, and Collinearity](contents.html#s63)
+- [6.4 Best Linear Approximation and the BLP–BLA Equivalence](contents.html#s64)
+- [6.5 Linear CEF versus Linear Projection](contents.html#s65)
+- [6.6 Population Frisch–Waugh–Lovell and Partialling Out](contents.html#s66)
+- [6.7 Interpreting Individual Regression Coefficients](contents.html#s67)
+- [6.8 Long Regression, Short Regression, and Omitted Variables](contents.html#s68)
+- [6.9 Descriptive versus Causal Interpretation of Regression](contents.html#s69)
+- [6.10 Approximation Quality and the Limits of Linear Regression](contents.html#s610)
+- [6.11 요약과 연습문제](contents.html#s6110)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+:::
+

@@ -150,6 +150,27 @@ book:
   - part: econometrics/ch03-target-model-identification/index.qmd
     chapters:
     - econometrics/ch03-target-model-identification/contents.qmd
+  - part: econometrics/ch04-population-optimization/index.qmd
+    chapters:
+    - econometrics/ch04-population-optimization/contents.qmd
+  - part: econometrics/ch05-conditional-expectation/index.qmd
+    chapters:
+    - econometrics/ch05-conditional-expectation/contents.qmd
+  - part: econometrics/ch06-population-linear-regression/index.qmd
+    chapters:
+    - econometrics/ch06-population-linear-regression/contents.qmd
+  - part: econometrics/ch07-sample-least-squares/index.qmd
+    chapters:
+    - econometrics/ch07-sample-least-squares/contents.qmd
+  - part: econometrics/ch08-sampling-theory-least-squares/index.qmd
+    chapters:
+    - econometrics/ch08-sampling-theory-least-squares/contents.qmd
+  - part: econometrics/ch09-exact-inference/index.qmd
+    chapters:
+    - econometrics/ch09-exact-inference/contents.qmd
+  - part: econometrics/ch10-large-sample-least-squares/index.qmd
+    chapters:
+    - econometrics/ch10-large-sample-least-squares/contents.qmd
   - econometrics/overview.qmd
   - supplements/index.qmd
   - supplements/visualization-guide.qmd
