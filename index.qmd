@@ -37,7 +37,7 @@ Chapter 01–10 · 기술, 확률모형, 식별, OLS, 추론
 ::: {.home-archive-item}
 **계산·탐색 보충자료**
 
-Interactive 2종 · R 구현 · MATLAB 확장 준비
+Interactive 4종 · R 1종 · MATLAB 3종 · GIF 1종
 :::
 :::
 :::
@@ -95,11 +95,15 @@ ECONOMETRICS
 COMPUTATION
 :::
 ### [계산·탐색 보충자료](supplements/index.html)
-이론과 연결되는 계산, 모수 변화, R·MATLAB 산출물을 모읍니다.
+Slutsky·Hicks, Solow, OLS, 도구변수, IS–LM 충격을 계산·시각화로 읽습니다.
+
+::: {.study-card__highlights}
+[Slutsky·Hicks](supplements/slutsky-decomposition.html) · [Solow](supplements/solow-growth.html) · [OLS](supplements/ols-geometry.html) · [도구변수](supplements/iv-weak-instruments.html) · [IS–LM GIF](supplements/islm-fiscal-shock.html)
+:::
 
 [보충자료 목록 보기](supplements/index.html){.study-card__link} →
 
-[Interactive 2종 제공 · R 구현 시작 · MATLAB 확장 준비]{.status}
+[Interactive 4종 · R 1종 · MATLAB 3종 · 정적 도표와 GIF]{.status}
 :::
 ::::
 
