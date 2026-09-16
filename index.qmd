@@ -34,6 +34,11 @@ Chapter 00–13 · 기술 부록 A–E
 
 Chapter 01–10 · 기술, 확률모형, 식별, OLS, 추론
 :::
+::: {.home-archive-item}
+**계산·탐색 보충자료**
+
+Interactive 2종 · R 구현 · MATLAB 확장 준비
+:::
 :::
 :::
 
@@ -54,23 +59,9 @@ THEORY
 
 [Chapter 0–4 · Section별 독립 페이지]{.status}
 :::
-::: {.study-card .study-card--supplements}
-::: {.study-card__number}
-02
-:::
-::: {.study-card__eyebrow}
-COMPUTATION
-:::
-### [계산·탐색 보충자료](supplements/index.html)
-이론과 연결되는 계산, 모수 변화, R·MATLAB 산출물을 모읍니다.
-
-[보충자료 목록 보기](supplements/index.html){.study-card__link} →
-
-[Interactive 2종 제공 · R 구현 시작 · MATLAB 확장 준비]{.status}
-:::
 ::: {.study-card .study-card--macro}
 ::: {.study-card__number}
-03
+02
 :::
 ::: {.study-card__eyebrow}
 MACROECONOMICS
@@ -84,7 +75,7 @@ MACROECONOMICS
 :::
 ::: {.study-card .study-card--econometrics}
 ::: {.study-card__number}
-04
+03
 :::
 ::: {.study-card__eyebrow}
 ECONOMETRICS
@@ -95,6 +86,20 @@ ECONOMETRICS
 [Chapter 01–10 읽기](econometrics/index.html){.study-card__link} →
 
 [Chapter 01–10 · 기술·확률·식별·OLS·유한표본·점근이론]{.status}
+:::
+::: {.study-card .study-card--supplements}
+::: {.study-card__number}
+04
+:::
+::: {.study-card__eyebrow}
+COMPUTATION
+:::
+### [계산·탐색 보충자료](supplements/index.html)
+이론과 연결되는 계산, 모수 변화, R·MATLAB 산출물을 모읍니다.
+
+[보충자료 목록 보기](supplements/index.html){.study-card__link} →
+
+[Interactive 2종 제공 · R 구현 시작 · MATLAB 확장 준비]{.status}
 :::
 ::::
 
@@ -107,7 +112,7 @@ ECONOMETRICS
 
 - **홈의 왼쪽 목차**에서는 과목을 선택합니다. 각 과목 첫 화면에서 Chapter와 Section으로 이동합니다.
 - **이 페이지에서** 목차로 세부 내용을 찾습니다. 모바일에서는 메뉴를 열어 이동합니다.
-- **정리·명제**는 녹색, **정의·가정**은 청회색 상자로 구분합니다. 접힌 **증명**은 제목을 누르면 펼쳐집니다.
+- **정리·명제**는 테라코타, **정의·가정**은 회보라 상자로 구분합니다. 접힌 **증명**은 제목을 누르면 펼쳐집니다.
 - 긴 수식과 표는 해당 영역 안에서 좌우로 스크롤할 수 있습니다.
 
 ## 함께 고치기
