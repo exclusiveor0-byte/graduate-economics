@@ -97,3 +97,10 @@ matlab -batch "run('supplements/matlab/ols_geometry_monte_carlo.m')"
 난수 seed, 표본 수, Monte Carlo 반복 횟수와 $X'\hat u=0$ 검증값은 metadata에 함께
 저장한다. MATLAB 실행은 현재 CI에 포함하지 않으므로, MATLAB 원본과 생성된 CSV·JSON·PNG를
 같은 PR에서 검토한다.
+
+## 두 번째 MATLAB 구현: 도구변수와 약한 도구변수
+
+`supplements/matlab/iv_weak_instruments.m`은 하나의 유효한 도구변수 $z$와 내생 설명변수
+$x$를 생성해 OLS와 2SLS의 표본분포를 비교한다. $\pi$는 첫 단계의 도구 강도, $\rho$는
+$x$와 구조오차의 내생성 정도다. 브라우저 도구는 이 두 값을 조절하고, 기준 MATLAB 산출물은
+CSV·metadata JSON·정적 PNG로 함께 보관한다.
