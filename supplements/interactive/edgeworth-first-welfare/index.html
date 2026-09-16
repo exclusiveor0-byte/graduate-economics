@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edgeworth 상자와 제1후생정리</title>
+  <style>
+    :root{--ink:#3f3129;--muted:#725f54;--paper:#fffaf2;--panel:#f5eadc;--rule:#dfcdb8;--terra:#954f2d;--plum:#725b70;--teal:#087e8b}*{box-sizing:border-box}body{margin:0;padding:1rem;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,"Noto Sans KR",sans-serif}h1{margin:0;font:600 1.3rem Georgia,"Noto Serif KR",serif}.lede{margin:.3rem 0 .8rem;color:var(--muted);font-size:.9rem}.layout{display:grid;grid-template-columns:minmax(13rem,.72fr) minmax(0,1.45fr);gap:.8rem}.panel,figure{margin:0;padding:.8rem;border:1px solid var(--rule);background:#fffdf9}.controls{display:grid;gap:.65rem}label{display:grid;grid-template-columns:1fr auto;gap:.2rem;font-size:.8rem;font-weight:700}output{color:var(--terra);font-variant-numeric:tabular-nums}input{grid-column:1/-1;width:100%;accent-color:var(--terra)}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.8rem}.metric{padding:.55rem;border-top:3px solid var(--plum);background:#f5eef3}.metric strong{display:block;color:var(--plum);font-size:.69rem}.metric span{font-variant-numeric:tabular-nums}svg{display:block;width:100%;height:auto}.axis{stroke:#4b3a31;stroke-width:2}.box{fill:#fffdf9;stroke:#4b3a31;stroke-width:2}.budget{stroke:#8c786a;stroke-width:2.4;stroke-dasharray:8 6}.contract{fill:none;stroke:var(--teal);stroke-width:4}.endow{fill:var(--terra)}.equilibrium{fill:var(--plum)}.guide{stroke:#b9a894;stroke-width:1;stroke-dasharray:4 5}.label{font:13px system-ui;fill:#3f3129}.muted{fill:#725f54}.formula{margin:.75rem 0 0;padding:.6rem .75rem;border-left:3px solid var(--teal);background:#edf7f6;font-family:Georgia,serif;font-size:.88rem}@media(max-width:720px){body{padding:.7rem}.layout{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(4,1fr)}.metric{font-size:.83rem}}
+  </style>
+</head>
+<body>
+  <h1>Edgeworth 상자: 경쟁균형과 제1후생정리</h1><p class="lede">초기부존과 선호를 바꾸고, 경쟁균형이 계약곡선 위에 놓이는지 확인하세요.</p>
+  <div class="layout">
+    <section class="panel controls" aria-label="모수 조절">
+      <label>A의 x 선호 alpha_A <output id="alphaAOut"></output><input id="alphaA" type="range" min="0.25" max="0.75" step="0.05" value="0.65"></label>
+      <label>B의 x 선호 alpha_B <output id="alphaBOut"></output><input id="alphaB" type="range" min="0.25" max="0.75" step="0.05" value="0.35"></label>
+      <label>A의 초기 x 부존 <output id="endowXOut"></output><input id="endowX" type="range" min="1" max="9" step="0.5" value="3.5"></label>
+      <label>A의 초기 y 부존 <output id="endowYOut"></output><input id="endowY" type="range" min="1" max="9" step="0.5" value="6.5"></label>
+      <p class="formula">청록 곡선: MRS<sub>A</sub> = MRS<sub>B</sub><br>보라 점: 시장청산 경쟁균형</p>
+    </section>
+    <section class="panel" aria-label="Edgeworth 상자">
+      <svg id="chart" viewBox="0 0 710 500" role="img" aria-labelledby="chartTitle chartDesc"><title id="chartTitle">계약곡선과 경쟁균형이 있는 Edgeworth 상자</title><desc id="chartDesc">왼쪽 아래는 소비자 A, 오른쪽 위는 소비자 B의 원점이다. 초기부존, 예산선, 계약곡선, 경쟁균형을 보인다.</desc><rect class="box" x="78" y="48" width="560" height="390"/><g id="grid"></g><path id="contract" class="contract"/><line id="budget" class="budget"/><circle id="endowment" class="endow" r="6"/><circle id="equilibrium" class="equilibrium" r="7"/><g id="labels" class="label"></g></svg>
+      <div class="metrics" aria-label="경쟁균형 결과"><div class="metric"><strong>경쟁가격 p_x / p_y</strong><span id="price"></span></div><div class="metric"><strong>경쟁균형 A</strong><span id="allocation"></span></div><div class="metric"><strong>|MRS_A − MRS_B|</strong><span id="mrsGap"></span></div><div class="metric"><strong>계약곡선 거리</strong><span id="curveGap"></span></div></div>
+    </section>
+  </div>
+  <script>
+    const $=id=>document.getElementById(id), ids=['alphaA','alphaB','endowX','endowY']; const X=10,Y=10,L=78,B=438,W=560,H=390,fmt=n=>Number(n).toFixed(3),sx=x=>L+x/X*W,sy=y=>B-y/Y*H;
+    function contractY(x,aA,aB){let ra=aA/(1-aA),rb=aB/(1-aB);return rb*x*Y/(ra*X+(rb-ra)*x)}
+    function render(){let aA=+$('alphaA').value,aB=+$('alphaB').value,wx=+$('endowX').value,wy=+$('endowY').value,wbx=X-wx,wby=Y-wy; $('alphaAOut').textContent=aA.toFixed(2);$('alphaBOut').textContent=aB.toFixed(2);$('endowXOut').textContent=wx.toFixed(1);$('endowYOut').textContent=wy.toFixed(1);
+      let numerator=aA*wy+aB*wby,denominator=X-aA*wx-aB*wbx,q=numerator/denominator,incomeA=q*wx+wy,xe=aA*incomeA/q,ye=(1-aA)*incomeA,mrsA=aA/(1-aA)*ye/xe,mrsB=aB/(1-aB)*(Y-ye)/(X-xe),cy=contractY(xe,aA,aB);
+      let path='';for(let x=0;x<=X;x+=.04){let y=contractY(x,aA,aB);path+=(x?'L':'M')+sx(x)+' '+sy(y)}$('contract').setAttribute('d',path);
+      let wealth=q*wx+wy,xLo=Math.max(0,(wealth-Y)/q),xHi=Math.min(X,wealth/q),yLo=wealth-q*xLo,yHi=wealth-q*xHi;$('budget').setAttribute('x1',sx(xLo));$('budget').setAttribute('y1',sy(yLo));$('budget').setAttribute('x2',sx(xHi));$('budget').setAttribute('y2',sy(yHi));
+      $('endowment').setAttribute('cx',sx(wx));$('endowment').setAttribute('cy',sy(wy));$('equilibrium').setAttribute('cx',sx(xe));$('equilibrium').setAttribute('cy',sy(ye));
+      let grid='';for(let v=0;v<=10;v+=2){grid+='<line class="guide" x1="'+sx(v)+'" y1="'+sy(0)+'" x2="'+sx(v)+'" y2="'+sy(10)+'"/><line class="guide" x1="'+sx(0)+'" y1="'+sy(v)+'" x2="'+sx(10)+'" y2="'+sy(v)+'"/>'}$('grid').innerHTML=grid;
+      $('labels').innerHTML='<text x="'+L+'" y="'+(B+26)+'">A의 x</text><text x="'+(L-42)+'" y="'+(sy(10)+5)+'">A의 y</text><text x="'+(L+W-48)+'" y="'+(B+26)+'">B의 x</text><text x="'+(L+W+10)+'" y="'+(sy(10)+5)+'">B의 y</text><text class="muted" x="'+(sx(wx)+9)+'" y="'+(sy(wy)-9)+'">초기부존</text><text x="'+(sx(xe)+9)+'" y="'+(sy(ye)-9)+'" fill="#725b70">경쟁균형</text><text x="'+sx(7.2)+'" y="'+sy(contractY(7.2,aA,aB)+.35)+'" fill="#087e8b">계약곡선</text><text class="muted" x="'+sx(1.0)+'" y="'+sy(8.9)+'">공통 예산선</text>';
+      $('price').textContent=fmt(q);$('allocation').textContent='('+fmt(xe)+', '+fmt(ye)+')';$('mrsGap').textContent=Math.abs(mrsA-mrsB).toExponential(1);$('curveGap').textContent=Math.abs(ye-cy).toExponential(1);
+    }ids.forEach(id=>$(id).addEventListener('input',render));render();
+  </script>
+</body></html>

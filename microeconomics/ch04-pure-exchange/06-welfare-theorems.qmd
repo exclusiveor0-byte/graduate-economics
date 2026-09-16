@@ -16,6 +16,11 @@ $$
 
 :::
 
+::: {.callout-note appearance="simple" title="VISUAL · Edgeworth 상자"}
+[Edgeworth 상자 보충자료](../../supplements/edgeworth-first-welfare.qmd)에서 초기부존과 선호를 바꾸며,
+경쟁균형이 계약곡선 위에 놓이는 과정을 확인할 수 있다.
+:::
+
 ::: {.callout-tip collapse="true" title="PROOF"}
 반대로 어떤 $y\in\mathcal F^{\le}(\bar e)$가 $x^*$를 Pareto dominate한다고 하자. 먼저 $y_i\succeq_i x_i^*$이면
 
