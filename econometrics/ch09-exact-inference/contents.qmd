@@ -1,0 +1,1257 @@
+---
+title: "Exact Inference in Linear Regression"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. -->
+
+:::::::::::::::::::::::::: {#s91}
+
+## [9.1]{.section-number}From Sampling Distributions to Statistical Inference
+
+::: {.topic-opening}
+Estimation은 unknown parameter의 point estimate를 만드는 문제이고, inference는 그 estimate의 sampling uncertainty를 이용하여
+  parameter에 대한 calibrated statement를 만드는 문제다.
+:::
+
+### 9.1.1 Estimation vs inference {#s911}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta\mid X
+\sim
+N\!\left(\beta,\sigma^2(X'X)^{-1}\right)
+$$
+
+::::::::::::::::::::
+
+라는 sampling distribution을 알고 있을 때 질문은 다음으로 바뀐다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{What does the sampling distribution allow us to say about }\beta?
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{estimator}
++
+\text{sampling uncertainty}
++
+\text{inferential rule}
+}
+$$
+
+::::::::::::::::::::
+
+### 9.1.2 Tests and confidence sets {#s912}
+
+:::::::::::::::::::: {.comparison-grid}
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Hypothesis testing
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    H_0:\theta\in\Theta_0
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+데이터가 null restriction과 얼마나 양립 가능한지를 calibrated rejection rule로 평가한다.
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Confidence set
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    C_{1-\alpha}(W_n)
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+repeated sampling에서 nominal coverage를 갖도록 parameter values의 random set을 구성한다.
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 9.1.3 Pivots {#s913}
+
+:::::::::::::::::::: {.statement .definition}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정의 9.1 · Pivot
+
+:::::::::::::::::::
+
+  
+parameter와 data의 함수 가운데 sampling distribution이 known하고 nuisance parameters에 의존하지 않는 quantity를 pivot이라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac{\widehat\beta_j-\beta_j}
+{s\sqrt{[(X'X)^{-1}]_{jj}}}
+\sim t_{n-k}.
+$$
+
+::::::::::::::::::::
+
+Exact tests와 confidence intervals는 이런 pivotal quantity를 invert하여 만든다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s92}
+
+## [9.2]{.section-number}Hypotheses, Test Statistics, and Rejection Regions
+
+::: {.topic-opening}
+Hypothesis test는 sample을 binary decision으로 매핑한다. null, alternative, statistic, rejection region을 분리해서 읽어야 한다.
+:::
+
+### 9.2.1 Null and alternative {#s921}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+H_0:\theta\in\Theta_0,
+\qquad
+H_1:\theta\in\Theta_1.
+$$
+
+::::::::::::::::::::
+
+scalar equality test는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+H_0:\theta=\theta_0,
+\qquad
+H_1:\theta\neq\theta_0.
+$$
+
+::::::::::::::::::::
+
+### 9.2.2 Test statistic and critical region {#s922}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+T=T(W_n)
+$$
+
+::::::::::::::::::::
+
+를 test statistic이라 하고, large values가 null에 불리하도록 설계했다고 하자.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Reject }H_0
+\quad\text{if}\quad
+T>c_\alpha.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\mathcal R_\alpha
+=
+\{W_n:T(W_n)>c_\alpha\}.
+$$
+
+::::::::::::::::::::
+
+### 9.2.3 Fail to reject ≠ accept {#s923}
+
+:::::::::::::::::::: {.statement .warning}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+주의 9.1 · Non-rejection의 의미
+
+:::::::::::::::::::
+
+  
+
+    $H_0$를 reject하지 못했다는 것은 현재 statistic과 significance level 아래에서 충분한 반대 evidence를 얻지 못했다는 뜻이다.
+    $H_0$가 참임을 입증했거나 $P(H_0\mid data)$가 높다는 뜻이 아니다.
+  
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{fail to reject }H_0
+\neq
+\text{evidence that }H_0\text{ is true}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s93}
+
+## [9.3]{.section-number}Type I Error, Size, Significance Level, and Power
+
+::: {.topic-opening}
+좋은 test는 false rejection probability를 통제하면서 economically relevant alternatives를 잘 탐지해야 한다.
+:::
+
+### 9.3.1 Type I error and size {#s931}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+P_\theta(\text{Reject }H_0),
+\qquad
+\theta\in\Theta_0.
+$$
+
+::::::::::::::::::::
+
+composite null에서 test size는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{size}
+=
+\sup_{\theta\in\Theta_0}
+P_\theta(\text{Reject }H_0).
+}
+$$
+
+::::::::::::::::::::
+
+level-$\alpha$ test는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{size}\le\alpha.
+$$
+
+::::::::::::::::::::
+
+### 9.3.2 Type II error and power {#s932}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\pi(\theta)
+=
+P_\theta(\text{Reject }H_0),
+\qquad
+\theta\in\Theta_1.
+}
+$$
+
+::::::::::::::::::::
+
+Type II error probability는 $1-\pi(\theta)$다.
+
+### 9.3.3 Size–power trade-off {#s933}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\text{critical value}\uparrow
+\quad\Rightarrow\quad
+\text{Type I error}\downarrow
+\quad\text{and typically}\quad
+\text{power}\downarrow.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+Test comparison의 원칙
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    유의수준 $\alpha$를 고정한 상태에서 alternatives에 대해 더 높은 power를 갖는 test가 더 informative하다.
+    단순히 size를 작게 만드는 것만으로 좋은 test가 되는 것은 아니다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s94}
+
+## [9.4]{.section-number}Exact $t$-Tests for a Single Linear Restriction
+
+::: {.topic-opening}
+Chapter 8의 normal and chi-square results를 결합하면 single linear restriction에 대해 exact Student-$t$ pivot을 얻는다.
+:::
+
+### 9.4.1 General linear restriction {#s941}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+H_0:r'\beta=r_0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+r'\widehat\beta-r'\beta
+\mid X
+\sim
+N\!\left(
+0,\sigma^2r'(X'X)^{-1}r
+\right).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 9.1 · Exact $t$-distribution
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  t(r_0)
+  =
+  \frac{r'\widehat\beta-r_0}
+  {s\sqrt{r'(X'X)^{-1}r}}
+  \sim
+  t_{n-k}
+  \qquad
+  \text{under }H_0.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 9.4.2 Individual coefficients {#s942}
+
+$r=e_j$이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+t
+=
+\frac{\widehat\beta_j-\beta_{j,0}}
+{se(\widehat\beta_j)}.
+}
+$$
+
+::::::::::::::::::::
+
+  흔히 $\beta_{j,0}=0$을 사용하지만 0이 언제나 경제적으로 중요한 null은 아니다.
+  $\beta_j=1$, $\beta_1-\beta_2=0$, $\beta_1+\beta_2=1$ 등 이론에 맞는 restriction을 검정해야 한다.
+
+### 9.4.3 One-sided vs two-sided tests {#s943}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+H_1:r'\beta\neq r_0.
+$$
+
+::::::::::::::::::::
+
+two-sided level-$\alpha$ rejection rule은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+|t(r_0)|
+>
+t_{1-\alpha/2,n-k}.
+}
+$$
+
+::::::::::::::::::::
+
+  one-sided test는 substantive theory나 parameter space가 사전에 방향을 제한할 때 사용해야 한다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s95}
+
+## [9.5]{.section-number}$p$-Values and Statistical Significance
+
+::: {.topic-opening}
+Binary reject/non-reject decision만으로는 observed evidence의 정도를 충분히 전달하지 못한다.
+  $p$-value는 동일한 test를 연속적인 evidence measure로 표현한다.
+:::
+
+### 9.5.1 Definition {#s951}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+p
+=
+2\left[
+1-F_{t_{n-k}}(|t_{\mathrm{obs}}|)
+\right].
+}
+$$
+
+::::::::::::::::::::
+
+  이는 null distribution 아래에서 observed statistic만큼 또는 더 극단적인 결과가 나올 tail probability다.
+
+### 9.5.2 Marginal significance level {#s952}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+p
+=
+\inf\{\alpha:\text{the level-}\alpha\text{ test rejects }H_0\}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+p\lt\alpha
+\iff
+\text{Reject }H_0\text{ at level }\alpha.
+$$
+
+::::::::::::::::::::
+
+### 9.5.3 Common misinterpretations {#s953}
+
+:::::::::::::::::::: {.statement .warning}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+주의 9.2 · $p$-value가 말하지 않는 것
+
+:::::::::::::::::::
+
+  
+
+    $p$-value는 $P(H_0\mid data)$가 아니다. 또한 effect size, causal importance, replication probability를 직접 측정하지 않는다.
+  
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+p
+\neq
+P(H_0\mid data).
+}
+$$
+
+::::::::::::::::::::
+
+exact continuous test에서는 null 아래
+
+:::::::::::::::::::: {.math-display}
+
+$$
+p\sim U(0,1),
+\qquad
+P(p\le\alpha\mid H_0)=\alpha.
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s96}
+
+## [9.6]{.section-number}Exact Confidence Intervals and Test Inversion
+
+::: {.topic-opening}
+Confidence interval은 point estimate 주변에 임의의 폭을 붙이는 것이 아니라 exact pivot 또는 level-$\alpha$ tests를 invert하여 만든 random set이다.
+:::
+
+### 9.6.1 Exact interval {#s961}
+
+$\theta=r'\beta$에 대해
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 9.2 · Exact $t$-confidence interval
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  C_{1-\alpha}
+  =
+  \left[
+  r'\widehat\beta
+  \pm
+  t_{1-\alpha/2,n-k}
+  s\sqrt{r'(X'X)^{-1}r}
+  \right].
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 9.6.2 Coverage interpretation {#s962}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+P_\beta\!\left(
+r'\beta\in C_{1-\alpha}
+\mid X
+\right)
+=
+1-\alpha.
+}
+$$
+
+::::::::::::::::::::
+
+  frequentist interpretation에서 random한 것은 confidence interval이고 $\beta$는 fixed parameter다.
+  repeated sampling에서 같은 construction을 반복할 때 $1-\alpha$ fraction이 true parameter를 cover한다.
+
+### 9.6.3 Test–CI duality {#s963}
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 9.3 · Test–confidence-set duality
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \theta_0\in C_{1-\alpha}
+  \iff
+  H_0:\theta=\theta_0
+  \text{ is not rejected at level }\alpha.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s97}
+
+## [9.7]{.section-number}Multiple Linear Restrictions and the $F$-Test
+
+::: {.topic-opening}
+여러 coefficient restrictions를 동시에 평가할 때는 individual $t$-tests를 나열하는 대신 joint quadratic statistic을 사용한다.
+:::
+
+### 9.7.1 Matrix restrictions {#s971}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+H_0:R\beta=r,
+}
+$$
+
+::::::::::::::::::::
+
+where $R\in\mathbb R^{q\times k}$ and $\operatorname{rank}(R)=q$.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(R\widehat\beta\mid X)
+=
+\sigma^2R(X'X)^{-1}R'.
+$$
+
+::::::::::::::::::::
+
+### 9.7.2 Exact $F$-statistic {#s972}
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 9.4 · Exact $F$-distribution
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  F
+  =
+  \frac{
+  (R\widehat\beta-r)'
+  [R(X'X)^{-1}R']^{-1}
+  (R\widehat\beta-r)
+  }{q\,s^2}
+  \sim
+  F_{q,n-k}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 9.7.3 Single restriction: $F=t^2$ {#s973}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+q=1
+\quad\Longrightarrow\quad
+F=t^2.
+}
+$$
+
+::::::::::::::::::::
+
+$t$- and $F$-tests는 같은 quadratic testing framework의 scalar/vector versions다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s98}
+
+## [9.8]{.section-number}Restricted versus Unrestricted Least Squares
+
+::: {.topic-opening}
+Linear hypothesis testing은 Chapter 4의 constrained optimization language로도 해석할 수 있다.
+  Null restriction을 부과했을 때 fit가 얼마나 악화되는지를 unrestricted fit와 비교한다.
+:::
+
+### 9.8.1 Restricted estimator {#s981}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta_U
+=
+\operatorname*{arg\,min}_\beta
+\|Y-X\beta\|_2^2,
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_R
+=
+\operatorname*{arg\,min}_{\beta:\,R\beta=r}
+\|Y-X\beta\|_2^2.
+}
+$$
+
+::::::::::::::::::::
+
+### 9.8.2 RSS comparison {#s982}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+RSS_R\ge RSS_U.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 9.5 · Restricted/unrestricted RSS form
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  F
+  =
+  \frac{(RSS_R-RSS_U)/q}
+  {RSS_U/(n-k)}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 9.8.3 Optimization interpretation {#s983}
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+Inference as constrained optimization
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    Null hypothesis가 옳다면 $R\beta=r$ constraint를 부과해도 minimized squared error가 지나치게 증가하지 않아야 한다.
+    $F$-test는 restricted and unrestricted optimization problems의 fit deterioration을 scale-adjusted statistic으로 측정한다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s99}
+
+## [9.9]{.section-number}Confidence Regions and Joint Uncertainty
+
+::: {.topic-opening}
+Scalar confidence interval은 parameter uncertainty의 한 방향만 보여준다.
+  여러 coefficients를 동시에 다루려면 joint confidence region이 필요하다.
+:::
+
+### 9.9.1 Ellipsoidal confidence regions {#s991}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+H_0:\beta=\beta_0.
+$$
+
+::::::::::::::::::::
+
+이를 $F$-test로 invert하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+(\widehat\beta-\beta)'
+(X'X)
+(\widehat\beta-\beta)
+\le
+k s^2F_{1-\alpha;k,n-k}.
+}
+$$
+
+::::::::::::::::::::
+
+형태의 ellipsoidal confidence region을 얻는다.
+
+### 9.9.2 Marginal vs joint uncertainty {#s992}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{marginal confidence intervals}
+\neq
+\text{joint confidence region}.
+}
+$$
+
+::::::::::::::::::::
+
+  각각의 coefficient에 대해 95% interval을 만든다고 해서 coefficient vector 전체가 동시에 95% coverage를 갖는 것은 아니다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s910}
+
+## [9.10]{.section-number}Statistical Significance, Economic Significance, and Interpretation
+
+::: {.topic-opening}
+Inferential calibration은 substantive interpretation을 대신하지 않는다.
+  통계적으로 precise한 estimate가 경제적으로 중요하거나 causal하다는 보장은 없다.
+:::
+
+### 9.10.1 Significance vs magnitude {#s9101}
+
+:::::::::::::::::::: {.comparison-grid}
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Statistical significance
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    p\lt\alpha
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+null value에 대한 evidence가 chosen level에서 충분히 강한지에 관한 statement.
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Economic significance
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    |\theta|\text{ on an economically meaningful scale}
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+effect magnitude가 substantive decision이나 theory에서 중요한지에 관한 statement.
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  large $n$에서는 tiny effect도 highly significant할 수 있고,
+  economically large effect가 noisy sample에서는 insignificant할 수 있다.
+
+### 9.10.2 Precision vs causal identification {#s9102}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{precise estimate of a descriptive target}
+\neq
+\text{causal identification}.
+}
+$$
+
+::::::::::::::::::::
+
+  작은 standard error와 작은 $p$-value는 chosen statistical target을 정밀하게 추정했다는 뜻이다.
+  그 target이 causal estimand와 같은지는 별도의 identifying assumptions가 결정한다.
+
+### 9.10.3 Multiple testing preview {#s9103}
+
+  많은 hypotheses를 동시에 검사하면 하나 이상의 false rejection이 발생할 probability가 증가한다.
+  family-wise error rate를 관리하는 가장 단순한 방법 중 하나가 Bonferroni correction이다.
+  본 장에서는 문제를 preview하고 high-dimensional/multiple inference는 뒤에서 더 일반적으로 다룬다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s9110}
+
+## [9.11]{.section-number}Limits of Exact Inference and the Road to Asymptotics
+
+::: {.topic-opening}
+Exact $t$- and $F$-theory는 강력하지만 특정 finite-sample model assumptions에 의존한다.
+  실제 경제 데이터에서는 이 assumptions가 자주 깨지므로 large-sample approximations가 필요해진다.
+:::
+
+### 9.11.1 Exact-theory assumptions {#s9111}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X\beta+\varepsilon,
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[\varepsilon\mid X]=0,
+\qquad
+\operatorname{Var}(\varepsilon\mid X)=\sigma^2I_n,
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\varepsilon\mid X
+\sim
+N(0,\sigma^2I_n).
+$$
+
+::::::::::::::::::::
+
+### 9.11.2 Heteroskedasticity and nonnormality {#s9112}
+
+  heteroskedasticity가 있으면 conventional homoskedastic standard error를 사용하는 Student-$t$ statistic은 일반적으로 exact $t$-distribution을 갖지 않는다.
+  normality가 없으면 finite-sample exact distribution 자체가 사라질 수 있다.
+
+:::::::::::::::::::: {.statement .warning}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+주의 9.3 · Robust SE + Student-$t$는 exact normal theory가 아니다
+
+:::::::::::::::::::
+
+  
+
+    heteroskedasticity-robust covariance estimators의 타당성은 large-sample consistency에 의해 정당화된다.
+    따라서 robust $t$-statistics의 기본 이론은 다음 large-sample chapter에서 다룬다.
+  
+
+::::::::::::::::::::
+
+### 9.11.3 Why large-sample theory {#s9113}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{exact finite-sample distribution을 모를 때도 왜 inference가 가능한가?}
+}
+$$
+
+::::::::::::::::::::
+
+  답은 law of large numbers, central limit theorem, continuous mapping, Slutsky theorem을 이용한 asymptotic approximation이다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{exact finite-sample inference}
+\longrightarrow
+\text{large-sample approximation}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s9120}
+
+## [9.12]{.section-number}요약과 연습문제
+
+### 9.12.1 Chapter map {#s9121}
+
+:::::::::::::::::::: {.chapter-summary}
+
+  
+
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 9 in one map
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  H_0
+  \longrightarrow
+  T(W_n)
+  \longrightarrow
+  \text{null distribution}
+  \longrightarrow
+  p\text{-value / critical value}
+  \longrightarrow
+  \text{reject or fail to reject}.
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \text{level-}\alpha\text{ test}
+  \Longleftrightarrow
+  (1-\alpha)\text{ confidence set}.
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \text{single restriction}
+  \Rightarrow
+  t,
+  \qquad
+  \text{multiple restrictions}
+  \Rightarrow
+  F.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 9.12.2 Inference checklist {#s9122}
+
+<ol>
+  <li><strong>Target:</strong> 어떤 parameter 또는 linear combination을 추론하려는가?</li>
+  <li><strong>Null:</strong> 경제적으로 의미 있는 $H_0$가 무엇인가?</li>
+  <li><strong>Statistic:</strong> 어떤 pivotal or approximately pivotal statistic을 사용하는가?</li>
+  <li><strong>Null distribution:</strong> exact인가 asymptotic인가?</li>
+  <li><strong>Size:</strong> Type I error가 어떤 level로 통제되는가?</li>
+  <li><strong>Power:</strong> economically relevant alternatives를 탐지할 힘이 충분한가?</li>
+  <li><strong>p-value:</strong> probability of the null로 오해하고 있지 않은가?</li>
+  <li><strong>Confidence set:</strong> marginal인가 joint인가?</li>
+  <li><strong>Interpretation:</strong> statistical significance와 economic significance를 분리했는가?</li>
+  <li><strong>Causality:</strong> precise inference와 causal identification을 혼동하지 않았는가?</li>
+</ol>
+
+### 연습문제 {#exercises}
+
+<ol class="exercise-list">
+  <li><strong>Testing language.</strong> null, alternative, test statistic, rejection region, critical value를 각각 정의하라.</li>
+  <li><strong>Type I and II errors.</strong> 두 오류를 state-decision table로 정리하고 size와 power function을 정의하라.</li>
+  <li><strong>Size–power trade-off.</strong> 동일한 statistic에서 critical value를 증가시킬 때 size와 power가 어떻게 변하는지 설명하라.</li>
+  <li><strong>Exact $t$.</strong> Chapter 8의 normal and chi-square results에서 exact Student-$t$ statistic을 유도하라.</li>
+  <li><strong>Nonzero null.</strong> $H_0:\beta_j=1$의 exact $t$-statistic과 rejection rule을 쓰라.</li>
+  <li><strong>Coefficient difference.</strong> $H_0:\beta_1-\beta_2=0$을 $r'\beta=r_0$ form으로 쓰고 standard error를 유도하라.</li>
+  <li><strong>One-sided test.</strong> two-sided와 one-sided critical values를 비교하고 one-sided test가 정당한 상황을 설명하라.</li>
+  <li><strong>$p$-value.</strong> exact two-sided $t$-test의 $p$-value formula를 쓰고 $p\neq P(H_0\mid data)$인 이유를 설명하라.</li>
+  <li><strong>Uniformity.</strong> continuous exact test에서 null 아래 $p\sim U(0,1)$임을 보이라.</li>
+  <li><strong>Confidence interval.</strong> $r'\beta$에 대한 exact $1-\alpha$ $t$-interval을 유도하라.</li>
+  <li><strong>Test inversion.</strong> $\theta_0\in C_{1-\alpha}$와 level-$\alpha$ test의 non-rejection이 동치임을 증명하라.</li>
+  <li><strong>Multiple restrictions.</strong> $H_0:R\beta=r$의 $F$-statistic을 유도하고 dimensions를 확인하라.</li>
+  <li><strong>$F=t^2$.</strong> $q=1$인 경우 exact $F$-statistic이 $t^2$와 같음을 보이라.</li>
+  <li><strong>Restricted least squares.</strong> $RSS_R\ge RSS_U$를 optimization argument로 설명하고 RSS-based $F$-formula를 유도하라.</li>
+  <li><strong>Joint region.</strong> $\beta$ 전체에 대한 ellipsoidal confidence region을 유도하고 marginal intervals와 차이를 설명하라.</li>
+  <li><strong>Economic significance.</strong> statistically significant하지만 economically negligible한 effect와 그 반대 상황을 각각 예시하라.</li>
+  <li><strong>Exact vs robust.</strong> heteroskedasticity가 있을 때 conventional Student-$t$ theory가 왜 exact하지 않은지 설명하라.</li>
+  <li><strong>Research reading exercise.</strong> empirical regression table 하나를 골라 각 reported coefficient에 대해 null hypothesis, standard error type, $p$-value, CI, economic magnitude, causal interpretation을 분리해 평가하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 다음 장
+
+  이 장은 Chapter 8의 exact normal-regression sampling theory를 hypothesis testing과 confidence-set construction으로 변환한다.
+  single linear restriction에 대한 Student-$t$ pivot, multiple restrictions에 대한 $F$-statistic,
+  restricted/unrestricted least squares, size와 power, p-values와 test inversion을 하나의 inferential framework 안에서 연결한다.
+  동시에 statistical significance, economic magnitude, causal interpretation을 서로 다른 층위로 유지한다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+  
+
+::::::::::::::::::: {.chapter-summary__head}
+
+다음 장으로
+
+:::::::::::::::::::
+
+  
+
+    Chapter 9의 exact theory는 normality와 homoskedasticity라는 강한 finite-sample assumptions에 의존했다.
+    Chapter 10에서는 이 assumptions를 완화하고 law of large numbers와 central limit theorem을 이용하여
+    OLS의 consistency와 asymptotic normality를 구축한다.
+    이후 heteroskedasticity-robust covariance estimation과 large-sample Wald inference를 정식으로 다룰 수 있게 된다.
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \text{exact finite-sample theory}
+  \longrightarrow
+  \text{consistency}
+  \longrightarrow
+  \text{asymptotic normality}
+  \longrightarrow
+  \text{robust inference}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

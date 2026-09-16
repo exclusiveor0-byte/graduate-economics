@@ -1,0 +1,1892 @@
+---
+title: "Large-Sample Theory for Least Squares"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. -->
+
+:::::::::::::::::::::::::: {#s101}
+
+## [10.1]{.section-number}Why Large-Sample Theory?
+
+::: {.topic-opening}
+Exact finite-sample theory는 강력하지만 특정 distributional model을 대가로 요구한다.
+  Asymptotic theory의 역할은 표본이 커질 때 empirical moments가 population moments를 학습한다는 사실을 이용해,
+  더 약한 assumptions 아래 estimation과 inference를 정당화하는 것이다.
+:::
+
+### 10.1.1 Exact theory의 대가 {#s1011}
+
+  Chapter 8–9의 exact regression theory는 대표적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X\beta+\varepsilon,
+\qquad
+E[\varepsilon\mid X]=0,
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(\varepsilon\mid X)=\sigma^2I_n,
+\qquad
+\varepsilon\mid X\sim N(0,\sigma^2I_n)
+$$
+
+::::::::::::::::::::
+
+  같은 restrictions를 사용했다. 이 assumptions 아래에서는 exact Student-$t$와 $F$ distributions를 얻을 수 있다.
+  하지만 경제데이터에서 homoskedasticity나 conditional normality가 자연스럽다고 볼 근거는 약한 경우가 많다.
+
+### 10.1.2 BLP로 되돌아가기 {#s1012}
+
+  이제 Chapter 6의 population linear projection으로 돌아간다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta
+=
+\operatorname*{arg\,min}_{b\in\mathbb R^k}
+E[(Y-X'b)^2].
+}
+$$
+
+::::::::::::::::::::
+
+  projection residual을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+e=Y-X'\beta
+$$
+
+::::::::::::::::::::
+
+라 하면 정의상
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Xe]=0.
+}
+$$
+
+::::::::::::::::::::
+
+  하지만 일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[e\mid X]\neq0.
+$$
+
+::::::::::::::::::::
+
+  즉 CEF가 nonlinear이더라도 OLS가 BLP를 large sample에서 추정할 수 있는가가 이번 장의 핵심 문제다.
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+핵심 전환
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    Chapter 8의 finite-sample conditional unbiasedness는 $E[e\mid X]=0$를 사용했다.
+    Chapter 10의 BLP consistency는 더 약한 orthogonality $E[Xe]=0$와 LLN/rank conditions만으로 가능할 수 있다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 10.1.3 Finite-sample vs large-sample questions {#s1013}
+
+:::::::::::::::::::: {.comparison-grid}
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Finite sample
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    E[\widehat\beta\mid X],
+    \qquad
+    \operatorname{Var}(\widehat\beta\mid X)
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+      fixed $n$에서 estimator의 exact sampling behavior를 묻는다.
+    
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Large sample
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    \widehat\beta_n\overset p\to\beta,
+    \qquad
+    \sqrt n(\widehat\beta_n-\beta)\overset d\to Z
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+      $n\to\infty$에서 estimator sequence가 target에 어떻게 접근하는지 묻는다.
+    
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s102}
+
+## [10.2]{.section-number}A Minimal Asymptotic Toolkit
+
+::: {.topic-opening}
+이 절의 목적은 확률수렴론 전체를 독립적으로 전개하는 것이 아니다.
+  Least squares의 consistency와 asymptotic normality를 이해하는 데 필요한 최소 도구만 구축한다.
+:::
+
+### 10.2.1 Convergence in probability {#s1021}
+
+:::::::::::::::::::: {.statement .definition}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정의 10.1 · Convergence in probability
+
+:::::::::::::::::::
+
+  
+$Z_n$이 $Z$에 probability로 수렴한다는 것은 모든 $\varepsilon\gt0$에 대해
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  P(\|Z_n-Z\|\gt\varepsilon)\to0
+  $$
+
+:::::::::::::::::::
+
+  
+임을 뜻하며 $Z_n\overset p\to Z$로 쓴다.
+
+::::::::::::::::::::
+
+  Consistency는 바로 이 언어로 정의한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_n\overset p\longrightarrow\theta_0.
+}
+$$
+
+::::::::::::::::::::
+
+### 10.2.2 Convergence in distribution {#s1022}
+
+:::::::::::::::::::: {.statement .definition}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정의 10.2 · Convergence in distribution
+
+:::::::::::::::::::
+
+  
+
+    scalar case에서 $Z_n\overset d\to Z$는 limit distribution $Z$의 continuity points $z$에 대해
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  P(Z_n\le z)\to P(Z\le z)
+  $$
+
+:::::::::::::::::::
+
+  
+를 뜻한다.
+
+::::::::::::::::::::
+
+  이는 estimator의 exact equality가 아니라 sampling distribution의 approximation language다.
+
+### 10.2.3 Law of Large Numbers and Continuous Mapping {#s1023}
+
+  i.i.d. $W_i$와 적절한 moment condition 아래
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac1n\sum_{i=1}^nW_i
+\overset p\longrightarrow
+E[W_i].
+}
+$$
+
+::::::::::::::::::::
+
+  그리고 $Z_n\overset p\to Z$, $g$가 $Z$에서 continuous이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+g(Z_n)\overset p\longrightarrow g(Z).
+}
+$$
+
+::::::::::::::::::::
+
+  OLS에서는 특히 matrix inversion에 CMT를 사용한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q\overset p\to Q,
+\qquad
+Q\succ0
+\quad\Longrightarrow\quad
+\widehat Q^{-1}\overset p\to Q^{-1}.
+$$
+
+::::::::::::::::::::
+
+### 10.2.4 Central Limit Theorem and Slutsky {#s1024}
+
+  mean-zero random vectors $W_i$가 i.i.d.이고 covariance $\Omega$가 finite이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac1{\sqrt n}\sum_{i=1}^nW_i
+\overset d\longrightarrow
+N(0,\Omega).
+}
+$$
+
+::::::::::::::::::::
+
+  Slutsky theorem은 probability convergence와 distribution convergence를 결합한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+A_n\overset p\to A,
+\qquad
+B_n\overset d\to B
+$$
+
+::::::::::::::::::::
+
+이면 적절한 연산에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+A_nB_n\overset d\to AB.
+$$
+
+::::::::::::::::::::
+
+### 10.2.5 $o_p(1)$ and $O_p(1)$ {#s1025}
+
+  $R_n=o_p(1)$은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+R_n\overset p\to0
+$$
+
+::::::::::::::::::::
+
+을 압축해서 쓰는 notation이다. 반면 $R_n=O_p(1)$은 stochastic boundedness를 의미한다.
+
+  예를 들어
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta-\beta
+=
+O_p(n^{-1/2})
+$$
+
+::::::::::::::::::::
+
+는 estimator error가 root-$n$ scale에서 stochastic order 1이라는 뜻이다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s103}
+
+## [10.3]{.section-number}Consistency of Least Squares
+
+::: {.topic-opening}
+OLS consistency는 sample moment들이 population moments로 수렴한다는 사실과 population second-moment matrix의 nonsingularity에서 나온다.
+:::
+
+### 10.3.1 Moment representation {#s1031}
+
+  population linear projection coefficient는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta
+=
+Q^{-1}q,
+\qquad
+Q=E[XX'],
+\qquad
+q=E[XY].
+}
+$$
+
+::::::::::::::::::::
+
+  sample analogues를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q
+=
+\frac1n\sum_{i=1}^nX_iX_i',
+\qquad
+\widehat q
+=
+\frac1n\sum_{i=1}^nX_iY_i
+$$
+
+::::::::::::::::::::
+
+라 하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta
+=
+\widehat Q^{-1}\widehat q.
+}
+$$
+
+::::::::::::::::::::
+
+### 10.3.2 Consistency via sample moments {#s1032}
+
+  다음 conditions를 생각하자.
+
+<ul>
+  <li>$(Y_i,X_i)$는 i.i.d.</li>
+  <li>$E[Y^2]\lt\infty$.</li>
+  <li>$E[\|X\|^2]\lt\infty$.</li>
+  <li>$Q=E[XX']\succ0$.</li>
+</ul>
+
+LLN으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q\overset p\to Q,
+\qquad
+\widehat q\overset p\to q.
+$$
+
+::::::::::::::::::::
+
+CMT로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q^{-1}\overset p\to Q^{-1}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 10.1 · Consistency of least squares
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \widehat\beta
+  =
+  \widehat Q^{-1}\widehat q
+  \overset p\longrightarrow
+  Q^{-1}q
+  =
+  \beta.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 10.3.3 Consistency via projection residuals {#s1033}
+
+  projection equation
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y_i=X_i'\beta+e_i,
+\qquad
+E[X_ie_i]=0
+$$
+
+::::::::::::::::::::
+
+을 이용하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta-\beta
+=
+\widehat Q^{-1}
+\left(
+\frac1n\sum_{i=1}^nX_ie_i
+\right).
+}
+$$
+
+::::::::::::::::::::
+
+LLN으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac1n\sum X_ie_i
+\overset p\to
+E[Xe]
+=
+0,
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta-\beta\overset p\to0.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+핵심 관찰 · Linear CEF가 필요하지 않다
+
+:::::::::::::::::::
+
+  
+
+    위 consistency proof에는 $E[e\mid X]=0$를 사용하지 않았다.
+    따라서 CEF가 nonlinear이어도 $\beta$를 population BLP로 정의하면 OLS가 그 projection coefficient를 consistent하게 추정할 수 있다.
+  
+
+::::::::::::::::::::
+
+### 10.3.4 Unbiasedness vs consistency {#s1034}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>성질</th><th>대표 statement</th><th>전형적 요구조건</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Finite-sample conditional unbiasedness</td>
+<td>$E[\widehat\beta\mid X]=\beta$</td>
+<td>$E[e\mid X]=0$</td>
+</tr>
+<tr>
+<td>Consistency for BLP</td>
+<td>$\widehat\beta\overset p\to\beta$</td>
+<td>$E[Xe]=0$ + LLN + rank</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{unbiasedness}
+\neq
+\text{consistency}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s104}
+
+## [10.4]{.section-number}Asymptotic Linear Representation and the $\sqrt n$ Rate
+
+::: {.topic-opening}
+Consistency는 estimator가 target으로 간다는 사실만 말한다.
+  Distributional approximation을 얻으려면 estimator error의 rate와 leading stochastic term을 분리해야 한다.
+:::
+
+### 10.4.1 Root-$n$ scaling {#s1041}
+
+  consistency identity에 $\sqrt n$을 곱하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\beta-\beta)
+=
+\widehat Q^{-1}
+\frac1{\sqrt n}
+\sum_{i=1}^nX_ie_i.
+}
+$$
+
+::::::::::::::::::::
+
+  이제 stochastic core는 normalized score average
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac1{\sqrt n}\sum X_ie_i
+$$
+
+::::::::::::::::::::
+
+다.
+
+### 10.4.2 Asymptotic linear representation {#s1042}
+
+  $\widehat Q^{-1}=Q^{-1}+o_p(1)$이므로
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 10.2 · Asymptotic linear representation
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \sqrt n(\widehat\beta-\beta)
+  =
+  Q^{-1}
+  \frac1{\sqrt n}\sum_{i=1}^nX_ie_i
+  +
+  o_p(1).
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  이 형태는 이후 M-estimator, Z-estimator, GMM에서도 반복된다.
+
+### 10.4.3 Influence direction {#s1043}
+
+  관측치 $i$의 leading contribution은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\psi_i
+=
+Q^{-1}X_ie_i.
+$$
+
+::::::::::::::::::::
+
+  따라서 asymptotic representation은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\beta-\beta)
+=
+\frac1{\sqrt n}\sum_{i=1}^n\psi_i
++
+o_p(1)
+$$
+
+::::::::::::::::::::
+
+로도 쓸 수 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta-\beta
+=
+O_p(n^{-1/2}).
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s105}
+
+## [10.5]{.section-number}Asymptotic Normality and the Sandwich Variance
+
+::: {.topic-opening}
+Asymptotic linearity가 estimator error를 normalized sample average로 환원했으므로,
+  이제 multivariate CLT와 Slutsky를 적용하면 된다.
+:::
+
+### 10.5.1 Score CLT {#s1051}
+
+  $E[Xe]=0$이고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+E[XX'e^2]
+$$
+
+::::::::::::::::::::
+
+가 finite라고 하자. 그러면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac1{\sqrt n}\sum_{i=1}^nX_ie_i
+\overset d\longrightarrow
+N(0,\Omega).
+}
+$$
+
+::::::::::::::::::::
+
+  finite fourth moments 같은 primitive conditions는 $\Omega$의 finiteness를 보장하는 편리한 sufficient conditions다.
+
+### 10.5.2 Sandwich theorem {#s1052}
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 10.3 · Asymptotic normality of OLS
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \sqrt n(\widehat\beta-\beta)
+  \overset d\longrightarrow
+  N(0,V),
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  V
+  =
+  Q^{-1}\Omega Q^{-1},
+  \qquad
+  Q=E[XX'],
+  \qquad
+  \Omega=E[XX'e^2].
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  이 covariance는 흔히 sandwich form이라 부른다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\underbrace{Q^{-1}}_{\text{bread}}
+\underbrace{\Omega}_{\text{meat}}
+\underbrace{Q^{-1}}_{\text{bread}}.
+$$
+
+::::::::::::::::::::
+
+### 10.5.3 Scaling and approximate distribution {#s1053}
+
+:::::::::::::::::::: {.statement .warning}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+주의 10.1 · $V$는 $\widehat\beta$ 자체의 variance가 아니다
+
+:::::::::::::::::::
+
+  
+
+    $V$는 $\sqrt n(\widehat\beta-\beta)$의 asymptotic covariance다.
+    따라서 large sample에서 estimator 자체는 대략
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \widehat\beta
+  \approx
+  N\!\left(
+  \beta,
+  \frac1nV
+  \right).
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  따라서 coefficient standard errors는 $n^{-1/2}$ order로 줄어든다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s106}
+
+## [10.6]{.section-number}Homoskedasticity as a Special Case
+
+::: {.topic-opening}
+Classical covariance formula는 asymptotic theory에서도 등장하지만, 일반적인 starting point가 아니라 sandwich variance의 special case다.
+:::
+
+### 10.6.1 Simplification {#s1061}
+
+  만약
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[e^2\mid X]=\sigma^2
+$$
+
+::::::::::::::::::::
+
+이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\Omega
+&=
+E[XX'e^2]\\
+&=
+E\!\left[
+XX'E[e^2\mid X]
+\right]\\
+&=
+\sigma^2E[XX']\\
+&=
+\sigma^2Q.
+\end{aligned}
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V
+=
+\sigma^2Q^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+### 10.6.2 Why the classical formula reappears {#s1062}
+
+  sample covariance approximation은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(\widehat\beta)
+\approx
+\frac{\sigma^2}{n}Q^{-1}.
+$$
+
+::::::::::::::::::::
+
+  그리고 $X'X/n\approx Q$이므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac{\sigma^2}{n}Q^{-1}
+\approx
+\sigma^2(X'X)^{-1}.
+$$
+
+::::::::::::::::::::
+
+  즉 Chapter 8의 familiar formula와 같은 형태가 나타난다.
+  하지만 Chapter 10에서는 이를 <strong>general sandwich의 special case</strong>로 이해한다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s107}
+
+## [10.7]{.section-number}Heteroskedasticity-Consistent Covariance Estimation
+
+::: {.topic-opening}
+Asymptotic normality만으로는 feasible inference를 할 수 없다.
+  $Q$와 $\Omega$가 unknown이므로 이들을 sample analogues로 consistent하게 추정해야 한다.
+:::
+
+### 10.7.1 Plug-in estimation of $Q$ and $\Omega$ {#s1071}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q
+=
+\frac1n\sum_{i=1}^nX_iX_i'.
+$$
+
+::::::::::::::::::::
+
+  $\Omega$는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+E[XX'e^2]
+$$
+
+::::::::::::::::::::
+
+이므로 natural sample analogue는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\Omega
+=
+\frac1n\sum_{i=1}^n
+X_iX_i'\widehat e_i^2.
+$$
+
+::::::::::::::::::::
+
+  true errors $e_i$ 대신 residuals $\widehat e_i$를 쓰지만,
+  consistency 아래 그 차이는 asymptotically negligible해진다.
+
+### 10.7.2 HC0 {#s1072}
+
+:::::::::::::::::::: {.statement .definition}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정의 10.3 · HC0 sandwich covariance estimator
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \widehat V_{HC0}
+  =
+  \widehat Q^{-1}
+  \widehat\Omega
+  \widehat Q^{-1}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  이것은 $\sqrt n(\widehat\beta-\beta)$의 asymptotic covariance $V$를 추정한다.
+  따라서 estimator 자체의 covariance estimator는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat{\operatorname{Var}}_{HC0}(\widehat\beta)
+=
+\frac1n\widehat V_{HC0}.
+}
+$$
+
+::::::::::::::::::::
+
+  원래 matrix notation으로 쓰면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+(X'X)^{-1}
+\left(
+\sum_{i=1}^n
+X_iX_i'\widehat e_i^2
+\right)
+(X'X)^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+### 10.7.3 HC1, HC2, HC3 {#s1073}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>Estimator</th><th>Residual-square adjustment</th><th>핵심 아이디어</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>HC0</td>
+<td>$\widehat e_i^2$</td>
+<td>direct plug-in</td>
+</tr>
+<tr>
+<td>HC1</td>
+<td>$\dfrac{n}{n-k}\widehat e_i^2$</td>
+<td>degrees-of-freedom rescaling</td>
+</tr>
+<tr>
+<td>HC2</td>
+<td>$\dfrac{\widehat e_i^2}{1-h_{ii}}$</td>
+<td>leverage-based residual variance correction</td>
+</tr>
+<tr>
+<td>HC3</td>
+<td>$\dfrac{\widehat e_i^2}{(1-h_{ii})^2}$</td>
+<td>stronger leverage correction</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+  standard regularity conditions 아래 이들 모두 같은 asymptotic covariance $V$에 consistent하다.
+  차이는 주로 finite-sample adjustment 방식에 있다.
+
+### 10.7.4 Leverage connection {#s1074}
+
+  Chapter 7에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+h_{ii}
+=
+X_i'(X'X)^{-1}X_i
+$$
+
+::::::::::::::::::::
+
+를 leverage라 정의했다. high-leverage observation에서는 OLS residual이 true error를 기계적으로 축소할 수 있다.
+
+  HC2와 HC3는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+1-h_{ii}
+$$
+
+::::::::::::::::::::
+
+  를 이용해 이 residual shrinkage를 보정하려는 시도다.
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+Ch.7 → Ch.10
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    Chapter 7의 hat-matrix geometry가 Chapter 10의 robust variance estimation에서 다시 등장한다.
+    leverage는 단순 geometry statistic이 아니라 residual-based covariance estimation의 finite-sample behavior에도 영향을 준다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s108}
+
+## [10.8]{.section-number}Functions of Regression Parameters and the Delta Method
+
+::: {.topic-opening}
+실제 경제적 관심은 regression coefficient vector 전체보다 특정 transformation에 있는 경우가 많다.
+  Continuous Mapping Theorem과 Delta Method는 coefficient asymptotics를 경제적으로 의미 있는 functions에 전달한다.
+:::
+
+### 10.8.1 Continuous transformations {#s1081}
+
+  관심 parameter를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\theta=r(\beta)
+$$
+
+::::::::::::::::::::
+
+라고 하고 plug-in estimator를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta
+=
+r(\widehat\beta)
+$$
+
+::::::::::::::::::::
+
+라 하자. $r$이 $\beta$에서 continuous이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta\overset p\longrightarrow\theta.
+}
+$$
+
+::::::::::::::::::::
+
+### 10.8.2 Delta method {#s1082}
+
+  $r:\mathbb R^k\to\mathbb R^q$가 differentiable하고 Jacobian을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+G
+=
+\left.
+\frac{\partial r(b)}
+{\partial b'}
+\right|_{b=\beta}
+$$
+
+::::::::::::::::::::
+
+라고 하자. First-order expansion은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+r(\widehat\beta)-r(\beta)
+=
+G(\widehat\beta-\beta)
++
+o_p(n^{-1/2}).
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 10.4 · Delta method for regression functions
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \sqrt n(\widehat\theta-\theta)
+  \overset d\longrightarrow
+  N(0,GVG').
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 10.8.3 Examples {#s1083}
+
+<strong>Coefficient ratio:</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\theta
+=
+\frac{\beta_1}{\beta_2},
+\qquad
+G
+=
+\begin{pmatrix}
+1/\beta_2 &
+-\beta_1/\beta_2^2 &
+0 &
+\cdots
+\end{pmatrix}.
+$$
+
+::::::::::::::::::::
+
+<strong>Quadratic marginal effect:</strong> model에 $x$와 $x^2$가 포함되어 있다면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\theta(x)
+=
+\beta_1+2x\beta_2,
+$$
+
+::::::::::::::::::::
+
+이며 이는 linear transformation이므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+G(x)
+=
+\begin{pmatrix}
+1&2x&0&\cdots
+\end{pmatrix}.
+$$
+
+::::::::::::::::::::
+
+<strong>Turning point:</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\theta
+=
+-\frac{\beta_1}{2\beta_2}.
+$$
+
+::::::::::::::::::::
+
+  이런 nonlinear functions에서도 estimator의 asymptotic distribution은 delta method로 근사할 수 있다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s109}
+
+## [10.9]{.section-number}Asymptotic $t$-Statistics, Wald Tests, and Confidence Sets
+
+::: {.topic-opening}
+Chapter 9의 exact pivots는 normal-homoskedastic model에 의존했다.
+  여기서는 consistent covariance estimator를 이용해 asymptotically pivotal statistics를 만든다.
+:::
+
+### 10.9.1 Studentization {#s1091}
+
+  scalar $\theta=r(\beta)$에 대해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta=r(\widehat\beta)
+$$
+
+::::::::::::::::::::
+
+라 하자. consistent standard error $se(\widehat\theta)$를 사용하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+T(\theta_0)
+=
+\frac{\widehat\theta-\theta_0}
+{se(\widehat\theta)}.
+}
+$$
+
+::::::::::::::::::::
+
+$H_0:\theta=\theta_0$ 아래
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+T(\theta_0)
+\overset d\longrightarrow
+N(0,1).
+}
+$$
+
+::::::::::::::::::::
+
+  limit distribution이 nuisance parameters에 의존하지 않으므로 이를 asymptotically pivotal이라 한다.
+
+### 10.9.2 Asymptotic confidence intervals {#s1092}
+
+  asymptotic $1-\alpha$ confidence interval은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta
+\pm
+z_{1-\alpha/2}
+\,se(\widehat\theta).
+}
+$$
+
+::::::::::::::::::::
+
+  coverage는 finite sample에서 exact equality가 아니라
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+P(\theta\in C_n)
+\longrightarrow
+1-\alpha.
+}
+$$
+
+::::::::::::::::::::
+
+즉 asymptotic coverage statement다.
+
+### 10.9.3 Wald tests {#s1093}
+
+  $q$-dimensional restriction
+
+:::::::::::::::::::: {.math-display}
+
+$$
+H_0:r(\beta)=r_0
+$$
+
+::::::::::::::::::::
+
+을 고려하자. $\widehat\theta=r(\widehat\beta)$와 covariance estimator $\widehat{\operatorname{Var}}(\widehat\theta)$를 이용해
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 10.5 · Asymptotic Wald statistic
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  W
+  =
+  (\widehat\theta-r_0)'
+  \widehat{\operatorname{Var}}(\widehat\theta)^{-1}
+  (\widehat\theta-r_0)
+  \overset d\longrightarrow
+  \chi_q^2.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  $q=1$이면 asymptotically
+
+:::::::::::::::::::: {.math-display}
+
+$$
+W=T^2.
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1010}
+
+## [10.10]{.section-number}Exact Inference versus Asymptotic Inference
+
+::: {.topic-opening}
+Exact theory와 asymptotic theory는 경쟁하는 두 철학이 아니라 서로 다른 assumptions와 guarantees를 가진 두 calibration 방식이다.
+:::
+
+### 10.10.1 Comparison table {#s10101}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>항목</th><th>Exact normal regression</th><th>Asymptotic regression</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Target</td>
+<td>주로 linear CEF coefficient</td>
+<td>BLP까지 허용</td>
+</tr>
+<tr>
+<td>Conditional mean linearity</td>
+<td>finite-sample unbiasedness에 중요</td>
+<td>BLP consistency에는 불필요</td>
+</tr>
+<tr>
+<td>Homoskedasticity</td>
+<td>conventional exact $t/F$에 필요</td>
+<td>robust sandwich에서는 불필요</td>
+</tr>
+<tr>
+<td>Normality</td>
+<td>exact distribution에 필요</td>
+<td>불필요</td>
+</tr>
+<tr>
+<td>Single restriction</td>
+<td>Student $t$</td>
+<td>asymptotic $N(0,1)$</td>
+</tr>
+<tr>
+<td>Joint restrictions</td>
+<td>$F$</td>
+<td>Wald $\chi^2$</td>
+</tr>
+<tr>
+<td>Coverage</td>
+<td>finite-sample exact</td>
+<td>limit에서 nominal</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{weaker assumptions}
+\quad\Longleftrightarrow\quad
+\text{approximate rather than exact calibration}.
+}
+$$
+
+::::::::::::::::::::
+
+### 10.10.2 How large is large? {#s10102}
+
+  Asymptotic normality가 성립한다고 해서 특정 $n$에서 normal approximation이 반드시 정확한 것은 아니다.
+  approximation quality는 distribution의 tail thickness, skewness, leverage structure, dimension 등에도 의존한다.
+
+:::::::::::::::::::: {.statement .warning}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+주의 10.2 · Universal sample-size threshold는 없다
+
+:::::::::::::::::::
+
+  
+
+    $n=30$, $50$, $100$ 같은 숫자를 보편적인 “large sample” 기준으로 사용할 수는 없다.
+    Asymptotic theorem은 $n\to\infty$의 limit statement이지 특정 finite $n$에서의 approximation accuracy를 보장하는 theorem이 아니다.
+  
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1011x}
+
+## [10.11]{.section-number}What Robust Inference Does—and Does Not—Robustify
+
+::: {.topic-opening}
+“Robust standard error”라는 표현은 종종 지나치게 넓게 해석된다.
+  HC covariance는 특정 variance misspecification에 robust할 뿐, target, identification, dependence 문제 전체를 해결하지 않는다.
+:::
+
+### 10.11.1 What robust SE fixes {#s10111}
+
+  homoskedasticity가 실패하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sigma^2Q^{-1}
+$$
+
+::::::::::::::::::::
+
+는 일반적으로 올바른 asymptotic variance가 아니다. HC estimator는 대신
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Q^{-1}\Omega Q^{-1}
+$$
+
+::::::::::::::::::::
+
+를 일관되게 추정하여 heteroskedasticity에 대해 valid한 large-sample uncertainty quantification을 제공한다.
+
+### 10.11.2 What it cannot fix {#s10112}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>문제</th><th>왜 HC standard error로 해결되지 않는가?</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Wrong causal target</td>
+<td>variance estimator는 estimand 자체를 바꾸지 않는다.</td>
+</tr>
+<tr>
+<td>Endogeneity</td>
+<td>$E[Xu]\neq0$이면 OLS consistency부터 깨진다.</td>
+</tr>
+<tr>
+<td>Weak/non-identification</td>
+<td>variance correction은 population mapping의 injectivity를 복구하지 않는다.</td>
+</tr>
+<tr>
+<td>Serial/cluster dependence</td>
+<td>cross-observation covariance를 무시한 $\Omega=E[XX'e^2]$만으로 충분하지 않다.</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{robust uncertainty}
+\neq
+\text{robust identification}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+가장 중요한 원칙
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    A robust standard error can robustify inference around a target;
+    it cannot repair a wrongly identified target.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 10.11.3 Dependence preview {#s10113}
+
+  observations가 dependent하면 score sequence
+
+:::::::::::::::::::: {.math-display}
+
+$$
+X_ie_i
+$$
+
+::::::::::::::::::::
+
+  자체가 serially or cluster correlated할 수 있다. 그러면 asymptotic variance의 middle component는 단순한
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[XX'e^2]
+$$
+
+::::::::::::::::::::
+
+가 아니라 cross-covariances까지 포함하는 long-run variance가 된다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega_{LR}
+=
+\sum_{\ell=-\infty}^{\infty}
+\operatorname{Cov}(X_te_t,\;X_{t-\ell}e_{t-\ell}).
+}
+$$
+
+::::::::::::::::::::
+
+  이것은 이후 time-series, cluster, panel-data inference에서 다룬다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1012x}
+
+## [10.12]{.section-number}요약과 연습문제
+
+### 10.12.1 Chapter map {#s10121}
+
+:::::::::::::::::::: {.chapter-summary}
+
+  
+
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 10 in one map
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \widehat\beta
+  =
+  \widehat Q^{-1}\widehat q
+  \overset p\longrightarrow
+  Q^{-1}q
+  =
+  \beta.
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \sqrt n(\widehat\beta-\beta)
+  =
+  Q^{-1}
+  \frac1{\sqrt n}\sum_{i=1}^nX_ie_i
+  +
+  o_p(1).
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \sqrt n(\widehat\beta-\beta)
+  \overset d\longrightarrow
+  N\!\left(
+  0,
+  Q^{-1}\Omega Q^{-1}
+  \right).
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \widehat V_{HC}
+  \overset p\longrightarrow
+  Q^{-1}\Omega Q^{-1}.
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+    LLN은 estimator의 center를 population target으로 보내고,
+    CLT는 root-$n$ fluctuations를 normal limit로 보내며,
+    sandwich covariance는 heteroskedasticity 아래 uncertainty를 정량화한다.
+  
+
+::::::::::::::::::::
+
+### 10.12.2 Asymptotic-reading checklist {#s10122}
+
+<ol>
+  <li><strong>Target:</strong> estimator는 linear CEF coefficient인가, BLP coefficient인가?</li>
+  <li><strong>Moment condition:</strong> population에서 어떤 orthogonality가 성립하는가?</li>
+  <li><strong>LLN:</strong> 어떤 sample moments가 어떤 population moments로 수렴하는가?</li>
+  <li><strong>Rank:</strong> limit matrix가 nonsingular한가?</li>
+  <li><strong>Rate:</strong> estimator error가 $n^{-1/2}$ scale인가?</li>
+  <li><strong>CLT object:</strong> 어떤 score-like random vector에 CLT를 적용하는가?</li>
+  <li><strong>Variance:</strong> general sandwich인가 homoskedastic simplification인가?</li>
+  <li><strong>Feasibility:</strong> asymptotic covariance를 어떻게 consistent하게 추정하는가?</li>
+  <li><strong>Transformation:</strong> 관심 parameter가 $r(\beta)$라면 delta method가 필요한가?</li>
+  <li><strong>Calibration:</strong> exact distribution인가 asymptotic approximation인가?</li>
+  <li><strong>Robustness:</strong> variance robustness와 target/identification robustness를 혼동하지 않았는가?</li>
+</ol>
+
+### 연습문제 {#exercises}
+
+<ol class="exercise-list">
+  <li><strong>Probability convergence.</strong> consistency의 정의를 쓰고 finite-sample unbiasedness와 논리적으로 어떻게 다른지 설명하라.</li>
+  <li><strong>LLN for $\widehat Q$.</strong> i.i.d.와 finite second moments 아래 $\widehat Q=n^{-1}\sum X_iX_i'\overset p\to E[XX']$임을 보이라.</li>
+  <li><strong>Matrix inversion.</strong> $Q\succ0$일 때 CMT를 이용해 $\widehat Q^{-1}\overset p\to Q^{-1}$를 정당화하라.</li>
+  <li><strong>Moment proof of consistency.</strong> $\widehat\beta=\widehat Q^{-1}\widehat q$ representation으로 OLS consistency를 증명하라.</li>
+  <li><strong>Residual proof of consistency.</strong> $Y=X'\beta+e$, $E[Xe]=0$를 이용해 consistency를 다시 증명하라.</li>
+  <li><strong>BLP vs CEF.</strong> $E[Xe]=0$이지만 $E[e\mid X]\neq0$인 예를 구성하고 왜 OLS consistency가 여전히 가능할 수 있는지 설명하라.</li>
+  <li><strong>Root-$n$ rate.</strong> $\sqrt n(\widehat\beta-\beta)=\widehat Q^{-1}n^{-1/2}\sum X_ie_i$를 유도하라.</li>
+  <li><strong>Asymptotic linearity.</strong> $\widehat Q^{-1}=Q^{-1}+o_p(1)$을 사용해 asymptotic linear representation을 증명하라.</li>
+  <li><strong>Score CLT.</strong> $W_i=X_ie_i$에 multivariate CLT를 적용하는 데 필요한 mean과 covariance를 계산하라.</li>
+  <li><strong>Sandwich variance.</strong> $V=Q^{-1}\Omega Q^{-1}$을 Slutsky theorem으로 유도하라.</li>
+  <li><strong>Homoskedasticity.</strong> $E[e^2\mid X]=\sigma^2$일 때 $\Omega=\sigma^2Q$임을 보이라.</li>
+  <li><strong>HC0.</strong> residual plug-in covariance estimator를 matrix notation과 summation notation으로 각각 쓰라.</li>
+  <li><strong>HC2/HC3.</strong> 왜 leverage $h_{ii}$가 residual-based covariance estimation에서 중요한지 설명하라.</li>
+  <li><strong>Delta method.</strong> $\theta=\beta_1/\beta_2$에 대한 asymptotic variance를 구하라.</li>
+  <li><strong>Turning point.</strong> $\theta=-\beta_1/(2\beta_2)$의 gradient를 구하고 delta-method variance formula를 쓰라.</li>
+  <li><strong>Asymptotic $t$.</strong> consistent robust standard error를 사용하면 $T(\theta_0)\overset d\to N(0,1)$임을 설명하라.</li>
+  <li><strong>Wald.</strong> $q$-dimensional restriction에 대해 Wald statistic의 $\chi_q^2$ limit를 유도하라.</li>
+  <li><strong>Exact vs asymptotic.</strong> Chapter 9의 exact $t/F$ inference와 Chapter 10의 robust asymptotic inference를 assumptions와 guarantees 관점에서 비교하라.</li>
+  <li><strong>Robustness limits.</strong> $E[Xu]\neq0$일 때 HC standard error가 OLS inconsistency를 해결하지 못하는 이유를 설명하라.</li>
+  <li><strong>Dependence preview.</strong> serial correlation이 있을 때 $\Omega=E[XX'e^2]$만으로 asymptotic variance가 충분하지 않은 이유를 score autocovariance 관점에서 설명하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 다음 장
+
+  이 장은 least squares를 large-sample perspective에서 다시 읽는다.
+  Population BLP의 orthogonality $E[Xe]=0$에서 출발하여,
+  LLN과 CMT로 consistency를 얻고,
+  normalized score에 CLT를 적용하여 asymptotic linearity와 sandwich normal approximation을 도출한다.
+  이후 residual plug-in을 이용한 heteroskedasticity-consistent covariance estimation,
+  delta method, robust $t$-statistics와 Wald inference를 구축한다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+  
+
+::::::::::::::::::: {.chapter-summary__head}
+
+다음 장으로
+
+:::::::::::::::::::
+
+  
+
+    Chapter 10에서는 OLS의 closed-form representation 덕분에 LLN, CLT, CMT, Slutsky를 직접 적용할 수 있었다.
+    다음 장에서는 이 구조를 추상화하여
+    $\widehat\theta=\operatorname*{arg\,min}_\theta Q_n(\theta)$인 M-estimator와
+    $P_n\psi(\widehat\theta)=0$인 Z-estimator를 일반적으로 분석한다.
+    핵심은 uniform convergence, identification, local expansion, stochastic equicontinuity를 이용하여
+    consistency와 asymptotic linearity를 OLS 밖으로 확장하는 것이다.
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \text{OLS asymptotics}
+  \longrightarrow
+  \text{general M/Z-estimation theory}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

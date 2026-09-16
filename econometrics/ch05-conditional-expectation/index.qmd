@@ -1,0 +1,33 @@
+# Chapter 05 · Conditional Expectation and Projection {.unnumbered}
+*Hilbert Space · Orthogonal Projection · Best Prediction · CEF*
+
+조건부기대값을 $L^2$ 공간의 orthogonal projection으로 해석하고, residual orthogonality·variance decomposition·information set·linear CEF를 population prediction 언어로 정리합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **5.1–5.4** $L^2$ geometry, projection theorem, conditional expectation
+- **5.5–5.8** residual orthogonality, prediction error, information, variance decomposition
+- **5.9–5.10** CEF·linear CEF와 restricted predictor classes
+- **5.11** 요약과 연습문제
+:::
+
+## Sections
+
+- [5.1 Conditional expectation을 왜 다시 보는가](contents.html#s51)
+- [$L^2$ Space와 Hilbert-Space Geometry](contents.html#s52)
+- [5.3 Orthogonal Projection Theorem](contents.html#s53)
+- [5.4 Conditional Expectation as the Best Predictor](contents.html#s54)
+- [5.5 Orthogonality and Residual Structure](contents.html#s55)
+- [5.6 Pythagorean Decomposition and Prediction Error](contents.html#s56)
+- [5.7 Information Sets and Nested Projections](contents.html#s57)
+- [5.8 Conditional Variance and Variance Decomposition](contents.html#s58)
+- [5.9 CEF, Linear CEF, and Interpretation](contents.html#s59)
+- [5.10 From Unrestricted to Restricted Predictor Classes](contents.html#s510)
+- [5.11 요약과 연습문제](contents.html#s5110)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+:::
+

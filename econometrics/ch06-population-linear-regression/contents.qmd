@@ -1,0 +1,1604 @@
+---
+title: "Population Linear Regression and Linear Approximation"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. -->
+
+:::::::::::::::::::::::::: {#s61}
+
+## [6.1]{.section-number}From Conditional Expectation to Linear Approximation
+
+::: {.topic-opening}
+Chapter 5의 CEF는 가능한 모든 square-integrable $X$-measurable predictor를 허용했다.
+  Population linear regression은 그 predictor class를 선형공간으로 제한한다.
+  따라서 linear regression을 이해하는 첫 단계는 “선형모형이 참인가?”가 아니라
+  <strong>어떤 subspace에 projection하고 있는가?</strong>를 묻는 것이다.
+:::
+
+### 6.1.1 Unrestricted vs restricted prediction {#s611}
+
+CEF는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+m(X)=E[Y\mid X]
+=
+\operatorname*{arg\,min}_{g\in L^2(\sigma(X))}
+E[(Y-g(X))^2].
+$$
+
+::::::::::::::::::::
+
+  반면 $X\in\mathbb R^k$를 사용한 linear predictor class는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\mathcal L_X
+=
+\{X'b:b\in\mathbb R^k\}
+\subseteq
+L^2(\sigma(X)).
+$$
+
+::::::::::::::::::::
+
+  따라서 linear regression은 unrestricted prediction problem을 finite-dimensional subspace로 제한한 population approximation problem이다.
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+핵심 전환
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    CEF가 nonlinear이라는 사실은 linear projection을 무의미하게 만들지 않는다.
+    그것은 단지 linear predictor가 CEF와 정확히 일치하지 않고 approximation이 된다는 뜻이다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 6.1.2 Exact specification vs approximation {#s612}
+
+:::::::::::::::::::: {.comparison-grid}
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Exact linear CEF
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+      E[Y\mid X]=X'\beta_0
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+      CEF 자체가 linear subspace 안에 있다. Linear predictor는 unrestricted best predictor와 일치한다.
+    
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Linear approximation
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+      E[Y\mid X]\notin\mathcal L_X
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+      CEF는 nonlinear이지만 best linear predictor는 여전히 well-defined한 population target이다.
+    
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  이 두 경우를 구분하는 것이 중요하다. 첫 번째는 functional-form restriction이고, 두 번째는 criterion으로 정의된 approximation parameter다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s62}
+
+## [6.2]{.section-number}Best Linear Predictor and Population Normal Equations
+
+::: {.topic-opening}
+Best Linear Predictor는 $Y$를 $X$의 선형결합으로 예측할 때 mean squared prediction error를 최소화하는 population projection이다.
+  여기서 sample OLS는 아직 등장하지 않는다.
+:::
+
+### 6.2.1 BLP definition {#s621}
+
+:::::::::::::::::::: {.statement .definition}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정의 6.1 · Best Linear Predictor
+
+:::::::::::::::::::
+
+  
+$E[Y^2]\lt\infty$와 $E[\|X\|^2]\lt\infty$를 가정하자. Best Linear Predictor coefficient는
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \beta^{BLP}
+  \in
+  \operatorname*{arg\,min}_{b\in\mathbb R^k}
+  E[(Y-X'b)^2].
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+이며 fitted population function은 $X'\beta^{BLP}$다.
+
+::::::::::::::::::::
+
+### 6.2.2 Quadratic criterion and FOC {#s622}
+
+population criterion을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+S(b)=E[(Y-X'b)^2]
+$$
+
+::::::::::::::::::::
+
+라고 하자. 이를 전개하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+S(b)
+=
+E[Y^2]
+-2b'E[XY]
++b'E[XX']b.
+$$
+
+::::::::::::::::::::
+
+따라서 gradient는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\nabla_b S(b)
+=
+-2E[XY]+2E[XX']b.
+$$
+
+::::::::::::::::::::
+
+interior optimum의 first-order condition은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[XX']\beta^{BLP}
+=
+E[XY].
+}
+$$
+
+::::::::::::::::::::
+
+  이를 population normal equation이라 부른다. $Q_{XX}=E[XX']$가 nonsingular이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta^{BLP}
+=
+E[XX']^{-1}E[XY].
+}
+$$
+
+::::::::::::::::::::
+
+### 6.2.3 Projection residual {#s623}
+
+population residual을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+u
+=
+Y-X'\beta^{BLP}
+$$
+
+::::::::::::::::::::
+
+라고 하면 normal equation은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Xu]=0.
+}
+$$
+
+::::::::::::::::::::
+
+  즉 $u$는 linear predictor space를 생성하는 각 regressor direction과 orthogonal하다.
+  이것은 projection으로부터 <em>정의상</em> 나오는 성질이다.
+
+:::::::::::::::::::: {.statement .remark}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+중요 · Orthogonality는 exogeneity assumption이 아니다
+
+:::::::::::::::::::
+
+  
+
+    $E[Xu]=0$은 BLP residual의 defining property다. 반면 구조모형에서 어떤 disturbance가 regressors와 orthogonal하다고 가정하는 것은 별도의 model restriction이다.
+    같은 형태의 식이라도 논리적 지위가 다를 수 있다.
+  
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s63}
+
+## [6.3]{.section-number}Existence, Uniqueness, and Collinearity
+
+::: {.topic-opening}
+Projection object의 존재와 coefficient vector의 uniqueness는 구분해야 한다.
+  이 절에서는 population Gram matrix가 coefficient identification에서 어떤 역할을 하는지 본다.
+:::
+
+### 6.3.1 Gram matrix geometry {#s631}
+
+  $Q_{XX}=E[XX']$라 하자. 임의의 $a\in\mathbb R^k$에 대해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+a'Q_{XX}a
+=
+E[(X'a)^2]
+\ge 0.
+$$
+
+::::::::::::::::::::
+
+  따라서 $Q_{XX}$는 항상 positive semidefinite다. Positive definite라면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+a'Q_{XX}a=0
+\quad\Longrightarrow\quad
+a=0,
+$$
+
+::::::::::::::::::::
+
+즉
+
+:::::::::::::::::::: {.math-display}
+
+$$
+X'a=0\ \text{a.s.}
+\quad\Longrightarrow\quad
+a=0.
+$$
+
+::::::::::::::::::::
+
+  이는 regressors 사이에 population에서 exact linear redundancy가 없다는 뜻이다.
+
+### 6.3.2 Unique predictor vs unique coefficient {#s632}
+
+  $\mathcal L_X$라는 subspace 자체에 대한 orthogonal projection은 unique하다.
+  그러나 $Q_{XX}$가 singular하면 동일한 function을 여러 coefficient vectors가 나타낼 수 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+X'b_1=X'b_2\quad\text{a.s.},
+\qquad
+b_1\neq b_2.
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{unique projected random variable}
+\not\Rightarrow
+\text{unique coefficient representation}.
+}
+$$
+
+::::::::::::::::::::
+
+  Chapter 3의 언어로 말하면 fitted function은 identified되지만 특정 parameterization은 identified되지 않을 수 있다.
+
+### 6.3.3 Centering and the intercept {#s633}
+
+  scalar $X$와 intercept를 포함한 projection
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=\alpha+\beta X+u
+$$
+
+::::::::::::::::::::
+
+에서는 normal equations가
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[u]=0,
+\qquad
+E[Xu]=0
+$$
+
+::::::::::::::::::::
+
+를 준다. 첫 식으로부터
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\alpha=E[Y]-\beta E[X].
+$$
+
+::::::::::::::::::::
+
+두 번째 식을 centered variables로 쓰면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta
+=
+\frac{\operatorname{Cov}(X,Y)}
+{\operatorname{Var}(X)}
+}
+$$
+
+::::::::::::::::::::
+
+이다. 따라서 intercept가 포함된 simple linear projection은 centered $L^2$ geometry와 직접 연결된다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s64}
+
+## [6.4]{.section-number}Best Linear Approximation and the BLP–BLA Equivalence
+
+::: {.topic-opening}
+BLP는 $Y$를 직접 예측한다. 그러나 Chapter 5의 CEF를 먼저 생각하면 다른 질문이 가능하다.
+  실제 CEF $m(X)$를 linear class에서 가장 잘 근사하는 coefficient는 무엇인가?
+:::
+
+### 6.4.1 BLA definition {#s641}
+
+$m(X)=E[Y\mid X]$라 하자.
+
+:::::::::::::::::::: {.statement .definition}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정의 6.2 · Best Linear Approximation
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \beta^{BLA}
+  \in
+  \operatorname*{arg\,min}_{b\in\mathbb R^k}
+  E[(m(X)-X'b)^2].
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+    BLA는 realized outcome $Y$가 아니라 CEF 자체의 approximation error를 최소화한다.
+  
+
+::::::::::::::::::::
+
+### 6.4.2 BLP = BLA {#s642}
+
+Chapter 5의 Pythagorean identity를 $g(X)=X'b$에 적용하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[(Y-X'b)^2]
+&=
+E[(Y-m(X))^2]\\
+&\quad+
+E[(m(X)-X'b)^2].
+\end{aligned}
+$$
+
+::::::::::::::::::::
+
+  첫 번째 항은 $b$와 무관하다. 따라서 두 criterion의 minimizer set은 같다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 6.1 · BLP–BLA equivalence
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \operatorname*{arg\,min}_{b}
+  E[(Y-X'b)^2]
+  =
+  \operatorname*{arg\,min}_{b}
+  E[(m(X)-X'b)^2].
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+$E[XX']\succ0$이면 특히
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \beta^{BLP}
+  =
+  \beta^{BLA}
+  =
+  E[XX']^{-1}E[Xm(X)]
+  =
+  E[XX']^{-1}E[XY].
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+  
+
+::::::::::::::::::: {.proof-label}
+
+핵심 한 줄
+
+:::::::::::::::::::
+
+  
+
+    $E[Xm(X)]=E[X\,E[Y\mid X]]=E[XY]$는 law of iterated expectations로 바로 나온다.
+    따라서 prediction route와 approximation route가 동일한 normal equation에 도달한다.
+    <span class="qed">□</span>
+  
+
+::::::::::::::::::::
+
+### 6.4.3 Approximation parameter interpretation {#s643}
+
+  이 결과는 linear regression coefficient의 해석을 크게 넓힌다.
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+핵심 메시지
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    CEF가 정확히 linear일 필요는 없다. Squared loss 아래 population linear regression coefficient는 실제 CEF의
+    $L^2(P_X)$-best linear approximation coefficient다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  따라서 linear regression을 “세상이 선형이라고 가정하는 모형”으로만 읽는 것은 지나치게 좁다.
+  보다 일반적으로는 특정 function class와 loss가 정의하는 population approximation target이다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s65}
+
+## [6.5]{.section-number}Linear CEF versus Linear Projection
+
+::: {.topic-opening}
+Linear CEF와 BLP는 같은 coefficient formula를 가질 수 있지만 전혀 같은 statement는 아니다.
+  이 구분은 이후 OLS의 해석에서 반복해서 중요해진다.
+:::
+
+### 6.5.1 Linear CEF model {#s651}
+
+linear CEF assumption은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Y\mid X]=X'\beta_0.
+}
+$$
+
+::::::::::::::::::::
+
+이를 error form으로 쓰면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X'\beta_0+\varepsilon,
+\qquad
+E[\varepsilon\mid X]=0.
+$$
+
+::::::::::::::::::::
+
+따라서 모든 적절한 $h(X)$에 대해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[h(X)\varepsilon]=0.
+$$
+
+::::::::::::::::::::
+
+### 6.5.2 Projection model {#s652}
+
+반면 BLP는 어떤 square-integrable joint distribution에서도
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X'\beta^{BLP}+u,
+\qquad
+E[Xu]=0
+$$
+
+::::::::::::::::::::
+
+라고 쓸 수 있다. 그러나 일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[u\mid X]\neq 0
+}
+$$
+
+::::::::::::::::::::
+
+일 수 있다. Orthogonality는 linear span에 대해서만 보장된다.
+
+### 6.5.3 One-way implication {#s653}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Y\mid X]=X'\beta_0
+\quad\Longrightarrow\quad
+\beta_0=\beta^{BLP}.
+}
+$$
+
+::::::::::::::::::::
+
+그러나 converse는 일반적으로 거짓이다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Xu]=0
+\quad\nRightarrow\quad
+E[u\mid X]=0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+주의 6.1 · Projection identity를 specification assumption으로 읽지 말 것
+
+:::::::::::::::::::
+
+  
+
+    BLP residual의 moment condition은 finite-dimensional projection의 결과다.
+    Conditional mean-zero error는 CEF의 functional form에 대한 훨씬 강한 restriction이다.
+  
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s66}
+
+## [6.6]{.section-number}Population Frisch–Waugh–Lovell and Partialling Out
+
+::: {.topic-opening}
+Multiple regression coefficient를 해석하려면 “다른 regressors를 통제한다”는 말을 algebraically 정확하게 만들어야 한다.
+  Population FWL theorem은 그 의미를 residualized variation으로 보여준다.
+:::
+
+### 6.6.1 Partitioned regressors {#s661}
+
+regressor vector를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+X=
+\begin{pmatrix}
+X_1\\
+X_2
+\end{pmatrix}
+$$
+
+::::::::::::::::::::
+
+로 나누고 population projection을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X_1'\beta_1+X_2'\beta_2+u,
+\qquad
+E[Xu]=0
+$$
+
+::::::::::::::::::::
+
+라고 하자.
+
+### 6.6.2 Residualized variation {#s662}
+
+  $X_1$을 $X_2$의 linear span에 project한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+X_1=\Pi'X_2+V_1,
+\qquad
+E[X_2V_1']=0.
+$$
+
+::::::::::::::::::::
+
+  $V_1$은 $X_2$가 선형적으로 설명하지 못하는 $X_1$의 variation이다.
+  $X_1$이 scalar이면 단순히
+
+:::::::::::::::::::: {.math-display}
+
+$$
+V_1=X_1-P_L[X_1\mid X_2].
+$$
+
+::::::::::::::::::::
+
+### 6.6.3 Population FWL theorem {#s663}
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 6.2 · Population Frisch–Waugh–Lovell
+
+:::::::::::::::::::
+
+  
+적절한 nonsingularity 조건 아래
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \beta_1
+  =
+  E[V_1V_1']^{-1}E[V_1Y].
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+$X_1$이 scalar이면
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \beta_1
+  =
+  \frac{E[V_1Y]}{E[V_1^2]}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+  
+
+::::::::::::::::::: {.proof-label}
+
+Derivation
+
+:::::::::::::::::::
+
+  
+
+    $E[V_1X_2']=0$이므로 population regression equation에 $V_1$을 곱해 기대값을 취하면
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  E[V_1Y]
+  =
+  E[V_1X_1']\beta_1.
+  $$
+
+:::::::::::::::::::
+
+  
+
+    $X_1=\Pi'X_2+V_1$이고 $V_1\perp X_2$이므로 $E[V_1X_1']=E[V_1V_1']$. 따라서 결과가 나온다.
+    <span class="qed">□</span>
+  
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+Partialling out ≠ causality
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    FWL은 population linear projection의 algebraic/geometric theorem이다.
+    다른 regressors를 residualize했다는 사실만으로 $X_1$ variation이 exogenous하거나 causal한 variation이 되는 것은 아니다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s67}
+
+## [6.7]{.section-number}Interpreting Individual Regression Coefficients
+
+::: {.topic-opening}
+Linear projection coefficients는 predictor class와 regressor coding에 따라 의미가 달라진다.
+  몇 가지 기본 사례를 population level에서 정리한다.
+:::
+
+### 6.7.1 Scalar regressor with intercept {#s671}
+
+  $$
+  Y=\alpha+\beta X+u
+  $$
+  에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta
+=
+\frac{\operatorname{Cov}(X,Y)}
+{\operatorname{Var}(X)},
+\qquad
+\alpha=E[Y]-\beta E[X].
+}
+$$
+
+::::::::::::::::::::
+
+  따라서 slope는 $X$와 $Y$의 linear co-movement를 $X$의 variation으로 normalize한 descriptive population parameter다.
+
+### 6.7.2 Binary regressor {#s672}
+
+$D\in\{0,1\}$이고 intercept를 포함하면 linear predictor class는 사실상 $D$의 두 support points를 완전히 span한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[Y\mid D]
+=
+\alpha+\beta D
+$$
+
+::::::::::::::::::::
+
+가 자동으로 성립하며
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\alpha=E[Y\mid D=0],
+\qquad
+\beta=E[Y\mid D=1]-E[Y\mid D=0].
+}
+$$
+
+::::::::::::::::::::
+
+  즉 simple regression coefficient는 treated와 untreated의 population mean difference다.
+  이것은 아직 causal effect가 아니라 observed groups의 descriptive contrast다.
+
+### 6.7.3 Categorical variables and saturation {#s673}
+
+  $C$가 $J$개의 범주를 갖는 categorical variable이면 intercept와 $J-1$개의 dummy를 사용하여 conditional mean을 정확히 표현할 수 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[Y\mid C]
+=
+\beta_0+\sum_{j=2}^{J}\beta_j\,\mathbf 1\{C=j\}.
+$$
+
+::::::::::::::::::::
+
+  따라서 “linear”라는 말은 원래 변수를 하나의 직선으로 설명한다는 뜻이 아니다.
+  어떤 basis functions를 regressors로 포함하는지가 predictor class를 결정한다.
+
+### 6.7.4 Basis expansions {#s674}
+
+  일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\phi_K(X)
+=
+(\phi_1(X),\ldots,\phi_K(X))'
+$$
+
+::::::::::::::::::::
+
+를 사용하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+g_K(X)=\phi_K(X)'\beta_K
+$$
+
+::::::::::::::::::::
+
+는 $X$에는 nonlinear이지만 coefficients에는 linear한 predictor다. 따라서 polynomial, spline, interaction, dummy expansion도 모두 linear projection theory 안에 들어온다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{linear in parameters}
+\neq
+\text{linear in raw covariates}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s68}
+
+## [6.8]{.section-number}Long Regression, Short Regression, and Omitted Variables
+
+::: {.topic-opening}
+변수를 빼면 단순히 같은 coefficient를 덜 정확하게 추정하는 것이 아니다.
+  Population projection 자체가 바뀌므로 target이 달라질 수 있다.
+:::
+
+### 6.8.1 Population target changes {#s681}
+
+long projection을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X_1'\beta_1+X_2'\beta_2+u,
+\qquad
+E[Xu]=0
+$$
+
+::::::::::::::::::::
+
+라고 하고, $X_2$를 제외한 short projection을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X_1'\gamma_1+v,
+\qquad
+E[X_1v]=0
+$$
+
+::::::::::::::::::::
+
+라고 하자. 일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\gamma_1\neq\beta_1.
+$$
+
+::::::::::::::::::::
+
+### 6.8.2 OVB decomposition {#s682}
+
+$X_2$의 $X_1$에 대한 population projection을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+X_2=\Pi'X_1+r,
+\qquad
+E[X_1r']=0
+$$
+
+::::::::::::::::::::
+
+라고 하면
+
+:::::::::::::::::::: {.statement .theorem}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+정리 6.3 · Population omitted-variable decomposition
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \gamma_1
+  =
+  \beta_1+\Pi\beta_2.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  따라서 long과 short coefficient가 같은 것은 예컨대
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Pi\beta_2=0
+$$
+
+::::::::::::::::::::
+
+  일 때다. 충분조건으로 $X_1$과 $X_2$가 linearly unrelated이거나, long projection에서 $X_2$의 coefficient가 0인 경우가 있다.
+
+### 6.8.3 What “bias” means here {#s683}
+
+:::::::::::::::::::: {.statement .warning}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+주의 6.2 · Population target difference를 곧바로 causal bias로 부르지 말 것
+
+:::::::::::::::::::
+
+  
+
+    $\gamma_1-\beta_1=\Pi\beta_2$는 우선 서로 다른 regressor spaces에 대한 두 population projections의 차이다.
+    $\beta_1$이 별도의 assumptions 아래 causal estimand와 일치할 때에만 이 차이를 causal omitted-variable bias로 해석할 수 있다.
+  
+
+::::::::::::::::::::
+
+  이 구분은 Chapter 1의 descriptive/causal distinction을 multiple regression에 적용한 것이다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s69}
+
+## [6.9]{.section-number}Descriptive versus Causal Interpretation of Regression
+
+::: {.topic-opening}
+Population regression coefficient의 default interpretation은 descriptive projection parameter다.
+  Causal interpretation은 coefficient formula 자체에서 나오지 않고 identification assumptions가 추가될 때 생긴다.
+:::
+
+### 6.9.1 Default descriptive reading {#s691}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta^{BLP}
+=
+\operatorname*{arg\,min}_b E[(Y-X'b)^2]
+}
+$$
+
+::::::::::::::::::::
+
+  는 joint distribution $P_{Y,X}$의 functional이다.
+  따라서 이것만으로는 intervention, counterfactual, treatment effect에 관한 statement가 없다.
+
+### 6.9.2 Random assignment {#s692}
+
+  binary treatment $D$의 simple regression coefficient는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\beta
+=
+E[Y\mid D=1]-E[Y\mid D=0].
+$$
+
+::::::::::::::::::::
+
+  만약 consistency와
+
+:::::::::::::::::::: {.math-display}
+
+$$
+D\perp(Y(0),Y(1))
+$$
+
+::::::::::::::::::::
+
+가 성립하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta
+=
+E[Y(1)-Y(0)].
+}
+$$
+
+::::::::::::::::::::
+
+  즉 같은 regression coefficient가 identifying assumptions의 유무에 따라 descriptive mean difference 또는 causal ATE로 해석될 수 있다.
+
+### 6.9.3 Controls, functional form, and heterogeneity {#s693}
+
+  control vector $X$를 포함한 regression
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=\alpha+\tau D+X'\gamma+u
+$$
+
+::::::::::::::::::::
+
+  에서 $\tau$를 causal effect로 읽으려면 단순히 “controls를 넣었다”는 사실로는 부족하다.
+  적어도 다음 질문을 별도로 확인해야 한다.
+
+<ul>
+  <li>선택편의를 제거할 적절한 identifying assumption이 있는가?</li>
+  <li>conditioning set이 causal adjustment set으로 정당화되는가?</li>
+  <li>conditional mean 또는 causal response가 specified linear class 안에 있는가?</li>
+  <li>treatment effect heterogeneity가 있을 때 $\tau$가 어떤 weighting을 갖는가?</li>
+</ul>
+
+:::::::::::::::::::: {.callout-strip}
+
+  
+
+::::::::::::::::::: {.left}
+
+Regression algebra
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.right}
+
+    Regression algebra does not create causality. Partialling out과 normal equations는 statistical geometry이고,
+    causal interpretation은 별도의 identification layer다.
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s610}
+
+## [6.10]{.section-number}Approximation Quality and the Limits of Linear Regression
+
+::: {.topic-opening}
+BLP는 well-defined한 population target이지만, 그것이 CEF를 잘 근사한다는 보장은 별개다.
+  이 절에서는 linear fit의 quality를 prediction geometry 안에서 읽는다.
+:::
+
+### 6.10.1 Population $R^2$ {#s6101}
+
+  intercept가 포함되고 $u=Y-X'\beta^{BLP}$라 하자.
+  Population coefficient of determination을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+R_L^2
+=
+1-
+\frac{E[u^2]}{\operatorname{Var}(Y)}
+}
+$$
+
+::::::::::::::::::::
+
+로 정의할 수 있다. Projection orthogonality에 의해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(Y)
+=
+\operatorname{Var}(X'\beta^{BLP})
++
+E[u^2]
+$$
+
+::::::::::::::::::::
+
+이므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+R_L^2
+=
+\frac{\operatorname{Var}(X'\beta^{BLP})}{\operatorname{Var}(Y)}.
+$$
+
+::::::::::::::::::::
+
+  이는 linear predictor가 설명하는 population variation의 비율이다.
+  높은 $R^2$는 causal validity나 correct specification을 의미하지 않는다.
+
+### 6.10.2 Residual variance decomposition {#s6102}
+
+  $m(X)=E[Y\mid X]$라 하면 Chapter 5의 Pythagorean identity로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[u^2]
+=
+E[\operatorname{Var}(Y\mid X)]
++
+E[(m(X)-X'\beta^{BLP})^2].
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.comparison-grid}
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Irreducible uncertainty
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    E[\operatorname{Var}(Y\mid X)]
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+현재 information set $X$만으로 제거할 수 없는 conditional noise.
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.comparison-card}
+
+    
+
+:::::::::::::::::: {.comparison-card__title}
+
+Linear approximation error
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+    E[(m(X)-X'\beta^{BLP})^2]
+    $$
+
+::::::::::::::::::
+
+    
+
+:::::::::::::::::: {.comparison-card__text}
+
+CEF가 선택한 linear predictor class에서 벗어나 있기 때문에 발생하는 손실.
+
+::::::::::::::::::
+
+  
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+  따라서 large regression residual은 높은 intrinsic noise 때문일 수도 있고, 잘못 제한된 function class 때문일 수도 있다.
+
+### 6.10.3 Pseudo-true parameter view {#s6103}
+
+  linear CEF가 false여도
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\beta^\dagger
+=
+\operatorname*{arg\,min}_{b}
+E[(Y-X'b)^2]
+$$
+
+::::::::::::::::::::
+
+  는 squared loss와 linear class가 정의하는 pseudo-true population target으로 해석할 수 있다.
+  이것은 Chapter 3–4의 criterion-defined target의 구체적인 사례다.
+
+:::::::::::::::::::: {.statement .remark}
+
+  
+
+::::::::::::::::::: {.statement-head}
+
+Pseudo-truth는 causal truth가 아니다
+
+:::::::::::::::::::
+
+  
+
+    $\beta^\dagger$가 unique하고 정확하게 추정 가능하더라도 그것이 원하는 causal estimand와 같은지는 별도의 identifying assumptions가 결정한다.
+  
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s6110}
+
+## [6.11]{.section-number}요약과 연습문제
+
+### 6.11.1 Chapter map {#s6111}
+
+:::::::::::::::::::: {.chapter-summary}
+
+  
+
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 6 in one map
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \begin{array}{ccc}
+  Y
+  &\xrightarrow{\text{projection onto }L^2(\sigma(X))}
+  &m(X)=E[Y\mid X]
+  \\[6pt]
+  \downarrow && \downarrow
+  \\[-2pt]
+  \mathcal L_X
+  &&\mathcal L_X
+  \\[6pt]
+  \searrow&&\swarrow
+  \\[-2pt]
+  &X'\beta^L&
+  \end{array}
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+    왼쪽 경로는 $Y$를 linear class에 직접 project하는 BLP이고,
+    오른쪽 경로는 CEF를 먼저 얻은 뒤 같은 linear class에 approximate하는 BLA다.
+    두 경로는 같은 coefficient에 도달한다.
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \beta^{BLP}
+  =
+  \beta^{BLA}.
+  }
+  $$
+
+:::::::::::::::::::
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \text{Linear CEF}
+  \Longrightarrow
+  \text{BLP equality},
+  \qquad
+  \text{but not conversely}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 6.11.2 Regression-reading checklist {#s6112}
+
+Population regression을 볼 때 다음 순서로 읽는다.
+
+<ol>
+  <li><strong>Predictor class:</strong> 어떤 regressors와 basis functions가 linear span을 구성하는가?</li>
+  <li><strong>Target:</strong> coefficient는 exact model parameter인가, best linear approximation인가?</li>
+  <li><strong>Uniqueness:</strong> $E[XX']$는 full rank인가?</li>
+  <li><strong>Residual property:</strong> $E[Xu]=0$인가, 더 강한 $E[u\mid X]=0$인가?</li>
+  <li><strong>Partial coefficient:</strong> FWL 관점에서 어떤 residualized variation을 사용하는가?</li>
+  <li><strong>Specification change:</strong> regressors를 추가·삭제하면 population target이 어떻게 바뀌는가?</li>
+  <li><strong>Interpretation:</strong> descriptive projection인가, identifying assumptions 아래 causal parameter인가?</li>
+  <li><strong>Approximation quality:</strong> CEF와 linear class 사이의 gap은 얼마나 큰가?</li>
+  <li><strong>Only later:</strong> 이 population target을 sample에서 어떻게 추정할 것인가?</li>
+</ol>
+
+### 연습문제 {#exercises}
+
+<ol class="exercise-list">
+  <li><strong>BLP normal equations.</strong> $S(b)=E[(Y-X'b)^2]$를 전개하고 $\nabla S(b)=0$에서 population normal equations를 유도하라.</li>
+  <li><strong>Positive definiteness.</strong> $E[XX']\succ0$가 $X'a=0$ a.s.인 nonzero $a$의 부재와 동치임을 보이라.</li>
+  <li><strong>Nonunique coefficients.</strong> $X_3=X_1+X_2$인 경우 동일한 fitted function을 생성하는 서로 다른 coefficient vectors를 구성하라.</li>
+  <li><strong>Simple projection.</strong> intercept를 포함한 scalar regression에서 $\beta=\operatorname{Cov}(X,Y)/\operatorname{Var}(X)$와 $\alpha=E[Y]-\beta E[X]$를 유도하라.</li>
+  <li><strong>BLP = BLA.</strong> $Y=m(X)+\varepsilon$, $E[\varepsilon\mid X]=0$을 사용하여 BLP와 BLA의 criterion 차이가 $b$와 무관한 상수임을 보이라.</li>
+  <li><strong>Linear CEF versus BLP.</strong> $E[Xu]=0$이지만 $E[u\mid X]\neq0$인 예를 구성하여 BLP가 linear CEF를 함의하지 않음을 보이라.</li>
+  <li><strong>Population FWL.</strong> partitioned regression에서 $V_1=X_1-P_L[X_1\mid X_2]$를 이용해 $\beta_1=E[V_1V_1']^{-1}E[V_1Y]$를 증명하라.</li>
+  <li><strong>Binary regressor.</strong> intercept와 binary $D$의 population regression slope가 $E[Y\mid D=1]-E[Y\mid D=0]$임을 보이라.</li>
+  <li><strong>Categorical saturation.</strong> 네 범주를 갖는 categorical regressor의 CEF를 intercept와 세 dummy variables로 정확히 표현하라.</li>
+  <li><strong>Basis expansion.</strong> $m(x)=x^2$, $X\sim N(0,1)$일 때 predictor class $\operatorname{span}\{1,X\}$와 $\operatorname{span}\{1,X,X^2\}$의 BLA를 각각 구하라.</li>
+  <li><strong>Omitted variables.</strong> $X_2=\Pi'X_1+r$를 사용하여 $\gamma_1=\beta_1+\Pi\beta_2$를 유도하라.</li>
+  <li><strong>Target change vs causal bias.</strong> omitted-variable formula가 언제 단순 population projection difference이고 언제 causal bias interpretation을 가질 수 있는지 설명하라.</li>
+  <li><strong>Population $R^2$.</strong> intercept가 포함된 BLP에서 $\operatorname{Var}(Y)=\operatorname{Var}(X'\beta)+E[u^2]$를 증명하고 $R_L^2$의 범위를 보이라.</li>
+  <li><strong>Residual decomposition.</strong> $E[u^2]=E[\operatorname{Var}(Y\mid X)]+E[(m(X)-X'\beta^{BLP})^2]$를 증명하고 두 항의 경제적·통계적 의미를 구분하라.</li>
+  <li><strong>Research reading exercise.</strong> empirical regression 하나를 골라 (i) population target, (ii) implied predictor class, (iii) BLP/BLA interpretation, (iv) causal interpretation에 필요한 assumptions, (v) omitted-variable concern을 분리해 기술하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 다음 장
+
+  이 장은 population linear projection을 conditional expectation의 restricted $L^2$ approximation으로 해석하는 관점을 중심으로 구성했다.
+  BLP의 quadratic criterion과 normal equations, BLA와의 동치, partialling-out geometry, short/long projection의 차이를 통해
+  “linear model이 정확히 참이지 않아도 linear regression coefficient는 well-defined한 population approximation parameter”라는 점을 강조했다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+  
+
+::::::::::::::::::: {.chapter-summary__head}
+
+다음 장으로
+
+:::::::::::::::::::
+
+  
+
+    Chapter 7에서는 population law $P_0$ 아래 정의된 $\beta^{BLP}$를 실제 표본에서 어떻게 구성하는지로 내려간다.
+    Population moments $E[XX']$와 $E[XY]$를 empirical moments로 바꾸면 ordinary least squares가 등장한다.
+    이때부터 sample normal equations, projection matrix, residual-maker matrix, QR/SVD와 같은 finite-sample linear algebra가 본격적으로 연결된다.
+  
+
+  
+
+::::::::::::::::::: {.math-display}
+
+$$
+  \boxed{
+  \underbrace{E[XX']\beta=E[XY]}_{\text{population projection}}
+  \longrightarrow
+  \underbrace{\frac1n\sum_{i=1}^n X_iX_i'\widehat\beta
+  =
+  \frac1n\sum_{i=1}^n X_iY_i}_{\text{sample analogue}}
+  \longrightarrow
+  \text{OLS}.
+  }
+  $$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

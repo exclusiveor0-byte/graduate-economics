@@ -47,7 +47,9 @@ def main():
             continue
         page = pages[output]
         text = (ROOT / source).read_text(encoding="utf-8-sig")
-        expected_callouts = len(re.findall(r"^:{3,}\s*\{\.callout-", text, re.M))
+        # Imported source notes use .callout-strip as a presentation class; it is
+        # intentionally not a Quarto callout and renders without the callout class.
+        expected_callouts = len(re.findall(r"^:{3,}\s*\{\.callout-(?!strip\b)", text, re.M))
         expected_proofs = len(re.findall(r'^:{3,}.*collapse="true"', text, re.M))
         if page.callouts != expected_callouts:
             errors.append(f"Callout count: {source}: {page.callouts}/{expected_callouts}")

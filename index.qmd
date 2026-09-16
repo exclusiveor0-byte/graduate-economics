@@ -32,7 +32,7 @@ Chapter 00–13 · 기술 부록 A–E
 ::: {.home-archive-item}
 **계량경제학**
 
-Chapter 01–03 · 기술, 확률모형, 식별
+Chapter 01–10 · 기술, 확률모형, 식별, OLS, 추론
 :::
 :::
 :::
@@ -92,9 +92,9 @@ ECONOMETRICS
 ### [계량경제학](econometrics/index.html)
 식별과 추정, 확률모형과 계산을 연결하는 정리노트입니다.
 
-[Chapter 01–03 읽기](econometrics/index.html){.study-card__link} →
+[Chapter 01–10 읽기](econometrics/index.html){.study-card__link} →
 
-[Chapter 01–03 · 기술·인과·확률모형·식별]{.status}
+[Chapter 01–10 · 기술·확률·식별·OLS·유한표본·점근이론]{.status}
 :::
 ::::
 

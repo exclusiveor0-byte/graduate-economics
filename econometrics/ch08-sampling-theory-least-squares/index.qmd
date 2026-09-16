@@ -1,0 +1,33 @@
+# Chapter 08 · Sampling Theory of Least Squares {.unnumbered}
+*Unbiasedness · Variance · Gauss–Markov · Normal Sampling Theory*
+
+OLS의 대수적 성질을 sampling theory로 연결합니다. stochastic linear regression model, error decomposition, heteroskedasticity, Gauss–Markov, error variance와 exact normal theory를 다룹니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **8.1–8.3** OLS algebra에서 stochastic regression model과 error decomposition으로
+- **8.4–8.6** unbiasedness, heteroskedasticity, classical variance formula
+- **8.7–8.10** Gauss–Markov, variance estimation, exact normal theory, limits
+- **8.11** 요약과 연습문제
+:::
+
+## Sections
+
+- [8.1 From OLS Algebra to Sampling Theory](contents.html#s81)
+- [8.2 The Stochastic Linear Regression Model](contents.html#s82)
+- [8.3 The Fundamental OLS Error Decomposition](contents.html#s83)
+- [8.4 Conditional and Unconditional Unbiasedness](contents.html#s84)
+- [8.5 Conditional Variance under Heteroskedasticity](contents.html#s85)
+- [8.6 Homoskedasticity and the Classical Variance Formula](contents.html#s86)
+- [8.7 Gauss–Markov and the Meaning of Efficiency](contents.html#s87)
+- [8.8 Estimating the Error Variance](contents.html#s88)
+- [8.9 Exact Normal Sampling Theory](contents.html#s89)
+- [8.10 What Finite-Sample Theory Does Not Give Us](contents.html#s810)
+- [8.11 요약과 연습문제](contents.html#s8110)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+:::
+
