@@ -177,6 +177,7 @@ book:
   - supplements/slutsky-decomposition.qmd
   - supplements/solow-growth.qmd
   - supplements/ols-geometry.qmd
+  - supplements/iv-weak-instruments.qmd
   - references.qmd
   page-footer:
     center: Collaborative graduate economics knowledge base
