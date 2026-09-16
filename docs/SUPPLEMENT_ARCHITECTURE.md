@@ -81,3 +81,19 @@ R 스크립트, 생성된 JSON·SVG, 설명 페이지, interactive HTML은 반�
 ```r
 Rscript supplements/r/solow-growth.R
 ```
+
+## 첫 MATLAB 구현: OLS 표본 기하와 표본 변동
+
+`supplements/matlab/ols_geometry_monte_carlo.m`은 base MATLAB만으로 단일 설명변수
+OLS의 기준 표본, 실행 메타데이터, 그리고 정적 PNG를 생성한다. 브라우저 도구는 같은
+모형을 이용해 표본 수·기울기·오차 분산·Monte Carlo 반복 횟수를 조절하게 한다.
+
+MATLAB 기준 산출물은 다음 명령으로 다시 생성한다.
+
+```text
+matlab -batch "run('supplements/matlab/ols_geometry_monte_carlo.m')"
+```
+
+난수 seed, 표본 수, Monte Carlo 반복 횟수와 $X'\hat u=0$ 검증값은 metadata에 함께
+저장한다. MATLAB 실행은 현재 CI에 포함하지 않으므로, MATLAB 원본과 생성된 CSV·JSON·PNG를
+같은 PR에서 검토한다.
