@@ -72,6 +72,9 @@ td, th { min-width: 6rem; padding: .7rem !important; }
 .study-card__eyebrow, .home-hero__eyebrow { color: #8a4e2d; font-size: .7rem; font-weight: 800; letter-spacing: .11em; }
 .study-card--micro .study-card__eyebrow, .study-card--micro .status, .study-card--micro a { color: #f4dfc8; }
 .study-card__link { margin-top: auto; font-weight: 700; text-decoration: none; }
+.study-card__highlights { margin: .1rem 0 .7rem; color: #654638; font-size: .78rem; line-height: 1.7; }
+.study-card__highlights a { color: #754020; font-weight: 700; text-decoration-color: #c99a78; text-underline-offset: .16em; }
+.study-card__highlights a:hover { color: #4b2b1b; }
 .home-hero { display: grid; grid-template-columns: minmax(0, 1.28fr) minmax(14rem, .72fr); gap: clamp(1.5rem, 4vw, 3.5rem); margin: 0 0 2.75rem; padding: clamp(1.5rem, 4vw, 2.65rem) 0 0; border-top: 2px solid #493a31; }
 .home-hero__lead > p { max-width: 38rem; margin: .7rem 0 1.35rem; color: #574137; font-size: clamp(1.12rem, 2vw, 1.34rem); line-height: 1.7; letter-spacing: -.025em; }
 .home-hero__actions { display: flex; flex-wrap: wrap; gap: .65rem; }
