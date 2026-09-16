@@ -279,7 +279,7 @@ Mean
 
 ::::::::::::::::::
 
-$E[Y^2]&lt;\infty$이면
+$E[Y^2] < \infty$이면
 
 :::::::::::::::::: {.math-display}
 
@@ -315,7 +315,7 @@ $\tau$-Quantile
 
 ::::::::::::::::::
 
-check loss $\rho_\tau(u)=u(\tau-\mathbf 1\{u&lt;0\})$ 아래
+check loss $\rho_\tau(u)=u(\tau-\mathbf{1}\{u<0\})$ 아래
 
 :::::::::::::::::: {.math-display}
 
@@ -432,8 +432,8 @@ coercivity는 매우 멀리 갈수록 criterion이 커지게 하여 relevant sub
 :::::::::::::::::::: {.math-display}
 
 $$
-Q(\theta)&gt;Q(\theta_0)
-\qquad\forall\theta\neq\theta_0
+Q(\theta) > Q(\theta_0)
+\qquad \forall \theta \neq \theta_0
 $$
 
 ::::::::::::::::::::
@@ -445,8 +445,8 @@ $$
 $$
 \inf_{\|\theta-\theta_0\|\ge\varepsilon}
 \{Q(\theta)-Q(\theta_0)\}
-&gt;0
-\qquad\forall\varepsilon&gt;0.
+>0
+\qquad \forall \varepsilon>0.
 $$
 
 ::::::::::::::::::::
@@ -633,7 +633,7 @@ $$\nabla Q(\theta_0)=0$$
 
 ### 4.5.2 Strict convexity와 strong convexity {#s452}
 
-strict convexity는 존재하는 minimizer의 uniqueness를 보장한다. strong convexity는 더 강하게 어떤 $\mu&gt;0$에 대해
+strict convexity는 존재하는 minimizer의 uniqueness를 보장한다. strong convexity는 더 강하게 어떤 $\mu>0$에 대해
 
 :::::::::::::::::::: {.math-display}
 
