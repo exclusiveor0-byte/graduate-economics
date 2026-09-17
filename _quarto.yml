@@ -171,24 +171,25 @@ book:
   - part: econometrics/ch10-large-sample-least-squares/index.qmd
     chapters:
     - econometrics/ch10-large-sample-least-squares/contents.qmd
-  - econometrics/overview.qmd
-  - supplements/index.qmd
-  - supplements/visualization-guide.qmd
-  - supplements/slutsky-decomposition.qmd
-  - supplements/solow-growth.qmd
-  - supplements/ols-geometry.qmd
-  - supplements/iv-weak-instruments.qmd
-  - supplements/islm-fiscal-shock.qmd
-  - supplements/edgeworth-first-welfare.qmd
-  - literature/index.qmd
-  - literature/theory-micro.qmd
-  - literature/macro-monetary.qmd
-  - literature/econometrics-methods.qmd
-  - literature/finance.qmd
-  - literature/labor-health-education.qmd
-  - literature/public-policy.qmd
-  - literature/io-trade.qmd
-  - literature/development-environment-urban.qmd
+  - part: supplements/index.qmd
+    chapters:
+    - supplements/visualization-guide.qmd
+    - supplements/slutsky-decomposition.qmd
+    - supplements/solow-growth.qmd
+    - supplements/ols-geometry.qmd
+    - supplements/iv-weak-instruments.qmd
+    - supplements/islm-fiscal-shock.qmd
+    - supplements/edgeworth-first-welfare.qmd
+  - part: literature/index.qmd
+    chapters:
+    - literature/theory-micro.qmd
+    - literature/macro-monetary.qmd
+    - literature/econometrics-methods.qmd
+    - literature/finance.qmd
+    - literature/labor-health-education.qmd
+    - literature/public-policy.qmd
+    - literature/io-trade.qmd
+    - literature/development-environment-urban.qmd
   - references.qmd
   page-footer:
     center: Collaborative graduate economics knowledge base
