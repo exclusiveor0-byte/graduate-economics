@@ -39,6 +39,11 @@ Chapter 01–10 · 기술, 확률모형, 식별, OLS, 추론
 
 Interactive 5종 · R 1종 · MATLAB 3종 · GIF 1종
 :::
+::: {.home-archive-item}
+**논문 아카이브**
+
+8개 분야 · 질문·설계·결과·기여 중심의 논문 노트
+:::
 :::
 :::
 
@@ -104,6 +109,20 @@ Slutsky·Hicks, Solow, OLS, 도구변수, IS–LM, Edgeworth 상자를 계산·�
 [보충자료 목록 보기](supplements/index.html){.study-card__link} →
 
 [Interactive 5종 · R 1종 · MATLAB 3종 · 정적 도표와 GIF]{.status}
+:::
+::: {.study-card .study-card--literature}
+::: {.study-card__number}
+05
+:::
+::: {.study-card__eyebrow}
+LITERATURE
+:::
+### [논문 아카이브](literature/index.html)
+경제이론부터 개발·환경·도시까지, 논문을 질문·설계·결과·기여로 읽고 연결합니다.
+
+[분야별 논문 아카이브 보기](literature/index.html){.study-card__link} →
+
+[8개 분야 · 표준 논문 노트 양식 · 첫 논문 추가 준비]{.status}
 :::
 ::::
 

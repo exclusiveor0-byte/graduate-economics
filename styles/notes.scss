@@ -64,6 +64,7 @@ td, th { min-width: 6rem; padding: .7rem !important; }
 .study-card--macro { grid-column: span 5; border-top: 5px solid #ad7446; background: #f5e7d6; }
 .study-card--econometrics { grid-column: span 7; border-top: 5px solid #766176; background: #f0e9ef; }
 .study-card--supplements { grid-column: span 5; border-top: 5px solid #9b5c39; background: #f5e9dc; }
+.study-card--literature { grid-column: span 7; border-top: 5px solid #466b68; background: #e7f0ed; }
 .study-card h3 { margin: .6rem 0 .75rem; font-size: 1.2rem; }
 .study-card p:last-child { margin-bottom: 0; }
 .study-card .status { font-size: .8rem; color: #75665b; }
@@ -85,6 +86,12 @@ td, th { min-width: 6rem; padding: .7rem !important; }
 .home-hero__navigator { align-self: start; padding: 1.2rem 1.3rem; border-left: 4px solid #b46f45; background: #f3e9dc; }
 .home-archive-item { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid #dccbb7; color: #705f52; font-size: .82rem; line-height: 1.55; }
 .home-archive-item strong { display: block; margin-bottom: .12rem; color: #513b2f; font-size: .96rem; }
+.literature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; margin: 1.25rem 0 2rem; }
+.literature-card { padding: 1rem 1.1rem; border-top: 3px solid #466b68; background: #edf4f1; }
+.literature-card h3 { margin: 0 0 .4rem; font-size: 1.02rem; }
+.literature-card h3 a { color: #284d4b; text-decoration: none; }
+.literature-card h3 a:hover { text-decoration: underline; text-underline-offset: .16em; }
+.paper-citation { margin: 1rem 0 1.5rem; padding: .9rem 1rem; border-left: 3px solid #466b68; background: #edf4f1; }
 .home-note { margin: -.25rem 0 2.5rem; padding: .9rem 1.05rem; border-left: 3px solid #b47b52; background: #f5eddf; color: #58463b; font-size: .94rem; }
 body.home-page #quarto-sidebar .sidebar-menu-container > ul > .sidebar-item-section { display: none; }
 body.home-page #title-block-header { margin-bottom: 2.25rem; padding: clamp(1.6rem, 4vw, 2.7rem); border: 0; background: #493a31; }
@@ -105,7 +112,8 @@ main :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
   html { font-size: 16px; }
   h1.title { font-size: 1.8rem; }
   .study-grid { grid-template-columns: 1fr; }
-  .study-card--micro, .study-card--supplements, .study-card--macro, .study-card--econometrics { grid-column: 1 / -1; }
+  .study-card--micro, .study-card--supplements, .study-card--macro, .study-card--econometrics, .study-card--literature { grid-column: 1 / -1; }
+  .literature-grid { grid-template-columns: 1fr; }
   .home-hero { grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2rem; }
   .home-hero__navigator { padding: 1rem; }
   body.home-page #title-block-header { margin-bottom: 1.65rem; }

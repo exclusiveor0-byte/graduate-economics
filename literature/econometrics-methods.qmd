@@ -1,0 +1,9 @@
+---
+title: "논문 아카이브 · 계량·방법론"
+---
+
+식별, 추정·추론, 인과추론, 구조추정, 계산방법 논문을 모읍니다.
+
+::: {.callout-note appearance="simple" title="새 논문"}
+`templates/paper-note-template.qmd`를 복사해 `literature/econometrics-methods/`에 추가합니다.
+:::
