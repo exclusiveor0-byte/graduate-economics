@@ -17,7 +17,7 @@ book:
   repo-url: https://github.com/exclusiveor0-byte/graduate-economics
   repo-branch: main
   repo-actions: [edit, issue]
-  title: 대학원 경제학 정리노트
+  title: 경제학 지식 아카이브
   subtitle: Graduate Economics Knowledge Base
   page-navigation: true
   search: true

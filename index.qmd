@@ -1,5 +1,5 @@
 ---
-title: 대학원 경제학 정리노트
+title: 경제학 지식 아카이브
 subtitle: Graduate Economics Knowledge Base
 ---
 
@@ -7,8 +7,8 @@ subtitle: Graduate Economics Knowledge Base
 ::: {.home-hero__lead}
 [ECONOMICS RESEARCH NOTEBOOK · VOL. 01]{.home-hero__eyebrow}
 
-경제학을 서로 연결된 문제, 가정, 증명으로 읽는 공동 정리노트입니다.
-각 과목의 Chapter 지도에서 시작해 필요한 Section으로 바로 이동할 수 있습니다.
+경제학의 문제, 가정, 증명을 서로 연결해 읽고 축적하는 공동 지식 아카이브입니다.
+각 과목의 길잡이에서 시작해, 필요한 개념과 논증의 절로 바로 이동할 수 있습니다.
 
 ::: {.home-hero__actions}
 [정리노트 둘러보기](#정리노트-읽기){.home-button .home-button--primary}

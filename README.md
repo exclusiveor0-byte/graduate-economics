@@ -56,7 +56,7 @@ quarto render
 ## 공개 저장소와 웹사이트
 
 - 원본: [exclusiveor0-byte/graduate-economics](https://github.com/exclusiveor0-byte/graduate-economics)
-- 읽기 사이트: [대학원 경제학 정리노트](https://exclusiveor0-byte.github.io/graduate-economics/)
+- 읽기 사이트: [경제학 지식 아카이브](https://exclusiveor0-byte.github.io/graduate-economics/)
 
 원문과 읽기 사이트 모두 공개합니다. PR의 초록 체크와 내용 리뷰를 거쳐 main에 반영하면
 GitHub Actions가 전체 렌더와 링크/블록 검사를 수행한 뒤 Pages에 배포합니다.
