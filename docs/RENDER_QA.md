@@ -87,7 +87,6 @@
 | `macroeconomics/index.qmd` | 0 | 0 | 0 | 통과 | 통과 |
 | `macroeconomics/overview.qmd` | 0 | 0 | 0 | 통과 | 통과 |
 | `econometrics/index.qmd` | 0 | 0 | 0 | 통과 | 통과 |
-| `econometrics/overview.qmd` | 0 | 0 | 0 | 통과 | 통과 |
 | `supplements/index.qmd` | 0 | 0 | 0 | 통과 | 통과 |
 | `supplements/visualization-guide.qmd` | 0 | 0 | 0 | 통과 | 통과 |
 | `references.qmd` | 0 | 0 | 0 | 통과 | 통과 |

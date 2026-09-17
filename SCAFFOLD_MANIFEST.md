@@ -20,7 +20,6 @@
 - `docs/STYLE_GUIDE.md`
 - `docs/V1_1_MIGRATION.md`
 - `econometrics/index.qmd`
-- `econometrics/overview.qmd`
 - `index.qmd`
 - `macroeconomics/index.qmd`
 - `macroeconomics/overview.qmd`

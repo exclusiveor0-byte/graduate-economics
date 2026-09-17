@@ -94,8 +94,12 @@ Consistency·asymptotic normality·sandwich variance·HC covariance·delta metho
 
 [12개 절 · 정리·증명·연습문제 포함]{.status}
 
-## Course Map
+## 이후 확장
 
-- [계량경제학 전체 구성](overview.html)
-- Chapter 4–10은 population optimization, conditional expectation, OLS, finite-sample theory, exact inference, 점근이론으로 이어집니다.
-- 이후 Chapter는 GLS, IV, GMM, MLE, 시계열 순서로 확장합니다.
+Chapter 4–10은 population optimization, conditional expectation, OLS, finite-sample theory,
+exact inference, 점근이론으로 이어집니다. 이후에는 다음 순서로 확장합니다.
+
+1. GLS와 이분산성·상관구조
+2. IV와 약한 도구변수
+3. GMM과 MLE
+4. 시계열과 패널 자료
