@@ -25,6 +25,7 @@ Quarto Book + GitHub + GitHub Actions + GitHub Pages를 이용한 공동 경제�
 
 관리자 설정은 [`docs/MAINTAINER_SETUP.md`](docs/MAINTAINER_SETUP.md),
 후속 계산 자료 구조는 [`docs/SUPPLEMENT_ARCHITECTURE.md`](docs/SUPPLEMENT_ARCHITECTURE.md)를 참고하세요.
+논문 아카이브의 분야와 작성 규칙은 [`docs/LITERATURE_ARCHITECTURE.md`](docs/LITERATURE_ARCHITECTURE.md)를 참고하세요.
 
 ## 로컬 미리보기
 

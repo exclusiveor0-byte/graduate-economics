@@ -58,5 +58,6 @@ merge가 끝나면 **main → Fetch origin → Pull origin**으로 공식본을 
 
 - Section: `templates/section-template.qmd`
 - Supplement: `templates/supplement-template.qmd`
+- Paper note: `templates/paper-note-template.qmd`
 
 Repository 내부의 `CONTRIBUTING.md`에는 더 자세한 협업 규칙이 있습니다.
