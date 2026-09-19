@@ -19,7 +19,6 @@ GRADUATE [과목 영문명: MICROECONOMICS / MACROECONOMICS / ECONOMETRICS] · D
 <!-- 과목에 맞는 칩 클래스 선택: .chip--micro, .chip--macro, .chip--metrics -->
 [과목명]{.chip .chip--micro}
 [총 2문제]{.chip}
-[문제당 약 15분]{.chip}
 [석사 졸업시험 대비]{.chip}
 :::
 :::

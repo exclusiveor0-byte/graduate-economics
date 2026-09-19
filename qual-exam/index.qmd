@@ -18,7 +18,6 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 [미시경제학]{.chip .chip--micro}
 [거시경제학]{.chip .chip--macro}
 [계량경제학]{.chip .chip--metrics}
-[문제당 약 15분]{.chip}
 [set up → derive → verify]{.chip}
 [실전 감각 유지]{.chip}
 :::
