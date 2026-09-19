@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 한 스푼 #1 · 손풀이 해설</title>
+<style>
+:root{
+  --bg:#f6f7f9;
+  --paper:#fff;
+  --text:#17191d;
+  --muted:#68707a;
+  --line:#dfe3e8;
+  --soft:#f1f3f5;
+  --accent:#2b5b84;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+  line-height:1.75;
+}
+.wrap{
+  width:min(920px,calc(100% - 32px));
+  margin:40px auto 72px;
+}
+.hero,.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+.hero{
+  padding:32px 34px 28px;
+  margin-bottom:20px;
+}
+.eyebrow{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+h1{
+  margin:0 0 10px;
+  font-size:31px;
+  letter-spacing:-.03em;
+}
+.subtitle{color:var(--muted);font-size:15px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.chip{
+  border:1px solid var(--line);
+  background:var(--soft);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:13px;
+  color:#444b54;
+}
+.btn-toggle-all{
+  margin-left:auto;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:opacity .15s ease;
+}
+.btn-toggle-all:hover{opacity:0.9}
+.card{
+  padding:30px 34px;
+  margin-top:20px;
+}
+.card h2{
+  margin:0 0 8px;
+  font-size:24px;
+  letter-spacing:-.02em;
+}
+.topic{
+  color:var(--muted);
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+details.solution-fold{
+  margin-top:16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  overflow:hidden;
+}
+summary.solution-toggle{
+  padding:14px 18px;
+  font-size:15px;
+  font-weight:700;
+  color:var(--accent);
+  cursor:pointer;
+  user-select:none;
+  background:var(--soft);
+  outline:none;
+}
+summary.solution-toggle:hover{
+  background:#e5e9ee;
+}
+.solution-content{
+  padding:18px 22px;
+  background:var(--paper);
+}
+.step{
+  margin:20px 0 0;
+}
+.step:first-child{margin-top:4px}
+.step h3{
+  margin:0 0 8px;
+  font-size:17px;
+  color:#1e293b;
+}
+.flow{
+  border-left:3px solid #cfd5dc;
+  padding-left:18px;
+  margin:10px 0 0;
+}
+.note{
+  margin-top:20px;
+  padding:14px 16px;
+  border:1px dashed var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  font-size:14px;
+  line-height:1.65;
+}
+.footer{
+  margin-top:28px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+@media print{
+  body{background:#fff}
+  .wrap{width:100%;margin:0}
+  .hero,.card{border-color:#bbb}
+  .card{break-before:page}
+  details.solution-fold{border:none}
+  details.solution-fold[open] .solution-content, details.solution-fold .solution-content{display:block !important}
+  summary.solution-toggle{display:none}
+}
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true
+  },
+  chtml: { scale: 1.02 }
+};
+function toggleAllSolutions() {
+  const detailsList = document.querySelectorAll('details.solution-fold');
+  const anyClosed = Array.from(detailsList).some(d => !d.open);
+  detailsList.forEach(d => d.open = anyClosed);
+  document.getElementById('toggleAllBtn').innerText = anyClosed ? '전체 해설 접기' : '전체 해설 펼치기';
+}
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<main class="wrap">
+
+<section class="hero">
+  <div class="eyebrow">Graduate Microeconomics · Daily Practice</div>
+  <h1>문제 한 스푼 #1 · 손풀이 해설</h1>
+  <div class="subtitle">손풀이의 전개 순서와 표현을 최대한 유지하여 정리한 내용 중심 해설본 (기본 접힘 상태)</div>
+  <div class="meta">
+    <span class="chip">생산자이론</span>
+    <span class="chip">부분균형</span>
+    <span class="chip">해설 수록</span>
+    <button id="toggleAllBtn" class="btn-toggle-all" onclick="toggleAllSolutions()">전체 해설 펼치기</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Problem 1. Producer Theory</h2>
+  <div class="topic">비용최소화 · 조건부 요소수요 · 비용함수</div>
+
+  <details class="solution-fold">
+    <summary class="solution-toggle">💡 손풀이 해설 펼치기 / 접기 (Problem 1)</summary>
+    <div class="solution-content">
+      <div class="step">
+        <h3>Setting</h3>
+        <div class="flow">
+          \[
+          q=f(L,K)=L^{1/2}K^{1/2}, \qquad w,r>0.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>Cost-minimization problem</h3>
+        <div class="flow">
+          \[
+          \min_{L,K}\; wL+rK
+          \qquad \text{s.t.}\qquad
+          L^{1/2}K^{1/2}\ge q.
+          \]
+
+          \[
+          \mathcal L(L,K,\lambda)
+          =
+          wL+rK-\lambda\left(L^{1/2}K^{1/2}-q\right).
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>KKT condition</h3>
+        <div class="flow">
+          엄밀히는
+          \[
+          \lambda\ge0,\qquad
+          L^{1/2}K^{1/2}-q\ge0,\qquad
+          \lambda\left(L^{1/2}K^{1/2}-q\right)=0
+          \]
+          이 함께 성립한다. 여기서는 \(w,r>0\)이고 생산기술이 단조적이므로
+          비용최소화에서 생산제약이 결합되어
+          \[
+          L^{1/2}K^{1/2}=q
+          \]
+          로 둘 수 있다.
+
+          \[
+          \frac{\partial \mathcal L}{\partial L}
+          =
+          w-\frac{\lambda}{2}\left(\frac{K}{L}\right)^{1/2}=0,
+          \]
+
+          \[
+          \frac{\partial \mathcal L}{\partial K}
+          =
+          r-\frac{\lambda}{2}\left(\frac{L}{K}\right)^{1/2}=0,
+          \]
+
+          \[
+          \frac{\partial \mathcal L}{\partial \lambda}
+          =
+          L^{1/2}K^{1/2}-q=0.
+          \]
+
+          앞의 두 식을 이용하면
+          \[
+          \frac{w}{r}=\frac{K}{L}.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>Conditional factor demand</h3>
+        <div class="flow">
+          \[
+          K=\frac{w}{r}L.
+          \]
+
+          이를 제약식에 대입하면
+          \[
+          \left(L\cdot \frac{w}{r}L\right)^{1/2}=q,
+          \]
+
+          따라서
+          \[
+          L^c(w,r,q) = \left(\frac{r}{w}\right)^{1/2}q,
+          \qquad
+          K^c(w,r,q) = \left(\frac{w}{r}\right)^{1/2}q.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>Cost function</h3>
+        <div class="flow">
+          \[
+          C(q) = wL^c+rK^c = 2\sqrt{wr}\,q.
+          \]
+
+          따라서
+          \[
+          AC = \frac{C(q)}{q} = 2\sqrt{wr},
+          \qquad
+          MC = \frac{dC(q)}{dq} = 2\sqrt{wr}.
+          \]
+
+          그러므로
+          \[
+          AC=MC=2\sqrt{wr}.
+          \]
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>핵심 정리</strong>: 생산함수는 \(L,K\)에 대해 1차 동차이므로 규모수익불변(CRS)이다.
+        이에 따라 비용함수는 산출량 \(q\)에 대해 선형이고, 장기평균비용과 장기한계비용이 일치한다.
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="card">
+  <h2>Problem 2. Partial Equilibrium</h2>
+  <div class="topic">경쟁균형 · 종량세 · 조세귀착 · 조세수입 · DWL</div>
+
+  <details class="solution-fold">
+    <summary class="solution-toggle">💡 손풀이 해설 펼치기 / 접기 (Problem 2)</summary>
+    <div class="solution-content">
+      <div class="step">
+        <h3>Setting</h3>
+        <div class="flow">
+          \[
+          p_D(Q)=20-Q,
+          \qquad
+          p_S(Q)=2+\frac12Q.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>조세부과 전</h3>
+        <div class="flow">
+          \[
+          20-Q=2+\frac12Q.
+          \]
+
+          \[
+          18=\frac32Q
+          \quad\Rightarrow\quad
+          Q^*=12.
+          \]
+
+          \[
+          p^*=20-12=8.
+          \]
+
+          따라서
+          \[
+          p^*=8.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>조세부과 후: 종량세 \(t=3\)</h3>
+        <div class="flow">
+          공급곡선은 위로 3만큼 이동하므로
+          \[
+          p_S^{tax}(Q) = 5+\frac12Q.
+          \]
+
+          새로운 균형은
+          \[
+          20-Q=5+\frac12Q,
+          \]
+
+          \[
+          15=\frac32Q
+          \quad\Rightarrow\quad
+          Q_t=10.
+          \]
+
+          소비자가 지불하는 가격은
+          \[
+          p_c=20-10=10,
+          \]
+
+          판매자가 세후 수취하는 가격은
+          \[
+          p_s=p_c-3=7.
+          \]
+
+          따라서
+          \[
+          p_c=10,
+          \qquad
+          p_s=7.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>Deadweight loss</h3>
+        <div class="flow">
+          \[
+          DWL = \frac12\times 3\times(12-10) = 3.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>조세부담</h3>
+        <div class="flow">
+          소비자 측 단위당 부담:
+          \[
+          \Delta p_c=10-8=2.
+          \]
+
+          생산자 측 단위당 부담:
+          \[
+          \Delta p_s=8-7=1.
+          \]
+
+          따라서 조세부담 비율은
+          \[
+          \text{소비자 } \frac23,
+          \qquad
+          \text{생산자 } \frac13.
+          \]
+
+          거래량이 \(10\)이므로 총 부담은
+          \[
+          \text{소비자 부담}=2\times10=20,
+          \qquad
+          \text{생산자 부담}=1\times10=10.
+          \]
+
+          여기서 \(20\)과 \(10\)은 조세귀착(tax incidence)을 가격변화에 거래량을 곱해 계산한 값이다.
+          소비자잉여와 생산자잉여의 감소분과는 구분해야 한다. 실제로
+          \[
+          CS_0=72,\qquad CS_1=50
+          \]
+          이므로 소비자잉여 감소는 \(22\)이고,
+          \[
+          PS_0=36,\qquad PS_1=25
+          \]
+          이므로 생산자잉여 감소는 \(11\)이다.
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>정부 조세수입</h3>
+        <div class="flow">
+          \[
+          T=tQ_t = 3\times10 = 30.
+          \]
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>최종 정리</strong>: 소비자는 총 \(20\), 생산자는 총 \(10\)의 조세를 부담하고,
+        정부의 조세수입은 \(30\), 사중손실은 \(3\)이다.
+      </div>
+    </div>
+  </details>
+</section>
+
+<div class="footer">문제 한 스푼 #1 · Solution Notes · <a href="../micro/set-01.html" style="color:var(--accent);text-decoration:none;">문제 본문으로 돌아가기</a></div>
+</main>
+</body>
+</html>

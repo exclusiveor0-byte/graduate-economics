@@ -48,12 +48,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-01.html" class="spoon-card" data-subject="micro" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 · 부분균형</div>
   <div class="spoon-card__desc">비용최소화, 조건부 요소수요, 비용함수 유도, 경쟁균형 및 종량세 부과와 사중손실 분석</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -84,24 +87,30 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-04.html" class="spoon-card" data-subject="micro" data-round="4">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#4 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">부분균형 · 소비자이론</div>
   <div class="spoon-card__desc">경쟁시장 가격하한제(Price Floor)와 초과공급 매입 후생손실, 준선형(Quasi-linear) 효용극대화와 경계해(Corner Solution)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
 <a href="micro/set-05.html" class="spoon-card" data-subject="micro" data-round="5">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#5 회차 (특별 구성)</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">시장의 종류 (Market Structure)</div>
   <div class="spoon-card__desc">독점(Monopoly)과 수요의 가격탄력성, Cournot 복점, Stackelberg 선도자 우위(First-mover advantage) 및 시장구조 비교</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 </div>
@@ -123,12 +132,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-01.html" class="spoon-card" data-subject="micro" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 · 부분균형</div>
   <div class="spoon-card__desc">비용최소화, 조건부 요소수요, 비용함수 유도, 경쟁균형 및 종량세 부과와 사중손실 분석</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -159,24 +171,30 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-04.html" class="spoon-card" data-subject="micro" data-round="4">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#4 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">부분균형 · 소비자이론</div>
   <div class="spoon-card__desc">경쟁시장 가격하한제(Price Floor)와 초과공급 매입 후생손실, 준선형(Quasi-linear) 효용극대화와 경계해(Corner Solution)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
 <a href="micro/set-05.html" class="spoon-card" data-subject="micro" data-round="5">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#5 회차 (특별 구성)</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">시장의 종류 (Market Structure)</div>
   <div class="spoon-card__desc">독점(Monopoly)과 수요의 가격탄력성, Cournot 복점, Stackelberg 선도자 우위(First-mover advantage) 및 시장구조 비교</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 </div>

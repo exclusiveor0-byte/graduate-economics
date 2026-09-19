@@ -17,7 +17,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 ::: {.spoon-hero__tags}
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -42,6 +42,68 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **competitive equilibrium → policy intervention → welfare**. 가격하한제에서는 소비자 구매량, 생산자 판매량, 정부 매입량을 구분하여 쓰시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Partial Equilibrium"}
+::: {.topic}
+경쟁시장 · 가격하한제 · 정부매입 · 후생
+:::
+
+#### 1) Setting
+$$
+p_D(Q) = 18 - Q, \qquad p_S(Q) = 2 + \frac{1}{2}Q.
+$$
+
+#### 2) 정부개입이 없는 경우 (Competitive Equilibrium)
+경쟁균형에서는 수요와 공급이 일치한다:
+$$
+18 - Q = 2 + \frac{1}{2}Q \quad\Longrightarrow\quad 16 = \frac{3}{2}Q \quad\Longrightarrow\quad Q^* = \frac{32}{3}.
+$$
+
+균형가격:
+$$
+p^* = 18 - \frac{32}{3} = \frac{22}{3}.
+$$
+
+#### 3) 가격하한제 $\bar{p} = 10$
+$$
+\bar{p} = 10 > \frac{22}{3} = p^*
+$$
+이므로 가격하한제는 실효적(binding)이다.
+
+- 소비자 수요량:
+  $$10 = 18 - Q_D \quad\Longrightarrow\quad Q_D = 8.$$
+- 생산자 공급량:
+  $$10 = 2 + \frac{1}{2}Q_S \quad\Longrightarrow\quad Q_S = 16.$$
+
+따라서 초과공급량은
+$$
+Q_S - Q_D = 16 - 8 = 8.
+$$
+
+#### 4) 정부의 초과공급 전량 매입과 후생 (Welfare Analysis)
+정부가 초과공급 8단위를 법정 하한가격 10에 전량 매입하므로
+$$
+\text{정부 매입비용} = 10 \times 8 = 80.
+$$
+
+- 정책 실시 전 총잉여($TS_0$):
+  $$TS_0 = \frac{1}{2}(18 - 2) \times \frac{32}{3} = \frac{256}{3}.$$
+- 정책 실시 후 소비자잉여($CS_1$):
+  $$CS_1 = \frac{1}{2}(18 - 10) \times 8 = 32.$$
+- 정책 실시 후 생산자잉여($PS_1$):
+  $$PS_1 = \frac{1}{2}(10 - 2) \times 16 = 64.$$
+- 정부 재정지출을 차감한 정책 실시 후 순총잉여($TS_1$):
+  $$TS_1 = CS_1 + PS_1 - \text{정부지출} = 32 + 64 - 80 = 16.$$
+
+따라서 사중손실(Deadweight Loss)은
+$$
+DWL = TS_0 - TS_1 = \frac{256}{3} - 16 = \frac{208}{3}.
+$$
+
+::: {.spoon-note}
+**후생 분석 주의사항**: 정부가 매입한 초과공급분($8$단위)은 시장에서 소비되지 않고 폐기되거나 사회적 가치가 없는 것으로 가정하므로, 정부 재정지출 $80$ 전액이 사회적 순후생에서 비용으로 차감됩니다.
+:::
 :::
 :::
 
@@ -71,6 +133,102 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **solve → characterize corners → verify**. 단순 FOC만 쓰지 말고 비음수제약 때문에 발생하는 경계해를 확인하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Consumer Theory"}
+::: {.topic}
+Quasi-linear Utility · KKT · Corner Solution · Roy's Identity
+:::
+
+#### 1) Utility Maximization
+소비자의 효용극대화 문제는
+$$
+\max_{x, y \ge 0}\; 2\sqrt{x} + y \qquad \text{s.t.} \qquad px + y \le m.
+$$
+
+Lagrangian을 설정하면:
+$$
+\mathcal{L} = 2\sqrt{x} + y + \lambda(m - px - y) + \lambda_x x + \lambda_y y.
+$$
+
+KKT 조건:
+$$
+\frac{\partial\mathcal{L}}{\partial x} = \frac{1}{\sqrt{x}} - \lambda p + \lambda_x = 0,
+$$
+$$
+\frac{\partial\mathcal{L}}{\partial y} = 1 - \lambda + \lambda_y = 0,
+$$
+$$
+\lambda(m - px - y) = 0, \qquad \lambda_x x = 0, \qquad \lambda_y y = 0,
+$$
+$$
+\lambda \ge 0, \quad \lambda_x \ge 0, \quad \lambda_y \ge 0, \quad x \ge 0, \quad y \ge 0, \quad px + y \le m.
+$$
+
+효용함수가 두 재화에 대해 강단조 증가하므로 예산제약은 결합되어 $px + y = m$이다.
+
+- **Case 1. Interior solution ($x > 0, y > 0$)**:
+  내부해에서는 $\lambda_x = \lambda_y = 0$.
+  $y$에 대한 FOC:
+  $$1 - \lambda = 0 \quad\Longrightarrow\quad \lambda = 1.$$
+  $x$에 대한 FOC:
+  $$\frac{1}{\sqrt{x}} = \lambda p = p \quad\Longrightarrow\quad x = \frac{1}{p^2}.$$
+  예산제약에서:
+  $$y = m - px = m - p\left(\frac{1}{p^2}\right) = m - \frac{1}{p}.$$
+  내부해 조건($y > 0$):
+  $$m - \frac{1}{p} > 0 \quad\Longleftrightarrow\quad mp > 1.$$
+
+- **Case 2. Corner solution ($x > 0, y = 0$)**:
+  예산제약이 결합하므로 $px = m \implies x = \frac{m}{p}$.
+  $x > 0$이므로 $\lambda_x = 0$.
+  $x$에 대한 FOC:
+  $$\lambda = \frac{1}{p\sqrt{x}} = \frac{1}{p\sqrt{m/p}} = \frac{1}{\sqrt{mp}}.$$
+  $y = 0$에서 1계 조건:
+  $$\lambda_y = \lambda - 1 \ge 0 \quad\Longrightarrow\quad \frac{1}{\sqrt{mp}} \ge 1 \quad\Longleftrightarrow\quad mp \le 1.$$
+
+- **Marshallian Demand 종합**:
+  $$
+  x(p, m) = \begin{cases}
+  \dfrac{1}{p^2}, & mp > 1, \\[6pt]
+  \dfrac{m}{p}, & mp \le 1,
+  \end{cases}
+  \qquad
+  y(p, m) = \begin{cases}
+  m - \dfrac{1}{p}, & mp > 1, \\[6pt]
+  0, & mp \le 1.
+  \end{cases}
+  $$
+
+#### 2) Indirect Utility Function $V(p, m)$
+- 내부해 ($mp > 1$):
+  $$
+  V(p, m) = 2\sqrt{\frac{1}{p^2}} + m - \frac{1}{p} = \frac{2}{p} + m - \frac{1}{p} = m + \frac{1}{p}.
+  $$
+- 경계해 ($mp \le 1$):
+  $$
+  V(p, m) = 2\sqrt{\frac{m}{p}} + 0 = 2\sqrt{\frac{m}{p}}.
+  $$
+
+따라서
+$$
+V(p, m) = \begin{cases}
+m + \dfrac{1}{p}, & mp > 1, \\[6pt]
+2\sqrt{\dfrac{m}{p}}, & mp \le 1.
+\end{cases}
+$$
+
+#### 3) Roy's Identity (내부해 검증)
+내부해($mp > 1$)에서 간접효용함수는 $V(p, m) = m + \frac{1}{p}$이다. 편미분을 구하면:
+$$
+\frac{\partial V}{\partial p} = -\frac{1}{p^2}, \qquad \frac{\partial V}{\partial m} = 1.
+$$
+
+Roy's identity를 적용하면:
+$$
+x(p, m) = -\frac{\partial V / \partial p}{\partial V / \partial m} = -\frac{-1/p^2}{1} = \frac{1}{p^2}.
+$$
+
+이는 1)에서 Lagrangian과 KKT 조건으로 도출한 내부해 Marshallian demand와 정확히 일치한다.
 :::
 :::
 

@@ -17,7 +17,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 ::: {.spoon-hero__tags}
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -43,6 +43,87 @@ $$
 ::: {.spoon-hint}
 **형식**: **set up → derive → verify**. 계산 결과뿐 아니라 마지막 문항의 경제학적 연결까지 쓰시오.
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Producer Theory"}
+::: {.topic}
+비용최소화 · 조건부 요소수요 · 비용함수
+:::
+
+#### 1) Setting
+$$
+q = f(L, K) = L^{1/2}K^{1/2}, \qquad w, r > 0.
+$$
+
+#### 2) Cost-minimization problem
+$$
+\min_{L, K}\; wL + rK \qquad \text{s.t.} \qquad L^{1/2}K^{1/2} \ge q.
+$$
+
+$$
+\mathcal{L}(L, K, \lambda) = wL + rK - \lambda\left(L^{1/2}K^{1/2} - q\right).
+$$
+
+#### 3) KKT condition
+엄밀히는
+$$
+\lambda \ge 0, \qquad L^{1/2}K^{1/2} - q \ge 0, \qquad \lambda\left(L^{1/2}K^{1/2} - q\right) = 0
+$$
+이 함께 성립한다. 여기서는 $w, r > 0$이고 생산기술이 단조적이므로 비용최소화에서 생산제약이 결합(binding)되어
+$$
+L^{1/2}K^{1/2} = q
+$$
+로 둘 수 있다.
+
+1계 조건(FOC):
+$$
+\frac{\partial \mathcal{L}}{\partial L} = w - \frac{\lambda}{2}\left(\frac{K}{L}\right)^{1/2} = 0,
+$$
+$$
+\frac{\partial \mathcal{L}}{\partial K} = r - \frac{\lambda}{2}\left(\frac{L}{K}\right)^{1/2} = 0,
+$$
+$$
+\frac{\partial \mathcal{L}}{\partial \lambda} = L^{1/2}K^{1/2} - q = 0.
+$$
+
+앞의 두 식을 나누어 정리하면
+$$
+\frac{w}{r} = \frac{K}{L}.
+$$
+
+#### 4) Conditional factor demand
+$$
+K = \frac{w}{r}L.
+$$
+
+이를 생산제약식에 대입하면
+$$
+\left(L \cdot \frac{w}{r}L\right)^{1/2} = q \quad\Longrightarrow\quad L\left(\frac{w}{r}\right)^{1/2} = q.
+$$
+
+따라서 조건부 요소수요함수는
+$$
+L^c(w, r, q) = \left(\frac{r}{w}\right)^{1/2}q, \qquad K^c(w, r, q) = \left(\frac{w}{r}\right)^{1/2}q.
+$$
+
+#### 5) Cost function
+$$
+C(q) = wL^c + rK^c = w\left(\frac{r}{w}\right)^{1/2}q + r\left(\frac{w}{r}\right)^{1/2}q = 2\sqrt{wr}\,q.
+$$
+
+따라서 장기평균비용($AC$)과 장기한계비용($MC$)은
+$$
+AC = \frac{C(q)}{q} = 2\sqrt{wr}, \qquad MC = \frac{dC(q)}{dq} = 2\sqrt{wr}.
+$$
+
+그러므로
+$$
+AC = MC = 2\sqrt{wr}.
+$$
+
+::: {.spoon-note}
+**경제학적 직관 (CRS & Cost Structure)**: 생산함수는 $L, K$에 대해 1차 동차(homogeneous of degree 1)이므로 규모수익불변(CRS)입니다. 이에 따라 비용함수는 산출량 $q$에 대해 엄밀히 선형(linear in $q$)이며, 장기평균비용($AC$)과 장기한계비용($MC$)이 산출량에 무관한 상수로 항상 일치합니다.
+:::
+:::
 :::
 
 ::: {.spoon-problem}
@@ -65,6 +146,86 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **equilibrium → policy change → welfare**. 조세쐐기 $p_c - p_s = t$를 명시적으로 사용하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Partial Equilibrium"}
+::: {.topic}
+경쟁균형 · 종량세 · 조세귀착 · 조세수입 · DWL
+:::
+
+#### 1) Setting
+$$
+p_D(Q) = 20 - Q, \qquad p_S(Q) = 2 + \frac{1}{2}Q.
+$$
+
+#### 2) 조세부과 전 (Initial Competitive Equilibrium)
+$$
+20 - Q = 2 + \frac{1}{2}Q \quad\Longrightarrow\quad 18 = \frac{3}{2}Q \quad\Longrightarrow\quad Q^* = 12.
+$$
+$$
+p^* = 20 - 12 = 8.
+$$
+따라서 초기 균형은 $p^* = 8$, $Q^* = 12$이다.
+
+#### 3) 조세부과 후: 종량세 $t = 3$
+판매자에게 단위당 $t = 3$이 부과되면 공급곡선은 위로 3만큼 평행이동한다:
+$$
+p_S^{tax}(Q) = 2 + \frac{1}{2}Q + 3 = 5 + \frac{1}{2}Q.
+$$
+
+새로운 시장 균형:
+$$
+20 - Q = 5 + \frac{1}{2}Q \quad\Longrightarrow\quad 15 = \frac{3}{2}Q \quad\Longrightarrow\quad Q_t = 10.
+$$
+
+소비자가 지불하는 가격($p_c$)과 판매자가 세후 수취하는 가격($p_s$):
+$$
+p_c = 20 - 10 = 10, \qquad p_s = p_c - t = 10 - 3 = 7.
+$$
+
+따라서
+$$
+p_c = 10, \qquad p_s = 7, \qquad Q_t = 10.
+$$
+
+#### 4) Deadweight Loss (사중손실)
+$$
+DWL = \frac{1}{2} \times t \times (Q^* - Q_t) = \frac{1}{2} \times 3 \times (12 - 10) = 3.
+$$
+
+#### 5) 조세부담 (Tax Incidence)
+- 소비자 측 단위당 부담: $\Delta p_c = p_c - p^* = 10 - 8 = 2$
+- 생산자 측 단위당 부담: $\Delta p_s = p^* - p_s = 8 - 7 = 1$
+
+따라서 조세부담 비율은
+$$
+\text{소비자: } \frac{2}{3}, \qquad \text{생산자: } \frac{1}{3}.
+$$
+
+거래량이 $Q_t = 10$이므로 총 부담은
+$$
+\text{소비자 총 부담} = 2 \times 10 = 20, \qquad \text{생산자 총 부담} = 1 \times 10 = 10.
+$$
+
+::: {.spoon-note}
+**잉여 변화와의 구분**: 여기서 $20$과 $10$은 가격변화에 세후 거래량을 곱한 순 조세귀착(tax incidence)입니다. 소비자잉여와 생산자잉여의 총 감소분은 사중손실 조각을 포함하므로 구분해야 합니다:
+$$
+CS_0 = \frac{1}{2}(20 - 8) \times 12 = 72, \qquad CS_1 = \frac{1}{2}(20 - 10) \times 10 = 50 \quad (\Delta CS = -22)
+$$
+$$
+PS_0 = \frac{1}{2}(8 - 2) \times 12 = 36, \qquad PS_1 = \frac{1}{2}(7 - 2) \times 10 = 25 \quad (\Delta PS = -11)
+$$
+즉 소비자는 세금 20에 DWL 2를 더해 총 22의 잉여가 감소하고, 생산자는 세금 10에 DWL 1을 더해 총 11의 잉여가 감소합니다 ($\Delta TS = -33 = -T - DWL = -30 - 3$).
+:::
+
+#### 6) 정부 조세수입
+$$
+T = t \times Q_t = 3 \times 10 = 30.
+$$
+
+::: {.spoon-note}
+**최종 요약**: 소비자는 총 $20$, 생산자는 총 $10$의 조세를 부담하며, 정부 조세수입은 $30$, 시장의 사중손실은 $3$이다.
+:::
 :::
 :::
 

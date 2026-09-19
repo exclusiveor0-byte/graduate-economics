@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 한 스푼 #5 · 손풀이 해설</title>
+<style>
+:root{
+  --bg:#f6f7f9;
+  --paper:#fff;
+  --text:#17191d;
+  --muted:#68707a;
+  --line:#dfe3e8;
+  --soft:#f1f3f5;
+  --accent:#2b5b84;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+  line-height:1.75;
+}
+.wrap{
+  width:min(920px,calc(100% - 32px));
+  margin:40px auto 72px;
+}
+.hero,.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+.hero{
+  padding:32px 34px 28px;
+  margin-bottom:20px;
+}
+.eyebrow{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+h1{
+  margin:0 0 10px;
+  font-size:31px;
+  letter-spacing:-.03em;
+}
+.subtitle{color:var(--muted);font-size:15px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.chip{
+  border:1px solid var(--line);
+  background:var(--soft);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:13px;
+  color:#444b54;
+}
+.btn-toggle-all{
+  margin-left:auto;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:opacity .15s ease;
+}
+.btn-toggle-all:hover{opacity:0.9}
+.card{
+  padding:30px 34px;
+  margin-top:20px;
+}
+.card h2{
+  margin:0 0 8px;
+  font-size:24px;
+  letter-spacing:-.02em;
+}
+.topic{
+  color:var(--muted);
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+details.solution-fold{
+  margin-top:16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  overflow:hidden;
+}
+summary.solution-toggle{
+  padding:14px 18px;
+  font-size:15px;
+  font-weight:700;
+  color:var(--accent);
+  cursor:pointer;
+  user-select:none;
+  background:var(--soft);
+  outline:none;
+}
+summary.solution-toggle:hover{
+  background:#e5e9ee;
+}
+.solution-content{
+  padding:18px 22px;
+  background:var(--paper);
+}
+.step{margin:20px 0 0}
+.step:first-child{margin-top:4px}
+.step h3{
+  margin:0 0 8px;
+  font-size:17px;
+  color:#1e293b;
+}
+.flow{
+  border-left:3px solid #cfd5dc;
+  padding-left:18px;
+  margin:10px 0 0;
+}
+.note{
+  margin-top:20px;
+  padding:14px 16px;
+  border:1px dashed var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  font-size:14px;
+  line-height:1.65;
+}
+.compare{
+  width:100%;
+  border-collapse:collapse;
+  margin:14px 0 4px;
+  font-size:15px;
+}
+.compare th,.compare td{
+  border-bottom:1px solid var(--line);
+  padding:10px 12px;
+  text-align:center;
+}
+.compare th:first-child,.compare td:first-child{text-align:left}
+.footer{
+  margin-top:28px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+@media print{
+  body{background:#fff}
+  .wrap{width:100%;margin:0}
+  .hero,.card{border-color:#bbb}
+  .card{break-before:page}
+  details.solution-fold{border:none}
+  details.solution-fold[open] .solution-content, details.solution-fold .solution-content{display:block !important}
+  summary.solution-toggle{display:none}
+}
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true
+  },
+  chtml: { scale: 1.02 }
+};
+function toggleAllSolutions() {
+  const detailsList = document.querySelectorAll('details.solution-fold');
+  const anyClosed = Array.from(detailsList).some(d => !d.open);
+  detailsList.forEach(d => d.open = anyClosed);
+  document.getElementById('toggleAllBtn').innerText = anyClosed ? '전체 해설 접기' : '전체 해설 펼치기';
+}
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<main class="wrap">
+
+<section class="hero">
+  <div class="eyebrow">Graduate Microeconomics · Daily Practice</div>
+  <h1>문제 한 스푼 #5 · 손풀이 해설</h1>
+  <div class="subtitle">손풀이의 전개 순서와 표현을 최대한 유지하여 정리한 내용 중심 해설본 (기본 접힘 상태)</div>
+  <div class="meta">
+    <span class="chip">시장구조</span>
+    <span class="chip">졸업시험 한 문제 분량</span>
+    <span class="chip">해설 수록</span>
+    <button id="toggleAllBtn" class="btn-toggle-all" onclick="toggleAllSolutions()">전체 해설 펼치기</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Problem. Market Structure</h2>
+  <div class="topic">Monopoly · Cournot · Sequential Quantity Competition</div>
+
+  <details class="solution-fold">
+    <summary class="solution-toggle">💡 손풀이 해설 펼치기 / 접기 (Problem. Market Structure)</summary>
+    <div class="solution-content">
+      <div class="step">
+        <h3>1) Monopoly</h3>
+        <div class="flow">
+          시장의 inverse demand는
+          \[
+          p(Q)=90-Q
+          \]
+          이고 한계비용은
+          \[
+          MC=10
+          \]
+          이다.
+
+          독점기업의 이윤은
+          \[
+          \pi^M(q) = (90-q)q-10q = 80q - q^2.
+          \]
+
+          FOC는
+          \[
+          \frac{d\pi^M}{dq} = 80-2q=0.
+          \]
+
+          따라서
+          \[
+          q^M=40.
+          \]
+
+          가격은
+          \[
+          p^M=90-40=50
+          \]
+          이고, 이윤은
+          \[
+          \pi^M = (50-10)\times40 = 1600.
+          \]
+
+          독점기업의 내부해에서는 Lerner condition
+          \[
+          \frac{p-MC}{p} = -\frac{1}{\varepsilon} = \frac{1}{|\varepsilon|}
+          \]
+          이 성립한다.
+
+          \(MC\gt0\)이면
+          \[
+          0\lt \frac{p-MC}{p} \lt1,
+          \]
+          따라서
+          \[
+          \frac{1}{|\varepsilon|}\lt1
+          \quad\Longrightarrow\quad
+          |\varepsilon|\gt1.
+          \]
+
+          즉 양의 한계비용을 가진 독점기업의 내부해에서는
+          수요의 가격탄력성 절댓값이 1보다 크다. 명제는 증명(Prove)된다.
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>2) Cournot duopoly</h3>
+        <div class="flow">
+          두 기업이 각각 산출량 \(q_1,q_2\)를 동시에 선택한다.
+
+          기업 1의 이윤은
+          \[
+          \pi_1(q_1,q_2) = (90-q_1-q_2)q_1-10q_1 = (80-q_1-q_2)q_1.
+          \]
+
+          기업 2의 이윤은
+          \[
+          \pi_2(q_2,q_1) = (80-q_1-q_2)q_2.
+          \]
+
+          FOC:
+          \[
+          \frac{\partial\pi_1}{\partial q_1} = 80-2q_1-q_2=0,
+          \]
+          \[
+          \frac{\partial\pi_2}{\partial q_2} = 80-q_1-2q_2=0.
+          \]
+
+          따라서 best-response functions는
+          \[
+          BR_1(q_2) = 40-\frac12q_2,
+          \qquad
+          BR_2(q_1) = 40-\frac12q_1.
+          \]
+
+          대칭균형에서 \(q_1^C=q_2^C\)이므로
+          \[
+          q_1^C=q_2^C=\frac{80}{3}.
+          \]
+
+          따라서 총산출량은
+          \[
+          Q^C = \frac{160}{3}.
+          \]
+
+          시장가격은
+          \[
+          p^C = 90-\frac{160}{3} = \frac{110}{3}.
+          \]
+
+          각 기업의 이윤은
+          \[
+          \pi_1^C=\pi_2^C = \left(\frac{110}{3}-10\right)\frac{80}{3} = \frac{6400}{9} \approx 711.11.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>3) Sequential quantity competition (Stackelberg)</h3>
+        <div class="flow">
+          기업 1이 leader, 기업 2가 follower라고 하자.
+
+          기업 2는 기업 1의 산출량 \(q_1\)을 관찰한 뒤 자신의 산출량을 선택한다.
+          기업 2의 best response는
+          \[
+          BR_2(q_1) = 40-\frac12q_1.
+          \]
+
+          따라서 leader인 기업 1의 이윤은
+          \[
+          \pi_1(q_1) = \bigl(90-q_1-BR_2(q_1)\bigr)q_1-10q_1 = \left(40-\frac12q_1\right)q_1.
+          \]
+
+          FOC는
+          \[
+          \frac{d\pi_1}{dq_1} = 40-q_1=0.
+          \]
+
+          따라서
+          \[
+          q_1^S=40.
+          \]
+
+          follower의 산출량은
+          \[
+          q_2^S = 40-\frac12(40) = 20.
+          \]
+
+          총산출량은
+          \[
+          Q^S=40+20=60
+          \]
+          이고 가격은
+          \[
+          p^S=90-60=30.
+          \]
+
+          각 기업의 이윤은
+          \[
+          \pi_1^S = (30-10)\times40 = 800,
+          \qquad
+          \pi_2^S = (30-10)\times20 = 400.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>4) First-mover advantage</h3>
+        <div class="flow">
+          동시게임에서 기업 1의 이윤은
+          \[
+          \pi_1^C=\frac{6400}{9} \approx 711.11,
+          \]
+          순차게임에서 leader인 기업 1의 이윤은
+          \[
+          \pi_1^S=800.
+          \]
+
+          따라서
+          \[
+          800\gt\frac{6400}{9},
+          \]
+          이므로 first-mover advantage가 존재한다.
+
+          동시게임에서는 기업 1이 \(q_2\)를 주어진 것으로 간주하여
+          \[
+          \max_{q_1}\pi_1(q_1,q_2)
+          \]
+          를 푼다.
+
+          반면 순차게임에서는
+          \[
+          q_2=BR_2(q_1)
+          \]
+          이므로 기업 1은 자신의 산출량 선택이 기업 2의 산출량에 미치는 전략적 대체(strategic substitutes) 영향까지 고려하여
+          \[
+          \max_{q_1}\pi_1(q_1,BR_2(q_1))
+          \]
+          를 푼다.
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>5) 시장구조 비교</h3>
+        <div class="flow">
+          <table class="compare">
+            <thead>
+              <tr>
+                <th>시장구조</th>
+                <th>총산출량</th>
+                <th>가격</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monopoly</td>
+                <td>\(40\)</td>
+                <td>\(50\)</td>
+              </tr>
+              <tr>
+                <td>Cournot (동시)</td>
+                <td>\(\frac{160}{3}\)</td>
+                <td>\(\frac{110}{3}\)</td>
+              </tr>
+              <tr>
+                <td>Sequential</td>
+                <td>\(60\)</td>
+                <td>\(30\)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          따라서
+          \[
+          Q^M\lt Q^C\lt Q^S,
+          \qquad
+          p^M\gt p^C\gt p^S.
+          \]
+
+          독점상황에서는 한 기업이 전체 시장에 대한 가격효과를 고려하므로
+          산출량을 가장 많이 제한한다.
+
+          Cournot에서는 두 기업 간 경쟁으로 인해 독점보다 총산출량이 증가한다.
+
+          순차게임에서는 leader가 공격적으로 산출량을 선택하고,
+          이에 follower가 산출량을 감소시키지만,
+          leader의 증가분이 follower의 감소분보다 크므로
+          총산출량은 동시 Cournot보다 더 커진다.
+        </div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<div class="footer">문제 한 스푼 #5 · Solution Notes · <a href="../micro/set-05.html" style="color:var(--accent);text-decoration:none;">문제 본문으로 돌아가기</a></div>
+</main>
+</body>
+</html>
