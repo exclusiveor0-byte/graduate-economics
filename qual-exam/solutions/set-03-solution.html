@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 한 스푼 #3 · 손풀이 해설</title>
+<style>
+:root{
+  --bg:#f6f7f9;
+  --paper:#fff;
+  --text:#17191d;
+  --muted:#68707a;
+  --line:#dfe3e8;
+  --soft:#f1f3f5;
+  --accent:#2b5b84;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+  line-height:1.75;
+}
+.wrap{
+  width:min(920px,calc(100% - 32px));
+  margin:40px auto 72px;
+}
+.hero,.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+.hero{
+  padding:32px 34px 28px;
+  margin-bottom:20px;
+}
+.eyebrow{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+h1{
+  margin:0 0 10px;
+  font-size:31px;
+  letter-spacing:-.03em;
+}
+.subtitle{color:var(--muted);font-size:15px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.chip{
+  border:1px solid var(--line);
+  background:var(--soft);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:13px;
+  color:#444b54;
+}
+.btn-toggle-all{
+  margin-left:auto;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:opacity .15s ease;
+}
+.btn-toggle-all:hover{opacity:0.9}
+.card{
+  padding:30px 34px;
+  margin-top:20px;
+}
+.card h2{
+  margin:0 0 8px;
+  font-size:24px;
+  letter-spacing:-.02em;
+}
+.topic{
+  color:var(--muted);
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+details.solution-fold{
+  margin-top:16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  overflow:hidden;
+}
+summary.solution-toggle{
+  padding:14px 18px;
+  font-size:15px;
+  font-weight:700;
+  color:var(--accent);
+  cursor:pointer;
+  user-select:none;
+  background:var(--soft);
+  outline:none;
+}
+summary.solution-toggle:hover{
+  background:#e5e9ee;
+}
+.solution-content{
+  padding:18px 22px;
+  background:var(--paper);
+}
+.step{margin:20px 0 0}
+.step:first-child{margin-top:4px}
+.step h3{
+  margin:0 0 8px;
+  font-size:17px;
+  color:#1e293b;
+}
+.flow{
+  border-left:3px solid #cfd5dc;
+  padding-left:18px;
+  margin:10px 0 0;
+}
+.note{
+  margin-top:20px;
+  padding:14px 16px;
+  border:1px dashed var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  font-size:14px;
+  line-height:1.65;
+}
+.footer{
+  margin-top:28px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+@media print{
+  body{background:#fff}
+  .wrap{width:100%;margin:0}
+  .hero,.card{border-color:#bbb}
+  .card{break-before:page}
+  details.solution-fold{border:none}
+  details.solution-fold[open] .solution-content, details.solution-fold .solution-content{display:block !important}
+  summary.solution-toggle{display:none}
+}
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true
+  },
+  chtml: { scale: 1.02 }
+};
+function toggleAllSolutions() {
+  const detailsList = document.querySelectorAll('details.solution-fold');
+  const anyClosed = Array.from(detailsList).some(d => !d.open);
+  detailsList.forEach(d => d.open = anyClosed);
+  document.getElementById('toggleAllBtn').innerText = anyClosed ? '전체 해설 접기' : '전체 해설 펼치기';
+}
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<main class="wrap">
+
+<section class="hero">
+  <div class="eyebrow">Graduate Microeconomics · Daily Practice</div>
+  <h1>문제 한 스푼 #3 · 손풀이 해설</h1>
+  <div class="subtitle">손풀이의 전개 순서와 표현을 최대한 유지하여 정리한 내용 중심 해설본 (기본 접힘 상태)</div>
+  <div class="meta">
+    <span class="chip">일반균형</span>
+    <span class="chip">생산자이론</span>
+    <span class="chip">해설 수록</span>
+    <button id="toggleAllBtn" class="btn-toggle-all" onclick="toggleAllSolutions()">전체 해설 펼치기</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Problem 1. General Equilibrium</h2>
+  <div class="topic">Marshallian Demand · Competitive Equilibrium · Pareto Efficiency</div>
+
+  <details class="solution-fold">
+    <summary class="solution-toggle">💡 손풀이 해설 펼치기 / 접기 (Problem 1)</summary>
+    <div class="solution-content">
+      <div class="step">
+        <h3>1) 각 소비자의 수요와 균형가격</h3>
+        <div class="flow">
+          재화 \(y\)의 가격을 1로 normalize하고 \(p_x=p\)라 하자.
+
+          소비자 1의 wealth는
+          \[
+          m_1=6p+2.
+          \]
+
+          소비자 1의 문제는
+          \[
+          \max_{x_1,y_1} x_1y_1
+          \qquad \text{s.t.}\qquad
+          px_1+y_1=6p+2.
+          \]
+
+          Lagrangian은
+          \[
+          \mathcal L
+          =
+          x_1y_1+\lambda_1(6p+2-px_1-y_1).
+          \]
+
+          FOC:
+          \[
+          \frac{\partial\mathcal L}{\partial x_1}
+          =
+          y_1-p\lambda_1=0,
+          \]
+          \[
+          \frac{\partial\mathcal L}{\partial y_1}
+          =
+          x_1-\lambda_1=0.
+          \]
+
+          따라서
+          \[
+          y_1=px_1.
+          \]
+
+          이를 예산제약에 대입하면
+          \[
+          px_1+px_1=6p+2,
+          \]
+          따라서
+          \[
+          x_1(p)=3+\frac1p,
+          \qquad
+          y_1(p)=3p+1.
+          \]
+
+          소비자 2의 wealth는
+          \[
+          m_2=2p+6.
+          \]
+
+          소비자 2의 문제는
+          \[
+          \max_{x_2,y_2} x_2y_2
+          \qquad \text{s.t.}\qquad
+          px_2+y_2=2p+6.
+          \]
+
+          같은 방식으로
+          \[
+          y_2=px_2
+          \]
+          이므로
+          \[
+          2px_2=2p+6.
+          \]
+
+          따라서
+          \[
+          x_2(p)=1+\frac3p,
+          \qquad
+          y_2(p)=p+3.
+          \]
+
+          \(x\)-재화 시장청산조건은
+          \[
+          x_1(p)+x_2(p)=8.
+          \]
+
+          즉
+          \[
+          3+\frac1p+1+\frac3p=8,
+          \]
+          \[
+          4+\frac4p=8.
+          \]
+
+          따라서
+          \[
+          p^*=1.
+          \]
+
+          \(y\)-재화도
+          \[
+          y_1(p)+y_2(p)
+          =
+          (3p+1)+(p+3)
+          =
+          4p+4
+          \]
+          이고 \(p^*=1\)에서
+          \[
+          y_1+y_2=8
+          \]
+          이므로 시장청산이 성립한다.
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>2) Competitive equilibrium allocation</h3>
+        <div class="flow">
+          \(p^*=1\)을 각 소비자의 수요함수에 대입하면,
+
+          소비자 1:
+          \[
+          x_1^*=3+1=4,
+          \qquad
+          y_1^*=3+1=4.
+          \]
+
+          소비자 2:
+          \[
+          x_2^*=1+3=4,
+          \qquad
+          y_2^*=1+3=4.
+          \]
+
+          따라서 competitive equilibrium allocation은
+          \[
+          ((x_1^*,y_1^*),(x_2^*,y_2^*))
+          =
+          ((4,4),(4,4)).
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>3) Pareto efficiency 확인</h3>
+        <div class="flow">
+          두 소비자의 효용함수는
+          \[
+          u_i(x_i,y_i)=x_iy_i
+          \]
+          이므로
+          \[
+          MU_{x_i}=y_i,
+          \qquad
+          MU_{y_i}=x_i.
+          \]
+
+          따라서
+          \[
+          MRS_i
+          =
+          \frac{MU_{x_i}}{MU_{y_i}}
+          =
+          \frac{y_i}{x_i}.
+          \]
+
+          equilibrium allocation에서
+
+          소비자 1:
+          \[
+          MRS_1
+          =
+          \frac{y_1^*}{x_1^*}
+          =
+          \frac44
+          =
+          1.
+          \]
+
+          소비자 2:
+          \[
+          MRS_2
+          =
+          \frac{y_2^*}{x_2^*}
+          =
+          \frac44
+          =
+          1.
+          \]
+
+          또한 equilibrium price ratio는
+          \[
+          \frac{p_x}{p_y}=1.
+          \]
+
+          즉
+          \[
+          MRS_1=MRS_2=\frac{p_x}{p_y}=1.
+          \]
+
+          두 소비자의 MRS가 동일하므로 추가적인 상호이익적 교환이 불가능하고,
+          따라서 equilibrium allocation은 Pareto efficient이다.
+
+          First Welfare Theorem에 따르면 locally nonsatiated preferences 등 필요한 조건하에서
+          competitive equilibrium은 Pareto efficient이다.
+          여기서도
+          \[
+          ((4,4),(4,4))
+          \]
+          에서 \(MRS_1=MRS_2\)이므로 Pareto efficiency를 직접 확인할 수 있다.
+        </div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="card">
+  <h2>Problem 2. Producer Theory</h2>
+  <div class="topic">Profit Maximization · Shutdown Price · Supply Function</div>
+
+  <details class="solution-fold">
+    <summary class="solution-toggle">💡 손풀이 해설 펼치기 / 접기 (Problem 2)</summary>
+    <div class="solution-content">
+      <div class="step">
+        <h3>1) 이윤극대화와 shutdown condition</h3>
+        <div class="flow">
+          비용함수는
+          \[
+          c(q)=q^2+4q+9,
+          \qquad q\ge0.
+          \]
+
+          기업의 이윤은
+          \[
+          \pi(q)
+          =
+          pq-c(q)
+          =
+          pq-q^2-4q-9.
+          \]
+
+          이를 \(q\)에 대해 미분하면
+          \[
+          \frac{d\pi}{dq}
+          =
+          p-2q-4=0.
+          \]
+
+          따라서 내부해 후보는
+          \[
+          q=\frac{p-4}{2}.
+          \]
+
+          가변비용은
+          \[
+          VC(q)=q^2+4q
+          \]
+          이므로
+          \[
+          AVC(q)
+          =
+          \frac{VC(q)}{q}
+          =
+          q+4.
+          \]
+
+          \(q\ge0\)에서
+          \[
+          \min AVC=4.
+          \]
+
+          따라서 shutdown price는
+          \[
+          p^{SD}=4.
+          \]
+
+          그러므로 최적 산출량은
+          \[
+          q^*(p)
+          =
+          \begin{cases}
+          0, & p\le4,\\[4pt]
+          \dfrac{p-4}{2}, & p>4.
+          \end{cases}
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>2) Supply function</h3>
+        <div class="flow">
+          한계비용은
+          \[
+          MC(q)=c'(q)=2q+4.
+          \]
+
+          경쟁기업은 생산하는 구간에서
+          \[
+          p=MC(q)
+          \]
+          이므로
+          \[
+          p=2q+4
+          \quad\Rightarrow\quad
+          q=\frac{p-4}{2}.
+          \]
+
+          따라서 supply function은
+          \[
+          q^s(p)
+          =
+          \begin{cases}
+          0, & p\le4,\\[4pt]
+          \dfrac{p-4}{2}, & p>4.
+          \end{cases}
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>3) Prove or disprove</h3>
+        <div class="flow">
+          주어진 명제는 다음과 같다.
+
+          \[
+          \text{“A competitive firm produces whenever }p\ge MC(0)\text{.”}
+          \]
+
+          비용함수에서
+          \[
+          MC(q)=2q+4
+          \]
+          이므로
+          \[
+          MC(0)=4.
+          \]
+
+          이제 \(p=4\)를 생각하면
+          \[
+          p=4=MC(0)
+          \]
+          이므로 명제의 조건 \(p\ge MC(0)\)은 만족한다.
+
+          그러나 기업의 이윤은
+          \[
+          \pi(q)
+          =
+          4q-(q^2+4q+9)
+          =
+          -q^2-9.
+          \]
+
+          이 이윤은 \(q=0\)에서 최대가 된다.
+
+          따라서
+          \[
+          q^*(4)=0.
+          \]
+
+          즉
+          \[
+          p\ge MC(0)
+          \]
+          이더라도 반드시 양의 산출량을 생산하는 것은 아니다.
+
+          따라서 주어진 명제는 false이다.
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>핵심 정리</strong>: 단순히 \(p\)와 \(MC(0)\)만 비교하는 것이 아니라,
+        실제 생산 여부는 shutdown condition인 \(p\ge \min AVC\)와 함께 보아야 한다는 점이다.
+        이 문제에서는 \(\min AVC=MC(0)=4\)이지만, \(p=4\)에서는 최적산출량이 \(0\)이다.
+      </div>
+    </div>
+  </details>
+</section>
+
+<div class="footer">문제 한 스푼 #3 · Solution Notes · <a href="../micro/set-03.html" style="color:var(--accent);text-decoration:none;">문제 본문으로 돌아가기</a></div>
+</main>
+</body>
+</html>
