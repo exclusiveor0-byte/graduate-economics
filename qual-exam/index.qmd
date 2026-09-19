@@ -43,7 +43,8 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 검색 조건과 일치하는 문제가 없습니다. 회차 번호나 다른 키워드를 입력해보세요.
 :::
 
-::: {#spoon-grid-all .spoon-grid}
+```{=html}
+<div id="spoon-grid-all" class="spoon-grid">
 <a href="micro/set-01.html" class="spoon-card" data-subject="micro" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
@@ -91,7 +92,8 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
-:::
+</div>
+```
 
 ### 미시경제학
 
@@ -104,7 +106,8 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 검색 조건과 일치하는 문제가 없습니다.
 :::
 
-::: {#spoon-grid-micro .spoon-grid}
+```{=html}
+<div id="spoon-grid-micro" class="spoon-grid">
 <a href="micro/set-01.html" class="spoon-card" data-subject="micro" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
@@ -152,7 +155,8 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
-:::
+</div>
+```
 
 ### 거시경제학
 
