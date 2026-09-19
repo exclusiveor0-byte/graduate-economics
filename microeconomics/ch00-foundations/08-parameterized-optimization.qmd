@@ -82,6 +82,10 @@ $$
 두 부등식이 가치함수의 연속성을 준다.
 :::
 
+::: {.callout-note appearance="simple" title="VISUAL · Berge 최대정리와 제약대응의 연속성"}
+[대응과 반연속성 보충자료](../../supplements/correspondence-hemicontinuity.qmd)에서 Berge 최대정리가 요구하는 제약대응 $B(\theta)$의 상반연속(해의 발산 방지)과 하반연속(접근 경로 보존) 조건이 각각 왜 필수적인지 대화형 도구로 직접 확인할 수 있다.
+:::
+
 ### 0.8.2 Envelope 정리
 
 Berge 최대정리가 값과 해 대응의 연속성을 다룬다면, Envelope 정리는 최적화된 값이 모수에 따라 어떻게 미분되는지를 다룬다. 먼저 실행가능집합이 모수에 의존하지 않는 경우를 보자.

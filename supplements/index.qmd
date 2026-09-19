@@ -10,6 +10,7 @@
 - [도구변수와 약한 도구변수](iv-weak-instruments.qmd) — MATLAB 기준 실험과 OLS·2SLS 비교 도구
 - [IS–LM 재정충격: 단기 균형의 이동](islm-fiscal-shock.qmd) — MATLAB 정적 도표와 재정지출 확대 GIF
 - [Edgeworth 상자: 경쟁균형과 후생경제학 제1정리](edgeworth-first-welfare.qmd) — 계약곡선과 경쟁균형 탐색 도구
+- [대응의 반연속성과 닫힌 그래프: UHC와 LHC](correspondence-hemicontinuity.qmd) — 반연속성 판정과 위상 기하 탐색 도구
 
 원칙:
 - 핵심 직관에 직접 필요한 자료는 본문에서 링크 또는 embed

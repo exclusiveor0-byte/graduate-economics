@@ -180,6 +180,7 @@ book:
     - supplements/iv-weak-instruments.qmd
     - supplements/islm-fiscal-shock.qmd
     - supplements/edgeworth-first-welfare.qmd
+    - supplements/correspondence-hemicontinuity.qmd
   - part: literature/index.qmd
     chapters:
     - literature/theory-micro.qmd

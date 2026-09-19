@@ -8,6 +8,7 @@
 - [도구변수와 약한 도구변수](iv-weak-instruments.qmd): MATLAB 기준 실험과 브라우저 Monte Carlo로 OLS 편향과 2SLS의 약한 도구변수 문제를 비교합니다.
 - [IS–LM 재정충격: 단기 균형의 이동](islm-fiscal-shock.qmd): MATLAB 정적 도표와 애니메이션 GIF로 재정지출 확대 뒤 IS–LM 단기 균형이 이동하는 과정을 읽습니다.
 - [Edgeworth 상자: 경쟁균형과 후생경제학 제1정리](edgeworth-first-welfare.qmd): 초기부존, 계약곡선, 경쟁균형을 한 도표에서 비교해 경쟁균형의 Pareto 효율성을 확인합니다.
+- [대응의 반연속성과 닫힌 그래프: UHC와 LHC](correspondence-hemicontinuity.qmd): 개집합 포섭 조건과 수열 수렴 조건을 직관적으로 조작하며 대응의 상반연속, 하반연속, 닫힌 그래프 성질을 확인합니다.
 
 ## 선택 기준
 
