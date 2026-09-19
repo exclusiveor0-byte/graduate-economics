@@ -3,505 +3,667 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>대응의 반연속성과 닫힌 그래프</title>
+  <title>대응의 반연속성과 닫힌 그래프: UHC와 LHC</title>
   <style>
     :root {
-      --ink: #3f3129;
-      --muted: #725f54;
-      --paper: #fffaf2;
-      --panel: #f5eadc;
-      --rule: #dfcdb8;
-      --terra: #954f2d;
-      --plum: #725b70;
-      --teal: #087e8b;
-      --green: #2d7738;
-      --amber: #b45309;
-      --red: #c0392b;
+      --bg: #fcfaf7;
+      --panel: #f7f1e8;
+      --card-bg: #ffffff;
+      --rule: #dfd3c3;
+      --ink: #2b2118;
+      --muted: #6b5a4e;
+      --accent: #8b3a1a;
+      --plum: #5c3d5e;
+      --teal: #1a6b72;
+      --green: #236330;
+      --green-bg: #eaf4ed;
+      --green-border: #99caa4;
+      --red: #9e2a2b;
+      --red-bg: #fbeeed;
+      --red-border: #e49f9e;
+      --highlight: #b85d19;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 1rem;
-      background: var(--paper);
+      padding: 1.1rem;
+      background: var(--bg);
       color: var(--ink);
-      font: 15px/1.5 system-ui, "Noto Sans KR", -apple-system, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    header {
+      margin-bottom: .9rem;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: .75rem;
+    }
+    .eyebrow {
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .25rem;
     }
     h1 {
-      margin: 0;
-      font: 600 1.25rem Georgia, "Noto Serif KR", serif;
+      margin: 0 0 .35rem;
+      font-family: Georgia, "Noto Serif KR", serif;
+      font-size: 1.42rem;
       color: var(--ink);
-    }
-    .lede {
-      margin: .25rem 0 .75rem;
-      color: var(--muted);
-      font-size: .88rem;
-    }
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(17rem, .85fr) minmax(0, 1.4fr);
-      gap: .8rem;
-    }
-    .panel {
-      margin: 0;
-      padding: .85rem;
-      border: 1px solid var(--rule);
-      background: #fffdf9;
-      border-radius: 4px;
-    }
-    .controls {
-      display: grid;
-      gap: .65rem;
-      align-content: start;
-    }
-    .section-title {
-      font-size: .8rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .03em;
-      color: var(--muted);
-      margin: 0 0 .2rem;
     }
-    .presets {
+    .subtitle {
+      margin: 0;
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    /* Operation Guide Banner */
+    .guide-banner {
+      background: #f3ece1;
+      border: 1px solid #dccdc0;
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: .65rem .95rem;
+      margin-bottom: 1rem;
+      font-size: .82rem;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .guide-banner strong {
+      color: var(--accent);
+    }
+    .guide-banner ol {
+      margin: .25rem 0 0;
+      padding-left: 1.25rem;
+    }
+    .guide-banner li {
+      margin-bottom: .15rem;
+    }
+
+    /* Preset Selection Bar */
+    .preset-bar {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: .35rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: .45rem;
+      margin-bottom: 1rem;
     }
     .preset-btn {
-      padding: .4rem .45rem;
-      border: 1px solid var(--rule);
-      border-radius: 4px;
+      padding: .6rem .65rem;
       background: var(--panel);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
       color: var(--ink);
-      font-size: .75rem;
-      font-weight: 600;
-      cursor: pointer;
       text-align: left;
-      transition: background .15s ease, border-color .15s ease;
-      line-height: 1.3;
-    }
-    .preset-btn:hover {
-      background: #ebd8c2;
-    }
-    .preset-btn.active {
-      background: var(--plum);
-      color: #fff;
-      border-color: var(--plum);
-    }
-    .mode-toggle {
-      display: flex;
-      gap: .4rem;
-      background: var(--panel);
-      padding: .25rem;
-      border-radius: 4px;
-      border: 1px solid var(--rule);
-    }
-    .mode-btn {
-      flex: 1;
-      padding: .35rem .4rem;
-      border: none;
-      border-radius: 3px;
-      background: transparent;
-      color: var(--ink);
-      font-size: .78rem;
-      font-weight: 600;
       cursor: pointer;
-      text-align: center;
-      transition: background .15s ease;
-    }
-    .mode-btn.active {
-      background: #fff;
-      color: var(--terra);
-      box-shadow: 0 1px 3px rgba(0,0,0,.08);
-    }
-    .control-group {
-      display: grid;
-      gap: .5rem;
-      padding: .65rem;
-      background: #faf4ed;
-      border: 1px solid var(--rule);
-      border-radius: 4px;
-    }
-    label {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: .2rem;
-      font-size: .78rem;
-      font-weight: 700;
-    }
-    output {
-      color: var(--terra);
-      font-variant-numeric: tabular-nums;
-    }
-    input[type="range"] {
-      grid-column: 1 / -1;
-      width: 100%;
-      accent-color: var(--terra);
-      margin: .2rem 0;
-    }
-    .formula-box {
-      margin: 0;
-      padding: .6rem .7rem;
-      border-left: 3px solid var(--plum);
-      background: #f7f1f5;
-      font-family: Georgia, serif;
-      font-size: .8rem;
-      line-height: 1.45;
-    }
-    .formula-box strong {
-      color: var(--plum);
-    }
-    .chart-container {
+      transition: all .15s ease;
       display: flex;
       flex-direction: column;
-      gap: .75rem;
+      gap: .2rem;
+    }
+    .preset-btn:hover {
+      background: #eee1cf;
+      border-color: #c9b49b;
+    }
+    .preset-btn.active {
+      background: var(--card-bg);
+      border-color: var(--accent);
+      border-top: 3px solid var(--accent);
+      box-shadow: 0 3px 8px rgba(139, 58, 26, .12);
+    }
+    .preset-btn__title {
+      font-size: .82rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .preset-btn.active .preset-btn__title {
+      color: var(--accent);
+    }
+    .preset-btn__formula {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    /* Main Grid Layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(19.5rem, 1fr) minmax(0, 1.55fr);
+      gap: 1.1rem;
+      align-items: start;
+    }
+
+    /* Left Control & Concept Panel */
+    .control-pane {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: .95rem;
+    }
+    .mode-nav {
+      display: flex;
+      background: var(--panel);
+      padding: .25rem;
+      border-radius: 6px;
+      gap: .25rem;
+      border: 1px solid var(--rule);
+    }
+    .mode-tab {
+      flex: 1;
+      padding: .5rem .6rem;
+      border: none;
+      background: transparent;
+      border-radius: 4px;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s ease;
+      text-align: center;
+    }
+    .mode-tab.active {
+      background: var(--card-bg);
+      color: var(--accent);
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+
+    .concept-card {
+      background: #faf6f0;
+      border-left: 3px solid var(--accent);
+      padding: .75rem .9rem;
+      border-radius: 0 4px 4px 0;
+      font-size: .8rem;
+      line-height: 1.55;
+    }
+    .concept-card strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: .25rem;
+    }
+
+    .slider-card {
+      background: #faf7f2;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: .75rem .9rem;
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+    .slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+    .slider-row .val {
+      font-family: Georgia, serif;
+      font-weight: 800;
+      color: var(--accent);
+      font-size: .92rem;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+      margin: .2rem 0 0;
+    }
+    .slider-help {
+      font-size: .74rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* Right Visual & Diagnostic Panel */
+    .visual-pane {
+      display: flex;
+      flex-direction: column;
+      gap: .95rem;
+    }
+    .svg-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: .85rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,.02);
     }
     svg {
       display: block;
       width: 100%;
       height: auto;
-      background: #fffdf9;
-      border: 1px solid var(--rule);
-      border-radius: 4px;
     }
-    .box {
-      fill: none;
-      stroke: var(--ink);
-      stroke-width: 1.5;
-    }
-    .grid-line {
-      stroke: #ebd8c2;
-      stroke-width: .8;
-      stroke-dasharray: 2 3;
-    }
-    .axis-line {
-      stroke: var(--muted);
-      stroke-width: 1.2;
-    }
-    .graph-fill {
-      fill: #e8dbcf;
-      opacity: 0.55;
-    }
-    .graph-boundary {
-      stroke: #b39783;
-      stroke-width: 1.5;
-      fill: none;
-    }
-    .f-base {
-      stroke: var(--plum);
-      stroke-width: 4.5;
-      stroke-linecap: round;
-    }
-    .f-test {
-      stroke: var(--terra);
-      stroke-width: 4.5;
-      stroke-linecap: round;
-    }
-    .v-band {
-      fill: #f0e6ef;
-      opacity: 0.6;
-    }
-    .v-line {
-      stroke: var(--plum);
-      stroke-width: 1.5;
-      stroke-dasharray: 4 3;
-    }
-    .lhc-line {
-      stroke: var(--teal);
-      stroke-width: 2;
-      stroke-dasharray: 3 3;
-    }
-    .target-dot {
-      fill: var(--plum);
-      stroke: #fff;
-      stroke-width: 2;
-    }
-    .test-dot {
-      fill: var(--terra);
-      stroke: #fff;
-      stroke-width: 2;
-    }
-    .status-overlay {
-      display: inline-flex;
+    .axis { stroke: #8d7968; stroke-width: 1.3; }
+    .grid { stroke: #ebd8c2; stroke-width: .8; stroke-dasharray: 2 3; }
+    .gph-area { fill: #eae0d4; fill-opacity: .6; }
+    .gph-stroke { stroke: #a38874; stroke-width: 1.8; fill: none; }
+    
+    .base-fiber { stroke: var(--plum); stroke-width: 4.5; stroke-linecap: round; }
+    .probe-fiber { stroke: var(--highlight); stroke-width: 4.5; stroke-linecap: round; }
+    .probe-fiber.is-contained { stroke: var(--green); }
+    .probe-fiber.is-breached { stroke: var(--red); }
+
+    .v-open-band { fill: #f3e8f2; fill-opacity: .7; }
+    .v-bound-line { stroke: var(--plum); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    .u-open-box { fill: #e6f3eb; fill-opacity: .45; stroke: var(--green); stroke-width: 1.5; stroke-dasharray: 4 3; }
+
+    .target-marker { fill: var(--plum); stroke: #fff; stroke-width: 2; }
+    .closest-marker { fill: var(--highlight); stroke: #fff; stroke-width: 2; }
+    .closest-marker.is-exact { fill: var(--green); }
+    .closest-marker.is-severed { fill: var(--red); }
+    .lhc-track-line { stroke: var(--teal); stroke-width: 2; stroke-dasharray: 3 3; }
+
+    /* Verdict & Evaluation Box */
+    .verdict-banner {
+      display: flex;
       align-items: center;
-      gap: .4rem;
-      padding: .35rem .65rem;
-      border-radius: 4px;
-      font-size: .82rem;
+      justify-content: space-between;
+      padding: .65rem 1rem;
+      border-radius: 6px;
+      font-size: .84rem;
       font-weight: 700;
-      margin-bottom: .2rem;
     }
-    .status-pass {
-      background: #eaf5ec;
+    .verdict-banner.pass {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
       color: var(--green);
-      border: 1px solid #c2e2c7;
     }
-    .status-fail {
-      background: #fdf0ee;
+    .verdict-banner.fail {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
       color: var(--red);
-      border: 1px solid #f6c4be;
     }
-    .badges-grid {
+
+    /* Academic Diagnostic Table */
+    .diagnostic-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: .45rem;
+      gap: .5rem;
     }
-    .badge-card {
-      padding: .45rem .5rem;
-      border-radius: 4px;
+    .diag-card {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
       border-top: 3px solid var(--muted);
-      background: #fbf7f2;
-      font-size: .72rem;
-      line-height: 1.35;
+      border-radius: 6px;
+      padding: .6rem .75rem;
+      font-size: .75rem;
+      line-height: 1.45;
     }
-    .badge-card strong {
+    .diag-card.is-true { border-top-color: var(--green); }
+    .diag-card.is-false { border-top-color: var(--red); }
+    .diag-card__name {
+      font-weight: 800;
+      margin-bottom: .2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .diag-card.is-true .diag-card__name { color: var(--green); }
+    .diag-card.is-false .diag-card__name { color: var(--red); }
+    .diag-card__detail { color: var(--muted); font-size: .72rem; }
+
+    /* Theorem Summary Badges */
+    .theorems-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem;
+    }
+    .thm-card {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: .6rem .85rem;
+      font-size: .76rem;
+      line-height: 1.45;
+    }
+    .thm-card strong {
       display: block;
-      font-size: .72rem;
       margin-bottom: .15rem;
+      font-size: .8rem;
     }
-    .badge-card.is-true {
-      border-top-color: var(--green);
-      background: #f4faf5;
+    .thm-card.applicable {
+      border-left: 3px solid var(--green);
     }
-    .badge-card.is-true strong {
+    .thm-card.applicable strong {
       color: var(--green);
     }
-    .badge-card.is-false {
-      border-top-color: var(--red);
-      background: #fdf5f4;
+    .thm-card.inapplicable {
+      border-left: 3px solid var(--red);
     }
-    .badge-card.is-false strong {
+    .thm-card.inapplicable strong {
       color: var(--red);
     }
-    .diag-text {
-      padding: .65rem .75rem;
-      border-left: 3px solid var(--teal);
-      background: #eff7f8;
+
+    /* Economic Implications Box */
+    .implication-box {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 6px 6px 0;
+      padding: .85rem 1.05rem;
       font-size: .8rem;
-      line-height: 1.45;
-      color: var(--ink);
+      line-height: 1.6;
     }
-    .diag-text strong {
+    .implication-box h3 {
+      margin: 0 0 .35rem;
+      font-size: .86rem;
+      font-weight: 800;
       color: var(--teal);
     }
-    @media (max-width: 860px) {
-      .layout { grid-template-columns: 1fr; }
-      .badges-grid { grid-template-columns: repeat(2, 1fr); }
+
+    @media (max-width: 960px) {
+      .preset-bar { grid-template-columns: repeat(2, 1fr); }
+      .main-grid { grid-template-columns: 1fr; }
+      .diagnostic-grid { grid-template-columns: repeat(2, 1fr); }
+      .theorems-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <h1>대응의 반연속성과 닫힌 그래프 (Correspondence, UHC, LHC)</h1>
-  <p class="lede">상반연속(UHC)의 개집합 포섭($F(x') \subseteq V$)과 하반연속(LHC)의 수열 수렴($y_k \to y_0$)을 조작하며 검증합니다.</p>
 
-  <div class="layout">
-    <!-- Controls Panel -->
-    <section class="panel controls" aria-label="대응 설정 및 검증 모수 조절">
-      <div>
-        <div class="section-title">대표 대응 프리셋 선택</div>
-        <div class="presets" role="group" aria-label="사례 프리셋">
-          <button type="button" class="preset-btn active" data-preset="A">
-            <strong>A. 연속 대응</strong><br>UHC &amp; LHC 모두 성립
-          </button>
-          <button type="button" class="preset-btn" data-preset="B">
-            <strong>B. 확장 점프</strong><br>UHC 만족, LHC 위반
-          </button>
-          <button type="button" class="preset-btn" data-preset="C">
-            <strong>C. 수축 점프</strong><br>LHC 만족, UHC 위반
-          </button>
-          <button type="button" class="preset-btn" data-preset="D">
-            <strong>D. 비콤팩트 치역</strong><br>닫힌 그래프이나 UHC 위반
-          </button>
-          <button type="button" class="preset-btn" data-preset="E">
-            <strong>E. 예산 대응</strong><br>소비자 이론 $B(p)$ 연속성
-          </button>
+  <header>
+    <div class="eyebrow">Advanced Mathematical Economics · Interactive Exploration</div>
+    <h1>대응의 반연속성과 닫힌 그래프: UHC와 LHC의 위상수학적 판정</h1>
+    <p class="subtitle">개집합 포섭 조건(<i>F</i>(<i>x</i>) ⊆ <i>V</i>)과 수열적 접근성(<i>y<sub>k</sub></i> → <i>y</i>₀)을 파이버(Fiber) 기하학으로 탐색합니다.</p>
+  </header>
+
+  <!-- Step-by-Step Operation Guide for Graduate Students -->
+  <div class="guide-banner" role="region" aria-label="조작 가이드">
+    <strong>조작 가이드 (Operational Workflow):</strong>
+    <ol>
+      <li><strong>프리셋 선택:</strong> 상단 5개 대표 대응(A~E) 중 하나를 선택하여 위상적 구조를 설정합니다.</li>
+      <li><strong>검증 모드 전환:</strong> <code>UHC (개집합 포섭)</code>와 <code>LHC (수열 접근)</code> 탭을 번갈아 선택합니다.</li>
+      <li><strong>모수 탐색 프로브 <i>x</i> 조작:</strong> 슬라이더를 좌우로 천천히 움직여 기준 특이점 <i>x</i>₀(=0) 근방에서 파이버 <i>F</i>(<i>x</i>)의 팽창(외측 폭발) 또는 수축(내측 증발)을 관찰합니다.</li>
+      <li><strong>위상 판정 확인:</strong> UHC 모드에서는 <i>F</i>(<i>x</i>)가 개근방 <i>V</i> 상자 안에 머무는지(녹색) 바깥으로 탈출하는지(적색)를, LHC 모드에서는 <i>x</i> → <i>x</i>₀일 때 선택지 거리 <i>d</i>(<i>y</i>₀, <i>F</i>(<i>x</i>))가 0으로 수렴하는지 확인합니다.</li>
+    </ol>
+  </div>
+
+  <!-- 5 Canonical Presets -->
+  <nav class="preset-bar" aria-label="대표 대응 사례 프리셋">
+    <button type="button" class="preset-btn active" data-preset="A">
+      <span class="preset-btn__title">A. 양측 연속 (UHC &amp; LHC)</span>
+      <span class="preset-btn__formula"><i>F</i>(<i>x</i>) = [<i>x</i>/3, 1 − <i>x</i>/3]</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="B">
+      <span class="preset-btn__title">B. UHC 만족 / LHC 위반</span>
+      <span class="preset-btn__formula"><i>F</i>(0)=[0,1], <i>F</i>(<i>x</i>)={0} (내측 수축)</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="C">
+      <span class="preset-btn__title">C. LHC 만족 / UHC 위반</span>
+      <span class="preset-btn__formula"><i>F</i>(0)={0}, <i>F</i>(<i>x</i>)=[0,1] (외측 폭발)</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="D">
+      <span class="preset-btn__title">D. 닫힌 그래프 / UHC 위반</span>
+      <span class="preset-btn__formula"><i>F</i>(0)={0}, <i>F</i>(<i>x</i>)={1/|<i>x</i>|} (비콤팩트)</span>
+    </button>
+    <button type="button" class="preset-btn" data-preset="E">
+      <span class="preset-btn__title">E. 예산 대응 <i>B</i>(<i>p</i>)</span>
+      <span class="preset-btn__formula"><i>B</i>(<i>p</i>) = [0, <i>w</i>/<i>p</i>] (소비자 이론)</span>
+    </button>
+  </nav>
+
+  <div class="main-grid">
+    <!-- Left: Rigorous Concepts & Operational Sliders -->
+    <aside class="control-pane">
+      <div class="mode-nav" role="tablist">
+        <button type="button" class="mode-tab active" id="tab-uhc" role="tab" aria-selected="true">
+          UHC (개집합 포섭 판정)
+        </button>
+        <button type="button" class="mode-tab" id="tab-lhc" role="tab" aria-selected="false">
+          LHC (수열 접근 판정)
+        </button>
+      </div>
+
+      <!-- Formal Mathematical Concept Card -->
+      <div class="concept-card" id="mode-concept-desc">
+        <!-- Dynamically injected math explanation -->
+      </div>
+
+      <!-- Primary Operational Probe: Parameter x -->
+      <div class="slider-card">
+        <div class="slider-row">
+          <span>모수 탐색 프로브 <i>x</i> (Parameter Probe)</span>
+          <span class="val" id="x-probe-val">0.00</span>
+        </div>
+        <input id="x-probe" type="range" min="-1" max="1" step="0.01" value="0.25">
+        <div class="slider-help">
+          외생변수 <i>x</i>를 연속적으로 스크러빙(scrubbing)하여 기준점 <i>x</i>₀ 근방 <i>U</i> 내부와 외부에서 파이버 <i>F</i>(<i>x</i>)의 거동을 직접 검증합니다.
         </div>
       </div>
 
-      <div>
-        <div class="section-title">검증 모드 선택</div>
-        <div class="mode-toggle" role="radiogroup" aria-label="검증 모드">
-          <button type="button" class="mode-btn active" id="btn-mode-uhc">UHC 검증 (개집합 포섭)</button>
-          <button type="button" class="mode-btn" id="btn-mode-lhc">LHC 검증 (수열 수렴)</button>
+      <!-- Mode-Specific Sliders -->
+      <div class="slider-card" id="uhc-params-block">
+        <div class="slider-row">
+          <span>개근방 <i>V</i>의 여유 반경 ε (Radius)</span>
+          <span class="val" id="eps-val">0.20</span>
+        </div>
+        <input id="eps-slider" type="range" min="0.05" max="0.6" step="0.02" value="0.20">
+        <div class="slider-help">
+          기준 파이버 <i>F</i>(<i>x</i>₀)를 둘러싸는 열린 개집합 <i>V</i> = (inf <i>F</i>(<i>x</i>₀) − ε, sup <i>F</i>(<i>x</i>₀) + ε)를 설정합니다. UHC가 성립하면 직적 근방 상자 <i>U</i> × <i>V</i>가 화면에 형성됩니다.
         </div>
       </div>
 
-      <div class="control-group">
-        <label>기준점 $x_0$ <output id="x0-out"></output>
-          <input id="x0-input" type="range" min="-0.8" max="0.8" step="0.05" value="0">
-        </label>
-
-        <!-- UHC Controls -->
-        <div id="uhc-controls">
-          <label>개집합 $V$ 반경 $\varepsilon$ <output id="eps-out"></output>
-            <input id="eps-input" type="range" min="0.05" max="0.6" step="0.02" value="0.2">
-          </label>
-          <label>검증점 $x'$ <output id="xtest-out"></output>
-            <input id="xtest-input" type="range" min="-0.8" max="0.8" step="0.02" value="0.15">
-          </label>
+      <div class="slider-card" id="lhc-params-block" style="display: none;">
+        <div class="slider-row">
+          <span>기준 선택원소 <i>y</i>₀ ∈ <i>F</i>(<i>x</i>₀)</span>
+          <span class="val" id="y0-val">0.80</span>
         </div>
-
-        <!-- LHC Controls -->
-        <div id="lhc-controls" style="display: none;">
-          <label>목표값 $y_0 \in F(x_0)$ <output id="y0-out"></output>
-            <input id="y0-input" type="range" min="0" max="1" step="0.05" value="0.8">
-          </label>
-          <label>접근 수열 $x_k \to x_0$ 위치 <output id="xk-out"></output>
-            <input id="xk-input" type="range" min="-0.8" max="0.8" step="0.02" value="0.2">
-          </label>
+        <input id="y0-slider" type="range" min="0" max="1" step="0.02" value="0.80">
+        <div class="slider-help">
+          기준 특이점 <i>x</i>₀에서 선택 가능한 실현값 <i>y</i>₀를 지정합니다. <i>x</i> → <i>x</i>₀일 때 <i>F</i>(<i>x</i>) 내에서 <i>y</i>₀로 다가가는 최단 투영점 <i>y</i>*(<i>x</i>)의 연속 경로를 추적합니다.
         </div>
       </div>
 
-      <div class="formula-box" id="formula-desc">
-        <!-- populated dynamically -->
+      <div style="font-size: .75rem; color: var(--muted); line-height: 1.5; border-top: 1px solid var(--rule); padding-top: .65rem;">
+        <strong>기준 특이점:</strong> <span id="x0-display-text"><i>x</i>₀ = 0.00, <i>F</i>(<i>x</i>₀) = [0.00, 1.00]</span>
       </div>
-    </section>
+    </aside>
 
-    <!-- Visual Chart & Diagnostics Panel -->
-    <section class="panel chart-container" aria-label="대응 시각화 및 판정">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .4rem;">
-        <div class="section-title" style="margin: 0;">대응 그래프 $\operatorname{gph}(F)$ 및 위상 기하</div>
-        <div id="status-badge" class="status-overlay status-pass">
-          <span>검증 결과 준비 중</span>
+    <!-- Right: High-Precision Visualization & Formal Diagnostic -->
+    <main class="visual-pane">
+      <div class="svg-wrapper">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: .6rem; flex-wrap: wrap; gap: .4rem;">
+          <span style="font-size: .8rem; font-weight: 800; text-transform: uppercase; color: var(--muted); letter-spacing: .05em;">
+            위상 기하 도표: gph(<i>F</i>) ⊆ <i>X</i> × <i>Y</i>
+          </span>
+          <div id="verdict-tag" class="verdict-banner pass">
+            <span>판정 계산 중...</span>
+          </div>
         </div>
+
+        <svg id="canvas" viewBox="0 0 740 430" role="img" aria-label="대응의 반연속성 기하학 다이어그램">
+          <!-- Clip path for chart plot area -->
+          <defs>
+            <clipPath id="plot-clip">
+              <rect x="70" y="25" width="615" height="355"/>
+            </clipPath>
+          </defs>
+
+          <!-- Grid & Plot Frame -->
+          <rect x="70" y="25" width="615" height="355" fill="#fffdfa" stroke="var(--rule)" stroke-width="1.2"/>
+          <g id="grid-group"></g>
+
+          <!-- Shaded Regions Layer (Clipped) -->
+          <g clip-path="url(#plot-clip)">
+            <!-- Open neighborhood V horizontal band (for UHC) -->
+            <rect id="v-band-rect" class="v-open-band" x="70" y="0" width="615" height="0" style="display: none;"/>
+            <!-- Open box U x V (for UHC) -->
+            <rect id="u-box-rect" class="u-open-box" x="0" y="0" width="0" height="0" style="display: none;"/>
+
+            <!-- Background Correspondence Graph gph(F) -->
+            <g id="graph-group"></g>
+
+            <!-- Boundary lines for V -->
+            <line id="v-upper-line" class="v-bound-line" style="display: none;"/>
+            <line id="v-lower-line" class="v-bound-line" style="display: none;"/>
+
+            <!-- LHC Tracking Path Line -->
+            <line id="lhc-path-line" class="lhc-track-line" style="display: none;"/>
+
+            <!-- Fibers -->
+            <!-- Critical Base Fiber F(x0) -->
+            <line id="fiber-base" class="base-fiber"/>
+            <!-- Probe Fiber F(x) -->
+            <line id="fiber-probe" class="probe-fiber"/>
+
+            <!-- Markers for LHC -->
+            <circle id="marker-y0" class="target-marker" r="5.5" style="display: none;"/>
+            <circle id="marker-closest" class="closest-marker" r="5.5" style="display: none;"/>
+          </g>
+
+          <!-- Annotations & Labels Layer (Unclipped) -->
+          <g id="labels-group"></g>
+        </svg>
       </div>
 
-      <svg id="chart" viewBox="0 0 740 450" role="img" aria-labelledby="chartTitle chartDesc">
-        <title id="chartTitle">대응의 상반연속·하반연속 기하학 도표</title>
-        <desc id="chartDesc">정의역 x와 공역 y 평면에서 대응 F(x)의 값집합, F(x0)의 개근방 V, 그리고 근방 점 x'에서의 값집합 F(x')의 포섭 관계를 시각화합니다.</desc>
-
-        <!-- Chart background and grid -->
-        <rect class="box" x="70" y="30" width="620" height="360"/>
-        <g id="grid-layer"></g>
-
-        <!-- Shaded band V (for UHC) -->
-        <rect id="v-band-rect" class="v-band" x="70" y="0" width="620" height="0" style="display: none;"/>
-        <line id="v-upper-line" class="v-line" style="display: none;"/>
-        <line id="v-lower-line" class="v-line" style="display: none;"/>
-
-        <!-- Correspondence graph area -->
-        <g id="graph-layer"></g>
-
-        <!-- Highlighted intervals -->
-        <line id="f-base-line" class="f-base"/>
-        <line id="f-test-line" class="f-test"/>
-
-        <!-- LHC sequence line & points -->
-        <line id="lhc-seq-line" class="lhc-line" style="display: none;"/>
-        <circle id="y0-dot" class="target-dot" r="5.5" style="display: none;"/>
-        <circle id="yk-dot" class="test-dot" r="5.5" style="display: none;"/>
-
-        <!-- Labels layer -->
-        <g id="labels-layer" style="font-size: 11px; fill: var(--ink); font-family: system-ui;"></g>
-      </svg>
-
-      <!-- 7 Property Badges -->
-      <div>
-        <div class="section-title">주요 위상적 성질 실시간 판정</div>
-        <div class="badges-grid" id="badges-container">
-          <!-- Badges dynamically rendered -->
+      <!-- 4 Core Topological Badges -->
+      <section class="diagnostic-grid" aria-label="위상적 성질 판정표">
+        <div class="diag-card" id="card-uhc">
+          <div class="diag-card__name">
+            <span>상반연속 (UHC)</span>
+            <span id="badge-uhc-icon">✓</span>
+          </div>
+          <div class="diag-card__detail" id="badge-uhc-desc">외측 팽창(폭발) 없음</div>
         </div>
-      </div>
+        <div class="diag-card" id="card-lhc">
+          <div class="diag-card__name">
+            <span>하반연속 (LHC)</span>
+            <span id="badge-lhc-icon">✓</span>
+          </div>
+          <div class="diag-card__detail" id="badge-lhc-desc">내측 선택지 증발 없음</div>
+        </div>
+        <div class="diag-card" id="card-closed">
+          <div class="diag-card__name">
+            <span>닫힌 그래프 (Closed)</span>
+            <span id="badge-closed-icon">✓</span>
+          </div>
+          <div class="diag-card__detail" id="badge-closed-desc">gph(<i>F</i>)가 닫힌 집합</div>
+        </div>
+        <div class="diag-card" id="card-compact">
+          <div class="diag-card__name">
+            <span>콤팩트 치역 (Compact)</span>
+            <span id="badge-compact-icon">✓</span>
+          </div>
+          <div class="diag-card__detail" id="badge-compact-desc">각 <i>F</i>(<i>x</i>)가 콤팩트</div>
+        </div>
+      </section>
 
-      <!-- Educational Diagnostic Narrative -->
-      <div class="diag-text" id="diag-narrative">
-        <!-- populated dynamically -->
-      </div>
-    </section>
+      <!-- Key Theorem Applicability Badges -->
+      <section class="theorems-row" aria-label="미시경제학 주요 정리 적용성">
+        <div class="thm-card" id="thm-berge">
+          <strong>Berge 최대정리 (Maximum Theorem)</strong>
+          <span id="thm-berge-desc">판정 중...</span>
+        </div>
+        <div class="thm-card" id="thm-kakutani">
+          <strong>Kakutani 부동점 정리 (Fixed Point)</strong>
+          <span id="thm-kakutani-desc">판정 중...</span>
+        </div>
+      </section>
+
+      <!-- Graduate Economic Implication Card -->
+      <section class="implication-box" id="economic-implication">
+        <!-- Dynamically rendered based on active preset -->
+      </section>
+    </main>
   </div>
 
   <script>
-    const $ = id => document.getElementById(id);
+    // Geometry bounds
+    const L = 70, W = 615, T = 25, H = 355, B = T + H;
 
-    // Canvas bounds
-    const L = 70, W = 620, T = 30, H = 360, B = T + H;
-
-    // Presets definition
+    // Presets with rigorous mathematical definitions
     const PRESETS = {
       A: {
-        name: '연속 대응',
-        xMin: -1.0, xMax: 1.0, yMin: -0.5, yMax: 1.5,
-        defaultX0: 0, defaultXTest: 0.25, defaultEps: 0.2, defaultY0: 0.5,
-        x0Min: -0.8, x0Max: 0.8,
-        desc: '<strong>F(x) = [x/3, 1 − x/3]</strong><br>모든 x에서 콤팩트 볼록 집합을 가지며, 상하 경계가 연속함수이므로 UHC와 LHC를 모두 만족하는 완전한 연속 대응입니다.',
+        name: '양측 연속 (UHC & LHC)',
+        mathTitle: 'F(x) = [x/3, 1 − x/3]',
+        xMin: -1.0, xMax: 1.0, yMin: -0.4, yMax: 1.4,
+        x0: 0.0,
+        defaultX: 0.35, defaultEps: 0.20, defaultY0: 0.60,
         evalF: x => [x / 3, 1 - x / 3],
-        graphShape: 'band',
-        isCompactValued: true,
-        isConvexValued: true,
-        isClosedGraph: true,
-        isUHC: true,
-        isLHC: true,
-        bergeApp: true
+        isUHC: true, isLHC: true, isClosed: true, isCompact: true,
+        bergeApplies: true,
+        kakutaniApplies: true,
+        uhcNote: '임의의 개집합 <i>V</i> ⊃ <i>F</i>(0) = [0, 1]에 대해, 상·하한 경계 함수가 연속이므로 δ = 3ε을 택하면 ∀<i>x</i> ∈ (−δ, δ), <i>F</i>(<i>x</i>) ⊆ <i>V</i>가 성립합니다. 따라서 <strong>외측 폭발이 전혀 발생하지 않아 UHC를 충족</strong>합니다.',
+        lhcNote: '임의의 <i>y</i>₀ ∈ <i>F</i>(0)에 대해 <i>x</i> → 0일 때 최단 투영 <i>y</i>*(<i>x</i>) = clamp(<i>y</i>₀, <i>x</i>/3, 1 − <i>x</i>/3) → <i>y</i>₀로 연속 수렴하므로 <strong>선택 가능성이 온전히 보존되어 LHC를 충족</strong>합니다.',
+        bergeNote: '<strong>Berge 정리 적용 가능:</strong> 제약대응 <i>F</i>가 UHC와 LHC를 동시에 만족(즉 연속)하고 콤팩트값을 가지므로, 연속인 목적함수에 대해 최적가치함수 <i>v</i>(<i>x</i>)는 연속이며 해대응 <i>D</i>(<i>x</i>)는 공집합이 아닌 콤팩트값 및 UHC를 갖습니다.',
+        kakutaniNote: '<strong>Kakutani 정리 적용 가능:</strong> 정의역 [−1, 1]과 공역이 콤팩트 볼록 집합이고 대응 <i>F</i>가 공집합이 아닌 콤팩트 볼록값을 가지며 UHC이므로, 반드시 부동점 <i>x</i>* ∈ <i>F</i>(<i>x</i>*)가 존재합니다.',
+        economicNote: '<strong>미시경제학 함의:</strong> 전형적인 연속 대응(Continuous Correspondence)입니다. 공역이 콤팩트 볼록 집합이므로 일반균형의 Walrasian 가격조정 및 정형화된 게임의 Nash 균형 증명(Kakutani)에 즉시 활용될 수 있으며, Berge 최대정리의 모든 가설을 만족하는 모범적 벤치마크입니다.'
       },
       B: {
-        name: '확장 점프 (UHC이나 not LHC)',
+        name: 'UHC 만족 / LHC 위반 (내측 수축)',
+        mathTitle: 'F(0) = [0, 1], F(x) = {0} (x ≠ 0)',
         xMin: -1.0, xMax: 1.0, yMin: -0.3, yMax: 1.3,
-        defaultX0: 0, defaultXTest: 0.25, defaultEps: 0.15, defaultY0: 0.85,
-        x0Min: -0.8, x0Max: 0.8,
-        desc: '<strong>F(0) = [0, 1], &nbsp; F(x) = {0} (x ≠ 0)</strong><br>x=0에서 값집합이 갑자기 [0, 1]로 확장됩니다. 0 근방에서 F(x\')={0} ⊂ V이므로 <strong>UHC는 성립</strong>하지만, y=1로 수렴하는 {y_k} 수열을 구성할 수 없어 <strong>LHC는 위반</strong>됩니다.',
-        evalF: x => Math.abs(x) < 0.001 ? [0, 1] : [0, 0],
-        graphShape: 'jump-expand',
-        isCompactValued: true,
-        isConvexValued: true,
-        isClosedGraph: true,
-        isUHC: true,
-        isLHC: false,
-        bergeApp: false
+        x0: 0.0,
+        defaultX: 0.30, defaultEps: 0.15, defaultY0: 0.85,
+        evalF: x => Math.abs(x) < 1e-4 ? [0, 1] : [0, 0],
+        isUHC: true, isLHC: false, isClosed: true, isCompact: true,
+        bergeApplies: false,
+        kakutaniApplies: true,
+        uhcNote: '<i>F</i>(0) = [0, 1]을 포함하는 임의의 개집합 <i>V</i>는 0을 원소로 포함합니다. <i>x</i> ≠ 0인 모든 <i>x</i>에서 <i>F</i>(<i>x</i>) = {0} ⊂ <i>V</i>이므로, <strong>임의의 근방 <i>U</i>에서 <i>F</i>(<i>U</i>) ⊆ <i>V</i>가 자명하게 성립하여 UHC를 만족</strong>합니다 (국소 내측 수축은 UHC를 위반하지 않음).',
+        lhcNote: '<i>y</i>₀ = 0.85 ∈ <i>F</i>(0)를 선택했을 때, <i>x</i> ≠ 0에서는 오직 <i>F</i>(<i>x</i>) = {0}뿐입니다. <i>x</i> → 0으로 아무리 다가가도 |<i>y</i>*(<i>x</i>) − <i>y</i>₀| = |0 − 0.85| = 0.85 &gt; 0으로 고정되므로 <strong><i>y<sub>k</sub></i> → <i>y</i>₀인 수열을 구성할 수 없어 LHC가 붕괴</strong>합니다 (0이 아닌 선택지들의 급작스러운 내측 증발).',
+        bergeNote: '<strong>Berge 정리 적용 불가 (LHC 위반):</strong> 목적함수가 <i>f</i>(<i>x</i>, <i>y</i>) = <i>y</i>인 경우, <i>x</i> = 0에서 최대가치는 <i>v</i>(0) = 1이지만, <i>x</i> ≠ 0에서는 <i>v</i>(<i>x</i>) = 0입니다. 제약집합이 <i>x</i> ≠ 0에서 급격히 축소되어 가치함수가 하반연속성을 잃고 <i>x</i> = 0에서 불연속이 됩니다.',
+        kakutaniNote: '<strong>Kakutani 정리 적용 가능:</strong> [0, 1] 상에서 <i>F</i>(<i>x</i>)는 공집합이 아닌 콤팩트 볼록값을 가지며 UHC를 만족하므로 부동점이 존재합니다 (실제로 <i>x</i>* = 0에서 0 ∈ <i>F</i>(0) = [0, 1] 성립).',
+        economicNote: '<strong>미시경제학 함의:</strong> 닫힌 그래프(Closed graph)와 콤팩트 치역을 가져 UHC는 완벽히 성립하지만 <strong>LHC가 깨짐으로써 최적화의 안정성이 파괴</strong>되는 대표적 사례입니다. 생산 제약이나 예산선이 모수 변화에 따라 급격히 축소될 때 기업이나 소비자가 누리던 이전 최적 선택지로의 접근성이 단절됨을 경고합니다.'
       },
       C: {
-        name: '수축 점프 (LHC이나 not UHC)',
+        name: 'LHC 만족 / UHC 위반 (외측 폭발)',
+        mathTitle: 'F(0) = {0}, F(x) = [0, 1] (x ≠ 0)',
         xMin: -1.0, xMax: 1.0, yMin: -0.3, yMax: 1.3,
-        defaultX0: 0, defaultXTest: 0.2, defaultEps: 0.2, defaultY0: 0,
-        x0Min: -0.8, x0Max: 0.8,
-        desc: '<strong>F(0) = {0}, &nbsp; F(x) = [0, 1] (x ≠ 0)</strong><br>x=0에서 값집합이 갑자기 단일점 {0}으로 붕괴(수축)합니다. F(0)의 작은 근방 V에 대해 x\' ≠ 0인 F(x\')=[0,1]이 밖으로 탈출하므로 <strong>UHC 및 닫힌 그래프 위반</strong>이지만, 0을 만나는 개집합은 항상 만나므로 <strong>LHC는 성립</strong>합니다.',
-        evalF: x => Math.abs(x) < 0.001 ? [0, 0] : [0, 1],
-        graphShape: 'jump-collapse',
-        isCompactValued: true,
-        isConvexValued: true,
-        isClosedGraph: false,
-        isUHC: false,
-        isLHC: true,
-        bergeApp: false
+        x0: 0.0,
+        defaultX: 0.25, defaultEps: 0.20, defaultY0: 0.00,
+        evalF: x => Math.abs(x) < 1e-4 ? [0, 0] : [0, 1],
+        isUHC: false, isLHC: true, isClosed: false, isCompact: true,
+        bergeApplies: false,
+        kakutaniApplies: false,
+        uhcNote: '<i>F</i>(0) = {0}의 개근방으로 <i>V</i> = (−ε, ε) (단, ε &lt; 1)을 잡으면, 0의 임의의 작은 근방 <i>U</i> 안에서도 <i>x</i> ≠ 0인 모든 점에서 <i>F</i>(<i>x</i>) = [0, 1] ⊈ <i>V</i>가 됩니다. 즉, <strong>파이버가 <i>V</i> 바깥으로 폭발적으로 탈출하여 UHC가 명백히 위반</strong>됩니다.',
+        lhcNote: '<i>F</i>(0) = {0}의 유일한 원소는 <i>y</i>₀ = 0입니다. 임의의 <i>x</i> ≠ 0에 대해 항상 0 ∈ <i>F</i>(<i>x</i>) = [0, 1]이므로 <i>y</i>*(<i>x</i>) = 0을 선택하면 |<i>y</i>*(<i>x</i>) − <i>y</i>₀| = 0 → 0이 되어 <strong>LHC는 완벽히 만족</strong>합니다.',
+        bergeNote: '<strong>Berge 정리 적용 불가 (UHC 위반):</strong> 목적함수가 <i>f</i>(<i>x</i>, <i>y</i>) = <i>y</i>인 경우, <i>x</i> ≠ 0에서 <i>v</i>(<i>x</i>) = 1이지만 <i>x</i> = 0에서 <i>v</i>(0) = 0입니다. lim sup <i>v</i>(<i>x</i>) = 1 &gt; <i>v</i>(0) = 0이 되어 가치함수가 상반연속성을 잃고 상방 도약 불연속이 발생합니다.',
+        kakutaniNote: '<strong>Kakutani 정리 적용 불가 (UHC 위반):</strong> UHC가 성립하지 않으며 그래프 또한 닫혀 있지 않으므로(수열 (1/<i>k</i>, 1) ∈ gph(<i>F</i>)의 극한 (0, 1) ∉ gph(<i>F</i>)) 부동점 정리를 적용할 수 없습니다.',
+        economicNote: '<strong>미시경제학 함의:</strong> <em>"외측 폭발(Outer explosion)"</em>에 의해 UHC와 그래프 닫힘성이 동시에 붕괴하는 교과서적 반례입니다. 규제 완화나 진입 허용으로 실행가능집합이 불연속적으로 급팽창할 때 발생하는 현상으로, 상한 통제가 불가능해져 균형 존재성 증명이 성립하지 않습니다.'
       },
       D: {
-        name: '비콤팩트 치역 (닫힌 그래프 ≠ UHC)',
+        name: '닫힌 그래프 / UHC 위반 (비콤팩트 치역)',
+        mathTitle: 'F(0) = {0}, F(x) = {1/|x|} (x ≠ 0)',
         xMin: -1.0, xMax: 1.0, yMin: -0.5, yMax: 5.5,
-        defaultX0: 0, defaultXTest: 0.3, defaultEps: 0.4, defaultY0: 0,
-        x0Min: -0.8, x0Max: 0.8,
-        desc: '<strong>F(0) = {0}, &nbsp; F(x) = {1/|x|} (x ≠ 0)</strong><br>치역이 비콤팩트(유계 아님)할 때의 대표적 반례입니다. 그래프는 닫혀 있지만(닫힌 그래프), x가 0으로 갈 때 함숫값이 무한대로 발산하여 임의의 유계 근방 V 밖으로 탈출하므로 <strong>UHC가 성립하지 않습니다</strong>.',
-        evalF: x => {
-          if (Math.abs(x) < 0.001) return [0, 0];
-          const val = 1 / Math.abs(x);
-          return [val, val];
-        },
-        graphShape: 'reciprocal',
-        isCompactValued: true,
-        isConvexValued: true,
-        isClosedGraph: true,
-        isUHC: false,
-        isLHC: false,
-        bergeApp: false
+        x0: 0.0,
+        defaultX: 0.35, defaultEps: 0.40, defaultY0: 0.00,
+        evalF: x => Math.abs(x) < 1e-4 ? [0, 0] : [1 / Math.abs(x), 1 / Math.abs(x)],
+        isUHC: false, isLHC: false, isClosed: true, isCompact: true,
+        bergeApplies: false,
+        kakutaniApplies: false,
+        uhcNote: '수열 (<i>x<sub>k</sub></i>, <i>y<sub>k</sub></i>) = (1/<i>k</i>, <i>k</i>) ∈ gph(<i>F</i>)는 <i>y<sub>k</sub></i> → ∞로 발산하여 <b>R</b>² 내에 집적점을 갖지 않으므로 <strong>그래프 gph(<i>F</i>) 자체는 닫힌 집합</strong>입니다. 그러나 <i>F</i>(0) = {0}의 유계 근방 <i>V</i> = (−ε, ε)에 대해 <i>x</i> → 0일 때 <i>F</i>(<i>x</i>) = 1/|<i>x</i>| → ∞로 발산하므로 <strong>UHC는 성립하지 않습니다</strong>.',
+        lhcNote: '<i>y</i>₀ = 0에 대해 <i>x</i> ≠ 0에서 선택 가능한 유일한 원소는 1/|<i>x</i>|이므로 |<i>y</i>*(<i>x</i>) − <i>y</i>₀| = 1/|<i>x</i>| → ∞로 발산합니다. 따라서 <strong>LHC 역시 철저히 위반</strong>됩니다.',
+        bergeNote: '<strong>Berge 정리 적용 불가:</strong> 대응이 비유계로 발산하며 UHC와 LHC를 모두 상실하여 최적화 문제의 해 존재성 및 연속성을 보장할 수 없습니다.',
+        kakutaniNote: '<strong>Kakutani 정리 적용 불가:</strong> 공역이 콤팩트하지 않고 국소 유계성을 만족하지 못해 UHC가 파괴되므로 적용 불가능합니다.',
+        economicNote: '<strong>미시경제학 함의:</strong> <em>"닫힌 그래프이면 UHC인가?"</em>라는 질문에 대한 대학원 미시경제학의 결정적 반례(Sundaram Chapter 9)입니다. <strong>공역 <i>Y</i>가 콤팩트하거나 <i>F</i>가 국소 유계(locally bounded)일 때만 [닫힌 그래프 ⇔ UHC] 동치</strong>가 성립합니다. 자원 제약이나 소비집합이 비유계인 모형을 다룰 때 닫힌 그래프만으로 UHC를 예단해서는 안 됨을 시사합니다.'
       },
       E: {
-        name: '예산 대응 B(p)',
-        xMin: 0.3, xMax: 2.5, yMin: -0.4, yMax: 5.5,
-        defaultX0: 1.0, defaultXTest: 0.65, defaultEps: 0.3, defaultY0: 1.6,
-        x0Min: 0.4, x0Max: 2.2,
-        desc: '<strong>B(p) = [0, w/p], &nbsp; (소득 w=2, 가격 p &gt; 0)</strong><br>소비자 이론의 1재화 단면 예산집합입니다. 가격 p가 양수인 영역에서 B(p)는 콤팩트 볼록 집합이며, 상한 2/p가 연속함수이므로 <strong>UHC와 LHC를 모두 충족</strong>하여 Berge 최대정리가 적용됩니다.',
+        name: '예산 대응 B(p) (소비자 이론)',
+        mathTitle: 'B(p) = [0, w/p], (w = 2, p > 0)',
+        xMin: 0.4, xMax: 2.6, yMin: -0.4, yMax: 5.5,
+        x0: 1.0,
+        defaultX: 0.70, defaultEps: 0.35, defaultY0: 1.60,
         evalF: p => [0, 2 / p],
-        graphShape: 'budget',
-        isCompactValued: true,
-        isConvexValued: true,
-        isClosedGraph: true,
-        isUHC: true,
-        isLHC: true,
-        bergeApp: true
+        isUHC: true, isLHC: true, isClosed: true, isCompact: true,
+        bergeApplies: true,
+        kakutaniApplies: true,
+        uhcNote: '기준 가격 <i>p</i>₀ = 1에서 <i>B</i>(1) = [0, 2]입니다. 임의의 <i>V</i> = (−ε, 2 + ε)에 대해 상한 함수 2/<i>p</i>가 <i>p</i> &gt; 0에서 연속이므로 2/<i>p</i> &lt; 2 + ε를 충족하는 가격 근방 <i>U</i> = (<i>p</i>₀ − δ, <i>p</i>₀ + δ)를 항상 구성할 수 있어 <strong>UHC를 만족</strong>합니다.',
+        lhcNote: '임의의 소비계획 <i>x</i>₀ ∈ [0, 2]에 대해 가격이 <i>p</i> → 1로 변동하더라도 <i>x</i>*(<i>p</i>) = min(<i>x</i>₀, 2/<i>p</i>) ∈ <i>B</i>(<i>p</i>)를 취하면 <i>p</i> → 1일 때 <i>x</i>*(<i>p</i>) → <i>x</i>₀가 엄밀히 보장되므로 <strong>LHC를 만족</strong>합니다.',
+        bergeNote: '<strong>Berge 정리 완벽 적용:</strong> 양의 가격 체계 <i>p</i> ≫ 0에서 예산 대응 <i>B</i>(<i>p</i>, <i>w</i>)는 연속(UHC + LHC)이고 공집합이 아닌 콤팩트 볼록 집합입니다. 따라서 연속인 효용함수 <i>u</i>(<i>x</i>)에 대해 간접효용함수 <i>v</i>(<i>p</i>, <i>w</i>)는 연속함수이며, 마샬 수요대응 <i>x</i>*(<i>p</i>, <i>w</i>)는 공집합이 아닌 콤팩트값 및 UHC를 갖습니다.',
+        kakutaniNote: '<strong>Kakutani 정리 적용 가능:</strong> 예산집합이 콤팩트 볼록 집합이므로 관련 효용 극대화 및 가격조정 대응에 부동점 정리를 원활히 적용할 수 있습니다.',
+        economicNote: '<strong>미시경제학 함의:</strong> 소비자 선택 이론의 근간입니다. 가격이 엄격히 양수(<i>p</i> ≫ 0)인 정규 가격 영역에서는 예산 대응이 연속이므로 Berge 정리에 의해 수요의 상반연속성과 간접효용함수의 연속성이 보장됩니다. 단, <i>p</i> → 0으로 가격이 0으로 수락되면 예산집합이 비유계로 발산하여 프리셋 D와 같은 위상적 파국이 일어날 수 있습니다.'
       }
     };
 
     let curPresetKey = 'A';
     let curMode = 'UHC'; // 'UHC' or 'LHC'
 
-    // Coordinate mapping functions
+    const $ = id => document.getElementById(id);
+
+    // Coordinate converters
     function sx(x, p) {
       return L + ((x - p.xMin) / (p.xMax - p.xMin)) * W;
     }
@@ -512,106 +674,99 @@
       return Math.max(min, Math.min(max, val));
     }
 
-    function initPreset(key) {
+    // Set Preset
+    function setPreset(key) {
       curPresetKey = key;
       const p = PRESETS[key];
 
-      // Update preset buttons
       document.querySelectorAll('.preset-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.preset === key);
       });
 
-      // Update range inputs bounds and defaults
-      const x0Input = $('x0-input');
-      x0Input.min = p.x0Min;
-      x0Input.max = p.x0Max;
-      x0Input.step = key === 'E' ? '0.05' : '0.02';
-      x0Input.value = p.defaultX0;
+      // Update Slider Ranges
+      const xProbe = $('x-probe');
+      xProbe.min = (p.xMin + 0.03).toFixed(2);
+      xProbe.max = (p.xMax - 0.03).toFixed(2);
+      xProbe.step = key === 'E' ? '0.02' : '0.01';
+      xProbe.value = p.defaultX;
 
-      const xtestInput = $('xtest-input');
-      xtestInput.min = p.xMin + 0.05;
-      xtestInput.max = p.xMax - 0.05;
-      xtestInput.value = p.defaultXTest;
+      const epsSlider = $('eps-slider');
+      epsSlider.value = p.defaultEps;
 
-      const epsInput = $('eps-input');
-      epsInput.value = p.defaultEps;
+      const y0Slider = $('y0-slider');
+      const [f0Min, f0Max] = p.evalF(p.x0);
+      y0Slider.min = Math.min(f0Min, f0Max).toFixed(2);
+      y0Slider.max = Math.max(f0Min, f0Max, 1.0).toFixed(2);
+      y0Slider.value = p.defaultY0;
 
-      const y0Input = $('y0-input');
-      const [f0Min, f0Max] = p.evalF(p.defaultX0);
-      y0Input.min = Math.min(f0Min, f0Max);
-      y0Input.max = Math.max(f0Min, f0Max) || 1;
-      y0Input.value = p.defaultY0;
+      $('x0-display-text').innerHTML = key === 'E' 
+        ? `기준 가격 <i>p</i>₀ = ${p.x0.toFixed(2)},  <i>B</i>(<i>p</i>₀) = [${f0Min.toFixed(2)}, ${f0Max.toFixed(2)}]`
+        : `기준 특이점 <i>x</i>₀ = ${p.x0.toFixed(2)},  <i>F</i>(<i>x</i>₀) = [${f0Min.toFixed(2)}, ${f0Max.toFixed(2)}]`;
 
-      const xkInput = $('xk-input');
-      xkInput.min = p.xMin + 0.05;
-      xkInput.max = p.xMax - 0.05;
-      xkInput.value = p.defaultXTest;
+      $('economic-implication').innerHTML = `<h3>미시경제학적 함의 (Graduate Microeconomics Context)</h3><div>${p.economicNote}</div>`;
 
-      $('formula-desc').innerHTML = p.desc;
+      // Update Theorem Cards
+      const thmB = $('thm-berge');
+      thmB.className = `thm-card ${p.bergeApplies ? 'applicable' : 'inapplicable'}`;
+      $('thm-berge-desc').innerHTML = p.bergeNote;
+
+      const thmK = $('thm-kakutani');
+      thmK.className = `thm-card ${p.kakutaniApplies ? 'applicable' : 'inapplicable'}`;
+      $('thm-kakutani-desc').innerHTML = p.kakutaniNote;
+
       render();
     }
 
+    // Render Grid
     function renderGrid(p) {
-      const g = $('grid-layer');
+      const g = $('grid-group');
       g.innerHTML = '';
 
-      // Ticks X
-      const numTicksX = 8;
-      for (let i = 0; i <= numTicksX; i++) {
-        const xVal = p.xMin + (i / numTicksX) * (p.xMax - p.xMin);
-        const xPos = sx(xVal, p);
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('class', 'grid-line');
-        line.setAttribute('x1', xPos);
-        line.setAttribute('y1', T);
-        line.setAttribute('x2', xPos);
-        line.setAttribute('y2', B);
-        g.appendChild(line);
+      const nX = 8;
+      for (let i = 0; i <= nX; i++) {
+        const xVal = p.xMin + (i / nX) * (p.xMax - p.xMin);
+        const xp = sx(xVal, p);
+        const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        l.setAttribute('class', 'grid');
+        l.setAttribute('x1', xp); l.setAttribute('x2', xp);
+        l.setAttribute('y1', T); l.setAttribute('y2', B);
+        g.appendChild(l);
       }
 
-      // Ticks Y
-      const numTicksY = 6;
-      for (let j = 0; j <= numTicksY; j++) {
-        const yVal = p.yMin + (j / numTicksY) * (p.yMax - p.yMin);
-        const yPos = sy(yVal, p);
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('class', 'grid-line');
-        line.setAttribute('x1', L);
-        line.setAttribute('y1', yPos);
-        line.setAttribute('x2', L + W);
-        line.setAttribute('y2', yPos);
-        g.appendChild(line);
+      const nY = 6;
+      for (let j = 0; j <= nY; j++) {
+        const yVal = p.yMin + (j / nY) * (p.yMax - p.yMin);
+        const yp = sy(yVal, p);
+        const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        l.setAttribute('class', 'grid');
+        l.setAttribute('x1', L); l.setAttribute('x2', L + W);
+        l.setAttribute('y1', yp); l.setAttribute('y2', yp);
+        g.appendChild(l);
       }
 
-      // Zero axes if within range
+      // Zero Axes
       if (p.xMin < 0 && p.xMax > 0) {
-        const x0 = sx(0, p);
-        const axis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        axis.setAttribute('class', 'axis-line');
-        axis.setAttribute('x1', x0);
-        axis.setAttribute('y1', T);
-        axis.setAttribute('x2', x0);
-        axis.setAttribute('y2', B);
-        g.appendChild(axis);
+        const ax = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        ax.setAttribute('class', 'axis');
+        ax.setAttribute('x1', sx(0, p)); ax.setAttribute('x2', sx(0, p));
+        ax.setAttribute('y1', T); ax.setAttribute('y2', B);
+        g.appendChild(ax);
       }
       if (p.yMin < 0 && p.yMax > 0) {
-        const y0 = sy(0, p);
-        const axis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        axis.setAttribute('class', 'axis-line');
-        axis.setAttribute('x1', L);
-        axis.setAttribute('y1', y0);
-        axis.setAttribute('x2', L + W);
-        axis.setAttribute('y2', y0);
-        g.appendChild(axis);
+        const ay = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        ay.setAttribute('class', 'axis');
+        ay.setAttribute('x1', L); ay.setAttribute('x2', L + W);
+        ay.setAttribute('y1', sy(0, p)); ay.setAttribute('y2', sy(0, p));
+        g.appendChild(ay);
       }
     }
 
-    function renderGraphLayer(p) {
-      const g = $('graph-layer');
+    // Render Graph Geometry
+    function renderGraphGeometry(p) {
+      const g = $('graph-group');
       g.innerHTML = '';
 
-      if (p.graphShape === 'band') {
-        // Continuous band polygon
+      if (curPresetKey === 'A') {
         const pts = [
           `${sx(-1, p)},${sy(-1/3, p)}`,
           `${sx(1, p)},${sy(1/3, p)}`,
@@ -619,100 +774,96 @@
           `${sx(-1, p)},${sy(4/3, p)}`
         ];
         const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        poly.setAttribute('class', 'graph-fill');
+        poly.setAttribute('class', 'gph-area');
         poly.setAttribute('points', pts.join(' '));
         g.appendChild(poly);
 
-        // Boundaries
         const b1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        b1.setAttribute('class', 'graph-boundary');
+        b1.setAttribute('class', 'gph-stroke');
         b1.setAttribute('x1', sx(-1, p)); b1.setAttribute('y1', sy(-1/3, p));
-        b1.setAttribute('x2', sx(1, p));  b1.setAttribute('y2', sy(1/3, p));
+        b1.setAttribute('x2', sx(1, p)); b1.setAttribute('y2', sy(1/3, p));
         g.appendChild(b1);
 
         const b2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        b2.setAttribute('class', 'graph-boundary');
+        b2.setAttribute('class', 'gph-stroke');
         b2.setAttribute('x1', sx(-1, p)); b2.setAttribute('y1', sy(4/3, p));
-        b2.setAttribute('x2', sx(1, p));  b2.setAttribute('y2', sy(2/3, p));
+        b2.setAttribute('x2', sx(1, p)); b2.setAttribute('y2', sy(2/3, p));
         g.appendChild(b2);
-      } else if (p.graphShape === 'jump-expand') {
-        // Lines y=0 for x != 0, and vertical bar [0, 1] at x=0
+      } else if (curPresetKey === 'B') {
+        // Line y=0 everywhere except x=0
         const l1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        l1.setAttribute('class', 'graph-boundary');
-        l1.setAttribute('x1', sx(-1, p)); l1.setAttribute('y1', sy(0, p));
-        l1.setAttribute('x2', sx(1, p));  l1.setAttribute('y2', sy(0, p));
+        l1.setAttribute('class', 'gph-stroke');
         l1.setAttribute('stroke-width', '2.5');
+        l1.setAttribute('x1', sx(-1, p)); l1.setAttribute('y1', sy(0, p));
+        l1.setAttribute('x2', sx(1, p)); l1.setAttribute('y2', sy(0, p));
         g.appendChild(l1);
 
+        // Vertical fiber [0, 1] at x=0
         const bar = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        bar.setAttribute('class', 'graph-boundary');
+        bar.setAttribute('class', 'gph-stroke');
+        bar.setAttribute('stroke', '#8d7968');
+        bar.setAttribute('stroke-width', '4');
         bar.setAttribute('x1', sx(0, p)); bar.setAttribute('y1', sy(0, p));
         bar.setAttribute('x2', sx(0, p)); bar.setAttribute('y2', sy(1, p));
-        bar.setAttribute('stroke-width', '4');
-        bar.setAttribute('stroke', '#a0836e');
         g.appendChild(bar);
-      } else if (p.graphShape === 'jump-collapse') {
-        // Shaded rectangle for x != 0
-        const r1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        r1.setAttribute('class', 'graph-fill');
-        r1.setAttribute('x', sx(-1, p));
-        r1.setAttribute('y', sy(1, p));
-        r1.setAttribute('width', sx(1, p) - sx(-1, p));
-        r1.setAttribute('height', sy(0, p) - sy(1, p));
-        g.appendChild(r1);
+      } else if (curPresetKey === 'C') {
+        // Rectangle [0, 1] for x != 0
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('class', 'gph-area');
+        rect.setAttribute('x', sx(-1, p)); rect.setAttribute('y', sy(1, p));
+        rect.setAttribute('width', sx(1, p) - sx(-1, p));
+        rect.setAttribute('height', sy(0, p) - sy(1, p));
+        g.appendChild(rect);
 
-        // Hollow vertical line at x=0 showing missing interior, only (0,0) remains
-        const hole = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        hole.setAttribute('x1', sx(0, p)); hole.setAttribute('y1', sy(0.02, p));
-        hole.setAttribute('x2', sx(0, p)); hole.setAttribute('y2', sy(1, p));
-        hole.setAttribute('stroke', '#fff');
-        hole.setAttribute('stroke-width', '3');
-        hole.setAttribute('stroke-dasharray', '2 2');
-        g.appendChild(hole);
+        // Slit at x=0: missing fiber except y=0
+        const slit = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        slit.setAttribute('x1', sx(0, p)); slit.setAttribute('x2', sx(0, p));
+        slit.setAttribute('y1', sy(0.02, p)); slit.setAttribute('y2', sy(1, p));
+        slit.setAttribute('stroke', '#fff');
+        slit.setAttribute('stroke-width', '3.5');
+        g.appendChild(slit);
 
-        const dot0 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        dot0.setAttribute('cx', sx(0, p)); dot0.setAttribute('cy', sy(0, p));
-        dot0.setAttribute('r', '4'); dot0.setAttribute('fill', '#a0836e');
-        g.appendChild(dot0);
-      } else if (p.graphShape === 'reciprocal') {
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.setAttribute('cx', sx(0, p)); dot.setAttribute('cy', sy(0, p));
+        dot.setAttribute('r', '4');
+        dot.setAttribute('fill', '#8d7968');
+        g.appendChild(dot);
+      } else if (curPresetKey === 'D') {
         // Curve y = 1/|x|
-        const pathNeg = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        let dNeg = '';
-        for (let x = -1.0; x <= -0.18; x += 0.02) {
-          const px = sx(x, p);
-          const py = sy(1 / Math.abs(x), p);
-          dNeg += (dNeg === '' ? 'M ' : ' L ') + `${px} ${py}`;
+        const p1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        let d1 = '';
+        for (let x = -1.0; x <= -0.19; x += 0.02) {
+          d1 += (d1 === '' ? 'M ' : ' L ') + `${sx(x, p)} ${sy(1 / Math.abs(x), p)}`;
         }
-        pathNeg.setAttribute('d', dNeg);
-        pathNeg.setAttribute('class', 'graph-boundary');
-        pathNeg.setAttribute('stroke-width', '2.5');
-        g.appendChild(pathNeg);
+        p1.setAttribute('d', d1);
+        p1.setAttribute('class', 'gph-stroke');
+        p1.setAttribute('stroke-width', '2.5');
+        g.appendChild(p1);
 
-        const pathPos = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        let dPos = '';
-        for (let x = 0.18; x <= 1.0; x += 0.02) {
-          const px = sx(x, p);
-          const py = sy(1 / x, p);
-          dPos += (dPos === '' ? 'M ' : ' L ') + `${px} ${py}`;
+        const p2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        let d2 = '';
+        for (let x = 0.19; x <= 1.0; x += 0.02) {
+          d2 += (d2 === '' ? 'M ' : ' L ') + `${sx(x, p)} ${sy(1 / x, p)}`;
         }
-        pathPos.setAttribute('d', dPos);
-        pathPos.setAttribute('class', 'graph-boundary');
-        pathPos.setAttribute('stroke-width', '2.5');
-        g.appendChild(pathPos);
+        p2.setAttribute('d', d2);
+        p2.setAttribute('class', 'gph-stroke');
+        p2.setAttribute('stroke-width', '2.5');
+        g.appendChild(p2);
 
-        const dot0 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        dot0.setAttribute('cx', sx(0, p)); dot0.setAttribute('cy', sy(0, p));
-        dot0.setAttribute('r', '4'); dot0.setAttribute('fill', '#a0836e');
-        g.appendChild(dot0);
-      } else if (p.graphShape === 'budget') {
-        // Area under y = 2/p
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.setAttribute('cx', sx(0, p)); dot.setAttribute('cy', sy(0, p));
+        dot.setAttribute('r', '4');
+        dot.setAttribute('fill', '#8d7968');
+        g.appendChild(dot);
+      } else if (curPresetKey === 'E') {
+        // Area under 2/p
         let dArea = `M ${sx(p.xMin, p)} ${sy(0, p)}`;
         for (let x = p.xMin; x <= p.xMax; x += 0.04) {
           dArea += ` L ${sx(x, p)} ${sy(2 / x, p)}`;
         }
         dArea += ` L ${sx(p.xMax, p)} ${sy(0, p)} Z`;
         const poly = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        poly.setAttribute('class', 'graph-fill');
+        poly.setAttribute('class', 'gph-area');
         poly.setAttribute('d', dArea);
         g.appendChild(poly);
 
@@ -720,266 +871,250 @@
         for (let x = p.xMin; x <= p.xMax; x += 0.04) {
           dCurve += (dCurve === '' ? 'M ' : ' L ') + `${sx(x, p)} ${sy(2 / x, p)}`;
         }
-        const bCurve = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        bCurve.setAttribute('class', 'graph-boundary');
-        bCurve.setAttribute('d', dCurve);
-        bCurve.setAttribute('stroke-width', '2');
-        g.appendChild(bCurve);
+        const bc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        bc.setAttribute('class', 'gph-stroke');
+        bc.setAttribute('d', dCurve);
+        bc.setAttribute('stroke-width', '2.2');
+        g.appendChild(bc);
       }
     }
 
-    function renderBadges(p, atX0UHC, atX0LHC) {
-      const container = $('badges-container');
-      container.innerHTML = '';
-
-      const items = [
-        { label: '비공집합 (Nonempty)', val: true, desc: '모든 점에서 정의됨' },
-        { label: '콤팩트값 (Compact)', val: p.isCompactValued, desc: p.isCompactValued ? '각 F(x)가 닫힌 유계' : '유계가 아님' },
-        { label: '볼록값 (Convex)', val: p.isConvexValued, desc: p.isConvexValued ? '각 F(x)가 볼록집합' : '볼록하지 않음' },
-        { label: '닫힌 그래프 (Closed Gr)', val: p.isClosedGraph, desc: p.isClosedGraph ? 'gph(F)가 닫힘' : '수렴 극한점 누락' },
-        { label: '상반연속 (UHC at x₀)', val: atX0UHC, desc: atX0UHC ? 'F(x\') ⊆ V 포섭 만족' : '값집합 외부로 탈출' },
-        { label: '하반연속 (LHC at x₀)', val: atX0LHC, desc: atX0LHC ? 'y_k → y₀ 수열 접근 가능' : '원소 접근 경로 소멸' },
-        { label: '전체 연속성 (Cont)', val: atX0UHC && atX0LHC, desc: (atX0UHC && atX0LHC) ? 'UHC + LHC 동시 만족' : '반연속성 결손' },
-        { label: '정리 적용 (Kakutani/Berge)', val: p.bergeApp, desc: p.bergeApp ? '정리 조건 완전 충족' : '가정 결여로 적용 불가' }
-      ];
-
-      items.forEach(item => {
-        const div = document.createElement('div');
-        div.className = `badge-card ${item.val ? 'is-true' : 'is-false'}`;
-        div.innerHTML = `<strong>${item.val ? '✓ ' : '✗ '}${item.label}</strong><span>${item.desc}</span>`;
-        container.appendChild(div);
-      });
-    }
-
+    // Main Render Pipeline
     function render() {
       const p = PRESETS[curPresetKey];
+      const xProbe = +$('x-probe').value;
+      $('x-probe-val').textContent = xProbe.toFixed(2);
 
-      const x0 = +$('x0-input').value;
-      $('x0-out').textContent = x0.toFixed(2);
+      const [f0Min, f0Max] = p.evalF(p.x0);
+      const [fxMin, fxMax] = p.evalF(xProbe);
 
-      const [f0Min, f0Max] = p.evalF(x0);
-
-      // Render base layers
       renderGrid(p);
-      renderGraphLayer(p);
+      renderGraphGeometry(p);
 
-      // F(x0) line
-      const fBaseLine = $('f-base-line');
-      fBaseLine.setAttribute('x1', sx(x0, p));
-      fBaseLine.setAttribute('x2', sx(x0, p));
-      fBaseLine.setAttribute('y1', sy(f0Min, p));
-      fBaseLine.setAttribute('y2', sy(f0Max, p));
+      // Base Fiber F(x0)
+      const fiberBase = $('fiber-base');
+      fiberBase.setAttribute('x1', sx(p.x0, p)); fiberBase.setAttribute('x2', sx(p.x0, p));
+      fiberBase.setAttribute('y1', sy(f0Min, p)); fiberBase.setAttribute('y2', sy(f0Max, p));
 
-      const labelsLayer = $('labels-layer');
-      labelsLayer.innerHTML = '';
+      // Probe Fiber F(x)
+      const fiberProbe = $('fiber-probe');
+      fiberProbe.setAttribute('x1', sx(xProbe, p)); fiberProbe.setAttribute('x2', sx(xProbe, p));
+      fiberProbe.setAttribute('y1', sy(fxMin, p)); fiberProbe.setAttribute('y2', sy(fxMax, p));
 
-      // Axis labels
-      const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      xLabel.setAttribute('x', L + W - 15);
-      xLabel.setAttribute('y', B - 8);
-      xLabel.setAttribute('font-weight', 'bold');
-      xLabel.setAttribute('fill', '#725f54');
-      xLabel.textContent = curPresetKey === 'E' ? '가격 p' : '정의역 x';
-      labelsLayer.appendChild(xLabel);
+      // Render Labels
+      const lblGroup = $('labels-group');
+      lblGroup.innerHTML = '';
 
-      const yLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      yLabel.setAttribute('x', L + 8);
-      yLabel.setAttribute('y', T + 18);
-      yLabel.setAttribute('font-weight', 'bold');
-      yLabel.setAttribute('fill', '#725f54');
-      yLabel.textContent = curPresetKey === 'E' ? '소비량 x' : '공역 y';
-      labelsLayer.appendChild(yLabel);
+      const makeText = (x, y, text, color, bold = false) => {
+        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        t.setAttribute('x', x); t.setAttribute('y', y);
+        t.setAttribute('fill', color);
+        if (bold) t.setAttribute('font-weight', 'bold');
+        t.setAttribute('font-size', '11px');
+        t.setAttribute('font-family', '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif');
+        t.textContent = text;
+        lblGroup.appendChild(t);
+      };
 
-      // Label for F(x0)
-      const f0Text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      f0Text.setAttribute('x', sx(x0, p) + 6);
-      f0Text.setAttribute('y', sy((f0Min + f0Max) / 2, p) - 6);
-      f0Text.setAttribute('fill', 'var(--plum)');
-      f0Text.setAttribute('font-weight', 'bold');
-      f0Text.textContent = `F(x₀)`;
-      labelsLayer.appendChild(f0Text);
+      // Axis names
+      makeText(L + W - 32, B - 8, curPresetKey === 'E' ? '가격 p' : '모수 x', '#7a6858', true);
+      makeText(L + 8, T + 18, curPresetKey === 'E' ? '소비량 x' : '공역 y', '#7a6858', true);
 
-      let atX0UHC = p.isUHC;
-      let atX0LHC = p.isLHC;
+      // Fiber Labels
+      makeText(sx(p.x0, p) + 6, sy((f0Min + f0Max) / 2, p) - 6, curPresetKey === 'E' ? 'B(p₀)' : 'F(x₀)', 'var(--plum)', true);
+      makeText(sx(xProbe, p) + 6, sy((fxMin + fxMax) / 2, p) + 14, curPresetKey === 'E' ? 'B(p)' : 'F(x)', 'var(--highlight)', true);
 
-      // If user moved x0 away from 0 in presets B, C, D, local continuity differs
-      if (curPresetKey === 'B' || curPresetKey === 'C' || curPresetKey === 'D') {
-        if (Math.abs(x0) > 0.05) {
-          atX0UHC = true;
-          atX0LHC = true;
-        }
-      }
-
+      // --- Mode Specific Operations ---
       if (curMode === 'UHC') {
-        $('uhc-controls').style.display = 'block';
-        $('lhc-controls').style.display = 'none';
+        $('uhc-params-block').style.display = 'flex';
+        $('lhc-params-block').style.display = 'none';
+
         $('v-band-rect').style.display = 'block';
         $('v-upper-line').style.display = 'block';
         $('v-lower-line').style.display = 'block';
-        $('lhc-seq-line').style.display = 'none';
-        $('y0-dot').style.display = 'none';
-        $('yk-dot').style.display = 'none';
+        $('u-box-rect').style.display = 'block';
 
-        const eps = +$('eps-input').value;
-        const xtest = +$('xtest-input').value;
-        $('eps-out').textContent = eps.toFixed(2);
-        $('xtest-out').textContent = xtest.toFixed(2);
+        $('lhc-path-line').style.display = 'none';
+        $('marker-y0').style.display = 'none';
+        $('marker-closest').style.display = 'none';
+
+        const eps = +$('eps-slider').value;
+        $('eps-val').textContent = eps.toFixed(2);
 
         const vMin = f0Min - eps;
         const vMax = f0Max + eps;
 
-        // V Band SVG
+        // V band dimensions
+        const vTop = sy(vMax, p);
+        const vBot = sy(vMin, p);
         const vRect = $('v-band-rect');
-        const vTopY = sy(vMax, p);
-        const vBotY = sy(vMin, p);
-        vRect.setAttribute('y', Math.max(T, vTopY));
-        vRect.setAttribute('height', Math.max(0, Math.min(B, vBotY) - Math.max(T, vTopY)));
+        vRect.setAttribute('y', Math.max(T, vTop));
+        vRect.setAttribute('height', Math.max(0, Math.min(B, vBot) - Math.max(T, vTop)));
 
-        const vUpper = $('v-upper-line');
-        vUpper.setAttribute('x1', L); vUpper.setAttribute('x2', L + W);
-        vUpper.setAttribute('y1', vTopY); vUpper.setAttribute('y2', vTopY);
+        $('v-upper-line').setAttribute('x1', L); $('v-upper-line').setAttribute('x2', L + W);
+        $('v-upper-line').setAttribute('y1', vTop); $('v-upper-line').setAttribute('y2', vTop);
 
-        const vLower = $('v-lower-line');
-        vLower.setAttribute('x1', L); vLower.setAttribute('x2', L + W);
-        vLower.setAttribute('y1', vBotY); vLower.setAttribute('y2', vBotY);
+        $('v-lower-line').setAttribute('x1', L); $('v-lower-line').setAttribute('x2', L + W);
+        $('v-lower-line').setAttribute('y1', vBot); $('v-lower-line').setAttribute('y2', vBot);
 
-        // F(x') line
-        const [ftMin, ftMax] = p.evalF(xtest);
-        const fTestLine = $('f-test-line');
-        fTestLine.style.display = 'block';
-        fTestLine.setAttribute('x1', sx(xtest, p));
-        fTestLine.setAttribute('x2', sx(xtest, p));
-        fTestLine.setAttribute('y1', sy(ftMin, p));
-        fTestLine.setAttribute('y2', sy(ftMax, p));
+        makeText(L + 10, vTop - 5, `V 상한: ${(vMax).toFixed(2)}`, 'var(--plum)');
+        makeText(L + 10, vBot + 14, `V 하한: ${(vMin).toFixed(2)}`, 'var(--plum)');
 
-        // Label for F(x')
-        const ftText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        ftText.setAttribute('x', sx(xtest, p) + 6);
-        ftText.setAttribute('y', sy((ftMin + ftMax) / 2, p) + 14);
-        ftText.setAttribute('fill', 'var(--terra)');
-        ftText.setAttribute('font-weight', 'bold');
-        ftText.textContent = `F(x')`;
-        labelsLayer.appendChild(ftText);
-
-        // Check containment: F(x') ⊆ V
-        const isContained = (ftMin >= vMin - 1e-4) && (ftMax <= vMax + 1e-4);
-
-        const badge = $('status-badge');
-        if (isContained) {
-          badge.className = 'status-overlay status-pass';
-          badge.innerHTML = `<span>✓ F(x') ⊆ V (포섭 만족: 안전)</span>`;
-        } else {
-          badge.className = 'status-overlay status-fail';
-          badge.innerHTML = `<span>⚠️ F(x') ⊈ V (탈출: UHC 위반 후보)</span>`;
+        // Compute Admissible Neighborhood U = (x0 - delta, x0 + delta)
+        let delta = 0;
+        if (curPresetKey === 'A') {
+          delta = Math.min(3 * eps, 0.9);
+        } else if (curPresetKey === 'B') {
+          delta = 0.95; // Any x has F(x)={0} in V
+        } else if (curPresetKey === 'C') {
+          delta = 0; // Immediate escape for x != 0
+        } else if (curPresetKey === 'D') {
+          delta = 0; // Escapes to infinity as x -> 0
+        } else if (curPresetKey === 'E') {
+          // B(p) = [0, 2/p], 2/p < 2 + eps => p > 2 / (2 + eps)
+          const pLower = 2 / (2 + eps);
+          delta = Math.min(1.0 - pLower, 0.8);
         }
 
-        // Narrative
-        let narrative = `<strong>UHC 판정 분석:</strong> 개근방 $V = (${vMin.toFixed(2)}, ${vMax.toFixed(2)})$ 안에 $x'=${xtest.toFixed(2)}$에서의 값집합 $F(x')=[${ftMin.toFixed(2)}, ${ftMax.toFixed(2)}]$가 `;
-        if (isContained) {
-          narrative += `완전히 포함됩니다. 임의의 열린 집합 $V \\supset F(x_0)$에 대해 $x_0$의 작은 근방 $U$가 존재하여 모든 $x' \\in U$에서 $F(x') \\subseteq V$가 성립하면 $x_0$에서 <strong>상반연속(UHC)</strong>입니다.`;
+        const uBox = $('u-box-rect');
+        if (delta > 0) {
+          const uLeft = sx(p.x0 - delta, p);
+          const uRight = sx(p.x0 + delta, p);
+          uBox.setAttribute('x', uLeft);
+          uBox.setAttribute('width', uRight - uLeft);
+          uBox.setAttribute('y', Math.max(T, vTop));
+          uBox.setAttribute('height', Math.max(0, Math.min(B, vBot) - Math.max(T, vTop)));
+          uBox.style.display = 'block';
+          makeText(uLeft + 5, B - 8, `안전 근방 U = (x₀ − δ, x₀ + δ)`, 'var(--green)', true);
         } else {
-          narrative += `<strong>포함되지 않고 벗어납니다!</strong> $x_0$에 아무리 가까운 근방에서도 값집합이 $V$ 바깥으로 튀어나가는 $x'$가 존재하면 상반연속(UHC)이 깨집니다.`;
+          uBox.style.display = 'none';
         }
-        $('diag-narrative').innerHTML = narrative;
+
+        // Test containment: F(x) ⊆ V
+        const isContained = (fxMin >= vMin - 1e-4) && (fxMax <= vMax + 1e-4);
+        fiberProbe.className.baseVal = isContained ? 'probe-fiber is-contained' : 'probe-fiber is-breached';
+
+        const tag = $('verdict-tag');
+        if (isContained) {
+          tag.className = 'verdict-banner pass';
+          tag.innerHTML = `<span>✓ 포섭 만족: <i>F</i>(${xProbe.toFixed(2)}) ⊆ <i>V</i> &nbsp; [외측 폭발 없음]</span>`;
+        } else {
+          tag.className = 'verdict-banner fail';
+          tag.innerHTML = `<span>⚠️ 포섭 탈출: <i>F</i>(${xProbe.toFixed(2)}) ⊈ <i>V</i> &nbsp; [외측 폭발 발생]</span>`;
+        }
+
+        $('mode-concept-desc').innerHTML = `
+          <strong>상반연속(UHC) 개집합 포섭 정의</strong>
+          대응 <i>F</i>가 <i>x</i>₀에서 UHC라는 것은, <i>F</i>(<i>x</i>₀) ⊆ <i>V</i>인 <em>임의의 개집합 <i>V</i></em>에 대해 
+          <i>x</i>₀의 국소 근방 <i>U</i>가 존재하여 <strong>∀<i>x</i> ∈ <i>U</i>, <i>F</i>(<i>x</i>) ⊆ <i>V</i></strong>를 만족하는 것입니다.
+          <div style="margin-top: .4rem; padding-top: .35rem; border-top: 1px dashed #d5c8b8;">
+            ${p.uhcNote}
+          </div>
+        `;
 
       } else {
         // LHC Mode
-        $('uhc-controls').style.display = 'none';
-        $('lhc-controls').style.display = 'block';
+        $('uhc-params-block').style.display = 'none';
+        $('lhc-params-block').style.display = 'flex';
+
         $('v-band-rect').style.display = 'none';
         $('v-upper-line').style.display = 'none';
         $('v-lower-line').style.display = 'none';
-        $('lhc-seq-line').style.display = 'block';
-        $('y0-dot').style.display = 'block';
-        $('yk-dot').style.display = 'block';
+        $('u-box-rect').style.display = 'none';
 
-        const y0Input = $('y0-input');
-        const xk = +$('xk-input').value;
-        $('xk-out').textContent = xk.toFixed(2);
+        $('lhc-path-line').style.display = 'block';
+        $('marker-y0').style.display = 'block';
+        $('marker-closest').style.display = 'block';
 
-        // Clamp y0 to F(x0)
-        let y0 = +y0Input.value;
+        let y0 = +$('y0-slider').value;
         y0 = clamp(y0, Math.min(f0Min, f0Max), Math.max(f0Min, f0Max));
-        $('y0-out').textContent = y0.toFixed(2);
+        $('y0-val').textContent = y0.toFixed(2);
+
+        // Closest element y*(x) in F(x)
+        const yClosest = clamp(y0, fxMin, fxMax);
 
         // Target dot (x0, y0)
-        const dot0 = $('y0-dot');
-        dot0.setAttribute('cx', sx(x0, p));
-        dot0.setAttribute('cy', sy(y0, p));
+        const m0 = $('marker-y0');
+        m0.setAttribute('cx', sx(p.x0, p));
+        m0.setAttribute('cy', sy(y0, p));
 
-        // Evaluate F(xk) and find closest yk to y0
-        const [fkMin, fkMax] = p.evalF(xk);
-        const yk = clamp(y0, fkMin, fkMax);
+        // Closest element dot (x, y*(x))
+        const mc = $('marker-closest');
+        mc.setAttribute('cx', sx(xProbe, p));
+        mc.setAttribute('cy', sy(yClosest, p));
 
-        // Test line F(xk)
-        const fTestLine = $('f-test-line');
-        fTestLine.style.display = 'block';
-        fTestLine.setAttribute('x1', sx(xk, p));
-        fTestLine.setAttribute('x2', sx(xk, p));
-        fTestLine.setAttribute('y1', sy(fkMin, p));
-        fTestLine.setAttribute('y2', sy(fkMax, p));
+        // Connecting trajectory line
+        const pathLine = $('lhc-path-line');
+        pathLine.setAttribute('x1', sx(xProbe, p));
+        pathLine.setAttribute('y1', sy(yClosest, p));
+        pathLine.setAttribute('x2', sx(p.x0, p));
+        pathLine.setAttribute('y2', sy(y0, p));
 
-        // Point (xk, yk)
-        const dotK = $('yk-dot');
-        dotK.setAttribute('cx', sx(xk, p));
-        dotK.setAttribute('cy', sy(yk, p));
+        const dist = Math.abs(yClosest - y0);
 
-        // Distance line between (xk, yk) and (xk, y0)
-        const seqLine = $('lhc-seq-line');
-        seqLine.setAttribute('x1', sx(xk, p));
-        seqLine.setAttribute('y1', sy(yk, p));
-        seqLine.setAttribute('x2', sx(x0, p));
-        seqLine.setAttribute('y2', sy(y0, p));
+        mc.className.baseVal = dist < 0.01 ? 'closest-marker is-exact' : (p.isLHC ? 'closest-marker' : 'closest-marker is-severed');
 
-        const dist = Math.abs(yk - y0);
-
-        const badge = $('status-badge');
-        const isLHCFeasible = atX0LHC || dist < 0.05;
-        if (atX0LHC || dist < 0.01) {
-          badge.className = 'status-overlay status-pass';
-          badge.innerHTML = `<span>✓ |y_k − y₀| = ${dist.toFixed(3)} (y_k → y₀ 수렴 경로 확보)</span>`;
+        const tag = $('verdict-tag');
+        if (p.isLHC || dist < 0.02) {
+          tag.className = 'verdict-banner pass';
+          tag.innerHTML = `<span>✓ 접근 경로 확보: <i>d</i>(<i>y</i>₀, <i>F</i>(<i>x</i>)) = ${dist.toFixed(3)} → 0 &nbsp; [수열 수렴 가능]</span>`;
         } else {
-          badge.className = 'status-overlay status-fail';
-          badge.innerHTML = `<span>⚠️ |y_k − y₀| = ${dist.toFixed(3)} &gt; 0 (LHC 위반: 접근 불가!)</span>`;
+          tag.className = 'verdict-banner fail';
+          tag.innerHTML = `<span>⚠️ 경로 단절: <i>d</i>(<i>y</i>₀, <i>F</i>(<i>x</i>)) = ${dist.toFixed(3)} &gt; 0 &nbsp; [내측 증발 발생]</span>`;
         }
 
-        let narrative = `<strong>LHC 판정 분석:</strong> $F(x_0)$의 원소 $y_0 = ${y0.toFixed(2)}$에 대해, 수열 $x_k = ${xk.toFixed(2)}$에서 선택 가능한 가장 가까운 원소는 $y_k = ${yk.toFixed(2)}$ (거리: ${dist.toFixed(3)})입니다. `;
-        if (atX0LHC) {
-          narrative += `$x_k \\to x_0$일 때 $y_k \\in F(x_k)$가 $y_0$로 완벽하게 수렴하므로 <strong>하반연속(LHC)</strong>을 만족합니다. 기존의 선택 가능점이 갑자기 증발하지 않습니다.`;
-        } else {
-          narrative += `$x_k$가 $x_0$로 다가가더라도 $F(x_k)$에는 $y_0$ 근처 원소가 존재하지 않아 <strong>$y_k \\to y_0$인 수열을 구성할 수 없습니다.</strong> 따라서 하반연속(LHC)이 위반됩니다.`;
-        }
-        $('diag-narrative').innerHTML = narrative;
+        makeText(sx(p.x0, p) - 48, sy(y0, p) - 8, `y₀ = ${y0.toFixed(2)}`, 'var(--plum)', true);
+        makeText(sx(xProbe, p) + 8, sy(yClosest, p) - 8, `y*(x) = ${yClosest.toFixed(2)}`, 'var(--highlight)', true);
+
+        $('mode-concept-desc').innerHTML = `
+          <strong>하반연속(LHC) 수열적 접근성 정의</strong>
+          대응 <i>F</i>가 <i>x</i>₀에서 LHC라는 것은, 임의의 수열 <i>x<sub>k</sub></i> → <i>x</i>₀와 임의의 원소 <i>y</i>₀ ∈ <i>F</i>(<i>x</i>₀)에 대해 
+          <strong><i>y<sub>k</sub></i> ∈ <i>F</i>(<i>x<sub>k</sub></i>)이면서 <i>y<sub>k</sub></i> → <i>y</i>₀인 수열 <i>y<sub>k</sub></i>를 항상 선택할 수 있는 것</strong>입니다.
+          <div style="margin-top: .4rem; padding-top: .35rem; border-top: 1px dashed #d5c8b8;">
+            ${p.lhcNote}
+          </div>
+        `;
       }
 
-      renderBadges(p, atX0UHC, atX0LHC);
+      // Update 4 Diagnostic Cards
+      const updateCard = (cardId, iconId, val, trueText, falseText) => {
+        const card = $(cardId);
+        const icon = $(iconId);
+        card.className = `diag-card ${val ? 'is-true' : 'is-false'}`;
+        icon.textContent = val ? '✓ 성립' : '✗ 위반';
+      };
+
+      updateCard('card-uhc', 'badge-uhc-icon', p.isUHC, '외측 팽창 없음', '외측 폭발 발생');
+      updateCard('card-lhc', 'badge-lhc-icon', p.isLHC, '내측 선택지 보존', '선택지 증발 발생');
+      updateCard('card-closed', 'badge-closed-icon', p.isClosed, 'gph(F) 닫힘', 'gph(F) 열림');
+      updateCard('card-compact', 'badge-compact-icon', p.isCompact, '닫힌 유계 파이버', '비유계 파이버');
     }
 
-    // Event listeners
+    // Event Bindings
     document.querySelectorAll('.preset-btn').forEach(btn => {
-      btn.addEventListener('click', () => initPreset(btn.dataset.preset));
+      btn.addEventListener('click', () => setPreset(btn.dataset.preset));
     });
 
-    $('btn-mode-uhc').addEventListener('click', () => {
+    $('tab-uhc').addEventListener('click', () => {
       curMode = 'UHC';
-      $('btn-mode-uhc').classList.add('active');
-      $('btn-mode-lhc').classList.remove('active');
+      $('tab-uhc').classList.add('active');
+      $('tab-lhc').classList.remove('active');
       render();
     });
 
-    $('btn-mode-lhc').addEventListener('click', () => {
+    $('tab-lhc').addEventListener('click', () => {
       curMode = 'LHC';
-      $('btn-mode-lhc').classList.add('active');
-      $('btn-mode-uhc').classList.remove('active');
+      $('tab-lhc').classList.add('active');
+      $('tab-lhc').classList.remove('active');
       render();
     });
 
-    ['x0-input', 'eps-input', 'xtest-input', 'y0-input', 'xk-input'].forEach(id => {
+    ['x-probe', 'eps-slider', 'y0-slider'].forEach(id => {
       $(id).addEventListener('input', render);
     });
 
-    // Initialize
-    initPreset('A');
+    // Initialize with Continuous Band
+    setPreset('A');
   </script>
 </body>
 </html>
