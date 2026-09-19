@@ -44,7 +44,53 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 :::
 
 ::: {#spoon-grid-all .spoon-grid}
-<!-- 등록된 회차 카드가 여기에 표시됩니다 -->
+<a href="micro/set-01.html" class="spoon-card" data-subject="micro" data-round="1">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#1 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 부분균형</div>
+  <div class="spoon-card__desc">비용최소화, 조건부 요소수요, 비용함수 유도, 경쟁균형 및 종량세 부과와 사중손실 분석</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-02.html" class="spoon-card" data-subject="micro" data-round="2">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#2 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 시장의 종류</div>
+  <div class="spoon-card__desc">지출함수와 간접효용함수, Shephard's lemma 및 Roy's identity 쌍대성, 차별화된 베르트랑 가격경쟁</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-03.html" class="spoon-card" data-subject="micro" data-round="3">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#3 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">일반균형 · 생산자이론</div>
+  <div class="spoon-card__desc">순수교환경제 경쟁균형 가격과 파레토 효율성, First Welfare Theorem, 이윤극대화와 조업중단 조건(Shutdown Condition)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-05.html" class="spoon-card" data-subject="micro" data-round="5">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#5 회차 (특별 구성)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 (Market Structure)</div>
+  <div class="spoon-card__desc">독점(Monopoly)과 수요의 가격탄력성, Cournot 복점, Stackelberg 선도자 우위(First-mover advantage) 및 시장구조 비교</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 :::
 
 ### 미시경제학
@@ -59,7 +105,53 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 :::
 
 ::: {#spoon-grid-micro .spoon-grid}
-<!-- 미시경제학 회차 카드가 여기에 표시됩니다 -->
+<a href="micro/set-01.html" class="spoon-card" data-subject="micro" data-round="1">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#1 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 부분균형</div>
+  <div class="spoon-card__desc">비용최소화, 조건부 요소수요, 비용함수 유도, 경쟁균형 및 종량세 부과와 사중손실 분석</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-02.html" class="spoon-card" data-subject="micro" data-round="2">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#2 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 시장의 종류</div>
+  <div class="spoon-card__desc">지출함수와 간접효용함수, Shephard's lemma 및 Roy's identity 쌍대성, 차별화된 베르트랑 가격경쟁</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-03.html" class="spoon-card" data-subject="micro" data-round="3">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#3 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">일반균형 · 생산자이론</div>
+  <div class="spoon-card__desc">순수교환경제 경쟁균형 가격과 파레토 효율성, First Welfare Theorem, 이윤극대화와 조업중단 조건(Shutdown Condition)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-05.html" class="spoon-card" data-subject="micro" data-round="5">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#5 회차 (특별 구성)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 (Market Structure)</div>
+  <div class="spoon-card__desc">독점(Monopoly)과 수요의 가격탄력성, Cournot 복점, Stackelberg 선도자 우위(First-mover advantage) 및 시장구조 비교</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 :::
 
 ### 거시경제학

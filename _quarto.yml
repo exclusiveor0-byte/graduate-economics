@@ -196,6 +196,12 @@ book:
     - literature/io-trade.qmd
     - literature/development-environment-urban.qmd
   - qual-exam/index.qmd
+  - part: "문제 한 스푼 · 미시경제학"
+    chapters:
+    - qual-exam/micro/set-01.qmd
+    - qual-exam/micro/set-02.qmd
+    - qual-exam/micro/set-03.qmd
+    - qual-exam/micro/set-05.qmd
   - references.qmd
   page-footer:
     center: Collaborative graduate economics knowledge base

@@ -1,0 +1,65 @@
+---
+title: "문제 한 스푼 #5"
+subtitle: "5회차 특별 구성 · 시장의 종류"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #5
+
+::: {.spoon-hero__desc}
+5회차 특별 구성: **시장의 종류 (Market Structure)**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[토픽 1개]{.chip}
+[졸업시험 한 문제 분량]{.chip}
+[약 30–40분]{.chip}
+[해설 미포함]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem. Market Structure
+::: {.topic}
+Monopoly · Cournot · Sequential Quantity Competition
+:::
+
+어떤 동질적 재화 시장의 inverse market demand가
+
+$$
+p(Q) = 90 - Q, \qquad Q \ge 0
+$$
+
+로 주어진다. 모든 기업의 한계비용은 $10$으로 일정하고 고정비용은 없다. 필요한 경우 모든 해가 내부해(interior solution)라고 가정하시오.
+
+1. **Monopoly.**  
+   하나의 독점기업이 시장 전체를 공급한다고 하자. 이윤극대화 산출량 $Q^M$, 가격 $p^M$, 이윤 $\pi^M$을 구하시오. 또한 다음 명제를 **prove or disprove** 하시오.
+   > If a monopolist has a strictly positive marginal cost, then at an interior optimum the absolute value of the price elasticity of demand must be strictly greater than one.
+
+2. **Cournot duopoly.**  
+   이제 동일한 비용구조를 가진 두 기업 $1, 2$가 산출량 $q_1, q_2$를 동시에 선택한다고 하자. 각 기업의 best-response function을 구하고 Cournot-Nash equilibrium $(q_1^C, q_2^C)$을 계산하시오. 이어 균형 총산출량 $Q^C$, 가격 $p^C$, 각 기업의 이윤을 구하시오.
+
+3. **Sequential quantity competition.**  
+   이제 기업 1이 먼저 $q_1$을 선택하고, 기업 2가 이를 관찰한 뒤 $q_2$를 선택한다고 하자. backward induction을 사용하여 subgame-perfect equilibrium $(q_1^S, q_2^S)$을 구하시오. 균형가격과 두 기업의 이윤도 계산하시오.
+
+4. 기업 1의 Cournot 이윤과 sequential game에서 leader로 행동할 때의 이윤을 비교하시오. 이 비교를 이용하여 이 문제에서 **first-mover advantage**가 존재하는지 설명하시오. 단순히 결과만 적지 말고, follower의 best response가 leader의 목적함수에 어떻게 들어가는지 수식으로 보이시오.
+
+5. 세 시장구조
+   $$
+   \text{Monopoly}, \qquad \text{Cournot duopoly}, \qquad \text{Sequential duopoly}
+   $$
+   에서의 총산출량과 시장가격을 비교하시오. 계산 결과를 바탕으로 기업 간 경쟁의 형태가 시장성과에 어떤 차이를 만드는지 간단히 설명하시오.
+
+::: {.spoon-hint}
+**구성**: **monopoly benchmark → simultaneous oligopoly → sequential oligopoly → strategic comparison**. Cournot와 sequential game의 의사결정 순서를 구분해서 풀이하시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
