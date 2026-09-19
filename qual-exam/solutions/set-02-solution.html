@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 한 스푼 #2 · 손풀이 해설</title>
+<style>
+:root{
+  --bg:#f6f7f9;
+  --paper:#fff;
+  --text:#17191d;
+  --muted:#68707a;
+  --line:#dfe3e8;
+  --soft:#f1f3f5;
+  --accent:#2b5b84;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+  line-height:1.75;
+}
+.wrap{
+  width:min(920px,calc(100% - 32px));
+  margin:40px auto 72px;
+}
+.hero,.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+.hero{
+  padding:32px 34px 28px;
+  margin-bottom:20px;
+}
+.eyebrow{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+h1{
+  margin:0 0 10px;
+  font-size:31px;
+  letter-spacing:-.03em;
+}
+.subtitle{color:var(--muted);font-size:15px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.chip{
+  border:1px solid var(--line);
+  background:var(--soft);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:13px;
+  color:#444b54;
+}
+.btn-toggle-all{
+  margin-left:auto;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:opacity .15s ease;
+}
+.btn-toggle-all:hover{opacity:0.9}
+.card{
+  padding:30px 34px;
+  margin-top:20px;
+}
+.card h2{
+  margin:0 0 8px;
+  font-size:24px;
+  letter-spacing:-.02em;
+}
+.topic{
+  color:var(--muted);
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+details.solution-fold{
+  margin-top:16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  overflow:hidden;
+}
+summary.solution-toggle{
+  padding:14px 18px;
+  font-size:15px;
+  font-weight:700;
+  color:var(--accent);
+  cursor:pointer;
+  user-select:none;
+  background:var(--soft);
+  outline:none;
+}
+summary.solution-toggle:hover{
+  background:#e5e9ee;
+}
+.solution-content{
+  padding:18px 22px;
+  background:var(--paper);
+}
+.step{margin:20px 0 0}
+.step:first-child{margin-top:4px}
+.step h3{
+  margin:0 0 8px;
+  font-size:17px;
+  color:#1e293b;
+}
+.flow{
+  border-left:3px solid #cfd5dc;
+  padding-left:18px;
+  margin:10px 0 0;
+}
+.note{
+  margin-top:20px;
+  padding:14px 16px;
+  border:1px dashed var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  font-size:14px;
+  line-height:1.65;
+}
+.footer{
+  margin-top:28px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+@media print{
+  body{background:#fff}
+  .wrap{width:100%;margin:0}
+  .hero,.card{border-color:#bbb}
+  .card{break-before:page}
+  details.solution-fold{border:none}
+  details.solution-fold[open] .solution-content, details.solution-fold .solution-content{display:block !important}
+  summary.solution-toggle{display:none}
+}
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true
+  },
+  chtml: { scale: 1.02 }
+};
+function toggleAllSolutions() {
+  const detailsList = document.querySelectorAll('details.solution-fold');
+  const anyClosed = Array.from(detailsList).some(d => !d.open);
+  detailsList.forEach(d => d.open = anyClosed);
+  document.getElementById('toggleAllBtn').innerText = anyClosed ? '전체 해설 접기' : '전체 해설 펼치기';
+}
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<main class="wrap">
+
+<section class="hero">
+  <div class="eyebrow">Graduate Microeconomics · Daily Practice</div>
+  <h1>문제 한 스푼 #2 · 손풀이 해설</h1>
+  <div class="subtitle">손풀이의 전개 순서와 표현을 최대한 유지하여 정리한 내용 중심 해설본 (기본 접힘 상태)</div>
+  <div class="meta">
+    <span class="chip">소비자이론</span>
+    <span class="chip">시장구조</span>
+    <span class="chip">해설 수록</span>
+    <button id="toggleAllBtn" class="btn-toggle-all" onclick="toggleAllSolutions()">전체 해설 펼치기</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Problem 1. Consumer Theory</h2>
+  <div class="topic">Indirect Utility · Shephard's Lemma · Roy's Identity · Duality</div>
+
+  <details class="solution-fold">
+    <summary class="solution-toggle">💡 손풀이 해설 펼치기 / 접기 (Problem 1)</summary>
+    <div class="solution-content">
+      <div class="step">
+        <h3>1) Indirect utility function</h3>
+        <div class="flow">
+          지출함수
+          \[
+          e(p_1,p_2,u)=3u\,p_1^{1/3}p_2^{2/3}
+          \]
+          에서
+          \[
+          e(p,V(p,m))=m
+          \]
+          을 사용하면
+          \[
+          3V(p_1,p_2,m)p_1^{1/3}p_2^{2/3}=m.
+          \]
+
+          따라서
+          \[
+          V(p_1,p_2,m)
+          =
+          \frac{1}{3}m\,p_1^{-1/3}p_2^{-2/3}.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>2) Hicksian demand와 Marshallian demand</h3>
+        <div class="flow">
+          Shephard's lemma에 의해
+          \[
+          h_1(p,u)
+          =
+          \frac{\partial e(p,u)}{\partial p_1}.
+          \]
+
+          따라서
+          \[
+          h_1(p_1,p_2,u)
+          =
+          3u\left(\frac13p_1^{-2/3}\right)p_2^{2/3}
+          =
+          u\,p_1^{-2/3}p_2^{2/3}.
+          \]
+
+          즉
+          \[
+          h_1(p_1,p_2,u)
+          =
+          u\left(\frac{p_2}{p_1}\right)^{2/3}.
+          \]
+
+          Roy's identity는
+          \[
+          x_1(p,m)
+          =
+          -\frac{\partial V(p,m)/\partial p_1}
+          {\partial V(p,m)/\partial m}.
+          \]
+
+          여기서
+          \[
+          \frac{\partial V}{\partial p_1}
+          =
+          -\frac19m\,p_1^{-4/3}p_2^{-2/3},
+          \]
+          \[
+          \frac{\partial V}{\partial m}
+          =
+          \frac13p_1^{-1/3}p_2^{-2/3}.
+          \]
+
+          따라서
+          \[
+          x_1(p_1,p_2,m)
+          =
+          \frac{m}{3p_1}.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>3) Duality 확인</h3>
+        <div class="flow">
+          확인할 관계는
+          \[
+          h_1(p,u)=x_1(p,e(p,u)).
+          \]
+
+          Marshallian demand에 \(m=e(p,u)\)를 대입하면
+          \[
+          x_1(p,e(p,u))
+          =
+          \frac{e(p,u)}{3p_1}.
+          \]
+
+          따라서
+          \[
+          x_1(p,e(p,u))
+          =
+          \frac{3u\,p_1^{1/3}p_2^{2/3}}{3p_1}
+          =
+          u\,p_1^{-2/3}p_2^{2/3}.
+          \]
+
+          즉
+          \[
+          x_1(p,e(p,u))=h_1(p,u).
+          \]
+        </div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="card">
+  <h2>Problem 2. Market Structure</h2>
+  <div class="topic">Differentiated Bertrand · Best Response · Sequential Pricing</div>
+
+  <details class="solution-fold">
+    <summary class="solution-toggle">💡 손풀이 해설 펼치기 / 접기 (Problem 2)</summary>
+    <div class="solution-content">
+      <div class="step">
+        <h3>1) Simultaneous competition</h3>
+        <div class="flow">
+          기업 \(A\)의 이윤은
+          \[
+          \pi_A = (p_A-6)q_A = (p_A-6)(24-p_A+p_B).
+          \]
+
+          따라서
+          \[
+          \frac{\partial\pi_A}{\partial p_A}
+          =
+          (24-p_A+p_B)+(p_A-6)(-1)
+          =
+          30+p_B-2p_A=0.
+          \]
+
+          그러므로 \(A\)의 best response는
+          \[
+          p_A=15+\frac12p_B.
+          \]
+
+          대칭적으로 \(B\)의 best response는
+          \[
+          p_B=15+\frac12p_A.
+          \]
+
+          대칭 Nash equilibrium에서는
+          \[
+          p_A=p_B=p^*.
+          \]
+
+          따라서
+          \[
+          p^*=15+\frac12p^* \quad\Rightarrow\quad p^*=30.
+          \]
+
+          즉
+          \[
+          (p_A^N,p_B^N)=(30,30).
+          \]
+
+          이때 각 기업의 수요는
+          \[
+          q_A=q_B=24,
+          \]
+          따라서
+          \[
+          \pi_A^N=\pi_B^N=(30-6)\times24=576.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>2) Sequential competition</h3>
+        <div class="flow">
+          기업 \(A\)가 먼저 \(p_A\)를 정하고,
+          \(B\)가 이를 관찰한 뒤 \(p_B\)를 선택한다.
+
+          먼저 follower인 \(B\)의 이윤은
+          \[
+          \pi_B = (p_B-6)(24-p_B+p_A).
+          \]
+
+          따라서
+          \[
+          \frac{\partial\pi_B}{\partial p_B} = 30+p_A-2p_B=0,
+          \]
+          즉
+          \[
+          p_B(p_A) = 15+\frac12p_A.
+          \]
+
+          이를 \(A\)의 수요에 대입하면
+          \[
+          q_A = 24-p_A+p_B = 24-p_A+15+\frac12p_A = 39-\frac12p_A.
+          \]
+
+          따라서 leader인 \(A\)의 이윤은
+          \[
+          \pi_A = (p_A-6)\left(39-\frac12p_A\right).
+          \]
+
+          FOC는
+          \[
+          \frac{d\pi_A}{dp_A} = \left(39-\frac12p_A\right) +(p_A-6)\left(-\frac12\right) = 42-p_A=0.
+          \]
+
+          따라서
+          \[
+          p_A^S=42.
+          \]
+
+          follower의 가격은
+          \[
+          p_B^S = 15+\frac12(42) = 36.
+          \]
+
+          그러므로
+          \[
+          (p_A^S,p_B^S)=(42,36).
+          \]
+
+          수요는
+          \[
+          q_A^S = 24-42+36 = 18,
+          \qquad
+          q_B^S = 24-36+42 = 30.
+          \]
+
+          이윤은
+          \[
+          \pi_A^S = (42-6)\times18 = 648,
+          \qquad
+          \pi_B^S = (36-6)\times30 = 900.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>3) Simultaneous vs. sequential competition</h3>
+        <div class="flow">
+          기업 \(A\)의 이윤을 비교하면
+          \[
+          \pi_A^N=576,
+          \qquad
+          \pi_A^S=648.
+          \]
+
+          따라서
+          \[
+          \pi_A^S>\pi_A^N
+          \]
+          이므로 기업 \(A\)는 sequential competition을 선호한다.
+
+          \(B\)의 best response가
+          \[
+          p_B=15+\frac12p_A
+          \]
+          이므로
+          \[
+          \frac{dp_B}{dp_A} = \frac12>0.
+          \]
+
+          즉 \(A\)가 가격을 올리면 \(B\)도 가격을 올리므로
+          두 기업의 가격은 strategic complements이다.
+
+          \(A\)가 먼저 높은 가격 \(p_A=42\)를 선택하면,
+          \(B\)도 이에 대응하여 \(p_B=36\)으로 가격을 올린다.
+
+          \(A\)의 판매량은 \(24\rightarrow18\)로 감소하지만,
+          마진은 \(p_A-6:\ 24\rightarrow36\)으로 증가한다.
+
+          그 결과 \(A\)의 이윤은 \(576\rightarrow648\)로 증가한다.
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>핵심 메커니즘</strong>: sequential game에서 leader가 follower의 반응 \(p_B(p_A)\)를 알고 자신의 가격을 선택한다는 점이다.
+        그래서 \(A\)의 목적함수는 \(\pi_A(p_A,p_B(p_A))\)로 바뀐다.
+      </div>
+    </div>
+  </details>
+</section>
+
+<div class="footer">문제 한 스푼 #2 · Solution Notes · <a href="../micro/set-02.html" style="color:var(--accent);text-decoration:none;">문제 본문으로 돌아가기</a></div>
+</main>
+</body>
+</html>
