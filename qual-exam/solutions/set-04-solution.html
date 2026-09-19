@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 한 스푼 #4 · 손풀이 해설</title>
+<style>
+:root{
+  --bg:#f6f7f9;
+  --paper:#fff;
+  --text:#17191d;
+  --muted:#68707a;
+  --line:#dfe3e8;
+  --soft:#f1f3f5;
+  --accent:#2b5b84;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+  line-height:1.75;
+}
+.wrap{
+  width:min(920px,calc(100% - 32px));
+  margin:40px auto 72px;
+}
+.hero,.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+.hero{
+  padding:32px 34px 28px;
+  margin-bottom:20px;
+}
+.eyebrow{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+h1{
+  margin:0 0 10px;
+  font-size:31px;
+  letter-spacing:-.03em;
+}
+.subtitle{color:var(--muted);font-size:15px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.chip{
+  border:1px solid var(--line);
+  background:var(--soft);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:13px;
+  color:#444b54;
+}
+.btn-toggle-all{
+  margin-left:auto;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:opacity .15s ease;
+}
+.btn-toggle-all:hover{opacity:0.9}
+.card{
+  padding:30px 34px;
+  margin-top:20px;
+}
+.card h2{
+  margin:0 0 8px;
+  font-size:24px;
+  letter-spacing:-.02em;
+}
+.topic{
+  color:var(--muted);
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+details.solution-fold{
+  margin-top:16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  overflow:hidden;
+}
+summary.solution-toggle{
+  padding:14px 18px;
+  font-size:15px;
+  font-weight:700;
+  color:var(--accent);
+  cursor:pointer;
+  user-select:none;
+  background:var(--soft);
+  outline:none;
+}
+summary.solution-toggle:hover{
+  background:#e5e9ee;
+}
+.solution-content{
+  padding:18px 22px;
+  background:var(--paper);
+}
+.step{margin:20px 0 0}
+.step:first-child{margin-top:4px}
+.step h3{
+  margin:0 0 8px;
+  font-size:17px;
+  color:#1e293b;
+}
+.flow{
+  border-left:3px solid #cfd5dc;
+  padding-left:18px;
+  margin:10px 0 0;
+}
+.note{
+  margin-top:20px;
+  padding:14px 16px;
+  border:1px dashed var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  font-size:14px;
+  line-height:1.65;
+}
+.footer{
+  margin-top:28px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+@media print{
+  body{background:#fff}
+  .wrap{width:100%;margin:0}
+  .hero,.card{border-color:#bbb}
+  .card{break-before:page}
+  details.solution-fold{border:none}
+  details.solution-fold[open] .solution-content, details.solution-fold .solution-content{display:block !important}
+  summary.solution-toggle{display:none}
+}
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true
+  },
+  chtml: { scale: 1.02 }
+};
+function toggleAllSolutions() {
+  const detailsList = document.querySelectorAll('details.solution-fold');
+  const anyClosed = Array.from(detailsList).some(d => !d.open);
+  detailsList.forEach(d => d.open = anyClosed);
+  document.getElementById('toggleAllBtn').innerText = anyClosed ? '전체 해설 접기' : '전체 해설 펼치기';
+}
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<main class="wrap">
+
+<section class="hero">
+  <div class="eyebrow">Graduate Microeconomics · Daily Practice</div>
+  <h1>문제 한 스푼 #4 · 손풀이 해설</h1>
+  <div class="subtitle">손풀이의 전개 순서와 표현을 최대한 유지하여 정리한 내용 중심 해설본 (기본 접힘 상태)</div>
+  <div class="meta">
+    <span class="chip">부분균형</span>
+    <span class="chip">소비자이론</span>
+    <span class="chip">해설 수록</span>
+    <button id="toggleAllBtn" class="btn-toggle-all" onclick="toggleAllSolutions()">전체 해설 펼치기</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Problem 1. Partial Equilibrium</h2>
+  <div class="topic">경쟁시장 · 가격하한제 · 정부매입 · 후생</div>
+
+  <details class="solution-fold">
+    <summary class="solution-toggle">💡 손풀이 해설 펼치기 / 접기 (Problem 1)</summary>
+    <div class="solution-content">
+      <div class="step">
+        <h3>Setting</h3>
+        <div class="flow">
+          \[
+          p_D(Q)=18-Q,
+          \qquad
+          p_S(Q)=2+\frac12Q.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>1) 정부개입이 없는 경우</h3>
+        <div class="flow">
+          경쟁균형에서는
+          \[
+          18-Q=2+\frac12Q.
+          \]
+
+          따라서
+          \[
+          16=\frac32Q
+          \quad\Rightarrow\quad
+          Q^*=\frac{32}{3}.
+          \]
+
+          균형가격은
+          \[
+          p^* = 18-\frac{32}{3} = \frac{22}{3}.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>2) 가격하한제 \(\bar p=10\)</h3>
+        <div class="flow">
+          \[
+          \bar p=10>\frac{22}{3}=p^*
+          \]
+          이므로 가격하한제는 binding이다.
+
+          소비자 수요량은
+          \[
+          10=18-Q_D
+          \quad\Rightarrow\quad
+          Q_D=8.
+          \]
+
+          생산자 공급량은
+          \[
+          10=2+\frac12Q_S
+          \quad\Rightarrow\quad
+          Q_S=16.
+          \]
+
+          따라서 초과공급은
+          \[
+          Q_S-Q_D = 16-8 = 8.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>3) 정부의 초과공급 전량 매입과 후생</h3>
+        <div class="flow">
+          정부가 초과공급 \(8\)단위를 가격 \(10\)에 전량 매입하므로
+          \[
+          \text{정부 매입비용} = 10\times8 = 80.
+          \]
+
+          가격하한제 실시 전 총잉여는 수요곡선과 공급곡선 사이의 삼각형 면적이므로
+          \[
+          TS_0 = \frac12(18-2)\frac{32}{3} = \frac{256}{3}.
+          \]
+
+          가격하한제 실시 후 소비자잉여는
+          \[
+          CS_1 = \frac12(18-10)\times8 = 32.
+          \]
+
+          생산자잉여는
+          \[
+          PS_1 = \frac12(10-2)\times16 = 64.
+          \]
+
+          정부의 매입비용을 차감하면 정책 실시 후 순총잉여는
+          \[
+          TS_1 = 32+64-80 = 16.
+          \]
+
+          따라서 deadweight loss는
+          \[
+          DWL = TS_0-TS_1 = \frac{256}{3}-16 = \frac{208}{3}.
+          \]
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>핵심 정리</strong>: 정부가 매입한 초과공급분은 사회적 가치가 없는 것으로 두고,
+        정부지출 \(80\)을 순후생에서 차감한 계산이다.
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="card">
+  <h2>Problem 2. Consumer Theory</h2>
+  <div class="topic">Quasi-linear Utility · KKT · Corner Solution · Roy's Identity</div>
+
+  <details class="solution-fold">
+    <summary class="solution-toggle">💡 손풀이 해설 펼치기 / 접기 (Problem 2)</summary>
+    <div class="solution-content">
+      <div class="step">
+        <h3>1) Utility maximization</h3>
+        <div class="flow">
+          소비자의 문제는
+          \[
+          \max_{x,y\ge0}\;2\sqrt{x}+y
+          \qquad
+          \text{s.t.}\qquad
+          px+y\le m,
+          \]
+          이다.
+
+          Lagrangian을
+          \[
+          \mathcal L = 2\sqrt{x}+y +\lambda(m-px-y) +\lambda_xx+\lambda_yy
+          \]
+          로 둔다.
+
+          KKT 조건은
+          \[
+          \frac{\partial\mathcal L}{\partial x} = \frac1{\sqrt{x}}-\lambda p+\lambda_x=0,
+          \]
+          \[
+          \frac{\partial\mathcal L}{\partial y} = 1-\lambda+\lambda_y=0,
+          \]
+          \[
+          \lambda(m-px-y)=0, \qquad \lambda_xx=0, \qquad \lambda_yy=0,
+          \]
+          그리고
+          \[
+          \lambda,\lambda_x,\lambda_y\ge0, \qquad x,y\ge0, \qquad px+y\le m.
+          \]
+
+          효용함수가 두 재화에 대해 증가하므로 예산제약은 결합되어
+          \[
+          px+y=m
+          \]
+          이다.
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>Case 1. Interior solution: \(x>0,\;y>0\)</h3>
+        <div class="flow">
+          interior에서는
+          \[
+          \lambda_x=\lambda_y=0.
+          \]
+
+          \(y\)에 대한 FOC에서
+          \[
+          1-\lambda=0 \quad\Rightarrow\quad \lambda=1.
+          \]
+
+          \(x\)에 대한 FOC는
+          \[
+          \frac1{\sqrt{x}}=\lambda p=p.
+          \]
+
+          따라서
+          \[
+          x=\frac1{p^2}.
+          \]
+
+          예산제약에서
+          \[
+          y = m-px = m-\frac1p.
+          \]
+
+          interior가 되려면
+          \[
+          y>0 \quad\Longleftrightarrow\quad m-\frac1p>0 \quad\Longleftrightarrow\quad mp>1.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>Case 2. Corner solution: \(x>0,\;y=0\)</h3>
+        <div class="flow">
+          예산제약이 결합되므로
+          \[
+          px=m \quad\Rightarrow\quad x=\frac{m}{p}.
+          \]
+
+          \(x>0\)이므로
+          \[
+          \lambda_x=0.
+          \]
+
+          \(x\)에 대한 FOC에서
+          \[
+          \lambda = \frac{1}{p\sqrt{x}} = \frac1{\sqrt{mp}}.
+          \]
+
+          \(y=0\)에서
+          \[
+          \lambda_y = \lambda-1 \ge0.
+          \]
+
+          따라서
+          \[
+          \frac1{\sqrt{mp}}\ge1 \quad\Longleftrightarrow\quad mp\le1.
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>Marshallian demand</h3>
+        <div class="flow">
+          따라서
+          \[
+          x(p,m) = \begin{cases}
+          \dfrac1{p^2}, & mp>1,\\[6pt]
+          \dfrac{m}{p}, & mp\le1,
+          \end{cases}
+          \qquad
+          y(p,m) = \begin{cases}
+          m-\dfrac1p, & mp>1,\\[6pt]
+          0, & mp\le1.
+          \end{cases}
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>2) Indirect utility function</h3>
+        <div class="flow">
+          interior인 \(mp>1\)에서는
+          \[
+          V(p,m) = 2\sqrt{\frac1{p^2}} + m-\frac1p = m+\frac1p.
+          \]
+
+          corner인 \(mp\le1\)에서는
+          \[
+          V(p,m) = 2\sqrt{\frac{m}{p}}.
+          \]
+
+          따라서
+          \[
+          V(p,m) = \begin{cases}
+          m+\dfrac1p, & mp>1,\\[6pt]
+          2\sqrt{\dfrac{m}{p}}, & mp\le1.
+          \end{cases}
+          \]
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>3) Roy's identity: interior</h3>
+        <div class="flow">
+          interior에서
+          \[
+          V(p,m)=m+\frac1p.
+          \]
+
+          따라서
+          \[
+          \frac{\partial V}{\partial p} = -\frac1{p^2},
+          \qquad
+          \frac{\partial V}{\partial m}=1.
+          \]
+
+          Roy's identity를 적용하면
+          \[
+          x(p,m) = -\frac{V_p}{V_m} = -\frac{-1/p^2}{1} = \frac1{p^2}.
+          \]
+
+          이는 1)에서 구한 interior Marshallian demand와 일치한다.
+        </div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<div class="footer">문제 한 스푼 #4 · Solution Notes · <a href="../micro/set-04.html" style="color:var(--accent);text-decoration:none;">문제 본문으로 돌아가기</a></div>
+</main>
+</body>
+</html>

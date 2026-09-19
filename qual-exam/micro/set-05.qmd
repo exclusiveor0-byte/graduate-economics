@@ -19,7 +19,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [토픽 1개]{.chip}
 [졸업시험 한 문제 분량]{.chip}
 [약 30–40분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 :::
 :::
 
@@ -57,6 +57,162 @@ $$
 
 ::: {.spoon-hint}
 **구성**: **monopoly benchmark → simultaneous oligopoly → sequential oligopoly → strategic comparison**. Cournot와 sequential game의 의사결정 순서를 구분해서 풀이하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem. Market Structure"}
+::: {.topic}
+Monopoly · Cournot · Sequential Quantity Competition · Strategic Substitutes
+:::
+
+#### 1) Monopoly
+시장의 inverse demand는 $p(Q) = 90 - Q$이고 한계비용은 $MC = 10$이다.
+
+독점기업의 이윤함수:
+$$
+\pi^M(q) = (90 - q)q - 10q = 80q - q^2.
+$$
+
+1계 조건(FOC):
+$$
+\frac{d\pi^M}{dq} = 80 - 2q = 0 \quad\Longrightarrow\quad q^M = 40.
+$$
+
+시장가격 및 극대화 이윤:
+$$
+p^M = 90 - 40 = 50,
+$$
+$$
+\pi^M = (50 - 10) \times 40 = 1600.
+$$
+
+**명제 증명 (Lerner Index & 탄력성)**:  
+독점기업의 내부해에서는 1계 조건 $MR = p\left(1 - \frac{1}{|\varepsilon|}\right) = MC$로부터 Lerner condition이 성립한다:
+$$
+\frac{p - MC}{p} = \frac{1}{|\varepsilon|}.
+$$
+$MC > 0$이고 $p > MC$이므로
+$$
+0 < \frac{p - MC}{p} < 1 \quad\Longrightarrow\quad \frac{1}{|\varepsilon|} < 1 \quad\Longrightarrow\quad |\varepsilon| > 1.
+$$
+따라서 양의 한계비용을 가진 독점기업의 최적 생산점에서는 수요의 가격탄력성 절댓값이 항상 1보다 엄밀히 큽니다 (수요가 탄력적인 영역에서만 생산). 명제는 **참(True)**이다.
+
+---
+
+#### 2) Cournot Duopoly
+두 기업이 산출량 $q_1, q_2$를 동시에 선택한다.
+
+- 기업 1의 이윤:
+  $$
+  \pi_1(q_1, q_2) = (90 - q_1 - q_2)q_1 - 10q_1 = (80 - q_1 - q_2)q_1.
+  $$
+- 기업 2의 이윤:
+  $$
+  \pi_2(q_2, q_1) = (80 - q_1 - q_2)q_2.
+  $$
+
+1계 조건(FOC):
+$$
+\frac{\partial\pi_1}{\partial q_1} = 80 - 2q_1 - q_2 = 0 \quad\Longrightarrow\quad BR_1(q_2) = 40 - \frac{1}{2}q_2.
+$$
+$$
+\frac{\partial\pi_2}{\partial q_2} = 80 - q_1 - 2q_2 = 0 \quad\Longrightarrow\quad BR_2(q_1) = 40 - \frac{1}{2}q_1.
+$$
+
+대칭균형($q_1^C = q_2^C$):
+$$
+q^C = 40 - \frac{1}{2}q^C \quad\Longrightarrow\quad \frac{3}{2}q^C = 40 \quad\Longrightarrow\quad q_1^C = q_2^C = \frac{80}{3}.
+$$
+
+균형 총산출량, 시장가격, 개별 이윤:
+$$
+Q^C = q_1^C + q_2^C = \frac{160}{3},
+$$
+$$
+p^C = 90 - \frac{160}{3} = \frac{110}{3},
+$$
+$$
+\pi_1^C = \pi_2^C = \left(\frac{110}{3} - 10\right)\frac{80}{3} = \frac{80}{3} \times \frac{80}{3} = \frac{6400}{9} \approx 711.11.
+$$
+
+---
+
+#### 3) Sequential Quantity Competition (Stackelberg)
+기업 1이 leader, 기업 2가 follower이다.
+
+1. **2단계 (Follower 의사결정)**:  
+   기업 2는 관찰된 $q_1$에 대해 자신의 최적대응함수를 따른다:
+   $$
+   BR_2(q_1) = 40 - \frac{1}{2}q_1.
+   $$
+
+2. **1단계 (Leader 의사결정)**:  
+   기업 1은 기업 2의 반응함수 $q_2 = BR_2(q_1)$을 시장수요에 대입하여 자신의 이윤을 극대화한다:
+   $$
+   \pi_1(q_1) = \bigl(90 - q_1 - BR_2(q_1)\bigr)q_1 - 10q_1 = \left(40 - \frac{1}{2}q_1\right)q_1.
+   $$
+
+1계 조건(FOC):
+$$
+\frac{d\pi_1}{dq_1} = 40 - q_1 = 0 \quad\Longrightarrow\quad q_1^S = 40.
+$$
+
+이에 따른 기업 2의 생산량:
+$$
+q_2^S = 40 - \frac{1}{2}(40) = 20.
+$$
+
+총산출량, 시장가격, 각 기업 이윤:
+$$
+Q^S = q_1^S + q_2^S = 40 + 20 = 60,
+$$
+$$
+p^S = 90 - 60 = 30,
+$$
+$$
+\pi_1^S = (30 - 10) \times 40 = 800,
+$$
+$$
+\pi_2^S = (30 - 10) \times 20 = 400.
+$$
+
+---
+
+#### 4) First-Mover Advantage
+- 동시 Cournot 게임에서 기업 1의 이윤: $\pi_1^C = \frac{6400}{9} \approx 711.11$
+- 순차게임에서 Leader인 기업 1의 이윤: $\pi_1^S = 800$
+
+$$
+800 > \frac{6400}{9}
+$$
+이므로 명백히 **선도자 우위(first-mover advantage)**가 존재한다.
+
+::: {.spoon-note}
+**전략적 메커니즘**:  
+- 동시게임에서는 기업 1이 $q_2$를 고정된 상수로 간주하여 $\max_{q_1} \pi_1(q_1, q_2)$를 풉니다.
+- 반면 순차게임에서는 $q_2 = BR_2(q_1)$의 전략적 대체(Strategic Substitutes, $BR_2'(q_1) = -1/2 < 0$) 관계를 사전에 반영합니다. Leader가 자신의 산출량을 늘리면 Follower는 이에 반응하여 산출량을 줄여야 하므로, Leader는 산출량을 Cournot 수준($80/3 \approx 26.67$)보다 공격적인 $40$으로 확대하여 더 큰 시장점유율과 이윤($800$)을 확보합니다.
+:::
+
+---
+
+#### 5) 시장구조 비교 (Market Structure Comparison)
+
+| 시장구조 | 총산출량 ($Q$) | 시장가격 ($p$) | 기업 1 이윤 ($\pi_1$) | 기업 2 이윤 ($\pi_2$) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Monopoly (독점)** | $40$ | $50$ | $1600$ | $-$ |
+| **Cournot (동시 복점)** | $\frac{160}{3} \approx 53.33$ | $\frac{110}{3} \approx 36.67$ | $\frac{6400}{9} \approx 711.11$ | $\frac{6400}{9} \approx 711.11$ |
+| **Sequential (순차 복점)** | $60$ | $30$ | $800$ | $400$ |
+
+따라서 총산출량과 시장가격은 다음의 엄격한 서열을 갖습니다:
+$$
+Q^M < Q^C < Q^S, \qquad p^M > p^C > p^S.
+$$
+
+::: {.spoon-note}
+**경제학적 함의**:  
+1. **독점**: 단일 기업이 시장 전체의 가격하락 효과(인과적 $MR$ 체감)를 완전히 내재화하므로 산출량을 가장 강하게 제한하여 가격이 가장 높습니다.
+2. **Cournot 복점**: 두 기업 간 산출량 경쟁으로 독점의 가격 지배력이 완화되어 총산출량이 증가하고 가격이 하락합니다.
+3. **Sequential 게임**: 선도자가 전략적 우위를 점하기 위해 과감하게 생산을 늘리고($q_1 = 40$), 추종자가 이에 밀려 생산을 줄이지만($q_2 = 20$), 선도자의 증가분($+13.33$)이 추종자의 감소분($-6.67$)을 압도하므로 세 구조 중 **총산출량이 가장 많고 시장가격이 가장 낮아(30)** 사회적 후생 및 소비자잉여 측면에서 가장 우수합니다.
+:::
 :::
 :::
 
