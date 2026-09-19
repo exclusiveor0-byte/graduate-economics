@@ -1,18 +1,31 @@
 ---
 title: "IS–LM 재정충격: 단기 균형의 이동"
-description: "MATLAB 애니메이션으로 재정지출 확대 뒤 IS–LM 단기 균형이 이동하는 과정을 읽는다."
+description: "대화형 탐색 도구와 MATLAB 애니메이션으로 재정지출 확대 뒤 IS–LM 단기 균형이 이동하는 과정을 읽는다."
 ---
 
 ## 목적
 
 재정지출 확대는 재화시장 수요를 늘려 IS 곡선을 오른쪽으로 이동시킵니다. 화폐공급이 고정된
 단기에는 산출과 이자율이 함께 변합니다. 이 보충자료는 충격 전 균형에서 충격 후 균형으로
-이동하는 과정을 한 장면씩 보여줍니다.
+이동하는 과정을 대화형 도구와 애니메이션으로 보여줍니다.
 
 관련 본문은 [Chapter 06 · Nominal Rigidity](../macroeconomics/ch06-nominal-rigidity/contents.qmd)와
 [Chapter 08 · Monetary Policy](../macroeconomics/ch08-monetary-policy/contents.qmd)입니다.
 
+## 조작 도구
+
+<iframe class="interactive-frame" title="IS–LM 재정충격과 단기 균형 탐색 도구" src="interactive/islm-fiscal-shock/index.html" loading="lazy"></iframe>
+
+### 조작 도구 읽는 법
+
+- **재정지출 충격 $G$**를 오른쪽으로 움직이면, 재화시장 수요 증가로 IS 곡선이 우측으로 평행 이동합니다.
+- 화폐공급이 일정한 상태에서 산출이 증가하면 거래적 화폐수요가 늘어나 이자율 $r$이 상승합니다.
+- 이자율 상승은 민간 투자·소비 수요를 일부 위축시키므로(**구축효과, crowding-out effect**), 최종 산출 증가분 $\Delta Y$는 이자율이 고정되었을 때의 단순 승수 효과보다 작아집니다.
+- 지표 카드의 **재정승수**는 $\frac{dY}{dG} = \frac{h}{h+bk}$로 계산되며, 기준 모수($h=8, b=9, k=0.5$) 아래에서 약 $0.64$입니다.
+- 버튼을 눌러 **기준 상태 ($G=0$)**와 **충격 상태 ($G=24$)**를 원클릭으로 비교할 수 있습니다.
+
 ## 기준 IS–LM 도표
+
 
 산출 $Y$, 이자율 $r$, 재정지출 충격 $G$를 다음처럼 둡니다.
 
