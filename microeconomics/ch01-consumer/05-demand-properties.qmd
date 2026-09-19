@@ -163,6 +163,11 @@ Hicksian decomposition은 초기 효용 $u^0$를 유지한다. 바로 앞의 유
 아래에서 도출하는 Slutsky equation은 가격변화가 무한소일 때의 미분 항등식이다. 세 결과는 모두 가격효과를 분해하지만, 보상 규칙과 적용 범위가 서로 다르다.
 :::
 
+::: {.callout-note appearance="simple" title="VISUAL · Slutsky 분해와 보상 규칙"}
+[Slutsky 분해 보충자료](../../supplements/slutsky-decomposition.qmd)에서 가격과 선호를 직접 조작하며 Slutsky 보상과 Hicks 보상의 차이 및 대체효과·소득효과의 기하학적 분해를 대화형으로 확인할 수 있다.
+:::
+
+
 ::: {.callout-important title="THEOREM · Law of compensated demand"}
 모든 $p^0,p^1\gg0$, $\bar u\in\mathcal U$, 그리고
 $h^r\in H(p^r,\bar u)$ $(r=0,1)$에 대해
