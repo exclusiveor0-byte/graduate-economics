@@ -178,6 +178,7 @@ book:
     - supplements/slutsky-decomposition.qmd
     - supplements/solow-growth.qmd
     - supplements/ols-geometry.qmd
+    - supplements/ols-projection-geometry.qmd
     - supplements/iv-weak-instruments.qmd
     - supplements/islm-fiscal-shock.qmd
     - supplements/edgeworth-first-welfare.qmd
