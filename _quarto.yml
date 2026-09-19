@@ -171,7 +171,8 @@ book:
   - part: econometrics/ch10-large-sample-least-squares/index.qmd
     chapters:
     - econometrics/ch10-large-sample-least-squares/contents.qmd
-  - part: supplements/index.qmd
+  - supplements/index.qmd
+  - part: "보충자료 세부 목록"
     chapters:
     - supplements/visualization-guide.qmd
     - supplements/slutsky-decomposition.qmd
@@ -181,7 +182,8 @@ book:
     - supplements/islm-fiscal-shock.qmd
     - supplements/edgeworth-first-welfare.qmd
     - supplements/correspondence-hemicontinuity.qmd
-  - part: literature/index.qmd
+  - literature/index.qmd
+  - part: "분야별 논문 아카이브"
     chapters:
     - literature/theory-micro.qmd
     - literature/macro-monetary.qmd

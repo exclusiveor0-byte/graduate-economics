@@ -94,27 +94,6 @@ td, th { min-width: 6rem; padding: .7rem !important; }
 .paper-citation { margin: 1rem 0 1.5rem; padding: .9rem 1rem; border-left: 3px solid #466b68; background: #edf4f1; }
 .home-note { margin: -.25rem 0 2.5rem; padding: .9rem 1.05rem; border-left: 3px solid #b47b52; background: #f5eddf; color: #58463b; font-size: .94rem; }
 body.home-page #quarto-sidebar .sidebar-menu-container > ul > .sidebar-item-section { display: none; }
-body.home-page #quarto-sidebar .sidebar-menu-container > ul > .sidebar-item-section.home-sidebar-top-item,
-body.home-page #quarto-sidebar .sidebar-menu-container > ul > .sidebar-item-section:has(a[href*="supplements/index.html"]),
-body.home-page #quarto-sidebar .sidebar-menu-container > ul > .sidebar-item-section:has(a[href*="literature/index.html"]) {
-  display: block;
-}
-body.home-page #quarto-sidebar .sidebar-item-section.home-sidebar-top-item > ul,
-body.home-page #quarto-sidebar .sidebar-item-section:has(a[href*="supplements/index.html"]) > ul,
-body.home-page #quarto-sidebar .sidebar-item-section:has(a[href*="literature/index.html"]) > ul {
-  display: none !important;
-}
-body.home-page #quarto-sidebar .sidebar-item-section.home-sidebar-top-item .sidebar-item-toggle,
-body.home-page #quarto-sidebar .sidebar-item-section:has(a[href*="supplements/index.html"]) .sidebar-item-toggle,
-body.home-page #quarto-sidebar .sidebar-item-section:has(a[href*="literature/index.html"]) .sidebar-item-toggle {
-  display: none !important;
-}
-body.home-page #quarto-sidebar .sidebar-item-section.home-sidebar-top-item > .sidebar-item-container,
-body.home-page #quarto-sidebar .sidebar-item-section:has(a[href*="supplements/index.html"]) > .sidebar-item-container,
-body.home-page #quarto-sidebar .sidebar-item-section:has(a[href*="literature/index.html"]) > .sidebar-item-container {
-  margin-top: 0;
-  font-weight: normal;
-}
 body.home-page #title-block-header { margin-bottom: 2.25rem; padding: clamp(1.6rem, 4vw, 2.7rem); border: 0; background: #493a31; }
 body.home-page h1.title { color: #fff8ed; font-family: Georgia, "Noto Serif KR", serif; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 600; letter-spacing: -.055em; }
 body.home-page #title-block-header .subtitle { margin-top: .5rem; color: #e8c9a8; font-size: 1rem; letter-spacing: .035em; }
