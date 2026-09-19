@@ -1,0 +1,79 @@
+---
+title: "문제 한 스푼 #4"
+subtitle: "부분균형 · 소비자이론"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #4
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **부분균형 · 소비자이론**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Partial Equilibrium
+::: {.topic}
+부분균형 · 경쟁시장, 가격하한제, 후생
+:::
+
+어떤 경쟁시장의 역수요와 역공급이 각각
+
+$$
+p_D(Q) = 18 - Q, \qquad p_S(Q) = 2 + \frac{1}{2}Q
+$$
+
+로 주어진다.
+
+1. 정부개입이 없을 때의 경쟁균형 가격 $p^*$와 거래량 $Q^*$를 구하시오.
+2. 정부가 $\bar p = 10$의 가격하한제(price floor)를 실시한다고 하자. 이 가격에서 수요량과 공급량을 각각 구하고, 실제 민간 거래량이 수요량에 의해 결정된다고 할 때 초과공급량을 계산하시오.
+3. 정부가 초과공급분을 전량 매입한다고 하자. 정부의 매입비용을 계산하고, 가격하한제 실시 전후의 총잉여를 비교하여 정책으로 인한 deadweight loss를 구하시오.
+
+::: {.spoon-hint}
+**형식**: **competitive equilibrium → policy intervention → welfare**. 가격하한제에서는 소비자 구매량, 생산자 판매량, 정부 매입량을 구분하여 쓰시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Consumer Theory
+::: {.topic}
+소비자이론 · Quasi-linear Utility, Corner Solution, Roy's Identity
+:::
+
+소비자의 효용함수가
+
+$$
+u(x, y) = 2\sqrt{x} + y
+$$
+
+이고, 예산제약은
+
+$$
+px + y \le m, \qquad p > 0, \; m > 0, \; x, y \ge 0
+$$
+
+으로 주어진다. 재화 $y$의 가격은 1로 normalize되어 있다.
+
+1. utility maximization problem을 풀어 Marshallian demand $x(p, m)$, $y(p, m)$를 구하시오. interior solution과 corner solution이 언제 발생하는지 명시하시오.
+2. 위 수요함수를 이용하여 indirect utility function $V(p, m)$을 구하시오.
+3. interior solution이 성립하는 경우 Roy's identity를 이용하여 $x(p, m)$를 다시 도출하고, 1번의 결과와 일치하는지 확인하시오.
+
+::: {.spoon-hint}
+**형식**: **solve → characterize corners → verify**. 단순 FOC만 쓰지 말고 비음수제약 때문에 발생하는 경계해를 확인하시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

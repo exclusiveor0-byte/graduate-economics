@@ -201,6 +201,7 @@ book:
     - qual-exam/micro/set-01.qmd
     - qual-exam/micro/set-02.qmd
     - qual-exam/micro/set-03.qmd
+    - qual-exam/micro/set-04.qmd
     - qual-exam/micro/set-05.qmd
   - references.qmd
   page-footer:
