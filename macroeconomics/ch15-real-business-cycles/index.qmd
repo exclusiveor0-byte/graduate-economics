@@ -1,0 +1,55 @@
+# Chapter 15 · 실물경기변동이론 {.unnumbered}
+*Technology Shocks, Propagation, Calibration, and Model Evaluation*
+
+이 장에서는 **실물경기변동이론**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **15.1–15.8** From Ramsey Growth to RBC · Intertemporal Substitution in Labor Supply
+- **15.9–15.15** Technology and Government-Purchases Shocks · Solving the Model with Chapter 14
+- **15.16–15.22** The Effects of a Positive Technology Shock · From the Model to Business-Cycle Moments
+- **15.23–15.29** A Historical Calibration Benchmark · Closing the Fluctuations Block
+:::
+
+## Sections
+
+- [15.1 From Ramsey Growth to RBC](contents.html#s01)
+- [15.2 The Baseline RBC Economy](contents.html#s02)
+- [15.3 Production, Resources, and Capital Accumulation](contents.html#s03)
+- [15.4 Competitive Firms and Factor Prices](contents.html#s04)
+- [15.5 Household Preferences](contents.html#s05)
+- [15.6 The Consumption Euler Equation](contents.html#s06)
+- [15.7 Intratemporal Labor--Leisure Choice](contents.html#s07)
+- [15.8 Intertemporal Substitution in Labor Supply](contents.html#s08)
+- [15.9 Technology and Government-Purchases Shocks](contents.html#s09)
+- [15.10 Competitive Equilibrium](contents.html#s10)
+- [15.11 Planner Representation](contents.html#s11)
+- [15.12 The Nonstochastic Steady State](contents.html#s12)
+- [15.13 States, Controls, and Timing](contents.html#s13)
+- [15.14 The Log-Linearized RBC System](contents.html#s14)
+- [15.15 Solving the Model with Chapter 14](contents.html#s15)
+- [15.16 The Effects of a Positive Technology Shock](contents.html#s16)
+- [15.17 Shock Persistence and Internal Propagation](contents.html#s17)
+- [15.18 Government-Purchases Shocks](contents.html#s18)
+- [15.19 Impulse Responses as Equilibrium Mechanisms](contents.html#s19)
+- [15.20 Calibration](contents.html#s20)
+- [15.21 Calibration Is Not Estimation](contents.html#s21)
+- [15.22 From the Model to Business-Cycle Moments](contents.html#s22)
+- [15.23 A Historical Calibration Benchmark](contents.html#s23)
+- [15.24 What the Baseline Model Explains](contents.html#s24)
+- [15.25 Labor Volatility and Labor--Productivity Comovement](contents.html#s25)
+- [15.26 Is the Solow Residual a Technology Shock?](contents.html#s26)
+- [15.27 The Propagation Problem](contents.html#s27)
+- [15.28 Monetary Neutrality, Real Extensions, and the RBC Legacy](contents.html#s28)
+- [15.29 Closing the Fluctuations Block](contents.html#s29)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

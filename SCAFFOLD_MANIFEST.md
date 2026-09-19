@@ -22,7 +22,6 @@
 - `econometrics/index.qmd`
 - `index.qmd`
 - `macroeconomics/index.qmd`
-- `macroeconomics/overview.qmd`
 - `microeconomics/ch00-foundations/01-model-structure.qmd`
 - `microeconomics/ch00-foundations/02-notation-logic.qmd`
 - `microeconomics/ch00-foundations/03-euclidean-space-sets.qmd`

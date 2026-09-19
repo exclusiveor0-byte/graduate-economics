@@ -9,7 +9,7 @@ Solow 모형에서 저축률 $s$, 감가상각률 $\delta$, 그리고 초기 자
 서로 다른 역할을 한다. 이 보충자료는 효율노동 단위 자본의 전이식과
 정상상태를 분리해 읽기 위해 R로 계산한 시나리오를 제공한다.
 
-관련 본문은 [Chapter 01 · 성장사실과 Solow 모형](../macroeconomics/ch01-solow-growth/contents.qmd)이다.
+관련 본문은 [Chapter 05 · Solow–Swan 성장모형](../macroeconomics/ch05-solow-swan/contents.qmd)이다.
 
 ## 조작 도구
 
@@ -52,5 +52,5 @@ Rscript supplements/r/solow-growth.R
 ```
 
 이 도구는 Cobb--Douglas 생산함수와 외생적인 저축률을 가정한 Solow 기준경제다.
-내생적 저축, 이행기 후생, 성장률 자체의 결정은 [Chapter 02](../macroeconomics/ch02-ramsey-olg/contents.qmd)와
-[Chapter 03](../macroeconomics/ch03-endogenous-growth/contents.qmd)에서 별도로 다룬다.
+내생적 저축, 이행기 후생, 성장률 자체의 결정은 [Chapter 07](../macroeconomics/ch07-ramsey-cks/contents.qmd)와
+[Chapter 08](../macroeconomics/ch08-endogenous-growth/contents.qmd)에서 별도로 다룬다.

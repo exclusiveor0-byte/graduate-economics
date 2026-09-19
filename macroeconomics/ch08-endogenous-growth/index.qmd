@@ -1,0 +1,45 @@
+# Chapter 08 · 내생적 성장과 지식축적 {.unnumbered}
+*Endogenous Growth, Knowledge Accumulation, and Innovation*
+
+이 장에서는 **내생적 성장과 지식축적**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **8.1–8.5** Why Ramsey Is Not Enough · Knowledge as a Produced State Variable
+- **8.6–8.10** Goods and R&D Sectors · Nonrivalry and Excludability
+- **8.11–8.15** Why Perfect Competition Is Not Enough · Decentralized Equilibrium vs. Social Planner
+- **8.16–8.19** Learning-by-Doing and the AK Connection · Chapter Summary and Empirical Bridge
+:::
+
+## Sections
+
+- [8.1 Why Ramsey Is Not Enough](contents.html#s01)
+- [8.2 Diminishing Returns and the Growth Problem](contents.html#s02)
+- [8.3 The AK Model: Minimal Endogenous Growth](contents.html#s03)
+- [8.4 Growth in the AK Economy](contents.html#s04)
+- [8.5 Knowledge as a Produced State Variable](contents.html#s05)
+- [8.6 Goods and R&D Sectors](contents.html#s06)
+- [8.7 The Knowledge Production Function](contents.html#s07)
+- [8.8 Knowledge Growth Dynamics](contents.html#s08)
+- [8.9 Returns to Produced Factors and Scale Effects](contents.html#s09)
+- [8.10 Nonrivalry and Excludability](contents.html#s10)
+- [8.11 Why Perfect Competition Is Not Enough](contents.html#s11)
+- [8.12 The Romer Model: Ideas, Patents, and Variety Expansion](contents.html#s12)
+- [8.13 Profits, Patents, and the Value of Ideas](contents.html#s13)
+- [8.14 Endogenous Allocation to R&D](contents.html#s14)
+- [8.15 Decentralized Equilibrium vs. Social Planner](contents.html#s15)
+- [8.16 Learning-by-Doing and the AK Connection](contents.html#s16)
+- [8.17 One Unifying Principle](contents.html#s17)
+- [8.18 Solow, Ramsey, and Endogenous Growth](contents.html#s18)
+- [8.19 Chapter Summary and Empirical Bridge](contents.html#s19)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

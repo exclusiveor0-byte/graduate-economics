@@ -1,0 +1,1247 @@
+---
+title: >-
+  선형 동태계와 합리적 기대
+description: >-
+  Linearization, Stability, Rational Expectations, and Solution Methods
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::::::::: {#s01 .section}
+## [14.1]{.section-number}Why Linear Solution Methods?
+
+Chapter 13에서 정리한 volatility, persistence, comovement를 모형에서
+계산하려면 먼저 stochastic equilibrium의 law of motion을 구해야 한다.
+
+현대 거시모형의 equilibrium conditions는 대개
+
+::: math-display
+$$
+E_t F(x_{t+1},x_t,x_{t-1},\varepsilon_t)=0
+$$
+:::
+
+처럼 비선형이고 forward-looking terms를 포함한다. 예를 들어 stochastic
+growth model의 Euler equation은
+
+::: math-display
+$$
+u'(c_t)
+=
+\beta E_t\!\left[
+u'(c_{t+1})R_{t+1}\right]
+$$
+:::
+
+과 같은 형태다. 일반적으로 closed form을 얻기 어렵기 때문에 다음 절차가
+표준적인 출발점이 된다.
+
+::::::: logic-steps
+::: {}
+[1]{.step}
+
+**Steady state:** shock이 없을 때의 기준점 또는 balanced-growth path를
+계산한다.
+:::
+
+::: {}
+[2]{.step}
+
+**Local approximation:** equilibrium conditions를 기준점 주변에서
+first-order linearize한다.
+:::
+
+::: {}
+[3]{.step}
+
+**RE solution:** timing과 stability restrictions를 이용해 bounded
+rational-expectations path를 선택한다.
+:::
+
+::: {}
+[4]{.step}
+
+**Quantitative output:** policy rules, impulse responses, second
+moments를 계산한다.
+:::
+:::::::
+
+::: chapter-thesis
+Methodological role
+
+Chapter 14의 목표는 특정 모형을 설명하는 것이 아니라, 여러 DSGE/RBC
+모형에 반복해서 적용되는 **local solution machinery**를 정리하는 것이다.
+:::
+:::::::::::
+
+:::::::::: {#s02 .section}
+## [14.2]{.section-number}Matrix Dynamic Systems
+
+Scalar difference equation을 vector-matrix notation으로 옮기면 다변량
+동학을 하나의 객체로 다룰 수 있다.
+
+먼저
+
+::: math-display
+$$
+\boxed{x_{t+1}=A x_t}
+$$
+:::
+
+를 생각하자. 여기서 $x_t\in\mathbb R^n$,
+$A\in\mathbb R^{n\times n}$이다. 반복대입하면
+
+::: math-display
+$$
+\boxed{x_t=A^t x_0.}
+$$
+:::
+
+따라서 system의 장기성질은 결국 $A^t$가 어떻게 움직이는지에 달려 있다.
+
+::::::: macro-grid
+::: statement
+**State vector**\
+여러 경제변수의 deviation을 하나의 벡터 $x_t$로 묶는다.
+:::
+
+::: statement
+**Transition matrix**\
+$A$는 각 변수의 현재값이 다음기 변수들에 미치는 선형 효과를 담는다.
+:::
+
+::: statement
+**Iteration**\
+$A^t$가 shock 또는 initial condition의 propagation을 결정한다.
+:::
+
+::: statement
+**Solution question**\
+어떤 directions가 수렴하고 어떤 directions가 발산하는가를 판별한다.
+:::
+:::::::
+::::::::::
+
+:::::: {#s03 .section}
+## [14.3]{.section-number}Eigenvalues and Eigenvectors
+
+Eigenvalue decomposition은 multivariate dynamics를 독립적인 dynamic
+modes로 분해하는 기본 도구다.
+
+행렬 $A$의 eigenpair $(\lambda,v)$는
+
+::: math-display
+$$
+\boxed{Av=\lambda v}
+$$
+:::
+
+를 만족한다. 만약 $x_0=v$이면
+
+::: math-display
+$$
+x_t=A^t v=\lambda^t v.
+$$
+:::
+
+즉 eigenvector 방향에서는 복잡한 vector system이 scalar difference
+equation처럼 움직인다.
+
+::: reading-rule
+**Reading rule.** 거시동학에서 중요한 것은 eigenvalue가 단순히 "큰가
+작은가"가 아니라 **unit circle에 대해 어디에 위치하는가**이다.
+:::
+::::::
+
+::::::: {#s04 .section}
+## [14.4]{.section-number}Diagonalization and Dynamic Modes
+
+행렬이 충분한 수의 독립 eigenvectors를 가지면 dynamics를 각 eigenmode의
+합으로 정확히 분해할 수 있다.
+
+$A$가 diagonalizable이라면
+
+::: math-display
+$$
+\boxed{A=V\Lambda V^{-1}},
+\qquad
+\Lambda=\operatorname{diag}(\lambda_1,\ldots,\lambda_n).
+$$
+:::
+
+따라서
+
+::: math-display
+$$
+\boxed{A^t=V\Lambda^tV^{-1}.}
+$$
+:::
+
+초기조건을 eigenvector basis로 쓰면
+
+::: math-display
+$$
+x_0=\sum_{i=1}^n a_i v_i
+\quad\Rightarrow\quad
+x_t=\sum_{i=1}^n a_i\lambda_i^t v_i.
+$$
+:::
+
+즉 각 $\lambda_i$가 하나의 dynamic mode의 decay, persistence, explosion,
+oscillation을 결정한다.
+
+::: extension
+**Technical note.** 모든 행렬이 diagonalizable한 것은 아니다. 이 경우
+Jordan form을 이론적으로 사용할 수 있지만, 실제 계산에서는 Schur 또는
+generalized Schur decomposition이 더 안정적인 경우가 많다.
+:::
+:::::::
+
+:::::: {#s05 .section}
+## [14.5]{.section-number}Stability and the Unit Circle
+
+Discrete-time system의 안정성은 eigenvalues가 unit circle 안에 있는지로
+판정한다.
+
+::: {.contrast-table .display-table-wrap}
+  Root        Condition         Dynamic implication
+  ----------- ----------------- ------------------------------------------------
+  Stable      $|\lambda_i|<1$   $\lambda_i^t\to0$
+  Unstable    $|\lambda_i|>1$   absolute value가 발산
+  Unit root   $|\lambda_i|=1$   일반적인 local stability classification의 경계
+:::
+
+따라서
+
+::: math-display
+$$
+\boxed{
+\rho(A)\equiv\max_i|\lambda_i|<1
+\quad\Longrightarrow\quad
+A^t\to0
+}
+$$
+:::
+
+가 된다. 여기서 $\rho(A)$는 spectral radius다.
+
+::: chapter-thesis
+Stability
+
+주어진 law of motion 아래에서 모든 초기 deviation이 사라지려면 모든
+dynamic modes가 unit circle 안에 있어야 한다.
+:::
+::::::
+
+::::: {#s06 .section}
+## [14.6]{.section-number}Complex Roots and Oscillatory Dynamics
+
+Complex eigenvalues는 damping 또는 amplification과 회전을 동시에
+나타낸다.
+
+복소근을
+
+::: math-display
+$$
+\lambda=re^{i\theta}
+$$
+:::
+
+라고 쓰면 $r$은 amplitude의 변화, $\theta$는 회전 또는 oscillation의
+주기적 성분을 결정한다.
+
+::: math-case
+$$
+r<1 \Rightarrow \text{damped oscillation},
+\qquad
+r>1 \Rightarrow \text{explosive oscillation}.
+$$
+:::
+
+다만 Chapter 13에서 강조했듯 실제 business cycle을 complex root가 만드는
+deterministic periodic cycle과 동일시해서는 안 된다. stochastic shocks가
+반복해서 들어오면 관찰되는 시계열은 regular cycle이 아니라 shock와
+propagation의 결합이다.
+:::::
+
+:::::::: {#s07 .section}
+## [14.7]{.section-number}Predetermined and Forward-Looking Variables
+
+거시모형의 핵심은 모든 변수가 동일한 timing restriction을 갖지 않는다는
+데 있다.
+
+::::: macro-grid
+::: statement
+**Predetermined variable**\
+현재 시점에 이미 주어져 있어 즉시 jump할 수 없는 변수. 대표적으로
+inherited capital $k_t$.
+:::
+
+::: statement
+**Forward-looking variable**\
+현재 equilibrium에서 즉시 조정되어 미래 기대와 안정성 조건을 반영할 수
+있는 변수. 대표적으로 consumption, asset prices.
+:::
+:::::
+
+state vector를
+
+::: math-display
+$$
+\boxed{
+z_t=
+\begin{pmatrix}
+x_t\\ y_t
+\end{pmatrix}}
+$$
+:::
+
+로 쓰고 $x_t$를 predetermined, $y_t$를 jump variables라고 하자. 초기
+시점에서 $x_0$는 역사에 의해 주어지지만 $y_0$는 equilibrium이 결정한다.
+
+::: reading-rule
+**Key distinction.** Rational-expectations solution에서는 unstable
+roots를 "버리는" 것이 아니라, jump variables가 현재 즉시 조정되어
+unstable directions의 coefficient를 0으로 만들어야 한다.
+:::
+::::::::
+
+:::::: {#s08 .section}
+## [14.8]{.section-number}From the Ramsey Saddle Path to Rational Expectations
+
+Chapter 7의 Ramsey saddle path는 Blanchard--Kahn logic을 이해하는 가장
+좋은 deterministic benchmark다.
+
+Ramsey에서
+
+::: math-case
+$$
+k(0):\text{ predetermined},
+\qquad
+c(0):\text{ jump variable}.
+$$
+:::
+
+steady state 주변의 system은 하나의 stable direction과 하나의 unstable
+direction을 가졌다. 따라서 주어진 $k(0)$에서 정확히 하나의 $c(0)$만
+선택해야 stable manifold에 올라갈 수 있었다.
+
+:::: equation-card
+Same geometry, richer system
+
+::: math-display
+$$
+\boxed{
+\text{Saddle-path selection}
+\quad\Longrightarrow\quad
+\text{BK stable RE selection}
+}
+$$
+:::
+::::
+
+Blanchard--Kahn condition은 이 아이디어를
+다변량·discrete-time·expectations system으로 일반화한다.
+::::::
+
+::::::::::: {#s09 .section}
+## [14.9]{.section-number}Linearization around a Steady State
+
+비선형 system을 steady state 주변에서 Taylor approximation하면 local
+linear dynamics를 얻는다.
+
+비선형 law
+
+::: math-display
+$$
+x_{t+1}=g(x_t)
+$$
+:::
+
+가 있고 $x^*=g(x^*)$라고 하자. $\widetilde x_t=x_t-x^*$로 두면
+
+::: math-display
+$$
+\boxed{
+\widetilde x_{t+1}
+\approx
+Dg(x^*)\widetilde x_t
+}
+$$
+:::
+
+이다. 즉 transition matrix는 steady state에서의 Jacobian
+
+::: math-display
+$$
+A=Dg(x^*)
+$$
+:::
+
+이다.
+
+::::::: logic-steps
+::: {}
+[1]{.step}
+
+정확한 nonlinear equilibrium conditions를 적는다.
+:::
+
+::: {}
+[2]{.step}
+
+deterministic steady state 또는 balanced-growth normalization을 구한다.
+:::
+
+::: {}
+[3]{.step}
+
+Jacobian matrices를 계산한다.
+:::
+
+::: {}
+[4]{.step}
+
+deviation variables로 선형 system을 구성한다.
+:::
+:::::::
+:::::::::::
+
+::::::: {#s10 .section}
+## [14.10]{.section-number}Log-Linearization
+
+RBC에서는 percentage deviations로 해석하기 쉬운 log-linearization이 특히
+많이 사용된다.
+
+양의 변수 $X_t$에 대해
+
+::: math-display
+$$
+\boxed{
+\widehat x_t
+\equiv
+\log X_t-\log X^*
+=
+\log\!\left(\frac{X_t}{X^*}\right)
+\approx
+\frac{X_t-X^*}{X^*}
+}
+$$
+:::
+
+로 정의하자. 예를 들어 Cobb--Douglas production
+
+::: math-display
+$$
+Y_t=A_tK_t^\alpha N_t^{1-\alpha}
+$$
+:::
+
+는
+
+::: math-display
+$$
+\boxed{
+\widehat y_t
+=
+\widehat a_t
++
+\alpha\widehat k_t
++
+(1-\alpha)\widehat n_t
+}
+$$
+:::
+
+가 된다. 곱셈과 거듭제곱이 선형결합으로 바뀌는 것이 log-linearization의
+큰 장점이다.
+
+### Resource constraints need shares
+
+합의 형태인 식은 단순히 hats를 더하면 안 된다. 예를 들어 steady
+state에서 $Y^*=C^*+I^*$이면 first-order approximation은
+
+::: math-display
+$$
+\boxed{
+\widehat y_t
+=
+s_C\widehat c_t+s_I\widehat i_t,
+\qquad
+s_C\equiv\frac{C^*}{Y^*},\quad
+s_I\equiv\frac{I^*}{Y^*}
+}
+$$
+:::
+
+처럼 steady-state shares를 포함한다.
+:::::::
+
+::::: {#s11 .section}
+## [14.11]{.section-number}What Linearization Preserves --- and What It Does Not
+
+First-order approximation은 매우 강력하지만 local object라는 점을 잊으면
+안 된다.
+
+::: {.contrast-table .display-table-wrap}
+  잘 포착하는 것                       주의가 필요한 것
+  ------------------------------------ -------------------------------------------------------
+  steady state 주변의 local dynamics   큰 shock과 멀리 떨어진 global dynamics
+  first-order policy responses         강한 nonlinearities와 kinks
+  IRFs와 기본 second moments           occasionally binding constraints
+  local determinacy                    정확한 welfare comparison과 higher-order risk effects
+:::
+
+::: chapter-thesis
+Scope
+
+이 장의 solution concept는 **local first-order perturbation
+solution**이다. Global dynamic programming solution과 동일한 객체가
+아니다.
+:::
+:::::
+
+:::::: {#s12 .section}
+## [14.12]{.section-number}A Canonical Linear Rational-Expectations System
+
+Linearized equilibrium conditions는 일반적으로 현재변수와 expected
+future variables를 함께 포함한다.
+
+대표적으로
+
+::: math-display
+$$
+\boxed{
+\Gamma_0 E_t z_{t+1}
+=
+\Gamma_1 z_t
++
+\Psi\varepsilon_t
+}
+$$
+:::
+
+와 같이 쓸 수 있다. 여기서 $z_t$ 안에는 predetermined variables와
+forward-looking variables가 모두 들어간다.
+
+우리가 찾고 싶은 것은 결국
+
+::: math-display
+$$
+\boxed{
+y_t=F x_t+G\varepsilon_t}
+$$
+:::
+
+와
+
+::: math-display
+$$
+\boxed{
+x_{t+1}=P x_t+Q\varepsilon_{t+1}}
+$$
+:::
+
+같은 policy/state-transition rules이다.
+::::::
+
+::::: {#s13 .section}
+## [14.13]{.section-number}Why Expectations Change the Initial-Value Problem
+
+일반적인 deterministic difference equation과 달리, rational-expectations
+system에서는 모든 초기값을 임의로 지정할 수 없다.
+
+예를 들어
+
+::: math-display
+$$
+y_t=aE_ty_{t+1}+b x_t
+$$
+:::
+
+에서는 현재 $y_t$가 미래 $y_{t+1}$에 대한 expectation에 의존한다.
+$y_t$가 jump variable이면 현재의 initial value는 과거가 아니라
+equilibrium의 forward-looking restriction에 의해 정해진다.
+
+::: reading-rule
+**RE boundary condition.** Predetermined states는 초기조건을 제공하고,
+forward-looking variables는 boundedness·transversality·expectations
+consistency가 요구하는 값을 선택한다.
+:::
+:::::
+
+:::::: {#s14 .section}
+## [14.14]{.section-number}A Scalar Forward-Looking Example
+
+간단한 예제를 통해 expectation과 exogenous state dynamics가 어떻게 현재
+jump variable을 결정하는지 보자.
+
+::: math-display
+$$
+y_t=aE_ty_{t+1}+b x_t,
+\qquad
+x_{t+1}=\rho x_t+\varepsilon_{t+1},
+\quad |\rho|<1.
+$$
+:::
+
+해를 $y_t=\phi x_t$라고 conjecture하면
+
+::: math-display
+$$
+\phi x_t
+=
+a\phi E_t x_{t+1}+b x_t
+=
+a\phi\rho x_t+b x_t.
+$$
+:::
+
+따라서
+
+::: math-display
+$$
+\boxed{
+\phi=\frac{b}{1-a\rho}
+}
+$$
+:::
+
+이다. 중요한 점은 $y_t$가 독립적인 initial condition이 아니라 $x_t$와
+미래 law of motion에 맞춰 현재 즉시 결정된다는 것이다.
+::::::
+
+::::: {#s15 .section}
+## [14.15]{.section-number}Generalized Eigenvalues
+
+일반적인 RE system에서는 $\Gamma_0$가 invertible하다고 가정하고
+$\Gamma_0^{-1}\Gamma_1$을 만드는 접근이 항상 가능하거나 수치적으로
+안전한 것은 아니다.
+
+따라서 matrix pair $(\Gamma_1,\Gamma_0)$의 generalized eigenvalues를
+사용한다.
+
+::: math-display
+$$
+\boxed{
+\det(\Gamma_1-\lambda\Gamma_0)=0.
+}
+$$
+:::
+
+$\Gamma_0$가 nonsingular한 특수한 경우에는 이 generalized eigenvalues가
+$\Gamma_0^{-1}\Gamma_1$의 ordinary eigenvalues와 일치한다.
+
+::: extension
+**Technical note.** 실제 구현에서는 generalized eigenvalues가
+finite인지, unit circle에 얼마나 가까운지, matrix pencil이 regular한지
+등의 조건도 확인해야 한다.
+:::
+:::::
+
+::::::: {#s16 .section}
+## [14.16]{.section-number}The Blanchard--Kahn Counting Condition
+
+Predetermined states와 jump variables의 수가 eigenvalue structure와
+정확히 맞아야 bounded rational-expectations equilibrium이 locally
+unique해진다.
+
+표준적인 regularity와 rank conditions 아래
+
+::: math-case
+$$
+n_f=\text{number of forward-looking variables},
+\qquad
+n_u=\text{number of unstable generalized roots}.
+$$
+:::
+
+Blanchard--Kahn의 핵심 counting condition은
+
+:::: equation-card
+Local determinacy
+
+::: math-display
+$$
+\boxed{n_u=n_f.}
+$$
+:::
+::::
+
+이다. 직관적으로는 각 unstable direction마다 하나의 jump degree of
+freedom이 필요하다.
+
+::: reading-rule
+**Important qualification.** Root counting만으로 충분한 것은 아니다.
+관련 eigenvector blocks의 rank/non-singularity 같은 regularity
+condition이 함께 필요하다. 이 장에서는 counting condition을 핵심
+직관으로 사용한다.
+:::
+:::::::
+
+::::: {#s17 .section}
+## [14.17]{.section-number}Determinacy, Indeterminacy, and Nonexistence
+
+BK logic은 세 가지 경우를 명확히 구분한다.
+
+::: {.contrast-table .display-table-wrap}
+  Root count   Interpretation                                 Local implication
+  ------------ ---------------------------------------------- ----------------------------------------------------
+  $n_u=n_f$    unstable restrictions와 jump freedoms가 일치   일반적으로 locally unique bounded RE equilibrium
+  $n_u<n_f$    jump freedoms가 더 많음                        indeterminacy: 여러 bounded paths가 가능할 수 있음
+  $n_u>n_f$    unstable directions가 너무 많음                일반적으로 bounded RE solution이 존재하지 않음
+:::
+
+따라서 determinacy는 단순한 stability 문제가 아니다.
+
+::: math-display
+$$
+\boxed{
+\text{stability}
+\neq
+\text{RE determinacy}.
+}
+$$
+:::
+
+Stability는 주어진 law of motion의 수렴성을 묻고, determinacy는 timing과
+expectations restrictions를 모두 만족하는 equilibrium law가 유일한지를
+묻는다.
+:::::
+
+::::: {#s18 .section}
+## [14.18]{.section-number}Expectational Errors and Nonfundamental Components
+
+Rational expectations는 미래 realization을 완벽히 안다는 뜻이 아니라
+forecast error가 현재 정보에 대해 예측불가능하다는 뜻이다.
+
+즉
+
+::: math-display
+$$
+\boxed{
+z_{t+1}=E_tz_{t+1}+\eta_{t+1},
+\qquad
+E_t[\eta_{t+1}]=0.}
+$$
+:::
+
+$\eta_{t+1}$은 forecast error다. Determinate fundamental
+equilibrium에서는 이 error가 새로운 fundamental innovations와 일치하도록
+구성된다.
+
+반면 indeterminate environment에서는 fundamentals만으로 equilibrium
+path가 하나로 결정되지 않을 수 있어, nonfundamental expectation
+disturbances가 추가적인 equilibrium variation을 만들 가능성이 생긴다.
+
+::: extension
+**Preview.** 이것이 sunspot equilibrium의 출발점이다. 본 장에서는 개념만
+소개하고 본격적인 indeterminacy theory는 다루지 않는다.
+:::
+:::::
+
+::::: {#s19 .section}
+## [14.19]{.section-number}Generalized Schur / QZ Decomposition
+
+고차원 linear RE model을 실제로 풀 때는 generalized eigenvalue problem을
+안정적으로 처리할 수 있는 QZ decomposition이 유용하다.
+
+matrix pair $(\Gamma_1,\Gamma_0)$에 대해 generalized Schur
+decomposition은 직교 또는 unitary matrices $Q,Z$를 사용해
+
+::: math-display
+$$
+Q'\Gamma_0Z=S,
+\qquad
+Q'\Gamma_1Z=T
+$$
+:::
+
+형태의 quasi-upper-triangular pair를 만든다. generalized roots는
+대응하는 diagonal blocks의 비율에서 얻어진다.
+
+::: chapter-thesis
+Why QZ?
+
+핵심은 $\Gamma_0^{-1}\Gamma_1$을 명시적으로 만들지 않고도
+stable/unstable generalized roots를 분류하고 재정렬할 수 있다는 점이다.
+:::
+
+이 때문에 Klein 방식은 singular 또는 nearly singular한 system에서도 단순
+inversion보다 더 일반적이고 수치적으로 적합한 접근을 제공한다.
+:::::
+
+:::::: {#s20 .section}
+## [14.20]{.section-number}From QZ to Policy Functions
+
+Ordered QZ decomposition으로 stable과 unstable subspaces를 나누면 jump
+variables를 predetermined states의 함수로 표현할 수 있다.
+
+변환된 좌표에서 stable block을 $s_t$, unstable block을 $u_t$라고 하자.
+Bounded equilibrium은 unstable component가 폭발하지 않도록 초기 jump
+variables를 제한한다.
+
+결과적으로 원래 variables에서
+
+::: math-display
+$$
+\boxed{y_t=F x_t}
+$$
+:::
+
+같은 policy rule과
+
+::: math-display
+$$
+\boxed{x_{t+1}=P x_t+Q\varepsilon_{t+1}}
+$$
+:::
+
+같은 state transition을 얻는다.
+
+::: reading-rule
+**Economic output of the solver.** QZ decomposition 자체가 최종 목적이
+아니다. 최종적으로 필요한 것은 각 endogenous variable을 current states와
+shocks에 매핑하는 **equilibrium decision rules**이다.
+:::
+::::::
+
+:::::::: {#s21 .section}
+## [14.21]{.section-number}State-Space Representation and Impulse Responses
+
+해결된 linear model은 simulation과 impulse-response analysis에 적합한
+state-space form으로 정리된다.
+
+예를 들어
+
+::: math-display
+$$
+\boxed{
+s_{t+1}=P s_t+Q\varepsilon_{t+1}}
+$$
+:::
+
+이고 observables가
+
+::: math-display
+$$
+\boxed{y_t=H s_t}
+$$
+:::
+
+라고 하자. 한 번의 unit shock가 $t$에 들어오면, 다른 shock를 0으로 둔
+conditional path에서
+
+::: math-display
+$$
+s_t=Q\varepsilon_t,
+\qquad
+s_{t+1}=PQ\varepsilon_t,
+\qquad
+s_{t+h}=P^hQ\varepsilon_t.
+$$
+:::
+
+따라서 state의 impulse response는
+
+::: math-display
+$$
+\boxed{IRF_s(h)=P^hQ}
+$$
+:::
+
+이고 observable variables의 response는
+
+::: math-display
+$$
+\boxed{IRF_y(h)=HP^hQ.}
+$$
+:::
+::::::::
+
+::::::::: {#s22 .section}
+## [14.22]{.section-number}From State-Space Solutions to Model Moments
+
+Chapter 13의 empirical targets는 해결된 state-space system에서 직접
+계산할 수 있다.
+
+shock covariance를
+
+::: math-display
+$$
+E[\varepsilon_{t+1}\varepsilon_{t+1}']=\Omega
+$$
+:::
+
+라고 하자. stationary state covariance $\Sigma$는 discrete Lyapunov
+equation
+
+::: math-display
+$$
+\boxed{
+\Sigma=P\Sigma P'+Q\Omega Q'
+}
+$$
+:::
+
+을 만족한다. $y_t=Hs_t$라면
+
+::: math-display
+$$
+\operatorname{Var}(y_t)=H\Sigma H'.
+$$
+:::
+
+또한 lag-$j$ covariance는
+
+::: math-display
+$$
+\operatorname{Cov}(s_{t+j},s_t)=P^j\Sigma,
+\qquad j\ge0,
+$$
+:::
+
+에서 얻을 수 있다. 따라서 volatility, autocorrelation,
+cross-correlation을 계산해 Chapter 13의 data moments와 비교할 수 있다.
+
+:::: equation-card
+Quantitative loop
+
+::: math-display
+$$
+\boxed{
+\text{Equilibrium Conditions}
+\to
+\text{Linear Solution}
+\to
+\text{IRFs/Moments}
+\to
+\text{Data Comparison}
+}
+$$
+:::
+::::
+:::::::::
+
+::::: {#s23 .section}
+## [14.23]{.section-number}Diagnostics and Common Failure Modes
+
+Linear solver의 오류는 단순한 coding 문제가 아니라 경제적 timing, steady
+state, numerical conditioning의 문제일 수 있다.
+
+::: {.contrast-table .display-table-wrap}
+  문제                     왜 중요한가                                점검할 것
+  ------------------------ ------------------------------------------ ----------------------------------------
+  Wrong steady state       Jacobian 전체가 잘못됨                     steady-state residuals가 충분히 작은지
+  Timing error             predetermined/jump classification이 바뀜   각 variable이 언제 선택·관측되는지
+  Root near unit circle    persistence와 root classification이 민감   tolerance와 eigenvalue modulus
+  Poor scaling             matrix conditioning 악화                   변수 normalization과 condition number
+  Singular matrix pencil   naive inversion 실패                       generalized formulation/QZ 사용
+  BK count failure         unique bounded RE path 없음                unstable roots vs jump variables
+:::
+
+::: reading-rule
+**Practical rule.** Solver가 숫자를 반환했다는 것과 경제적으로
+admissible한 equilibrium을 찾았다는 것은 동일하지 않다. Steady-state
+residual, timing, BK condition, solution residual을 모두 검증해야 한다.
+:::
+:::::
+
+:::::::::::: {#s24 .section}
+## [14.24]{.section-number}Why RBC Next?
+
+이제 Chapter 15에서 필요한 해법이 모두 준비되었다.
+
+RBC model은
+
+::: math-display
+$$
+\boxed{
+\text{Preferences}
++
+\text{Technology}
++
+\text{Resource Constraint}
++
+\text{Shock Process}
+}
+$$
+:::
+
+에서 equilibrium conditions를 만든다. 그 다음
+
+:::::::: logic-steps
+::: {}
+[1]{.step}
+
+deterministic steady state를 계산한다.
+:::
+
+::: {}
+[2]{.step}
+
+equilibrium conditions를 log-linearize한다.
+:::
+
+::: {}
+[3]{.step}
+
+BK/QZ로 bounded rational-expectations solution을 얻는다.
+:::
+
+::: {}
+[4]{.step}
+
+technology shock의 IRFs와 model moments를 계산한다.
+:::
+
+::: {}
+[5]{.step}
+
+Chapter 13의 business-cycle facts와 비교한다.
+:::
+::::::::
+
+::: chapter-thesis
+Three-chapter architecture
+
+**Chapter 13:** 무엇을 설명해야 하는가?  →  **Chapter 14:** 동태모형을
+어떻게 푸는가?  →  **Chapter 15:** RBC가 그 facts를 얼마나 설명하는가?
+:::
+
+::: section-summary
+**Chapter summary.** 이 장의 중심은 eigenvalues가 동태적 directions를
+결정하고, 경제적 timing이 그 directions 중 어떤 path가 equilibrium으로
+허용되는지를 결정한다는 점이다. Linearization은 nonlinear macro를 local
+matrix system으로 바꾸고, Blanchard--Kahn 조건은 predetermined/jump
+structure와 unstable roots를 연결한다. Generalized Schur/QZ
+decomposition은 이 이론을 실제 multivariate computation으로 구현하며,
+최종 state-space solution은 IRFs와 moments를 생산한다.
+:::
+::::::::::::
+
+::: {#check .section}
+## Learning Check
+
+1.  왜 현대 거시모형의 equilibrium conditions를 그대로 closed form으로
+    풀기 어려운가?
+2.  $x_{t+1}=Ax_t$에서 장기동학이 $A^t$에 의해 결정되는 이유를 설명할 수
+    있는가?
+3.  Eigenvalue와 eigenvector가 각각 어떤 dynamic information을
+    제공하는가?
+4.  Diagonalization $A=V\Lambda V^{-1}$이 왜 유용한가?
+5.  Discrete-time stability에서 unit circle이 기준이 되는 이유를 설명할
+    수 있는가?
+6.  Complex eigenvalues의 modulus와 argument를 동학적으로 해석할 수
+    있는가?
+7.  Predetermined variable과 forward-looking variable을 timing 기준으로
+    구별할 수 있는가?
+8.  Ramsey saddle path와 Blanchard--Kahn logic의 공통점을 설명할 수
+    있는가?
+9.  Steady state 주변의 first-order linearization을 Jacobian으로 표현할
+    수 있는가?
+10. $\widehat x_t=\log(X_t/X^*)$를 percentage deviation으로 해석할 수
+    있는가?
+11. 곱셈식의 log-linearization과 합계식의 log-linearization이 왜 다른가?
+12. First-order approximation이 local solution이라는 의미를 설명할 수
+    있는가?
+13. Canonical linear RE system에서 predetermined block과 jump block을
+    구별할 수 있는가?
+14. Forward-looking variable의 initial value를 과거가 아니라 equilibrium
+    condition이 결정하는 이유를 설명할 수 있는가?
+15. Generalized eigenvalue와 ordinary eigenvalue의 관계를 설명할 수
+    있는가?
+16. 표준 regularity 조건 아래 BK counting condition $n_u=n_f$의 경제적
+    의미를 설명할 수 있는가?
+17. Determinacy, indeterminacy, no bounded solution을 root count로
+    구별할 수 있는가?
+18. Expectational error $\eta_{t+1}$가 rational expectations와 모순되지
+    않는 이유를 설명할 수 있는가?
+19. 왜 QZ decomposition이 explicit matrix inversion보다 일반적인가?
+20. QZ solver의 최종 경제적 산출물이 policy functions라는 점을 설명할 수
+    있는가?
+21. State-space law에서 impulse response $P^hQ$를 도출할 수 있는가?
+22. Discrete Lyapunov equation으로 stationary covariance를 계산하는
+    원리를 설명할 수 있는가?
+23. Stability와 determinacy가 동일하지 않은 이유를 설명할 수 있는가?
+24. Linear solver 결과를 검증할 때 steady state, timing, BK count,
+    numerical conditioning을 왜 함께 확인해야 하는가?
+:::
+
+::::::::::::::::::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Linear dynamic system
+:::
+
+현재 state에 대한 선형 transformation으로 다음기 state가 결정되는
+system. 기본형은 $x_{t+1}=Ax_t$.
+::::
+
+:::: definition-row
+::: term
+Eigenvalue
+:::
+
+특정 eigenvector 방향의 한 기간 growth/decay factor $\lambda$.
+::::
+
+:::: definition-row
+::: term
+Eigenvector
+:::
+
+행렬 작용 후 방향이 유지되는 vector $v$, 즉 $Av=\lambda v$.
+::::
+
+:::: definition-row
+::: term
+Spectral radius
+:::
+
+행렬 eigenvalues의 절댓값 중 최댓값 $\rho(A)=\max_i|\lambda_i|$.
+::::
+
+:::: definition-row
+::: term
+Stable root
+:::
+
+Discrete time에서 $|\lambda|<1$을 만족하여 시간이 지나며 해당 mode가
+소멸하는 root.
+::::
+
+:::: definition-row
+::: term
+Unstable root
+:::
+
+Discrete time에서 $|\lambda|>1$을 만족하여 해당 mode가 발산하는 root.
+::::
+
+:::: definition-row
+::: term
+Predetermined variable
+:::
+
+현재 시점에 과거 선택이나 기술적 제약으로 이미 주어져 있어 즉시 jump할
+수 없는 variable.
+::::
+
+:::: definition-row
+::: term
+Jump variable
+:::
+
+현재 equilibrium에서 즉시 조정되어 forward-looking restrictions를
+만족시킬 수 있는 variable.
+::::
+
+:::: definition-row
+::: term
+Linearization
+:::
+
+비선형 system을 기준점 주변의 first-order Taylor approximation으로
+대체하는 절차.
+::::
+
+:::: definition-row
+::: term
+Log-linearization
+:::
+
+양의 변수의 log deviations를 사용해 nonlinear equilibrium conditions를
+percentage-deviation 형태의 선형식으로 근사하는 방법.
+::::
+
+:::: definition-row
+::: term
+Generalized eigenvalue
+:::
+
+Matrix pair $(B,A)$에 대해 $\det(B-\lambda A)=0$을 만족하는 $\lambda$.
+::::
+
+:::: definition-row
+::: term
+Blanchard--Kahn condition
+:::
+
+표준 regularity 조건 아래 bounded local RE equilibrium의 존재·유일성을
+unstable roots와 forward-looking variables의 수를 비교해 판별하는 조건.
+::::
+
+:::: definition-row
+::: term
+Determinacy
+:::
+
+주어진 fundamentals와 초기 predetermined states에 대해 admissible
+bounded rational-expectations equilibrium이 locally unique한 성질.
+::::
+
+:::: definition-row
+::: term
+Indeterminacy
+:::
+
+동일한 fundamentals 아래 여러 bounded RE paths가 존재할 수 있는 상황.
+::::
+
+:::: definition-row
+::: term
+Expectational error
+:::
+
+$z_{t+1}-E_tz_{t+1}$로 정의되는 innovation. 현재 정보에 대한
+조건부기대값이 0이다.
+::::
+
+:::: definition-row
+::: term
+QZ decomposition
+:::
+
+두 행렬의 generalized eigenvalue structure를 안정적으로 분해·재정렬하는
+generalized Schur decomposition.
+::::
+
+:::: definition-row
+::: term
+Policy function
+:::
+
+Jump/control variables를 현재 states와 shocks에 매핑하는 equilibrium
+decision rule.
+::::
+
+:::: definition-row
+::: term
+State-space representation
+:::
+
+해결된 모형을 transition equation과 observation equation으로 표현한
+형식.
+::::
+
+:::: definition-row
+::: term
+Impulse response
+:::
+
+한 번의 innovation이 이후 여러 기간의 endogenous variables에 미치는
+conditional dynamic response.
+::::
+
+:::: definition-row
+::: term
+Discrete Lyapunov equation
+:::
+
+Stable linear state-space model의 stationary covariance
+$\Sigma=P\Sigma P'+Q\Omega Q'$를 정의하는 matrix equation.
+::::
+:::::::::::::::::::::::::::::::::::::::::::

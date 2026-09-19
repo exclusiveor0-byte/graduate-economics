@@ -1,0 +1,1007 @@
+---
+title: >-
+  2기간 거시경제 모형
+description: >-
+  A Two-Period Macroeconomic Economy
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+:::::::: {#s01 .section}
+## [4.1]{.section-number}왜 2기간 경제에서 시작하는가
+
+성장모형의 핵심은 현재 산출을 모두 소비하지 않고 일부를 자본으로 넘길 때
+미래 생산과 소비가 어떻게 달라지는가에 있다. 2기간 모형은 이 메커니즘을
+무한기간 동학보다 먼저, 가장 작은 일반균형 환경에서 분리해 보여준다.
+
+Chapter 1의 2기간 소비--저축 문제에서는 이자율과 소득이 가계에게 주어진
+것으로 취급되었다. 이제는 경제 전체를 닫아야 한다. 가계가 절약한 자원은
+투자되어 다음기의 자본이 되고, 자본의 한계생산물이 그 저축에 대한 수익을
+결정한다.
+
+:::: chapter-thesis
+Bridge from optimization to macro equilibrium
+
+::: math-display
+$$
+\boxed{
+\text{Preferences}
+\;\longrightarrow\;
+\text{Saving}
+\;\longrightarrow\;
+\text{Investment}
+\;\longrightarrow\;
+\text{Capital}
+\;\longrightarrow\;
+\text{Return}
+\;\longrightarrow\;
+\text{Consumption}
+}
+$$
+:::
+
+이 장의 목적은 새로운 최적화 기법을 추가하는 것이 아니라, 앞에서 배운
+최적조건이 생산경제와 시장균형 속에서 어떤 의미를 갖는지 확인하는
+것이다.
+::::
+
+::::: callout-strip
+::: left
+Chapter 1과의 차이
+:::
+
+::: right
+Chapter 1에서는 $R$이 외생적 가격이었다. Chapter 4에서는 균형수익률이
+자본의 한계생산성과 감가상각에서 내생적으로 나온다.
+:::
+:::::
+::::::::
+
+:::::::: {#s02 .section}
+## [4.2]{.section-number}Environment와 Timing
+
+경제는 $t=0,1$의 두 시점으로 구성된다. 초기 자본은 역사적으로 주어지고,
+시점 0의 소비와 투자가 시점 1의 생산능력을 결정한다.
+
+노동공급은 각 시점에서 1로 정규화하고, 생산함수를
+
+::: math-display
+$$
+y_t=f(k_t),
+\qquad
+f'(k)>0,
+\qquad
+f''(k)<0
+$$
+:::
+
+로 쓴다. 자본은 한 기간에 $\delta\in[0,1]$만큼 감가상각된다. 초기 자본
+$k_0>0$는 주어져 있다.
+
+:::: equation-card
+Resource constraints
+
+::: math-display
+$$
+c_0+k_1
+=
+f(k_0)+(1-\delta)k_0,
+$$ $$
+c_1
+=
+f(k_1)+(1-\delta)k_1.
+$$
+:::
+
+마지막 시점에는 더 이상의 자본축적 결정이 없으므로, 시점 1의 산출과 남은
+자본을 모두 소비할 수 있다고 둔다.
+::::
+
+따라서 timing은
+
+::: math-display
+$$
+\boxed{
+k_0
+\;\longrightarrow\;
+(c_0,k_1)
+\;\longrightarrow\;
+k_1
+\;\longrightarrow\;
+c_1
+}
+$$
+:::
+
+이다. $k_0$는 inherited state이고, $k_1$은 시점 0에 선택되는
+control이면서 동시에 시점 1의 state다. Chapter 3에서 만든 state--control
+언어가 그대로 적용된다.
+
+Technical Note · 마지막 시점의 자본을 왜 소비 가능한 자원으로 넣는가
+
+::: details-body
+유한기간 모형에서는 terminal treatment가 명시되어야 한다. 여기서는 시점
+1 이후 경제가 끝난다고 보고 미감가 자본 $(1-\delta)k_1$에 salvage value
+1을 부여한다. 다른 terminal payoff를 택하면 마지막 시점 조건은 달라질 수
+있다.
+:::
+::::::::
+
+::::::: {#s03 .section}
+## [4.3]{.section-number}Planner\'s Problem
+
+먼저 가격과 시장을 제거하고 feasible allocation 가운데 어떤
+소비·자본배분이 효용을 최대화하는지 본다. 이는 나중의 competitive
+equilibrium과 비교할 기준점이 된다.
+
+사회계획자의 문제는
+
+::: math-display
+$$
+\max_{c_0,c_1,k_1}
+\left\{
+u(c_0)+\beta u(c_1)\right\}
+$$ $$
+\text{s.t.}\qquad
+c_0+k_1=f(k_0)+(1-\delta)k_0,
+$$ $$
+c_1=f(k_1)+(1-\delta)k_1,
+\qquad 0<\beta<1
+$$
+:::
+
+이다. 자원제약을 목적함수에 대입하면 선택변수는 $k_1$ 하나로 줄어든다.
+
+::: math-display
+$$
+\max_{k_1}
+\left\{
+ u\!\left(f(k_0)+(1-\delta)k_0-k_1\right)
++
+\beta u\!\left(f(k_1)+(1-\delta)k_1\right)
+\right\}.
+$$
+:::
+
+내부해에서 $k_1$에 대한 일계조건은
+
+:::: equation-card
+Planner Euler condition
+
+::: math-display
+$$
+\boxed{
+u'(c_0)
+=
+\beta u'(c_1)
+\left[f'(k_1)+1-\delta\right].
+}
+$$
+:::
+
+현재 소비 1단위를 포기해 자본을 늘릴 때 잃는 한계효용과, 그 자본이 다음
+시점에 만들어내는 추가 자원을 할인된 미래 한계효용으로 평가한 값이
+같아야 한다.
+::::
+
+즉 Chapter 1에서 보았던 intertemporal optimality condition이 이제
+생산기술과 직접 연결된다.
+:::::::
+
+:::::::: {#s04 .section}
+## [4.4]{.section-number}자본의 수익률
+
+Planner의 Euler condition에서 대괄호 안의 항은 자본 한 단위를 오늘
+추가로 보유했을 때 다음 시점에 얻는 총자원이다. 이것이 실물자본의 gross
+return이다.
+
+다음기의 자본 한 단위는 생산에서 $f'(k_1)$만큼의 추가 산출을 만들고,
+감가상각 후 $1-\delta$만큼 남는다. 따라서
+
+:::: equation-card
+Gross return on capital
+
+::: math-display
+$$
+\boxed{
+R_1
+\equiv
+f'(k_1)+1-\delta.
+}
+$$
+:::
+::::
+
+Planner Euler equation은 따라서
+
+::: math-display
+$$
+\boxed{
+u'(c_0)=\beta R_1u'(c_1).}
+$$
+:::
+
+로 쓸 수 있다. Chapter 1에서 외생적으로 주어졌던 $1+r$가 이제
+생산경제에서는
+
+::: math-display
+$$
+\boxed{
+1+r
+\quad\longleftrightarrow\quad
+f'(k_1)+1-\delta
+}
+$$
+:::
+
+로 해석된다. 즉 이자율은 단순한 금융변수가 아니라 자원을 오늘에서 내일로
+이전하는 기술적 기회비용과 연결된다.
+
+::: reading-rule
+**중요:** $f'(k_1)$은 자본의 rental rate이고, $R_1=f'(k_1)+1-\delta$는
+미감가 자본까지 포함한 gross payoff다. 두 개를 혼동하지 않는다.
+:::
+::::::::
+
+::::::: {#s05 .section}
+## [4.5]{.section-number}Household Saving
+
+이제 같은 allocation을 시장경제의 언어로 해석한다. 대표가계는 노동과
+초기 자본을 보유하고, 기업으로부터 요소소득을 받은 뒤 소비와 다음기의
+자본보유를 선택한다.
+
+노동공급을 1로 고정하고, 시점 $t$의 임금을 $w_t$, 자본 rental rate를
+$r_t$라 하자. 가계의 예산제약은
+
+::: math-display
+$$
+c_0+k_1
+=
+w_0+(r_0+1-\delta)k_0,
+$$ $$
+c_1
+=
+w_1+(r_1+1-\delta)k_1.
+$$
+:::
+
+가계는 가격 $(w_0,w_1,r_0,r_1)$을 주어진 것으로 받아들이고
+
+::: math-display
+$$
+\max_{c_0,c_1,k_1}
+\left\{u(c_0)+\beta u(c_1)\right\}
+$$
+:::
+
+을 푼다. 내부해에서 다음의 Euler equation을 얻는다.
+
+:::: equation-card
+Household Euler equation
+
+::: math-display
+$$
+\boxed{
+u'(c_0)
+=
+\beta (r_1+1-\delta)u'(c_1).
+}
+$$
+:::
+
+가계에게 relevant한 intertemporal price는 다음기의 자본보유가 주는 gross
+return $r_1+1-\delta$다.
+::::
+
+따라서 household side만 보면 Chapter 1의 소비--저축 문제가 그대로
+반복된다. 달라진 점은 이제 이 수익률이 기업의 생산결정과 시장청산을 통해
+균형에서 결정된다는 것이다.
+:::::::
+
+:::::::: {#s06 .section}
+## [4.6]{.section-number}Firms와 Factor Prices
+
+경쟁기업은 자본과 노동의 가격을 주어진 것으로 받아들이고 이윤을
+극대화한다. 이 조건이 가계가 마주하는 수익률을 생산기술에 연결한다.
+
+총생산기술을 $F(K,L)$이라 하고 노동을 1로 정규화하여 $f(k)=F(k,1)$라
+하자. 경쟁기업의 문제는 각 시점에서
+
+::: math-display
+$$
+\max_{K,L}
+\left\{F(K,L)-rK-wL\right\}
+$$
+:::
+
+이다. 내부해에서
+
+::: math-display
+$$
+r_t=F_K(K_t,L_t),
+\qquad
+w_t=F_L(K_t,L_t).
+$$
+:::
+
+노동을 1로 놓으면
+
+:::: equation-card
+Competitive factor pricing
+
+::: math-display
+$$
+\boxed{
+r_t=f'(k_t),
+\qquad
+w_t=f(k_t)-k_tf'(k_t)
+}
+$$
+:::
+
+두 번째 식은 생산함수가 자본과 노동에 대해 constant returns to scale일
+때 Euler theorem에서 나온다.
+::::
+
+따라서 시점 1에서 가계가 받는 자본의 gross return은
+
+::: math-display
+$$
+\boxed{
+R_1=r_1+1-\delta
+=f'(k_1)+1-\delta.
+}
+$$
+:::
+
+이제 planner problem의 기술적 수익률과 household problem의 시장수익률이
+동일한 객체가 된다.
+::::::::
+
+:::::::: {#s07 .section}
+## [4.7]{.section-number}Saving, Investment, and Market Clearing
+
+폐쇄경제에서는 가계가 소비하지 않은 산출이 경제 밖으로 사라질 수 없다.
+그것은 투자되어 다음기의 자본을 만든다. 따라서 총저축과 총투자는
+균형에서 같은 회계적 흐름이다.
+
+시점 0의 gross investment를
+
+::: math-display
+$$
+i_0
+\equiv
+k_1-(1-\delta)k_0
+$$
+:::
+
+라고 정의한다. 시점 0의 산출을 $y_0=f(k_0)$라 하면 자원제약은
+
+::: math-display
+$$
+y_0=c_0+i_0.
+$$
+:::
+
+따라서 national saving을 $s_0\equiv y_0-c_0$라 정의하면
+
+:::: equation-card
+Closed-economy market clearing
+
+::: math-display
+$$
+\boxed{s_0=i_0.}
+$$
+:::
+::::
+
+이 등식은 별도의 행동가정이 아니라 폐쇄경제의 자원제약과 시장청산에서
+나온다. 행동적으로 결정되는 것은 가계가 얼마를 소비하고 저축할지이며, 그
+결과가 총투자와 다음기 자본으로 구현된다.
+
+::: reading-rule
+**구분:** $k_1$ 자체가 시점 0의 gross investment는 아니다. 기존 자본의
+미감가 부분 $(1-\delta)k_0$을 제외한 $k_1-(1-\delta)k_0$가 새로 생산된
+투자재다.
+:::
+::::::::
+
+:::::::::::::::::::: {#s08 .section}
+## [4.8]{.section-number}Competitive Equilibrium
+
+거시모형을 닫으려면 개별 최적화만으로는 부족하다. 가격을 주어진 것으로
+받아들인 가계와 기업의 선택이 서로 양립하고, 모든 시장이 동시에
+청산되어야 한다.
+
+:::: {.statement .definition}
+::: statement-head
+Competitive equilibrium
+:::
+
+초기자본 $k_0$가 주어졌을 때 competitive equilibrium은 allocation
+$\{c_0,c_1,k_1\}$과 prices $\{w_0,w_1,r_0,r_1\}$로서, (i) 가계가 주어진
+가격에서 효용을 극대화하고, (ii) 기업이 주어진 가격에서 이윤을
+극대화하며, (iii) 재화·노동·자본시장이 청산되는 조합이다.
+::::
+
+이 모형에서 equilibrium을 닫는 핵심 조건은 다음 세 묶음으로 정리된다.
+
+::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Household optimality
+:::
+
+$u'(c_0)=\beta(r_1+1-\delta)u'(c_1)$.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Firm optimality
+:::
+
+$r_t=f'(k_t)$, 그리고 CRS 아래 $w_t=f(k_t)-k_tf'(k_t)$.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Market clearing
+:::
+
+가계가 보유한 자본이 기업이 사용하는 자본과 같고, 재화시장에서
+$y_0=c_0+i_0$가 성립한다.
+::::
+::::::
+:::::::::::::::
+
+:::: chapter-thesis
+Equilibrium grammar
+
+::: math-display
+$$
+\boxed{
+\text{Optimization}
++
+\text{Prices}
++
+\text{Market Clearing}
+=
+\text{Competitive Equilibrium}
+}
+$$
+:::
+::::
+
+이 문법은 뒤의 Ramsey, complete-markets, RBC에서도 그대로 반복된다.
+모형은 복잡해져도 equilibrium을 읽는 순서는 바뀌지 않는다.
+::::::::::::::::::::
+
+::::::::::: {#s09 .section}
+## [4.9]{.section-number}Planner와 Competitive Equilibrium
+
+이 경제가 왜 planner problem으로도 풀리는지를 확인한다. 가계의 Euler
+equation과 기업의 factor-pricing condition을 결합하면 planner의
+최적조건과 정확히 같은 식이 나온다.
+
+가계의 Euler equation은
+
+::: math-display
+$$
+u'(c_0)
+=
+\beta(r_1+1-\delta)u'(c_1).
+$$
+:::
+
+경쟁기업의 자본가격 조건은
+
+::: math-display
+$$
+r_1=f'(k_1).
+$$
+:::
+
+따라서 competitive equilibrium에서는
+
+:::: equation-card
+Decentralized Euler equation
+
+::: math-display
+$$
+\boxed{
+u'(c_0)
+=
+\beta u'(c_1)
+\left[f'(k_1)+1-\delta\right].
+}
+$$
+:::
+::::
+
+이는 4.3의 planner Euler condition과 동일하다. 완전경쟁, 왜곡 없는 가격,
+적절한 시장구조 아래에서 competitive allocation은 planner allocation과
+일치한다.
+
+::::: callout-strip
+::: left
+왜 중요한가
+:::
+
+::: right
+뒤의 대표가계 성장모형과 RBC에서 equilibrium allocation을 구할 때
+planner problem을 푸는 방식이 자주 사용된다. 그 정당화는 가격과
+시장청산을 통해 분권화된 최적조건이 planner 조건과 일치하는 데 있다.
+:::
+:::::
+
+Technical Note · 이 일치가 항상 성립하는 것은 아니다
+
+::: details-body
+외부효과, 조세왜곡, 시장불완전성, 가격경직성, 정보제약 등이 존재하면
+competitive equilibrium과 planner allocation이 일반적으로 달라질 수
+있다. 이후의 많은 거시모형은 바로 이 일치가 깨지는 지점을 연구한다.
+:::
+:::::::::::
+
+:::::::: {#s10 .section}
+## [4.10]{.section-number}CRRA Example
+
+CRRA 선호를 사용하면 Euler equation이 소비성장 비율과 자본수익률의
+관계로 직접 바뀐다. Chapter 1의 결과가 생산경제 안에서 어떻게
+재해석되는지 확인할 수 있다.
+
+선호를
+
+::: math-display
+$$
+u(c)=\frac{c^{1-\sigma}-1}{1-\sigma},
+\qquad \sigma>0,
+\qquad \sigma\neq1
+$$
+:::
+
+로 두면 $u'(c)=c^{-\sigma}$다. Euler equation은
+
+::: math-display
+$$
+c_0^{-\sigma}
+=
+\beta R_1c_1^{-\sigma}.
+$$
+:::
+
+따라서
+
+:::: equation-card
+Consumption growth
+
+::: math-display
+$$
+\boxed{
+\frac{c_1}{c_0}
+=
+(\beta R_1)^{1/\sigma},
+\qquad
+R_1=f'(k_1)+1-\delta.
+}
+$$
+:::
+::::
+
+$1/\sigma$는 intertemporal substitution의 민감도를 나타낸다. 다른 조건이
+같다면 미래수익률이 높을수록 소비를 미래로 옮기려는 substitution
+incentive가 커진다. 다만 equilibrium의 저축량 변화는 수익률 자체가
+$k_1$에 의존한다는 점까지 함께 고려해야 한다.
+
+Special case · Log utility
+
+::: details-body
+$\sigma=1$이면 $u(c)=\log c$로 해석하고 Euler equation은
+$c_1/c_0=\beta R_1$가 된다.
+:::
+::::::::
+
+:::::: {#s11 .section}
+## [4.11]{.section-number}Comparative Statics
+
+비교정태에서는 한 파라미터가 Euler condition의 어느 쪽을 움직이는지와,
+equilibrium에서 가격과 quantity가 함께 조정된다는 점을 구분해야 한다.
+
+### 4.11.1 Patience: $\beta$
+
+표준적인 strictly concave interior problem에서 $\beta$가 커지면
+미래효용의 상대적 가중치가 높아진다. 주어진 기술 아래 더 높은 $k_1$을
+선택하려는 힘이 생기며 현재 소비를 미래 소비로 이전하는 방향으로
+작용한다.
+
+::: math-display
+$$
+\beta\uparrow
+\quad\Longrightarrow\quad
+\text{future consumption receives more weight}.
+$$
+:::
+
+### 4.11.2 Technology and the marginal product of capital
+
+미래 생산기술이 바뀌어 주어진 $k_1$에서 $f'(k_1)$이 높아지면 자본의
+gross return
+
+::: math-display
+$$
+R_1=f'(k_1)+1-\delta
+$$
+:::
+
+도 높아진다. 이는 미래로 자원을 이전할 유인을 강화한다. 그러나 최종
+equilibrium에서는 $k_1$ 자체가 조정되면서 한계생산물도 변하므로
+partial-equilibrium return effect와 equilibrium quantity effect를
+구분해야 한다.
+
+### 4.11.3 Depreciation
+
+$\delta$가 커지면 다른 조건이 같을 때 자본 한 단위가 다음 시점에 남기는
+자원이 줄어들어 gross return을 낮춘다. 동시에 시점 0의 기존 자본에서
+남는 자원도 줄기 때문에, 전체 equilibrium 효과를 단일한 부호로
+기계적으로 결론내리기보다는 자원제약과 Euler condition을 함께 봐야 한다.
+
+::: reading-rule
+**비교정태 원칙:** 파라미터 변화가 한 식의 한 항에 미치는 직접효과와,
+equilibrium에서 내생변수들이 다시 조정되는 총효과를 구분한다.
+:::
+::::::
+
+:::::::::: {#s12 .section}
+## [4.12]{.section-number}Recursive Representation과 Backward Induction
+
+2기간 경제는 Chapter 3의 Dynamic Programming을 실제 생산경제에 적용하는
+가장 간단한 예다. 유한기간 문제에서는 value function이 시간에 따라
+달라지고, 마지막 시점부터 뒤로 풀어간다.
+
+마지막 시점의 value function은
+
+::: math-display
+$$
+V_1(k_1)
+=
+u\!\left(f(k_1)+(1-\delta)k_1\right).
+$$
+:::
+
+초기 시점에는
+
+:::: equation-card
+Finite-horizon Bellman equation
+
+::: math-display
+$$
+\boxed{
+V_0(k_0)
+=
+\max_{k_1}
+\left\{
+ u(c_0)+\beta V_1(k_1)
+\right\}
+}
+$$ $$
+\text{s.t.}\qquad
+c_0=f(k_0)+(1-\delta)k_0-k_1.
+$$
+:::
+::::
+
+따라서 해법의 순서는
+
+::: math-display
+$$
+\boxed{
+V_1
+\;\longrightarrow\;
+V_0
+}
+$$
+:::
+
+이다. 이것이 backward induction이다. 무한기간 stationary problem에서는
+환경이 매 시점 같아 $V_t=V$로 쓸 수 있지만, 유한기간에서는 terminal
+date까지 남은 시간이 다르므로 일반적으로 $V_0$와 $V_1$이 서로 다르다.
+
+::::: callout-strip
+::: left
+Recursive macro의 관점
+:::
+
+::: right
+state를 정하고, 마지막 시점의 continuation value를 계산한 뒤 한 단계씩
+뒤로 이동한다. 이 기본 구조가 더 긴 유한기간 모형과 stochastic dynamic
+programming에도 그대로 확장된다.
+:::
+:::::
+::::::::::
+
+::::::: {#s13 .section}
+## [4.13]{.section-number}Extension: Borrowing and Lending
+
+폐쇄경제에서는 국내저축이 국내투자와 같아야 했다. 국제금융시장에서
+차입·대출할 수 있도록 허용하면 소비평활화와 국내투자가 분리될 수 있다.
+
+가계가 주어진 세계 gross interest rate $R^*$로 차입·대출할 수 있고
+외생적 소득흐름 $(y_0,y_1)$을 가진 단순 교환경제를 생각하면
+intertemporal budget constraint는
+
+::: math-display
+$$
+c_0+\frac{c_1}{R^*}
+=
+y_0+\frac{y_1}{R^*}.
+$$
+:::
+
+가계의 Euler equation은
+
+::: math-display
+$$
+u'(c_0)=\beta R^*u'(c_1).
+$$
+:::
+
+생산과 투자까지 허용하면 국내투자는 세계이자율과 국내 자본의 한계수익을
+비교하여 결정되고, 국내저축과 국내투자의 차이는 대외순자산의 변화로
+흡수된다.
+
+:::: equation-card
+Closed vs. open economy
+
+::: math-display
+$$
+\boxed{
+\text{Closed economy: } S=I
+}
+$$ $$
+\boxed{
+\text{Open economy: } S-I=\text{net foreign lending}
+}
+$$
+:::
+::::
+
+이 확장은 국제거시에서 중요하지만, 여기서는 두 경제의 회계적 차이와
+intertemporal price의 역할만 확인한다.
+:::::::
+
+::::::: {#s14 .section}
+## [4.14]{.section-number}왜 다음이 Solow인가
+
+이 장에서는 가계의 효용극대화 때문에 저축이 내생적으로 결정되었다. 다음
+장의 Solow 모형은 오히려 저축률을 외생적인 상수로 둔다. 이는 후퇴가
+아니라 분석대상을 분리하기 위한 의도적인 단순화다.
+
+2기간 경제는 다음 질문을 함께 다뤘다.
+
+::: math-display
+$$
+\text{왜 저축하는가?}
+\qquad+
+\qquad
+\text{저축이 자본축적에 무엇을 하는가?}
+$$
+:::
+
+Solow는 첫 번째 질문을 잠시 고정한다.
+
+:::: equation-card
+Solow\'s deliberate simplification
+
+::: math-display
+$$
+\boxed{
+s=\text{exogenous constant}
+}
+$$
+:::
+
+가계의 최적화 대신 주어진 저축률을 사용하여 자본축적, 정상상태, balanced
+growth path, 그리고 저축률 변화의 level effect를 먼저 분리해 분석한다.
+::::
+
+그 후 Ramsey 모형에서 다시 저축을 소비자의 최적 선택으로 내생화한다.
+따라서 성장 파트의 흐름은
+
+::: math-display
+$$
+\boxed{
+\text{Two-period choice}
+\;\longrightarrow\;
+\text{Solow: saving exogenous}
+\;\longrightarrow\;
+\text{Ramsey: saving endogenous again}
+}
+$$
+:::
+
+로 읽으면 된다.
+:::::::
+
+::::: {#s15 .section}
+## [4.15]{.section-number}Chapter Summary
+
+2기간 모형의 핵심은 소비--저축이라는 미시적 선택을 생산과 시장청산에
+연결하여, 자본축적의 거시적 의미를 처음으로 완성하는 데 있다.
+
+::: math-display
+$$
+\boxed{
+u'(c_0)
+=
+\beta
+\underbrace{\left[f'(k_1)+1-\delta\right]}_{\text{gross return on capital}}
+u'(c_1)
+}
+$$
+:::
+
+- 시점 0의 소비와 자본축적은 같은 자원을 놓고 경쟁한다.
+- 추가 자본 한 단위의 미래 payoff는 $f'(k_1)+1-\delta$다.
+- 가계의 Euler equation은 intertemporal marginal substitution과
+  자본수익률을 연결한다.
+- 경쟁기업은 $r_t=f'(k_t)$가 되도록 자본을 고용한다.
+- 폐쇄경제의 자원제약은 national saving과 gross investment의 일치를
+  의미한다.
+- competitive equilibrium은 household optimality, firm optimality,
+  market clearing의 결합이다.
+- 왜곡이 없는 표준환경에서는 competitive allocation과 planner
+  allocation의 Euler condition이 일치한다.
+- 유한기간 Dynamic Programming에서는 마지막 시점에서 시작해 backward
+  induction한다.
+- Solow는 저축결정 자체를 외생화하여 자본축적 메커니즘만 분리해서
+  분석한다.
+
+::: chapter-thesis
+One equation, two sides of macroeconomics
+
+Euler equation의 왼쪽은 **preferences**, 오른쪽의 $f'(k_1)+1-\delta$는
+**technology**다. 2기간 생산경제에서는 이 둘이 처음으로 equilibrium
+condition 하나 안에서 만난다.
+:::
+:::::
+
+::: {#check .section}
+## Learning Check
+
+1.  Chapter 1의 2기간 소비--저축 문제와 Chapter 4의 2기간 생산경제의
+    차이를 설명할 수 있는가?
+2.  왜 $k_1$가 시점 0의 control이면서 시점 1의 state인지 timing으로
+    설명할 수 있는가?
+3.  Planner problem에서 Euler equation
+    $u'(c_0)=\beta u'(c_1)[f'(k_1)+1-\delta]$을 직접 유도할 수 있는가?
+4.  왜 자본의 gross return이 $f'(k_1)+1-\delta$인지 경제적으로 설명할 수
+    있는가?
+5.  경쟁기업의 FOC에서 $r_t=f'(k_t)$가 어떻게 나오는지 설명할 수 있는가?
+6.  gross investment $i_0=k_1-(1-\delta)k_0$와 다음기 자본 $k_1$을
+    구분할 수 있는가?
+7.  폐쇄경제에서 왜 $S=I$인지 자원제약으로 설명할 수 있는가?
+8.  competitive equilibrium을 household optimization, firm optimization,
+    market clearing으로 정의할 수 있는가?
+9.  왜 표준환경에서 planner Euler equation과 decentralized Euler
+    equation이 일치하는가?
+10. CRRA 선호 아래 소비성장률과 자본수익률의 관계를 유도할 수 있는가?
+11. 2기간 문제를 $V_1\to V_0$의 backward induction으로 표현할 수 있는가?
+12. 왜 Solow 모형이 저축률을 다시 외생화하는지 설명할 수 있는가?
+:::
+
+::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Two-period production economy
+:::
+
+현재 소비·투자와 다음기의 생산·소비를 자본축적으로 연결한 가장 단순한
+동태 생산경제.
+::::
+
+:::: definition-row
+::: term
+Gross return on capital
+:::
+
+추가 자본 한 단위가 다음 시점에 제공하는 총 payoff. 이 장에서는
+$R_1=f'(k_1)+1-\delta$.
+::::
+
+:::: definition-row
+::: term
+Rental rate
+:::
+
+기업이 자본서비스 한 단위에 지급하는 가격. 완전경쟁에서 $r_t=f'(k_t)$.
+::::
+
+:::: definition-row
+::: term
+Gross investment
+:::
+
+자본스톡을 유지·증가시키기 위해 시점 $t$ 산출에서 투자재로 전환된 양.
+$i_t=k_{t+1}-(1-\delta)k_t$.
+::::
+
+:::: definition-row
+::: term
+National saving
+:::
+
+폐쇄경제에서 현재 산출 중 소비되지 않은 부분. 단순모형에서는
+$s_t=y_t-c_t$.
+::::
+
+:::: definition-row
+::: term
+Market clearing
+:::
+
+가계와 기업의 계획이 실제 거래량에서 서로 일치하고 모든 재화·요소시장의
+초과수요가 0이 되는 조건.
+::::
+
+:::: definition-row
+::: term
+Competitive equilibrium
+:::
+
+가격을 주어진 것으로 받아들이는 가계와 기업의 최적 선택이 시장청산과
+동시에 성립하는 allocation과 price의 조합.
+::::
+
+:::: definition-row
+::: term
+Planner allocation
+:::
+
+경제 전체의 자원제약 아래 사회적 목적함수를 직접 최대화하여 얻는
+allocation.
+::::
+
+:::: definition-row
+::: term
+Decentralization
+:::
+
+planner allocation을 적절한 시장가격과 개별 최적화의 결과로 구현하는 것.
+::::
+
+:::: definition-row
+::: term
+Backward induction
+:::
+
+유한기간 Dynamic Programming에서 terminal value를 먼저 구하고 이전
+시점의 value function을 순차적으로 계산하는 방법.
+::::
+
+:::: definition-row
+::: term
+Net foreign lending
+:::
+
+개방경제에서 국내저축이 국내투자를 초과하는 부분. 단순 회계에서는 $S-I$.
+::::
+:::::::::::::::::::::::::

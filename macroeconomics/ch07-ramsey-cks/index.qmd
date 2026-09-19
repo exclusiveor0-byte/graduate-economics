@@ -1,0 +1,50 @@
+# Chapter 07 · Ramsey–Cass–Koopmans 성장모형 {.unnumbered}
+*Optimal Saving, Saddle-Path Dynamics, and the Modified Golden Rule*
+
+이 장에서는 **Ramsey–Cass–Koopmans 성장모형**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **7.1–7.6** From Solow to Ramsey · Consumption per Worker and per Effective Worker
+- **7.7–7.12** Capital Accumulation · Predetermined Capital and Jump Consumption
+- **7.13–7.18** The Saddle Path · A Fall in the Discount Rate
+- **7.19–7.24** Anticipated vs. Unanticipated Changes · Chapter Summary
+:::
+
+## Sections
+
+- [7.1 From Solow to Ramsey](contents.html#s01)
+- [7.2 Environment](contents.html#s02)
+- [7.3 Households and Preferences](contents.html#s03)
+- [7.4 Firms and Factor Prices](contents.html#s04)
+- [7.5 Household Optimization](contents.html#s05)
+- [7.6 Consumption per Worker and per Effective Worker](contents.html#s06)
+- [7.7 Capital Accumulation](contents.html#s07)
+- [7.8 The $\dot c=0$ Locus](contents.html#s08)
+- [7.9 The $\dot k=0$ Locus](contents.html#s09)
+- [7.10 The Ramsey Steady State](contents.html#s10)
+- [7.11 Golden Rule vs. Modified Golden Rule](contents.html#s11)
+- [7.12 Predetermined Capital and Jump Consumption](contents.html#s12)
+- [7.13 The Saddle Path](contents.html#s13)
+- [7.14 Why Other Paths Are Not Equilibria](contents.html#s14)
+- [7.15 Welfare and the Planner Problem](contents.html#s15)
+- [7.16 Balanced Growth Path](contents.html#s16)
+- [7.17 Ramsey vs. Solow](contents.html#s17)
+- [7.18 A Fall in the Discount Rate](contents.html#s18)
+- [7.19 Anticipated vs. Unanticipated Changes](contents.html#s19)
+- [7.20 Local Linearization and Saddle Stability](contents.html#s20)
+- [7.21 Cobb--Douglas Example](contents.html#s21)
+- [7.22 What Ramsey Explains---and Does Not Explain](contents.html#s22)
+- [7.23 Why Endogenous Growth Next?](contents.html#s23)
+- [7.24 Chapter Summary](contents.html#s24)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

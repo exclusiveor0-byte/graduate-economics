@@ -83,63 +83,54 @@ book:
     - microeconomics/ch04-pure-exchange/supplement-examples-exercises.qmd
     - microeconomics/ch04-pure-exchange/references.qmd
   - macroeconomics/index.qmd
-  - part: macroeconomics/ch00-macro-map/index.qmd
+  - part: macroeconomics/ch00-foundations/index.qmd
     chapters:
-    - macroeconomics/ch00-macro-map/contents.qmd
-  - part: macroeconomics/ch01-solow-growth/index.qmd
+    - macroeconomics/ch00-foundations/contents.qmd
+  - part: macroeconomics/ch01-constrained-optimization/index.qmd
     chapters:
-    - macroeconomics/ch01-solow-growth/contents.qmd
-  - part: macroeconomics/ch02-ramsey-olg/index.qmd
+    - macroeconomics/ch01-constrained-optimization/contents.qmd
+  - part: macroeconomics/ch02-continuous-time-dynamics/index.qmd
     chapters:
-    - macroeconomics/ch02-ramsey-olg/contents.qmd
-  - part: macroeconomics/ch03-endogenous-growth/index.qmd
+    - macroeconomics/ch02-continuous-time-dynamics/contents.qmd
+  - part: macroeconomics/ch03-dynamic-programming/index.qmd
     chapters:
-    - macroeconomics/ch03-endogenous-growth/contents.qmd
-  - part: macroeconomics/ch04-development-accounting/index.qmd
+    - macroeconomics/ch03-dynamic-programming/contents.qmd
+  - part: macroeconomics/ch04-two-period-macro/index.qmd
     chapters:
-    - macroeconomics/ch04-development-accounting/contents.qmd
-  - part: macroeconomics/ch05-real-business-cycles/index.qmd
+    - macroeconomics/ch04-two-period-macro/contents.qmd
+  - part: macroeconomics/ch05-solow-swan/index.qmd
     chapters:
-    - macroeconomics/ch05-real-business-cycles/contents.qmd
-  - part: macroeconomics/ch06-nominal-rigidity/index.qmd
+    - macroeconomics/ch05-solow-swan/contents.qmd
+  - part: macroeconomics/ch06-infinite-horizon-consumption/index.qmd
     chapters:
-    - macroeconomics/ch06-nominal-rigidity/contents.qmd
-  - part: macroeconomics/ch07-new-keynesian-dsge/index.qmd
+    - macroeconomics/ch06-infinite-horizon-consumption/contents.qmd
+  - part: macroeconomics/ch07-ramsey-cks/index.qmd
     chapters:
-    - macroeconomics/ch07-new-keynesian-dsge/contents.qmd
-  - part: macroeconomics/ch08-monetary-policy/index.qmd
+    - macroeconomics/ch07-ramsey-cks/contents.qmd
+  - part: macroeconomics/ch08-endogenous-growth/index.qmd
     chapters:
-    - macroeconomics/ch08-monetary-policy/contents.qmd
-  - part: macroeconomics/ch09-consumption-risk/index.qmd
+    - macroeconomics/ch08-endogenous-growth/contents.qmd
+  - part: macroeconomics/ch09-growth-accounting/index.qmd
     chapters:
-    - macroeconomics/ch09-consumption-risk/contents.qmd
-  - part: macroeconomics/ch10-investment/index.qmd
+    - macroeconomics/ch09-growth-accounting/contents.qmd
+  - part: macroeconomics/ch10-stochastic-dynamics/index.qmd
     chapters:
-    - macroeconomics/ch10-investment/contents.qmd
+    - macroeconomics/ch10-stochastic-dynamics/contents.qmd
   - part: macroeconomics/ch11-complete-markets/index.qmd
     chapters:
     - macroeconomics/ch11-complete-markets/contents.qmd
-  - part: macroeconomics/ch12-financial-frictions/index.qmd
+  - part: macroeconomics/ch12-incomplete-markets/index.qmd
     chapters:
-    - macroeconomics/ch12-financial-frictions/contents.qmd
-  - part: macroeconomics/ch13-incomplete-markets/index.qmd
+    - macroeconomics/ch12-incomplete-markets/contents.qmd
+  - part: macroeconomics/ch13-business-cycle-facts/index.qmd
     chapters:
-    - macroeconomics/ch13-incomplete-markets/contents.qmd
-  - part: macroeconomics/appendix-a-dynamic-optimization/index.qmd
+    - macroeconomics/ch13-business-cycle-facts/contents.qmd
+  - part: macroeconomics/ch14-linear-rational-expectations/index.qmd
     chapters:
-    - macroeconomics/appendix-a-dynamic-optimization/contents.qmd
-  - part: macroeconomics/appendix-b-linear-rational-expectations/index.qmd
+    - macroeconomics/ch14-linear-rational-expectations/contents.qmd
+  - part: macroeconomics/ch15-real-business-cycles/index.qmd
     chapters:
-    - macroeconomics/appendix-b-linear-rational-expectations/contents.qmd
-  - part: macroeconomics/appendix-c-perturbation/index.qmd
-    chapters:
-    - macroeconomics/appendix-c-perturbation/contents.qmd
-  - part: macroeconomics/appendix-d-business-cycle-measurement/index.qmd
-    chapters:
-    - macroeconomics/appendix-d-business-cycle-measurement/contents.qmd
-  - part: macroeconomics/appendix-e-growth-empirics/index.qmd
-    chapters:
-    - macroeconomics/appendix-e-growth-empirics/contents.qmd
+    - macroeconomics/ch15-real-business-cycles/contents.qmd
   - econometrics/index.qmd
   - part: econometrics/ch01-foundations/index.qmd
     chapters:

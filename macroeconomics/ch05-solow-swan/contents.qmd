@@ -1,0 +1,1228 @@
+---
+title: >-
+  Solow–Swan 성장모형
+description: >-
+  Capital Accumulation, Balanced Growth, and Transitional Dynamics
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::::: {#s01 .section}
+## [5.1]{.section-number}Endogenous Saving에서 Solow로
+
+Solow--Swan 모형의 출발점은 저축행동을 더 정교하게 만드는 것이 아니라,
+오히려 저축률을 외생화하는 것이다. 이 단순화로 자본축적이 장기소득과
+성장에 미치는 효과를 다른 선택문제와 분리해서 볼 수 있다.
+
+Chapter 4에서는 가계가 기간간 가격을 보고 저축을 선택했다. 대표적인
+Euler equation은
+
+::: math-display
+$$
+u'(c_0)=\beta R_1u'(c_1)
+$$
+:::
+
+이었다. Solow 모형에서는 이 최적화 블록을 제거하고 대신
+
+:::: equation-card
+Exogenous saving rule
+
+::: math-display
+$$
+\boxed{S(t)=sY(t),\qquad 0<s<1}
+$$ $$
+C(t)=(1-s)Y(t)
+$$
+:::
+
+를 가정한다. 즉 저축률 $s$가 왜 그 값인지는 설명하지 않고, 그 값이
+주어졌을 때 경제가 어떻게 움직이는지를 분석한다.
+::::
+
+::: reading-rule
+**모형의 의도:** Solow는 "가계가 왜 저축하는가?"를 잠시 보류하고 "주어진
+저축이 자본축적과 성장에 무엇을 하는가?"만 격리한다. 따라서 단순화는
+결함이라기보다 분석대상을 명확히 하는 장치다.
+:::
+
+이후 Ramsey 모형에서 다시 저축을 내생화하므로, Solow는 성장론의
+최종모형이라기보다 자본축적의 독립적인 역할을 보여주는 benchmark다.
+:::::::
+
+:::::::::::::::: {#s02 .section}
+## [5.2]{.section-number}Environment
+
+경제는 자본 $K$, 노동 $L$, 노동증대형 기술 $A$를 사용해 산출 $Y$를
+생산한다. 노동과 기술은 외생적으로 성장하고, 산출의 일정 비율이 투자되어
+자본이 축적된다.
+
+::: math-display
+$$
+Y(t)=F\bigl(K(t),A(t)L(t)\bigr).
+$$
+:::
+
+:::: definition-row
+::: term
+$K(t)$
+:::
+
+물적자본 stock. 과거 투자의 누적결과이며 감가상각된다.
+::::
+
+:::: definition-row
+::: term
+$L(t)$
+:::
+
+노동 또는 인구. 외생적 성장률 $n$으로 증가한다.
+::::
+
+:::: definition-row
+::: term
+$A(t)$
+:::
+
+노동생산성을 높이는 labor-augmenting technology. 외생적 성장률 $g$로
+증가한다.
+::::
+
+:::: definition-row
+::: term
+$A(t)L(t)$
+:::
+
+effective labor. 기술진보가 노동 한 단위의 효율성을 얼마나 높였는지를
+반영한 노동투입.
+::::
+
+외생적 성장과정은
+
+::: math-display
+$$
+\dot L(t)=nL(t),
+\qquad
+\dot A(t)=gA(t),
+$$
+:::
+
+이므로
+
+::: math-display
+$$
+L(t)=L(0)e^{nt},
+\qquad
+A(t)=A(0)e^{gt}.
+$$
+:::
+
+총자본은 저축된 산출과 감가상각에 의해
+
+:::: equation-card
+Capital accumulation
+
+::: math-display
+$$
+\boxed{\dot K(t)=sY(t)-\delta K(t)}
+$$
+:::
+
+로 움직인다. $sY$는 gross investment, $\delta K$는 감가상각이다.
+::::
+::::::::::::::::
+
+::::::: {#s03 .section}
+## [5.3]{.section-number}Production Technology
+
+Solow의 동학을 한 변수로 줄이려면 생산함수에 일정한 규모수익과 자본의
+한계생산 체감이 필요하다. 이 가정들은 장기적으로 자본만 계속 쌓아서는
+지속적인 성장률을 만들기 어렵다는 구조를 만든다.
+
+### Constant Returns to Scale
+
+::: math-display
+$$
+F(\lambda K,\lambda AL)=\lambda F(K,AL),
+\qquad \lambda>0.
+$$
+:::
+
+따라서 자본과 effective labor를 같은 비율로 늘리면 산출도 같은 비율로
+증가한다.
+
+### Diminishing marginal product of capital
+
+뒤에서 정의할 intensive-form 생산함수 $f(k)$에 대해 보통
+
+::: math-display
+$$
+f'(k)>0,
+\qquad
+f''(k)<0
+$$
+:::
+
+를 둔다. 자본은 산출을 늘리지만, 다른 투입 대비 자본이 많아질수록 추가
+자본 한 단위의 기여는 작아진다.
+
+Technical Note · Inada conditions
+
+:::: details-body
+표준적인 내부 정상상태의 존재와 전역적 동학을 단순하게 만들기 위해
+다음과 같은 Inada 조건을 추가하기도 한다.
+
+::: math-display
+$$
+\lim_{k\to0^+}f'(k)=\infty,
+\qquad
+\lim_{k\to\infty}f'(k)=0.
+$$
+:::
+
+이 조건들은 편리한 충분조건이지, Solow의 모든 경제적 결론에 반드시
+필요한 최소가정은 아니다.
+::::
+:::::::
+
+:::::::: {#s04 .section}
+## [5.4]{.section-number}Intensive Form
+
+총량 $K$와 $Y$는 노동과 기술이 성장하기 때문에 정상상태에서도 계속 커질
+수 있다. 따라서 장기동학을 읽으려면 성장추세를 제거한 stationary
+object를 만들어야 한다.
+
+effective labor 한 단위당 자본과 산출을
+
+::: math-display
+$$
+k\equiv\frac{K}{AL},
+\qquad
+y\equiv\frac{Y}{AL}
+$$
+:::
+
+로 정의한다. CRS를 이용하면
+
+::: math-display
+$$
+\frac{Y}{AL}
+=
+F\!\left(\frac{K}{AL},1\right)
+\equiv f(k).
+$$
+:::
+
+:::: equation-card
+Intensive-form production function
+
+::: math-display
+$$
+\boxed{y=f(k)}
+$$
+:::
+
+이제 경제의 생산측은 총량 $(K,A,L)$ 대신 하나의 state $k$로 표현된다.
+::::
+
+::: reading-rule
+**정규화의 목적:** $K$와 $Y$의 장기추세를 없애고, 그 아래에서 경제의
+자본집약도가 어디로 수렴하는지를 본다. 이 방식은 이후 성장모형의
+stationary transformation과 RBC의 detrending에도 반복된다.
+:::
+::::::::
+
+:::::::::: {#s05 .section}
+## [5.5]{.section-number}The Fundamental Law of Motion
+
+Solow 모형의 거의 모든 결과는 effective labor당 자본 $k$의 하나의
+미분방정식에서 나온다. 이 식을 정확히 유도하고 읽는 것이 이 장의
+중심이다.
+
+정의 $k=K/(AL)$에서 성장률을 취하면
+
+::: math-display
+$$
+\frac{\dot k}{k}
+=
+\frac{\dot K}{K}
+-
+\frac{\dot A}{A}
+-
+\frac{\dot L}{L}.
+$$
+:::
+
+여기에 $\dot K=sY-\delta K$, $\dot A/A=g$, $\dot L/L=n$을 대입하면
+
+::: math-display
+$$
+\dot k
+=
+\frac{sY}{AL}
+-
+(\delta+n+g)\frac{K}{AL}.
+$$
+:::
+
+따라서
+
+:::: equation-card
+Fundamental law of motion
+
+::: math-display
+$$
+\boxed{
+\dot k
+=
+sf(k)-(n+g+\delta)k
+}
+$$
+:::
+::::
+
+::: display-table-wrap
+  항                         표현         경제적 의미
+  -------------------------- ------------ -----------------------------------------------------------------------------
+  Actual investment          $sf(k)$      effective labor 한 단위당 실제 신규투자
+  Depreciation               $\delta k$   기존 자본의 물리적 소모를 보전하는 데 필요한 투자
+  Capital dilution           $nk$         노동 증가로 동일한 자본집약도를 유지하는 데 필요한 투자
+  Effective-labor dilution   $gk$         기술향상으로 effective labor가 늘어날 때 같은 $k$를 유지하는 데 필요한 투자
+:::
+
+:::: chapter-thesis
+Solow dynamics
+
+::: math-display
+$$
+\boxed{
+\dot k
+=
+\underbrace{sf(k)}_{\text{actual investment}}
+-
+\underbrace{(n+g+\delta)k}_{\text{break-even investment}}
+}
+$$
+:::
+
+Solow의 동학은 실제 투자와 현재 자본집약도를 유지하는 데 필요한
+break-even investment의 차이로 읽는다.
+::::
+::::::::::
+
+:::::::::: {#s06 .section}
+## [5.6]{.section-number}Steady State
+
+정상상태는 총자본이나 총산출이 멈추는 상태가 아니라, effective labor당
+자본 $k$가 더 이상 변하지 않는 상태다. 이 구분이 Solow의 성장개념을
+이해하는 핵심이다.
+
+정상상태 $k^*$에서는
+
+::: math-display
+$$
+\dot k=0.
+$$
+:::
+
+따라서
+
+:::: equation-card
+Steady-state condition
+
+::: math-display
+$$
+\boxed{
+sf(k^*)=(n+g+\delta)k^*
+}
+$$
+:::
+
+actual investment와 break-even investment가 정확히 같아지는 자본집약도가
+정상상태다.
+::::
+
+정상상태에서 일정한 것은
+
+::: math-display
+$$
+k^*=\frac{K}{AL}
+$$
+:::
+
+이지 $K$, $Y$, $C$ 자체가 아니다. 따라서 "steady state"를 "경제가
+성장하지 않는 상태"라고 읽으면 안 된다.
+
+::::: callout-strip
+::: left
+Normalization matters
+:::
+
+::: right
+무엇을 정상상태라고 부르는지는 어떤 변수로 모형을 정규화했는지에 달려
+있다. Solow에서 stationary object는 effective labor당 변수다.
+:::
+:::::
+::::::::::
+
+:::::::: {#s07 .section}
+## [5.7]{.section-number}Stability와 Transition Dynamics
+
+정상상태가 존재한다는 것만으로는 충분하지 않다. 초기 자본집약도가
+정상상태에서 벗어나 있을 때 경제가 어떤 방향으로 움직이는지를 확인해야
+한다.
+
+law of motion을
+
+::: math-display
+$$
+\dot k=G(k)
+\equiv
+sf(k)-(n+g+\delta)k
+$$
+:::
+
+라고 하자. 표준적인 오목 생산함수 아래에서 $k<k^*$이면
+
+::: math-display
+$$
+sf(k)>(n+g+\delta)k
+\quad\Rightarrow\quad
+\dot k>0,
+$$
+:::
+
+반대로 $k>k^*$이면
+
+::: math-display
+$$
+sf(k)<(n+g+\delta)k
+\quad\Rightarrow\quad
+\dot k<0.
+$$
+:::
+
+따라서
+
+:::: equation-card
+Global direction of motion
+
+::: math-display
+$$
+\boxed{k(t)\longrightarrow k^*}
+$$
+:::
+
+이라는 안정적 정상상태가 나타난다.
+::::
+
+Chapter 2의 언어로 보면 Solow는 하나의 predetermined state $k$를 가진
+autonomous dynamical system이다. 차이는 이 동학이 household
+optimization에서 도출된 것이 아니라 외생적 저축규칙과 생산기술에서 바로
+나온다는 점이다.
+::::::::
+
+:::::::::: {#s08 .section}
+## [5.8]{.section-number}Balanced Growth Path
+
+Solow에서 정상상태는 성장의 부재가 아니라 균형성장경로의 stationary
+representation이다. $k$가 일정해도 기술과 노동이 성장하면 총량과
+노동자당 변수는 계속 증가한다.
+
+정상상태에서
+
+::: math-display
+$$
+k=\frac{K}{AL}=k^*
+$$
+:::
+
+가 일정하므로
+
+::: math-display
+$$
+g_K=g_A+g_L=g+n.
+$$
+:::
+
+CRS와 $y=f(k^*)$ 때문에 총산출도
+
+::: math-display
+$$
+g_Y=n+g
+$$
+:::
+
+로 성장한다. 한편 노동자당 산출은
+
+::: math-display
+$$
+\frac{Y}{L}=A f(k^*)
+$$
+:::
+
+이므로
+
+:::: equation-card
+Balanced-growth rates
+
+::: math-display
+$$
+\boxed{
+g_{K}=g_Y=n+g,
+\qquad
+g_{K/L}=g_{Y/L}=g
+}
+$$
+:::
+::::
+
+::: display-table-wrap
+              Steady state                 Balanced Growth Path
+  ----------- ---------------------------- ---------------------------------------
+  초점        정규화 변수의 stationarity   경제 주요 변수의 일정한 성장률
+  Solow에서   $\dot k=0$                   $K,Y$는 $n+g$, $K/L,Y/L$은 $g$로 성장
+  핵심        $k$가 일정                   총량이 반드시 일정한 것은 아님
+:::
+::::::::::
+
+::::::::: {#s09 .section}
+## [5.9]{.section-number}Saving Rate의 영구적 상승
+
+Solow의 대표적인 정책실험은 저축률의 영구적 상승이다. 이 실험은 state
+variable의 연속성, 이행동학, 장기수준과 장기성장률의 차이를 한 번에
+보여준다.
+
+경제가 처음에 $s_0$ 아래 정상상태 $k_0^*$에 있다고 하자. 어느 시점에
+저축률이
+
+::: math-display
+$$
+s_0\longrightarrow s_1,
+\qquad s_1>s_0
+$$
+:::
+
+로 영구적으로 상승하면, 모든 $k$에서 actual-investment schedule
+$sf(k)$가 위로 이동한다. 새로운 정상상태는
+
+::: math-display
+$$
+s_1f(k_1^*)=(n+g+\delta)k_1^*
+$$
+:::
+
+을 만족하고 표준적인 경우
+
+::: math-display
+$$
+\boxed{k_1^*>k_0^*}
+$$
+:::
+
+이다.
+
+:::: {.statement .remark}
+::: statement-head
+Predetermined state
+:::
+
+저축률이 바뀌는 순간에도 물적자본 stock 자체는 즉시 점프할 수 없다.
+따라서 $k$는 연속적으로 움직이며, 충격 직후에는 기존 자본을 출발점으로
+새로운 정상상태를 향해 점진적으로 이동한다.
+::::
+
+즉
+
+::: math-display
+$$
+k(t_0^+)=k(t_0^-),
+\qquad
+\dot k(t_0^+)>0.
+$$
+:::
+
+이 구분은 이후 Ramsey에서 predetermined capital과 jump consumption을
+구별할 때 다시 등장한다.
+:::::::::
+
+:::::::: {#s10 .section}
+## [5.10]{.section-number}Level Effect vs. Growth Effect
+
+저축률 상승은 경제를 새로운 높은 수준의 자본집약도로 이동시키지만,
+새로운 균형성장경로에 도달한 뒤 노동자당 성장률을 영구적으로 높이지는
+않는다. 이것이 Solow의 핵심 결론이다.
+
+노동자당 산출은
+
+::: math-display
+$$
+\frac{Y}{L}=A f(k)
+$$
+:::
+
+이므로 성장률은
+
+::: math-display
+$$
+\frac{d}{dt}\ln\!\left(\frac{Y}{L}\right)
+=
+g+\frac{f'(k)k}{f(k)}\frac{\dot k}{k}.
+$$
+:::
+
+저축률 상승 이후 이행기간에는 $\dot k>0$이므로 기술진보 $g$에 capital
+deepening 효과가 더해진다. 따라서 일시적으로 노동자당 산출성장률은
+$g$보다 높을 수 있다.
+
+그러나 새로운 정상상태에 도달하면
+
+::: math-display
+$$
+\dot k=0
+$$
+:::
+
+이므로 다시
+
+:::: chapter-thesis
+Central Solow result
+
+::: math-display
+$$
+\boxed{
+s\uparrow
+\quad\Rightarrow\quad
+\text{temporary growth effect}
++
+\text{permanent level effect}
+}
+$$ $$
+\boxed{
+g_{Y/L}^{\mathrm{BGP}}=g
+\quad\text{before and after the change in }s
+}
+$$
+:::
+
+높은 저축률은 노동자당 소득의 장기수준을 높이지만, 외생적 기술진보율이
+변하지 않는 한 장기 노동자당 성장률 자체를 바꾸지 않는다.
+::::
+::::::::
+
+::::::::: {#s11 .section}
+## [5.11]{.section-number}Cobb--Douglas Example
+
+Cobb--Douglas 기술은 Solow의 정상상태와 비교정태를 닫힌 형태로 보여준다.
+일반적인 경제적 논리는 그대로 유지하면서 파라미터가 장기수준에 어떻게
+들어가는지를 명확히 볼 수 있다.
+
+생산함수를
+
+::: math-display
+$$
+Y=K^\alpha(AL)^{1-\alpha},
+\qquad 0<\alpha<1
+$$
+:::
+
+로 두면 intensive form은
+
+::: math-display
+$$
+f(k)=k^\alpha.
+$$
+:::
+
+따라서 law of motion은
+
+::: math-display
+$$
+\dot k
+=
+sk^\alpha-(n+g+\delta)k.
+$$
+:::
+
+정상상태에서는
+
+::: math-display
+$$
+sk^{*\alpha}=(n+g+\delta)k^*.
+$$
+:::
+
+따라서
+
+:::: equation-card
+Closed-form steady state
+
+::: math-display
+$$
+\boxed{
+k^*
+=
+\left(\frac{s}{n+g+\delta}\right)^{\!\frac{1}{1-\alpha}}
+}
+$$ $$
+\boxed{
+y^*=f(k^*)
+=
+\left(\frac{s}{n+g+\delta}\right)^{\!\frac{\alpha}{1-\alpha}}
+}
+$$
+:::
+::::
+
+이 식에서 저축률은 정상상태의 수준을 높이고, $n$, $g$, $\delta$는
+effective-labor 단위의 정상상태 자본을 낮춘다. 다만 $g$는 동시에
+노동자당 변수의 장기 성장률을 결정하므로 수준효과와 성장률효과를
+분리해서 읽어야 한다.
+:::::::::
+
+::::::::: {#s12 .section}
+## [5.12]{.section-number}Consumption and the Golden Rule
+
+높은 저축률은 자본과 산출을 높이지만 소비를 항상 높이지는 않는다. 너무
+많이 저축하면 유지해야 할 자본이 커져 오히려 정상상태 소비가 낮아질 수
+있다. Golden Rule은 이 trade-off를 묻는다.
+
+steady-state consumption per effective worker는 자원제약으로부터
+
+::: math-display
+$$
+c^*
+=f(k^*)-(n+g+\delta)k^*.
+$$
+:::
+
+이를 $k^*$에 대해 최대화하면
+
+::: math-display
+$$
+\frac{dc^*}{dk^*}
+=
+f'(k^*)-(n+g+\delta)=0.
+$$
+:::
+
+따라서 Golden-Rule capital $k_{GR}$은
+
+:::: equation-card
+Golden Rule
+
+::: math-display
+$$
+\boxed{
+f'(k_{GR})=n+g+\delta
+}
+$$
+:::
+
+을 만족한다. 즉 추가 자본의 한계생산이 그 자본집약도를 유지하는
+한계비용과 같은 지점이다.
+::::
+
+:::: {.statement .warning}
+::: statement-head
+Golden Rule은 아직 완전한 welfare optimum이 아니다
+:::
+
+Solow 모형에는 대표가계의 기간간 효용과 discounting이 명시되어 있지
+않다. 따라서 Golden Rule은 **정상상태 소비수준을 최대화하는 자본
+stock**이지, 모든 세대의 효용을 고려한 intertemporal welfare
+optimum이라는 뜻은 아니다. 그 문제는 Ramsey에서 다시 다룬다.
+::::
+:::::::::
+
+::::::: {#s13 .section}
+## [5.13]{.section-number}Comparative Statics
+
+정상상태 조건은 외생적 파라미터가 장기 자본집약도와 산출수준을 어떻게
+바꾸는지를 간결하게 보여준다. 다만 level과 growth rate를 같은 방향으로
+읽어서는 안 된다.
+
+::: display-table-wrap
+  변화               $k^*$의 효과                    장기 노동자당 성장률   핵심 메커니즘
+  ------------------ ------------------------------- ---------------------- --------------------------------------------------------
+  $s\uparrow$        상승                            불변: $g$              actual investment 증가
+  $n\uparrow$        하락                            불변: $g$              capital dilution 증가
+  $\delta\uparrow$   하락                            불변: $g$              replacement investment 증가
+  $g\uparrow$        effective-labor 단위에서 하락   상승                   효율노동 증가가 빨라지는 동시에 장기 기술성장률도 상승
+:::
+
+::::: callout-strip
+::: left
+Do not mix objects
+:::
+
+::: right
+$k=K/(AL)$의 정상상태 수준과 $Y/L$의 성장률은 서로 다른 객체다. 특히
+$g\uparrow$는 $k^*$를 낮출 수 있으면서도 노동자당 산출의 장기 성장률은
+높인다.
+:::
+:::::
+:::::::
+
+:::::::::: {#s14 .section}
+## [5.14]{.section-number}Speed of Convergence
+
+정상상태로 수렴한다는 방향성뿐 아니라 얼마나 빠르게 수렴하는지도
+중요하다. 정상상태 근방에서는 비선형 Solow 동학을 선형화하여 수렴속도를
+읽을 수 있다.
+
+law of motion을
+
+::: math-display
+$$
+\dot k=G(k)
+$$
+:::
+
+라고 하면 $G(k^*)=0$이다. 정상상태 근방에서 1차 Taylor approximation을
+쓰면
+
+::: math-display
+$$
+\dot k
+\approx
+G'(k^*)(k-k^*).
+$$
+:::
+
+안정성을 위해
+
+::: math-display
+$$
+G'(k^*)<0
+$$
+:::
+
+이어야 하므로
+
+:::: equation-card
+Local convergence
+
+::: math-display
+$$
+\boxed{
+k(t)-k^*
+\approx
+e^{G'(k^*)t}[k(0)-k^*]
+}
+$$
+:::
+::::
+
+Cobb--Douglas의 경우
+
+::: math-display
+$$
+G'(k^*)
+=-(1-\alpha)(n+g+\delta),
+$$
+:::
+
+따라서 local convergence speed를 양수 $\lambda\equiv-G'(k^*)$로 정의하면
+
+::: math-display
+$$
+\boxed{
+\lambda=(1-\alpha)(n+g+\delta)
+}
+$$
+:::
+
+가 된다. 여기서는 구조만 확인하고, 실제 국가자료에서 이 속도가 얼마나
+큰지는 성장모형의 실증평가에서 다루는 것이 자연스럽다.
+::::::::::
+
+::::::: {#s15 .section}
+## [5.15]{.section-number}Conditional Convergence
+
+Solow의 수렴예측은 모든 가난한 나라가 자동으로 부유한 나라를
+따라잡는다는 명제가 아니다. 같은 장기결정요인을 가진 경제들 사이에서
+초기 자본집약도의 차이가 줄어든다는 조건부 명제다.
+
+두 경제가 동일한
+
+::: math-display
+$$
+s,\quad n,\quad g,\quad \delta,\quad f(\cdot)
+$$
+:::
+
+를 가지면 동일한 $k^*$를 향한다. 초기 $k_0$가 낮은 경제에서는 표준적으로
+자본의 한계생산이 높고, 정상상태까지의 거리가 크기 때문에 더 빠른
+capital deepening이 가능하다.
+
+:::: {.statement .definition}
+::: statement-head
+Conditional convergence
+:::
+
+장기 정상상태를 결정하는 구조적 파라미터가 같거나 적절히 통제된 경제들
+사이에서, 초기소득이 낮을수록 해당 정상상태를 향한 성장률이 높은 경향을
+말한다.
+::::
+
+반대로 국가마다 $s,n,g,\delta$나 생산기술이 다르면 서로 다른 정상상태를
+가질 수 있으므로 단순한 unconditional convergence가 일반적으로 따라오지
+않는다.
+
+Extension · Solow와 성장회귀의 연결
+
+::: details-body
+실증적인 convergence regression은 초기소득과 이후 성장률의 관계에 저축,
+인구성장, 인적자본, 제도 등 정상상태를 이동시키는 요인을 함께 통제하는
+방식으로 발전했다. 이 장에서는 이론적 예측만 확립하고 계량적 검증은
+성장모형 평가 파트로 넘긴다.
+:::
+:::::::
+
+::::: {#s16 .section}
+## [5.16]{.section-number}Solow가 설명하는 것과 못 하는 것
+
+Solow 모형은 자본축적의 동학을 매우 투명하게 만들지만, 장기성장의 가장
+중요한 두 원천인 저축행동과 기술진보 자체를 모형 밖에서 가져온다. 이
+성공과 한계를 동시에 읽어야 한다.
+
+::: display-table-wrap
+                 Solow가 설명하는 것                                    Solow가 외생적으로 두는 것
+  -------------- ------------------------------------------------------ --------------------------------------
+  저축           주어진 $s$가 자본축적과 장기수준에 미치는 효과         왜 가계가 그 저축률을 선택하는가
+  자본           capital deepening, 정상상태, 이행동학                  저축의 미시적 최적화
+  성장           기술진보가 주어졌을 때 BGP의 성장률                    왜 $g>0$이고 무엇이 $g$를 결정하는가
+  국가 간 차이   파라미터 차이가 정상상태 수준을 이동시키는 기본 논리   생산성·기술·제도의 근본적 결정요인
+:::
+
+::: chapter-thesis
+What Solow teaches
+
+자본축적은 소득수준과 이행기의 성장률을 크게 바꿀 수 있지만, 한계생산
+체감이 존재하는 한 자본축적만으로 영구적인 노동자당 성장률을 유지할 수
+없다. 표준 Solow에서 지속적인 노동자당 성장은 외생적 기술진보에서
+나온다.
+:::
+
+따라서 이후 성장론의 두 방향은 자연스럽다. 하나는 저축을 최적화의 결과로
+내생화하는 Ramsey이고, 다른 하나는 장기 기술성장률 자체를 설명하려는
+endogenous growth theory다.
+:::::
+
+::::::::::::::::::::::: {#s17 .section}
+## [5.17]{.section-number}왜 Infinite-Horizon Household인가
+
+Solow의 다음 질문은 분명하다. 저축률 $s$를 외생적으로 주지 않고 가계가
+직접 소비와 자산축적을 선택한다면 장기자본과 성장경로는 어떻게
+달라지는가?
+
+Solow에서는
+
+::: math-display
+$$
+S_t=sY_t
+$$
+:::
+
+가 모형의 primitive처럼 주어졌다. 이를 내생화하려면 household가 무한한
+미래를 바라보며
+
+::: math-display
+$$
+\max_{\{c_t\}}
+\sum_{t=0}^{\infty}\beta^t u(c_t)
+$$
+:::
+
+를 풀어야 한다. 하지만 무한기간에서는 단순한 한 기간 예산제약을 넘어서
+다음 개념들이 필요하다.
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Sequential budget constraints
+:::
+
+매 기간 자산이 어떻게 다음 기간으로 이월되는지 명확히 한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Present-value budget constraint
+:::
+
+무한개의 기간별 제약을 하나의 intertemporal resource constraint로
+통합한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Solvency and no-Ponzi condition
+:::
+
+끝없이 차입하여 기존 부채를 갚는 경로를 배제하고 feasible lifetime
+plan의 경계를 정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Optimal saving
+:::
+
+이후 Ramsey에서 Euler equation과 자본축적을 결합하여 $s$를 내생화한다.
+::::
+::::::
+:::::::::::::::::::
+
+::: section-bridge
+다음 Chapter 6은 성장모형을 새로 하나 더 추가하는 장이 아니라, Solow의
+외생적 저축률을 Ramsey의 최적 저축으로 바꾸기 위해 필요한 무한기간
+예산제약과 solvency 조건을 준비하는 장이다.
+:::
+:::::::::::::::::::::::
+
+:::::::::::::::::::::: {#s18 .section}
+## [5.18]{.section-number}Chapter Summary
+
+Solow--Swan 모형의 핵심은 복잡한 성장현상을 하나의 normalized state
+$k$와 하나의 law of motion으로 줄이고, 그 방정식에서
+정상상태·균형성장·정책변화의 이행경로를 동시에 읽어내는 것이다.
+
+::: math-display
+$$
+\boxed{y=f(k)}
+$$ $$
+\boxed{\dot k=sf(k)-(n+g+\delta)k}
+$$ $$
+\boxed{sf(k^*)=(n+g+\delta)k^*}
+$$ $$
+\boxed{g_{Y/L}^{\mathrm{BGP}}=g}
+$$
+:::
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Normalize
+:::
+
+총량을 effective labor로 나누어 stationary state $k=K/(AL)$를 만든다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Accumulate
+:::
+
+실제 투자 $sf(k)$와 break-even investment $(n+g+\delta)k$의 차이가 $k$의
+동학을 결정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Converge
+:::
+
+표준 조건에서 경제는 안정적인 $k^*$로 수렴한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Grow
+:::
+
+정상상태에서도 노동자당 산출은 외생적 기술진보율 $g$로 성장한다.
+::::
+::::::
+:::::::::::::::::::
+
+::: reading-rule
+**이 장의 결론:** 높은 저축률은 정상상태 소득수준을 높이고 이행기간의
+성장률을 높일 수 있지만, 표준 Solow에서 지속적인 노동자당 성장은
+기술진보에 의해 결정된다. 다음 단계는 저축률 자체를 가계의 최적화로
+설명하는 것이다.
+:::
+::::::::::::::::::::::
+
+::: {#check .section}
+## Learning Check
+
+1.  Chapter 4의 내생적 저축과 Solow의 외생적 저축률 가정은 정확히 어떻게
+    다른가?
+2.  왜 생산함수를 $Y=F(K,AL)$처럼 labor-augmenting technology로 쓰며,
+    effective labor $AL$는 어떤 역할을 하는가?
+3.  CRS를 이용해 $y=f(k)$를 직접 유도할 수 있는가?
+4.  $k=K/(AL)$에서 $\dot k=sf(k)-(n+g+\delta)k$를 단계별로 유도할 수
+    있는가?
+5.  $(n+g+\delta)k$의 세 구성요소를 각각 경제적으로 설명할 수 있는가?
+6.  steady state와 balanced growth path의 차이를 설명할 수 있는가?
+7.  왜 저축률의 영구적 상승 직후 $k$는 점프하지 않는가?
+8.  저축률 상승이 permanent level effect는 만들지만 permanent
+    growth-rate effect는 만들지 않는 이유는 무엇인가?
+9.  Cobb--Douglas 생산함수에서 $k^*$와 $y^*$를 닫힌 형태로 구할 수
+    있는가?
+10. Golden Rule 조건 $f'(k_{GR})=n+g+\delta$를 유도하고, 이것이 곧바로
+    완전한 welfare optimum을 뜻하지 않는 이유를 설명할 수 있는가?
+11. conditional convergence가 unconditional convergence와 다른 이유는
+    무엇인가?
+12. Solow가 $s$와 $g$를 외생적으로 둔다는 사실이 이후 Ramsey와
+    endogenous growth theory를 어떻게 동기부여하는가?
+:::
+
+::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Effective labor
+:::
+
+노동량에 노동증대형 기술수준을 곱한 $AL$. 생산의 효율단위 노동투입을
+나타낸다.
+::::
+
+:::: definition-row
+::: term
+Intensive form
+:::
+
+CRS를 이용해 총량 생산함수를 effective labor당 형태 $y=f(k)$로 정규화한
+표현.
+::::
+
+:::: definition-row
+::: term
+Capital deepening
+:::
+
+노동 또는 effective labor 한 단위당 자본이 증가하는 과정. Solow의 이행기
+성장의 핵심 원천.
+::::
+
+:::: definition-row
+::: term
+Break-even investment
+:::
+
+감가상각과 노동·기술 증가에도 현재의 effective-labor당 자본을 유지하는
+데 필요한 투자 $(n+g+\delta)k$.
+::::
+
+:::: definition-row
+::: term
+Steady state
+:::
+
+Solow에서 $\dot k=0$을 만족하여 effective-labor당 자본이 일정한 상태.
+::::
+
+:::: definition-row
+::: term
+Balanced Growth Path
+:::
+
+경제의 주요 총량과 비율이 일정한 성장률로 움직이는 경로. Solow
+정상상태는 normalized variables가 일정한 BGP를 나타낸다.
+::::
+
+:::: definition-row
+::: term
+Level effect
+:::
+
+파라미터 변화가 장기 성장률은 바꾸지 않으면서 변수의 장기수준을
+영구적으로 이동시키는 효과.
+::::
+
+:::: definition-row
+::: term
+Growth effect
+:::
+
+변수의 성장률 자체에 미치는 효과. Solow의 저축률 변화는 이행기에는
+성장효과가 있지만 BGP 성장률에는 영구효과가 없다.
+::::
+
+:::: definition-row
+::: term
+Golden Rule
+:::
+
+steady-state consumption per effective worker를 최대화하는 자본수준.
+표준 Solow에서 $f'(k_{GR})=n+g+\delta$.
+::::
+
+:::: definition-row
+::: term
+Convergence speed
+:::
+
+초기상태가 정상상태에서 벗어나 있을 때 그 격차가 얼마나 빠르게
+축소되는지를 나타내는 속도.
+::::
+
+:::: definition-row
+::: term
+Conditional convergence
+:::
+
+장기 정상상태를 결정하는 구조적 조건이 동일하거나 통제된 경제들 사이에서
+초기소득 격차가 줄어드는 경향.
+::::
+
+:::: definition-row
+::: term
+Predetermined variable
+:::
+
+과거의 축적결과로 현재 값이 주어져 충격 순간에 자유롭게 점프할 수 없는
+state variable. Solow의 자본 $k$가 대표적이다.
+::::
+:::::::::::::::::::::::::::

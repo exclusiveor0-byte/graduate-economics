@@ -1,0 +1,1169 @@
+---
+title: >-
+  불확실성하 동태선택
+description: >-
+  States, Expectations, and Stochastic Dynamic Programming
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+:::::::::: {#s01 .section}
+## [10.1]{.section-number}From Deterministic Paths to Contingent Plans
+
+불확실성의 핵심 변화는 목적함수에 기대값 기호 하나를 추가하는 데 있지
+않다. 미래 선택의 객체 자체가 하나의 고정된 수열에서 **미래 상태에
+조건부인 contingency plan**으로 바뀐다.
+
+Deterministic problem에서는 예를 들어 소비계획을
+
+::: math-display
+$$
+\{c_t\}_{t=0}^{\infty}
+$$
+:::
+
+처럼 하나의 경로로 생각할 수 있었다. 하지만 다음기에 두 상태
+
+::: math-display
+$$
+s_{t+1}\in\{H,L\}
+$$
+:::
+
+가 가능하다면 다음기의 소비도 상태에 따라 달라져야 한다.
+
+:::: equation-card
+Contingent choice
+
+::: math-display
+$$
+\boxed{
+c_{t+1}=c_{t+1}(s_{t+1})
+}
+$$
+:::
+
+즉 미래에 실제로 어떤 상태가 실현되느냐에 따라 서로 다른 행동을 지정하는
+계획이 필요하다.
+::::
+
+::::: callout-strip
+::: left
+Core shift
+:::
+
+::: right
+deterministic path → state-contingent plan.
+:::
+:::::
+
+이 distinction은 Chapter 11의 state-contingent claims와 risk sharing을
+이해하는 출발점이다.
+::::::::::
+
+::::::::::::: {#s02 .section}
+## [10.2]{.section-number}States, Shocks, Histories, and Information
+
+Stochastic dynamic model에서는 무엇이 현재까지 알려져 있고, 무엇이
+다음기에 새롭게 실현되며, 어떤 변수가 미래 선택에 필요한 정보를
+요약하는지를 구분해야 한다.
+
+:::: definition-row
+::: term
+Exogenous state $s_t$
+:::
+
+경제주체가 직접 선택하지 않지만 현재의 의사결정에 영향을 주고 자체
+전이법칙을 따르는 상태.
+::::
+
+:::: definition-row
+::: term
+Endogenous state $x_t$
+:::
+
+과거 선택의 결과로 축적되어 현재 주어진 상태. 자본, 자산 등이
+대표적이다.
+::::
+
+:::: definition-row
+::: term
+Innovation $\varepsilon_{t+1}$
+:::
+
+시점 $t$의 의사결정 뒤 새롭게 실현되는 충격.
+::::
+
+:::: definition-row
+::: term
+History $s^t$
+:::
+
+현재까지 실현된 외생상태의 전체 열 $s^t=(s_0,\ldots,s_t)$.
+::::
+
+필요하다면 전체 상태를
+
+::: math-display
+$$
+\boxed{z_t=(x_t,s_t)}
+$$
+:::
+
+처럼 묶을 수 있다. Recursive formulation의 목적은 긴 history 자체를 계속
+들고 가는 대신, 미래의 payoff와 feasible choices를 결정하는 데 필요한
+정보를 충분히 요약하는 state를 찾는 것이다.
+
+::: reading-rule
+**State sufficiency:** 올바른 state는 과거의 모든 세부정보를 보존할
+필요는 없지만, 미래의 최적선택에 필요한 정보는 잃어서는 안 된다.
+:::
+:::::::::::::
+
+:::::::: {#s03 .section}
+## [10.3]{.section-number}Conditional Expectations
+
+불확실성하의 미래가치는 현재 이용 가능한 정보에 조건부로 평가한다. 이를
+표현하는 기본 기호가 $E_t[\cdot]$다.
+
+시점 $t$의 정보집합을 $\mathcal F_t$라고 쓰면
+
+:::: equation-card
+Conditional expectation
+
+::: math-display
+$$
+\boxed{
+E_t[X]
+\equiv
+E[X\mid\mathcal F_t]
+}
+$$
+:::
+::::
+
+따라서
+
+::: math-display
+$$
+E_t\!\left[u'(c_{t+1})R_{t+1}\right]
+$$
+:::
+
+은 미래의 marginal payoff를 시점 $t$에서 알고 있는 정보만으로 평가한
+조건부기대값이다.
+
+:::: {.statement .remark}
+::: statement-head
+Remark · Expectation is information-dependent
+:::
+
+같은 random variable이라도 $\mathcal F_t$가 달라지면 조건부기대값이
+달라질 수 있다. 따라서 stochastic macro에서 timing과 information set은
+수식의 부수적 표기가 아니라 모형의 일부다.
+::::
+::::::::
+
+:::::::: {#s04 .section}
+## [10.4]{.section-number}Timing and Non-Anticipativity
+
+현재의 control은 아직 실현되지 않은 미래 shock을 사용할 수 없다. 따라서
+충격이 언제 관측되고 선택이 언제 이루어지는지를 먼저 정해야 한다.
+
+:::: chapter-thesis
+Canonical timing
+
+::: math-display
+$$
+\boxed{
+(x_t,s_t)\ \text{observed}
+\;\longrightarrow\;
+u_t\ \text{chosen}
+\;\longrightarrow\;
+\varepsilon_{t+1}\ \text{realized}
+\;\longrightarrow\;
+(x_{t+1},s_{t+1})
+}
+$$
+:::
+::::
+
+따라서 $u_t$는 현재 정보에 근거해 선택되어야 한다. 미래 shock
+realization을 미리 알고 선택하는 rule은 admissible하지 않다.
+
+::::: callout-strip
+::: left
+Non-anticipativity
+:::
+
+::: right
+현재 행동은 현재까지 이용 가능한 정보에는 의존할 수 있지만, 아직
+관측되지 않은 미래 충격에는 의존할 수 없다.
+:::
+:::::
+
+이 원칙이 깨지면 기대효용 문제의 의미 자체가 달라진다.
+::::::::
+
+::::::: {#s05 .section}
+## [10.5]{.section-number}Markov Processes
+
+Recursive macro에서 가장 유용한 외생상태 구조는 Markov process다. 현재
+state가 미래분포를 예측하는 데 필요한 과거정보를 모두 요약한다.
+
+Finite-state case에서
+
+::: math-display
+$$
+s_t\in\{s_1,\ldots,s_N\}
+$$
+:::
+
+라고 하자. Markov property는
+
+:::: equation-card
+Markov property
+
+::: math-display
+$$
+\boxed{
+\Pr(s_{t+1}=s'\mid s^t)
+=
+\Pr(s_{t+1}=s'\mid s_t)
+}
+$$
+:::
+::::
+
+이다. 과거가 무의미하다는 뜻이 아니라, **현재 state가 관련된 과거정보를
+이미 요약하고 있다**는 뜻이다.
+
+Transition probability를
+
+::: math-display
+$$
+P_{ij}
+\equiv
+\Pr(s_{t+1}=s_j\mid s_t=s_i)
+$$
+:::
+
+라고 정의한다.
+:::::::
+
+:::::::: {#s06 .section}
+## [10.6]{.section-number}Transition Probabilities and Invariant Distributions
+
+Markov transition law는 개별 state가 어떻게 움직이는지뿐 아니라 경제
+전체의 state distribution이 어떻게 움직이는지도 결정한다.
+
+Transition matrix는
+
+::: math-display
+$$
+P=
+\begin{pmatrix}
+P_{11}&\cdots&P_{1N}\\
+\vdots&\ddots&\vdots\\
+P_{N1}&\cdots&P_{NN}
+\end{pmatrix},
+\qquad
+\sum_{j=1}^{N}P_{ij}=1.
+$$
+:::
+
+현재 distribution을 row vector $\mu_t$로 쓰면
+
+:::: equation-card
+Distribution dynamics
+
+::: math-display
+$$
+\boxed{\mu_{t+1}=\mu_tP}
+$$
+:::
+::::
+
+이다. Invariant distribution $\mu^*$는
+
+::: math-display
+$$
+\boxed{\mu^*=\mu^*P}
+$$
+:::
+
+를 만족한다.
+
+::: reading-rule
+**Deterministic steady state와의 차이:** 개별 경제주체의 state가 계속
+바뀌더라도 state distribution은 시간불변일 수 있다. 따라서 stochastic
+economy의 장기상태를 논할 때는 point steady state와 invariant
+distribution을 구분해야 한다.
+:::
+::::::::
+
+:::::::::::::::::: {#s07 .section}
+## [10.7]{.section-number}The Stochastic Sequential Problem
+
+Deterministic optimal control problem에 uncertainty를 넣는 가장 직접적인
+방법은 transition equation에 shock을 추가하고 expected discounted
+return을 극대화하는 것이다.
+
+:::: equation-card
+General stochastic control problem
+
+::: math-display
+$$
+\boxed{
+\max_{\{u_t\}}
+E_0\sum_{t=0}^{\infty}\beta^t r(x_t,u_t,s_t)
+}
+$$ $$
+\boxed{
+x_{t+1}=g(x_t,u_t,s_t,\varepsilon_{t+1})
+}
+$$
+:::
+::::
+
+여기서 $0<\beta<1$이고, $u_t$는 시점 $t$에서 관측 가능한 state에 근거해
+선택된다.
+
+::::::::::::::: logic-steps
+::::: step
+::: num
+1
+:::
+
+::: {}
+**Observe**
+
+현재 state $(x_t,s_t)$를 관측한다.
+:::
+:::::
+
+::::: step
+::: num
+2
+:::
+
+::: {}
+**Choose**
+
+현재 control $u_t$를 선택한다.
+:::
+:::::
+
+::::: step
+::: num
+3
+:::
+
+::: {}
+**Shock**
+
+새로운 innovation $\varepsilon_{t+1}$이 실현된다.
+:::
+:::::
+
+::::: step
+::: num
+4
+:::
+
+::: {}
+**Transition**
+
+다음 state $(x_{t+1},s_{t+1})$로 이동한다.
+:::
+:::::
+:::::::::::::::
+::::::::::::::::::
+
+::::::: {#s08 .section}
+## [10.8]{.section-number}The Stochastic Bellman Equation
+
+Recursive structure는 uncertainty가 도입되어도 사라지지 않는다. 달라지는
+것은 continuation value를 하나의 확정값이 아니라 조건부기대값으로
+평가한다는 점이다.
+
+Shock representation을 사용하면
+
+:::: equation-card
+Stochastic Bellman equation
+
+::: math-display
+$$
+\boxed{
+V(x,s)
+=
+\max_{u\in\Gamma(x,s)}
+\left\{
+r(x,u,s)
++
+\beta E\!\left[V(x',s')\mid x,s,u\right]
+\right\}
+}
+$$
+:::
+::::
+
+Finite-state Markov case에서는 expectation을 합으로 쓸 수 있다.
+
+::: math-display
+$$
+\boxed{
+V(x,s)
+=
+\max_{u\in\Gamma(x,s)}
+\left\{
+r(x,u,s)
++
+\beta\sum_{s'}\pi(s'\mid s)
+V\!\left(g(x,u,s,s'),s'\right)
+\right\}.
+}
+$$
+:::
+
+::: {.contrast-table .display-table-wrap}
+  구조                 Deterministic   Stochastic
+  -------------------- --------------- --------------------------
+  Continuation value   $V(x')$         $E_t[V(x')]$
+  Transition           $x'=g(x,u)$     $x'=g(x,u,\varepsilon')$
+  Policy               $u=h(x)$        $u=h(x,s)$
+:::
+:::::::
+
+:::::: {#s09 .section}
+## [10.9]{.section-number}Policy Functions under Uncertainty
+
+Optimal behavior는 미래의 모든 possible history를 직접 나열하는 대신,
+현재의 sufficient state를 입력으로 받는 policy function으로 표현할 수
+있다.
+
+::: math-display
+$$
+\boxed{u_t=h(x_t,s_t)}
+$$
+:::
+
+여기서 $h$는 현재 state가 주어졌을 때 최적 control을 반환한다. 같은
+$x_t$라도 현재 exogenous state $s_t$가 다르면 optimal choice가 달라질 수
+있다.
+
+:::: {.statement .theorem}
+::: statement-head
+Recursive principle
+:::
+
+과거 history가 미래 payoff에 미치는 모든 효과가 현재 state $(x_t,s_t)$에
+요약되어 있다면, optimal continuation plan도 그 state의 함수로 표현할 수
+있다.
+::::
+
+이 관점이 나중의 recursive competitive equilibrium, incomplete-markets
+household problem, RBC solution의 공통 언어가 된다.
+::::::
+
+::::::: {#s10 .section}
+## [10.10]{.section-number}First-Order Conditions and the Stochastic Euler Equation
+
+Bellman equation의 FOC와 envelope condition을 결합하면 deterministic
+Euler equation의 expected-value counterpart가 나온다.
+
+일반적인 interior choice의 FOC는 개략적으로
+
+::: math-display
+$$
+r_u(x_t,u_t,s_t)
++
+\beta E_t\!\left[
+V_x(x_{t+1},s_{t+1})
+\,g_u(x_t,u_t,s_t,\varepsilon_{t+1})
+\right]
+=0
+$$
+:::
+
+형태를 가진다. 소비--저축 문제에서는 이것이 다음 식으로 정리된다.
+
+:::: equation-card
+Stochastic Euler equation
+
+::: math-display
+$$
+\boxed{
+u'(c_t)
+=
+\beta E_t\!\left[
+R_{t+1}u'(c_{t+1})
+\right]
+}
+$$
+:::
+::::
+
+Deterministic case의
+
+::: math-display
+$$
+u'(c_t)=\beta R_{t+1}u'(c_{t+1})
+$$
+:::
+
+와 비교하면, 미래의 marginal benefit이 하나의 값이 아니라 미래 상태들에
+대한 **conditional expectation**으로 들어간다.
+:::::::
+
+:::::::: {#s11 .section}
+## [10.11]{.section-number}The Stochastic Discount Factor
+
+Stochastic Euler equation을 가격식의 형태로 쓰면 현재와 미래 marginal
+utility의 비율이 위험한 payoff를 할인하는 핵심 객체로 나타난다.
+
+Euler equation을 현재 marginal utility로 나누면
+
+::: math-display
+$$
+1
+=
+E_t\!\left[
+\beta\frac{u'(c_{t+1})}{u'(c_t)}R_{t+1}
+\right].
+$$
+:::
+
+다음과 같이 정의하자.
+
+:::: equation-card
+Stochastic discount factor
+
+::: math-display
+$$
+\boxed{
+m_{t+1}
+\equiv
+\beta\frac{u'(c_{t+1})}{u'(c_t)}
+}
+$$ $$
+\boxed{1=E_t[m_{t+1}R_{t+1}]}
+$$
+:::
+::::
+
+만약 $R_{t+1}^f$가 시점 $t$에 확정되어 있는 risk-free gross return이면
+
+::: math-display
+$$
+1=R_{t+1}^fE_t[m_{t+1}],
+\qquad
+\boxed{
+R_{t+1}^f
+=
+\frac{1}{E_t[m_{t+1}]}
+}.
+$$
+:::
+
+::: reading-rule
+**Scope:** 여기서는 SDF를 complete-markets pricing을 위한 preview로만
+사용한다. Risk premia와 asset-pricing applications는 이 장의 핵심 대상이
+아니다.
+:::
+::::::::
+
+::::::::::: {#s12 .section}
+## [10.12]{.section-number}A Stochastic Consumption--Saving Problem
+
+간단한 household problem 하나로 endogenous state, exogenous state,
+Markov transition, conditional expectation, policy function을 한 번에
+묶어보자.
+
+Risk-free gross return이 $R$이고 income이 Markov process를 따른다고
+하자.
+
+::: math-display
+$$
+y_{t+1}\sim\pi(y'\mid y_t).
+$$
+:::
+
+Period budget constraint를
+
+::: math-display
+$$
+\boxed{c_t+a_{t+1}=Ra_t+y_t}
+$$
+:::
+
+라고 하자. 그러면 state는 $(a_t,y_t)$, control은 $a_{t+1}$ 또는 동치로
+$c_t$다.
+
+:::: equation-card
+Household Bellman equation
+
+::: math-display
+$$
+\boxed{
+V(a,y)
+=
+\max_{a'\ge \underline a}
+\left\{
+u(Ra+y-a')
++
+\beta\sum_{y'}\pi(y'\mid y)V(a',y')
+\right\}
+}
+$$
+:::
+::::
+
+Interior solution에서
+
+::: math-display
+$$
+\boxed{
+u'(c_t)=\beta R E_t[u'(c_{t+1})]}
+$$
+:::
+
+를 얻는다.
+
+::::: callout-strip
+::: left
+State decomposition
+:::
+
+::: right
+$a_t$: endogenous state · $y_t$: exogenous state · $a_{t+1}$: chosen
+next state.
+:::
+:::::
+:::::::::::
+
+:::::::: {#s13 .section}
+## [10.13]{.section-number}A Stochastic Growth Problem
+
+성장모형에 생산성충격을 추가하면 이후 RBC에서 반복해서 사용할 stochastic
+growth benchmark를 얻는다.
+
+Resource constraint:
+
+::: math-display
+$$
+\boxed{
+c_t+k_{t+1}=z_t f(k_t)+(1-\delta)k_t}
+$$
+:::
+
+Technology process:
+
+::: math-display
+$$
+\boxed{
+\ln z_{t+1}
+=
+\rho_z\ln z_t+\varepsilon_{t+1},
+\qquad |\rho_z|<1
+}
+$$
+:::
+
+Planner의 Bellman equation은
+
+::: math-display
+$$
+V(k,z)
+=
+\max_{k'}
+\left\{
+u\!\left(zf(k)+(1-\delta)k-k'\right)
++
+\beta E[V(k',z')\mid z]
+\right\}.
+$$
+:::
+
+Interior Euler equation:
+
+:::: equation-card
+Stochastic growth Euler equation
+
+::: math-display
+$$
+\boxed{
+u'(c_t)
+=
+\beta E_t\!\left[
+u'(c_{t+1})
+\left(
+z_{t+1}f'(k_{t+1})+1-\delta
+\right)
+\right]
+}
+$$
+:::
+::::
+
+이 식은 후반 RBC model의 consumption-saving margin과 동일한 구조를
+가진다. Chapter 10에서는 quantitative solution이나 log-linearization까지
+진행하지 않는다.
+::::::::
+
+:::::: {#s14 .section}
+## [10.14]{.section-number}State, Control, and Shock: What Is What?
+
+Stochastic model에서는 현재 state, chosen next state, exogenous state,
+innovation을 혼동하지 않는 것이 중요하다.
+
+::: display-table-wrap
+  객체                역할                                                     Stochastic growth 예
+  ------------------- -------------------------------------------------------- ----------------------
+  Endogenous state    과거 선택으로 결정되어 현재 주어진 stock                 $k_t$
+  Exogenous state     현재 관측되며 외생 전이법칙을 따름                       $z_t$
+  Control             현재 선택                                                $c_t$ 또는 $k_{t+1}$
+  Innovation          현재 선택 뒤 새롭게 실현되는 shock                       $\varepsilon_{t+1}$
+  Chosen next state   현재 control에 의해 결정되는 다음기의 endogenous stock   $k_{t+1}$
+:::
+
+:::: {.statement .warning}
+::: statement-head
+Do not identify the innovation with the state
+:::
+
+$z_{t+1}$는 단순히 $\varepsilon_{t+1}$ 그 자체가 아니다. 예를 들어
+AR(1)에서는 현재 state $z_t$와 새로운 innovation $\varepsilon_{t+1}$가
+함께 다음 state $z_{t+1}$를 결정한다.
+::::
+::::::
+
+::::::: {#s15 .section}
+## [10.15]{.section-number}Expectations and Model Consistency
+
+Stochastic macro에서 $E_t[\cdot]$는 임의의 forecast rule을 뜻하지
+않는다. 모형이 가정한 transition law와 equilibrium law of motion에
+일치하는 조건부기대값을 사용한다.
+
+:::: chapter-thesis
+Model-consistent expectations
+
+::: math-display
+$$
+\boxed{
+\text{perceived conditional law}
+=
+\text{law generated by the model/equilibrium}
+}
+$$
+:::
+::::
+
+예를 들어 생산성 state가
+
+::: math-display
+$$
+\ln z_{t+1}=\rho_z\ln z_t+\varepsilon_{t+1}
+$$
+:::
+
+를 따른다면, 시점 $t$의 기대는 이 transition law를 사용해 계산된다.
+
+::: reading-rule
+**Boundary of this chapter:** rational-expectations linear systems의
+root counting과 Blanchard--Kahn solution은 Chapter 14에서 다룬다.
+여기서는 expectations가 model-consistent conditional probabilities로
+계산된다는 점만 확보한다.
+:::
+:::::::
+
+::::::::::: {#s16 .section}
+## [10.16]{.section-number}Uncertainty vs. Market Completeness
+
+경제가 불확실하다는 사실과 금융시장이 incomplete하다는 사실은 서로 다른
+개념이다. Uncertainty는 possible states에 관한 것이고, market
+completeness는 그 states에 대해 어떤 claims를 거래할 수 있는가에 관한
+것이다.
+
+::::::: macro-grid
+::: {}
+[UNCERTAINTY]{.tag}
+
+### What can happen?
+
+미래에 여러 state가 가능한가, 그리고 그 probabilities는 어떻게
+정해지는가?
+:::
+
+::: {}
+[MARKET STRUCTURE]{.tag}
+
+### What can be traded?
+
+각 미래 state에 대한 payoff를 자유롭게 사고팔 수 있는가?
+:::
+
+::: {}
+[COMPLETE]{.tag}
+
+### Full spanning
+
+Relevant states에 대한 contingent claims가 충분히 존재한다.
+:::
+
+::: {}
+[INCOMPLETE]{.tag}
+
+### Missing span
+
+일부 state-contingent payoff를 금융자산으로 구현할 수 없다.
+:::
+:::::::
+
+::::: callout-strip
+::: left
+Key distinction
+:::
+
+::: right
+$\text{uncertainty}\neq\text{market incompleteness}$.
+:::
+:::::
+:::::::::::
+
+::::::: {#s17 .section}
+## [10.17]{.section-number}State-Contingent Claims: Preview
+
+Complete markets를 이해하기 위해 가장 단순한 contingent security를 미리
+정의한다.
+
+시점 $t+1$에 가능한 상태가 $s'\in S$라고 하자. 오늘 다음 payoff를
+약속하는 claim을 생각한다.
+
+:::: equation-card
+One-period Arrow security
+
+::: math-display
+$$
+\boxed{
+\text{payoff at }t+1
+=
+\begin{cases}
+1,& s_{t+1}=s',\\
+0,& \text{otherwise}.
+\end{cases}
+}
+$$
+:::
+::::
+
+그 claim의 시점 $t$ 가격을
+
+::: math-display
+$$
+q_t(s')
+$$
+:::
+
+라고 쓰자. 모든 relevant state에 대해 이런 claim을 충분히 조합할 수
+있다면 임의의 state-contingent payoff를 복제할 수 있다.
+
+::: section-bridge
+**Bridge to Chapter 11.** 다음 장에서는 이 Arrow security의 가격,
+household budget constraint, Pareto risk sharing, Arrow--Debreu time-0
+trading과 sequential trading의 관계를 본격적으로 분석한다.
+:::
+:::::::
+
+:::::: {#s18 .section}
+## [10.18]{.section-number}Deterministic vs. Stochastic Macro
+
+Chapter 10의 수학적 변화는 간단해 보이지만 경제적 의미는 크다. 미래가
+하나의 점이 아니라 분포이므로 optimality condition도 상태별 marginal
+payoff의 기대값을 비교한다.
+
+::: {.contrast-table .display-table-wrap}
+  객체                 Deterministic macro                  Stochastic macro
+  -------------------- ------------------------------------ ------------------------------------------
+  Transition           $x_{t+1}=g(x_t,u_t)$                 $x_{t+1}=g(x_t,u_t,\varepsilon_{t+1})$
+  Continuation value   $V(x_{t+1})$                         $E_t[V(x_{t+1})]$
+  Plan                 고정된 경로                          state-contingent policy
+  Euler equation       $u'(c_t)=\beta R_{t+1}u'(c_{t+1})$   $u'(c_t)=\beta E_t[R_{t+1}u'(c_{t+1})]$
+  Long-run object      steady state / BGP                   stationary rule / invariant distribution
+:::
+
+:::: chapter-thesis
+Minimal conceptual change
+
+::: math-display
+$$
+\boxed{
+\text{future value}
+\longrightarrow
+\text{expected future value conditional on current information}
+}
+$$
+:::
+::::
+::::::
+
+::::: {#s19 .section}
+## [10.19]{.section-number}Why Complete Markets Next?
+
+우리는 이제 future states, conditional expectations, stochastic
+optimality를 정의했다. 하지만 아직 위험을 어떤 계약으로 거래할 수
+있는지는 정하지 않았다.
+
+다음 질문은
+
+::: chapter-thesis
+Next question
+
+**모든 미래 state에 대해 충분한 contingent claims가 존재한다면,
+경제주체들은 consumption risk를 어떻게 공유하는가?**
+:::
+
+이다. 이 질문을 풀기 위해 다음 장에서는
+
+- state-contingent commodities와 Arrow securities,
+- time-0 Arrow--Debreu trading,
+- Pareto problem과 complete risk sharing,
+- state prices와 marginal utility,
+- sequential trading과 time-0 trading의 equivalence
+
+를 다룬다.
+
+::: section-bridge
+**Next:** Chapter 11 --- Complete Markets and Risk Sharing.
+:::
+:::::
+
+::::::::::: {#s20 .section}
+## [10.20]{.section-number}Chapter Summary
+
+불확실성은 deterministic macro의 구조를 폐기하지 않는다. 대신 state와
+information을 명시하고, continuation values와 marginal returns를
+조건부기대값으로 평가하도록 확장한다.
+
+::::::: macro-grid
+::: {}
+[STATE]{.tag}
+
+### Compress relevant history
+
+현재 state는 미래 optimal choice에 필요한 과거정보를 요약한다.
+:::
+
+::: {}
+[EXPECTATION]{.tag}
+
+### Condition on current information
+
+미래 payoff는 $E_t[\cdot]$를 통해 현재 정보에 조건부로 평가한다.
+:::
+
+::: {}
+[RECURSION]{.tag}
+
+### Expected continuation value
+
+Bellman equation의 continuation term이 $\beta E_t[V_{t+1}]$로 바뀐다.
+:::
+
+::: {}
+[MARKETS]{.tag}
+
+### Still to be specified
+
+불확실성을 정의한 뒤에도 어떤 state-contingent claims가 거래 가능한지는
+별도로 정해야 한다.
+:::
+:::::::
+
+:::: equation-card
+Three equations to retain
+
+::: math-display
+$$
+\boxed{x_{t+1}=g(x_t,u_t,\varepsilon_{t+1})}
+$$ $$
+\boxed{
+V(x)=\max_u\left\{r(x,u)+\beta E_t[V(x')]\right\}
+}
+$$ $$
+\boxed{
+u'(c_t)=\beta E_t[R_{t+1}u'(c_{t+1})]}
+$$
+:::
+::::
+
+::: reading-rule
+**Bottom line:** uncertainty 아래에서 경제주체가 선택하는 것은 미리
+고정된 미래경로가 아니라, 각 possible state에 대응하는 contingent
+policy다.
+:::
+:::::::::::
+
+::: {#check .section}
+## Learning Check
+
+1.  Deterministic plan과 contingent plan의 차이를 설명할 수 있는가?
+2.  State, shock, history, information set을 서로 구분할 수 있는가?
+3.  $E_t[X]$가 의미하는 조건부기대값을 설명할 수 있는가?
+4.  Non-anticipativity가 왜 필요한가?
+5.  Finite-state Markov property와 transition matrix를 정의할 수 있는가?
+6.  $\mu_{t+1}=\mu_tP$와 invariant distribution $\mu^*=\mu^*P$를 해석할
+    수 있는가?
+7.  General stochastic sequential problem을 쓸 수 있는가?
+8.  Deterministic Bellman equation과 stochastic Bellman equation의
+    차이는 무엇인가?
+9.  왜 optimal policy를 $u_t=h(x_t,s_t)$로 쓸 수 있는가?
+10. Stochastic Euler equation을 deterministic counterpart와 비교할 수
+    있는가?
+11. Stochastic discount factor $m_{t+1}$의 정의와 Euler pricing
+    equation을 쓸 수 있는가?
+12. Consumption-saving problem에서 endogenous state와 exogenous state를
+    구별할 수 있는가?
+13. Stochastic growth model의 Euler equation을 도출·해석할 수 있는가?
+14. Innovation $\varepsilon_{t+1}$과 next state $z_{t+1}$를 왜 구별해야
+    하는가?
+15. Uncertainty와 market incompleteness가 다른 개념인 이유는 무엇인가?
+16. One-period Arrow security가 어떤 payoff를 약속하는 자산인지 설명할
+    수 있는가?
+:::
+
+::::::::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Contingent plan
+:::
+
+미래의 possible state 또는 history에 따라 서로 다른 행동을 지정하는
+계획.
+::::
+
+:::: definition-row
+::: term
+State variable
+:::
+
+미래 payoff와 feasible choices를 결정하는 데 필요한 과거정보를 현재
+시점에서 요약한 변수.
+::::
+
+:::: definition-row
+::: term
+Innovation
+:::
+
+현재의 정보집합으로는 알 수 없고 다음기에 새롭게 실현되는 random shock.
+::::
+
+:::: definition-row
+::: term
+History
+:::
+
+현재까지 실현된 states의 전체 순서. 예: $s^t=(s_0,\ldots,s_t)$.
+::::
+
+:::: definition-row
+::: term
+Information set
+:::
+
+시점 $t$에 경제주체가 의사결정에 사용할 수 있는 정보의 집합
+$\mathcal F_t$.
+::::
+
+:::: definition-row
+::: term
+Conditional expectation
+:::
+
+현재 정보에 조건부로 계산한 미래 random variable의 기대값,
+$E_t[X]=E[X\mid\mathcal F_t]$.
+::::
+
+:::: definition-row
+::: term
+Non-anticipativity
+:::
+
+현재의 선택이 아직 관측되지 않은 미래 shock에 의존할 수 없다는
+admissibility requirement.
+::::
+
+:::: definition-row
+::: term
+Markov property
+:::
+
+다음 state의 조건부분포가 현재 state만 알면 충분하고 그 이전 history에는
+추가적으로 의존하지 않는 성질.
+::::
+
+:::: definition-row
+::: term
+Transition matrix
+:::
+
+Finite-state Markov chain에서 $P_{ij}=\Pr(s_{t+1}=s_j\mid s_t=s_i)$를
+모은 행렬.
+::::
+
+:::: definition-row
+::: term
+Invariant distribution
+:::
+
+Transition을 한 번 적용해도 변하지 않는 distribution, $\mu^*=\mu^*P$.
+::::
+
+:::: definition-row
+::: term
+Stochastic Bellman equation
+:::
+
+Continuation value를 조건부기대값으로 평가하는 recursive optimality
+equation.
+::::
+
+:::: definition-row
+::: term
+Stochastic Euler equation
+:::
+
+현재 marginal cost와 미래 state별 marginal benefits의 조건부기대값을
+같게 하는 intertemporal optimality condition.
+::::
+
+:::: definition-row
+::: term
+Stochastic discount factor
+:::
+
+$m_{t+1}=\beta u'(c_{t+1})/u'(c_t)$. 미래 payoff를 marginal utility
+기준으로 할인하는 random variable.
+::::
+
+:::: definition-row
+::: term
+Arrow security
+:::
+
+특정 미래 state에서만 1을 지급하고 다른 state에서는 0을 지급하는
+state-contingent claim.
+::::
+
+:::: definition-row
+::: term
+Complete markets
+:::
+
+Relevant future states의 contingent payoffs를 충분히 span할 수 있는
+자산·상품 구조.
+::::
+:::::::::::::::::::::::::::::::::

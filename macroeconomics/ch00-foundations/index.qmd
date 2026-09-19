@@ -1,0 +1,30 @@
+# Chapter 00 · 현대 거시경제학의 문제와 방법 {.unnumbered}
+*Questions, Dynamic Equilibrium, States, and Recursive Representation*
+
+이 장에서는 **현대 거시경제학의 문제와 방법**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **0.1–0.2** 거시경제학의 핵심 질문 · 동태 거시모형의 공통 구조
+- **0.3–0.4** 상태변수와 재귀적 표현 · 균형을 읽는 방법
+- **0.5** 거시경제학 I의 전체 흐름 · 거시경제학 I의 전체 흐름
+:::
+
+## Sections
+
+- [0.1 거시경제학의 핵심 질문](contents.html#s01)
+- [0.2 동태 거시모형의 공통 구조](contents.html#s02)
+- [0.3 상태변수와 재귀적 표현](contents.html#s03)
+- [0.4 균형을 읽는 방법](contents.html#s04)
+- [0.5 거시경제학 I의 전체 흐름](contents.html#s05)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

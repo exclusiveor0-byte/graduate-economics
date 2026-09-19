@@ -1,0 +1,36 @@
+# Chapter 01 · 제약최적화와 기간간 선택 {.unnumbered}
+*Constrained Optimization, Shadow Prices, and Intertemporal Choice*
+
+이 장에서는 **제약최적화와 기간간 선택**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **1.1–1.4** 거시경제학에서의 최적화 · Envelope Theorem
+- **1.5–1.8** 2기간 소비--저축 문제 · CRRA 선호와 소비성장
+- **1.9–1.11** 비교정태: 인내심, 이자율, 소비의 기울기 · Chapter Summary
+:::
+
+## Sections
+
+- [1.1 거시경제학에서의 최적화](contents.html#s01)
+- [1.2 등식제약 최적화](contents.html#s02)
+- [1.3 Lagrange 승수와 Shadow Price](contents.html#s03)
+- [1.4 Envelope Theorem](contents.html#s04)
+- [1.5 2기간 소비--저축 문제](contents.html#s05)
+- [1.6 기간간 예산제약](contents.html#s06)
+- [1.7 Euler Equation](contents.html#s07)
+- [1.8 CRRA 선호와 소비성장](contents.html#s08)
+- [1.9 비교정태: 인내심, 이자율, 소비의 기울기](contents.html#s09)
+- [1.10 2기간에서 다기간 문제로](contents.html#s10)
+- [1.11 Chapter Summary](contents.html#s11)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

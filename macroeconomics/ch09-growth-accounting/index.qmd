@@ -1,0 +1,45 @@
+# Chapter 09 · 성장모형의 평가 {.unnumbered}
+*Growth Accounting, Convergence, and Development Accounting*
+
+이 장에서는 **성장모형의 평가**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **9.1–9.5** From Theory to Measurement · Proximate Sources vs. Fundamental Causes
+- **9.6–9.10** Human Capital and Input Quality · A Generic Convergence Regression
+- **9.11–9.15** Limits of Growth Regressions · Interpreting Productivity Differences
+- **9.16–9.19** Evaluating the Growth Models · Chapter Summary and Bridge to Uncertainty
+:::
+
+## Sections
+
+- [9.1 From Theory to Measurement](contents.html#s01)
+- [9.2 Growth Accounting](contents.html#s02)
+- [9.3 Cobb--Douglas and Factor Shares](contents.html#s03)
+- [9.4 The Solow Residual](contents.html#s04)
+- [9.5 Proximate Sources vs. Fundamental Causes](contents.html#s05)
+- [9.6 Human Capital and Input Quality](contents.html#s06)
+- [9.7 What Growth Accounting Can Tell Us](contents.html#s07)
+- [9.8 Convergence as a Model Prediction](contents.html#s08)
+- [9.9 Absolute and Conditional Convergence](contents.html#s09)
+- [9.10 A Generic Convergence Regression](contents.html#s10)
+- [9.11 Limits of Growth Regressions](contents.html#s11)
+- [9.12 From Growth to Development Accounting](contents.html#s12)
+- [9.13 Income per Worker Decomposition](contents.html#s13)
+- [9.14 Capital--Output Representation](contents.html#s14)
+- [9.15 Interpreting Productivity Differences](contents.html#s15)
+- [9.16 Evaluating the Growth Models](contents.html#s16)
+- [9.17 Accounting, Theory, and Identification](contents.html#s17)
+- [9.18 Closing the Growth Block](contents.html#s18)
+- [9.19 Chapter Summary and Bridge to Uncertainty](contents.html#s19)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

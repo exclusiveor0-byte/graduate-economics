@@ -1,0 +1,1480 @@
+---
+title: >-
+  Ramsey–Cass–Koopmans 성장모형
+description: >-
+  Optimal Saving, Saddle-Path Dynamics, and the Modified Golden Rule
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+:::::::: {#s01 .section}
+## [7.1]{.section-number}From Solow to Ramsey
+
+Solow에서 저축은 외생적 규칙이었다. Ramsey에서는 소비와 저축이
+household의 기간간 최적화 결과가 된다. 따라서 경제의 동학은 하나의
+자본축적식이 아니라 소비와 자본을 함께 결정하는 2차원 시스템으로 바뀐다.
+
+Solow의 기본식은
+
+::: math-display
+$$
+\dot k=sf(k)-(n+g+\delta)k
+$$
+:::
+
+였다. 여기서는 $s$가 주어져 있으므로 현재 $k$가 주어지면 $\dot k$가 바로
+결정된다. Ramsey에서는 소비가 choice이므로 저축률 자체가
+
+::: math-display
+$$
+s_t=1-\frac{c_t}{y_t}
+$$
+:::
+
+처럼 equilibrium outcome이 된다. 따라서 필요한 식은 자본축적식과 소비
+Euler equation의 두 개다.
+
+:::: chapter-thesis
+The Ramsey step
+
+::: math-display
+$$
+\boxed{
+\text{Household optimization}
++
+\text{Firm optimization}
++
+\text{Market clearing}
+\Longrightarrow
+(\dot k,\dot c)
+}
+$$
+:::
+
+Ramsey 모형은 Solow의 자본축적 메커니즘을 버리는 것이 아니라, 저축률을
+household의 최적 선택으로 대체한다.
+::::
+
+::: display-table-wrap
+              Solow           Ramsey--Cass--Koopmans
+  ----------- --------------- -----------------------------
+  저축        $s$ 외생적      소비선택에서 내생적
+  동태변수    $k$             $(k,c)$
+  선호        명시하지 않음   무한기간 효용 명시
+  핵심 조건   자본축적식      자본축적식 + Euler equation
+:::
+::::::::
+
+::::::: {#s02 .section}
+## [7.2]{.section-number}Environment
+
+생산측은 Solow와 동일하다. 차이는 자본축적을 결정하는 저축행동이
+household optimization에서 나온다는 점이다. 따라서 익숙한
+effective-labor normalization을 그대로 유지할 수 있다.
+
+::: math-display
+$$
+Y(t)=F\bigl(K(t),A(t)L(t)\bigr),
+$$ $$
+\frac{\dot L}{L}=n,
+\qquad
+\frac{\dot A}{A}=g.
+$$
+:::
+
+생산함수는 CRS이고, intensive form을
+
+::: math-display
+$$
+k\equiv\frac{K}{AL},
+\qquad
+y\equiv\frac{Y}{AL}=f(k)
+$$
+:::
+
+로 정의한다. 표준 가정은
+
+::: math-display
+$$
+f'(k)>0,
+\qquad
+f''(k)<0.
+$$
+:::
+
+::: reading-rule
+**Notation choice:** Romer의 기본 Ramsey 전개는 편의를 위해 감가상각을
+0으로 둔다. 이 노트에서는 Chapter 2·4·5와의 일관성을 위해 $\delta\ge0$를
+유지한다. 따라서 Romer의 식은 아래 결과에서 $\delta=0$을 대입한
+특수경우로 읽으면 된다.
+:::
+:::::::
+
+:::::::::: {#s03 .section}
+## [7.3]{.section-number}Households and Preferences
+
+대표 household는 무한한 미래를 바라보며 소비경로를 선택한다. 성장하는
+경제에서는 per-worker consumption과 per-effective-worker consumption을
+구분해야 하므로 선호와 normalization의 관계를 먼저 명확히 한다.
+
+worker 1인당 소비를 $C(t)$라 하자. CRRA 순간효용은
+
+::: math-display
+$$
+u(C)=\frac{C^{1-\sigma}-1}{1-\sigma},
+\qquad \sigma>0,
+$$
+:::
+
+이며 $\sigma\to1$이면 $u(C)=\ln C$가 된다. 결정론적 기간간 선택에서
+
+:::: equation-card
+Intertemporal substitution
+
+::: math-display
+$$
+\boxed{
+\mathrm{EIS}=\frac{1}{\sigma}
+}
+$$
+:::
+
+$\sigma$가 클수록 household는 소비성장률을 크게 변동시키는 것을 덜
+선호한다.
+::::
+
+dynastic household의 할인율을 $\rho>0$라 한다. 인구가 $n$으로 성장하는
+formulation에서 lifetime utility가 잘 정의되도록 표준적으로
+
+::: math-display
+$$
+\boxed{
+\rho-n-(1-\sigma)g>0
+}
+$$
+:::
+
+같은 조건을 둔다. 이 조건은 뒤에서 Ramsey steady state와 Golden Rule을
+비교할 때도 중요한 역할을 한다. effective-labor 단위로 목적함수를
+정규화하면 편의상
+
+::: math-display
+$$
+\bar\rho
+\equiv
+\rho-n-(1-\sigma)g
+>0
+$$
+:::
+
+를 정의할 수 있고, 상수배를 제외한 normalized objective는
+
+::: math-display
+$$
+\int_0^\infty
+e^{-\bar\rho t}
+\frac{c(t)^{1-\sigma}}{1-\sigma}\,dt
+$$
+:::
+
+형태가 된다. 이 $\bar\rho$가 planner formulation에서 effective discount
+rate 역할을 한다.
+
+Technical Note · Romer의 $\theta$와 이 노트의 $\sigma$
+
+::: details-body
+Romer는 CRRA 계수를 $\theta$로 표기한다. 이 노트는 Chapter 1부터 같은
+객체를 $\sigma$로 사용했으므로 계속 $\sigma$를 쓴다. 즉 Romer의
+$\theta$는 여기서의 $\sigma$와 동일한 파라미터다.
+:::
+::::::::::
+
+::::::::::::::::::::::: {#s04 .section}
+## [7.4]{.section-number}Firms and Factor Prices
+
+경쟁기업은 자본과 노동을 한계생산만큼 보상한다. household는 가격을
+주어진 것으로 받아들이지만, 일반균형에서는 그 가격이 aggregate capital에
+의해 결정된다.
+
+기업의 이윤극대화에서 자본의 rental return은 한계생산과 일치한다.
+감가상각을 고려한 순실질수익률은
+
+:::: equation-card
+Return on capital
+
+::: math-display
+$$
+\boxed{
+r(t)=f'\bigl(k(t)\bigr)-\delta
+}
+$$
+:::
+::::
+
+effective labor 한 단위당 임금은
+
+::: math-display
+$$
+\boxed{
+w(t)=f(k(t))-k(t)f'(k(t))
+}
+$$
+:::
+
+이다. CRS와 완전경쟁 때문에 aggregate profits는 0이다.
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Capital determines marginal product
+:::
+
+현재 $k$가 한계생산 $f'(k)$를 결정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Marginal product determines return
+:::
+
+경쟁시장에서는 $r=f'(k)-\delta$가 된다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Return affects saving
+:::
+
+household의 Euler equation이 $r$을 통해 소비성장률을 결정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Saving feeds back into capital
+:::
+
+현재 소비가 낮을수록 투자와 다음 자본이 커진다.
+::::
+::::::
+:::::::::::::::::::
+:::::::::::::::::::::::
+
+::::::::: {#s05 .section}
+## [7.5]{.section-number}Household Optimization
+
+Chapter 6에서 household side의 무한기간 문제를 이미 완성했다.
+Ramsey에서는 그 Euler equation에 경쟁균형 수익률 $r=f'(k)-\delta$를
+대입한다.
+
+worker 1인당 소비 $C$의 연속시간 Euler equation은
+
+::: math-display
+$$
+\frac{\dot C}{C}
+=
+\frac{r-\rho}{\sigma}.
+$$
+:::
+
+따라서 equilibrium return을 대입하면
+
+:::: equation-card
+Consumption Euler equation
+
+::: math-display
+$$
+\boxed{
+\frac{\dot C}{C}
+=
+\frac{f'(k)-\delta-\rho}{\sigma}
+}
+$$
+:::
+::::
+
+자본의 순수익률이 시간선호율보다 높으면 worker 1인당 소비는 증가한다.
+반대로 수익률이 낮으면 현재 소비가 상대적으로 매력적이므로 소비는
+감소한다.
+
+::::: callout-strip
+::: left
+Intertemporal margin
+:::
+
+::: right
+Ramsey의 저축률은 별도의 behavioral rule이 아니다. 현재소비 한 단위를
+포기했을 때의 수익률과 미래소비의 discounted marginal utility가
+같아지도록 소비경로가 조정된 결과다.
+:::
+:::::
+:::::::::
+
+::::::::: {#s06 .section}
+## [7.6]{.section-number}Consumption per Worker and per Effective Worker
+
+성장모형의 phase dynamics는 stationary variable로 보는 것이 편리하다.
+따라서 worker 1인당 소비 $C$를 effective labor당 소비 $c$로 변환한다.
+
+정의상
+
+::: math-display
+$$
+C(t)=A(t)c(t).
+$$
+:::
+
+따라서 성장률은
+
+::: math-display
+$$
+\frac{\dot C}{C}
+=
+g+\frac{\dot c}{c}.
+$$
+:::
+
+이를 앞의 Euler equation과 결합하면
+
+:::: equation-card
+Normalized Euler equation
+
+::: math-display
+$$
+\boxed{
+\frac{\dot c}{c}
+=
+\frac{f'(k)-\delta-\rho-\sigma g}{\sigma}
+}
+$$
+:::
+::::
+
+:::: {.statement .warning}
+::: statement-head
+Normalization warning
+:::
+
+$\dot C/C=(f'(k)-\delta-\rho)/\sigma$와
+$\dot c/c=[f'(k)-\delta-\rho-\sigma g]/\sigma$는 서로 다른 소비변수의
+성장률이다. Ramsey의 steady-state phase diagram은 stationary variable
+$c=C/A$를 사용하므로 $-\sigma g$ 항을 빠뜨리면 안 된다.
+::::
+:::::::::
+
+:::::::: {#s07 .section}
+## [7.7]{.section-number}Capital Accumulation
+
+소비가 내생적이므로 자본축적은 산출 중 소비하지 않은 부분에 의해
+결정된다. 이것이 household Euler equation과 결합될 두 번째 동태식이다.
+
+aggregate resource constraint와 capital accumulation은
+
+::: math-display
+$$
+Y=C_{\mathrm{agg}}+I,
+\qquad
+\dot K=Y-C_{\mathrm{agg}}-\delta K.
+$$
+:::
+
+effective labor 단위로 정규화하면
+
+:::: equation-card
+Capital law of motion
+
+::: math-display
+$$
+\boxed{
+\dot k
+=
+f(k)-c-(n+g+\delta)k
+}
+$$
+:::
+::::
+
+따라서 Ramsey economy의 핵심 시스템은
+
+:::: chapter-thesis
+Canonical Ramsey system
+
+::: math-display
+$$
+\boxed{
+\begin{aligned}
+\frac{\dot c}{c}
+&=
+\frac{f'(k)-\delta-\rho-\sigma g}{\sigma},\\[4pt]
+\dot k
+&=
+f(k)-c-(n+g+\delta)k.
+\end{aligned}
+}
+$$
+:::
+
+첫 식은 household의 intertemporal optimality, 두 번째 식은 economy-wide
+feasibility를 나타낸다.
+::::
+::::::::
+
+:::::: {#s08 .section}
+## [7.8]{.section-number}The $\dot c=0$ Locus
+
+소비가 effective-labor 단위에서 일정하려면 자본의 한계생산이
+시간선호·감가상각·기술성장으로 구성된 임계수익률과 같아야 한다.
+
+$c>0$에서 $\dot c=0$ 조건은
+
+:::: equation-card
+Consumption nullcline
+
+::: math-display
+$$
+\boxed{
+f'(k^*)=\rho+\delta+\sigma g
+}
+$$
+:::
+::::
+
+이다. $f''(k)<0$이므로 방향은
+
+::: display-table-wrap
+  자본수준   한계생산                       소비방향     해석
+  ---------- ------------------------------ ------------ ------------------------------------------------
+  $k<k^*$    $f'(k)>\rho+\delta+\sigma g$   $\dot c>0$   자본수익률이 높아 미래소비가 상대적으로 매력적
+  $k=k^*$    등호                           $\dot c=0$   effective-labor당 소비 일정
+  $k>k^*$    $f'(k)<\rho+\delta+\sigma g$   $\dot c<0$   자본수익률이 낮아 소비를 현재 쪽으로 이동
+:::
+
+따라서 $(k,c)$ 공간에서 $\dot c=0$ locus는 $k=k^*$인 수직선이다.
+::::::
+
+::::::: {#s09 .section}
+## [7.9]{.section-number}The $\dot k=0$ Locus
+
+자본집약도가 일정하려면 산출에서 소비하고 남은 자원이 depreciation과
+effective-labor growth를 정확히 보전해야 한다.
+
+$\dot k=0$이면
+
+:::: equation-card
+Capital nullcline
+
+::: math-display
+$$
+\boxed{
+c=f(k)-(n+g+\delta)k
+}
+$$
+:::
+::::
+
+이다. 주어진 $k$에서 이 값보다 소비가 낮으면 투자가 충분하여 $k$가
+증가하고, 소비가 높으면 $k$가 감소한다.
+
+::: display-table-wrap
+  위치             조건                     자본방향
+  ---------------- ------------------------ ------------
+  nullcline 아래   $c<f(k)-(n+g+\delta)k$   $\dot k>0$
+  nullcline 위     $c>f(k)-(n+g+\delta)k$   $\dot k<0$
+:::
+
+이 곡선의 꼭짓점은
+
+::: math-display
+$$
+f'(k)=n+g+\delta
+$$
+:::
+
+을 만족하므로 Chapter 5에서 정의한 Golden-Rule capital과 일치한다.
+:::::::
+
+:::::: {#s10 .section}
+## [7.10]{.section-number}The Ramsey Steady State
+
+Ramsey steady state는 소비와 자본의 두 동태식이 동시에 정지하는 점이다.
+이 점은 선호와 기술이 함께 장기자본을 결정한다는 점에서 Solow와 다르다.
+
+두 nullcline을 동시에 만족해야 하므로
+
+::: math-display
+$$
+\boxed{
+f'(k^*)=\rho+\delta+\sigma g
+}
+$$ $$
+\boxed{
+c^*=f(k^*)-(n+g+\delta)k^*
+}
+$$
+:::
+
+이다. 따라서 $k^*$는 저축률 $s$가 아니라
+
+::: math-display
+$$
+\rho,\quad \sigma,\quad g,\quad \delta,
+\quad\text{and}\quad f(\cdot)
+$$
+:::
+
+에 의해 결정된다.
+
+::: reading-rule
+**Economic reading:** steady state에서 자본수익률은 household가 balanced
+consumption growth를 받아들이는 데 필요한 수익률과 정확히 일치한다.
+따라서 장기자본은 기술만으로도, 선호만으로도 정해지지 않는다.
+:::
+::::::
+
+:::::::::::: {#s11 .section}
+## [7.11]{.section-number}Golden Rule vs. Modified Golden Rule
+
+Solow의 Golden Rule은 정상상태 소비를 최대화한다. Ramsey는 그 정상상태에
+도달하기 위해 현재 포기해야 하는 소비까지 포함해 discounted lifetime
+utility를 최대화한다. 두 기준은 일반적으로 같지 않다.
+
+Golden Rule은
+
+::: math-display
+$$
+\boxed{
+f'(k_{GR})=n+g+\delta
+}
+$$
+:::
+
+이고 Ramsey steady state는
+
+::: math-display
+$$
+\boxed{
+f'(k^*)=\rho+\delta+\sigma g.
+}
+$$
+:::
+
+표준적인 well-defined utility 조건
+
+::: math-display
+$$
+\rho-n-(1-\sigma)g>0
+$$
+:::
+
+은
+
+::: math-display
+$$
+\rho+\sigma g>n+g
+$$
+:::
+
+와 동치다. 따라서 $f'$가 감소하므로
+
+:::: equation-card
+Modified Golden Rule
+
+::: math-display
+$$
+\boxed{k^*<k_{GR}}
+$$
+:::
+
+가 된다. Ramsey steady state는 현재소비의 기회비용을 반영하므로
+일반적으로 consumption-maximizing Golden Rule보다 낮은 자본수준에
+위치한다.
+::::
+
+::::: callout-strip
+::: left
+두 최적성의 차이
+:::
+
+::: right
+Golden Rule은 "장기적으로 유지 가능한 소비수준"을 최대화한다. Ramsey는
+"그 장기수준에 도달하는 전체 경로의 할인효용"을 최대화한다.
+:::
+:::::
+::::::::::::
+
+:::::::: {#s12 .section}
+## [7.12]{.section-number}Predetermined Capital and Jump Consumption
+
+Ramsey 동학을 이해하려면 state와 control의 timing을 구분해야 한다.
+자본은 과거투자의 누적결과이므로 충격 순간에 점프할 수 없지만, 소비는
+현재 선택이므로 즉시 조정될 수 있다.
+
+::::: macro-grid
+::: {}
+[STATE]{.tag}
+
+### Capital $k$
+
+$k(0)=k_0$는 역사적으로 주어진 predetermined state다. 물적자본 stock은
+순간적으로 생성·소멸할 수 없다.
+:::
+
+::: {}
+[CONTROL / JUMP]{.tag}
+
+### Consumption $c$
+
+현재 소비율은 household의 choice다. 새로운 정보가 도착하면 $c(0)$는 즉시
+바뀔 수 있다.
+:::
+:::::
+
+:::: equation-card
+Initial conditions
+
+::: math-display
+$$
+\boxed{
+k(0)=k_0\ \text{given},
+\qquad
+c(0)\ \text{endogenous}
+}
+$$
+:::
+::::
+
+따라서 두 개의 미분방정식이 있다고 해서 $k(0)$와 $c(0)$를 임의로 둘 다
+고를 수 있는 것은 아니다. household의 장기 budget condition과
+optimality가 올바른 $c(0)$를 선택한다.
+::::::::
+
+::::::: {#s13 .section}
+## [7.13]{.section-number}The Saddle Path
+
+주어진 초기자본 $k_0$에서 모든 초기소비가 equilibrium과 양립하는 것은
+아니다. feasibility와 intertemporal optimality를 동시에 만족하며 steady
+state로 수렴시키는 유일한 초기소비가 존재한다. 그 점들의 집합이 saddle
+path다.
+
+:::: equation-card
+Stable policy relation
+
+::: math-display
+$$
+\boxed{
+c_0=\phi(k_0)}
+$$
+:::
+
+$\phi$는 초기자본을 equilibrium initial consumption에 대응시키는
+stable-arm relation이다.
+::::
+
+phase diagram을 그림 없이 읽으면 다음과 같다.
+
+::: display-table-wrap
+  현재 위치                  $\dot k$   $\dot c$   움직임
+  -------------------------- ---------- ---------- --------
+  $\dot k=0$ 위, $k<k^*$     음         양         좌상향
+  $\dot k=0$ 아래, $k<k^*$   양         양         우상향
+  $\dot k=0$ 위, $k>k^*$     음         음         좌하향
+  $\dot k=0$ 아래, $k>k^*$   양         음         우하향
+:::
+
+이 방향장 중 steady state로 들어가는 1차원 stable arm만 equilibrium
+경로가 된다.
+
+::: section-bridge
+Saddle path는 "경제가 자연스럽게 아무 데서나 steady state로 수렴한다"는
+뜻이 아니다. 주어진 predetermined state에 대해 jump variable이 정확한
+값으로 조정되어야만 안정경로에 올라설 수 있다는 뜻이다.
+:::
+:::::::
+
+:::::: {#s14 .section}
+## [7.14]{.section-number}Why Other Paths Are Not Equilibria
+
+Euler equation과 자본축적식을 만족하는 경로가 여러 개 보이더라도 모두
+equilibrium은 아니다. 장기 budget condition, nonnegative capital,
+optimality가 잘못된 경로를 제거한다.
+
+### Consumption is too high
+
+초기소비가 saddle path보다 높으면 자본축적이 지나치게 약해져 결국
+
+::: math-display
+$$
+k(t)\rightarrow0
+$$
+:::
+
+를 넘어 음의 물적자본을 요구하는 방향으로 진행할 수 있다. 이는
+기술적으로 feasible하지 않다.
+
+### Consumption is too low
+
+초기소비가 saddle path보다 낮으면 household가 지나치게 많은 자산을
+축적한다. 극한에서 현재가치 자원이 소비되지 않은 채 남으면
+
+::: math-display
+$$
+PV(\text{resources})>PV(\text{consumption})
+$$
+:::
+
+이 되어 소비를 조금 더 늘려 lifetime utility를 높일 수 있다. 따라서 그런
+경로도 optimum이 아니다.
+
+::: reading-rule
+**Selection logic:** Euler equation은 소비의 local slope를 정하지만,
+saddle path는 무한기간 budget/solvency condition까지 결합해 올바른
+initial level을 선택한다. Chapter 6에서 "Euler equation이 경로의 기울기,
+lifetime budget이 수준을 결정한다"고 구분한 이유가 여기서 드러난다.
+:::
+::::::
+
+::::::::: {#s15 .section}
+## [7.15]{.section-number}Welfare and the Planner Problem
+
+완전경쟁·완전시장·외부효과 부재의 benchmark에서는 decentralized
+equilibrium allocation을 social planner problem으로도 구할 수 있다. 이
+equivalence는 이후 RBC에서 planner formulation을 사용하는 근거가 된다.
+
+planner는 aggregate feasibility를 직접 고려하면서 representative
+household의 lifetime utility를 최대화한다. current-value Hamiltonian을
+개념적으로 쓰면
+
+::: math-display
+$$
+\mathcal H
+=u(c)+\lambda\bigl[f(k)-c-(n+g+\delta)k\bigr]
+$$
+:::
+
+형태가 된다. 여기서 normalized objective의 discount rate는
+$\bar\rho=\rho-n-(1-\sigma)g$다. FOC $u'(c)=\lambda$와 costate
+equation을 결합하면
+
+::: math-display
+$$
+-\sigma\frac{\dot c}{c}
+=
+\bar\rho-f'(k)+(n+g+\delta)
+$$
+:::
+
+이고, $\bar\rho$를 대입하면 앞에서 얻은 normalized Euler equation과
+정확히 동일하다.
+
+:::: equation-card
+Benchmark welfare equivalence
+
+::: math-display
+$$
+\boxed{
+\text{Competitive equilibrium allocation}
+=
+\text{Planner allocation}
+}
+$$
+:::
+::::
+
+:::: {.statement .warning}
+::: statement-head
+Scope
+:::
+
+이 equivalence는 왜곡이 없는 benchmark의 결과다. 세금, 외부효과,
+시장불완전성, 정보제약 등이 들어가면 competitive equilibrium과 planner
+allocation이 일반적으로 일치하지 않는다.
+::::
+:::::::::
+
+:::::::: {#s16 .section}
+## [7.16]{.section-number}Balanced Growth Path
+
+Ramsey에서 저축이 내생적이어도 장기 성장률의 기본 구조는 Solow와 같다.
+steady state에서 effective-labor 단위 변수는 일정하고, worker당 변수는
+기술진보율로 성장한다.
+
+Ramsey steady state에서는
+
+::: math-display
+$$
+k=k^*,
+\qquad
+c=c^*.
+$$
+:::
+
+따라서 총량은
+
+::: math-display
+$$
+g_K=g_Y=g_{C_{\mathrm{agg}}}=n+g,
+$$
+:::
+
+worker당 변수는
+
+:::: equation-card
+Long-run growth rates
+
+::: math-display
+$$
+\boxed{
+g_{K/L}=g_{Y/L}=g_{C/L}=g}
+$$
+:::
+::::
+
+로 성장한다.
+
+::: chapter-thesis
+Central growth implication
+
+**저축을 내생화해도 장기 worker당 성장률은 여전히 외생적 기술진보율
+$g$에 의해 결정된다.** Ramsey가 내생화하는 것은 saving behavior이지,
+아직 long-run technology growth 자체가 아니다.
+:::
+::::::::
+
+::::::: {#s17 .section}
+## [7.17]{.section-number}Ramsey vs. Solow
+
+Ramsey는 Solow의 장기성장 결론을 상당 부분 유지하면서,
+저축·복지·이행동학을 미시적으로 닫는다. 두 모형의 차이를 정확히 구분하면
+endogenous growth로 넘어가는 이유도 명확해진다.
+
+::: display-table-wrap
+  구분                 Solow                       Ramsey
+  -------------------- --------------------------- -----------------------------
+  저축률               외생적 $s$                  소비최적화에서 내생적
+  소비                 산출의 잔여항               forward-looking control
+  상태/점프            주로 $k$                    $k$ predetermined, $c$ jump
+  동태계               1차원 $\dot k$              2차원 $(\dot k,\dot c)$
+  장기자본             $s,n,g,\delta,f$            $\rho,\sigma,g,\delta,f$
+  welfare              선호가 없어 직접평가 제한   lifetime utility 명시
+  장기 worker당 성장   $g$                         $g$
+:::
+
+::::: callout-strip
+::: left
+핵심 구분
+:::
+
+::: right
+Ramsey의 endogenous saving은 endogenous long-run growth와 같은 말이
+아니다. 선호가 저축률과 자본수준을 내생화하지만, 장기 worker당 성장률은
+여전히 외생적인 $g$가 결정한다.
+:::
+:::::
+:::::::
+
+:::::::: {#s18 .section}
+## [7.18]{.section-number}A Fall in the Discount Rate
+
+시간선호율 $\rho$의 하락은 household가 더 인내적이 되는 충격이다.
+Solow의 저축률 상승과 가장 가까운 Ramsey 실험이며, predetermined state와
+jump variable의 차이를 선명하게 보여준다.
+
+steady-state condition은
+
+::: math-display
+$$
+f'(k^*)=\rho+\delta+\sigma g.
+$$
+:::
+
+따라서
+
+::: math-display
+$$
+\rho\downarrow
+\quad\Rightarrow\quad
+k^*\uparrow.
+$$
+:::
+
+충격이 예상되지 않았다면 충격 순간의 자본은 고정되어 있다.
+
+::: math-display
+$$
+k(t_0^+)=k(t_0^-).
+$$
+:::
+
+하지만 소비는 즉시 조정될 수 있으므로 새로운 saddle path 위로 점프한다.
+더 인내적인 household는 현재소비를 줄이고 저축을 늘리므로 표준적인 경우
+
+:::: equation-card
+Impact and transition
+
+::: math-display
+$$
+\boxed{
+\rho\downarrow
+\;\Rightarrow\;
+\begin{cases}
+ c\text{ jumps down on impact},\\
+ k\text{ is unchanged on impact},\\
+ k\text{ and }c\text{ then rise toward the new steady state}.
+\end{cases}
+}
+$$
+:::
+::::
+
+새로운 $k^*$는 Golden Rule 방향으로 이동하고, 표준 조건 아래 $c^*$도
+높아진다.
+::::::::
+
+::::: {#s19 .section}
+## [7.19]{.section-number}Anticipated vs. Unanticipated Changes
+
+Ramsey household는 forward-looking이므로 "충격의 크기"뿐 아니라 "언제
+알려졌는가"가 현재 equilibrium을 바꾼다. 이는 이후 rational
+expectations와 정책분석의 기본 논리다.
+
+::: display-table-wrap
+  변화          현재 소비                    현재 자본               핵심
+  ------------- ---------------------------- ----------------------- ------------------------------------
+  Unexpected    정보도착 시 즉시 점프 가능   즉시 점프 불가          새 saddle path로 impact adjustment
+  Anticipated   실제 변화 전부터 반응 가능   축적을 통해 미리 조정   news가 현재 choice를 바꿈
+:::
+
+Extension · 왜 anticipated shock은 발표시점부터 영향을 주는가
+
+::: details-body
+Euler equation은 현재소비와 미래의 수익률·소비 한계효용을 연결한다.
+따라서 미래의 $\rho$, 세금, 생산성, 정책이 바뀐다는 정보가 오늘 알려지면
+현재의 최적 소비·저축도 즉시 달라질 수 있다. 자본은 stock이라 점프하지
+않지만, 발표일부터 다른 축적경로를 따른다.
+:::
+:::::
+
+:::::::::: {#s20 .section}
+## [7.20]{.section-number}Local Linearization and Saddle Stability
+
+왜 "saddle"이라는 이름이 붙는지 국소적으로 확인할 수 있다. steady state
+주변에서 비선형 Ramsey 시스템을 1차 선형화하면 한 방향은 안정적이고 다른
+방향은 불안정하다는 것이 드러난다.
+
+편차를
+
+::: math-display
+$$
+\widetilde k=k-k^*,
+\qquad
+\widetilde c=c-c^*
+$$
+:::
+
+라 하자. 시스템을 $(k,c)$ 순서로 선형화하면
+
+::: math-display
+$$
+\begin{pmatrix}
+\dot{\widetilde k}\\[2pt]
+\dot{\widetilde c}
+\end{pmatrix}
+=
+J
+\begin{pmatrix}
+\widetilde k\\[2pt]
+\widetilde c
+\end{pmatrix},
+$$
+:::
+
+여기서 steady state Jacobian은
+
+:::: equation-card
+Jacobian at the steady state
+
+::: math-display
+$$
+\boxed{
+J=
+\begin{pmatrix}
+\rho-n-(1-\sigma)g & -1\\[4pt]
+\dfrac{c^*}{\sigma}f''(k^*) & 0
+\end{pmatrix}
+}
+$$
+:::
+::::
+
+그리고
+
+::: math-display
+$$
+\det J
+=
+\frac{c^*}{\sigma}f''(k^*)
+<0.
+$$
+:::
+
+따라서 두 고유값은 부호가 반대다.
+
+::: math-display
+$$
+\boxed{
+\lambda_s<0<\lambda_u
+}
+$$
+:::
+
+즉 steady state는 saddle point이고 안정고유공간은 1차원이다.
+
+::: reading-rule
+**후속 연결:** predetermined state가 하나이고 stable eigenvalue도
+하나이므로 locally unique한 equilibrium jump가 가능하다. 이 "stable
+roots와 predetermined states의 개수"를 맞추는 아이디어가 나중의
+Blanchard--Kahn 조건으로 일반화된다.
+:::
+::::::::::
+
+:::::::::: {#s21 .section}
+## [7.21]{.section-number}Cobb--Douglas Example
+
+Cobb--Douglas 기술에서는 Ramsey steady state가 닫힌 형태로 표현되어
+선호와 기술 파라미터가 장기자본에 어떻게 들어가는지 직접 확인할 수 있다.
+
+intensive-form 생산함수를
+
+::: math-display
+$$
+f(k)=k^\alpha,
+\qquad 0<\alpha<1
+$$
+:::
+
+로 두면
+
+::: math-display
+$$
+f'(k)=\alpha k^{\alpha-1}.
+$$
+:::
+
+Ramsey steady state는
+
+::: math-display
+$$
+\alpha k^{*\alpha-1}
+=
+\rho+\delta+\sigma g
+$$
+:::
+
+을 만족하므로
+
+:::: equation-card
+Closed-form Ramsey capital
+
+::: math-display
+$$
+\boxed{
+k^*
+=
+\left(
+\frac{\alpha}{\rho+\delta+\sigma g}
+\right)^{\!\frac{1}{1-\alpha}}
+}
+$$
+:::
+::::
+
+그리고
+
+::: math-display
+$$
+\boxed{
+c^*=k^{*\alpha}-(n+g+\delta)k^*}
+$$
+:::
+
+이다. 즉 다른 조건이 같다면
+
+::: math-display
+$$
+\rho\uparrow\Rightarrow k^*\downarrow,
+\qquad
+\delta\uparrow\Rightarrow k^*\downarrow.
+$$
+:::
+
+$g>0$에서는 $\sigma$ 역시 normalized steady-state condition에 들어간다.
+미래의 성장하는 소비를 얼마나 쉽게 대체할 수 있는지가 장기자본 선택과
+연결되기 때문이다.
+::::::::::
+
+::::: {#s22 .section}
+## [7.22]{.section-number}What Ramsey Explains---and Does Not Explain
+
+Ramsey는 Solow의 가장 큰 행동적 단순화였던 고정 저축률을 제거한다.
+그러나 장기 기술진보율 자체는 여전히 모형 밖에서 주어진다.
+
+::: display-table-wrap
+             Ramsey가 내생화하는 것                   여전히 외생적인 것
+  ---------- ---------------------------------------- -------------------------------
+  가계행동   소비·저축의 시점간 배분                  시간선호와 CRRA 파라미터 자체
+  자본       steady-state capital과 transition path   생산기술의 함수형태·파라미터
+  가격       자본축적과 함께 움직이는 $r,w$           완전경쟁이라는 시장구조
+  성장       이행기 성장과 endogenous saving          장기 기술성장률 $g$
+:::
+
+::: chapter-thesis
+What changes, what does not
+
+Ramsey는 **얼마나 저축할 것인가**를 설명하지만, 표준형에서는 **왜
+생산성이 영구적으로 성장하는가**를 설명하지 않는다. 따라서 장기 worker당
+성장률은 여전히 $g$다.
+:::
+:::::
+
+::::::::::::::::::::: {#s23 .section}
+## [7.23]{.section-number}Why Endogenous Growth Next?
+
+Solow와 Ramsey를 비교하면 성장론의 다음 질문이 명확해진다. 저축을
+내생화해도 지속적인 1인당 성장은 여전히 외생적 기술진보에 의존한다. 이제
+$g$ 자체를 경제 내부에서 설명해야 한다.
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Solow
+:::
+
+$s$와 $g$가 모두 외생적이다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Ramsey
+:::
+
+$s_t$는 내생화하지만 $g$는 여전히 외생적이다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Next question
+:::
+
+한계생산 체감을 피하거나 knowledge accumulation을 도입해 지속성장의
+원천을 경제 내부에 둘 수 있는가?
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Endogenous growth
+:::
+
+AK, spillovers, human capital, R&D와 ideas가 이 질문에 서로 다른 답을
+준다.
+::::
+::::::
+:::::::::::::::::::
+
+::: section-bridge
+다음 Chapter 8에서는 "저축률을 내생화하는 것"을 넘어 "장기 성장률 자체를
+내생화하는 것"이 무엇을 요구하는지 살펴본다.
+:::
+:::::::::::::::::::::
+
+::::::::::::::::::::::: {#s24 .section}
+## [7.24]{.section-number}Chapter Summary
+
+Ramsey--Cass--Koopmans 모형은 지금까지 만든 최적화·solvency·성장도구를
+하나의 동태 일반균형으로 결합한다. 핵심은 자본은 predetermined이지만
+소비는 jump할 수 있고, 올바른 소비만이 saddle path를 따라 장기균형으로
+경제를 이끈다는 것이다.
+
+::: math-display
+$$
+\boxed{
+\frac{\dot c}{c}
+=
+\frac{f'(k)-\delta-\rho-\sigma g}{\sigma}
+}
+$$ $$
+\boxed{
+\dot k
+=
+f(k)-c-(n+g+\delta)k
+}
+$$ $$
+\boxed{
+f'(k^*)=\rho+\delta+\sigma g}
+$$
+:::
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Optimize
+:::
+
+household Euler equation이 소비성장률을 결정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Accumulate
+:::
+
+resource constraint가 자본축적을 결정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Select the path
+:::
+
+$k_0$는 주어지고 $c_0$가 saddle path 위로 조정된다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Converge and grow
+:::
+
+effective-labor 단위로 steady state에 수렴하지만 worker당 변수는 $g$로
+성장한다.
+::::
+::::::
+:::::::::::::::::::
+
+::: reading-rule
+**이 장의 결론:** endogenous saving은 자본수준과 이행경로를 내생화하지만
+장기 기술성장률까지 내생화하지는 않는다. Ramsey의 성공이 바로 다음
+endogenous-growth 질문의 출발점이다.
+:::
+
+Source and notation note
+
+::: details-body
+이 장의 기본 benchmark는 Romer의 Ramsey--Cass--Koopmans 전개를 따른다.
+다만 전체 노트와의 일관성을 위해 Romer의 CRRA 기호 $\theta$ 대신
+$\sigma$를 사용하고, Romer가 기본 전개에서 생략한 감가상각 $\delta$를
+유지했다. 따라서 $\delta=0$을 두면 Romer의 기본식과 직접 대응한다.
+:::
+:::::::::::::::::::::::
+
+::: {#check .section}
+## Learning Check
+
+1.  Solow에서 외생적이던 저축률이 Ramsey에서는 어떤 equilibrium object로
+    바뀌는가?
+2.  경쟁기업의 FOC에서 $r=f'(k)-\delta$와 effective-labor당 임금식을
+    유도할 수 있는가?
+3.  worker당 소비 Euler equation을 effective-labor당 소비식으로 바꾸면서
+    왜 $-\sigma g$ 항이 생기는가?
+4.  Ramsey의 두 핵심 동태식 $\dot c$와 $\dot k$를 각각 어떤 경제적
+    조건에서 얻는가?
+5.  $\dot c=0$ locus의 위치와 좌우에서 소비의 운동방향을 설명할 수
+    있는가?
+6.  $\dot k=0$ locus가 왜 Golden Rule capital에서 최대가 되는가?
+7.  Ramsey steady state가 $f'(k^*)=\rho+\delta+\sigma g$를 만족하는
+    이유는 무엇인가?
+8.  왜 표준 조건 아래 $k^*<k_{GR}$인가? Golden Rule과 Modified Golden
+    Rule의 welfare criterion 차이는 무엇인가?
+9.  왜 $k$는 predetermined이고 $c$는 jump variable인가?
+10. 주어진 $k_0$에 대해 saddle path가 어떻게 올바른 $c_0$를 선택하는가?
+11. saddle path보다 높은 소비경로와 낮은 소비경로가 각각 왜
+    equilibrium에서 배제되는가?
+12. benchmark에서 competitive equilibrium과 planner allocation이 왜
+    일치하는가?
+13. Ramsey에서 저축이 내생적이어도 장기 worker당 성장률이 여전히 $g$인
+    이유는 무엇인가?
+14. $\rho$의 예상치 못한 하락 직후 $k$와 $c$는 각각 어떻게 반응하는가?
+15. Jacobian의 determinant가 음수라는 사실이 왜 saddle stability를
+    의미하는가?
+16. Cobb--Douglas에서 $k^*$를 닫힌 형태로 유도할 수 있는가?
+17. Ramsey가 해결한 Solow의 한계와 여전히 남겨둔 성장론의 질문을 구분할
+    수 있는가?
+:::
+
+::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Ramsey--Cass--Koopmans model
+:::
+
+무한수명 household의 최적 소비·저축과 경쟁적 생산을 결합하여 자본축적을
+내생적으로 결정하는 대표적 성장모형.
+::::
+
+:::: definition-row
+::: term
+Consumption Euler equation
+:::
+
+현재와 미래 소비 사이의 한계적 재배분이 더 이상 utility를 높이지
+못하도록 소비성장률과 자본수익률을 연결하는 조건.
+::::
+
+:::: definition-row
+::: term
+Predetermined state
+:::
+
+과거 축적의 결과로 현재 값이 주어져 충격 시점에 자유롭게 점프할 수 없는
+변수. Ramsey의 자본 $k$가 대표적이다.
+::::
+
+:::: definition-row
+::: term
+Jump variable
+:::
+
+새로운 정보가 도착했을 때 equilibrium condition을 만족하도록 즉시 조정될
+수 있는 forward-looking 변수. Ramsey의 소비 $c$가 대표적이다.
+::::
+
+:::: definition-row
+::: term
+Nullcline
+:::
+
+동태계에서 특정 변수의 시간미분이 0이 되는 점들의 집합. Ramsey에서는
+$\dot c=0$과 $\dot k=0$ loci를 사용한다.
+::::
+
+:::: definition-row
+::: term
+Saddle point
+:::
+
+일부 방향에서는 안정적이고 다른 방향에서는 불안정한 정상점. Ramsey
+steady state는 표준 조건 아래 saddle이다.
+::::
+
+:::: definition-row
+::: term
+Saddle path
+:::
+
+주어진 predetermined state에서 steady state로 수렴하는 안정경로.
+equilibrium initial jump variable을 선택한다.
+::::
+
+:::: definition-row
+::: term
+Modified Golden Rule
+:::
+
+discounted lifetime utility 최적화가 결정하는 Ramsey의 장기자본 조건.
+표준 모형에서는 $f'(k^*)=\rho+\delta+\sigma g$.
+::::
+
+:::: definition-row
+::: term
+Golden Rule
+:::
+
+steady-state consumption을 최대화하는 자본수준.
+$f'(k_{GR})=n+g+\delta$를 만족한다.
+::::
+
+:::: definition-row
+::: term
+Balanced Growth Path
+:::
+
+정규화 변수는 일정하고 주요 총량은 일정한 성장률로 움직이는 경로.
+Ramsey에서도 worker당 변수는 장기적으로 $g$로 성장한다.
+::::
+
+:::: definition-row
+::: term
+Local linearization
+:::
+
+정상상태 주변에서 비선형 동태계를 Jacobian을 이용한 선형시스템으로
+근사하여 안정성과 수렴방향을 분석하는 방법.
+::::
+
+:::: definition-row
+::: term
+Endogenous saving
+:::
+
+저축률을 외생적 상수로 주지 않고 household의 최적 소비선택과 equilibrium
+prices의 결과로 결정하는 구조.
+::::
+:::::::::::::::::::::::::::

@@ -1,0 +1,40 @@
+# Chapter 04 · 2기간 거시경제 모형 {.unnumbered}
+*A Two-Period Macroeconomic Economy*
+
+이 장에서는 **2기간 거시경제 모형**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **4.1–4.5** 왜 2기간 경제에서 시작하는가 · Household Saving
+- **4.6–4.10** Firms와 Factor Prices · CRRA Example
+- **4.11–4.15** Comparative Statics · Chapter Summary
+:::
+
+## Sections
+
+- [4.1 왜 2기간 경제에서 시작하는가](contents.html#s01)
+- [4.2 Environment와 Timing](contents.html#s02)
+- [4.3 Planner\'s Problem](contents.html#s03)
+- [4.4 자본의 수익률](contents.html#s04)
+- [4.5 Household Saving](contents.html#s05)
+- [4.6 Firms와 Factor Prices](contents.html#s06)
+- [4.7 Saving, Investment, and Market Clearing](contents.html#s07)
+- [4.8 Competitive Equilibrium](contents.html#s08)
+- [4.9 Planner와 Competitive Equilibrium](contents.html#s09)
+- [4.10 CRRA Example](contents.html#s10)
+- [4.11 Comparative Statics](contents.html#s11)
+- [4.12 Recursive Representation과 Backward Induction](contents.html#s12)
+- [4.13 Extension: Borrowing and Lending](contents.html#s13)
+- [4.14 왜 다음이 Solow인가](contents.html#s14)
+- [4.15 Chapter Summary](contents.html#s15)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

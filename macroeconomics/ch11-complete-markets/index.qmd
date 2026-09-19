@@ -1,33 +1,42 @@
-# Chapter 11 · 완전시장 {.unnumbered}
-*Complete Markets, State Prices, Risk Sharing, and the Foundations of Asset Valuation*
+# Chapter 11 · 완전시장과 위험공유 {.unnumbered}
+*Complete Markets, State Prices, and Risk Sharing*
 
-이 장에서는 **완전시장**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+이 장에서는 **완전시장과 위험공유**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
 
 ## Chapter Map
 
 ::: {.callout-note title="Reading Roadmap"}
-- **11.1–11.4** 미래의 날짜뿐 아니라 상태까지 왜 가격화해야 하는가 · Arrow\--Debreu equilibrium: time-0 trading, 예산제약, 그리고 시장청산
-- **11.5–11.8** 상태가격, marginal valuation, 그리고 stochastic discount factor · recursive complete-markets equilibrium과 Markov state-price kernel
-- **11.9 및 결론 상태조건부 가격에서 기업가치와 투자까지** 위험 없는 claim, 위험자산, equity, 그리고 term claims의 가격 · 결론 상태조건부 가격에서 기업가치와 투자까지
+- **11.1–11.6** What Are Complete Markets? · CRRA and Constant Consumption Shares
+- **11.7–11.11** Idiosyncratic vs. Aggregate Risk · State Prices and the Stochastic Discount Factor
+- **11.12–11.16** Pricing Arbitrary Assets · Time-0 vs. Sequential Trading
+- **11.17–11.21** Recursive Complete-Markets Equilibrium · Chapter Summary
 :::
 
 ## Sections
 
-- [11.1 미래의 날짜뿐 아니라 상태까지 왜 가격화해야 하는가](contents.html#ch11-s01)
-- [11.2 event tree, date\--state commodity, contractibility, 그리고 market completeness](contents.html#ch11-s02)
-- [11.3 Pareto allocation과 완전한 위험분담의 기준](contents.html#ch11-s03)
-- [11.4 Arrow\--Debreu equilibrium: time-0 trading, 예산제약, 그리고 시장청산](contents.html#ch11-s04)
-- [11.5 상태가격, marginal valuation, 그리고 stochastic discount factor](contents.html#ch11-s05)
-- [11.6 asset spanning, law of one price, no arbitrage, 그리고 Arrow securities](contents.html#ch11-s06)
-- [11.7 sequential Arrow-security trading, 금융부, debt limits, 그리고 구현 동치](contents.html#ch11-s07)
-- [11.8 recursive complete-markets equilibrium과 Markov state-price kernel](contents.html#ch11-s08)
-- [11.9 위험 없는 claim, 위험자산, equity, 그리고 term claims의 가격](contents.html#ch11-s09)
-- [11.10 완전시장 하의 기업가치, 투자, 그리고 marginal $q$](contents.html#ch11-s10)
-- [11.11 완전시장 benchmark의 한계와 금융마찰·불완전시장으로의 연결](contents.html#ch11-s11)
-- [결론 상태조건부 가격에서 기업가치와 투자까지](contents.html#ch11-conclusion)
-- [Learning Check](contents.html#ch11-check)
-- [핵심 용어](contents.html#ch11-glossary)
-- [참조 문헌](contents.html#ch11-references)
+- [11.1 What Are Complete Markets?](contents.html#s01)
+- [11.2 The Pure Exchange Economy](contents.html#s02)
+- [11.3 Preferences and State-Contingent Consumption](contents.html#s03)
+- [11.4 The Pareto Problem](contents.html#s04)
+- [11.5 Complete Risk Sharing](contents.html#s05)
+- [11.6 CRRA and Constant Consumption Shares](contents.html#s06)
+- [11.7 Idiosyncratic vs. Aggregate Risk](contents.html#s07)
+- [11.8 Time-0 Arrow--Debreu Markets](contents.html#s08)
+- [11.9 Household Optimization and State Prices](contents.html#s09)
+- [11.10 Competitive Equilibrium and Pareto Optimality](contents.html#s10)
+- [11.11 State Prices and the Stochastic Discount Factor](contents.html#s11)
+- [11.12 Pricing Arbitrary Assets](contents.html#s12)
+- [11.13 Sequential Trading and Arrow Securities](contents.html#s13)
+- [11.14 Financial Wealth and the Sequential Budget Constraint](contents.html#s14)
+- [11.15 Natural Debt Limits](contents.html#s15)
+- [11.16 Time-0 vs. Sequential Trading](contents.html#s16)
+- [11.17 Recursive Complete-Markets Equilibrium](contents.html#s17)
+- [11.18 Complete Markets as a Benchmark](contents.html#s18)
+- [11.19 What Complete Markets Do Not Mean](contents.html#s19)
+- [11.20 Why Incomplete Markets Next?](contents.html#s20)
+- [11.21 Chapter Summary](contents.html#s21)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
 
 ::: {.callout-tip title="본문 읽기"}
 원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.

@@ -1,0 +1,1286 @@
+---
+title: >-
+  실물경기변동이론
+description: >-
+  Technology Shocks, Propagation, Calibration, and Model Evaluation
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+:::::: {#s01 .section}
+## [15.1]{.section-number}From Ramsey Growth to RBC
+
+Real Business Cycle theory는 Ramsey--Cass--Koopmans의 동태적 최적화
+구조에 노동선택과 확률적 실물충격을 결합한 경기변동 모형으로 이해하는
+것이 가장 정확하다.
+
+:::: equation-card
+::: math-display
+$$
+\boxed{
+\text{Ramsey growth}
++\text{labor choice}
++\text{stochastic real shocks}
+\Longrightarrow
+\text{RBC}
+}
+$$
+:::
+::::
+
+Romer의 baseline RBC는 명시적으로 Ramsey 모형의 discrete-time
+variation으로 출발한다. 차이는 장기성장만을 설명하는 대신, 기술과
+정부지출의 확률적 변동을 도입하고 소비·노동·투자·자본이 충격에 어떻게
+반응하는지를 정량적으로 묻는다는 데 있다.
+
+::: chapter-thesis
+Core question
+
+완전경쟁, 가격신축성, 합리적 기대, 최적화만으로 관찰되는 경기변동의 주요
+moments를 얼마나 설명할 수 있는가?
+:::
+::::::
+
+:::::::::: {#s02 .section}
+## [15.2]{.section-number}The Baseline RBC Economy
+
+경제에는 동일한 price-taking households와 firms가 있고, household는
+무한히 살며 capital을 소유하고 노동을 공급한다.
+
+::::::: macro-grid
+::: statement
+**Households**\
+소비, 저축·투자, 노동공급을 intertemporally 최적화한다.
+:::
+
+::: statement
+**Firms**\
+capital과 labor를 경쟁적으로 임대하여 output을 생산한다.
+:::
+
+::: statement
+**Government**\
+baseline에서는 정부구매를 하며 Romer에서는 lump-sum taxes로 재원을
+조달한다.
+:::
+
+::: statement
+**Shocks**\
+technology와 government purchases가 stochastic driving processes다.
+:::
+:::::::
+
+생산함수는 Romer의 labor-augmenting Cobb--Douglas를 따른다.
+
+::: math-display
+$$
+\boxed{
+Y_t=K_t^{\alpha}(A_tL_t)^{1-\alpha},
+\qquad 0<\alpha<1.
+}
+$$
+:::
+
+::: reading-rule
+**Notation rule.** 이 장의 핵심 mechanism은 stationary 또는 detrended
+variables로 설명하되, Romer의 원형은 인구성장과 기술추세를 포함한다.
+따라서 trend와 cycle을 섞지 않고 필요할 때 $\widetilde A_t$,
+$\widetilde G_t$를 trend deviation으로 표시한다.
+:::
+::::::::::
+
+:::::: {#s03 .section}
+## [15.3]{.section-number}Production, Resources, and Capital Accumulation
+
+현재 output은 소비, 투자, 정부구매에 배분되고, 투자는 다음기의
+predetermined capital stock을 만든다.
+
+::: math-display
+$$
+Y_t=C_t+I_t+G_t,
+$$
+:::
+
+::: math-display
+$$
+K_{t+1}=(1-\delta)K_t+I_t.
+$$
+:::
+
+두 식을 결합하면 RBC에서 반복해서 사용할 aggregate resource constraint를
+얻는다.
+
+::: math-display
+$$
+\boxed{
+C_t+G_t+K_{t+1}
+=Y_t+(1-\delta)K_t.
+}
+$$
+:::
+
+이 식은 단순 회계식이지만 equilibrium dynamics에서 핵심적이다. 특히
+$K_t$는 period $t$에 이미 주어진 state이고 $K_{t+1}$은 현재 investment
+choice에 의해 결정된다.
+::::::
+
+:::::: {#s04 .section}
+## [15.4]{.section-number}Competitive Firms and Factor Prices
+
+완전경쟁 기업은 factor prices를 주어진 것으로 보고 이윤을 극대화하므로
+wage와 capital rental rate는 marginal products와 같다.
+
+::: math-display
+$$
+\boxed{
+w_t=(1-\alpha)\frac{Y_t}{L_t}
+}
+$$
+:::
+
+::: math-display
+$$
+\boxed{
+r_t^k=\alpha\frac{Y_t}{K_t}.
+}
+$$
+:::
+
+한 단위의 capital을 $t$에서 보유해 $t+1$까지 가져갈 때의 gross real
+payoff를 단순화해서 쓰면
+
+::: math-display
+$$
+\boxed{
+R_{t+1}=1-\delta+r_{t+1}^{k}.
+}
+$$
+:::
+
+따라서 technology shock은 현재 생산성뿐 아니라 노동의 현재 보상과 자본의
+미래수익을 동시에 움직인다.
+::::::
+
+::::: {#s05 .section}
+## [15.5]{.section-number}Household Preferences
+
+Romer의 baseline은 consumption과 leisure 모두에서 효용을 얻는
+representative household를 사용한다.
+
+일인당 소비를 $c_t$, 일인당 노동을 $\ell_t$라고 두면 instantaneous
+utility는
+
+::: math-display
+$$
+\boxed{
+u(c_t,1-\ell_t)
+=\ln c_t+b\ln(1-\ell_t),
+\qquad b>0.
+}
+$$
+:::
+
+Romer 원문은 population growth를 명시하고 household size로 utility를
+가중한다. 이 장의 local cyclical analysis에서는 그 trend component를
+분리한 뒤 동일한 intratemporal tradeoff와 stochastic Euler condition에
+집중한다.
+
+::: {.contrast-table .display-table-wrap}
+  Parameter                  Economic role
+  -------------------------- --------------------------------------
+  $\beta$ 또는 $e^{-\rho}$   미래효용 discounting
+  $b$                        leisure의 상대적 utility weight
+  $\alpha$                   capital share / production curvature
+  $\delta$                   capital depreciation
+:::
+:::::
+
+:::::: {#s06 .section}
+## [15.6]{.section-number}The Consumption Euler Equation
+
+현재 소비 한 단위를 줄여 capital에 투자할 것인지의 선택은 미래 marginal
+utility와 미래 return의 joint distribution에 의해 결정된다.
+
+::: math-display
+$$
+\boxed{
+u_c(c_t,1-\ell_t)
+=\beta E_t\!\left[
+u_c(c_{t+1},1-\ell_{t+1})R_{t+1}\right].
+}
+$$
+:::
+
+log consumption utility에서는
+
+::: math-display
+$$
+\boxed{
+\frac{1}{c_t}
+=\beta E_t\!\left[
+\frac{R_{t+1}}{c_{t+1}}
+\right].
+}
+$$
+:::
+
+따라서 일반적으로
+
+::: math-display
+$$
+E_t\!\left[\frac{R_{t+1}}{c_{t+1}}\right]
+\neq
+E_t[R_{t+1}]\,
+E_t\!\left[\frac{1}{c_{t+1}}\right].
+$$
+:::
+
+이 식은 Chapter 10의 stochastic Euler equation이 RBC equilibrium 안에서
+구체화된 것이다.
+::::::
+
+::::::::: {#s07 .section}
+## [15.7]{.section-number}Intratemporal Labor--Leisure Choice
+
+같은 시점에서 household는 한 단위의 leisure를 포기해 벌 수 있는
+실질임금과 leisure의 marginal utility를 비교한다.
+
+::: math-display
+$$
+\boxed{
+-\frac{u_{\ell}(c_t,1-\ell_t)}{u_c(c_t,1-\ell_t)}=w_t.
+}
+$$
+:::
+
+Romer의 log specification에서는
+
+::: math-display
+$$
+\boxed{
+\frac{b}{1-\ell_t}
+=\frac{w_t}{c_t}.
+}
+$$
+:::
+
+:::::: logic-steps
+::: {}
+[1]{.step}
+
+$w_t\uparrow$는 leisure의 opportunity cost를 높이는 substitution
+effect를 만든다.
+:::
+
+::: {}
+[2]{.step}
+
+wealth가 증가하면 leisure에 대한 demand가 증가할 수 있어 labor를 줄이는
+wealth effect가 생긴다.
+:::
+
+::: {}
+[3]{.step}
+
+RBC의 실제 labor response는 이 두 힘과 intertemporal substitution의
+결합으로 결정된다.
+:::
+::::::
+:::::::::
+
+:::: {#s08 .section}
+## [15.8]{.section-number}Intertemporal Substitution in Labor Supply
+
+RBC의 employment mechanism은 단순히 "임금이 높으면 더 일한다"가 아니라
+노동을 시점 간 재배분하는 선택을 강조한다.
+
+현재 wage가 미래 wage에 비해 일시적으로 높거나 현재 일해서 얻은 소득의
+저축수익이 높으면 household는 노동을 현재로 옮길 유인을 가진다.
+
+::: math-display
+$$
+\boxed{
+\text{temporarily high return to work at }t
+\Longrightarrow
+\ell_t\uparrow
+\text{ relative to future labor}.
+}
+$$
+:::
+
+Romer는 이 intertemporal substitution in labor supply를 RBC의 employment
+fluctuations에서 핵심적인 mechanism으로 설명한다. 이 메커니즘의
+empirical plausibility는 뒤에서 model evaluation의 핵심 쟁점이 된다.
+::::
+
+::::::: {#s09 .section}
+## [15.9]{.section-number}Technology and Government-Purchases Shocks
+
+Romer baseline에는 technology와 government purchases라는 두 driving
+processes가 있다.
+
+### Technology
+
+::: math-display
+$$
+\ln A_t=\bar A+gt+\widetilde A_t,
+$$
+:::
+
+::: math-display
+$$
+\boxed{
+\widetilde A_t=\rho_A\widetilde A_{t-1}+\varepsilon_{A,t},
+\qquad |\rho_A|<1.
+}
+$$
+:::
+
+### Government purchases
+
+::: math-display
+$$
+\ln G_t=\bar G+(n+g)t+\widetilde G_t,
+$$
+:::
+
+::: math-display
+$$
+\boxed{
+\widetilde G_t=\rho_G\widetilde G_{t-1}+\varepsilon_{G,t},
+\qquad |\rho_G|<1.
+}
+$$
+:::
+
+Core analysis는 technology shock으로 설명하고, government-purchases
+shock은 서로 다른 wage·labor·consumption implications를 보여주는 비교
+shock으로 사용한다.
+:::::::
+
+::::: {#s10 .section}
+## [15.10]{.section-number}Competitive Equilibrium
+
+RBC equilibrium은 household optimality, firm optimality, feasibility,
+production, shock processes가 동시에 성립하는 stochastic allocation과
+price system이다.
+
+:::: equation-card
+::: math-display
+$$
+\begin{aligned}
+u_c(c_t,1-\ell_t)
+&=\beta E_t\!\left[u_c(c_{t+1},1-\ell_{t+1})R_{t+1}\right],\\
+-\frac{u_{\ell,t}}{u_{c,t}}&=w_t,\\
+w_t&=(1-\alpha)\frac{Y_t}{L_t},\\
+r_t^k&=\alpha\frac{Y_t}{K_t},\\
+C_t+G_t+K_{t+1}&=Y_t+(1-\delta)K_t,\\
+Y_t&=K_t^{\alpha}(A_tL_t)^{1-\alpha}.
+\end{aligned}
+$$
+:::
+::::
+
+여기에 $A_t$와 $G_t$의 exogenous laws of motion을 붙이면 model이 닫힌다.
+:::::
+
+::::: {#s11 .section}
+## [15.11]{.section-number}Planner Representation
+
+baseline의 경쟁적 시장이 완전하고 distortion이 없다면 competitive
+allocation을 social planner problem으로 표현할 수 있다.
+
+::: math-display
+$$
+\max_{\{c_t,\ell_t,k_{t+1}\}}
+E_0\sum_{t=0}^{\infty}\beta^t u(c_t,1-\ell_t)
+$$
+:::
+
+subject to
+
+::: math-display
+$$
+\boxed{
+c_t+g_t+k_{t+1}
+=F(k_t,A_t\ell_t)+(1-\delta)k_t.
+}
+$$
+:::
+
+계산상 planner representation이 편리하지만, 이것이 모든 DSGE에서 가능한
+것은 아니다. taxes, monopolistic competition, externalities, incomplete
+markets가 들어오면 decentralized equilibrium과 planner allocation의
+등가성이 깨질 수 있다.
+:::::
+
+::::::: {#s12 .section}
+## [15.12]{.section-number}The Nonstochastic Steady State
+
+Chapter 14의 local solution을 적용하려면 먼저 shocks를 끈 기준점 또는
+detrended balanced-growth steady state를 구한다.
+
+stationary representation에서 steady-state Euler condition은
+
+::: math-display
+$$
+\boxed{
+1=\beta\left(\alpha\frac{y^*}{k^*}+1-\delta\right).
+}
+$$
+:::
+
+labor condition은
+
+::: math-display
+$$
+\boxed{
+\frac{b}{1-\ell^*}=\frac{w^*}{c^*}.
+}
+$$
+:::
+
+resource condition은
+
+::: math-display
+$$
+\boxed{
+c^*+g^*+\delta k^*=y^*.
+}
+$$
+:::
+
+::: reading-rule
+**Normalization note.** Romer 원문에는 population growth와 trend
+technology growth가 있으므로 원변수 자체는 stationary하지 않을 수 있다.
+실제 log-linearization은 비확률적 balanced-growth path 또는 적절히
+detrended stationary variables 주변에서 수행한다.
+:::
+:::::::
+
+:::: {#s13 .section}
+## [15.13]{.section-number}States, Controls, and Timing
+
+RBC를 해석할 때 경제적 state와 단순 contemporaneous control을 구별해야
+한다.
+
+::: {.contrast-table .display-table-wrap}
+  Object                            Typical role                     Timing
+  --------------------------------- -------------------------------- --------------------------------------------------------------
+  $k_t$                             endogenous predetermined state   과거 investment의 결과로 period $t$에 이미 주어짐
+  $\widetilde A_t,\widetilde G_t$   exogenous states                 현재 shock realization에 따라 관찰됨
+  $c_t$                             forward-looking control          현재 즉시 조정 가능하며 Euler equation에 미래기대 포함
+  $\ell_t$                          static/intratemporal control     현재 wage와 marginal utilities에 따라 contemporaneously 결정
+:::
+
+따라서 BK root count에서 단순히 "controls의 수"를 세면 안 된다.
+algebraic intratemporal variables를 제거한 reduced system에서 실제
+forward-looking degrees of freedom을 식별해야 한다.
+::::
+
+::::: {#s14 .section}
+## [15.14]{.section-number}The Log-Linearized RBC System
+
+steady state 또는 balanced-growth path 주변에서 equilibrium conditions를
+first-order log-linearize하면 Chapter 14의 linear RE system으로
+변환된다.
+
+production function은 특히 간단하다.
+
+::: math-display
+$$
+\boxed{
+\widehat y_t
+=\alpha\widehat k_t
++(1-\alpha)(\widehat a_t+\widehat\ell_t).
+}
+$$
+:::
+
+Euler equation, labor FOC, resource constraint, shock processes도 같은
+방식으로 근사하면
+
+::: math-display
+$$
+\boxed{
+\Gamma_0 E_t z_{t+1}
+=\Gamma_1z_t+\Psi\varepsilon_t
+}
+$$
+:::
+
+형태를 얻는다. 여기서 중요한 것은 개별 coefficient를 외우는 것이 아니라
+nonlinear economic conditions가 하나의 linear rational-expectations
+system으로 정리된다는 점이다.
+:::::
+
+::::::::::: {#s15 .section}
+## [15.15]{.section-number}Solving the Model with Chapter 14
+
+RBC solution은 Chapter 14의 machinery를 특정 equilibrium system에
+적용하는 작업이다.
+
+::::::::: logic-steps
+::: {}
+[1]{.step}
+
+**Specify:** household FOCs, firm FOCs, feasibility, shock laws를
+적는다.
+:::
+
+::: {}
+[2]{.step}
+
+**Steady state:** deterministic reference allocation을 계산한다.
+:::
+
+::: {}
+[3]{.step}
+
+**Approximate:** equilibrium conditions를 first-order log-linearize한다.
+:::
+
+::: {}
+[4]{.step}
+
+**Classify:** predetermined states와 genuine forward-looking variables를
+구분한다.
+:::
+
+::: {}
+[5]{.step}
+
+**Check BK:** unstable roots와 forward-looking dimensions의 수를
+비교한다.
+:::
+
+::: {}
+[6]{.step}
+
+**Solve:** QZ/generalized Schur method로 policy functions를 얻는다.
+:::
+:::::::::
+
+::: math-display
+$$
+\boxed{
+x_{t+1}=Px_t+Q\varepsilon_{t+1},
+\qquad
+y_t=Hx_t+J\varepsilon_t.
+}
+$$
+:::
+:::::::::::
+
+::::::::: {#s16 .section}
+## [15.16]{.section-number}The Effects of a Positive Technology Shock
+
+RBC mechanism의 핵심은 positive technology innovation이 생산성과 factor
+returns를 움직이고, household의 intertemporal responses가 이를
+consumption·labor·investment dynamics로 전달하는 과정이다.
+
+:::::::: logic-steps
+::: {}
+[1]{.step}
+
+**Productivity:** $\varepsilon_{A,t}>0\Rightarrow A_t\uparrow$, 따라서
+주어진 $K_t,L_t$에서 output capacity가 증가한다.
+:::
+
+::: {}
+[2]{.step}
+
+**Returns:** 노동과 자본의 marginal products가 변해 current wage와
+expected capital return에 영향을 준다.
+:::
+
+::: {}
+[3]{.step}
+
+**Labor:** intertemporal substitution은 현재 노동을 늘리는 방향으로
+작용할 수 있다.
+:::
+
+::: {}
+[4]{.step}
+
+**Consumption:** lifetime resources가 증가하므로 consumption이 상승하는
+방향으로 움직인다.
+:::
+
+::: {}
+[5]{.step}
+
+**Investment:** capital의 미래수익이 높아지면서 investment가 증가하고
+$K_{t+1}$이 높아진다.
+:::
+::::::::
+
+Romer의 baseline parameterization에서도 positive technology shock
+impact에서 labor, consumption, output이 상승하고, 이후에는 증가한
+capital stock이 dynamics에 추가로 작용한다.
+:::::::::
+
+::::::: {#s17 .section}
+## [15.17]{.section-number}Shock Persistence and Internal Propagation
+
+관찰된 output persistence가 shock 자체의 persistence 때문인지, 경제
+내부의 propagation mechanism 때문인지 구분해야 한다.
+
+::::: macro-grid
+::: statement
+**Exogenous persistence**\
+$\widetilde A_t=\rho_A\widetilde A_{t-1}+\varepsilon_t$에서 큰
+$\rho_A$가 shock을 오래 지속시킨다.
+:::
+
+::: statement
+**Endogenous propagation**\
+capital accumulation, intertemporal substitution, adjustment
+mechanisms가 주어진 shock의 효과를 자체적으로 전달한다.
+:::
+:::::
+
+::: math-display
+$$
+\boxed{
+\text{persistent shock process}
+\neq
+\text{strong internal propagation}.
+}
+$$
+:::
+
+이 distinction은 baseline RBC 평가에서 특히 중요하다. 모형이 persistent
+output을 생성하더라도 그 persistence를 거의 전적으로 shock process에
+넣어 두었다면 propagation 자체를 설명한 것은 아니다.
+:::::::
+
+:::: {#s18 .section}
+## [15.18]{.section-number}Government-Purchases Shocks
+
+정부구매 shock은 technology를 직접 바꾸지 않고 wealth와 resource
+allocation을 통해 economy를 움직인다는 점에서 유용한 비교실험이다.
+
+lump-sum tax finance 아래 현재·미래 정부구매의 증가가 household의
+lifetime resources를 줄이면 wealth effect가 발생한다.
+
+::: math-display
+$$
+G_t\uparrow
+\Longrightarrow
+\text{private lifetime wealth}\downarrow.
+$$
+:::
+
+baseline에서는 이에 따라 consumption이 감소하고 labor supply가 증가할 수
+있으며, 정부가 더 많은 goods를 흡수하므로 investment는 crowding out될 수
+있다. 기술충격과 달리 생산성을 직접 높이지 않고도 labor와 output을
+움직이므로 wage-output comovement도 달라질 수 있다.
+::::
+
+::::: {#s19 .section}
+## [15.19]{.section-number}Impulse Responses as Equilibrium Mechanisms
+
+solution을 얻은 뒤 가장 먼저 보는 것은 한 번의 structural innovation이
+endogenous variables를 시간에 따라 어떻게 움직이는지다.
+
+::: math-display
+$$
+IRF_Y(h),\qquad IRF_C(h),\qquad IRF_I(h),\qquad IRF_L(h),\qquad IRF_w(h).
+$$
+:::
+
+이 노트에서는 figure 없이 response를 네 단계로 해석한다.
+
+::: {.contrast-table .display-table-wrap}
+  Horizon       Question
+  ------------- ---------------------------------------------------------------------------------
+  Impact        predetermined capital이 고정된 상태에서 어떤 variables가 즉시 jump하는가?
+  Short run     labor, consumption, investment가 어떤 substitution/wealth effects를 반영하는가?
+  Propagation   capital accumulation이 shock 이후 dynamics를 얼마나 연장하는가?
+  Convergence   shock decay와 stable roots가 economy를 어떻게 기준경로로 되돌리는가?
+:::
+:::::
+
+:::::: {#s20 .section}
+## [15.20]{.section-number}Calibration
+
+RBC의 전통적인 quantitative strategy는 경제이론과 외부 증거를 이용해
+parameter values를 discipline한 뒤 model implications를 data와 비교하는
+것이다.
+
+::: math-display
+$$
+\theta=
+(\alpha,\beta,\delta,b,\rho_A,\sigma_A,\rho_G,\sigma_G,\ldots).
+$$
+:::
+
+::: {.contrast-table .display-table-wrap}
+  Parameter           Typical discipline
+  ------------------- -------------------------------------------------------------------
+  $\alpha$            factor income shares
+  $\delta$            capital depreciation evidence
+  $\beta$             steady-state return / Euler restriction
+  $b$                 steady-state labor or leisure allocation
+  $\rho_A,\sigma_A$   measured productivity dynamics, subject to identification caveats
+:::
+
+::: extension
+**Historical Romer/Campbell illustration.** Romer reports a quarterly
+baseline using $\alpha=1/3$, $\delta=2.5\%$, $\rho_A=\rho_G=0.95$,
+together with steady-state targets including government purchases/output
+$=0.2$, real return $=1.5\%$ per quarter, and labor $=1/3$. These are an
+illustrative historical calibration, not universal parameter values.
+:::
+::::::
+
+:::::: {#s21 .section}
+## [15.21]{.section-number}Calibration Is Not Estimation
+
+Calibration과 econometric estimation은 parameter choice와 model
+evaluation의 논리가 다르다.
+
+:::: equation-card
+::: math-display
+$$
+\boxed{
+\text{Calibration:}
+\quad
+\text{discipline parameters}
+\rightarrow
+\text{solve/simulate}
+\rightarrow
+\text{compare moments}.
+}
+$$
+:::
+::::
+
+반면 structural estimation은 명시된 likelihood나 moment conditions를
+통해 parameter를 자료에서 추정하는 절차를 포함한다. 따라서
+
+::: math-display
+$$
+\boxed{
+\text{calibration}\neq\text{structural estimation},
+\qquad
+\text{moment matching}\neq\text{causal identification}.
+}
+$$
+:::
+
+Romer도 calibration이 model의 successes와 failures를 드러내는 데
+유용하지만, 여러 다른 모형이 같은 moments를 맞출 수 있고 aggregate fit
+자체의 정보량이 제한될 수 있음을 강조한다.
+::::::
+
+:::::: {#s22 .section}
+## [15.22]{.section-number}From the Model to Business-Cycle Moments
+
+Chapter 13에서 정의한 empirical targets를 model-generated data에도
+동일하게 적용해야 한다.
+
+simulation 또는 analytical covariance calculation으로
+
+::: math-display
+$$
+\{Y_t,C_t,I_t,L_t,\ldots\}_{t=1}^{T}
+$$
+:::
+
+를 얻은 뒤
+
+::: math-display
+$$
+\sigma_Y,\qquad
+\frac{\sigma_C}{\sigma_Y},\qquad
+\frac{\sigma_I}{\sigma_Y},\qquad
+\frac{\sigma_L}{\sigma_Y},\qquad
+\operatorname{Corr}(L,Y/L)
+$$
+:::
+
+등을 계산한다.
+
+::: chapter-thesis
+Comparability principle
+
+Data와 model에 서로 다른 detrending/filtering을 적용하면 moment
+comparison의 해석이 바뀐다. 가능한 한 동일한 transformation을 적용해야
+한다.
+:::
+::::::
+
+:::: {#s23 .section}
+## [15.23]{.section-number}A Historical Calibration Benchmark
+
+Romer가 Hansen and Wright (1992)를 인용해 제시하는 비교는 baseline RBC가
+무엇을 잘 맞추고 어디서 실패하는지를 보여주는 고전적 예다.
+
+::: display-table-wrap
+  Moment                         U.S. data   Baseline RBC
+  ------------------------------ ----------- --------------
+  $\sigma_Y$                     1.92        1.30
+  $\sigma_C/\sigma_Y$            0.45        0.31
+  $\sigma_I/\sigma_Y$            2.78        3.15
+  $\sigma_L/\sigma_Y$            0.96        0.49
+  $\operatorname{Corr}(L,Y/L)$   −0.14       0.93
+:::
+
+**Interpretation rule.** 위 수치는 Romer 5판이 보고한 역사적 calibration
+benchmark이며 특정 sample·detrending·parameterization에 의존한다. 이를
+현재의 보편적 business-cycle moments로 해석해서는 안 된다.
+::::
+
+::::::: {#s24 .section}
+## [15.24]{.section-number}What the Baseline Model Explains
+
+baseline RBC는 모든 사실을 맞추지 못하지만 몇 가지 핵심 qualitative
+ranking을 자연스럽게 생성한다.
+
+::: math-display
+$$
+\boxed{
+\sigma_C<\sigma_Y<\sigma_I.
+}
+$$
+:::
+
+즉 consumption은 output보다 smooth하고 investment는 output보다
+volatile하다. 이는 단순히 shock variances를 조정한 결과가 아니라
+household의 consumption smoothing과 capital accumulation의 결합에서
+나온다.
+
+::::: macro-grid
+::: statement
+**Consumption smoothing**\
+temporary resources fluctuation 전체를 현재 소비에 반영하지 않는다.
+:::
+
+::: statement
+**Investment margin**\
+resources와 expected returns의 변화가 investment에 집중되어 큰 변동성을
+만들 수 있다.
+:::
+:::::
+:::::::
+
+:::::: {#s25 .section}
+## [15.25]{.section-number}Labor Volatility and Labor--Productivity Comovement
+
+고전적 baseline의 더 큰 난점은 labor input의 크기와 productivity와의
+comovement다.
+
+### Labor volatility
+
+Romer가 보고한 benchmark에서는
+
+::: math-display
+$$
+\left(\frac{\sigma_L}{\sigma_Y}\right)_{\text{model}}
+<
+\left(\frac{\sigma_L}{\sigma_Y}\right)_{\text{data}},
+$$
+:::
+
+즉 labor fluctuations가 너무 작다.
+
+### Labor--productivity correlation
+
+technology-driven baseline에서는 productivity가 좋아질 때 labor도
+늘어나기 쉬워
+
+::: math-display
+$$
+\operatorname{Corr}(L,Y/L)
+$$
+:::
+
+가 강한 양(+)의 값을 갖기 쉽다. 그러나 Romer의 역사적 comparison에서는
+data의 correlation이 거의 0에 가까운 반면 baseline model은 매우 높은
+양의 correlation을 생성한다.
+
+::: section-summary
+**Lesson.** output volatility 하나를 맞추는 것으로 충분하지 않다. 한
+모형은 여러 variances, covariances, cross-correlations를 동시에 설명해야
+한다.
+:::
+::::::
+
+:::::::::: {#s26 .section}
+## [15.26]{.section-number}Is the Solow Residual a Technology Shock?
+
+RBC의 quantitative discipline에서 가장 중요한 identification 문제 중
+하나는 measured productivity와 structural technology를 같은 것으로 볼 수
+있는가이다.
+
+::: math-display
+$$
+\boxed{
+\text{Solow residual}
+\neq
+\text{necessarily pure technology shock}.
+}
+$$
+:::
+
+Romer는 short-run Solow residual variation에 다음이 섞일 수 있다고
+논의한다.
+
+::::::: macro-grid
+::: statement
+**Utilization**\
+capital utilization이나 labor effort가 경기와 함께 변하면 measured TFP가
+움직일 수 있다.
+:::
+
+::: statement
+**Reallocation**\
+inputs가 생산성이 다른 firms/sectors 사이에서 재배치되면 aggregate
+residual이 변한다.
+:::
+
+::: statement
+**Returns to scale / market structure**\
+기본 accounting assumptions가 깨지면 residual 해석도 변한다.
+:::
+
+::: statement
+**Measurement**\
+inputs와 output의 측정오차가 residual에 직접 들어간다.
+:::
+:::::::
+
+따라서 Chapter 9의 원리가 다시 나타난다.
+
+::: math-display
+$$
+\boxed{
+\text{accounting residual}
+\neq
+\text{structurally identified shock}.
+}
+$$
+:::
+::::::::::
+
+::::: {#s27 .section}
+## [15.27]{.section-number}The Propagation Problem
+
+baseline RBC의 또 다른 비판은 endogenous propagation이 약해 output
+dynamics가 driving shock dynamics를 너무 직접적으로 따라갈 수 있다는
+점이다.
+
+::: math-display
+$$
+\boxed{
+\text{realistic persistence in }Y_t
+\text{ obtained from large }\rho_A
+\not\Rightarrow
+\text{strong model propagation}.
+}
+$$
+:::
+
+Romer는 Cogley--Nason 및 Rotemberg--Woodford의 결과를 요약하면서
+baseline RBC가 실제 경제의 predictable movements와 충분히 강한
+propagation을 생성하지 못한다는 비판을 소개한다.
+
+::: chapter-thesis
+Diagnostic question
+
+모형의 persistence를 설명하는 힘이 equilibrium mechanism 안에 있는가,
+아니면 exogenous shock process에 이미 가정되어 있는가?
+:::
+:::::
+
+::::::::: {#s28 .section}
+## [15.28]{.section-number}Monetary Neutrality, Real Extensions, and the RBC Legacy
+
+pure RBC의 flexible-price structure에서는 monetary disturbance가 nominal
+variables만 바꾸고 real allocation을 바꾸지 않는다. Romer는 이
+prediction을 baseline RBC의 중요한 한계로 평가한다.
+
+동시에 RBC의 실패가 RBC framework 전체를 버려야 한다는 뜻은 아니다.
+다양한 real extensions가 baseline의 부족한 margin을 보완하려 했다.
+
+::::::: macro-grid
+::: statement
+**Indivisible labor**\
+employment extensive margin을 통해 aggregate hours의 반응성을 높인다.
+:::
+
+::: statement
+**Variable utilization**\
+measured productivity와 effective capital services를 분리한다.
+:::
+
+::: statement
+**Adjustment costs**\
+investment/capital dynamics에 추가 propagation을 만든다.
+:::
+
+::: statement
+**Multiple sectors & shocks**\
+comovement와 transmission의 추가 channels를 제공한다.
+:::
+:::::::
+
+더 중요한 유산은 방법론이다.
+
+::: math-display
+$$
+\boxed{
+\text{Primitives}
+\to
+\text{Dynamic GE}
+\to
+\text{Steady State}
+\to
+\text{Approximate Solution}
+\to
+\text{Simulation/IRFs}
+\to
+\text{Data Moments}.
+}
+$$
+:::
+
+현대 DSGE는 baseline RBC의 모든 substantive assumptions를 받아들이지는
+않지만, 이 quantitative workflow를 계승한다.
+:::::::::
+
+::::::::: {#s29 .section}
+## [15.29]{.section-number}Closing the Fluctuations Block
+
+Chapter 13--15는 경기변동 연구의 데이터--해법--모형 구조를 하나의 폐쇄된
+논리로 만든다.
+
+:::::: logic-steps
+::: {}
+[13]{.step}
+
+**Facts:** volatility, persistence, comovement, lead--lag를 측정하고
+empirical targets를 정의했다.
+:::
+
+::: {}
+[14]{.step}
+
+**Solution:** linearization, eigenvalues, BK conditions, QZ
+decomposition으로 dynamic model을 풀었다.
+:::
+
+::: {}
+[15]{.step}
+
+**Evaluation:** RBC를 풀어 IRFs와 moments를 만들고 data와 비교하며
+mechanism의 강점과 한계를 진단한다.
+:::
+::::::
+
+::: math-display
+$$
+\boxed{
+\text{Data}
+\rightarrow
+\text{Solution Method}
+\rightarrow
+\text{Structural Model}
+\rightarrow
+\text{Model-Implied Data}.
+}
+$$
+:::
+
+::: section-summary
+**Final lesson.** RBC의 핵심 질문은 "technology shock가 경기변동의
+정답인가?"가 아니다. 더 근본적인 질문은 optimizing dynamic general
+equilibrium이 어떤 propagation과 comovement를 생성하며, 그
+implications를 어떤 empirical discipline으로 평가할 것인가이다. Model
+fit은 중요한 증거지만 structural validation과 동일하지 않다.
+:::
+:::::::::
+
+::: {#check .section}
+## Learning Check
+
+1.  RBC를 Ramsey growth model의 stochastic extension이라고 부를 수 있는
+    이유를 설명할 수 있는가?
+2.  생산함수 $Y_t=K_t^\alpha(A_tL_t)^{1-\alpha}$에서 technology가 labor
+    augmenting으로 들어가는 의미를 설명할 수 있는가?
+3.  resource constraint와 capital accumulation을 하나의 식으로 결합할 수
+    있는가?
+4.  완전경쟁 아래 wage와 capital rental rate가 marginal products와 같은
+    이유를 설명할 수 있는가?
+5.  stochastic Euler equation에서 future return과 future marginal
+    utility의 covariance가 중요한 이유는 무엇인가?
+6.  intratemporal labor FOC와 intertemporal labor substitution을 구별할
+    수 있는가?
+7.  Romer의 technology shock와 government-purchases shock processes를
+    trend와 cycle로 분해할 수 있는가?
+8.  baseline competitive equilibrium을 household, firm, feasibility,
+    shock blocks로 정리할 수 있는가?
+9.  어떤 assumptions 아래 planner representation을 사용할 수 있는가?
+10. balanced-growth trend가 있는 모형에서 왜 원변수의 steady state 대신
+    detrended steady state가 필요한가?
+11. predetermined state, exogenous state, forward-looking control,
+    static control을 구별할 수 있는가?
+12. RBC equilibrium conditions를 log-linearized RE system으로 바꾸는
+    논리를 설명할 수 있는가?
+13. Chapter 14의 BK/QZ solution이 Chapter 15에서 어떤 역할을 하는가?
+14. positive technology shock의 impact에서 capital은 왜 즉시 jump하지
+    않는가?
+15. shock persistence와 internal propagation을 구별할 수 있는가?
+16. government-purchases shock가 technology shock와 다른 wage/labor
+    mechanism을 갖는 이유를 설명할 수 있는가?
+17. calibration과 structural estimation이 동일하지 않은 이유를 설명할 수
+    있는가?
+18. model과 data의 moments를 비교할 때 왜 동일한 detrending/filtering이
+    중요한가?
+19. baseline RBC가 consumption과 investment의 상대적 volatility를 어떤
+    방향으로 설명하는가?
+20. labor volatility와 labor-productivity correlation이 baseline model의
+    진단에 왜 중요한가?
+21. Solow residual을 structural technology shock로 바로 해석하면 안 되는
+    이유를 설명할 수 있는가?
+22. 큰 $\rho_A$로 output persistence를 맞추는 것과 endogenous
+    propagation을 설명하는 것은 왜 다른가?
+23. pure RBC의 monetary neutrality가 왜 nominal rigidity models로
+    넘어가는 동기가 되는가?
+24. RBC가 현대 DSGE에 남긴 methodological workflow를 설명할 수 있는가?
+:::
+
+::::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Real Business Cycle (RBC)
+:::
+
+완전경쟁·가격신축성·최적화하는 경제주체와 실물충격을 이용해 경기변동을
+설명하는 stochastic dynamic general-equilibrium framework.
+::::
+
+:::: definition-row
+::: term
+Technology shock
+:::
+
+생산가능성 또는 productivity process를 이동시키는 exogenous innovation.
+baseline에서는
+$\widetilde A_t=\rho_A\widetilde A_{t-1}+\varepsilon_{A,t}$.
+::::
+
+:::: definition-row
+::: term
+Government-purchases shock
+:::
+
+정부의 goods demand가 stochastic하게 변하는 real disturbance.
+technology를 직접 바꾸지 않고 wealth/resource effects를 통해 economy를
+움직인다.
+::::
+
+:::: definition-row
+::: term
+Intertemporal substitution in labor supply
+:::
+
+현재와 미래의 상대적 wage 또는 return 변화에 따라 노동을 시점 간
+재배분하는 household response.
+::::
+
+:::: definition-row
+::: term
+Planner representation
+:::
+
+distortion-free competitive equilibrium allocation을 social planner
+problem의 해로 표현하는 계산적 representation.
+::::
+
+:::: definition-row
+::: term
+Balanced-growth path
+:::
+
+trend growth를 가진 variables가 일정한 비율로 성장하면서 적절한
+normalized variables는 일정한 경로.
+::::
+
+:::: definition-row
+::: term
+Calibration
+:::
+
+외부 증거와 steady-state restrictions 등으로 parameter를 discipline한 뒤
+model implications를 정량적으로 비교하는 parameterization strategy.
+::::
+
+:::: definition-row
+::: term
+Impulse response
+:::
+
+한 번의 structural innovation이 equilibrium variables의 현재와 미래
+경로에 미치는 conditional response.
+::::
+
+:::: definition-row
+::: term
+Propagation mechanism
+:::
+
+exogenous shock의 효과를 economy 내부의 states와 equilibrium choices가
+시간에 걸쳐 전달·증폭·완화하는 mechanism.
+::::
+
+:::: definition-row
+::: term
+Solow residual
+:::
+
+output growth에서 measured input contributions를 뺀 accounting residual.
+short-run에는 pure technology 이외 요인을 포함할 수 있다.
+::::
+
+:::: definition-row
+::: term
+Indivisible labor
+:::
+
+개별 노동공급이 연속적 hours가 아니라 work/not-work 같은 discrete
+margin을 갖는 specification.
+::::
+
+:::: definition-row
+::: term
+Moment matching
+:::
+
+model-generated variances, correlations, persistence 등의 moments를
+data의 대응 moments와 비교하는 model evaluation 방식.
+::::
+
+:::: definition-row
+::: term
+Structural validation
+:::
+
+관찰된 fit을 넘어 shocks와 mechanisms가 경제적으로 올바르게
+식별·설명된다는 더 강한 주장. 단순 moment fit과 동일하지 않다.
+::::
+:::::::::::::::::::::::::::::
+
+::: section
+## Sources used for this chapter
+
+David Romer, *Advanced Macroeconomics*, 5th ed. (2018), Chapter 5,
+especially §§5.3--5.10. Course placement follows the uploaded
+*Macroeconomic Theory I* syllabus. The historical calibration table is
+reported by Romer from Hansen and Wright (1992).
+:::

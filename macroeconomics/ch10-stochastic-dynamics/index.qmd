@@ -1,0 +1,46 @@
+# Chapter 10 · 불확실성하 동태선택 {.unnumbered}
+*States, Expectations, and Stochastic Dynamic Programming*
+
+이 장에서는 **불확실성하 동태선택**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **10.1–10.5** From Deterministic Paths to Contingent Plans · Markov Processes
+- **10.6–10.10** Transition Probabilities and Invariant Distributions · First-Order Conditions and the Stochastic Euler Equation
+- **10.11–10.15** The Stochastic Discount Factor · Expectations and Model Consistency
+- **10.16–10.20** Uncertainty vs. Market Completeness · Chapter Summary
+:::
+
+## Sections
+
+- [10.1 From Deterministic Paths to Contingent Plans](contents.html#s01)
+- [10.2 States, Shocks, Histories, and Information](contents.html#s02)
+- [10.3 Conditional Expectations](contents.html#s03)
+- [10.4 Timing and Non-Anticipativity](contents.html#s04)
+- [10.5 Markov Processes](contents.html#s05)
+- [10.6 Transition Probabilities and Invariant Distributions](contents.html#s06)
+- [10.7 The Stochastic Sequential Problem](contents.html#s07)
+- [10.8 The Stochastic Bellman Equation](contents.html#s08)
+- [10.9 Policy Functions under Uncertainty](contents.html#s09)
+- [10.10 First-Order Conditions and the Stochastic Euler Equation](contents.html#s10)
+- [10.11 The Stochastic Discount Factor](contents.html#s11)
+- [10.12 A Stochastic Consumption--Saving Problem](contents.html#s12)
+- [10.13 A Stochastic Growth Problem](contents.html#s13)
+- [10.14 State, Control, and Shock: What Is What?](contents.html#s14)
+- [10.15 Expectations and Model Consistency](contents.html#s15)
+- [10.16 Uncertainty vs. Market Completeness](contents.html#s16)
+- [10.17 State-Contingent Claims: Preview](contents.html#s17)
+- [10.18 Deterministic vs. Stochastic Macro](contents.html#s18)
+- [10.19 Why Complete Markets Next?](contents.html#s19)
+- [10.20 Chapter Summary](contents.html#s20)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

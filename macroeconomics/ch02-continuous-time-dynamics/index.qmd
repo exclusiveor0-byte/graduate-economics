@@ -1,0 +1,40 @@
+# Chapter 02 · 연속시간 동태최적화 {.unnumbered}
+*Continuous-Time Dynamic Optimization and the Maximum Principle*
+
+이 장에서는 **연속시간 동태최적화**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **2.1–2.5** 정적에서 동태최적화로 · Maximum Principle
+- **2.6–2.10** Costate와 Shadow Value · Boundary Conditions와 Transversality Condition
+- **2.11–2.15** Predetermined States와 Jump Variables · Chapter Summary
+:::
+
+## Sections
+
+- [2.1 정적에서 동태최적화로](contents.html#s01)
+- [2.2 일반적인 Optimal Control Problem](contents.html#s02)
+- [2.3 Present-Value Hamiltonian](contents.html#s03)
+- [2.4 Current-Value Hamiltonian](contents.html#s04)
+- [2.5 Maximum Principle](contents.html#s05)
+- [2.6 Costate와 Shadow Value](contents.html#s06)
+- [2.7 소비--자본 문제](contents.html#s07)
+- [2.8 CRRA와 연속시간 Euler Equation](contents.html#s08)
+- [2.9 이산시간 Euler Equation과의 연결](contents.html#s09)
+- [2.10 Boundary Conditions와 Transversality Condition](contents.html#s10)
+- [2.11 Predetermined States와 Jump Variables](contents.html#s11)
+- [2.12 Canonical Dynamic System](contents.html#s12)
+- [2.13 필요조건과 충분조건](contents.html#s13)
+- [2.14 Maximum Principle에서 Dynamic Programming으로](contents.html#s14)
+- [2.15 Chapter Summary](contents.html#s15)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

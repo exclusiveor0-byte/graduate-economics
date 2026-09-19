@@ -1,0 +1,50 @@
+# Chapter 13 · 경기변동의 사실과 측정 {.unnumbered}
+*Business-Cycle Facts, Measurement, and Empirical Targets*
+
+이 장에서는 **경기변동의 사실과 측정**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **13.1–13.6** From Individual Risk to Aggregate Fluctuations · Detrending and Measurement Choices
+- **13.7–13.12** Business-Cycle Moments · Output and Its Components
+- **13.13–13.18** Consumption and Investment · Irregular Fluctuations, Not Mechanical Cycles
+- **13.19–13.24** Shocks and Propagation · Chapter Summary
+:::
+
+## Sections
+
+- [13.1 From Individual Risk to Aggregate Fluctuations](contents.html#s01)
+- [13.2 What Is a Business Cycle?](contents.html#s02)
+- [13.3 Macroeconomic Time-Series Data](contents.html#s03)
+- [13.4 Levels, Logs, and Growth Rates](contents.html#s04)
+- [13.5 Trend and Cycle](contents.html#s05)
+- [13.6 Detrending and Measurement Choices](contents.html#s06)
+- [13.7 Business-Cycle Moments](contents.html#s07)
+- [13.8 Volatility](contents.html#s08)
+- [13.9 Persistence](contents.html#s09)
+- [13.10 Comovement and Cyclicality](contents.html#s10)
+- [13.11 Lead--Lag Relationships](contents.html#s11)
+- [13.12 Output and Its Components](contents.html#s12)
+- [13.13 Consumption and Investment](contents.html#s13)
+- [13.14 Labor-Market Fluctuations and Okun\'s Law](contents.html#s14)
+- [13.15 Productivity over the Cycle](contents.html#s15)
+- [13.16 Wages, Inflation, and Interest Rates](contents.html#s16)
+- [13.17 Recession Dating vs. Statistical Cycles](contents.html#s17)
+- [13.18 Irregular Fluctuations, Not Mechanical Cycles](contents.html#s18)
+- [13.19 Shocks and Propagation](contents.html#s19)
+- [13.20 Moments Are Targets, Not Explanations](contents.html#s20)
+- [13.21 A Standard Business-Cycle Moment Table](contents.html#s21)
+- [13.22 From Facts to Quantitative Model Evaluation](contents.html#s22)
+- [13.23 Why Linear Dynamic Systems Next?](contents.html#s23)
+- [13.24 Chapter Summary](contents.html#s24)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

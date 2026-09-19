@@ -79,9 +79,9 @@ MACROECONOMICS
 ### [거시경제학](macroeconomics/index.html)
 성장 · 실물경기변동 · New Keynesian DSGE · 통화정책 · 금융마찰 · 불완전시장
 
-[Chapter 00부터 읽기](macroeconomics/ch00-macro-map/index.html){.study-card__link} →
+[Chapter 00부터 읽기](macroeconomics/ch00-foundations/index.html){.study-card__link} →
 
-[Chapter 지도와 기술 부록을 따라 필요한 주제로 이동]{.status}
+[Chapter 지도를 따라 필요한 주제로 이동]{.status}
 :::
 ::: {.study-card .study-card--econometrics}
 ::: {.study-card__number}

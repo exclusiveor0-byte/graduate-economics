@@ -1,0 +1,50 @@
+# Chapter 14 · 선형 동태계와 합리적 기대 {.unnumbered}
+*Linearization, Stability, Rational Expectations, and Solution Methods*
+
+이 장에서는 **선형 동태계와 합리적 기대**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **14.1–14.6** Why Linear Solution Methods? · Complex Roots and Oscillatory Dynamics
+- **14.7–14.12** Predetermined and Forward-Looking Variables · A Canonical Linear Rational-Expectations System
+- **14.13–14.18** Why Expectations Change the Initial-Value Problem · Expectational Errors and Nonfundamental Components
+- **14.19–14.24** Generalized Schur / QZ Decomposition · Why RBC Next?
+:::
+
+## Sections
+
+- [14.1 Why Linear Solution Methods?](contents.html#s01)
+- [14.2 Matrix Dynamic Systems](contents.html#s02)
+- [14.3 Eigenvalues and Eigenvectors](contents.html#s03)
+- [14.4 Diagonalization and Dynamic Modes](contents.html#s04)
+- [14.5 Stability and the Unit Circle](contents.html#s05)
+- [14.6 Complex Roots and Oscillatory Dynamics](contents.html#s06)
+- [14.7 Predetermined and Forward-Looking Variables](contents.html#s07)
+- [14.8 From the Ramsey Saddle Path to Rational Expectations](contents.html#s08)
+- [14.9 Linearization around a Steady State](contents.html#s09)
+- [14.10 Log-Linearization](contents.html#s10)
+- [14.11 What Linearization Preserves --- and What It Does Not](contents.html#s11)
+- [14.12 A Canonical Linear Rational-Expectations System](contents.html#s12)
+- [14.13 Why Expectations Change the Initial-Value Problem](contents.html#s13)
+- [14.14 A Scalar Forward-Looking Example](contents.html#s14)
+- [14.15 Generalized Eigenvalues](contents.html#s15)
+- [14.16 The Blanchard--Kahn Counting Condition](contents.html#s16)
+- [14.17 Determinacy, Indeterminacy, and Nonexistence](contents.html#s17)
+- [14.18 Expectational Errors and Nonfundamental Components](contents.html#s18)
+- [14.19 Generalized Schur / QZ Decomposition](contents.html#s19)
+- [14.20 From QZ to Policy Functions](contents.html#s20)
+- [14.21 State-Space Representation and Impulse Responses](contents.html#s21)
+- [14.22 From State-Space Solutions to Model Moments](contents.html#s22)
+- [14.23 Diagnostics and Common Failure Modes](contents.html#s23)
+- [14.24 Why RBC Next?](contents.html#s24)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

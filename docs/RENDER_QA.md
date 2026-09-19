@@ -85,7 +85,6 @@
 | `microeconomics/ch04-pure-exchange/supplement-examples-exercises.qmd` | 47 | 0 | 0 | 통과 | 통과 |
 | `microeconomics/ch04-pure-exchange/references.qmd` | 0 | 0 | 0 | 통과 | 통과 |
 | `macroeconomics/index.qmd` | 0 | 0 | 0 | 통과 | 통과 |
-| `macroeconomics/overview.qmd` | 0 | 0 | 0 | 통과 | 통과 |
 | `econometrics/index.qmd` | 0 | 0 | 0 | 통과 | 통과 |
 | `supplements/index.qmd` | 0 | 0 | 0 | 통과 | 통과 |
 | `supplements/visualization-guide.qmd` | 0 | 0 | 0 | 통과 | 통과 |
