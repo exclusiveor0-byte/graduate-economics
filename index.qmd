@@ -44,6 +44,11 @@ subtitle: Graduate Economics Knowledge Base
 
 경제학 논문을 질문·설계·결과·기여로 읽고 연결하는 아카이브
 :::
+::: {.home-archive-item}
+**문제 한 스푼**
+
+대학원 졸업시험 대비 매일 미시·거시·계량 문제를 풀고 축적하는 아카이브
+:::
 :::
 :::
 
@@ -119,6 +124,20 @@ LITERATURE
 [분야별 논문 아카이브 보기](literature/index.html){.study-card__link} →
 
 [분야별 질문·설계·결과·기여 중심의 논문 노트]{.status}
+:::
+::: {.study-card .study-card--qual}
+::: {.study-card__number}
+06
+:::
+::: {.study-card__eyebrow}
+QUALIFYING EXAM
+:::
+### [문제 한 스푼](qual-exam/index.html)
+대학원 졸업시험 대비 매일 미시·거시·계량 문제를 풀고 축적하는 실전 문제 아카이브입니다.
+
+[문제 목록 및 검색](qual-exam/index.html){.study-card__link} →
+
+[과목별 탭 구분 · 회차 검색 · 단계별 풀이]{.status}
 :::
 ::::
 

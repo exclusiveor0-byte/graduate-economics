@@ -1,0 +1,197 @@
+---
+title: "문제 한 스푼 (A Spoon of Problem)"
+subtitle: "대학원 경제학 졸업시험 대비 매일 문제 아카이브"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
+:::
+
+# 문제 한 스푼 (A Spoon of Problem)
+
+::: {.spoon-hero__desc}
+대학원 경제학 종합시험·졸업시험(Qualifying Examination) 준비를 위해 미시경제학, 거시경제학, 계량경제학 문제를 매일 출제하고 풀이하는 아카이브입니다. 과목별 탭과 회차별 개별 파일로 관리되며, 실시간 검색창을 통해 원하는 회차와 주제를 빠르게 찾을 수 있습니다.
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[거시경제학]{.chip .chip--macro}
+[계량경제학]{.chip .chip--metrics}
+[문제당 약 15분]{.chip}
+[set up → derive → verify]{.chip}
+[실전 감각 유지]{.chip}
+:::
+:::
+
+::: {.spoon-search-wrapper}
+::: {.spoon-search-box}
+<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 회차(#1, #2...) 또는 주제/키워드 검색 (예: 생산자이론, Solow, Roy, 비용최소화, 부분균형...)" autocomplete="off">
+<span id="spoon-search-count" class="spoon-count-badge">실시간 검색 대기 중</span>
+:::
+:::
+
+::: {.panel-tabset}
+
+### 전체 보기
+
+::: {.spoon-guide-box}
+**📚 문제 한 스푼 아카이브 저장소 안내**
+매일 출제되는 문제가 누적되는 메인 대시보드입니다. 회차 번호(#1, #2, ...)나 토픽 키워드로 상단 검색창에서 즉시 필터링할 수 있습니다.
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 문제가 없습니다. 회차 번호나 다른 키워드를 입력해보세요.
+:::
+
+::: {#spoon-grid-all .spoon-grid}
+<!-- 등록된 회차 카드가 여기에 표시됩니다 -->
+:::
+
+### 미시경제학
+
+::: {.spoon-guide-box}
+**🎯 미시경제학 (Microeconomics)**
+- 주요 범위: 소비자이론, 생산자이론, 부분균형, 일반균형(에지워스 상자·후생경제학 정리), 불확실성하의 선택, 게임이론, 정보경제학
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 문제가 없습니다.
+:::
+
+::: {#spoon-grid-micro .spoon-grid}
+<!-- 미시경제학 회차 카드가 여기에 표시됩니다 -->
+:::
+
+### 거시경제학
+
+::: {.spoon-guide-box}
+**🎯 거시경제학 (Macroeconomics)**
+- 주요 범위: Solow 성장모형(황금률·수렴속도), Ramsey-Cass-Koopmans 모형, OLG 모형, 내생적 성장이론, 실물경기변동(RBC), New Keynesian DSGE, 통화·재정정책
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 문제가 없습니다.
+:::
+
+::: {#spoon-grid-macro .spoon-grid}
+<!-- 거시경제학 회차 카드가 여기에 표시됩니다 -->
+:::
+
+### 계량경제학
+
+::: {.spoon-guide-box}
+**🎯 계량경제학 (Econometrics)**
+- 주요 범위: 확률표본·조건부기댓값, 식별(Identification), OLS 추정량 대표본 성질, 가설검정 및 점근추론, 이분산·자기상관, 도구변수(IV/2SLS), 패널데이터 분석
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 문제가 없습니다.
+:::
+
+::: {#spoon-grid-metrics .spoon-grid}
+<!-- 계량경제학 회차 카드가 여기에 표시됩니다 -->
+:::
+
+### 문제 업로드 가이드
+
+::: {.spoon-guide-box}
+**✍️ 새 문제 출제 및 업로드 방법 (4단계)**
+
+매일 문제를 출제하고 사이트에 등록할 때는 아래 4단계를 따라 진행하시면 됩니다.
+
+#### 1단계: 표준 템플릿 복사
+저장소의 `templates/problem-template.qmd` 파일을 복사합니다.
+
+#### 2단계: 과목 폴더에 개별 회차 파일 생성
+출제할 과목 폴더에 회차별 번호로 파일을 생성하고 내용을 작성합니다.
+- **미시경제학**: `qual-exam/micro/set-01.qmd`, `set-02.qmd`, ...
+- **거시경제학**: `qual-exam/macro/set-01.qmd`, `set-02.qmd`, ...
+- **계량경제학**: `qual-exam/econometrics/set-01.qmd`, `set-02.qmd`, ...
+
+#### 3단계: `_quarto.yml` 목차에 챕터 등록
+`_quarto.yml`의 `chapters:` 항목 중 `qual-exam/index.qmd` 아래에 추가합니다:
+```yaml
+  - qual-exam/index.qmd
+  - part: qual-exam/micro/index.qmd
+    chapters:
+    - qual-exam/micro/set-01.qmd
+```
+*(또는 독립 회차 파일로 `- qual-exam/micro/set-01.qmd` 형태로 추가)*
+
+#### 4단계: `qual-exam/index.qmd` 카드 목록에 추가
+`qual-exam/index.qmd`의 해당 과목 탭 및 전체 탭에 아래 카드 태그를 추가하면 실시간 검색과 카드 UI가 즉시 연동됩니다:
+```html
+<a href="micro/set-01.html" class="spoon-card" data-subject="micro" data-round="1">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#1 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 부분균형</div>
+  <div class="spoon-card__desc">비용최소화, 비용함수 유도, 장기평균비용, 종량세와 사중손실 분석</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+```
+:::
+
+:::
+
+```{=html}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("spoon-search");
+  const countBadge = document.getElementById("spoon-search-count");
+  if (!searchInput) return;
+
+  function filterCards() {
+    const query = searchInput.value.toLowerCase().trim();
+    // Find active tab pane or default to tab content
+    const activePane = document.querySelector(".tab-pane.active") || document.querySelector(".tab-content") || document;
+    const cards = activePane.querySelectorAll(".spoon-card");
+    const emptyMsg = activePane.querySelector(".spoon-empty-msg");
+
+    let total = cards.length;
+    let visible = 0;
+
+    cards.forEach(function (card) {
+      const text = card.textContent.toLowerCase();
+      const round = card.getAttribute("data-round") || "";
+      const matches = !query || text.includes(query) || round.includes(query.replace("#", ""));
+      if (matches) {
+        card.style.display = "";
+        visible++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (countBadge) {
+      if (total === 0) {
+        countBadge.textContent = "등록 대기 중";
+      } else if (!query) {
+        countBadge.textContent = `현재 탭: 총 ${total}개 문제`;
+      } else {
+        countBadge.textContent = `검색 결과: ${visible} / ${total}개`;
+      }
+    }
+
+    if (emptyMsg) {
+      emptyMsg.style.display = (total > 0 && visible === 0) ? "block" : "none";
+    }
+  }
+
+  searchInput.addEventListener("input", filterCards);
+
+  // Re-run filter when switching tabs in Quarto
+  document.querySelectorAll('a[data-bs-toggle="tab"], button[data-bs-toggle="tab"]').forEach(function (tabEl) {
+    tabEl.addEventListener("shown.bs.tab", function () {
+      filterCards();
+    });
+  });
+
+  filterCards();
+});
+</script>
+```

@@ -1,0 +1,71 @@
+---
+title: "문제 한 스푼 #회차"
+subtitle: "과목명 · 세부 토픽명"
+date: "YYYY-MM-DD"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE [과목 영문명: MICROECONOMICS / MACROECONOMICS / ECONOMETRICS] · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #[회차]
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **[세부 토픽명 입력]**
+:::
+
+::: {.spoon-hero__tags}
+<!-- 과목에 맞는 칩 클래스 선택: .chip--micro, .chip--macro, .chip--metrics -->
+[과목명]{.chip .chip--micro}
+[총 2문제]{.chip}
+[문제당 약 15분]{.chip}
+[석사 졸업시험 대비]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. [영문 주제명 (예: Producer Theory)]
+::: {.topic}
+[세부 토픽 · 핵심 개념 (예: 생산자이론 · 비용최소화와 비용함수)]
+:::
+
+[문제 지문 및 경제적 환경 설정 내용을 작성합니다.]
+
+$$
+q = f(L, K) = L^{1/2} K^{1/2}
+$$
+
+1. [소문항 1 작성]
+2. [소문항 2 작성]
+3. [소문항 3 작성]
+
+::: {.spoon-hint}
+**풀이 팁 / 권장 전개**: `set up` → `derive` → `verify`. 단순 계산 결과 도출에 그치지 않고 경제학적 직관과 연결하여 서술합니다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. [영문 주제명 (예: Partial Equilibrium)]
+::: {.topic}
+[세부 토픽 · 핵심 개념 (예: 부분균형 · 경쟁시장, 조세, 후생)]
+:::
+
+[문제 지문 및 시장 환경 설정 내용을 작성합니다.]
+
+$$
+p_D(Q) = 20 - Q, \qquad p_S(Q) = 2 + \frac{1}{2}Q
+$$
+
+1. [소문항 1 작성]
+2. [소문항 2 작성]
+3. [소문항 3 작성]
+
+::: {.spoon-hint}
+**풀이 팁 / 권장 전개**: 균형식 조건 명시 → 정책/충격 반영 → 후생 및 재분배 효과 분석 순서로 전개합니다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
