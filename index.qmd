@@ -22,27 +22,27 @@ subtitle: Graduate Economics Knowledge Base
 ::: {.home-archive-item}
 **미시경제학**
 
-Chapter 0–4 · 수학적 기초부터 순수교환경제
+수학적 기초에서 소비자·생산자·시장·순수교환경제로 이어지는 과정
 :::
 ::: {.home-archive-item}
 **거시경제학**
 
-Chapter 00–13 · 기술 부록 A–E
+성장·변동·정책·금융을 하나의 거시경제학 지도로 연결하는 과정
 :::
 ::: {.home-archive-item}
 **계량경제학**
 
-Chapter 01–10 · 기술, 확률모형, 식별, OLS, 추론
+관측분포·식별·추정과 계산을 연결하는 계량경제학 과정
 :::
 ::: {.home-archive-item}
 **계산·탐색 보충자료**
 
-Interactive 7종 · R 1종 · MATLAB 5종 · GIF 애니메이션
+계산·시각화·interactive 자료로 본문 개념을 다시 탐색하는 보충자료 모음입니다.
 :::
 ::: {.home-archive-item}
 **논문 아카이브**
 
-8개 분야 · 질문·설계·결과·기여 중심의 논문 노트
+경제학 논문을 질문·설계·결과·기여로 읽고 연결하는 아카이브
 :::
 :::
 :::
@@ -62,7 +62,7 @@ THEORY
 
 [Chapter 0부터 읽기](microeconomics/ch00-foundations/index.html){.study-card__link} →
 
-[Chapter 0–4 · Section별 독립 페이지]{.status}
+[Chapter 지도를 따라 Section별 독립 페이지로 이동]{.status}
 :::
 ::: {.study-card .study-card--macro}
 ::: {.study-card__number}
@@ -76,7 +76,7 @@ MACROECONOMICS
 
 [Chapter 00부터 읽기](macroeconomics/ch00-macro-map/index.html){.study-card__link} →
 
-[Chapter 00–13 · 기술 부록 A–E]{.status}
+[Chapter 지도와 기술 부록을 따라 필요한 주제로 이동]{.status}
 :::
 ::: {.study-card .study-card--econometrics}
 ::: {.study-card__number}
@@ -90,7 +90,7 @@ ECONOMETRICS
 
 [Chapter 01–10 읽기](econometrics/index.html){.study-card__link} →
 
-[Chapter 01–10 · 기술·확률·식별·OLS·유한표본·점근이론]{.status}
+[확률·식별·OLS·추론을 연결하는 Chapter 구성]{.status}
 :::
 ::: {.study-card .study-card--supplements}
 ::: {.study-card__number}
@@ -100,11 +100,11 @@ ECONOMETRICS
 COMPUTATION
 :::
 ### [계산·탐색 보충자료](supplements/index.html)
-Slutsky·Hicks, Solow, Ramsey, OLS 기하, 도구변수, IS–LM, Edgeworth, 대응이론을 계산·시각화로 읽습니다.
+본문의 개념을 직접 계산하고 시각화하며, 필요한 경우 매개변수를 바꾸어 탐색할 수 있습니다.
 
 [보충자료 목록 보기](supplements/index.html){.study-card__link} →
 
-[Interactive 7종 · R 1종 · MATLAB 5종 · 정적 도표와 GIF]{.status}
+[계산·시각화·interactive 자료 모음]{.status}
 :::
 ::: {.study-card .study-card--literature}
 ::: {.study-card__number}
@@ -118,7 +118,7 @@ LITERATURE
 
 [분야별 논문 아카이브 보기](literature/index.html){.study-card__link} →
 
-[8개 분야 · 표준 논문 노트 양식 · 첫 논문 추가 준비]{.status}
+[분야별 질문·설계·결과·기여 중심의 논문 노트]{.status}
 :::
 ::::
 
