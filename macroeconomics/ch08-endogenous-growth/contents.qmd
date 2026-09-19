@@ -1,0 +1,1257 @@
+---
+title: >-
+  내생적 성장과 지식축적
+description: >-
+  Endogenous Growth, Knowledge Accumulation, and Innovation
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::::: {#s01 .section}
+## [8.1]{.section-number}Why Ramsey Is Not Enough
+
+Ramsey는 Solow의 외생적 저축률을 household optimization으로 대체했다.
+그러나 장기 노동자당 성장률의 원천은 여전히 외생적 기술진보였다. 내생적
+성장론의 출발점은 이 마지막 외생변수를 설명하는 것이다.
+
+Ramsey의 balanced growth path에서는
+
+::: math-display
+$$
+\boxed{g_{Y/L}=g_A}
+$$
+:::
+
+이고, 기본모형에서 $g_A$는 모형 밖에서 주어진다. 따라서
+
+:::: chapter-thesis
+What remains exogenous?
+
+::: math-display
+$$
+\boxed{
+\text{endogenous saving}
+\;\not\Rightarrow\;
+\text{endogenous long-run growth}
+}
+$$
+:::
+
+저축을 최적화의 결과로 만들었다고 해서 기술성장의 원인까지 설명한 것은
+아니다. 이제 $A$의 움직임 자체를 경제적 선택과 생산기술의 결과로
+만들어야 한다.
+::::
+
+::: section-bridge
+Chapter 8의 질문은 "저축률을 어떻게 정하는가?"가 아니라 "생산된 요소에
+대한 수익체감이 왜 장기성장을 멈추며, 어떤 메커니즘이 이를 상쇄할 수
+있는가?"이다.
+:::
+:::::::
+
+:::::: {#s02 .section}
+## [8.2]{.section-number}Diminishing Returns and the Growth Problem
+
+Solow와 Ramsey에서 자본축적만으로 지속성장이 어려운 이유는 물적자본의
+한계생산이 감소하기 때문이다. 내생적 성장론은 이 구조를 제거하거나 다른
+축적 가능한 요소로 상쇄한다.
+
+가장 단순한 예로
+
+::: math-display
+$$
+Y=K^\alpha,
+\qquad 0<\alpha<1
+$$
+:::
+
+라면 자본의 한계생산은
+
+::: math-display
+$$
+MPK=\alpha K^{\alpha-1}
+\longrightarrow 0
+\qquad\text{as }K\to\infty.
+$$
+:::
+
+추가 자본의 수익이 계속 하락하므로, 동일한 방식의 자본축적만으로는 양의
+1인당 성장률을 영구히 유지하기 어렵다.
+
+::: reading-rule
+**Reading rule:** endogenous growth의 핵심은 "saving을 내생화했는가"가
+아니다. **재생산 가능한 요소(reproducible factors)에 대한 총수익이
+장기적으로 체감하는가**가 핵심이다.
+:::
+::::::
+
+:::::::: {#s03 .section}
+## [8.3]{.section-number}The AK Model: Minimal Endogenous Growth
+
+가장 작은 내생적 성장모형은 생산기술을 자본에 선형으로 두는 AK 모형이다.
+이 단순한 변경만으로 한계생산 체감이 사라지고 장기 성장률이 모형
+내부에서 결정된다.
+
+:::: equation-card
+Linear technology
+
+::: math-display
+$$
+\boxed{Y=AK},
+\qquad A>0.
+$$
+:::
+
+여기서 $A$는 생산성 파라미터이고, 이 절에서는 외생적 성장률이 아니라
+일정한 기술계수다.
+::::
+
+자본의 한계생산은
+
+::: math-display
+$$
+\boxed{MPK=A}
+$$
+:::
+
+이므로 $K$가 증가해도 수익률이 떨어지지 않는다. aggregate resource
+constraint는
+
+::: math-display
+$$
+\dot K=AK-C-\delta K
+$$
+:::
+
+가 된다.
+
+Interpretation · Broad capital
+
+::: details-body
+$K$를 기계·건물 같은 물적자본만으로 해석하면 $Y=AK$는 강한 가정이다.
+따라서 AK의 $K$는 물적자본뿐 아니라 인적자본, 조직자본, 지식 관련 자본
+등 재생산 가능한 요소의 복합체로 넓게 해석할 수 있다. AK는 구체적인
+혁신과정이라기보다 "생산된 요소 전체에 asymptotically constant returns가
+존재하면 무엇이 달라지는가?"를 보여주는 benchmark다.
+:::
+::::::::
+
+:::::::::: {#s04 .section}
+## [8.4]{.section-number}Growth in the AK Economy
+
+Ramsey household를 AK technology와 결합하면 장기 성장률이 선호와
+생산성의 함수로 직접 결정된다. Solow의 level effect와 달리 성장률 자체가
+경제적 환경에 반응할 수 있다.
+
+대표가계가 CRRA 효용
+
+::: math-display
+$$
+\int_0^\infty e^{-\rho t}
+\frac{C(t)^{1-\sigma}}{1-\sigma}\,dt,
+\qquad \sigma>0
+$$
+:::
+
+를 극대화한다고 하자. 순자본수익률은 $A-\delta$이므로 Euler equation은
+
+:::: equation-card
+AK consumption growth
+
+::: math-display
+$$
+\boxed{
+\frac{\dot C}{C}
+=
+\frac{A-\delta-\rho}{\sigma}
+}
+$$
+:::
+::::
+
+balanced growth path에서 소비와 자본의 비율이 일정하면
+
+::: math-display
+$$
+\boxed{
+g_C=g_K=g_Y
+=
+\frac{A-\delta-\rho}{\sigma}
+}
+$$
+:::
+
+이다. 따라서 생산성, 감가상각, 시간선호, 기간간대체탄력성이 장기
+성장률에 직접 들어간다.
+
+::: display-table-wrap
+                         Solow / Ramsey   AK
+  ---------------------- ---------------- -------------------------
+  축적요소의 수익        체감             상수
+  높은 축적의 장기효과   주로 수준효과    성장률효과 가능
+  장기 성장률            외생적 $g_A$     기술·선호에 의해 내생적
+:::
+
+:::: {.statement .warning}
+::: statement-head
+Do not confuse the mechanism
+:::
+
+AK가 지속성장을 만드는 이유는 단순히 "저축을 많이 하기 때문"이 아니다.
+핵심은 자본이 축적되어도 그 한계수익이 체감하지 않는다는 점이다.
+::::
+::::::::::
+
+::::::: {#s05 .section}
+## [8.5]{.section-number}Knowledge as a Produced State Variable
+
+AK는 지속성장이 가능한 최소조건을 보여주지만, 무엇이 그 비체감 수익을
+만드는지는 설명하지 않는다. 보다 구체적인 접근은 기술 $A$를 경제가 직접
+생산하는 state variable로 바꾸는 것이다.
+
+기존 성장모형에서는
+
+::: math-display
+$$
+\dot A=g_AA
+$$
+:::
+
+가 외생적으로 주어졌다. 이제 이를
+
+:::: equation-card
+Endogenous knowledge accumulation
+
+::: math-display
+$$
+\boxed{
+\dot A
+=
+\mathcal G(K_A,L_A,A)
+}
+$$
+:::
+::::
+
+처럼 바꾼다. $K_A$와 $L_A$는 연구에 투입되는 자본과 노동이다. 따라서
+경제는 이제 하나가 아니라 두 개의 축적 가능한 state를 가진다.
+
+::: math-display
+$$
+\boxed{(K,A)}
+$$
+:::
+
+이 변화가 endogenous technological change의 출발점이다.
+:::::::
+
+::::::: {#s06 .section}
+## [8.6]{.section-number}Goods and R&D Sectors
+
+지식을 생산하려면 conventional goods production과 R&D를 분리해야 한다.
+경제는 제한된 노동과 자본을 현재 생산과 미래 지식생산 사이에 배분한다.
+
+노동과 자본을
+
+::: math-display
+$$
+L=L_Y+L_A,
+\qquad
+K=K_Y+K_A
+$$
+:::
+
+로 나누고, 일정한 연구투입 비율을
+
+::: math-display
+$$
+L_A=a_LL,
+\qquad
+K_A=a_KK,
+\qquad
+0<a_L,a_K<1
+$$
+:::
+
+로 두자. goods sector의 Cobb--Douglas technology는
+
+:::: equation-card
+Goods production
+
+::: math-display
+$$
+\boxed{
+Y
+=
+[(1-a_K)K]^\alpha
+[A(1-a_L)L]^{1-\alpha}
+},
+\qquad 0\le\alpha<1.
+$$
+:::
+::::
+
+여기서 중요한 점은 아이디어 $A$가 한 sector에서 사용된다고 다른
+sector에서 사라지지 않는다는 것이다. 이 비경합성이 뒤에서 시장구조를
+바꾼다.
+:::::::
+
+::::::::::::: {#s07 .section}
+## [8.7]{.section-number}The Knowledge Production Function
+
+R&D sector는 연구자·연구자본·기존 지식을 결합해 새로운 아이디어를
+만든다. 이때 기존 지식이 미래 발견을 얼마나 쉽게 만드는지가 장기동학을
+좌우한다.
+
+:::: equation-card
+Knowledge technology
+
+::: math-display
+$$
+\boxed{
+\dot A
+=
+B K_A^{\beta_A}L_A^{\gamma_A}A^\phi
+},
+\qquad
+B>0,
+\quad \beta_A,\gamma_A\ge0.
+$$
+:::
+::::
+
+:::: definition-row
+::: term
+$B$
+:::
+
+R&D의 기본 생산성.
+::::
+
+:::: definition-row
+::: term
+$\beta_A$
+:::
+
+연구자본이 새로운 아이디어 생산에 미치는 탄력성.
+::::
+
+:::: definition-row
+::: term
+$\gamma_A$
+:::
+
+연구노동이 새로운 아이디어 생산에 미치는 탄력성.
+::::
+
+:::: definition-row
+::: term
+$\phi$
+:::
+
+기존 knowledge stock이 새로운 knowledge 생산에 미치는 효과.
+::::
+
+### Standing on shoulders vs. fishing out
+
+$\phi>0$이면 기존 지식이 새로운 발견을 돕는 *standing on shoulders*
+효과가 존재한다. 반대로 발견하기 쉬운 아이디어가 먼저 소진되어 연구가
+점점 어려워지는 힘은 *fishing out*으로 해석할 수 있다. 중요한 것은 이 두
+힘의 순효과가 $\phi$에 담긴다는 점이다.
+:::::::::::::
+
+:::::::::::: {#s08 .section}
+## [8.8]{.section-number}Knowledge Growth Dynamics
+
+지식축적의 장기성질을 가장 투명하게 보려면 먼저 물적자본을 제거한다.
+그러면 하나의 성장률 방정식으로 감소수익·상수수익·증가수익의 세 regime을
+비교할 수 있다.
+
+$\alpha=\beta_A=0$이라 두면
+
+::: math-display
+$$
+Y=A(1-a_L)L,
+$$ $$
+\dot A
+=
+B(a_LL)^{\gamma_A}A^\phi.
+$$
+:::
+
+따라서
+
+:::: equation-card
+Growth rate of knowledge
+
+::: math-display
+$$
+\boxed{
+g_A
+\equiv
+\frac{\dot A}{A}
+=
+Ba_L^{\gamma_A}L^{\gamma_A}A^{\phi-1}
+}
+$$
+:::
+::::
+
+노동이 $\dot L/L=n$으로 증가한다고 하고 로그미분하면
+
+::: math-display
+$$
+\boxed{
+\frac{\dot g_A}{g_A}
+=
+\gamma_A n+(\phi-1)g_A
+}
+$$
+:::
+
+### Case I · $\phi<1$
+
+기존 지식의 자기증폭이 비례보다 약하면 안정적인 성장률이 존재한다.
+
+::: math-display
+$$
+\boxed{
+g_A^*
+=
+\frac{\gamma_A n}{1-\phi}
+}
+$$
+:::
+
+이 경우 $a_L$ 증가는 단기적으로 $g_A$를 높이지만 장기 성장률은 다시
+$g_A^*$로 수렴한다. 따라서 연구비중 증가는 장기적으로 주로 **level
+effect**를 만든다.
+
+### Case II · $\phi=1$
+
+지식생산이 기존 지식에 정확히 비례하면
+
+::: math-display
+$$
+g_A=B(a_LL)^{\gamma_A}.
+$$
+:::
+
+특히 $n=0$이면 $L$이 일정하므로 $g_A$가 일정하다. 이때
+
+::: math-display
+$$
+a_L\uparrow
+\quad\Rightarrow\quad
+g_A\uparrow
+$$
+:::
+
+가 영구적으로 성립한다. R&D 자원배분이 장기 성장률을 직접 바꾸는 가장
+단순한 fully endogenous growth case다.
+
+### Case III · $\phi>1$
+
+기존 지식이 새로운 지식생산을 비례 이상으로 증폭하면 $g_A$ 자체가 계속
+상승할 수 있다. 이는 accelerating growth를 만들며, 일부
+parameterization에서는 finite-time explosion까지 나타날 수 있다.
+
+:::: {.statement .warning}
+::: statement-head
+A model lesson
+:::
+
+"성장이 endogenous하다"는 것만으로 이론이 강한 것은 아니다. 장기결과는
+knowledge technology의 curvature, 특히 $\phi$에 매우 민감하다.
+::::
+::::::::::::
+
+::::::: {#s09 .section}
+## [8.9]{.section-number}Returns to Produced Factors and Scale Effects
+
+앞의 세 regime을 묶는 핵심은 축적 가능한 요소에 대한 returns다. 동시에
+연구인력의 규모가 장기성장률에 들어가는지 여부가 endogenous-growth
+model의 중요한 실증예측을 만든다.
+
+::: display-table-wrap
+  Knowledge returns   조건       장기동학
+  ------------------- ---------- -------------------------------------------------------
+  Decreasing          $\phi<1$   안정적인 성장률로 수렴; 연구비중 변화는 주로 수준효과
+  Constant            $\phi=1$   적절한 조건에서 지속적인 내생적 성장
+  Increasing          $\phi>1$   가속성장 또는 폭발적 동학 가능
+:::
+
+### Scale effects
+
+knowledge growth 식
+
+::: math-display
+$$
+g_A
+=
+Ba_L^{\gamma_A}L^{\gamma_A}A^{\phi-1}
+$$
+:::
+
+은 연구자 수가 많을수록 더 많은 발견이 가능하다는 직관을 담는다. 어떤
+specification에서는
+
+::: math-display
+$$
+L\uparrow
+\quad\Rightarrow\quad
+g_A\uparrow
+$$
+:::
+
+가 장기적으로도 성립한다. 이를 **scale effect**라고 한다.
+
+::: reading-rule
+**이론과 실증의 연결:** scale effect는 단순한 부수적 예측이 아니라
+R&D-based growth theory의 기술가정을 평가하는 중요한 empirical
+implication이다. 실제 평가는 다음 Chapter 9에서 다룬다.
+:::
+:::::::
+
+:::::::: {#s10 .section}
+## [8.10]{.section-number}Nonrivalry and Excludability
+
+지식은 물적자본과 근본적으로 다르다. 한 경제주체가 어떤 아이디어를
+사용한다고 해서 다른 경제주체가 같은 아이디어를 사용하는 데 방해가 되지
+않는다. 이 비경합성이 성장과 시장구조를 동시에 바꾼다.
+
+:::: {.statement .definition}
+::: statement-head
+Nonrivalry
+:::
+
+한 사람이 재화를 사용해도 다른 사람의 사용가능량이 줄지 않는 성질.
+아이디어와 지식은 대표적인 nonrival object다.
+::::
+
+:::: {.statement .definition}
+::: statement-head
+Excludability
+:::
+
+소유자가 다른 사람의 사용을 배제할 수 있는 정도. 지식의 excludability는
+특허·저작권·영업비밀과 같은 제도와 지식의 성격에 의해 달라진다.
+::::
+
+::: display-table-wrap
+                  Rival                       Nonrival
+  --------------- --------------------------- ----------------------------
+  Excludable      일반적인 private good       patent-protected idea
+  Nonexcludable   일부 common-resource 사례   basic scientific knowledge
+:::
+
+따라서 knowledge는 본질적으로 nonrival이지만 반드시 nonexcludable인 것은
+아니다. 이 구분이 innovation incentives의 제도적 기반이다.
+::::::::
+
+:::::: {#s11 .section}
+## [8.11]{.section-number}Why Perfect Competition Is Not Enough
+
+완전경쟁은 재화가격을 한계비용과 같게 만든다. 그러나 이미 발견된
+아이디어를 추가 사용자에게 제공하는 한계비용이 거의 0이라면,
+완전경쟁가격만으로는 최초의 연구개발비용을 회수하기 어렵다.
+
+아이디어의 추가 사용에 대한 marginal cost가 0이라면 완전경쟁에서는
+
+::: math-display
+$$
+p_A=MC_A=0.
+$$
+:::
+
+그러면 민간 혁신자가 upfront R&D cost를 회수할 수 없다. 따라서 private
+innovation을 설명하려면 일반적으로
+
+:::: chapter-thesis
+Innovation requires a departure
+
+::: math-display
+$$
+\boxed{
+\text{market power}
+\quad\text{or}\quad
+\text{public / subsidized research}
+}
+$$
+:::
+::::
+
+가 필요하다. 특허권은 아이디어 사용에 일정한 excludability를 부여하고,
+그 결과 monopoly rent가 혁신의 보상이 된다.
+::::::
+
+::::::::::::::::::::::: {#s12 .section}
+## [8.12]{.section-number}The Romer Model: Ideas, Patents, and Variety Expansion
+
+Romer형 endogenous technological change model은 새로운 아이디어를 새로운
+intermediate variety의 설계도로 해석한다. 혁신은 새로운 variety를
+추가하고, patent는 그 아이디어에 대한 일시적 또는 영구적 시장지배력을
+제공한다.
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Researchers
+:::
+
+연구노동을 사용하여 새로운 idea를 생산한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Patent holders
+:::
+
+새 아이디어에 대한 독점적 사용권을 보유한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Intermediate producers
+:::
+
+각 아이디어를 embodied input으로 생산하고 markup을 부과한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Final-goods firms
+:::
+
+다양한 intermediate inputs를 결합하여 최종재를 생산한다.
+::::
+::::::
+:::::::::::::::::::
+
+### Variety expansion
+
+현재 사용 가능한 아이디어가 $i\in[0,A]$라고 하고, intermediate input을
+$x(i)$라 하자. 대표적인 aggregator는
+
+::: math-display
+$$
+Y
+=
+\left[
+\int_0^A x(i)^\eta\,di
+\right]^{1/\eta},
+\qquad 0<\eta<1.
+$$
+:::
+
+새로운 idea는 새로운 input variety를 추가한다. 따라서
+
+::: math-display
+$$
+A\uparrow
+\quad\Rightarrow\quad
+\text{greater specialization}
+\quad\Rightarrow\quad
+Y\uparrow.
+$$
+:::
+
+::: reading-rule
+**핵심:** Romer model의 목적은 "아이디어가 많으면 생산이 늘어난다"에서
+끝나지 않는다. 왜 경제주체가 비용을 들여 아이디어를 만들 유인이 있는지를
+monopoly profit과 free entry로 닫는 데 있다.
+:::
+:::::::::::::::::::::::
+
+:::::: {#s13 .section}
+## [8.13]{.section-number}Profits, Patents, and the Value of Ideas
+
+Patent holder는 downward-sloping demand에 직면하므로 한계비용보다 높은
+가격을 부과한다. 이 monopoly profit의 현재가치가 새 아이디어의
+시장가치를 만든다.
+
+개별 intermediate producer의 이윤을 $\pi(t)$라 하면 아이디어의 가치는
+
+:::: equation-card
+Value of an idea
+
+::: math-display
+$$
+\boxed{
+V_A(t)
+=
+\int_t^\infty
+\exp\!\left[-\int_t^\tau r(s)\,ds\right]
+\pi(\tau)\,d\tau
+}
+$$
+:::
+::::
+
+R&D 부문에 free entry가 있다면 새로운 아이디어를 만드는 기대비용과 그
+가치가 같아진다.
+
+::: math-display
+$$
+\boxed{
+V_A
+=
+\text{marginal cost of creating an idea}
+}
+$$
+:::
+
+이 zero-profit/free-entry condition이 research activity를 시장 내부에서
+결정하는 핵심 equilibrium condition이다.
+::::::
+
+::::::: {#s14 .section}
+## [8.14]{.section-number}Endogenous Allocation to R&D
+
+초기의 two-sector model에서는 연구노동 비중 $a_L$을 외생적으로 주었다.
+Romer형 모형에서는 연구의 private return이 goods production의 임금과
+비교되면서 R&D employment가 내생적으로 결정된다.
+
+노동시장이 경쟁적이면 동일한 노동은 두 sector에서 같은 보상을 받아야
+한다.
+
+::: math-display
+$$
+\boxed{
+w_A=w_Y}
+$$
+:::
+
+동시에 R&D free entry는
+
+::: math-display
+$$
+\boxed{
+\text{value of innovation}
+=
+\text{cost of innovation}
+}
+$$
+:::
+
+을 요구한다. 따라서 equilibrium chain은
+
+:::: chapter-thesis
+Endogenous R&D
+
+::: math-display
+$$
+\boxed{
+\text{profit incentives}
+\rightarrow
+L_A
+\rightarrow
+\dot A
+\rightarrow
+\text{long-run growth}
+}
+$$
+:::
+::::
+
+가 된다. 성장률이 단순히 외생적으로 주어진 연구비중에 의존하는 것이
+아니라 market incentives와 general equilibrium의 결과가 된다.
+:::::::
+
+:::::: {#s15 .section}
+## [8.15]{.section-number}Decentralized Equilibrium vs. Social Planner
+
+지식이 nonrival이고 혁신자가 모든 사회적 편익과 비용을 내부화하지 못하면
+private return과 social return이 달라진다. 따라서 decentralized R&D
+allocation은 일반적으로 planner allocation과 일치하지 않는다.
+
+::: display-table-wrap
+  Effect                      방향       경제적 내용
+  --------------------------- ---------- ----------------------------------------------------------
+  Knowledge / R&D spillover   Positive   오늘의 아이디어가 미래 연구자의 생산성을 높임
+  Consumer-surplus effect     Positive   혁신이 downstream users와 소비자에게 추가 surplus를 제공
+  Business-stealing effect    Negative   새로운 기술이 기존 혁신자의 rent를 잠식
+:::
+
+:::: {.statement .warning}
+::: statement-head
+Do not overstate the sign
+:::
+
+"시장 R&D는 항상 너무 적다"고 일반적으로 결론내리면 안 된다. 각
+외부효과의 순효과는 model specification과 market structure에 따라 달라질
+수 있다. 핵심은 private marginal return과 social marginal return이
+일치할 이유가 없다는 점이다.
+::::
+
+따라서 subsidy, patent protection, public basic research는 모두 growth
+policy와 연결될 수 있지만, 최적정책은 어떤 왜곡이 지배적인지에 따라
+달라진다.
+::::::
+
+:::::::::: {#s16 .section}
+## [8.16]{.section-number}Learning-by-Doing and the AK Connection
+
+지식축적은 반드시 별도의 연구실에서만 일어날 필요가 없다. 생산과 투자
+자체가 새로운 know-how를 만들어낸다면 learning-by-doing을 통해 외부성이
+누적되고, 결과적으로 AK형 기술이 나타날 수 있다.
+
+goods production을
+
+::: math-display
+$$
+Y=K^\alpha(AL)^{1-\alpha}
+$$
+:::
+
+로 두고 knowledge가 자본축적의 부산물로
+
+::: math-display
+$$
+A=BK^\varphi
+$$
+:::
+
+라고 하자. 대입하면
+
+::: math-display
+$$
+Y
+=
+B^{1-\alpha}
+K^{\alpha+\varphi(1-\alpha)}
+L^{1-\alpha}.
+$$
+:::
+
+따라서 reproducible capital $K$의 총 exponent는
+
+::: math-display
+$$
+\alpha+\varphi(1-\alpha).
+$$
+:::
+
+특히 $\varphi=1$이면
+
+::: math-display
+$$
+\alpha+(1-\alpha)=1,
+$$
+:::
+
+이므로 fixed labor 아래
+
+:::: equation-card
+Effective AK technology
+
+::: math-display
+$$
+\boxed{Y=\widetilde A K}
+$$
+:::
+::::
+
+형태가 된다. 즉 capital의 직접 생산효과와 learning externality가 합쳐져
+총수익의 체감을 상쇄한다.
+::::::::::
+
+:::::::::::::::::::::: {#s17 .section}
+## [8.17]{.section-number}One Unifying Principle
+
+AK, knowledge accumulation, R&D, learning-by-doing, human capital은
+표면적으로 서로 다른 모형처럼 보인다. 그러나 장기성장을 만들어내는
+공통논리는 하나다.
+
+:::: chapter-thesis
+Unifying principle
+
+::: math-display
+$$
+\boxed{
+\text{How rapidly do returns to reproducible factors decline as those factors accumulate?}
+}
+$$
+:::
+::::
+
+지속적인 1인당 성장을 위해서는 생산 가능한 요소 전체에 대해 한계수익
+체감을 제거하거나 지식·인적자본·외부효과 등으로 충분히 상쇄하는
+메커니즘이 필요하다.
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+AK
+:::
+
+선형기술로 비체감 수익을 직접 가정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Knowledge accumulation
+:::
+
+지식이 스스로 미래 지식생산을 돕는다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+R&D models
+:::
+
+profit incentives가 혁신자원 배분과 지식성장을 결정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Learning-by-doing
+:::
+
+생산활동이 knowledge externality를 만들어 private capital보다 큰 social
+return을 만든다.
+::::
+::::::
+:::::::::::::::::::
+::::::::::::::::::::::
+
+::::::: {#s18 .section}
+## [8.18]{.section-number}Solow, Ramsey, and Endogenous Growth
+
+Part II의 세 성장모형은 서로 대체재가 아니라 단계적인 질문의 확장이다.
+각 모형은 이전 모형에서 외생적으로 남아 있던 하나의 객체를 추가로
+설명한다.
+
+::: display-table-wrap
+                       Solow    Ramsey         Endogenous Growth
+  -------------------- -------- -------------- -----------------------------------------
+  저축                 외생적   내생적         내생적 가능
+  기술성장             외생적   외생적         모형 내부
+  핵심 state           $k$      $(k,c)$ 동태   $K,A$ 또는 broader reproducible factors
+  장기성장률           $g_A$    $g_A$          기술·선호·R&D 구조에 의해 결정 가능
+  시장구조             경쟁     경쟁           R&D에서 불완전경쟁 가능
+  정책의 성장률 효과   제한적   제한적         구조에 따라 영구효과 가능
+:::
+
+::: math-display
+$$
+\boxed{
+\begin{aligned}
+\text{Solow:}\;& s,\ g_A\text{ exogenous},\\
+\text{Ramsey:}\;& s\text{ endogenous},\ g_A\text{ exogenous},\\
+\text{Endogenous growth:}\;& g_A\text{ endogenous}.
+\end{aligned}
+}
+$$
+:::
+
+:::: {.statement .remark}
+::: statement-head
+Endogenous does not mean assumption-free
+:::
+
+예를 들어 $\dot A=BA$는 장기성장을 내생적으로 만들지만, 그 결과는
+knowledge production이 정확히 선형이라는 강한 기술가정에 의존한다.
+결과가 모형 내부에서 결정된다는 사실과 그 결과를 만드는 구조적 가정이
+설득력 있다는 것은 별개의 문제다.
+::::
+:::::::
+
+:::::::::::::::::::::: {#s19 .section}
+## [8.19]{.section-number}Chapter Summary and Empirical Bridge
+
+내생적 성장론은 "기술진보율 $g$"를 하나의 외생적 숫자로 두는 대신,
+지식의 생산기술·연구자원 배분·시장구조·외부효과를 통해 장기성장의 원인을
+경제 안에서 설명하려 한다. 그러나 어떤 메커니즘이 실제로 중요한지는
+이론만으로 결정되지 않는다.
+
+::: math-display
+$$
+\boxed{Y=AK}
+$$ $$
+\boxed{
+\dot A
+=
+B K_A^{\beta_A}L_A^{\gamma_A}A^\phi
+}
+$$ $$
+\boxed{
+\frac{\dot A}{A}
+=
+B K_A^{\beta_A}L_A^{\gamma_A}A^{\phi-1}
+}
+$$
+:::
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Remove diminishing returns
+:::
+
+AK는 reproducible factors에 대한 수익체감이 사라지면 지속성장이 가능함을
+보여준다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Produce knowledge
+:::
+
+$A$를 state variable로 만들고 knowledge technology의 curvature를
+분석한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Create incentives
+:::
+
+nonrival knowledge를 민간이 생산하게 하려면 patents, markup, free entry
+같은 시장구조가 필요하다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Evaluate the mechanism
+:::
+
+scale effects, TFP, R&D intensity, capital contribution이 실제 자료와
+맞는지 확인해야 한다.
+::::
+::::::
+:::::::::::::::::::
+
+::: reading-rule
+**이 장의 결론:** 지속적 성장은 단순한 자본축적 자체보다 **재생산 가능한
+요소의 수익구조와 지식의 생산·확산 방식**에 달려 있다. 다음 Chapter
+9에서는 growth accounting과 empirical evidence를 이용해 이러한
+성장메커니즘이 실제 데이터를 얼마나 설명하는지 평가한다.
+:::
+::::::::::::::::::::::
+
+::: {#check .section}
+## Learning Check
+
+1.  Ramsey가 저축을 내생화했음에도 장기 노동자당 성장률을 설명하지 못한
+    이유는 무엇인가?
+2.  왜 diminishing marginal product of capital은 자본축적만으로
+    지속성장을 어렵게 만드는가?
+3.  AK technology에서 $MPK$가 왜 일정하며, 이것이 장기 성장률에 어떤
+    차이를 만드는가?
+4.  CRRA 가계가 있는 AK 모형에서 $\dot C/C=(A-\delta-\rho)/\sigma$를
+    설명할 수 있는가?
+5.  지식 $A$를 produced state variable로 본다는 것은 무엇을 의미하는가?
+6.  goods sector와 R&D sector를 분리하는 이유는 무엇인가?
+7.  knowledge production function의 $\phi$가 $1$보다 작거나 같거나 큰 세
+    경우를 비교할 수 있는가?
+8.  $\phi<1$에서 연구노동 비중의 상승이 장기 성장률이 아니라 주로
+    수준효과를 만드는 이유는 무엇인가?
+9.  scale effect는 무엇이며 왜 empirical implication이 중요한가?
+10. nonrivalry와 excludability를 구분할 수 있는가?
+11. 왜 private innovation을 설명하려면 완전경쟁에서 벗어나는 장치가
+    필요한가?
+12. Romer model에서 patent, monopoly profit, free entry가 R&D
+    allocation을 어떻게 결정하는가?
+13. private return to R&D와 social return이 달라지는 세 가지 대표적
+    효과는 무엇인가?
+14. learning-by-doing이 어떻게 effective AK technology를 만들 수 있는가?
+15. "endogenous growth"와 "assumption-free explanation"이 같은 말이 아닌
+    이유는 무엇인가?
+:::
+
+::::::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Endogenous growth
+:::
+
+장기 성장률이 외생적 기술진보율로 주어지지 않고 모형 내부의
+기술·선호·자원배분·혁신구조에서 결정되는 성장.
+::::
+
+:::: definition-row
+::: term
+AK model
+:::
+
+$Y=AK$처럼 reproducible capital에 대한 한계생산이 체감하지 않는 선형
+성장모형.
+::::
+
+:::: definition-row
+::: term
+Reproducible factor
+:::
+
+경제 내부의 투자나 생산을 통해 축적할 수 있는 생산요소. 물적자본,
+인적자본, 지식 등이 예다.
+::::
+
+:::: definition-row
+::: term
+Knowledge production
+:::
+
+연구투입과 기존 지식을 사용해 새로운 아이디어를 생산하는 과정.
+::::
+
+:::: definition-row
+::: term
+Standing on shoulders
+:::
+
+기존 지식이 미래 연구를 더 생산적으로 만드는 자기강화 효과.
+::::
+
+:::: definition-row
+::: term
+Fishing out
+:::
+
+쉬운 발견이 먼저 이루어져 추가 지식발견이 점점 어려워지는 효과.
+::::
+
+:::: definition-row
+::: term
+Scale effect
+:::
+
+경제나 연구부문의 규모가 클수록 장기 성장률이 높아지는 이론적 예측.
+::::
+
+:::: definition-row
+::: term
+Nonrivalry
+:::
+
+한 사람의 사용이 다른 사람의 사용가능량을 줄이지 않는 성질. 지식의
+핵심적 특성.
+::::
+
+:::: definition-row
+::: term
+Excludability
+:::
+
+소유자가 타인의 사용을 막을 수 있는 정도. 특허와 지적재산권이 이를
+변화시킨다.
+::::
+
+:::: definition-row
+::: term
+Variety expansion
+:::
+
+새 아이디어가 새로운 intermediate input의 종류를 늘리고 specialization을
+통해 생산성을 높이는 성장메커니즘.
+::::
+
+:::: definition-row
+::: term
+Free-entry condition
+:::
+
+R&D 진입이 자유로울 때 새 아이디어의 시장가치가 그 아이디어를 만드는
+한계비용과 같아지는 조건.
+::::
+
+:::: definition-row
+::: term
+Knowledge spillover
+:::
+
+혁신자가 보상받지 못하는 방식으로 새로운 지식이 다른 생산자나 미래
+연구자의 생산성을 높이는 외부효과.
+::::
+
+:::: definition-row
+::: term
+Business stealing
+:::
+
+새로운 혁신이 기존 기업 또는 기존 아이디어 보유자의 rent를 잠식하는
+효과.
+::::
+
+:::: definition-row
+::: term
+Learning-by-doing
+:::
+
+별도의 의도적 R&D가 아니라 생산이나 투자활동 자체의 부산물로 지식이
+축적되는 메커니즘.
+::::
+:::::::::::::::::::::::::::::::

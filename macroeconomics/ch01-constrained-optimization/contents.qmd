@@ -1,0 +1,812 @@
+---
+title: >-
+  제약최적화와 기간간 선택
+description: >-
+  Constrained Optimization, Shadow Prices, and Intertemporal Choice
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+:::::::: {#s01 .section}
+## [1.1]{.section-number}거시경제학에서의 최적화
+
+현대 거시경제학에서 가계·기업·정책당국의 행동은 대개 **목적함수와
+제약조건**의 조합으로 표현된다. 따라서 모형을 읽을 때는 먼저 무엇을
+선택하는지, 무엇이 주어져 있는지, 어떤 제약이 선택을 묶는지를 구분해야
+한다.
+
+::: chapter-thesis
+이 장의 핵심 문법
+
+거시경제학의 많은 핵심 방정식은 최적화 문제의 일계조건이다. 소비 Euler
+equation, 노동공급 조건, 자본수요 조건, 자산가격식은 서로 다른 주제처럼
+보이지만 모두 **한계비용과 한계편익을 제약 아래에서 일치시키는
+조건**으로 읽을 수 있다.
+:::
+
+일반적인 선택문제를 추상적으로 쓰면 다음과 같다.
+
+::: math-display
+$$
+\max_{x}\; f(x)
+\qquad \text{s.t.}\qquad
+x\in\mathcal F,
+$$
+:::
+
+여기서 $f$는 목적함수이고 $\mathcal F$는 기술, 예산, 자원 또는 제도적
+제약이 규정하는 feasible set이다. 거시모형에서는 현재의 선택이 미래의
+feasible set까지 바꾸는 경우가 많기 때문에, 정적 제약최적화의 논리를
+정확히 이해하는 것이 동태최적화의 출발점이 된다.
+
+::::: callout-strip
+::: left
+읽는 순서
+:::
+
+::: right
+선택변수 → 목적함수 → 제약 → Lagrangian → 일계조건 → 경제적 해석.
+계산보다 이 순서를 먼저 복원한다.
+:::
+:::::
+::::::::
+
+:::::::::::: {#s02 .section}
+## [1.2]{.section-number}등식제약 최적화
+
+가장 기본적인 문제는 하나의 등식제약 아래에서 목적함수를 극대화하는
+것이다. Lagrange 방법은 제약을 목적함수에 가격처럼 붙여, feasible set
+위의 최적조건을 무제약 형태의 일계조건으로 표현한다.
+
+### 1.2.1 Lagrangian과 일계조건 {#s021}
+
+다음 문제를 생각하자.
+
+::: math-display
+$$
+V(b)
+=\max_{x\in\mathbb R^n} f(x)
+\qquad\text{s.t.}\qquad
+g(x)=b.
+$$
+:::
+
+Lagrangian을
+
+::: math-display
+$$
+\mathcal L(x,\lambda;b)
+=f(x)+\lambda\,[b-g(x)]
+$$
+:::
+
+로 정의하면 내부해의 일계조건은
+
+::: math-display
+$$
+\nabla_x\mathcal L
+=\nabla f(x)-\lambda\nabla g(x)=0,
+\qquad
+g(x)=b.
+$$
+:::
+
+따라서 최적점 $(x^*,\lambda^*)$에서는
+
+:::: equation-card
+핵심 조건
+
+::: math-display
+$$
+\boxed{\nabla f(x^*)=\lambda^*\nabla g(x^*)}.
+$$
+:::
+
+목적함수의 기울기와 제약의 기울기가 평행해야 한다. feasible direction을
+따라 일계에서 목적함수를 더 증가시킬 수 없다는 뜻이다.
+::::
+
+벡터 $d$가 제약을 일계에서 유지하는 feasible direction이라면
+$\nabla g(x^*)'d=0$이다. 위의 조건에서
+
+::: math-display
+$$
+\nabla f(x^*)'d
+=\lambda^*\nabla g(x^*)'d
+=0
+$$
+:::
+
+이므로, feasible set에 접하는 작은 이동은 최적점에서 목적함수를 일계에서
+변화시키지 않는다.
+
+### 1.2.2 필요조건과 충분조건 {#s022}
+
+일계조건을 만족한다고 해서 언제나 최적해가 되는 것은 아니다. 일계조건은
+일반적으로 **후보점**을 찾는 조건이며, 최적성의 충분성을 위해서는
+목적함수와 feasible set의 곡률이 중요하다.
+
+:::: {.statement .theorem}
+::: statement-head
+Concavity와 충분성
+:::
+
+목적함수 $f$가 concave이고 feasible set이 convex이며 적절한 정칙조건이
+성립하면, KKT/Lagrange 조건을 만족하는 점은 전역최적해다. 특히 $f$가
+strictly concave이면 최적해는 존재하는 범위에서 유일하다.
+::::
+
+Technical Note · 2차조건은 언제 필요한가?
+
+::: details-body
+무제약 문제에서는 Hessian의 음정정부호가 엄격한 국소최대의 대표적
+충분조건이다. 등식제약 문제에서는 임의의 방향이 아니라 제약에 접하는
+feasible directions에 대해 목적함수의 2차변화가 음이어야 한다. 뒤의
+거시모형에서는 선호의 strict concavity와 생산기술의 concavity가 이러한
+조건을 구조적으로 보장하는 경우가 많다.
+:::
+::::::::::::
+
+::::::::: {#s03 .section}
+## [1.3]{.section-number}Lagrange 승수와 Shadow Price
+
+Lagrange 승수 $\lambda$는 계산을 위한 보조변수에 그치지 않는다. 최적화된
+목적함수가 제약의 우변 $b$에 얼마나 민감한지를 나타내는 **한계가치**다.
+
+가치함수를 다시
+
+::: math-display
+$$
+V(b)=\max_x f(x)
+\qquad\text{s.t.}\qquad g(x)=b
+$$
+:::
+
+로 두자. 정칙성이 충분하여 미분 가능하면 envelope theorem으로
+
+:::: equation-card
+Shadow-value formula
+
+::: math-display
+$$
+\boxed{\frac{dV(b)}{db}=\lambda^*.}
+$$
+:::
+
+제약을 한 단위 완화했을 때 최적으로 달성할 수 있는 목적함수가 일계에서
+얼마나 증가하는지가 승수다.
+::::
+
+따라서 경제적 의미는 제약에 따라 달라진다. 가계의 예산제약에 붙은 승수는
+추가 wealth의 한계효용, 사회계획자의 자원제약에 붙은 승수는 추가 재화 한
+단위의 사회적 한계가치, 자본축적 제약의 costate는 추가 state 한 단위의
+continuation value로 해석된다.
+
+::: display-table-wrap
+  제약              승수의 해석                                      뒤에서의 사용
+  ----------------- ------------------------------------------------ -----------------------------------
+  가계 예산제약     wealth 한 단위의 한계가치                        소비 Euler equation
+  자원제약          재화 한 단위의 사회적 shadow value               planner problem, decentralization
+  자본의 운동법칙   state를 한 단위 더 보유하는 continuation value   Maximum Principle, Ramsey
+  자산/차입 제약    제약 완화의 한계가치                             불완전시장과 borrowing constraint
+:::
+
+:::: {.statement .warning}
+::: statement-head
+주의 · Shadow price와 시장가격
+:::
+
+shadow price는 특정 최적화 문제에서 제약을 완화하는 한계가치다.
+경쟁균형에서 이 값이 시장가격 또는 가격비율과 연결되는 경우가 많지만, 두
+개념은 정의상 동일하지 않다.
+::::
+:::::::::
+
+:::::::::: {#s04 .section}
+## [1.4]{.section-number}Envelope Theorem
+
+Envelope theorem은 최적선택 자체가 매개변수에 반응하는 복잡한 경로를
+직접 미분하지 않고도, 최적화된 가치의 한계변화를 계산하게 해준다. 이
+논리는 이후 Bellman equation의 envelope condition에서 반복된다.
+
+우선 무제약 형태로
+
+::: math-display
+$$
+V(a)=\max_x F(x,a),
+\qquad x^*(a)\in\arg\max_x F(x,a)
+$$
+:::
+
+라고 하자. 그러면
+
+::: math-display
+$$
+V(a)=F(x^*(a),a)
+$$
+:::
+
+이고 chain rule에 의해
+
+::: math-display
+$$
+\frac{dV}{da}
+=F_x(x^*,a)\frac{dx^*}{da}+F_a(x^*,a).
+$$
+:::
+
+내부해의 일계조건 $F_x(x^*,a)=0$을 사용하면
+
+:::: equation-card
+Envelope condition
+
+::: math-display
+$$
+\boxed{\frac{dV(a)}{da}=F_a(x^*(a),a).}
+$$
+:::
+
+최적선택 $x^*(a)$가 변하면서 생기는 효과는 최적점에서 일계로 사라지고,
+매개변수가 목적함수에 직접 미치는 효과만 남는다.
+::::
+
+제약문제에서는 같은 원리가 Lagrangian에 적용된다. 앞의 문제에서 $b$는
+$\mathcal L$에 $\lambda b$로 들어가므로
+
+::: math-display
+$$
+\frac{dV}{db}
+=\frac{\partial\mathcal L}{\partial b}
+=\lambda^*.
+$$
+:::
+
+::: section-bridge
+이제 같은 최적화 문법을 가장 단순한 기간간 선택문제에 적용한다. 여기서
+처음 등장하는 Euler equation은 뒤의 Ramsey, 자산가격결정, RBC에서 계속
+재등장한다.
+:::
+::::::::::
+
+::::::::::::::::: {#s05 .section}
+## [1.5]{.section-number}2기간 소비--저축 문제
+
+가계는 현재 소비를 늘리면 현재 효용을 얻지만, 그만큼 저축할 자원이 줄어
+미래 소비가 감소한다. 이 단순한 trade-off가 현대 거시경제학의 기간간
+선택을 가장 압축적으로 보여준다.
+
+시점 $0$과 $1$에 소득 $y_0,y_1$을 받는 가계를 생각하자. 초기 금융자산은
+$a_0$, 시점 0에 선택하는 다음 기 자산은 $a_1$, 이자율은 $r$이다. 가계의
+선호는
+
+::: math-display
+$$
+U(c_0,c_1)=u(c_0)+\beta u(c_1),
+\qquad 0<\beta<1,
+$$
+:::
+
+이고 $u'(c)>0$, $u''(c)<0$라 하자. 순차적 예산제약은
+
+::: math-display
+$$
+c_0+a_1=y_0+a_0,
+$$ $$
+c_1=y_1+(1+r)a_1.
+$$
+:::
+
+이다. 현재 소비를 한 단위 줄이면 자산 $a_1$을 한 단위 더 보유할 수 있고,
+다음 기에는 $1+r$만큼 소비를 더 할 수 있다.
+
+:::::::::::: logic-steps
+::::: logic-step
+::: n
+01
+:::
+
+::: {}
+오늘의 선택
+
+$c_0$와 $a_1$ 사이에서 현재 자원을 배분한다.
+:::
+:::::
+
+::::: logic-step
+::: n
+02
+:::
+
+::: {}
+저축의 수익
+
+오늘 포기한 소비 1단위는 미래의 $1+r$단위 소비로 전환된다.
+:::
+:::::
+
+::::: logic-step
+::: n
+03
+:::
+
+::: {}
+최적성
+
+현재 소비의 한계효용 손실과 미래 소비의 할인된 한계효용 이득이 같아지는
+지점에서 저축이 결정된다.
+:::
+:::::
+::::::::::::
+
+:::: {.statement .remark}
+::: statement-head
+이 장의 범위
+:::
+
+여기서는 단일 가계의 부분균형 선택만 다룬다. 기업, 생산, 자본축적,
+시장청산을 결합한 2기간 성장경제는 뒤의 성장 파트에서 별도로 다룬다.
+::::
+:::::::::::::::::
+
+::::::: {#s06 .section}
+## [1.6]{.section-number}기간간 예산제약
+
+두 개의 순차적 예산제약을 결합하면 현재가치(present-value) 예산제약을
+얻는다. 이 표현은 이자율을 **현재 소비와 미래 소비 사이의 상대가격**으로
+읽게 해준다.
+
+첫 번째 제약에서 $a_1=y_0+a_0-c_0$이므로 이를 두 번째 제약에 대입하면
+
+::: math-display
+$$
+c_1
+=y_1+(1+r)(y_0+a_0-c_0).
+$$
+:::
+
+정리하면
+
+:::: equation-card
+Present-value budget constraint
+
+::: math-display
+$$
+\boxed{
+c_0+\frac{c_1}{1+r}
+=
+y_0+a_0+\frac{y_1}{1+r}.
+}
+$$
+:::
+
+왼쪽은 평생소비의 현재가치, 오른쪽은 초기자산과 평생소득의 현재가치다.
+::::
+
+따라서 미래 소비 $c_1$ 한 단위의 현재가격은 $1/(1+r)$이다. 반대로 현재
+소비 1단위를 포기하면 미래 소비 $1+r$단위를 얻을 수 있으므로
+
+::: math-display
+$$
+\boxed{1+r=\text{현재 소비 1단위의 미래소비 기회비용}.}
+$$
+:::
+
+이 해석은 이후 자본수익률, 무위험수익률, 자산가격을 모두 기간간
+상대가격의 언어로 읽는 출발점이 된다.
+:::::::
+
+::::::::::::: {#s07 .section}
+## [1.7]{.section-number}Euler Equation
+
+Euler equation은 최적소비 경로의 인접한 두 시점을 연결한다. 핵심은
+소비의 **수준**을 직접 결정하는 식이 아니라, 현재와 미래 소비 사이에서
+더 이상 유리한 한계적 재배분이 존재하지 않는다는 조건이라는 점이다.
+
+현재가치 예산제약을 이용해 Lagrangian을
+
+::: math-display
+$$
+\mathcal L
+=u(c_0)+\beta u(c_1)
++\lambda\left[
+y_0+a_0+\frac{y_1}{1+r}
+-c_0-\frac{c_1}{1+r}
+\right]
+$$
+:::
+
+로 쓰자. 내부해의 FOC는
+
+::: math-display
+$$
+u'(c_0)=\lambda,
+\qquad
+\beta u'(c_1)=\frac{\lambda}{1+r}.
+$$
+:::
+
+승수 $\lambda$를 제거하면
+
+:::: equation-card
+Consumption Euler equation
+
+::: math-display
+$$
+\boxed{
+u'(c_0)=\beta(1+r)u'(c_1).
+}
+$$
+:::
+
+현재 소비 한 단위를 줄이는 한계비용과 그 자원을 저축해 미래 소비를
+늘리는 할인된 한계편익이 같다.
+::::
+
+### 1.7.1 한계효용 해석 {#s071}
+
+현재 소비를 $dc_0<0$만큼 줄여 저축하면 미래 소비는 대략 $-(1+r)dc_0$만큼
+증가한다. 효용의 일계변화는
+
+::: math-display
+$$
+dU
+\approx
+u'(c_0)dc_0
++\beta u'(c_1)\big[-(1+r)dc_0\big].
+$$
+:::
+
+최적점에서는 이런 작은 재배분으로 효용을 높일 수 없어야 하므로 괄호 안의
+한계효과가 0이 되고 Euler equation이 나온다.
+
+### 1.7.2 MRS와 상대가격 {#s072}
+
+Euler equation을 다시 쓰면
+
+::: math-display
+$$
+\boxed{
+\frac{u'(c_0)}{\beta u'(c_1)}=1+r.
+}
+$$
+:::
+
+왼쪽은 현재소비와 미래소비 사이의 marginal rate of substitution이고,
+오른쪽은 시장이 제공하는 기간간 교환비율이다. 따라서 내부해에서
+
+::: math-display
+$$
+\boxed{
+\text{intertemporal MRS}
+=
+\text{intertemporal relative price}.
+}
+$$
+:::
+
+이 조건이 깨져 있다면 소비를 한 시점에서 다른 시점으로 조금 이동시켜
+효용을 증가시킬 수 있다.
+
+::::: callout-strip
+::: left
+핵심 구분
+:::
+
+::: right
+Euler equation은 lifetime budget constraint를 대체하지 않는다. Euler
+equation은 소비의 기간간 기울기를 규정하고, 예산제약은 그 경로의 수준을
+결정한다.
+:::
+:::::
+:::::::::::::
+
+::::::::: {#s08 .section}
+## [1.8]{.section-number}CRRA 선호와 소비성장
+
+CRRA 효용을 사용하면 Euler equation을 소비성장률의 식으로 바꿀 수 있다.
+이 형태는 Ramsey 모형과 RBC 모형에서 특히 중요하다.
+
+효용함수를
+
+::: math-display
+$$
+u(c)=
+\begin{cases}
+\dfrac{c^{1-\sigma}-1}{1-\sigma}, & \sigma\neq1,\\[6pt]
+\ln c, & \sigma=1,
+\end{cases}
+\qquad \sigma>0
+$$
+:::
+
+라 하자. 그러면
+
+::: math-display
+$$
+u'(c)=c^{-\sigma}.
+$$
+:::
+
+Euler equation에 대입하면
+
+::: math-display
+$$
+c_0^{-\sigma}
+=\beta(1+r)c_1^{-\sigma},
+$$
+:::
+
+따라서
+
+:::: equation-card
+Consumption-growth equation
+
+::: math-display
+$$
+\boxed{
+\frac{c_1}{c_0}
+=\big[\beta(1+r)\big]^{1/\sigma}.
+}
+$$
+:::
+
+인내심 $\beta$, 시장수익률 $1+r$, 기간간 대체탄력성 $1/\sigma$가
+최적소비의 성장기울기를 결정한다.
+::::
+
+로그를 취하면
+
+::: math-display
+$$
+\ln c_1-\ln c_0
+=\frac{1}{\sigma}
+\left[\ln\beta+\ln(1+r)\right].
+$$
+:::
+
+$1/\sigma$는 CRRA 선호에서 elasticity of intertemporal
+substitution(EIS)이다. $\sigma$가 클수록 소비자는 시점 간 소비구성의
+변화를 꺼리므로, 수익률 변화에 대한 최적 소비성장률의 반응이 작아진다.
+:::::::::
+
+::::::: {#s09 .section}
+## [1.9]{.section-number}비교정태: 인내심, 이자율, 소비의 기울기
+
+Euler equation은 소비경로의 기울기에 대한 비교정태를 명확하게 보여준다.
+그러나 소비성장률의 반응과 **저축량 자체의 반응**은 구분해야 한다.
+
+::: display-table-wrap
+  변화               Euler equation의 함의               해석
+  ------------------ ----------------------------------- -------------------------------------------------------------------------
+  $\beta\uparrow$    $c_1/c_0\uparrow$                   미래효용을 더 크게 평가하므로 소비를 미래 쪽으로 이동한다.
+  $r\uparrow$        CRRA 내부해에서 $c_1/c_0\uparrow$   현재 소비의 미래소비 기회비용이 커져 미래소비의 상대적 매력이 높아진다.
+  $\sigma\uparrow$   $c_1/c_0$의 수익률 민감도 감소      EIS $=1/\sigma$가 낮아져 기간간 대체가 약해진다.
+:::
+
+:::: {.statement .warning}
+::: statement-head
+주의 · $r\uparrow\Rightarrow$ 저축 증가?
+:::
+
+Euler equation이 직접 말하는 것은 최적 소비의 **상대적 기울기**다.
+이자율 변화는 substitution effect뿐 아니라 평생자원의 현재가치를 바꾸는
+wealth effect도 만들 수 있다. 따라서 초기자산과 소득의 시점구조를
+명시하지 않고 자산보유 $a_1$이 반드시 증가한다고 결론내릴 수는 없다.
+::::
+
+Extension · 차입제약이 있으면 무엇이 달라지는가?
+
+::: details-body
+예를 들어 $a_1\ge \underline a$라는 차입제약이 있고 제약이 binding이면,
+unconstrained Euler equality 대신 Kuhn--Tucker 조건이 적용된다. 이때
+가계는 현재소비를 더 줄여 미래로 이전하고 싶지 않은 것이 아니라, 원하는
+만큼 미래소득을 현재로 당겨올 수 없기 때문에 소비경로가 제약된다. 이
+경제적 효과는 불완전시장 파트에서 본격적으로 다룬다.
+:::
+:::::::
+
+:::::::: {#s10 .section}
+## [1.10]{.section-number}2기간에서 다기간 문제로
+
+2기간 문제의 핵심 논리는 기간 수가 늘어나도 바뀌지 않는다. 인접한 두
+시점 사이에서 한계효용과 수익률을 맞추는 Euler equation이 반복된다. 다만
+무한기간에서는 상태의 운동법칙과 종단조건을 함께 다루어야 한다.
+
+확정적 $T+1$기간 소비문제를 단순화하여
+
+::: math-display
+$$
+\max_{\{c_t,a_{t+1}\}_{t=0}^{T}}
+\sum_{t=0}^{T}\beta^t u(c_t)
+$$
+:::
+
+로 쓰고, 각 기간 자산의 gross return을 $R_{t+1}=1+r_{t+1}$라 하자.
+내부해에서는 인접한 두 시점마다
+
+:::: equation-card
+Multi-period Euler condition
+
+::: math-display
+$$
+\boxed{
+u'(c_t)
+=\beta R_{t+1}u'(c_{t+1}),
+\qquad t=0,\ldots,T-1.
+}
+$$
+:::
+
+2기간 최적조건이 전체 소비경로를 따라 반복된다.
+::::
+
+그러나 무한기간 성장모형에서는 자본 $k_t$가 오늘의 선택에 의해 내일의
+feasible set을 바꾸는 **state variable**이 된다. 따라서 다음 장부터는
+단순한 유한차원 Lagrangian을 넘어, state의 운동법칙을 포함한 동태최적화
+도구가 필요하다.
+
+::: math-display
+$$
+\boxed{
+\text{static constrained optimization}
+\;\longrightarrow\;
+\text{intertemporal Euler equation}
+\;\longrightarrow\;
+\text{dynamic optimization with states}
+}
+$$
+:::
+
+::: section-bridge
+다음 장에서는 연속시간 상태방정식 $\dot x=F(x,u)$을 가진 문제를 Maximum
+Principle로 다루고, Lagrange 승수가 시간에 따라 움직이는 costate 또는
+shadow value가 되는 과정을 살펴본다.
+:::
+::::::::
+
+::::: {#s11 .section}
+## [1.11]{.section-number}Chapter Summary
+
+이 장에서 필요한 결과는 수식의 개수가 아니라 하나의 논리적 연결이다.
+제약 아래에서의 한계적 최적성이 shadow price와 Euler equation으로
+이어진다.
+
+::: math-display
+$$
+\boxed{
+\text{Constraint}
+\rightarrow
+\text{Lagrangian}
+\rightarrow
+\text{FOC}
+\rightarrow
+\text{Multiplier / Shadow Value}
+\rightarrow
+\text{Euler Equation}
+}
+$$
+:::
+
+- 등식제약 최적화의 내부해에서는 목적함수와 제약의 gradient가 승수를
+  통해 정렬된다.
+- Lagrange 승수는 제약을 한 단위 완화했을 때 최적가치가 얼마나
+  변하는지를 측정하는 shadow value다.
+- Envelope theorem은 최적선택의 간접적 변화효과를 일계에서 제거해
+  value의 매개변수 민감도를 계산한다.
+- 이자율은 현재소비와 미래소비 사이의 상대가격이며, Euler equation은
+  intertemporal MRS와 시장의 교환비율을 일치시킨다.
+- CRRA 선호에서는 소비성장률이 $\beta$, 수익률, EIS $1/\sigma$로 간단히
+  표현된다.
+- 다기간·무한기간 모형에서는 같은 Euler logic에 state dynamics와
+  종단조건이 추가된다.
+
+::: reading-rule
+다음 장으로 가져갈 질문
+
+**현재의 선택이 미래의 state를 직접 움직인다면, 각 시점의 shadow value는
+시간에 따라 어떻게 진화해야 하는가?** 이 질문이 Maximum Principle의
+state equation과 costate equation으로 이어진다.
+:::
+:::::
+
+::: {#check .section}
+## Learning Check
+
+1.  등식제약 최적화에서 $\nabla f(x^*)=\lambda^*\nabla g(x^*)$가 왜
+    성립하는지 feasible direction의 관점에서 설명할 수 있는가?
+2.  가치함수 $V(b)$와 Lagrange 승수 $\lambda^*$ 사이의 관계를
+    shadow-price 해석과 함께 설명할 수 있는가?
+3.  Envelope theorem에서 왜 $dx^*/da$가 포함된 항이 일계에서 사라지는가?
+4.  2기간 순차적 예산제약을 현재가치 예산제약으로 변환할 수 있는가?
+5.  $u'(c_0)=\beta(1+r)u'(c_1)$을 한계효용과 MRS 두 관점에서 설명할 수
+    있는가?
+6.  CRRA 선호 아래에서 $c_1/c_0=[\beta(1+r)]^{1/\sigma}$를 유도하고
+    $1/\sigma$의 역할을 설명할 수 있는가?
+7.  왜 $r\uparrow$가 곧바로 자산보유량의 증가를 의미하지 않는가?
+8.  2기간 Euler equation이 다기간 동태최적화 문제로 어떻게 일반화되는가?
+:::
+
+::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Lagrangian
+:::
+
+목적함수에 제약을 승수와 함께 결합하여 constrained optimum의 일계조건을
+표현하는 함수.
+::::
+
+:::: definition-row
+::: term
+Lagrange multiplier
+:::
+
+제약의 한계적 완화가 최적가치에 미치는 효과를 측정하는 변수. 적절한 조건
+아래 value function의 제약 우변에 대한 미분과 같다.
+::::
+
+:::: definition-row
+::: term
+Shadow price
+:::
+
+시장거래가 존재하지 않더라도 제약 또는 자원 한 단위가 최적화 문제 안에서
+가지는 한계가치.
+::::
+
+:::: definition-row
+::: term
+Envelope theorem
+:::
+
+최적화된 가치의 매개변수 변화율을 최적선택의 반응을 직접 미분하지 않고
+목적함수 또는 Lagrangian의 직접효과로 계산하는 결과.
+::::
+
+:::: definition-row
+::: term
+Present-value budget
+:::
+
+모든 시점의 소비와 자원을 하나의 기준시점 가격으로 할인해 표현한 기간간
+예산제약.
+::::
+
+:::: definition-row
+::: term
+Euler equation
+:::
+
+인접 시점 사이의 한계적 자원 재배분으로 목적함수를 더 높일 수 없도록
+하는 intertemporal optimality condition.
+::::
+
+:::: definition-row
+::: term
+Intertemporal MRS
+:::
+
+현재소비와 미래소비 사이에서 소비자가 효용을 유지하며 교환하려는
+한계비율.
+::::
+
+:::: definition-row
+::: term
+CRRA
+:::
+
+상대적 위험회피도가 일정한 효용함수 계열. 결정론적 기간간 선택에서는
+EIS가 $1/\sigma$로 나타난다.
+::::
+
+:::: definition-row
+::: term
+EIS
+:::
+
+Elasticity of intertemporal substitution. 기간간 상대가격 변화에
+소비성장기울기가 얼마나 반응하는지를 나타내는 탄력성.
+::::
+:::::::::::::::::::::

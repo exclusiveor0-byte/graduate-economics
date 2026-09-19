@@ -1,0 +1,1171 @@
+---
+title: >-
+  경기변동의 사실과 측정
+description: >-
+  Business-Cycle Facts, Measurement, and Empirical Targets
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+::::: {#s01 .section}
+## [13.1]{.section-number}From Individual Risk to Aggregate Fluctuations
+
+Chapter 10--12의 중심은 개인이 불확실성에 직면할 때 어떤 contingent
+plan을 선택하고, 금융시장 구조가 위험배분을 어떻게 바꾸는가였다. 이제
+관점을 경제 전체의 시계열로 옮긴다.
+
+::: {.contrast-table .display-table-wrap}
+  앞선 장   핵심 질문                                             주요 state
+  --------- ----------------------------------------------------- ------------------------------------
+  Ch.10     불확실성 하에서 어떻게 선택하는가?                    현재 state와 shock process
+  Ch.11     완전시장에서 위험을 어떻게 공유하는가?                aggregate state, contingent claims
+  Ch.12     불완전시장에서 어떻게 self-insure하는가?              wealth + idiosyncratic state
+  Ch.13     경제 전체의 단기 변동은 데이터에서 어떻게 보이는가?   aggregate macro time series
+:::
+
+대표적으로 관찰하는 aggregate variables는
+
+::: math-display
+$$
+Y_t,\quad C_t,\quad I_t,\quad G_t,\quad N_t,\quad H_t,\quad w_t,\quad P_t,\quad i_t.
+$$
+:::
+
+이다. 이 장에서의 목표는 이러한 변수들의 움직임을 **모형의
+설명대상**으로 정리하는 것이다.
+:::::
+
+::::: {#s02 .section}
+## [13.2]{.section-number}What Is a Business Cycle?
+
+"Cycle"이라는 이름과 달리 실제 경기변동은 일정한 주기와 진폭을 가진
+기계적 파동이 아니다.
+
+Romer의 미국 경기변동 개관에서 recession의 크기, 지속기간, recession
+사이의 간격은 상당히 불규칙하다. 따라서 현대적 business-cycle analysis의
+출발점은 보통 다음과 같다.
+
+:::: equation-card
+Shock--propagation view
+
+::: math-display
+$$
+\boxed{
+\text{Shock}
+\rightarrow
+\text{Propagation Mechanism}
+\rightarrow
+\text{Observed Aggregate Fluctuation}
+}
+$$
+:::
+::::
+
+즉 경기변동 연구의 핵심 쟁점은 "cycle의 고정된 주기는 얼마인가?"가
+아니라, **어떤 disturbance가 발생했고 경제의 구조가 그 disturbance를
+어떤 동학으로 전파하는가**이다.
+:::::
+
+::::::::: {#s03 .section}
+## [13.3]{.section-number}Macroeconomic Time-Series Data
+
+경기변동을 측정하기 전에 어떤 경제활동을 어떤 단위로 관찰하는지 구분해야
+한다.
+
+::::::: macro-grid
+::: statement
+**Real activity**\
+실질 GDP, 소비, 투자, 정부지출, 순수출.
+:::
+
+::: statement
+**Labor market**\
+고용, 총근로시간, 평균근로시간, 실업률.
+:::
+
+::: statement
+**Productivity**\
+산출/근로시간, 산출/고용 등 노동생산성 지표.
+:::
+
+::: statement
+**Prices & finance**\
+물가, 인플레이션, 실질임금, 명목·실질 이자율.
+:::
+:::::::
+
+### Real versus nominal
+
+명목변수와 실질변수는 구별되어야 한다. 예를 들어 nominal GDP와 real
+GDP의 변화는 서로 다른 경제적 의미를 가진다. 경기변동의 quantity side를
+분석할 때는 일반적으로 실질변수를 중심으로 하되, price variables도
+별도의 empirical target으로 본다.
+
+::: reading-rule
+**Measurement rule.** 서로 다른 변수의 경기동학을 비교하려면 frequency,
+seasonal adjustment, price deflation, population normalization 등 데이터
+transformation의 기준을 통일해야 한다.
+:::
+:::::::::
+
+::::::::: {#s04 .section}
+## [13.4]{.section-number}Levels, Logs, and Growth Rates
+
+같은 변수도 level, log level, growth rate 중 무엇을 사용하는지에 따라
+데이터의 모습과 해석이 달라진다.
+
+양의 변수 $X_t$에 대해
+
+::: math-display
+$$
+x_t\equiv\log X_t
+$$
+:::
+
+라고 두자. 로그차분은 작은 변화에서 성장률을 근사한다.
+
+::: math-display
+$$
+\boxed{
+\Delta x_t
+=
+\log X_t-\log X_{t-1}
+\approx
+\frac{X_t-X_{t-1}}{X_{t-1}}
+}
+$$
+:::
+
+따라서 세 객체를 구별해야 한다.
+
+:::::: logic-steps
+::: {}
+[1]{.step}
+
+**Level:** 경제규모나 자원의 총량.
+:::
+
+::: {}
+[2]{.step}
+
+**Log level:** 비율변화 해석과 선형근사에 편리한 변환.
+:::
+
+::: {}
+[3]{.step}
+
+**Growth rate:** 한 기간 동안의 변화율.
+:::
+::::::
+
+특히 장기 성장추세가 있는 macro series의 level만 보면 장기성장이
+단기변동을 압도할 수 있다. 그래서 business-cycle analysis에서는 trend를
+제거한 component나 성장률을 자주 사용한다.
+:::::::::
+
+::::::: {#s05 .section}
+## [13.5]{.section-number}Trend and Cycle
+
+경기순환 성분은 원자료에서 직접 관찰되는 별도의 시계열이 아니다. 먼저
+장기추세를 어떻게 정의할지 선택해야 한다.
+
+로그변수 $x_t$를
+
+::: math-display
+$$
+\boxed{
+x_t=\tau_t+\widetilde x_t
+}
+$$
+:::
+
+로 분해하자. 여기서
+
+::: math-case
+$$
+\tau_t=\text{trend component},
+\qquad
+\widetilde x_t=\text{cyclical component}.
+$$
+:::
+
+따라서
+
+::: math-display
+$$
+\boxed{
+\widetilde x_t=x_t-\tau_t
+}
+$$
+:::
+
+이다. $x_t$가 log variable이면 $100\widetilde x_t$는 작은 변동에서 trend
+대비 대략적인 percentage deviation으로 해석할 수 있다.
+
+::: chapter-thesis
+Measurement problem
+
+Trend $\tau_t$는 관찰되는 structural object가 아니다. 어떤 detrending
+rule을 선택하는지가 측정된 cycle의 크기와 persistence에 영향을 줄 수
+있다.
+:::
+:::::::
+
+:::::: {#s06 .section}
+## [13.6]{.section-number}Detrending and Measurement Choices
+
+"Cycle"을 추출하는 방법은 여러 가지이며, 서로 다른 filter가 서로 다른
+low-frequency movement를 trend로 분류할 수 있다.
+
+::: display-table-wrap
+  방법                   핵심 아이디어                                 주의점
+  ---------------------- --------------------------------------------- ---------------------------------------
+  Linear trend           시간에 대한 deterministic trend를 적합        실제 trend가 비선형이면 민감
+  First differences      성장률로 장기수준을 제거                      cycle의 level persistence와 다른 객체
+  Smooth trend filters   저주파 움직임을 trend로 분리                  smoothing parameter에 의존
+  Band-pass logic        특정 frequency band의 움직임만 cycle로 간주   선택한 주파수 범위가 결과를 규정
+:::
+
+### HP filter as a technical benchmark
+
+대표적인 smooth-trend decomposition은 다음 목적함수로 표현할 수 있다.
+
+::: math-display
+$$
+\boxed{
+\min_{\{\tau_t\}}
+\sum_{t=1}^{T}(x_t-\tau_t)^2
++
+\lambda
+\sum_{t=2}^{T-1}
+\big[(\tau_{t+1}-\tau_t)-(\tau_t-\tau_{t-1})\big]^2
+}
+$$
+:::
+
+첫 항은 trend가 data와 너무 멀어지는 것을 벌하고, 둘째 항은 trend
+growth가 지나치게 빠르게 변하는 것을 벌한다.
+
+::: callout-strip
+**Important.** HP trend나 어떤 다른 statistical trend도 "참된
+잠재산출"과 자동으로 동일하지 않다. Model moments와 data moments를
+비교하려면 가능한 한 같은 transformation을 양쪽에 적용해야 한다.
+:::
+::::::
+
+:::::::::: {#s07 .section}
+## [13.7]{.section-number}Business-Cycle Moments
+
+복잡한 거시시계열의 동학을 비교하기 위해 몇 개의 저차 moments로
+요약한다.
+
+:::: equation-card
+Four measurement dimensions
+
+::: math-display
+$$
+\boxed{
+\text{Volatility}
++
+\text{Persistence}
++
+\text{Comovement}
++
+\text{Lead/Lag}
+}
+$$
+:::
+::::
+
+::::::: macro-grid
+::: statement
+**Volatility**\
+얼마나 크게 움직이는가?
+:::
+
+::: statement
+**Persistence**\
+충격 이후 얼마나 오래 지속되는가?
+:::
+
+::: statement
+**Comovement**\
+output과 같은 방향인가, 반대 방향인가?
+:::
+
+::: statement
+**Lead/Lag**\
+output보다 먼저 움직이는가, 나중에 움직이는가?
+:::
+:::::::
+
+이 네 가지는 이후 RBC model에서 simulation moments를 data moments와
+비교하는 기본 언어가 된다.
+::::::::::
+
+:::::: {#s08 .section}
+## [13.8]{.section-number}Volatility
+
+Volatility는 cyclical component가 평균 주변에서 얼마나 크게 흔들리는지를
+측정한다.
+
+평균을 제거한 cyclical component의 표준편차를
+
+::: math-display
+$$
+\boxed{
+\sigma_x
+=
+\sqrt{\operatorname{Var}(\widetilde x_t)}
+}
+$$
+:::
+
+라고 하자. 서로 다른 변수의 scale을 비교할 때 output을 benchmark로
+relative volatility를 쓸 수 있다.
+
+::: math-display
+$$
+\boxed{
+\text{Relative volatility of }x
+=
+\frac{\sigma_x}{\sigma_y}
+}
+$$
+:::
+
+여기서 $y$는 보통 log output의 cyclical component다.
+
+::: reading-rule
+**Interpretation.** $\sigma_x/\sigma_y>1$이면 $x$가 output보다
+상대적으로 크게 움직이고, $<1$이면 더 smooth하다. 이 통계량은 변동의
+크기를 말할 뿐 원인을 말하지 않는다.
+:::
+::::::
+
+::::: {#s09 .section}
+## [13.9]{.section-number}Persistence
+
+같은 크기의 shock이라도 효과가 즉시 사라지는 경제와 여러 기간 남는
+경제는 매우 다른 business-cycle dynamics를 보인다.
+
+lag $j$의 autocorrelation은
+
+::: math-display
+$$
+\boxed{
+\rho_x(j)
+=
+\operatorname{Corr}(\widetilde x_t,\widetilde x_{t-j})
+}
+$$
+:::
+
+로 정의한다. 특히
+
+::: math-display
+$$
+\rho_x(1)
+=
+\operatorname{Corr}(\widetilde x_t,\widetilde x_{t-1})
+$$
+:::
+
+는 one-period persistence의 대표적인 요약통계다.
+
+높은 autocorrelation이 관찰된다고 해서 shock process 자체가 반드시 매우
+persistent하다는 뜻은 아니다. 내부 propagation mechanism이 일시적
+shock을 장기간 지속시키는 경우도 가능하다. 따라서 persistence는 shock와
+propagation을 함께 반영하는 reduced-form fact다.
+:::::
+
+:::::::::: {#s10 .section}
+## [13.10]{.section-number}Comovement and Cyclicality
+
+경기변동에서는 각 변수가 output과 같은 방향으로 움직이는지, 반대
+방향으로 움직이는지가 중요한 empirical target이다.
+
+동시상관을
+
+::: math-display
+$$
+\boxed{
+\rho_{xy}(0)
+=
+\operatorname{Corr}(\widetilde x_t,\widetilde y_t)
+}
+$$
+:::
+
+라고 하자.
+
+:::: definition-row
+::: term
+Procyclical
+:::
+
+$\rho_{xy}(0)>0$. Output이 trend보다 높을 때 $x$도 높은 경향.
+::::
+
+:::: definition-row
+::: term
+Countercyclical
+:::
+
+$\rho_{xy}(0)<0$. Output과 반대 방향으로 움직이는 경향.
+::::
+
+:::: definition-row
+::: term
+Acyclical
+:::
+
+$\rho_{xy}(0)$가 0에 가까워 뚜렷한 동시상관이 약한 경우.
+::::
+
+이 분류는 causal language가 아니라 purely descriptive language다.
+::::::::::
+
+::::: {#s11 .section}
+## [13.11]{.section-number}Lead--Lag Relationships
+
+두 변수가 같은 분기에 함께 움직이는지뿐 아니라, 어느 변수가 먼저
+움직이는지도 측정할 수 있다.
+
+이 노트에서는 convention을 다음처럼 고정한다.
+
+::: math-display
+$$
+\boxed{
+\rho_{xy}(j)
+=
+\operatorname{Corr}(\widetilde x_{t+j},\widetilde y_t)
+}
+$$
+:::
+
+- $j<0$: $x$의 이전 값과 현재 output을 비교하므로, 높은 상관은 $x$가
+  output을 **lead**할 수 있음을 뜻한다.
+- $j=0$: contemporaneous comovement.
+- $j>0$: 미래의 $x$와 현재 output을 비교하므로, 높은 상관은 $x$가
+  output을 **lag**할 수 있음을 뜻한다.
+
+::: {.warning .callout-strip}
+**Do not infer causality.** $x$가 output을 lead하더라도 그것만으로 $x$가
+output의 structural cause라고 결론낼 수 없다. 공통 shock이나 기대변수
+때문에 같은 패턴이 생길 수 있다.
+:::
+:::::
+
+::::: {#s12 .section}
+## [13.12]{.section-number}Output and Its Components
+
+총산출의 변동은 GDP의 모든 구성요소에 균등하게 분산되지 않는다.
+
+국민계정 identity는
+
+::: math-display
+$$
+\boxed{
+Y_t=C_t+I_t+G_t+NX_t
+}
+$$
+:::
+
+이다. 그러나 동일한 identity를 구성한다고 해서 각 항의 cyclical
+behavior가 동일한 것은 아니다.
+
+Romer의 recession decomposition에서는 inventory investment가 GDP에서
+차지하는 평균비중은 작지만 recession의 output shortfall에서 매우 큰 몫을
+차지한다. Durable consumption, residential investment, nonresidential
+fixed investment도 경기변동에 disproportionately 기여하는 반면,
+nondurables와 services 및 government purchases는 상대적으로 안정적인
+편으로 정리된다.
+
+::: chapter-thesis
+Empirical lesson
+
+Aggregate output의 움직임을 설명하려면 GDP identity만 맞추는 것으로
+충분하지 않다. 모형은 각 expenditure component의 서로 다른 cyclical
+response도 설명해야 한다.
+:::
+:::::
+
+::::: {#s13 .section}
+## [13.13]{.section-number}Consumption and Investment
+
+Consumption과 investment는 모두 output identity의 구성요소지만,
+이론적으로도 서로 다른 intertemporal margins에 의해 움직인다.
+
+### Consumption
+
+Chapter 6, 10--12의 소비이론에서는 household가 intertemporal marginal
+utility를 비교한다.
+
+::: math-display
+$$
+\boxed{
+u'(c_t)=\beta E_t\!\left[R_{t+1}u'(c_{t+1})\right]
+}
+$$
+:::
+
+따라서 소비는 current income만을 기계적으로 따라가는 변수가 아니다.
+Wealth, expected future resources, insurance possibilities가 중요하다.
+
+### Investment
+
+Investment는 현재소비를 포기하고 미래 productive capacity를 확보하는
+선택이다. 따라서 expected future marginal product와 discounting에
+민감하다. Romer의 recession evidence에서도 여러 investment categories가
+output fluctuations에 큰 비중으로 기여한다.
+
+::: reading-rule
+**Target, not presumption.** 실제 상대변동성의 정확한 수치는 sample과
+transformation에 따라 달라진다. 따라서 이 장에서는 숫자를 외생적으로
+고정하기보다, $\sigma_C/\sigma_Y$, $\sigma_I/\sigma_Y$, 그리고 각 변수의
+output correlation을 측정대상으로 둔다.
+:::
+:::::
+
+::::: {#s14 .section}
+## [13.14]{.section-number}Labor-Market Fluctuations and Okun\'s Law
+
+경기침체는 output만의 현상이 아니다. Employment, total hours, average
+hours, unemployment가 함께 움직인다.
+
+Romer의 postwar U.S. recession summary에서는 recession 동안
+
+- employment가 감소하고,
+- unemployment rate가 상승하며,
+- average weekly hours도 감소하는 경향
+
+이 나타난다.
+
+### Okun-type relationship
+
+Output의 shortfall과 unemployment의 증가는 음의 관계를 보이는 경향이
+있으며 이를 넓게 Okun\'s law라고 부른다. 개념적으로는
+
+::: math-display
+$$
+\boxed{
+\widetilde y_t\downarrow
+\quad\Longleftrightarrow\quad
+u_t-\bar u\uparrow
+}
+$$
+:::
+
+처럼 표현할 수 있다.
+
+::: callout-strip
+**Coefficient caution.** 특정 "몇 대 몇" 계수는 sample, output-gap
+definition, unemployment specification에 따라 달라질 수 있다. 따라서
+구조적 상수처럼 취급하지 않는다.
+:::
+:::::
+
+::::: {#s15 .section}
+## [13.15]{.section-number}Productivity over the Cycle
+
+RBC model에서 technology가 핵심 shock가 되기 때문에 측정된
+productivity의 경기동학은 특별히 중요하다.
+
+가장 단순한 labor productivity measure는
+
+::: math-display
+$$
+\boxed{
+AP_t=\frac{Y_t}{H_t}
+}
+$$
+:::
+
+이다. Romer의 recession summary에서는 output per hour가 recession에서
+대체로 하락하는 것으로 정리된다.
+
+하지만 다음 등식은 성립하지 않는다.
+
+::: math-display
+$$
+\boxed{
+\text{Measured Productivity Movement}
+\neq
+\text{Pure Technology Shock}
+}
+$$
+:::
+
+측정된 productivity에는 technology뿐 아니라 capacity utilization, labor
+effort, factor hoarding, composition, measurement error 등이 섞일 수
+있다. 따라서 productivity가 procyclical하다는 reduced-form fact만으로
+technology shock의 exogeneity를 증명할 수 없다.
+:::::
+
+:::: {#s16 .section}
+## [13.16]{.section-number}Wages, Inflation, and Interest Rates
+
+Business-cycle model의 empirical targets에는 quantities뿐 아니라
+relative prices와 financial prices도 포함된다.
+
+::: display-table-wrap
+  변수                      Romer의 postwar U.S. recession benchmark   해석상 주의
+  ------------------------- ------------------------------------------ --------------------------------------------
+  Real wage                 aggregate data에서 약하게 하락하는 경향    deflator, composition, wage measure에 민감
+  Inflation                 단일한 명확한 recession pattern이 약함     시기와 monetary regime에 따라 달라짐
+  Nominal short rate        대체로 하락                                정책반응과 기대인플레이션이 함께 작용
+  Ex-post real short rate   대체로 하락                                ex ante real rate와는 다른 객체
+:::
+
+이러한 facts는 뒤의 RBC model뿐 아니라 nominal rigidity와 monetary
+models가 어떤 추가 설명을 제공해야 하는지를 판단하는 기준이 된다.
+::::
+
+:::::: {#s17 .section}
+## [13.17]{.section-number}Recession Dating vs. Statistical Cycles
+
+"Recession"이라는 사건 분류와 detrended time series의 "negative cycle"은
+같은 개념이 아니다.
+
+::: {.contrast-table .display-table-wrap}
+             Statistical cycle             Recession dating
+  ---------- ----------------------------- -------------------------------------------
+  객체       $\widetilde y_t=y_t-\tau_t$   peak--trough chronology
+  결정방식   선택한 trend/filter           여러 macro indicators를 종합한 chronology
+  출력       연속적인 deviation series     recession/expansion episode
+:::
+
+Romer가 설명하듯 미국의 공식 recession dates는 단순히 "실질 GDP가 두
+분기 연속 감소했는가"라는 규칙만으로 정해지는 것이 아니라 여러 지표를
+종합하여 dating한다.
+
+:::: chapter-thesis
+Do not conflate
+
+::: math-display
+$$
+\boxed{
+\text{Cycle Extraction}
+\neq
+\text{Recession Dating}
+}
+$$
+:::
+::::
+::::::
+
+::: {#s18 .section}
+## [13.18]{.section-number}Irregular Fluctuations, Not Mechanical Cycles
+
+경기변동을 설명하는 모형은 고정된 주기를 재현하는 oscillator가 아니라
+불규칙한 stochastic fluctuations를 생성할 수 있어야 한다.
+
+실제 recessions는
+
+- peak-to-trough decline의 크기,
+- 침체가 지속되는 기간,
+- 한 recession에서 다음 recession까지의 간격,
+- 회복의 형태
+
+가 서로 다르다.
+
+따라서 quantitative business-cycle model의 목적은 "정확히 8년마다 침체가
+온다" 같은 deterministic periodicity를 만드는 것이 아니다. 오히려
+stochastic shocks와 endogenous propagation이 결합되어 관찰되는
+분포적·동태적 moments를 생성하는지가 중요하다.
+:::
+
+:::::::: {#s19 .section}
+## [13.19]{.section-number}Shocks and Propagation
+
+한 시계열의 persistence나 comovement는 shock process와 economic
+propagation을 분리하지 않은 reduced-form 결과다.
+
+개념적으로
+
+::: math-display
+$$
+\boxed{
+\text{Observed Dynamics}
+=
+\text{Shock Process}
++
+\text{Propagation Mechanism}
+}
+$$
+:::
+
+이라고 생각할 수 있다.
+
+:::::: logic-steps
+::: {}
+[1]{.step}
+
+**Shock:** technology, preference, policy, demand, financial conditions
+등 exogenous 또는 predetermined disturbance.
+:::
+
+::: {}
+[2]{.step}
+
+**Propagation:** capital accumulation, intertemporal substitution,
+adjustment costs, expectations, nominal rigidities 등 shock의 효과를
+시간에 걸쳐 전달하는 구조.
+:::
+
+::: {}
+[3]{.step}
+
+**Observed moments:** shock와 propagation이 결합하여 만들어낸
+volatility, autocorrelation, cross-correlation.
+:::
+::::::
+
+RBC에서는 특히 technology shock와 competitive propagation mechanism이
+어느 정도의 business-cycle facts를 설명할 수 있는지를 묻는다.
+::::::::
+
+::::::: {#s20 .section}
+## [13.20]{.section-number}Moments Are Targets, Not Explanations
+
+Chapter 9에서 growth accounting과 causal explanation을 구분했듯, Chapter
+13에서는 business-cycle moments와 structural explanation을 구분해야
+한다.
+
+::: math-display
+$$
+\boxed{
+\operatorname{Corr}(\widetilde I_t,\widetilde Y_t)>0
+}
+$$
+:::
+
+라는 사실이 관찰되어도 그것만으로
+
+::: math-display
+$$
+I_t\longrightarrow Y_t
+$$
+:::
+
+라는 causal direction이 식별되는 것은 아니다.
+
+::: {.contrast-table .display-table-wrap}
+  단계               질문
+  ------------------ --------------------------------------------------------
+  Measurement        무엇이 얼마나 움직였는가?
+  Structural model   어떤 mechanism이 그 moments를 생성할 수 있는가?
+  Identification     관찰된 fluctuation에서 어떤 shock가 실제 원인이었는가?
+:::
+
+::: chapter-thesis
+Core distinction
+
+Business-cycle facts are empirical targets for a model, not explanations
+of the cycle themselves.
+:::
+:::::::
+
+::::: {#s21 .section}
+## [13.21]{.section-number}A Standard Business-Cycle Moment Table
+
+모형과 데이터를 비교할 때는 동일한 transformation과 동일한 moment
+definitions를 사용한 표를 만드는 것이 가장 투명하다.
+
+::: display-table-wrap
+  Variable             Relative volatility      Corr. with output   Persistence      Lead/Lag
+  -------------------- ------------------------ ------------------- ---------------- -------------------------
+  Output $Y$           1.00                     1.00                $\rho_Y(1)$      benchmark
+  Consumption $C$      $\sigma_C/\sigma_Y$      $\rho_{CY}(0)$      $\rho_C(1)$      from $\rho_{CY}(j)$
+  Investment $I$       $\sigma_I/\sigma_Y$      $\rho_{IY}(0)$      $\rho_I(1)$      from $\rho_{IY}(j)$
+  Hours $H$            $\sigma_H/\sigma_Y$      $\rho_{HY}(0)$      $\rho_H(1)$      from $\rho_{HY}(j)$
+  Productivity $Y/H$   $\sigma_{AP}/\sigma_Y$   $\rho_{AP,Y}(0)$    $\rho_{AP}(1)$   from cross-correlations
+  Real wage $w$        $\sigma_w/\sigma_Y$      $\rho_{wY}(0)$      $\rho_w(1)$      from cross-correlations
+:::
+
+현재 Stock--Watson 원문이 없는 상태에서는 위 표에 그 논문의 고유
+empirical estimates를 임의로 채우지 않는다. 대신 이 표 자체를 **측정
+template**으로 사용한다.
+
+::: reading-rule
+**Practical rule.** Data table과 model table을 따로 만들되, sample
+frequency와 detrending rule을 일치시킨 뒤 같은 statistics를 계산한다.
+:::
+:::::
+
+::::::: {#s22 .section}
+## [13.22]{.section-number}From Facts to Quantitative Model Evaluation
+
+Business-cycle facts를 정리한 이유는 다음 단계에서 structural model이 이
+facts를 재현하는지 평가하기 위해서다.
+
+모형을 풀어 stochastic equilibrium law of motion을 얻었다고 하자. 이를
+이용해 simulated series를 만든다.
+
+::: math-display
+$$
+\{Y_t^{m},C_t^{m},I_t^{m},H_t^{m},\ldots\}_{t=1}^{T}.
+$$
+:::
+
+그 다음 data와 같은 transformation을 적용하여
+
+::: math-display
+$$
+\sigma_x^{m},
+\qquad
+\rho_x^{m}(1),
+\qquad
+\operatorname{Corr}(\widetilde x_t^{m},\widetilde y_t^{m}),
+\qquad
+\rho_{xy}^{m}(j)
+$$
+:::
+
+를 계산한다.
+
+:::: equation-card
+Quantitative macro workflow
+
+::: math-display
+$$
+\boxed{
+\text{Model}
+\rightarrow
+\text{Solution}
+\rightarrow
+\text{Simulation}
+\rightarrow
+\text{Moments}
+\rightarrow
+\text{Comparison with Data}
+}
+$$
+:::
+::::
+
+여기서 moment matching이 모형의 진실성을 자동으로 증명하는 것은 아니다.
+다만 어떤 mechanism이 중요한 empirical dimensions를 동시에 설명하는지
+체계적으로 평가하게 해준다.
+:::::::
+
+:::::: {#s23 .section}
+## [13.23]{.section-number}Why Linear Dynamic Systems Next?
+
+이제 어떤 statistics를 설명해야 하는지는 알았다. 다음 문제는 stochastic
+macro model의 equilibrium dynamics를 실제로 어떻게 계산하느냐이다.
+
+RBC와 rational-expectations models는 일반적으로 다음과 같은 비선형
+조건들의 시스템을 만든다.
+
+::: math-display
+$$
+\boxed{
+E_t\!\left[F(x_{t+1},x_t,x_{t-1},\varepsilon_t)\right]=0.
+}
+$$
+:::
+
+정상상태 주변의 local dynamics를 분석하려면 이 시스템을 linearize하고,
+predetermined variables와 forward-looking variables를 구별하며, stable
+solution을 선택해야 한다.
+
+::: chapter-thesis
+Next chapter
+
+**Chapter 14: Linear Dynamic Systems and Rational Expectations** ---
+state-space representation, eigenvalues, saddle-path logic,
+Blanchard--Kahn conditions, generalized Schur/QZ method의 기초를
+준비한다.
+:::
+
+따라서 세 장의 역할은 분명하다.
+
+::: math-display
+$$
+\boxed{
+\begin{aligned}
+\text{Ch.13: }&\text{What must the model explain?}\\[4pt]
+\text{Ch.14: }&\text{How do we solve the model?}\\[4pt]
+\text{Ch.15: }&\text{Can the RBC model reproduce the facts?}
+\end{aligned}
+}
+$$
+:::
+::::::
+
+:::::::::::: {#s24 .section}
+## [13.24]{.section-number}Chapter Summary
+
+Chapter 13은 경기변동을 설명하는 모형을 제시한 장이 아니라, 모형이
+설명해야 할 empirical objects와 비교규칙을 정의한 장이다.
+
+::: section-summary
+- Business cycle은 일정한 주기의 deterministic cycle이 아니라 불규칙한
+  aggregate fluctuation이다.
+- Log transformation과 growth rate는 장기추세가 있는 거시시계열을
+  비교하는 기본 도구다.
+- Cycle은 $x_t=\tau_t+\widetilde x_t$라는 decomposition에서 정의되지만,
+  trend $\tau_t$의 선택은 측정결과에 영향을 준다.
+- Volatility는 변동의 크기, persistence는 시간적 지속성, comovement는
+  output과의 동행성, lead--lag는 시차구조를 요약한다.
+- GDP components의 fluctuations는 균등하지 않으며 investment-related
+  components가 recession dynamics에서 중요한 역할을 할 수 있다.
+- Labor-market facts에는 employment·hours·unemployment의 동행과
+  Okun-type relationship이 포함된다.
+- Measured productivity는 technology와 동일한 객체가 아니므로 해석에
+  주의해야 한다.
+- Recession dating과 detrended statistical cycle은 구별되는 measurement
+  concepts다.
+- Observed persistence와 comovement는 shock process와 propagation
+  mechanism의 결합 결과다.
+- Business-cycle moments는 structural explanation이 아니라 모형이
+  설명해야 할 empirical targets다.
+:::
+
+::::::: equation-card
+Four objects to retain
+
+::: math-display
+$$
+\boxed{x_t=\tau_t+\widetilde x_t}
+$$
+:::
+
+::: math-display
+$$
+\boxed{\sigma_x=\sqrt{\operatorname{Var}(\widetilde x_t)}}
+$$
+:::
+
+::: math-display
+$$
+\boxed{\rho_x(j)=\operatorname{Corr}(\widetilde x_t,\widetilde x_{t-j})}
+$$
+:::
+
+::: math-display
+$$
+\boxed{\rho_{xy}(j)=\operatorname{Corr}(\widetilde x_{t+j},\widetilde y_t)}
+$$
+:::
+:::::::
+
+::::: chapter-thesis
+Core message
+
+::: math-display
+$$
+\boxed{
+\text{Business-cycle facts are empirical targets for a model,}
+}
+$$
+:::
+
+::: math-display
+$$
+\boxed{
+\text{not structural explanations of the cycle themselves.}
+}
+$$
+:::
+:::::
+::::::::::::
+
+::: {#check .section}
+## Learning Check
+
+1.  Business cycle이 deterministic periodic cycle과 다른 이유를 설명할
+    수 있는가?
+2.  Aggregate fluctuation을 shock와 propagation mechanism으로 분해해
+    사고할 수 있는가?
+3.  Level, log level, growth rate의 차이를 설명할 수 있는가?
+4.  $\Delta\log X_t$가 성장률을 근사하는 이유를 설명할 수 있는가?
+5.  Trend--cycle decomposition $x_t=\tau_t+\widetilde x_t$의 의미를
+    설명할 수 있는가?
+6.  Detrending rule에 따라 measured cycle이 달라질 수 있는 이유를 설명할
+    수 있는가?
+7.  HP-filter objective의 두 항이 각각 무엇을 벌하는지 설명할 수 있는가?
+8.  Volatility와 relative volatility를 계산할 수 있는가?
+9.  Autocorrelation을 persistence measure로 해석할 수 있는가?
+10. Procyclical, countercyclical, acyclical을 correlation으로 정의할 수
+    있는가?
+11. 이 노트의 lead--lag convention
+    $\rho_{xy}(j)=\operatorname{Corr}(\widetilde x_{t+j},\widetilde y_t)$을
+    정확히 읽을 수 있는가?
+12. 왜 lead--lag correlation만으로 causal direction을 식별할 수 없는가?
+13. GDP identity와 GDP components의 서로 다른 cyclical behavior를 구별할
+    수 있는가?
+14. Consumption과 investment가 서로 다른 intertemporal margins에 의해
+    움직이는 이유를 설명할 수 있는가?
+15. Okun\'s law를 structural constant가 아니라 empirical
+    relationship으로 설명할 수 있는가?
+16. 왜 measured labor productivity를 pure technology shock와 동일시하면
+    안 되는가?
+17. Recession dating과 statistical cycle extraction을 구별할 수 있는가?
+18. Business-cycle moments가 model targets이지 structural explanations가
+    아닌 이유를 설명할 수 있는가?
+19. Data와 simulated model moments를 공정하게 비교하려면 어떤
+    transformation을 맞춰야 하는가?
+20. 왜 다음 장에서 linear dynamic systems와 rational-expectations
+    solution methods가 필요한가?
+:::
+
+::::::::::::::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Business cycle
+:::
+
+일정한 기계적 주기라기보다 trend 주변에서 나타나는 불규칙한 aggregate
+fluctuations를 가리키는 거시경제학적 용어.
+::::
+
+:::: definition-row
+::: term
+Trend
+:::
+
+시계열의 저주파·장기 움직임을 나타내도록 선택한 component $\tau_t$.
+::::
+
+:::: definition-row
+::: term
+Cyclical component
+:::
+
+원시계열에서 선택한 trend를 제거한 $\widetilde x_t=x_t-\tau_t$.
+::::
+
+:::: definition-row
+::: term
+Detrending
+:::
+
+장기추세를 분리하여 단기 변동 component를 구성하는 데이터
+transformation.
+::::
+
+:::: definition-row
+::: term
+HP filter
+:::
+
+data fit과 trend-growth smoothness 사이의 trade-off를 penalty
+parameter로 조정하는 대표적 statistical trend filter.
+::::
+
+:::: definition-row
+::: term
+Volatility
+:::
+
+Cyclical component의 dispersion. 보통 표준편차로 측정.
+::::
+
+:::: definition-row
+::: term
+Relative volatility
+:::
+
+어떤 변수의 표준편차를 output의 표준편차로 나눈 값.
+::::
+
+:::: definition-row
+::: term
+Persistence
+:::
+
+현재의 cyclical deviation이 이후 기간까지 남는 정도. Autocorrelation으로
+자주 요약.
+::::
+
+:::: definition-row
+::: term
+Comovement
+:::
+
+두 macro variables의 cyclical components가 같은 시점 또는 여러 시차에서
+함께 움직이는 정도.
+::::
+
+:::: definition-row
+::: term
+Procyclical
+:::
+
+Output과 양의 contemporaneous correlation을 보이는 경향.
+::::
+
+:::: definition-row
+::: term
+Countercyclical
+:::
+
+Output과 음의 contemporaneous correlation을 보이는 경향.
+::::
+
+:::: definition-row
+::: term
+Lead--lag correlation
+:::
+
+서로 다른 시점의 두 변수 사이 상관관계를 이용해 timing relation을
+요약하는 statistic.
+::::
+
+:::: definition-row
+::: term
+Recession dating
+:::
+
+여러 macro indicators를 종합해 peak와 trough를 식별하고 recession
+episode를 분류하는 chronology.
+::::
+
+:::: definition-row
+::: term
+Okun\'s law
+:::
+
+Output weakness와 unemployment increase 사이의 경험적 음의 관계를
+지칭하는 표현.
+::::
+
+:::: definition-row
+::: term
+Shock
+:::
+
+경제의 state나 equilibrium conditions를 변화시키는 innovation 또는
+disturbance.
+::::
+
+:::: definition-row
+::: term
+Propagation mechanism
+:::
+
+Shock의 효과를 여러 변수와 여러 기간에 걸쳐 전달하는 경제구조.
+::::
+
+:::: definition-row
+::: term
+Target moment
+:::
+
+Structural model이 quantitative evaluation에서 재현하려고 하는 data
+statistic.
+::::
+
+:::: definition-row
+::: term
+Simulation moment
+:::
+
+해결된 model에서 생성한 artificial time series로 계산한 statistic.
+::::
+:::::::::::::::::::::::::::::::::::::::

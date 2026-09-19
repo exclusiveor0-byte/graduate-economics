@@ -1,0 +1,1026 @@
+---
+title: >-
+  연속시간 동태최적화
+description: >-
+  Continuous-Time Dynamic Optimization and the Maximum Principle
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+:::::::: {#s01 .section}
+## [2.1]{.section-number}정적에서 동태최적화로
+
+Chapter 1의 제약최적화에서는 선택변수가 한 번에 정해지고 제약도 같은
+시점의 선택들을 묶었다. 동태 거시에서는 오늘의 선택이 내일의 자본, 자산,
+부채 또는 지식축적을 바꾸므로 **현재 payoff와 미래 feasible set을 동시에
+고려**해야 한다.
+
+::: chapter-thesis
+이 장의 핵심 전환
+
+정적 Lagrange multiplier가 제약 한 단위의 shadow value라면, 동태문제의
+**costate**는 상태변수 한 단위를 추가로 보유할 때 얻는 미래 가치의
+한계값이다. 따라서 동태최적화는 물리적 상태의 운동법칙과 그 상태의
+가치가 움직이는 법칙을 함께 푸는 문제다.
+:::
+
+가장 단순한 동태문제에서 상태변수의 운동법칙을
+
+::: math-display
+$$
+\dot x(t)=f(x(t),a(t))
+$$
+:::
+
+라고 하자. 현재의 control $a(t)$는 현재의 payoff를 바꾸는 동시에
+$\dot x(t)$를 통해 미래의 state를 바꾼다. 따라서 한 시점의 최적성만
+확인해서는 전체 경로의 최적성을 판단할 수 없다.
+
+::::: callout-strip
+::: left
+읽는 순서
+:::
+
+::: right
+State와 control을 구분한다 → 운동법칙을 쓴다 → Hamiltonian을 만든다 →
+control·state·costate 방정식을 얻는다 → 초기조건과 종단조건으로
+최적경로를 선택한다.
+:::
+:::::
+::::::::
+
+::::::: {#s02 .section}
+## [2.2]{.section-number}일반적인 Optimal Control Problem
+
+연속시간 동태최적화의 기본형은 흐름효용을 무한기간에 걸쳐 할인한
+목적함수를 최대화하되, 상태변수가 미분방정식에 따라 움직인다는 제약을
+부과하는 것이다.
+
+다음 문제를 기준형으로 사용하자.
+
+::: math-display
+$$
+\max_{\{a(t)\}_{t\ge0}}
+\int_0^{\infty}e^{-\rho t}u(x(t),a(t))\,dt
+$$ $$
+\text{s.t.}\qquad
+\dot x(t)=f(x(t),a(t)),
+\qquad x(0)=x_0,
+\qquad \rho>0.
+$$
+:::
+
+### 2.2.1 State와 Control {#s021}
+
+::: display-table-wrap
+  객체                      의미                                                              거시경제학의 예
+  ------------------------- ----------------------------------------------------------------- ----------------------------------
+  State $x(t)$              현재까지의 역사가 남긴 정보로서 미래 feasible set을 규정          자본, 자산, 부채, 지식 stock
+  Control $a(t)$            현재 시점에서 선택하는 변수                                       소비, 투자, 노동, 정책수단
+  Law of motion $f$         현재 state와 control이 다음 순간의 state를 어떻게 바꾸는지 규정   자본축적식, 자산축적식
+  Initial condition $x_0$   최적화가 시작될 때 이미 주어진 상태                               초기 자본 $k_0$, 초기 자산 $a_0$
+:::
+
+:::: equation-card
+Predetermined state
+
+::: math-display
+$$
+\boxed{x(0)=x_0\ \text{is given},
+\qquad a(0)\ \text{is chosen}.}
+$$
+:::
+
+state는 과거의 결과이므로 초기값이 주어지는 반면, control은 현재의
+의사결정으로 조정할 수 있다.
+::::
+
+이 구분은 뒤의 Ramsey 모형에서 $k$를 state, $c$를 control 또는 jump
+variable로 읽는 기초가 되며, 더 뒤의 선형 합리적 기대모형에서도
+predetermined variable과 forward-looking variable의 구분으로 확장된다.
+:::::::
+
+::::::::::::::: {#s03 .section}
+## [2.3]{.section-number}Present-Value Hamiltonian
+
+Hamiltonian은 순간 payoff와 상태의 운동법칙을 하나의 표현으로 결합한다.
+Present-value 형식에서는 목적함수에 이미 들어 있는 할인요인을 그대로
+유지하고, 상태방정식에 붙는 승수도 현재시점 가치 단위로 측정한다.
+
+위의 문제에 대해 present-value Hamiltonian을
+
+::: math-display
+$$
+\boxed{
+\mathcal H^P(x,a,\mu,t)
+=e^{-\rho t}u(x,a)+\mu(t)f(x,a)
+}
+$$
+:::
+
+로 정의한다. 여기서 $\mu(t)$는 상태방정식에 붙는 동태적 Lagrange
+multiplier이다. 직관적으로 $\mu(t)$는 시점 $t$의 state를 한 단위 더
+보유하는 것이 **시점 0의 가치 단위**로 얼마나 중요한지를 나타낸다.
+
+:::::::::::: logic-steps
+::::: logic-step
+::: n
+01
+:::
+
+::: {}
+Current payoff
+
+$e^{-\rho t}u(x,a)$는 시점 $t$의 효용을 시점 0의 가치로 할인한다.
+:::
+:::::
+
+::::: logic-step
+::: n
+02
+:::
+
+::: {}
+State accumulation
+
+$f(x,a)$는 control이 state의 변화율을 어떻게 바꾸는지를 나타낸다.
+:::
+:::::
+
+::::: logic-step
+::: n
+03
+:::
+
+::: {}
+Shadow value
+
+$\mu f$는 state의 변화가 미래 목적값에 미치는 효과를 present-value
+단위로 평가한다.
+:::
+:::::
+::::::::::::
+
+Technical Note · 왜 Hamiltonian이 Lagrangian의 동태적 대응물인가?
+
+::: details-body
+상태방정식을 $\dot x-f(x,a)=0$라는 시점별 제약으로 생각하면, 각 시점마다
+이 제약에 승수를 붙이는 연속시간 Lagrangian을 구성할 수 있다. 적분
+부분적분(integration by parts)을 적용하면 승수의 시간변화가 costate
+equation으로 나타난다. 이 장에서는 Maximum Principle의 조건을 사용하며,
+완전한 함수공간상의 증명은 다루지 않는다.
+:::
+:::::::::::::::
+
+::::::::: {#s04 .section}
+## [2.4]{.section-number}Current-Value Hamiltonian
+
+거시경제학에서는 할인항을 Hamiltonian 밖으로 정리한 current-value 표현이
+더 자주 사용된다. 두 Hamiltonian은 서로 다른 문제를 푸는 것이 아니라
+**같은 최적화 문제를 다른 가치 단위로 표현**한다.
+
+current-value costate를
+
+::: math-display
+$$
+\lambda(t)\equiv e^{\rho t}\mu(t)
+$$
+:::
+
+로 정의하면 current-value Hamiltonian은
+
+:::: equation-card
+Current-value Hamiltonian
+
+::: math-display
+$$
+\boxed{
+\mathcal H(x,a,\lambda)
+=u(x,a)+\lambda f(x,a).
+}
+$$
+:::
+
+$\lambda(t)$는 state 한 단위를 더 보유하는 가치를 시점 $t$의 효용 단위로
+측정한 shadow value다.
+::::
+
+::: display-table-wrap
+                     Present value                       Current value
+  ------------------ ----------------------------------- ----------------------------------------
+  Hamiltonian        $\mathcal H^P=e^{-\rho t}u+\mu f$   $\mathcal H=u+\lambda f$
+  Costate            $\mu$                               $\lambda=e^{\rho t}\mu$
+  가치 단위          시점 0의 할인된 가치                현재시점의 효용 가치
+  Costate equation   $\dot\mu=-\mathcal H_x^P$           $\dot\lambda=\rho\lambda-\mathcal H_x$
+:::
+
+:::: {.statement .warning}
+::: statement-head
+주의 · 두 costate 식을 섞지 않는다
+:::
+
+present-value Hamiltonian에는 $+\rho\mu$ 항이 없고, current-value
+Hamiltonian의 costate equation에는 $\rho\lambda$가 나타난다. 정의한
+Hamiltonian과 costate 단위를 먼저 확인해야 한다.
+::::
+:::::::::
+
+:::::::::::::: {#s05 .section}
+## [2.5]{.section-number}Maximum Principle
+
+Maximum Principle은 무한차원의 경로 선택문제를 state와 costate가 따르는
+미분방정식과 매 시점의 control 최적조건으로 바꾼다. 내부해에서
+current-value Hamiltonian을 쓰면 핵심 조건은 세 식으로 정리된다.
+
+:::: equation-card
+Current-value Maximum Principle · interior case
+
+::: math-display
+$$
+\boxed{\mathcal H_a(x,a,\lambda)=0}
+\qquad\text{(control condition)}
+$$ $$
+\boxed{\dot x=\mathcal H_{\lambda}=f(x,a)}
+\qquad\text{(state equation)}
+$$ $$
+\boxed{\dot\lambda=\rho\lambda-\mathcal H_x}
+\qquad\text{(costate equation)}
+$$
+:::
+::::
+
+각 조건은 서로 다른 역할을 한다.
+
+:::: definition-row
+::: term
+Control condition
+:::
+
+현재 control을 한계적으로 바꿀 때 현재 payoff와 state accumulation을
+통한 미래가치 효과가 서로 상쇄되어야 한다.
+::::
+
+:::: definition-row
+::: term
+State equation
+:::
+
+실물 또는 금융 state가 기술적·회계적 제약에 따라 어떻게 움직이는지를
+나타낸다.
+::::
+
+:::: definition-row
+::: term
+Costate equation
+:::
+
+state의 shadow value가 할인, 현재의 직접가치, 미래 state에 대한 생산성
+때문에 어떻게 변하는지를 나타낸다.
+::::
+
+Maximum Principle이 중요한 이유는 최적화 문제를 단순히 한 시점의 FOC로
+끝내지 않고, **quantity dynamics와 value dynamics를 동시에 연결**하기
+때문이다.
+
+::::: callout-strip
+::: left
+세 식의 역할
+:::
+
+::: right
+$\mathcal H_a=0$은 "무엇을 선택할 것인가", $\dot x=f$는 "상태가 어떻게
+움직이는가", $\dot\lambda=\rho\lambda-\mathcal H_x$는 "그 상태의 가치가
+어떻게 움직이는가"를 답한다.
+:::
+:::::
+::::::::::::::
+
+::::::::: {#s06 .section}
+## [2.6]{.section-number}Costate와 Shadow Value
+
+Costate는 Chapter 1의 Lagrange multiplier가 시간에 따라 움직이는 형태다.
+상태변수를 한 단위 더 보유하는 것이 미래의 목적함수를 얼마나
+증가시키는지를 측정하며, 그 가치 자체도 최적경로를 따라 변한다.
+
+current-value costate equation을 다시 쓰면
+
+::: math-display
+$$
+\dot\lambda
+=\rho\lambda-\mathcal H_x
+$$
+:::
+
+이고, $\lambda>0$이면
+
+:::: equation-card
+Shadow-return decomposition
+
+::: math-display
+$$
+\boxed{
+\rho
+=
+\frac{\mathcal H_x}{\lambda}
++
+\frac{\dot\lambda}{\lambda}.
+}
+$$
+:::
+
+할인율은 state 한 단위가 현재 제공하는 한계가치와 그 shadow price의
+자본이득률을 합친 값으로 읽을 수 있다.
+::::
+
+특히 순간효용이 state에 직접 의존하지 않는 경우 $u_x=0$이면
+
+::: math-display
+$$
+\mathcal H_x=\lambda f_x,
+\qquad
+\rho=f_x+\frac{\dot\lambda}{\lambda}.
+$$
+:::
+
+이는 state를 하나의 자산처럼 해석하게 한다. $f_x$는 state가 제공하는
+한계적 "수익", $\dot\lambda/\lambda$는 그 shadow value의 capital gain에
+해당한다. 이 해석은 이후 자본의 가치, Tobin\'s $q$, 자산가격결정식과
+연결된다.
+
+:::: {.statement .remark}
+::: statement-head
+핵심 연결 · Multiplier → Costate → Value derivative
+:::
+
+Chapter 1의 multiplier, 이 장의 costate, 다음 장의 value-function
+derivative는 서로 다른 도구처럼 보이지만 모두 **추가 자원 또는 state 한
+단위의 한계가치**를 표현한다.
+::::
+:::::::::
+
+::::::::::: {#s07 .section}
+## [2.7]{.section-number}소비--자본 문제
+
+Maximum Principle의 구조를 가장 단순한 자본축적 문제에 적용하자. 아직
+시장청산과 분권균형을 포함한 Ramsey 모형 전체를 다루는 것이 아니라,
+최적화 도구 자체를 확인하기 위한 planner형 예제다.
+
+문제는
+
+::: math-display
+$$
+\max_{\{c(t)\}}
+\int_0^{\infty}e^{-\rho t}u(c(t))\,dt
+$$ $$
+\text{s.t.}\qquad
+\dot k(t)=f(k(t))-c(t)-\delta k(t),
+\qquad k(0)=k_0.
+$$
+:::
+
+이다. 여기서 $k$는 state, $c$는 control이다. current-value Hamiltonian은
+
+::: math-display
+$$
+\mathcal H
+=u(c)+\lambda\big[f(k)-c-\delta k\big].
+$$
+:::
+
+### 2.7.1 Control condition {#s071}
+
+::: math-display
+$$
+\mathcal H_c
+=u'(c)-\lambda=0,
+$$
+:::
+
+따라서
+
+:::: equation-card
+Consumption and shadow value
+
+::: math-display
+$$
+\boxed{u'(c)=\lambda.}
+$$
+:::
+
+소비 한 단위의 한계효용은 그 자원을 소비하지 않고 자본으로 남겨둘 때의
+shadow value와 같아야 한다.
+::::
+
+### 2.7.2 Costate equation {#s072}
+
+자본의 한계생산은 $f'(k)$이고 감가상각률은 $\delta$이므로
+
+::::: math-display
+$$
+\mathcal H_k
+=\lambda\big[f'(k)-\delta\big].
+$$
+
+따라서 costate equation은
+
+::: math-display
+$$
+\dot\lambda
+=\rho\lambda
+-\lambda\big[f'(k)-\delta\big],
+$$
+:::
+
+즉
+
+::: math-display
+$$
+\boxed{
+\frac{\dot\lambda}{\lambda}
+=\rho+\delta-f'(k).
+}
+$$
+:::
+
+자본의 순한계수익 $f'(k)-\delta$가 시간선호율 $\rho$보다 높으면
+$\lambda$는 감소한다. 이는 미래에 자원이 상대적으로 풍부해지면서 그
+한계가치가 낮아지는 방향과 일치한다.
+:::::
+:::::::::::
+
+:::::::::: {#s08 .section}
+## [2.8]{.section-number}CRRA와 연속시간 Euler Equation
+
+소비의 FOC $u'(c)=\lambda$와 costate equation을 결합하면 costate를
+제거하고 소비 자체의 운동법칙을 얻을 수 있다. 이것이 연속시간
+consumption Euler equation이다.
+
+$u'(c)=\lambda$를 시간에 대해 미분하면
+
+::: math-display
+$$
+ u''(c)\dot c=\dot\lambda.
+$$
+:::
+
+이를 costate equation과 결합하면
+
+::: math-display
+$$
+ u''(c)\dot c
+=u'(c)\big[\rho+\delta-f'(k)\big].
+$$
+:::
+
+따라서 일반 선호에서는
+
+::: math-display
+$$
+-\frac{c u''(c)}{u'(c)}\frac{\dot c}{c}
+=f'(k)-\delta-\rho.
+$$
+:::
+
+CRRA 효용
+
+::: math-display
+$$
+ u(c)=\frac{c^{1-\sigma}-1}{1-\sigma},
+\qquad
+-\frac{c u''(c)}{u'(c)}=\sigma
+$$
+:::
+
+을 사용하면
+
+:::: equation-card
+Continuous-time consumption Euler equation
+
+::: math-display
+$$
+\boxed{
+\frac{\dot c}{c}
+=\frac{1}{\sigma}
+\left[f'(k)-\delta-\rho\right].
+}
+$$
+:::
+
+자본의 순한계수익이 시간선호율보다 높을수록 소비는 더 빠르게 증가하며,
+그 반응의 크기는 EIS $1/\sigma$가 결정한다.
+::::
+
+::: display-table-wrap
+  조건                  소비의 움직임   경제적 의미
+  --------------------- --------------- -----------------------------------------------
+  $f'(k)-\delta>\rho$   $\dot c>0$      저축의 순수익이 높아 현재소비를 미래로 이전
+  $f'(k)-\delta=\rho$   $\dot c=0$      현재와 미래 사이의 한계적 유인이 균형
+  $f'(k)-\delta<\rho$   $\dot c<0$      현재소비의 상대적 가치가 높아 소비경로가 하향
+:::
+::::::::::
+
+:::::::: {#s09 .section}
+## [2.9]{.section-number}이산시간 Euler Equation과의 연결
+
+Chapter 1의 이산시간 Euler equation과 이 장의 연속시간 Euler equation은
+서로 다른 경제원리가 아니다. 시간간격을 매우 작게 만들면 동일한
+intertemporal optimality condition의 두 표현이 서로 연결된다.
+
+Chapter 1에서 확정적 이산시간 문제의 Euler equation은
+
+::: math-display
+$$
+ u'(c_t)
+=\beta R_{t+1}u'(c_{t+1})
+$$
+:::
+
+였다. 짧은 시간간격 $\Delta t$에 대해
+
+::: math-display
+$$
+ \beta_{\Delta t}=e^{-\rho\Delta t},
+\qquad
+ R_{t,t+\Delta t}\approx 1+r_t\Delta t
+$$
+:::
+
+라고 놓고 1차 근사를 취하면
+
+::: math-display
+$$
+\frac{\dot u'(c_t)}{u'(c_t)}
+=\rho-r_t.
+$$
+:::
+
+CRRA에서는 $\dot u'/u'=-\sigma\dot c/c$이므로
+
+:::: equation-card
+Same Euler logic, different clock
+
+::: math-display
+$$
+\boxed{
+\frac{\dot c_t}{c_t}
+=\frac{r_t-\rho}{\sigma}.
+}
+$$
+:::
+
+자본모형에서 $r_t=f'(k_t)-\delta$로 두면 바로 앞 절의 식과 일치한다.
+::::
+
+따라서 이산시간과 연속시간의 선택은 경제적 원리를 바꾸기보다, 모형의
+상태전이와 해법을 표현하는 방식의 차이다.
+::::::::
+
+:::::::::: {#s10 .section}
+## [2.10]{.section-number}Boundary Conditions와 Transversality Condition
+
+state equation과 costate equation은 보통 두 개의 1계 미분방정식을
+만든다. 따라서 최적경로를 특정하려면 두 개의 경계조건이 필요하다. 하나는
+초기 state이고, 다른 하나는 미래의 최적성을 반영하는 종단조건이다.
+
+소비--자본 문제에서는
+
+::: math-display
+$$
+ k(0)=k_0
+$$
+:::
+
+가 주어진다. 그러나 $\lambda(0)$ 또는 $c(0)$는 미리 주어지지 않는다.
+무한기간 문제에서 흔히 사용되는 transversality condition은 current-value
+costate를 기준으로
+
+:::: equation-card
+A standard infinite-horizon TVC
+
+::: math-display
+$$
+\boxed{
+\lim_{t\to\infty}
+ e^{-\rho t}\lambda(t)x(t)=0.
+}
+$$
+:::
+
+미래에 경제적 가치가 남아 있는 state를 끝없이 축적한 채 사용하지 않는
+경로를 배제하는 조건으로 해석할 수 있다.
+::::
+
+present-value costate $\mu=e^{-\rho t}\lambda$를 쓰면 같은 조건은
+
+::: math-display
+$$
+\lim_{t\to\infty}\mu(t)x(t)=0
+$$
+:::
+
+로 표현된다.
+
+:::: {.statement .warning}
+::: statement-head
+주의 · TVC를 기계적으로 붙이지 않는다
+:::
+
+TVC의 정확한 형태와 필요성·충분성은 목적함수, admissible paths, terminal
+payoff, state constraints에 따라 달라질 수 있다. 위 식은 표준적인
+무한기간 성장문제에서 사용하는 대표적 형태이지 모든 optimal-control
+problem에 자동으로 적용되는 보편 공식은 아니다.
+::::
+
+Extension · 유한기간과 terminal payoff
+
+::: details-body
+유한기간 문제 $$
+\max \int_0^T e^{-\rho t}u(x,a)dt+e^{-\rho T}\Phi(x(T))
+$$ 에서는 terminal state가 자유로운 경우 종단시점의 costate가 terminal
+payoff의 미분과 연결된다. 정확한 부호와 가치단위는
+present-value/current-value 정의에 맞추어 일관되게 써야 한다.
+:::
+::::::::::
+
+::::::: {#s11 .section}
+## [2.11]{.section-number}Predetermined States와 Jump Variables
+
+동태모형을 읽을 때 가장 중요한 구분 중 하나는 어떤 변수가 과거에 의해
+이미 정해져 있고, 어떤 변수가 새로운 정보나 경로조건에 맞추어 즉시
+조정될 수 있는가이다.
+
+::: display-table-wrap
+                Predetermined state                     Control / forward-looking variable
+  ------------- --------------------------------------- ------------------------------------------------
+  초기값        $x(0)=x_0$가 주어짐                     최적화에 의해 선택됨
+  점프 가능성   stock이므로 일반적으로 즉시 점프 불가   가격·소비 같은 변수는 즉시 조정 가능할 수 있음
+  경로 선택     과거가 현재 위치를 고정                 미래 최적성 조건에 맞추어 초기값이 결정
+:::
+
+소비--자본 문제에서는
+
+::: math-display
+$$
+\boxed{k(0)=k_0\ \text{given},
+\qquad c(0)\ \text{chosen}.}
+$$
+:::
+
+자본은 축적된 stock이므로 시점 0에 임의로 바꿀 수 없지만, 소비는 경로의
+최적성을 만족하도록 즉시 조정될 수 있다. 따라서 미래의 TVC와 현재의
+state를 동시에 만족시키는 특정 $c(0)$가 선택된다.
+
+:::: {.statement .remark}
+::: statement-head
+앞으로의 연결
+:::
+
+Ramsey 모형의 saddle path, New Keynesian 모형의 forward-looking
+variables, Blanchard--Kahn 조건은 모두 이 predetermined/jump 구분을 더
+일반적인 선형 동태계에서 사용한다.
+::::
+:::::::
+
+::::::: {#s12 .section}
+## [2.12]{.section-number}Canonical Dynamic System
+
+Maximum Principle을 적용하면 원래의 함수 최적화 문제는 보통 유한차원의
+미분방정식 시스템으로 바뀐다. 경제학적으로는 state의 움직임과 최적
+control의 움직임을 함께 추적하게 된다.
+
+소비--자본 문제에서는 state equation과 CRRA Euler equation이
+
+:::: equation-card
+Canonical system
+
+::: math-display
+$$
+\boxed{
+\dot k=f(k)-c-\delta k
+}
+$$ $$
+\boxed{
+\frac{\dot c}{c}
+=\frac{1}{\sigma}\big[f'(k)-\delta-\rho\big].
+}
+$$
+:::
+
+최적화 문제는 이제 $(k,c)$ 평면에서 움직이는 2차원 동태계로 표현된다.
+::::
+
+정지조건은
+
+::: math-display
+$$
+\dot k=0
+\quad\Longleftrightarrow\quad
+c=f(k)-\delta k,
+$$ $$
+\dot c=0
+\quad\Longleftrightarrow\quad
+f'(k)=\rho+\delta.
+$$
+:::
+
+이다. 이 두 locus의 교점이 정지상태 후보를 주지만, 어떤 경로가 그 점으로
+수렴하는지와 왜 특정 초기소비만 허용되는지는 phase diagram과 saddle-path
+stability를 분석해야 한다.
+
+::: section-bridge
+이 장에서는 nullcline의 의미까지만 확인한다. 성장 파트의 Ramsey 장에서
+$\dot k=0$, $\dot c=0$의 위치와 화살표를 이용해 saddle path를 완전히
+분석한다.
+:::
+:::::::
+
+:::::::::: {#s13 .section}
+## [2.13]{.section-number}필요조건과 충분조건
+
+Maximum Principle이 주는 조건은 일반적으로 최적경로가 반드시 만족해야
+하는 **필요조건**이다. FOC를 만족하는 경로를 찾았다는 사실만으로
+전역최적성이 자동으로 보장되는 것은 아니다.
+
+:::: {.statement .theorem}
+::: statement-head
+Concavity와 sufficiency의 기본 논리
+:::
+
+허용집합이 적절히 convex이고, Hamiltonian이 관련 변수에 대해
+concave하며, 경계조건과 TVC가 적절하게 만족되는 표준 문제에서는 Maximum
+Principle의 조건을 만족하는 admissible path를 전역최적경로로 확인할 수
+있다. 엄밀한 충분조건은 문제의 정식화에 따라 달라진다.
+::::
+
+성장모형에서 자주 사용하는
+
+::: math-display
+$$
+ u'(c)>0,\qquad u''(c)<0,
+$$ $$
+ f'(k)>0,\qquad f''(k)<0
+$$
+:::
+
+같은 가정은 단순한 편의가 아니다. 효용과 생산기술의 concavity가 최적화
+문제의 곡률을 규정하고, FOC로 얻은 경로를 해석하는 데 필요한 구조를
+제공한다.
+
+::::: callout-strip
+::: left
+기억할 점
+:::
+
+::: right
+"Hamiltonian의 FOC를 풀었다"와 "최적해를 증명했다"는 같은 문장이 아니다.
+admissibility, concavity, boundary/TVC 조건을 함께 확인한다.
+:::
+:::::
+
+Technical Note · 여러 state와 control
+
+::: details-body
+state가 $x\in\mathbb R^n$, control이 $a\in\mathbb R^m$이면 costate도
+$\lambda\in\mathbb R^n$인 벡터가 된다. current-value 조건은 $$
+\nabla_a\mathcal H=0,
+\qquad
+\dot x=\nabla_{\lambda}\mathcal H,
+\qquad
+\dot\lambda=\rho\lambda-\nabla_x\mathcal H
+$$ 의 벡터형으로 그대로 확장된다.
+:::
+::::::::::
+
+:::::::: {#s14 .section}
+## [2.14]{.section-number}Maximum Principle에서 Dynamic Programming으로
+
+Maximum Principle은 최적경로를 state와 costate의 미분방정식으로
+특성화한다. 다음 장에서는 같은 동태문제를 **현재 state에서 시작할 때
+얻을 수 있는 최대 continuation value**라는 함수로 다시 표현한다.
+
+Maximum Principle의 언어는
+
+::: math-display
+$$
+(x(t),a(t),\lambda(t))
+$$
+:::
+
+의 경로를 찾는 것이다. 반면 Dynamic Programming은 현재 state $x$에서의
+최적가치를
+
+::: math-display
+$$
+V(x)
+=
+\text{현재 state }x\text{에서 앞으로 달성 가능한 최대가치}
+$$
+:::
+
+로 정의하고, 문제를
+
+::: math-display
+$$
+\boxed{
+\text{current payoff}
++
+\text{continuation value}
+}
+$$
+:::
+
+의 반복적 구조로 표현한다.
+
+::: display-table-wrap
+                Maximum Principle                       Dynamic Programming
+  ------------- --------------------------------------- ------------------------------------
+  핵심 객체     state, control, costate                 state, policy, value function
+  핵심 방정식   state + costate equations               Bellman equation / HJB
+  한계가치      $\lambda(t)$                            적절한 조건에서 $V_x$
+  강점          연속시간 FOC와 saddle dynamics가 투명   재귀적 표현, 불확실성, 계산에 강함
+:::
+
+::: section-bridge
+다음 장에서는 Bellman equation을 중심으로 sequential formulation을
+recursive formulation으로 바꾸고, policy function과 value function이
+동태 거시모형을 어떻게 압축하는지를 정리한다.
+:::
+::::::::
+
+::::: {#s15 .section}
+## [2.15]{.section-number}Chapter Summary
+
+이 장의 목적은 Maximum Principle의 공식을 많이 모으는 것이 아니라,
+**동태적 제약 아래에서 수량과 가치가 함께 움직인다**는 한 가지 구조를
+확실히 잡는 것이다.
+
+::: math-display
+$$
+\boxed{
+\text{Dynamic Constraint}
+\rightarrow
+\text{Hamiltonian}
+\rightarrow
+\text{Maximum Principle}
+\rightarrow
+\text{Euler Equation}
+\rightarrow
+\text{Canonical System}
+}
+$$
+:::
+
+- state는 미래 feasible set을 요약하며 초기값이 주어지는 predetermined
+  variable이다.
+- control은 현재 선택되며 state의 운동법칙과 현재 payoff를 동시에
+  바꾼다.
+- Hamiltonian은 순간 payoff와 state accumulation의 shadow value를
+  결합한다.
+- Maximum Principle은 control condition, state equation, costate
+  equation으로 최적경로를 특성화한다.
+- costate는 state 한 단위의 동태적 shadow value이며 Chapter 1의 Lagrange
+  multiplier를 시간축으로 확장한 개념이다.
+- 소비--자본 문제에서 costate를 제거하면 연속시간 Euler equation
+  $\dot c/c=[f'(k)-\delta-\rho]/\sigma$를 얻는다.
+- 초기 state만으로는 최적경로가 완전히 정해지지 않으며, 무한기간
+  문제에서는 적절한 TVC와 미래 최적성 조건이 필요하다.
+- Maximum Principle의 canonical system은 Ramsey 모형의 phase diagram과
+  saddle-path 분석으로 이어진다.
+
+::: reading-rule
+다음 장으로 가져갈 질문
+
+**경로 전체를 직접 추적하지 않고, 현재 state만으로 남은 모든 미래를
+요약할 수 있는가?** Dynamic Programming은 이 질문에 value function과
+Bellman equation으로 답한다.
+:::
+:::::
+
+::: {#check .section}
+## Learning Check
+
+1.  state variable과 control variable을 정의하고, 왜 state의 초기값은
+    predetermined인지 설명할 수 있는가?
+2.  present-value Hamiltonian과 current-value Hamiltonian의 차이를
+    costate의 가치 단위와 함께 설명할 수 있는가?
+3.  current-value Maximum Principle의 control condition, state equation,
+    costate equation을 쓸 수 있는가?
+4.  costate를 state 한 단위의 shadow value로 해석하고
+    $\rho=\mathcal H_x/\lambda+\dot\lambda/\lambda$의 경제적 의미를
+    설명할 수 있는가?
+5.  소비--자본 문제에서 $u'(c)=\lambda$와 costate equation을 이용해
+    연속시간 Euler equation을 유도할 수 있는가?
+6.  CRRA 선호에서 $\dot c/c=[f'(k)-\delta-\rho]/\sigma$가 의미하는 바를
+    설명할 수 있는가?
+7.  이산시간 Euler equation에서 연속시간 식이 어떻게 나오는지 작은
+    시간간격의 관점에서 설명할 수 있는가?
+8.  왜 $k(0)$는 주어지지만 $c(0)$는 미래의 optimality condition에 맞추어
+    선택되는가?
+9.  TVC가 왜 필요하며, 왜 모든 문제에 같은 형태를 기계적으로 적용하면 안
+    되는가?
+10. Maximum Principle과 Dynamic Programming이 동일한 동태문제를 어떤
+    다른 객체로 표현하는지 비교할 수 있는가?
+:::
+
+::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+State variable
+:::
+
+현재의 위치와 미래 feasible set을 요약하는 변수. 초기값은 과거에 의해
+주어지는 경우가 일반적이다.
+::::
+
+:::: definition-row
+::: term
+Control variable
+:::
+
+각 시점에서 경제주체가 선택하며 현재 payoff와 state transition에 영향을
+주는 변수.
+::::
+
+:::: definition-row
+::: term
+Hamiltonian
+:::
+
+순간 목적함수와 state의 운동법칙을 shadow value를 이용해 결합한
+동태최적화의 핵심 함수.
+::::
+
+:::: definition-row
+::: term
+Present-value costate
+:::
+
+state 한 단위의 한계가치를 시점 0의 할인된 가치 단위로 측정한 승수
+$\mu(t)$.
+::::
+
+:::: definition-row
+::: term
+Current-value costate
+:::
+
+state 한 단위의 한계가치를 현재시점 가치 단위로 측정한 승수
+$\lambda(t)=e^{\rho t}\mu(t)$.
+::::
+
+:::: definition-row
+::: term
+Maximum Principle
+:::
+
+동태최적화의 최적경로가 만족해야 하는 control, state, costate 조건을
+제시하는 원리.
+::::
+
+:::: definition-row
+::: term
+Costate equation
+:::
+
+state의 shadow value가 시간에 따라 어떻게 변하는지를 규정하는
+미분방정식.
+::::
+
+:::: definition-row
+::: term
+Transversality condition
+:::
+
+종단 또는 무한미래의 경계에서 최적경로를 선택하기 위해 필요한 조건의
+총칭. 정확한 형태는 문제에 의존한다.
+::::
+
+:::: definition-row
+::: term
+Predetermined variable
+:::
+
+현재 시점에 과거에 의해 이미 정해져 있어 즉시 임의로 조정할 수 없는
+state.
+::::
+
+:::: definition-row
+::: term
+Jump variable
+:::
+
+새로운 정보나 미래 경로조건에 맞추어 현재 시점에 즉시 조정될 수 있는
+forward-looking variable.
+::::
+
+:::: definition-row
+::: term
+Canonical system
+:::
+
+Maximum Principle의 조건을 이용해 state와 control 또는 state와 costate의
+연립 미분방정식으로 표현한 동태계.
+::::
+:::::::::::::::::::::::::

@@ -1,0 +1,44 @@
+# Chapter 03 · 동적계획법과 재귀적 방법 {.unnumbered}
+*Dynamic Programming and Recursive Methods*
+
+이 장에서는 **동적계획법과 재귀적 방법**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **3.1–3.5** 왜 Recursive Methods인가 · Principle of Optimality
+- **3.6–3.10** Bellman Equation · Euler Equation 복원
+- **3.11–3.14** Bellman Operator와 Fixed Point · Stochastic Dynamic Programming
+- **3.15–3.18** Continuous-Time DP와 HJB · Chapter Summary
+:::
+
+## Sections
+
+- [3.1 왜 Recursive Methods인가](contents.html#s01)
+- [3.2 Sequential Formulation](contents.html#s02)
+- [3.3 State Variables](contents.html#s03)
+- [3.4 Value Function](contents.html#s04)
+- [3.5 Principle of Optimality](contents.html#s05)
+- [3.6 Bellman Equation](contents.html#s06)
+- [3.7 Policy Functions와 Laws of Motion](contents.html#s07)
+- [3.8 First-Order Condition](contents.html#s08)
+- [3.9 Envelope Condition](contents.html#s09)
+- [3.10 Euler Equation 복원](contents.html#s10)
+- [3.11 Bellman Operator와 Fixed Point](contents.html#s11)
+- [3.12 Value Function Iteration](contents.html#s12)
+- [3.13 Policy Iteration](contents.html#s13)
+- [3.14 Stochastic Dynamic Programming](contents.html#s14)
+- [3.15 Continuous-Time DP와 HJB](contents.html#s15)
+- [3.16 Maximum Principle vs. Dynamic Programming](contents.html#s16)
+- [3.17 좋은 State를 고르는 법](contents.html#s17)
+- [3.18 Chapter Summary](contents.html#s18)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

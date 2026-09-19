@@ -1,0 +1,1296 @@
+---
+title: >-
+  동적계획법과 재귀적 방법
+description: >-
+  Dynamic Programming and Recursive Methods
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+:::::::::::::::::::::: {#s01 .section}
+## [3.1]{.section-number}왜 Recursive Methods인가
+
+동태 거시의 원래 문제는 보통 무한한 선택수열 전체를 한꺼번에 고르는
+형태다. Dynamic Programming은 이 무한차원 문제를 **현재의 선택 + 남은
+미래의 최적가치**로 분해하여, 동일한 구조가 매 시점 반복되는 재귀적
+문제로 바꾼다.
+
+대표적인 자본축적 문제를 생각하자.
+
+::: math-display
+$$
+\max_{\{c_t,k_{t+1}\}_{t=0}^{\infty}}
+\sum_{t=0}^{\infty}\beta^t u(c_t),
+\qquad 0<\beta<1,
+$$ $$
+\text{s.t.}\qquad
+c_t+k_{t+1}=f(k_t)+(1-\delta)k_t,
+\qquad k_0\text{ given}.
+$$
+:::
+
+sequential formulation에서는 $\{c_t,k_{t+1}\}_{t\ge0}$ 전체가
+선택대상이다. 그러나 시점 $t$에서 중요한 것은 과거의 모든 기록 자체가
+아니라, 그 과거가 남긴 현재 자본 $k_t$다. 현재 $k_t$가 주어지면 오늘의
+선택과 그 이후 문제를 다시 같은 형태로 쓸 수 있다.
+
+::: chapter-thesis
+Recursive compression
+
+동적계획법의 핵심은 미래를 무시하는 것이 아니라, 미래 전체를
+**continuation value**라는 하나의 함수에 담는 것이다. 적절한 state를
+찾으면 무한한 history 대신 현재 state만으로 의사결정을 표현할 수 있다.
+:::
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+History를 압축한다
+:::
+
+미래 최적화에 필요한 과거 정보를 state $s_t$로 요약한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+미래를 함수로 압축한다
+:::
+
+state $s$에서 시작할 때 얻을 수 있는 최대가치를 $V(s)$로 정의한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+오늘과 내일을 연결한다
+:::
+
+current payoff와 discounted continuation value의 합을 최대화한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+정책함수로 동태를 생성한다
+:::
+
+최적 선택규칙과 transition law를 반복하여 전체 시계열을 복원한다.
+::::
+::::::
+:::::::::::::::::::
+::::::::::::::::::::::
+
+:::::::::: {#s02 .section}
+## [3.2]{.section-number}Sequential Formulation
+
+재귀적 표현을 만들기 전에 원래의 sequential problem을 정확히 써야 한다.
+어떤 변수가 주어지고, 무엇을 선택하며, 오늘의 선택이 다음 state를 어떻게
+결정하는지를 먼저 분명히 해야 한다.
+
+기본 자본축적 문제는
+
+::: math-display
+$$
+\max_{\{c_t,k_{t+1}\}_{t=0}^{\infty}}
+\sum_{t=0}^{\infty}\beta^t u(c_t)
+$$ $$
+\text{s.t.}\qquad
+c_t+k_{t+1}=f(k_t)+(1-\delta)k_t,
+\qquad k_0\text{ given}
+$$
+:::
+
+로 쓸 수 있다. 시점 $t$의 timing은 다음 세 단계로 읽으면 된다.
+
+:::: equation-card
+Timing
+
+::: math-display
+$$
+\boxed{
+ k_t
+ \;\longrightarrow\;
+ (c_t,k_{t+1})
+ \;\longrightarrow\;
+ k_{t+1}
+}
+$$
+:::
+
+현재 state $k_t$를 관찰하고 현재 소비와 다음기의 자본을 선택한다. 선택된
+$k_{t+1}$는 다음 시점의 inherited state가 된다.
+::::
+
+resource constraint를 이용하면 소비를 제거하여
+
+::: math-display
+$$
+c_t=f(k_t)+(1-\delta)k_t-k_{t+1}
+$$
+:::
+
+로 쓸 수 있다. 따라서 실질적으로는 현재 $k_t$가 주어졌을 때 다음 state
+$k_{t+1}$를 선택하는 문제로 볼 수 있다.
+
+::::: callout-strip
+::: left
+중요
+:::
+
+::: right
+recursive formulation을 만들기 전에 timing을 잘못 잡으면 state와
+control이 뒤섞인다. 특히 $k_{t+1}$는 오늘 선택되는 control이면서 동시에
+내일의 state다.
+:::
+:::::
+::::::::::
+
+::::::::::: {#s03 .section}
+## [3.3]{.section-number}State Variables
+
+state는 단순히 "과거 변수"가 아니다. 현재 이후의 의사결정 문제를 완전히
+정의하는 데 필요한 과거 정보의 요약이다. recursive formulation의 성패는
+적절한 state를 선택하는 데 달려 있다.
+
+:::: {.statement .definition}
+::: statement-head
+State variable
+:::
+
+시점 $t$의 state $s_t$는, 현재와 미래의 feasible set·payoff·transition을
+결정하는 데 필요한 정보를 담아야 한다. 이상적으로는 과거 history 전체를
+다시 참조하지 않고도 $s_t$만으로 continuation problem을 정의할 수 있어야
+한다.
+::::
+
+확률적 환경에서는 이 아이디어가 Markov representation으로 나타난다.
+적절한 state를 구성했다면
+
+::: math-display
+$$
+\Pr(s_{t+1}\mid s_t,s_{t-1},\ldots)
+=
+\Pr(s_{t+1}\mid s_t)
+$$
+:::
+
+와 같이 미래의 조건부 분포가 현재 state에 의해 요약된다. 이는 원래
+경제가 본질적으로 "기억이 없다"는 뜻이 아니라, 필요한 기억을 state가
+충분히 담고 있다는 뜻이다.
+
+### 3.3.1 Minimal sufficient state {#s031}
+
+좋은 state는 두 조건을 동시에 만족해야 한다.
+
+- **Sufficiency:** 미래 최적화 문제를 정의하는 데 필요한 정보를 빠뜨리지
+  않아야 한다.
+- **Parsimony:** 미래에 아무 역할도 하지 않는 불필요한 history를
+  포함하지 않는 것이 좋다.
+
+::::::: macro-grid
+::: {}
+[PHYSICAL]{.tag}
+
+### Physical state
+
+자본 $k_t$, 재고, 내구재처럼 물리적으로 축적되어 다음 시점으로 넘어가는
+stock.
+:::
+
+::: {}
+[EXOGENOUS]{.tag}
+
+### Exogenous state
+
+생산성 $z_t$, 정부지출 상태 등 외생적 확률과정이 현재 기회를 규정하는
+변수.
+:::
+
+::: {}
+[WEALTH]{.tag}
+
+### Financial state
+
+자산 $a_t$, 부채처럼 현재 예산집합과 다음기의 재원을 규정하는 stock.
+:::
+
+::: {}
+[PROMISED / BELIEF]{.tag}
+
+### Informational state
+
+belief, promised value, multiplier처럼 과거 history의 관련 정보를
+요약하는 상태. 고급 recursive models에서 중요하다.
+:::
+:::::::
+:::::::::::
+
+:::::: {#s04 .section}
+## [3.4]{.section-number}Value Function
+
+현재 state가 주어졌을 때 앞으로 최적으로 행동하면 얼마의 목적함수 값을
+얻을 수 있는지를 하나의 함수로 표현한다. 이것이 value function이다.
+
+현재 자본이 $k$일 때 value function을
+
+::: math-display
+$$
+V(k)
+\equiv
+\sup_{\{c_t,k_{t+1}\}_{t=0}^{\infty}}
+\sum_{t=0}^{\infty}\beta^t u(c_t)
+$$ $$
+\text{s.t.}\qquad
+k_0=k,
+\quad
+c_t+k_{t+1}=f(k_t)+(1-\delta)k_t
+$$
+:::
+
+로 정의한다. $V(k)$는 단순한 보조함수가 아니라 현재 state $k$가 허용하는
+**최적 continuation utility**다.
+
+:::: equation-card
+경제적 의미
+
+::: math-display
+$$
+\boxed{
+V(k)=\text{현재 state }k\text{에서 시작할 때 달성 가능한 최대 미래가치}
+}
+$$
+:::
+
+미래의 무한한 선택수열이 value function 하나로 압축된다.
+::::
+
+따라서 $V'(k)$가 존재한다면 이는 자본을 한 단위 더 보유했을 때 최적
+continuation value가 얼마나 증가하는지를 나타낸다. 이 한계가치는 Chapter
+2의 costate와 밀접하게 연결된다.
+::::::
+
+::::::: {#s05 .section}
+## [3.5]{.section-number}Principle of Optimality
+
+Bellman equation이 가능한 이유는 최적경로의 어느 시점 이후를
+잘라내더라도, 남은 부분 역시 그 시점의 state에서 시작하는 continuation
+problem의 최적해여야 하기 때문이다.
+
+:::: {.statement .theorem}
+::: statement-head
+Principle of Optimality
+:::
+
+초기 state에서 최적인 계획의 continuation은, 그 계획이 도달한 중간
+state에서 시작하는 남은 문제에 대해서도 최적이어야 한다. 그렇지 않다면
+중간 이후를 더 나은 continuation으로 대체하여 원래 계획의 가치를 높일 수
+있으므로 모순이다.
+::::
+
+이 원리는 전체 목적함수를 현재와 미래로 분할하게 해준다.
+
+::: math-display
+$$
+\sum_{t=0}^{\infty}\beta^t u(c_t)
+=
+u(c_0)
++
+\beta
+\sum_{t=1}^{\infty}\beta^{t-1}u(c_t).
+$$
+:::
+
+시점 1 이후의 최적가치는 현재 선택으로 결정되는 $k_1$의 함수이므로
+
+::: math-display
+$$
+\sum_{t=1}^{\infty}\beta^{t-1}u(c_t)
+=V(k_1)
+$$
+:::
+
+로 압축할 수 있다. 이 한 단계의 분해가 Bellman equation을 만든다.
+:::::::
+
+::::::: {#s06 .section}
+## [3.6]{.section-number}Bellman Equation
+
+Bellman equation은 value function이 스스로를 한 시점 앞으로 이동시킨
+형태다. 현재 state에서 오늘의 선택을 하고, 그 선택이 만든 다음 state의
+최적가치를 이어 붙인다.
+
+자본축적 제약을 소비에 대입하면
+
+::: math-display
+$$
+\boxed{
+V(k)
+=
+\max_{k'}
+\left\{
+u\!\left(f(k)+(1-\delta)k-k'\right)
++
+\beta V(k')
+\right\}.
+}
+$$
+:::
+
+여기서 $k'$는 $k_{t+1}$를 뜻한다. Bellman equation은 세 개의 구성요소로
+읽는다.
+
+::: display-table-wrap
+  구성요소             표현            역할
+  -------------------- --------------- ---------------------------------------------
+  현재 state           $k$             현재 feasible set을 규정
+  현재 payoff          $u(c)$          오늘 선택에서 얻는 효용
+  continuation value   $\beta V(k')$   오늘 선택이 만든 다음 state 이후의 최적가치
+:::
+
+:::: chapter-thesis
+Bellman form
+
+::: math-display
+$$
+\boxed{
+\text{Value today}
+=
+\max_{\text{current action}}
+\left\{
+\text{current payoff}
++
+\text{discounted value tomorrow}
+\right\}.
+}
+$$
+:::
+::::
+
+중요한 점은 Bellman equation이 새로운 경제적 가정을 추가하지 않는다는
+것이다. 적절한 조건 아래 sequential problem과 recursive problem은 동일한
+최적화 문제의 두 표현이다.
+:::::::
+
+:::::::: {#s07 .section}
+## [3.7]{.section-number}Policy Functions와 Laws of Motion
+
+Dynamic Programming의 해는 value function만이 아니다. 각 state에서 어떤
+action을 선택해야 하는지를 주는 **policy function**이 실제 경제의 동태를
+생성한다.
+
+Bellman equation의 최적해를
+
+::: math-display
+$$
+k'=g(k)
+$$
+:::
+
+라고 하자. 그러면 소비정책은 자원제약으로부터
+
+::: math-display
+$$
+c=h(k)
+\equiv
+f(k)+(1-\delta)k-g(k)
+$$
+:::
+
+로 얻어진다. 따라서 최적경제의 시간경로는
+
+:::: equation-card
+Recursive solution
+
+::: math-display
+$$
+\boxed{
+\begin{aligned}
+k_{t+1}&=g(k_t),\\
+c_t&=h(k_t).
+\end{aligned}
+}
+$$
+:::
+
+초기 state $k_0$와 policy function이 주어지면 이후의 전체 경로를
+반복(iteration)으로 생성할 수 있다.
+::::
+
+즉 recursive solution의 본질은 "모든 날짜의 선택을 따로 계산하는 것"이
+아니라, **state에 대한 선택규칙을 한 번 찾은 뒤 그것을 반복 적용하는
+것**이다.
+
+::: section-bridge
+이 구조는 이후 RBC에서 $k_{t+1}=g(k_t,z_t)$, $c_t=h(k_t,z_t)$로
+확장되고, incomplete-markets 모형에서는 개별 자산정책 $a'=g(a,z)$의
+형태로 다시 나타난다.
+:::
+::::::::
+
+::::::: {#s08 .section}
+## [3.8]{.section-number}First-Order Condition
+
+Bellman equation을 미분하면 현재 소비와 다음 state 사이의 한계적
+trade-off가 나타난다. 이것이 recursive formulation의 일계조건이다.
+
+Bellman equation
+
+::: math-display
+$$
+V(k)=
+\max_{k'}
+\left\{
+u(c)+\beta V(k')\right\},
+\qquad
+c=f(k)+(1-\delta)k-k'
+$$
+:::
+
+에서 interior optimum을 가정하고 $k'$에 대해 미분하면
+
+::: math-display
+$$
+-u'(c)+\beta V'(k')=0.
+$$
+:::
+
+따라서
+
+:::: equation-card
+Bellman FOC
+
+::: math-display
+$$
+\boxed{
+u'(c)=\beta V'(k').}
+$$
+:::
+
+현재 소비 한 단위를 줄일 때 잃는 한계효용과, 그 자원을 다음 state로 넘겨
+증가시키는 discounted continuation value가 같아야 한다.
+::::
+
+여기서 $V'(k')$가 단순한 수학적 derivative가 아니라 다음 시점 state의
+shadow value라는 점이 중요하다.
+:::::::
+
+::::::: {#s09 .section}
+## [3.9]{.section-number}Envelope Condition
+
+Chapter 1의 envelope theorem이 Dynamic Programming에서 다시 등장한다.
+최적 policy 자체가 state 변화에 반응하는 간접효과는 FOC 때문에 일계에서
+사라지고, state의 직접효과만 남는다.
+
+Bellman equation을 현재 state $k$에 대해 미분하면
+
+::: math-display
+$$
+V'(k)
+=
+u'(c)
+\left[f'(k)+1-\delta\right]
+$$
+:::
+
+를 얻는다. 즉
+
+:::: equation-card
+Envelope condition
+
+::: math-display
+$$
+\boxed{
+V'(k)=u'(c)\left[f'(k)+1-\delta\right].
+}
+$$
+:::
+
+현재 자본 한 단위가 생산과 미감가 자본을 통해 제공하는 추가 자원을 현재
+한계효용 단위로 평가한 것이 state의 marginal value다.
+::::
+
+Chapter 2의 costate $\lambda_t$와 비교하면, 적절한 normalization과
+timing 아래
+
+::: math-display
+$$
+\boxed{
+\lambda_t
+\quad\longleftrightarrow\quad
+V'(k_t)
+}
+$$
+:::
+
+라는 대응관계를 볼 수 있다. Maximum Principle은 shadow value를 별도의
+costate path로 추적하고, Dynamic Programming은 그것을 value function의
+derivative 안에 담는다.
+:::::::
+
+::::::::: {#s10 .section}
+## [3.10]{.section-number}Euler Equation 복원
+
+Bellman FOC와 envelope condition을 한 시점 차이로 결합하면 Chapter 1에서
+보았던 Euler equation이 다시 나온다. 이는 서로 다른 최적화 방법이 같은
+경제적 조건을 특성화한다는 핵심 확인이다.
+
+시점 $t$의 FOC는
+
+::: math-display
+$$
+u'(c_t)=\beta V'(k_{t+1}).
+$$
+:::
+
+다음 시점의 envelope condition은
+
+::: math-display
+$$
+V'(k_{t+1})
+=
+u'(c_{t+1})
+\left[f'(k_{t+1})+1-\delta\right].
+$$
+:::
+
+두 식을 결합하면
+
+:::: equation-card
+Euler equation
+
+::: math-display
+$$
+\boxed{
+u'(c_t)
+=
+\beta u'(c_{t+1})
+\left[f'(k_{t+1})+1-\delta\right].
+}
+$$
+:::
+::::
+
+왼쪽은 오늘 소비 한 단위의 한계가치다. 오른쪽은 그 한 단위를 오늘
+소비하지 않고 자본으로 넘겼을 때 내일 얻는 총수익을 내일의 한계효용으로
+평가하고 할인한 값이다.
+
+::: display-table-wrap
+  방법                  핵심 한계가치         Euler equation으로 가는 경로
+  --------------------- --------------------- ----------------------------------
+  Lagrangian            예산제약 승수         인접시점 FOC의 비율
+  Maximum Principle     costate $\lambda_t$   control FOC + costate equation
+  Dynamic Programming   $V'(s_t)$             Bellman FOC + envelope condition
+:::
+
+::: reading-rule
+**같은 Euler equation이 반복해서 나오는 이유:** 세 방법이 서로 다른
+경제모형을 푸는 것이 아니라, 동일한 intertemporal optimality condition을
+서로 다른 수학적 표현으로 특성화하기 때문이다.
+:::
+:::::::::
+
+:::::::: {#s11 .section}
+## [3.11]{.section-number}Bellman Operator와 Fixed Point
+
+Bellman equation을 함수에 작용하는 operator의 fixed-point 문제로 보면
+존재·유일성과 계산 알고리즘을 하나의 언어로 연결할 수 있다. 이 부분은
+recursive methods의 수학적 골격이다.
+
+Bellman operator $T$를
+
+::: math-display
+$$
+(TW)(k)
+\equiv
+\max_{k'\in\Gamma(k)}
+\left\{
+u(c(k,k'))+\beta W(k')\right\}
+$$
+:::
+
+로 정의하자. 여기서 $\Gamma(k)$는 state $k$에서 가능한 다음 state의
+집합이다. Bellman equation은
+
+::: math-display
+$$
+\boxed{V=TV}
+$$
+:::
+
+즉 value function이 Bellman operator의 fixed point라는 뜻이다.
+
+Technical Note · Contraction mapping의 기본 논리
+
+:::: details-body
+표준적인 bounded-return discounted problem에서 sup norm을 사용하고
+$0<\beta<1$이면 Bellman operator는 흔히
+
+::: math-display
+$$
+\|TW_1-TW_2\|_{\infty}
+\le
+\beta
+\|W_1-W_2\|_{\infty}
+$$
+:::
+
+를 만족한다. 그러면 $T$는 contraction이고 Banach fixed-point theorem에
+의해 fixed point가 유일하며 반복 $W_{n+1}=TW_n$이 그 fixed point로
+수렴한다. 다만 unbounded utility, noncompact choice set 등에서는 별도의
+함수공간과 조건이 필요하므로 이 결론을 기계적으로 적용해서는 안 된다.
+::::
+
+Technical Note · Blackwell sufficient conditions
+
+::: details-body
+할인 동적계획 문제에서는 monotonicity와 discounting을 이용해
+contraction을 확인하는 Blackwell의 충분조건이 자주 사용된다. 이 장에서는
+정리의 활용구조만 기억하고, 정식 함수해석 증명은 별도 수학 부록의
+영역으로 둔다.
+:::
+::::::::
+
+:::::::::::::::::::::: {#s12 .section}
+## [3.12]{.section-number}Value Function Iteration
+
+fixed-point 표현은 곧 계산법이 된다. 임의의 초기 guess에서 Bellman
+operator를 반복 적용하면 value function에 접근할 수 있다.
+
+::: math-display
+$$
+V_{n+1}=TV_n,
+\qquad n=0,1,2,\ldots
+$$
+:::
+
+즉
+
+::: math-display
+$$
+V_0
+\longrightarrow
+V_1
+\longrightarrow
+V_2
+\longrightarrow
+\cdots
+\longrightarrow
+V.
+$$
+:::
+
+각 iteration에서는 모든 state에서 현재 guess $V_n$를 continuation
+value로 사용하여 한 기간의 최적화를 푼다. contraction이 성립하는 표준
+경우에는 이 반복이 유일한 fixed point로 수렴한다.
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Initial guess
+:::
+
+함수 $V_0$를 하나 정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Bellman update
+:::
+
+각 state에서 $TV_n$을 계산하여 $V_{n+1}$을 얻는다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Policy extraction
+:::
+
+각 maximization의 argmax를 기록하면 policy guess도 함께 얻어진다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Convergence check
+:::
+
+$\|V_{n+1}-V_n\|$가 충분히 작아질 때까지 반복한다.
+::::
+::::::
+:::::::::::::::::::
+
+이 노트에서는 알고리즘의 개념적 구조만 다룬다. grid 선택, interpolation,
+approximation error, acceleration 같은 수치기법은 별도 computational
+macro 주제로 둔다.
+::::::::::::::::::::::
+
+::::: {#s13 .section}
+## [3.13]{.section-number}Policy Iteration
+
+Value Function Iteration이 value를 직접 업데이트한다면, Policy
+Iteration은 주어진 정책의 가치를 평가한 뒤 그 정책을 개선하는 과정을
+반복한다.
+
+정책 $g_n$이 주어졌다고 하자. 먼저 이 정책을 계속 따랐을 때의 value
+$V^{g_n}$를 계산한다. 그다음 $V^{g_n}$를 continuation value로 사용해 각
+state에서 더 나은 action을 선택하여 $g_{n+1}$을 만든다.
+
+::: math-display
+$$
+\boxed{
+ g_n
+ \longrightarrow
+ V^{g_n}
+ \longrightarrow
+ g_{n+1}.
+}
+$$
+:::
+
+이 아이디어는 Howard policy improvement와 연결된다. 실제 계산에서는
+문제구조에 따라 VFI보다 훨씬 빠를 수 있지만, 여기서 중요한 것은 알고리즘
+비교 자체가 아니라 **recursive formulation이 value와 policy 사이의
+반복적 갱신을 가능하게 한다**는 점이다.
+
+Extension · 왜 계산 알고리즘도 경제학의 일부인가
+
+::: details-body
+비선형·확률적 거시모형에서는 닫힌형 해가 존재하지 않는 경우가
+일반적이다. recursive formulation은 equilibrium object를 함수방정식으로
+표현하여 numerical solution의 출발점을 제공한다. 따라서 Bellman
+equation은 단지 이론적 표현이 아니라 계산 가능한 경제모형의 언어이기도
+하다.
+:::
+:::::
+
+::::::::: {#s14 .section}
+## [3.14]{.section-number}Stochastic Dynamic Programming
+
+불확실성이 들어가도 재귀적 구조는 그대로 유지된다. 차이는 다음 state의
+continuation value가 확정값이 아니라 현재 정보에 대한 조건부 기대값으로
+들어간다는 점이다.
+
+외생적 생산성 상태 $z_t$가 Markov process를 따른다고 하자.
+
+::: math-display
+$$
+z_{t+1}\sim P(\cdot\mid z_t).
+$$
+:::
+
+전체 state를
+
+::: math-display
+$$
+s_t=(k_t,z_t)
+$$
+:::
+
+로 잡으면 stochastic Bellman equation은
+
+:::: equation-card
+Stochastic Bellman equation
+
+::: math-display
+$$
+\boxed{
+V(k,z)
+=
+\max_{k'}
+\left\{
+u(c)
++
+\beta
+\mathbb E\left[V(k',z')\mid z\right]
+\right\}.
+}
+$$
+:::
+::::
+
+정책함수도
+
+::: math-display
+$$
+k'=g(k,z),
+\qquad
+c=h(k,z)
+$$
+:::
+
+처럼 외생상태에 의존한다. 이후 RBC는 이 구조에 생산성 shock과
+competitive equilibrium을 결합한 대표적인 응용이다.
+
+::: reading-rule
+**여기서는 Markov chain의 상세 이론을 전개하지 않는다.** 확률적 state가
+조건부 분포를 통해 continuation value에 들어간다는 구조만 확립하고,
+stochastic dynamics는 이후 별도 장에서 다시 다룬다.
+:::
+:::::::::
+
+:::::::::: {#s15 .section}
+## [3.15]{.section-number}Continuous-Time DP와 HJB
+
+Dynamic Programming은 이산시간에만 적용되는 방법이 아니다.
+연속시간에서는 Bellman equation의 미분형인
+Hamilton--Jacobi--Bellman(HJB) equation이 Chapter 2의 Maximum
+Principle과 연결된다.
+
+연속시간 문제를
+
+::: math-display
+$$
+V(x_0)
+=
+\sup_{\{a_t\}}
+\int_0^{\infty}
+e^{-\rho t}u(x_t,a_t)\,dt,
+\qquad
+\dot x_t=f(x_t,a_t)
+$$
+:::
+
+라고 하자. 작은 시간간격에 대해 Bellman 원리를 적용하고 극한을 취하면
+표준적인 stationary HJB는
+
+:::: equation-card
+HJB equation
+
+::: math-display
+$$
+\boxed{
+\rho V(x)
+=
+\max_a
+\left\{
+u(x,a)+V_x(x)f(x,a)\right\}.
+}
+$$
+:::
+::::
+
+Chapter 2의 current-value Hamiltonian
+
+::: math-display
+$$
+\mathcal H(x,a,\lambda)
+=
+u(x,a)+\lambda f(x,a)
+$$
+:::
+
+와 비교하면
+
+::: math-display
+$$
+\boxed{\lambda\longleftrightarrow V_x(x)}
+$$
+:::
+
+가 자연스럽게 나타난다. 즉 Maximum Principle의 costate는 Dynamic
+Programming에서 value function의 state derivative로 내생적으로 표현된다.
+
+Technical Note · HJB의 작은 시간간격 직관
+
+:::: details-body
+짧은 $\Delta t$ 동안 현재 payoff를 얻고 다음 state에서 계속 최적으로
+행동한다고 쓰면
+
+::: math-display
+$$
+V(x)
+=\max_a
+\left\{
+u(x,a)\Delta t
++e^{-\rho\Delta t}V(x+f(x,a)\Delta t)
+\right\}+o(\Delta t).
+$$
+:::
+
+$V$를 1차 Taylor expansion하고 $\Delta t$로 나눈 뒤 $\Delta t\to0$을
+취하면 HJB가 나온다. 이는 Bellman 원리의 연속시간 표현이다.
+::::
+::::::::::
+
+:::::: {#s16 .section}
+## [3.16]{.section-number}Maximum Principle vs. Dynamic Programming
+
+두 방법은 경쟁하는 별개의 이론이 아니라 동일한 동태최적화 문제를 다른
+객체로 표현한다. 어떤 방법이 더 편리한지는 시간구조, 불확실성, 비선형성,
+계산 목적에 따라 달라진다.
+
+::: display-table-wrap
+                Maximum Principle                           Dynamic Programming
+  ------------- ------------------------------------------- --------------------------------------------
+  핵심 객체     state, control, costate path                state, value function, policy function
+  핵심 방정식   Hamiltonian FOC + state/costate equations   Bellman equation / HJB
+  한계가치      $\lambda_t$                                 적절한 조건에서 $V_s(s_t)$
+  경로 선택     initial condition + terminal/TVC            value fixed point + optimal policy
+  강점          연속시간 FOC, phase dynamics가 투명         재귀성, 불확실성, 계산, 비선형 문제에 강함
+  대표 결과     canonical system                            policy function과 recursive law of motion
+:::
+
+:::: chapter-thesis
+하나의 구조, 세 개의 언어
+
+::: math-display
+$$
+\boxed{
+\text{Lagrange multiplier}
+\;\longrightarrow\;
+\text{costate}
+\;\longrightarrow\;
+V_s
+}
+$$
+:::
+
+Chapter 1--3은 서로 분리된 기법 목록이 아니라, 제약의 한계가치가 정적
+문제에서 동태경로, 다시 recursive state value로 확장되는 하나의
+흐름이다.
+::::
+::::::
+
+:::::::::::::::::::::::: {#s17 .section}
+## [3.17]{.section-number}좋은 State를 고르는 법
+
+실제 recursive macro에서 가장 어려운 작업은 Bellman equation을 미분하는
+것이 아니라, 무엇을 state로 잡아야 문제를 재귀적으로 닫을 수 있는지를
+알아내는 것이다.
+
+::: display-table-wrap
+  모형                      대표 state                  왜 필요한가
+  ------------------------- --------------------------- --------------------------------------------------------------
+  Deterministic growth      $k_t$                       현재 생산가능성과 다음 자본 선택을 규정
+  Stochastic growth / RBC   $(k_t,z_t)$                 자본과 현재 생산성 상태가 미래 분포와 feasible set을 규정
+  소비--저축, 불완전시장    $(a_t,z_t)$                 재산과 소득상태가 현재 예산집합과 self-insurance 기회를 규정
+  Heterogeneous-agent GE    개별 state + 분포 $\mu_t$   가격이 경제 전체의 분포에 의존할 수 있음
+  Recursive contracts       promised value 등           과거 계약 history의 incentive-relevant 정보를 요약
+:::
+
+좋은 state를 찾을 때는 다음 질문을 순서대로 던지면 된다.
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+오늘의 feasible set은 무엇에 의존하는가?
+:::
+
+자본, 자산, 기술상태처럼 현재 자원제약을 규정하는 stock을 찾는다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+미래 shock의 조건부분포는 무엇에 의존하는가?
+:::
+
+Markov state를 포함하여 미래 불확실성을 현재 state가 충분히 요약하도록
+한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+가격이나 계약이 history에 의존하는가?
+:::
+
+필요하면 distribution, belief, promised value처럼 비물리적 state를
+추가한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+더 줄일 수 있는가?
+:::
+
+미래 문제에 아무 영향을 주지 않는 history는 state에서 제거한다.
+::::
+::::::
+:::::::::::::::::::
+
+::::: callout-strip
+::: left
+State is a model object
+:::
+
+::: right
+state는 데이터의 변수목록과 동일하지 않다. 어떤 정보를 state로 포함해야
+하는지는 경제환경, 정보구조, equilibrium concept에 의해 결정된다.
+:::
+:::::
+::::::::::::::::::::::::
+
+::::: {#s18 .section}
+## [3.18]{.section-number}Chapter Summary
+
+이 장의 목적은 Bellman equation을 하나 더 외우는 것이 아니라, 동태
+거시문제를 **state → choice → transition → continuation value**의
+반복구조로 읽는 법을 확립하는 것이다.
+
+::: math-display
+$$
+\boxed{
+\begin{aligned}
+\text{Sequential Problem}
+&\longrightarrow
+\text{State}\\
+&\longrightarrow
+\text{Value Function}\\
+&\longrightarrow
+\text{Bellman Equation}\\
+&\longrightarrow
+\text{Policy Function}\\
+&\longrightarrow
+\text{Law of Motion}.
+\end{aligned}
+}
+$$
+:::
+
+- recursive formulation은 무한한 미래를 없애는 것이 아니라 continuation
+  value에 압축한다.
+- state는 미래 문제를 정의하는 데 필요한 history의 충분한 요약이다.
+- value function은 현재 state에서 달성 가능한 최대 continuation value다.
+- principle of optimality는 최적계획의 continuation 역시 해당 state에서
+  최적이어야 함을 말한다.
+- Bellman equation은 current payoff와 discounted continuation value를
+  결합한다.
+- policy function을 반복하면 초기 state에서 전체 최적경로를 생성할 수
+  있다.
+- Bellman FOC와 envelope condition을 결합하면 기존의 Euler equation을
+  복원한다.
+- Bellman operator의 fixed-point 표현은 존재·유일성 논리와 numerical
+  iteration을 연결한다.
+- 불확실성은 conditional expectation을 추가하지만 recursive structure
+  자체를 바꾸지 않는다.
+- 연속시간 HJB에서 $V_x$는 Maximum Principle의 costate와 대응한다.
+
+::: reading-rule
+Part I의 결론
+
+Chapter 1--3으로 최적화 도구를 일단 닫는다. 다음 장부터는 새로운 최적화
+기법을 늘리기보다, 이 도구들을 실제 거시경제에 적용한다. 첫 단계는
+**2기간 경제에서 소비·저축, 기업의 생산, 자본축적, 시장청산이 어떻게
+하나의 일반균형을 만드는지** 보는 것이다.
+:::
+:::::
+
+::: {#check .section}
+## Learning Check
+
+1.  sequential formulation과 recursive formulation의 차이를 같은
+    자본축적 문제를 이용해 설명할 수 있는가?
+2.  state를 "과거 변수"가 아니라 "미래 continuation problem에 충분한
+    정보의 요약"으로 정의할 수 있는가?
+3.  value function의 경제적 의미와 $V'(k)$의 shadow-value 해석을 설명할
+    수 있는가?
+4.  principle of optimality가 왜 Bellman equation을 정당화하는지
+    논리적으로 설명할 수 있는가?
+5.  자본축적 문제의 Bellman equation을 직접 세울 수 있는가?
+6.  policy function $k'=g(k)$과 consumption rule $c=h(k)$에서 전체
+    동태가 어떻게 생성되는지 설명할 수 있는가?
+7.  Bellman FOC와 envelope condition을 이용해 Euler equation을 복원할 수
+    있는가?
+8.  Bellman operator의 fixed point라는 표현이 value function iteration과
+    어떻게 연결되는지 설명할 수 있는가?
+9.  확률적 환경에서 state에 exogenous Markov state를 포함해야 하는
+    이유를 설명할 수 있는가?
+10. HJB의 $V_x$와 Maximum Principle의 costate $\lambda$ 사이의 대응을
+    설명할 수 있는가?
+11. 주어진 거시모형에서 "무엇이 state인가?"를 판단하기 위해 어떤 질문을
+    던져야 하는가?
+:::
+
+::::::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Recursive formulation
+:::
+
+동태문제를 현재 state와 다음 state 사이의 반복적 구조로 표현하는 방식.
+현재 선택과 continuation value를 결합한다.
+::::
+
+:::: definition-row
+::: term
+State variable
+:::
+
+현재 이후의 feasible set, payoff, transition을 정의하는 데 필요한 과거
+정보의 요약.
+::::
+
+:::: definition-row
+::: term
+Value function
+:::
+
+주어진 state에서 시작하여 앞으로 최적으로 행동할 때 얻을 수 있는 최대
+continuation value.
+::::
+
+:::: definition-row
+::: term
+Principle of optimality
+:::
+
+최적계획의 continuation은 그 시점에 도달한 state에서 시작하는 남은
+문제에 대해서도 최적이어야 한다는 원리.
+::::
+
+:::: definition-row
+::: term
+Bellman equation
+:::
+
+현재 value를 current payoff와 discounted continuation value의 최적합으로
+표현하는 함수방정식.
+::::
+
+:::: definition-row
+::: term
+Policy function
+:::
+
+각 state에 대해 최적 action을 대응시키는 함수. 예: $k'=g(k)$.
+::::
+
+:::: definition-row
+::: term
+Transition law
+:::
+
+현재 state와 action이 다음 state를 결정하는 규칙. 최적 policy를 대입하면
+equilibrium/optimal law of motion이 된다.
+::::
+
+:::: definition-row
+::: term
+Envelope condition
+:::
+
+최적 policy의 간접반응을 FOC로 제거하고 state 변화가 최적가치에 미치는
+직접 한계효과를 나타내는 조건.
+::::
+
+:::: definition-row
+::: term
+Bellman operator
+:::
+
+candidate value function을 한 번의 최적화로 새로운 value function에
+매핑하는 함수연산자 $T$.
+::::
+
+:::: definition-row
+::: term
+Fixed point
+:::
+
+$V=TV$를 만족하는 함수. Bellman equation의 해인 value function이 이에
+해당한다.
+::::
+
+:::: definition-row
+::: term
+Value Function Iteration
+:::
+
+$V_{n+1}=TV_n$을 반복하여 Bellman fixed point에 접근하는 기본 numerical
+method.
+::::
+
+:::: definition-row
+::: term
+Policy Iteration
+:::
+
+주어진 정책의 value를 평가하고 그 value를 이용해 정책을 개선하는 과정을
+반복하는 방법.
+::::
+
+:::: definition-row
+::: term
+HJB equation
+:::
+
+연속시간 Dynamic Programming의 Bellman equation. stationary
+problem에서는 $\rho V=\max_a\{u+V_xf\}$ 형태로 나타난다.
+::::
+
+:::: definition-row
+::: term
+Markov state
+:::
+
+미래의 조건부분포를 현재 값만으로 표현할 수 있도록 필요한 정보를 포함한
+state.
+::::
+:::::::::::::::::::::::::::::::

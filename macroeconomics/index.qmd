@@ -4,41 +4,33 @@
 
 **시간, 성장, 변동, 화폐, 위험, 그리고 정책**
 
-현재 마이그레이션 범위는 **Chapter 00–13과 기술 부록 A–E**입니다. 거시경제학의
-공통 언어에서 출발해 성장·경기변동·명목경직성·통화정책·금융마찰·불완전시장
-모형으로 이어집니다.
+현재 마이그레이션 범위는 **Chapter 00–15**입니다. 거시경제학의 질문과
+최적화 방법에서 출발해 성장·불확실성·완전시장·불완전시장·경기변동으로
+이어집니다.
 
 ## Chapter 선택
 
 | Chapter | 내용 |
 |---|---|
-| [Chapter 00](ch00-macro-map/index.qmd) | 거시경제학의 지도 |
-| [Chapter 01](ch01-solow-growth/index.qmd) | 성장사실과 Solow 모형 |
-| [Chapter 02](ch02-ramsey-olg/index.qmd) | 내생적 저축과 세대구조 |
-| [Chapter 03](ch03-endogenous-growth/index.qmd) | 지식축적과 내생적 성장 |
-| [Chapter 04](ch04-development-accounting/index.qmd) | 국가 간 소득격차 |
-| [Chapter 05](ch05-real-business-cycles/index.qmd) | 실물경기변동 |
-| [Chapter 06](ch06-nominal-rigidity/index.qmd) | 명목경직성 |
-| [Chapter 07](ch07-new-keynesian-dsge/index.qmd) | New Keynesian DSGE |
-| [Chapter 08](ch08-monetary-policy/index.qmd) | 통화정책 |
-| [Chapter 09](ch09-consumption-risk/index.qmd) | 소비·저축·위험 |
-| [Chapter 10](ch10-investment/index.qmd) | 투자수요 |
+| [Chapter 00](ch00-foundations/index.qmd) | 현대 거시경제학의 문제와 방법 |
+| [Chapter 01](ch01-constrained-optimization/index.qmd) | 제약최적화와 기간간 선택 |
+| [Chapter 02](ch02-continuous-time-dynamics/index.qmd) | 연속시간 동태최적화 |
+| [Chapter 03](ch03-dynamic-programming/index.qmd) | 동적계획법과 재귀적 방법 |
+| [Chapter 04](ch04-two-period-macro/index.qmd) | 2기간 거시경제 모형 |
+| [Chapter 05](ch05-solow-swan/index.qmd) | Solow–Swan 성장모형 |
+| [Chapter 06](ch06-infinite-horizon-consumption/index.qmd) | 무한기간 예산제약과 소비 |
+| [Chapter 07](ch07-ramsey-cks/index.qmd) | Ramsey–Cass–Koopmans 성장모형 |
+| [Chapter 08](ch08-endogenous-growth/index.qmd) | 내생적 성장과 지식축적 |
+| [Chapter 09](ch09-growth-accounting/index.qmd) | 성장모형의 평가 |
+| [Chapter 10](ch10-stochastic-dynamics/index.qmd) | 불확실성하 동태선택 |
 | [Chapter 11](ch11-complete-markets/index.qmd) | 완전시장 |
-| [Chapter 12](ch12-financial-frictions/index.qmd) | 금융마찰과 금융위기 |
-| [Chapter 13](ch13-incomplete-markets/index.qmd) | 불완전시장과 부의 분포 |
-
-## 기술 부록
-
-| Appendix | 내용 |
-|---|---|
-| [Appendix A](appendix-a-dynamic-optimization/index.qmd) | 동태최적화와 재귀적 방법 |
-| [Appendix B](appendix-b-linear-rational-expectations/index.qmd) | 선형 합리적 기대모형 |
-| [Appendix C](appendix-c-perturbation/index.qmd) | 섭동법과 고차근사 |
-| [Appendix D](appendix-d-business-cycle-measurement/index.qmd) | 경기변동 측정과 모형평가 |
-| [Appendix E](appendix-e-growth-empirics/index.qmd) | 성장회계와 성장실증 |
+| [Chapter 12](ch12-incomplete-markets/index.qmd) | 불완전시장과 자기보험 |
+| [Chapter 13](ch13-business-cycle-facts/index.qmd) | 경기변동의 사실과 측정 |
+| [Chapter 14](ch14-linear-rational-expectations/index.qmd) | 선형 동태계와 합리적 기대 |
+| [Chapter 15](ch15-real-business-cycles/index.qmd) | 실물경기변동이론 |
 
 ::: {.callout-note title="Source migration"}
-각 Chapter의 본문은 원본 강의노트의 수식, 표, 연습문제, 참조 문헌을 보존해
+각 Chapter의 본문은 새 강의노트의 수식, 표, 연습문제, 참조 문헌을 보존해
 마이그레이션했습니다. 문장·수식·참고문헌 수정은 해당 Chapter의 본문 페이지에서
 Pull Request로 제안합니다.
 :::

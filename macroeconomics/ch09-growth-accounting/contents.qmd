@@ -1,0 +1,1219 @@
+---
+title: >-
+  성장모형의 평가
+description: >-
+  Growth Accounting, Convergence, and Development Accounting
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+:::::::::: {#s01 .section}
+## [9.1]{.section-number}From Theory to Measurement
+
+성장이론은 장기경로를 만드는 메커니즘을 제시한다. 모형평가는 그
+메커니즘을 관측 가능한 성장률, 소득수준, 요소축적, 생산성의 언어로
+번역하는 단계다.
+
+::::::: macro-grid
+::: {}
+[SOLOW]{.tag}
+
+### Capital accumulation
+
+자본축적은 수준과 이행동학에 중요하지만 장기 노동자당 성장률은
+기술진보에 의해 결정된다.
+:::
+
+::: {}
+[RAMSEY]{.tag}
+
+### Optimal saving
+
+저축률은 내생화되지만 장기성장의 기술진보율은 여전히 외생적으로 남는다.
+:::
+
+::: {}
+[ENDOGENOUS GROWTH]{.tag}
+
+### Knowledge accumulation
+
+지식생산과 R&D 배분을 통해 기술성장의 일부를 모형 내부에서 설명한다.
+:::
+
+::: {}
+[MEASUREMENT]{.tag}
+
+### What do the data say?
+
+실제 성장과 소득격차에서 물적자본, 인적자본, 생산성이 각각 얼마나 큰
+몫을 차지하는지 살펴본다.
+:::
+:::::::
+
+:::: chapter-thesis
+Three empirical objects
+
+::: math-display
+$$
+\boxed{
+\text{growth over time}
+\quad | \quad
+\text{convergence}
+\quad | \quad
+\text{income differences across economies}
+}
+$$
+:::
+::::
+
+이 세 객체는 각각 growth accounting, convergence analysis, development
+accounting으로 연결된다.
+::::::::::
+
+::::::::: {#s02 .section}
+## [9.2]{.section-number}Growth Accounting
+
+Growth accounting은 산출증가를 생산요소 증가와 잔여 생산성 변화로
+분해하는 방법이다. 핵심은 생산함수의 전미분을 성장률의 가중합으로 바꾸는
+것이다.
+
+일반적인 생산함수를
+
+::: math-display
+$$
+Y=F(K,L,A)
+$$
+:::
+
+라고 하자. 시간에 대해 미분하면
+
+::: math-display
+$$
+\dot Y
+=
+F_K\dot K+F_L\dot L+F_A\dot A.
+$$
+:::
+
+양변을 산출량으로 나누고 각 항을 탄력성 형태로 정리하면
+
+:::: equation-card
+Growth-accounting identity
+
+::: math-display
+$$
+\boxed{
+\frac{\dot Y}{Y}
+=
+\frac{F_KK}{Y}\frac{\dot K}{K}
++
+\frac{F_LL}{Y}\frac{\dot L}{L}
++
+\frac{F_AA}{Y}\frac{\dot A}{A}
+}
+$$
+:::
+::::
+
+이를
+
+::: math-display
+$$
+\boxed{
+g_Y=\alpha_K g_K+\alpha_L g_L+R
+}
+$$
+:::
+
+라고 요약한다. 여기서 각 $\alpha$는 output elasticity이고, $R$은
+명시적으로 측정한 투입성장으로 설명되지 않는 **growth-accounting
+residual**이다.
+
+::: reading-rule
+**Reading rule:** 이 식은 생산함수에서 나온 **분해식**이다. 아직 어떤
+항이 다른 항을 인과적으로 변화시켰다는 뜻은 아니다.
+:::
+:::::::::
+
+::::::::::: {#s03 .section}
+## [9.3]{.section-number}Cobb--Douglas and Factor Shares
+
+Cobb--Douglas와 완전경쟁을 결합하면 output elasticity를 factor income
+share로 측정할 수 있다. 이론이 실제 데이터 분해식으로 바뀌는 핵심
+단계다.
+
+앞 장들과 notation을 맞추어 labor-augmenting technology를 쓰자.
+
+::: math-display
+$$
+Y=K^{\alpha}(AL)^{1-\alpha},
+\qquad 0<\alpha<1.
+$$
+:::
+
+로그미분하면
+
+::: math-display
+$$
+\boxed{
+g_Y
+=\alpha g_K+(1-\alpha)g_L+(1-\alpha)g_A}
+$$
+:::
+
+이고 노동자당 변수 $y\equiv Y/L$, $k\equiv K/L$로는
+
+::: math-display
+$$
+\boxed{
+g_y=\alpha g_k+(1-\alpha)g_A.}
+$$
+:::
+
+:::: {.statement .remark}
+::: statement-head
+Labor-augmenting technology and measured TFP
+:::
+
+Hicks-neutral TFP를 $Z\equiv A^{1-\alpha}$로 정의하면
+$Y=ZK^\alpha L^{1-\alpha}$이고 $g_Z=(1-\alpha)g_A$다. 따라서
+**labor-augmenting technology growth $g_A$**와 **측정되는 TFP growth
+$g_Z$**를 같은 기호로 혼동하지 않는다.
+::::
+
+### Competitive factor pricing
+
+완전경쟁 아래에서 기업은 요소의 한계생산만큼 지급한다.
+
+::: math-display
+$$
+r=F_K,
+\qquad
+w=F_L.
+$$
+:::
+
+따라서 자본소득분배율은
+
+::: math-display
+$$
+\frac{rK}{Y}
+=
+\frac{F_KK}{Y}
+=\alpha,
+$$
+:::
+
+이고 노동소득분배율은 $1-\alpha$다.
+
+::: section-bridge
+즉 growth accounting은 단순한 통계항등식이 아니라 **생산함수 + 가격결정
+가정 + 소득분배 자료**를 결합한 측정체계다.
+:::
+:::::::::::
+
+:::::::: {#s04 .section}
+## [9.4]{.section-number}The Solow Residual
+
+관측 가능한 산출·자본·노동 성장률과 요소분배율을 이용하면 설명되지 않은
+부분을 잔차로 계산할 수 있다. 문제는 그 잔차의 경제적 의미다.
+
+:::: equation-card
+Solow residual
+
+::: math-display
+$$
+\boxed{
+R
+=
+g_Y-\alpha g_K-(1-\alpha)g_L
+}
+$$
+:::
+
+앞의 labor-augmenting Cobb--Douglas가 정확하다면
+$R=(1-\alpha)g_A=g_Z$다.
+::::
+
+이 잔차를 흔히 TFP growth 또는 technological progress와 연결하지만,
+실제로는 훨씬 넓은 대상을 포함할 수 있다.
+
+::: display-table-wrap
+  잔차에 들어갈 수 있는 것   예시                        해석상의 문제
+  -------------------------- --------------------------- ---------------------------------------
+  기술                       생산기법, 새로운 아이디어   우리가 설명하고 싶은 대상일 수 있음
+  투입의 질                  교육, 경험, 자본재 품질     측정하지 않으면 생산성으로 흡수
+  가동률                     설비·노동 utilization       경기상황에 따라 잔차가 움직일 수 있음
+  조직·배분                  기업조직, 자원 재배치       기술과 구별되지 않을 수 있음
+  측정오차                   산출·자본·노동 측정         잔차가 error absorber가 됨
+:::
+
+:::: {.statement .warning}
+::: statement-head
+Do not over-interpret the residual
+:::
+
+$R$을 계산했다는 것은 순수한 기술진보를 직접 관측했다는 뜻이 아니다.
+잔차는 모형이 명시적으로 설명하지 못한 모든 부분을 함께 담는다.
+::::
+::::::::
+
+:::::: {#s05 .section}
+## [9.5]{.section-number}Proximate Sources vs. Fundamental Causes
+
+Growth accounting이 보여주는 것은 산출성장이 생산함수의 어느 항에
+나타나는가이다. 그러나 그 항이 왜 움직였는지는 별도의 경제이론과
+식별문제가 필요하다.
+
+예를 들어 생산성이 외생적으로 상승했다고 하자.
+
+::: math-display
+$$
+A\uparrow
+\;\Rightarrow\;
+Y\uparrow
+\;\Rightarrow\;
+I\uparrow
+\;\Rightarrow\;
+K\uparrow.
+$$
+:::
+
+이 경우 growth accounting은 이후의 산출증가 일부를 $K$의 증가에
+배분한다. 하지만 경제적 원인을 더 깊게 추적하면 자본축적 자체가 생산성
+상승에 대한 내생적 반응일 수 있다.
+
+:::: chapter-thesis
+Distinction
+
+::: math-display
+$$
+\boxed{
+\text{proximate contribution}
+\neq
+\text{fundamental cause}
+}
+$$
+:::
+::::
+
+따라서 "성장의 몇 퍼센트가 자본 때문이다"라는 문장은 항상 어느 수준의
+설명을 말하는지 명확해야 한다.
+::::::
+
+:::::::::: {#s06 .section}
+## [9.6]{.section-number}Human Capital and Input Quality
+
+노동시간과 자본스톡을 단순한 물량으로만 측정하면 생산요소의 질적 차이를
+생산성 잔차에 떠넘기게 된다. 따라서 effective inputs를 정의하는 것이
+중요하다.
+
+노동서비스를
+
+::: math-display
+$$
+H=hL
+$$
+:::
+
+라고 두고 생산함수를
+
+::: math-display
+$$
+Y=K^{\alpha}(AH)^{1-\alpha}
+$$
+:::
+
+로 쓰면
+
+::: math-display
+$$
+\boxed{
+g_Y
+=\alpha g_K+(1-\alpha)g_H+(1-\alpha)g_A.}
+$$
+:::
+
+여기서 $h$는 교육, 경험, 기술숙련 등 노동자당 human capital을 요약한다.
+
+::::: macro-grid
+::: {}
+[LABOR]{.tag}
+
+### Hours are not enough
+
+동일한 한 시간의 노동이라도 교육과 경험에 따라 생산서비스는 다를 수
+있다.
+:::
+
+::: {}
+[CAPITAL]{.tag}
+
+### Capital is heterogeneous
+
+기계, 소프트웨어, 설비는 감가상각률과 생산성이 다르므로 단순 합계가
+충분하지 않을 수 있다.
+:::
+:::::
+
+::: section-bridge
+Input quality를 더 정교하게 측정할수록 기존에 TFP로 분류되던 성장 일부가
+factor accumulation으로 재분류될 수 있다.
+:::
+::::::::::
+
+::::::::::::::::::::: {#s07 .section}
+## [9.7]{.section-number}What Growth Accounting Can Tell Us
+
+Growth accounting은 유용하지만 질문의 범위를 분명히 해야 한다. 그것은
+성장의 즉각적인 산술적 원천을 정리하는 도구이지 완결된 성장원인이론은
+아니다.
+
+::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Measure
+:::
+
+산출, 자본, 노동, 인적자본의 성장률을 측정한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Weight
+:::
+
+생산탄력성 또는 요소소득분배율로 각 투입성장의 기여를 가중한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Residual
+:::
+
+관측되지 않은 생산성 변화를 잔차로 계산한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Do not stop there
+:::
+
+왜 투자, 인적자본, 생산성이 변했는지는 별도의 모형과 자료가 필요하다.
+::::
+::::::
+:::::::::::::::::::
+
+::: reading-rule
+**Core message:** growth accounting은 **description with structure**이지
+causal identification이 아니다.
+:::
+:::::::::::::::::::::
+
+::::::: {#s08 .section}
+## [9.8]{.section-number}Convergence as a Model Prediction
+
+Solow류 모형은 단순히 장기수준을 예측하는 데 그치지 않고 정상상태로
+향하는 transition dynamics를 제시한다. 이 예측은 국가 간 성장률의 차이에
+대한 관측 가능한 함의를 가진다.
+
+Chapter 5의 기본동학은
+
+::: math-display
+$$
+\dot k=sf(k)-(n+g+\delta)k.
+$$
+:::
+
+따라서 정상상태 $k^*$ 아래에서는
+
+::: math-display
+$$
+k<k^*
+\quad\Rightarrow\quad
+\dot k>0.
+$$
+:::
+
+즉 정상상태에 비해 자본이 적은 경제는 자본집약도가 빠르게 증가한다.
+
+:::: {.statement .remark}
+::: statement-head
+Convergence is relative to a steady state
+:::
+
+"가난한 경제는 빨리 성장한다"가 일반적 예측은 아니다. 정확한 예측은
+**동일하거나 유사한 정상상태를 향하는 경제에서, 정상상태보다 더 아래에
+있는 경제가 더 빠르게 접근한다**는 것이다.
+::::
+:::::::
+
+::::: {#s09 .section}
+## [9.9]{.section-number}Absolute and Conditional Convergence
+
+Convergence를 해석하려면 모든 경제가 같은 정상상태를 갖는다는 강한
+경우와 정상상태 자체가 서로 다른 일반적인 경우를 구분해야 한다.
+
+::: display-table-wrap
+                Absolute convergence            Conditional convergence
+  ------------- ------------------------------- ---------------------------------------------------
+  정상상태      경제 간 동일                    경제별로 다를 수 있음
+  핵심 예측     초기소득이 낮을수록 빠른 성장   자신의 정상상태 대비 더 아래에 있을수록 빠른 성장
+  통제변수      필요하지 않다고 가정            저축, 인구증가, 인적자본 등 포함
+  이론적 요구   매우 강함                       Solow형 이질성과 더 잘 맞음
+:::
+
+정상상태가
+
+::: math-display
+$$
+y_i^*=y^*(s_i,n_i,h_i,\delta,\ldots)
+$$
+:::
+
+처럼 경제별 특성에 따라 달라진다면, 관측되는 소득수준만 비교해서는
+convergence prediction을 정확히 평가할 수 없다.
+:::::
+
+::::::: {#s10 .section}
+## [9.10]{.section-number}A Generic Convergence Regression
+
+이론의 transition prediction을 데이터에 옮기려면 일정 기간의 평균
+성장률을 초기소득과 정상상태 결정변수에 연결하는 회귀식을 생각할 수
+있다.
+
+:::: equation-card
+Generic empirical mapping
+
+::: math-display
+$$
+\boxed{
+\frac{1}{T}
+\left[
+\ln y_{i,T}-\ln y_{i,0}
+\right]
+=
+\beta_0-\beta_1\ln y_{i,0}
++\gamma'X_i+\varepsilon_i
+}
+$$
+:::
+::::
+
+여기서 $X_i$는 정상상태를 이동시키는 변수들을 모은 벡터다.
+
+::: math-display
+$$
+X_i
+=
+\bigl(s_i,n_i,h_i,\ldots\bigr).
+$$
+:::
+
+적절한 조건 아래 $\beta_1>0$는 다른 정상상태 결정요인을 통제했을 때
+초기소득이 낮을수록 이후 성장률이 높다는 패턴을 나타낸다.
+
+::: section-bridge
+여기서 회귀식의 역할은 이론적 예측을 observable relation으로 번역하는
+것이다. 계수 자체를 곧바로 구조적 파라미터나 정책의 인과효과로
+해석해서는 안 된다.
+:::
+:::::::
+
+::::::::::::: {#s11 .section}
+## [9.11]{.section-number}Limits of Growth Regressions
+
+Cross-country regression은 모형의 정성적 예측과 자료의 패턴을 비교하는
+데 유용하지만, 그 계수는 여러 식별문제를 동시에 품고 있다.
+
+:::: definition-row
+::: term
+Reverse causality
+:::
+
+높은 성장전망이 투자와 교육을 늘릴 수 있으므로 $X_i$가 성장의 원인인
+동시에 결과일 수 있다.
+::::
+
+:::: definition-row
+::: term
+Omitted variables
+:::
+
+제도, 지리, 초기조건처럼 성장과 설명변수 모두에 영향을 주는 누락변수가
+존재할 수 있다.
+::::
+
+:::: definition-row
+::: term
+Measurement error
+:::
+
+초기소득, 자본, 교육 등의 측정오차가 회귀계수를 왜곡할 수 있다.
+::::
+
+:::: definition-row
+::: term
+Heterogeneity
+:::
+
+생산기술과 구조적 파라미터 자체가 경제마다 다르면 하나의 공통 회귀식이
+제한적일 수 있다.
+::::
+
+:::: chapter-thesis
+Interpretation discipline
+
+::: math-display
+$$
+\boxed{
+\text{model-consistent correlation}
+\neq
+\text{causal identification}
+}
+$$
+:::
+::::
+:::::::::::::
+
+::::::: {#s12 .section}
+## [9.12]{.section-number}From Growth to Development Accounting
+
+Growth accounting이 한 경제의 시간에 따른 성장률을 분해한다면,
+development accounting은 같은 생산함수 논리를 사용해 국가 간 소득수준의
+격차를 분해한다.
+
+::::: macro-grid
+::: {}
+[TIME SERIES QUESTION]{.tag}
+
+### Growth accounting
+
+한 경제는 왜 이전보다 더 많은 산출을 생산하게 되었는가?
+:::
+
+::: {}
+[CROSS-SECTION QUESTION]{.tag}
+
+### Development accounting
+
+왜 어떤 경제는 다른 경제보다 노동자당 산출이 더 높은가?
+:::
+:::::
+
+기본 생산함수를
+
+::: math-display
+$$
+\boxed{
+Y_i=K_i^{\alpha}(A_iH_i)^{1-\alpha}
+}
+$$
+:::
+
+로 두고 국가 간 차이를 물적자본, 인적자본, 잔여 생산성으로 나눈다.
+:::::::
+
+:::::::::::::::::: {#s13 .section}
+## [9.13]{.section-number}Income per Worker Decomposition
+
+생산함수를 노동자 수로 정규화하면 국가 간 노동자당 산출격차를
+투입집약도와 생산성 차이의 곱으로 표현할 수 있다.
+
+$y_i\equiv Y_i/L_i$, $k_i\equiv K_i/L_i$, $h_i\equiv H_i/L_i$라 두면
+
+::: math-display
+$$
+\boxed{
+y_i
+=
+k_i^{\alpha}(A_i h_i)^{1-\alpha}.}
+$$
+:::
+
+로그를 취하면
+
+::: math-display
+$$
+\boxed{
+\ln y_i
+=
+\alpha\ln k_i
++(1-\alpha)\ln h_i
++(1-\alpha)\ln A_i.
+}
+$$
+:::
+
+이 식은 소득격차를 세 가지 accounting component로 나눈다.
+
+::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+K
+:::
+
+:::: {}
+::: head
+Physical capital intensity
+:::
+
+노동자 한 명당 얼마나 많은 물적자본을 사용하는가.
+::::
+::::::
+
+:::::: logic-step
+::: n
+H
+:::
+
+:::: {}
+::: head
+Human capital per worker
+:::
+
+교육·경험 등 노동자 한 명이 제공하는 effective labor service의 차이.
+::::
+::::::
+
+:::::: logic-step
+::: n
+A
+:::
+
+:::: {}
+::: head
+Residual productivity
+:::
+
+관측한 자본과 인적자본으로 설명되지 않는 산출효율 차이.
+::::
+::::::
+:::::::::::::::
+::::::::::::::::::
+
+:::::::: {#s14 .section}
+## [9.14]{.section-number}Capital--Output Representation
+
+단순한 $K/L$ decomposition은 높은 생산성이 더 많은 자본축적을 유발한
+결과까지 자본의 독립적 기여로 분류할 수 있다. 이를 드러내기 위해
+생산함수를 $K/Y$ 형태로 재배열할 수 있다.
+
+앞의 생산함수에서
+
+::: math-display
+$$
+y_i=k_i^{\alpha}(A_i h_i)^{1-\alpha}
+$$
+:::
+
+이므로 $k_i=(K_i/Y_i)y_i$를 대입해 정리하면
+
+:::: equation-card
+Development-accounting representation
+
+::: math-display
+$$
+\boxed{
+\ln y_i
+=
+\frac{\alpha}{1-\alpha}
+\ln\frac{K_i}{Y_i}
++
+\ln h_i
++
+\ln A_i
+}
+$$
+:::
+::::
+
+이 표현은 장기적으로 productivity가 높아지면서 산출과 자본이 함께
+증가하는 효과를 단순 $K/L$ 식보다 덜 기계적으로 자본기여에 귀속한다.
+
+:::: {.statement .remark}
+::: statement-head
+An accounting choice, not a unique truth
+:::
+
+$K/L$ 표현과 $K/Y$ 표현은 모두 생산함수의 재배열이다. 어느 쪽이
+"정답"이라기보다 어떤 경제적 질문을 더 투명하게 보여주는지가 중요하다.
+::::
+::::::::
+
+::::: {#s15 .section}
+## [9.15]{.section-number}Interpreting Productivity Differences
+
+Development accounting에서 계산되는 $A_i$도 순수한 기술수준 그 자체가
+아니다. 관측된 생산요소로 설명되지 않는 모든 구조적 차이를 흡수할 수
+있다.
+
+::: math-display
+$$
+\boxed{
+A_i
+=
+\text{technology}
++
+\text{organization}
++
+\text{allocation}
++
+\text{institutions}
++
+\text{measurement error}
++\cdots
+}
+$$
+:::
+
+위 식은 등식의 엄밀한 대수표현이 아니라 해석상의 경고다. accounting
+residual은 여러 경제적 메커니즘의 합성결과일 수 있다.
+
+::: reading-rule
+**Interpretation rule:** cross-country $A_i$는 **accounting
+object**이지, 추가 가정 없이 곧바로 하나의 structural primitive로 해석할
+수 있는 대상이 아니다.
+:::
+:::::
+
+::::::::::::::::: {#s16 .section}
+## [9.16]{.section-number}Evaluating the Growth Models
+
+이제 Chapter 5--8의 모형을 동일한 경험적 질문에 비추어 본다. 목적은
+하나의 모형을 승자로 고르는 것이 아니라 각 모형이 설명하는 margin과
+남겨두는 unexplained margin을 구분하는 것이다.
+
+::: display-table-wrap
+  모형                설명하는 핵심                           데이터에서 확인할 질문
+  ------------------- --------------------------------------- -------------------------------------------------------------
+  Solow               자본축적, BGP, convergence              capital deepening이 수준과 이행성장의 얼마를 설명하는가?
+  Ramsey              최적 소비·저축과 saddle-path dynamics   저축을 내생화했을 때 장기성장 예측이 얼마나 달라지는가?
+  Endogenous Growth   지식축적과 혁신의 장기성장 메커니즘     지속적 생산성 성장과 R&D·규모효과를 어떤 구조가 설명하는가?
+:::
+
+성장모형을 평가할 때는 최소한 세 질문을 분리해야 한다.
+
+::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+01
+:::
+
+:::: {}
+::: head
+Levels
+:::
+
+장기 소득수준의 차이를 설명하는가?
+::::
+::::::
+
+:::::: logic-step
+::: n
+02
+:::
+
+:::: {}
+::: head
+Transitions
+:::
+
+정상상태로 접근하는 속도와 방향을 설명하는가?
+::::
+::::::
+
+:::::: logic-step
+::: n
+03
+:::
+
+:::: {}
+::: head
+Long-run growth
+:::
+
+지속적인 노동자당 성장률의 근원을 설명하는가?
+::::
+::::::
+:::::::::::::::
+:::::::::::::::::
+
+:::::: {#s17 .section}
+## [9.17]{.section-number}Accounting, Theory, and Identification
+
+성장분석의 세 단계는 서로 다른 질문에 답한다. 이들을 혼동하면 accounting
+residual을 원인으로 부르거나, 모형과 일치하는 상관관계를 인과효과로
+해석하게 된다.
+
+:::: chapter-thesis
+Three layers
+
+::: math-display
+$$
+\boxed{
+\begin{aligned}
+\text{Accounting:}&\quad \text{What moved?}\\
+\text{Theory:}&\quad \text{What mechanism can generate it?}\\
+\text{Identification:}&\quad \text{What actually caused it?}
+\end{aligned}
+}
+$$
+:::
+::::
+
+Growth accounting은 첫 질문에 강하다. Solow·Ramsey·endogenous growth는
+두 번째 질문에 구조를 제공한다. 세 번째 질문에는 별도의 실증설계가
+필요하다.
+
+::: reading-rule
+**Do not collapse the layers:** **Accounting ≠ Theory ≠
+Identification.**
+:::
+::::::
+
+::::::::::::::::::::::::::::: {#s18 .section}
+## [9.18]{.section-number}Closing the Growth Block
+
+Chapter 4부터 시작한 성장 파트는 이제 household choice, capital
+accumulation, long-run growth, knowledge production, empirical
+evaluation을 하나의 흐름으로 닫는다.
+
+::::::::::::::::::::::::::: logic-steps
+:::::: logic-step
+::: n
+04
+:::
+
+:::: {}
+::: head
+Two-period macro economy
+:::
+
+기간간 선택과 생산·저축·투자의 일반균형 연결을 만든다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+05
+:::
+
+:::: {}
+::: head
+Solow--Swan
+:::
+
+외생적 저축 아래 자본축적과 BGP를 분리해서 본다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+06
+:::
+
+:::: {}
+::: head
+Infinite-horizon household
+:::
+
+lifetime budget, solvency, Euler equation을 정립한다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+07
+:::
+
+:::: {}
+::: head
+Ramsey--Cass--Koopmans
+:::
+
+최적 소비와 자본축적을 결합하여 saddle-path equilibrium을 만든다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+08
+:::
+
+:::: {}
+::: head
+Endogenous growth
+:::
+
+기술·지식의 축적을 모형 내부로 끌어들인다.
+::::
+::::::
+
+:::::: logic-step
+::: n
+09
+:::
+
+:::: {}
+::: head
+Empirical evaluation
+:::
+
+growth, convergence, income differences를 이용해 이론의 설명범위를
+측정한다.
+::::
+::::::
+:::::::::::::::::::::::::::
+
+::: section-bridge
+이제 장기성장의 deterministic benchmark가 완성되었다. 다음 파트에서는
+미래상태가 확정되어 있지 않은 환경으로 넘어간다.
+:::
+:::::::::::::::::::::::::::::
+
+:::::::::: {#s19 .section}
+## [9.19]{.section-number}Chapter Summary and Bridge to Uncertainty
+
+Chapter 9의 핵심은 성장모형을 데이터에 연결하는 세 가지 도구와 그 해석의
+경계를 분명히 하는 것이다. 성장 파트의 끝은 동시에 stochastic
+macroeconomics의 출발점이다.
+
+:::: equation-card
+Growth accounting
+
+::: math-display
+$$
+\boxed{
+g_Y
+=\alpha_K g_K+\alpha_L g_L+R
+}
+$$
+:::
+::::
+
+:::: equation-card
+Development accounting
+
+::: math-display
+$$
+\boxed{
+\ln\frac{Y_i}{L_i}
+=
+\frac{\alpha}{1-\alpha}
+\ln\frac{K_i}{Y_i}
++
+\ln\frac{H_i}{L_i}
++
+\ln A_i
+}
+$$
+:::
+::::
+
+:::: chapter-thesis
+Final interpretation
+
+::: math-display
+$$
+\boxed{
+\text{measurement}
+\rightarrow
+\text{model evaluation}
+\not\Rightarrow
+\text{causal identification}
+}
+$$
+:::
+::::
+
+지금까지는 미래의 생산성, 소득, 수익률 경로를 대체로 확정된 것으로
+두었다. 다음 Chapter 10부터는 상태가 확률적으로 변화하고, 가계와 시장이
+위험을 어떻게 가격·배분하는지를 다룬다.
+
+::: reading-rule
+**Next:** deterministic growth에서 **dynamic models under
+uncertainty**로 이동한다. 상태, 기대, contingent consumption, risk
+sharing이 새 핵심 언어가 된다.
+:::
+::::::::::
+
+::: {#check .section}
+## Learning Check
+
+1.  Growth accounting이 답하는 질문과 답하지 못하는 질문을 구분할 수
+    있는가?
+2.  일반 생산함수에서 성장률 분해식을 도출할 수 있는가?
+3.  Cobb--Douglas에서 factor income share가 output elasticity와 연결되는
+    이유는 무엇인가?
+4.  Solow residual을 순수한 기술진보라고 바로 해석하면 안 되는 이유는
+    무엇인가?
+5.  Proximate contribution과 fundamental cause의 차이를 설명할 수
+    있는가?
+6.  Human capital과 input quality를 반영하면 TFP 추정이 왜 달라질 수
+    있는가?
+7.  Absolute convergence와 conditional convergence를 구분할 수 있는가?
+8.  Generic convergence regression에서 초기소득과 $X_i$가 각각 어떤
+    이론적 역할을 하는가?
+9.  Cross-country growth regression의 대표적인 식별문제는 무엇인가?
+10. Growth accounting과 development accounting의 질문이 어떻게 다른가?
+11. Income-per-worker decomposition을 도출할 수 있는가?
+12. 왜 $K/Y$ representation이 단순 $K/L$ representation보다 유용할 수
+    있는가?
+13. Cross-country productivity residual $A_i$가 어떤 경제적 요소들을
+    포함할 수 있는가?
+14. Accounting, theory, identification을 서로 분리해야 하는 이유는
+    무엇인가?
+15. Chapter 5--8의 성장모형을 levels, transitions, long-run growth의 세
+    margin으로 비교할 수 있는가?
+:::
+
+::::::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Growth accounting
+:::
+
+산출성장을 생산요소 성장의 가중합과 잔여 생산성 성장으로 분해하는 방법.
+::::
+
+:::: definition-row
+::: term
+Output elasticity
+:::
+
+특정 투입요소가 1% 변할 때 산출이 몇 % 변하는지를 나타내는 탄력성.
+::::
+
+:::: definition-row
+::: term
+Factor share
+:::
+
+총소득 가운데 특정 생산요소에 지급되는 비율. 완전경쟁과 CRS 아래 output
+elasticity와 연결된다.
+::::
+
+:::: definition-row
+::: term
+Solow residual
+:::
+
+관측된 산출성장에서 측정된 자본·노동 증가의 기여를 제외하고 남는 잔차
+$R$. 특정 생산함수와 측정가정 아래 TFP growth와 연결된다.
+::::
+
+:::: definition-row
+::: term
+TFP
+:::
+
+Total factor productivity. 주어진 관측 투입으로 얼마나 많은 산출을
+만들어내는지를 요약하는 생산성 개념. Labor-augmenting $A$와 notation상
+구별할 필요가 있다.
+::::
+
+:::: definition-row
+::: term
+Capital deepening
+:::
+
+노동자당 또는 effective labor당 자본량이 증가하는 현상.
+::::
+
+:::: definition-row
+::: term
+Proximate source
+:::
+
+생산함수 분해에서 직접적으로 관측되는 성장 또는 소득격차의 근접한
+구성요소.
+::::
+
+:::: definition-row
+::: term
+Fundamental cause
+:::
+
+투자, 인적자본, 생산성 등이 왜 변화했는지를 설명하는 더 깊은 경제적
+원인.
+::::
+
+:::: definition-row
+::: term
+Absolute convergence
+:::
+
+경제들이 같은 정상상태를 향해 가며 초기소득이 낮은 경제가 더 빠르게
+성장한다는 개념.
+::::
+
+:::: definition-row
+::: term
+Conditional convergence
+:::
+
+경제별 정상상태 결정요인을 고려했을 때 자신의 정상상태보다 더 아래에
+있는 경제가 더 빠르게 접근한다는 개념.
+::::
+
+:::: definition-row
+::: term
+Development accounting
+:::
+
+국가 간 노동자당 소득격차를 물적자본, 인적자본, 잔여 생산성 차이로
+분해하는 방법.
+::::
+
+:::: definition-row
+::: term
+Human capital
+:::
+
+교육, 경험, 기술 등 노동자의 생산서비스를 높이는 축적된 역량.
+::::
+
+:::: definition-row
+::: term
+Productivity residual
+:::
+
+측정된 생산요소의 양과 질로 설명되지 않는 산출차이를 포착하는 회계적
+잔차.
+::::
+
+:::: definition-row
+::: term
+Identification
+:::
+
+관측된 상관관계나 분해를 넘어 특정 경제적 요인의 인과효과를 구별해내는
+문제.
+::::
+:::::::::::::::::::::::::::::::

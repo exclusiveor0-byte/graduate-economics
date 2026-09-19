@@ -23,7 +23,7 @@ Solow 모형에서는 저축률 $s$가 외생적 상수로 고정되었으나, R
    만약 초기 소비를 안장경로보다 미세하게라도 높게 잡으면($c_0 > c_0^*$) 자본이 유한 시간 내 고갈되어 경제가 붕괴하고, 낮게 잡으면($c_0 < c_0^*$) 비효율적 과잉축적으로 횡단성 조건(Transversality Condition, TVC)을 위반합니다. 따라서 오직 단 하나의 $c_0$만이 최적 경로로 선택됩니다.
 :::
 
-관련 교재 본문은 [Chapter 02 · Ramsey–Cass–Koopmans Model](../macroeconomics/ch02-ramsey-olg/contents.qmd#ch02-s04)의 Section 2.4(가계 최적화와 오일러 방정식), Section 2.5(위상도와 안장경로), Section 2.6(수정 황금률), Section 2.7(비교동학과 시간선호율 충격)입니다.
+관련 교재 본문은 [Chapter 07 · Ramsey–Cass–Koopmans 성장모형](../macroeconomics/ch07-ramsey-cks/contents.qmd#s04)의 해당 Section에서 가계 최적화와 오일러 방정식, 위상도와 안장경로, 수정 황금률을 다룹니다.
 
 ---
 

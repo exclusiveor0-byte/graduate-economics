@@ -1,4 +1,4 @@
-"""Build overview pages for imported macroeconomics chapters and appendices.
+"""Build overview pages for imported macroeconomics chapters.
 
 The imported lecture notes intentionally keep each chapter body in one
 ``contents.qmd`` file.  This utility gives that body a lightweight entry page:
@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1] / "macroeconomics"
-SKIP_DIRECTORIES = {"ch00-macro-map"}
+SKIP_DIRECTORIES: set[str] = set()
 SECTION = re.compile(
     r"^:+\s+\{#(?P<anchor>[A-Za-z0-9_-]+)\s+\.section\}\s*$"
     r"\n^##\s+(?P<title>.+?)\s*$",

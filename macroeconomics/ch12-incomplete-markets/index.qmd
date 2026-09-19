@@ -1,0 +1,49 @@
+# Chapter 12 · 불완전시장과 자기보험 {.unnumbered}
+*Incomplete Markets, Self-Insurance, and Precautionary Saving*
+
+이 장에서는 **불완전시장과 자기보험**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **12.1–12.6** From Complete to Incomplete Markets · Assets as a History State
+- **12.7–12.12** The Euler Equation · Persistent vs. Transitory Income Risk
+- **12.13–12.18** Complete vs. Incomplete Insurance · Stationary Distribution
+- **12.19–12.23** Natural vs. Ad Hoc Borrowing Limits · Chapter Summary
+:::
+
+## Sections
+
+- [12.1 From Complete to Incomplete Markets](contents.html#s01)
+- [12.2 Market Incompleteness as a Spanning Failure](contents.html#s02)
+- [12.3 Idiosyncratic Income Risk](contents.html#s03)
+- [12.4 The Risk-Free Bond Economy](contents.html#s04)
+- [12.5 The Recursive Household Problem](contents.html#s05)
+- [12.6 Assets as a History State](contents.html#s06)
+- [12.7 The Euler Equation](contents.html#s07)
+- [12.8 Borrowing Constraints](contents.html#s08)
+- [12.9 The Euler Inequality](contents.html#s09)
+- [12.10 Consumption Smoothing and Self-Insurance](contents.html#s10)
+- [12.11 Precautionary Saving](contents.html#s11)
+- [12.12 Persistent vs. Transitory Income Risk](contents.html#s12)
+- [12.13 Complete vs. Incomplete Insurance](contents.html#s13)
+- [12.14 A Two-Household Example](contents.html#s14)
+- [12.15 Incomplete-Markets Competitive Equilibrium](contents.html#s15)
+- [12.16 Interest Rates and Precautionary Saving](contents.html#s16)
+- [12.17 Wealth Distribution](contents.html#s17)
+- [12.18 Stationary Distribution](contents.html#s18)
+- [12.19 Natural vs. Ad Hoc Borrowing Limits](contents.html#s19)
+- [12.20 Exogenous vs. Endogenous Market Incompleteness](contents.html#s20)
+- [12.21 What Incomplete Markets Change](contents.html#s21)
+- [12.22 Why Business-Cycle Measurement Next?](contents.html#s22)
+- [12.23 Chapter Summary](contents.html#s23)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::

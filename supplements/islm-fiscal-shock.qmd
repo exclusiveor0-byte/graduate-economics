@@ -9,8 +9,8 @@ description: "대화형 탐색 도구와 MATLAB 애니메이션으로 재정지�
 단기에는 산출과 이자율이 함께 변합니다. 이 보충자료는 충격 전 균형에서 충격 후 균형으로
 이동하는 과정을 대화형 도구와 애니메이션으로 보여줍니다.
 
-관련 본문은 [Chapter 06 · Nominal Rigidity](../macroeconomics/ch06-nominal-rigidity/contents.qmd)와
-[Chapter 08 · Monetary Policy](../macroeconomics/ch08-monetary-policy/contents.qmd)입니다.
+관련 본문은 [거시경제학 Chapter 지도](../macroeconomics/index.qmd)에서
+새 강의노트의 경기변동·기대·정책 관련 논의를 따라가며 확인할 수 있습니다.
 
 ## 조작 도구
 

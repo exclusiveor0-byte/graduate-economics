@@ -1,0 +1,1310 @@
+---
+title: >-
+  불완전시장과 자기보험
+description: >-
+  Incomplete Markets, Self-Insurance, and Precautionary Saving
+---
+
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+
+:::::: {#s01 .section}
+## [12.1]{.section-number}From Complete to Incomplete Markets
+
+Chapter 11에서 시장의 완전성은 모든 relevant state-contingent payoff를
+traded assets가 span할 수 있다는 뜻이었다. Incomplete markets에서는 일부
+contingency에 대한 독립적인 거래가 불가능하다.
+
+::: {.contrast-table .display-table-wrap}
+                        Complete Markets                    Incomplete Markets
+  --------------------- ----------------------------------- ------------------------------
+  Available claims      모든 relevant contingency를 span    일부 contingency만 span
+  Idiosyncratic risk    완전한 risk sharing 가능            부분적으로만 완화
+  Household state       aggregate state 중심                wealth + idiosyncratic state
+  Insurance mechanism   state-contingent market insurance   saving을 통한 self-insurance
+:::
+
+:::: chapter-thesis
+Core transition
+
+::: math-display
+$$
+\boxed{
+\text{complete risk sharing}
+\;\longrightarrow\;
+\text{limited insurance + wealth accumulation}
+}
+$$
+:::
+::::
+
+시장 불완전성은 불확실성 자체와 다르다. 동일한 income process가 주어져도
+어떤 claims를 거래할 수 있는가에 따라 allocation은 크게 달라진다.
+::::::
+
+::::::: {#s02 .section}
+## [12.2]{.section-number}Market Incompleteness as a Spanning Failure
+
+시장 불완전성의 가장 간결한 수학적 표현은 asset payoff space의 rank가
+state space를 충분히 span하지 못한다는 것이다.
+
+다음기 가능한 state가 $S$개이고 traded assets의 state-contingent payoff
+matrix를 $D$라고 하자. Complete markets라면 적절한 조건 아래
+
+::: math-display
+$$
+\operatorname{rank}(D)=S.
+$$
+:::
+
+반대로
+
+:::: equation-card
+Spanning failure
+
+::: math-display
+$$
+\boxed{
+\operatorname{rank}(D)<S
+}
+$$
+:::
+::::
+
+이면 모든 state-specific payoff를 복제할 수 없다.
+
+::: reading-rule
+**해석:** 불완전시장은 단순히 "자산의 개수가 적다"는 말보다 강하다.
+핵심은 이용 가능한 payoff vectors가 relevant uncertainty를 충분히
+span하지 못한다는 것이다.
+:::
+:::::::
+
+::::::::: {#s03 .section}
+## [12.3]{.section-number}Idiosyncratic Income Risk
+
+대표적인 incomplete-markets environment는 household가 idiosyncratic
+labor-income risk를 겪지만 완전한 income insurance를 거래할 수 없는
+경제다.
+
+소득상태를
+
+::: math-display
+$$
+y_t\in\mathcal Y
+$$
+:::
+
+라고 하고 Markov transition을
+
+::: math-display
+$$
+\Pr(y_{t+1}=y'\mid y_t=y)=P(y'\mid y)
+$$
+:::
+
+라고 하자. Household의 lifetime objective는
+
+::: math-display
+$$
+\boxed{
+E_0\sum_{t=0}^{\infty}\beta^t u(c_t)
+}
+$$
+:::
+
+이다. 여기서 $y_t$는 household-specific state이므로 동일한 aggregate
+environment에서도 서로 다른 가계가 서로 다른 income histories를 경험할
+수 있다.
+
+::::: callout-strip
+::: left
+Key friction
+:::
+
+::: right
+Income risk가 존재하는 것 자체가 핵심이 아니라, 그 risk에 정확히
+대응하는 state-contingent claims가 존재하지 않는 것이 핵심이다.
+:::
+:::::
+:::::::::
+
+::::::::::::::: {#s04 .section}
+## [12.4]{.section-number}The Risk-Free Bond Economy
+
+가장 단순한 incomplete-markets benchmark는 household가 한 종류의
+one-period risk-free asset만 거래할 수 있는 경제다.
+
+이 장에서는 timing을 다음과 같이 고정한다.
+
+:::: equation-card
+Budget constraint
+
+::: math-display
+$$
+\boxed{
+c_t+a_{t+1}=(1+r)a_t+y_t
+}
+$$
+:::
+::::
+
+:::: definition-row
+::: term
+$a_t$
+:::
+
+period $t$ 시작 시 보유한 risk-free assets.
+::::
+
+:::: definition-row
+::: term
+$y_t$
+:::
+
+period $t$에 실현된 idiosyncratic income.
+::::
+
+:::: definition-row
+::: term
+$a_{t+1}$
+:::
+
+현재 선택하는 다음기의 asset position.
+::::
+
+:::: definition-row
+::: term
+$1+r$
+:::
+
+risk-free gross return.
+::::
+
+Complete markets와 달리 현재 household는 다음기 상태별로 서로 다른
+$a_{t+1}(y')$를 선택하지 못한다. 선택할 수 있는 것은 하나의
+$a_{t+1}$뿐이다.
+
+:::: chapter-thesis
+What is missing?
+
+::: math-display
+$$
+\boxed{
+\text{one bond cannot generally replicate a full vector of state-contingent transfers}
+}
+$$
+:::
+::::
+:::::::::::::::
+
+:::::::: {#s05 .section}
+## [12.5]{.section-number}The Recursive Household Problem
+
+현재 wealth와 income state가 미래 feasible set과 continuation value를
+결정하므로 household problem은 $(a,y)$를 state로 하는 stochastic dynamic
+program으로 쓸 수 있다.
+
+Borrowing limit을
+
+::: math-display
+$$
+a'\ge \underline a
+$$
+:::
+
+라고 하자. Bellman equation은
+
+:::: equation-card
+Household Bellman equation
+
+::: math-display
+$$
+\boxed{
+V(a,y)
+=
+\max_{a'\ge\underline a}
+\left\{
+u\bigl((1+r)a+y-a'\bigr)
++\beta\sum_{y'}P(y'\mid y)V(a',y')
+\right\}
+}
+$$
+:::
+::::
+
+최적 policy functions를
+
+::: math-display
+$$
+c=c(a,y),
+\qquad
+a'=g(a,y)
+$$
+:::
+
+라고 쓸 수 있다.
+
+::: reading-rule
+**Chapter 10과의 연결:** uncertainty가 Bellman equation에 conditional
+expectation을 넣었다면, market incompleteness는 household의 endogenous
+wealth $a$를 필수 state variable로 만든다.
+:::
+::::::::
+
+:::::::: {#s06 .section}
+## [12.6]{.section-number}Assets as a History State
+
+Incomplete markets의 가장 중요한 structural change는 과거 shock가 현재
+자산을 통해 미래 선택에 영향을 준다는 것이다.
+
+과거 소득경로가
+
+::: math-display
+$$
+(y_0,y_1,\ldots,y_{t-1})
+$$
+:::
+
+였다면, household의 saving decisions을 거쳐 그 정보의 일부가 현재 wealth
+$a_t$에 축약된다.
+
+:::: chapter-thesis
+Compressed history
+
+::: math-display
+$$
+\boxed{
+a_t
+=\text{a summary of past shocks and past saving choices}}
+$$
+:::
+::::
+
+따라서 동일한 현재 income state $y_t$를 가진 두 household라도 과거
+histories가 달랐다면
+
+::: math-display
+$$
+a_t^1\neq a_t^2
+$$
+:::
+
+일 수 있고, 그 결과
+
+::: math-display
+$$
+c(a_t^1,y_t)\neq c(a_t^2,y_t)
+$$
+:::
+
+가 일반적이다. Complete-markets allocation에서 사라졌던 history
+dependence가 wealth를 통해 다시 나타난다.
+::::::::
+
+::::::::::: {#s07 .section}
+## [12.7]{.section-number}The Euler Equation
+
+Borrowing constraint가 binding하지 않는 interior region에서는 표준
+stochastic Euler equation이 유지된다.
+
+FOC와 envelope condition을 결합하면
+
+:::: equation-card
+Unconstrained Euler equation
+
+::: math-display
+$$
+\boxed{
+u'(c_t)
+=
+\beta(1+r)E_t\left[u'(c_{t+1})\right]
+}
+$$
+:::
+::::
+
+을 얻는다.
+
+::::: macro-grid
+::: {}
+### Intertemporal smoothing
+
+현재와 미래의 expected marginal utility를 risk-free return을 통해
+정렬한다.
+:::
+
+::: {}
+### Missing state insurance
+
+하지만 하나의 risk-free bond만으로 각 future state의 marginal utility를
+독립적으로 맞출 수는 없다.
+:::
+:::::
+
+::::: callout-strip
+::: left
+Key distinction
+:::
+
+::: right
+Incomplete markets에서도 intertemporal trade는 가능하지만 cross-state
+insurance는 제한된다.
+:::
+:::::
+:::::::::::
+
+::::: {#s08 .section}
+## [12.8]{.section-number}Borrowing Constraints
+
+Incomplete-markets model에서 borrowing constraint는 단순한 기술적 조건이
+아니라 consumption smoothing의 범위를 직접 결정하는 핵심 friction이다.
+
+일반적인 제약은
+
+::: math-display
+$$
+\boxed{
+a_{t+1}\ge\underline a}
+$$
+:::
+
+이다.
+
+::: {.contrast-table .display-table-wrap}
+  구분                      의미                                                         전형적 예
+  ------------------------- ------------------------------------------------------------ -------------------------------------------------
+  Natural borrowing limit   모든 가능한 미래 상태에서 ultimately repayable한 최대 debt   worst-case future income의 present value에 기초
+  Ad hoc borrowing limit    모형자가 외생적으로 더 강하게 설정한 제한                    $a'\ge0$
+:::
+
+Natural limit은 Ponzi scheme을 배제하면서 가능한 한 차입기회를 넓게
+유지하려는 solvency condition이다. 반면 no-borrowing 같은 ad hoc limit은
+consumption smoothing을 더 강하게 제한한다.
+:::::
+
+:::::::::::: {#s09 .section}
+## [12.9]{.section-number}The Euler Inequality
+
+Borrowing constraint가 binding하면 household는 원래 원했던 만큼 현재로
+resources를 가져올 수 없다. 그 결과 Euler equality가 inequality로
+바뀐다.
+
+Constraint multiplier를 $\mu_t\ge0$라고 하면
+
+::: math-display
+$$
+u'(c_t)
+=
+\beta(1+r)E_t[u'(c_{t+1})]
++\mu_t,
+$$
+:::
+
+::: math-display
+$$
+\mu_t(a_{t+1}-\underline a)=0.
+$$
+:::
+
+따라서 항상
+
+:::: equation-card
+Euler inequality
+
+::: math-display
+$$
+\boxed{
+u'(c_t)
+\ge
+\beta(1+r)E_t[u'(c_{t+1})]
+}
+$$
+:::
+::::
+
+::::::: macro-grid
+:::: {}
+### Constraint slack
+
+::: math-display
+$$a_{t+1}>\underline a\quad\Rightarrow\quad\mu_t=0$$
+:::
+
+Euler equality가 성립한다.
+::::
+
+:::: {}
+### Constraint binding
+
+::: math-display
+$$a_{t+1}=\underline a\quad\Rightarrow\quad\mu_t\ge0$$
+:::
+
+현재 marginal utility가 unconstrained benchmark보다 높을 수 있다.
+::::
+:::::::
+::::::::::::
+
+::::::: {#s10 .section}
+## [12.10]{.section-number}Consumption Smoothing and Self-Insurance
+
+완전한 보험계약이 없더라도 household는 risk-free saving을 이용해
+소득변동을 시간에 걸쳐 완화할 수 있다. 이것이 self-insurance다.
+
+높은 소득이 실현되면 일반적으로
+
+::: math-display
+$$
+y_t\uparrow
+\quad\Rightarrow\quad
+a_{t+1}\uparrow
+$$
+:::
+
+의 방향으로 buffer를 축적하고, 낮은 소득이 실현되면
+
+::: math-display
+$$
+y_t\downarrow
+\quad\Rightarrow\quad
+a_{t+1}\downarrow
+$$
+:::
+
+의 방향으로 기존 assets를 사용한다.
+
+:::: chapter-thesis
+Self-insurance mechanism
+
+::: math-display
+$$
+\boxed{
+\text{missing insurance markets}
+\;\longrightarrow\;
+\text{saving and dissaving as private insurance}
+}
+$$
+:::
+::::
+
+따라서 consumption은 income보다 smooth할 수 있지만 complete markets처럼
+idiosyncratic risk를 완전히 제거하지는 못한다.
+:::::::
+
+::::::::: {#s11 .section}
+## [12.11]{.section-number}Precautionary Saving
+
+Uninsurable future income risk 자체가 추가적인 saving motive를 만들 수
+있다. 이 효과가 precautionary saving이다.
+
+Euler equation에서 미래 consumption uncertainty는
+
+::: math-display
+$$
+E_t[u'(c_{t+1})]
+$$
+:::
+
+를 통해 현재 decision에 들어온다. 고전적인 expected-utility
+benchmark에서 marginal utility가 convex하면
+
+::: math-display
+$$
+u'''(c)>0
+$$
+:::
+
+이고, uncertainty가 expected future marginal utility를 높여 현재
+consumption을 줄이고 assets를 더 축적하려는 동기를 만들 수 있다.
+
+::: reading-rule
+**범위:** $u'''(c)>0$은 단순한 additive risk setting에서 precautionary
+motive를 이해하는 대표적 benchmark다. 모든 일반적 환경에서 이 조건
+하나만으로 equilibrium saving response 전체가 결정되는 것은 아니다.
+:::
+
+::::: callout-strip
+::: left
+Economic intuition
+:::
+
+::: right
+미래의 나쁜 income realization에서 marginal utility가 매우 커질 수 있기
+때문에 household는 현재 조금 덜 소비하고 buffer assets를 보유한다.
+:::
+:::::
+:::::::::
+
+::::: {#s12 .section}
+## [12.12]{.section-number}Persistent vs. Transitory Income Risk
+
+동일한 현재 income decline이라도 shock persistence가 다르면 lifetime
+resources에 미치는 효과가 다르므로 consumption response도 달라진다.
+
+::: {.contrast-table .display-table-wrap}
+                         Transitory Shock                     Persistent Shock
+  ---------------------- ------------------------------------ -----------------------------------
+  Future income effect   작거나 일시적                        여러 기간 지속
+  Lifetime resources     상대적으로 작은 변화                 더 큰 변화
+  Role of assets         현재 shock를 상당 부분 smooth 가능   assets만으로 완전 상쇄하기 어려움
+  Consumption response   상대적으로 작음                      더 큼
+:::
+
+따라서 incomplete-markets model에서 income process의 transition matrix는
+단순한 technical input이 아니라 optimal saving behavior의 핵심
+determinant다.
+
+::: section-summary
+**Reading rule.** Consumption response를 해석할 때 shock size뿐 아니라
+persistence와 household의 initial wealth를 함께 봐야 한다.
+:::
+:::::
+
+:::::: {#s13 .section}
+## [12.13]{.section-number}Complete vs. Incomplete Insurance
+
+Chapter 11과 Chapter 12의 차이는 단순히 자산의 종류가 다르다는 데 있지
+않다. 소비배분을 결정하는 state 자체가 바뀐다.
+
+::: {.contrast-table .display-table-wrap}
+  Dimension               Complete Markets                            Incomplete Markets
+  ----------------------- ------------------------------------------- -------------------------------------------
+  Contingent claims       Relevant states를 모두 span                 일부만 span
+  Idiosyncratic risk      완전 공유 가능                              부분적으로만 완화
+  Consumption rule        주로 aggregate resources와 Pareto weights   own wealth와 idiosyncratic state에도 의존
+  History dependence      benchmark에서 크게 축약                     wealth를 통해 핵심적으로 남음
+  Insurance technology    market insurance                            self-insurance
+  Borrowing constraints   덜 중심적                                   consumption dynamics의 핵심
+:::
+
+:::: chapter-thesis
+One-line contrast
+
+::: math-display
+$$
+\boxed{
+\text{Chapter 11: insurance through markets}
+\qquad
+\text{Chapter 12: insurance through savings}
+}
+$$
+:::
+::::
+::::::
+
+::::::::::::: {#s14 .section}
+## [12.14]{.section-number}A Two-Household Example
+
+Aggregate uncertainty는 없지만 idiosyncratic risk가 존재하는 가장 단순한
+예는 두 household의 income shock가 정확히 반대 방향으로 움직이는 경제다.
+
+예를 들어
+
+::: math-display
+$$
+y_t^1=\bar y+\varepsilon_t,
+\qquad
+y_t^2=\bar y-\varepsilon_t.
+$$
+:::
+
+그러면 aggregate endowment는
+
+::: math-display
+$$
+Y_t=y_t^1+y_t^2=2\bar y
+$$
+:::
+
+로 일정하다.
+
+::::::: macro-grid
+:::: {}
+### Complete markets
+
+대칭적 preferences와 Pareto weights 아래에서 idiosyncratic shock를
+완전히 공유할 수 있으므로
+
+::: math-display
+$$c_t^1=c_t^2=\bar y$$
+:::
+
+가 가능하다.
+::::
+
+:::: {}
+### Bond-only markets
+
+한 개의 risk-free bond만으로 상태별 transfers를 완전히 복제할 수
+없으므로 일반적으로
+
+::: math-display
+$$c_t^1\neq c_t^2$$
+:::
+
+이고 consumption은 각각의 wealth와 income history에 의존한다.
+::::
+:::::::
+
+::::: callout-strip
+::: left
+Lesson
+:::
+
+::: right
+Aggregate resources가 완전히 안정적이어도 incomplete markets 때문에
+individual consumption risk가 남을 수 있다.
+:::
+:::::
+:::::::::::::
+
+:::::::: {#s15 .section}
+## [12.15]{.section-number}Incomplete-Markets Competitive Equilibrium
+
+여러 household가 제한된 asset menu를 거래하면 equilibrium은 household
+optimization과 goods-market clearing, asset-market clearing을 동시에
+만족해야 한다.
+
+두 household의 zero-net-supply bond economy를 예로 들면 equilibrium
+objects는
+
+::: math-display
+$$
+\{r_t\},
+\qquad
+\{c_t^i,a_{t+1}^i\}_{i=1,2}
+$$
+:::
+
+이다. 각 household는 주어진 interest-rate process에서 자신의 problem을
+풀고, equilibrium에서는
+
+::::: equation-card
+Market clearing
+
+::: math-display
+$$
+\boxed{
+\sum_i c_t^i=\sum_i y_t^i
+}
+$$
+:::
+
+::: math-display
+$$
+\boxed{
+\sum_i a_{t+1}^i=0
+}
+$$
+:::
+:::::
+
+가 성립해야 한다.
+
+::: reading-rule
+**일반화:** 자산의 aggregate supply가 0이 아닌 경우에는 두 번째 식의
+우변이 해당 asset supply가 된다. 이 장의 zero-net-supply formulation은
+순수교환경제의 가장 단순한 benchmark다.
+:::
+::::::::
+
+::::::::: {#s16 .section}
+## [12.16]{.section-number}Interest Rates and Precautionary Saving
+
+Interest rate가 equilibrium에서 내생적으로 결정되면 precautionary saving
+motive는 aggregate asset demand를 통해 가격에도 영향을 준다.
+
+Uninsurable risk가 커질수록 많은 household가 동시에 더 높은 buffer
+assets를 원할 수 있다.
+
+:::::: logic-steps
+::: {}
+1
+
+Idiosyncratic risk가 precautionary saving demand를 높인다.
+:::
+
+::: {}
+2
+
+제한된 aggregate asset supply 아래 원하는 saving을 모두 수용할 수 없다.
+:::
+
+::: {}
+3
+
+Market clearing을 위해 equilibrium return이 조정된다.
+:::
+::::::
+
+Bewley-type stationary benchmark에서는 이러한 힘이
+
+::: math-display
+$$
+1+r<\beta^{-1}
+$$
+:::
+
+와 같은 낮은 equilibrium return을 유도할 수 있다.
+
+::: reading-rule
+**주의:** 이것은 모든 incomplete-markets model의 보편 법칙이 아니다.
+Asset supply, income process, borrowing limits, preferences가 주어진
+stationary Bewley-type environment에서 나오는 대표적 equilibrium force로
+이해해야 한다.
+:::
+:::::::::
+
+:::::::: {#s17 .section}
+## [12.17]{.section-number}Wealth Distribution
+
+동일한 preferences를 가진 household라도 서로 다른 income histories와
+saving decisions을 경험하면 endogenous wealth heterogeneity가 발생한다.
+
+두 household가 같은 초기자산에서 시작해도
+
+::: math-display
+$$
+(y_0^1,y_1^1,\ldots)
+\neq
+(y_0^2,y_1^2,\ldots)
+$$
+:::
+
+이면 policy function
+
+::: math-display
+$$
+a_{t+1}=g(a_t,y_t)
+$$
+:::
+
+을 반복 적용하면서
+
+::: math-display
+$$
+a_t^1\neq a_t^2
+$$
+:::
+
+가 된다.
+
+:::: chapter-thesis
+Distributional implication
+
+::: math-display
+$$
+\boxed{
+\text{idiosyncratic shocks}
++
+\text{incomplete insurance}
+\;\longrightarrow\;
+\text{endogenous wealth dispersion}
+}
+$$
+:::
+::::
+
+이 지점이 modern heterogeneous-agent macroeconomics로 가는 출발점이다.
+::::::::
+
+::::::::: {#s18 .section}
+## [12.18]{.section-number}Stationary Distribution
+
+Household policy가 주어지면 individual state transition이 population
+distribution의 law of motion을 유도한다.
+
+Individual state를
+
+::: math-display
+$$
+x=(a,y)
+$$
+:::
+
+라고 하고 distribution을 $\mu_t(a,y)$라고 하자. Asset policy
+
+::: math-display
+$$
+a'=g(a,y)
+$$
+:::
+
+와 income transition $P(y'\mid y)$가 함께 population distribution을
+이동시킨다. 이를 연산자 $T_g$로 쓰면
+
+::: math-display
+$$
+\mu_{t+1}=T_g\mu_t.
+$$
+:::
+
+Stationary distribution은
+
+:::: equation-card
+Invariant distribution
+
+::: math-display
+$$
+\boxed{
+\mu^*=T_g\mu^*
+}
+$$
+:::
+::::
+
+를 만족한다.
+
+::: extension
+**Technical extension.** 실제 heterogeneous-agent model에서는
+equilibrium price를 guess하고 household policy를 계산한 뒤 invariant
+distribution과 aggregate asset demand를 계산하고 market clearing이 될
+때까지 price를 갱신하는 fixed-point procedure를 사용한다.
+:::
+:::::::::
+
+::::: {#s19 .section}
+## [12.19]{.section-number}Natural vs. Ad Hoc Borrowing Limits
+
+두 borrowing restrictions는 모두 Ponzi-type behavior를 막을 수 있지만
+경제적 의미와 optimality conditions에 미치는 효과가 다르다.
+
+::: {.contrast-table .display-table-wrap}
+                            Natural Limit                                   Ad Hoc Limit
+  ------------------------- ----------------------------------------------- ----------------------------
+  Basis                     worst-case repayment capacity                   externally imposed rule
+  Typical tightness         가능한 한 느슨함                                더 강할 수 있음
+  Economic interpretation   solvency                                        credit-market restriction
+  Euler condition           Inada-type conditions 아래 interior일 수 있음   binding 시 inequality 가능
+:::
+
+No-borrowing example:
+
+::: math-display
+$$
+\boxed{a_{t+1}\ge0.}
+$$
+:::
+
+이 제약은 향후 높은 income이 예상되어도 현재 consumption을 미래
+income으로 담보해 늘리는 것을 막는다.
+:::::
+
+::::::: {#s20 .section}
+## [12.20]{.section-number}Exogenous vs. Endogenous Market Incompleteness
+
+지금까지는 일부 assets가 존재하지 않는다고 직접 가정했다. 그러나 더 깊은
+질문은 왜 그런 보험계약이 시장에서 만들어지지 않는가이다.
+
+::::: macro-grid
+::: {}
+### Exogenous incompleteness
+
+Modeler가 tradeable asset menu를 제한한다. Bewley-style models의 대표적
+접근이다.
+:::
+
+::: {}
+### Endogenous incompleteness
+
+Private information, moral hazard, limited commitment, enforcement,
+collateral constraints 등이 특정 contingent contracts의 존재를 막는다.
+:::
+:::::
+
+가능한 microfoundations:
+
+- private information,
+- moral hazard,
+- limited commitment,
+- weak contract enforcement,
+- collateral constraints,
+- transaction or verification costs.
+
+::: reading-rule
+**범위:** 이 장은 asset-market incompleteness의 consequences에 집중한다.
+Missing markets의 contracting foundation 자체는 별도의 dynamic
+contracting 문제다.
+:::
+:::::::
+
+::::::::::: {#s21 .section}
+## [12.21]{.section-number}What Incomplete Markets Change
+
+Complete markets에서 incomplete markets로 이동할 때 가장 중요한 변화는
+individual consumption을 설명하기 위해 필요한 state가 늘어난다는 것이다.
+
+Complete-markets benchmark에서는 대표적으로
+
+::: math-display
+$$
+c_t^i=\phi_i(Y_t)
+$$
+:::
+
+와 같이 aggregate resources와 Pareto weights가 소비배분의 핵심이었다.
+
+Incomplete markets에서는
+
+:::: equation-card
+History dependence through wealth
+
+::: math-display
+$$
+\boxed{
+c_t^i=c(a_t^i,y_t^i)
+}
+$$
+:::
+::::
+
+가 된다.
+
+::::::: logic-steps
+::: {}
+1
+
+Shock가 household income을 움직인다.
+:::
+
+::: {}
+2
+
+Limited insurance 때문에 shock가 완전히 공유되지 않는다.
+:::
+
+::: {}
+3
+
+Saving choice가 wealth를 변화시킨다.
+:::
+
+::: {}
+4
+
+Wealth가 이후 consumption과 saving의 state가 된다.
+:::
+:::::::
+
+이 반복이 individual dynamics와 cross-sectional distribution을 동시에
+만든다.
+:::::::::::
+
+:::::: {#s22 .section}
+## [12.22]{.section-number}Why Business-Cycle Measurement Next?
+
+Chapter 10--12에서 stochastic environment와 risk-sharing market
+structure를 준비했다. 다음 단계는 실제 aggregate fluctuations가 어떤
+통계적 특징을 가지는지 측정하는 것이다.
+
+지금까지의 흐름은
+
+::: math-display
+$$
+\boxed{
+\text{Uncertainty}
+\rightarrow
+\text{Complete Markets}
+\rightarrow
+\text{Incomplete Markets}
+}
+$$
+:::
+
+였다. 이제 질문은
+
+::: chapter-thesis
+Next question
+
+실제 output, consumption, investment, hours, productivity는 trend
+주변에서 얼마나 변하고, 서로 얼마나 함께 움직이는가?
+:::
+
+따라서 다음 장은
+
+::: math-display
+$$
+\boxed{
+\text{Chapter 13: Business-Cycle Facts and Measurement}
+}
+$$
+:::
+
+로 이어진다. 여기서부터 aggregate fluctuations의 empirical
+regularities가 RBC model이 설명해야 할 target moments가 된다.
+::::::
+
+:::::::::::: {#s23 .section}
+## [12.23]{.section-number}Chapter Summary
+
+Incomplete markets의 핵심은 불확실성이 아니라 불확실성에 대응하는
+contingent trades가 충분하지 않다는 것이다. 그 결과 household wealth가
+history-dependent state가 된다.
+
+::: section-summary
+- 시장 불완전성은 traded payoffs가 relevant state space를 충분히
+  span하지 못하는 상태다.
+- Bond-only economy에서 household state는 $(a,y)$이고, consumption과
+  saving은 이 state에 조건부이다.
+- Borrowing constraint가 slack하면 stochastic Euler equality가 성립하고,
+  binding하면 Euler inequality가 나타난다.
+- 완전한 market insurance 대신 households는 saving과 dissaving으로
+  self-insure한다.
+- Uninsurable risk는 precautionary saving motive를 만들 수 있다.
+- Shock persistence가 lifetime resources와 consumption response의 크기를
+  결정하는 핵심 요소다.
+- Incomplete insurance 때문에 individual consumption은 own income과
+  wealth에 의존한다.
+- Idiosyncratic shocks와 incomplete insurance는 endogenous wealth
+  distribution을 만든다.
+- Stationary equilibrium에서는 household policy와 income transition이
+  invariant wealth-income distribution을 유도한다.
+:::
+
+::::::: equation-card
+Four equations to retain
+
+::: math-display
+$$
+\boxed{
+c_t+a_{t+1}=(1+r)a_t+y_t
+}
+$$
+:::
+
+::: math-display
+$$
+\boxed{
+V(a,y)=\max_{a'\ge\underline a}
+\left\{
+u((1+r)a+y-a')+\beta E[V(a',y')\mid y]\right\}
+}
+$$
+:::
+
+::: math-display
+$$
+\boxed{
+u'(c_t)=\beta(1+r)E_t[u'(c_{t+1})]
+\quad\text{if the constraint is slack}}
+$$
+:::
+
+::: math-display
+$$
+\boxed{
+u'(c_t)\ge\beta(1+r)E_t[u'(c_{t+1})]
+\quad\text{with a borrowing constraint}}
+$$
+:::
+:::::::
+
+::::: chapter-thesis
+Core message
+
+::: math-display
+$$
+\boxed{
+\text{When markets are incomplete, households cannot fully insure idiosyncratic risk;}
+}
+$$
+:::
+
+::: math-display
+$$
+\boxed{
+\text{they smooth consumption by carrying wealth across time.}
+}
+$$
+:::
+:::::
+::::::::::::
+
+::: {#check .section}
+## Learning Check
+
+1.  Complete markets와 incomplete markets를 payoff spanning의 관점에서
+    구별할 수 있는가?
+2.  Risk-free bond 하나만 존재할 때 왜 여러 future states를 완전히
+    insure할 수 없는지 설명할 수 있는가?
+3.  Income process $P(y'\mid y)$와 household state $(a,y)$를 정의할 수
+    있는가?
+4.  Budget constraint $c+a'=(1+r)a+y$의 timing을 정확히 설명할 수
+    있는가?
+5.  Household Bellman equation을 쓰고 consumption 및 asset policy
+    functions를 정의할 수 있는가?
+6.  왜 current assets가 past income histories의 compressed state인지
+    설명할 수 있는가?
+7.  Borrowing constraint가 slack할 때 stochastic Euler equation을 유도할
+    수 있는가?
+8.  Natural borrowing limit과 ad hoc borrowing limit의 차이를 설명할 수
+    있는가?
+9.  Constraint가 binding할 때 Euler equality가 inequality로 바뀌는
+    이유를 설명할 수 있는가?
+10. Self-insurance와 complete market insurance의 차이를 설명할 수
+    있는가?
+11. Precautionary saving motive가 어떤 조건에서 나타나는지 직관적으로
+    설명할 수 있는가?
+12. Persistent income shock가 transitory shock보다 consumption을 크게
+    움직일 수 있는 이유를 설명할 수 있는가?
+13. Aggregate risk가 없어도 incomplete markets 때문에 individual
+    consumption risk가 남을 수 있음을 보일 수 있는가?
+14. Incomplete-markets competitive equilibrium의 household optimality 및
+    market-clearing conditions를 말할 수 있는가?
+15. 왜 precautionary asset demand가 equilibrium interest rate를 낮추는
+    방향으로 작용할 수 있는지 설명할 수 있는가?
+16. Idiosyncratic shocks가 어떻게 endogenous wealth distribution을
+    만드는지 설명할 수 있는가?
+17. Stationary distribution $\mu^*=T_g\mu^*$의 의미를 설명할 수 있는가?
+18. Exogenous market incompleteness와 endogenous market incompleteness를
+    구별할 수 있는가?
+19. 왜 Chapter 13에서는 aggregate business-cycle facts와 moments를
+    측정해야 하는가?
+:::
+
+::::::::::::::::::::::::::::::::::: {#glossary .section}
+## 핵심 용어
+
+:::: definition-row
+::: term
+Incomplete markets
+:::
+
+Traded asset payoffs가 relevant state-contingent payoff space를 완전히
+span하지 못하는 시장구조.
+::::
+
+:::: definition-row
+::: term
+Spanning failure
+:::
+
+Available asset payoff vectors의 선형결합만으로 모든 relevant
+state-contingent claims를 복제할 수 없는 상태.
+::::
+
+:::: definition-row
+::: term
+Idiosyncratic income risk
+:::
+
+가계별로 다르게 실현되어 개인의 labor income이나 endowment를 변화시키는
+위험.
+::::
+
+:::: definition-row
+::: term
+Self-insurance
+:::
+
+완전한 보험계약 대신 saving과 dissaving을 이용해 개인이 스스로
+consumption risk를 완화하는 행위.
+::::
+
+:::: definition-row
+::: term
+Risk-free bond
+:::
+
+다음기의 모든 state에서 동일한 payoff를 지급하는 one-period asset.
+::::
+
+:::: definition-row
+::: term
+Borrowing constraint
+:::
+
+다음기 asset position에 부과되는 하한 $a'\ge\underline a$.
+::::
+
+:::: definition-row
+::: term
+Natural borrowing limit
+:::
+
+Worst-case future income에서도 repayment가 가능한 범위에서 도출되는
+solvency-based debt limit.
+::::
+
+:::: definition-row
+::: term
+Ad hoc borrowing limit
+:::
+
+상환능력의 정확한 natural bound보다 강하게 외생적으로 설정한 borrowing
+restriction.
+::::
+
+:::: definition-row
+::: term
+Euler inequality
+:::
+
+Borrowing constraint가 binding할 때 현재 marginal utility가 discounted
+expected future marginal utility보다 크거나 같아지는 optimality
+condition.
+::::
+
+:::: definition-row
+::: term
+Precautionary saving
+:::
+
+Uninsurable future uncertainty 때문에 household가 추가 assets를
+축적하려는 saving motive.
+::::
+
+:::: definition-row
+::: term
+Buffer stock
+:::
+
+불리한 future income shocks에 대비해 household가 유지하려는 liquid asset
+cushion.
+::::
+
+:::: definition-row
+::: term
+History dependence
+:::
+
+현재 allocation이 current exogenous state뿐 아니라 과거 shock와
+decisions의 결과인 wealth에도 의존하는 성질.
+::::
+
+:::: definition-row
+::: term
+Wealth distribution
+:::
+
+가계별 asset holdings의 cross-sectional distribution. Idiosyncratic
+histories와 policy rules에 의해 내생적으로 진화할 수 있다.
+::::
+
+:::: definition-row
+::: term
+Stationary distribution
+:::
+
+Household policy와 exogenous transition 아래 한 기간 이후에도 동일하게
+유지되는 invariant distribution $\mu^*=T_g\mu^*$.
+::::
+
+:::: definition-row
+::: term
+Bewley-type economy
+:::
+
+Idiosyncratic risk를 가진 heterogeneous households가 제한된 asset menu를
+이용해 self-insure하는 대표적인 incomplete-markets environment.
+::::
+
+:::: definition-row
+::: term
+Endogenous market incompleteness
+:::
+
+Information, enforcement, commitment, collateral 등 경제적 frictions
+때문에 일부 contingent contracts가 존재하지 않게 되는 경우.
+::::
+:::::::::::::::::::::::::::::::::::

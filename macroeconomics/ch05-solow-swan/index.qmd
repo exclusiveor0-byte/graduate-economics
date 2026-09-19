@@ -1,0 +1,44 @@
+# Chapter 05 · Solow–Swan 성장모형 {.unnumbered}
+*Capital Accumulation, Balanced Growth, and Transitional Dynamics*
+
+이 장에서는 **Solow–Swan 성장모형**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **5.1–5.5** Endogenous Saving에서 Solow로 · The Fundamental Law of Motion
+- **5.6–5.10** Steady State · Level Effect vs. Growth Effect
+- **5.11–5.14** Cobb--Douglas Example · Speed of Convergence
+- **5.15–5.18** Conditional Convergence · Chapter Summary
+:::
+
+## Sections
+
+- [5.1 Endogenous Saving에서 Solow로](contents.html#s01)
+- [5.2 Environment](contents.html#s02)
+- [5.3 Production Technology](contents.html#s03)
+- [5.4 Intensive Form](contents.html#s04)
+- [5.5 The Fundamental Law of Motion](contents.html#s05)
+- [5.6 Steady State](contents.html#s06)
+- [5.7 Stability와 Transition Dynamics](contents.html#s07)
+- [5.8 Balanced Growth Path](contents.html#s08)
+- [5.9 Saving Rate의 영구적 상승](contents.html#s09)
+- [5.10 Level Effect vs. Growth Effect](contents.html#s10)
+- [5.11 Cobb--Douglas Example](contents.html#s11)
+- [5.12 Consumption and the Golden Rule](contents.html#s12)
+- [5.13 Comparative Statics](contents.html#s13)
+- [5.14 Speed of Convergence](contents.html#s14)
+- [5.15 Conditional Convergence](contents.html#s15)
+- [5.16 Solow가 설명하는 것과 못 하는 것](contents.html#s16)
+- [5.17 왜 Infinite-Horizon Household인가](contents.html#s17)
+- [5.18 Chapter Summary](contents.html#s18)
+- [Learning Check](contents.html#check)
+- [핵심 용어](contents.html#glossary)
+
+::: {.callout-tip title="본문 읽기"}
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+:::
