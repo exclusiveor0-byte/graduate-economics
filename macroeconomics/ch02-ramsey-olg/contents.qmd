@@ -748,6 +748,11 @@ RCK 경제에는 두 개의 내생변수 $k$와 $c$가 있다. 그러나 초기 
 마음대로 선택할 수는 없다. 과거의 축적 결과인 $k(0)$는 주어져 있고,
 현재소비 $c(0)$만이 즉시 조정될 수 있다.
 
+::: {.callout-note appearance="simple"}
+### 계산·시각화 보충자료
+위상도(Phase Diagram)에서의 4사분면 벡터장, 안장경로 수렴 궤적, 초기 소비 이탈에 따른 자본 고갈 및 횡단성 조건(TVC) 위배, 그리고 수치적 슈팅 알고리즘(Shooting Method)에 대한 MATLAB 애니메이션 및 수치 분석은 [계산·탐색 보충자료: Ramsey 모형의 동학과 Saddle-Path 안장점 안정성](../../supplements/ramsey-saddle-path.qmd)을 참고하십시오.
+:::
+
 아래의 선형화 결과는 2.2에서 둔 신고전적 생산기술, $\widetilde\rho>0$,
 양의 정상상태와 interior optimal path를 전제로 한다. 이 절에서 증명하는
 것은 정상상태 근방의 **국소 saddle-path 성질**이다. 전역적 유일성은
@@ -1000,6 +1005,11 @@ RCK에서 가장 투명한 비교정태는 순수 시간선호율 $\rho$의 변�
 Chapter 01의 외생적 투자율 변화와 달리, household가 소비경로 전체를 다시
 최적화하는 충격이다. 아래에서는 경제가 충격 직전 기존 균제성장경로 위에
 있었고, 충격 뒤에도 $\widetilde\rho>0$이 유지된다고 둔다.
+
+::: {.callout-note appearance="simple"}
+### 계산·시각화 보충자료
+시간선호율 영구 인하 충격($\rho_0 \to \rho_1$) 시 자본스톡 $k$의 사전결정성($k(t_0^+) = k(t_0^-)$)과 소비 $c$의 순간적인 수직 도약 하락($c(t_0^+) < c(t_0^-)$), 그리고 신규 정상상태로의 전이 동학에 대한 MATLAB 애니메이션 및 시계열 도표는 [보충자료: 시간선호율 충격 비교동학](../../supplements/ramsey-saddle-path.qmd#sec-comparative-dynamics)을 참고하십시오.
+:::
 
 modified Golden Rule을 $\rho$에 대해 미분하면,
 

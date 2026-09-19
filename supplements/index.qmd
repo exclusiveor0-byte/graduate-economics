@@ -6,6 +6,7 @@
 
 - [Slutsky 분해: 가격변화와 두 보상 규칙](slutsky-decomposition.qmd)
 - [Solow 성장모형: 자본축적과 전이경로](solow-growth.qmd) — R 계산 원본과 브라우저 탐색 도구
+- [Ramsey 모형: 안장경로 동학과 슈팅 알고리즘](ramsey-saddle-path.qmd) — MATLAB 4종 애니메이션, 정적 위상도 및 수치 슈팅 해법
 - [OLS 표본 기하와 표본 변동](ols-geometry.qmd) — MATLAB 기준 계산과 브라우저 Monte Carlo 도구
 - [OLS 직교사영과 정상방정식의 벡터 기하](ols-projection-geometry.qmd) — MATLAB 기하 시각화와 4대 기본 등가성 해설
 - [도구변수와 약한 도구변수](iv-weak-instruments.qmd) — MATLAB 기준 실험과 OLS·2SLS 비교 도구
