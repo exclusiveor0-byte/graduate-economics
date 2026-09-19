@@ -81,6 +81,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
 </a>
 
+<a href="micro/set-04.html" class="spoon-card" data-subject="micro" data-round="4">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#4 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">부분균형 · 소비자이론</div>
+  <div class="spoon-card__desc">경쟁시장 가격하한제(Price Floor)와 초과공급 매입 후생손실, 준선형(Quasi-linear) 효용극대화와 경계해(Corner Solution)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
 <a href="micro/set-05.html" class="spoon-card" data-subject="micro" data-round="5">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#5 회차 (특별 구성)</span>
@@ -139,6 +151,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">일반균형 · 생산자이론</div>
   <div class="spoon-card__desc">순수교환경제 경쟁균형 가격과 파레토 효율성, First Welfare Theorem, 이윤극대화와 조업중단 조건(Shutdown Condition)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-04.html" class="spoon-card" data-subject="micro" data-round="4">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#4 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">부분균형 · 소비자이론</div>
+  <div class="spoon-card__desc">경쟁시장 가격하한제(Price Floor)와 초과공급 매입 후생손실, 준선형(Quasi-linear) 효용극대화와 경계해(Corner Solution)</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
