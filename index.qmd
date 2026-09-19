@@ -37,7 +37,7 @@ Chapter 01–10 · 기술, 확률모형, 식별, OLS, 추론
 ::: {.home-archive-item}
 **계산·탐색 보충자료**
 
-Interactive 5종 · R 1종 · MATLAB 3종 · GIF 1종
+Interactive 6종 · R 1종 · MATLAB 3종 · GIF 1종
 :::
 ::: {.home-archive-item}
 **논문 아카이브**
@@ -102,13 +102,9 @@ COMPUTATION
 ### [계산·탐색 보충자료](supplements/index.html)
 Slutsky·Hicks, Solow, OLS, 도구변수, IS–LM, Edgeworth 상자를 계산·시각화로 읽습니다.
 
-::: {.study-card__highlights}
-[Slutsky·Hicks](supplements/slutsky-decomposition.html) · [Solow](supplements/solow-growth.html) · [OLS](supplements/ols-geometry.html) · [도구변수](supplements/iv-weak-instruments.html) · [IS–LM GIF](supplements/islm-fiscal-shock.html) · [Edgeworth 상자](supplements/edgeworth-first-welfare.html)
-:::
-
 [보충자료 목록 보기](supplements/index.html){.study-card__link} →
 
-[Interactive 5종 · R 1종 · MATLAB 3종 · 정적 도표와 GIF]{.status}
+[Interactive 6종 · R 1종 · MATLAB 3종 · 정적 도표와 GIF]{.status}
 :::
 ::: {.study-card .study-card--literature}
 ::: {.study-card__number}

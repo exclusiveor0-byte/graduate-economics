@@ -1,7 +1,17 @@
 <script>
 // Keep wide tables within the reading column, with keyboard-accessible scrolling.
 document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.toggle("home-page", Boolean(document.querySelector(".home-hero")));
+  const isHome = Boolean(document.querySelector(".home-hero"));
+  document.body.classList.toggle("home-page", isHome);
+
+  if (isHome) {
+    document.querySelectorAll("#quarto-sidebar .sidebar-item-section").forEach((section) => {
+      const link = section.querySelector("a[href*='supplements/index.html'], a[href*='literature/index.html']");
+      if (link) {
+        section.classList.add("home-sidebar-top-item");
+      }
+    });
+  }
 
   document.querySelectorAll("main table").forEach((table) => {
     if (table.closest(".table-scroll")) return;
