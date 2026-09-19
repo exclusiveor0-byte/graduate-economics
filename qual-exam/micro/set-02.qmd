@@ -17,7 +17,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 ::: {.spoon-hero__tags}
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -46,6 +46,67 @@ $$
 ::: {.spoon-hint}
 **형식**: **duality → derive → verify**. 공식을 단순히 적기보다 각 단계의 미분과 대입을 명확히 보이시오.
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Consumer Theory"}
+::: {.topic}
+Indirect Utility · Shephard's Lemma · Roy's Identity · Duality
+:::
+
+#### 1) Indirect Utility Function $V(p_1, p_2, m)$
+지출함수
+$$
+e(p_1, p_2, u) = 3u\,p_1^{1/3}p_2^{2/3}
+$$
+에서 항등식 $e(p, V(p, m)) = m$을 적용하면:
+$$
+3V(p_1, p_2, m)p_1^{1/3}p_2^{2/3} = m.
+$$
+
+따라서 간접효용함수는
+$$
+V(p_1, p_2, m) = \frac{1}{3}m\,p_1^{-1/3}p_2^{-2/3}.
+$$
+
+#### 2) Hicksian Demand와 Marshallian Demand
+**Shephard's lemma**에 의해 재화 1의 Hicksian 보상수요함수는 지출함수를 $p_1$으로 편미분하여 구한다:
+$$
+h_1(p, u) = \frac{\partial e(p, u)}{\partial p_1} = 3u\left(\frac{1}{3}p_1^{-2/3}\right)p_2^{2/3} = u\,p_1^{-2/3}p_2^{2/3} = u\left(\frac{p_2}{p_1}\right)^{2/3}.
+$$
+
+**Roy's identity**에 의해 재화 1의 Marshallian 일반수요함수는
+$$
+x_1(p, m) = -\frac{\partial V(p, m)/\partial p_1}{\partial V(p, m)/\partial m}.
+$$
+각각 편미분을 계산하면:
+$$
+\frac{\partial V}{\partial p_1} = -\frac{1}{9}m\,p_1^{-4/3}p_2^{-2/3},
+$$
+$$
+\frac{\partial V}{\partial m} = \frac{1}{3}p_1^{-1/3}p_2^{-2/3}.
+$$
+
+따라서
+$$
+x_1(p_1, p_2, m) = -\frac{-\frac{1}{9}m\,p_1^{-4/3}p_2^{-2/3}}{\frac{1}{3}p_1^{-1/3}p_2^{-2/3}} = \frac{m}{3p_1}.
+$$
+
+#### 3) Duality 확인
+확인할 쌍대성 관계식:
+$$
+h_1(p, u) = x_1(p, e(p, u)).
+$$
+
+Marshallian demand $x_1(p, m) = \frac{m}{3p_1}$에 소득 $m = e(p, u)$를 대입하면:
+$$
+x_1(p, e(p, u)) = \frac{e(p, u)}{3p_1} = \frac{3u\,p_1^{1/3}p_2^{2/3}}{3p_1} = u\,p_1^{-2/3}p_2^{2/3}.
+$$
+
+이는 앞서 도출한 $h_1(p, u) = u\,p_1^{-2/3}p_2^{2/3}$와 정확히 일치하므로
+$$
+x_1(p, e(p, u)) = h_1(p, u)
+$$
+가 성립함을 확인하였다.
+:::
 :::
 
 ::: {.spoon-problem}
@@ -68,6 +129,118 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **best response → equilibrium → compare**. 마지막 문항에서는 가격만 비교하지 말고 이윤을 직접 계산하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Market Structure"}
+::: {.topic}
+Differentiated Bertrand · Best Response · Sequential Pricing · Strategic Complements
+:::
+
+#### 1) Simultaneous Competition (동시 가격경쟁)
+기업 $A$의 이윤함수:
+$$
+\pi_A = (p_A - 6)q_A = (p_A - 6)(24 - p_A + p_B).
+$$
+
+1계 조건(FOC):
+$$
+\frac{\partial\pi_A}{\partial p_A} = (24 - p_A + p_B) + (p_A - 6)(-1) = 30 + p_B - 2p_A = 0.
+$$
+
+따라서 기업 $A$의 최적대응함수(Best-Response Function)는
+$$
+p_A = 15 + \frac{1}{2}p_B.
+$$
+
+대칭적으로 기업 $B$의 최적대응함수는
+$$
+p_B = 15 + \frac{1}{2}p_A.
+$$
+
+대칭 Nash equilibrium ($p_A = p_B = p^*$):
+$$
+p^* = 15 + \frac{1}{2}p^* \quad\Longrightarrow\quad \frac{1}{2}p^* = 15 \quad\Longrightarrow\quad p^* = 30.
+$$
+
+즉 균형가격은
+$$
+(p_A^N, p_B^N) = (30, 30).
+$$
+
+이때 각 기업의 수요와 이윤:
+$$
+q_A = q_B = 24 - 30 + 30 = 24,
+$$
+$$
+\pi_A^N = \pi_B^N = (30 - 6) \times 24 = 576.
+$$
+
+---
+
+#### 2) Sequential Competition (순차 가격경쟁)
+기업 $A$가 먼저 $p_A$를 정하고, $B$가 이를 관찰한 뒤 $p_B$를 선택한다.
+
+1. **Follower $B$의 의사결정**:  
+   기업 $B$는 주어진 $p_A$에 대해 자신의 최적대응함수를 따른다:
+   $$
+   p_B(p_A) = 15 + \frac{1}{2}p_A.
+   $$
+
+2. **Leader $A$의 의사결정**:  
+   기업 $A$는 $B$의 반응을 자신의 수요함수에 대입한다:
+   $$
+   q_A = 24 - p_A + p_B(p_A) = 24 - p_A + 15 + \frac{1}{2}p_A = 39 - \frac{1}{2}p_A.
+   $$
+   따라서 Leader인 기업 $A$의 이윤함수는
+   $$
+   \pi_A = (p_A - 6)\left(39 - \frac{1}{2}p_A\right).
+   $$
+
+1계 조건(FOC):
+$$
+\frac{d\pi_A}{dp_A} = \left(39 - \frac{1}{2}p_A\right) + (p_A - 6)\left(-\frac{1}{2}\right) = 42 - p_A = 0 \quad\Longrightarrow\quad p_A^S = 42.
+$$
+
+이에 따른 Follower $B$의 가격:
+$$
+p_B^S = 15 + \frac{1}{2}(42) = 36.
+$$
+
+따라서 subgame-perfect equilibrium 가격 쌍은
+$$
+(p_A^S, p_B^S) = (42, 36).
+$$
+
+각 기업의 수요 및 이윤:
+$$
+q_A^S = 24 - 42 + 36 = 18, \qquad q_B^S = 24 - 36 + 42 = 30.
+$$
+$$
+\pi_A^S = (42 - 6) \times 18 = 648,
+$$
+$$
+\pi_B^S = (36 - 6) \times 30 = 900.
+$$
+
+---
+
+#### 3) Simultaneous vs. Sequential Competition 비교
+기업 $A$의 이윤을 비교하면
+$$
+\pi_A^N = 576, \qquad \pi_A^S = 648.
+$$
+$$
+\pi_A^S > \pi_A^N
+$$
+이므로 기업 $A$는 **sequential competition(순차경쟁)을 엄밀히 선호**한다.
+
+::: {.spoon-note}
+**전략적 보완성(Strategic Complements) 메커니즘**:  
+- Follower $B$의 최적대응함수 기울기가 $\frac{dp_B}{dp_A} = \frac{1}{2} > 0$이므로 두 기업의 가격은 **전략적 보완재(strategic complements)**입니다.
+- Leader $A$가 동시균형 가격($30$)보다 높은 가격 $p_A = 42$를 사전에 책정하면, $B$ 역시 가격을 $p_B = 36$으로 동반 인상합니다.
+- 이에 따라 $A$의 판매량은 $24 \to 18$로 다소 감소하지만, 단위당 마진($p_A - 6$)이 $24 \to 36$으로 50%나 급증하여 총이윤이 $576 \to 648$로 증가합니다.
+- **핵심**: 순차게임에서 Leader는 Follower의 가격 반응 $p_B(p_A)$를 알고 목적함수 $\pi_A(p_A, p_B(p_A))$를 풀기 때문에, 가격 완화(price coordination) 효과를 주도하여 동시게임보다 높은 이윤을 누릴 수 있습니다.
+:::
 :::
 :::
 

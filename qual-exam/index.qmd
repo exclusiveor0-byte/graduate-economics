@@ -63,12 +63,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-02.html" class="spoon-card" data-subject="micro" data-round="2">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#2 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">소비자이론 · 시장의 종류</div>
   <div class="spoon-card__desc">지출함수와 간접효용함수, Shephard's lemma 및 Roy's identity 쌍대성, 차별화된 베르트랑 가격경쟁</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -147,12 +150,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-02.html" class="spoon-card" data-subject="micro" data-round="2">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#2 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">소비자이론 · 시장의 종류</div>
   <div class="spoon-card__desc">지출함수와 간접효용함수, Shephard's lemma 및 Roy's identity 쌍대성, 차별화된 베르트랑 가격경쟁</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
