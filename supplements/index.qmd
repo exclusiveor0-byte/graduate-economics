@@ -1,4 +1,4 @@
-# 보충자료 {.unnumbered}
+# 계산·탐색 보충자료 {.unnumbered}
 
 본문의 이해를 보조하는 계산·시각화·interactive 자료를 관리합니다.
 
