@@ -139,43 +139,44 @@ grid(ax1, 'on'); xlim(ax1, [0.6, 4.0]); ylim(ax1, [-0.4, 2.4]);
 
 % --- Right Panel: Observation Space R^3 ---
 ax2 = nexttile(tl1, 2); hold(ax2, 'on'); grid(ax2, 'on'); box(ax2, 'on');
-view(ax2, 130, 22);
+view(ax2, -40, 22);
 
-% Subspace Plane C(X): u*1 + v*x
-[u_pl, v_pl] = meshgrid(linspace(0.0, 3.2, 15), linspace(-1.2, 1.2, 15));
+% Subspace Plane C(X): u*1 + v*x (broadened floor patch)
+[u_pl, v_pl] = meshgrid(linspace(-0.6, 3.6, 35), linspace(-2.2, 2.2, 35));
 pl_x = u_pl * ones3(1) + v_pl * x_vec(1);
 pl_y = u_pl * ones3(2) + v_pl * x_vec(2);
 pl_z = u_pl * ones3(3) + v_pl * x_vec(3);
-surf(ax2, pl_x, pl_y, pl_z, 'FaceColor', c_teal_lite, 'FaceAlpha', 0.50, ...
-    'EdgeColor', [0.70, 0.80, 0.78], 'EdgeAlpha', 0.6);
+surf(ax2, pl_x, pl_y, pl_z, 'FaceColor', c_teal_lite, 'FaceAlpha', 0.38, ...
+    'EdgeColor', [0.70, 0.80, 0.78], 'EdgeAlpha', 0.4);
 
 draw_vec3 = @(ax, o, v, col, w) quiver3(ax, o(1), o(2), o(3), v(1), v(2), v(3), 0, ...
     'Color', col, 'LineWidth', w, 'MaxHeadSize', 0.22);
 
 O = [0; 0; 0];
-draw_vec3(ax2, O, ones3, c_gray, 1.8);
-text(ax2, ones3(1)*1.02, ones3(2)*1.02, ones3(3)*1.02 + 0.15, ' $\mathbf{1} = (1,1,1)^T$', ...
+draw_vec3(ax2, O, ones3, c_gray, 2.0);
+text(ax2, ones3(1) + 0.15, ones3(2) + 0.05, ones3(3) - 0.15, ' $\mathbf{1} = (1,1,1)^T$', ...
     'FontSize', 9.5, 'Color', [0.35, 0.40, 0.45], 'Interpreter', 'latex');
 
-draw_vec3(ax2, O, x_vec, c_gray, 1.8);
-text(ax2, x_vec(1) - 0.2, x_vec(2) + 0.05, x_vec(3) + 0.12, ' $x = (-1,0,1)^T$', ...
+draw_vec3(ax2, O, x_vec, c_gray, 2.0);
+text(ax2, x_vec(1) - 0.25, x_vec(2) - 0.1, x_vec(3) + 0.15, ' $x = (-1,0,1)^T$', ...
     'FontSize', 9.5, 'Color', [0.35, 0.40, 0.45], 'Interpreter', 'latex');
 
-draw_vec3(ax2, O, y, c_dark, 2.6);
-text(ax2, y(1) - 0.15, y(2) - 0.15, y(3) + 0.22, ' $y = (2,1,4)^T$', ...
+draw_vec3(ax2, O, y, c_dark, 3.0);
+text(ax2, y(1) + 0.15, y(2) + 0.05, y(3) + 0.25, ' $y = (2,1,4)^T$', ...
     'FontSize', 11, 'FontWeight', 'bold', 'Color', c_dark, 'Interpreter', 'latex');
 
-draw_vec3(ax2, O, y_hat, c_teal, 2.8);
-text(ax2, y_hat(1) + 0.15, y_hat(2) + 0.1, y_hat(3) - 0.25, ...
+draw_vec3(ax2, O, y_hat, c_teal, 3.0);
+text(ax2, y_hat(1) - 0.15, y_hat(2) + 0.15, y_hat(3) + 0.1, ...
     ' $\hat{y} = P_X y = (4/3, 7/3, 10/3)^T$', ...
-    'FontSize', 10.5, 'FontWeight', 'bold', 'Color', c_teal, 'Interpreter', 'latex');
+    'FontSize', 10.5, 'FontWeight', 'bold', 'Color', c_teal, 'Interpreter', 'latex', ...
+    'HorizontalAlignment', 'right');
 
-draw_vec3(ax2, y_hat, e_hat, c_rust, 2.8);
-text(ax2, y_hat(1) + e_hat(1)*0.5 - 0.35, y_hat(2) + e_hat(2)*0.5, y_hat(3) + e_hat(3)*0.5 + 0.2, ...
-    ' $\hat{e} = y - \hat{y} = M_X y$', 'FontSize', 10.5, 'FontWeight', 'bold', 'Color', c_rust, 'Interpreter', 'latex');
+draw_vec3(ax2, y_hat, e_hat, c_rust, 3.0);
+text(ax2, (y_hat(1)+y(1))/2 - 0.45, (y_hat(2)+y(2))/2 + 0.15, (y_hat(3)+y(3))/2 + 0.35, ...
+    ' $\hat{e} \perp \mathcal{C}(X)$', 'FontSize', 11, 'FontWeight', 'bold', 'Color', c_rust, 'Interpreter', 'latex');
 
 % 3D Right-Angle Square Marker at y_hat
-s_sq = 0.28;
+s_sq = 0.35;
 e_dir = e_hat / norm(e_hat);
 yhat_dir = - y_hat / norm(y_hat);
 q1 = y_hat + s_sq * yhat_dir;
@@ -192,17 +193,17 @@ plot3(ax2, [z_start(1), y(1)], [z_start(2), y(2)], [z_start(3), y(3)], ':', ...
     'Color', [0.70, 0.50, 0.45], 'LineWidth', 1.2);
 plot3(ax2, z_start(1), z_start(2), z_start(3), 'o', 'MarkerSize', 7, ...
     'MarkerFaceColor', [0.85, 0.88, 0.90], 'MarkerEdgeColor', c_dark);
-text(ax2, z_start(1) - 0.2, z_start(2) + 0.1, z_start(3) - 0.25, '$X\beta^{(0)}$', ...
+text(ax2, z_start(1) + 0.12, z_start(2) - 0.15, z_start(3) - 0.2, '$X\beta^{(0)}$', ...
     'FontSize', 9.5, 'Color', c_dark, 'Interpreter', 'latex');
 
 % Label Subspace plane nicely inside viewing bounds
-text(ax2, 0.2, 1.8, 2.8, '$\mathcal{C}(X) = \mathrm{span}\{\mathbf{1}, x\}$', ...
+text(ax2, -0.6, 2.2, 2.8, '$\mathcal{C}(X) = \mathrm{span}\{\mathbf{1}, x\}$', ...
     'FontSize', 11, 'FontWeight', 'bold', 'Color', c_teal, 'Interpreter', 'latex');
 
 xlabel(ax2, 'Obs 1 ($y_1$)', 'FontSize', 10, 'Interpreter', 'latex');
 ylabel(ax2, 'Obs 2 ($y_2$)', 'FontSize', 10, 'Interpreter', 'latex');
 zlabel(ax2, 'Obs 3 ($y_3$)', 'FontSize', 10, 'Interpreter', 'latex');
-xlim(ax2, [-1.2, 3.2]); ylim(ax2, [-0.2, 3.2]); zlim(ax2, [-0.2, 4.5]);
+xlim(ax2, [-1.5, 3.5]); ylim(ax2, [-1.0, 3.5]); zlim(ax2, [-0.5, 4.8]);
 title(ax2, 'Observation Space: $X^T\hat{e} = 0 \iff \hat{e} \perp \mathcal{C}(X) \iff \hat{y} = P_X y$', ...
     'FontSize', 11, 'Color', c_dark, 'Interpreter', 'latex');
 
@@ -234,56 +235,69 @@ R2_1 = 1 - (RSS_1 / TSS);  % 3/7 approx 0.4286
 fig2 = figure('Position', [100, 100, 1050, 720], 'Color', c_bg, 'Visible', 'off');
 tl2 = tiledlayout(fig2, 1, 1, 'Padding', 'compact');
 ax_f2 = nexttile(tl2, 1); hold(ax_f2, 'on'); grid(ax_f2, 'on'); box(ax_f2, 'on');
-view(ax_f2, 134, 22);
+view(ax_f2, -40, 22);
 
 % 1. Render Plane C(X_1) = span{1, x}
-surf(ax_f2, pl_x, pl_y, pl_z, 'FaceColor', c_teal_lite, 'FaceAlpha', 0.45, ...
-    'EdgeColor', [0.75, 0.83, 0.80], 'EdgeAlpha', 0.5);
+surf(ax_f2, pl_x, pl_y, pl_z, 'FaceColor', c_teal_lite, 'FaceAlpha', 0.38, ...
+    'EdgeColor', [0.70, 0.80, 0.78], 'EdgeAlpha', 0.4);
 
 % 2. Render 1D Subspace Line C(X_0) = span{1}
-t_line = linspace(-0.2, 3.2, 40);
+t_line = linspace(-0.5, 3.6, 60);
 line_1d = t_line .* ones3;
 plot3(ax_f2, line_1d(1, :), line_1d(2, :), line_1d(3, :), '-', ...
-    'Color', c_gold, 'LineWidth', 3.2);
-text(ax_f2, 2.9, 2.9, 3.2, '$\mathcal{C}(X_0) = \mathrm{span}\{\mathbf{1}\}$', ...
+    'Color', c_gold, 'LineWidth', 3.5);
+text(ax_f2, 0.5, 0.5, 0.7, '$\mathcal{C}(X_0) = \mathrm{span}\{\mathbf{1}\}$', ...
     'FontSize', 10.5, 'FontWeight', 'bold', 'Color', c_gold, 'Interpreter', 'latex');
 
 % Vectors: y, y_hat_0, y_hat_1
-draw_vec3(ax_f2, O, y, c_dark, 2.6);
-text(ax_f2, y(1) - 0.1, y(2) - 0.2, y(3) + 0.25, ' $y = (2,1,4)^T$', ...
+draw_vec3(ax_f2, O, y, c_dark, 3.0);
+text(ax_f2, y(1) + 0.15, y(2) + 0.05, y(3) + 0.25, ' $y = (2,1,4)^T$', ...
     'FontSize', 11, 'FontWeight', 'bold', 'Color', c_dark, 'Interpreter', 'latex');
 
-draw_vec3(ax_f2, O, y_hat_0, c_gold, 2.6);
-text(ax_f2, y_hat_0(1) + 0.1, y_hat_0(2) - 0.25, y_hat_0(3) - 0.25, ...
+draw_vec3(ax_f2, O, y_hat_0, c_gold, 3.0);
+text(ax_f2, y_hat_0(1) + 0.2, y_hat_0(2) - 0.2, y_hat_0(3) - 0.35, ...
     ' $\hat{y}_0 = P_{\mathbf{1}}y = (\bar{y}, \bar{y}, \bar{y})^T$', ...
     'FontSize', 10.5, 'FontWeight', 'bold', 'Color', c_gold, 'Interpreter', 'latex');
 
-draw_vec3(ax_f2, O, y_hat_1, c_teal, 2.6);
-text(ax_f2, y_hat_1(1) + 0.15, y_hat_1(2) + 0.05, y_hat_1(3) - 0.25, ...
+draw_vec3(ax_f2, O, y_hat_1, c_teal, 3.0);
+text(ax_f2, y_hat_1(1) - 0.15, y_hat_1(2) + 0.15, y_hat_1(3) + 0.1, ...
     ' $\hat{y}_1 = P_X y = (4/3, 7/3, 10/3)^T$', ...
-    'FontSize', 10.5, 'FontWeight', 'bold', 'Color', c_teal, 'Interpreter', 'latex');
+    'FontSize', 10.5, 'FontWeight', 'bold', 'Color', c_teal, 'Interpreter', 'latex', ...
+    'HorizontalAlignment', 'right');
 
-% Residual connections
+% Hypotenuse e_hat_0
 plot3(ax_f2, [y_hat_0(1), y(1)], [y_hat_0(2), y(2)], [y_hat_0(3), y(3)], '--', ...
-    'Color', c_gold, 'LineWidth', 2.0);
-text(ax_f2, (y_hat_0(1)+y(1))/2 - 0.3, (y_hat_0(2)+y(2))/2 - 0.1, (y_hat_0(3)+y(3))/2 + 0.25, ...
-    ' $\|\hat{e}_0\|^2 = 14/3$', 'FontSize', 10, 'FontWeight', 'bold', 'Color', c_gold, 'Interpreter', 'latex');
+    'Color', c_gold, 'LineWidth', 2.4);
+text(ax_f2, (y_hat_0(1)+y(1))/2 + 0.22, (y_hat_0(2)+y(2))/2 - 0.15, (y_hat_0(3)+y(3))/2 - 0.15, ...
+    ' $\|\hat{e}_0\|^2 = 14/3$', 'FontSize', 10.5, 'FontWeight', 'bold', 'Color', c_gold, 'Interpreter', 'latex');
 
-plot3(ax_f2, [y_hat_1(1), y(1)], [y_hat_1(2), y(2)], [y_hat_1(3), y(3)], '-', ...
-    'Color', c_rust, 'LineWidth', 2.4);
-text(ax_f2, (y_hat_1(1)+y(1))/2 + 0.12, (y_hat_1(2)+y(2))/2, (y_hat_1(3)+y(3))/2 + 0.1, ...
-    ' $\|\hat{e}_1\|^2 = 8/3$', 'FontSize', 10, 'FontWeight', 'bold', 'Color', c_rust, 'Interpreter', 'latex');
+% Leg 1: e_hat_1
+draw_vec3(ax_f2, y_hat_1, e_hat_1, c_rust, 3.0);
+text(ax_f2, (y_hat_1(1)+y(1))/2 - 0.45, (y_hat_1(2)+y(2))/2 + 0.15, (y_hat_1(3)+y(3))/2 + 0.35, ...
+    ' $\|\hat{e}_1\|^2 = 8/3$', 'FontSize', 11, 'FontWeight', 'bold', 'Color', c_rust, 'Interpreter', 'latex');
 
-% Shift vector from y_hat_0 to y_hat_1
-draw_vec3(ax_f2, y_hat_0, y_hat_1 - y_hat_0, [0.35, 0.40, 0.45], 1.8);
+% Leg 2: y_hat_1 - y_hat_0
+draw_vec3(ax_f2, y_hat_0, y_hat_1 - y_hat_0, c_teal, 2.5);
+text(ax_f2, (y_hat_0(1)+y_hat_1(1))/2 - 0.35, (y_hat_0(2)+y_hat_1(2))/2 + 0.15, (y_hat_0(3)+y_hat_1(3))/2 - 0.25, ...
+    ' $\hat{y}_1 - \hat{y}_0$', 'FontSize', 10.5, 'FontWeight', 'bold', 'Color', c_teal, 'Interpreter', 'latex');
 
-text(ax_f2, 0.2, 1.8, 2.9, '$\mathcal{C}(X_1) = \mathrm{span}\{\mathbf{1}, x\}$', ...
+% Right-angle square marker at y_hat_1 between e_hat_1 and (y_hat_0 - y_hat_1)
+s_sq2 = 0.30;
+e1_dir = e_hat_1 / norm(e_hat_1);
+dy_dir = (y_hat_0 - y_hat_1) / norm(y_hat_0 - y_hat_1);
+m1 = y_hat_1 + s_sq2 * dy_dir;
+m2 = m1 + s_sq2 * e1_dir;
+m3 = y_hat_1 + s_sq2 * e1_dir;
+plot3(ax_f2, [m1(1), m2(1), m3(1)], [m1(2), m2(2), m3(2)], [m1(3), m2(3), m3(3)], ...
+    'Color', c_rust, 'LineWidth', 1.8);
+
+text(ax_f2, -0.6, 2.2, 2.8, '$\mathcal{C}(X_1) = \mathrm{span}\{\mathbf{1}, x\}$', ...
     'FontSize', 11, 'FontWeight', 'bold', 'Color', c_teal, 'Interpreter', 'latex');
 
 xlabel(ax_f2, 'Obs 1 ($y_1$)', 'FontSize', 10, 'Interpreter', 'latex');
 ylabel(ax_f2, 'Obs 2 ($y_2$)', 'FontSize', 10, 'Interpreter', 'latex');
 zlabel(ax_f2, 'Obs 3 ($y_3$)', 'FontSize', 10, 'Interpreter', 'latex');
-xlim(ax_f2, [-1.2, 3.2]); ylim(ax_f2, [-0.4, 3.4]); zlim(ax_f2, [-0.2, 4.8]);
+xlim(ax_f2, [-1.5, 3.5]); ylim(ax_f2, [-1.0, 3.5]); zlim(ax_f2, [-0.5, 4.8]);
 
 title(tl2, '\textbf{Variable Addition in OLS: Space Expansion from Line to Plane}', ...
     'FontSize', 13.5, 'Color', c_dark, 'Interpreter', 'latex');
@@ -293,10 +307,11 @@ ann_str = { ...
     '$\mathcal{C}(X_0) \subset \mathcal{C}(X_1) \quad (\mathrm{Line} \subset \mathrm{Plane})$', ...
     '$X_0 = [\mathbf{1}]: \quad RSS_0 = 14/3, \quad R_0^2 = 0$', ...
     '$X_1 = [\mathbf{1}, x]: \quad RSS_1 = 8/3, \quad R_1^2 = 3/7$', ...
-    '$\min_{z \in \mathcal{C}(X_1)} \|y-z\|^2 \le \min_{z \in \mathcal{C}(X_0)} \|y-z\|^2$' ...
+    'Pythagorean Theorem: $\|\hat{e}_0\|^2 = \|\hat{e}_1\|^2 + \|\hat{y}_1 - \hat{y}_0\|^2$', ...
+    '$\frac{14}{3} = \frac{8}{3} + 2 \quad \iff \quad RSS_0 = RSS_1 + \Delta ESS$' ...
 };
 
-annotation(fig2, 'textbox', [0.06, 0.72, 0.38, 0.20], 'String', ann_str, ...
+annotation(fig2, 'textbox', [0.06, 0.69, 0.38, 0.23], 'String', ann_str, ...
     'BackgroundColor', [1, 1, 1, 0.92], 'EdgeColor', [0.75, 0.78, 0.82], ...
     'FontSize', 9.5, 'Margin', 8, 'FitBoxToText', 'on', 'Interpreter', 'latex');
 

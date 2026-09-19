@@ -1,0 +1,1075 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>관측공간 R³에서의 OLS 직교사영과 정상방정식 3D 기하</title>
+  <style>
+    :root {
+      --bg: #fcfbf9;
+      --paper: #ffffff;
+      --panel: #f7f5f0;
+      --rule: #e2ddd3;
+      --rule-dark: #c9c2b4;
+      --ink: #1e2530;
+      --muted: #5e6876;
+      --accent: #b34728;     /* Rust / Residual */
+      --teal: #166258;       /* Teal / Projection */
+      --teal-bg: #e6f1ef;
+      --gold: #b37e19;       /* Amber / Intercept */
+      --gold-bg: #fbf4e4;
+      --navy: #1b2838;
+      --shadow: 0 4px 14px rgba(27, 40, 56, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", "Noto Sans KR", Roboto, sans-serif;
+      line-height: 1.5;
+      padding: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    header { margin-bottom: 0.85rem; }
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .badge {
+      font-size: 0.72rem;
+      background: var(--teal-bg);
+      color: var(--teal);
+      border: 1px solid rgba(22, 98, 88, 0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .lede {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 0.6rem 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+    .btn-group {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-right: 0.2rem;
+    }
+    button {
+      background: var(--paper);
+      color: var(--ink);
+      border: 1px solid var(--rule-dark);
+      padding: 0.3rem 0.65rem;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    button:hover {
+      background: #f0ede6;
+      border-color: var(--navy);
+    }
+    button.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 0.85rem;
+      align-items: start;
+    }
+    .canvas-container {
+      position: relative;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 520px;
+      cursor: grab;
+    }
+    canvas:active { cursor: grabbing; }
+    .canvas-overlay {
+      position: absolute;
+      top: 0.6rem;
+      left: 0.7rem;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .camera-tag {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 0.2rem 0.45rem;
+      font-size: 0.72rem;
+      font-family: monospace;
+      color: var(--muted);
+    }
+    .hint-tag {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 0.2rem 0.45rem;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 0.8rem;
+      box-shadow: var(--shadow);
+    }
+    .card h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .formula-box {
+      background: var(--panel);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 4px 4px 0;
+      padding: 0.45rem 0.6rem;
+      font-family: "Georgia", serif;
+      font-size: 0.82rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.45;
+    }
+    .formula-box.rust {
+      border-left-color: var(--accent);
+      background: #fbf2ef;
+    }
+    .formula-box.gold {
+      border-left-color: var(--gold);
+      background: var(--gold-bg);
+    }
+    .metrics-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+    .metrics-table tr {
+      border-bottom: 1px solid #f0eee8;
+    }
+    .metrics-table tr:last-child {
+      border-bottom: none;
+    }
+    .metrics-table td {
+      padding: 0.35rem 0.15rem;
+    }
+    .metrics-table td:last-child {
+      text-align: right;
+      font-family: monospace;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .slider-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 45px;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.76rem;
+      margin-bottom: 0.45rem;
+    }
+    .slider-row input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+    }
+    .slider-val {
+      font-family: monospace;
+      text-align: right;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .legend-list {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.74rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .guide-box {
+      font-size: 0.74rem;
+      color: var(--muted);
+      line-height: 1.5;
+      background: #fdfcf9;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 0.55rem 0.7rem;
+    }
+    .guide-box strong { color: var(--navy); }
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      canvas { height: 440px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      OLS 직교사영과 관측공간 3D 기하 탐색 도구
+      <span class="badge">R³ Observation Space</span>
+    </h1>
+    <p class="lede">
+      3차원 관측공간에서 설명변수 열공간 $\mathcal{C}(X)$로의 직교사영, 변수 추가에 따른 피타고라스 분해($TSS = ESS + RSS$), 그리고 정규방정식 $X'\hat{e} = 0$을 360° 자유 회전으로 입체 관찰합니다.
+    </p>
+  </header>
+
+  <div class="toolbar">
+    <div class="btn-group">
+      <span class="btn-label">기하 모드:</span>
+      <button id="btn-mode-single" class="active" onclick="setMode('single')">① 기본 직교사영</button>
+      <button id="btn-mode-nested" onclick="setMode('nested')">② 변수 추가 & 피타고라스</button>
+      <button id="btn-mode-param" onclick="setMode('param')">③ 모수공간 연동 탐색</button>
+    </div>
+    <div class="btn-group">
+      <span class="btn-label">시점 프리셋:</span>
+      <button onclick="setPreset(-40, 22)">표준 3D (-40°, 22°)</button>
+      <button onclick="setPreset(135, 35)">피타고라스 정면 (135°, 35°)</button>
+      <button onclick="setPreset(-45, 68)">열공간 수직 하향 (Top-down)</button>
+      <button onclick="setPreset(45, 0)">평면 측면 (Side: e ⊥ C)</button>
+      <button onclick="resetCamera()">원위치</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="canvas-container">
+      <canvas id="view3d"></canvas>
+      <div class="canvas-overlay">
+        <div id="cam-tag" class="camera-tag">Az: -40.0° | El: 22.0° | Zoom: 1.00×</div>
+        <div class="hint-tag">마우스 드래그 / 터치: 3D 자유 회전 | 휠: 줌 인/아웃</div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <!-- Mode 1 & 2 Math Info -->
+      <div class="card" id="card-formula">
+        <h3 id="card-title">① 관측공간 직교사영</h3>
+        <div class="formula-box" id="formula-main">
+          $\hat{y} = P_X y \in \mathcal{C}(X)$<br>
+          $\hat{e} = M_X y = y - \hat{y} \perp \mathcal{C}(X)$<br>
+          <strong>정상방정식:</strong> $X'\hat{e} = \begin{pmatrix} \mathbf{1}'\hat{e} \\ x'\hat{e} \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$
+        </div>
+
+        <table class="metrics-table">
+          <tr>
+            <td>종속변수 $\|y\|^2$</td>
+            <td id="m-y2">21.000</td>
+          </tr>
+          <tr>
+            <td>적합값 $\|\hat{y}\|^2$ (ESS uncentered)</td>
+            <td id="m-yh2">18.333 (55/3)</td>
+          </tr>
+          <tr>
+            <td>잔차제곱합 $\|\hat{e}\|^2$ (RSS)</td>
+            <td id="m-e2" style="color:var(--accent);">2.667 (8/3)</td>
+          </tr>
+          <tr>
+            <td>직교성 확인 $y'y - (\|\hat{y}\|^2 + \|\hat{e}\|^2)$</td>
+            <td id="m-pyth">0.0000 (Exact)</td>
+          </tr>
+          <tr>
+            <td>중심화 총제곱합 $TSS = \|y - \bar{y}\mathbf{1}\|^2$</td>
+            <td id="m-tss">4.667 (14/3)</td>
+          </tr>
+          <tr>
+            <td>중심화 설명제곱합 $ESS = \|\hat{y} - \bar{y}\mathbf{1}\|^2$</td>
+            <td id="m-ess">2.000 (6/3)</td>
+          </tr>
+          <tr>
+            <td>결정계수 $R^2 = ESS / TSS$</td>
+            <td id="m-r2" style="color:var(--teal);">0.4286 (3/7)</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Interactive Sliders (Mode 3 or Interactive Y) -->
+      <div class="card" id="card-controls">
+        <h3>모수 & 좌표 동적 조절</h3>
+        <div id="controls-param" style="display:none;">
+          <div class="slider-row">
+            <span>상수 $\beta_0$:</span>
+            <input type="range" id="sl-b0" min="0.5" max="4.0" step="0.05" value="2.333">
+            <span class="slider-val" id="val-b0">2.33</span>
+          </div>
+          <div class="slider-row">
+            <span>기울기 $\beta_1$:</span>
+            <input type="range" id="sl-b1" min="-0.5" max="2.5" step="0.05" value="1.000">
+            <span class="slider-val" id="val-b1">1.00</span>
+          </div>
+          <div class="formula-box rust" style="font-size:0.75rem; margin-top:0.4rem;">
+            목적함수 $S(\beta) = \|y - X\beta\|^2$:<br>
+            <strong id="val-sbeta" style="font-size:0.95rem;">2.667</strong>
+            (최소값 $S(\hat{\beta}) = 8/3 \approx 2.667$)
+          </div>
+        </div>
+
+        <div id="controls-y">
+          <div class="slider-row">
+            <span>관측치 $y_3$:</span>
+            <input type="range" id="sl-y3" min="1.0" max="6.0" step="0.1" value="4.0">
+            <span class="slider-val" id="val-y3">4.0</span>
+          </div>
+          <p style="font-size:0.72rem; color:var(--muted); margin-top:0.2rem;">
+            $y_3$를 움직이면 종속변수 벡터 $y$의 위치가 실시간으로 이동하며, 열공간 $\mathcal{C}(X)$로 떨어지는 직교사영 $\hat{y}$와 잔차 $\hat{e}$가 동적으로 갱신됩니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Vector Legend -->
+      <div class="card">
+        <h3>도표 범례 (Geometry Legend)</h3>
+        <div class="legend-list">
+          <div class="legend-item">
+            <div class="dot" style="background:#1b2838;"></div>
+            <span><strong>$y = (2, 1, 4)^T$</strong>: 종속변수 벡터 (3차원 공간)</span>
+          </div>
+          <div class="legend-item">
+            <div class="dot" style="background:#166258;"></div>
+            <span><strong>$\hat{y} = P_X y$</strong>: OLS 적합값 벡터 (평면 상의 수선의 발)</span>
+          </div>
+          <div class="legend-item">
+            <div class="dot" style="background:#b34728;"></div>
+            <span><strong>$\hat{e} = y - \hat{y}$</strong>: OLS 잔차 벡터 ($\hat{e} \perp \mathcal{C}(X)$)</span>
+          </div>
+          <div class="legend-item">
+            <div class="dot" style="background:#b37e19;"></div>
+            <span><strong>$\hat{y}_0 = P_{\mathbf{1}}y$</strong>: 상수항 단독 사영 ($\mathcal{C}(\mathbf{1})$ 직선 위)</span>
+          </div>
+          <div class="legend-item">
+            <div class="dot" style="background:rgba(22, 98, 88, 0.45); border:1px solid #166258;"></div>
+            <span><strong>$\mathcal{C}(X) = \mathrm{span}\{\mathbf{1}, x\}$</strong>: 설명변수 2차원 열공간 평면</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graduate Guide Box -->
+      <div class="guide-box">
+        <strong>대학원생 권장 관찰법</strong>:
+        <ul style="padding-left:1.1rem; margin-top:0.25rem;">
+          <li><strong>피타고라스 뷰</strong>를 클릭하면 $\hat{y}_0, \hat{y}_1, y$가 이루는 삼각형이 화면에 정확한 직각삼각형으로 펼쳐집니다. 빗변 $\|\hat{e}_0\|^2 = 14/3$이 밑변 $\|\hat{y}_1 - \hat{y}_0\|^2 = 2$와 높이 $\|\hat{e}_1\|^2 = 8/3$으로 직교분해되는 기하학적 정리를 육안으로 확인하세요.</li>
+          <li><strong>평면 측면 뷰</strong>에서는 잔차 벡터 $\hat{e}$가 열공간 평면 $\mathcal{C}(X)$와 어떠한 왜곡도 없이 완벽히 $90^\circ$ 직교함을 확인할 수 있습니다.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Exact OLS Vector Setup
+    const ones3 = [1, 1, 1];
+    const x_vec = [-1, 0, 1];
+    let y_vec = [2, 1, 4];
+    
+    // Interactive State
+    let currentMode = 'single'; // 'single' | 'nested' | 'param'
+    let paramB0 = 7/3;
+    let paramB1 = 1.0;
+
+    // Camera Orbit State (Default natural view: az = -40 deg, el = 22 deg)
+    let camera = {
+      az: -40 * Math.PI / 180,
+      el: 22 * Math.PI / 180,
+      dist: 13.5,
+      zoom: 1.0,
+      target: [1.0, 1.2, 2.0]
+    };
+    let isDragging = false;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+
+    const canvas = document.getElementById('view3d');
+    const ctx = canvas.getContext('2d');
+
+    // UI elements
+    const camTag = document.getElementById('cam-tag');
+    const slY3 = document.getElementById('sl-y3');
+    const valY3 = document.getElementById('val-y3');
+    const slB0 = document.getElementById('sl-b0');
+    const valB0 = document.getElementById('val-b0');
+    const slB1 = document.getElementById('sl-b1');
+    const valB1 = document.getElementById('val-b1');
+    const valSbeta = document.getElementById('val-sbeta');
+    const controlsParam = document.getElementById('controls-param');
+    const controlsY = document.getElementById('controls-y');
+    const cardTitle = document.getElementById('card-title');
+    const formulaMain = document.getElementById('formula-main');
+
+    // Vector Math Helpers
+    const dot = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+    const add = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]];
+    const sub = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]];
+    const scale = (a, s) => [a[0]*s, a[1]*s, a[2]*s];
+    const norm2 = a => dot(a, a);
+    const norm = a => Math.sqrt(norm2(a));
+
+    function computeOLS() {
+      const y = y_vec;
+      // Normal equations for X = [ones3, x_vec]
+      // X'X = [ [3, 0], [0, 2] ]
+      const b0_hat = dot(ones3, y) / 3;
+      const b1_hat = dot(x_vec, y) / 2;
+      const beta_hat = [b0_hat, b1_hat];
+
+      const y_hat = add(scale(ones3, b0_hat), scale(x_vec, b1_hat));
+      const e_hat = sub(y, y_hat);
+
+      // Model 0: Intercept only
+      const y_hat_0 = scale(ones3, b0_hat);
+      const e_hat_0 = sub(y, y_hat_0);
+
+      const y2 = norm2(y);
+      const yh2 = norm2(y_hat);
+      const e2 = norm2(e_hat);
+
+      const y_bar = b0_hat;
+      const tss = norm2(sub(y, scale(ones3, y_bar)));
+      const ess = norm2(sub(y_hat, scale(ones3, y_bar)));
+      const rss = e2;
+      const r2 = tss > 1e-8 ? ess / tss : 0;
+
+      // Model 0 vs Model 1
+      const rss0 = norm2(e_hat_0);
+      const dy_hat = sub(y_hat, y_hat_0);
+      const dy_len2 = norm2(dy_hat);
+
+      return {
+        beta_hat, y_hat, e_hat,
+        y_hat_0, e_hat_0, dy_hat, dy_len2,
+        y2, yh2, e2, tss, ess, rss, r2, rss0
+      };
+    }
+
+    function updateMetrics() {
+      const res = computeOLS();
+      document.getElementById('m-y2').textContent = res.y2.toFixed(3);
+      document.getElementById('m-yh2').textContent = res.yh2.toFixed(3);
+      document.getElementById('m-e2').textContent = res.e2.toFixed(3);
+      document.getElementById('m-pyth').textContent = Math.abs(res.y2 - (res.yh2 + res.e2)).toFixed(5) + " (Exact)";
+      document.getElementById('m-tss').textContent = res.tss.toFixed(3);
+      document.getElementById('m-ess').textContent = res.ess.toFixed(3);
+      document.getElementById('m-r2').textContent = res.r2.toFixed(4);
+
+      if (currentMode === 'param') {
+        const b0 = parseFloat(slB0.value);
+        const b1 = parseFloat(slB1.value);
+        const z = add(scale(ones3, b0), scale(x_vec, b1));
+        const s_val = norm2(sub(y_vec, z));
+        valSbeta.textContent = s_val.toFixed(3);
+      }
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      document.getElementById('btn-mode-single').classList.toggle('active', mode === 'single');
+      document.getElementById('btn-mode-nested').classList.toggle('active', mode === 'nested');
+      document.getElementById('btn-mode-param').classList.toggle('active', mode === 'param');
+
+      controlsParam.style.display = (mode === 'param') ? 'block' : 'none';
+      controlsY.style.display = (mode === 'param') ? 'none' : 'block';
+
+      if (mode === 'single') {
+        cardTitle.textContent = '① 기본 직교사영 (Grand Equivalence)';
+        formulaMain.className = 'formula-box';
+        formulaMain.innerHTML = `
+          $\hat{y} = P_X y \in \mathcal{C}(X)$<br>
+          $\hat{e} = M_X y = y - \hat{y} \perp \mathcal{C}(X)$<br>
+          <strong>정상방정식:</strong> $X'\\hat{e} = \\begin{pmatrix} \\mathbf{1}'\\hat{e} \\\\ x'\\hat{e} \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix}$
+        `;
+      } else if (mode === 'nested') {
+        cardTitle.textContent = '② 변수 추가 & 피타고라스 분해';
+        formulaMain.className = 'formula-box gold';
+        formulaMain.innerHTML = `
+          $\mathcal{C}(X_0) \\subset \mathcal{C}(X_1) \\quad (\\text{직선} \\subset \\text{평면})$<br>
+          <strong>피타고라스 분해:</strong><br>
+          $\\|\\hat{e}_0\\|^2 = \\|\\hat{e}_1\\|^2 + \\|\\hat{y}_1 - \\hat{y}_0\\|^2$<br>
+          $14/3 = 8/3 + 2 \\iff 4.667 = 2.667 + 2.000$<br>
+          $RSS_0 = RSS_1 + \\Delta ESS \\implies R_1^2 = 3/7$
+        `;
+      } else if (mode === 'param') {
+        cardTitle.textContent = '③ 모수공간 좌표 탐색';
+        formulaMain.className = 'formula-box rust';
+        formulaMain.innerHTML = `
+          점 $z(\\beta) = \\beta_0 \\mathbf{1} + \\beta_1 x \\in \\mathcal{C}(X)$<br>
+          잔차제곱합 $S(\\beta) = \\|y - z(\\beta)\\|^2$<br>
+          최적해 $\\hat{\\beta} = (7/3, 1)^T$에서 최소값 $S(\\hat{\\beta}) = 8/3$
+        `;
+      }
+      updateMetrics();
+      draw();
+    }
+
+    function setPreset(azDeg, elDeg) {
+      camera.az = azDeg * Math.PI / 180;
+      camera.el = elDeg * Math.PI / 180;
+      updateCameraTag();
+      draw();
+    }
+
+    function resetCamera() {
+      setPreset(-40, 22);
+      camera.zoom = 1.0;
+      updateCameraTag();
+      draw();
+    }
+
+    function updateCameraTag() {
+      const azD = (camera.az * 180 / Math.PI).toFixed(1);
+      const elD = (camera.el * 180 / Math.PI).toFixed(1);
+      camTag.textContent = `Az: ${azD}° | El: ${elD}° | Zoom: ${camera.zoom.toFixed(2)}×`;
+    }
+
+    // 3D Engine Projection Math
+    function project3D(pt, w, h) {
+      // Relative to camera target
+      const p = [pt[0] - camera.target[0], pt[1] - camera.target[1], pt[2] - camera.target[2]];
+
+      const cosAz = Math.cos(camera.az), sinAz = Math.sin(camera.az);
+      const cosEl = Math.cos(camera.el), sinEl = Math.sin(camera.el);
+
+      // Camera orientation axes:
+      // Right vector: [cosAz, sinAz, 0]
+      // Up vector: [-sinAz*sinEl, cosAz*sinEl, cosEl]
+      // Depth vector: [sinAz*cosEl, -cosAz*cosEl, sinEl]
+      const xCam = p[0] * cosAz + p[1] * sinAz;
+      const yCam = -p[0] * sinAz * sinEl + p[1] * cosAz * sinEl + p[2] * cosEl;
+      const zCam = p[0] * sinAz * cosEl - p[1] * cosAz * cosEl + p[2] * sinEl;
+
+      const d = camera.dist;
+      // Subtle perspective factor
+      const f = (d / (d - zCam * 0.7)) * camera.zoom;
+      const baseScale = Math.min(w, h) * 0.17;
+
+      const screenX = w / 2 + xCam * baseScale * f;
+      const screenY = h / 2 - yCam * baseScale * f;
+
+      return { x: screenX, y: screenY, z: zCam, scale: f };
+    }
+
+    // Canvas Resizing
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.resetTransform();
+      ctx.scale(dpr, dpr);
+      draw();
+    }
+    window.addEventListener('resize', resizeCanvas);
+
+    // Mouse & Touch Controls
+    canvas.addEventListener('mousedown', e => {
+      isDragging = true;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => isDragging = false);
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastMouseX;
+      const dy = e.clientY - lastMouseY;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+
+      camera.az += dx * 0.01;
+      camera.el -= dy * 0.01;
+
+      // Clamp elevation
+      const maxEl = 85 * Math.PI / 180;
+      const minEl = -85 * Math.PI / 180;
+      camera.el = Math.max(minEl, Math.min(maxEl, camera.el));
+
+      updateCameraTag();
+      draw();
+    });
+
+    canvas.addEventListener('wheel', e => {
+      e.preventDefault();
+      const zoomFactor = e.deltaY < 0 ? 1.06 : 0.94;
+      camera.zoom = Math.max(0.4, Math.min(3.0, camera.zoom * zoomFactor));
+      updateCameraTag();
+      draw();
+    }, { passive: false });
+
+    // Touch Support
+    let lastTouchDist = null;
+    canvas.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        lastMouseX = e.touches[0].clientX;
+        lastMouseY = e.touches[0].clientY;
+      } else if (e.touches.length === 2) {
+        lastTouchDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+      }
+    });
+    canvas.addEventListener('touchmove', e => {
+      if (e.touches.length === 1 && isDragging) {
+        const dx = e.touches[0].clientX - lastMouseX;
+        const dy = e.touches[0].clientY - lastMouseY;
+        lastMouseX = e.touches[0].clientX;
+        lastMouseY = e.touches[0].clientY;
+
+        camera.az += dx * 0.01;
+        camera.el -= dy * 0.01;
+        const maxEl = 85 * Math.PI / 180;
+        const minEl = -85 * Math.PI / 180;
+        camera.el = Math.max(minEl, Math.min(maxEl, camera.el));
+        updateCameraTag();
+        draw();
+      } else if (e.touches.length === 2 && lastTouchDist) {
+        const dist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        camera.zoom = Math.max(0.4, Math.min(3.0, camera.zoom * (dist / lastTouchDist)));
+        lastTouchDist = dist;
+        updateCameraTag();
+        draw();
+      }
+    });
+    canvas.addEventListener('touchend', () => { isDragging = false; lastTouchDist = null; });
+
+    // Slider Listeners
+    slY3.addEventListener('input', () => {
+      y_vec[2] = parseFloat(slY3.value);
+      valY3.textContent = y_vec[2].toFixed(1);
+      updateMetrics();
+      draw();
+    });
+    slB0.addEventListener('input', () => {
+      paramB0 = parseFloat(slB0.value);
+      valB0.textContent = paramB0.toFixed(2);
+      updateMetrics();
+      draw();
+    });
+    slB1.addEventListener('input', () => {
+      paramB1 = parseFloat(slB1.value);
+      valB1.textContent = paramB1.toFixed(2);
+      updateMetrics();
+      draw();
+    });
+
+    // Drawing Functions
+    function draw() {
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Background gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+      bgGrad.addColorStop(0, '#fdfcf9');
+      bgGrad.addColorStop(1, '#f5f2eb');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      const renderQueue = [];
+
+      // 1. Coordinate Axes Box & Ticks
+      const xLim = [-1.5, 3.5];
+      const yLim = [-1.0, 3.5];
+      const zLim = [-0.5, 4.8];
+
+      // Origin
+      const O = [0, 0, 0];
+      const pO = project3D(O, w, h);
+
+      // Main Axes
+      const axX = [xLim[1], 0, 0];
+      const axY = [0, yLim[1], 0];
+      const axZ = [0, 0, zLim[1]];
+
+      renderQueue.push({
+        type: 'axes',
+        z: pO.z,
+        draw: () => {
+          // Axis lines from origin
+          const pX = project3D(axX, w, h);
+          const pY = project3D(axY, w, h);
+          const pZ = project3D(axZ, w, h);
+
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = '#9ca3af';
+
+          // X axis (Obs 1)
+          ctx.beginPath(); ctx.moveTo(pO.x, pO.y); ctx.lineTo(pX.x, pX.y); ctx.stroke();
+          // Y axis (Obs 2)
+          ctx.beginPath(); ctx.moveTo(pO.x, pO.y); ctx.lineTo(pY.x, pY.y); ctx.stroke();
+          // Z axis (Obs 3)
+          ctx.beginPath(); ctx.moveTo(pO.x, pO.y); ctx.lineTo(pZ.x, pZ.y); ctx.stroke();
+
+          // Axis Labels
+          drawPillLabel(pX.x + 8, pX.y + 4, 'Obs 1 (y₁)', '#4b5563');
+          drawPillLabel(pY.x + 8, pY.y + 4, 'Obs 2 (y₂)', '#4b5563');
+          drawPillLabel(pZ.x, pZ.y - 12, 'Obs 3 (y₃)', '#4b5563');
+        }
+      });
+
+      // 2. Subspace Plane C(X): u*1 + v*x
+      // Meshgrid of plane quads
+      const uSteps = 8;
+      const vSteps = 8;
+      const uRange = [-0.6, 3.6];
+      const vRange = [-2.2, 2.2];
+
+      for (let i = 0; i < uSteps; i++) {
+        for (let j = 0; j < vSteps; j++) {
+          const u0 = uRange[0] + (uRange[1] - uRange[0]) * (i / uSteps);
+          const u1 = uRange[0] + (uRange[1] - uRange[0]) * ((i + 1) / uSteps);
+          const v0 = vRange[0] + (vRange[1] - vRange[0]) * (j / vSteps);
+          const v1 = vRange[0] + (vRange[1] - vRange[0]) * ((j + 1) / vSteps);
+
+          const q00 = add(scale(ones3, u0), scale(x_vec, v0));
+          const q10 = add(scale(ones3, u1), scale(x_vec, v0));
+          const q11 = add(scale(ones3, u1), scale(x_vec, v1));
+          const q01 = add(scale(ones3, u0), scale(x_vec, v1));
+
+          const center = scale(add(add(q00, q10), add(q11, q01)), 0.25);
+          const pCenter = project3D(center, w, h);
+
+          renderQueue.push({
+            type: 'plane_quad',
+            z: pCenter.z,
+            draw: () => {
+              const p00 = project3D(q00, w, h);
+              const p10 = project3D(q10, w, h);
+              const p11 = project3D(q11, w, h);
+              const p01 = project3D(q01, w, h);
+
+              ctx.beginPath();
+              ctx.moveTo(p00.x, p00.y);
+              ctx.lineTo(p10.x, p10.y);
+              ctx.lineTo(p11.x, p11.y);
+              ctx.lineTo(p01.x, p01.y);
+              ctx.closePath();
+
+              ctx.fillStyle = 'rgba(22, 98, 88, 0.12)';
+              ctx.fill();
+              ctx.strokeStyle = 'rgba(22, 98, 88, 0.22)';
+              ctx.lineWidth = 0.75;
+              ctx.stroke();
+            }
+          });
+        }
+      }
+
+      // Plane Label
+      const pPlaneLbl = project3D([-0.6, 2.2, 2.8], w, h);
+      renderQueue.push({
+        type: 'label',
+        z: pPlaneLbl.z,
+        draw: () => {
+          drawPillLabel(pPlaneLbl.x, pPlaneLbl.y, 'C(X) = span{1, x}', '#166258', '#e6f1ef', true);
+        }
+      });
+
+      // 3. Basis vectors: 1 and x
+      const p1 = project3D(ones3, w, h);
+      const px = project3D(x_vec, w, h);
+
+      renderQueue.push({
+        type: 'vector',
+        z: p1.z,
+        draw: () => {
+          drawArrow3D(pO, p1, '#6b7280', 2.0);
+          drawPillLabel(p1.x + 12, p1.y + 4, '1 = (1,1,1)ᵀ', '#4b5563');
+        }
+      });
+      renderQueue.push({
+        type: 'vector',
+        z: px.z,
+        draw: () => {
+          drawArrow3D(pO, px, '#6b7280', 2.0);
+          drawPillLabel(px.x - 30, px.y + 8, 'x = (-1,0,1)ᵀ', '#4b5563');
+        }
+      });
+
+      // 4. OLS Computed Points
+      const res = computeOLS();
+      const pY = project3D(y_vec, w, h);
+      const pYhat = project3D(res.y_hat, w, h);
+      const pYhat0 = project3D(res.y_hat_0, w, h);
+
+      // In Mode 2: Nested Subspace Line C(X_0) = span{1}
+      if (currentMode === 'nested') {
+        const lineStart = scale(ones3, -0.5);
+        const lineEnd = scale(ones3, 3.6);
+        const pLineS = project3D(lineStart, w, h);
+        const pLineE = project3D(lineEnd, w, h);
+
+        renderQueue.push({
+          type: 'line1d',
+          z: (pLineS.z + pLineE.z) / 2,
+          draw: () => {
+            ctx.beginPath();
+            ctx.moveTo(pLineS.x, pLineS.y);
+            ctx.lineTo(pLineE.x, pLineE.y);
+            ctx.strokeStyle = '#b37e19';
+            ctx.lineWidth = 3.5;
+            ctx.stroke();
+
+            const pMid = project3D([0.5, 0.5, 0.7], w, h);
+            drawPillLabel(pMid.x + 10, pMid.y, 'C(X₀) = span{1}', '#b37e19', '#fbf4e4', true);
+          }
+        });
+
+        // Vector y_hat_0
+        renderQueue.push({
+          type: 'vector',
+          z: pYhat0.z,
+          draw: () => {
+            drawArrow3D(pO, pYhat0, '#b37e19', 3.0);
+            drawPillLabel(pYhat0.x + 15, pYhat0.y + 12, 'ŷ₀ = P₁y = (ȳ,ȳ,ȳ)ᵀ', '#b37e19');
+          }
+        });
+
+        // Hypotenuse e_hat_0 (dashed line from y_hat_0 to y)
+        renderQueue.push({
+          type: 'hypotenuse',
+          z: (pYhat0.z + pY.z) / 2,
+          draw: () => {
+            ctx.save();
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = '#b37e19';
+            ctx.lineWidth = 2.4;
+            ctx.beginPath();
+            ctx.moveTo(pYhat0.x, pYhat0.y);
+            ctx.lineTo(pY.x, pY.y);
+            ctx.stroke();
+            ctx.restore();
+
+            const pHypMid = project3D(scale(add(res.y_hat_0, y_vec), 0.5), w, h);
+            drawPillLabel(pHypMid.x + 14, pHypMid.y + 4, '||ê₀||² = 14/3', '#b37e19', '#ffffff');
+          }
+        });
+
+        // Shift vector from y_hat_0 to y_hat_1
+        renderQueue.push({
+          type: 'vector',
+          z: (pYhat0.z + pYhat.z) / 2,
+          draw: () => {
+            drawArrow3D(pYhat0, pYhat, '#166258', 2.6);
+            const pDiffMid = project3D(scale(add(res.y_hat_0, res.y_hat), 0.5), w, h);
+            drawPillLabel(pDiffMid.x - 20, pDiffMid.y + 8, 'ŷ₁ - ŷ₀', '#166258');
+          }
+        });
+      }
+
+      // Main Vector y
+      renderQueue.push({
+        type: 'vector',
+        z: pY.z,
+        draw: () => {
+          drawArrow3D(pO, pY, '#1b2838', 3.2);
+          drawPillLabel(pY.x + 10, pY.y - 12, `y = (${y_vec[0]}, ${y_vec[1]}, ${y_vec[2].toFixed(1)})ᵀ`, '#1b2838', '#ffffff', true);
+        }
+      });
+
+      // Projection Vector y_hat
+      renderQueue.push({
+        type: 'vector',
+        z: pYhat.z,
+        draw: () => {
+          drawArrow3D(pO, pYhat, '#166258', 3.2);
+          const lblText = (currentMode === 'nested') ? 'ŷ₁ = P_X y' : 'ŷ = P_X y = (4/3, 7/3, 10/3)ᵀ';
+          drawPillLabel(pYhat.x - 30, pYhat.y - 14, lblText, '#166258', '#e6f1ef', true);
+        }
+      });
+
+      // Residual Vector e_hat (from y_hat to y)
+      renderQueue.push({
+        type: 'vector',
+        z: (pYhat.z + pY.z) / 2,
+        draw: () => {
+          drawArrow3D(pYhat, pY, '#b34728', 3.0);
+          const pMid = project3D(scale(add(res.y_hat, y_vec), 0.5), w, h);
+          const lbl = (currentMode === 'nested') ? '||ê₁||² = 8/3' : 'ê ⊥ C(X)';
+          drawPillLabel(pMid.x - 12, pMid.y - 14, lbl, '#b34728', '#fbf2ef', true);
+        }
+      });
+
+      // 3D Right Angle Square at y_hat
+      renderQueue.push({
+        type: 'square',
+        z: pYhat.z,
+        draw: () => {
+          drawRightAngleSquare(res.y_hat, res.e_hat, res.y_hat, w, h);
+        }
+      });
+
+      // In Mode 3: Candidate point z(beta)
+      if (currentMode === 'param') {
+        const zPt = add(scale(ones3, paramB0), scale(x_vec, paramB1));
+        const pZ = project3D(zPt, w, h);
+
+        renderQueue.push({
+          type: 'candidate',
+          z: pZ.z,
+          draw: () => {
+            // Line from y to zPt
+            ctx.save();
+            ctx.setLineDash([4, 4]);
+            ctx.strokeStyle = '#b34728';
+            ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            ctx.moveTo(pZ.x, pZ.y);
+            ctx.lineTo(pY.x, pY.y);
+            ctx.stroke();
+            ctx.restore();
+
+            // Point on plane
+            ctx.beginPath();
+            ctx.arc(pZ.x, pZ.y, 6, 0, Math.PI * 2);
+            ctx.fillStyle = '#b34728';
+            ctx.fill();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#fff';
+            ctx.stroke();
+
+            drawPillLabel(pZ.x + 8, pZ.y + 12, `z(β) = Xβ`, '#b34728', '#ffffff', true);
+          }
+        });
+      }
+
+      // Sort render queue by camera depth z (Painter's Algorithm)
+      renderQueue.sort((a, b) => a.z - b.z);
+
+      // Execute draw routines
+      renderQueue.forEach(item => item.draw());
+    }
+
+    // Helper: Draw 3D Arrow
+    function drawArrow3D(pFrom, pTo, color, lineWidth) {
+      ctx.beginPath();
+      ctx.moveTo(pFrom.x, pFrom.y);
+      ctx.lineTo(pTo.x, pTo.y);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+
+      // Arrowhead
+      const angle = Math.atan2(pTo.y - pFrom.y, pTo.x - pFrom.x);
+      const headLen = Math.min(14, Math.hypot(pTo.x - pFrom.x, pTo.y - pFrom.y) * 0.25);
+
+      ctx.beginPath();
+      ctx.moveTo(pTo.x, pTo.y);
+      ctx.lineTo(pTo.x - headLen * Math.cos(angle - Math.PI / 6), pTo.y - headLen * Math.sin(angle - Math.PI / 6));
+      ctx.lineTo(pTo.x - headLen * Math.cos(angle + Math.PI / 6), pTo.y - headLen * Math.sin(angle + Math.PI / 6));
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+
+    // Helper: Draw 3D Right-Angle Square
+    function drawRightAngleSquare(basePt, dirV1, dirV2, w, h) {
+      const s = 0.32;
+      const u1 = scale(dirV1, 1 / norm(dirV1));
+      const u2 = scale(dirV2, -1 / norm(dirV2)); // towards origin
+
+      const pt1 = add(basePt, scale(u2, s));
+      const pt2 = add(pt1, scale(u1, s));
+      const pt3 = add(basePt, scale(u1, s));
+
+      const p0 = project3D(basePt, w, h);
+      const p1 = project3D(pt1, w, h);
+      const p2 = project3D(pt2, w, h);
+      const p3 = project3D(pt3, w, h);
+
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+      ctx.lineTo(p3.x, p3.y);
+      ctx.strokeStyle = '#b34728';
+      ctx.lineWidth = 1.6;
+      ctx.stroke();
+    }
+
+    // Helper: Pill Label
+    function drawPillLabel(x, y, text, textColor, bgColor = 'rgba(255, 255, 255, 0.90)', border = false) {
+      ctx.font = '500 11px system-ui, sans-serif';
+      const metrics = ctx.measureText(text);
+      const padX = 5, padY = 2;
+      const textW = metrics.width;
+      const textH = 12;
+
+      ctx.fillStyle = bgColor;
+      ctx.beginPath();
+      ctx.roundRect(x - padX, y - textH + 2 - padY, textW + padX * 2, textH + padY * 2, 3);
+      ctx.fill();
+
+      if (border) {
+        ctx.strokeStyle = textColor;
+        ctx.lineWidth = 0.75;
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = textColor;
+      ctx.fillText(text, x, y);
+    }
+
+    // Initialize
+    updateMetrics();
+    resizeCanvas();
+  </script>
+</body>
+</html>
