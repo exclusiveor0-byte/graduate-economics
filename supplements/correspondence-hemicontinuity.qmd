@@ -5,98 +5,137 @@ description: "개집합 포섭 조건과 수열 수렴 조건을 직관적으로
 
 ## 목적
 
-미시경제이론에서는 최적해나 균형이 유일하지 않은 경우가 흔하므로 함수 대신 집합값 사상인
-**대응(correspondence)**을 기본 도구로 사용합니다. 이때 모수 변화에 따른 해의 안정성과
-존재성을 보장하기 위해 일반적인 연속성 대신 **상반연속(Upper Hemicontinuity, UHC)**과
-**하반연속(Lower Hemicontinuity, LHC)**을 구분하여 다룹니다.
+미시경제이론에서는 최적해나 시장 균형이 유일하지 않은 경우가 일반적이므로, 함수(function) 대신 집합값 사상(set-valued mapping)인 **대응(correspondence)**을 기본적인 분석 도구로 사용합니다. 이때 외생 모수 변화에 따른 해의 연속적 거동과 균형 존재성을 증명하기 위해, 일반적인 위상적 연속성 개념을 **상반연속(Upper Hemicontinuity, UHC)**과 **하반연속(Lower Hemicontinuity, LHC)**의 두 축으로 분해하여 다룹니다.
 
-이 보충자료는 점프와 비콤팩트 치역을 가진 대표적인 대응 프리셋들을 통해 UHC의 개집합 포섭 조건,
-LHC의 수열 접근 조건, 그리고 닫힌 그래프(closed graph)와의 관계를 대화형으로 시각화합니다.
+이 보충자료는 대학원 미시경제학의 표준 문헌(Mas-Colell, Whinston, and Green; Sundaram; Ok)에서 다루는 대표적인 대응 프리셋들을 통해 다음을 상호작용적으로 탐색할 수 있도록 설계되었습니다.
 
-관련 본문은 [0.5 함수와 대응](../microeconomics/ch00-foundations/05-functions-correspondences.qmd)과
-[0.8 모수화된 최적화, Berge 최대정리, Envelope 정리](../microeconomics/ch00-foundations/08-parameterized-optimization.qmd)입니다.
+1. **UHC의 개집합 포섭 조건 ($F(x) \subseteq V$)**: 파이버의 국소 외측 폭발(outer explosion) 억제 메커니즘
+2. **LHC의 수열적 접근성 ($\exists y_k \in F(x_k) \text{ s.t. } y_k \to y_0$)**: 실행가능한 선택지의 국소 내측 소멸(inner collapse/evaporation) 방지 메커니즘
+3. **닫힌 그래프(Closed Graph)와 콤팩트 치역(Compact-Valuedness)의 상호작용**: 공역의 콤팩트성 또는 국소 유계성 부재 시 발생하는 반례 검증
+4. **미시경제학 2대 핵심 정리(Berge 최대정리, Kakutani 부동점 정리)에 미치는 파급효과**
+
+관련 본문은 [0.5 함수와 대응](../microeconomics/ch00-foundations/05-functions-correspondences.qmd)과 [0.8 모수화된 최적화, Berge 최대정리, Envelope 정리](../microeconomics/ch00-foundations/08-parameterized-optimization.qmd)입니다.
 
 ## 조작 도구
 
 <iframe class="interactive-frame" title="대응의 반연속성과 닫힌 그래프 탐색 도구" src="interactive/correspondence-hemicontinuity/index.html" loading="lazy"></iframe>
 
-### 조작 도구 읽는 법
+### 조작 도구 읽는 법 및 실험 가이드
 
-- **대표 대응 프리셋 (A~E)**:
-  - **A. 연속 대응**: $F(x) = [x/3, 1 - x/3]$ — 모든 점에서 콤팩트 볼록 집합이며 UHC와 LHC를 모두 충족합니다.
-  - **B. 확장 점프**: $x=0$에서 갑자기 $[0, 1]$로 확장 — $F(x') \subseteq V$이므로 **UHC는 만족**하지만, $y=1$로 접근하는 수열이 존재하지 않아 **LHC는 위반**됩니다.
-  - **C. 수축 점프**: $x=0$에서 갑자기 $\{0\}$으로 수축 — 0 근방에서 $F(x')=[0,1]$이 개근방 $V$를 탈출하므로 **UHC는 위반**되지만, 0을 만나는 개근방은 항상 교차하므로 **LHC는 만족**합니다.
-  - **D. 비콤팩트 치역**: $F(0)=\{0\}, F(x)=\{1/|x|\} \; (x \ne 0)$ — 그래프는 닫혀 있으나(closed graph), 치역이 비콤팩트하여 $x \to 0$일 때 무한대로 발산하므로 **UHC가 성립하지 않는** 표준 반례입니다.
-  - **E. 예산 대응**: $B(p) = [0, w/p] \; (p > 0)$ — 소비자 이론의 예산집합 단면으로, 양의 가격 영역에서 연속(UHC + LHC)임을 확인합니다.
-- **검증 모드 전환**:
-  - **UHC 검증 모드**: $F(x_0)$를 감싸는 개집합 $V = (F_{\min} - \varepsilon, F_{\max} + \varepsilon)$의 띠(band)를 표시하고, 근방의 점 $x'$에서의 값집합 $F(x')$가 $V$ 안에 온전히 포섭되는지 검증합니다.
-  - **LHC 검증 모드**: $F(x_0)$ 안의 임의의 목표점 $y_0$를 설정하고, $x_k \to x_0$로 다가갈 때 $F(x_k)$ 안에서 $y_0$로 수렴하는 점 $y_k$를 찾을 수 있는지(거리 $|y_k - y_0| \to 0$) 확인합니다.
-- **위상적 성질 배지**:
-  - 비공집합, 콤팩트값, 볼록값, 닫힌 그래프, UHC, LHC, 정리 적용 가능 여부 등 8개 항목의 성립 여부를 실시간으로 판정합니다.
+이 대화형 도구는 단순한 값 변경기가 아니라, 위상수학적 정의의 논리적 구조(한칭 기호 $\forall, \exists$)를 기하학적 파이버(fiber) 조작으로 직접 시험하도록 구성되어 있습니다.
 
-## 위상수학적 정의와 핵심 직관
+#### 1. 핵심 조작부: 모수 탐색 프로브 $x$ (Parameter Probe)
+- **왜 $x$를 조작하는가?**  
+  대응의 반연속성은 특정 기준점 $x_0$에서의 국소적 성질입니다. 슬라이더 $x$를 조작하는 것은 기준 특이점 $x_0(=0)$ 근방의 임의의 점 $x$를 취하거나, 수열 $x_k \to x_0$의 점진적 극한 과정을 모사(scrubbing)하는 것입니다.
+- **파이버 $F(x)$의 실시간 관찰**:  
+  보라색 세로선은 기준 파이버 $F(x_0)$이며, 주황색/녹색/적색 세로선은 현재 프로브 $x$에서의 파이버 $F(x)$입니다.
 
-대응 $F: X \rightrightarrows Y$에 대해 정의역 $X$와 공역 $Y$가 거리공간(또는 위상공간)일 때 다음 두 연속성 개념을 구별합니다.
+#### 2. 검증 모드별 위상수학적 해석
+- **UHC 검증 모드 (개집합 포섭 판정)**:
+  - **슬라이더 $\varepsilon$ (근방 반경)**: $F(x_0)$를 포함하는 임의의 열린 개집합 $V = (\min F(x_0) - \varepsilon, \max F(x_0) + \varepsilon)$를 지정합니다.
+  - **직적 안전 상자 $U \times V$**: UHC 정의($\exists U \ni x_0 \text{ s.t. } F(U) \subseteq V$)에 따라, $F(x) \subseteq V$를 만족하는 정의역 근방 $U = (x_0 - \delta^*, x_0 + \delta^*)$와의 직적 상자가 연녹색으로 표시됩니다.
+  - **동적 판정**: 프로브 $x$를 움직였을 때, $F(x)$가 상자 내에 온전히 머물면 **녹색(포섭 성공: $F(x) \subseteq V$)**, 상자 밖으로 돌출되면 **적색(외측 폭발 발생: $F(x) \not\subseteq V$)**으로 즉각 전환됩니다.
+- **LHC 검증 모드 (수열적 접근성 판정)**:
+  - **슬라이더 $y_0$ (기준 선택원소)**: $x_0$에서 선택 가능한 임의의 원소 $y_0 \in F(x_0)$를 지정합니다 ($\forall y_0 \in F(x_0)$ 조건 시험).
+  - **최단 투영점 $y^*(x)$ 및 궤적 추적**: 프로브 $x$가 $x_0$로 다가갈 때, 파이버 $F(x)$ 내에서 $y_0$와 가장 가까운 원소 $y^*(x) = \arg\min_{y \in F(x)} |y - y_0|$와의 연결선과 유클리드 거리 $d(y_0, F(x))$를 실시간 계산합니다.
+  - **동적 판정**: $x \to x_0$일 때 거리 $d(y_0, F(x)) \to 0$으로 연속 수렴하면 **경로 확보(LHC 만족)**, 반면 $x \ne x_0$에서 파이버가 급축소되어 $d(y_0, F(x)) > 0$으로 단절되면 **경로 단절(내측 소멸 발생, LHC 위반)**로 판정됩니다.
+
+#### 3. 5대 대표 대응 프리셋
+- **A. 양측 연속 (UHC & LHC)**: $F(x) = [x/3, 1 - x/3]$  
+  모든 점에서 콤팩트 볼록 집합이며, 상·하한 경계 함수가 연속이므로 UHC와 LHC를 완벽히 동시 만족합니다.
+- **B. UHC 만족 / LHC 위반 (내측 수축)**: $F(0) = [0, 1], \; F(x) = \{0\} \; (x \ne 0)$  
+  $F(0)$를 감싸는 임의의 $V$는 0을 포함하므로 모든 $x \ne 0$에서 $F(x)=\{0\} \subset V$가 되어 **UHC를 만족**합니다 (외측 폭발 없음). 그러나 $y_0 = 0.85$를 잡으면 $x \ne 0$에서 $F(x)$ 내에 $0.85$로 다가갈 수 있는 원소가 전무하여 거리 $d = 0.85$로 단절되므로 **LHC를 위반**합니다 (내측 선택지 증발).
+- **C. LHC 만족 / UHC 위반 (외측 폭발)**: $F(0) = \{0\}, \; F(x) = [0, 1] \; (x \ne 0)$  
+  $F(0)=\{0\}$의 임의의 작은 근방 $V = (-\varepsilon, \varepsilon)$에 대해 $x \ne 0$인 모든 점에서 $F(x)=[0,1] \not\subseteq V$가 되어 값집합이 $V$ 바깥으로 폭발하므로 **UHC를 위반**합니다. 반면 $y_0 = 0$에 대해 $x \ne 0$에서도 항상 $0 \in F(x)$이므로 $y^*(x) = 0 \to 0$이 되어 **LHC는 만족**합니다.
+- **D. 닫힌 그래프 / UHC 위반 (비콤팩트 치역)**: $F(0) = \{0\}, \; F(x) = \{1/|x|\} \; (x \ne 0)$  
+  수열 $(1/k, k)$는 그래프에 속하나 극한이 $\mathbb{R}^2$에 없어 그래프 자체는 닫혀 있습니다($\operatorname{gph}(F)$ is closed). 그러나 치역이 비콤팩트하여 $x \to 0$일 때 무한대로 발산하므로 $F(0)=\{0\}$의 임의의 유계 근방 $V$를 벗어나 **UHC가 성립하지 않는** 대학원 미시경제학의 표준 반례입니다.
+- **E. 예산 대응 $B(p)$ (소비자 이론)**: $B(p) = [0, w/p] \; (w=2, p > 0)$  
+  양의 가격 영역 $p \gg 0$에서 연속(UHC + LHC)이며, Berge 최대정리를 통해 간접효용함수의 연속성과 마샬 수요의 상반연속성을 유도하는 경제학적 핵심 대응입니다.
+
+## 위상수학적 정의와 체계적 비교
+
+위상공간 $X, Y$ 사이의 대응 $F: X \rightrightarrows Y$에 대해, $F$의 상·하 역상(upper and lower inverse images)은 다음과 같이 정의됩니다.
+
+$$
+F^+(V) \equiv \{x \in X \mid F(x) \subseteq V\}, \qquad F^-(V) \equiv \{x \in X \mid F(x) \cap V \ne \varnothing\}.
+$$
 
 ### 1. 상반연속 (Upper Hemicontinuity, UHC)
 
-$F$가 $x_0 \in X$에서 **상반연속**이라는 것은, $F(x_0)$를 포함하는 임의의 열린 집합 $V \subseteq Y$에 대해 $x_0$의 어떤 열린 근방 $U \subseteq X$가 존재하여 다음이 성립하는 것입니다.
+대응 $F$가 $x_0 \in X$에서 **상반연속**이라는 것은, $F(x_0)$를 포함하는 임의의 열린 집합 $V \subseteq Y$에 대해 $x_0$의 어떤 열린 근방 $U \subseteq X$가 존재하여 다음이 성립하는 것입니다.
 
 $$
-\forall x' \in U \quad \Longrightarrow \quad F(x') \subseteq V.
+\forall x \in U \quad \Longrightarrow \quad F(x) \subseteq V \quad \Longleftrightarrow \quad U \subseteq F^+(V).
 $$
 
-- **직관**: 외생변수 $x$가 미세하게 변하더라도, 값집합 $F(x')$가 기존의 $F(x_0)$ 바깥으로 **갑자기 튀어나가거나 폭발(explosion)하지 않는** 성질입니다.
-- **수축은 허용, 폭발은 불허**: $F(x_0)$가 컸다가 주변에서 작아지는 것(프리셋 B)은 UHC를 만족하지만, $F(x_0)$가 작았는데 주변에서 갑자기 커지는 것(프리셋 C)은 UHC를 위반합니다.
+- **위상적 직관**: 모수 $x$가 $x_0$ 근방에서 섭동(perturbation)될 때, 값집합 $F(x)$가 기존의 $F(x_0)$ 바깥으로 **갑자기 팽창하거나 폭발(outer explosion)하지 않는** 성질입니다.
+- **수축의 허용**: $F(x_0)$가 컸다가 주변에서 급격히 축소되는 현상(프리셋 B)은 UHC의 정의를 훼손하지 않습니다. 반면 $F(x_0)$가 작았다가 주변에서 갑자기 커지는 현상(프리셋 C)은 작은 개근방 $V$를 벗어나므로 UHC를 위반합니다.
+- **수열적 특성화 (콤팩트 치역 하)**: $F$가 콤팩트값을 가질 때, $F$가 $x_0$에서 UHC인 것은 다음 조건과 동치입니다.
+  $$
+  x_k \to x_0, \; y_k \in F(x_k) \quad \Longrightarrow \quad \{y_k\}\text{는 } F(x_0)\text{의 어떤 원소로 수렴하는 부분수열을 가진다.}
+  $$
 
 ### 2. 하반연속 (Lower Hemicontinuity, LHC)
 
-$F$가 $x_0 \in X$에서 **하반연속**이라는 것은, $F(x_0)$와 교차하는($F(x_0) \cap V \ne \varnothing$) 임의의 열린 집합 $V \subseteq Y$에 대해 $x_0$의 어떤 열린 근방 $U \subseteq X$가 존재하여 다음이 성립하는 것입니다.
+대응 $F$가 $x_0 \in X$에서 **하반연속**이라는 것은, $F(x_0)$와 교차하는($F(x_0) \cap V \ne \varnothing$) 임의의 열린 집합 $V \subseteq Y$에 대해 $x_0$의 어떤 열린 근방 $U \subseteq X$가 존재하여 다음이 성립하는 것입니다.
 
 $$
-\forall x' \in U \quad \Longrightarrow \quad F(x') \cap V \ne \varnothing.
+\forall x \in U \quad \Longrightarrow \quad F(x) \cap V \ne \varnothing \quad \Longleftrightarrow \quad U \subseteq F^-(V).
 $$
 
-거리공간에서는 다음의 동치인 **수열 판정법**이 특히 직관적입니다.
+- **거리공간에서의 수열 판정법 (Sequential Characterization)**:
+  $X, Y$가 거리공간일 때, $F$가 $x_0$에서 LHC인 것은 다음 조건과 동치입니다.
+  $$
+  x_k \to x_0 \quad \text{and} \quad y_0 \in F(x_0) \quad \Longrightarrow \quad \exists y_k \in F(x_k) \text{ s.t. } y_k \to y_0.
+  $$
+- **위상적 직관**: 기준점 $x_0$에서 선택 가능했던 임의의 원소 $y_0 \in F(x_0)$에 대해, 모수가 $x \to x_0$로 다가갈 때 그 원소로 점진적으로 접근할 수 있는 선택지 경로가 **내측에서 급작스럽게 소멸(inner collapse/evaporation)하지 않는** 성질입니다.
+- **팽창의 허용**: 주변에서 파이버가 갑자기 커지는 현상(프리셋 C)은 기존 원소 $y_0$로의 접근 경로를 차단하지 않으므로 LHC를 만족합니다. 반면 주변에서 파이버가 급수축하여 기존 원소 $y_0$가 사라지는 현상(프리셋 B)은 LHC를 위반합니다.
 
-$$
-x_k \to x_0 \quad \text{and} \quad y_0 \in F(x_0) \quad \Longrightarrow \quad \exists y_k \in F(x_k) \text{ s.t. } y_k \to y_0.
-$$
+### 3. 닫힌 그래프 정리 (Closed Graph Theorem for Correspondences)
 
-- **직관**: 기존에 선택 가능했던 임의의 점 $y_0 \in F(x_0)$에 대해, 외생변수가 조금 변하더라도 그 점 근처로 **언제나 다가갈 수 있는 선택지 $y_k \in F(x_k)$가 갑자기 소멸(implosion)하지 않는** 성질입니다.
+대응 $F: X \rightrightarrows Y$의 그래프는 $\operatorname{gph}(F) \equiv \{(x, y) \in X \times Y \mid y \in F(x)\}$입니다.
 
-## 정적 그림
+- **그래프의 닫힘성**: 수열 $(x_k, y_k) \in \operatorname{gph}(F)$가 $(x_0, y_0)$로 수렴할 때, $y_0 \in F(x_0)$가 성립하는 성질입니다.
+- **동치 정리**: 공역 $Y$가 콤팩트하거나 $F$가 국소 유계(locally bounded)이면,
+  $$
+  F\text{가 } x_0\text{에서 닫힌값(closed-valued)을 갖고 UHC이다} \quad \Longleftrightarrow \quad \operatorname{gph}(F)\text{가 } x_0\text{에서 닫혀 있다}.
+  $$
+- **비콤팩트 공역의 경고 (프리셋 D)**: 공역이 비콤팩트하면 그래프가 닫혀 있더라도 수열 $y_k$가 무한대로 발산하여 집적점을 갖지 못할 수 있으며, 이 경우 닫힌 그래프이면서도 UHC는 성립하지 않습니다.
 
-상호작용 환경을 사용할 수 없는 환경을 위한 기준 위상 도표입니다. 좌측은 UHC의 개근방 포섭 구조를, 우측은 확장 점프에서 LHC가 위반되는 기하학적 메커니즘을 보여줍니다.
+## 정적 기준 도표
 
-![대응의 반연속성: UHC의 개근방 포섭 구조와 LHC 위반 확장 점프의 비교](../assets/images/correspondence-hemicontinuity-static.svg){.supplement-fallback fig-alt="좌측은 UHC의 개근방 포섭 구조를, 우측은 확장 점프에서 LHC가 위반되는 메커니즘을 보여주는 정적 도표"}
+<figure>
+  <img src="../assets/images/correspondence-hemicontinuity-static.svg" class="supplement-fallback" alt="대응의 반연속성: UHC의 개근방 포섭 구조와 LHC 위반 확장 점프의 비교" />
+  <figcaption>정적 도표: 좌측은 UHC의 개근방 포섭 구조($U \times V$), 우측은 프리셋 B에서 $y_0 \in F(0)$로의 접근 경로가 단절되어 LHC가 위반되는 기하학적 메커니즘을 보여줍니다.</figcaption>
+</figure>
 
 ## 미시경제학 핵심 정리와의 연결
 
-### 1. Kakutani 부동점 정리와 UHC
+대학원 미시경제학에서 반연속성이 필수적인 이유는 다음 두 정리의 성립 기반이기 때문입니다.
 
-게임이론의 Nash 균형과 일반균형이론의 Walrasian 균형 증명에 사용되는 Kakutani 부동점 정리는 다음과 같은 가정을 요구합니다.
+### 1. Berge 최대정리 (Maximum Theorem)와 제약대응의 연속성
 
-- 정의역 $S$가 공집합이 아닌 콤팩트 볼록 집합이다.
-- 대응 $F: S \rightrightarrows S$가 모든 점에서 공집합이 아닌 콤팩트 볼록 값을 가진다.
-- $F$가 **상반연속(UHC)**이다.
+모수 $\theta \in \Theta$에 의해 지배되는 최적화 문제:
+$$
+v(\theta) \equiv \max_{y \in B(\theta)} f(\theta, y), \qquad D(\theta) \equiv \arg\max_{y \in B(\theta)} f(\theta, y)
+$$
+에서 목적함수 $f: \Theta \times Y \to \mathbb{R}$가 연속이고 제약대응 $B: \Theta \rightrightarrows Y$가 공집합이 아닌 콤팩트값을 가질 때:
 
-공역 $S$ 자체가 콤팩트하므로, 본문 Proposition 0.5.2에 따라 **UHC는 닫힌 그래프($\operatorname{gph} F$ is closed)와 동치**입니다. 따라서 균형 분석에서는 최적반응대응 $BR(s)$의 그래프가 닫혀 있는지를 점검하는 것으로 충분합니다.
+- **$B(\theta)$가 연속(UHC + LHC)이면**: 가치함수 $v(\theta)$는 **연속함수**이며, 최적해 대응 $D(\theta)$는 공집합이 아닌 콤팩트값을 갖고 **상반연속(UHC)**입니다.
+- **왜 UHC와 LHC가 둘 다 필요한가?**
+  - **UHC의 역할 (상한 억제)**: $\theta_k \to \theta$일 때 실행가능집합 $B(\theta_k)$가 국소 콤팩트 집합 내에 유계로 묶이므로, $\limsup_{k \to \infty} v(\theta_k) \le v(\theta)$를 보장합니다 (가치의 상방 도약 방지). 프리셋 C처럼 UHC가 깨지면 $x \ne 0$에서 $v(x)=1$이다가 $x=0$에서 $v(0)=0$으로 추락하여 상반연속성이 파괴됩니다.
+  - **LHC의 역할 (하한 확보)**: 기존 최적해 $y^* \in D(\theta)$로 접근하는 수열 $y_k \in B(\theta_k)$의 존재성을 보장하므로, $\liminf_{k \to \infty} v(\theta_k) \ge v(\theta)$를 보장합니다 (가치의 하방 급락 방지). 프리셋 B처럼 LHC가 깨지면 $x \ne 0$에서 $v(x)=0$이다가 $x=0$에서 $v(0)=1$로 점프하여 하반연속성이 파괴됩니다.
 
-### 2. Berge 최대정리와 제약대응의 연속성
+### 2. Kakutani 부동점 정리와 균형의 존재성
 
-모수화된 최적화 문제 $\max_{x \in B(\theta)} f(x, \theta)$에서 가치함수 $v(\theta)$의 연속성과 해 대응 $D(\theta) = \operatorname{arg\,max}_{x \in B(\theta)} f(x, \theta)$의 UHC를 보장하기 위해, Berge 최대정리는 제약대응 $B(\theta)$가 **UHC와 LHC를 동시에 만족(즉 연속)**할 것을 요구합니다.
+전략형 게임의 Nash 균형과 Walrasian 일반균형의 존재성은 Kakutani 부동점 정리에 기초합니다.
 
-- **UHC의 역할**: $\theta^k \to \theta$일 때 실행가능집합들이 국소적으로 유계인 공통 콤팩트 집합 안에 머물게 하여, 해의 부분수열 수렴 $\limsup v(\theta^k) \le v(\theta)$을 보장합니다 (상한 통제).
-- **LHC의 역할**: 기존 최적해 $x^* \in D(\theta)$로 접근하는 경로 $x^k \in B(\theta^k)$를 항상 확보하여, 갑작스러운 제약 수축으로 인한 효용 급락을 방지하고 $\liminf v(\theta^k) \ge v(\theta)$를 보장합니다 (접근성 보장).
-
-### 3. 비콤팩트 공역과 닫힌 그래프의 한계
-
-공역이 콤팩트하지 않거나 국소 유계성을 만족하지 못하면, **닫힌 그래프를 갖더라도 UHC가 성립하지 않을 수 있습니다** (프리셋 D). 수열 $(x_k, y_k) = (1/k, k)$는 그래프 상에 있지만 $y_k \to \infty$로 발산하므로 $\mathbb{R}$ 안에서 수렴하지 않아 그래프의 닫힘성을 깨지 못합니다. 그러나 $x \to 0$일 때 함숫값이 무한히 발산하므로 $F(0)=\{0\}$의 임의의 유계 근방 $V$를 벗어나 UHC가 깨집니다. 이 반례는 자원 제약이나 소비집합이 비유계일 때 주의해야 하는 핵심 수학적 사실입니다.
+- **정리**: $S \subseteq \mathbb{R}^n$이 공집합이 아닌 콤팩트 볼록 집합이고, 대응 $F: S \rightrightarrows S$가 모든 점에서 공집합이 아닌 콤팩트 볼록값을 가지며 **상반연속(UHC)**이면, 부동점 $\exists s^* \in F(s^*)$가 존재합니다.
+- **경제학적 의미**: 전략공간 $S$가 콤팩트하므로, 각 경기자의 최적반응대응 $BR_i(s_{-i})$의 그래프가 닫혀 있는 것만 확인하면 UHC가 자동으로 성립합니다. 부동점 정리는 제약의 수축(LHC 위반)에는 영향을 받지 않으며, 오직 외측 폭발 방지(UHC)와 값집합의 볼록성만을 요구합니다.
 
 ## 재현과 범위
 
-- 대화형 도구: [`supplements/interactive/correspondence-hemicontinuity/index.html`](interactive/correspondence-hemicontinuity/index.html) (외부 CDN이나 서버 없이 순수 HTML, CSS, SVG, JavaScript로 동작)
+- 대화형 도구: [`supplements/interactive/correspondence-hemicontinuity/index.html`](interactive/correspondence-hemicontinuity/index.html) (외부 라이브러리 및 외부 CDN 의존성 없는 순수 독립형 HTML/SVG/ES6)
 - 정적 도표: [`assets/images/correspondence-hemicontinuity-static.svg`](../assets/images/correspondence-hemicontinuity-static.svg)
 - 메타데이터: [`assets/data/correspondence-hemicontinuity-metadata.json`](../assets/data/correspondence-hemicontinuity-metadata.json)
-- 이 자료는 1차원 정의역과 공역 상에서 반연속성의 핵심 개념을 직관적으로 검증하도록 설계되었습니다. 일반적인 다차원 위상공간에서의 엄밀한 증명은 본문 [Chapter 00 · Mathematical Foundations](../microeconomics/ch00-foundations/index.qmd)을 참조하십시오.
+- 본 자료의 수학적 증명 및 다차원 일반화는 [Chapter 00 · Mathematical Foundations](../microeconomics/ch00-foundations/index.qmd)을 참조하십시오.
