@@ -177,6 +177,7 @@ book:
     - supplements/visualization-guide.qmd
     - supplements/slutsky-decomposition.qmd
     - supplements/solow-growth.qmd
+    - supplements/ramsey-saddle-path.qmd
     - supplements/ols-geometry.qmd
     - supplements/ols-projection-geometry.qmd
     - supplements/iv-weak-instruments.qmd

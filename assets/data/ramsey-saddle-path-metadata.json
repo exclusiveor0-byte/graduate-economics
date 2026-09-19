@@ -1,0 +1,49 @@
+{
+  "title": "Ramsey-Cass-Koopmans Model Saddle Path Dynamics & Shooting Algorithm",
+  "generator": "supplements/matlab/ramsey_saddle_path.m",
+  "matlab_version": "25.2.0.3123386 (R2025b) Update 3",
+  "timestamp": "2026-09-19 18:10:26",
+  "parameters": {
+    "alpha": 0.33,
+    "theta": 2,
+    "n": 0.01,
+    "g": 0.02,
+    "delta": 0.05,
+    "effective_depreciation_x": 0.08,
+    "rho_baseline": 0.04,
+    "rho_shock": 0.02
+  },
+  "steady_states": {
+    "baseline": {
+      "k_star": 4.0163975905170251,
+      "c_star": 1.2609054253865568,
+      "output_y": 1.5822172326279189,
+      "saving_rate": 0.20307692307692315,
+      "stable_eigenvalue": -0.094570316575898566,
+      "unstable_eigenvalue": 0.14457031657589858,
+      "stable_eigenvector": [
+        0.9897107226323264,
+        0.14308279248951677
+      ]
+    },
+    "post_shock": {
+      "k_star": 5.1537254104558761,
+      "c_star": 1.3056104373154889,
+      "output_y": 1.7179084701519589,
+      "saving_rate": 0.23999999999999994
+    },
+    "golden_rule": {
+      "k_GR": 8.2897839735564762,
+      "c_GR": 1.3464618817655367
+    }
+  },
+  "comparative_dynamics": {
+    "shock_type": "Permanent drop in discount rate rho from 0.04 to 0.02",
+    "predetermined_capital_k0": 4.0163975905170251,
+    "pre_shock_consumption": 1.2609054253865568,
+    "jump_consumption_c_t0_plus": 1.1693767805364803,
+    "vertical_jump_delta_c": -0.0915286448500765,
+    "long_run_capital_change": 1.137327819938851,
+    "long_run_consumption_change": 0.044705011928932059
+  }
+}
