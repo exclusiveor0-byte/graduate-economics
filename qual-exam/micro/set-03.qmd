@@ -1,0 +1,80 @@
+---
+title: "문제 한 스푼 #3"
+subtitle: "일반균형 · 생산자이론"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #3
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **일반균형 · 생산자이론**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. General Equilibrium
+::: {.topic}
+일반균형 · Competitive Equilibrium과 Pareto Efficiency
+:::
+
+두 소비자와 두 재화 $x, y$로 이루어진 pure exchange economy를 생각하자.
+
+$$
+u_1(x_1, y_1) = x_1 y_1, \qquad \omega_1 = (6, 2)
+$$
+
+$$
+u_2(x_2, y_2) = x_2 y_2, \qquad \omega_2 = (2, 6)
+$$
+
+$p_y = 1$로 normalize하고 $p_x = p > 0$라 하자.
+
+1. 각 소비자의 Marshallian demand를 구하고 competitive equilibrium price $p^*$를 계산하시오.
+2. Competitive equilibrium allocation을 구하시오.
+3. 두 소비자의 MRS를 이용하여 이 equilibrium allocation이 Pareto efficient인지 직접 확인하시오. 이 결과가 First Welfare Theorem과 어떻게 연결되는지도 간단히 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **individual demand → market clearing → welfare verification**. 균형가격 계산 후 배분까지 반드시 명시하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Producer Theory
+::: {.topic}
+생산자이론 · 이윤극대화, 공급, Shutdown Condition
+:::
+
+경쟁기업의 비용함수가
+
+$$
+c(q) = q^2 + 4q + 9, \qquad q \ge 0
+$$
+
+로 주어진다. 산출물 가격을 $p > 0$라 하자.
+
+1. 기업의 이윤극대화 문제를 풀어 최적 산출량 $q^*(p)$를 구하시오. 단, shutdown condition을 명시적으로 고려하시오.
+2. 기업의 supply function을 구하시오.
+3. 다음 명제를 **prove or disprove** 하시오.
+   > A competitive firm produces whenever $p \ge MC(0)$.
+   
+   필요하다면 average variable cost와 shutdown price를 이용하시오.
+
+::: {.spoon-hint}
+**형식**: **maximize → characterize supply → prove/disprove**. 마지막 문항에서는 $MC(0)$와 shutdown price를 구분해서 논증하시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
