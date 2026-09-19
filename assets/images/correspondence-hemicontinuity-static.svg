@@ -1,95 +1,116 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="500" viewBox="0 0 840 500" role="img" aria-labelledby="title desc">
   <title id="title">대응의 상반연속(UHC)과 하반연속(LHC) 위상 기하</title>
-  <desc id="desc">왼쪽은 UHC의 개근방 포섭 구조 F(x') ⊆ V를, 오른쪽은 비연속 점프 대응에서 UHC와 LHC가 각각 위반되는 기하학적 메커니즘을 비교합니다.</desc>
+  <desc id="desc">왼쪽은 UHC의 개근방 포섭 구조를, 오른쪽은 확장 점프에서 LHC가 위반되는 기하학적 메커니즘을 비교하는 정적 도표입니다.</desc>
   <rect width="840" height="500" fill="#fffaf2"/>
 
-  <!-- Title -->
-  <text x="50" y="42" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#3f3129">대응의 반연속성: UHC(개근방 포섭)와 LHC(수열 접근성)</text>
+  <!-- Main Title -->
+  <text x="40" y="40" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="20" font-weight="bold" fill="#3f3129">대응의 반연속성: UHC(개근방 포섭)와 LHC(수열 접근성)</text>
 
-  <!-- Panel 1: UHC definition & geometry (x in [-1, 1]) -->
-  <g transform="translate(50, 65)">
-    <rect width="350" height="390" fill="#fffdf9" stroke="#dfcdb8" stroke-width="1.5" rx="4"/>
-    <text x="20" y="32" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#725b70">1. 상반연속 (UHC: Upper Hemicontinuous)</text>
-    <text x="20" y="52" font-family="Georgia, serif" font-size="12" fill="#725f54">∀ open V ⊃ F(x₀), ∃ open U ∋ x₀ s.t. ∀x' ∈ U, F(x') ⊆ V</text>
+  <!-- ================= LEFT PANEL: UHC ================= -->
+  <g transform="translate(40, 60)">
+    <!-- Panel Box -->
+    <rect width="365" height="415" fill="#fffdf9" stroke="#dfcdb8" stroke-width="1.5" rx="5"/>
+    <text x="18" y="30" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="15" font-weight="bold" fill="#725b70">1. 상반연속 (UHC: Upper Hemicontinuous)</text>
+    <text x="18" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#725f54">F(x₀) ⊂ V 이면, x₀ 근방 U 내 모든 x'에서 F(x') ⊆ V</text>
 
-    <!-- Axes box -->
-    <rect x="50" y="75" width="260" height="230" fill="none" stroke="#3f3129" stroke-width="1.2"/>
+    <!-- Axes Box (x in [-1, 1], y in [-0.5, 1.5]) -->
+    <rect x="55" y="75" width="260" height="210" fill="#fffaf2" stroke="#3f3129" stroke-width="1.2"/>
 
-    <!-- Grid lines -->
-    <line x1="50" y1="190" x2="310" y2="190" stroke="#ebd8c2" stroke-width="1" stroke-dasharray="3 3"/>
-    <line x1="180" y1="75" x2="180" y2="305" stroke="#ebd8c2" stroke-width="1" stroke-dasharray="3 3"/>
+    <!-- Grid / Axis Lines -->
+    <!-- y = 0 axis line at SVG y = 233 -->
+    <line x1="55" y1="233" x2="315" y2="233" stroke="#dfcdb8" stroke-width="1" stroke-dasharray="3 3"/>
+    <!-- x = 0 axis line at SVG x = 185 -->
+    <line x1="185" y1="75" x2="185" y2="285" stroke="#dfcdb8" stroke-width="1" stroke-dasharray="3 3"/>
 
-    <!-- Correspondence Graph Band F(x) = [x/3, 1 - x/3] -->
-    <polygon points="50,225 310,180 310,155 50,115" fill="#e8dbcf" opacity="0.6"/>
-    <line x1="50" y1="225" x2="310" y2="180" stroke="#b39783" stroke-width="1.5"/>
-    <line x1="50" y1="115" x2="310" y2="155" stroke="#b39783" stroke-width="1.5"/>
+    <!-- Correspondence Graph Band: F(x) = [x/3, 1 - x/3] -->
+    <!-- x=-1 (x=55): y in [-1/3, 4/3] -> SVG y from 268 to 93 -->
+    <!-- x=1 (x=315): y in [1/3, 2/3] -> SVG y from 198 to 163 -->
+    <polygon points="55,268 315,198 315,163 55,93" fill="#e8dbcf" opacity="0.65"/>
+    <line x1="55" y1="268" x2="315" y2="198" stroke="#b39783" stroke-width="1.5"/>
+    <line x1="55" y1="93" x2="315" y2="163" stroke="#b39783" stroke-width="1.5"/>
+    <text x="65" y="115" font-family="system-ui, sans-serif" font-size="11" fill="#725f54">gph(F)</text>
 
-    <!-- Open neighborhood V around F(x0) -->
-    <rect x="50" y="130" width="260" height="110" fill="#f0e6ef" opacity="0.65"/>
-    <line x1="50" y1="130" x2="310" y2="130" stroke="#725b70" stroke-width="1.5" stroke-dasharray="5 4"/>
-    <line x1="50" y1="240" x2="310" y2="240" stroke="#725b70" stroke-width="1.5" stroke-dasharray="5 4"/>
-    <text x="260" y="145" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#725b70">개근방 V</text>
+    <!-- Open Neighborhood V around F(x0)=[0, 1] with radius eps=0.25 -> y in [-0.25, 1.25] -> SVG y in [102, 259] -->
+    <rect x="55" y="102" width="260" height="157" fill="#f0e6ef" opacity="0.55"/>
+    <line x1="55" y1="102" x2="315" y2="102" stroke="#725b70" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <line x1="55" y1="259" x2="315" y2="259" stroke="#725b70" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="260" y="118" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="11" font-weight="bold" fill="#725b70">개근방 V</text>
 
-    <!-- Base point x0 = 0 and interval F(x0) -->
-    <line x1="180" y1="150" x2="180" y2="220" stroke="#725b70" stroke-width="4.5" stroke-linecap="round"/>
-    <text x="185" y="188" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#725b70">F(x₀)</text>
-    <circle cx="180" cy="305" r="4" fill="#725b70"/>
-    <text x="175" y="322" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#725b70">x₀</text>
+    <!-- Base Point x0 = 0 (x=185) and interval F(x0) = [0, 1] (SVG y from 128 to 233) -->
+    <line x1="185" y1="128" x2="185" y2="233" stroke="#725b70" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="185" cy="128" r="3.5" fill="#725b70"/>
+    <circle cx="185" cy="233" r="3.5" fill="#725b70"/>
+    <text x="145" y="180" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="bold" fill="#725b70">F(x₀)</text>
+    <circle cx="185" cy="285" r="4" fill="#725b70"/>
+    <text x="180" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="bold" fill="#725b70">x₀</text>
 
-    <!-- Test point x' in U and interval F(x') -->
-    <line x1="230" y1="160" x2="230" y2="210" stroke="#954f2d" stroke-width="4.5" stroke-linecap="round"/>
-    <text x="235" y="188" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#954f2d">F(x')</text>
-    <circle cx="230" cy="305" r="4" fill="#954f2d"/>
-    <text x="226" y="322" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#954f2d">x'</text>
+    <!-- Test Point x' = 0.35 (x=231) and interval F(x') = [0.12, 0.88] (SVG y from 140 to 220) -->
+    <line x1="231" y1="140" x2="231" y2="220" stroke="#954f2d" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="231" cy="140" r="3.5" fill="#954f2d"/>
+    <circle cx="231" cy="220" r="3.5" fill="#954f2d"/>
+    <text x="238" y="180" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="bold" fill="#954f2d">F(x')</text>
+    <circle cx="231" cy="285" r="4" fill="#954f2d"/>
+    <text x="226" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="bold" fill="#954f2d">x'</text>
 
-    <!-- Neighborhood U brackets on X axis -->
-    <line x1="130" y1="305" x2="235" y2="305" stroke="#087e8b" stroke-width="2.5"/>
-    <text x="145" y="338" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#087e8b">근방 U (x₀ 포함)</text>
+    <!-- Neighborhood U bracket on X axis -->
+    <line x1="145" y1="285" x2="245" y2="285" stroke="#087e8b" stroke-width="3"/>
+    <text x="155" y="320" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="11" font-weight="bold" fill="#087e8b">근방 U (x₀ 포함)</text>
 
-    <!-- Explanation footer -->
-    <text x="20" y="360" font-family="system-ui, sans-serif" font-size="12" fill="#3f3129">✔ U 내부의 모든 x'에 대해 F(x') ⊆ V가 성립함</text>
-    <text x="20" y="378" font-family="system-ui, sans-serif" font-size="11" fill="#725f54">→ 값집합이 외생변수 변화 시 갑자기 밖으로 튀어나가지 않음</text>
+    <!-- Footer Explanation -->
+    <rect x="18" y="335" width="329" height="65" fill="#f4faf5" stroke="#c2e2c7" rx="4"/>
+    <text x="28" y="357" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="12" font-weight="bold" fill="#2d7738">✓ F(x') ⊆ V 포섭 만족 (안전)</text>
+    <text x="28" y="375" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="11" fill="#3f3129">• 외생변수 변화 시 값집합이 밖으로 폭발하지 않음</text>
+    <text x="28" y="391" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="11" fill="#725f54">• 콤팩트 공역에서 닫힌 그래프(closed graph)와 동치</text>
   </g>
 
-  <!-- Panel 2: LHC failure (Jump expansion) & UHC failure -->
-  <g transform="translate(440, 65)">
-    <rect width="350" height="390" fill="#fffdf9" stroke="#dfcdb8" stroke-width="1.5" rx="4"/>
-    <text x="20" y="32" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#954f2d">2. 하반연속 위반 반례 (확장 점프)</text>
-    <text x="20" y="52" font-family="Georgia, serif" font-size="12" fill="#725f54">F(0)=[0, 1], &nbsp; F(x)={0} (x ≠ 0) : UHC 만족, LHC 위반</text>
+  <!-- ================= RIGHT PANEL: LHC VIOLATION ================= -->
+  <g transform="translate(435, 60)">
+    <!-- Panel Box -->
+    <rect width="365" height="415" fill="#fffdf9" stroke="#dfcdb8" stroke-width="1.5" rx="5"/>
+    <text x="18" y="30" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="15" font-weight="bold" fill="#954f2d">2. 하반연속 위반 반례 (확장 점프)</text>
+    <text x="18" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#725f54">F(0) = [0, 1],   F(x) = {0} (x ≠ 0)</text>
 
-    <!-- Axes box -->
-    <rect x="50" y="75" width="260" height="230" fill="none" stroke="#3f3129" stroke-width="1.2"/>
+    <!-- Axes Box (x in [-1, 1], y in [-0.2, 1.2]) -->
+    <rect x="55" y="75" width="260" height="210" fill="#fffaf2" stroke="#3f3129" stroke-width="1.2"/>
 
-    <!-- Grid lines -->
-    <line x1="50" y1="260" x2="310" y2="260" stroke="#ebd8c2" stroke-width="1" stroke-dasharray="3 3"/>
-    <line x1="180" y1="75" x2="180" y2="305" stroke="#ebd8c2" stroke-width="1" stroke-dasharray="3 3"/>
+    <!-- Grid / Axis Lines -->
+    <!-- y = 0 axis line at SVG y = 255 -->
+    <line x1="55" y1="255" x2="315" y2="255" stroke="#dfcdb8" stroke-width="1" stroke-dasharray="3 3"/>
+    <!-- x = 0 axis line at SVG x = 185 -->
+    <line x1="185" y1="75" x2="185" y2="285" stroke="#dfcdb8" stroke-width="1" stroke-dasharray="3 3"/>
 
-    <!-- Graph of F: lines y=0 for x!=0 -->
-    <line x1="50" y1="260" x2="175" y2="260" stroke="#b39783" stroke-width="3"/>
-    <line x1="185" y1="260" x2="310" y2="260" stroke="#b39783" stroke-width="3"/>
+    <!-- Correspondence Graph: y=0 for x!=0 -->
+    <line x1="55" y1="255" x2="180" y2="255" stroke="#b39783" stroke-width="3.5"/>
+    <line x1="190" y1="255" x2="315" y2="255" stroke="#b39783" stroke-width="3.5"/>
 
-    <!-- Expanded vertical bar at x=0: [0, 1] -->
-    <line x1="180" y1="120" x2="180" y2="260" stroke="#725b70" stroke-width="5" stroke-linecap="round"/>
-    <text x="110" y="195" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#725b70">F(0)=[0, 1]</text>
+    <!-- Expanded vertical bar at x=0: [0, 1] (SVG y from 105 to 255) -->
+    <line x1="185" y1="105" x2="185" y2="255" stroke="#725b70" stroke-width="5" stroke-linecap="round"/>
+    <text x="110" y="180" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="bold" fill="#725b70">F(0)=[0, 1]</text>
 
-    <!-- Target y0 = 1 in F(0) -->
-    <circle cx="180" cy="120" r="6" fill="#725b70" stroke="#fff" stroke-width="2"/>
-    <text x="192" y="125" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#725b70">목표점 y₀ = 1</text>
+    <!-- Target Point y0 = 1 in F(0) at (185, 105) -->
+    <circle cx="185" cy="105" r="6" fill="#725b70" stroke="#fff" stroke-width="2"/>
+    <text x="195" y="110" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="12" font-weight="bold" fill="#725b70">목표점 y₀ = 1</text>
 
-    <!-- Sequence x_k -> 0 -->
-    <line x1="240" y1="260" x2="240" y2="260" stroke="#954f2d" stroke-width="5"/>
-    <circle cx="240" cy="260" r="6" fill="#954f2d" stroke="#fff" stroke-width="2"/>
-    <text x="225" y="280" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#954f2d">yₖ = 0</text>
-    <circle cx="240" cy="305" r="4" fill="#954f2d"/>
-    <text x="235" y="322" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#954f2d">xₖ</text>
+    <!-- Horizontal guideline from y0 to x_k -->
+    <line x1="185" y1="105" x2="255" y2="105" stroke="#725b70" stroke-width="1.2" stroke-dasharray="3 3"/>
 
-    <!-- Gap / Disconnection arrow -->
-    <line x1="240" y1="250" x2="240" y2="130" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
-    <path d="M 236 138 L 240 126 L 244 138 Z" fill="#c0392b"/>
-    <text x="248" y="195" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#c0392b">간극 |yₖ − y₀| = 1</text>
+    <!-- Approaching Sequence Point x_k = 0.54 (x=255) -->
+    <circle cx="255" cy="285" r="4" fill="#954f2d"/>
+    <text x="248" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="bold" fill="#954f2d">x_k</text>
 
-    <!-- Explanation footer -->
-    <text x="20" y="360" font-family="system-ui, sans-serif" font-size="12" fill="#c0392b">✘ xₖ → 0이어도 yₖ=0은 y₀=1로 접근 불가 (LHC 위반)</text>
-    <text x="20" y="378" font-family="system-ui, sans-serif" font-size="11" fill="#725f54">✔ 그러나 {0} ⊂ [0,1] ⊂ V이므로 상반연속(UHC)은 성립</text>
+    <!-- F(x_k) = {0} at (255, 255) -->
+    <circle cx="255" cy="255" r="6" fill="#954f2d" stroke="#fff" stroke-width="2"/>
+    <text x="240" y="272" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="bold" fill="#954f2d">y_k = 0</text>
+
+    <!-- Disconnection Gap Arrow from y_k=0 to y_0=1 -->
+    <line x1="255" y1="245" x2="255" y2="115" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
+    <polygon points="251,123 255,111 259,123" fill="#c0392b"/>
+    <text x="262" y="180" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="11" font-weight="bold" fill="#c0392b">간극 |y_k − y₀| = 1</text>
+
+    <!-- Footer Explanation -->
+    <rect x="18" y="335" width="329" height="65" fill="#fdf5f4" stroke="#f6c4be" rx="4"/>
+    <text x="28" y="357" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="12" font-weight="bold" fill="#c0392b">✕ 하반연속(LHC) 위반: 접근 불가</text>
+    <text x="28" y="375" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="11" fill="#3f3129">• x_k → 0이어도 y_k=0은 y₀=1로 접근할 수 없음</text>
+    <text x="28" y="391" font-family="system-ui, -apple-system, 'Noto Sans KR', sans-serif" font-size="11" fill="#725f54">• 단, {0} ⊆ [0,1] ⊂ V이므로 상반연속(UHC)은 성립</text>
   </g>
 </svg>
