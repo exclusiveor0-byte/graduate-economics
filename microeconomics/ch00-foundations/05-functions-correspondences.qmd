@@ -168,6 +168,10 @@ $$
 UHC와 LHC는 그림만으로 외우기보다 open-set 정의와 수열 조건을 함께 읽는 편이 안전하다. 이후 수요대응과 최적반응대응에서는 compact한 선택공간 또는 local compact containment를 먼저 확보한 뒤 closed graph를 검증하는 순서가 표준적이다.
 :::
 
+::: {.callout-note appearance="simple" title="VISUAL · 대응의 반연속성과 닫힌 그래프"}
+[대응과 반연속성 보충자료](../../supplements/correspondence-hemicontinuity.qmd)에서 UHC의 $\varepsilon\text{–}\delta$ 개집합 포섭, LHC의 수열 수렴, 그리고 비콤팩트 치역에서 닫힌 그래프와 UHC의 괴리를 대화형 도구로 직접 조작하며 확인할 수 있다.
+:::
+
 ### 0.5.3 경제학에서의 대응
 
 예산대응은 주어진 가격과 소득 아래에서 선택 가능한 소비묶음의 집합을 정한다.
