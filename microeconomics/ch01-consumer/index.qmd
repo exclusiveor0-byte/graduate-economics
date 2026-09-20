@@ -27,5 +27,5 @@
 - [참고문헌](references.html)
 
 ::: {.callout-tip title="협업 단위"}
-각 Section은 독립 페이지와 URL을 갖습니다. 내용 수정은 가능하면 Section 단위 Pull Request로 진행합니다.
+각 Section은 독립 페이지와 URL을 갖는다. 내용 수정은 가능하면 Section 단위 Pull Request로 진행한다.
 :::

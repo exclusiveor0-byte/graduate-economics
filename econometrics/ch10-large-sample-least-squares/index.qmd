@@ -1,7 +1,7 @@
 # Chapter 10 · Large-Sample Theory for Least Squares {.unnumbered}
 *Consistency · Asymptotic Normality · Sandwich Variance · Wald Inference*
 
-least squares의 consistency·asymptotic linear representation·asymptotic normality를 전개하고 sandwich variance, HC covariance, delta method, Wald inference와 robust inference의 범위를 정리합니다.
+least squares의 consistency·asymptotic linear representation·asymptotic normality를 전개하고 sandwich variance, HC covariance, delta method, Wald inference와 robust inference의 범위를 정리한다.
 
 ## Chapter Map
 
@@ -29,5 +29,5 @@ least squares의 consistency·asymptotic linear representation·asymptotic norma
 - [참고문헌 및 다음 장](contents.html#references)
 
 ::: {.callout-tip title="본문 읽기"}
-원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
 :::

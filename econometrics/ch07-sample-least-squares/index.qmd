@@ -1,7 +1,7 @@
 # Chapter 07 · Sample Least Squares and Finite-Sample Geometry {.unnumbered}
 *OLS · Projection Matrix · FWL · Leverage · QR/SVD*
 
-population moments의 표본 analogue에서 시작해 OLS normal equations, Euclidean projection, FWL, hat matrix, rank deficiency와 QR·SVD 계산을 finite-sample geometry로 정리합니다.
+population moments의 표본 analogue에서 시작해 OLS normal equations, Euclidean projection, FWL, hat matrix, rank deficiency와 QR·SVD 계산을 finite-sample geometry로 정리한다.
 
 ## Chapter Map
 
@@ -28,6 +28,6 @@ population moments의 표본 analogue에서 시작해 OLS normal equations, Eucl
 - [참고문헌 및 다음 장](contents.html#references)
 
 ::: {.callout-tip title="본문 읽기"}
-원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
 :::
 

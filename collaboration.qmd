@@ -1,6 +1,6 @@
 # Collaboration Guide {.unnumbered}
 
-이 프로젝트는 Git을 깊게 아는 것을 전제로 하지 않습니다.
+이 프로젝트는 Git을 깊게 아는 것을 전제로 하지 않는다.
 
 ## 팀원이 기억할 여섯 단계
 
@@ -12,7 +12,7 @@
 6. **Create Pull Request**
 
 ::: {.callout-tip title="권장 도구"}
-**GitHub Desktop + VS Code + Quarto** 조합을 기본으로 사용합니다. 터미널 Git은 선택사항입니다.
+**GitHub Desktop + VS Code + Quarto** 조합을 기본으로 사용한다. 터미널 Git은 선택사항이다.
 :::
 
 ## 작업 예시
@@ -24,35 +24,35 @@ main
  └─ oh/slutsky-proof
 ```
 
-각 branch는 가능한 한 하나의 명확한 작업만 담습니다.
+각 branch는 가능한 한 하나의 명확한 작업만 담는다.
 
 ## Pull Request
 
-Pull Request를 만들면 GitHub Actions가 자동으로 Quarto 전체 렌더를 검사합니다.
+Pull Request를 만들면 GitHub Actions가 자동으로 Quarto 전체 렌더를 검사한다.
 
 - ✅ 초록 체크: 구조적으로 렌더 가능
 - ❌ 빨간 체크: merge 전에 렌더 오류를 수정
 
-경제학적 내용의 정확성은 별도 리뷰가 필요합니다.
+경제학적 내용의 정확성은 별도 리뷰가 필요하다.
 
-초록 체크는 전체 페이지 생성, 내부 링크, 정리·증명 블록 수도 확인합니다.
-리뷰용 웹 파일은 Actions 실행 화면의 **Artifacts → book-preview**에서 받을 수 있습니다.
+초록 체크는 전체 페이지 생성, 내부 링크, 정리·증명 블록 수도 확인한다.
+리뷰용 웹 파일은 Actions 실행 화면의 **Artifacts → book-preview**에서 받을 수 있다.
 
-정리노트 원본과 읽기 화면은 공개합니다. 수정 제안은 Pull Request로 검토하며,
-main에 반영되면 자동 검사 후 GitHub Pages에 출판됩니다.
+정리노트 원본과 읽기 화면은 공개한다. 수정 제안은 Pull Request로 검토하며,
+main에 반영되면 자동 검사 후 GitHub Pages에 출판된다.
 
 ## 오탈자는 웹에서 바로 제안
 
-GitHub에서 해당 `.qmd` 파일을 열고 연필 버튼을 누릅니다.
-수정 후 **Commit changes → Create a new branch for this commit and start a pull request**를 선택합니다.
-바뀐 문장과 이유를 적으면 검토 요청이 만들어집니다.
+GitHub에서 해당 `.qmd` 파일을 열고 연필 버튼을 누른다.
+수정 후 **Commit changes → Create a new branch for this commit and start a pull request**를 선택한다.
+바뀐 문장과 이유를 적으면 검토 요청이 만들어진다.
 
-수식·증명처럼 미리보기가 필요한 수정은 GitHub Desktop과 VS Code에서 진행하세요.
-merge가 끝나면 **main → Fetch origin → Pull origin**으로 공식본을 받은 뒤 다음 작업을 시작합니다.
+수식·증명처럼 미리보기가 필요한 수정은 GitHub Desktop과 VS Code에서 진행한다.
+merge가 끝나면 **main → Fetch origin → Pull origin**으로 공식본을 받은 뒤 다음 작업을 시작한다.
 
 ## Conflict가 보이면
 
-직접 복잡한 Git 명령으로 해결하려고 하지 않습니다. 해당 Pull Request 링크를 Maintainer에게 전달하고 함께 해결합니다.
+직접 복잡한 Git 명령으로 해결하려고 하지 않는다. 해당 Pull Request 링크를 Maintainer에게 전달하고 함께 해결한다.
 
 ## 작성 양식
 
@@ -60,4 +60,4 @@ merge가 끝나면 **main → Fetch origin → Pull origin**으로 공식본을 
 - Supplement: `templates/supplement-template.qmd`
 - Paper note: `templates/paper-note-template.qmd`
 
-Repository 내부의 `CONTRIBUTING.md`에는 더 자세한 협업 규칙이 있습니다.
+Repository 내부의 `CONTRIBUTING.md`에는 더 자세한 협업 규칙이 있다.

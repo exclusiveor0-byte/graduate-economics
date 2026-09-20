@@ -1,7 +1,7 @@
 # Chapter 12 · 불완전시장과 자기보험 {.unnumbered}
 *Incomplete Markets, Self-Insurance, and Precautionary Saving*
 
-이 장에서는 **불완전시장과 자기보험**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토합니다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동합니다.
+이 장에서는 **불완전시장과 자기보험**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토한다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동한다.
 
 ## Chapter Map
 
@@ -41,9 +41,9 @@
 - [핵심 용어](contents.html#glossary)
 
 ::: {.callout-tip title="본문 읽기"}
-원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있습니다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있습니다.
+원본 통합 강의노트의 수식·표·연습문제는 한 페이지로 보존되어 있다. 위의 Section 링크로 바로 이동하거나, [본문 전체](contents.html)에서 순서대로 읽을 수 있다.
 :::
 
 ::: {.callout-tip title="협업 단위"}
-본문은 원본 보존을 위해 한 파일로 관리합니다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 주세요.
+본문은 원본 보존을 위해 한 파일로 관리한다. 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 제출한다.
 :::

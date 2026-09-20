@@ -5,7 +5,7 @@ description: >-
   Continuous-Time Dynamic Optimization and the Maximum Principle
 ---
 
-<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리한다. -->
 
 :::::::: {#s01 .section}
 ## [2.1]{.section-number}정적에서 동태최적화로

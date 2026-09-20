@@ -5,5 +5,5 @@ title: "논문 아카이브 · 거시·화폐"
 성장, 경기변동, 통화정책, 명목경직성, 이질적 경제주체 논문을 모읍니다.
 
 ::: {.callout-note appearance="simple" title="새 논문"}
-`templates/paper-note-template.qmd`를 복사해 `literature/macro-monetary/`에 추가합니다.
+`templates/paper-note-template.qmd`를 복사해 `literature/macro-monetary/`에 추가한다.
 :::

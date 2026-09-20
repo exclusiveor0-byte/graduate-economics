@@ -3,7 +3,7 @@ title: "계량경제학의 구조"
 description: "Description · Causality · Identification · Estimation"
 ---
 
-<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리합니다. -->
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
 
 ::::::::::::::::::::: {#s11 .section}
 ## [1.1]{.section-number}Description과 Causality: 계량경제학의 첫 번째 구분

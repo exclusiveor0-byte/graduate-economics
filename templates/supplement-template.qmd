@@ -1,7 +1,7 @@
 # Supplement Title
 
 ::: {.callout-note title="Purpose"}
-이 Supplement가 본문의 어떤 직관 또는 계산을 보완하는지 설명합니다.
+이 Supplement가 본문의 어떤 직관 또는 계산을 보완하는지 설명한다.
 :::
 
 ## Main Result
@@ -14,11 +14,11 @@
 
 ### Interactive
 
-Interactive 구현이 있는 경우 삽입합니다.
+Interactive 구현이 있는 경우 삽입한다.
 
 ### Animation
 
-GIF 또는 MP4 fallback을 삽입합니다.
+GIF 또는 MP4 fallback을 삽입한다.
 
 ```markdown
 ![Animation description](../../assets/gif/example.gif)
@@ -26,7 +26,7 @@ GIF 또는 MP4 fallback을 삽입합니다.
 
 ### Static
 
-PDF/인쇄용 대표 정적 그림을 삽입합니다.
+PDF/인쇄용 대표 정적 그림을 삽입한다.
 
 :::
 
