@@ -10,6 +10,14 @@ subtitle: Graduate Economics Knowledge Base
 경제학의 문제, 가정, 증명을 서로 연결해 읽고 축적하는 공동 지식 아카이브입니다.
 각 과목의 길잡이에서 시작해, 필요한 개념과 논증의 절로 바로 이동할 수 있습니다.
 
+::: {.home-operators}
+<span class="home-operators__item"><span class="home-operators__label">소속</span> 서울시립대학교 경제학부</span>
+<span class="home-operators__sep">·</span>
+<span class="home-operators__item"><span class="home-operators__label">총괄</span> <strong class="home-operators__lead-name">오형진</strong></span>
+<span class="home-operators__sep">·</span>
+<span class="home-operators__item"><span class="home-operators__label">운영</span> <span class="home-operators__members">김상은 · 김정원 · 변수향</span></span>
+:::
+
 ::: {.home-hero__actions}
 [정리노트 둘러보기](#정리노트-읽기){.home-button .home-button--primary}
 [협업 방식 보기](collaboration.html){.home-button}
