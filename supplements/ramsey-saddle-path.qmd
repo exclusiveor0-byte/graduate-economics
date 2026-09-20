@@ -211,24 +211,26 @@ Ramsey 모형을 처음 접할 때 가장 빈번히 발생하는 질문은 **"�
 
 가장 직관적이고 강력한 수치 알고리즘이 바로 **슈팅법(Shooting Method with Bisection)**이다:
 
-```
-Algorithm: Bisection Shooting Method for Saddle Path
-Input: Initial capital k0, target steady state k*, tolerance eps
-Search bracket: [c_low, c_high]
+::: {.callout-note appearance="simple"}
+### 알고리즘 6.1 · 안장경로 이분법 슈팅 알고리즘 (Bisection Shooting Method)
 
-While (c_high - c_low) > eps:
-    c_guess = (c_low + c_high) / 2
-    Integrate ODE forward from [k0, c_guess] over [0, T]
-    
-    If trajectory hits k -> 0 (capital exhaustion):
-        // Fired too high!
-        c_high = c_guess
-    Else If trajectory crosses k > k* with c -> 0 (TVC violation):
-        // Fired too low!
-        c_low = c_guess
-        
-Return c_guess as c0* on the saddle path
-```
+- **입력 (Input)**: 초기 자본 $k_0$, 목표 정상상태 $k^*$, 수렴 허용오차 $\epsilon$, 최대 적분시간 $T$
+- **탐색 구간 설정**: 초기소비 탐색 구간 $[c_{low}, c_{high}]$
+
+**반복 절차 (Iterative Procedure)**:
+
+1. **소비 추정치 분할**:
+   $$
+   c_{guess} = \frac{c_{low} + c_{high}}{2}
+   $$
+2. **미분방정식계 전진 적분**:
+   초기점 $(k_0, c_{guess})$에서 출발하여 시간 구간 $[0, T]$에 대해 연립 비선형 미분방정식계를 순방향 적분한다.
+3. **궤적 분기 판정 및 탐색 구간 갱신**:
+   - **과다 소비 ($k \to 0$, 자본 고갈)**: 초기 소비가 안장경로보다 높아 자본이 잠식되므로 상한을 축소한다 ($c_{high} \leftarrow c_{guess}$).
+   - **과소 소비 ($k > k^*$ 및 $c \to 0$, 횡단성 조건 위배)**: 초기 소비가 과소하여 자본이 과잉축적되므로 하한을 상향한다 ($c_{low} \leftarrow c_{guess}$).
+4. **수렴 판정**:
+   구간 폭 $|c_{high} - c_{low}| \le \epsilon$을 만족할 때까지 반복하며, 종료 시 최종 $c_{guess}$를 안장경로 상의 유일한 초기소비 $c_0^*$로 채택한다.
+:::
 
 ![슈팅 알고리즘: (좌) 목표 정상상태 $E^*$를 향해 발사되는 탄도 궤적들, (우) 탐색 구간 $[c_{low}, c_{high}]$의 지수적 수렴 ($2^{-j}$)](../assets/gif/ramsey-shooting-algorithm.gif){#fig-gif-shooting fig-alt="왼쪽 패널에서는 과다 슈팅과 과소 슈팅 궤적들이 번갈아 발사되다가 점점 정상상태로 수렴하고, 오른쪽 패널에서는 상한과 하한이 지수적으로 좁혀진다."}
 
