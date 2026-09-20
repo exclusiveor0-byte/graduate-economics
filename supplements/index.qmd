@@ -1,20 +1,587 @@
-# 계산·탐색 보충자료 {.unnumbered}
+---
+title: "계산·시각화 보충자료 (Supplements)"
+subtitle: "대학원 경제학 9대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
+---
 
-본문의 이해를 보조하는 계산·시각화·interactive 자료를 관리합니다.
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
+:::
 
-## 현재 제공되는 보충자료
+# 계산·시각화 보충자료 (Supplements)
 
-- [Slutsky 분해: 가격변화와 두 보상 규칙](slutsky-decomposition.qmd)
-- [Solow 성장모형: 자본축적과 전이경로](solow-growth.qmd) — 동학적 자본축적, 베르누이 닫힌 해, 수렴속도 및 황금률 동학
-- [Ramsey 모형: 안장경로 동학과 슈팅 알고리즘](ramsey-saddle-path.qmd) — MATLAB 4종 애니메이션, 정적 위상도 및 수치 슈팅 해법
-- [OLS 표본 기하와 표본 변동](ols-geometry.qmd) — Gauss–Markov BLUE 분산 타원, 유한표본 정규성 및 결합 신뢰타원 동학
-- [OLS 직교사영과 정상방정식의 벡터 기하](ols-projection-geometry.qmd) — 3D 관측공간 직교사영, Frisch–Waugh–Lovell 정리 및 다중공선성의 기하
-- [도구변수와 약한 도구변수](iv-weak-instruments.qmd) — 내생성 편향, 약한 도구의 유한표본 붕괴 및 Anderson–Rubin 강건 추론
-- [IS–LM 재정충격: 단기 균형의 이동](islm-fiscal-shock.qmd) — 케인즈 승수, 구축효과 분해 및 통화정책 공조 동학
-- [Edgeworth 상자: 경쟁균형과 후생경제학 정리](edgeworth-first-welfare.qmd) — 계약곡선, 타토느망 가격탐색, 제1·제2 후생정리의 기하학과 지지 가격체계
-- [대응의 반연속성과 닫힌 그래프: UHC와 LHC](correspondence-hemicontinuity.qmd) — 외측 폭발 억제, 내측 소멸 방지, 닫힌 그래프 정리 및 Berge 최대정리의 기하
+::: {.spoon-hero__desc}
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 9대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 21종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+:::
 
-원칙:
-- 핵심 직관에 직접 필요한 자료는 본문에서 링크 또는 embed
-- 계산량이 크거나 부가적인 자료는 Supplement로 분리
-- Interactive가 있다면 가능하면 GIF/MP4/static fallback도 제공
+::: {.spoon-hero__tags}
+[미시경제학 (3편)]{.chip .chip--micro}
+[거시경제학 (3편)]{.chip .chip--macro}
+[계량경제학 (3편)]{.chip .chip--metrics}
+[21종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
+[엄밀한 수리 증명]{.chip .chip--primary}
+[재현 가능 수치 코드]{.chip}
+:::
+:::
+
+::: {.spoon-search-wrapper}
+::: {.spoon-search-box}
+<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 주제어, 모형, 정리 검색 (예: Slutsky, Solow, Ramsey, OLS, 사영, FWL, 후생정리, 도구변수...)" autocomplete="off">
+<span id="spoon-search-count" class="spoon-count-badge">실시간 검색 대기 중</span>
+:::
+:::
+
+::: {.panel-tabset}
+
+### 전체 보기
+
+::: {.spoon-guide-box}
+**📚 대학원 경제학 9대 계산·시각화 보충자료 통합 포털**
+미시·거시·계량 전 분야에 걸쳐 엄밀한 수리 전개와 MATLAB/R 수치 시뮬레이션으로 제작된 보충자료 9편의 통합 인덱스이다. 상단 검색창에서 키워드를 입력하여 즉시 필터링하거나 각 분야별 하위탭으로 이동하여 탐색할 수 있다.
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 보충자료가 없다. 다른 검색어를 입력해보기 바란다.
+:::
+
+```{=html}
+<div id="supplement-grid-all" class="spoon-grid">
+<!-- Micro 1: Slutsky -->
+<a href="slutsky-decomposition.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">Slutsky 분해: 가격변화와 두 보상 규칙</div>
+  <div class="spoon-card__desc">가격효과를 대체효과와 소득효과로 분해하고, Slutsky 과정보상과 Hicks 효용보상의 수리적 차이 및 마샬·힉스 수요곡선의 곡률 관계를 기하학적으로 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">대체·소득효과</span>
+    <span class="chip chip--topic">과정보상 정리</span>
+    <span class="chip chip--topic">보상변화(CV)·대등변화(EV)</span>
+    <span class="chip chip--topic">기펜재 역설</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 2권 제4장 간접효용·지출함수 및 제5장 슬러츠키 방정식</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Micro 2: Edgeworth -->
+<a href="edgeworth-first-welfare.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">Edgeworth 상자: 경쟁균형과 후생경제학 정리</div>
+  <div class="spoon-card__desc">2인 2재화 순수교환경제에서 계약곡선의 미분기하학, 타토느망(Tâtonnement) 경매인의 가격조정 동학, 제1·제2 후생경제학 기본정리의 지지 초평면을 시각적으로 규명한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">계약곡선 미분기하</span>
+    <span class="chip chip--topic">타토느망 가격탐색</span>
+    <span class="chip chip--topic">제1후생정리</span>
+    <span class="chip chip--topic">제2후생정리 지지가격</span>
+    <span class="chip chip--topic">코어 수렴</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 5권 제15장 일반균형이론 및 제16장 후생경제학 기본정리</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Micro 3: Correspondence -->
+<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">대응의 반연속성과 닫힌 그래프: UHC와 LHC</div>
+  <div class="spoon-card__desc">집합값 대응(Correspondence)의 상반연속(UHC: 외측 폭발 억제)과 하반연속(LHC: 내측 소멸 방지), 닫힌 그래프 정리 및 Berge 최대정리의 기하학적 정합성을 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">상반연속(UHC)</span>
+    <span class="chip chip--topic">하반연속(LHC)</span>
+    <span class="chip chip--topic">닫힌 그래프 정리</span>
+    <span class="chip chip--topic">Berge 최대정리</span>
+    <span class="chip chip--topic">Kakutani 고정점</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 수학 부록 / 제3장 최적화와 쌍대성, 일반균형 존재 정리</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Macro 1: Solow -->
+<a href="solow-growth.html" class="spoon-card" data-subject="macro">
+  <div class="spoon-card__header">
+    <span class="chip chip--macro">거시경제학</span>
+    <span class="chip chip--gif">3종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">Solow 성장모형: 자본축적과 전이경로</div>
+  <div class="spoon-card__desc">신고전학파 생산함수 하의 자본축적 동학과 베르누이 미분방정식의 닫힌 해, 정상상태 수렴속도(반감기), 저축률 변화에 따른 황금률(Golden Rule) 동학을 시뮬레이션한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">자본축적 미분방정식</span>
+    <span class="chip chip--topic">베르누이 닫힌 해</span>
+    <span class="chip chip--topic">수렴 반감기</span>
+    <span class="chip chip--topic">황금률(Golden Rule) 동학</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 거시 1권 제1장 Solow 신고전학파 성장모형 및 제2장 경험적 실증</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Macro 2: Ramsey -->
+<a href="ramsey-saddle-path.html" class="spoon-card" data-subject="macro">
+  <div class="spoon-card__header">
+    <span class="chip chip--macro">거시경제학</span>
+    <span class="chip chip--gif">4종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">Ramsey 모형: 안장경로 동학과 슈팅 알고리즘</div>
+  <div class="spoon-card__desc">무한시계 최적소비·자본축적의 해밀토니안 동학, 2차원 위상도 상의 안장경로(Saddle Path) 고유벡터, 초기가치문제(IVP)와 후진 슈팅(Backward Shooting) 수치해법을 탐색한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">오일러 방정식</span>
+    <span class="chip chip--topic">해밀토니안 최적제어</span>
+    <span class="chip chip--topic">안장경로(Saddle Path)</span>
+    <span class="chip chip--topic">후진 슈팅 알고리즘</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 거시 1권 제3장 Ramsey-Cass-Koopmans 최적성장모형</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Macro 3: IS-LM -->
+<a href="islm-fiscal-shock.html" class="spoon-card" data-subject="macro">
+  <div class="spoon-card__header">
+    <span class="chip chip--macro">거시경제학</span>
+    <span class="chip chip--gif">3종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">IS–LM 재정충격: 단기 균형의 이동</div>
+  <div class="spoon-card__desc">케인즈 교차도와 통화시장 균형으로부터 IS–LM 곡선을 유도하고, 재정지출 충격 후 이자율 상승에 따른 투자 구축효과 분해 및 중앙은행의 통화정책 공조 동학을 비교한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">케인즈 승수</span>
+    <span class="chip chip--topic">유동성 선호설</span>
+    <span class="chip chip--topic">구축효과(Crowding-out)</span>
+    <span class="chip chip--topic">통화정책 공조</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 거시 2권 제7장 IS-LM 단기 총수요 모형</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Metrics 1: OLS Geometry -->
+<a href="ols-geometry.html" class="spoon-card" data-subject="metrics">
+  <div class="spoon-card__header">
+    <span class="chip chip--metrics">계량경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">OLS 표본 기하와 표본 변동</div>
+  <div class="spoon-card__desc">OLS 추정량의 대수적 분해, Gauss–Markov 정리에 따른 BLUE 분산 타원의 주축 분해, 유한표본 정규성 검정 및 결합 신뢰타원의 표본 변동 동학을 확인한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">최소자승법(OLS)</span>
+    <span class="chip chip--topic">Gauss–Markov BLUE</span>
+    <span class="chip chip--topic">분산 타원 주축분해</span>
+    <span class="chip chip--topic">결합 신뢰타원 동학</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 계량 1권 제7장 최소자승추정량 및 제8장 표본이론과 BLUE</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Metrics 2: OLS Projection -->
+<a href="ols-projection-geometry.html" class="spoon-card" data-subject="metrics">
+  <div class="spoon-card__header">
+    <span class="chip chip--metrics">계량경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">OLS 직교사영과 정상방정식의 벡터 기하</div>
+  <div class="spoon-card__desc">n차원 관측공간에서 열공간 직교사영행렬 P와 잔차생성행렬 M, 정상방정식의 기하학적 유도, Frisch–Waugh–Lovell (FWL) 직교화 및 다중공선성 평면 붕괴를 입체적으로 분석한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">3D 직교사영</span>
+    <span class="chip chip--topic">사영행렬 P와 M</span>
+    <span class="chip chip--topic">정상방정식</span>
+    <span class="chip chip--topic">Frisch–Waugh–Lovell 정리</span>
+    <span class="chip chip--topic">다중공선성</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 계량 1권 제7장 최소자승법 및 제9장 정확추론(Exact Inference)</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Metrics 3: IV & Weak IV -->
+<a href="iv-weak-instruments.html" class="spoon-card" data-subject="metrics">
+  <div class="spoon-card__header">
+    <span class="chip chip--metrics">계량경제학</span>
+    <span class="chip chip--gif">3종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">도구변수와 약한 도구변수</div>
+  <div class="spoon-card__desc">내생성(Endogeneity)에 따른 OLS의 점근적 편향, 도구변수(IV)와 2SLS 추정량, 약한 도구변수(Weak IV) 환경에서의 유한표본 붕괴 및 Anderson–Rubin (AR) 강건 추론을 탐색한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">내생성 편향</span>
+    <span class="chip chip--topic">외생성·관련성 조건</span>
+    <span class="chip chip--topic">2SLS 추정량</span>
+    <span class="chip chip--topic">약한 도구 붕괴</span>
+    <span class="chip chip--topic">Anderson–Rubin 검정</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 계량 2권 제14장 도구변수 및 2단계 최소자승법(2SLS)</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+</div>
+```
+
+### 미시경제학
+
+::: {.spoon-guide-box}
+**🎯 미시경제학 (Microeconomics) 보충자료 아카이브**
+- **주요 영역**: 소비자 쌍대성 이론(Slutsky 분해), 일반균형과 후생경제학(Edgeworth 상자), 고급 미시 수학(집합값 대응의 반연속성과 Berge 최대정리).
+- **시각화 특징**: 6종의 고해상도 GIF를 통해 보상수요의 곡률, 경매인의 타토느망 탐색 경로, 상반연속·하반연속의 위상수학적 포섭 조건을 엄밀하게 시각화한다.
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 미시경제학 보충자료가 없다.
+:::
+
+```{=html}
+<div id="supplement-grid-micro" class="spoon-grid">
+<!-- Micro 1: Slutsky -->
+<a href="slutsky-decomposition.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">Slutsky 분해: 가격변화와 두 보상 규칙</div>
+  <div class="spoon-card__desc">가격효과를 대체효과와 소득효과로 분해하고, Slutsky 과정보상과 Hicks 효용보상의 수리적 차이 및 마샬·힉스 수요곡선의 곡률 관계를 기하학적으로 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">대체·소득효과</span>
+    <span class="chip chip--topic">과정보상 정리</span>
+    <span class="chip chip--topic">보상변화(CV)·대등변화(EV)</span>
+    <span class="chip chip--topic">기펜재 역설</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 2권 제4장 간접효용·지출함수 및 제5장 슬러츠키 방정식</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Micro 2: Edgeworth -->
+<a href="edgeworth-first-welfare.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">Edgeworth 상자: 경쟁균형과 후생경제학 정리</div>
+  <div class="spoon-card__desc">2인 2재화 순수교환경제에서 계약곡선의 미분기하학, 타토느망(Tâtonnement) 경매인의 가격조정 동학, 제1·제2 후생경제학 기본정리의 지지 초평면을 시각적으로 규명한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">계약곡선 미분기하</span>
+    <span class="chip chip--topic">타토느망 가격탐색</span>
+    <span class="chip chip--topic">제1후생정리</span>
+    <span class="chip chip--topic">제2후생정리 지지가격</span>
+    <span class="chip chip--topic">코어 수렴</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 5권 제15장 일반균형이론 및 제16장 후생경제학 기본정리</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Micro 3: Correspondence -->
+<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">대응의 반연속성과 닫힌 그래프: UHC와 LHC</div>
+  <div class="spoon-card__desc">집합값 대응(Correspondence)의 상반연속(UHC: 외측 폭발 억제)과 하반연속(LHC: 내측 소멸 방지), 닫힌 그래프 정리 및 Berge 최대정리의 기하학적 정합성을 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">상반연속(UHC)</span>
+    <span class="chip chip--topic">하반연속(LHC)</span>
+    <span class="chip chip--topic">닫힌 그래프 정리</span>
+    <span class="chip chip--topic">Berge 최대정리</span>
+    <span class="chip chip--topic">Kakutani 고정점</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 수학 부록 / 제3장 최적화와 쌍대성, 일반균형 존재 정리</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+</div>
+```
+
+### 거시경제학
+
+::: {.spoon-guide-box}
+**🎯 거시경제학 (Macroeconomics) 보충자료 아카이브**
+- **주요 영역**: 신고전학파 성장모형(Solow 전이경로), 무한시계 최적성장(Ramsey 안장경로 및 슈팅 알고리즘), 단기 총수요 모형(IS–LM 재정충격과 구축효과).
+- **시각화 특징**: 10종의 동적 시뮬레이션을 통해 비선형 자본축적 미분방정식의 위상도, 안장경로 고유벡터 수렴, 통화정책 공조에 따른 균형 이동을 직관적으로 재현한다.
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 거시경제학 보충자료가 없다.
+:::
+
+```{=html}
+<div id="supplement-grid-macro" class="spoon-grid">
+<!-- Macro 1: Solow -->
+<a href="solow-growth.html" class="spoon-card" data-subject="macro">
+  <div class="spoon-card__header">
+    <span class="chip chip--macro">거시경제학</span>
+    <span class="chip chip--gif">3종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">Solow 성장모형: 자본축적과 전이경로</div>
+  <div class="spoon-card__desc">신고전학파 생산함수 하의 자본축적 동학과 베르누이 미분방정식의 닫힌 해, 정상상태 수렴속도(반감기), 저축률 변화에 따른 황금률(Golden Rule) 동학을 시뮬레이션한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">자본축적 미분방정식</span>
+    <span class="chip chip--topic">베르누이 닫힌 해</span>
+    <span class="chip chip--topic">수렴 반감기</span>
+    <span class="chip chip--topic">황금률(Golden Rule) 동학</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 거시 1권 제1장 Solow 신고전학파 성장모형 및 제2장 경험적 실증</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Macro 2: Ramsey -->
+<a href="ramsey-saddle-path.html" class="spoon-card" data-subject="macro">
+  <div class="spoon-card__header">
+    <span class="chip chip--macro">거시경제학</span>
+    <span class="chip chip--gif">4종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">Ramsey 모형: 안장경로 동학과 슈팅 알고리즘</div>
+  <div class="spoon-card__desc">무한시계 최적소비·자본축적의 해밀토니안 동학, 2차원 위상도 상의 안장경로(Saddle Path) 고유벡터, 초기가치문제(IVP)와 후진 슈팅(Backward Shooting) 수치해법을 탐색한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">오일러 방정식</span>
+    <span class="chip chip--topic">해밀토니안 최적제어</span>
+    <span class="chip chip--topic">안장경로(Saddle Path)</span>
+    <span class="chip chip--topic">후진 슈팅 알고리즘</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 거시 1권 제3장 Ramsey-Cass-Koopmans 최적성장모형</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Macro 3: IS-LM -->
+<a href="islm-fiscal-shock.html" class="spoon-card" data-subject="macro">
+  <div class="spoon-card__header">
+    <span class="chip chip--macro">거시경제학</span>
+    <span class="chip chip--gif">3종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">IS–LM 재정충격: 단기 균형의 이동</div>
+  <div class="spoon-card__desc">케인즈 교차도와 통화시장 균형으로부터 IS–LM 곡선을 유도하고, 재정지출 충격 후 이자율 상승에 따른 투자 구축효과 분해 및 중앙은행의 통화정책 공조 동학을 비교한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">케인즈 승수</span>
+    <span class="chip chip--topic">유동성 선호설</span>
+    <span class="chip chip--topic">구축효과(Crowding-out)</span>
+    <span class="chip chip--topic">통화정책 공조</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 거시 2권 제7장 IS-LM 단기 총수요 모형</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+</div>
+```
+
+### 계량경제학
+
+::: {.spoon-guide-box}
+**🎯 계량경제학 (Econometrics) 보충자료 아카이브**
+- **주요 영역**: OLS 추정량의 표본 기하와 신뢰타원, 고차원 관측공간 $\mathbb{R}^n$에서의 직교사영과 FWL 정리, 도구변수 식별과 약한 도구변수 유한표본 붕괴.
+- **시각화 특징**: 7종의 정밀 다이어그램 및 시뮬레이션을 통해 Gauss–Markov BLUE 타원, 3D 사영 기하, 도구변수 상관계수 $\rho_{ue}$에 따른 2SLS 편향 붕괴를 다각도로 검증한다.
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 계량경제학 보충자료가 없다.
+:::
+
+```{=html}
+<div id="supplement-grid-metrics" class="spoon-grid">
+<!-- Metrics 1: OLS Geometry -->
+<a href="ols-geometry.html" class="spoon-card" data-subject="metrics">
+  <div class="spoon-card__header">
+    <span class="chip chip--metrics">계량경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">OLS 표본 기하와 표본 변동</div>
+  <div class="spoon-card__desc">OLS 추정량의 대수적 분해, Gauss–Markov 정리에 따른 BLUE 분산 타원의 주축 분해, 유한표본 정규성 검정 및 결합 신뢰타원의 표본 변동 동학을 확인한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">최소자승법(OLS)</span>
+    <span class="chip chip--topic">Gauss–Markov BLUE</span>
+    <span class="chip chip--topic">분산 타원 주축분해</span>
+    <span class="chip chip--topic">결합 신뢰타원 동학</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 계량 1권 제7장 최소자승추정량 및 제8장 표본이론과 BLUE</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Metrics 2: OLS Projection -->
+<a href="ols-projection-geometry.html" class="spoon-card" data-subject="metrics">
+  <div class="spoon-card__header">
+    <span class="chip chip--metrics">계량경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">OLS 직교사영과 정상방정식의 벡터 기하</div>
+  <div class="spoon-card__desc">n차원 관측공간에서 열공간 직교사영행렬 P와 잔차생성행렬 M, 정상방정식의 기하학적 유도, Frisch–Waugh–Lovell (FWL) 직교화 및 다중공선성 평면 붕괴를 입체적으로 분석한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">3D 직교사영</span>
+    <span class="chip chip--topic">사영행렬 P와 M</span>
+    <span class="chip chip--topic">정상방정식</span>
+    <span class="chip chip--topic">Frisch–Waugh–Lovell 정리</span>
+    <span class="chip chip--topic">다중공선성</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 계량 1권 제7장 최소자승법 및 제9장 정확추론(Exact Inference)</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Metrics 3: IV & Weak IV -->
+<a href="iv-weak-instruments.html" class="spoon-card" data-subject="metrics">
+  <div class="spoon-card__header">
+    <span class="chip chip--metrics">계량경제학</span>
+    <span class="chip chip--gif">3종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">도구변수와 약한 도구변수</div>
+  <div class="spoon-card__desc">내생성(Endogeneity)에 따른 OLS의 점근적 편향, 도구변수(IV)와 2SLS 추정량, 약한 도구변수(Weak IV) 환경에서의 유한표본 붕괴 및 Anderson–Rubin (AR) 강건 추론을 탐색한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">내생성 편향</span>
+    <span class="chip chip--topic">외생성·관련성 조건</span>
+    <span class="chip chip--topic">2SLS 추정량</span>
+    <span class="chip chip--topic">약한 도구 붕괴</span>
+    <span class="chip chip--topic">Anderson–Rubin 검정</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 계량 2권 제14장 도구변수 및 2단계 최소자승법(2SLS)</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+</div>
+```
+
+### 가이드 및 원칙
+
+::: {.spoon-guide-box}
+**📐 보충자료 제작 및 기술 가이드 안내**
+보충자료의 제작 원칙, 시각화 기술 스택, 그리고 재현 가능성(Reproducibility) 정책을 규정하는 기술 문서이다.
+자세한 기술 명세와 CI 빌드 정책은 [보충자료 기술 가이드 전문](visualization-guide.html)에서 확인할 수 있다.
+:::
+
+#### 1. 시각화 형식 선택 기준
+
+| 시각화 목적 | 권장 파일 형식 | 특징 및 기술 스택 |
+|:---|:---|:---|
+| **정적 구조 및 수리 분해** | SVG / PNG | 벡터 고해상도, 수식 표기 일치, PDF 인쇄 최적화 |
+| **동적 전이경로 및 위상도 수렴** | 고해상도 GIF | 0-jitter 타임라인 보정, 브라우저 무설치 즉시 재생 |
+| **장시간 고차원 시뮬레이션** | MP4 비디오 | 고압축 고화질, 동영상 컨트롤러 지원 |
+| **사용자 매개변수 인터랙티브 탐색** | Observable JS (OJS) | 브라우저 클라이언트 연산, 실시간 반응형 슬라이더 |
+| **대규모 수치 최적화 및 몬테카를로** | MATLAB / R 원천 코드 | 사후 생성 에셋 커밋, 연구 재현 스크립트 완비 |
+
+#### 2. 보충자료 관리 3대 원칙
+
+1. **본문과의 유기적 연계**:
+   본문의 핵심 이론 이해에 반드시 필요한 직관은 본문 챕터 내에서 직접 링크 또는 요약 카드로 안내하고, 계산량이 많거나 부가적인 시뮬레이션은 본 보충자료 아카이브로 분리하여 관리한다.
+
+2. **완전한 재현 가능성 (Full Reproducibility)**:
+   모든 시뮬레이션 수치와 GIF 애니메이션은 MATLAB, Python, R 원천 스크립트로부터 100% 동일하게 재생성될 수 있어야 하며, 무작위 표본 난수 시드(seed)와 모수 설정값이 문서 내에 명기된다.
+
+3. **엄밀한 학술 서술체 준수**:
+   모든 해설 문장은 간결하고 명확한 대학원 수준의 학술 평서문(`~이다`, `~다`, `~한다`, `~된다`)으로 일관되게 서술된다.
+
+:::
+
+```{=html}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("spoon-search");
+  const countBadge = document.getElementById("spoon-search-count");
+  if (!searchInput) return;
+
+  function filterCards() {
+    const query = searchInput.value.toLowerCase().trim();
+    const activePane = document.querySelector(".tab-pane.active") || document.querySelector(".tab-content") || document;
+    const cards = activePane.querySelectorAll(".spoon-card");
+    const emptyMsg = activePane.querySelector(".spoon-empty-msg");
+
+    let total = cards.length;
+    let visible = 0;
+
+    cards.forEach(function (card) {
+      const text = card.textContent.toLowerCase();
+      const matches = !query || text.includes(query);
+      if (matches) {
+        card.style.display = "";
+        visible++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (countBadge) {
+      if (total === 0) {
+        countBadge.textContent = "보충자료 가이드 탭";
+      } else if (!query) {
+        countBadge.textContent = `현재 탭: 총 ${total}개 자료`;
+      } else {
+        countBadge.textContent = `검색 결과: ${visible} / ${total}개`;
+      }
+    }
+
+    if (emptyMsg) {
+      emptyMsg.style.display = (total > 0 && visible === 0) ? "block" : "none";
+    }
+  }
+
+  searchInput.addEventListener("input", filterCards);
+
+  document.querySelectorAll('a[data-bs-toggle="tab"], button[data-bs-toggle="tab"]').forEach(function (tabEl) {
+    tabEl.addEventListener("shown.bs.tab", function () {
+      filterCards();
+    });
+  });
+
+  filterCards();
+});
+</script>
+```
