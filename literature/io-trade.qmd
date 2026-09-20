@@ -5,5 +5,5 @@ title: "논문 아카이브 · 산업조직·무역"
 시장구조, 경쟁정책, 기업행동, 국제무역 논문을 모읍니다.
 
 ::: {.callout-note appearance="simple" title="새 논문"}
-`templates/paper-note-template.qmd`를 복사해 `literature/io-trade/`에 추가합니다.
+`templates/paper-note-template.qmd`를 복사해 `literature/io-trade/`에 추가한다.
 :::

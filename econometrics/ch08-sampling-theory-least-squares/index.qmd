@@ -1,7 +1,7 @@
 # Chapter 08 · Sampling Theory of Least Squares {.unnumbered}
 *Unbiasedness · Variance · Gauss–Markov · Normal Sampling Theory*
 
-OLS의 대수적 성질을 sampling theory로 연결합니다. stochastic linear regression model, error decomposition, heteroskedasticity, Gauss–Markov, error variance와 exact normal theory를 다룹니다.
+OLS의 대수적 성질을 sampling theory로 연결한다. stochastic linear regression model, error decomposition, heteroskedasticity, Gauss–Markov, error variance와 exact normal theory를 다룬다.
 
 ## Chapter Map
 
@@ -28,6 +28,6 @@ OLS의 대수적 성질을 sampling theory로 연결합니다. stochastic linear
 - [참고문헌 및 다음 장](contents.html#references)
 
 ::: {.callout-tip title="본문 읽기"}
-원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
 :::
 

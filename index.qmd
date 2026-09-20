@@ -7,8 +7,8 @@ subtitle: Graduate Economics Knowledge Base
 ::: {.home-hero__lead}
 [ECONOMICS RESEARCH NOTEBOOK · VOL. 01]{.home-hero__eyebrow}
 
-경제학의 문제, 가정, 증명을 서로 연결해 읽고 축적하는 공동 지식 아카이브입니다.
-각 과목의 길잡이에서 시작해, 필요한 개념과 논증의 절로 바로 이동할 수 있습니다.
+경제학의 문제, 가정, 증명을 서로 연결해 읽고 축적하는 공동 지식 아카이브이다.
+각 과목의 길잡이에서 시작해, 필요한 개념과 논증의 절로 바로 이동할 수 있다.
 
 ::: {.home-operators}
 <span class="home-operators__item"><span class="home-operators__label">소속</span> 서울시립대학교 경제학부</span>
@@ -45,7 +45,7 @@ subtitle: Graduate Economics Knowledge Base
 ::: {.home-archive-item}
 **계산·탐색 보충자료**
 
-계산·시각화·interactive 자료로 본문 개념을 다시 탐색하는 보충자료 모음입니다.
+계산·시각화·interactive 자료로 본문 개념을 다시 탐색하는 보충자료 모음이다.
 :::
 ::: {.home-archive-item}
 **논문 아카이브**
@@ -99,7 +99,7 @@ MACROECONOMICS
 ECONOMETRICS
 :::
 ### [계량경제학](econometrics/index.html)
-식별과 추정, 확률모형과 계산을 연결하는 정리노트입니다.
+식별과 추정, 확률모형과 계산을 연결하는 정리노트이다.
 
 [Chapter 01–10 읽기](econometrics/index.html){.study-card__link} →
 
@@ -113,7 +113,7 @@ ECONOMETRICS
 COMPUTATION
 :::
 ### [계산·탐색 보충자료](supplements/index.html)
-본문의 개념을 직접 계산하고 시각화하며, 필요한 경우 매개변수를 바꾸어 탐색할 수 있습니다.
+본문의 개념을 직접 계산하고 시각화하며, 필요한 경우 매개변수를 바꾸어 탐색할 수 있다.
 
 [보충자료 목록 보기](supplements/index.html){.study-card__link} →
 
@@ -127,7 +127,7 @@ COMPUTATION
 LITERATURE
 :::
 ### [논문 아카이브](literature/index.html)
-경제이론부터 개발·환경·도시까지, 논문을 질문·설계·결과·기여로 읽고 연결합니다.
+경제이론부터 개발·환경·도시까지, 논문을 질문·설계·결과·기여로 읽고 연결한다.
 
 [분야별 논문 아카이브 보기](literature/index.html){.study-card__link} →
 
@@ -141,7 +141,7 @@ LITERATURE
 QUALIFYING EXAM
 :::
 ### [문제 한 스푼](qual-exam/index.html)
-대학원 졸업시험 대비 매일 미시·거시·계량 문제를 풀고 축적하는 실전 문제 아카이브입니다.
+대학원 졸업시험 대비 매일 미시·거시·계량 문제를 풀고 축적하는 실전 문제 아카이브이다.
 
 [문제 목록 및 검색](qual-exam/index.html){.study-card__link} →
 
@@ -151,17 +151,17 @@ QUALIFYING EXAM
 
 ::: {.home-note}
 **처음 읽는다면** 과목 카드를 선택한 뒤 Chapter 소개 페이지에서 지도와
-절 링크를 확인하세요. Section의 주소는 그대로 공유할 수 있습니다.
+절 링크를 확인한다. Section의 주소는 그대로 공유할 수 있다.
 :::
 
 ## 읽는 방법
 
-- **홈의 왼쪽 목차**에서는 과목을 선택합니다. 각 과목 첫 화면에서 Chapter와 Section으로 이동합니다.
-- **이 페이지에서** 목차로 세부 내용을 찾습니다. 모바일에서는 메뉴를 열어 이동합니다.
-- **정리·명제**는 테라코타, **정의·가정**은 회보라 상자로 구분합니다. 접힌 **증명**은 제목을 누르면 펼쳐집니다.
-- 긴 수식과 표는 해당 영역 안에서 좌우로 스크롤할 수 있습니다.
+- **홈의 왼쪽 목차**에서는 과목을 선택한다. 각 과목 첫 화면에서 Chapter와 Section으로 이동한다.
+- **이 페이지에서** 목차로 세부 내용을 찾는다. 모바일에서는 메뉴를 열어 이동한다.
+- **정리·명제**는 테라코타, **정의·가정**은 회보라 상자로 구분한다. 접힌 **증명**은 제목을 누르면 펼쳐진다.
+- 긴 수식과 표는 해당 영역 안에서 좌우로 스크롤할 수 있다.
 
 ## 함께 고치기
 
-작은 오탈자부터 증명 보완까지, Section 하나씩 제안하고 검토합니다.
-처음 참여한다면 [협업 안내](collaboration.html)를 읽으세요.
+작은 오탈자부터 증명 보완까지, Section 하나씩 제안하고 검토한다.
+처음 참여한다면 [협업 안내](collaboration.html)를 참고한다.

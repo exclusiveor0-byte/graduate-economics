@@ -1,7 +1,7 @@
 # Chapter 05 · Conditional Expectation and Projection {.unnumbered}
 *Hilbert Space · Orthogonal Projection · Best Prediction · CEF*
 
-조건부기대값을 $L^2$ 공간의 orthogonal projection으로 해석하고, residual orthogonality·variance decomposition·information set·linear CEF를 population prediction 언어로 정리합니다.
+조건부기대값을 $L^2$ 공간의 orthogonal projection으로 해석하고, residual orthogonality·variance decomposition·information set·linear CEF를 population prediction 언어로 정리한다.
 
 ## Chapter Map
 
@@ -28,6 +28,6 @@
 - [참고문헌 및 다음 장](contents.html#references)
 
 ::: {.callout-tip title="본문 읽기"}
-원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
 :::
 

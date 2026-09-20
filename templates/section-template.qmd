@@ -2,7 +2,7 @@
 
 ### Overview
 
-이 절의 목적과 핵심 질문을 2–4문장으로 설명합니다.
+이 절의 목적과 핵심 질문을 2–4문장으로 설명한다.
 
 ::: {.callout-note title="Definition"}
 정의

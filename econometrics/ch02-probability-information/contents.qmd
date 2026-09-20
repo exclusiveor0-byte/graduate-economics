@@ -3,7 +3,7 @@ title: "확률모형, 정보집합, 그리고 자료배열"
 description: "Observed Data · Information · Conditioning · Dependence · Sampling"
 ---
 
-<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리합니다. -->
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
 
 ::::::::::::::::::::::::::::::::: {#s21 .section}
 ## [2.1]{.section-number}경제적 세계를 확률모형으로 표현하기

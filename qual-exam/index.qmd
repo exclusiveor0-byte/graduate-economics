@@ -11,7 +11,7 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 # 문제 한 스푼 (A Spoon of Problem)
 
 ::: {.spoon-hero__desc}
-대학원 경제학 종합시험·졸업시험(Qualifying Examination) 준비를 위해 미시경제학, 거시경제학, 계량경제학 문제를 매일 출제하고 풀이하는 아카이브입니다. 과목별 탭과 회차별 개별 파일로 관리되며, 실시간 검색창을 통해 원하는 회차와 주제를 빠르게 찾을 수 있습니다.
+대학원 경제학 종합시험·졸업시험(Qualifying Examination) 준비를 위해 미시경제학, 거시경제학, 계량경제학 문제를 매일 출제하고 풀이하는 아카이브이다. 과목별 탭과 회차별 개별 파일로 관리되며, 실시간 검색창을 통해 원하는 회차와 주제를 빠르게 찾을 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
@@ -36,11 +36,11 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 
 ::: {.spoon-guide-box}
 **📚 문제 한 스푼 아카이브 저장소 안내**
-매일 출제되는 문제가 누적되는 메인 대시보드입니다. 회차 번호(#1, #2, ...)나 토픽 키워드로 상단 검색창에서 즉시 필터링할 수 있습니다.
+매일 출제되는 문제가 누적되는 메인 대시보드이다. 회차 번호(#1, #2, ...)나 토픽 키워드로 상단 검색창에서 즉시 필터링할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
-검색 조건과 일치하는 문제가 없습니다. 회차 번호나 다른 키워드를 입력해보세요.
+검색 조건과 일치하는 문제가 없다. 회차 번호나 다른 키워드를 입력하라.
 :::
 
 ```{=html}
@@ -142,7 +142,7 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 :::
 
 ::: {.spoon-empty-msg}
-검색 조건과 일치하는 문제가 없습니다.
+검색 조건과 일치하는 문제가 없다.
 :::
 
 ```{=html}
@@ -244,11 +244,11 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 :::
 
 ::: {.spoon-empty-msg}
-검색 조건과 일치하는 문제가 없습니다.
+검색 조건과 일치하는 문제가 없다.
 :::
 
 ::: {#spoon-grid-macro .spoon-grid}
-<!-- 거시경제학 회차 카드가 여기에 표시됩니다 -->
+<!-- 거시경제학 회차 카드가 여기에 표시된다 -->
 :::
 
 ### 계량경제학
@@ -259,11 +259,11 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 :::
 
 ::: {.spoon-empty-msg}
-검색 조건과 일치하는 문제가 없습니다.
+검색 조건과 일치하는 문제가 없다.
 :::
 
 ::: {#spoon-grid-metrics .spoon-grid}
-<!-- 계량경제학 회차 카드가 여기에 표시됩니다 -->
+<!-- 계량경제학 회차 카드가 여기에 표시된다 -->
 :::
 
 ### 문제 업로드 가이드
@@ -271,19 +271,19 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 ::: {.spoon-guide-box}
 **✍️ 새 문제 출제 및 업로드 방법 (4단계)**
 
-매일 문제를 출제하고 사이트에 등록할 때는 아래 4단계를 따라 진행하시면 됩니다.
+매일 문제를 출제하고 사이트에 등록할 때는 아래 4단계를 따라 진행한다.
 
 #### 1단계: 표준 템플릿 복사
-저장소의 `templates/problem-template.qmd` 파일을 복사합니다.
+저장소의 `templates/problem-template.qmd` 파일을 복사한다.
 
 #### 2단계: 과목 폴더에 개별 회차 파일 생성
-출제할 과목 폴더에 회차별 번호로 파일을 생성하고 내용을 작성합니다.
+출제할 과목 폴더에 회차별 번호로 파일을 생성하고 내용을 작성한다.
 - **미시경제학**: `qual-exam/micro/set-01.qmd`, `set-02.qmd`, ...
 - **거시경제학**: `qual-exam/macro/set-01.qmd`, `set-02.qmd`, ...
 - **계량경제학**: `qual-exam/econometrics/set-01.qmd`, `set-02.qmd`, ...
 
 #### 3단계: `_quarto.yml` 목차에 챕터 등록
-`_quarto.yml`의 `chapters:` 항목 중 `qual-exam/index.qmd` 아래에 추가합니다:
+`_quarto.yml`의 `chapters:` 항목 중 `qual-exam/index.qmd` 아래에 추가한다:
 ```yaml
   - qual-exam/index.qmd
   - part: qual-exam/micro/index.qmd
@@ -293,7 +293,7 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 *(또는 독립 회차 파일로 `- qual-exam/micro/set-01.qmd` 형태로 추가)*
 
 #### 4단계: `qual-exam/index.qmd` 카드 목록에 추가
-`qual-exam/index.qmd`의 해당 과목 탭 및 전체 탭에 아래 카드 태그를 추가하면 실시간 검색과 카드 UI가 즉시 연동됩니다:
+`qual-exam/index.qmd`의 해당 과목 탭 및 전체 탭에 아래 카드 태그를 추가하면 실시간 검색과 카드 UI가 즉시 연동된다:
 ```html
 <a href="micro/set-01.html" class="spoon-card" data-subject="micro" data-round="1">
   <div class="spoon-card__header">

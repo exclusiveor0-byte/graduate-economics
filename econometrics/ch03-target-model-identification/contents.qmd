@@ -3,7 +3,7 @@ title: "Target, Model, and Identification"
 description: "Estimands · Model Restrictions · Observational Equivalence · Identification"
 ---
 
-<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리합니다. -->
+<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
 
 :::::::::::::::::::::::::: {#s31 .section}
 ## [3.1]{.section-number}무엇을 식별하려는가: Target, Parameter, Estimand

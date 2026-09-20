@@ -1,7 +1,7 @@
 # Chapter 06 · Population Linear Regression and Linear Approximation {.unnumbered}
 *Best Linear Predictor · BLA · FWL · Omitted Variables*
 
-conditional expectation에서 linear approximation으로 이동해 BLP·BLA·population normal equations·FWL·omitted variables와 회귀계수의 descriptive·causal 해석을 분리합니다.
+conditional expectation에서 linear approximation으로 이동해 BLP·BLA·population normal equations·FWL·omitted variables와 회귀계수의 descriptive·causal 해석을 분리한다.
 
 ## Chapter Map
 
@@ -28,6 +28,6 @@ conditional expectation에서 linear approximation으로 이동해 BLP·BLA·pop
 - [참고문헌 및 다음 장](contents.html#references)
 
 ::: {.callout-tip title="본문 읽기"}
-원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
 :::
 

@@ -5,7 +5,7 @@ description: >-
   Optimal Saving, Saddle-Path Dynamics, and the Modified Golden Rule
 ---
 
-<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리합니다. -->
+<!-- 새 거시경제학 노트를 보존한 마이그레이션. 공유 CSS는 styles/macro-content.scss에서 관리한다. -->
 
 :::::::: {#s01 .section}
 ## [7.1]{.section-number}From Solow to Ramsey

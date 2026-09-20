@@ -1,7 +1,7 @@
 # Chapter 09 · Exact Inference in Linear Regression {.unnumbered}
 *$t$ Test · $F$ Test · Confidence Sets · Economic Significance*
 
-sampling distribution에서 hypothesis, size·power, exact $t$·$F$ test, confidence interval·region으로 이어지는 linear regression의 finite-sample inference를 정리합니다.
+sampling distribution에서 hypothesis, size·power, exact $t$·$F$ test, confidence interval·region으로 이어지는 linear regression의 finite-sample inference를 정리한다.
 
 ## Chapter Map
 
@@ -29,6 +29,6 @@ sampling distribution에서 hypothesis, size·power, exact $t$·$F$ test, confid
 - [참고문헌 및 다음 장](contents.html#references)
 
 ::: {.callout-tip title="본문 읽기"}
-원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동하세요.
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
 :::
 

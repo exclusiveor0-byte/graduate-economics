@@ -1,13 +1,13 @@
 # 계량경제학 {.unnumbered}
 
-관측분포의 기술, 인과적 해석, 식별, 추정과 계산을 분리해 읽는 계량경제학 정리노트입니다.
+관측분포의 기술, 인과적 해석, 식별, 추정과 계산을 분리해 읽는 계량경제학 정리노트이다.
 
 ## Chapters
 
 ### [Chapter 01 · 계량경제학의 구조](ch01-foundations/index.html)
 
 Description · Causality · Identification · Estimation의 관계를 정리하고,
-CEF와 BLP/BLA, OLS의 기술적 기본값, 식별가정과 표본추정의 순서를 다룹니다.
+CEF와 BLP/BLA, OLS의 기술적 기본값, 식별가정과 표본추정의 순서를 다룬다.
 
 [Chapter 01 읽기](ch01-foundations/index.html) →
 
@@ -16,7 +16,7 @@ CEF와 BLP/BLA, OLS의 기술적 기본값, 식별가정과 표본추정의 순�
 ### [Chapter 02 · 확률모형, 정보집합, 그리고 자료배열](ch02-probability-information/index.html)
 
 Full data와 observed data, 조건부기대값, 독립성, 자료배열, empirical law를
-계량경제학의 확률언어로 정리합니다.
+계량경제학의 확률언어로 정리한다.
 
 [Chapter 02 읽기](ch02-probability-information/index.html) →
 
@@ -25,7 +25,7 @@ Full data와 observed data, 조건부기대값, 독립성, 자료배열, empiric
 ### [Chapter 03 · Target, Model, and Identification](ch03-target-model-identification/index.html)
 
 Estimand와 model restriction, observational equivalence, point·set·weak
-identification을 구분하고 causal·moment model의 식별 논리를 다룹니다.
+identification을 구분하고 causal·moment model의 식별 논리를 다룬다.
 
 [Chapter 03 읽기](ch03-target-model-identification/index.html) →
 
@@ -34,7 +34,7 @@ identification을 구분하고 causal·moment model의 식별 논리를 다룹�
 ### [Chapter 04 · Population Characterization and Optimization](ch04-population-optimization/index.html)
 
 Identified target을 criterion minimizer·estimating-equation root·constrained solution으로 표현하고,
-existence·uniqueness·convexity·KKT·local geometry를 연결합니다.
+existence·uniqueness·convexity·KKT·local geometry를 연결한다.
 
 [Chapter 04 읽기](ch04-population-optimization/index.html) →
 
@@ -43,7 +43,7 @@ existence·uniqueness·convexity·KKT·local geometry를 연결합니다.
 ### [Chapter 05 · Conditional Expectation and Projection](ch05-conditional-expectation/index.html)
 
 Conditional expectation을 $L^2$ 공간의 best predictor와 orthogonal projection으로 해석하고,
-residual orthogonality·variance decomposition·information set을 다룹니다.
+residual orthogonality·variance decomposition·information set을 다룬다.
 
 [Chapter 05 읽기](ch05-conditional-expectation/index.html) →
 
@@ -52,7 +52,7 @@ residual orthogonality·variance decomposition·information set을 다룹니다.
 ### [Chapter 06 · Population Linear Regression and Linear Approximation](ch06-population-linear-regression/index.html)
 
 BLP·BLA·population normal equations·FWL·omitted variables를 통해 회귀계수의
-descriptive·causal 해석과 approximation limit을 분리합니다.
+descriptive·causal 해석과 approximation limit을 분리한다.
 
 [Chapter 06 읽기](ch06-population-linear-regression/index.html) →
 
@@ -61,7 +61,7 @@ descriptive·causal 해석과 approximation limit을 분리합니다.
 ### [Chapter 07 · Sample Least Squares and Finite-Sample Geometry](ch07-sample-least-squares/index.html)
 
 OLS의 normal equations, projection geometry, residualization, leverage, rank deficiency와
-QR·SVD 계산을 finite-sample 관점에서 정리합니다.
+QR·SVD 계산을 finite-sample 관점에서 정리한다.
 
 [Chapter 07 읽기](ch07-sample-least-squares/index.html) →
 
@@ -70,7 +70,7 @@ QR·SVD 계산을 finite-sample 관점에서 정리합니다.
 ### [Chapter 08 · Sampling Theory of Least Squares](ch08-sampling-theory-least-squares/index.html)
 
 OLS error decomposition, unbiasedness, heteroskedasticity, Gauss–Markov,
-error variance와 exact normal sampling theory를 다룹니다.
+error variance와 exact normal sampling theory를 다룬다.
 
 [Chapter 08 읽기](ch08-sampling-theory-least-squares/index.html) →
 
@@ -79,7 +79,7 @@ error variance와 exact normal sampling theory를 다룹니다.
 ### [Chapter 09 · Exact Inference in Linear Regression](ch09-exact-inference/index.html)
 
 Hypothesis·size·power부터 exact $t$·$F$ test, confidence interval·region과
-economic significance까지 finite-sample inference를 전개합니다.
+economic significance까지 finite-sample inference를 전개한다.
 
 [Chapter 09 읽기](ch09-exact-inference/index.html) →
 
@@ -88,7 +88,7 @@ economic significance까지 finite-sample inference를 전개합니다.
 ### [Chapter 10 · Large-Sample Theory for Least Squares](ch10-large-sample-least-squares/index.html)
 
 Consistency·asymptotic normality·sandwich variance·HC covariance·delta method·Wald inference를
-연결하고 robust inference의 범위를 분명히 합니다.
+연결하고 robust inference의 범위를 분명히 한다.
 
 [Chapter 10 읽기](ch10-large-sample-least-squares/index.html) →
 
@@ -97,7 +97,7 @@ Consistency·asymptotic normality·sandwich variance·HC covariance·delta metho
 ## 이후 확장
 
 Chapter 4–10은 population optimization, conditional expectation, OLS, finite-sample theory,
-exact inference, 점근이론으로 이어집니다. 이후에는 다음 순서로 확장합니다.
+exact inference, 점근이론으로 이어진다. 이후에는 다음 순서로 확장한다.
 
 1. GLS와 이분산성·상관구조
 2. IV와 약한 도구변수
