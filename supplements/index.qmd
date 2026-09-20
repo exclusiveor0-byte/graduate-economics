@@ -9,7 +9,7 @@
 - [Ramsey 모형: 안장경로 동학과 슈팅 알고리즘](ramsey-saddle-path.qmd) — MATLAB 4종 애니메이션, 정적 위상도 및 수치 슈팅 해법
 - [OLS 표본 기하와 표본 변동](ols-geometry.qmd) — MATLAB 기준 계산과 브라우저 Monte Carlo 도구
 - [OLS 직교사영과 정상방정식의 벡터 기하](ols-projection-geometry.qmd) — MATLAB 기하 시각화와 4대 기본 등가성 해설
-- [도구변수와 약한 도구변수](iv-weak-instruments.qmd) — MATLAB 기준 실험과 OLS·2SLS 비교 도구
+- [도구변수와 약한 도구변수](iv-weak-instruments.qmd) — 내생성 편향, 약한 도구의 유한표본 붕괴 및 Anderson–Rubin 강건 추론
 - [IS–LM 재정충격: 단기 균형의 이동](islm-fiscal-shock.qmd) — 케인즈 승수, 구축효과 분해 및 통화정책 공조 동학
 - [Edgeworth 상자: 경쟁균형과 후생경제학 정리](edgeworth-first-welfare.qmd) — 계약곡선, 타토느망 가격탐색, 제1·제2 후생정리의 기하학과 지지 가격체계
 - [대응의 반연속성과 닫힌 그래프: UHC와 LHC](correspondence-hemicontinuity.qmd) — 외측 폭발 억제, 내측 소멸 방지, 닫힌 그래프 정리 및 Berge 최대정리의 기하
