@@ -262,6 +262,8 @@ main :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
 .chip--metrics { background: #f5f3ff; border-color: #ddd6fe; color: #5b21b6; }
 .chip--primary { background: #e0f2fe; border-color: #bae6fd; color: #0369a1; }
 .chip--guide { background: #fef3c7; border-color: #fde68a; color: #92400e; }
+.chip--gif { background: #fef2f2; border-color: #fecdd3; color: #be123c; font-size: 0.72rem; padding: 0.15rem 0.5rem; }
+.chip--topic { background: #f1f5f9; border-color: #e2e8f0; color: #475569; font-size: 0.72rem; padding: 0.15rem 0.5rem; }
 
 .spoon-search-wrapper {
   margin: 1.5rem 0 1.25rem;
@@ -375,9 +377,24 @@ main :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
 .spoon-card__desc {
   font-size: 0.84rem;
   color: #475569;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.65rem;
   line-height: 1.5;
   flex-grow: 1;
+}
+.spoon-card__topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.65rem;
+}
+.spoon-card__chapter {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  line-height: 1.4;
 }
 .spoon-card__footer {
   display: flex;
