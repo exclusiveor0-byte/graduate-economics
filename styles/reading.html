@@ -1,4 +1,144 @@
 <script>
+// Sidebar Subject Accordion & Active Tab-Only Expansion
+(function initSidebar() {
+  function setupSidebarAccordion() {
+    const sidebar = document.getElementById("quarto-sidebar");
+    if (!sidebar) return;
+    const sidebarUl = sidebar.querySelector(".sidebar-menu-container > ul.list-unstyled");
+    if (!sidebarUl || sidebarUl.dataset.subjectAccordionInit) return;
+    sidebarUl.dataset.subjectAccordionInit = "true";
+
+    // 6 primary subject definitions
+    const subjectDefs = [
+      { key: "micro", id: "sidebar-subj-micro", pattern: "microeconomics/" },
+      { key: "macro", id: "sidebar-subj-macro", pattern: "macroeconomics/" },
+      { key: "metrics", id: "sidebar-subj-metrics", pattern: "econometrics/" },
+      { key: "supplements", id: "sidebar-subj-supplements", pattern: "supplements/" },
+      { key: "literature", id: "sidebar-subj-literature", pattern: "literature/" },
+      { key: "qual-exam", id: "sidebar-subj-qual", pattern: "qual-exam/" }
+    ];
+
+    // Determine active subject from current page URL or active link
+    const currentPath = window.location.pathname.replace(/\\/g, "/");
+    let activeSubjKey = null;
+    for (const subj of subjectDefs) {
+      if (currentPath.includes("/" + subj.pattern) || currentPath.endsWith(subj.pattern)) {
+        activeSubjKey = subj.key;
+        break;
+      }
+    }
+
+    if (!activeSubjKey) {
+      const activeLink = sidebarUl.querySelector("a.sidebar-link.active");
+      if (activeLink) {
+        const href = (activeLink.getAttribute("href") || "").replace(/\\/g, "/");
+        for (const subj of subjectDefs) {
+          if (href.includes(subj.pattern)) {
+            activeSubjKey = subj.key;
+            break;
+          }
+        }
+      }
+    }
+
+    // Traverse top-level items of sidebarUl and group chapters under their subject
+    const items = Array.from(sidebarUl.children);
+    let currentSubjDef = null;
+    let currentSubjUl = null;
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const link = item.querySelector(":scope > .sidebar-item-container > a.sidebar-link") || item.querySelector("a.sidebar-link");
+      const href = link ? (link.getAttribute("href") || "").replace(/\\/g, "/") : "";
+
+      // Check if this item is a subject header (e.g. microeconomics/index.html)
+      const matchedDef = subjectDefs.find(s => href.includes(s.pattern + "index.") || href.endsWith(s.pattern));
+
+      if (matchedDef) {
+        item.classList.add("sidebar-item-section", "subject-header-item");
+        const isActiveSubj = (matchedDef.key === activeSubjKey);
+
+        const container = item.querySelector(".sidebar-item-container");
+        if (container) {
+          const toggle = document.createElement("a");
+          toggle.className = "sidebar-item-toggle text-start" + (isActiveSubj ? "" : " collapsed");
+          toggle.setAttribute("data-bs-toggle", "collapse");
+          toggle.setAttribute("data-bs-target", "#" + matchedDef.id);
+          toggle.setAttribute("role", "navigation");
+          toggle.setAttribute("aria-expanded", isActiveSubj ? "true" : "false");
+          toggle.setAttribute("aria-label", "토글 섹션");
+          toggle.innerHTML = '<i class="bi bi-chevron-right ms-2"></i>';
+          container.appendChild(toggle);
+        }
+
+        const subjUl = document.createElement("ul");
+        subjUl.id = matchedDef.id;
+        subjUl.className = "collapse list-unstyled sidebar-section depth1 subject-collapse" + (isActiveSubj ? " show" : "");
+        item.appendChild(subjUl);
+
+        currentSubjDef = matchedDef;
+        currentSubjUl = subjUl;
+      } else if (currentSubjUl && (item.classList.contains("sidebar-item-section") || (link && href.includes(currentSubjDef.pattern)))) {
+        // Belongs to the current subject group
+        currentSubjUl.appendChild(item);
+      } else {
+        // Global item outside subject groups (index, collaboration, references)
+        currentSubjDef = null;
+        currentSubjUl = null;
+      }
+    }
+
+    // Accordion: when any subject expands, collapse other open subjects
+    const allSubjUls = sidebar.querySelectorAll(".subject-collapse");
+    allSubjUls.forEach(ul => {
+      ul.addEventListener("show.bs.collapse", function (e) {
+        if (e.target !== ul) return; // ignore bubbled events from sub-chapters
+        allSubjUls.forEach(otherUl => {
+          if (otherUl !== ul && otherUl.classList.contains("show")) {
+            if (window.bootstrap?.Collapse) {
+              const bsCollapse = bootstrap.Collapse.getInstance(otherUl) || new bootstrap.Collapse(otherUl, { toggle: false });
+              bsCollapse.hide();
+            } else {
+              otherUl.classList.remove("show");
+              const toggle = otherUl.parentElement?.querySelector(".sidebar-item-toggle");
+              if (toggle) {
+                toggle.classList.add("collapsed");
+                toggle.setAttribute("aria-expanded", "false");
+              }
+            }
+          }
+        });
+      });
+    });
+
+    // In the active subject: collapse any chapters that don't contain the active link
+    if (activeSubjKey) {
+      const activeSubjEl = document.getElementById("sidebar-subj-" + activeSubjKey);
+      if (activeSubjEl) {
+        const chapterSections = activeSubjEl.querySelectorAll(":scope > .sidebar-item-section");
+        chapterSections.forEach(sec => {
+          const hasActiveChild = Boolean(sec.querySelector("a.sidebar-link.active"));
+          const secUl = sec.querySelector(":scope > ul.sidebar-section");
+          const secToggle = sec.querySelector(":scope > .sidebar-item-container > .sidebar-item-toggle");
+          if (!hasActiveChild && secUl) {
+            secUl.classList.remove("show");
+            if (secToggle) {
+              secToggle.classList.add("collapsed");
+              secToggle.setAttribute("aria-expanded", "false");
+            }
+          }
+        });
+      }
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupSidebarAccordion);
+  } else {
+    setupSidebarAccordion();
+  }
+})();
+
 // Keep wide tables within the reading column, with keyboard-accessible scrolling.
 document.addEventListener("DOMContentLoaded", () => {
   const isHome = Boolean(document.querySelector(".home-hero"));
