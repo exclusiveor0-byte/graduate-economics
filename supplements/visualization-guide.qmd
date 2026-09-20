@@ -2,15 +2,15 @@
 
 ## 현재 제공되는 보충자료
 
-- [Slutsky 분해: 가격변화와 두 보상 규칙](slutsky-decomposition.qmd): 두 재화 Cobb--Douglas 소비자에서 가격을 바꾸고 Slutsky 보상과 Hicks 보상을 비교합니다.
-- [Solow 성장모형: 자본축적과 전이경로](solow-growth.qmd): R이 생성한 전이경로 격자에서 저축률·감가상각률·초기 자본을 바꾸며 정상상태를 비교합니다.
-- [Ramsey 모형: 안장경로 동학과 슈팅 알고리즘](ramsey-saddle-path.qmd): MATLAB 정적 위상도와 네 가지 GIF 애니메이션으로 안장경로와 슈팅 해법을 비교합니다.
-- [OLS 표본 기하와 표본 변동](ols-geometry.qmd): MATLAB 기준 표본과 fixed-$X$ Monte Carlo로 투영, 잔차 직교성, 표본분포를 확인합니다.
-- [OLS 직교사영과 정상방정식의 벡터 기하](ols-projection-geometry.qmd): MATLAB으로 투영행렬, 정상방정식, 잔차 직교성을 한 번에 확인합니다.
-- [도구변수와 약한 도구변수](iv-weak-instruments.qmd): MATLAB 기준 실험과 브라우저 Monte Carlo로 OLS 편향과 2SLS의 약한 도구변수 문제를 비교합니다.
-- [IS–LM 재정충격: 단기 균형의 이동](islm-fiscal-shock.qmd): MATLAB 정적 도표와 애니메이션 GIF로 재정지출 확대 뒤 IS–LM 단기 균형이 이동하는 과정을 읽습니다.
-- [Edgeworth 상자: 경쟁균형과 후생경제학 제1정리](edgeworth-first-welfare.qmd): 초기부존, 계약곡선, 경쟁균형을 한 도표에서 비교해 경쟁균형의 Pareto 효율성을 확인합니다.
-- [대응의 반연속성과 닫힌 그래프: UHC와 LHC](correspondence-hemicontinuity.qmd): 개집합 포섭 조건과 수열 수렴 조건을 직관적으로 조작하며 대응의 상반연속, 하반연속, 닫힌 그래프 성질을 확인합니다.
+- [Slutsky 분해: 가격변화와 두 보상 규칙](slutsky-decomposition.qmd): 두 재화 Cobb--Douglas 소비자에서 가격을 바꾸고 Slutsky 보상과 Hicks 보상을 비교한다.
+- [Solow 성장모형: 자본축적과 전이경로](solow-growth.qmd): R이 생성한 전이경로 격자에서 저축률·감가상각률·초기 자본을 바꾸며 정상상태를 비교한다.
+- [Ramsey 모형: 안장경로 동학과 슈팅 알고리즘](ramsey-saddle-path.qmd): MATLAB 정적 위상도와 네 가지 GIF 애니메이션으로 안장경로와 슈팅 해법을 비교한다.
+- [OLS 표본 기하와 표본 변동](ols-geometry.qmd): MATLAB 기준 표본과 fixed-$X$ Monte Carlo로 투영, 잔차 직교성, 표본분포를 확인한다.
+- [OLS 직교사영과 정상방정식의 벡터 기하](ols-projection-geometry.qmd): MATLAB으로 투영행렬, 정상방정식, 잔차 직교성을 한 번에 확인한다.
+- [도구변수와 약한 도구변수](iv-weak-instruments.qmd): MATLAB 기준 실험과 브라우저 Monte Carlo로 OLS 편향과 2SLS의 약한 도구변수 문제를 비교한다.
+- [IS–LM 재정충격: 단기 균형의 이동](islm-fiscal-shock.qmd): MATLAB 정적 도표와 애니메이션 GIF로 재정지출 확대 뒤 IS–LM 단기 균형이 이동하는 과정을 읽는다.
+- [Edgeworth 상자: 경쟁균형과 후생경제학 제1정리](edgeworth-first-welfare.qmd): 초기부존, 계약곡선, 경쟁균형을 한 도표에서 비교해 경쟁균형의 Pareto 효율성을 확인한다.
+- [대응의 반연속성과 닫힌 그래프: UHC와 LHC](correspondence-hemicontinuity.qmd): 개집합 포섭 조건과 수열 수렴 조건을 직관적으로 조작하며 대응의 상반연속, 하반연속, 닫힌 그래프 성질을 확인한다.
 
 ## 선택 기준
 
@@ -25,13 +25,13 @@
 
 ## v1 CI 원칙
 
-초기 GitHub Actions는 Quarto 렌더만 수행합니다.
+초기 GitHub Actions는 Quarto 렌더만 수행한다.
 
-R/MATLAB 계산 결과는 우선 로컬에서 생성한 뒤 asset으로 commit합니다.
+R/MATLAB 계산 결과는 우선 로컬에서 생성한 뒤 asset으로 commit한다.
 
 팀이 workflow에 익숙해진 뒤:
 - R package environment
 - MATLAB Actions
 - computational freeze/cache
 
-를 단계적으로 추가합니다.
+를 단계적으로 추가한다.
