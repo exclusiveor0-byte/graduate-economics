@@ -23,10 +23,10 @@ INK_COLOR = "#2d251e"
 MUTED_COLOR = "#75665b"
 GRID_COLOR = "#e5ded3"
 TEAL_COLOR = "#087e8b"      # Contract curve / Pareto efficiency
-AMBER_COLOR = "#b46f45"     # Consumer B / Transfer vector
-GOLD_COLOR = "#a16207"      # Indifference curves / Utility
+AMBER_COLOR = "#c0392b"     # Consumer B / Indifference curve B (clear contrast)
+GOLD_COLOR = "#d97706"      # Consumer A / Indifference curve A
 PURPLE_COLOR = "#6b4c7a"    # Equilibrium / Supporting price
-RED_COLOR = "#c0392b"       # Budget lines / Disequilibrium
+RED_COLOR = "#dc2626"       # Budget lines / Disequilibrium
 
 plt.rcParams["font.sans-serif"] = ["Malgun Gothic", "Pretendard", "Segoe UI", "DejaVu Sans"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -57,6 +57,19 @@ def util_A(x, y):
 def util_B(xB, yB):
     return (xB ** alpha_B) * (yB ** (1.0 - alpha_B))
 
+# Exact Indifference curve formulations in (xA, yA) space
+# For A: u_A = x_A^0.6 * y_A^0.4 => y_A = (u_A / x_A^0.6)^(1/0.4) = u_A^2.5 / x_A^1.5
+def ic_A_y(x, u):
+    return (u ** (1.0 / (1.0 - alpha_A))) / (x ** (alpha_A / (1.0 - alpha_A)))
+
+# For B: u_B = x_B^0.4 * y_B^0.6 => y_B = (u_B / x_B^0.4)^(1/0.6) = u_B^(5/3) / x_B^(2/3)
+# where x_B = X_bar - x, and y_A = Y_bar - y_B
+def ic_B_y(x, u):
+    xB = X_bar - x
+    with np.errstate(invalid="ignore"):
+        yB = (u ** (1.0 / (1.0 - alpha_B))) / (xB ** (alpha_B / (1.0 - alpha_B)))
+        return Y_bar - yB
+
 # Initial utilities at endowment omega
 uA_omega = util_A(e_A1, e_A2)  # ~ 3.4822
 uB_omega = util_B(e_B1, e_B2)  # ~ 3.4822
@@ -74,32 +87,19 @@ uB_star = util_B(X_bar - xA_star, Y_bar - yA_star)  # ~ 5.1017
 # ==============================================================================
 def generate_gif_equilibrium():
     print("Generating GIF 1: edgeworth-competitive-equilibrium.gif ...")
-    n_frames = 38
-    # Price p = px / py sweeps: starts high (2.2) -> drops to low (0.55) -> converges to p* = 1.0
-    p_phase1 = np.linspace(2.2, 0.55, 24)
-    p_phase2 = np.linspace(0.55, 1.0, 14)
+    # Price sweep: starts high (1.75) -> drops to low (0.62) -> converges to p* = 1.0
+    # Both consumers' demands remain comfortably inside the box [0, 10] x [0, 10] throughout
+    p_phase1 = np.linspace(1.75, 0.62, 22)
+    p_phase2 = np.linspace(0.62, 1.0, 14)
     p_vals = np.concatenate([p_phase1, p_phase2])
 
-    xA_grid = np.linspace(0.01, 9.99, 300)
+    xA_grid = np.linspace(0.01, 9.99, 400)
     cc_y = contract_curve_y(xA_grid)
-
-    # Indifference curve contours for A (from O_A) and B (from O_B)
-    # y_A = (u / x_A^0.6)^(1/0.4) = u^(2.5) / x_A^(1.5)
-    def ic_A_y(x, u):
-        return (u ** 2.5) / (x ** 1.5)
-
-    # For B: y_B = u^(1/0.6) / x_B^(0.4/0.6) => y_A = 10 - [u^(5/3) / (10 - x_A)^(2/3)]
-    def ic_B_y(x, u):
-        xB = X_bar - x
-        with np.errstate(invalid="ignore"):
-            yB = (u ** (1.0 / alpha_B)) / (xB ** ((1.0 - alpha_B) / alpha_B))
-            return Y_bar - yB
 
     frames = []
 
     # Dense price grid for excess demand curve in Panel 2
-    p_dense = np.linspace(0.45, 2.3, 200)
-    # z_x(p) = (1.2 + 4.8/p) + (3.2 + 0.8/p) - 10 = 5.6/p - 5.6
+    p_dense = np.linspace(0.50, 2.0, 200)
     zx_dense = 5.6 / p_dense - 5.6
 
     for idx, p in enumerate(p_vals):
@@ -120,7 +120,11 @@ def generate_gif_equilibrium():
         yB_dem_inA = Y_bar - yB_dem
 
         zx = xA_dem + xB_dem - X_bar
-        is_equil = abs(p - 1.0) < 0.02 and idx > 28
+        is_equil = abs(p - 1.0) < 0.02 and idx > 26
+
+        # Current utility levels at demand points
+        uA_curr = util_A(xA_dem, yA_dem)
+        uB_curr = util_B(xB_dem, yB_dem)
 
         # ---------------- Panel 1: Edgeworth Box ----------------
         ax1.set_facecolor(BG_COLOR)
@@ -143,52 +147,66 @@ def generate_gif_equilibrium():
         ax1.annotate(r"초기부존 $\omega(2,8)$", xy=(e_A1, e_A2), xytext=(e_A1 + 0.3, e_A2 + 0.4),
                      fontweight="bold", color=INK_COLOR, fontsize=9.5)
 
-        # Budget line passing through omega: y - e_A2 = -p * (x - e_A1) => y = e_A2 - p*(x - e_A1)
+        # Budget line passing through omega: y = e_A2 - p*(x - e_A1)
         x_bl = np.array([0, X_bar])
         y_bl = e_A2 - p * (x_bl - e_A1)
         bl_color = PURPLE_COLOR if is_equil else RED_COLOR
         ax1.plot(x_bl, y_bl, color=bl_color, linewidth=2.0, linestyle="--",
                  label=f"예산선 (기울기 $-p={-p:.2f}$)")
 
-        # Current choices of A and B
         if not is_equil:
+            # Disequilibrium: Plot both indifference curves passing through dA and dB
+            uA_vals = ic_A_y(xA_grid, uA_curr)
+            maskA = (uA_vals >= 0) & (uA_vals <= Y_bar)
+            ax1.plot(xA_grid[maskA], uA_vals[maskA], color=GOLD_COLOR, linewidth=1.5, alpha=0.6,
+                     label=r"$u_A$ 무차별곡선 ($d_A$에서 접함)")
+
+            uB_vals = ic_B_y(xA_grid, uB_curr)
+            maskB = (uB_vals >= 0) & (uB_vals <= Y_bar)
+            ax1.plot(xA_grid[maskB], uB_vals[maskB], color=AMBER_COLOR, linewidth=1.5, alpha=0.6,
+                     label=r"$u_B$ 무차별곡선 ($d_B$에서 접함)")
+
             # A's optimal bundle
-            if 0 <= xA_dem <= X_bar and 0 <= yA_dem <= Y_bar:
-                ax1.plot(xA_dem, yA_dem, "o", color=INK_COLOR, markersize=7, zorder=7)
-                ax1.text(xA_dem + 0.2, yA_dem + 0.2, r"$d_A$", fontsize=9, fontweight="bold", color=INK_COLOR)
+            ax1.plot(xA_dem, yA_dem, "o", color=GOLD_COLOR, markersize=8, zorder=7)
+            ax1.text(xA_dem + 0.2, yA_dem + 0.25, r"$d_A$", fontsize=9.5, fontweight="bold", color=GOLD_COLOR)
+
             # B's optimal bundle in box
-            if 0 <= xB_dem_inA <= X_bar and 0 <= yB_dem_inA <= Y_bar:
-                ax1.plot(xB_dem_inA, yB_dem_inA, "s", color=AMBER_COLOR, markersize=7, zorder=7)
-                ax1.text(xB_dem_inA - 0.9, yB_dem_inA - 0.7, r"$d_B$", fontsize=9, fontweight="bold", color=AMBER_COLOR)
+            ax1.plot(xB_dem_inA, yB_dem_inA, "s", color=AMBER_COLOR, markersize=8, zorder=7)
+            ax1.text(xB_dem_inA - 0.9, yB_dem_inA - 0.75, r"$d_B$", fontsize=9.5, fontweight="bold", color=AMBER_COLOR)
+
             # Arrow indicating disequilibrium mismatch
-            if 0 <= xA_dem <= X_bar and 0 <= xB_dem_inA <= X_bar:
-                ax1.annotate("", xy=(xB_dem_inA, yB_dem_inA), xytext=(xA_dem, yA_dem),
-                             arrowprops=dict(arrowstyle="<->", color=RED_COLOR, lw=1.5, ls=":"))
+            ax1.annotate("", xy=(xB_dem_inA, yB_dem_inA), xytext=(xA_dem, yA_dem),
+                         arrowprops=dict(arrowstyle="<->", color=RED_COLOR, lw=1.6, ls=":"))
         else:
             # Equilibrium coincidence at (6, 4)!
-            ax1.plot(xA_star, yA_star, "*", color=GOLD_COLOR, markersize=14, zorder=8, label=r"경쟁균형 $x^*(6,4)$")
-            # Tangent indifference curves
+            # Plot the tangent indifference curves
             uA_vals = ic_A_y(xA_grid, uA_star)
             maskA = (uA_vals >= 0) & (uA_vals <= Y_bar)
-            ax1.plot(xA_grid[maskA], uA_vals[maskA], color=GOLD_COLOR, linewidth=1.8, label=r"$u_A^*$ 무차별곡선")
+            ax1.plot(xA_grid[maskA], uA_vals[maskA], color=GOLD_COLOR, linewidth=2.3, zorder=7,
+                     label=r"$u_A^*$ 무차별곡선")
 
             uB_vals = ic_B_y(xA_grid, uB_star)
             maskB = (uB_vals >= 0) & (uB_vals <= Y_bar)
-            ax1.plot(xA_grid[maskB], uB_vals[maskB], color=AMBER_COLOR, linewidth=1.8, label=r"$u_B^*$ 무차별곡선")
+            ax1.plot(xA_grid[maskB], uB_vals[maskB], color=AMBER_COLOR, linewidth=2.3, zorder=7,
+                     label=r"$u_B^*$ 무차별곡선")
 
-            ax1.annotate(r"후생경제학 제1정리 달성!" + "\n" + r"$x^* \in$ 계약곡선 ($MRS_A=MRS_B=p^*$)",
-                         xy=(xA_star, yA_star), xytext=(xA_star - 4.8, yA_star - 2.5),
+            # Equilibrium star marker
+            ax1.plot(xA_star, yA_star, "*", color=GOLD_COLOR, markersize=15, zorder=9,
+                     label=r"경쟁균형 $x^*(6,4)$")
+
+            ax1.annotate(r"제1후생정리: 두 무차별곡선 상호 외접!" + "\n" + r"$x^* \in$ 계약곡선 ($MRS_A=MRS_B=p^*=1$)",
+                         xy=(xA_star, yA_star), xytext=(xA_star - 5.2, yA_star - 2.5),
                          fontweight="bold", color=PURPLE_COLOR, fontsize=9.5,
-                         arrowprops=dict(arrowstyle="->", color=PURPLE_COLOR, lw=1.4))
+                         arrowprops=dict(arrowstyle="->", color=PURPLE_COLOR, lw=1.6))
 
         status_str = "시장청산 경쟁균형 도달! (p*=1.0)" if is_equil else f"가격 모색 중: p={p:.2f}"
         ax1.set_title(f"Edgeworth 상자 ({status_str})", fontsize=11.5, fontweight="bold", color=INK_COLOR)
-        ax1.legend(loc="lower left", fontsize=8.0, framealpha=0.9)
+        ax1.legend(loc="lower left", fontsize=8.0, framealpha=0.92)
 
         # ---------------- Panel 2: Walrasian Excess Demand ----------------
         ax2.set_facecolor(BG_COLOR)
         ax2.set_xlim(-4.0, 6.0)
-        ax2.set_ylim(0.45, 2.3)
+        ax2.set_ylim(0.45, 2.1)
         ax2.set_xlabel(r"재화 1 초과수요 $z_x(p) = d_A^x + d_B^x - \bar{x}$", fontsize=10.5, color=INK_COLOR, fontweight="bold")
         ax2.set_ylabel(r"상대가격 $p = p_x / p_y$", fontsize=10.5, color=INK_COLOR, fontweight="bold")
         ax2.grid(True, color=GRID_COLOR, linestyle="-", linewidth=0.7)
@@ -197,20 +215,20 @@ def generate_gif_equilibrium():
         # Excess demand curve
         ax2.plot(zx_dense, p_dense, color=TEAL_COLOR, linewidth=2.2, label=r"총초과수요곡선 $z_x(p) = \frac{5.6}{p} - 5.6$")
         ax2.axvline(0, color=INK_COLOR, linestyle="-", linewidth=1.2)
-        ax2.axhline(p_star, color=GOLD_COLOR, linestyle="--", linewidth=1.2, label=r"균형가격 $p^* = 1.0$")
+        ax2.axhline(p_star, color=PURPLE_COLOR, linestyle="--", linewidth=1.2, label=r"균형가격 $p^* = 1.0$")
 
         # Shading excess demand vs excess supply
         ax2.axvspan(0, 6.0, color="#fef3c7", alpha=0.4, label=r"초과수요 ($z_x > 0 \to \dot{p} > 0$)")
         ax2.axvspan(-4.0, 0, color="#e0f2fe", alpha=0.4, label=r"초과공급 ($z_x < 0 \to \dot{p} < 0$)")
 
         # Current point on excess demand
-        curr_pt_color = GOLD_COLOR if is_equil else RED_COLOR
+        curr_pt_color = PURPLE_COLOR if is_equil else RED_COLOR
         ax2.plot(zx, p, "o", color=curr_pt_color, markersize=8, zorder=6)
         txt_pos = (zx + 0.3, p + 0.08) if zx < 2.5 else (zx - 2.8, p + 0.08)
         ax2.annotate(f"p={p:.2f}\n$z_x$={zx:+.2f}", xy=(zx, p), xytext=txt_pos,
                      fontweight="bold", color=curr_pt_color, fontsize=8.5)
 
-        ax2.legend(loc="upper right", fontsize=8.0, framealpha=0.9)
+        ax2.legend(loc="upper right", fontsize=8.0, framealpha=0.92)
 
         fig.canvas.draw()
         rgba = np.asarray(fig.canvas.buffer_rgba())
@@ -218,8 +236,9 @@ def generate_gif_equilibrium():
         plt.close(fig)
 
     out_path = os.path.join(GIF_DIR, "edgeworth-competitive-equilibrium.gif")
-    frames_to_save = frames + [frames[-1]] * 8
-    frames_to_save[0].save(out_path, save_all=True, append_images=frames_to_save[1:], duration=130, loop=0)
+    # Hold equilibrium frame for 16 frames (~2.2 seconds)
+    frames_to_save = frames + [frames[-1]] * 16
+    frames_to_save[0].save(out_path, save_all=True, append_images=frames_to_save[1:], duration=140, loop=0)
     print(f"  -> Saved: {out_path} ({os.path.getsize(out_path)/1024:.1f} KB)")
 
 
@@ -232,7 +251,7 @@ def generate_gif_second_welfare():
     # Target allocation xA sweeps along the contract curve from 2.0 to 8.0
     xA_targets = np.linspace(2.0, 8.0, n_frames)
 
-    xA_grid = np.linspace(0.01, 9.99, 300)
+    xA_grid = np.linspace(0.01, 9.99, 400)
     cc_y = contract_curve_y(xA_grid)
 
     # Precalculate Utility Possibility Frontier (UPF)
@@ -279,24 +298,34 @@ def generate_gif_second_welfare():
         ax1.plot(e_A1, e_A2, "o", color=MUTED_COLOR, markersize=7, zorder=5)
         ax1.text(e_A1 + 0.2, e_A2 + 0.3, r"초기 $\omega(2,8)$", color=MUTED_COLOR, fontsize=8.5)
 
-        # Target point on contract curve
-        ax1.plot(xA_tgt, yA_tgt, "*", color=GOLD_COLOR, markersize=12, zorder=8,
-                 label=f"목표 배분 $x^*({xA_tgt:.1f}, {yA_tgt:.1f})$")
-
         # Supporting budget line passing through x_tgt: y - yA_tgt = -p_sup * (x - xA_tgt)
         x_bl = np.array([0, X_bar])
         y_bl = yA_tgt - p_sup * (x_bl - xA_tgt)
         ax1.plot(x_bl, y_bl, color=PURPLE_COLOR, linewidth=2.0, linestyle="--",
                  label=f"지지가격선 (기울기 $-p={-p_sup:.2f}$)")
 
-        # Transfer vector: Arrow from initial endowment to target budget line
-        # Target endowment can be x_tgt itself (or any point on the supporting line)
-        ax1.annotate("", xy=(xA_tgt, yA_tgt), xytext=(e_A1, e_A2),
-                     arrowprops=dict(arrowstyle="->", color=AMBER_COLOR, lw=1.8, ls="-."))
-        ax1.text((e_A1 + xA_tgt) / 2 - 0.5, (e_A2 + yA_tgt) / 2 + 0.3,
-                 "일괄이전 (Lump-sum)", color=AMBER_COLOR, fontsize=8.5, fontweight="bold")
+        # Both tangent indifference curves at target point x_tgt!
+        uA_vals = ic_A_y(xA_grid, uA_tgt)
+        maskA = (uA_vals >= 0) & (uA_vals <= Y_bar)
+        ax1.plot(xA_grid[maskA], uA_vals[maskA], color=GOLD_COLOR, linewidth=1.8, alpha=0.85,
+                 label=r"$u_A$ 무차별곡선")
 
-        ax1.legend(loc="lower right", fontsize=8.0, framealpha=0.9)
+        uB_vals = ic_B_y(xA_grid, uB_tgt)
+        maskB = (uB_vals >= 0) & (uB_vals <= Y_bar)
+        ax1.plot(xA_grid[maskB], uB_vals[maskB], color=AMBER_COLOR, linewidth=1.8, alpha=0.85,
+                 label=r"$u_B$ 무차별곡선")
+
+        # Target point on contract curve
+        ax1.plot(xA_tgt, yA_tgt, "*", color=GOLD_COLOR, markersize=13, zorder=8,
+                 label=f"목표 배분 $x^*({xA_tgt:.1f}, {yA_tgt:.1f})$")
+
+        # Transfer vector: Arrow from initial endowment to target budget line
+        ax1.annotate("", xy=(xA_tgt, yA_tgt), xytext=(e_A1, e_A2),
+                     arrowprops=dict(arrowstyle="->", color=MUTED_COLOR, lw=1.6, ls="-."))
+        ax1.text((e_A1 + xA_tgt) / 2 - 0.5, (e_A2 + yA_tgt) / 2 + 0.3,
+                 "일괄이전 (Lump-sum)", color=MUTED_COLOR, fontsize=8.5, fontweight="bold")
+
+        ax1.legend(loc="lower right", fontsize=7.8, framealpha=0.92)
 
         # ---------------- Panel 2: Utility Possibility Frontier (UPF) ----------------
         ax2.set_facecolor(BG_COLOR)
@@ -331,7 +360,7 @@ def generate_gif_second_welfare():
                              uB_tgt - 2.0 if uB_tgt > 5.0 else uB_tgt + 0.8),
                      fontweight="bold", color=PURPLE_COLOR, fontsize=9.0)
 
-        ax2.legend(loc="lower left", fontsize=8.0, framealpha=0.9)
+        ax2.legend(loc="lower left", fontsize=8.0, framealpha=0.92)
 
         fig.canvas.draw()
         rgba = np.asarray(fig.canvas.buffer_rgba())
@@ -339,8 +368,8 @@ def generate_gif_second_welfare():
         plt.close(fig)
 
     out_path = os.path.join(GIF_DIR, "edgeworth-second-welfare-theorem.gif")
-    frames_to_save = frames + [frames[-1]] * 8
-    frames_to_save[0].save(out_path, save_all=True, append_images=frames_to_save[1:], duration=130, loop=0)
+    frames_to_save = frames + [frames[-1]] * 12
+    frames_to_save[0].save(out_path, save_all=True, append_images=frames_to_save[1:], duration=140, loop=0)
     print(f"  -> Saved: {out_path} ({os.path.getsize(out_path)/1024:.1f} KB)")
 
 
