@@ -34,6 +34,54 @@ main > blockquote { background: #f5eddf; padding: 1rem 1.25rem; border-left: 3px
 .sidebar-navigation .sidebar-item-toggle { flex-shrink: 0; }
 .sidebar-navigation .sidebar-link.active { color: #743f27; font-weight: 750; border-left: 3px solid #8a4e2d; padding-left: .45rem; }
 .sidebar-navigation .sidebar-item-section > .sidebar-item-container { margin-top: .65rem; font-weight: 650; }
+.sidebar-navigation .sidebar-item-section.subject-header-item {
+  margin-top: .85rem;
+  margin-bottom: .2rem;
+  border-bottom: 1px solid rgba(225, 213, 196, 0.6);
+  padding-bottom: .25rem;
+
+  > .sidebar-item-container {
+    margin-top: 0;
+    font-size: 1.02rem;
+    font-weight: 750;
+    letter-spacing: -.02em;
+
+    > a.sidebar-link {
+      color: #3f3129;
+      padding-left: .2rem;
+      &:hover {
+        color: #8a4e2d;
+      }
+      &.active {
+        color: #743f27;
+        font-weight: 800;
+        border-left: 3px solid #8a4e2d;
+        padding-left: .45rem;
+      }
+    }
+
+    > .sidebar-item-toggle {
+      padding: .2rem .35rem;
+      color: #705f52;
+      &:hover {
+        color: #3f3129;
+      }
+    }
+  }
+}
+.sidebar-navigation .subject-collapse {
+  padding-left: .25rem;
+
+  > .sidebar-item-section {
+    margin-top: .35rem;
+
+    > .sidebar-item-container {
+      margin-top: 0;
+      font-size: .88rem;
+      font-weight: 600;
+    }
+  }
+}
 #TOC { font-size: .8rem; line-height: 1.65; }
 .callout { margin: 1.45rem 0; border-radius: .3rem; border: 1px solid var(--notes-rule); border-left-width: 4px; box-shadow: none; }
 div.callout.callout-style-default .callout-body { font-size: 1rem; line-height: 1.85; }
@@ -94,7 +142,7 @@ td, th { min-width: 6rem; padding: .7rem !important; }
 .literature-card h3 a:hover { text-decoration: underline; text-underline-offset: .16em; }
 .paper-citation { margin: 1rem 0 1.5rem; padding: .9rem 1rem; border-left: 3px solid #466b68; background: #edf4f1; }
 .home-note { margin: -.25rem 0 2.5rem; padding: .9rem 1.05rem; border-left: 3px solid #b47b52; background: #f5eddf; color: #58463b; font-size: .94rem; }
-body.home-page #quarto-sidebar .sidebar-menu-container > ul > .sidebar-item-section { display: none; }
+body.home-page #quarto-sidebar .sidebar-menu-container > ul > .sidebar-item-section:not(.subject-header-item) { display: none; }
 body.home-page #title-block-header { margin-bottom: 2.25rem; padding: clamp(1.6rem, 4vw, 2.7rem); border: 0; background: #493a31; }
 body.home-page h1.title { color: #fff8ed; font-family: Georgia, "Noto Serif KR", serif; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 600; letter-spacing: -.055em; }
 body.home-page #title-block-header .subtitle { margin-top: .5rem; color: #e8c9a8; font-size: 1rem; letter-spacing: .035em; }
