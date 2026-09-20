@@ -5,7 +5,7 @@
 ## 현재 제공되는 보충자료
 
 - [Slutsky 분해: 가격변화와 두 보상 규칙](slutsky-decomposition.qmd)
-- [Solow 성장모형: 자본축적과 전이경로](solow-growth.qmd) — R 계산 원본과 브라우저 탐색 도구
+- [Solow 성장모형: 자본축적과 전이경로](solow-growth.qmd) — 동학적 자본축적, 베르누이 닫힌 해, 수렴속도 및 황금률 동학
 - [Ramsey 모형: 안장경로 동학과 슈팅 알고리즘](ramsey-saddle-path.qmd) — MATLAB 4종 애니메이션, 정적 위상도 및 수치 슈팅 해법
 - [OLS 표본 기하와 표본 변동](ols-geometry.qmd) — Gauss–Markov BLUE 분산 타원, 유한표본 정규성 및 결합 신뢰타원 동학
 - [OLS 직교사영과 정상방정식의 벡터 기하](ols-projection-geometry.qmd) — 3D 관측공간 직교사영, Frisch–Waugh–Lovell 정리 및 다중공선성의 기하
