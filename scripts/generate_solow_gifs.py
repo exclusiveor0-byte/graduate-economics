@@ -147,14 +147,15 @@ def generate_gif_convergence():
         ax2.grid(True, color=GRID_COLOR, linestyle="-", linewidth=0.7)
         ax2.legend(loc="right", fontsize=8.5, framealpha=0.9)
 
-        plt.tight_layout()
+        fig.subplots_adjust(left=0.07, right=0.96, bottom=0.12, top=0.90, wspace=0.22)
         fig.canvas.draw()
         rgba = np.asarray(fig.canvas.buffer_rgba())
         frames.append(Image.fromarray(rgba))
         plt.close(fig)
 
     out_path = os.path.join(GIF_DIR, "solow-capital-convergence.gif")
-    frames[0].save(out_path, save_all=True, append_images=frames[1:], duration=120, loop=0)
+    frames_to_save = frames + [frames[-1]] * 6
+    frames_to_save[0].save(out_path, save_all=True, append_images=frames_to_save[1:], duration=120, loop=0)
     print(f"  -> Saved: {out_path} ({os.path.getsize(out_path)/1024:.1f} KB)")
 
 
@@ -273,14 +274,15 @@ def generate_gif_saving_shock():
         labels = [l.get_label() for l in lines]
         ax2.legend(lines, labels, loc="lower right", fontsize=8.5, framealpha=0.9)
 
-        plt.tight_layout()
+        fig.subplots_adjust(left=0.07, right=0.92, bottom=0.12, top=0.90, wspace=0.25)
         fig.canvas.draw()
         rgba = np.asarray(fig.canvas.buffer_rgba())
         frames.append(Image.fromarray(rgba))
         plt.close(fig)
 
     out_path = os.path.join(GIF_DIR, "solow-saving-rate-shock.gif")
-    frames[0].save(out_path, save_all=True, append_images=frames[1:], duration=120, loop=0)
+    frames_to_save = frames + [frames[-1]] * 6
+    frames_to_save[0].save(out_path, save_all=True, append_images=frames_to_save[1:], duration=120, loop=0)
     print(f"  -> Saved: {out_path} ({os.path.getsize(out_path)/1024:.1f} KB)")
 
 
@@ -289,15 +291,15 @@ def generate_gif_saving_shock():
 # ==============================================================================
 def generate_gif_golden_rule():
     print("Generating GIF 3: solow-golden-rule.gif ...")
-    s_sweep = np.linspace(0.06, 0.75, 36)
-    s_dense = np.linspace(0.04, 0.85, 300)
+    s_sweep = np.linspace(0.08, 0.52, 36)
+    s_dense = np.linspace(0.06, 0.58, 300)
 
     # Steady states as function of s
     k_star_dense = (s_dense / dilution) ** (1.0 / (1.0 - alpha))
     y_star_dense = k_star_dense ** alpha
     c_star_dense = (1.0 - s_dense) * y_star_dense
 
-    k_grid = np.linspace(0.001, 15.0, 300)
+    k_grid = np.linspace(0.001, 19.0, 300)
     dep_line = dilution * k_grid
     y_curve = k_grid ** alpha
 
@@ -323,12 +325,13 @@ def generate_gif_golden_rule():
         ax1.axvline(k_gold, color=GOLD_COLOR, linestyle="--", alpha=0.6, label=f"황금률 자본 ($k_{{gold}}={k_gold:.2f}$)")
 
         ax1.plot(k_curr, dilution * k_curr, "o", color=curve_color, markersize=8, zorder=6)
+        x_txt = k_curr - 3.0 if k_curr > 13.0 else k_curr + 0.4
         ax1.annotate(f"$k^*={k_curr:.2f}$", xy=(k_curr, dilution * k_curr),
-                     xytext=(k_curr + 0.3, dilution * k_curr - 0.08),
+                     xytext=(x_txt, dilution * k_curr + 0.1),
                      fontweight="bold", color=curve_color, fontsize=9.5)
 
-        ax1.set_xlim(0, 15.0)
-        ax1.set_ylim(0, 2.5)
+        ax1.set_xlim(0, 19.0)
+        ax1.set_ylim(0, 3.0)
         ax1.set_xlabel("유효노동 단위 자본 $k$", fontsize=10.5, color=INK_COLOR, fontweight="bold")
         ax1.set_ylabel("투자 및 자본유지", fontsize=10.5, color=INK_COLOR, fontweight="bold")
         ax1.set_title("저축률에 따른 솔로우 교차점 이동", fontsize=11.0, fontweight="bold", color=INK_COLOR)
@@ -340,35 +343,41 @@ def generate_gif_golden_rule():
         ax2.plot(s_dense, c_star_dense, color=PURPLE_COLOR, linewidth=2.4, label=r"정상상태 소비 $c^*(s) = (1-s)k^{*\alpha}$")
 
         # Shading dynamic inefficiency region
-        ax2.axvspan(s_gold, 0.85, color="#f9e8e8", alpha=0.7, label=r"동태적 비효율 영역 ($s > \alpha$)")
+        ax2.axvspan(s_gold, 0.58, color="#f9e8e8", alpha=0.7, label=r"동태적 비효율 영역 ($s > \alpha$)")
         ax2.axvline(s_gold, color=GOLD_COLOR, linestyle="--", linewidth=1.5)
         ax2.plot(s_gold, c_gold, "*", color=GOLD_COLOR, markersize=12, zorder=7, label=f"황금률 저축률 ($s={s_gold:.2f}$)")
 
-        # Moving current point
+        # Moving current point with guide dashed lines
+        ax2.plot([s_curr, s_curr], [0.60, c_curr], linestyle=":", color=curve_color, linewidth=1.2, alpha=0.5)
+        ax2.plot([0.05, s_curr], [c_curr, c_curr], linestyle=":", color=curve_color, linewidth=1.2, alpha=0.5)
         ax2.plot(s_curr, c_curr, "o", color=curve_color, markersize=8, zorder=8)
+
         text_label = "비효율 과잉저축!" if is_inefficient else "동태적 효율 영역"
+        x_ann = s_curr - 0.13 if s_curr > 0.35 else s_curr + 0.02
+        y_ann = c_curr - 0.20 if c_curr > 1.1 else c_curr + 0.08
         ax2.annotate(f"$s={s_curr:.2f}$\n$c^*={c_curr:.3f}$\n({text_label})",
                      xy=(s_curr, c_curr),
-                     xytext=(s_curr + 0.04, c_curr - 0.15 if c_curr > 1.0 else c_curr + 0.1),
+                     xytext=(x_ann, y_ann),
                      fontweight="bold", color=curve_color, fontsize=9,
                      arrowprops=dict(arrowstyle="->", color=curve_color, lw=1.2))
 
-        ax2.set_xlim(0.05, 0.85)
-        ax2.set_ylim(0.4, 1.5)
+        ax2.set_xlim(0.05, 0.58)
+        ax2.set_ylim(0.60, 1.50)
         ax2.set_xlabel("저축률 $s$", fontsize=10.5, color=INK_COLOR, fontweight="bold")
         ax2.set_ylabel("정상상태 소비 $c^*$", fontsize=10.5, color=INK_COLOR, fontweight="bold")
         ax2.set_title("황금률과 동태적 비효율성 (저축률 vs 장기 소비)", fontsize=11.0, fontweight="bold", color=INK_COLOR)
         ax2.grid(True, color=GRID_COLOR, linestyle="-", linewidth=0.7)
         ax2.legend(loc="lower left", fontsize=8.0, framealpha=0.9)
 
-        plt.tight_layout()
+        fig.subplots_adjust(left=0.07, right=0.96, bottom=0.12, top=0.90, wspace=0.22)
         fig.canvas.draw()
         rgba = np.asarray(fig.canvas.buffer_rgba())
         frames.append(Image.fromarray(rgba))
         plt.close(fig)
 
     out_path = os.path.join(GIF_DIR, "solow-golden-rule.gif")
-    frames[0].save(out_path, save_all=True, append_images=frames[1:], duration=120, loop=0)
+    frames_to_save = frames + [frames[-1]] * 6
+    frames_to_save[0].save(out_path, save_all=True, append_images=frames_to_save[1:], duration=120, loop=0)
     print(f"  -> Saved: {out_path} ({os.path.getsize(out_path)/1024:.1f} KB)")
 
 
