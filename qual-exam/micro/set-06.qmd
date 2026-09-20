@@ -1,0 +1,94 @@
+---
+title: "문제 한 스푼 #6"
+subtitle: "일반균형 · 소비자이론"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #6
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **일반균형 · 소비자이론**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[문제당 약 10–15분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. General Equilibrium
+::: {.topic}
+Pure Exchange Economy · Competitive Equilibrium · Pareto Efficiency
+:::
+
+두 소비자와 두 재화 $x, y$로 이루어진 pure exchange economy를 생각하자. 두 소비자의 효용함수와 초기부존은
+
+$$
+u_1(x_1, y_1) = x_1 y_1, \qquad \omega_1 = (6, 0),
+$$
+
+$$
+u_2(x_2, y_2) = x_2 y_2^2, \qquad \omega_2 = (0, 6).
+$$
+
+$p_y = 1$로 normalize하고 $p_x = p > 0$라 하자.
+
+1. 각 소비자의 wealth와 Marshallian demand를 구하시오. 이를 이용하여 competitive equilibrium price $p^*$를 계산하시오.
+2. Competitive equilibrium allocation을 구하시오.
+3. 각 소비자의 MRS를 계산하고, 2번에서 구한 equilibrium allocation에서
+   $$
+   MRS_1 = MRS_2 = \frac{p_x}{p_y}
+   $$
+   가 성립하는지 확인하시오. 이 결과를 First Welfare Theorem과 연결하여 간단히 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **individual demand → market clearing → welfare verification**. 한 재화의 시장청산조건으로 균형가격을 구한 뒤 다른 재화 시장도 확인하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Consumer Theory
+::: {.topic}
+Expenditure Function · Shephard's Lemma · Duality
+:::
+
+두 재화에 대한 소비자의 expenditure function이
+
+$$
+e(p_1, p_2, u) = u\left(\sqrt{p_1} + \sqrt{p_2}\right)^2, \qquad p_1, p_2, u > 0
+$$
+
+로 주어진다. 소비자의 소득은 $m > 0$이다.
+
+1. duality relation
+   $$
+   e(p, V(p, m)) = m
+   $$
+   을 이용하여 indirect utility function $V(p_1, p_2, m)$을 구하시오.
+2. Shephard's lemma를 이용하여 Hicksian demands $h_1(p_1, p_2, u)$, $h_2(p_1, p_2, u)$를 구하시오. 이어서
+   $$
+   x_i(p, m) = h_i(p, V(p, m)), \qquad i = 1, 2,
+   $$
+   를 이용하여 Marshallian demands를 구하시오.
+3. 구한 Marshallian demands가
+   $$
+   p_1 x_1(p, m) + p_2 x_2(p, m) = m
+   $$
+   을 만족하는지 확인하고, $x_1, x_2$가 $(p_1, p_2, m)$에 대해 degree 0 homogeneous인지 보이시오.
+
+::: {.spoon-hint}
+**형식**: **duality → Shephard → Marshallian demand → verify**. 마지막 문항에서는 계산 결과의 성질을 직접 대입하여 확인하시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
