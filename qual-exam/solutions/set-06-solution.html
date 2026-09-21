@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 한 스푼 #6 · 손풀이 해설</title>
+<style>
+:root{--bg:#f6f7f9;--paper:#fff;--text:#17191d;--muted:#68707a;--line:#dfe3e8;--soft:#f1f3f5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;line-height:1.75}.wrap{width:min(920px,calc(100% - 32px));margin:40px auto 72px}.hero,.card{background:var(--paper);border:1px solid var(--line);border-radius:18px}.hero{padding:32px 34px 28px;margin-bottom:20px}.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}h1{margin:0 0 10px;font-size:31px;letter-spacing:-.03em}.subtitle{color:var(--muted);font-size:15px}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.chip{border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:6px 10px;font-size:13px;color:#444b54}.card{padding:30px 34px;margin-top:20px}.card h2{margin:0 0 8px;font-size:24px;letter-spacing:-.02em}.topic{color:var(--muted);font-size:14px;font-weight:700;margin-bottom:18px}.step{margin:22px 0 0}.step h3{margin:0 0 10px;font-size:18px}.flow{border-left:3px solid #cfd5dc;padding-left:18px;margin:12px 0 0}.note{margin-top:18px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;background:#fafbfc;color:#4d5560;font-size:14px}.footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}@media print{body{background:#fff}.wrap{width:100%;margin:0}.hero,.card{border-color:#bbb}.card{break-before:page}}
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],processEscapes:true},chtml:{scale:1.02}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<main class="wrap">
+<section class="hero">
+<div class="eyebrow">Graduate Microeconomics · Daily Practice</div>
+<h1>문제 한 스푼 #6 · 손풀이 해설</h1>
+<div class="subtitle">손풀이의 전개 순서와 계산 흐름을 유지하여 정리한 내용 중심 해설본</div>
+<div class="meta"><span class="chip">일반균형</span><span class="chip">소비자이론</span><span class="chip">원본 이미지 제외</span><span class="chip">MathJax CHTML</span></div>
+</section>
+
+<section class="card">
+<h2>Problem 1. General Equilibrium</h2>
+<div class="topic">KKT · Market Clearing · Walrasian Equilibrium · Pareto Efficiency</div>
+<div class="step"><h3>Setting</h3><div class="flow">
+\[
+u_1(x_1,y_1)=x_1y_1,\qquad \omega_1=(6,0),
+\]
+\[
+u_2(x_2,y_2)=x_2y_2^2,\qquad \omega_2=(0,6).
+\]
+\(p_y=1\), \(p_x=p\gt0\)로 normalize한다.
+</div></div>
+
+<div class="step"><h3>1) 각 소비자의 효용극대화 문제</h3><div class="flow">
+소비자 1의 wealth는 \(m_1=6p\)이므로
+\[
+\max_{x_1,y_1\ge0}x_1y_1\qquad \text{s.t.}\qquad px_1+y_1\le6p.
+\]
+Lagrangian은
+\[
+\mathcal L_1=x_1y_1+\lambda_1(6p-px_1-y_1)+\delta_1x_1+\nu_1y_1.
+\]
+KKT의 stationarity 조건은
+\[
+y_1-p\lambda_1+\delta_1=0,\qquad x_1-\lambda_1+\nu_1=0,
+\]
+complementary slackness는
+\[
+\lambda_1(6p-px_1-y_1)=0,\qquad \delta_1x_1=0,\qquad \nu_1y_1=0.
+\]
+
+소비자 2의 wealth는 \(m_2=6\)이므로
+\[
+\max_{x_2,y_2\ge0}x_2y_2^2\qquad \text{s.t.}\qquad px_2+y_2\le6.
+\]
+Lagrangian은
+\[
+\mathcal L_2=x_2y_2^2+\lambda_2(6-px_2-y_2)+\delta_2x_2+\nu_2y_2.
+\]
+stationarity 조건은
+\[
+y_2^2-p\lambda_2+\delta_2=0,\qquad 2x_2y_2-\lambda_2+\nu_2=0,
+\]
+complementary slackness는
+\[
+\lambda_2(6-px_2-y_2)=0,\qquad \delta_2x_2=0,\qquad \nu_2y_2=0.
+\]
+</div></div>
+
+<div class="step"><h3>2) FOC와 시장청산</h3><div class="flow">
+균형에서 양의 소비를 고려하면 소비자 1의 FOC로부터
+\[
+\frac{y_1}{x_1}=p.
+\]
+예산제약 \(px_1+y_1=6p\)과 함께 사용하면
+\[
+px_1+px_1=6p,
+\]
+따라서
+\[
+x_1=3,\qquad y_1=3p.
+\]
+
+소비자 2의 FOC로부터
+\[
+\frac{y_2}{2x_2}=p,
+\]
+즉
+\[
+y_2=2px_2.
+\]
+예산제약 \(px_2+y_2=6\)에 대입하면
+\[
+3px_2=6,
+\]
+따라서
+\[
+x_2=\frac{2}{p},\qquad y_2=4.
+\]
+
+시장청산조건은
+\[
+x_1+x_2=6,\qquad y_1+y_2=6.
+\]
+\(x\)-재화 시장에서
+\[
+3+\frac{2}{p}=6,
+\]
+이므로
+\[
+p^*=\frac23.
+\]
+따라서
+\[
+(x_1^*,y_1^*)=(3,2),\qquad (x_2^*,y_2^*)=(3,4).
+\]
+</div></div>
+
+<div class="step"><h3>3) Pareto efficiency</h3><div class="flow">
+소비자 1과 2의 MRS는 각각
+\[
+MRS_1=\frac{y_1}{x_1},\qquad MRS_2=\frac{y_2}{2x_2}.
+\]
+균형배분에서
+\[
+MRS_1=MRS_2=p^*=\frac23.
+\]
+따라서 두 소비자의 MRS가 일치한다. 이 배분은 Walrasian equilibrium allocation이며, First Welfare Theorem에 의해 Pareto efficient이다.
+</div></div>
+</section>
+
+<section class="card">
+<h2>Problem 2. Consumer Theory</h2>
+<div class="topic">Expenditure Function · Indirect Utility · Shephard's Lemma · Duality</div>
+<div class="step"><h3>1) Indirect utility function</h3><div class="flow">
+주어진 expenditure function은
+\[
+e(p_1,p_2,u)=u\left(\sqrt{p_1}+\sqrt{p_2}\right)^2.
+\]
+duality relation
+\[
+e(p_1,p_2,V(p_1,p_2,m))=m
+\]
+을 사용하면
+\[
+V(p_1,p_2,m)\left(\sqrt{p_1}+\sqrt{p_2}\right)^2=m.
+\]
+따라서
+\[
+V(p_1,p_2,m)=\frac{m}{\left(\sqrt{p_1}+\sqrt{p_2}\right)^2}.
+\]
+</div></div>
+
+<div class="step"><h3>2) Shephard's lemma와 Marshallian demand</h3><div class="flow">
+Shephard's lemma에 의해
+\[
+h_1(p_1,p_2,u)=\frac{\partial e}{\partial p_1}=u\frac{\sqrt{p_1}+\sqrt{p_2}}{\sqrt{p_1}},
+\]
+\[
+h_2(p_1,p_2,u)=\frac{\partial e}{\partial p_2}=u\frac{\sqrt{p_1}+\sqrt{p_2}}{\sqrt{p_2}}.
+\]
+이제 \(x_i(p,m)=h_i(p,V(p,m))\)를 이용하면
+\[
+x_1(p_1,p_2,m)=\frac{m}{\sqrt{p_1}\left(\sqrt{p_1}+\sqrt{p_2}\right)},
+\]
+\[
+x_2(p_1,p_2,m)=\frac{m}{\sqrt{p_2}\left(\sqrt{p_1}+\sqrt{p_2}\right)}.
+\]
+</div></div>
+
+<div class="step"><h3>3) Budget identity 확인</h3><div class="flow">
+구한 Marshallian demands를 예산식에 대입하면
+\[
+p_1x_1+p_2x_2
+=
+m\left(
+\frac{\sqrt{p_1}}{\sqrt{p_1}+\sqrt{p_2}}
++
+\frac{\sqrt{p_2}}{\sqrt{p_1}+\sqrt{p_2}}
+\right)
+=m.
+\]
+</div></div>
+
+<div class="step">
+  <h3>4) Degree-0 homogeneity 확인</h3>
+  <div class="flow">
+    임의의 \(t\gt0\)에 대해 모든 가격과 소득을 같은 비율로 변화시키면,
+
+    \[
+    x_1(tp_1,tp_2,tm)
+    =
+    \frac{tm}
+    {\sqrt{tp_1}\left(\sqrt{tp_1}+\sqrt{tp_2}\right)}.
+    \]
+
+    \[
+    \sqrt{tp_i}=\sqrt{t}\sqrt{p_i}
+    \]
+    이므로
+    \[
+    x_1(tp_1,tp_2,tm)
+    =
+    \frac{tm}
+    {\sqrt{t}\sqrt{p_1}\,
+    \sqrt{t}\left(\sqrt{p_1}+\sqrt{p_2}\right)}.
+    \]
+
+    따라서
+    \[
+    x_1(tp_1,tp_2,tm)
+    =
+    \frac{m}
+    {\sqrt{p_1}\left(\sqrt{p_1}+\sqrt{p_2}\right)}
+    =
+    x_1(p_1,p_2,m).
+    \]
+
+    마찬가지로
+    \[
+    x_2(tp_1,tp_2,tm)
+    =
+    \frac{tm}
+    {\sqrt{tp_2}\left(\sqrt{tp_1}+\sqrt{tp_2}\right)}
+    =
+    x_2(p_1,p_2,m).
+    \]
+
+    따라서 Marshallian demand는 \((p_1,p_2,m)\)에 대해 degree 0 homogeneous이다:
+    \[
+    x_i(tp_1,tp_2,tm)=x_i(p_1,p_2,m),
+    \qquad i=1,2.
+    \]
+  </div>
+</div>
+</section>
+
+<div class="footer">문제 한 스푼 #6 · Solution Notes</div>
+</main>
+</body>
+</html>
