@@ -1,0 +1,87 @@
+---
+title: "문제 한 스푼 #7"
+subtitle: "생산자이론 · 시장의 종류"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #7
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **생산자이론 · 시장의 종류**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[문제당 약 10–15분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Producer Theory
+::: {.topic}
+비용최소화 · 조건부 요소수요 · Shephard's Lemma
+:::
+
+한 기업의 생산함수가
+
+$$
+q = f(L, K) = L^{1/3} K^{2/3}, \qquad L, K \ge 0
+$$
+
+로 주어진다. 노동과 자본의 요소가격은 각각 $w > 0$, $r > 0$이다.
+
+1. 주어진 산출량 $q > 0$을 생산하기 위한 비용최소화 문제를 설정하고, 조건부 요소수요 $L^c(w, r, q)$, $K^c(w, r, q)$를 구하시오.
+2. 위 결과를 이용하여 비용함수 $c(w, r, q)$를 구하시오.
+3. Shephard's lemma를 이용하여
+   $$
+   \frac{\partial c(w, r, q)}{\partial w} = L^c(w, r, q), \qquad \frac{\partial c(w, r, q)}{\partial r} = K^c(w, r, q)
+   $$
+   가 실제로 성립하는지 확인하시오.
+
+::: {.spoon-hint}
+**형식**: **cost minimization → cost function → verify**. FOC에서 요소가격비와 조건부 요소사용비율의 관계를 먼저 정리하면 계산이 단순해진다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Market Structure
+::: {.topic}
+Cournot Competition · Asymmetric Marginal Costs
+:::
+
+두 기업 $1, 2$가 동질적 재화를 생산하며 수량경쟁을 한다. 시장의 inverse demand는
+
+$$
+p(Q) = 60 - Q, \qquad Q = q_1 + q_2
+$$
+
+이고, 각 기업의 비용함수는
+
+$$
+C_1(q_1) = 6q_1, \qquad C_2(q_2) = 12q_2
+$$
+
+로 주어진다.
+
+1. 각 기업의 best-response function을 구하고 Cournot-Nash equilibrium $(q_1^*, q_2^*)$을 계산하시오.
+2. 균형가격 $p^*$와 각 기업의 이윤 $\pi_1^*, \pi_2^*$을 구하시오.
+3. 다음 명제를 이 문제에서 확인하시오.
+   > **If $MC_1 < MC_2$, firm 1 produces more and earns a greater profit than firm 2 in the Cournot equilibrium.**
+   
+   계산 결과를 이용하여 왜 이러한 차이가 발생하는지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **best response → equilibrium → compare**. 두 기업의 비용이 다르므로 대칭균형을 가정하지 마시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
