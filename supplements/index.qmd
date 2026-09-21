@@ -234,13 +234,13 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
     <span class="chip chip--gif">2종 동적 시뮬레이션</span>
   </div>
   <div class="spoon-card__title">실물경기변동(RBC) 모형: 기술충격과 동태적 충격반응(IRF) 전파</div>
-  <div class="spoon-card__desc">표준 RBC 모형에서 1% 기술충격에 따른 사전결정 자본과 소비의 수직 점프 동학, 소비 평활화와 투자 가속도, 여가의 기간간 대체, 그리고 6대 거시변수의 충격반응함수(IRF) 전파 메커니즘을 분석한다.</div>
+  <div class="spoon-card__desc">표준 RBC 모형에서 1% 기술충격에 따른 노동시장의 기간간 대체와 경기순응적 고용, 소비 평활화와 투자 가속도, 내생적 자본축적, 그리고 6대 거시변수의 충격반응함수(IRF) 전파 메커니즘을 분석한다.</div>
   <div class="spoon-card__topics">
     <span class="chip chip--topic">RBC 기술충격</span>
-    <span class="chip chip--topic">소비 점프(Jump)</span>
-    <span class="chip chip--topic">안장경로 복귀</span>
+    <span class="chip chip--topic">노동 기간간 대체</span>
     <span class="chip chip--topic">소비 평활화</span>
     <span class="chip chip--topic">투자 가속도</span>
+    <span class="chip chip--topic">내생적 자본축적</span>
     <span class="chip chip--topic">충격반응함수(IRF)</span>
   </div>
   <div class="spoon-card__chapter">
@@ -539,13 +539,13 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
     <span class="chip chip--gif">2종 동적 시뮬레이션</span>
   </div>
   <div class="spoon-card__title">실물경기변동(RBC) 모형: 기술충격과 동태적 충격반응(IRF) 전파</div>
-  <div class="spoon-card__desc">표준 RBC 모형에서 1% 기술충격에 따른 사전결정 자본과 소비의 수직 점프 동학, 소비 평활화와 투자 가속도, 여가의 기간간 대체, 그리고 6대 거시변수의 충격반응함수(IRF) 전파 메커니즘을 분석한다.</div>
+  <div class="spoon-card__desc">표준 RBC 모형에서 1% 기술충격에 따른 노동시장의 기간간 대체와 경기순응적 고용, 소비 평활화와 투자 가속도, 내생적 자본축적, 그리고 6대 거시변수의 충격반응함수(IRF) 전파 메커니즘을 분석한다.</div>
   <div class="spoon-card__topics">
     <span class="chip chip--topic">RBC 기술충격</span>
-    <span class="chip chip--topic">소비 점프(Jump)</span>
-    <span class="chip chip--topic">안장경로 복귀</span>
+    <span class="chip chip--topic">노동 기간간 대체</span>
     <span class="chip chip--topic">소비 평활화</span>
     <span class="chip chip--topic">투자 가속도</span>
+    <span class="chip chip--topic">내생적 자본축적</span>
     <span class="chip chip--topic">충격반응함수(IRF)</span>
   </div>
   <div class="spoon-card__chapter">
