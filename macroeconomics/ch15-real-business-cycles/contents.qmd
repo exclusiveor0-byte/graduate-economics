@@ -619,6 +619,11 @@ $K_{t+1}$이 높아진다.
 Romer의 baseline parameterization에서도 positive technology shock
 impact에서 labor, consumption, output이 상승하고, 이후에는 증가한
 capital stock이 dynamics에 추가로 작용한다.
+
+::: {.callout-note}
+### 계산·시각화 보충자료
+기술충격 직후 사전결정 자본 하의 소비 수직 점프 동학, 2차원 $(\hat{k}_t, \hat{c}_t)$ 위상도 상의 안장경로 복귀 궤적, 그리고 산출량·투자·소비·노동·이자율·실질임금 6대 거시변수의 충격반응함수(IRF) 전파 메커니즘은 [보충자료 · 실물경기변동(RBC) 모형: 기술충격과 동태적 충격반응(IRF) 전파](../../supplements/rbc-technology-shock.qmd)에서 2종의 출판 품질 동적 시뮬레이션과 함께 확인할 수 있다.
+:::
 :::::::::
 
 ::::::: {#s17 .section}
