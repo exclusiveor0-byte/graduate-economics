@@ -1,6 +1,6 @@
 ---
 title: "계산·시각화 보충자료 (Supplements)"
-subtitle: "대학원 경제학 9대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
+subtitle: "대학원 경제학 10대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
 ---
 
 ::: {.spoon-hero}
@@ -11,14 +11,14 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 # 계산·시각화 보충자료 (Supplements)
 
 ::: {.spoon-hero__desc}
-본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 9대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 21종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 10대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 23종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
-[미시경제학 (3편)]{.chip .chip--micro}
+[미시경제학 (4편)]{.chip .chip--micro}
 [거시경제학 (3편)]{.chip .chip--macro}
 [계량경제학 (3편)]{.chip .chip--metrics}
-[21종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
+[23종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
 :::
@@ -36,8 +36,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 ### 전체 보기
 
 ::: {.spoon-guide-box}
-**📚 대학원 경제학 9대 계산·시각화 보충자료 통합 포털**
-미시·거시·계량 전 분야에 걸쳐 엄밀한 수리 전개와 MATLAB/R 수치 시뮬레이션으로 제작된 보충자료 9편의 통합 인덱스이다. 상단 검색창에서 키워드를 입력하여 즉시 필터링하거나 각 분야별 하위탭으로 이동하여 탐색할 수 있다.
+**📚 대학원 경제학 10대 계산·시각화 보충자료 통합 포털**
+미시·거시·계량 전 분야에 걸쳐 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 10편의 통합 인덱스이다. 상단 검색창에서 키워드를 입력하여 즉시 필터링하거나 각 분야별 하위탭으로 이동하여 탐색할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -108,6 +108,29 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 미시 수학 부록 / 제3장 최적화와 쌍대성, 일반균형 존재 정리</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Micro 4: Producer Cost Envelope -->
+<a href="producer-cost-envelope.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">생산자이론: 등량곡선, 확장경로, 그리고 장단기 비용 포락선</div>
+  <div class="spoon-card__desc">2요소 생산기술에서 비용최소화 확장경로(Expansion Path), 단기 자본 제약의 비용 쐐기, 그리고 포락선 정리(Envelope Theorem)에 따른 장단기 평균·한계비용 곡선의 형성과 접점 비대칭성을 분석한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">등량곡선·MRTS</span>
+    <span class="chip chip--topic">장기 확장경로</span>
+    <span class="chip chip--topic">단기 자본 제약</span>
+    <span class="chip chip--topic">포락선 정리(Envelope)</span>
+    <span class="chip chip--topic">최적조업규모(MES)</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 1권 제2장 생산자이론 (생산기술·비용최소화·생산쌍대성)</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
@@ -254,8 +277,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-guide-box}
 **🎯 미시경제학 (Microeconomics) 보충자료 아카이브**
-- **주요 영역**: 소비자 쌍대성 이론(Slutsky 분해), 일반균형과 후생경제학(Edgeworth 상자), 고급 미시 수학(집합값 대응의 반연속성과 Berge 최대정리).
-- **시각화 특징**: 6종의 고해상도 GIF를 통해 보상수요의 곡률, 경매인의 타토느망 탐색 경로, 상반연속·하반연속의 위상수학적 포섭 조건을 엄밀하게 시각화한다.
+- **주요 영역**: 소비자 쌍대성 이론(Slutsky 분해), 생산자이론과 비용 포락선(확장경로와 Envelope 정리), 일반균형과 후생경제학(Edgeworth 상자), 고급 미시 수학(집합값 대응의 반연속성과 Berge 최대정리).
+- **시각화 특징**: 8종의 고해상도 GIF를 통해 보상수요의 곡률, 등량곡선과 비용 포락선의 접점 동학, 경매인의 타토느망 탐색 경로, 상반연속·하반연속의 위상수학적 포섭 조건을 엄밀하게 시각화한다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -326,6 +349,29 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 미시 수학 부록 / 제3장 최적화와 쌍대성, 일반균형 존재 정리</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Micro 4: Producer Cost Envelope -->
+<a href="producer-cost-envelope.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">생산자이론: 등량곡선, 확장경로, 그리고 장단기 비용 포락선</div>
+  <div class="spoon-card__desc">2요소 생산기술에서 비용최소화 확장경로(Expansion Path), 단기 자본 제약의 비용 쐐기, 그리고 포락선 정리(Envelope Theorem)에 따른 장단기 평균·한계비용 곡선의 형성과 접점 비대칭성을 분석한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">등량곡선·MRTS</span>
+    <span class="chip chip--topic">장기 확장경로</span>
+    <span class="chip chip--topic">단기 자본 제약</span>
+    <span class="chip chip--topic">포락선 정리(Envelope)</span>
+    <span class="chip chip--topic">최적조업규모(MES)</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 1권 제2장 생산자이론 (생산기술·비용최소화·생산쌍대성)</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
