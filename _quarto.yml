@@ -191,6 +191,7 @@ book:
     - literature/theory-micro.qmd
     - literature/macro-monetary.qmd
     - literature/econometrics-methods.qmd
+    - literature/econometrics-methods/1985-newey-gmm-specification.qmd
     - literature/finance.qmd
     - literature/labor-health-education.qmd
     - literature/public-policy.qmd
