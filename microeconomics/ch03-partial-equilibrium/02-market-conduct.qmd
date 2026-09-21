@@ -810,3 +810,8 @@ $$
 | Cournot | best-response fixed point | no entry / no exit | free entry여도 보통 $p\gt MC$, profit $0$ 가능 |
 | Homogeneous Bertrand | price Nash, 표준모형에서 $p=MC$ | fixed cost가 있으면 active free-entry closure가 어려움 | fixed cost가 없으면 profit $0$; $F\gt 0$이면 $p=MC$로 $F$를 회수하지 못함 |
 | Monopolistic competition | differentiated-price Nash | entry until zero profit | 보통 $p\gt MC$, $p=AC$, profit $0$ |
+
+::: {.callout-note}
+### 계산·시각화 보충자료
+2기업 과점 시장에서 수량 및 가격 최적대응 동학(Best-Response Dynamics), Stackelberg 등이윤곡선의 외접 기하학, 카르텔 담합의 이탈 유인, 그리고 시장구조별 후생 삼각형 분해 및 $N$-기업 대칭 Cournot의 완전경쟁 수렴 과정은 [보충자료 · 과점 게임이론: Cournot, Bertrand, Stackelberg 반응곡선과 균형 동학](../../supplements/oligopoly-game-theory.qmd)에서 2종의 출판 품질 동적 시뮬레이션과 함께 확인할 수 있다.
+:::
