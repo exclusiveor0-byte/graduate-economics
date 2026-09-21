@@ -7,7 +7,7 @@ description: "GMM 적률조건 검정의 국소 대립가설(Pitman drift) 하 �
 ::: {.paper-citation}
 **서지정보** Whitney K. Newey. (1985). “Generalized Method of Moments Specification Testing.” *Journal of Econometrics*, 29(3), 229–256.
 
-**원문 링크** [DOI: 10.1016/0304-4076(85)90019-9](https://doi.org/10.1016/0304-4076(85)90019-9)
+**원문 링크** [DOI: 10.1016/0304-4076(85)90154-X](https://doi.org/10.1016/0304-4076(85)90154-X)
 :::
 
 ::: {.callout-note appearance="simple" title="초록 (Abstract)"}
