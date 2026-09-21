@@ -1,9 +1,20 @@
 ---
 title: "논문 아카이브 · 계량·방법론"
+description: "식별, 추정·추론, GMM/적률조건, 시계열·패널, 인과추론, 구조추정 관련 핵심 방법론 논문을 모읍니다."
 ---
 
 식별, 추정·추론, 인과추론, 구조추정, 계산방법 논문을 모읍니다.
 
-::: {.callout-note appearance="simple" title="새 논문"}
-`templates/paper-note-template.qmd`를 복사해 `literature/econometrics-methods/`에 추가한다.
+## 수록 논문 목록
+
+::: {.callout-note appearance="simple" icon=false}
+### [Newey (1985) Generalized Method of Moments Specification Testing](econometrics-methods/1985-newey-gmm-specification.qmd)
+- **저자**: Whitney K. Newey (*Journal of Econometrics*, 1985)
+- **주제**: GMM 모형명세 검정, 과식별(Hansen J) 검정의 일반화, 검정력 향상을 위한 적률선택, 피트먼 국소 대립가설(Pitman local drift) 하 점근분포
+- **핵심 기여**: GMM specification test를 피트먼 국소 이동과 사영행렬 $P_W$를 통한 신호 흡수 기하학으로 정식화하여, (i) 맹점 방향(blind directions)의 존재, (ii) 최대 자유도 검정(maximal-df tests)의 점근적 동등성, (iii) 표적 최적 검정(targeted optimal tests)의 도출 원리를 규명함.
 :::
+
+::: {.callout-tip appearance="simple" title="새 논문 추가 안내"}
+`templates/paper-note-template.qmd`를 복사해 `literature/econometrics-methods/`에 추가한다. 파일명은 `연도-저자-핵심어.qmd` 규칙을 따른다.
+:::
+
