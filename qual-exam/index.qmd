@@ -131,6 +131,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
+
+<a href="micro/set-07.html" class="spoon-card" data-subject="micro" data-round="7">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#7 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 시장의 종류</div>
+  <div class="spoon-card__desc">Cobb–Douglas 생산함수의 비용최소화와 조건부 요소수요, Shephard's lemma 검증, 비대칭 한계비용 하의 Cournot 복점 경쟁균형 및 비교정학</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -229,6 +241,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">일반균형 · 소비자이론</div>
   <div class="spoon-card__desc">순수교환경제 경쟁균형 가격과 파레토 효율성, First Welfare Theorem, 지출함수와 Shephard's lemma, 마샬 수요함수의 0차 동차성</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-07.html" class="spoon-card" data-subject="micro" data-round="7">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#7 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 시장의 종류</div>
+  <div class="spoon-card__desc">Cobb–Douglas 생산함수의 비용최소화와 조건부 요소수요, Shephard's lemma 검증, 비대칭 한계비용 하의 Cournot 복점 경쟁균형 및 비교정학</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
