@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -51,6 +51,119 @@ $p_y = 1$로 normalize하고 $p_x = p > 0$라 하자.
 
 ::: {.spoon-hint}
 **형식**: **individual demand → market clearing → welfare verification**. 한 재화의 시장청산조건으로 균형가격을 구한 뒤 다른 재화 시장도 확인하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. General Equilibrium"}
+::: {.topic}
+KKT · Market Clearing · Walrasian Equilibrium · Pareto Efficiency
+:::
+
+#### 1) 각 소비자의 효용극대화 문제와 KKT 조건
+
+소비자 1의 소득은 $m_1 = p \cdot 6 + 1 \cdot 0 = 6p$이므로:
+$$
+\max_{x_1, y_1 \ge 0} x_1 y_1 \qquad \text{s.t.} \qquad px_1 + y_1 \le 6p.
+$$
+
+라그랑지안(Lagrangian):
+$$
+\mathcal{L}_1 = x_1 y_1 + \lambda_1(6p - px_1 - y_1) + \delta_1 x_1 + \nu_1 y_1.
+$$
+
+KKT 정지성(Stationarity) 조건:
+$$
+\frac{\partial \mathcal{L}_1}{\partial x_1} = y_1 - p\lambda_1 + \delta_1 = 0, \qquad \frac{\partial \mathcal{L}_1}{\partial y_1} = x_1 - \lambda_1 + \nu_1 = 0.
+$$
+
+상보적 여유성(Complementary Slackness):
+$$
+\lambda_1(6p - px_1 - y_1) = 0, \qquad \delta_1 x_1 = 0, \qquad \nu_1 y_1 = 0.
+$$
+
+소비자 2의 소득은 $m_2 = p \cdot 0 + 1 \cdot 6 = 6$이므로:
+$$
+\max_{x_2, y_2 \ge 0} x_2 y_2^2 \qquad \text{s.t.} \qquad px_2 + y_2 \le 6.
+$$
+
+라그랑지안:
+$$
+\mathcal{L}_2 = x_2 y_2^2 + \lambda_2(6 - px_2 - y_2) + \delta_2 x_2 + \nu_2 y_2.
+$$
+
+KKT 정지성 조건:
+$$
+\frac{\partial \mathcal{L}_2}{\partial x_2} = y_2^2 - p\lambda_2 + \delta_2 = 0, \qquad \frac{\partial \mathcal{L}_2}{\partial y_2} = 2x_2 y_2 - \lambda_2 + \nu_2 = 0.
+$$
+
+상보적 여유성:
+$$
+\lambda_2(6 - px_2 - y_2) = 0, \qquad \delta_2 x_2 = 0, \qquad \nu_2 y_2 = 0.
+$$
+
+---
+
+#### 2) 1계 조건(FOC)과 왈라스 균형 계산
+
+균형에서 양의 소비($x_i, y_i > 0 \implies \delta_i = \nu_i = 0$)를 고려하면:
+
+- **소비자 1의 마샬 수요**:
+  $$
+  \frac{y_1}{x_1} = p \implies y_1 = px_1.
+  $$
+  예산제약식 $px_1 + y_1 = 6p$에 대입하면:
+  $$
+  px_1 + px_1 = 6p \implies 2px_1 = 6p \quad\Longrightarrow\quad x_1(p) = 3, \quad y_1(p) = 3p.
+  $$
+
+- **소비자 2의 마샬 수요**:
+  $$
+  \frac{y_2^2}{2x_2 y_2} = \frac{y_2}{2x_2} = p \implies y_2 = 2px_2.
+  $$
+  예산제약식 $px_2 + y_2 = 6$에 대입하면:
+  $$
+  px_2 + 2px_2 = 6 \implies 3px_2 = 6 \quad\Longrightarrow\quad x_2(p) = \frac{2}{p}, \quad y_2(p) = 4.
+  $$
+
+- **시장청산조건(Market Clearing)**:
+  경제 전체의 총부존은 $\bar{x} = 6 + 0 = 6$, $\bar{y} = 0 + 6 = 6$이다. $x$재화 시장 청산:
+  $$
+  x_1(p) + x_2(p) = 3 + \frac{2}{p} = 6 \implies \frac{2}{p} = 3 \quad\Longrightarrow\quad p^* = \frac{2}{3}.
+  $$
+
+  *(왈라스 법칙에 따른 $y$재화 시장 점검)*:
+  $$
+  y_1(p^*) + y_2(p^*) = 3\left(\frac{2}{3}\right) + 4 = 2 + 4 = 6 = \bar{y}.
+  $$
+
+- **경쟁균형 배분(Competitive Equilibrium Allocation)**:
+  $$
+  (x_1^*, y_1^*) = (3, 2), \qquad (x_2^*, y_2^*) = (3, 4).
+  $$
+
+---
+
+#### 3) 파레토 효율성(Pareto Efficiency)과 후생경제학 제1정리
+
+각 소비자의 한계대체율($MRS$):
+$$
+MRS_1(x_1, y_1) = \frac{\partial u_1 / \partial x_1}{\partial u_1 / \partial y_1} = \frac{y_1}{x_1},
+$$
+$$
+MRS_2(x_2, y_2) = \frac{\partial u_2 / \partial x_2}{\partial u_2 / \partial y_2} = \frac{y_2^2}{2x_2 y_2} = \frac{y_2}{2x_2}.
+$$
+
+균형배분 $(x_1^*, y_1^*) = (3, 2)$, $(x_2^*, y_2^*) = (3, 4)$에서 한계대체율을 평가하면:
+$$
+MRS_1(3, 2) = \frac{2}{3}, \qquad MRS_2(3, 4) = \frac{4}{2 \times 3} = \frac{2}{3}.
+$$
+
+따라서
+$$
+MRS_1 = MRS_2 = \frac{p_x^*}{p_y^*} = p^* = \frac{2}{3}
+$$
+가 정확히 성립하여 두 소비자의 무차별곡선이 공통 접선을 공유하며 계약곡선(Contract Curve) 상에 안착한다.
+
+**후생경제학 제1정리와의 연계**: 두 소비자의 선호는 국소 불포화(Local Nonsatiation, LNS)를 만족하므로, 시장의 가격기구를 통해 달성된 왈라스 경쟁균형 배분은 **후생경제학 제1정리(First Fundamental Welfare Theorem)**에 의해 반드시 파레토 효율적(Pareto Efficient)이다.
 :::
 :::
 
@@ -86,6 +199,96 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **duality → Shephard → Marshallian demand → verify**. 마지막 문항에서는 계산 결과의 성질을 직접 대입하여 확인하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Consumer Theory"}
+::: {.topic}
+Expenditure Function · Indirect Utility · Shephard's Lemma · Duality · Homogeneity
+:::
+
+#### 1) 간접효용함수(Indirect Utility Function) $V(p_1, p_2, m)$ 도출
+
+주어진 지출함수는 다음과 같다:
+$$
+e(p_1, p_2, u) = u\left(\sqrt{p_1} + \sqrt{p_2}\right)^2.
+$$
+
+지출함수와 간접효용함수 사이의 쌍대성 항등식(Duality Relation):
+$$
+e(p_1, p_2, V(p_1, p_2, m)) = m.
+$$
+
+이를 대입하면:
+$$
+V(p_1, p_2, m)\left(\sqrt{p_1} + \sqrt{p_2}\right)^2 = m.
+$$
+
+따라서 간접효용함수는 다음과 같다:
+$$
+V(p_1, p_2, m) = \frac{m}{\left(\sqrt{p_1} + \sqrt{p_2}\right)^2}.
+$$
+
+---
+
+#### 2) Shephard's Lemma와 마샬 수요함수(Marshallian Demand)
+
+Shephard's lemma에 의해 힉스 보상수요함수(Hicksian Demands)는 지출함수를 각 가격에 대해 편미분하여 얻어진다:
+$$
+h_1(p_1, p_2, u) = \frac{\partial e}{\partial p_1} = u \cdot 2\left(\sqrt{p_1} + \sqrt{p_2}\right) \cdot \frac{1}{2\sqrt{p_1}} = u\frac{\sqrt{p_1} + \sqrt{p_2}}{\sqrt{p_1}},
+$$
+$$
+h_2(p_1, p_2, u) = \frac{\partial e}{\partial p_2} = u \cdot 2\left(\sqrt{p_1} + \sqrt{p_2}\right) \cdot \frac{1}{2\sqrt{p_2}} = u\frac{\sqrt{p_1} + \sqrt{p_2}}{\sqrt{p_2}}.
+$$
+
+이제 쌍대성 관계식 $x_i(p, m) = h_i(p, V(p, m))$에 간접효용함수 $V(p, m)$을 대입하면 마샬 수요함수가 도출된다:
+$$
+x_1(p_1, p_2, m) = \left[\frac{m}{\left(\sqrt{p_1} + \sqrt{p_2}\right)^2}\right] \frac{\sqrt{p_1} + \sqrt{p_2}}{\sqrt{p_1}} = \frac{m}{\sqrt{p_1}\left(\sqrt{p_1} + \sqrt{p_2}\right)},
+$$
+$$
+x_2(p_1, p_2, m) = \left[\frac{m}{\left(\sqrt{p_1} + \sqrt{p_2}\right)^2}\right] \frac{\sqrt{p_1} + \sqrt{p_2}}{\sqrt{p_2}} = \frac{m}{\sqrt{p_2}\left(\sqrt{p_1} + \sqrt{p_2}\right)}.
+$$
+
+---
+
+#### 3) 예산 항등식(Budget Identity) 확인
+
+구한 마샬 수요를 총지출식 $p_1 x_1 + p_2 x_2$에 대입하여 검증한다:
+$$
+p_1 x_1 + p_2 x_2 = p_1 \frac{m}{\sqrt{p_1}\left(\sqrt{p_1} + \sqrt{p_2}\right)} + p_2 \frac{m}{\sqrt{p_2}\left(\sqrt{p_1} + \sqrt{p_2}\right)}
+$$
+$$
+= \frac{\sqrt{p_1}\,m}{\sqrt{p_1} + \sqrt{p_2}} + \frac{\sqrt{p_2}\,m}{\sqrt{p_1} + \sqrt{p_2}} = m\left(\frac{\sqrt{p_1} + \sqrt{p_2}}{\sqrt{p_1} + \sqrt{p_2}}\right) = m.
+$$
+
+따라서 소비자의 예산제약식이 항등적으로 만족됨을 확인한다.
+
+---
+
+#### 4) 0차 동차성(Degree-0 Homogeneity) 증명
+
+임의의 스칼라 $t > 0$에 대해 모든 가격과 소득을 $t$배 변화시켰을 때:
+$$
+x_1(tp_1, tp_2, tm) = \frac{tm}{\sqrt{tp_1}\left(\sqrt{tp_1} + \sqrt{tp_2}\right)}.
+$$
+
+$\sqrt{tp_i} = \sqrt{t}\sqrt{p_i}$이므로 분모를 정리하면:
+$$
+x_1(tp_1, tp_2, tm) = \frac{tm}{\sqrt{t}\sqrt{p_1}\left(\sqrt{t}\sqrt{p_1} + \sqrt{t}\sqrt{p_2}\right)} = \frac{tm}{t \sqrt{p_1}\left(\sqrt{p_1} + \sqrt{p_2}\right)}
+$$
+$$
+= \frac{m}{\sqrt{p_1}\left(\sqrt{p_1} + \sqrt{p_2}\right)} = x_1(p_1, p_2, m).
+$$
+
+동일한 방법으로 $x_2$에 대해서도:
+$$
+x_2(tp_1, tp_2, tm) = \frac{tm}{\sqrt{tp_2}\left(\sqrt{tp_1} + \sqrt{tp_2}\right)} = \frac{m}{\sqrt{p_2}\left(\sqrt{p_1} + \sqrt{p_2}\right)} = x_2(p_1, p_2, m).
+$$
+
+따라서 마샬 수요함수는 가격과 소득 $(p_1, p_2, m)$에 대해 **0차 동차(homogeneous of degree 0)**이다:
+$$
+x_i(tp_1, tp_2, tm) = t^0 x_i(p_1, p_2, m) = x_i(p_1, p_2, m), \qquad i = 1, 2.
+$$
+이는 화폐환상(Money Illusion)이 존재하지 않음을 뜻한다.
 :::
 :::
 
