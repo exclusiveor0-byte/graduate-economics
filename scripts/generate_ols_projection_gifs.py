@@ -2,7 +2,7 @@
 
 Outputs:
   - assets/gif/ols-projection-3d-geometry.gif
-  - assets/gif/ols-frisch-waugh-lovell-geometry.gif
+  - assets/gif/ols-multicollinearity-geometry.gif
 """
 
 import os
@@ -28,6 +28,7 @@ NAVY_COLOR = "#1f3b5c"       # y vector / main OLS fit
 RED_COLOR = "#b83b26"        # Residual vector e_hat / condition explosion
 TEAL_COLOR = "#087e8b"       # Subspace C(X) plane / fitted y_hat / prediction invariance
 PLUM_COLOR = "#6b4c7a"       # Optimization trajectory / FWL residuals
+PURPLE_COLOR = "#6b4c7a"     # Parallelogram components / Coordinates
 GOLD_COLOR = "#d97706"       # Intercept vector 1 / Baseline
 GREEN_COLOR = "#15803d"      # Orthogonal projections / Right angles
 
@@ -214,191 +215,132 @@ def generate_gif_projection_3d():
 
 
 # ==============================================================================
-# 2. GIF 2: Frisch–Waugh–Lovell (FWL) Geometry and Multicollinearity Conditioning
+# 2. GIF 2: Multicollinearity Geometry: Parallelogram Collapse vs Prediction Invariance
 # ==============================================================================
-def generate_gif_frisch_waugh_lovell():
-    print("Generating GIF 2: ols-frisch-waugh-lovell-geometry.gif ...")
+def generate_gif_multicollinearity_geometry():
+    print("Generating GIF 2: ols-multicollinearity-geometry.gif ...")
 
-    # Sequence of frames demonstrating:
-    # Left: FWL 3-Stage Partial Orthogonal Projection:
-    #       Stage 1: Raw vectors y, x, 1
-    #       Stage 2: Orthogonalize by M_1 -> demeaned vectors M_1 y, M_1 x
-    #       Stage 3: Univariate regression of M_1 y on M_1 x -> identical slope beta_1 = 1.0!
-    # Right: Multicollinearity diagnostic:
-    #        Sweep delta: 1.0 down to 0.005 -> Condition number & coefficient explosion vs prediction invariance!
+    thetas_fwd = [65.0, 58.0, 50.0, 42.0, 35.0, 29.0, 24.0, 20.0, 16.0, 13.0, 10.5, 8.5]
+    thetas_hold_low = [8.5, 8.5, 8.5]
+    thetas_bwd = [11.0, 15.0, 22.0, 32.0, 46.0, 65.0]
+    thetas_hold_high = [65.0, 65.0]
 
-    # 18 frames: delta sweep
-    deltas_forward = [1.0, 0.60, 0.35, 0.20, 0.12, 0.07, 0.04, 0.02, 0.01, 0.005]
-    deltas_hold = [0.005, 0.005, 0.005]
-    deltas_back = [0.02, 0.08, 0.25, 0.60, 1.0]
-    deltas = deltas_forward + deltas_hold + deltas_back
-
-    # Setup for multicollinearity experiment (n=6, k=3)
-    n6 = 6
-    ones_6 = np.ones(n6)
-    x1_6 = np.array([-2.0, -1.0, 0.0, 1.0, 2.0, 3.0])
-    v_6 = np.array([1.0, -2.0, 1.0, 1.0, -2.0, 1.0])
-    # Verify orthogonality: ones_6 @ v_6 == 0, x1_6 @ v_6 == 0
-    norm_v = np.sqrt(np.sum(v_6**2))  # sqrt(12)
-
-    # Precalculate curves across fine delta grid
-    d_grid = np.logspace(-3, 0, 100)
-    cond_grid = []
-    beta_sens_grid = []
-    pred_sens_grid = []
-
-    for d in d_grid:
-        x2_d = x1_6 + d * v_6
-        X_d = np.column_stack([ones_6, x1_6, x2_d])
-        cond_val = np.linalg.cond(X_d.T @ X_d)
-        cond_grid.append(cond_val)
-        # Theoretical sensitivity
-        beta_sens_grid.append(1.0 / (np.sqrt(6.0) * d))
-        pred_sens_grid.append(1.0)
-
-    # FWL vectors for left panel (n=3)
-    # y = [2, 1, 4]', 1 = [1, 1, 1]', x = [-1, 0, 1]'
-    y_bar = 7.0 / 3.0
-    x_bar = 0.0
-    M1_y = vec_y - y_bar * vec_1  # [-1/3, -4/3, 5/3]
-    M1_x = vec_x - x_bar * vec_1  # [-1, 0, 1]
-    # Regression of M1_y on M1_x: slope = (M1_x' M1_y) / (M1_x' M1_x) = 2.0 / 2.0 = 1.0
-    beta_fwl = np.dot(M1_x, M1_y) / np.dot(M1_x, M1_x)
-    fwl_fit = beta_fwl * M1_x
-    fwl_resid = M1_y - fwl_fit    # [2/3, -4/3, 2/3] == e_hat!
+    thetas = thetas_fwd + thetas_hold_low + thetas_bwd + thetas_hold_high
+    u, v = 2.0, 1.5
 
     frames = []
 
-    for idx, d_cur in enumerate(deltas):
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11.0, 4.8), dpi=105)
+    for idx, theta_deg in enumerate(thetas):
+        theta = np.radians(theta_deg)
+        r_corr = np.cos(theta)
+        vif = 1.0 / (np.sin(theta)**2)
+
+        b2 = v / np.sin(theta)
+        b1 = u - v * (np.cos(theta) / np.sin(theta))
+
+        p_x1 = np.array([1.0, 0.0])
+        p_x2 = np.array([np.cos(theta), np.sin(theta)])
+        p_yhat = np.array([u, v])
+        p_b1x1 = np.array([b1, 0.0])
+        p_b2x2 = np.array([b2 * np.cos(theta), b2 * np.sin(theta)])
+
+        fig, (ax_geo, ax_info) = plt.subplots(1, 2, figsize=(14.2, 7.2), dpi=100,
+                                              gridspec_kw={'width_ratios': [1.25, 1.0]})
         fig.patch.set_facecolor(BG_COLOR)
-        fig.subplots_adjust(left=0.07, right=0.96, top=0.88, bottom=0.14, wspace=0.28)
+        ax_geo.set_facecolor(BG_COLOR)
+        ax_info.set_facecolor(BG_COLOR)
 
-        # ----------------------------------------------------------------------
-        # Left Panel: FWL 2D Projection Subspace (Demeaned Observation Space)
-        # ----------------------------------------------------------------------
-        ax1.set_facecolor(BG_COLOR)
-        for spine in ax1.spines.values():
-            spine.set_color(GRID_COLOR)
-        ax1.grid(True, linestyle="--", alpha=0.6, color=GRID_COLOR)
+        # Left: Parallelogram Geometry
+        ax_geo.set_xlim(-10.5, 13.5)
+        ax_geo.set_ylim(-1.8, 6.0)
+        ax_geo.set_xlabel("설명변수 평면 기저 X_1 방향 축", fontsize=11, fontweight="bold", color=INK_COLOR)
+        ax_geo.set_ylabel("직교 여차원 방향 축", fontsize=11, fontweight="bold", color=INK_COLOR)
+        ax_geo.set_title(f"■ [기하학적 실체] 다중공선성과 평행사변형 좌표계 붕괴 (θ = {theta_deg:.1f}°)",
+                         fontsize=12, fontweight="bold", color=INK_COLOR, pad=10)
+        ax_geo.grid(True, linestyle="--", alpha=0.4, color=GRID_COLOR)
+        ax_geo.axhline(0, color=MUTED_COLOR, lw=0.8, linestyle="-", alpha=0.4)
+        ax_geo.axvline(0, color=MUTED_COLOR, lw=0.8, linestyle="-", alpha=0.4)
 
-        # In the subspace orthogonal to 1, vectors live in a 2D plane.
-        # We project M1_y and M1_x onto 2D coordinates for clear visualization:
-        # Basis e1_sub = M1_x / ||M1_x|| = [-1, 0, 1] / sqrt(2)
-        # Basis e2_sub = [1, -2, 1] / sqrt(6)  (orthogonal to 1 and M1_x)
-        e1_sub = M1_x / np.sqrt(2.0)
-        e2_sub = np.array([1.0, -2.0, 1.0]) / np.sqrt(6.0)
+        # Parallelogram dashed lines
+        ax_geo.plot([p_b1x1[0], p_yhat[0]], [p_b1x1[1], p_yhat[1]], color=PURPLE_COLOR, linestyle="--", lw=1.5, alpha=0.7)
+        ax_geo.plot([p_b2x2[0], p_yhat[0]], [p_b2x2[1], p_yhat[1]], color=RED_COLOR, linestyle="--", lw=1.5, alpha=0.7)
 
-        # Coordinates in 2D plane:
-        u_x = np.dot(M1_x, e1_sub)
-        v_x = np.dot(M1_x, e2_sub)
-        u_y = np.dot(M1_y, e1_sub)
-        v_y = np.dot(M1_y, e2_sub)
-        u_fit = np.dot(fwl_fit, e1_sub)
-        v_fit = np.dot(fwl_fit, e2_sub)
-        u_res = u_y - u_fit
-        v_res = v_y - v_fit
+        # Shaded parallelogram polygon
+        poly = plt.Polygon([[0, 0], p_b1x1, p_yhat, p_b2x2], facecolor="#e2e8f0", edgecolor="none", alpha=0.35)
+        ax_geo.add_patch(poly)
 
-        # Origin
-        ax1.scatter(0, 0, color=INK_COLOR, s=25, zorder=5)
+        # Basis vectors x1, x2
+        ax_geo.annotate("", xy=(p_x1[0], p_x1[1]), xytext=(0, 0),
+                        arrowprops=dict(arrowstyle="->", color=GOLD_COLOR, lw=2.5, mutation_scale=15))
+        ax_geo.text(1.1, -0.4, "기저 x_1", color=GOLD_COLOR, fontsize=10, fontweight="bold")
 
-        # Partial regressor axis line: span of M1_x
-        axis_span = np.linspace(-2.2, 2.2, 50)
-        ax1.plot(axis_span, np.zeros_like(axis_span), "--", color=MUTED_COLOR, lw=1.2, alpha=0.6,
-                 label=r"부분설명변수 축 $\mathcal{C}(M_1 x)$")
+        ax_geo.annotate("", xy=(p_x2[0], p_x2[1]), xytext=(0, 0),
+                        arrowprops=dict(arrowstyle="->", color=GOLD_COLOR, lw=2.5, mutation_scale=15))
+        ax_geo.text(p_x2[0] + 0.1, p_x2[1] + 0.15, "기저 x_2", color=GOLD_COLOR, fontsize=10, fontweight="bold")
 
-        # Vector M1_x
-        ax1.annotate("", xy=(u_x, v_x), xytext=(0, 0),
-                     arrowprops=dict(arrowstyle="->", color=GOLD_COLOR, lw=2.2))
-        ax1.text(u_x + 0.08, v_x - 0.12, r"$M_1 x$", fontsize=10, color=GOLD_COLOR, fontweight="bold")
+        # Component vectors b1*x1, b2*x2
+        ax_geo.annotate("", xy=(p_b1x1[0], p_b1x1[1]), xytext=(0, 0),
+                        arrowprops=dict(arrowstyle="->", color=RED_COLOR, lw=2.8, mutation_scale=18))
+        ax_geo.annotate("", xy=(p_b2x2[0], p_b2x2[1]), xytext=(0, 0),
+                        arrowprops=dict(arrowstyle="->", color=PURPLE_COLOR, lw=2.8, mutation_scale=18))
 
-        # Vector M1_y
-        ax1.annotate("", xy=(u_y, v_y), xytext=(0, 0),
-                     arrowprops=dict(arrowstyle="->", color=NAVY_COLOR, lw=2.4))
-        ax1.text(u_y - 0.25, v_y + 0.10, r"$M_1 y$", fontsize=10, color=NAVY_COLOR, fontweight="bold")
+        # Target vector y_hat
+        ax_geo.annotate("", xy=(p_yhat[0], p_yhat[1]), xytext=(0, 0),
+                        arrowprops=dict(arrowstyle="->", color=TEAL_COLOR, lw=3.8, mutation_scale=22))
+        ax_geo.scatter([p_yhat[0]], [p_yhat[1]], color=TEAL_COLOR, s=120, zorder=6, edgecolor=INK_COLOR, lw=1.5)
+        ax_geo.annotate(f"사영 벡터 y_hat = ({u:.1f}, {v:.1f})\n[예측치: 100% 불변 고정]",
+                        xy=(p_yhat[0], p_yhat[1]), xytext=(p_yhat[0] + 0.4, p_yhat[1] + 0.9),
+                        fontsize=9.5, fontweight="bold", color=TEAL_COLOR,
+                        arrowprops=dict(arrowstyle="->", color=TEAL_COLOR, lw=1.5),
+                        bbox=dict(boxstyle="round,pad=0.3", facecolor="#ffffff", edgecolor=TEAL_COLOR, alpha=0.95))
 
-        # Fitted partial projection
-        ax1.annotate("", xy=(u_fit, v_fit), xytext=(0, 0),
-                     arrowprops=dict(arrowstyle="->", color=TEAL_COLOR, lw=2.2))
-        ax1.text(u_fit + 0.06, v_fit + 0.12, rf"$\hat{{\beta}}_1 M_1 x$ (${beta_fwl:.1f} M_1 x$)",
-                 fontsize=9.5, color=TEAL_COLOR, fontweight="bold")
+        # Labels for component vectors
+        label_b1_x = p_b1x1[0] / 2.0 if abs(b1) > 2.0 else b1 - 0.8
+        ax_geo.text(label_b1_x, -0.65, f"β_1 x_1 ({b1:+.2f})", color=RED_COLOR,
+                    fontsize=9.5, fontweight="bold", ha="center",
+                    bbox=dict(boxstyle="round,pad=0.2", facecolor="#ffffff", edgecolor=RED_COLOR, alpha=0.85))
 
-        # Orthogonal residual e_hat
-        ax1.plot([u_fit, u_y], [v_fit, v_y], "-", color=RED_COLOR, lw=2.2,
-                 label=r"직교 잔차 $\hat{e} = M_1 y - \hat{\beta}_1 M_1 x$")
+        label_b2_x = p_b2x2[0] / 2.0
+        label_b2_y = p_b2x2[1] / 2.0 + 0.45
+        ax_geo.text(label_b2_x, label_b2_y, f"β_2 x_2 ({b2:+.2f})", color=PURPLE_COLOR,
+                    fontsize=9.5, fontweight="bold", ha="center",
+                    bbox=dict(boxstyle="round,pad=0.2", facecolor="#ffffff", edgecolor=PURPLE_COLOR, alpha=0.85))
 
-        # Right angle marker
-        ra_size = 0.12
-        ax1.plot([u_fit, u_fit, u_fit - ra_size * 0.2],
-                 [v_fit, v_fit + ra_size, v_fit + ra_size],
-                 "-", color=RED_COLOR, lw=1.0)
+        # Right: Econometric Diagnostic Dashboard
+        ax_info.axis("off")
 
-        ax1.set_xlim(-1.8, 2.2)
-        ax1.set_ylim(-1.0, 2.2)
-        ax1.set_xlabel(r"직교기저 $e_1$ (방향 $M_1 x$)", fontsize=10.0, color=INK_COLOR)
-        ax1.set_ylabel(r"직교기저 $e_2$ (여공간 방향)", fontsize=10.0, color=INK_COLOR)
-        ax1.set_title(r"FWL 정리: $M_1 y$의 $M_1 x$ 직교사영 ($\hat{\beta}_1 = 1.0$ 일치)",
-                      fontsize=11.0, fontweight="bold", color=INK_COLOR, pad=8)
-        ax1.legend(loc="upper left", framealpha=0.92, facecolor=BG_COLOR, edgecolor=GRID_COLOR, fontsize=8.0)
+        ax_info.text(0.04, 0.96, f"■ 실시간 다중공선성 진단 대시보드 (θ = {theta_deg:.1f}°)", fontsize=12, fontweight="bold", color=INK_COLOR)
+        ax_info.axhline(0.92, xmin=0.04, xmax=0.96, color=MUTED_COLOR, lw=0.8, alpha=0.5)
 
-        # Info badge left
-        badge_fwl = (
-            rf"$\hat{{\beta}}_1 = \frac{{(M_1 x)'(M_1 y)}}{{(M_1 x)'(M_1 x)}} = \frac{{2.0}}{{2.0}} = {beta_fwl:.1f}$" "\n"
-            rf"$\|M_1 y\|^2 = \|\hat{{\beta}}_1 M_1 x\|^2 + \|\hat{{e}}\|^2$" "\n"
-            rf"$\frac{{14}}{{3}} = 2 + \frac{{8}}{{3}}$ (중심화 피타고라스)" "\n"
-            r"$\hat{e}_{FWL} \equiv \hat{e}_{OLS}$ (잔차 완전 일치)"
+        ax_info.text(0.06, 0.85, "1. 기하학적 각도 및 상관관계 지표", fontsize=10.5, fontweight="bold", color=INK_COLOR)
+        ax_info.text(0.08, 0.78, f"• 두 설명변수 사이 각도 (θ):        {theta_deg:.1f}°", fontsize=9.5, color=INK_COLOR)
+        ax_info.text(0.08, 0.72, f"• 설명변수 간 상관계수 (r = cos θ):    {r_corr:.4f}", fontsize=9.5, color=INK_COLOR)
+        
+        vif_c = GREEN_COLOR if vif < 5 else (GOLD_COLOR if vif < 10 else RED_COLOR)
+        vif_status = "안전 (Normal)" if vif < 5 else ("주의 (Moderate)" if vif < 10 else "위험/폭발 (Severe Multicollinearity)")
+        ax_info.text(0.08, 0.66, f"• 분산팽창지수 (VIF = 1 / sin²θ):    {vif:.2f}  [{vif_status}]", fontsize=9.5, fontweight="bold", color=vif_c)
+
+        ax_info.text(0.06, 0.56, "2. 회귀계수 분해 vs 사영 예측치 불변성", fontsize=10.5, fontweight="bold", color=INK_COLOR)
+        ax_info.text(0.08, 0.49, f"• 추정 계수 β_1 (x_1 방향 좌표):       {b1:+.2f}", fontsize=9.5, fontweight="bold", color=RED_COLOR)
+        ax_info.text(0.08, 0.43, f"• 추정 계수 β_2 (x_2 방향 좌표):       {b2:+.2f}", fontsize=9.5, fontweight="bold", color=PURPLE_COLOR)
+        ax_info.text(0.08, 0.37, f"• 사영 예측 벡터 합산:                  β_1 x_1 + β_2 x_2 ≡ ({u:.1f}, {v:.1f})", fontsize=9.5, fontweight="bold", color=TEAL_COLOR)
+        ax_info.text(0.08, 0.31, f"• 예측치 노름 ||y_hat||:                {np.linalg.norm(p_yhat):.4f} (100% 불변)", fontsize=9.5, fontweight="bold", color=TEAL_COLOR)
+
+        ax_info.text(0.06, 0.22, "3. 계량경제학적 핵심 결론 (Core Takeaway)", fontsize=10.5, fontweight="bold", color=INK_COLOR)
+        takeaway = (
+            "• [예측(Prediction)은 안전]: 열공간 C(X) 평면 자체는 불변이므로\n"
+            "  사영 벡터 y_hat(그림자)은 다중공선성에 전혀 영향을 받지 않는다.\n"
+            "• [인과추론(Identification)은 파탄]: 두 기저축이 겹쳐지면서\n"
+            "  평행사변형 좌표계가 붕괴하여 β_1은 음(-)으로, β_2는 양(+)으로\n"
+            "  상쇄 폭발하므로 개별 변수의 한계효과 식별은 불가능해진다."
         )
-        ax1.text(0.96, 0.05, badge_fwl, transform=ax1.transAxes,
-                 fontsize=8.5, va="bottom", ha="right",
-                 bbox=dict(boxstyle="round,pad=0.4", facecolor="#f3ede2", edgecolor="#d5c7b5", alpha=0.95))
+        ax_info.text(0.06, 0.04, takeaway, fontsize=8.8, color=INK_COLOR, va="bottom",
+                     bbox=dict(boxstyle="round,pad=0.4", facecolor="#f5efe6", edgecolor="#dfd4c5", alpha=0.95))
 
-        # ----------------------------------------------------------------------
-        # Right Panel: Multicollinearity Conditioning & Invariance
-        # ----------------------------------------------------------------------
-        ax2.set_facecolor(BG_COLOR)
-        for spine in ax2.spines.values():
-            spine.set_color(GRID_COLOR)
-        ax2.grid(True, linestyle="--", alpha=0.6, color=GRID_COLOR)
+        fig.suptitle("OLS 다중공선성의 기하학적 본질: 평행사변형 좌표계 붕괴 vs 사영 벡터 불변성",
+                     fontsize=13.0, color=INK_COLOR, fontweight="bold", y=0.965)
+        plt.subplots_adjust(left=0.06, right=0.96, top=0.88, bottom=0.10, wspace=0.25)
 
-        # Plot curves
-        ax2.plot(d_grid, cond_grid, "-", color=RED_COLOR, lw=2.2,
-                 label=r"Gram 행렬 조건수 $\kappa(X_\delta' X_\delta) \sim \mathcal{O}(\delta^{-2})$")
-        ax2.plot(d_grid, beta_sens_grid, "--", color=PLUM_COLOR, lw=2.0,
-                 label=r"계수 추정 불안정성 $\|\Delta\hat{\beta}\| \sim \mathcal{O}(\delta^{-1})$")
-        ax2.plot(d_grid, pred_sens_grid, "-", color=TEAL_COLOR, lw=2.8,
-                 label=r"예측 변동 민감도 $\|\Delta\hat{y}\|/\|\Delta y\| \equiv 1.0$ (불변)")
-
-        # Current delta markers
-        cur_cond = np.linalg.cond((np.column_stack([ones_6, x1_6, x1_6 + d_cur * v_6])).T @ (np.column_stack([ones_6, x1_6, x1_6 + d_cur * v_6])))
-        cur_beta_sens = 1.0 / (np.sqrt(6.0) * d_cur)
-
-        ax2.scatter(d_cur, cur_cond, color=RED_COLOR, s=60, zorder=6)
-        ax2.scatter(d_cur, cur_beta_sens, color=PLUM_COLOR, s=60, zorder=6)
-        ax2.scatter(d_cur, 1.0, color=TEAL_COLOR, s=70, marker="s", zorder=6)
-        ax2.axvline(d_cur, color=MUTED_COLOR, linestyle=":", lw=1.2, alpha=0.8)
-
-        ax2.set_xscale("log")
-        ax2.set_yscale("log")
-        ax2.set_xlim(1e-3, 1.2)
-        ax2.set_ylim(0.5, 2e7)
-        ax2.set_xlabel(r"섭동 계수 $\delta$ (선형종속 접근: $\delta \rightarrow 0$)", fontsize=10.0, color=INK_COLOR)
-        ax2.set_ylabel("민감도 및 조건수 (Log Scale)", fontsize=10.0, color=INK_COLOR)
-        ax2.set_title(r"다중공선성의 기하: 부분공간 불변성 vs 좌표계 파탄",
-                      fontsize=11.0, fontweight="bold", color=INK_COLOR, pad=8)
-        ax2.legend(loc="upper right", framealpha=0.92, facecolor=BG_COLOR, edgecolor=GRID_COLOR, fontsize=7.8)
-
-        # Info badge right
-        badge_right = (
-            rf"현재 $\delta = {d_cur:.3f}$" "\n"
-            rf"조건수 $\kappa(X'X) = {cur_cond:.1e}$" "\n"
-            rf"계수 변동 노름: $\times {cur_beta_sens:.1f}$ 배" "\n"
-            r"$\rightarrow$ 사영 $\hat{y}$는 불변, 계수 $\hat{\beta}$만 폭발"
-        )
-        ax2.text(0.04, 0.05, badge_right, transform=ax2.transAxes,
-                 fontsize=8.5, va="bottom", ha="left",
-                 bbox=dict(boxstyle="round,pad=0.4", facecolor="#edf2f7", edgecolor="#cbd5e1", alpha=0.95))
-
-        # Save frame to PIL
         fig.canvas.draw()
         rgba = np.asarray(fig.canvas.buffer_rgba())
         img = Image.fromarray(rgba).convert("RGB")
@@ -406,8 +348,8 @@ def generate_gif_frisch_waugh_lovell():
         plt.close(fig)
 
     # Save animated GIF
-    out_path = os.path.join(GIF_DIR, "ols-frisch-waugh-lovell-geometry.gif")
-    durations = [280] * len(deltas_forward) + [650] * len(deltas_hold) + [280] * len(deltas_back)
+    out_path = os.path.join(GIF_DIR, "ols-multicollinearity-geometry.gif")
+    durations = [280]*len(thetas_fwd) + [750]*len(thetas_hold_low) + [280]*len(thetas_bwd) + [750]*len(thetas_hold_high)
     frames[0].save(
         out_path,
         save_all=True,
@@ -422,5 +364,5 @@ def generate_gif_frisch_waugh_lovell():
 
 if __name__ == "__main__":
     generate_gif_projection_3d()
-    generate_gif_frisch_waugh_lovell()
+    generate_gif_multicollinearity_geometry()
     print("All OLS projection geometry GIFs successfully generated!")
