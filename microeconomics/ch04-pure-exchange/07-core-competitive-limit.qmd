@@ -212,3 +212,7 @@ $$
 
 을 뜻한다. Hausdorff metric 등의 topology를 지정한 별도의 set convergence를 이 문장으로 주장하지는 않는다.
 :::
+
+::: {.callout-tip appearance="simple" title="보충자료 안내 · 에지워스 상자에서의 코어 축소 동학"}
+복제 차수 $r=1, 2, 3, \dots, \infty$에 따른 에지워스 상자 내 코어 선분의 양방향 수축 기하, 불균등 연합($2B + 1A$)의 구체적 차단 잉여 계산, 그리고 왈라스 경쟁균형점으로의 Debreu–Scarf 수렴 애니메이션은 [보충자료 · 코어(Core)와 경쟁균형 수렴](../../supplements/core-competitive-convergence.qmd)에서 고해상도 시뮬레이션 및 재현 가능 파이썬 코드와 함께 확인할 수 있다.
+:::

@@ -1,6 +1,6 @@
 ---
 title: "계산·시각화 보충자료 (Supplements)"
-subtitle: "대학원 경제학 12대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
+subtitle: "대학원 경제학 13대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
 ---
 
 ::: {.spoon-hero}
@@ -11,14 +11,14 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 # 계산·시각화 보충자료 (Supplements)
 
 ::: {.spoon-hero__desc}
-본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 12대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 27종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 13대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 29종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
-[미시경제학 (5편)]{.chip .chip--micro}
+[미시경제학 (6편)]{.chip .chip--micro}
 [거시경제학 (4편)]{.chip .chip--macro}
 [계량경제학 (3편)]{.chip .chip--metrics}
-[27종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
+[29종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
 :::
@@ -36,8 +36,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 ### 전체 보기
 
 ::: {.spoon-guide-box}
-**📚 대학원 경제학 12대 계산·시각화 보충자료 통합 포털**
-미시·거시·계량 전 분야에 걸쳐 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 12편의 통합 인덱스이다. 상단 검색창에서 키워드를 입력하여 즉시 필터링하거나 각 분야별 하위탭으로 이동하여 탐색할 수 있다.
+**📚 대학원 경제학 13대 계산·시각화 보충자료 통합 포털**
+미시·거시·계량 전 분야에 걸쳐 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 13편의 통합 인덱스이다. 상단 검색창에서 키워드를 입력하여 즉시 필터링하거나 각 분야별 하위탭으로 이동하여 탐색할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -155,6 +155,31 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 미시 3권 제3장 부분균형과 시장구조 (Conduct·Welfare)</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Micro 6: Core Convergence -->
+<a href="core-competitive-convergence.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">코어(Core)와 경쟁균형 수렴: 에지워스 상자에서 Debreu–Scarf 복제경제 동학</div>
+  <div class="spoon-card__desc">가격 없는 협조적 안정성 개념인 코어(Core), 2인 에지워스 상자에서의 코어 선분, r-복제경제에서의 불균등 연합(Unbalanced Coalition) 블로킹 및 왈라스 경쟁균형으로의 Debreu–Scarf 수렴을 규명한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">코어(Core)</span>
+    <span class="chip chip--topic">약한 차단(Weak Blocking)</span>
+    <span class="chip chip--topic">복제경제(Replica Economy)</span>
+    <span class="chip chip--topic">동등대우 정리(Equal-Treatment)</span>
+    <span class="chip chip--topic">불균등 연합 블로킹</span>
+    <span class="chip chip--topic">Debreu–Scarf 정리</span>
+    <span class="chip chip--topic">보이지 않는 손</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 4권 제4장 순수교환경제 제7절 Core와 competitive limit</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
@@ -325,8 +350,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-guide-box}
 **🎯 미시경제학 (Microeconomics) 보충자료 아카이브**
-- **주요 영역**: 소비자 쌍대성 이론(Slutsky 분해), 생산자이론과 비용 포락선(확장경로와 Envelope 정리), 과점 게임이론(Cournot·Stackelberg 반응곡선과 후생), 일반균형과 후생경제학(Edgeworth 상자), 고급 미시 수학(집합값 대응의 반연속성과 Berge 최대정리).
-- **시각화 특징**: 10종의 고해상도 GIF를 통해 보상수요의 곡률, 등량곡선과 비용 포락선의 접점 동학, 과점 최적대응 거미집 수렴과 등이윤 외접, 경매인의 타토느망 탐색 경로, 상반연속·하반연속의 위상수학적 포섭 조건을 엄밀하게 시각화한다.
+- **주요 영역**: 소비자 쌍대성 이론(Slutsky 분해), 생산자이론과 비용 포락선(확장경로와 Envelope 정리), 과점 게임이론(Cournot·Stackelberg 반응곡선과 후생), 일반균형과 후생경제학(Edgeworth 상자), 복제경제와 코어 수렴(Debreu–Scarf 정리), 고급 미시 수학(집합값 대응의 반연속성과 Berge 최대정리).
+- **시각화 특징**: 12종의 고해상도 GIF를 통해 보상수요의 곡률, 등량곡선과 비용 포락선의 접점 동학, 과점 최적대응 거미집 수렴과 등이윤 외접, 경매인의 타토느망 탐색 경로, 복제경제 연합 블로킹과 코어 수축 기하, 상반연속·하반연속의 위상수학적 포섭 조건을 엄밀하게 시각화한다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -444,6 +469,31 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 미시 3권 제3장 부분균형과 시장구조 (Conduct·Welfare)</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Micro 6: Core Convergence -->
+<a href="core-competitive-convergence.html" class="spoon-card" data-subject="micro">
+  <div class="spoon-card__header">
+    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">코어(Core)와 경쟁균형 수렴: 에지워스 상자에서 Debreu–Scarf 복제경제 동학</div>
+  <div class="spoon-card__desc">가격 없는 협조적 안정성 개념인 코어(Core), 2인 에지워스 상자에서의 코어 선분, r-복제경제에서의 불균등 연합(Unbalanced Coalition) 블로킹 및 왈라스 경쟁균형으로의 Debreu–Scarf 수렴을 규명한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">코어(Core)</span>
+    <span class="chip chip--topic">약한 차단(Weak Blocking)</span>
+    <span class="chip chip--topic">복제경제(Replica Economy)</span>
+    <span class="chip chip--topic">동등대우 정리(Equal-Treatment)</span>
+    <span class="chip chip--topic">불균등 연합 블로킹</span>
+    <span class="chip chip--topic">Debreu–Scarf 정리</span>
+    <span class="chip chip--topic">보이지 않는 손</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 미시 4권 제4장 순수교환경제 제7절 Core와 competitive limit</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>

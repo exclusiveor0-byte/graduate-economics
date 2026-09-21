@@ -170,6 +170,7 @@ book:
     - supplements/correspondence-hemicontinuity.qmd
     - supplements/producer-cost-envelope.qmd
     - supplements/oligopoly-game-theory.qmd
+    - supplements/core-competitive-convergence.qmd
   - part: "보충자료 · 거시경제학"
     chapters:
     - supplements/solow-growth.qmd
