@@ -227,7 +227,7 @@ def generate_gif_propagation_mechanics():
         # -------------------------------------------------------------
         ax_cap.set_title("■ [전파기제 2-B] 내생적 자본축적과 경기 지속성 증폭", fontsize=11.5, fontweight="bold", color=INK_COLOR, pad=8)
         ax_cap.set_xlim(0, 40)
-        ax_cap.set_ylim(-0.05, 0.65)
+        ax_cap.set_ylim(-0.1, 1.25)
         ax_cap.set_xlabel("경과 분기 (t, Quarters)", fontsize=9.5, color=INK_COLOR)
         ax_cap.set_ylabel("자본스톡 변동률 k_t (%)", fontsize=9.5, color=INK_COLOR)
         ax_cap.grid(True, linestyle="--", alpha=0.4, color=GRID_COLOR)
@@ -238,6 +238,10 @@ def generate_gif_propagation_mechanics():
         ax_cap.plot(t_axis[:frame_t+1], k_sim[:frame_t+1], color=BLUE_COLOR, lw=2.4)
         ax_cap.scatter([frame_t], [k_sim[frame_t]], color=BLUE_COLOR, s=70, zorder=5, edgecolor=INK_COLOR)
         ax_cap.axvline(frame_t, color=RED_COLOR, lw=1.2, linestyle=":")
+
+        # Active value label on dot
+        ax_cap.text(frame_t, k_sim[frame_t] + 0.08, f"+{k_sim[frame_t]:.2f}%", ha="center",
+                    fontsize=9.0, fontweight="bold", color=BLUE_COLOR)
 
         ax_cap.text(0.96, 0.20,
                     "[핵심 직관] 내생적 전파 (Endogenous Propagation):\n"
@@ -316,12 +320,12 @@ def generate_gif_irf_propagation():
         fig.patch.set_facecolor(BG_COLOR)
         
         var_specs = [
-            ("y", "총산출량 (GDP Y_t)", [-0.2, 1.6], TEAL_COLOR),
-            ("c", "가계 소비 (C_t)", [-0.1, 0.7], PURPLE_COLOR),
-            ("i", "총투자 (I_t)", [-0.5, 4.8], GOLD_COLOR),
-            ("l", "노동 투입 (L_t)", [-0.3, 0.9], GREEN_COLOR),
-            ("k", "자본 스톡 (K_t)", [-0.1, 0.9], BLUE_COLOR),
-            ("r", "실질이자율 변동 (Δr_t, %p)", [-0.04, 0.16], RED_COLOR),
+            ("y", "총산출량 (GDP Y_t)", [-0.2, 1.8], TEAL_COLOR),
+            ("c", "가계 소비 (C_t)", [-0.1, 0.9], PURPLE_COLOR),
+            ("i", "총투자 (I_t)", [-0.5, 6.8], GOLD_COLOR),
+            ("l", "노동 투입 (L_t)", [-0.3, 1.0], GREEN_COLOR),
+            ("k", "자본 스톡 (K_t)", [-0.1, 1.25], BLUE_COLOR),
+            ("r", "실질이자율 변동 (Δr_t, %p)", [-0.04, 0.08], RED_COLOR),
         ]
 
         for idx, (v_key, v_title, y_lims, v_color) in enumerate(var_specs):
