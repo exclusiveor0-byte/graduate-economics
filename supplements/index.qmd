@@ -1,6 +1,6 @@
 ---
 title: "계산·시각화 보충자료 (Supplements)"
-subtitle: "대학원 경제학 11대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
+subtitle: "대학원 경제학 12대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
 ---
 
 ::: {.spoon-hero}
@@ -11,14 +11,14 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 # 계산·시각화 보충자료 (Supplements)
 
 ::: {.spoon-hero__desc}
-본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 11대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 25종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 12대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 27종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
 [미시경제학 (5편)]{.chip .chip--micro}
-[거시경제학 (3편)]{.chip .chip--macro}
+[거시경제학 (4편)]{.chip .chip--macro}
 [계량경제학 (3편)]{.chip .chip--metrics}
-[25종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
+[27종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
 :::
@@ -36,8 +36,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 ### 전체 보기
 
 ::: {.spoon-guide-box}
-**📚 대학원 경제학 11대 계산·시각화 보충자료 통합 포털**
-미시·거시·계량 전 분야에 걸쳐 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 11편의 통합 인덱스이다. 상단 검색창에서 키워드를 입력하여 즉시 필터링하거나 각 분야별 하위탭으로 이동하여 탐색할 수 있다.
+**📚 대학원 경제학 12대 계산·시각화 보충자료 통합 포털**
+미시·거시·계량 전 분야에 걸쳐 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 12편의 통합 인덱스이다. 상단 검색창에서 키워드를 입력하여 즉시 필터링하거나 각 분야별 하위탭으로 이동하여 탐색할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -221,6 +221,30 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 거시 2권 제7장 IS-LM 단기 총수요 모형</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Macro 4: RBC Technology Shock -->
+<a href="rbc-technology-shock.html" class="spoon-card" data-subject="macro">
+  <div class="spoon-card__header">
+    <span class="chip chip--macro">거시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">실물경기변동(RBC) 모형: 기술충격과 동태적 충격반응(IRF) 전파</div>
+  <div class="spoon-card__desc">표준 RBC 모형에서 1% 기술충격에 따른 사전결정 자본과 소비의 수직 점프 동학, 소비 평활화와 투자 가속도, 여가의 기간간 대체, 그리고 6대 거시변수의 충격반응함수(IRF) 전파 메커니즘을 분석한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">RBC 기술충격</span>
+    <span class="chip chip--topic">소비 점프(Jump)</span>
+    <span class="chip chip--topic">안장경로 복귀</span>
+    <span class="chip chip--topic">소비 평활화</span>
+    <span class="chip chip--topic">투자 가속도</span>
+    <span class="chip chip--topic">충격반응함수(IRF)</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 거시 2권 제14장 선형합리적기대 및 제15장 실물경기변동이론</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
@@ -432,8 +456,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-guide-box}
 **🎯 거시경제학 (Macroeconomics) 보충자료 아카이브**
-- **주요 영역**: 신고전학파 성장모형(Solow 전이경로), 무한시계 최적성장(Ramsey 안장경로 및 슈팅 알고리즘), 단기 총수요 모형(IS–LM 재정충격과 구축효과).
-- **시각화 특징**: 10종의 동적 시뮬레이션을 통해 비선형 자본축적 미분방정식의 위상도, 안장경로 고유벡터 수렴, 통화정책 공조에 따른 균형 이동을 직관적으로 재현한다.
+- **주요 영역**: 신고전학파 성장모형(Solow 전이경로), 무한시계 최적성장(Ramsey 안장경로 및 슈팅 알고리즘), 단기 총수요 모형(IS–LM 재정충격과 구축효과), 실물경기변동(RBC 모형과 기술충격 IRF).
+- **시각화 특징**: 12종의 동적 시뮬레이션을 통해 비선형 자본축적 미분방정식의 위상도, 안장경로 고유벡터 수렴, 통화정책 공조, 기술충격의 동태적 충격반응(IRF) 전파 동학을 직관적으로 재현한다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -502,6 +526,30 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 거시 2권 제7장 IS-LM 단기 총수요 모형</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Macro 4: RBC Technology Shock -->
+<a href="rbc-technology-shock.html" class="spoon-card" data-subject="macro">
+  <div class="spoon-card__header">
+    <span class="chip chip--macro">거시경제학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">실물경기변동(RBC) 모형: 기술충격과 동태적 충격반응(IRF) 전파</div>
+  <div class="spoon-card__desc">표준 RBC 모형에서 1% 기술충격에 따른 사전결정 자본과 소비의 수직 점프 동학, 소비 평활화와 투자 가속도, 여가의 기간간 대체, 그리고 6대 거시변수의 충격반응함수(IRF) 전파 메커니즘을 분석한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">RBC 기술충격</span>
+    <span class="chip chip--topic">소비 점프(Jump)</span>
+    <span class="chip chip--topic">안장경로 복귀</span>
+    <span class="chip chip--topic">소비 평활화</span>
+    <span class="chip chip--topic">투자 가속도</span>
+    <span class="chip chip--topic">충격반응함수(IRF)</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 거시 2권 제14장 선형합리적기대 및 제15장 실물경기변동이론</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>

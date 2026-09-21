@@ -175,6 +175,7 @@ book:
     - supplements/solow-growth.qmd
     - supplements/ramsey-saddle-path.qmd
     - supplements/islm-fiscal-shock.qmd
+    - supplements/rbc-technology-shock.qmd
   - part: "보충자료 · 계량경제학"
     chapters:
     - supplements/ols-geometry.qmd
