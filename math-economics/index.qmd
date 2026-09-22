@@ -1,0 +1,40 @@
+# 경제학을 위한 수학 {.unnumbered}
+
+## 대학원 수리경제이론 및 수리적 기초
+
+**선형대수, 실해석, 최적화 이론, 동태계 분석, 그리고 부동점 정리**
+
+이 과목은 미시경제학, 거시경제학, 계량경제학 전반의 이론적 모형화와 엄밀한 증명에 필수적인 수학적 언어와 기초 이론을 체계적으로 다룬다. 직관적 경제학적 서술을 수리적 엄밀성으로 뒷받침하며, 대학원 코어 코스와 종합시험(Qualifying Exam)을 위한 탄탄한 기초를 제공한다.
+
+## Chapter 로드맵 및 편성 현황
+
+| Chapter | 대주제 및 주요 내용 | 상태 |
+|---|---|---|
+| [Chapter 01](ch01-linear-algebra/index.qmd) | **선형대수학과 행렬해석** · 벡터공간, 선형변환, 정사영, 행렬식 | 업로드 준비 완료 |
+| Chapter 02 | **고유값, 스펙트럼 정리 및 2차형식** · 대칭행렬, 정부호성, 행렬분해(QR, SVD) | 업로드 대기 |
+| Chapter 03 | **유클리드 공간과 거리공간** · 노름공간, 열린집합·닫힌집합, 위상적 기초 | 업로드 대기 |
+| Chapter 04 | **위상구조, 점렬 및 콤팩트성** · 완비성, Bolzano–Weierstrass, Heine–Borel | 업로드 대기 |
+| Chapter 05 | **함수의 연속성과 극값정리** · 연속사상, 균등연속, Weierstrass 최대값 정리 | 업로드 대기 |
+| Chapter 06 | **다변수 미분과 국소 극값 조건** · 전미분, 야코비안, 헤시안, 음함수정리, Taylor 전개 | 업로드 대기 |
+| Chapter 07 | **등식 및 부등식 제약최적화** · 라그랑주 승수법, KKT 조건, 상보여유성 | 업로드 대기 |
+| Chapter 08 | **볼록집합, 볼록함수와 초평면 분리정리** · Convexity, 준볼록성, Minkowski 분리정리 | 업로드 대기 |
+| Chapter 09 | **매개변수 최적화와 포락선·최대값 정리** · Envelope Theorem, 대응, Berge 최대값 정리 | 업로드 대기 |
+| Chapter 10 | **차분방정식과 이산시간 동태계** · 선형 차분방정식계, Schur–Cohn 안정성 판정 | 업로드 대기 |
+| Chapter 11 | **미분방정식계와 위상도 분석** · 연립 ODE, 2차원 위상도, 안장점 경로(Saddle-Path) | 업로드 대기 |
+| Chapter 12 | **변분법과 폰트랴긴 최대원리** · Euler–Lagrange, 해밀토니안, 횡단성 조건 | 업로드 대기 |
+| Chapter 13 | **동적계획법과 수축사상정리** · Bellman 방정식, Banach 부동점 정리, Blackwell 조건 | 업로드 대기 |
+| Chapter 14 | **Brouwer·Kakutani 부동점 정리와 균형 존재성** · 대응의 연속성, 일반균형 및 내시균형 존재 증명 | 업로드 대기 |
+
+::: {.callout-note title="원고 업로드 및 편제 안내"}
+- 강의노트 원고는 미시·거시·계량경제학 과목과 동일하게 준비되는 대로 Chapter 단위로 순차 업로드됩니다.
+- 각 Chapter는 목차와 요약을 담은 `index.qmd`와 원문 수식·증명을 담은 `contents.qmd`의 2-file 표준 구조로 운영됩니다.
+- 본문의 정리, 명제, 증명 보완 및 수정 제안은 GitHub Pull Request를 통해 참여할 수 있습니다.
+:::
+
+## 주요 참고 문헌
+
+- Carl P. Simon and Lawrence Blume, *Mathematics for Economists*, W. W. Norton & Company.
+- Rangarajan K. Sundaram, *A First Course in Optimization Theory*, Cambridge University Press.
+- Angel de la Fuente, *Mathematical Methods and Models for Economists*, Cambridge University Press.
+- Efe A. Ok, *Real Analysis with Economic Applications*, Princeton University Press.
+- Nancy L. Stokey and Robert E. Lucas Jr. with Edward C. Prescott, *Recursive Methods in Economic Dynamics*, Harvard University Press.

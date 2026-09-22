@@ -28,6 +28,11 @@ subtitle: Graduate Economics Knowledge Base
 [CURRENT ARCHIVE]{.home-hero__eyebrow}
 
 ::: {.home-archive-item}
+**경제학을 위한 수학**
+
+선형대수·실해석·최적화·동태계·부동점정리를 포괄하는 수리경제학 기초
+:::
+::: {.home-archive-item}
 **미시경제학**
 
 수학적 기초에서 소비자·생산자·시장·순수교환경제로 이어지는 과정
@@ -63,9 +68,23 @@ subtitle: Graduate Economics Knowledge Base
 ## 정리노트 읽기
 
 :::: {.study-grid}
-::: {.study-card .study-card--micro}
+::: {.study-card .study-card--math}
 ::: {.study-card__number}
 01
+:::
+::: {.study-card__eyebrow}
+MATHEMATICAL FOUNDATIONS
+:::
+### [경제학을 위한 수학](math-economics/index.html)
+선형대수 · 위상 및 실해석 · 정적·동적 최적화 · 동태계 · 부동점 정리
+
+[Chapter 01부터 읽기](math-economics/index.html){.study-card__link} →
+
+[경제학 연구와 분석을 뒷받침하는 수리적 언어와 공통 기초]{.status}
+:::
+::: {.study-card .study-card--micro}
+::: {.study-card__number}
+02
 :::
 ::: {.study-card__eyebrow}
 THEORY
@@ -79,7 +98,7 @@ THEORY
 :::
 ::: {.study-card .study-card--macro}
 ::: {.study-card__number}
-02
+03
 :::
 ::: {.study-card__eyebrow}
 MACROECONOMICS
@@ -93,7 +112,7 @@ MACROECONOMICS
 :::
 ::: {.study-card .study-card--econometrics}
 ::: {.study-card__number}
-03
+04
 :::
 ::: {.study-card__eyebrow}
 ECONOMETRICS
@@ -107,7 +126,7 @@ ECONOMETRICS
 :::
 ::: {.study-card .study-card--supplements}
 ::: {.study-card__number}
-04
+05
 :::
 ::: {.study-card__eyebrow}
 COMPUTATION
@@ -121,7 +140,7 @@ COMPUTATION
 :::
 ::: {.study-card .study-card--literature}
 ::: {.study-card__number}
-05
+06
 :::
 ::: {.study-card__eyebrow}
 LITERATURE
@@ -135,7 +154,7 @@ LITERATURE
 :::
 ::: {.study-card .study-card--qual}
 ::: {.study-card__number}
-06
+07
 :::
 ::: {.study-card__eyebrow}
 QUALIFYING EXAM

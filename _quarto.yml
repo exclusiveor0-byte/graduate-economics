@@ -28,6 +28,10 @@ book:
   chapters:
   - index.qmd
   - collaboration.qmd
+  - math-economics/index.qmd
+  - part: math-economics/ch01-linear-algebra/index.qmd
+    chapters:
+    - math-economics/ch01-linear-algebra/contents.qmd
   - microeconomics/index.qmd
   - part: microeconomics/ch00-foundations/index.qmd
     chapters:
