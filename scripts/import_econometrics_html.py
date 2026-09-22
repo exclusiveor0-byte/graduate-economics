@@ -106,6 +106,12 @@ def convert(source: str) -> str:
     text = re.sub(r'<p(?:\s[^>]*)?>', "\n", text)
     text = text.replace("</p>", "\n")
     text = re.sub(r'<!--.*?-->', "", text, flags=re.S)
+
+    # Strip leading and trailing whitespace from each line so HTML source indentation
+    # does not accidentally trigger 4-space indented code blocks (<pre><code>) in Markdown
+    cleaned_lines = [line.strip() for line in text.splitlines()]
+    text = "\n".join(cleaned_lines)
+
     text = re.sub(r'\n{3,}', "\n\n", text)
     return text.strip() + "\n"
 
