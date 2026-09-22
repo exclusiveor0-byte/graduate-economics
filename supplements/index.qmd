@@ -11,14 +11,14 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 # 계산·시각화 보충자료 (Supplements)
 
 ::: {.spoon-hero__desc}
-본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 14대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 29종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 14대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 31종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
 [미시경제학 (6편)]{.chip .chip--micro}
 [거시경제학 (4편)]{.chip .chip--macro}
 [계량경제학 (4편)]{.chip .chip--metrics}
-[29종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
+[31종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
 :::
@@ -348,7 +348,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 <a href="classical-testing-trinity.html" class="spoon-card" data-subject="metrics">
   <div class="spoon-card__header">
     <span class="chip chip--metrics">계량경제학</span>
-    <span class="chip chip--primary">엄밀한 수리 증명</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
   </div>
   <div class="spoon-card__title">3대 고전 가설검정의 기하학: Wald, 우도비(LR), 라그랑주 승수(LM/Score)</div>
   <div class="spoon-card__desc">로그우도함수의 곡면 위에서 모수 수평 거리(Wald), 우도 높이 갭(LR), 접선 기울기(LM)의 기하학적 분해, 선형회귀에서의 유한표본 부등식 W ≥ LR ≥ LM 대수 증명 및 비선형 불변성 상충을 분석한다.</div>
@@ -718,7 +718,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 <a href="classical-testing-trinity.html" class="spoon-card" data-subject="metrics">
   <div class="spoon-card__header">
     <span class="chip chip--metrics">계량경제학</span>
-    <span class="chip chip--primary">엄밀한 수리 증명</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
   </div>
   <div class="spoon-card__title">3대 고전 가설검정의 기하학: Wald, 우도비(LR), 라그랑주 승수(LM/Score)</div>
   <div class="spoon-card__desc">로그우도함수의 곡면 위에서 모수 수평 거리(Wald), 우도 높이 갭(LR), 접선 기울기(LM)의 기하학적 분해, 선형회귀에서의 유한표본 부등식 W ≥ LR ≥ LM 대수 증명 및 비선형 불변성 상충을 분석한다.</div>
