@@ -1,0 +1,121 @@
+---
+title: "선형대수학과 행렬해석"
+description: "Vector Spaces, Linear Transformations, Projections, and Matrices"
+---
+
+::: {.callout-note title="원고 업로드 대기 영역"}
+현재 Chapter 01 "선형대수학과 행렬해석"의 업로드 및 렌더링 영역이 마련되었습니다.
+미시·거시·계량경제학과 동일하게 강의노트 원고가 제공되는 즉시 이 영역의 내용이 치환되어 업데이트됩니다.
+:::
+
+:::::::: {#s11 .section}
+## [1.1]{.section-number}벡터공간의 공리계와 부분공간
+
+선형대수학은 유한 차원 유클리드 공간 $\mathbb{R}^n$뿐만 아니라 임의의 추상적 벡터공간 $V$ 위에서 정의되는 대수적 구조를 연구한다.
+
+::: {.callout-note title="정의: 벡터공간 (Vector Space)"}
+체 $\mathbb{R}$ 위의 벡터공간 $V$는 덧셈($+$)과 스칼라곱($\cdot$) 연산이 정의되어 다음 8가지 공리를 만족하는 공집합이 아닌 집합이다:
+
+1. **덧셈에 대한 결합법칙**: 모든 $u, v, w \in V$에 대해 $(u + v) + w = u + (v + w)$
+2. **덧셈에 대한 교환법칙**: 모든 $u, v \in V$에 대해 $u + v = v + u$
+3. **덧셈 항등원(영벡터)**: 모든 $v \in V$에 대해 $v + \mathbf{0} = v$를 만족하는 $\mathbf{0} \in V$가 존재
+4. **덧셈 역원**: 모든 $v \in V$에 대해 $v + (-v) = \mathbf{0}$을 만족하는 $-v \in V$가 존재
+5. **스칼라곱에 대한 분배법칙 I**: $a(u + v) = au + av$ ($a \in \mathbb{R}$, $u, v \in V$)
+6. **스칼라곱에 대한 분배법칙 II**: $(a + b)v = av + bv$ ($a, b \in \mathbb{R}$, $v \in V$)
+7. **스칼라곱의 결합법칙**: $(ab)v = a(bv)$ ($a, b \in \mathbb{R}$, $v \in V$)
+8. **스칼라곱의 항등원**: $1 \cdot v = v$ ($v \in V$)
+:::
+
+::: {.callout-important title="정리: 부분공간 판정법 (Subspace Test)"}
+벡터공간 $V$의 부분집합 $W \subseteq V$가 $V$의 부분공간(Subspace)이기 위한 필요충분조건은 다음 세 가지가 성립하는 것이다:
+
+1. $\mathbf{0} \in W$
+2. 모든 $u, v \in W$에 대해 $u + v \in W$ (덧셈에 대해 닫혀 있음)
+3. 모든 $c \in \mathbb{R}$ 및 $v \in W$에 대해 $cv \in W$ (스칼라곱에 대해 닫혀 있음)
+:::
+::::::::
+
+:::::::: {#s12 .section}
+## [1.2]{.section-number}일차독립, 기저(Basis), 그리고 차원(Dimension)
+
+벡터공간 $V$의 벡터들의 모임 $\{v_1, v_2, \dots, v_k\}$에 대하여, 선형결합을 통해 공간을 생성(Span)하고 최소한의 정보로 좌표계를 형성하는 개념을 정의한다.
+
+::: {.callout-note title="정의: 일차독립 (Linear Independence)"}
+벡터들의 집합 $\{v_1, v_2, \dots, v_k\} \subset V$가 **일차독립**(Linearly Independent)이라는 것은 스칼라 방정식
+$$
+c_1 v_1 + c_2 v_2 + \cdots + c_k v_k = \mathbf{0}
+$$
+을 만족하는 유일한 해가 $c_1 = c_2 = \cdots = c_k = 0$뿐일 때를 의미한다. 만약 영이 아닌 계수 조합으로 영벡터를 만들 수 있다면, 이 집합은 **일차종속**(Linearly Dependent)이라고 한다.
+:::
+
+::: {.callout-note title="정의: 기저와 차원 (Basis and Dimension)"}
+부분공간 $W \subseteq V$의 부분집합 $\mathcal{B} = \{v_1, \dots, v_n\}$이 다음 두 조건을 만족하면 $\mathcal{B}$를 $W$의 **기저**(Basis)라고 한다:
+
+1. $\mathcal{B}$는 일차독립이다.
+2. $\operatorname{span}(\mathcal{B}) = W$이다.
+
+기저에 속한 원소의 개수를 부분공간 $W$의 **차원**(Dimension)이라 하며, $\dim(W) = n$으로 표기한다.
+:::
+::::::::
+
+:::::::: {#s13 .section}
+## [1.3]{.section-number}선형변환과 행렬표현, 랭크-퇴화차수 정리
+
+선형사상(Linear Transformation)은 벡터공간 사이에서 덧셈과 스칼라곱의 연산 구조를 보존하는 사상이다.
+
+::: {.callout-note title="정의: 선형변환 (Linear Transformation)"}
+두 벡터공간 $V, W$ 사이의 함수 $T: V \to W$가 모든 $u, v \in V$ 및 $c \in \mathbb{R}$에 대해 다음을 만족할 때 $T$를 **선형변환**이라 한다:
+$$
+T(u + v) = T(u) + T(v), \quad T(cu) = c T(u)
+$$
+:::
+
+::: {.callout-important title="정리: 랭크-퇴화차수 정리 (Rank-Nullity Theorem)"}
+유한차원 벡터공간 $V$에서 $W$로 가는 선형변환 $T: V \to W$에 대하여, 영공간(Kernel/Null Space)의 차원을 $\operatorname{nullity}(T)$, 상공간(Range/Image)의 차원을 $\operatorname{rank}(T)$라 하면 다음이 성립한다:
+$$
+\dim(V) = \operatorname{rank}(T) + \operatorname{nullity}(T)
+$$
+:::
+::::::::
+
+:::::::: {#s14 .section}
+## [1.4]{.section-number}내적공간, 노름, 그리고 직교정사영
+
+계량경제학의 최소자승추정(OLS) 및 Frisch–Waugh–Lovell 정리의 근간이 되는 기하학적 정사영 이론을 다룬다.
+
+::: {.callout-note title="정의: 유클리드 내적과 직교성 (Inner Product & Orthogonality)"}
+$\mathbb{R}^n$의 두 벡터 $x, y \in \mathbb{R}^n$에 대하여 내적은 다음과 같이 정의된다:
+$$
+\langle x, y \rangle = x^T y = \sum_{i=1}^n x_i y_i
+$$
+$\langle x, y \rangle = 0$일 때, 두 벡터 $x$와 $y$는 서로 **직교**(Orthogonal)한다고 하며 $x \perp y$로 나타낸다.
+:::
+
+::: {.callout-important title="정리: 정사영 정리 (Orthogonal Projection Theorem)"}
+$\mathbb{R}^n$의 부분공간 $S$와 임의의 벡터 $y \in \mathbb{R}^n$에 대하여, 다음 거리를 최소화하는 유일한 벡터 $\hat{y} \in S$가 존재한다:
+$$
+\min_{s \in S} \|y - s\|^2
+$$
+이 최적해 $\hat{y}$는 오차 벡터 $e = y - \hat{y}$가 부분공간 $S$의 모든 벡터와 직교한다는 조건($e \perp S$)과 동치이다. $S$의 열벡터 기저 행렬을 $X$라 할 때, 정사영 행렬 $P$는 다음과 같다:
+$$
+P = X(X^T X)^{-1} X^T, \quad \hat{y} = P y
+$$
+:::
+::::::::
+
+:::::::: {#s15 .section}
+## [1.5]{.section-number}행렬식과 가역성 판정
+
+연립일차방정식 $A x = b$의 유일해 존재 조건과 행렬의 정칙성(Nonsingularity)을 판정하는 핵심 도구이다.
+
+::: {.callout-important title="정리: 가역행렬의 동치조건 (Invertible Matrix Theorem)"}
+$n \times n$ 정방행렬 $A$에 대하여 다음 명제들은 모두 상호 동치이다:
+
+1. $A$는 가역행렬(Invertible)이다.
+2. $\det(A) \neq 0$이다.
+3. $\operatorname{rank}(A) = n$이다.
+4. $A$의 열벡터들은 $\mathbb{R}^n$의 기저를 이룬다.
+5. 동차방정식 $Ax = \mathbf{0}$의 해는 오직 자명해 $x = \mathbf{0}$뿐이다.
+6. 모든 $b \in \mathbb{R}^n$에 대해 $Ax = b$는 유일한 해 $x = A^{-1}b$를 갖는다.
+:::
+::::::::
