@@ -11,7 +11,18 @@
 .statement.warning { border-left-color: #a64e3e; }
 .statement.identification { border-left-color: #9a5531; }
 .statement.remark { border-left-color: #7b7151; }
+.statement.claim { border-left-color: #8b4e30; }
+.statement.counterexample { border-left-color: #7a4e20; }
+.statement.algorithm { border-left-color: #5f6b50; }
+.statement.assumption { border-left-color: #315f82; }
+.statement.preview { border-left-color: #6a6d78; }
 .statement-head { color: #725b70; font-size: .82rem; font-weight: 700; letter-spacing: .04em; }
+.statement.claim .statement-head { color: #8b4e30; }
+.statement.counterexample .statement-head { color: #7a4e20; }
+.statement.algorithm .statement-head { color: #5f6b50; }
+.statement.assumption .statement-head { color: #315f82; }
+.statement.warning .statement-head { color: #a64e3e; }
+.statement.theorem .statement-head, .statement.proposition .statement-head { color: #9a6434; }
 .topic-opening { max-width: 47rem; margin: 1.6rem 0; padding: .9rem 1rem; border-top: 1px solid var(--notes-rule); border-bottom: 1px solid var(--notes-rule); background: #fdf9f7; font-size: 1.04rem; }
 .formula-grid { max-width: 47rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin: 1.4rem 0; }
 .formula-grid--long { grid-template-columns: 1fr; }
@@ -22,6 +33,7 @@
 .callout-strip .right { color: #665a55; }
 .proof { max-width: 47rem; margin: 1.4rem 0; padding-left: 1.1rem; border-left: 2px solid #cbbeb8; color: #433b37; }
 .proof-label { color: #6d605a; font-size: .82rem; font-weight: 700; letter-spacing: .04em; }
+.qed { float: right; color: #6d605a; }
 .logic-chain { max-width: 47rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .55rem; margin: 1.4rem 0; }
 .logic-chain__step { padding: .75rem; border: 1px solid var(--notes-rule); background: #fff; }
 .logic-chain__num { display: block; color: #8a4e2d; font-size: .78rem; font-weight: 700; }
