@@ -182,6 +182,7 @@ book:
     - supplements/ols-geometry.qmd
     - supplements/ols-projection-geometry.qmd
     - supplements/iv-weak-instruments.qmd
+    - supplements/classical-testing-trinity.qmd
   - part: "보충자료 · 가이드"
     chapters:
     - supplements/visualization-guide.qmd
