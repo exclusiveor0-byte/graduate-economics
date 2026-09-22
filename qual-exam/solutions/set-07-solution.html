@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 한 스푼 #7 · 손풀이 해설</title>
+<style>
+:root{
+  --bg:#f6f7f9;
+  --paper:#fff;
+  --text:#17191d;
+  --muted:#68707a;
+  --line:#dfe3e8;
+  --soft:#f1f3f5;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+  line-height:1.75;
+}
+.wrap{
+  width:min(920px,calc(100% - 32px));
+  margin:40px auto 72px;
+}
+.hero,.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+.hero{
+  padding:32px 34px 28px;
+  margin-bottom:20px;
+}
+.eyebrow{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+h1{
+  margin:0 0 10px;
+  font-size:31px;
+  letter-spacing:-.03em;
+}
+.subtitle{color:var(--muted);font-size:15px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.chip{
+  border:1px solid var(--line);
+  background:var(--soft);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:13px;
+  color:#444b54;
+}
+.card{
+  padding:30px 34px;
+  margin-top:20px;
+}
+.card h2{
+  margin:0 0 8px;
+  font-size:24px;
+  letter-spacing:-.02em;
+}
+.topic{
+  color:var(--muted);
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:18px;
+}
+.step{margin:22px 0 0}
+.step h3{
+  margin:0 0 10px;
+  font-size:18px;
+}
+.flow{
+  border-left:3px solid #cfd5dc;
+  padding-left:18px;
+  margin:12px 0 0;
+}
+.note{
+  margin-top:18px;
+  padding:14px 16px;
+  border:1px dashed var(--line);
+  border-radius:12px;
+  background:#fafbfc;
+  color:#4d5560;
+  font-size:14px;
+}
+.footer{
+  margin-top:28px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+@media print{
+  body{background:#fff}
+  .wrap{width:100%;margin:0}
+  .hero,.card{border-color:#bbb}
+  .card{break-before:page}
+}
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true
+  },
+  chtml: { scale: 1.02 }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<main class="wrap">
+
+<section class="hero">
+  <div class="eyebrow">Graduate Microeconomics · Daily Practice</div>
+  <h1>문제 한 스푼 #7 · 손풀이 해설</h1>
+  <div class="subtitle">손풀이의 전개 순서와 계산 흐름을 유지하여 정리한 내용 중심 해설본</div>
+  <div class="meta">
+    <span class="chip">생산자이론</span>
+    <span class="chip">시장의 종류</span>
+    <span class="chip">원본 이미지 제외</span>
+    <span class="chip">MathJax CHTML</span>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Problem 1. Producer Theory</h2>
+  <div class="topic">Cost Minimization · Conditional Factor Demand · Shephard's Lemma</div>
+
+  <div class="step">
+    <h3>1) 비용최소화와 조건부 요소수요</h3>
+    <div class="flow">
+      생산함수는
+      \[
+      q=L^{1/3}K^{2/3}
+      \]
+      이고, 비용최소화 문제는
+      \[
+      \min_{L,K}\; wL+rK
+      \qquad
+      \text{s.t.}\qquad
+      L^{1/3}K^{2/3}=q
+      \]
+      이다.
+
+      Lagrangian을
+      \[
+      \mathcal L
+      =
+      wL+rK+\lambda\left(q-L^{1/3}K^{2/3}\right)
+      \]
+      로 둔다.
+
+      FOC는
+      \[
+      \frac{\partial\mathcal L}{\partial L}
+      =
+      w-\lambda\frac13L^{-2/3}K^{2/3}=0,
+      \]
+      \[
+      \frac{\partial\mathcal L}{\partial K}
+      =
+      r-\lambda\frac23L^{1/3}K^{-1/3}=0.
+      \]
+
+      두 식을 나누면
+      \[
+      \frac{w}{r}
+      =
+      \frac12\frac{K}{L}.
+      \]
+
+      따라서
+      \[
+      K=\frac{2w}{r}L.
+      \]
+
+      이를 생산제약에 대입하면
+      \[
+      q
+      =
+      L^{1/3}
+      \left(\frac{2w}{r}L\right)^{2/3}
+      =
+      L\left(\frac{2w}{r}\right)^{2/3}.
+      \]
+
+      따라서 노동의 조건부 요소수요는
+      \[
+      L^c(w,r,q)
+      =
+      q\left(\frac{r}{2w}\right)^{2/3}.
+      \]
+
+      그리고
+      \[
+      K=\frac{2w}{r}L
+      \]
+      을 이용하면
+      \[
+      K^c(w,r,q)
+      =
+      q\left(\frac{2w}{r}\right)^{1/3}.
+      \]
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>2) 비용함수</h3>
+    <div class="flow">
+      비용함수는
+      \[
+      C(w,r,q)
+      =
+      wL^c+rK^c.
+      \]
+
+      따라서
+      \[
+      C(w,r,q)
+      =
+      wq\left(\frac{r}{2w}\right)^{2/3}
+      +
+      rq\left(\frac{2w}{r}\right)^{1/3}.
+      \]
+
+      이를 정리하면
+      \[
+      C(w,r,q)
+      =
+      q\,w^{1/3}r^{2/3}
+      \left(
+      2^{-2/3}+2^{1/3}
+      \right).
+      \]
+
+      \[
+      2^{-2/3}+2^{1/3}
+      =
+      3\cdot2^{-2/3}
+      \]
+      이므로
+      \[
+      C(w,r,q)
+      =
+      3\cdot2^{-2/3}\,
+      q\,w^{1/3}r^{2/3}.
+      \]
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>3) Shephard's lemma 확인</h3>
+    <div class="flow">
+      비용함수를 \(w\)에 대해 미분하면
+      \[
+      \frac{\partial C}{\partial w}
+      =
+      3\cdot2^{-2/3}q
+      \cdot\frac13
+      w^{-2/3}r^{2/3}.
+      \]
+
+      따라서
+      \[
+      \frac{\partial C}{\partial w}
+      =
+      q\left(\frac{r}{2w}\right)^{2/3}
+      =
+      L^c(w,r,q).
+      \]
+
+      마찬가지로 \(r\)에 대해 미분하면
+      \[
+      \frac{\partial C}{\partial r}
+      =
+      3\cdot2^{-2/3}q
+      w^{1/3}\cdot\frac23r^{-1/3}.
+      \]
+
+      따라서
+      \[
+      \frac{\partial C}{\partial r}
+      =
+      q\left(\frac{2w}{r}\right)^{1/3}
+      =
+      K^c(w,r,q).
+      \]
+
+      그러므로
+      \[
+      \frac{\partial C}{\partial w}=L^c,
+      \qquad
+      \frac{\partial C}{\partial r}=K^c
+      \]
+      가 성립한다.
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Problem 2. Market Structure</h2>
+  <div class="topic">Cournot Competition · Asymmetric Marginal Costs</div>
+
+  <div class="step">
+    <h3>1) Best responses와 Cournot-Nash equilibrium</h3>
+    <div class="flow">
+      시장의 inverse demand는
+      \[
+      p(Q)=60-Q,
+      \qquad
+      Q=q_1+q_2
+      \]
+      이고, 비용함수는
+      \[
+      C_1(q_1)=6q_1,
+      \qquad
+      C_2(q_2)=12q_2
+      \]
+      이다.
+
+      기업 1의 이윤은
+      \[
+      \pi_1
+      =
+      (60-q_1-q_2)q_1-6q_1.
+      \]
+
+      FOC는
+      \[
+      \frac{\partial\pi_1}{\partial q_1}
+      =
+      54-2q_1-q_2=0.
+      \]
+
+      따라서 기업 1의 best response는
+      \[
+      BR_1(q_2)
+      =
+      27-\frac12q_2.
+      \]
+
+      기업 2의 이윤은
+      \[
+      \pi_2
+      =
+      (60-q_1-q_2)q_2-12q_2.
+      \]
+
+      FOC는
+      \[
+      \frac{\partial\pi_2}{\partial q_2}
+      =
+      48-q_1-2q_2=0.
+      \]
+
+      따라서 기업 2의 best response는
+      \[
+      BR_2(q_1)
+      =
+      24-\frac12q_1.
+      \]
+
+      Cournot-Nash equilibrium에서는
+      \[
+      q_1=27-\frac12q_2,
+      \qquad
+      q_2=24-\frac12q_1.
+      \]
+
+      이를 연립하면
+      \[
+      q_1^*=20,
+      \qquad
+      q_2^*=14.
+      \]
+
+      따라서
+      \[
+      (q_1^*,q_2^*)=(20,14).
+      \]
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>2) 균형가격과 이윤</h3>
+    <div class="flow">
+      총산출량은
+      \[
+      Q^*
+      =
+      q_1^*+q_2^*
+      =
+      34.
+      \]
+
+      따라서 시장가격은
+      \[
+      p^*
+      =
+      60-34
+      =
+      26.
+      \]
+
+      기업 1의 이윤은
+      \[
+      \pi_1^*
+      =
+      (26-6)\cdot20
+      =
+      400.
+      \]
+
+      기업 2의 이윤은
+      \[
+      \pi_2^*
+      =
+      (26-12)\cdot14
+      =
+      196.
+      \]
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>3) 한계비용 차이와 균형 비교</h3>
+    <div class="flow">
+      이 문제에서는
+      \[
+      MC_1=6\lt12=MC_2.
+      \]
+
+      그리고 실제 균형에서
+      \[
+      q_1^*=20\gt14=q_2^*,
+      \]
+      \[
+      \pi_1^*=400\gt196=\pi_2^*.
+      \]
+
+      기업 1의 best response는
+      \[
+      q_1=27-\frac12q_2
+      \]
+      이고, 기업 2의 best response는
+      \[
+      q_2=24-\frac12q_1
+      \]
+      이다.
+
+      기업 1의 한계비용이 더 낮기 때문에 기업 1의 best-response curve가
+      기업 2의 것보다 바깥쪽에 위치한다. 따라서 균형에서 기업 1이 더 많은 산출량을 선택한다.
+
+      또한 두 기업이 같은 시장가격 \(p^*=26\)에 판매하므로
+      기업 1은
+      \[
+      p^*-MC_1
+      \]
+      이 기업 2의
+      \[
+      p^*-MC_2
+      \]
+      보다 크다. 여기에 더 큰 균형산출량까지 결합되어 기업 1의 이윤이 더 크게 나타난다.
+    </div>
+  </div>
+</section>
+
+<div class="footer">문제 한 스푼 #7 · Solution Notes</div>
+</main>
+</body>
+</html>

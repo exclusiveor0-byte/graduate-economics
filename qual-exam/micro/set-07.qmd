@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -47,6 +47,98 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **cost minimization → cost function → verify**. FOC에서 요소가격비와 조건부 요소사용비율의 관계를 먼저 정리하면 계산이 단순해진다.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Producer Theory"}
+::: {.topic}
+Cost Minimization · Conditional Factor Demand · Shephard's Lemma
+:::
+
+#### 1) 비용최소화와 조건부 요소수요
+
+생산함수는
+$$
+q = L^{1/3} K^{2/3}
+$$
+이고, 비용최소화 문제는
+$$
+\min_{L, K \ge 0} wL + rK \qquad \text{s.t.} \qquad L^{1/3} K^{2/3} = q
+$$
+이다.
+
+라그랑지안(Lagrangian)을
+$$
+\mathcal{L} = wL + rK + \lambda\left(q - L^{1/3} K^{2/3}\right)
+$$
+로 둔다.
+
+1계 조건(FOC)은 다음과 같다:
+$$
+\frac{\partial \mathcal{L}}{\partial L} = w - \lambda \frac{1}{3} L^{-2/3} K^{2/3} = 0,
+$$
+$$
+\frac{\partial \mathcal{L}}{\partial K} = r - \lambda \frac{2}{3} L^{1/3} K^{-1/3} = 0.
+$$
+
+두 식을 나누면 한계기술대체율(MRTS)과 요소가격비의 일치조건을 얻는다:
+$$
+\frac{w}{r} = \frac{1}{2} \frac{K}{L} \implies K = \frac{2w}{r} L.
+$$
+
+이를 생산 제약조건 $L^{1/3} K^{2/3} = q$에 대입하면:
+$$
+q = L^{1/3} \left(\frac{2w}{r} L\right)^{2/3} = L \left(\frac{2w}{r}\right)^{2/3}.
+$$
+
+따라서 노동의 조건부 요소수요(Conditional Factor Demand)는 다음과 같다:
+$$
+L^c(w, r, q) = q \left(\frac{r}{2w}\right)^{2/3}.
+$$
+
+이를 $K = \frac{2w}{r} L$에 대입하면 자본의 조건부 요소수요를 얻는다:
+$$
+K^c(w, r, q) = \frac{2w}{r} q \left(\frac{r}{2w}\right)^{2/3} = q \left(\frac{2w}{r}\right)^{1/3}.
+$$
+
+#### 2) 비용함수 $C(w, r, q)$ 도출
+
+비용함수는 최소비용의 정의에 따라 다음과 같다:
+$$
+C(w, r, q) = w L^c + r K^c.
+$$
+
+조건부 요소수요식을 대입하면:
+$$
+C(w, r, q) = w \cdot q \left(\frac{r}{2w}\right)^{2/3} + r \cdot q \left(\frac{2w}{r}\right)^{1/3} = q \, w^{1/3} r^{2/3} \left( 2^{-2/3} + 2^{1/3} \right).
+$$
+
+계수 부분을 정리하면:
+$$
+2^{-2/3} + 2^{1/3} = 2^{-2/3}(1 + 2) = 3 \cdot 2^{-2/3}.
+$$
+
+따라서 총비용함수는 다음과 같다:
+$$
+C(w, r, q) = 3 \cdot 2^{-2/3} q \, w^{1/3} r^{2/3}.
+$$
+
+#### 3) Shephard's lemma 확인
+
+포락선 정리(Envelope Theorem)에 따른 셰퍼드의 보조정리(Shephard's Lemma):
+$$
+\frac{\partial C(w, r, q)}{\partial w} = L^c(w, r, q), \qquad \frac{\partial C(w, r, q)}{\partial r} = K^c(w, r, q).
+$$
+
+1. **임금 $w$에 대한 편미분**:
+   $$
+   \frac{\partial C}{\partial w} = 3 \cdot 2^{-2/3} q \cdot \frac{1}{3} w^{-2/3} r^{2/3} = 2^{-2/3} q \, w^{-2/3} r^{2/3} = q \left(\frac{r}{2w}\right)^{2/3} = L^c(w, r, q).
+   $$
+2. **자본임대가격 $r$에 대한 편미분**:
+   $$
+   \frac{\partial C}{\partial r} = 3 \cdot 2^{-2/3} q \cdot w^{1/3} \cdot \frac{2}{3} r^{-1/3} = 2^{1/3} q \, w^{1/3} r^{-1/3} = q \left(\frac{2w}{r}\right)^{1/3} = K^c(w, r, q).
+   $$
+
+따라서 두 조건 모두 정확하게 성립한다.
 :::
 :::
 
@@ -79,6 +171,96 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **best response → equilibrium → compare**. 두 기업의 비용이 다르므로 대칭균형을 가정하지 마시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Market Structure"}
+::: {.topic}
+Cournot Competition · Asymmetric Marginal Costs · Comparative Statics
+:::
+
+#### 1) 각 기업의 최적대응함수(Best Responses)와 Cournot-Nash 균형
+
+시장의 역수요함수는 $p(Q) = 60 - Q$ ($Q = q_1 + q_2$)이고, 비용함수는 $C_1(q_1) = 6q_1$, $C_2(q_2) = 12q_2$이다.
+
+**기업 1의 이윤극대화**:
+$$
+\pi_1(q_1, q_2) = (60 - q_1 - q_2)q_1 - 6q_1.
+$$
+1계 조건(FOC):
+$$
+\frac{\partial \pi_1}{\partial q_1} = 60 - 2q_1 - q_2 - 6 = 54 - 2q_1 - q_2 = 0.
+$$
+따라서 기업 1의 최적대응함수(Best-response Function)는:
+$$
+BR_1(q_2) = 27 - \frac{1}{2}q_2.
+$$
+
+**기업 2의 이윤극대화**:
+$$
+\pi_2(q_1, q_2) = (60 - q_1 - q_2)q_2 - 12q_2.
+$$
+1계 조건(FOC):
+$$
+\frac{\partial \pi_2}{\partial q_2} = 60 - q_1 - 2q_2 - 12 = 48 - q_1 - 2q_2 = 0.
+$$
+따라서 기업 2의 최적대응함수는:
+$$
+BR_2(q_1) = 24 - \frac{1}{2}q_1.
+$$
+
+**Cournot-Nash 균형 산출량**:
+두 최적대응식을 연립하면:
+$$
+q_1 = 27 - \frac{1}{2}\left(24 - \frac{1}{2}q_1\right) = 27 - 12 + \frac{1}{4}q_1 = 15 + \frac{1}{4}q_1.
+$$
+$$
+\frac{3}{4}q_1 = 15 \implies q_1^* = 20.
+$$
+이를 기업 2의 최적대응식에 대입하면:
+$$
+q_2^* = 24 - \frac{1}{2}(20) = 14.
+$$
+따라서 쿠르노-내시 균형 산출량 벡터는:
+$$
+(q_1^*, q_2^*) = (20, 14).
+$$
+
+#### 2) 균형시장가격과 각 기업의 균형이윤
+
+- **총산출량**:
+  $$
+  Q^* = q_1^* + q_2^* = 20 + 14 = 34.
+  $$
+- **균형시장가격**:
+  $$
+  p^* = 60 - Q^* = 60 - 34 = 26.
+  $$
+- **기업 1의 균형이윤**:
+  $$
+  \pi_1^* = (p^* - MC_1)q_1^* = (26 - 6) \times 20 = 20 \times 20 = 400.
+  $$
+- **기업 2의 균형이윤**:
+  $$
+  \pi_2^* = (p^* - MC_2)q_2^* = (26 - 12) \times 14 = 14 \times 14 = 196.
+  $$
+
+#### 3) 한계비용 차이와 쿠르노 균형 비교 논증
+
+문제에서 주어진 한계비용 조건:
+$$
+MC_1 = 6 < 12 = MC_2.
+$$
+실제 계산된 쿠르노 균형 결과:
+$$
+q_1^* = 20 > 14 = q_2^*, \qquad \pi_1^* = 400 > 196 = \pi_2^*.
+$$
+따라서 명제 "한계비용이 더 낮은 기업이 더 많이 생산하고 더 큰 이윤을 얻는다"가 성립한다.
+
+**이러한 차이가 발생하는 경제학적 원인**:
+1. **반응곡선의 상대적 위치 (Strategic Advantage)**:  
+   기업의 최적대응식 $q_i = \frac{60 - MC_i}{2} - \frac{1}{2}q_j$에서 절편은 $(60 - MC_i)/2$이다. 기업 1은 한계비용이 더 낮기 때문에 절편이 $27$로 기업 2의 절편 $24$보다 크다. 이는 평면상에서 기업 1의 최적대응곡선이 더 바깥쪽에 위치함을 의미하며, 상대방의 임의의 생산량에 대해 항상 더 공격적으로 많은 수량을 공급하여 균형 산출량 우위($q_1^* > q_2^*$)를 점한다.
+2. **마진 우위와 물량 우위의 결합 (Double Advantage)**:  
+   동질재 과점 시장에서 두 기업은 동일한 시장가격 $p^* = 26$에 직면한다. 따라서 단위당 마진은 비용이 낮은 기업 1($p^* - MC_1 = 20$)이 기업 2($p^* - MC_2 = 14$)보다 더 크다. 여기에 더 큰 균형 판매량($20 > 14$)까지 결합되어, 총이윤 격차는 마진 차이와 수량 차이의 곱($20^2 = 400$ vs $14^2 = 196$, 약 2.04배)으로 대폭 확대된다.
 :::
 :::
 
