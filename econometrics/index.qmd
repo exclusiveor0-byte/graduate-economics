@@ -20,7 +20,7 @@ Full data와 observed data, 조건부기대값, 독립성, 자료배열, empiric
 
 [Chapter 02 읽기](ch02-probability-information/index.html) →
 
-[11개 절 · 표 5개 · 연습문제 포함]{.status}
+[11개 절 · 표 8개 · 연습문제 포함]{.status}
 
 ### [Chapter 03 · Target, Model, and Identification](ch03-target-model-identification/index.html)
 
@@ -29,7 +29,7 @@ identification을 구분하고 causal·moment model의 식별 논리를 다룬�
 
 [Chapter 03 읽기](ch03-target-model-identification/index.html) →
 
-[11개 절 · 표 3개 · 연습문제 포함]{.status}
+[11개 절 · 표 5개 · 연습문제 포함]{.status}
 
 ### [Chapter 04 · Population Characterization and Optimization](ch04-population-optimization/index.html)
 

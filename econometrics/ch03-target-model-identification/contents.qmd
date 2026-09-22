@@ -3,530 +3,1215 @@ title: "Target, Model, and Identification"
 description: "Estimands · Model Restrictions · Observational Equivalence · Identification"
 ---
 
-<!-- 원본 본문을 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
 
-:::::::::::::::::::::::::: {#s31 .section}
+:::::::::::::::::::::::::: {#s31}
+
 ## [3.1]{.section-number}무엇을 식별하려는가: Target, Parameter, Estimand
 
-Identification을 논하기 전에 먼저 **무엇을 알고 싶은가**가 정해져야
-한다. 같은 데이터와 같은 경제적 질문도 연구자가 어떤 estimand를
-선택하느냐에 따라 전혀 다른 식별문제가 된다. 따라서 이 장에서는
-estimator가 아니라 **population target**에서 시작한다.
+::: {.topic-opening}
+Identification을 논하기 전에 먼저 <strong>무엇을 알고 싶은가</strong>가 정해져야 한다. 같은 데이터와 같은 경제적 질문도 연구자가 어떤 estimand를 선택하느냐에 따라 전혀 다른 식별문제가 된다.
+따라서 이 장에서는 estimator가 아니라 <strong>population target</strong>에서 시작한다.
+:::
 
 ### 3.1.1 경제적 질문에서 estimand로 {#s311}
 
-"교육의 임금효과는 얼마인가?"라는 문장은 아직 수학적 target이 아니다.
-평균효과를 원하는지, 처치자에 대한 평균효과를 원하는지, 특정 공변량
-집단의 효과를 원하는지 먼저 정해야 한다. binary treatment를 예로 들면
-다음 target들은 서로 다르다.
+“교육의 임금효과는 얼마인가?”라는 문장은 아직 수학적 target이 아니다. 평균효과를 원하는지, 처치자에 대한 평균효과를 원하는지, 특정 공변량 집단의 효과를 원하는지 먼저 정해야 한다.
+binary treatment를 예로 들면 다음 target들은 서로 다르다.
 
-::::::::: formula-grid
-:::: formula-card
-**ATE**
+:::::::::::::::::::: {.formula-grid}
 
-::: math-display
-$$\tau_{ATE}=E\{Y(1)-Y(0)\}.$$
-:::
-::::
+::::::::::::::::::: {.formula-card}
 
-:::: formula-card
-**ATT**
+<strong>ATE</strong>
 
-::: math-display
-$$\tau_{ATT}=E\{Y(1)-Y(0)\mid D=1\}.$$
-:::
-::::
+:::::::::::::::::: {.math-display}
 
-:::: formula-card
-**CATE**
+$$
+\tau_{ATE}=E\{Y(1)-Y(0)\}.
+$$
 
-::: math-display
-$$\tau(x)=E\{Y(1)-Y(0)\mid X=x\}.$$
-:::
-::::
-:::::::::
+::::::::::::::::::
 
-세 target은 모두 "처치효과"라는 같은 경제적 언어 아래 놓이지만 값도 다를
-수 있고 필요한 identifying assumptions도 다를 수 있다. 따라서 연구
-질문을 estimand로 번역하는 단계는 단순한 notation 선택이 아니다.
+:::::::::::::::::::
 
-:::: {.statement .remark}
-::: statement-head
+::::::::::::::::::: {.formula-card}
+
+<strong>ATT</strong>
+
+:::::::::::::::::: {.math-display}
+
+$$
+\tau_{ATT}=E\{Y(1)-Y(0)\mid D=1\}.
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.formula-card}
+
+<strong>CATE</strong>
+
+:::::::::::::::::: {.math-display}
+
+$$
+\tau(x)=E\{Y(1)-Y(0)\mid X=x\}.
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+세 target은 모두 “처치효과”라는 같은 경제적 언어 아래 놓이지만 값도 다를 수 있고 필요한 identifying assumptions도 다를 수 있다. 따라서 연구 질문을 estimand로 번역하는 단계는 단순한 notation 선택이 아니다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
 원칙 3.1 · Identification은 target-relative하다
-:::
 
-어떤 model이 "identified되어 있다"는 표현은 엄밀하게는 불완전하다.
-무엇이 identified되는지 명시해야 한다. 동일한 observed-data model에서
-어떤 functional은 point identified이고 다른 functional은 set
-identified일 수 있다.
-::::
+:::::::::::::::::::
+
+어떤 model이 “identified되어 있다”는 표현은 엄밀하게는 불완전하다. 무엇이 identified되는지 명시해야 한다. 동일한 observed-data model에서 어떤 functional은 point identified이고 다른 functional은 set identified일 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.1 · ATE, ATT, ATU가 같은 population에서도 달라질 수 있다
+
+:::::::::::::::::::
+
+population이 두 latent types $H,L$로 구성되고 각각 population share가 $1/2$라고 하자.
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Type</th><th>Share</th><th>$Y(1)$</th><th>$Y(0)$</th><th>$P(D=1\mid \text{type})$</th></tr></thead>
+<tbody>
+<tr><td>$H$</td><td>$1/2$</td><td>$10$</td><td>$4$</td><td>$0.8$</td></tr>
+<tr><td>$L$</td><td>$1/2$</td><td>$5$</td><td>$3$</td><td>$0.2$</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+individual treatment effects are
+
+::::::::::::::::::: {.math-display}
+
+$$
+\tau_H=6,\qquad \tau_L=2.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+ATE
+=
+\frac12(6)+\frac12(2)
+=
+4.
+$$
+
+:::::::::::::::::::
+
+Bayes rule을 사용하면 treated group 안의 $H$-type 비중은
+
+::::::::::::::::::: {.math-display}
+
+$$
+P(H\mid D=1)
+=
+\frac{0.8(1/2)}{0.8(1/2)+0.2(1/2)}
+=
+0.8.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+ATT
+=
+0.8(6)+0.2(2)
+=
+5.2.
+$$
+
+:::::::::::::::::::
+
+같은 방식으로 untreated group에서는 $P(H\mid D=0)=0.2$, 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+ATU
+=
+0.2(6)+0.8(2)
+=
+2.8.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+ATE=4,\qquad ATT=5.2,\qquad ATU=2.8.
+}
+$$
+
+:::::::::::::::::::
+
+즉 “treatment effect”라는 같은 경제적 언어 아래에서도 target population을 어떻게 정의하느냐에 따라 estimand가 달라진다.
+
+::::::::::::::::::::
 
 ### 3.1.2 Parameter as a functional {#s312}
 
-descriptive target은 흔히 observed-data distribution $P_0$의
-functional로 표현된다. 관측 random element를 $W\sim P_0$라 하면
-parameter는
+descriptive target은 흔히 observed-data distribution $P_0$의 functional로 표현된다. 관측 random element를 $W\sim P_0$라 하면 parameter는
 
-::: math-display
-$$\theta_0=T(P_0)$$
-:::
+:::::::::::::::::::: {.math-display}
+
+$$
+\theta_0=T(P_0)
+$$
+
+::::::::::::::::::::
 
 와 같은 mapping으로 이해할 수 있다. 예를 들어
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 \mu_0=E_{P_0}[Y],\qquad
 m_0(x)=E_{P_0}[Y\mid X=x],\qquad
 \beta^{LP}=E[XX']^{-1}E[XY].
 $$
-:::
 
-scalar나 finite-dimensional vector만 parameter인 것은 아니다. CEF
-$m_0(\cdot)$, density $f_0(\cdot)$, quantile function, impulse response
-function처럼 함수 자체가 target일 수도 있다. 따라서 parameter space
-$\Theta$는 $\mathbb R^k$일 수도 있고 함수공간일 수도 있다.
+::::::::::::::::::::
+
+scalar나 finite-dimensional vector만 parameter인 것은 아니다. CEF $m_0(\cdot)$, density $f_0(\cdot)$, quantile function, impulse response function처럼 함수 자체가 target일 수도 있다. 따라서 parameter space $\Theta$는 $\mathbb R^k$일 수도 있고 함수공간일 수도 있다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED MAP 3.2 · Parameter는 distribution에 적용되는 rule이다
+
+:::::::::::::::::::
+
+$X\in\{0,1\}$이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+P(X=1)=\frac12,
+\qquad
+Y=1+2X
+$$
+
+:::::::::::::::::::
+
+라고 하자. 동일한 observed law $P$에서 서로 다른 functionals를 계산하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+T_1(P)=E_P[Y]=2,
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+T_2(P)=P(Y=3)=\frac12,
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+T_3(P)=E_P[Y\mid X=1]=3.
+$$
+
+:::::::::::::::::::
+
+parameter는 “data에 붙은 숫자”가 아니라 probability law를 특정 population object로 보내는 mapping이다.
+
+::::::::::::::::::::
 
 ### 3.1.3 Parameter와 estimator의 분리 {#s313}
 
-::::::::::: comparison-grid
-:::::: comparison-card
-::: comparison-card__title
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
 Population target
-:::
 
-::: comparison-card__formula
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
 $\theta_0=T(P_0)$
-:::
 
-::: comparison-card__text
-모집단 법칙이 정해졌을 때 정의되는 비확률적 대상. identification의
-대상이다.
-:::
-::::::
+::::::::::::::::::
 
-:::::: comparison-card
-::: comparison-card__title
+:::::::::::::::::: {.comparison-card__text}
+
+모집단 법칙이 정해졌을 때 정의되는 비확률적 대상. identification의 대상이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
 Estimator
-:::
 
-::: comparison-card__formula
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
 $\widehat\theta_n=T_n(W_1,\ldots,W_n)$
-:::
 
-::: comparison-card__text
-표본의 함수인 random variable. estimation과 sampling uncertainty의
-대상이다.
-:::
-::::::
-:::::::::::
+::::::::::::::::::
 
-::::: callout-strip
-::: left
+:::::::::::::::::: {.comparison-card__text}
+
+표본의 함수인 random variable. estimation과 sampling uncertainty의 대상이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
 이 장의 규칙.
-:::
 
-::: right
-$\theta_0$의 존재·유일성은 population problem이고, $\widehat\theta_n$의
-bias·variance·consistency는 sampling problem이다. 전자를 해결하지 않고
-후자로 갈 수 없다.
-:::
-:::::
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+$\theta_0$의 존재·유일성은 population problem이고, $\widehat\theta_n$의 bias·variance·consistency는 sampling problem이다. 전자를 해결하지 않고 후자로 갈 수 없다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
 ::::::::::::::::::::::::::
 
-::::::::::: {#s32 .section}
+:::::::::::::::::::::::::: {#s32}
+
 ## [3.2]{.section-number}Model은 무엇인가
 
-계량경제학에서 model은 단지 방정식 하나가 아니다. model은 **어떤
-probability laws를 가능한 세계로 허용할 것인가**에 대한 제한이다.
-Identification은 바로 이 허용집합과 관측분포의 관계에서 생긴다.
+::: {.topic-opening}
+계량경제학에서 model은 단지 방정식 하나가 아니다. model은 <strong>어떤 probability laws를 가능한 세계로 허용할 것인가</strong>에 대한 제한이다. Identification은 바로 이 허용집합과 관측분포의 관계에서 생긴다.
+:::
 
 ### 3.2.1 Model as a set of probability laws {#s321}
 
-::::: {.statement .definition}
-::: statement-head
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
 정의 3.1 · Statistical model
-:::
+
+:::::::::::::::::::
 
 관측 random element $W$의 가능한 분포들의 집합을
 
-::: math-display
-$$\mathcal P=\{P_\theta:\theta\in\Theta\}\subseteq\mathfrak P(\mathcal W)$$
-:::
+::::::::::::::::::: {.math-display}
 
-라고 하자. 더 일반적으로 parameterization 없이
-$\mathcal P\subseteq\mathfrak P(\mathcal W)$ 자체를 statistical
-model이라 부른다.
-:::::
+$$
+\mathcal P=\{P_\theta:\theta\in\Theta\}\subseteq\mathfrak P(\mathcal W)
+$$
+
+:::::::::::::::::::
+
+라고 하자. 더 일반적으로 parameterization 없이 $\mathcal P\subseteq\mathfrak P(\mathcal W)$ 자체를 statistical model이라 부른다.
+
+::::::::::::::::::::
 
 예를 들어 선형 조건부평균 가정
 
-::: math-display
-$$E[Y\mid X]=X'\beta$$
-:::
+:::::::::::::::::::: {.math-display}
 
-은 가능한 $(Y,X)$의 joint law를 제한한다. 반면 projection coefficient를
-정의하는
+$$
+E[Y\mid X]=X'\beta
+$$
 
-::: math-display
-$$\beta^{LP}=\arg\min_b E[(Y-X'b)^2]$$
-:::
+::::::::::::::::::::
 
-는 적절한 second moments가 존재하면 거의 모든 joint law에서 정의되는
-*definition*이다. 이 둘을 혼동하면 "가정으로부터 나온 결론"과 "정의상
-항상 성립하는 성질"이 섞인다.
+은 가능한 $(Y,X)$의 joint law를 제한한다. 반면 projection coefficient를 정의하는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\beta^{LP}=\arg\min_b E[(Y-X'b)^2]
+$$
+
+::::::::::::::::::::
+
+는 적절한 second moments가 존재하면 거의 모든 joint law에서 정의되는 <em>definition</em>이다. 이 둘을 혼동하면 “가정으로부터 나온 결론”과 “정의상 항상 성립하는 성질”이 섞인다.
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.3 · Linear CEF는 틀릴 수 있지만 BLP는 여전히 존재한다
+
+:::::::::::::::::::
+
+$X\sim N(0,1)$, $Y=X^2+\varepsilon$, $E[\varepsilon\mid X]=0$라고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y\mid X]=X^2,
+$$
+
+:::::::::::::::::::
+
+이므로 linear conditional-mean restriction $E[Y\mid X]=a+bX$는 성립하지 않는다.
+
+그러나 best linear predictor는 여전히 정의된다. Intercept를 포함하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+b^{LP}
+=
+\frac{\operatorname{Cov}(X,Y)}{\operatorname{Var}(X)}
+=
+\frac{E[X^3]}{1}
+=
+0,
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+a^{LP}
+=
+E[Y]-b^{LP}E[X]
+=
+E[X^2]
+=
+1.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Y\mid X]=X^2
+\neq
+1+0\cdot X,
+\qquad
+\text{but BLP is well defined.}
+}
+$$
+
+:::::::::::::::::::
+
+이 예는 model restriction과 projection-defined target을 구분해야 하는 이유를 보여준다.
+
+::::::::::::::::::::
 
 ### 3.2.2 Restriction, assumption, normalization {#s322}
 
-::: display-table-wrap
-  종류                  역할                                                     예
-  --------------------- -------------------------------------------------------- ---------------------------------------------
-  경제적 restriction    행동·기술·제도에 의해 가능한 구조를 줄인다.              utility maximization, exclusion restriction
-  통계적 assumption     확률법칙에 조건을 건다.                                  $E[u\mid X]=0$, independence, stationarity
-  support restriction   어떤 비교가 데이터 안에서 가능한지 정한다.               overlap, common support
-  normalization         관측적으로 동등한 표현의 scale·location 등을 고정한다.   latent-index scale normalization
-:::
+:::::::::::::::::::: {.display-table-wrap}
 
-normalization은 새로운 empirical information을 추가하는 것이 아니라
-parameterization의 중복표현을 제거하기 위한 경우가 많다. 반면 exclusion
-restriction이나 independence assumption은 실제로 허용되는
-data-generating laws를 줄이며 identification content를 제공한다.
+<table>
+<thead><tr><th>종류</th><th>역할</th><th>예</th></tr></thead>
+<tbody>
+<tr><td>경제적 restriction</td><td>행동·기술·제도에 의해 가능한 구조를 줄인다.</td><td>utility maximization, exclusion restriction</td></tr>
+<tr><td>통계적 assumption</td><td>확률법칙에 조건을 건다.</td><td>$E[u\mid X]=0$, independence, stationarity</td></tr>
+<tr><td>support restriction</td><td>어떤 비교가 데이터 안에서 가능한지 정한다.</td><td>overlap, common support</td></tr>
+<tr><td>normalization</td><td>관측적으로 동등한 표현의 scale·location 등을 고정한다.</td><td>latent-index scale normalization</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+normalization은 새로운 empirical information을 추가하는 것이 아니라 parameterization의 중복표현을 제거하기 위한 경우가 많다. 반면 exclusion restriction이나 independence assumption은 실제로 허용되는 data-generating laws를 줄이며 identification content를 제공한다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.4 · Normalization은 새로운 empirical information이 아니다
+
+:::::::::::::::::::
+
+latent-index model을
+
+::::::::::::::::::: {.math-display}
+
+$$
+D=1\{X'\beta+\varepsilon\ge0\}
+$$
+
+:::::::::::::::::::
+
+라고 하자. $\varepsilon=\sigma U$이고 $U$의 distribution shape는 알려져 있지만 $\sigma$는 free라고 하자.
+choice probability는 $X'\beta/\sigma$를 통해 결정된다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+P(D=1\mid X)
+=
+F_U\!\left(\frac{X'\beta}{\sigma}\right).
+$$
+
+:::::::::::::::::::
+
+따라서 모든 $c\gt0$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+(\beta,\sigma)
+\quad\text{and}\quad
+(c\beta,c\sigma)
+$$
+
+:::::::::::::::::::
+
+는 같은 observed choice probabilities를 만든다. $\sigma=1$ 같은 scale normalization은 data가 새 정보를 제공해서가 아니라 redundant representation을 제거하기 위한 convention이다.
+
+::::::::::::::::::::
 
 ### 3.2.3 Structural model과 observed-data model {#s323}
 
-Chapter 2의 full-data law를 $P^F$, observation map을 $O$라 하자. 실제
-관측분포는 pushforward law
+Chapter 2의 full-data law를 $P^F$, observation map을 $O$라 하자. 실제 관측분포는 pushforward law
 
-::: math-display
-$$P^O=O_{\#}P^F=P^F\circ O^{-1}$$
-:::
+:::::::::::::::::::: {.math-display}
 
-이다. structural model은 가능한 full-data laws의 집합 $\mathcal M^F$를
-제한하고, 이것이 유도하는 observed-data model은
+$$
+P^O=O_{\#}P^F=P^F\circ O^{-1}
+$$
 
-::: math-display
-$$\mathcal M^O=\{O_{\#}P^F:P^F\in\mathcal M^F\}$$
-:::
+::::::::::::::::::::
 
-가 된다. 경제학적 구조가 서로 달라도 동일한 $P^O$를 만들 수 있다는
-사실이 identification problem의 출발점이다.
-:::::::::::
+이다. structural model은 가능한 full-data laws의 집합 $\mathcal M^F$를 제한하고, 이것이 유도하는 observed-data model은
 
-:::::::::::::::::::::::: {#s33 .section}
+:::::::::::::::::::: {.math-display}
+
+$$
+\mathcal M^O=\{O_{\#}P^F:P^F\in\mathcal M^F\}
+$$
+
+::::::::::::::::::::
+
+가 된다. 경제학적 구조가 서로 달라도 동일한 $P^O$를 만들 수 있다는 사실이 identification problem의 출발점이다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s33}
+
 ## [3.3]{.section-number}Identification의 일반적 정의
 
-Identification은 finite sample의 정확도와 관계없는 **population
-uniqueness** 문제다. 표본크기를 무한대로 보내 관측분포 $P^O_0$를 완전히
-안다고 상상하자. 그때도 target이 하나로 정해지는가를 묻는다.
+::: {.topic-opening}
+Identification은 finite sample의 정확도와 관계없는 <strong>population uniqueness</strong> 문제다. 표본크기를 무한대로 보내 관측분포 $P^O_0$를 완전히 안다고 상상하자. 그때도 target이 하나로 정해지는가를 묻는다.
+:::
 
 ### 3.3.1 Observational equivalence class {#s331}
 
-:::::: {.statement .definition}
-::: statement-head
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
 정의 3.2 · Observational equivalence
-:::
+
+:::::::::::::::::::
 
 두 full-data laws $P_1^F,P_2^F\in\mathcal M^F$가
 
-::: math-display
-$$O_{\#}P_1^F=O_{\#}P_2^F$$
-:::
+::::::::::::::::::: {.math-display}
 
-를 만족하면 observationally equivalent하다고 한다. 주어진 observed law
-$P^O$와 양립하는 full-data laws의 집합은
+$$
+O_{\#}P_1^F=O_{\#}P_2^F
+$$
 
-::: math-display
-$$\mathcal E(P^O)=\{P^F\in\mathcal M^F:O_{\#}P^F=P^O\}$$
-:::
+:::::::::::::::::::
+
+를 만족하면 observationally equivalent하다고 한다. 주어진 observed law $P^O$와 양립하는 full-data laws의 집합은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\mathcal E(P^O)=\{P^F\in\mathcal M^F:O_{\#}P^F=P^O\}
+$$
+
+:::::::::::::::::::
 
 이다.
-::::::
 
-데이터는 $\mathcal E(P^O)$ 안의 어느 full-data law가 진짜인지 구분하지
-못한다. 따라서 target이 이 equivalence class 안에서 변한다면 그 target은
-point identified될 수 없다.
+::::::::::::::::::::
+
+데이터는 $\mathcal E(P^O)$ 안의 어느 full-data law가 진짜인지 구분하지 못한다. 따라서 target이 이 equivalence class 안에서 변한다면 그 target은 point identified될 수 없다.
 
 ### 3.3.2 Identified set {#s332}
 
-::::: {.statement .definition}
-::: statement-head
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
 정의 3.3 · Identified set
-:::
 
-full-data target을 $\psi(P^F)$라 하자. observed law $P^O$가 허용하는
-target 값의 집합은
+:::::::::::::::::::
 
-::: math-display
+full-data target을 $\psi(P^F)$라 하자. observed law $P^O$가 허용하는 target 값의 집합은
+
+::::::::::::::::::: {.math-display}
+
 $$
 \Psi_I(P^O)
 =
 \{\psi(P^F):P^F\in\mathcal E(P^O)\}.
 $$
-:::
+
+:::::::::::::::::::
 
 이 집합을 identified set이라 한다.
-:::::
 
-::::::::::: comparison-grid
-:::::: comparison-card
-::: comparison-card__title
+::::::::::::::::::::
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
 Point identification
-:::
 
-::: comparison-card__formula
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
 $\Psi_I(P^O)=\{\psi_0\}$
-:::
 
-::: comparison-card__text
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
 관측분포가 target을 하나로 결정한다.
-:::
-::::::
 
-:::::: comparison-card
-::: comparison-card__title
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
 Set identification
-:::
 
-::: comparison-card__formula
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
 $|\Psi_I(P^O)|>1$
-:::
 
-::: comparison-card__text
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
 여러 값이 observationally compatible하다.
-:::
-::::::
-:::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
 
 ### 3.3.3 Identification as constancy on fibers {#s333}
 
-::::: {.statement .theorem}
-::: statement-head
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
 명제 3.1 · Identification의 동치조건
-:::
 
-target $\psi$가 point identified될 필요충분조건은 모든 observationally
-equivalent한 $P_1^F,P_2^F\in\mathcal M^F$에 대해
+:::::::::::::::::::
 
-::: math-display
+target $\psi$가 point identified될 필요충분조건은 모든 observationally equivalent한 $P_1^F,P_2^F\in\mathcal M^F$에 대해
+
+::::::::::::::::::: {.math-display}
+
 $$
 O_{\#}P_1^F=O_{\#}P_2^F
 \quad\Longrightarrow\quad
 \psi(P_1^F)=\psi(P_2^F)
 $$
-:::
 
-가 성립하는 것이다. 즉 $\psi$는 observation map의 각 fiber 위에서
-constant여야 한다.
-:::::
+:::::::::::::::::::
 
-:::: proof
-::: proof-label
+가 성립하는 것이다. 즉 $\psi$는 observation map의 각 fiber 위에서 constant여야 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+<strong>Necessity.</strong>
+$\psi$가 point identified라고 하자. 어떤 $P_1^F,P_2^F\in\mathcal M^F$가
+
+::::::::::::::::::: {.math-display}
+
+$$
+O_\#P_1^F=O_\#P_2^F=P^O
+$$
+
+:::::::::::::::::::
+
+를 만족하면 둘 다 같은 fiber $\mathcal E(P^O)$에 속한다.
+Point identification이면 identified set이 singleton이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\psi(P_1^F)=\psi(P_2^F).
+$$
+
+:::::::::::::::::::
+
+<strong>Sufficiency.</strong>
+반대로 $\psi$가 모든 observational-equivalence class 위에서 constant라고 하자.
+그러면 임의의 observed law $P^O$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Psi_I(P^O)
+=
+\{\psi(P^F):P^F\in\mathcal E(P^O)\}
+$$
+
+:::::::::::::::::::
+
+의 모든 원소가 동일하다. 따라서 $\Psi_I(P^O)$는 singleton이고 target은 point identified다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Point identification}
+\iff
+\text{target is constant on observational fibers}.
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.5 · Fiber 위에서 constant인지 직접 확인하기
+
+:::::::::::::::::::
+
+full states가 $\{a,b,c,d\}$이고 observation map이
+
+::::::::::::::::::: {.math-display}
+
+$$
+a,b\mapsto x,
+\qquad
+c,d\mapsto y
+$$
+
+:::::::::::::::::::
+
+로 states를 collapse한다고 하자. 첫 번째 target이
+
+::::::::::::::::::: {.math-display}
+
+$$
+\psi_1(a)=\psi_1(b)=1,
+\qquad
+\psi_1(c)=\psi_1(d)=2
+$$
+
+:::::::::::::::::::
+
+라면 each observational fiber에서 constant이므로 identified될 수 있다.
+
+반면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\psi_2(a)=1,
+\qquad
+\psi_2(b)=3
+$$
+
+:::::::::::::::::::
+
+이면 $a,b$가 같은 observed state $x$를 만들면서 target은 다르므로 $\psi_2$는 point identified되지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
 해설
-:::
 
-observed law 하나가 허용하는 full-data laws 전체가 하나의 fiber다. 그
-fiber 위에서 target이 하나의 값만 가지면 observed law만으로 target을
-복원할 수 있다. 반대로 target이 두 값을 갖는다면 같은 데이터분포로 서로
-다른 target 값이 가능하므로 point identification이 실패한다.
-::::
-::::::::::::::::::::::::
+:::::::::::::::::::
 
-::::::::::::: {#s34 .section}
+observed law 하나가 허용하는 full-data laws 전체가 하나의 fiber다. 그 fiber 위에서 target이 하나의 값만 가지면 observed law만으로 target을 복원할 수 있다. 반대로 target이 두 값을 갖는다면 같은 데이터분포로 서로 다른 target 값이 가능하므로 point identification이 실패한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s34}
+
 ## [3.4]{.section-number}Descriptive Targets와 Statistical Identification
 
-Descriptive target은 보통 observed-data distribution 자체의 특징이므로
-causal target보다 identification이 직접적이다. 그러나 support 밖의
-extrapolation, non-injective parameterization, coarsening이 존재하면
-descriptive target도 자동으로 identified되는 것은 아니다.
+::: {.topic-opening}
+Descriptive target은 보통 observed-data distribution 자체의 특징이므로 causal target보다 identification이 직접적이다. 그러나 support 밖의 extrapolation, non-injective parameterization, coarsening이 존재하면 descriptive target도 자동으로 identified되는 것은 아니다.
+:::
 
 ### 3.4.1 Observed-data functional {#s341}
 
 $W=(Y,X)\sim P_0$가 관측되고 target이
 
-::: math-display
-$$\theta_0=T(P_0)$$
-:::
+:::::::::::::::::::: {.math-display}
 
-로 정의된다면, $T$가 well-defined한 한 identification은 사실상 정의에
-내장되어 있다. 예를 들어
+$$
+\theta_0=T(P_0)
+$$
 
-::: math-display
+::::::::::::::::::::
+
+로 정의된다면, $T$가 well-defined한 한 identification은 사실상 정의에 내장되어 있다. 예를 들어
+
+:::::::::::::::::::: {.math-display}
+
 $$
 E[Y],\qquad
 \operatorname{Var}(Y),\qquad
 E[Y\mid X=x],\qquad
 Q_Y(\tau)
 $$
-:::
+
+::::::::::::::::::::
 
 는 모두 observed law의 functionals다.
 
-:::: {.statement .remark}
-::: statement-head
-중요한 구분 · Descriptive does not mean trivial
-:::
+:::::::::::::::::::: {.statement .remark}
 
-descriptive target이 distribution의 functional이라는 사실은
-finite-sample estimation이 쉽다는 뜻이 아니다. 고차원 CEF나 conditional
-density는 point identified되어도 nonparametric estimation이 매우 어렵다.
-Identification과 statistical difficulty는 별개의 차원이다.
-::::
+::::::::::::::::::: {.statement-head}
+
+중요한 구분 · Descriptive does not mean trivial
+
+:::::::::::::::::::
+
+descriptive target이 distribution의 functional이라는 사실은 finite-sample estimation이 쉽다는 뜻이 아니다. 고차원 CEF나 conditional density는 point identified되어도 nonparametric estimation이 매우 어렵다. Identification과 statistical difficulty는 별개의 차원이다.
+
+::::::::::::::::::::
 
 ### 3.4.2 Support와 extrapolation {#s342}
 
-조건부평균 $m_0(x)=E[Y\mid X=x]$는 $P_X$-almost everywhere에서 정의된다.
-따라서 $x_0$가 데이터의 support 밖에 있다면
+조건부평균 $m_0(x)=E[Y\mid X=x]$는 $P_X$-almost everywhere에서 정의된다. 따라서 $x_0$가 데이터의 support 밖에 있다면
 
-::: math-display
-$$x_0\notin\operatorname{supp}(X)$$
-:::
+:::::::::::::::::::: {.math-display}
 
-관측분포만으로 $m_0(x_0)$를 결정할 수 없다. 그 값을 말하려면 smoothness,
-functional form, structural restriction 같은 extrapolating assumptions가
-추가되어야 한다.
+$$
+x_0\notin\operatorname{supp}(X)
+$$
 
-::::: callout-strip
-::: left
+::::::::::::::::::::
+
+관측분포만으로 $m_0(x_0)$를 결정할 수 없다. 그 값을 말하려면 smoothness, functional form, structural restriction 같은 extrapolating assumptions가 추가되어야 한다.
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
 Support는 identification content를 가진다.
-:::
 
-::: right
-"충분한 표본이 있으면 언젠가 보일 것"과 "모집단에서 애초에 probability
-zero라 볼 수 없다"는 전혀 다른 문제다.
-:::
-:::::
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+“충분한 표본이 있으면 언젠가 보일 것”과 “모집단에서 애초에 probability zero라 볼 수 없다”는 전혀 다른 문제다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 3.1 · Support 밖 conditional mean은 observed law alone으로 정해지지 않는다
+
+:::::::::::::::::::
+
+$X\sim U[0,1]$이고 $m(x)=E[Y\mid X=x]$라고 하자.
+두 candidate conditional-mean functions가
+
+::::::::::::::::::: {.math-display}
+
+$$
+m_1(x)=m_2(x)=x
+\qquad
+\text{for }x\in[0,1]
+$$
+
+:::::::::::::::::::
+
+를 만족한다고 하자. 그러나 support 밖에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+m_1(2)=2,
+\qquad
+m_2(2)=100
+$$
+
+:::::::::::::::::::
+
+로 둘 수 있다. 두 specifications는 observed $X$-support에서 동일한 conditional law를 만들 수 있으므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+m(2)
+\text{ is not identified without extrapolation restrictions.}
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
 
 ### 3.4.3 Parameterization identification {#s343}
 
-parametric family $\{P_\theta:\theta\in\Theta\}$에서 parameter
-$\theta$의 global identification은 mapping
+parametric family $\{P_\theta:\theta\in\Theta\}$에서 parameter $\theta$의 global identification은 mapping
 
-::: math-display
-$$\theta\mapsto P_\theta$$
-:::
+:::::::::::::::::::: {.math-display}
+
+$$
+\theta\mapsto P_\theta
+$$
+
+::::::::::::::::::::
 
 가 injective라는 뜻이다. 즉
 
-::: math-display
-$$P_{\theta_1}=P_{\theta_2}\Longrightarrow\theta_1=\theta_2.$$
-:::
+:::::::::::::::::::: {.math-display}
 
-분포 자체는 완전히 identified되어도 parameterization이 중복되어 있으면
-$\theta$는 identified되지 않는다. 이 경우 normalization이나
-재parameterization으로 표현의 중복을 제거할 수 있다.
-:::::::::::::
+$$
+P_{\theta_1}=P_{\theta_2}\Longrightarrow\theta_1=\theta_2.
+$$
 
-:::::::::::::::::::::::::::::: {#s35 .section}
+::::::::::::::::::::
+
+분포 자체는 완전히 identified되어도 parameterization이 중복되어 있으면 $\theta$는 identified되지 않는다. 이 경우 normalization이나 재parameterization으로 표현의 중복을 제거할 수 있다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.6 · Distribution은 identified되어도 parameter label은 아닐 수 있다
+
+:::::::::::::::::::
+
+parametric family를
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_\theta=N(0,\theta^2),
+\qquad
+\theta\in\mathbb R\setminus\{0\}
+$$
+
+:::::::::::::::::::
+
+라고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_\theta=P_{-\theta}.
+$$
+
+:::::::::::::::::::
+
+따라서 $\theta$ 자체는 sign ambiguity 때문에 identified되지 않지만
+$|\theta|$는 distribution으로부터 유일하게 결정된다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta\text{ not identified},
+\qquad
+|\theta|\text{ identified}.
+}
+$$
+
+:::::::::::::::::::
+
+즉 nonidentification은 underlying distribution의 문제가 아니라 redundant parameterization의 문제일 수도 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s35}
+
 ## [3.5]{.section-number}Causal Targets와 Causal Identification
 
-causal target은 대개 observed law의 직접적인 functional이 아니다. 따라서
-causal identification은 보이지 않는 counterfactual object를 **관측분포의
-functional로 표현하는 representation problem**이다.
+::: {.topic-opening}
+causal target은 대개 observed law의 직접적인 functional이 아니다. 따라서 causal identification은 보이지 않는 counterfactual object를 <strong>관측분포의 functional로 표현하는 representation problem</strong>이다.
+:::
 
 ### 3.5.1 Fundamental missingness {#s351}
 
 binary treatment에서 full datum은 $(Y(1),Y(0),D,X)$지만 관측 outcome은
 
-::: math-display
-$$Y=DY(1)+(1-D)Y(0)$$
-:::
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=DY(1)+(1-D)Y(0)
+$$
+
+::::::::::::::::::::
 
 뿐이다. ATE
 
-::: math-display
-$$\tau_0=E[Y(1)-Y(0)]$$
-:::
+:::::::::::::::::::: {.math-display}
 
-는 full-data law의 functional이다. 반면 관측 law는 $P_{Y,D,X}$뿐이므로
-일반적으로
+$$
+\tau_0=E[Y(1)-Y(0)]
+$$
 
-::: math-display
-$$P_{Y,D,X}\ \not\Rightarrow\ E[Y(1)-Y(0)].$$
-:::
+::::::::::::::::::::
 
-원인은 단순하다. 처치자에게서는 $Y(0)$를, 비처치자에게서는 $Y(1)$을 보지
-못한다. 이 missing counterfactual을 어떤 restriction으로 연결할 것인가가
-causal identification의 핵심이다.
+는 full-data law의 functional이다. 반면 관측 law는 $P_{Y,D,X}$뿐이므로 일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+P_{Y,D,X}\ \not\Rightarrow\ E[Y(1)-Y(0)].
+$$
+
+::::::::::::::::::::
+
+원인은 단순하다. 처치자에게서는 $Y(0)$를, 비처치자에게서는 $Y(1)$을 보지 못한다. 이 missing counterfactual을 어떤 restriction으로 연결할 것인가가 causal identification의 핵심이다.
 
 ### 3.5.2 Random assignment {#s352}
 
 만약
 
-::: math-display
-$$D\perp (Y(0),Y(1))$$
-:::
+:::::::::::::::::::: {.math-display}
 
-이면 처치상태가 potential outcomes의 분포를 선택하지 않는다.
-consistency와 positivity 아래
+$$
+D\perp (Y(0),Y(1))
+$$
 
-::: math-display
+::::::::::::::::::::
+
+이면 처치상태가 potential outcomes의 분포를 선택하지 않는다. consistency와 positivity 아래
+
+:::::::::::::::::::: {.math-display}
+
 $$
 E[Y(d)]
 =E[Y(d)\mid D=d]
 =E[Y\mid D=d],
 $$
-:::
+
+::::::::::::::::::::
 
 따라서
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 \boxed{\tau_{ATE}=E[Y\mid D=1]-E[Y\mid D=0].}
 $$
-:::
 
-여기서 중요한 점은 단순 평균차가 "본질적으로 causal"한 것이 아니라,
-random assignment라는 restriction 아래 causal target과 descriptive
-functional이 같아진다는 사실이다.
+::::::::::::::::::::
+
+여기서 중요한 점은 단순 평균차가 “본질적으로 causal”한 것이 아니라, random assignment라는 restriction 아래 causal target과 descriptive functional이 같아진다는 사실이다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Derivation under random assignment
+
+:::::::::::::::::::
+
+random assignment $D\perp(Y(0),Y(1))$이면 각 $d\in\{0,1\}$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y(d)\mid D=d]
+=
+E[Y(d)].
+$$
+
+:::::::::::::::::::
+
+또한 consistency에 의해 $D=d$인 units에서는 $Y=Y(d)$. 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y(d)\mid D=d]
+=
+E[Y\mid D=d].
+$$
+
+:::::::::::::::::::
+
+두 식을 합치면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y(d)]
+=
+E[Y\mid D=d].
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+ATE
+=
+E[Y\mid D=1]-E[Y\mid D=0].
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 3.5.3 Unconfoundedness와 overlap {#s353}
 
 관측연구에서는 보다 일반적으로
 
-::: math-display
-$$(Y(0),Y(1))\perp D\mid X$$
-:::
+:::::::::::::::::::: {.math-display}
+
+$$
+(Y(0),Y(1))\perp D\mid X
+$$
+
+::::::::::::::::::::
 
 를 가정할 수 있다. 그러나 conditional comparison을 실제로 수행하려면
 
-::: math-display
-$$0<P(D=1\mid X=x)<1$$
-:::
+:::::::::::::::::::: {.math-display}
 
-이라는 overlap이 필요하다. 첫 조건은 counterfactual selection을
-통제하고, 두 번째 조건은 필요한 비교가 support 안에 존재하게 한다.
+$$
+0\lt P(D=1\mid X=x)\lt 1
+$$
 
-:::: {.statement .warning}
-::: statement-head
+::::::::::::::::::::
+
+이라는 overlap이 필요하다. 첫 조건은 counterfactual selection을 통제하고, 두 번째 조건은 필요한 비교가 support 안에 존재하게 한다.
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
 주의 3.1 · Conditioning variables는 자동으로 causal controls가 아니다
-:::
 
-$E[Y\mid D,X]$를 계산할 수 있다는 사실만으로 $X$가 valid adjustment
-set이라는 결론은 나오지 않는다. 어떤 변수를 condition해야 하는지는
-causal structure에 관한 별도의 가정이 결정한다. collider나
-post-treatment variable에 conditioning하면 오히려 causal
-interpretation을 훼손할 수 있다.
-::::
+:::::::::::::::::::
+
+$E[Y\mid D,X]$를 계산할 수 있다는 사실만으로 $X$가 valid adjustment set이라는 결론은 나오지 않는다. 어떤 변수를 condition해야 하는지는 causal structure에 관한 별도의 가정이 결정한다. collider나 post-treatment variable에 conditioning하면 오히려 causal interpretation을 훼손할 수 있다.
+
+::::::::::::::::::::
 
 ### 3.5.4 g-formula와 causal interpretation {#s354}
 
-:::::: {.statement .theorem}
-::: statement-head
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
 명제 3.2 · Conditional ignorability 아래 ATE identification
-:::
+
+:::::::::::::::::::
 
 consistency, conditional ignorability, overlap이 성립하면
 
-::: math-display
+::::::::::::::::::: {.math-display}
+
 $$
 E[Y(d)]
 =
 E\bigl[E[Y\mid D=d,X]\bigr],\qquad d\in\{0,1\},
 $$
-:::
+
+:::::::::::::::::::
 
 따라서
 
-::: math-display
+::::::::::::::::::: {.math-display}
+
 $$
 \boxed{
 \tau_{ATE}
@@ -536,443 +1221,1285 @@ E[Y\mid D=1,X]-E[Y\mid D=0,X]
 \right].
 }
 $$
-:::
-::::::
 
-::::::::::::::: logic-chain
-:::::: logic-chain__step
-[1]{.logic-chain__num}
+:::::::::::::::::::
 
-::::: {}
-::: logic-chain__text
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$d\in\{0,1\}$를 고정하자. 먼저 law of iterated expectations로
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y(d)]
+=
+E\!\left[E[Y(d)\mid X]\right].
+$$
+
+:::::::::::::::::::
+
+conditional ignorability로
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y(d)\mid X]
+=
+E[Y(d)\mid D=d,X].
+$$
+
+:::::::::::::::::::
+
+consistency로
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y(d)\mid D=d,X]
+=
+E[Y\mid D=d,X].
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y(d)]
+=
+E\!\left[E[Y\mid D=d,X]\right].
+$$
+
+:::::::::::::::::::
+
+$d=1$과 $d=0$을 빼면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+ATE
+=
+E\!\left[
+E[Y\mid D=1,X]-E[Y\mid D=0,X]
+\right].
+}
+$$
+
+:::::::::::::::::::
+
+여기서 overlap은 위 algebraic equalities를 만드는 assumption이라기보다,
+각 $X=x$에서 두 treatment arms의 conditional means가 observed support 안에서 학습 가능하도록 하는 support condition이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 3.2 · Ignorability가 있어도 overlap이 없으면 comparison이 비어 있을 수 있다
+
+:::::::::::::::::::
+
+$D=1\{X\gt0\}$라고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+P(D=1\mid X=x)
+=
+\begin{cases}
+0,&x\le0,\\
+1,&x\gt0.
+\end{cases}
+$$
+
+:::::::::::::::::::
+
+즉 어떤 $x$에서도 treated와 control observations가 동시에 존재하지 않는다.
+따라서 한 treatment arm의 conditional mean은 반드시 support 밖 extrapolation에 의존한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{ignorability}
+\neq
+\text{overlap}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.logic-chain}
+
+::::::::::::::::::: {.logic-chain__step}
+
+<span class="logic-chain__num">1</span>
+
+:::::::::::::::::: {.import-block}
+
+::::::::::::::::: {.logic-chain__text}
+
 Causal target
-:::
 
-::: logic-chain__sub
+:::::::::::::::::
+
+::::::::::::::::: {.logic-chain__sub}
+
 $E[Y(1)-Y(0)]$
-:::
-:::::
-::::::
 
-:::::: logic-chain__step
-[2]{.logic-chain__num}
+:::::::::::::::::
 
-::::: {}
-::: logic-chain__text
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.logic-chain__step}
+
+<span class="logic-chain__num">2</span>
+
+:::::::::::::::::: {.import-block}
+
+::::::::::::::::: {.logic-chain__text}
+
 Identifying restrictions
-:::
 
-::: logic-chain__sub
+:::::::::::::::::
+
+::::::::::::::::: {.logic-chain__sub}
+
 consistency + ignorability + overlap
-:::
-:::::
-::::::
 
-:::::: logic-chain__step
-[3]{.logic-chain__num}
+:::::::::::::::::
 
-::::: {}
-::: logic-chain__text
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.logic-chain__step}
+
+<span class="logic-chain__num">3</span>
+
+:::::::::::::::::: {.import-block}
+
+::::::::::::::::: {.logic-chain__text}
+
 Observed-data representation
-:::
 
-::: logic-chain__sub
+:::::::::::::::::
+
+::::::::::::::::: {.logic-chain__sub}
+
 $E[m_1(X)-m_0(X)]$
-:::
-:::::
-::::::
-:::::::::::::::
-::::::::::::::::::::::::::::::
 
-::::::::: {#s36 .section}
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s36}
+
 ## [3.6]{.section-number}Observational Equivalence, Point Identification, Set Identification
 
-Non-identification은 "추정량이 부정확하다"는 뜻이 아니다. 서로 다른
-구조가 정확히 같은 관측분포를 만들 수 있다는 뜻이다. 이 경우 데이터가
-무한히 많아도 구조를 구별할 수 없다.
+::: {.topic-opening}
+Non-identification은 “추정량이 부정확하다”는 뜻이 아니다. 서로 다른 구조가 정확히 같은 관측분포를 만들 수 있다는 뜻이다. 이 경우 데이터가 무한히 많아도 구조를 구별할 수 없다.
+:::
 
 ### 3.6.1 Point·set·empty identified set {#s361}
 
 parameterized model에서 observed law $P_0$에 대한 identified set을
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 \Theta_I(P_0)=\{\theta\in\Theta:P_\theta=P_0\}
 $$
-:::
+
+::::::::::::::::::::
 
 라고 하자. 그러면 세 경우가 존재한다.
 
-::: display-table-wrap
-  경우               수학적 표현                    해석
-  ------------------ ------------------------------ -----------------------------------------------------------
-  Point identified   $\Theta_I(P_0)=\{\theta_0\}$   유일한 parameter가 observed law와 양립한다.
-  Set identified     $|\Theta_I(P_0)|>1$            여러 parameter가 observationally equivalent하다.
-  Model refuted      $\Theta_I(P_0)=\varnothing$    model 안 어떤 parameter도 observed law를 생성하지 못한다.
-:::
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>경우</th><th>수학적 표현</th><th>해석</th></tr></thead>
+<tbody>
+<tr><td>Point identified</td><td>$\Theta_I(P_0)=\{\theta_0\}$</td><td>유일한 parameter가 observed law와 양립한다.</td></tr>
+<tr><td>Set identified</td><td>$|\Theta_I(P_0)|>1$</td><td>여러 parameter가 observationally equivalent하다.</td></tr>
+<tr><td>Model refuted</td><td>$\Theta_I(P_0)=\varnothing$</td><td>model 안 어떤 parameter도 observed law를 생성하지 못한다.</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.7 · Point, set, empty identified set을 직접 계산하기
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Moment equation</th><th>Identified set</th><th>Case</th></tr></thead>
+<tbody>
+<tr><td>$m(\theta)=\theta-2=0$</td><td>$\{2\}$</td><td>Point identified</td></tr>
+<tr><td>$m(\theta)=\theta^2-1=0$</td><td>$\{-1,1\}$</td><td>Set identified</td></tr>
+<tr><td>$m(\theta)=\theta^2+1=0$, $\Theta=\mathbb R$</td><td>$\varnothing$</td><td>Model refuted</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+identified set은 추상적인 notation이 아니라 population restrictions의 solution set 그 자체다.
+
+::::::::::::::::::::
 
 ### 3.6.2 More data cannot cure non-identification {#s362}
 
-:::: {.statement .warning}
-::: statement-head
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
 원칙 3.2 · Infinite data ≠ identification
-:::
 
-$n\to\infty$는 원칙적으로 $P_0$를 더 정확하게 배우게 해 줄 뿐이다. $P_0$
-자체가 $\theta_1$과 $\theta_2$를 구분하지 못한다면 sample size를 늘리는
-것은 이 문제를 해결하지 못한다.
-::::
+:::::::::::::::::::
 
-::: math-display
+$n\to\infty$는 원칙적으로 $P_0$를 더 정확하게 배우게 해 줄 뿐이다. $P_0$ 자체가 $\theta_1$과 $\theta_2$를 구분하지 못한다면 sample size를 늘리는 것은 이 문제를 해결하지 못한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
 $$
 P_{\theta_1}=P_{\theta_2},\ \theta_1\neq\theta_2
 \quad\Longrightarrow\quad
 \text{no sample from }P_0\text{ can distinguish them asymptotically.}
 $$
-:::
 
-따라서 non-identification의 해결책은 더 많은 동일종류의 데이터를 모으는
-것이 아니라, 새로운 variation, 새로운 measurement, exclusion
-restriction, functional-form restriction 등 **model or information
-structure를 바꾸는 것**이다.
+::::::::::::::::::::
+
+따라서 non-identification의 해결책은 더 많은 동일종류의 데이터를 모으는 것이 아니라, 새로운 variation, 새로운 measurement, exclusion restriction, functional-form restriction 등 <strong>model or information structure를 바꾸는 것</strong>이다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$P_{\theta_1}=P_{\theta_2}$이고 $\theta_1\neq\theta_2$라고 하자.
+i.i.d. sample을 생각하면 모든 $n$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_{\theta_1}^{\otimes n}
+=
+P_{\theta_2}^{\otimes n}.
+$$
+
+:::::::::::::::::::
+
+따라서 sample size를 아무리 키워도 두 parameter values 아래 observed sample의 law는 정확히 같다.
+Dominating density가 존재한다면 likelihood ratio도
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{L_n(\theta_1)}{L_n(\theta_2)}
+=
+1
+$$
+
+:::::::::::::::::::
+
+a.s. under the common law. 즉 $n\to\infty$는 같은 observed law를 더 정확히 학습하게 할 뿐,
+그 law가 구별하지 못하는 parameter values를 새롭게 구별하게 만들지 못한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 3.6.3 Partial identification {#s363}
 
-point identification이 실패했다고 해서 분석이 끝나는 것은 아니다. model
-assumptions가 target의 가능한 범위를 줄여 준다면
+point identification이 실패했다고 해서 분석이 끝나는 것은 아니다. model assumptions가 target의 가능한 범위를 줄여 준다면
 
-::: math-display
-$$\Psi_I(P_0)=[\underline\psi(P_0),\overline\psi(P_0)]$$
-:::
+:::::::::::::::::::: {.math-display}
 
-같은 sharp identified set을 보고할 수 있다. 이 관점에서는 연구 목표가
-하나의 숫자를 억지로 선택하는 것이 아니라, **관측정보와 가정이
-논리적으로 허용하는 모든 값**을 정확히 기술하는 것이다.
-:::::::::
+$$
+\Psi_I(P_0)=[\underline\psi(P_0),\overline\psi(P_0)]
+$$
 
-::::::::::::::::::::: {#s37 .section}
+::::::::::::::::::::
+
+같은 sharp identified set을 보고할 수 있다. 이 관점에서는 연구 목표가 하나의 숫자를 억지로 선택하는 것이 아니라, <strong>관측정보와 가정이 논리적으로 허용하는 모든 값</strong>을 정확히 기술하는 것이다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.8 · Missing counterfactual과 elementary ATT bounds
+
+:::::::::::::::::::
+
+binary outcome 또는 bounded outcome으로
+
+::::::::::::::::::: {.math-display}
+
+$$
+0\le Y(0),Y(1)\le1
+$$
+
+:::::::::::::::::::
+
+을 가정하자. Treated units의 ATT는
+
+::::::::::::::::::: {.math-display}
+
+$$
+ATT
+=
+E[Y(1)\mid D=1]
+-
+E[Y(0)\mid D=1].
+$$
+
+:::::::::::::::::::
+
+consistency로 첫 항은 $E[Y\mid D=1]$이지만 두 번째 항은 missing counterfactual이다.
+Boundedness만 사용하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+0
+\le
+E[Y(0)\mid D=1]
+\le
+1.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Y\mid D=1]-1
+\le
+ATT
+\le
+E[Y\mid D=1].
+}
+$$
+
+:::::::::::::::::::
+
+점 하나를 억지로 선택하지 않고 assumptions가 논리적으로 허용하는 interval을 보고하는 것이 partial identification의 기본 논리다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s37}
+
 ## [3.7]{.section-number}Moment Restrictions와 Rank Identification
 
-많은 계량모형은 full likelihood보다 약한 형태의 population moment
-restrictions로 표현된다. 이 경우 identification은 moment equation의 해가
-유일한지에 관한 문제로 바뀐다.
+::: {.topic-opening}
+많은 계량모형은 full likelihood보다 약한 형태의 population moment restrictions로 표현된다. 이 경우 identification은 moment equation의 해가 유일한지에 관한 문제로 바뀐다.
+:::
 
 ### 3.7.1 Population moments {#s371}
 
 $g(W,\theta)\in\mathbb R^q$라 하고 model이
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 E[g(W,\theta_0)]=0
 $$
-:::
+
+::::::::::::::::::::
 
 을 함의한다고 하자. population moment map을
 
-::: math-display
-$$m(\theta)=E[g(W,\theta)]$$
-:::
+:::::::::::::::::::: {.math-display}
+
+$$
+m(\theta)=E[g(W,\theta)]
+$$
+
+::::::::::::::::::::
 
 라 정의하면 moment-identified set은
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 \Theta_I=\{\theta\in\Theta:m(\theta)=0\}.
 $$
-:::
 
-따라서 point identification은 $m(\theta)=0$의 해가 정확히 하나라는
-뜻이다.
+::::::::::::::::::::
 
-:::: {.statement .remark}
-::: statement-head
+따라서 point identification은 $m(\theta)=0$의 해가 정확히 하나라는 뜻이다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
 Moment condition은 estimator가 아니다
-:::
 
-$E[g(W,\theta_0)]=0$은 population restriction이다. sample moment
-$n^{-1}\sum_i g(W_i,\theta)$를 이용해 어떤 estimator를 만들지는 다음
-단계의 문제다. Chapter 3에서는 population uniqueness까지만 다룬다.
-::::
+:::::::::::::::::::
+
+$E[g(W,\theta_0)]=0$은 population restriction이다. sample moment $n^{-1}\sum_i g(W_i,\theta)$를 이용해 어떤 estimator를 만들지는 다음 단계의 문제다. Chapter 3에서는 population uniqueness까지만 다룬다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 3.3 · Linear moment system의 identified set과 null space
+
+:::::::::::::::::::
+
+$m(\theta)=A\theta-b$, $A\in\mathbb R^{q\times k}$이고 한 solution $\theta_0$가 존재한다고 하자.
+그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Theta_I
+=
+\theta_0+\operatorname{Null}(A).
+}
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Theta_I=\{\theta_0\}
+\iff
+\operatorname{Null}(A)=\{0\}
+\iff
+\operatorname{rank}(A)=k.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$A\theta=b$와 $A\theta_0=b$를 빼면
+
+::::::::::::::::::: {.math-display}
+
+$$
+A(\theta-\theta_0)=0.
+$$
+
+:::::::::::::::::::
+
+따라서 모든 solution은 $\theta=\theta_0+h$ with $h\in\operatorname{Null}(A)$ 형태다.
+반대로 $h\in\operatorname{Null}(A)$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+A(\theta_0+h)=A\theta_0+Ah=b.
+$$
+
+:::::::::::::::::::
+
+따라서 solution set은 정확히 $\theta_0+\operatorname{Null}(A)$.
+Rank-nullity theorem으로 null space가 trivial일 필요충분조건은 $\operatorname{rank}(A)=k$다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 3.7.2 Linear IV example {#s372}
 
 구조식
 
-::: math-display
-$$Y=X'\beta_0+u$$
-:::
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X'\beta_0+u
+$$
+
+::::::::::::::::::::
 
 와 instrument condition
 
-::: math-display
-$$E[Zu]=0$$
-:::
+:::::::::::::::::::: {.math-display}
+
+$$
+E[Zu]=0
+$$
+
+::::::::::::::::::::
 
 이 주어지면
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 E[Z(Y-X'\beta_0)]=0
 \quad\Longleftrightarrow\quad
 E[ZY]=E[ZX']\beta_0.
 $$
-:::
+
+::::::::::::::::::::
 
 따라서 $\beta_0\in\mathbb R^k$를 유일하게 풀기 위한 핵심 조건은
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 \boxed{\operatorname{rank}E[ZX']=k.}
 $$
-:::
 
-rank가 부족하면 어떤 방향의 $\beta$ 변화가 moments를 바꾸지 않는다. 즉
-instruments가 structural parameter의 모든 방향을 distinguish하지 못한다.
+::::::::::::::::::::
+
+rank가 부족하면 어떤 방향의 $\beta$ 변화가 moments를 바꾸지 않는다. 즉 instruments가 structural parameter의 모든 방향을 distinguish하지 못한다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 3.4 · Linear IV rank condition은 uniqueness condition이다
+
+:::::::::::::::::::
+
+$A=E[ZX']$, $b=E[ZY]$라 쓰면 population IV moments는
+
+::::::::::::::::::: {.math-display}
+
+$$
+A\beta=b.
+$$
+
+:::::::::::::::::::
+
+$\operatorname{rank}(A)=k$이면 $\beta$는 unique하다.
+Rank deficient이면 nonzero $h\in\operatorname{Null}(A)$가 존재하고
+
+::::::::::::::::::: {.math-display}
+
+$$
+A(\beta_0+th)=b
+\qquad
+\forall t\in\mathbb R,
+$$
+
+:::::::::::::::::::
+
+이므로 whole line of observationally equivalent coefficient vectors가 생긴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+두 solutions $\beta_1,\beta_2$가 있으면
+
+::::::::::::::::::: {.math-display}
+
+$$
+A(\beta_1-\beta_2)=0.
+$$
+
+:::::::::::::::::::
+
+full column rank이면 null space가 $\{0\}$이므로 $\beta_1=\beta_2$.
+반대로 rank deficient이면 $h\neq0$이면서 $Ah=0$인 direction이 있으므로
+$\beta_0+th$는 모든 $t$에서 같은 moments를 만족한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 3.7.3 Order와 rank의 차이 {#s373}
 
-moment의 개수 $q$가 parameter 차원 $k$보다 적으면 당연히 일반적인 point
-identification을 기대하기 어렵다. 그러나 $q\ge k$라고 해서 충분하지
-않다. 정보의 독립성이 필요하다.
+moment의 개수 $q$가 parameter 차원 $k$보다 적으면 당연히 일반적인 point identification을 기대하기 어렵다. 그러나 $q\ge k$라고 해서 충분하지 않다. 정보의 독립성이 필요하다.
 
-::::::::::: comparison-grid
-:::::: comparison-card
-::: comparison-card__title
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
 Order condition
-:::
 
-::: comparison-card__formula
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
 $q\ge k$
-:::
 
-::: comparison-card__text
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
 식의 개수에 관한 necessary-type counting condition.
-:::
-::::::
 
-:::::: comparison-card
-::: comparison-card__title
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
 Rank condition
-:::
 
-::: comparison-card__formula
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
 $\operatorname{rank}G_0=k$
-:::
 
-::: comparison-card__text
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
 moments가 locally independent parameter directions를 구별하는지 확인.
-:::
-::::::
-:::::::::::
-:::::::::::::::::::::
 
-::::::::::::::::: {#s38 .section}
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 3.3 · Order condition은 충분하지 않다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+A=
+\begin{pmatrix}
+1&1\\
+2&2
+\end{pmatrix}.
+$$
+
+:::::::::::::::::::
+
+여기서는 $q=k=2$이므로 equation count는 충분해 보이지만
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{rank}(A)=1.
+$$
+
+:::::::::::::::::::
+
+두 번째 row가 첫 번째 row의 배수이므로 independent identifying information은 한 방향뿐이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+q\ge k
+\not\Rightarrow
+\operatorname{rank}(A)=k.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s38}
+
 ## [3.8]{.section-number}Global, Local, and Weak Identification
 
-"identified / not identified"라는 이분법만으로는 실제 계량문제를 충분히
-설명하지 못한다. uniqueness가 전체 parameter space에서 성립하는지, 진실
-근방에서만 성립하는지, 그리고 그 uniqueness가 얼마나 안정적인지를
-구분해야 한다.
+::: {.topic-opening}
+“identified / not identified”라는 이분법만으로는 실제 계량문제를 충분히 설명하지 못한다. uniqueness가 전체 parameter space에서 성립하는지, 진실 근방에서만 성립하는지, 그리고 그 uniqueness가 얼마나 안정적인지를 구분해야 한다.
+:::
 
 ### 3.8.1 Global vs local identification {#s381}
 
-::::: {.statement .definition}
-::: statement-head
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
 정의 3.4 · Global identification
-:::
+
+:::::::::::::::::::
 
 $m(\theta_0)=0$이고
 
-::: math-display
-$$m(\theta)=0\Longrightarrow\theta=\theta_0\qquad\forall\theta\in\Theta$$
-:::
+::::::::::::::::::: {.math-display}
+
+$$
+m(\theta)=0\Longrightarrow\theta=\theta_0\qquad\forall\theta\in\Theta
+$$
+
+:::::::::::::::::::
 
 이면 $\theta_0$는 globally identified다.
-:::::
 
-::::: {.statement .definition}
-::: statement-head
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
 정의 3.5 · Local identification
-:::
+
+:::::::::::::::::::
 
 어떤 neighborhood $\mathcal N(\theta_0)$가 존재하여
 
-::: math-display
-$$m(\theta)=0,\ \theta\in\mathcal N(\theta_0)\Longrightarrow\theta=\theta_0$$
-:::
+::::::::::::::::::: {.math-display}
+
+$$
+m(\theta)=0,\ \theta\in\mathcal N(\theta_0)\Longrightarrow\theta=\theta_0
+$$
+
+:::::::::::::::::::
 
 이면 locally identified다.
-:::::
 
-local identification은 진실 근방의 uniqueness만 보장하므로 멀리 떨어진
-다른 observationally equivalent solution이 존재할 수 있다. nonlinear
-models에서 global identification은 별도의 구조적 argument를 요구하는
-경우가 많다.
+::::::::::::::::::::
+
+local identification은 진실 근방의 uniqueness만 보장하므로 멀리 떨어진 다른 observationally equivalent solution이 존재할 수 있다. nonlinear models에서 global identification은 별도의 구조적 argument를 요구하는 경우가 많다.
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.9 · Local identification without global identification
+
+:::::::::::::::::::
+
+scalar moment map
+
+::::::::::::::::::: {.math-display}
+
+$$
+m(\theta)=\theta^2-1
+$$
+
+:::::::::::::::::::
+
+을 생각하자. $\theta_0=1$에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+m(1)=0,
+\qquad
+m'(1)=2\neq0.
+$$
+
+:::::::::::::::::::
+
+따라서 $1$의 sufficiently small neighborhood에서는 root가 unique하다.
+하지만
+
+::::::::::::::::::: {.math-display}
+
+$$
+m(-1)=0
+$$
+
+:::::::::::::::::::
+
+이므로 global uniqueness는 실패한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{local identification}
+\not\Rightarrow
+\text{global identification}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
 
 ### 3.8.2 Jacobian rank와 local injectivity {#s382}
 
 smooth moment map에 대해
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 G_0
 =
 \left.\frac{\partial m(\theta)}{\partial\theta'}\right|_{\theta=\theta_0}
 $$
-:::
+
+::::::::::::::::::::
 
 를 생각하자. $G_0$가 full column rank이면 작은 parameter 변화 $h$에 대해
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 m(\theta_0+h)
 \approx
 G_0h
 $$
-:::
 
-이며, $G_0h=0$을 만족하는 비영벡터 $h$가 없다. 이는 local
-identification의 핵심 differential condition이다.
+::::::::::::::::::::
 
-:::: {.statement .remark}
-::: statement-head
+이며, $G_0h=0$을 만족하는 비영벡터 $h$가 없다. 이는 local identification의 핵심 differential condition이다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
 주의 · Rank는 local condition이다
-:::
 
-Jacobian full rank는 일반적으로 global uniqueness를 보장하지 않는다.
-nonlinear map은 여러 곳에서 같은 값을 가질 수 있다. 따라서 local rank
-argument와 global injectivity argument를 구분해야 한다.
-::::
+:::::::::::::::::::
+
+Jacobian full rank는 일반적으로 global uniqueness를 보장하지 않는다. nonlinear map은 여러 곳에서 같은 값을 가질 수 있다. 따라서 local rank argument와 global injectivity argument를 구분해야 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof sketch
+
+:::::::::::::::::::
+
+$m:\mathbb R^k\to\mathbb R^q$가 continuously differentiable이고
+$G_0=Dm(\theta_0)$가 full column rank $k$라고 하자.
+그러면 $G_0$의 $k$개 linearly independent rows를 선택해
+$k\times k$ nonsingular sub-Jacobian을 만들 수 있다.
+그 corresponding sub-map을 $\widetilde m(\theta)\in\mathbb R^k$라 하자.
+
+Inverse function theorem에 의해 $\theta_0$의 어떤 neighborhood에서
+$\theta\mapsto\widetilde m(\theta)$는 one-to-one이다.
+따라서 그 neighborhood 안에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+m(\theta)=m(\theta_0)
+$$
+
+:::::::::::::::::::
+
+이면 특히 $\widetilde m(\theta)=\widetilde m(\theta_0)$, 따라서 $\theta=\theta_0$.
+즉 full-column-rank Jacobian은 local injectivity를 주는 충분조건이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 3.8.3 Singular values와 weak identification {#s383}
 
 full rank라 하더라도 smallest singular value가 매우 작을 수 있다.
 
-::: math-display
-$$
-0<\sigma_{\min}(G_0)\ll1.
-$$
-:::
+:::::::::::::::::::: {.math-display}
 
-이때 model은 수학적으로 point identified이지만 어떤 parameter
-direction에 대해 moments가 거의 변하지 않는다. 그래서 작은 sampling
-perturbation이 큰 parameter 변화로 확대될 수 있다.
+$$
+0\lt \sigma_{\min}(G_0)\ll1.
+$$
 
-::::: callout-strip
-::: left
+::::::::::::::::::::
+
+이때 model은 수학적으로 point identified이지만 어떤 parameter direction에 대해 moments가 거의 변하지 않는다. 그래서 작은 sampling perturbation이 큰 parameter 변화로 확대될 수 있다.
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
 identified ≠ strongly identified.
-:::
 
-::: right
-Rank는 0인지 아닌지를 말하지만, singular value의 크기는 identification
-strength에 대한 local sensitivity를 보여준다. 이 구분은 weak
-instruments에서 핵심적이다.
-:::
-:::::
+:::::::::::::::::::
 
-여기서 numerical condition number와의 유사성이 보이지만 두 개념을
-동일시하면 안 된다. weak identification은 data-generating law가
-parameter를 얼마나 잘 distinguish하는지의 statistical property이고,
-numerical conditioning은 주어진 계산문제를 finite precision으로 얼마나
-안정적으로 푸는지의 computational property다.
+::::::::::::::::::: {.right}
 
-::: {.callout-note appearance="simple" title="VISUAL · 도구변수와 약한 도구변수"}
-[도구변수와 약한 도구변수 보충자료](../../supplements/iv-weak-instruments.qmd)에서 도구 강도 $\pi$와 내생성 $\rho$를 조절하며, 1단계 F 통계량과 2SLS 추정치 표본분포의 변동성을 대화형으로 확인할 수 있다.
-:::
-:::::::::::::::::
+Rank는 0인지 아닌지를 말하지만, singular value의 크기는 identification strength에 대한 local sensitivity를 보여준다. 이 구분은 weak instruments에서 핵심적이다.
 
+:::::::::::::::::::
 
-:::::::::::::: {#s39 .section}
+::::::::::::::::::::
+
+여기서 numerical condition number와의 유사성이 보이지만 두 개념을 동일시하면 안 된다. weak identification은 data-generating law가 parameter를 얼마나 잘 distinguish하는지의 statistical property이고, numerical conditioning은 주어진 계산문제를 finite precision으로 얼마나 안정적으로 푸는지의 computational property다.
+
+:::::::::::::::::::: {.statement .claim}
+
+::::::::::::::::::: {.statement-head}
+
+DERIVATION 3.1 · Smallest singular value가 identification strength를 지배한다
+
+:::::::::::::::::::
+
+local linearization에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Delta m
+\approx
+G_0\Delta\theta.
+$$
+
+:::::::::::::::::::
+
+singular-value inequality에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|G_0\Delta\theta\|
+\ge
+\sigma_{\min}(G_0)\|\Delta\theta\|.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\|\Delta\theta\|
+\le
+\frac{1}{\sigma_{\min}(G_0)}
+\|\Delta m\|.
+}
+$$
+
+:::::::::::::::::::
+
+$\sigma_{\min}(G_0)$가 작으면 매우 작은 moment perturbation도 큰 parameter perturbation과 compatible해진다.
+Rank가 positive인지 여부와 identification strength를 구분해야 하는 이유다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s39}
+
 ## [3.9]{.section-number}Misspecification과 Pseudo-True Parameter
 
-Identification 논의는 흔히 "진짜 parameter $\theta_0$가 model 안에
-존재한다"는 가정을 암묵적으로 깐다. 그러나 실제 계량모형은 대개 근사다.
-이때 무엇이 target인지 다시 정의해야 한다.
+::: {.topic-opening}
+Identification 논의는 흔히 “진짜 parameter $\theta_0$가 model 안에 존재한다”는 가정을 암묵적으로 깐다. 그러나 실제 계량모형은 대개 근사다. 이때 무엇이 target인지 다시 정의해야 한다.
+:::
 
 ### 3.9.1 Correct specification과 misspecification {#s391}
 
 parametric model을
 
-::: math-display
-$$\mathcal P=\{P_\theta:\theta\in\Theta\}$$
-:::
+:::::::::::::::::::: {.math-display}
+
+$$
+\mathcal P=\{P_\theta:\theta\in\Theta\}
+$$
+
+::::::::::::::::::::
 
 라 하자. correct specification은
 
-::: math-display
-$$P_0=P_{\theta_0}\quad\text{for some }\theta_0\in\Theta$$
-:::
+:::::::::::::::::::: {.math-display}
+
+$$
+P_0=P_{\theta_0}\quad\text{for some }\theta_0\in\Theta
+$$
+
+::::::::::::::::::::
 
 를 뜻한다. 반대로
 
-::: math-display
-$$P_0\notin\mathcal P$$
-:::
+:::::::::::::::::::: {.math-display}
 
-이면 엄밀한 의미의 "true parameter in the model"은 존재하지 않는다.
+$$
+P_0\notin\mathcal P
+$$
+
+::::::::::::::::::::
+
+이면 엄밀한 의미의 “true parameter in the model”은 존재하지 않는다.
 
 ### 3.9.2 Criterion-defined target {#s392}
 
-misspecification 아래에서도 연구자는 population criterion
-$Q(\theta;P_0)$를 정해 target을 새로 정의할 수 있다.
+misspecification 아래에서도 연구자는 population criterion $Q(\theta;P_0)$를 정해 target을 새로 정의할 수 있다.
 
-::::: {.statement .definition}
-::: statement-head
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
 정의 3.6 · Pseudo-true parameter
-:::
 
-::: math-display
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
 $$
 \theta^\dagger
 \in
 \arg\min_{\theta\in\Theta}Q(\theta;P_0).
 $$
-:::
 
-minimizer가 유일하면 $\theta^\dagger$를 해당 criterion과 model class에
-대한 pseudo-true parameter라 한다.
-:::::
+:::::::::::::::::::
+
+minimizer가 유일하면 $\theta^\dagger$를 해당 criterion과 model class에 대한 pseudo-true parameter라 한다.
+
+::::::::::::::::::::
 
 예를 들어 nonlinear least squares에서는
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 Q(\theta)=E[(Y-m(X,\theta))^2]
 $$
-:::
 
-의 minimizer가 pseudo-true value가 된다. 여기서 uniqueness는 다시
-identification problem이다. criterion을 썼다는 사실만으로 minimizer가
-하나가 되는 것은 아니다.
+::::::::::::::::::::
 
-::: math-display
+의 minimizer가 pseudo-true value가 된다. 여기서 uniqueness는 다시 identification problem이다. criterion을 썼다는 사실만으로 minimizer가 하나가 되는 것은 아니다.
+
+:::::::::::::::::::: {.math-display}
+
 $$
 Q(\theta)>Q(\theta^\dagger)
 \qquad\forall\theta\neq\theta^\dagger
 $$
-:::
 
-같은 separation이 있으면 criterion-defined target의 point
-identification이 확보된다.
+::::::::::::::::::::
+
+같은 separation이 있으면 criterion-defined target의 point identification이 확보된다.
+
+:::::::::::::::::::: {.statement .claim}
+
+::::::::::::::::::: {.statement-head}
+
+DERIVATION 3.2 · Smooth least-squares pseudo-true target의 FOC
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(\theta)
+=
+E[(Y-m(X,\theta))^2]
+$$
+
+:::::::::::::::::::
+
+이고 $\theta^\dagger$가 interior minimizer이며 differentiation under the expectation이 허용된다고 하자.
+그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+0
+=
+\nabla_\theta Q(\theta^\dagger)
+=
+-2E\!\left[
+m_\theta(X,\theta^\dagger)
+\{Y-m(X,\theta^\dagger)\}
+\right].
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E\!\left[
+m_\theta(X,\theta^\dagger)
+\{Y-m(X,\theta^\dagger)\}
+\right]
+=
+0.
+}
+$$
+
+:::::::::::::::::::
+
+이 moment는 structural assumption에서 나온 것이 아니라 chosen criterion의 first-order condition에서 나온 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 3.4 · Criterion이 있다고 해서 unique pseudo-truth가 생기는 것은 아니다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(\theta)
+=
+(\theta^2-1)^2.
+$$
+
+:::::::::::::::::::
+
+그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\arg\min_\theta Q(\theta)
+=
+\{-1,1\}.
+$$
+
+:::::::::::::::::::
+
+objective는 잘 정의되어 있지만 minimizer가 singleton이 아니므로 criterion-defined target도 point identified되지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.10 · Same law, different loss, different pseudo-true target
+
+:::::::::::::::::::
+
+location approximation $m(\theta)=\theta$를 생각하자.
+Squared-error criterion은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\theta_{L2}
+=
+\arg\min_\theta E[(Y-\theta)^2]
+=
+E[Y],
+$$
+
+:::::::::::::::::::
+
+반면 absolute-error criterion은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\theta_{L1}
+\in
+\arg\min_\theta E|Y-\theta|
+$$
+
+:::::::::::::::::::
+
+이고 median이 unique하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\theta_{L1}
+=
+\operatorname{Median}(Y).
+$$
+
+:::::::::::::::::::
+
+따라서 일반적으로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta_{L2}\neq\theta_{L1}.
+}
+$$
+
+:::::::::::::::::::
+
+pseudo-true parameter는 data law뿐 아니라 model class와 loss function에 의존한다.
+
+::::::::::::::::::::
 
 ### 3.9.3 Pseudo-truth ≠ causal truth {#s393}
 
-:::: {.statement .warning}
-::: statement-head
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
 주의 3.2 · 좋은 approximation과 causal interpretation은 별개다
-:::
 
-어떤 estimator가 $\theta^\dagger$에 일관되게 수렴하고 $\theta^\dagger$가
-매우 잘 identified되어 있어도, 그 parameter가 원하는 causal estimand와
-같다는 보장은 없다. causal equality를 만들려면 별도의 identifying
-restrictions가 필요하다.
-::::
+:::::::::::::::::::
 
-특히 linear regression이 nonlinear CEF를 최적으로 근사하는 BLP/BLA
-coefficient를 정확히 추정한다고 해도, 그 coefficient가 treatment
-effect를 나타내는지는 또 다른 질문이다. 따라서
+어떤 estimator가 $\theta^\dagger$에 일관되게 수렴하고 $\theta^\dagger$가 매우 잘 identified되어 있어도, 그 parameter가 원하는 causal estimand와 같다는 보장은 없다. causal equality를 만들려면 별도의 identifying restrictions가 필요하다.
 
-::: math-display
+::::::::::::::::::::
+
+특히 linear regression이 nonlinear CEF를 최적으로 근사하는 BLP/BLA coefficient를 정확히 추정한다고 해도, 그 coefficient가 treatment effect를 나타내는지는 또 다른 질문이다. 따라서
+
+:::::::::::::::::::: {.math-display}
+
 $$
 \boxed{
 \text{statistical target}
@@ -981,105 +2508,250 @@ $$
 \quad\text{unless identifying assumptions link them.}
 }
 $$
-:::
-::::::::::::::
 
-::::::::::::::::::::: {#s310 .section}
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s310}
+
 ## [3.10]{.section-number}Identification, Estimation, Optimization의 분리
 
-이 노트의 중요한 목표 중 하나는 계량경제학과 최적화를 연결하되, 서로
-다른 질문을 같은 층위에 놓지 않는 것이다. Identification, estimation,
-computation은 밀접하지만 논리적으로 분리된다.
+::: {.topic-opening}
+이 노트의 중요한 목표 중 하나는 계량경제학과 최적화를 연결하되, 서로 다른 질문을 같은 층위에 놓지 않는 것이다. Identification, estimation, computation은 밀접하지만 논리적으로 분리된다.
+:::
 
 ### 3.10.1 세 가지 서로 다른 질문 {#s3101}
 
-::: display-table-wrap
-  문제             핵심 질문                                                대표 수학
-  ---------------- -------------------------------------------------------- -------------------------------------------------------
-  Identification   $P_0$를 완전히 알면 target이 하나로 정해지는가?          injectivity, rank, identified set
-  Estimation       finite sample로 target을 얼마나 정확히 배울 수 있는가?   LLN, CLT, consistency, asymptotic distribution
-  Computation      정의된 estimator를 실제로 안정적으로 계산할 수 있는가?   linear algebra, optimization algorithms, conditioning
-:::
+:::::::::::::::::::: {.display-table-wrap}
 
-::::::::::::::: logic-chain
-:::::: logic-chain__step
-[I]{.logic-chain__num}
+<table>
+<thead><tr><th>문제</th><th>핵심 질문</th><th>대표 수학</th></tr></thead>
+<tbody>
+<tr><td>Identification</td><td>$P_0$를 완전히 알면 target이 하나로 정해지는가?</td><td>injectivity, rank, identified set</td></tr>
+<tr><td>Estimation</td><td>finite sample로 target을 얼마나 정확히 배울 수 있는가?</td><td>LLN, CLT, consistency, asymptotic distribution</td></tr>
+<tr><td>Computation</td><td>정의된 estimator를 실제로 안정적으로 계산할 수 있는가?</td><td>linear algebra, optimization algorithms, conditioning</td></tr>
+</tbody>
+</table>
 
-::::: {}
-::: logic-chain__text
+::::::::::::::::::::
+
+:::::::::::::::::::: {.logic-chain}
+
+::::::::::::::::::: {.logic-chain__step}
+
+<span class="logic-chain__num">I</span>
+
+:::::::::::::::::: {.import-block}
+
+::::::::::::::::: {.logic-chain__text}
+
 Population uniqueness
-:::
 
-::: logic-chain__sub
+:::::::::::::::::
+
+::::::::::::::::: {.logic-chain__sub}
+
 identification
-:::
-:::::
-::::::
 
-:::::: logic-chain__step
-[II]{.logic-chain__num}
+:::::::::::::::::
 
-::::: {}
-::: logic-chain__text
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.logic-chain__step}
+
+<span class="logic-chain__num">II</span>
+
+:::::::::::::::::: {.import-block}
+
+::::::::::::::::: {.logic-chain__text}
+
 Sample learning
-:::
 
-::: logic-chain__sub
+:::::::::::::::::
+
+::::::::::::::::: {.logic-chain__sub}
+
 estimation and inference
-:::
-:::::
-::::::
 
-:::::: logic-chain__step
-[III]{.logic-chain__num}
+:::::::::::::::::
 
-::::: {}
-::: logic-chain__text
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.logic-chain__step}
+
+<span class="logic-chain__num">III</span>
+
+:::::::::::::::::: {.import-block}
+
+::::::::::::::::: {.logic-chain__text}
+
 Finite-precision solution
-:::
 
-::: logic-chain__sub
+:::::::::::::::::
+
+::::::::::::::::: {.logic-chain__sub}
+
 computation
-:::
-:::::
-::::::
-:::::::::::::::
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
 
 ### 3.10.2 Regularization과 uniqueness {#s3102}
 
-sample criterion이 flat하거나 ill-conditioned할 때 penalty를 추가하면
-unique minimizer를 만들 수 있다.
+sample criterion이 flat하거나 ill-conditioned할 때 penalty를 추가하면 unique minimizer를 만들 수 있다.
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 \widehat\theta_\lambda
 =
 \arg\min_\theta\{Q_n(\theta)+\lambda R(\theta)\}.
 $$
-:::
 
-그러나 이는 원래 structural parameter를 "identify했다"는 뜻이 아니다.
-penalty는 새로운 criterion을 정의하여 target을 바꾸거나 selection rule을
-추가한다. 따라서 **algorithmic uniqueness, regularized uniqueness,
-population identification**을 구분해야 한다.
+::::::::::::::::::::
 
-:::: {.statement .remark}
-::: statement-head
+그러나 이는 원래 structural parameter를 “identify했다”는 뜻이 아니다. penalty는 새로운 criterion을 정의하여 target을 바꾸거나 selection rule을 추가한다. 따라서 <strong>algorithmic uniqueness, regularized uniqueness, population identification</strong>을 구분해야 한다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
 예시 · Optimizer는 답을 줄 수 있지만 경제학은 아직 답을 못 줄 수 있다
-:::
 
-nonidentified model에서도 finite sample criterion은 우연히 하나의 sharp
-minimum을 가질 수 있다. 수치 알고리즘이 그 minimum을 정확히 찾았다는
-사실은 structural target이 identified되었다는 증거가 아니다.
-::::
+:::::::::::::::::::
+
+nonidentified model에서도 finite sample criterion은 우연히 하나의 sharp minimum을 가질 수 있다. 수치 알고리즘이 그 minimum을 정확히 찾았다는 사실은 structural target이 identified되었다는 증거가 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 3.11 · Regularization이 unique solution을 만들어도 identification은 복구되지 않는다
+
+:::::::::::::::::::
+
+population criterion을
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(\theta_1,\theta_2)
+=
+(\theta_1-1)^2
+$$
+
+:::::::::::::::::::
+
+라 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\arg\min Q
+=
+\{(1,t):t\in\mathbb R\},
+$$
+
+:::::::::::::::::::
+
+즉 $\theta_2$ 방향은 population criterion이 전혀 구분하지 못한다.
+
+ridge penalty를 추가하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_\lambda(\theta_1,\theta_2)
+=
+(\theta_1-1)^2+\lambda\theta_2^2,
+\qquad
+\lambda\gt0,
+$$
+
+:::::::::::::::::::
+
+unique minimizer는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta_\lambda=(1,0).
+}
+$$
+
+:::::::::::::::::::
+
+그러나 data가 $\theta_2=0$을 identify한 것이 아니다.
+penalty가 zero를 selection rule로 고른 것이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{regularized uniqueness}
+\neq
+\text{population identification}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 3.5 · Optimizer convergence does not imply point identification
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(\theta)
+=
+(\theta^2-1)^2
+$$
+
+:::::::::::::::::::
+
+에는 two global minimizers가 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\arg\min Q
+=
+\{-1,1\}.
+$$
+
+:::::::::::::::::::
+
+gradient-based algorithm이 initialization에 따라 $+1$ 또는 $-1$로 정확히 수렴해도
+population solution set이 singleton으로 바뀌는 것은 아니다.
+
+::::::::::::::::::::
 
 ### 3.10.3 Chapter 4로의 연결 {#s3103}
 
-이제 target이 무엇이고, 어떤 restrictions 아래 그것이 identified되는지를
-분리했다. 다음 장에서는 identified target을 실제 계산 가능한 population
-characterization으로 바꾼다.
+이제 target이 무엇이고, 어떤 restrictions 아래 그것이 identified되는지를 분리했다. 다음 장에서는 identified target을 실제 계산 가능한 population characterization으로 바꾼다.
 
-::: math-display
+:::::::::::::::::::: {.math-display}
+
 $$
 \theta_0
 =
@@ -1087,25 +2759,29 @@ $$
 \qquad\text{or}\qquad
 M(\theta_0)=0.
 $$
-:::
 
-이때부터 convexity, first-order conditions, second-order conditions,
-root finding, Lagrangian과 같은 optimization language가 본격적으로
-등장한다. 순서는 중요하다. **먼저 무엇을 알아낼 수 있는지 식별하고,
-그다음 그것을 어떻게 characterize하고 계산할지를 묻는다.**
-:::::::::::::::::::::
+::::::::::::::::::::
 
-::::::: {#s3110 .section}
+이때부터 convexity, first-order conditions, second-order conditions, root finding, Lagrangian과 같은 optimization language가 본격적으로 등장한다. 순서는 중요하다. <strong>먼저 무엇을 알아낼 수 있는지 식별하고, 그다음 그것을 어떻게 characterize하고 계산할지를 묻는다.</strong>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s3110}
+
 ## [3.11]{.section-number}요약과 연습문제
 
 ### 3.11.1 핵심 개념 지도 {#s3111}
 
-:::::: chapter-summary
-::: chapter-summary__head
-Chapter 3 in one map
-:::
+:::::::::::::::::::: {.chapter-summary}
 
-::: math-display
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 3 in one map
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
 $$
 \boxed{
 \text{Economic Question}
@@ -1119,9 +2795,11 @@ $$
 \text{Identified Set }\Psi_I(P^O)
 }
 $$
-:::
 
-::: math-display
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
 $$
 \boxed{
 \Psi_I(P^O)=\{\psi_0\}
@@ -1135,104 +2813,71 @@ $$
 \text{Set Identification}
 }
 $$
-:::
 
-causal analysis에서는 identifying assumptions가 full-data target을
-observed-data functional로 연결한다. moment models에서는 population
-moment map의 uniqueness와 rank가 identification을 결정한다.
-misspecification 아래에서는 criterion이 pseudo-true target을 새로
-정의한다.
-::::::
+:::::::::::::::::::
+
+causal analysis에서는 identifying assumptions가 full-data target을 observed-data functional로 연결한다. moment models에서는 population moment map의 uniqueness와 rank가 identification을 결정한다. misspecification 아래에서는 criterion이 pseudo-true target을 새로 정의한다.
+
+::::::::::::::::::::
 
 ### 3.11.2 Model-reading checklist {#s3112}
 
 앞으로 어떤 계량모형을 만나더라도 다음 순서로 읽는다.
 
-1.  **Target:** 정확히 어떤 population object를 알고 싶은가?
-2.  **Interpretation:** descriptive인가, causal인가, structural인가?
-3.  **Observed information:** 어떤 variables와 어떤 law가 관측 가능한가?
-4.  **Model restrictions:** 어떤 assumptions가 가능한 DGP를 줄이는가?
-5.  **Observational equivalence:** 같은 observed law를 만드는 다른
-    구조가 있는가?
-6.  **Identification:** identified set은 singleton인가?
-7.  **Strength:** local Jacobian은 얼마나 안정적으로 parameter
-    directions를 구분하는가?
-8.  **Misspecification:** true parameter가 없을 때 어떤 pseudo-true
-    target을 정의하는가?
-9.  **Only then:** 어떤 estimator와 algorithm을 사용할 것인가?
+<ol>
+<li><strong>Target:</strong> 정확히 어떤 population object를 알고 싶은가?</li>
+<li><strong>Interpretation:</strong> descriptive인가, causal인가, structural인가?</li>
+<li><strong>Observed information:</strong> 어떤 variables와 어떤 law가 관측 가능한가?</li>
+<li><strong>Model restrictions:</strong> 어떤 assumptions가 가능한 DGP를 줄이는가?</li>
+<li><strong>Observational equivalence:</strong> 같은 observed law를 만드는 다른 구조가 있는가?</li>
+<li><strong>Identification:</strong> identified set은 singleton인가?</li>
+<li><strong>Strength:</strong> local Jacobian은 얼마나 안정적으로 parameter directions를 구분하는가?</li>
+<li><strong>Misspecification:</strong> true parameter가 없을 때 어떤 pseudo-true target을 정의하는가?</li>
+<li><strong>Only then:</strong> 어떤 estimator와 algorithm을 사용할 것인가?</li>
+</ol>
 
 ### 연습문제 {#exercises}
 
-1.  **Estimand의 차이.** $D\in\{0,1\}$일 때 ATE, ATT, ATU를 각각
-    정의하라. treatment selection이 heterogeneous treatment effect와
-    연관될 때 세 값이 서로 달라질 수 있는 간단한 finite-population
-    example을 구성하라.
-2.  **Observed-data functional.** $W=(Y,X)$의 joint law $P$가 알려져
-    있다고 하자. $E[Y]$, $E[Y\mid X=x]$,
-    $\operatorname{Var}(Y\mid X=x)$가 어떤 의미에서 $P$의
-    functionals인지 설명하라. $x\notin\operatorname{supp}(X)$일 때
-    무엇이 달라지는가?
-3.  **Observational equivalence.** parameterization
-    $P_\theta=P_{-\theta}$가 모든 $\theta$에 대해 성립한다고 하자.
-    $\theta$의 identified set과 $|\theta|$의 identified set을 비교하라.
-4.  **Random assignment.** consistency와 $D\perp(Y(0),Y(1))$로부터
-    $E[Y(1)-Y(0)]=E[Y\mid D=1]-E[Y\mid D=0]$를 단계별로 증명하라.
-5.  **Conditional ignorability.** $(Y(0),Y(1))\perp D\mid X$ 아래
-    g-formula를 증명하라. overlap이 필요한 이유를 support 관점에서
-    설명하라.
-6.  **Moment identification.** $m(\theta)=A\theta-b$,
-    $A\in\mathbb R^{q\times k}$라 하자.
-    $\Theta_I=\{\theta:A\theta=b\}$를 구하고 $\operatorname{rank}(A)$에
-    따라 point/set identification을 분류하라.
-7.  **Linear IV.** $E[Z(Y-X'\beta)]=0$에서 $E[ZX']$의 null space가
-    nontrivial할 때 observationally indistinguishable한 $\beta$ 방향을
-    설명하라.
-8.  **Local vs global.** scalar moment $m(\theta)=\theta^2-1$을
-    고려하라. $\theta_0=1$에서 local identification과 global
-    identification을 각각 판단하라.
-9.  **Weak identification.**
-    $m_\varepsilon(\theta)=\varepsilon(\theta-\theta_0)$에서
-    $\varepsilon>0$라 하자. 모든 $\varepsilon$에서 point
-    identification은 성립하지만 $\varepsilon\downarrow0$일 때 왜
-    identification strength가 약해지는지 설명하라.
-10. **Pseudo-true parameter.** 실제 CEF가 $m_0(x)=x^2$이고 연구자가
-    $a+bx$로 근사한다고 하자. $X\sim N(0,1)$일 때 least-squares
-    pseudo-true $(a^\dagger,b^\dagger)$를 구하라. 이것이 "true
-    structural coefficient"가 아닌 이유를 설명하라.
-11. **Identification vs optimization.** population criterion
-    $Q(\theta)=(\theta^2-1)^2$를 생각하라. global minimizers를 구하고,
-    gradient descent가 특정 초기값에서 하나의 minimizer로 수렴한다는
-    사실이 왜 point identification을 의미하지 않는지 설명하라.
-12. **Research reading exercise.** 실제 empirical paper 하나를 골라 (i)
-    estimand, (ii) observed-data law, (iii) identifying
-    restrictions, (iv) 주요 support/rank condition, (v) estimator를 각각
-    한 문장으로 분리해 기술하라.
-:::::::
+<ol class="exercise-list">
+<li><strong>Estimand의 차이.</strong> $H,L$ 두 유형의 population을 직접 구성하여 ATE, ATT, ATU가 서로 다른 값을 갖게 하고 Bayes rule로 세 값을 모두 계산하라.</li>
+<li><strong>Observed-data functional과 support.</strong> $X\sim U[0,1]$일 때 $m(x)=E[Y\mid X=x]$가 $x\in[0,1]$에서는 identified되지만 $m(2)$는 그렇지 않음을 두 observationally equivalent extensions를 구성하여 보이라.</li>
+<li><strong>Observational equivalence.</strong> $P_\theta=P_{-\theta}$를 만족하는 family에서 $\theta$와 $|\theta|$의 identified sets를 각각 구하고, fiber-constancy criterion으로 결과를 설명하라.</li>
+<li><strong>Random assignment.</strong> consistency와 $D\perp(Y(0),Y(1))$만으로 $E[Y(d)]=E[Y\mid D=d]$를 각 equality의 근거를 적어가며 증명하라.</li>
+<li><strong>Conditional ignorability.</strong> g-formula를 LIE → ignorability → consistency 순으로 증명하고, $D=1\{X>0\}$ example에서 overlap failure가 어떤 conditional mean을 support 밖으로 밀어내는지 설명하라.</li>
+<li><strong>Moment identification.</strong> $m(\theta)=A\theta-b$에서 solution $\theta_0$가 존재할 때 $\Theta_I=\theta_0+\operatorname{Null}(A)$를 증명하고 rank-nullity theorem으로 singleton 조건을 유도하라.</li>
+<li><strong>Linear IV.</strong> $A=E[ZX']$가 rank deficient일 때 nonzero $h\in\operatorname{Null}(A)$를 이용해 $\beta_0+th$가 모든 $t$에서 동일한 population moments를 만족함을 증명하라.</li>
+<li><strong>Local vs global.</strong> $m(\theta)=\theta^2-1$에 대해 $\theta_0=1$의 local identification을 derivative와 inverse-function logic으로 설명하고 global identification이 실패하는 이유를 보이라.</li>
+<li><strong>Weak identification.</strong> $m_\varepsilon(\theta)=\varepsilon(\theta-\theta_0)$에서 moment perturbation $\delta$가 parameter perturbation $\delta/\varepsilon$로 확대됨을 유도하고 $\varepsilon\downarrow0$의 의미를 해석하라.</li>
+<li><strong>Pseudo-true parameter.</strong> $X\sim N(0,1)$, true CEF $m_0(x)=x^2$, linear approximation $a+bx$에서 $(a^\dagger,b^\dagger)$를 계산하고 criterion-induced orthogonality를 확인하라.</li>
+<li><strong>Identification vs optimization.</strong> $Q(\theta)=(\theta^2-1)^2$와 $Q_\lambda(\theta_1,\theta_2)=(\theta_1-1)^2+\lambda\theta_2^2$를 이용해 optimizer uniqueness, regularized uniqueness, population identification의 차이를 비교하라.</li>
+<li>
+<strong>Research reading exercise.</strong> 실제 empirical paper 하나를 골라 (i) estimand, (ii) observed-data law, (iii) identifying restrictions, (iv) 주요 support/rank condition, (v) estimator를 각각 한 문장으로 분리해 기술하라.
+</li>
+</ol>
 
-:::::: {#references .section .references}
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
 ## 참고문헌 및 다음 장
 
-이 장의 identification 관점은 Bruce E. Hansen의 *Econometrics*에서
-사용하는 "parameter as a function of the observed distribution" 관점과
-nonlinear regression, IV, time-series identification 논의를 기본 축으로
-삼고, Jeffrey M. Wooldridge의 *Econometric Analysis of Cross Section and
-Panel Data*에서 강조되는 causal/ceteris-paribus interpretation과
-moment-based identification의 언어를 함께 사용한다. asymptotic
-estimation과 identification을 분리하는 관점은 이후 van der Vaart의 M- 및
-Z-estimation 구조와 연결된다.
+이 장의 identification 관점은 Bruce E. Hansen의 <em>Econometrics</em>에서 사용하는 “parameter as a function of the observed distribution” 관점과 nonlinear regression, IV, time-series identification 논의를 기본 축으로 삼고,
+Jeffrey M. Wooldridge의 <em>Econometric Analysis of Cross Section and Panel Data</em>에서 강조되는 causal/ceteris-paribus interpretation과 moment-based identification의 언어를 함께 사용한다.
+asymptotic estimation과 identification을 분리하는 관점은 이후 van der Vaart의 M- 및 Z-estimation 구조와 연결된다.
 
-::::: chapter-summary
-::: chapter-summary__head
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
 다음 장으로
-:::
 
-Chapter 4에서는 identified target을 **population optimization problem
-또는 population estimating equation**으로 characterize한다. Chapter 3의
-질문이 "이 target은 관측분포로부터 유일하게 정해지는가?"였다면, Chapter
-4의 질문은 "그 target을 어떤 목적함수, gradient, Hessian, moment map으로
-표현하고 어떤 조건이 해의 존재·유일성을 보장하는가?"이다.
+:::::::::::::::::::
 
-::: math-display
+Chapter 4에서는 identified target을 <strong>population optimization problem 또는 population estimating equation</strong>으로 characterize한다.
+Chapter 3의 질문이 “이 target은 관측분포로부터 유일하게 정해지는가?”였다면, Chapter 4의 질문은 “그 target을 어떤 목적함수, gradient, Hessian, moment map으로 표현하고 어떤 조건이 해의 존재·유일성을 보장하는가?”이다.
+
+::::::::::::::::::: {.math-display}
+
 $$
 \boxed{
 \text{Identification}
@@ -1244,6 +2889,9 @@ $$
 \text{Computation}
 }
 $$
-:::
-:::::
-::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
