@@ -149,6 +149,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
+
+<a href="micro/set-08.html" class="spoon-card" data-subject="micro" data-round="8">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#8 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">부분균형 · 일반균형</div>
+  <div class="spoon-card__desc">경쟁시장 가격상한제와 후생손실(DWL), 순수교환경제 경쟁균형 가격·배분 및 제1후생경제학 정리 검증</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -267,6 +279,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   <div class="spoon-card__desc">Cobb–Douglas 생산함수의 비용최소화와 조건부 요소수요, Shephard's lemma 검증, 비대칭 한계비용 하의 Cournot 복점 경쟁균형 및 비교정학</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 · 해설 수록 →</span>
+  </div>
+</a>
+
+<a href="micro/set-08.html" class="spoon-card" data-subject="micro" data-round="8">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#8 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">부분균형 · 일반균형</div>
+  <div class="spoon-card__desc">경쟁시장 가격상한제와 후생손실(DWL), 순수교환경제 경쟁균형 가격·배분 및 제1후생경제학 정리 검증</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
   </div>
 </a>
 </div>
