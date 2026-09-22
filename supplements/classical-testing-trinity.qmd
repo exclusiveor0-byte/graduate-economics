@@ -1,0 +1,512 @@
+---
+title: "3대 고전 가설검정의 기하학: Wald, 우도비(LR), 라그랑주 승수(LM/Score)"
+subtitle: "로그우도함수의 곡률, 수평·수직·접선 기하학, 유한표본 부등식 W ≥ LR ≥ LM 증명 및 비선형 불변성"
+description: "로그우도함수의 곡률과 3차원 기하, 모수 수평 거리(Wald), 우도 높이 차이(LR), 접선 기울기(LM)의 정의와 도출, 정보행렬 동등성 하의 점근적 동등성, 선형회귀에서의 유한표본 부등식 W ≥ LR ≥ LM의 대수·기하학적 증명, 그리고 비선형 불변성 상충과 실무적 검정 선택 기준을 분석한다."
+---
+
+## 목적과 3대 핵심 계량경제학 명제
+
+계량경제학 및 수리통계학에서 모수 제약 가설 $H_0: r(\theta) = \mathbf{0}$을 검정하는 가장 대표적인 방법은 **왈드(Wald)** 검정, **우도비(Likelihood Ratio, LR)** 검정, 그리고 **라그랑주 승수(Lagrange Multiplier, LM 또는 Score)** 검정이다. 이 세 가지 검정은 흔히 서로 다른 대수적 공식과 통계학자의 이름으로 개별 학습되지만, 본질적으로는 **로그우도함수(Log-Likelihood Surface)라는 단 하나의 기하학적 곡면 위에서 가설의 타당성을 측정하는 세 가지 서로 다른 차원의 거리 척도**이다.
+
+::: {.callout-note appearance="simple"}
+### 3대 고전 가설검정의 3대 핵심 명제
+
+1. **로그우도 곡면 위의 3대 측정 차원 (The Geometric Trinity)**:
+   - **Wald 검정 (수평 거리)**: 비제약 최우추정치 $\hat{\theta}$가 귀무가설의 제약 부분공간으로부터 가로축(모수 공간)으로 얼마나 멀리 떨어져 있는가를 피셔 정보행렬(곡률)로 가중하여 측정한다.
+   - **LR 검정 (수직 높이 차이)**: 비제약 정점의 우도 높이 $\ln L(\hat{\theta})$와 제약 하의 최고 높이 $\ln L(\tilde{\theta})$ 간의 세로축 격차 $2[\ln L(\hat{\theta}) - \ln L(\tilde{\theta})]$를 직접 측정한다.
+   - **LM / Score 검정 (접선 경사도)**: 제약 추정점 $\tilde{\theta}$에서 우도함수의 접선 기울기(Score 벡터 $S(\tilde{\theta})$)가 평평한 정상점($\mathbf{0}$)으로부터 얼마나 가파르게 벗어나 있는가를 측정한다.
+
+2. **선형회귀에서의 유한표본 부등식 (Finite-Sample Inequality, Berndt & Savin 1977)**:
+   - 정규오차를 갖는 선형회귀모형에서 선형 제약을 검정할 때, 표본 크기와 무관하게 세 검정통계량 사이에는 언제나 다음의 엄격한 대소 관계가 성립한다:
+     $$
+     \boxed{W \ge LR \ge LM}
+     $$
+   - 이 부등식으로 인해 동일한 공칭 유의수준(예: 5%)의 카이제곱 임계치를 적용할 경우, Wald 검정은 과대기각(Type I Error 인플레이션)을 유발하고 LM 검정은 과소기각(지나치게 보수적)하는 **검정 간 상충(Conflict between Tests)**이 필연적으로 발생한다.
+
+3. **점근적 동등성과 비선형 불변성(Invariance) 상충**:
+   - 표본 크기 $n \to \infty$ 극한에서는 세 통계량의 차이가 $o_p(1)$로 소멸하여 동일한 점근 카이제곱분포 $\chi_q^2$로 수렴한다.
+   - 그러나 비선형 제약 하에서 Wald 검정은 가설을 수식으로 표현하는 방식(재매개화, Reparameterization)에 따라 검정 결과가 임의로 뒤바뀌는 치명적 결함(Gregory–Veall 효과)을 갖는 반면, LR 및 LM 검정은 제약의 수학적 표현 형태에 완벽히 불변이다.
+:::
+
+관련 교재 본문은 [Chapter 09 · Exact Inference](../econometrics/ch09-exact-inference/contents.qmd)의 유한표본 가설검정, [Chapter 10 · Large-Sample Theory of Least Squares](../econometrics/ch10-large-sample-least-squares/contents.qmd)의 점근적 가설검정, 그리고 [Newey (1985) GMM Specification Testing 논문 리뷰](../literature/econometrics-methods/1985-newey-gmm-specification.qmd)에서 다룬다.
+
+---
+
+## 1. 로그우도함수와 기본 추정 프레임워크
+
+관측치 벡터 $z_i \in \mathbb{R}^d$ ($i=1, \dots, n$)가 모수 벡터 $\theta \in \Theta \subseteq \mathbb{R}^k$를 갖는 확률밀도함수 $f(z_i; \theta)$로부터 독립항등분포(i.i.d.)로 추출되었다고 가정한다.
+
+### 로그우도함수, 스코어 벡터, 정보행렬
+
+1. **표본 로그우도함수 (Log-Likelihood Function)**:
+   $$
+   \ln L_n(\theta) \equiv \sum_{i=1}^n \ln f(z_i; \theta), \qquad \ell_n(\theta) \equiv \frac{1}{n}\ln L_n(\theta).
+   $$
+2. **스코어 벡터 (Score Vector / Gradient)**:
+   $$
+   S_n(\theta) \equiv \nabla_\theta \ln L_n(\theta) = \sum_{i=1}^n \nabla_\theta \ln f(z_i; \theta) = \sum_{i=1}^n s(z_i; \theta) \in \mathbb{R}^{k \times 1}.
+   $$
+   참 모수 $\theta_0$에서 스코어의 기댓값은 항상 영벡터이다: $\mathbb{E}[S_n(\theta_0)] = \mathbf{0}$.
+3. **헤시안 행렬 (Hessian Matrix / Curvature)**:
+   $$
+   H_n(\theta) \equiv \nabla_\theta^2 \ln L_n(\theta) = \sum_{i=1}^n \nabla_\theta^2 \ln f(z_i; \theta) \in \mathbb{R}^{k \times k}.
+   $$
+4. **피셔 정보행렬 (Fisher Information Matrix)**:
+   정칙성 조건(Regularity Conditions) 하에서 정보행렬 동등성(Information Matrix Equality)이 성립한다:
+   $$
+   I(\theta_0) \equiv \lim_{n \to \infty} \frac{1}{n} \mathbb{E}\left[ -H_n(\theta_0) \right] = \lim_{n \to \infty} \frac{1}{n} \mathbb{E}\left[ S_n(\theta_0) S_n(\theta_0)' \right].
+   $$
+
+### 비제약 추정량 vs 제약 추정량
+
+검정하고자 하는 귀무가설은 $q$개의 독립된 제약조건식으로 주어진다:
+$$
+H_0: r(\theta) = \mathbf{0}_{q \times 1} \quad \text{vs} \quad H_1: r(\theta) \neq \mathbf{0}_{q \times 1} \qquad (q \le k).
+$$
+여기서 제약의 $q \times k$ 자코비안(Jacobian) 행렬 $R(\theta) \equiv \frac{\partial r(\theta)}{\partial \theta'}$는 가설이 성립하는 영역에서 최대 행계수 $\operatorname{rank}(R(\theta)) = q$를 갖는다.
+
+- **비제약 최우추정량 (Unrestricted MLE, $\hat{\theta}$)**:
+  $$
+  \hat{\theta} \equiv \arg\max_{\theta \in \Theta} \ln L_n(\theta) \implies S_n(\hat{\theta}) = \mathbf{0}_{k \times 1}.
+  $$
+- **제약 최우추정량 (Restricted MLE, $\tilde{\theta}$)**:
+  $$
+  \tilde{\theta} \equiv \arg\max_{\theta \in \Theta, \, r(\theta)=\mathbf{0}} \ln L_n(\theta).
+  $$
+  라그랑주 승수 벡터 $\lambda \in \mathbb{R}^q$를 도입한 라그랑지안 함수 $\mathcal{L}_n(\theta, \lambda) = \ln L_n(\theta) - \lambda' r(\theta)$의 1계 정지 조건(Stationarity)은 다음과 같다:
+  $$
+  \nabla_\theta \mathcal{L}_n(\tilde{\theta}, \tilde{\lambda}) = S_n(\tilde{\theta}) - R(\tilde{\theta})' \tilde{\lambda} = \mathbf{0} \implies S_n(\tilde{\theta}) = R(\tilde{\theta})' \tilde{\lambda}.
+  $$
+  이 관계는 **제약점 $\tilde{\theta}$에서의 우도 기울기(Score)가 제약 곡면의 법선벡터 $R(\tilde{\theta})'$와 라그랑주 승수 $\tilde{\lambda}$의 선형결합과 정확히 일치함**을 보여준다.
+
+---
+
+## 2. 3대 검정통계량의 수리적 정의와 기하학적 분해
+
+3대 검정통계량은 귀무가설 $H_0$가 참일 때 표본 크기 $n \to \infty$에서 모두 자유도 $q$인 중심 카이제곱분포 $\chi_q^2$로 점근 수렴한다. 그러나 각 검정이 사용하는 정보와 계산 요구사항은 완전히 다르다.
+
+```
++-------------------------------------------------------------------------------+
+|                       로그우도함수 ln L(theta) 의 기하학                       |
+|                                                                               |
+|            ln L(theta)                                                        |
+|                 ^                                                             |
+|                 |                  정점: 비제약 MLE theta_hat                 |
+|                 |                     (Score S = 0)                           |
+|                 |                         .-'-.                               |
+|        ln L(^) -+-----------------------.'     '.                             |
+|                 |                      /         \                            |
+|                 |                     /           |  <--- [LR 검정]           |
+|                 |                    /            |  수직 높이 차이:          |
+|                 |                   /             |  2 [ln L(^) - ln L(~)]    |
+|        ln L(~) -+------------------/--------------|                           |
+|                 |                 /               |                           |
+|                 |      접선 기울기                |                           |
+|                 |      S(theta_tilde)             |                           |
+|                 |         /                       |                           |
+|                 |        /  <--- [LM 검정]        |                           |
+|                 |       /   제약점의 경사도       |                           |
+|                 |      /    (Score 벡터 크기)     |                           |
+|                 +-----+---------------------------+----------> theta          |
+|                       theta_tilde              theta_hat                      |
+|                       (제약 MLE)                                              |
+|                       |                           |                           |
+|                       +-------------+-------------+                           |
+|                                     |                                         |
+|                                     v                                         |
+|                                [Wald 검정]                                    |
+|                        모수공간의 수평 거리:                                  |
+|                      (theta_hat - theta_tilde)                                |
++-------------------------------------------------------------------------------+
+```
+
+### 2.1 Wald 검정통계량 (수평 거리)
+
+Wald 검정은 **오직 비제약 추정량 $\hat{\theta}$ 하나만 계산**한다. 제약 조건 $r(\hat{\theta})$가 $\mathbf{0}$에서 얼마나 떨어져 있는지를 $\hat{\theta}$의 점근 공분산 행렬로 정규화한 이차형식(Quadratic Form)이다.
+
+델타 방법(Delta Method)에 의해 $\sqrt{n} r(\hat{\theta}) \xrightarrow{d} \mathcal{N}\left(\mathbf{0}, R(\theta_0) I(\theta_0)^{-1} R(\theta_0)'\right)$이므로, Wald 통계량은 다음과 같이 정의된다:
+
+$$
+W \equiv r(\hat{\theta})' \left[ R(\hat{\theta}) \widehat{\operatorname{Avar}}(\hat{\theta}) R(\hat{\theta})' \right]^{-1} r(\hat{\theta}).
+$$
+
+정보행렬 추정치 $\hat{I}_n \equiv -\frac{1}{n} H_n(\hat{\theta})$를 사용할 경우:
+
+$$
+W = n \cdot r(\hat{\theta})' \left[ R(\hat{\theta}) \hat{I}_n^{-1} R(\hat{\theta})' \right]^{-1} r(\hat{\theta}) \xrightarrow{d} \chi_q^2.
+$$
+
+::: {.callout-tip appearance="simple"}
+### Wald 검정의 기하학적 의미
+Wald 검정은 우도함수의 정점 $\hat{\theta}$에서 내려다보았을 때, 귀무가설의 제약 평면 $r(\theta) = \mathbf{0}$까지의 **마할라노비스 수평 거리(Mahalanobis Distance)**이다. 우도 곡면의 국소 곡률(Hessian $\hat{I}_n$)이 가파를수록 동일한 거리 차이에 대해 더 큰 통계량 값을 부여한다.
+:::
+
+### 2.2 우도비(LR) 검정통계량 (수직 높이 차이)
+
+LR 검정은 **비제약 추정량 $\hat{\theta}$와 제약 추정량 $\tilde{\theta}$를 둘 다 추정**하여, 두 추정점에서의 표본 로그우도함수 높이의 차이를 직접 비교한다:
+
+$$
+LR \equiv 2 \left[ \ln L_n(\hat{\theta}) - \ln L_n(\tilde{\theta}) \right] = 2n \left[ \ell_n(\hat{\theta}) - \ell_n(\tilde{\theta}) \right].
+$$
+
+귀무가설 $H_0$가 참이라면 제약점 $\tilde{\theta}$는 비제약 정점 $\hat{\theta}$와 매우 가까워 우도 높이의 손실이 거의 없다. 반면 대립가설이 참이라면 제약을 부과함으로써 우도 높이가 극적으로 추락하므로 $LR$ 값은 매우 커진다.
+
+### 2.3 라그랑주 승수(LM / Score) 검정통계량 (접선 경사도)
+
+LM 검정은 **오직 제약 추정량 $\tilde{\theta}$ 하나만 계산**한다. 귀무가설이 참이라면 제약 추정점 $\tilde{\theta}$ 역시 정점 $\hat{\theta}$ 근처에 위치하므로 그 지점에서의 접선 기울기(Score $S_n(\tilde{\theta})$)가 거의 평평($\approx \mathbf{0}$)해야 한다는 원리에 기초한다:
+
+$$
+LM \equiv \frac{1}{n} S_n(\tilde{\theta})' \tilde{I}_n^{-1} S_n(\tilde{\theta}).
+$$
+
+여기서 $\tilde{I}_n \equiv -\frac{1}{n} H_n(\tilde{\theta})$ 또는 $\frac{1}{n}\sum_{i=1}^n s(z_i; \tilde{\theta})s(z_i; \tilde{\theta})'$이다.
+
+1계 정지 조건 $S_n(\tilde{\theta}) = R(\tilde{\theta})' \tilde{\lambda}$를 대입하면, 스코어 검정은 **라그랑주 승수 $\tilde{\lambda}$의 크기를 측정하는 검정**과 완벽히 동일해진다:
+
+$$
+LM = \tilde{\lambda}' R(\tilde{\theta}) \left[ \frac{1}{n} \tilde{I}_n \right]^{-1} R(\tilde{\theta})' \tilde{\lambda} / n \xrightarrow{d} \chi_q^2.
+$$
+
+제약조건이 참 모수를 심각하게 왜곡하고 있다면 제약을 강제하기 위해 막대한 섀도우 가격(Shadow Price, 라그랑주 승수 $\tilde{\lambda}$)이 필요하므로 $LM$ 통계량이 급증하여 귀무가설을 기각하게 된다.
+
+---
+
+## 3. 다차원 모수공간에서의 2D 등고선 기하
+
+2차원 모수공간 $\theta = (\theta_1, \theta_2)'$에서 단일 선형 제약 $H_0: \theta_1 = \theta_{1,0}$ ($q=1$)을 검정하는 기하학적 상황을 고려한다.
+
+```
++-------------------------------------------------------------------------------+
+|                    2차원 모수공간 (theta_1, theta_2) 에서의 기하              |
+|                                                                               |
+|       theta_2 ^                                                               |
+|               |              .---.                                            |
+|               |            .'     '.  우도 등고선                             |
+|               |           /  .---.  \  ln L(theta) = c                        |
+|               |          / .'     '. \                                        |
+|               |         | /    +    \ |  <--- 정점 theta_hat                  |
+|               |         | \  (MLE)  / |       (Score S = 0)                   |
+|               |          \ '.     .' /                                        |
+|               |           \  '---'  /                                         |
+|               |            '.     .'                                          |
+|               |              '---'                                            |
+|               |                                                               |
+|               |       제약선: theta_1 = theta_{1,0}                           |
+|               |             |                                                 |
+|               |          .  |  .                                              |
+|               |        .'   |   '.                                            |
+|               |       /     *     \  <--- 제약 MLE theta_tilde                |
+|               |      |   (접점)    |      등고선과 제약선의 접점              |
+|               |       \    ===>   /       Score 벡터 S(~)가 제약선에 수직!    |
+|               |        '.  S(~) .'        S(~) = R' lambda_tilde              |
+|               |          '--|--'                                              |
+|               +-------------+---------------------------------> theta_1       |
+|                        theta_{1,0}                                            |
++-------------------------------------------------------------------------------+
+```
+
+1. **비제약 정점 $\hat{\theta}$**:
+   - 우도 곡면의 꼭짓점으로서 등고선의 중심에 위치한다. 이 지점에서 경사도 벡터는 $S_n(\hat{\theta}) = \mathbf{0}$이다.
+2. **제약선과 접점 $\tilde{\theta}$**:
+   - 제약 집합 $\{\theta \in \mathbb{R}^2 \mid \theta_1 = \theta_{1,0}\}$ 위에서 우도를 극대화하는 점 $\tilde{\theta}$는 **제약 직선이 우도 등고선과 외접(tangent)하는 점**이다.
+   - 접점 조건에 의해, $\tilde{\theta}$에서의 로그우도 경사도 벡터 $S_n(\tilde{\theta})$는 등고선의 접선에 수직이며, 따라서 **제약 직선 $R$의 법선 방향(Normal Direction)과 평행**하다:
+     $$
+     S_n(\tilde{\theta}) \propto R(\tilde{\theta})'.
+     $$
+3. **세 검정의 2차원 대응**:
+   - **Wald**: 중심 $\hat{\theta}$로부터 제약선 $\theta_1 = \theta_{1,0}$까지의 최단 마할라노비스 벡터를 측정한다.
+   - **LR**: 중심 타원의 높이와 접점 $\tilde{\theta}$가 놓인 타원의 높이 갭을 측정한다.
+   - **LM**: 접점 $\tilde{\theta}$에서 등고선이 바깥으로 밀어내는 경사도 벡터 $S_n(\tilde{\theta})$의 크기를 측정한다.
+
+---
+
+## 4. 선형회귀모형에서의 대수적 닫힌 해와 유한표본 부등식
+
+고전적 정규오차 선형회귀모형에서 세 통계량을 닫힌 폼(Closed-form)으로 완전히 유도하고, Berndt & Savin (1977)의 유한표본 부등식을 대수적으로 증명한다.
+
+### 4.1 선형회귀의 비제약 및 제약 로그우도함수
+
+모형 설정:
+$$
+y = X\beta + u, \qquad u \sim \mathcal{N}(\mathbf{0}, \sigma^2 I_n), \qquad H_0: R\beta = q \quad (R: q \times k).
+$$
+
+표본 로그우도함수는 다음과 같다:
+$$
+\ln L_n(\beta, \sigma^2) = -\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln(\sigma^2) - \frac{1}{2\sigma^2}(y - X\beta)'(y - X\beta).
+$$
+
+- **비제약 OLS/MLE 추정량**:
+  $$
+  \hat{\beta} = (X'X)^{-1}X'y, \qquad \hat{u} = y - X\hat{\beta}, \qquad SSR_U \equiv \hat{u}'\hat{u}, \qquad \hat{\sigma}_U^2 = \frac{SSR_U}{n}.
+  $$
+  비제약 프로파일 최대 로그우도:
+  $$
+  \ln L_n(\hat{\beta}, \hat{\sigma}_U^2) = -\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln\left(\frac{SSR_U}{n}\right) - \frac{n}{2}.
+  $$
+
+- **제약 OLS/MLE 추정량**:
+  $$
+  \tilde{\beta} = \hat{\beta} - (X'X)^{-1}R'\left[ R(X'X)^{-1}R' \right]^{-1}(R\hat{\beta} - q), \qquad \tilde{u} = y - X\tilde{\beta}, \qquad SSR_R \equiv \tilde{u}'\tilde{u}, \qquad \tilde{\sigma}_R^2 = \frac{SSR_R}{n}.
+  $$
+  제약 프로파일 최대 로그우도:
+  $$
+  \ln L_n(\tilde{\beta}, \tilde{\sigma}_R^2) = -\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln\left(\frac{SSR_R}{n}\right) - \frac{n}{2}.
+  $$
+
+잔차제곱합의 증가분은 제약 위반의 이차형식과 정확히 일치한다:
+$$
+SSR_R - SSR_U = (R\hat{\beta} - q)' \left[ R(X'X)^{-1}R' \right]^{-1} (R\hat{\beta} - q) \ge 0.
+$$
+
+### 4.2 세 검정통계량의 잔차제곱합 표현
+
+1. **우도비 (LR) 통계량**:
+   $$
+   LR = 2\left[ \ln L_n(\hat{\beta}, \hat{\sigma}_U^2) - \ln L_n(\tilde{\beta}, \tilde{\sigma}_R^2) \right] = n \ln\left( \frac{\tilde{\sigma}_R^2}{\hat{\sigma}_U^2} \right) = n \ln\left( \frac{SSR_R}{SSR_U} \right).
+   $$
+2. **Wald 통계량**:
+   비제약 분산 추정량 $\hat{\sigma}_U^2$를 사용하는 왈드 통계량:
+   $$
+   W = (R\hat{\beta} - q)' \left[ \hat{\sigma}_U^2 R(X'X)^{-1}R' \right]^{-1} (R\hat{\beta} - q) = \frac{SSR_R - SSR_U}{\hat{\sigma}_U^2} = n \left( \frac{SSR_R - SSR_U}{SSR_U} \right).
+   $$
+3. **라그랑주 승수 (LM) 통계량**:
+   제약 분산 추정량 $\tilde{\sigma}_R^2$를 사용하는 스코어 통계량:
+   $$
+   LM = (R\hat{\beta} - q)' \left[ \tilde{\sigma}_R^2 R(X'X)^{-1}R' \right]^{-1} (R\hat{\beta} - q) = \frac{SSR_R - SSR_U}{\tilde{\sigma}_R^2} = n \left( \frac{SSR_R - SSR_U}{SSR_R} \right).
+   $$
+
+### 4.3 유한표본 부등식 $W \ge LR \ge LM$의 완전 증명
+
+잔차제곱합의 상대적 증가율을 $x$로 정의한다:
+$$
+x \equiv \frac{SSR_R - SSR_U}{SSR_U} \ge 0.
+$$
+선형회귀에서 고전적 $F$-통계량과의 관계는 $x = \frac{q}{n-k} F$이다. 이제 세 검정통계량을 $x$의 단일 변수 함수로 표현할 수 있다:
+
+$$
+W = n \cdot x,
+$$
+
+$$
+LR = n \ln\left( \frac{SSR_R}{SSR_U} \right) = n \ln\left( \frac{SSR_U + (SSR_R - SSR_U)}{SSR_U} \right) = n \ln(1 + x),
+$$
+
+$$
+LM = n \left( \frac{SSR_R - SSR_U}{SSR_R} \right) = n \left( \frac{x \cdot SSR_U}{(1 + x) \cdot SSR_U} \right) = n \frac{x}{1 + x}.
+$$
+
+::: {.callout-important appearance="simple"}
+### 기본 미적분학 로그 부등식과 증명
+
+임의의 실수 $x > 0$에 대해 다음 표준적인 대수적 부등식이 성립한다:
+$$
+\frac{x}{1 + x} < \ln(1 + x) < x.
+$$
+
+*(증명)*  
+1. **상한 부등식 $\ln(1+x) < x$**:  
+   함수 $f(t) = \ln(1+t) - t$를 정의하면 $f(0) = 0$이고, $t > 0$에서 도함수는 $f'(t) = \frac{1}{1+t} - 1 = -\frac{t}{1+t} < 0$이다. 따라서 $f(t)$는 엄격한 단조감소함수이며, 모든 $x > 0$에 대해 $f(x) < f(0) = 0 \implies \ln(1+x) < x$이다.
+2. **하한 부등식 $\frac{x}{1+x} < \ln(1+x)$**:  
+   함수 $g(t) = \ln(1+t) - \frac{t}{1+t}$를 정의하면 $g(0) = 0$이고, 도함수는 다음과 같다:
+   $$
+   g'(t) = \frac{1}{1+t} - \frac{(1+t) - t}{(1+t)^2} = \frac{1}{1+t} - \frac{1}{(1+t)^2} = \frac{t}{(1+t)^2} > 0 \quad (\forall t > 0).
+   $$
+   따라서 $g(t)$는 엄격한 단조증가함수이며, 모든 $x > 0$에 대해 $g(x) > g(0) = 0 \implies \ln(1+x) > \frac{x}{1+x}$이다.
+
+양변에 표본 크기 $n > 0$을 곱하면:
+$$
+n \frac{x}{1 + x} < n \ln(1 + x) < n x \iff LM < LR < W \quad (\forall x > 0).
+$$
+표본에서 귀무가설의 제약이 정확히 일치하여 $SSR_R = SSR_U \iff x = 0$인 경우에만 세 통계량이 모두 $0$으로 일치한다. 따라서 임의의 유한표본에서 다음 부등식이 항상 성립한다:
+$$
+\boxed{W \ge LR \ge LM}
+$$
+:::
+
+---
+
+## 5. 점근적 동등성과 검정 간 상충(Conflict)
+
+### 5.1 $n \to \infty$ 극한에서의 일치성
+
+귀무가설 $H_0$가 참일 때, $x = \frac{q}{n-k}F = O_p(1/n)$이다. $x \to 0$ 근방에서 테일러 전개를 적용한다:
+
+$$
+\ln(1 + x) = x - \frac{1}{2}x^2 + O(x^3),
+$$
+
+$$
+\frac{x}{1 + x} = x(1 - x + O(x^2)) = x - x^2 + O(x^3).
+$$
+
+따라서 통계량 간의 차이는 다음과 같다:
+
+$$
+W - LR = n\left[ x - \ln(1+x) \right] = \frac{n}{2}x^2 + O(n x^3) = O_p\left( \frac{1}{n} \right) \xrightarrow{p} 0,
+$$
+
+$$
+LR - LM = n\left[ \ln(1+x) - \frac{x}{1+x} \right] = \frac{n}{2}x^2 + O(n x^3) = O_p\left( \frac{1}{n} \right) \xrightarrow{p} 0.
+$$
+
+따라서 극한에서는 세 검정이 상호 $o_p(1)$로 일치하며 동일한 $\chi_q^2$ 극한분포를 공유한다.
+
+### 5.2 유한표본에서의 검정 상충 (Conflict between Tests)
+
+그러나 표본 크기 $n$이 유한할 때, 동일한 카이제곱 임계치 $c_\alpha$ (예: 유의수준 5%에서 $\chi_q^2(0.95)$)를 기각 기준으로 적용하면 심각한 문제가 발생한다:
+
+```
+                  기각역 판정 영역
+    0 ────────────── LM ─────────── LR ─────────── W ──────────> 통계량 값
+                      |              |              |
+                      |   [영역 A]   |   [영역 B]   |
+                      +--------------+--------------+
+                                     ^
+                                   c_alpha (임계치)
+```
+
+- **영역 A ($LM < c_\alpha \le LR$)**: LR과 Wald는 기각하지만, LM은 기각하지 못한다.
+- **영역 B ($LR < c_\alpha \le W$)**: Wald는 유의하다고 기각하지만, LR과 LM은 기각하지 못한다.
+
+| 검정 종류 | 분산 추정치 분모 | 유한표본 기각률 성향 | 실무적 평가 |
+| :--- | :--- | :--- | :--- |
+| **Wald** | $\hat{\sigma}_U^2 = SSR_U / n$ (가장 작음) | **과대기각 (Over-rejection)** | 제1종 오류가 5%보다 훨씬 커져(예: 10~15%) 허위 발견 위험 |
+| **LR** | $\hat{\sigma}_U^2$와 $\tilde{\sigma}_R^2$의 기하평균 효과 | **중립적 (Moderate)** | Wald와 LM의 중간에서 가장 안정적인 기각률 유지 |
+| **LM** | $\tilde{\sigma}_R^2 = SSR_R / n$ (가장 큼) | **과소기각 (Under-rejection)** | 지나치게 보수적이어서 검정력(Power) 손실 가능성 |
+
+::: {.callout-tip appearance="simple"}
+### 실무적 권고: 정확한 F-검정으로의 환원
+선형회귀모형에서는 유한표본 부등식 $W \ge LR \ge LM$으로 인한 카이제곱 검정 간 충돌을 피하기 위해, 카이제곱 임계치 대신 자유도 $(q, n-k)$를 갖는 **정확한 $F$-검정(Exact F-test)**을 직접 사용하는 것이 학술적 표준이다.
+:::
+
+---
+
+## 6. 비선형 제약 하의 재매개화 불변성 상충
+
+귀무가설이 비선형 형태 $r(\theta) = \mathbf{0}$일 때, 3대 검정은 또 다른 결정적인 차이를 보인다.
+
+### Gregory–Veall (1985) 패러독스: Wald 검정의 비불변성
+
+2변수 모수에서 다음 두 가설은 경제학적으로 완전히 동일한 명제이다:
+$$
+H_0^{(A)}: \frac{\theta_1}{\theta_2} = 1 \iff H_0^{(B)}: \theta_1 - \theta_2 = 0.
+$$
+
+- **LR 및 LM 검정의 불변성**:
+  두 가설 모두 동일한 제약 부분공간 $\{\theta \in \mathbb{R}^2 \mid \theta_1 = \theta_2\}$를 정의한다. 최적화 관점에서 제약 최우추정량 $\tilde{\theta}$와 극대화된 로그우도값 $\ln L_n(\tilde{\theta})$는 가설을 어떻게 표기하든 100% 동일하다. 따라서 **$LR$과 $LM$ 통계량은 재매개화에 완벽히 불변(Invariant)**이다.
+- **Wald 검정의 비불변성**:
+  Wald 검정은 델타 방법의 자코비안 $R(\hat{\theta})$를 분모 분산의 가중치로 사용한다.
+  - 가설 (B)에서 $R^{(B)} = (1, -1)$
+  - 가설 (A)에서 $R^{(A)} = \left( \frac{1}{\hat{\theta}_2}, -\frac{\hat{\theta}_1}{\hat{\theta}_2^2} \right)$
+  이로 인해 동일한 데이터와 동일한 추정치 $\hat{\theta}$를 가지고도, **가설 (A)의 Wald 통계량과 가설 (B)의 Wald 통계량이 수치적으로 완전히 다르게 계산**되며, 심지어 하나는 기각되고 하나는 기각되지 않는 왜곡이 발생한다.
+
+---
+
+## 7. 3대 검정의 종합 비교 및 실무적 선택 가이드
+
+| 비교 기준 | Wald 검정 | 우도비 (LR) 검정 | 라그랑주 승수 (LM) 검정 |
+| :--- | :--- | :--- | :--- |
+| **추정 요구량** | **비제약 모형만** 1회 추정 ($\hat{\theta}$) | **비제약·제약 모형 둘 다** 2회 추정 | **제약 모형만** 1회 추정 ($\tilde{\theta}$) |
+| **선형회귀 대소관계** | $W = n \frac{SSR_R - SSR_U}{SSR_U}$ (최대) | $LR = n \ln(SSR_R / SSR_U)$ (중간) | $LM = n \frac{SSR_R - SSR_U}{SSR_R}$ (최소) |
+| **비선형 불변성** | **불변하지 않음** (표현식에 따라 수치 변동) | **완벽히 불변** | **완벽히 불변** |
+| **계산적 최적 상황** | 비제약 모형은 쉽고 제약 모형이 복잡할 때 | 두 모형 모두 추정이 쉬울 때 | **제약 모형(귀무가설)이 단순할 때** |
+| **대표적 실무 응용** | 회귀계수의 개별 $t$-검정 및 복합 선형결합 | 중첩 모형(Nested models) 간 적합도 비교 | Breusch–Godfrey 잔차 자기상관 검정, White 이분산 검정, ARCH-LM 검정 |
+
+---
+
+## 8. 재현 가능한 몬테카를로 시뮬레이션 (Python)
+
+다음 Python 스크립트는 선형회귀모형에서 1,000회의 표본을 몬테카를로 시뮬레이션하여 세 검정통계량을 직접 계산하고, 모든 반복에서 유한표본 부등식 $W \ge LR \ge LM$이 철저하게 성립함을 수치적으로 검증한다.
+
+```python
+import numpy as np
+
+def run_classical_testing_simulation(n_obs=50, n_sim=1000, seed=42):
+    """
+    3대 고전 가설검정(Wald, LR, LM)의 유한표본 부등식 W >= LR >= LM 및
+    점근 카이제곱 분포로의 수렴 동학을 검증하는 몬테카를로 시뮬레이션
+    """
+    np.random.seed(seed)
+    
+    # 참 모수 설정: y = beta_0 + beta_1*x1 + beta_2*x2 + u
+    # 귀무가설 H0: beta_1 = 0, beta_2 = 0 (q = 2개의 제약)
+    beta_true = np.array([1.0, 0.0, 0.0])
+    q = 2
+    
+    W_list = []
+    LR_list = []
+    LM_list = []
+    inequality_holds_count = 0
+    
+    for _ in range(n_sim):
+        # 1. 데이터 생성 (귀무가설 참)
+        X_mat = np.column_stack([
+            np.ones(n_obs),
+            np.random.normal(0, 1, n_obs),
+            np.random.normal(0, 1, n_obs)
+        ])
+        u = np.random.normal(0, 1, n_obs)
+        y = X_mat @ beta_true + u
+        
+        # 2. 비제약 OLS 추정 (Unrestricted)
+        beta_hat = np.linalg.solve(X_mat.T @ X_mat, X_mat.T @ y)
+        residuals_U = y - X_mat @ beta_hat
+        SSR_U = np.sum(residuals_U**2)
+        
+        # 3. 제약 OLS 추정 (Restricted: y = beta_0 + u, 즉 상수항만 포함)
+        X_R = X_mat[:, [0]]
+        beta_tilde = np.linalg.solve(X_R.T @ X_R, X_R.T @ y)
+        residuals_R = y - X_R @ beta_tilde
+        SSR_R = np.sum(residuals_R**2)
+        
+        # 4. 세 통계량 계산
+        x = (SSR_R - SSR_U) / SSR_U
+        W_stat = n_obs * x
+        LR_stat = n_obs * np.log(1.0 + x)
+        LM_stat = n_obs * (x / (1.0 + x))
+        
+        W_list.append(W_stat)
+        LR_list.append(LR_stat)
+        LM_list.append(LM_stat)
+        
+        # 5. 부등식 성립 검증: W >= LR >= LM
+        if W_stat >= LR_stat - 1e-10 and LR_stat >= LM_stat - 1e-10:
+            inequality_holds_count += 1
+            
+    W_arr = np.array(W_list)
+    LR_arr = np.array(LR_list)
+    LM_arr = np.array(LM_list)
+    
+    # 5% 카이제곱 임계치 (자유도 q = 2)
+    crit_val_5pct = 5.9915
+    rej_W = np.mean(W_arr > crit_val_5pct) * 100
+    rej_LR = np.mean(LR_arr > crit_val_5pct) * 100
+    rej_LM = np.mean(LM_arr > crit_val_5pct) * 100
+    
+    print(f"=== 표본 크기 n = {n_obs}, 반복 횟수 = {n_sim} ===")
+    print(f"부등식 W >= LR >= LM 성립 비율: {inequality_holds_count / n_sim * 100:.1f}%")
+    print(f"평균 통계량: W = {np.mean(W_arr):.4f}, LR = {np.mean(LR_arr):.4f}, LM = {np.mean(LM_arr):.4f}")
+    print(f"공칭 5% 유의수준 하 실제 기각률 (Type I Error):")
+    print(f"  - Wald 검정 : {rej_W:.2f}% (과대기각 / 왜곡)")
+    print(f"  - LR 검정   : {rej_LR:.2f}% (중립적)")
+    print(f"  - LM 검정   : {rej_LM:.2f}% (과소기각 / 보수적)")
+
+# 시뮬레이션 실행: 표본크기 30 vs 300 비교
+if __name__ == "__main__":
+    print("--- 소표본 (n = 30) ---")
+    run_classical_testing_simulation(n_obs=30, n_sim=2000, seed=123)
+    print("\n--- 대규모 표본 (n = 300) ---")
+    run_classical_testing_simulation(n_obs=300, n_sim=2000, seed=123)
+```
+
+---
+
+## 참고문헌
+
+- Berndt, E. R., & Savin, N. E. (1977). “Conflict Among Testing Procedures in a Linear Regression Model with Autoregressive Disturbances.” *Econometrica*, 45(5), 1263–1278.
+- Breusch, T. S. (1979). “Conflict Among Testing Procedures in a Linear Regression Model: An Addendum.” *Econometrica*, 47(1), 203–207.
+- Engle, R. F. (1984). “Wald, Likelihood Ratio, and Lagrange Multiplier Tests in Econometrics.” In Z. Griliches & M. D. Intriligator (Eds.), *Handbook of Econometrics*, Vol. 2, Ch. 13, pp. 775–826. North-Holland.
+- Gregory, A. W., & Veall, M. R. (1985). “Formulating Wald Tests in Nonlinear Models.” *International Economic Review*, 26(3), 719–724.
+- Hansen, B. E. (2022). *Econometrics*. Princeton University Press.
+- Hayashi, F. (2000). *Econometrics*. Princeton University Press.
