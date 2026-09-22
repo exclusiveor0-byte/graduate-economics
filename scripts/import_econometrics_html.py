@@ -8,6 +8,7 @@ attributes consumed by styles/econometrics-content.scss.
 
 from __future__ import annotations
 
+import html
 import re
 import sys
 from pathlib import Path
@@ -49,11 +50,20 @@ def convert(source: str) -> str:
         raise ValueError("Could not find <article class=\"note-content\"> in source HTML")
 
     text = headings(article.group(1))
-    # The source files use MathJax's LaTex delimiters. Pandoc's Markdown
+
+    # The source files use MathJax's LaTeX delimiters. Pandoc's Markdown
     # reader handles dollar delimiters reliably inside imported fenced divs.
-    text = re.sub(r"(?<!\\)\\\[", "$$", text)
-    text = re.sub(r"(?<!\\)\\\]", "$$", text)
-    text = text.replace(r"\(", "$").replace(r"\)", "$")
+    # Unescape HTML entities inside math expressions.
+    def unescape_display_math(match: re.Match[str]) -> str:
+        content = html.unescape(match.group(1).strip())
+        return f"\n$$\n{content}\n$$\n"
+
+    def unescape_inline_math(match: re.Match[str]) -> str:
+        content = html.unescape(match.group(1))
+        return f"${content}$"
+
+    text = re.sub(r"(?<!\\)\\\[(.*?)(?<!\\)\\\]", unescape_display_math, text, flags=re.S)
+    text = re.sub(r"\\\((.*?)\\\)", unescape_inline_math, text, flags=re.S)
 
     def section_open(match: re.Match[str]) -> str:
         attrs = attributes(match.group(0))
@@ -85,14 +95,14 @@ def convert(source: str) -> str:
     if div_stack:
         raise ValueError("Unclosed <div> tags in source HTML")
 
-    # Keep classed paragraphs as HTML only when the class is needed by the
-    # shared stylesheet. Plain paragraphs become ordinary Markdown paragraphs.
-    text = re.sub(
-        r'<p class="topic-opening">(.*?)</p>',
-        lambda match: f"\n::: {{.topic-opening}}\n{match.group(1).strip()}\n:::\n",
-        text,
-        flags=re.S,
-    )
+    # Keep classed paragraphs as fenced divs so SCSS styles them
+    def classed_p(match: re.Match[str]) -> str:
+        cls = match.group(1)
+        content = match.group(2).strip()
+        return f"\n::: {{.{cls}}}\n{content}\n:::\n"
+
+    text = re.sub(r'<p class="([^"]+)">(.*?)</p>', classed_p, text, flags=re.S)
+
     text = re.sub(r'<p(?:\s[^>]*)?>', "\n", text)
     text = text.replace("</p>", "\n")
     text = re.sub(r'<!--.*?-->', "", text, flags=re.S)
@@ -101,13 +111,14 @@ def convert(source: str) -> str:
 
 
 def main() -> None:
-    if len(sys.argv) != 4:
-        raise SystemExit("Usage: import_econometrics_html.py SOURCE_HTML OUTPUT_QMD TITLE")
+    if len(sys.argv) < 4 or len(sys.argv) > 5:
+        raise SystemExit("Usage: import_econometrics_html.py SOURCE_HTML OUTPUT_QMD TITLE [DESCRIPTION]")
     source, output = map(Path, sys.argv[1:3])
     converted = convert(source.read_text(encoding="utf-8"))
+    desc_line = f'description: "{sys.argv[4]}"\n' if len(sys.argv) == 5 else ""
     Path(output).write_text(
-        f'---\ntitle: "{sys.argv[3]}"\n---\n\n'
-        "<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. -->\n\n"
+        f'---\ntitle: "{sys.argv[3]}"\n{desc_line}---\n\n'
+        "<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->\n\n"
         + converted,
         encoding="utf-8",
     )
