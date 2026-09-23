@@ -59,6 +59,7 @@
 .rule-list li + li { margin-top: .45rem; }
 .math-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; margin: 1.2rem 0; padding: .3rem; }
 .section-number { color: #8a4e2d; font-size: .78em; font-weight: 750; margin-right: .35em; }
+.small { font-size: .85rem; color: #5f6e79; line-height: 1.6; }
 @media (max-width: 700px) {
   .target-grid, .comparison-grid, .formula-grid, .logic-chain, .callout-strip { grid-template-columns: 1fr; }
   .case-study__step, .property-row { grid-template-columns: 1fr; gap: .3rem; }

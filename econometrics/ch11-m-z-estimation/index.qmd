@@ -1,0 +1,35 @@
+# Chapter 11 · General M- and Z-Estimation {.unnumbered}
+*Uniform Convergence · Consistency · Local Linearization · Sandwich Asymptotics*
+
+OLS의 closed-form representation을 일반화하여 population optimization problem과 population estimating equation이 sample estimator와 어떻게 연결되고, 어떤 조건에서 consistency와 root-$n$ asymptotic normality가 성립하는지 체계적으로 정리한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **11.1–11.4** OLS에서 M/Z-estimation으로, pointwise vs uniform convergence, M-consistency
+- **11.5–11.7** ULLN, Z-consistency, local identification과 Jacobian/curvature
+- **11.8–11.10** smooth M/Z asymptotics, influence representation, sandwich variance
+- **11.11–11.14** approximate/nonsmooth solutions, examples, limits, 요약과 연습문제
+:::
+
+## Sections
+
+- [11.1 From Least Squares to General Estimation](contents.html#s111)
+- [11.2 M-Estimators and Z-Estimators](contents.html#s112)
+- [11.3 Why Pointwise Convergence Is Not Enough](contents.html#s113)
+- [11.4 Consistency of M-Estimators](contents.html#s114)
+- [11.5 Primitive Conditions: Uniform Laws of Large Numbers](contents.html#s115)
+- [11.6 Consistency of Z-Estimators](contents.html#s116)
+- [11.7 Local Identification, Jacobians, and Curvature](contents.html#s117)
+- [11.8 Asymptotic Normality of Smooth M-Estimators](contents.html#s118)
+- [11.9 Asymptotic Normality of Z-Estimators](contents.html#s119)
+- [11.10 Sandwich Variance and Influence Representations](contents.html#s1110)
+- [11.11 Approximate Solutions, Nonsmooth Problems, and Computation](contents.html#s1111x)
+- [11.12 Examples: OLS, NLLS, MLE, LAD, and Quantile Regression](contents.html#s1112x)
+- [11.13 What the General Theory Does—and Does Not—Guarantee](contents.html#s1113x)
+- [11.14 요약과 연습문제](contents.html#s1114x)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
+:::

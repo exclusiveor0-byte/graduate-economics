@@ -1,0 +1,35 @@
+# Chapter 13 · Likelihood-Based Estimation and Quasi-Likelihood {.unnumbered}
+*Maximum Likelihood · KL Projection · Score and Information · QMLE · Likelihood Inference*
+
+관측자료의 parametric probability model 전체를 criterion으로 사용하는 likelihood 접근법을 다룬다. population expected log likelihood, identification, score/Hessian geometry, QMLE와 robust sandwich covariance를 정리한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **13.1–13.4** probability models, likelihood, KL geometry, MLE as M/Z estimation
+- **13.5–13.7** consistency, score/Hessian/information, asymptotic normality and efficiency
+- **13.8–13.10** QMLE, sandwich covariance, Wald/LR/Score inference
+- **13.11–13.14** numerical computation, canonical examples, limits, 요약과 연습문제
+:::
+
+## Sections
+
+- [13.1 From Moment Restrictions to Probability Models](contents.html#s131)
+- [13.2 Likelihood, Log-Likelihood, and Conditional Likelihood](contents.html#s132)
+- [13.3 Population Likelihood, KL Divergence, and Identification](contents.html#s133)
+- [13.4 MLE as an M-Estimator and the Score as a Z-Equation](contents.html#s134)
+- [13.5 Consistency of Maximum Likelihood](contents.html#s135)
+- [13.6 Score, Hessian, and Fisher Information](contents.html#s136)
+- [13.7 Asymptotic Normality and Efficiency of MLE](contents.html#s137)
+- [13.8 Quasi-Maximum Likelihood and Misspecification](contents.html#s138)
+- [13.9 Robust Sandwich Covariance for QMLE](contents.html#s139)
+- [13.10 Wald, Likelihood-Ratio, and Score Tests](contents.html#s1310)
+- [13.11 Computing Maximum Likelihood](contents.html#s1311x)
+- [13.12 Examples: Normal Regression, Logit, and Poisson QMLE](contents.html#s1312x)
+- [13.13 What Likelihood Does—and Does Not—Buy Us](contents.html#s1313x)
+- [13.14 요약과 연습문제](contents.html#s1314x)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
+:::

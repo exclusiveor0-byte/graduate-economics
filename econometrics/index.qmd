@@ -94,12 +94,46 @@ Consistency·asymptotic normality·sandwich variance·HC covariance·delta metho
 
 [12개 절 · 정리·증명·연습문제 포함]{.status}
 
+### [Chapter 11 · General M- and Z-Estimation](ch11-m-z-estimation/index.html)
+
+일반적인 M-추정량과 Z-추정량의 균등수렴, 일관성, 국소 선형화, 점근정규성과
+샌드위치 공분산 행렬 구조를 정식화한다.
+
+[Chapter 11 읽기](ch11-m-z-estimation/index.html) →
+
+[14개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 12 · Moment Restrictions, Instrumental Variables, and GMM](ch12-instrumental-variables-gmm/index.html)
+
+내생성과 도구변수 모멘트 조건, 2SLS 사영 기하, GMM 목적함수와 효율적 가중행렬,
+과대식별 제약 검정($J$-test)을 통합한다.
+
+[Chapter 12 읽기](ch12-instrumental-variables-gmm/index.html) →
+
+[13개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 13 · Likelihood-Based Estimation and Quasi-Likelihood](ch13-likelihood-quasi-likelihood/index.html)
+
+모수적 확률모형의 최대우도추정(MLE), 쿨백-라이블러 투영, 정보행렬 등식,
+준최대우도(QMLE)와 로버스트 샌드위치 추론을 다룬다.
+
+[Chapter 13 읽기](ch13-likelihood-quasi-likelihood/index.html) →
+
+[14개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 14 · Weak Identification and Nonregular Asymptotics](ch14-weak-identification-nonregular/index.html)
+
+국소 0 수렴 점근이론, 약한 도구변수의 비정규 극한, Anderson–Rubin 식별-로버스트 추론,
+특이 정보행렬과 경계 모수를 다룬다.
+
+[Chapter 14 읽기](ch14-weak-identification-nonregular/index.html) →
+
+[13개 절 · 정리·증명·연습문제 포함]{.status}
+
 ## 이후 확장
 
-Chapter 4–10은 population optimization, conditional expectation, OLS, finite-sample theory,
-exact inference, 점근이론으로 이어진다. 이후에는 다음 순서로 확장한다.
+Chapter 01–14는 확률모형, 식별, OLS, 점근이론, M/Z 추정, IV/GMM, MLE/QMLE, 약한 식별까지의 횡단면 계량경제이론을 완비했다. 이후에는 다음 순서로 확장한다.
 
-1. GLS와 이분산성·상관구조
-2. IV와 약한 도구변수
-3. GMM과 MLE
-4. 시계열과 패널 자료
+1. 시계열 및 동태적 거시계량 모형
+2. 패널 자료 및 고정효과·확률효과
+3. 비모수 및 준모수 계량경제학

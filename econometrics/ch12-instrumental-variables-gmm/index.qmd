@@ -1,0 +1,34 @@
+# Chapter 12 · Moment Restrictions, Instrumental Variables, and GMM {.unnumbered}
+*Endogeneity · Identification · 2SLS · Efficient Weighting · Overidentification*
+
+일반적인 M- and Z-estimation의 일관성과 점근정규성 구조를 instrumental variables, two-stage least squares, 그리고 generalized method of moments에 적용한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **12.1–12.4** endogeneity, IV moments, validity/relevance/rank, exactly identified IV
+- **12.5–12.6** 2SLS projection geometry와 large-sample theory
+- **12.7–12.10** GMM, sandwich variance, efficient weighting, $J$-test
+- **12.11–12.13** weak instruments, causal interpretation, 요약과 연습문제
+:::
+
+## Sections
+
+- [12.1 Why Moment Restrictions beyond OLS?](contents.html#s121)
+- [12.2 Instrumental Variables as Moment Restrictions](contents.html#s122)
+- [12.3 Identification: Validity, Relevance, and Rank](contents.html#s123)
+- [12.4 Exactly Identified IV and the Scalar IV Formula](contents.html#s124)
+- [12.5 Two-Stage Least Squares as Projected-Instrument Estimation](contents.html#s125)
+- [12.6 Large-Sample Theory for 2SLS](contents.html#s126)
+- [12.7 From IV to Generalized Method of Moments](contents.html#s127)
+- [12.8 Consistency and Asymptotic Normality of GMM](contents.html#s128)
+- [12.9 Efficient Weighting and Two-Step GMM](contents.html#s129)
+- [12.10 Overidentifying Restrictions and the $J$-Test](contents.html#s1210)
+- [12.11 Weak Instruments, Near-Singularity, and Many Moments](contents.html#s1211x)
+- [12.12 Statistical Moment Validity versus Causal IV Interpretation](contents.html#s1212x)
+- [12.13 요약과 연습문제](contents.html#s1213x)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
+:::

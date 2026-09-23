@@ -166,6 +166,18 @@ book:
   - part: econometrics/ch10-large-sample-least-squares/index.qmd
     chapters:
     - econometrics/ch10-large-sample-least-squares/contents.qmd
+  - part: econometrics/ch11-m-z-estimation/index.qmd
+    chapters:
+    - econometrics/ch11-m-z-estimation/contents.qmd
+  - part: econometrics/ch12-instrumental-variables-gmm/index.qmd
+    chapters:
+    - econometrics/ch12-instrumental-variables-gmm/contents.qmd
+  - part: econometrics/ch13-likelihood-quasi-likelihood/index.qmd
+    chapters:
+    - econometrics/ch13-likelihood-quasi-likelihood/contents.qmd
+  - part: econometrics/ch14-weak-identification-nonregular/index.qmd
+    chapters:
+    - econometrics/ch14-weak-identification-nonregular/contents.qmd
   - supplements/index.qmd
   - part: "보충자료 · 미시경제학"
     chapters:

@@ -1,0 +1,4200 @@
+---
+title: "Likelihood-Based Estimation and Quasi-Likelihood"
+description: "Maximum Likelihood · KL Projection · Score and Information · QMLE · Likelihood Inference"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s131}
+
+## [13.1]{.section-number}From Moment Restrictions to Probability Models
+
+::: {.topic-opening}
+Chapter 12의 GMM은 data distribution이 만족해야 하는 일부 moment restrictions를 사용했다.
+Likelihood-based estimation은 한 단계 더 나아가 관측자료의 parametric probability family 자체를 명시한다.
+:::
+
+### 13.1.1 Moment models versus likelihood models {#s1311}
+
+moment-based model은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[g(W,\theta_0)]=0
+$$
+
+::::::::::::::::::::
+
+와 같은 제한만 요구한다. 반면 parametric likelihood model은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+W\sim P_\theta,
+\qquad
+\theta\in\Theta,
+}
+$$
+
+::::::::::::::::::::
+
+또는 density가 존재하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+W\sim f_\theta(w)
+}
+$$
+
+::::::::::::::::::::
+
+와 같이 distribution family 전체를 명시한다.
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Moment model
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+E[g(W,\theta_0)]=0
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+distribution의 특정 restrictions만 사용한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Likelihood model
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+W\sim f_\theta
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+parametric family 안에서 전체 distributional shape를 사용한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 13.1.2 More structure, more information, more assumptions {#s1312}
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Likelihood trade-off
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+Correctly specified parametric likelihood는 distributional structure를 더 많이 사용하므로 높은 efficiency를 제공할 수 있다.
+그러나 동시에 moment-based methods보다 더 많은 specification assumptions에 의존한다.
+따라서 “더 많은 정보”와 “더 많은 modeling risk”는 함께 움직인다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{more structure}
+\Longrightarrow
+\text{potentially more efficiency}
+\quad\text{and}\quad
+\text{more specification exposure}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+연결 13.1 · Likelihood models imply moment restrictions, but not conversely
+
+:::::::::::::::::::
+
+regular parametric likelihood model은 다음 score moment를 생성한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+s(W,\theta)
+=
+\nabla_\theta\log f_\theta(W),
+\qquad
+E_\theta[s(W,\theta)]=0.
+$$
+
+:::::::::::::::::::
+
+따라서 likelihood model은 특정한 moment restriction들의 집합을 함의한다. 반면 finite set of restrictions는
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[g(W,\theta_0)]=0
+$$
+
+:::::::::::::::::::
+
+일반적으로 $W$의 전체 probability law를 결정하지 못한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{likelihood model}
+\Rightarrow
+\text{moment restrictions},
+\qquad
+\text{moment restrictions}
+\not\Rightarrow
+\text{unique likelihood model}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s132}
+
+## [13.2]{.section-number}Likelihood, Log-Likelihood, and Conditional Likelihood
+
+::: {.topic-opening}
+Likelihood는 관측된 sample을 고정한 뒤 각 parameter value가 그 sample에 부여하는 relative fit을 나타내는 function이다.
+:::
+
+### 13.2.1 Likelihood and log-likelihood {#s1321}
+
+i.i.d. observations $W_1,\ldots,W_n$의 density가 $f_\theta(w)$라 하자.
+sample likelihood는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+L_n(\theta)
+=
+\prod_{i=1}^n f_\theta(W_i).
+}
+$$
+
+::::::::::::::::::::
+
+logarithm은 product를 sum으로 바꾼다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\ell_n(\theta)
+=
+\log L_n(\theta)
+=
+\sum_{i=1}^n\log f_\theta(W_i).
+}
+$$
+
+::::::::::::::::::::
+
+log는 strictly increasing이므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname*{arg\,max}_\theta L_n(\theta)
+=
+\operatorname*{arg\,max}_\theta \ell_n(\theta).
+$$
+
+::::::::::::::::::::
+
+Maximum likelihood estimator는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_{MLE}
+\in
+\operatorname*{arg\,max}_{\theta\in\Theta}
+\ell_n(\theta).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 13.1 · Maximizing likelihood and log-likelihood are equivalent
+
+:::::::::::::::::::
+
+Whenever $L_n(\theta)\gt0$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname*{arg\,max}_{\theta\in\Theta}
+L_n(\theta)
+=
+\operatorname*{arg\,max}_{\theta\in\Theta}
+\log L_n(\theta).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+logarithm은 $(0,\infty)$에서 strictly increasing이다. 따라서 임의의 $\theta_1,\theta_2$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+L_n(\theta_1)\ge L_n(\theta_2)
+\iff
+\log L_n(\theta_1)\ge\log L_n(\theta_2).
+$$
+
+:::::::::::::::::::
+
+parameter value들의 순서는 변하지 않으므로 argmax set도 일치한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 13.2.2 Likelihood is not a density for the parameter {#s1322}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 13.1 · Likelihood와 posterior는 다르다
+
+:::::::::::::::::::
+
+관측된 data $w$를 고정하면 $L(\theta;w)$는 $\theta$의 function이지만,
+frequentist likelihood에서는 $\theta$의 probability density가 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+L(\theta;w)
+\neq
+p(\theta\mid w).
+}
+$$
+
+::::::::::::::::::::
+
+### 13.2.3 Conditional likelihood {#s1323}
+
+Econometrics에서는 $X$의 marginal law 전체를 parameterize하지 않고 conditional law만 model하는 경우가 많다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+f_\theta(y,x)
+=
+f_\theta(y\mid x)f_X(x).
+$$
+
+::::::::::::::::::::
+
+$f_X$가 $\theta$와 무관하다면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta
+=
+\operatorname*{arg\,max}_\theta
+\sum_{i=1}^n
+\log f_\theta(Y_i\mid X_i).
+}
+$$
+
+::::::::::::::::::::
+
+를 사용하면 된다. Logit, probit, Poisson regression 등의 기본 likelihood가 이 conditional form이다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 13.1 · A likelihood is not a probability density over the parameter
+
+:::::::::::::::::::
+
+$Y_1,\ldots,Y_n$이 success probability $p$를 갖는 Bernoulli라고 하자. sample을 관측한 뒤에는
+
+::::::::::::::::::: {.math-display}
+
+$$
+L(p)
+=
+p^{\sum_iY_i}
+(1-p)^{n-\sum_iY_i},
+\qquad
+0\le p\le1.
+$$
+
+:::::::::::::::::::
+
+이는 $p$의 함수이지만, frequentist likelihood는 를 요구하지 않는다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\int_0^1L(p)\,dp=1.
+$$
+
+:::::::::::::::::::
+
+posterior density를 만들려면 추가적인 prior와 normalization이 필요하다. 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+L(p;y)
+\neq
+p(p\mid y)
+}
+$$
+
+:::::::::::::::::::
+
+as mathematical objects.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 13.2 · Conditional and joint likelihoods have the same $	heta$-argmax when $f_X$ is ancillary for $	heta$
+
+:::::::::::::::::::
+
+If
+
+::::::::::::::::::: {.math-display}
+
+$$
+f_\theta(y,x)
+=
+f_\theta(y\mid x)f_X(x),
+$$
+
+:::::::::::::::::::
+
+이고 $f_X$가 $\theta$에 의존하지 않으면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname*{arg\,max}_\theta
+\sum_i\log f_\theta(Y_i,X_i)
+=
+\operatorname*{arg\,max}_\theta
+\sum_i\log f_\theta(Y_i\mid X_i).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+joint log likelihood는 다음과 같이 분해된다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\ell_n^{joint}(\theta)
+=
+\sum_i\log f_\theta(Y_i\mid X_i)
++
+\sum_i\log f_X(X_i).
+$$
+
+:::::::::::::::::::
+
+두 번째 항은 $\theta$에 대해 상수이므로 이를 더해도 argmax는 변하지 않는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s133}
+
+## [13.3]{.section-number}Population Likelihood, KL Divergence, and Identification
+
+::: {.topic-opening}
+Sample likelihood를 논하기 전에 population에서 likelihood가 어떤 target을 정의하는지부터 분명히 해야 한다.
+:::
+
+### 13.3.1 Population expected log likelihood {#s1331}
+
+true data law의 density를 $f_0$라 하자. Population expected log likelihood는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+M(\theta)
+=
+E_0[\log f_\theta(W)].
+}
+$$
+
+::::::::::::::::::::
+
+따라서 likelihood-defined population target은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta^\dagger
+=
+\operatorname*{arg\,max}_{\theta\in\Theta}
+E_0[\log f_\theta(W)].
+}
+$$
+
+::::::::::::::::::::
+
+### 13.3.2 KL projection {#s1332}
+
+Kullback–Leibler divergence를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+D_{KL}(f_0\Vert f_\theta)
+=
+E_0
+\left[
+\log
+\frac{f_0(W)}{f_\theta(W)}
+\right]
+$$
+
+::::::::::::::::::::
+
+라 하자. 그러면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+D_{KL}(f_0\Vert f_\theta)
+=
+E_0[\log f_0(W)]
+-
+E_0[\log f_\theta(W)].
+$$
+
+::::::::::::::::::::
+
+첫 번째 항은 $\theta$에 무관하므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname*{arg\,max}_\theta
+E_0[\log f_\theta(W)]
+=
+\operatorname*{arg\,min}_\theta
+D_{KL}(f_0\Vert f_\theta).
+}
+$$
+
+::::::::::::::::::::
+
+즉 likelihood target은 true distribution을 parametric family에 KL sense로 projection한 parameter다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 13.1A · Gibbs inequality and nonnegativity of KL divergence
+
+:::::::::::::::::::
+
+relevant support에서 $f_0$가 $f_\theta$에 대해 absolutely continuous이고 logarithm이 integrable하다고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+D_{KL}(f_0\Vert f_\theta)
+=
+E_0\left[
+\log\frac{f_0(W)}{f_\theta(W)}
+\right]
+\ge0.
+}
+$$
+
+:::::::::::::::::::
+
+usual equality condition 아래에서 equality는 $f_\theta=f_0$가 $P_0$-almost surely일 때만 성립한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+$x=f_\theta(W)/f_0(W)$로 두고 $\log x\le x-1$을 사용하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+-D_{KL}(f_0\Vert f_\theta)
+&=
+E_0\left[
+\log\frac{f_\theta(W)}{f_0(W)}
+\right]\\
+&\le
+E_0\left[
+\frac{f_\theta(W)}{f_0(W)}-1
+\right]\\
+&=
+\int f_\theta(w)\,dw-1\\
+&=0.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+따라서 $D_{KL}\ge0$이다. Equality가 성립하려면 $\log x\le x-1$의 equality condition이 성립해야 하므로 $f_\theta/f_0=1$ almost surely이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 13.1B · Correct specification + distributional identification implies a unique population likelihood maximizer
+
+:::::::::::::::::::
+
+Assume
+
+::::::::::::::::::: {.math-display}
+
+$$
+f_0=f_{\theta_0}
+$$
+
+:::::::::::::::::::
+
+and
+
+::::::::::::::::::: {.math-display}
+
+$$
+f_\theta=f_{\theta_0}\ P_0\text{-a.s.}
+\quad\Longrightarrow\quad
+\theta=\theta_0.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta_0
+=
+\operatorname*{arg\,max}_{\theta\in\Theta}
+E_{\theta_0}[\log f_\theta(W)].
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+For any $\theta$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+M(\theta_0)-M(\theta)
+&=
+E_{\theta_0}
+\left[
+\log\frac{f_{\theta_0}(W)}{f_\theta(W)}
+\right]\\
+&=
+D_{KL}(f_{\theta_0}\Vert f_\theta)\\
+&\ge0.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+따라서 $\theta_0$가 population criterion을 최대화한다. Equality는 $f_\theta=f_{\theta_0}$ almost surely를 의미하고, identification condition으로부터 $\theta=\theta_0$를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 13.3.3 Correct specification and misspecification {#s1333}
+
+<strong>Correct specification:</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+f_0=f_{\theta_0}
+$$
+
+::::::::::::::::::::
+
+이고 parameterization이 identified라면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta^\dagger=\theta_0.
+}
+$$
+
+::::::::::::::::::::
+
+<strong>Misspecification:</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+f_0
+\notin
+\{f_\theta:\theta\in\Theta\}
+$$
+
+::::::::::::::::::::
+
+이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta^\dagger
+=
+\text{KL-best approximation within the working family}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+Remark · “Pseudo-true”는 criterion-relative한 개념이다
+
+:::::::::::::::::::
+
+$\theta^\dagger$는 likelihood criterion이 정의한 population target이다.
+이것이 structural or causal truth인지 여부는 별도의 model interpretation과 identification assumptions에 달려 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .identification}
+
+::::::::::::::::::: {.statement-head}
+
+식별 13.1 · Observational equivalence set in likelihood models
+
+:::::::::::::::::::
+
+model이 correctly specified이지만 point identified가 아니라면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Theta_0
+=
+\{
+\theta\in\Theta:
+P_\theta=P_0
+\}.
+$$
+
+:::::::::::::::::::
+
+로 정의하자. 모든 $\theta\in\Theta_0$는 동일한 population expected log likelihood를 달성한다. 따라서 likelihood maximization만으로는 unique parameter vector가 아니라 $\Theta_0$만 identify할 수 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{likelihood maximization}
+\neq
+\text{automatic point identification}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 13.1A · Support matters for KL geometry
+
+:::::::::::::::::::
+
+$P_0(A)\gt0$인 어떤 집합 $A$가 존재하여 $A$ 위에서 $f_\theta(w)=0$이고 $f_0(w)\gt0$라면
+
+::::::::::::::::::: {.math-display}
+
+$$
+D_{KL}(f_0\Vert f_\theta)=+\infty.
+$$
+
+:::::::::::::::::::
+
+따라서 common-support 또는 absolute-continuity condition은 단순한 기술적 장식이 아니라 population likelihood geometry의 일부다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s134}
+
+## [13.4]{.section-number}MLE as an M-Estimator and the Score as a Z-Equation
+
+::: {.topic-opening}
+Maximum likelihood는 Chapter 11의 general M/Z framework 안에 정확히 들어간다.
+:::
+
+### 13.4.1 MLE as M-estimation {#s1341}
+
+negative log likelihood를 loss로 두자.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\rho(W,\theta)
+=
+-\log f_\theta(W).
+$$
+
+::::::::::::::::::::
+
+그러면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_{MLE}
+=
+\operatorname*{arg\,min}_\theta
+P_n\rho(W,\theta).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Maximum likelihood is an M-estimator.}
+}
+$$
+
+::::::::::::::::::::
+
+### 13.4.2 Score equations {#s1342}
+
+개별 score를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+s(W,\theta)
+=
+\nabla_\theta\log f_\theta(W)
+}
+$$
+
+::::::::::::::::::::
+
+로 정의한다. Sample score:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+S_n(\theta)
+=
+\nabla_\theta\ell_n(\theta)
+=
+\sum_{i=1}^n s(W_i,\theta).
+$$
+
+::::::::::::::::::::
+
+interior smooth optimum에서는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+S_n(\widehat\theta)=0.
+}
+$$
+
+::::::::::::::::::::
+
+따라서 regular smooth MLE는 score-based Z-estimator로도 볼 수 있다.
+
+### 13.4.3 FOC is not the definition of MLE {#s1343}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 13.2 · Score zero는 candidate condition
+
+:::::::::::::::::::
+
+$S_n(\theta)=0$은 stationary point를 나타낼 뿐 global maximum을 보장하지 않는다.
+Boundary solution, parameter-dependent support, nonconcavity, multiple stationary points에서는 score equation만으로 MLE를 정의할 수 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+S_n(\theta)=0
+\not\Rightarrow
+\theta\text{ is the MLE}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 13.1 · Score zero does not characterize the global MLE
+
+:::::::::::::::::::
+
+다음과 같은 smooth한 log-likelihood 형태의 objective를 생각하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\ell(\theta)
+=
+-(\theta^2-1)^2.
+$$
+
+:::::::::::::::::::
+
+Its score is
+
+::::::::::::::::::: {.math-display}
+
+$$
+\ell'(\theta)
+=
+-4\theta(\theta^2-1),
+$$
+
+:::::::::::::::::::
+
+그러면 stationary points는 $-1,0,1$이다. 그러나
+
+::::::::::::::::::: {.math-display}
+
+$$
+\ell(-1)=\ell(1)=0,
+\qquad
+\ell(0)=-1.
+$$
+
+:::::::::::::::::::
+
+따라서 $\theta=0$은 score equation을 만족하지만 maximizer는 아니다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s135}
+
+## [13.5]{.section-number}Consistency of Maximum Likelihood
+
+::: {.topic-opening}
+MLE consistency는 Chapter 11의 M-estimator consistency theorem을 expected log-likelihood에 적용한 결과다.
+:::
+
+### 13.5.1 Uniform convergence and separation {#s1351}
+
+normalized log likelihood를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+M_n(\theta)
+=
+\frac1n\ell_n(\theta)
+=
+P_n\log f_\theta
+$$
+
+::::::::::::::::::::
+
+라 하고 population criterion을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+M(\theta)
+=
+P_0\log f_\theta
+$$
+
+::::::::::::::::::::
+
+라 하자. 핵심 conditions는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sup_{\theta\in\Theta}
+|M_n(\theta)-M(\theta)|
+\overset p\longrightarrow0
+}
+$$
+
+::::::::::::::::::::
+
+와, 모든 $\varepsilon\gt0$에 대해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+M(\theta^\dagger)
+>
+\sup_{\|\theta-\theta^\dagger\|\ge\varepsilon}
+M(\theta).
+}
+$$
+
+::::::::::::::::::::
+
+라는 separated maximum이다.
+
+### 13.5.2 What MLE is consistent for {#s1352}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 13.1 · Basic likelihood consistency
+
+:::::::::::::::::::
+
+uniform convergence와 separated population maximum이 성립하고 $\widehat\theta$가 exact 또는 asymptotically exact maximizer이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta
+\overset p\longrightarrow
+\theta^\dagger.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Likelihood argmax consistency
+
+:::::::::::::::::::
+
+$\varepsilon\gt0$를 고정하고 population separation gap을
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Delta_\varepsilon
+=
+M(\theta^\dagger)
+-
+\sup_{\|\theta-\theta^\dagger\|\ge\varepsilon}
+M(\theta)
+\gt0.
+$$
+
+:::::::::::::::::::
+
+Also let
+
+::::::::::::::::::: {.math-display}
+
+$$
+\delta_n
+=
+\sup_{\theta\in\Theta}
+|M_n(\theta)-M(\theta)|
+=
+o_p(1),
+$$
+
+:::::::::::::::::::
+
+로 정의하자. 또한 estimator가 다음 near-maximizer condition을 만족한다고 하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+M_n(\widehat\theta_n)
+\ge
+\sup_{\theta\in\Theta}M_n(\theta)-r_n,
+\qquad
+r_n=o_p(1).
+$$
+
+:::::::::::::::::::
+
+$\delta_n\lt\Delta_\varepsilon/3$이고 $r_n\lt\Delta_\varepsilon/3$인 사건 위에서 $\|\theta-\theta^\dagger\|\ge\varepsilon$인 parameter는
+
+::::::::::::::::::: {.math-display}
+
+$$
+M_n(\theta)
+\le
+M(\theta^\dagger)-2\Delta_\varepsilon/3,
+$$
+
+:::::::::::::::::::
+
+while
+
+::::::::::::::::::: {.math-display}
+
+$$
+M_n(\theta^\dagger)
+\ge
+M(\theta^\dagger)-\Delta_\varepsilon/3.
+$$
+
+:::::::::::::::::::
+
+를 만족한다. 따라서 이러한 $\theta$는 near-maximizer가 될 수 없다. 그러므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+P(\|\widehat\theta_n-\theta^\dagger\|\ge\varepsilon)
+\to0.
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+correct specification이면 $\theta^\dagger=\theta_0$, misspecification이면 $\theta^\dagger$는 KL pseudo-true target이다.
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+중요
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+MLE consistency theorem은 model truth를 만들어주지 않는다.
+이 theorem이 말하는 것은 sample likelihood maximizer가 population expected log-likelihood maximizer를 학습한다는 것이다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+해석 13.1 · Consistency estimates the population criterion target, not model truth
+
+:::::::::::::::::::
+
+The conclusion
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta_n\overset p\longrightarrow\theta^\dagger
+$$
+
+:::::::::::::::::::
+
+는 $E_0[\log f_\theta]$의 maximizer를 학습한다는 진술이다. 이것이 를 의미하지는 않는다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+f_0=f_{\theta^\dagger}.
+$$
+
+:::::::::::::::::::
+
+correct specification은 estimator consistency의 결과가 아니라 별도의 assumption이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s136}
+
+## [13.6]{.section-number}Score, Hessian, and Fisher Information
+
+::: {.topic-opening}
+Correctly specified regular likelihood의 특별한 구조는 score variance와 expected curvature가 일치한다는 데 있다.
+:::
+
+### 13.6.1 Score mean-zero identity {#s1361}
+
+regular density에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\int f_\theta(w)\,dw=1.
+$$
+
+::::::::::::::::::::
+
+differentiation under the integral sign이 허용되면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+0
+=
+\int
+\frac{\partial f_\theta(w)}
+{\partial\theta}
+dw.
+$$
+
+::::::::::::::::::::
+
+$\partial_\theta f_\theta=f_\theta s_\theta$이므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E_\theta[s(W,\theta)]=0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 13.3 · Score mean-zero identity
+
+:::::::::::::::::::
+
+support가 parameter-independent이고 differentiation을 integral 안으로 통과시킬 수 있다고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E_\theta[s(W,\theta)]=0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Because
+
+::::::::::::::::::: {.math-display}
+
+$$
+\int f_\theta(w)\,dw=1,
+$$
+
+:::::::::::::::::::
+
+differentiating gives
+
+::::::::::::::::::: {.math-display}
+
+$$
+0
+=
+\int
+\frac{\partial f_\theta(w)}{\partial\theta}
+\,dw.
+$$
+
+:::::::::::::::::::
+
+Using
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{\partial f_\theta(w)}{\partial\theta}
+=
+f_\theta(w)
+\nabla_\theta\log f_\theta(w)
+=
+f_\theta(w)s(W,\theta),
+$$
+
+:::::::::::::::::::
+
+we obtain $E_\theta[s(W,\theta)]=0$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 13.6.2 Hessian and score variance {#s1362}
+
+개별 log-likelihood Hessian:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+H(W,\theta)
+=
+\nabla_\theta^2\log f_\theta(W).
+$$
+
+::::::::::::::::::::
+
+Expected negative Hessian:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\mathcal H(\theta)
+=
+-
+E_\theta[H(W,\theta)].
+}
+$$
+
+::::::::::::::::::::
+
+Score outer-product matrix:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\mathcal J(\theta)
+=
+E_\theta[
+s(W,\theta)s(W,\theta)'
+].
+}
+$$
+
+::::::::::::::::::::
+
+### 13.6.3 Information matrix equality {#s1363}
+
+regular correctly specified likelihood에서는 second differentiation identity로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\mathcal H(\theta)
+=
+\mathcal J(\theta).
+}
+$$
+
+::::::::::::::::::::
+
+이 공통 matrix를 Fisher information이라 한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\mathcal I(\theta)
+=
+E_\theta[s_\theta s_\theta']
+=
+-
+E_\theta[\nabla_\theta^2\log f_\theta(W)].
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 13.2A · Information matrix equality
+
+:::::::::::::::::::
+
+regular correct specification, common support, 그리고 integral 아래 differentiation이 valid하다는 조건 아래에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+-
+E_\theta[
+\nabla_\theta^2\log f_\theta(W)
+]
+=
+E_\theta[
+s(W,\theta)s(W,\theta)'
+].
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+score identity
+$$
+E_\theta[s(W,\theta)]=0
+$$
+를 미분하자. Componentwise로는
+
+::::::::::::::::::: {.math-display}
+
+$$
+0
+=
+\int
+\left[
+\frac{\partial s(W,\theta)}{\partial\theta'}
+f_\theta(W)
++
+s(W,\theta)
+\frac{\partial f_\theta(W)}{\partial\theta'}
+\right]dW.
+$$
+
+:::::::::::::::::::
+
+Since
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{\partial f_\theta(W)}{\partial\theta'}
+=
+f_\theta(W)s(W,\theta)',
+$$
+
+:::::::::::::::::::
+
+it follows that
+
+::::::::::::::::::: {.math-display}
+
+$$
+E_\theta\left[
+\frac{\partial s(W,\theta)}{\partial\theta'}
+\right]
++
+E_\theta[s(W,\theta)s(W,\theta)']
+=
+0.
+$$
+
+:::::::::::::::::::
+
+$\partial s/\partial\theta'=\nabla_\theta^2\log f_\theta$이므로 항을 정리하면 결과를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 13.6.4 Observed and expected information {#s1364}
+
+<strong>Observed information:</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\mathcal I_n^{obs}(\theta)
+=
+-\nabla_\theta^2\ell_n(\theta).
+}
+$$
+
+::::::::::::::::::::
+
+<strong>Expected information:</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\mathcal I_n^{exp}(\theta)
+=
+n\mathcal I(\theta).
+}
+$$
+
+::::::::::::::::::::
+
+finite sample에서는 서로 다를 수 있지만 regular correctly specified settings에서 normalized versions는 같은 population information matrix를 추정한다.
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 13.2 · Parameter-dependent support breaks the regular score identity
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y\sim U(0,\theta),
+\qquad
+f_\theta(y)=\frac1\theta\mathbf1\{0\le y\le\theta\}.
+$$
+
+:::::::::::::::::::
+
+interior sample point $0\lt y\lt\theta$에서 formal score는
+
+::::::::::::::::::: {.math-display}
+
+$$
+s(y,\theta)
+=
+-\frac1\theta.
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+E_\theta[s(Y,\theta)]
+=
+-\frac1\theta
+\neq0.
+$$
+
+:::::::::::::::::::
+
+모순은 없다. support가 $\theta$에 의존하므로 $\int_0^\theta \theta^{-1}dy=1$을 미분할 때 boundary term이 필요하다. 따라서 regular interchange argument를 적용할 수 없다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{parameter-dependent support}
+\Rightarrow
+\text{regular score identities may fail}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+정리표 13.1 · Three information objects
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Object</th><th>Definition</th><th>Population role</th></tr></thead>
+<tbody>
+<tr><td>Observed information</td><td>$-\nabla^2\ell_n(\theta)$</td><td>sample curvature</td></tr>
+<tr><td>OPG</td><td>$\sum_i s_i(\theta)s_i(\theta)'$</td><td>sample score covariance</td></tr>
+<tr><td>Expected information</td><td>$n\mathcal I(\theta)$</td><td>correct specification 아래 expected curvature / score variance</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+regular correct specification 아래에서는 normalized observed information과 expected information이 동일한 $\mathcal I(\theta_0)$로 수렴한다. Misspecification 아래에서는 Hessian과 OPG가 일반적으로 서로 다른 matrix로 수렴한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s137}
+
+## [13.7]{.section-number}Asymptotic Normality and Efficiency of MLE
+
+::: {.topic-opening}
+MLE asymptotic normality는 score의 CLT와 Hessian의 LLN을 결합한 Chapter 11 smooth M-estimation argument의 특수사례다.
+:::
+
+### 13.7.1 Score expansion {#s1371}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+엄밀화 13.1 · Exact multivariate score expansion via an integrated Hessian
+
+:::::::::::::::::::
+
+Define
+
+::::::::::::::::::: {.math-display}
+
+$$
+\bar H_n
+=
+\int_0^1
+\frac1n
+\nabla_\theta S_n
+\left(
+\theta_0+t(\widehat\theta-\theta_0)
+\right)
+dt.
+$$
+
+:::::::::::::::::::
+
+그러면 fundamental theorem of calculus에 의해 다음 exact vector identity를 얻는다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1nS_n(\widehat\theta)
+-
+\frac1nS_n(\theta_0)
+=
+\bar H_n(\widehat\theta-\theta_0).
+$$
+
+:::::::::::::::::::
+
+interior exact MLE에서는 $S_n(\widehat\theta)=0$이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+=
+-\bar H_n^{-1}
+\frac1{\sqrt n}S_n(\theta_0).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+g(t)
+=
+\frac1n
+S_n\left(
+\theta_0+t(\widehat\theta-\theta_0)
+\right).
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+g'(t)
+=
+\frac1n
+\nabla_\theta S_n
+\left(
+\theta_0+t(\widehat\theta-\theta_0)
+\right)
+(\widehat\theta-\theta_0).
+$$
+
+:::::::::::::::::::
+
+$0$에서 $1$까지 적분하면 exact expansion을 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 13.7.2 Inverse-information variance {#s1372}
+
+correct specification과 regularity 아래
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac1{\sqrt n}S_n(\theta_0)
+\overset d\longrightarrow
+N(0,\mathcal I(\theta_0)),
+$$
+
+::::::::::::::::::::
+
+그리고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+-\frac1n\nabla_\theta S_n(\widetilde\theta)
+\overset p\longrightarrow
+\mathcal I(\theta_0).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 13.2 · Regular MLE asymptotic normality
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+\overset d\longrightarrow
+N\!\left(
+0,
+\mathcal I(\theta_0)^{-1}
+\right).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Regular MLE asymptotic normality
+
+:::::::::::::::::::
+
+integrated-Hessian identity에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\theta-\theta_0)
+=
+-\bar H_n^{-1}
+\frac1{\sqrt n}S_n(\theta_0).
+$$
+
+:::::::::::::::::::
+
+correct specification과 score CLT 아래에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1{\sqrt n}S_n(\theta_0)
+\Rightarrow
+N(0,\mathcal I_0),
+\qquad
+\mathcal I_0=\mathcal I(\theta_0).
+$$
+
+:::::::::::::::::::
+
+consistency와 local Hessian LLN에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+-\bar H_n\overset p\longrightarrow\mathcal I_0.
+$$
+
+:::::::::::::::::::
+
+Hence $-\bar H_n^{-1}\to_p\mathcal I_0^{-1}$. Slutsky gives
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+\Rightarrow
+N(0,\mathcal I_0^{-1}).
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+regular parametric models에서 이 inverse-information covariance는 MLE의 asymptotic efficiency와 연결된다.
+
+### 13.7.3 Why the sandwich collapses {#s1373}
+
+Chapter 11의 generic smooth M-estimator variance는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+H^{-1}BH^{-1}.
+$$
+
+::::::::::::::::::::
+
+correct likelihood에서는 information matrix equality에 의해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+B=H=\mathcal I.
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+H^{-1}BH^{-1}
+=
+\mathcal I^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Likelihood의 특별함
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+$I^{-1}$은 generic M-estimation과 별개의 variance formula가 아니다.
+Correctly specified regular likelihood에서 일반 sandwich가 information identity 때문에 단순화된 결과다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 13.2B · MLE asymptotic linear representation
+
+:::::::::::::::::::
+
+regular MLE conditions 아래에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta-\theta_0
+=
+\frac1n
+\sum_{i=1}^n
+\mathcal I_0^{-1}
+s(W_i,\theta_0)
++
+o_p(n^{-1/2}).
+}
+$$
+
+:::::::::::::::::::
+
+따라서 first-order influence contribution은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+IF(W)
+=
+\mathcal I_0^{-1}s(W,\theta_0).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+asymptotic score expansion으로부터
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\theta-\theta_0)
+=
+\mathcal I_0^{-1}
+\frac1{\sqrt n}\sum_i s(W_i,\theta_0)
++
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+$\sqrt n$으로 나누면 다음 representation을 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 13.2C · Parametric efficiency in the regular asymptotically linear class
+
+:::::::::::::::::::
+
+regular asymptotically linear estimator의 influence function $\phi(W)$가 다음을 만족한다고 하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[\phi(W)s(W,\theta_0)']
+=
+I_K.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[\phi\phi']
+-
+\mathcal I_0^{-1}
+\succeq0.
+}
+$$
+
+:::::::::::::::::::
+
+MLE influence function $\phi^*=\mathcal I_0^{-1}s$는 lower bound를 달성한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Parametric information bound within the stated class
+
+:::::::::::::::::::
+
+Write
+
+::::::::::::::::::: {.math-display}
+
+$$
+\phi
+=
+\phi^*
++
+r,
+\qquad
+\phi^*=\mathcal I_0^{-1}s.
+$$
+
+:::::::::::::::::::
+
+normalization condition은
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[rs']
+=
+E[\phi s']
+-
+\mathcal I_0^{-1}E[ss']
+=
+I_K-I_K
+=
+0.
+$$
+
+:::::::::::::::::::
+
+를 의미한다. 따라서 $r$과 $\phi^*$ 사이의 cross covariance는 0이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[r\phi^{*'}]
+=
+E[rs']\mathcal I_0^{-1}
+=
+0.
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[\phi\phi']
+=
+E[\phi^*\phi^{*'}]
++
+E[rr']
+=
+\mathcal I_0^{-1}
++
+E[rr'].
+$$
+
+:::::::::::::::::::
+
+$E[rr']\succeq0$이므로 결과가 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s138}
+
+## [13.8]{.section-number}Quasi-Maximum Likelihood and Misspecification
+
+::: {.topic-opening}
+Working likelihood가 true data density를 포함하지 않아도 likelihood criterion 자체는 여전히 population target과 estimator를 정의한다.
+이때 estimator를 quasi-MLE로 해석한다.
+:::
+
+### 13.8.1 Working likelihood and pseudo-true target {#s1381}
+
+true density가 parametric family 바깥에 있다고 하자.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+f_0
+\notin
+\{f_\theta:\theta\in\Theta\}.
+$$
+
+::::::::::::::::::::
+
+그래도 sample estimator는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta_{QMLE}
+=
+\operatorname*{arg\,max}_\theta
+\sum_i\log f_\theta(W_i)
+$$
+
+::::::::::::::::::::
+
+로 정의할 수 있다. Population target은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta^\dagger
+=
+\operatorname*{arg\,max}_\theta
+E_0[\log f_\theta(W)]
+=
+\operatorname*{arg\,min}_\theta
+D_{KL}(f_0\Vert f_\theta).
+}
+$$
+
+::::::::::::::::::::
+
+### 13.8.2 Pseudo-score condition {#s1382}
+
+$\theta^\dagger$가 interior이고 differentiation이 허용되면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E_0[s(W,\theta^\dagger)]=0.
+}
+$$
+
+::::::::::::::::::::
+
+즉 quasi-likelihood는 pseudo-true target에서 score moment equation을 생성한다.
+
+### 13.8.3 Information equality can fail {#s1383}
+
+misspecification 아래에는 기대값이 true law $P_0$에 의해 계산되므로 일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E_0[s s']
+\neq
+-
+E_0[H].
+}
+$$
+
+::::::::::::::::::::
+
+Correct likelihood에서 특별했던 information matrix equality가 더 이상 보장되지 않는다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 13.2 · Gaussian working likelihood under nonnormal data
+
+:::::::::::::::::::
+
+true scalar $Y$가 finite mean과 variance를 가지지만 반드시 normal일 필요는 없다고 하자. Gaussian working family를 사용하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y\sim N(\mu,\sigma^2).
+$$
+
+:::::::::::::::::::
+
+상수항을 제외하면 population expected log likelihood는
+
+::::::::::::::::::: {.math-display}
+
+$$
+M(\mu,\sigma^2)
+=
+-\frac12\log\sigma^2
+-
+\frac{1}{2\sigma^2}
+E[(Y-\mu)^2].
+$$
+
+:::::::::::::::::::
+
+고정된 $\sigma^2$에서 $M$을 최대화하는 것은 $E[(Y-\mu)^2]$를 최소화하는 것과 같으므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\mu^\dagger=E[Y].
+}
+$$
+
+:::::::::::::::::::
+
+이 값을 대입하고 $\sigma^2$에 대해 최대화하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sigma^{2\dagger}
+=
+\operatorname{Var}(Y).
+}
+$$
+
+:::::::::::::::::::
+
+따라서 incorrect Gaussian density를 사용하더라도 meaningful한 pseudo-true mean과 variance parameter를 얻을 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 13.3 · A boundary pseudo-true maximizer need not satisfy the pseudo-score equation
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Theta=[0,\infty),
+\qquad
+M(\theta)=-(\theta+1)^2.
+$$
+
+:::::::::::::::::::
+
+population maximizer는 boundary point $\theta^\dagger=0$이지만
+
+::::::::::::::::::: {.math-display}
+
+$$
+M'(0)=-2\neq0.
+$$
+
+:::::::::::::::::::
+
+이다. 따라서 $E_0[s(W,\theta^\dagger)]=0$은 interior differentiable optimum을 필요로 하며 pseudo-true maximizer에 대한 universal property가 아니다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s139}
+
+## [13.9]{.section-number}Robust Sandwich Covariance for QMLE
+
+::: {.topic-opening}
+Information equality가 깨지면 inverse Hessian alone으로는 sampling variability를 정확히 표현할 수 없다.
+General M-estimator sandwich가 다시 등장한다.
+:::
+
+### 13.9.1 Bread and meat {#s1391}
+
+pseudo-true target에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+H
+=
+-
+E_0[
+\nabla_\theta^2
+\log f_{\theta^\dagger}(W)
+]
+}
+$$
+
+::::::::::::::::::::
+
+와
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+J
+=
+E_0[
+s(W,\theta^\dagger)
+s(W,\theta^\dagger)'
+]
+}
+$$
+
+::::::::::::::::::::
+
+를 정의한다. 그러면 regular QMLE asymptotics는
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 13.3 · QMLE sandwich asymptotics
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta^\dagger)
+\overset d\longrightarrow
+N(0,H^{-1}JH^{-1}).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · QMLE sandwich asymptotics
+
+:::::::::::::::::::
+
+interior pseudo-true target에서 sample score는 integrated-Hessian expansion을 만족한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+0
+=
+\frac1{\sqrt n}S_n(\theta^\dagger)
++
+\bar H_n
+\sqrt n(\widehat\theta-\theta^\dagger),
+$$
+
+:::::::::::::::::::
+
+where
+
+::::::::::::::::::: {.math-display}
+
+$$
+-\bar H_n\overset p\longrightarrow H.
+$$
+
+:::::::::::::::::::
+
+Therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\theta-\theta^\dagger)
+=
+H^{-1}
+\frac1{\sqrt n}
+S_n(\theta^\dagger)
++
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+score CLT 아래에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1{\sqrt n}S_n(\theta^\dagger)
+\Rightarrow
+N(0,J).
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta^\dagger)
+\Rightarrow
+N(0,H^{-1}JH^{-1}).
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 13.9.2 Correct versus misspecified likelihood {#s1392}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Case</th><th>Curvature / score variance</th><th>Asymptotic variance</th></tr></thead>
+<tbody>
+<tr>
+<td>Correct regular likelihood</td>
+<td>$H=J=\mathcal I$</td>
+<td>$\mathcal I^{-1}$</td>
+</tr>
+<tr>
+<td>Misspecified / quasi likelihood</td>
+<td>$H\neq J$ generally</td>
+<td>$H^{-1}JH^{-1}$</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+### 13.9.3 Sample covariance estimator {#s1393}
+
+sample analogues:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat H
+=
+-\frac1n
+\sum_{i=1}^n
+\nabla_\theta^2
+\log f_{\widehat\theta}(W_i),
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat J
+=
+\frac1n
+\sum_{i=1}^n
+s(W_i,\widehat\theta)
+s(W_i,\widehat\theta)'.
+$$
+
+::::::::::::::::::::
+
+따라서 robust covariance는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat V
+=
+\widehat H^{-1}
+\widehat J
+\widehat H^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+$\widehat V$는 $\sqrt n(\widehat\theta-\theta^\dagger)$의 covariance estimator이며,
+estimator 자체의 covariance는 asymptotically $n^{-1}\widehat V$다.
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 13.3 · Robust standard errors do not repair the target
+
+:::::::::::::::::::
+
+sandwich covariance는 misspecified likelihood에서 pseudo-true target 주변의 sampling uncertainty를 robust하게 추정한다.
+이는 working likelihood를 true model로 만들거나 $\theta^\dagger$를 structural/causal target으로 바꾸는 것이 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 13.4 · Plug-in sandwich consistency
+
+:::::::::::::::::::
+
+Hessian과 score outer product에 대해 local ULLN이 성립하고 $\widehat\theta\to_p\theta^\dagger$라고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat H\overset p\longrightarrow H,
+\qquad
+\widehat J\overset p\longrightarrow J,
+$$
+
+:::::::::::::::::::
+
+and therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat H^{-1}
+\widehat J
+\widehat H^{-1}
+\overset p\longrightarrow
+H^{-1}JH^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Chapter 11의 random-index plug-in logic을
+
+::::::::::::::::::: {.math-display}
+
+$$
+f_H(W,\theta)
+=
+-\nabla_\theta^2\log f_\theta(W),
+\qquad
+f_J(W,\theta)
+=
+s(W,\theta)s(W,\theta)'.
+$$
+
+:::::::::::::::::::
+
+에 적용할 수 있다. Local ULLN과 $\widehat\theta\to_p\theta^\dagger$로부터 두 matrix의 probability limit를 얻는다. $H$가 nonsingular이므로 inverse continuity와 Slutsky에 의해 sandwich limit가 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 13.4 · Inverse Hessian alone can be wrong under misspecification
+
+:::::::::::::::::::
+
+다음 working model을 사용하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y\sim N(\mu,1)
+$$
+
+:::::::::::::::::::
+
+한편 true distribution은
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y]=\mu_0,
+\qquad
+\operatorname{Var}(Y)=\tau^2.
+$$
+
+:::::::::::::::::::
+
+를 만족한다고 하자. Score는 $s(Y,\mu)=Y-\mu$이므로 $\mu^\dagger=\mu_0$이다. pseudo-true target에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+H=1,
+\qquad
+J=\tau^2.
+$$
+
+:::::::::::::::::::
+
+Therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V_{QMLE}
+=
+H^{-1}JH^{-1}
+=
+\tau^2.
+}
+$$
+
+:::::::::::::::::::
+
+naive inverse-Hessian variance는 $1$이며, 이는 $\tau^2=1$일 때만 올바르다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1310}
+
+## [13.10]{.section-number}Wald, Likelihood-Ratio, and Score Tests
+
+::: {.topic-opening}
+Regular correctly specified likelihood에서는 동일한 local quadratic geometry에서 Wald, likelihood-ratio, score tests가 나온다.
+:::
+
+### 13.10.1 Restricted and unrestricted estimation {#s13101}
+
+$q$-dimensional restriction
+
+:::::::::::::::::::: {.math-display}
+
+$$
+H_0:
+r(\theta)=0
+$$
+
+::::::::::::::::::::
+
+를 생각하자. Unrestricted MLE를 $\widehat\theta$, restricted MLE를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widetilde\theta
+=
+\operatorname*{arg\,max}_{\theta:r(\theta)=0}
+\ell_n(\theta)
+$$
+
+::::::::::::::::::::
+
+라 하자.
+
+### 13.10.2 Wald test {#s13102}
+
+Wald test는 unrestricted estimate가 null manifold에서 얼마나 떨어져 있는지를 covariance metric으로 측정한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+W
+=
+n\,
+r(\widehat\theta)'
+\left[
+R(\widehat\theta)
+\widehat V
+R(\widehat\theta)'
+\right]^{-1}
+r(\widehat\theta),
+$$
+
+::::::::::::::::::::
+
+where $R(\theta)=\partial r(\theta)/\partial\theta'$.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+W\overset d\longrightarrow\chi_q^2
+}
+$$
+
+::::::::::::::::::::
+
+regular null asymptotics 아래에서는
+
+### 13.10.3 Likelihood-ratio test {#s13103}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+LR
+=
+2[
+\ell_n(\widehat\theta)
+-
+\ell_n(\widetilde\theta)
+].
+}
+$$
+
+::::::::::::::::::::
+
+regular correctly specified model에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+LR\overset d\longrightarrow\chi_q^2.
+}
+$$
+
+::::::::::::::::::::
+
+### 13.10.4 Score / LM test {#s13104}
+
+Score test는 restricted estimator에서 likelihood slope가 얼마나 zero에서 벗어나는지를 측정한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+LM
+\approx
+S_n(\widetilde\theta)'
+\mathcal I_n(\widetilde\theta)^{-1}
+S_n(\widetilde\theta)
+}
+$$
+
+::::::::::::::::::::
+
+실제 restriction dimension에 맞춘 projection/restriction form으로 계산한다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+증명 개요 13.1 · Local quadratic likelihood geometry
+
+:::::::::::::::::::
+
+regular correct specification과 local perturbation $h/\sqrt n$ 아래에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\ell_n\left(
+\theta_0+\frac h{\sqrt n}
+\right)
+-
+\ell_n(\theta_0)
+=
+h'
+\frac1{\sqrt n}S_n(\theta_0)
+-
+\frac12
+h'\mathcal I_0h
++
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+score term은 random linear component를, Fisher information은 deterministic quadratic curvature를 제공한다. Wald, LR, Score test는 동일한 local geometry의 서로 다른 표현이다.
+
+::::::::::::::::::::
+
+### 13.10.5 First-order equivalence and misspecification {#s13105}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Test</th><th>Geometric interpretation</th></tr></thead>
+<tbody>
+<tr><td>Wald</td><td>unrestricted estimate와 null set의 distance</td></tr>
+<tr><td>LR</td><td>restricted와 unrestricted objective values의 gap</td></tr>
+<tr><td>Score / LM</td><td>restricted point에서의 local slope</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+regular correctly specified likelihood에서는 세 test가 first-order asymptotically equivalent하다.
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+Misspecified likelihood에서의 주의
+
+:::::::::::::::::::
+
+QMLE에서는 standard likelihood-ratio statistic이 automatically standard chi-square limit을 갖는다고 생각하면 안 된다.
+Robust covariance를 이용한 Wald-type inference는 pseudo-true target에 대한 regular QMLE inference와 더 직접적으로 연결된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 13.5 · Scalar Wald, LR, and Score statistics have the same leading quadratic form
+
+:::::::::::::::::::
+
+scalar regular null $H_0:\theta=\theta_0$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+W
+=
+n(\widehat\theta-\theta_0)^2\mathcal I_0
++
+o_p(1),
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+LR
+=
+n(\widehat\theta-\theta_0)^2\mathcal I_0
++
+o_p(1),
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+LM
+=
+\frac{S_n(\theta_0)^2}{n\mathcal I_0}
++
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+Since
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\theta-\theta_0)
+=
+\mathcal I_0^{-1}
+\frac1{\sqrt n}S_n(\theta_0)
++
+o_p(1),
+$$
+
+:::::::::::::::::::
+
+세 통계량은 first-order equivalent하며 모두 $\chi_1^2$로 수렴한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · First-order equivalence in the scalar regular case
+
+:::::::::::::::::::
+
+Wald expression은 asymptotic variance $\mathcal I_0^{-1}/n$에서 바로 나온다. LR expression은 restricted와 unrestricted optimum 주위의 local quadratic log-likelihood expansion에서 나오고, Score expression은 null score를 variance $n\mathcal I_0$로 표준화한 것이다. 마지막으로 MLE score expansion에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+n(\widehat\theta-\theta_0)^2\mathcal I_0
+=
+\frac{S_n(\theta_0)^2}{n\mathcal I_0}
++
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+따라서 세 통계량은 동일한 leading term을 공유한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 13.5 · Standard LR need not be chi-square under misspecification
+
+:::::::::::::::::::
+
+다시 working likelihood $Y_i\sim N(\mu,1)$를 사용하되 true data는
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y_i]=0,
+\qquad
+\operatorname{Var}(Y_i)=\tau^2.
+$$
+
+:::::::::::::::::::
+
+를 만족한다고 하자. $H_0:\mu=0$을 검정할 때 unrestricted QMLE는 $\widehat\mu=\bar Y$이고 working likelihood-ratio statistic은
+
+::::::::::::::::::: {.math-display}
+
+$$
+LR
+=
+n\bar Y^2.
+$$
+
+:::::::::::::::::::
+
+But
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\,\bar Y
+\Rightarrow
+N(0,\tau^2),
+$$
+
+:::::::::::::::::::
+
+so
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+LR
+\Rightarrow
+\tau^2\chi_1^2,
+}
+$$
+
+:::::::::::::::::::
+
+이며 $\tau^2=1$이 아니면 $\chi_1^2$가 아니다. 반면 robust Wald statistic은
+
+::::::::::::::::::: {.math-display}
+
+$$
+W_R
+=
+\frac{n\bar Y^2}{\widehat\tau^2}
+$$
+
+:::::::::::::::::::
+
+consistent variance estimation 아래 standard $\chi_1^2$ limit를 갖는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1311x}
+
+## [13.11]{.section-number}Computing Maximum Likelihood
+
+::: {.topic-opening}
+Likelihood theory의 statistical target과 numerical optimization problem은 연결되어 있지만 동일하지 않다.
+이 절에서는 score와 curvature가 실제 algorithms에 어떻게 들어가는지 본다.
+:::
+
+### 13.11.1 Newton–Raphson {#s13111}
+
+score와 Hessian을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+S_n(\theta)=\nabla\ell_n(\theta),
+\qquad
+H_n(\theta)=\nabla^2\ell_n(\theta)
+$$
+
+::::::::::::::::::::
+
+라 하면 Newton update는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta^{(m+1)}
+=
+\theta^{(m)}
+-
+H_n(\theta^{(m)})^{-1}
+S_n(\theta^{(m)}).
+}
+$$
+
+::::::::::::::::::::
+
+locally quadratic likelihood에서는 빠른 convergence를 기대할 수 있지만,
+Hessian이 ill-conditioned하거나 starting value가 나쁘면 불안정할 수 있다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 13.6 · Newton–Raphson from a local quadratic approximation
+
+:::::::::::::::::::
+
+$\theta$ 주위의 second-order approximation은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\ell_n(\theta+d)
+\approx
+\ell_n(\theta)
++
+S_n(\theta)'d
++
+\frac12d'H_n(\theta)d.
+$$
+
+:::::::::::::::::::
+
+quadratic approximation을 최대화하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+d
+=
+-H_n(\theta)^{-1}S_n(\theta),
+}
+$$
+
+:::::::::::::::::::
+
+이고 따라서 Newton update를 얻는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+quadratic approximation을 $d$에 대해 미분하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+S_n(\theta)+H_n(\theta)d=0.
+$$
+
+:::::::::::::::::::
+
+Hessian이 nonsingular이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+d=-H_n(\theta)^{-1}S_n(\theta).
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 13.11.2 Fisher scoring {#s13112}
+
+observed Hessian 대신 expected information을 사용하는 update:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta^{(m+1)}
+=
+\theta^{(m)}
++
+\mathcal I_n(\theta^{(m)})^{-1}
+S_n(\theta^{(m)}).
+}
+$$
+
+::::::::::::::::::::
+
+이는 expected curvature를 이용한다는 점에서 Newton–Raphson과 구별된다.
+
+### 13.11.3 Local maxima, scaling, and constraints {#s13113}
+
+<ul>
+<li>starting values와 multiple local maxima,</li>
+<li>flat하거나 nearly singular한 Hessian,</li>
+<li>parameter scaling,</li>
+<li>line search와 trust-region safeguards,</li>
+<li>positivity, probability, variance에 대한 parameter constraints</li>
+</ul>
+
+등이 실제 likelihood computation에서 중요하다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{optimizer convergence}
+\neq
+\text{global maximum certification}
+\neq
+\text{statistical identification}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+계산 13.1 · Numerical error must be below the statistical first-order scale
+
+:::::::::::::::::::
+
+exact MLE을 $\widehat\theta_n$라 하고 numerical solution $\widetilde\theta_n$이
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widetilde\theta_n-\widehat\theta_n
+=
+o_p(n^{-1/2}),
+$$
+
+:::::::::::::::::::
+
+를 만족하면 두 estimator는 동일한 first-order asymptotic distribution을 갖는다. Locally nonsingular Hessian 아래에서는 다음 score-based condition이 sufficient하다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\left\|
+\frac1nS_n(\widetilde\theta_n)
+\right\|
+=
+o_p(n^{-1/2}).
+$$
+
+:::::::::::::::::::
+
+따라서 fixed optimizer tolerance가 모든 $n$에서 자동으로 적절한 것은 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 13.6 · Complete separation in logit can destroy finite MLE existence
+
+:::::::::::::::::::
+
+다음 조건을 만족하는 vector $b$가 존재한다고 하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+X_i'b\gt0
+\quad\text{whenever }Y_i=1,
+\qquad
+X_i'b\lt0
+\quad\text{whenever }Y_i=0.
+$$
+
+:::::::::::::::::::
+
+$t\to\infty$인 ray $\beta=tb$를 따라가면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Lambda(X_i'\beta)\to1
+\quad(Y_i=1),
+\qquad
+\Lambda(X_i'\beta)\to0
+\quad(Y_i=0).
+$$
+
+:::::::::::::::::::
+
+log likelihood는 supremum에 접근하지만 그 supremum이 finite한 $\beta$에서 달성될 필요는 없다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{concavity}
+\not\Rightarrow
+\text{existence of a finite MLE}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1312x}
+
+## [13.12]{.section-number}Examples: Normal Regression, Logit, and Poisson QMLE
+
+::: {.topic-opening}
+같은 likelihood architecture가 familiar econometric models에서 어떻게 나타나는지 확인한다.
+:::
+
+### 13.12.1 Normal linear regression {#s13121}
+
+conditional model:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y_i\mid X_i
+\sim
+N(X_i'\beta,\sigma^2).
+$$
+
+::::::::::::::::::::
+
+log likelihood:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\ell(\beta,\sigma^2)
+=
+-\frac n2\log(2\pi)
+-\frac n2\log\sigma^2
+-\frac{1}{2\sigma^2}
+\sum_{i=1}^n
+(Y_i-X_i'\beta)^2.
+$$
+
+::::::::::::::::::::
+
+$\beta$에 대해 maximize하는 것은 residual sum of squares를 minimize하는 것과 같으므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{MLE}
+=
+\widehat\beta_{OLS}.
+}
+$$
+
+::::::::::::::::::::
+
+그러나 variance MLE는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\sigma^2_{MLE}
+=
+\frac1n
+\sum_i
+(Y_i-X_i'\widehat\beta)^2,
+}
+$$
+
+::::::::::::::::::::
+
+로서 unbiased residual variance $RSS/(n-k)$와 다르다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 13.7 · Normal regression MLE recovers OLS and $RSS/n$
+
+:::::::::::::::::::
+
+For
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y\mid X\sim N(X'\beta,\sigma^2),
+$$
+
+:::::::::::::::::::
+
+$\beta$에 대한 score는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{\partial\ell}{\partial\beta}
+=
+\frac1{\sigma^2}
+X'(Y-X\beta).
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{MLE}
+=
+(X'X)^{-1}X'Y.
+}
+$$
+
+:::::::::::::::::::
+
+Also
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{\partial\ell}{\partial\sigma^2}
+=
+-\frac n{2\sigma^2}
++
+\frac{RSS}{2\sigma^4},
+$$
+
+:::::::::::::::::::
+
+so
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\sigma^2_{MLE}
+=
+RSS/n.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+$\beta$-score를 0으로 두면 OLS normal equations를 얻는다. $\sigma^2$-score를 0으로 두고 $2\sigma^4$를 곱하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+-n\sigma^2+RSS=0.
+$$
+
+:::::::::::::::::::
+
+Hence $\widehat\sigma^2=RSS/n$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+연결 13.2 · Gaussian QMLE reproduces the BLP target
+
+:::::::::::::::::::
+
+conditional normality가 거짓이더라도 constant variance Gaussian working likelihood를 $\beta$에 대해 최대화하는 것은
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_n(Y-X'\beta)^2.
+$$
+
+:::::::::::::::::::
+
+를 최소화하는 것과 같다. 따라서 population pseudo-true coefficient는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta^\dagger
+=
+\operatorname*{arg\,min}_b
+E[(Y-X'b)^2]
+=
+\beta^{BLP}.
+}
+$$
+
+:::::::::::::::::::
+
+이다. 즉 Chapter 6의 best linear predictor가 Gaussian QMLE의 pseudo-true parameter로 다시 등장한다.
+
+::::::::::::::::::::
+
+### 13.12.2 Binary logit {#s13122}
+
+binary response model:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+P(Y_i=1\mid X_i)
+=
+p_i
+=
+\Lambda(X_i'\beta),
+\qquad
+\Lambda(t)=\frac{e^t}{1+e^t}.
+$$
+
+::::::::::::::::::::
+
+individual log likelihood:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\ell_i(\beta)
+=
+Y_i\log p_i
++
+(1-Y_i)\log(1-p_i).
+$$
+
+::::::::::::::::::::
+
+score:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+s_i(\beta)
+=
+X_i(Y_i-p_i).
+}
+$$
+
+::::::::::::::::::::
+
+Hessian:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\nabla_\beta^2\ell_n(\beta)
+=
+-
+\sum_i
+p_i(1-p_i)
+X_iX_i'.
+}
+$$
+
+::::::::::::::::::::
+
+score는 nonlinear model에서도 “regressor × generalized residual”의 orthogonality structure를 갖는다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 13.8 · Logit score and concavity
+
+:::::::::::::::::::
+
+Let $p_i=\Lambda(X_i'\beta)$. Since
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{\partial p_i}{\partial\beta}
+=
+p_i(1-p_i)X_i,
+$$
+
+:::::::::::::::::::
+
+Bernoulli score는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+s_i(\beta)
+=
+X_i(Y_i-p_i),
+}
+$$
+
+:::::::::::::::::::
+
+그리고 Hessian은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\nabla_\beta^2\ell_n(\beta)
+=
+-\sum_i
+p_i(1-p_i)X_iX_i'.
+}
+$$
+
+:::::::::::::::::::
+
+따라서 log-likelihood는 concave하다. 그러나 strict concavity와 finite existence에는 추가 조건이 필요하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Differentiate
+
+::::::::::::::::::: {.math-display}
+
+$$
+\ell_i
+=
+Y_i\log p_i+(1-Y_i)\log(1-p_i).
+$$
+
+:::::::::::::::::::
+
+logistic derivative를 사용하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{\partial\ell_i}{\partial\beta}
+=
+X_i(Y_i-p_i).
+$$
+
+:::::::::::::::::::
+
+한 번 더 미분하면
+$$
+-p_i(1-p_i)X_iX_i'
+$$
+를 얻는다. 이를 $i$에 대해 합하면 Hessian이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 13.12.3 Poisson QMLE {#s13123}
+
+conditional mean을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Y\mid X]
+=
+\mu(X,\beta)
+=
+\exp(X'\beta)
+}
+$$
+
+::::::::::::::::::::
+
+라고 model한다고 하자. Poisson working log likelihood를 사용하면 score는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+s_i(\beta)
+=
+X_i(Y_i-\mu_i).
+}
+$$
+
+::::::::::::::::::::
+
+따라서 true conditional distribution이 Poisson이 아니더라도 conditional mean model이 올바르면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[
+X(Y-\mu(X,\beta_0))
+]
+=
+0
+$$
+
+::::::::::::::::::::
+
+이 성립할 수 있고, appropriate regularity 아래 Poisson QMLE는 mean parameter를 consistently estimate할 수 있다.
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 13.4 · Mean correctness와 Poisson distribution correctness는 다르다
+
+:::::::::::::::::::
+
+$\operatorname{Var}(Y\mid X)=E[Y\mid X]$라는 Poisson variance restriction이 틀릴 수 있다.
+이 경우 conventional inverse-information standard errors보다 robust sandwich covariance가 필요하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 13.9 · Poisson QMLE score, curvature, and robust covariance
+
+:::::::::::::::::::
+
+With
+
+::::::::::::::::::: {.math-display}
+
+$$
+\mu_i
+=
+\exp(X_i'\beta),
+$$
+
+:::::::::::::::::::
+
+Poisson working log likelihood의 score는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+s_i(\beta)
+=
+X_i(Y_i-\mu_i)
+}
+$$
+
+:::::::::::::::::::
+
+and Hessian
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+H_i(\beta)
+=
+-\mu_iX_iX_i'.
+}
+$$
+
+:::::::::::::::::::
+
+conditional mean이 correctly specified이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y\mid X]
+=
+\mu(X,\beta_0),
+$$
+
+:::::::::::::::::::
+
+then $E[s_i(\beta_0)]=0$. Define
+
+::::::::::::::::::: {.math-display}
+
+$$
+A
+=
+E[\mu(X,\beta_0)XX'],
+\qquad
+B
+=
+E[XX'(Y-\mu)^2].
+$$
+
+:::::::::::::::::::
+
+Poisson-QMLE의 asymptotic covariance는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V_{PQMLE}
+=
+A^{-1}BA^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+이고 $\operatorname{Var}(Y\mid X)=\mu(X,\beta_0)$이면 $B=A$이므로 covariance는 $A^{-1}$로 단순화된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Ignoring the term $-\log(Y_i!)$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\ell_i(\beta)
+=
+Y_iX_i'\beta
+-
+\exp(X_i'\beta).
+$$
+
+:::::::::::::::::::
+
+한 번과 두 번 미분하여 stated score와 Hessian을 얻는다. Correct mean specification 아래에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[s_i(\beta_0)\mid X_i]
+=
+X_i
+\{E[Y_i\mid X_i]-\mu_i\}
+=
+0.
+$$
+
+:::::::::::::::::::
+
+generic QMLE sandwich는 $A^{-1}BA^{-1}$를 준다. Poisson variance가 correct이면
+$$
+E[(Y-\mu)^2\mid X]=\mu,
+$$
+이므로 $B=A$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1313x}
+
+## [13.13]{.section-number}What Likelihood Does—and Does Not—Buy Us
+
+::: {.topic-opening}
+Likelihood는 강력한 unifying framework지만 identification, interpretation, computation의 모든 문제를 자동으로 해결하지 않는다.
+:::
+
+### 13.13.1 What likelihood provides {#s13131}
+
+<ul>
+<li>하나의 unified sample criterion,</li>
+<li>score-based estimating equations,</li>
+<li>information geometry,</li>
+<li>correct specification 아래의 efficient regular parametric asymptotics,</li>
+<li>Wald, LR, Score를 이용한 inference,</li>
+<li>nonlinear probability model을 위한 자연스러운 framework.</li>
+</ul>
+
+### 13.13.2 Identification and misspecification {#s13132}
+
+likelihood를 쓴다고 parameter가 자동으로 identified되는 것은 아니다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+f_{\theta_1}=f_{\theta_2}
+\quad\text{with}\quad
+\theta_1\neq\theta_2
+$$
+
+::::::::::::::::::::
+
+이면 parameterization은 observationally nonidentified다.
+
+또한 model family가 틀리면 estimator는 structural truth가 아니라
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\theta^\dagger
+=
+\operatorname*{arg\,min}_\theta
+D_{KL}(f_0\Vert f_\theta)
+$$
+
+::::::::::::::::::::
+
+를 학습한다.
+
+### 13.13.3 Causal interpretation and computation {#s13133}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{precise likelihood estimation}
+\neq
+\text{causal identification}.
+}
+$$
+
+::::::::::::::::::::
+
+causal interpretation에는 별도의 structural/identifying assumptions가 필요하다.
+또한 nonconcave likelihood에서는 local optimizer가 global MLE인지 별도의 확인이 필요할 수 있다.
+
+### 13.13.4 Nonregularity preview {#s13134}
+
+standard likelihood theory는 다음 상황에서 실패하거나 수정이 필요할 수 있다.
+
+<ul>
+<li>boundary parameters,</li>
+<li>singular information matrices,</li>
+<li>mixture models,</li>
+<li>null 아래 unidentified nuisance parameters,</li>
+<li>weak identification,</li>
+<li>parameter-dependent support,</li>
+<li>nonstandard convergence rates.</li>
+</ul>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{regular likelihood theory}
+\text{ is powerful, but it is a local regularity theory.}
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+실패 유형 13.1 · Four distinct problems that likelihood does not collapse into one
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Problem</th><th>What fails</th><th>Typical consequence</th></tr></thead>
+<tbody>
+<tr><td>Nonidentification</td><td>서로 다른 $\theta$가 동일한 observed law를 생성</td><td>point target이 아니라 set target</td></tr>
+<tr><td>Misspecification</td><td>$f_0$가 working family 바깥에 존재</td><td>KL pseudo-true target과 sandwich covariance</td></tr>
+<tr><td>Numerical failure</td><td>algorithm이 global optimum을 놓치거나 finite maximizer가 존재하지 않음</td><td>계산된 값이 statistical estimator와 다름</td></tr>
+<tr><td>Nonregularity</td><td>ordinary local quadratic/root-$n$ theory가 붕괴</td><td>nonstandard rate 또는 limiting law</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{good optimization}
+\not\Rightarrow
+\text{correct specification}
+\not\Rightarrow
+\text{identification}
+\not\Rightarrow
+\text{causal interpretation}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1314x}
+
+## [13.14]{.section-number}요약과 연습문제
+
+### 13.14.1 Chapter map {#s13141}
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 13 in one map
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+f_\theta
+\longrightarrow
+E_0[\log f_\theta(W)]
+\longrightarrow
+\theta^\dagger
+\longrightarrow
+\ell_n(\theta)
+\longrightarrow
+\widehat\theta
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{score}
++
+\text{curvature}
++
+\text{CLT}
+\Longrightarrow
+\text{asymptotic normality}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Correct specification: }
+\theta^\dagger=\theta_0,
+\quad
+H=J=\mathcal I,
+\quad
+V=\mathcal I^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Misspecification: }
+\theta^\dagger=\text{KL projection},
+\quad
+H\neq J\text{ generally},
+\quad
+V=H^{-1}JH^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 13.14.2 MLE/QMLE comparison {#s13142}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Object</th><th>Correctly specified MLE</th><th>QMLE / misspecified likelihood</th></tr></thead>
+<tbody>
+<tr><td>Population target</td><td>true $\theta_0$</td><td>KL pseudo-true $\theta^\dagger$</td></tr>
+<tr><td>Score mean</td><td>$E_{\theta_0}[s]=0$</td><td>interior pseudo-true target에서 $E_0[s(\theta^\dagger)]=0$</td></tr>
+<tr><td>Information equality</td><td>$H=J=\mathcal I$</td><td>not guaranteed</td></tr>
+<tr><td>Asymptotic variance</td><td>$\mathcal I^{-1}$</td><td>$H^{-1}JH^{-1}$</td></tr>
+<tr><td>Standard LR theory</td><td>regularly available</td><td>standard form이 자동으로 valid한 것은 아님</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+### 13.14.3 Likelihood checklist {#s13143}
+
+<ol>
+<li><strong>Probability model:</strong> 어떤 joint/conditional distribution을 parameterize하는가?</li>
+<li><strong>Population target:</strong> expected log likelihood의 maximizer는 무엇인가?</li>
+<li><strong>Identification:</strong> 서로 다른 parameter가 서로 다른 observed-data laws를 생성하는가?</li>
+<li><strong>Specification:</strong> true law가 model family에 포함된다고 보는가, working likelihood로 보는가?</li>
+<li><strong>Consistency:</strong> normalized log likelihood가 uniformly converge하고 target이 separated되어 있는가?</li>
+<li><strong>Score:</strong> first-order condition의 estimating function은 무엇인가?</li>
+<li>Curvature 측면에서 Hessian/information matrix가 nonsingular한가?</li>
+<li><strong>Variance:</strong> information equality를 사용할 수 있는가, sandwich가 필요한가?</li>
+<li><strong>Inference:</strong> Wald/LR/Score 중 어떤 test가 현재 specification 아래 정당화되는가?</li>
+<li><strong>Computation:</strong> local maximum, scaling, constraints, convergence diagnostics를 확인했는가?</li>
+<li><strong>Interpretation:</strong> likelihood parameter와 structural/causal target을 구분했는가?</li>
+</ol>
+
+### 연습문제 {#exercises}
+
+<ol class="exercise-list">
+<li><strong>Likelihood and log-likelihood.</strong> strictly increasing transformation을 이용해 $\arg\max L_n=\arg\max\ell_n$을 증명하라.</li>
+<li><strong>Likelihood is not posterior.</strong> Bernoulli likelihood를 쓰고 왜 그것이 parameter density가 아닌지 설명하라.</li>
+<li><strong>Conditional likelihood.</strong> $f_\theta(y,x)=f_\theta(y\mid x)f_X(x)$에서 $f_X$가 $\theta$-free일 때 joint/conditional argmax equivalence를 증명하라.</li>
+<li><strong>Likelihood implies moments.</strong> regular correct likelihood에서 score moment restriction이 어떻게 생성되는지 보이라.</li>
+<li><strong>KL decomposition.</strong> expected log likelihood maximization과 KL minimization이 동치임을 증명하라.</li>
+<li><strong>Gibbs inequality.</strong> $\log x\le x-1$을 이용해 $D_{KL}(f_0\Vert f_\theta)\ge0$를 증명하라.</li>
+<li><strong>KL identification.</strong> correct specification과 distributional identification에서 $\theta_0$가 unique population maximizer임을 증명하라.</li>
+<li><strong>Observational equivalence.</strong> $P_{\theta_1}=P_{\theta_2}$인 distinct parameters가 있을 때 population likelihood maximizer set을 characterize하라.</li>
+<li><strong>Support failure.</strong> $f_\theta=0$인 region에서 $f_0\gt0$이면 KL divergence가 infinite가 되는 이유를 설명하라.</li>
+<li><strong>MLE as M.</strong> negative log likelihood를 이용해 MLE를 M-estimator로 표현하라.</li>
+<li><strong>Score as Z.</strong> smooth interior MLE의 score equation을 Z-estimation form으로 쓰라.</li>
+<li><strong>FOC is not MLE.</strong> $\ell(\theta)=-(\theta^2-1)^2$에서 score roots와 maxima를 비교하라.</li>
+<li><strong>MLE consistency.</strong> uniform convergence, separation gap, near-maximizer condition으로 likelihood argmax consistency를 증명하라.</li>
+<li><strong>Model truth versus consistency.</strong> $\hat\theta\to_p\theta^\dagger$가 $f_0=f_{\theta^\dagger}$를 imply하지 않는 이유를 설명하라.</li>
+<li><strong>Score identity.</strong> $E_\theta[s(W,\theta)]=0$를 differentiation under the integral sign으로 증명하라.</li>
+<li><strong>Information equality.</strong> score identity를 다시 미분하여 $-E[H]=E[ss']$를 증명하라.</li>
+<li><strong>Uniform-support counterexample.</strong> $Y\sim U(0,\theta)$에서 formal score mean이 zero가 아닌 이유를 support dependence로 설명하라.</li>
+<li><strong>Three information matrices.</strong> observed Hessian, OPG, expected information을 정의하고 correct specification에서 population limits를 비교하라.</li>
+<li><strong>Integrated Hessian.</strong> fundamental theorem of calculus로 exact multivariate score expansion을 증명하라.</li>
+<li><strong>MLE asymptotic normality.</strong> score CLT와 local Hessian LLN으로 inverse-information limit를 증명하라.</li>
+<li><strong>MLE influence function.</strong> $IF(W)=\mathcal I^{-1}s(W,\theta_0)$를 유도하고 covariance를 계산하라.</li>
+<li><strong>Parametric efficiency.</strong> $\phi=\mathcal I^{-1}s+r$ decomposition으로 covariance lower bound를 증명하라.</li>
+<li><strong>Gaussian pseudo-truth.</strong> arbitrary finite-variance $Y$에 Gaussian working likelihood를 적용해 $\mu^\dagger=E[Y]$, $\sigma^{2\dagger}=\operatorname{Var}(Y)$를 유도하라.</li><li><strong>Boundary pseudo-score.</strong> $\Theta=[0,\infty)$, $M(\theta)=-(\theta+1)^2$에서 maximizer가 score zero를 만족하지 않음을 보이라.</li><li><strong>QMLE ALR.</strong> integrated-Hessian score expansion에서 QMLE asymptotic linear representation을 유도하라.</li><li><strong>QMLE sandwich.</strong> score CLT로 $H^{-1}JH^{-1}$를 도출하라.</li><li><strong>Sandwich consistency.</strong> local ULLN과 random-index plug-in logic으로 $\hat H\to_pH,\hat J\to_pJ,\hat V\to_pV$를 증명하라.</li><li><strong>Misspecified normal mean.</strong> working $N(\mu,1)$, true variance $\tau^2$에서 $H=1,J=\tau^2$를 계산하라.</li><li><strong>Wald/LR/Score.</strong> scalar regular null에서 세 statistics가 같은 leading quadratic form을 갖는 것을 보이라.</li><li><strong>Misspecified LR.</strong> working $N(\mu,1)$에서 $LR=n\bar Y^2\Rightarrow\tau^2\chi_1^2$를 유도하라.</li><li><strong>Newton–Raphson.</strong> local quadratic approximation에서 Newton update를 유도하라.</li><li><strong>Fisher scoring.</strong> Newton–Raphson과 Fisher scoring의 curvature matrix를 비교하라.</li><li><strong>Numerical tolerance.</strong> $\tilde\theta-\hat\theta=o_p(n^{-1/2})$가 first-order equivalence에 충분한 이유를 설명하고 normalized score residual condition과 연결하라.</li><li><strong>Normal regression.</strong> Gaussian conditional likelihood에서 $\hat\beta_{MLE}=\hat\beta_{OLS}$, $\hat\sigma^2=RSS/n$을 유도하라.</li><li><strong>Gaussian QMLE and BLP.</strong> conditional normality가 틀려도 Gaussian quasi-likelihood의 $\beta^\dagger$가 BLP임을 증명하라.</li><li><strong>Logit.</strong> Bernoulli log-likelihood에서 score와 Hessian을 유도하고 concavity를 보이라.</li><li><strong>Complete separation.</strong> logit separation에서 finite MLE가 존재하지 않을 수 있음을 parameter ray argument로 설명하라.</li><li><strong>Poisson QMLE.</strong> score, Hessian, $A,B$, robust sandwich를 유도하고 Poisson variance restriction이 맞을 때 $A^{-1}$로 단순화됨을 보이라.</li></ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 다음 장
+
+이 장은 likelihood를 Chapter 11의 M/Z-estimation과 연결하면서,
+population expected log likelihood, KL projection, score, Hessian, information matrix,
+MLE/QMLE asymptotics, robust sandwich covariance, Wald/LR/Score inference를 하나의 구조로 정리한다.
+Correct specification에서는 Fisher information identity가 generic sandwich를 inverse-information form으로 단순화하고,
+misspecification에서는 pseudo-true KL target과 robust sandwich covariance가 다시 핵심이 된다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+다음 장으로
+
+:::::::::::::::::::
+
+Chapter 11–13은 regular estimation theory의 기본 toolbox를 완성한다.
+다음 장에서는 이 regular theory가 실패하거나 불안정해지는 상황—
+weak identification, singular information, boundary parameters, unidentified nuisance parameters, nonstandard rates—
+을 하나의 nonregular estimation framework로 묶어 분석할 수 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{regular M/Z, GMM, likelihood theory}
+\longrightarrow
+\text{nonregularity and weak identification}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
