@@ -1,0 +1,4040 @@
+---
+title: "Moment Restrictions, Instrumental Variables, and GMM"
+description: "Endogeneity · Identification · 2SLS · Efficient Weighting · Overidentification"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s121}
+
+## [12.1]{.section-number}Why Moment Restrictions beyond OLS?
+
+::: {.topic-opening}
+OLS는 sample에서 언제나 계산할 수 있다. 문제는 structural parameter가 OLS의 population projection target과 같은가이다.
+Endogeneity가 존재하면 OLS의 defining moments는 structural parameter를 characterize하지 못한다.
+:::
+
+### 12.1.1 OLS moment failure and endogeneity {#s1211}
+
+structural equation을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X'\beta_0+u
+$$
+
+::::::::::::::::::::
+
+라고 하자. OLS가 $\beta_0$를 recover하려면 population orthogonality
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[Xu]=0
+$$
+
+::::::::::::::::::::
+
+가 필요하다. Endogeneity는 이 moment restriction의 실패로 표현된다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Xu]\neq0.
+}
+$$
+
+::::::::::::::::::::
+
+이 경우 OLS가 계산되지 않는 것이 아니다. OLS는 여전히 $Y$의 best linear projection coefficient를 계산한다.
+다만 그 descriptive projection target이 structural $\beta_0$와 달라질 수 있다.
+
+### 12.1.2 Replace invalid moments with valid moments {#s1212}
+
+다른 observable vector $Z$가 structural error와 orthogonal하다고 하자.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Zu]=0.
+}
+$$
+
+::::::::::::::::::::
+
+그러면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[Z(Y-X'\beta_0)]=0
+$$
+
+::::::::::::::::::::
+
+을 이용해 $\beta_0$를 characterize할 수 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{invalid regressor moments}
+\longrightarrow
+\text{valid instrumental moments}.
+}
+$$
+
+::::::::::::::::::::
+
+### 12.1.3 Endogeneity is not a computational problem {#s1213}
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+핵심 구분
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+IV는 endogeneity를 numerical algorithm으로 “제거”하는 방법이 아니다.
+IV는 structural parameter를 characterize하는 population moment conditions를 바꾸는 방법이다.
+따라서 endogeneity는 computation 이전에 identification의 문제다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+유도 12.1 · Endogeneity가 OLS structural target을 이동시키는 방식
+
+:::::::::::::::::::
+
+scalar structural equation
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y=\beta_0X+u
+$$
+
+:::::::::::::::::::
+
+를 생각하자. Population OLS coefficient는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\beta^{OLS}
+=
+\frac{E[XY]}{E[X^2]}
+=
+\frac{E[X(\beta_0X+u)]}{E[X^2]}.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta^{OLS}-\beta_0
+=
+\frac{E[Xu]}{E[X^2]}.
+}
+$$
+
+:::::::::::::::::::
+
+즉 endogeneity는 OLS 계산의 실패가 아니라, OLS projection target과 structural parameter가 달라지는 population problem이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+직접 전개하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[XY]
+=
+E[X(\beta_0X+u)]
+=
+\beta_0E[X^2]+E[Xu].
+$$
+
+:::::::::::::::::::
+
+양변을 $E[X^2]$로 나누면 stated decomposition을 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 12.1 · Endogenous regressor, valid instrument
+
+:::::::::::::::::::
+
+다음 DGP를 생각하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+X=Z+v,
+\qquad
+u=\rho v+\varepsilon,
+$$
+
+:::::::::::::::::::
+
+where
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Zv]=E[Z\varepsilon]=E[v\varepsilon]=0,
+\qquad
+\rho\neq0.
+$$
+
+:::::::::::::::::::
+
+그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Xu]
+=
+E[(Z+v)(\rho v+\varepsilon)]
+=
+\rho E[v^2]
+\neq0,
+$$
+
+:::::::::::::::::::
+
+하지만
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Zu]
+=
+\rho E[Zv]+E[Z\varepsilon]
+=
+0.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+X\text{ is endogenous},
+\qquad
+Z\text{ is a valid IV moment source}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s122}
+
+## [12.2]{.section-number}Instrumental Variables as Moment Restrictions
+
+::: {.topic-opening}
+Instrumental variables는 Chapter 11의 Z-estimation을 가장 중요한 econometric setting에 적용한 것이다.
+:::
+
+### 12.2.1 The IV moment condition {#s1221}
+
+$X\in\mathbb R^K$, $Z\in\mathbb R^L$라 하자.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Z(Y-X'\beta_0)]=0.
+}
+$$
+
+::::::::::::::::::::
+
+moment map을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+g(\beta)
+=
+E[Z(Y-X'\beta)]
+=
+E[ZY]-E[ZX']\beta
+$$
+
+::::::::::::::::::::
+
+로 쓰면 target은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+g(\beta_0)=0.
+}
+$$
+
+::::::::::::::::::::
+
+### 12.2.2 Conditional to unconditional moments {#s1222}
+
+더 강한 condition
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[u\mid Z]=0
+$$
+
+::::::::::::::::::::
+
+가 성립하면 suitable measurable function $h(Z)$에 대해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[h(Z)u]=0.
+$$
+
+::::::::::::::::::::
+
+따라서 하나의 conditional moment restriction은 여러 unconditional moments를 생성할 수 있다.
+다만
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[Zu]=0
+$$
+
+::::::::::::::::::::
+
+자체가 IV estimation에 충분할 수 있으며 conditional mean-zero는 그보다 강한 restriction이다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 12.1 · Conditional moments generate unconditional moments
+
+:::::::::::::::::::
+
+만약
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[u\mid Z]=0
+$$
+
+:::::::::::::::::::
+
+이고 $h(Z)u$가 integrable이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[h(Z)u]=0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[h(Z)u]
+&=
+E\!\left[
+E[h(Z)u\mid Z]
+\right]\\
+&=
+E\!\left[
+h(Z)E[u\mid Z]
+\right]\\
+&=0.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+따라서 하나의 conditional restriction은 적절한 $h$를 통해 potentially many unconditional restrictions를 생성한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 12.2.3 IV as Z-estimation {#s1223}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\psi(W,\beta)
+=
+Z(Y-X'\beta).
+}
+$$
+
+::::::::::::::::::::
+
+따라서 IV는 Chapter 11의 general Z-estimator framework에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[\psi(W,\beta_0)]=0
+$$
+
+::::::::::::::::::::
+
+을 사용하는 특수사례다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 12.2 · Linear transformations of valid instruments
+
+:::::::::::::::::::
+
+$E[Zu]=0$이고 $A$가 fixed matrix이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[(AZ)u]
+=
+AE[Zu]
+=
+0.
+}
+$$
+
+:::::::::::::::::::
+
+따라서 valid instrument vector의 linear transformation은 validity를 보존한다.
+그러나 $A$가 rank-deficient이면 parameter-relevant moment directions를 잃을 수 있으므로
+<strong>validity preservation과 identification preservation은 같은 명제가 아니다.</strong>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s123}
+
+## [12.3]{.section-number}Identification: Validity, Relevance, and Rank
+
+::: {.topic-opening}
+Moment condition이 존재하는 것만으로 parameter가 identified되는 것은 아니다.
+IV에서는 validity와 relevance가 서로 다른 역할을 한다.
+:::
+
+### 12.3.1 Validity {#s1231}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Zu]=0.
+}
+$$
+
+::::::::::::::::::::
+
+이 조건은 instruments가 structural error와 orthogonal하다는 population restriction이다.
+validity는 moment condition 자체의 정당성을 말한다.
+
+### 12.3.2 Relevance and rank {#s1232}
+
+moment equation을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[ZY]
+=
+E[ZX']\beta_0
+$$
+
+::::::::::::::::::::
+
+로 쓰고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Q_{ZX}
+=
+E[ZX']
+\in\mathbb R^{L\times K}
+$$
+
+::::::::::::::::::::
+
+라 하자. parameter identification을 위한 핵심 rank condition은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{rank}(Q_{ZX})=K.
+}
+$$
+
+::::::::::::::::::::
+
+instruments가 error와 orthogonal하더라도 $X$의 relevant variation을 충분히 설명하지 못하면 $\beta_0$를 구별할 수 없다.
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Validity
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+E[Zu]=0
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+moment restriction의 정당성.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Relevance
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+\operatorname{rank}E[ZX']=K
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+moments가 parameter directions를 실제로 구별하는지의 문제.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 12.1A · Linear IV point identification iff full column rank
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+g(\beta)
+=
+E[ZY]-Q_{ZX}\beta,
+\qquad
+Q_{ZX}=E[ZX'].
+$$
+
+:::::::::::::::::::
+
+Assume $g(\beta_0)=0$. Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta_0\text{ is the unique solution of }g(\beta)=0
+\iff
+\operatorname{rank}(Q_{ZX})=K.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+$\beta_1$도 $g(\beta_1)=0$을 만족한다고 하자. $g(\beta_0)=0$을 빼면
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_{ZX}(\beta_1-\beta_0)=0.
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\beta_1-\beta_0\in\operatorname{Null}(Q_{ZX}).
+$$
+
+:::::::::::::::::::
+
+따라서 해가 유일할 필요충분조건은 $\operatorname{Null}(Q_{ZX})=\{0\}$이며, 이는 $\operatorname{rank}(Q_{ZX})=K$와 동치다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+따름정리 12.1 · Rank failure의 identification set
+
+:::::::::::::::::::
+
+$\beta_0$가 하나의 해이고 $Q_{ZX}$가 rank-deficient라면 전체 해집합은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\mathcal I
+=
+\beta_0+\operatorname{Null}(Q_{ZX}).
+}
+$$
+
+:::::::::::::::::::
+
+즉 rank failure는 단순히 numerical instability가 아니라 coefficient vector의 population set identification을 의미한다.
+
+::::::::::::::::::::
+
+### 12.3.3 Under-, just-, and overidentification {#s1233}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Moment count</th><th>Case</th><th>Interpretation</th></tr></thead>
+<tbody>
+<tr><td>$L\lt K$</td><td>Underidentified</td><td>moments의 수가 parameter dimension보다 작아 full identification 불가능</td></tr>
+<tr><td>$L=K$</td><td>Just identified</td><td>rank가 full이면 exact solution 가능</td></tr>
+<tr><td>$L\gt K$</td><td>Overidentified</td><td>parameter 수보다 더 많은 moment restrictions</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 12.1 · Valid but irrelevant
+
+:::::::::::::::::::
+
+$Z$가 $X$와 $u$에 독립이고 $E[Z]=0$라고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Zu]=0,
+\qquad
+E[ZX']=0.
+$$
+
+:::::::::::::::::::
+
+따라서 instrument는 perfectly valid하지만 parameter variation을 구별하는 데 아무 정보도 제공하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 12.2 · Relevant but invalid
+
+:::::::::::::::::::
+
+scalar case에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+Z=X+u
+$$
+
+:::::::::::::::::::
+
+라고 하자. 일반적으로 $E[ZX]\neq0$이므로 first-stage association은 강할 수 있다. 그러나
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Zu]
+=
+E[Xu]+E[u^2],
+$$
+
+:::::::::::::::::::
+
+이므로 validity는 보장되지 않는다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{relevance}
+\not\Rightarrow
+\text{validity}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 12.3.4 Order condition is not sufficient {#s1234}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+L\ge K
+\not\Rightarrow
+\operatorname{rank}E[ZX']=K.
+}
+$$
+
+::::::::::::::::::::
+
+instrument count는 necessary dimension condition일 뿐이다.
+instruments가 linearly redundant하거나 $X$와 거의 관련이 없으면 rank condition은 실패하거나 nearly fail할 수 있다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+기하 12.1 · Rank와 identification strength는 다른 정보다
+
+:::::::::::::::::::
+
+Singular-value decomposition을
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_{ZX}=U\Sigma V'
+$$
+
+:::::::::::::::::::
+
+로 쓰자. Point identification은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sigma_{\min}(Q_{ZX})\gt0
+$$
+
+:::::::::::::::::::
+
+와 동치지만, $\sigma_{\min}$가 매우 작으면 moments가 일부 parameter direction을 매우 약하게 distinguish한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{rank}
+=
+\text{binary identification},
+\qquad
+\sigma_{\min}
+=
+\text{local strength/conditioning}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s124}
+
+## [12.4]{.section-number}Exactly Identified IV and the Scalar IV Formula
+
+::: {.topic-opening}
+Just-identified system에서는 moment equations를 직접 풀 수 있다.
+Scalar IV formula는 reduced form과 first stage의 관계를 가장 투명하게 보여준다.
+:::
+
+### 12.4.1 Matrix IV {#s1241}
+
+$L=K$이고 $E[ZX']$가 nonsingular라면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[ZY]
+=
+E[ZX']\beta_0,
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta_0
+=
+E[ZX']^{-1}E[ZY].
+}
+$$
+
+::::::::::::::::::::
+
+### 12.4.2 Scalar IV ratio {#s1242}
+
+intercept를 제거한 scalar $X,Z$ case에서는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[Z(Y-\beta X)]=0
+$$
+
+::::::::::::::::::::
+
+이므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta_{IV}
+=
+\frac{E[ZY]}{E[ZX]}.
+}
+$$
+
+::::::::::::::::::::
+
+centered variables라면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta_{IV}
+=
+\frac{\operatorname{Cov}(Z,Y)}
+{\operatorname{Cov}(Z,X)}.
+}
+$$
+
+::::::::::::::::::::
+
+### 12.4.3 Reduced form over first stage {#s1243}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{IV coefficient}
+=
+\frac{\text{association of }Z\text{ with }Y}
+{\text{association of }Z\text{ with }X}.
+}
+$$
+
+::::::::::::::::::::
+
+numerator는 reduced-form variation, denominator는 first-stage variation이다.
+하지만 이 ratio가 causal effect라는 해석은 algebra 자체에서 나오지 않는다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 12.3 · Exactly identified IV sample analogue
+
+:::::::::::::::::::
+
+$L=K$이고 $Z'X$가 nonsingular이면 sample IV equations는
+
+::::::::::::::::::: {.math-display}
+
+$$
+Z'(Y-X\beta)=0
+$$
+
+:::::::::::::::::::
+
+have solution
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{IV}
+=
+(Z'X)^{-1}Z'Y.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+sample moment equations로부터
+
+::::::::::::::::::: {.math-display}
+
+$$
+Z'Y=Z'X\widehat\beta.
+$$
+
+:::::::::::::::::::
+
+$(Z'X)^{-1}$을 왼쪽에서 곱하면 결과를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+유도 12.2 · Scalar IV separates validity and relevance
+
+:::::::::::::::::::
+
+Using $Y=\beta_0X+u$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[ZY]
+=
+\beta_0E[ZX]+E[Zu].
+$$
+
+:::::::::::::::::::
+
+Hence, whenever $E[ZX]\neq0$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta_{IV}
+=
+\beta_0
++
+\frac{E[Zu]}{E[ZX]}.
+}
+$$
+
+:::::::::::::::::::
+
+분자는 moment invalidity를, 분모는 relevance를 나타낸다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+민감도 12.1 · Weak denominator and ratio instability
+
+:::::::::::::::::::
+
+Write $\beta_{IV}=\mu_{ZY}/\mu_{ZX}$. Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{\partial\beta_{IV}}{\partial\mu_{ZY}}
+=
+\frac1{\mu_{ZX}},
+\qquad
+\frac{\partial\beta_{IV}}{\partial\mu_{ZX}}
+=
+-\frac{\mu_{ZY}}{\mu_{ZX}^2}.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+|\mu_{ZX}|\approx0
+\Rightarrow
+\text{large sensitivity to small moment perturbations}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s125}
+
+## [12.5]{.section-number}Two-Stage Least Squares as Projected-Instrument Estimation
+
+::: {.topic-opening}
+Multiple instruments에서는 instruments가 제공하는 $X$의 linear variation을 먼저 추출하고,
+그 variation을 이용해 structural coefficient를 추정할 수 있다.
+:::
+
+### 12.5.1 Population first-stage projection {#s1251}
+
+$E[ZZ']\succ0$라 하고 $X$를 $Z$에 linear projection하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+X
+=
+\Pi'Z+V,
+\qquad
+E[ZV']=0,
+$$
+
+::::::::::::::::::::
+
+where
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Pi
+=
+E[ZZ']^{-1}E[ZX'].
+$$
+
+::::::::::::::::::::
+
+projected component
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+X^*
+=
+\Pi'Z
+}
+$$
+
+::::::::::::::::::::
+
+는 instrument space에서 얻을 수 있는 $X$의 linear component다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 12.4 · Population first-stage projection and valid projected variation
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Pi=E[ZZ']^{-1}E[ZX'],
+\qquad
+X^*=\Pi'Z.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Z(X-X^*)']=0.
+$$
+
+:::::::::::::::::::
+
+If $E[Zu]=0$, then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[X^*u]
+=
+\Pi'E[Zu]
+=
+0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Since $X^*=\Pi'Z$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[ZX^{*'}]
+=
+E[ZZ']\Pi
+=
+E[ZX'].
+$$
+
+:::::::::::::::::::
+
+Therefore $E[Z(X-X^*)']=0$. Also
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[X^*u]
+=
+E[\Pi'Zu]
+=
+\Pi'E[Zu]
+=
+0.
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 12.5.2 Sample projection {#s1252}
+
+sample matrix $Z$에 대해 projection matrix는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+P_Z
+=
+Z(Z'Z)^{-1}Z'.
+$$
+
+::::::::::::::::::::
+
+따라서 first-stage fitted regressors는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat X=P_ZX.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 12.5 · Population 2SLS coefficient
+
+:::::::::::::::::::
+
+Define
+
+::::::::::::::::::: {.math-display}
+
+$$
+A
+=
+Q_{XZ}Q_{ZZ}^{-1}Q_{ZX}.
+$$
+
+:::::::::::::::::::
+
+$A$가 nonsingular이면 projected regressor $X^*=\Pi'Z$를 사용한 coefficient는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\beta_0
+=
+A^{-1}
+Q_{XZ}Q_{ZZ}^{-1}E[ZY].
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Because
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[X^*X']
+=
+\Pi'E[ZX']
+=
+Q_{XZ}Q_{ZZ}^{-1}Q_{ZX}
+=
+A,
+$$
+
+:::::::::::::::::::
+
+and
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[X^*Y]
+=
+\Pi'E[ZY]
+=
+Q_{XZ}Q_{ZZ}^{-1}E[ZY],
+$$
+
+:::::::::::::::::::
+
+$X^*$를 사용한 population regression coefficient는 위 식과 같다. Validity 아래에서는 $E[ZY]=Q_{ZX}\beta_0$이므로 이 식은 $A^{-1}A\beta_0=\beta_0$로 축약된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 12.5.3 2SLS formula {#s1253}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정의 12.1 · Two-stage least squares
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{2SLS}
+=
+(X'P_ZX)^{-1}X'P_ZY.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Projection derivation of 2SLS
+
+:::::::::::::::::::
+
+Let $\widehat X=P_ZX$. Since $P_Z'=P_Z=P_Z^2$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat X'\widehat X
+=
+X'P_Z'P_ZX
+=
+X'P_ZX,
+$$
+
+:::::::::::::::::::
+
+and
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat X'Y
+=
+X'P_ZY.
+$$
+
+:::::::::::::::::::
+
+따라서 $Y$를 $\widehat X$에 OLS 회귀한 coefficient는
+
+::::::::::::::::::: {.math-display}
+
+$$
+(\widehat X'\widehat X)^{-1}\widehat X'Y
+=
+(X'P_ZX)^{-1}X'P_ZY.
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+$\widehat X=P_ZX$를 이용하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta_{2SLS}
+=
+(\widehat X'\widehat X)^{-1}\widehat X'Y.
+$$
+
+::::::::::::::::::::
+
+즉 first stage는 endogenous regressors를 instrument space에 projection하는 단계이며,
+second stage는 그 projected variation을 이용해 coefficient를 결정한다.
+
+### 12.5.4 Standard-error warning {#s1254}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 12.1 · 두 단계로 계산된다고 해서 naive two-step OLS inference를 쓰는 것은 아니다
+
+:::::::::::::::::::
+
+second-stage coefficient는 $\widehat X$에 대한 OLS와 algebraically 같지만,
+일반적인 2SLS covariance는 단순 second-stage OLS covariance와 같지 않다.
+Structural residual과 IV/GMM asymptotic variance formula를 사용해야 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+왜 naive second-stage SE가 실패하는가
+
+:::::::::::::::::::
+
+coefficient algebra에서는 $\widehat X=P_ZX$를 사용하지만 structural moments는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat u_i
+=
+Y_i-X_i'\widehat\beta_{2SLS},
+$$
+
+:::::::::::::::::::
+
+에서 구성되며 fitted-regressor OLS residual인
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_i-\widehat X_i'\widehat\beta_{2SLS}.
+$$
+
+:::::::::::::::::::
+
+In general
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+Y-\widehat X\widehat\beta
+\neq
+Y-X\widehat\beta.
+}
+$$
+
+:::::::::::::::::::
+
+에서 구성되는 것이 아니다. 따라서 $\widehat X$에 대한 OLS와 coefficient가 같다는 사실이 standard error까지 같음을 의미하지는 않는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s126}
+
+## [12.6]{.section-number}Large-Sample Theory for 2SLS
+
+::: {.topic-opening}
+2SLS의 sampling theory는 Chapter 11의 general moment-estimation logic으로 직접 얻을 수 있다.
+Unlike classical OLS, 2SLS는 처음부터 large-sample theory가 중심이다.
+:::
+
+### 12.6.1 Consistency {#s1261}
+
+moment contribution을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+g_i(\beta)
+=
+Z_i(Y_i-X_i'\beta)
+$$
+
+::::::::::::::::::::
+
+라고 하자. population derivative는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+G
+=
+-\,
+E[ZX'].
+$$
+
+::::::::::::::::::::
+
+instrument validity, full-column-rank condition, LLN과 regularity가 성립하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{2SLS}
+\overset p\longrightarrow
+\beta_0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 12.2A · 2SLS consistency from an exact sample identity
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q_{ZZ}=P_n[ZZ'],
+\qquad
+\widehat Q_{XZ}=P_n[XZ'],
+$$
+
+:::::::::::::::::::
+
+and
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat A_n
+=
+\widehat Q_{XZ}\widehat Q_{ZZ}^{-1}\widehat Q_{ZX}.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{2SLS}-\beta_0
+=
+\widehat A_n^{-1}
+\widehat Q_{XZ}\widehat Q_{ZZ}^{-1}
+P_n[Zu].
+}
+$$
+
+:::::::::::::::::::
+
+Under LLN, $E[Zu]=0$, $Q_{ZZ}\succ0$, and $\operatorname{rank}(Q_{ZX})=K$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta_{2SLS}\overset p\longrightarrow\beta_0.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+2SLS formula에 $Y=X\beta_0+u$를 대입하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\widehat\beta-\beta_0
+&=
+(X'P_ZX)^{-1}X'P_Zu\\
+&=
+\widehat A_n^{-1}
+\widehat Q_{XZ}\widehat Q_{ZZ}^{-1}
+P_n[Zu].
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+LLN에 의해
+$$
+P_n[Zu]\to_p0,\quad \widehat Q_{ZZ}\to_pQ_{ZZ},\quad \widehat Q_{XZ}\to_pQ_{XZ}.
+$$
+Full column rank이면
+$$
+A=Q_{XZ}Q_{ZZ}^{-1}Q_{ZX}\succ0,
+$$
+이므로 $\widehat A_n^{-1}=O_p(1)$이다. 따라서 전체 곱은 probability로 0에 수렴한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 12.6.2 Heteroskedastic sandwich variance {#s1262}
+
+정의:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Q_{ZZ}=E[ZZ'],
+\qquad
+Q_{ZX}=E[ZX'],
+\qquad
+\Omega=E[ZZ'u^2].
+$$
+
+::::::::::::::::::::
+
+2SLS는 asymptotically $W=Q_{ZZ}^{-1}$를 사용하는 GMM estimator다.
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+A
+=
+Q_{XZ}Q_{ZZ}^{-1}Q_{ZX}.
+$$
+
+::::::::::::::::::::
+
+일반적인 heteroskedastic asymptotic variance는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V_{2SLS}
+=
+A^{-1}
+Q_{XZ}Q_{ZZ}^{-1}
+\Omega
+Q_{ZZ}^{-1}Q_{ZX}
+A^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+그리고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\beta_{2SLS}-\beta_0)
+\overset d\longrightarrow
+N(0,V_{2SLS}).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 12.2B · 2SLS asymptotic linear representation
+
+:::::::::::::::::::
+
+앞의 regularity conditions와 $Z_iu_i$에 대한 CLT가 성립하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\beta_{2SLS}-\beta_0)
+=
+A^{-1}
+Q_{XZ}Q_{ZZ}^{-1}
+\frac1{\sqrt n}\sum_{i=1}^nZ_iu_i
++
+o_p(1).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+exact identity의 양변에 $\sqrt n$을 곱하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\beta-\beta_0)
+=
+\widehat A_n^{-1}
+\widehat Q_{XZ}\widehat Q_{ZZ}^{-1}
+\frac1{\sqrt n}\sum Z_iu_i.
+$$
+
+:::::::::::::::::::
+
+matrix product는 probability로
+$$
+A^{-1}Q_{XZ}Q_{ZZ}^{-1}
+$$
+에 수렴한다. CLT 아래 score sum은 $O_p(1)$이므로 random matrix를 그 probability limit로 대체하여 생기는 오차는 $o_p(1)$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+따름정리 12.2 · 2SLS robust sandwich
+
+:::::::::::::::::::
+
+If
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1{\sqrt n}\sum Z_iu_i
+\overset d\longrightarrow
+N(0,\Omega),
+\qquad
+\Omega=E[ZZ'u^2],
+$$
+
+:::::::::::::::::::
+
+then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\beta_{2SLS}-\beta_0)
+\Rightarrow
+N(0,V_{2SLS}),
+}
+$$
+
+:::::::::::::::::::
+
+where
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V_{2SLS}
+=
+A^{-1}
+Q_{XZ}Q_{ZZ}^{-1}
+\Omega
+Q_{ZZ}^{-1}Q_{ZX}
+A^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 12.6.3 Homoskedastic special case {#s1263}
+
+만약
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[u^2\mid Z]=\sigma^2,
+$$
+
+::::::::::::::::::::
+
+이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+\sigma^2Q_{ZZ},
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V_{2SLS}
+=
+\sigma^2
+\left(
+Q_{XZ}Q_{ZZ}^{-1}Q_{ZX}
+\right)^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Homoskedastic simplification
+
+:::::::::::::::::::
+
+Under $E[u^2\mid Z]=\sigma^2$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\Omega
+&=
+E[ZZ'u^2]\\
+&=
+E[ZZ'E[u^2\mid Z]]\\
+&=
+\sigma^2E[ZZ']\\
+&=
+\sigma^2Q_{ZZ}.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+이를 robust sandwich에 대입하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+V_{2SLS}
+=
+\sigma^2
+A^{-1}
+Q_{XZ}Q_{ZZ}^{-1}
+Q_{ZZ}
+Q_{ZZ}^{-1}Q_{ZX}
+A^{-1}
+=
+\boxed{\sigma^2A^{-1}}.
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s127}
+
+## [12.7]{.section-number}From IV to Generalized Method of Moments
+
+::: {.topic-opening}
+Overidentified systems에서는 sample moments를 모두 정확히 zero로 만드는 것이 일반적으로 불가능하다.
+GMM은 moment violations의 weighted quadratic norm을 최소화한다.
+:::
+
+### 12.7.1 Overidentified moments {#s1271}
+
+general moment vector를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+g(W,\theta)\in\mathbb R^L,
+\qquad
+\theta\in\mathbb R^K,
+\qquad
+L\ge K
+$$
+
+::::::::::::::::::::
+
+라고 하자. population restriction은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[g(W,\theta_0)]=0.
+}
+$$
+
+::::::::::::::::::::
+
+sample average moment는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\bar g_n(\theta)
+=
+\frac1n\sum_{i=1}^n g(W_i,\theta).
+$$
+
+::::::::::::::::::::
+
+### 12.7.2 GMM criterion {#s1272}
+
+positive-definite weighting matrix $W_n$에 대해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\theta)
+=
+\bar g_n(\theta)'W_n\bar g_n(\theta).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+정의 12.2 · Generalized method of moments
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_{GMM}
+=
+\operatorname*{arg\,min}_{\theta\in\Theta}
+\bar g_n(\theta)'W_n\bar g_n(\theta).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+따라서 GMM은 moment system을 optimization problem으로 바꾸는 M-estimation procedure다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+기하 12.2 · GMM as weighted least squares in moment space
+
+:::::::::::::::::::
+
+Because
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\theta)
+=
+\bar g_n(\theta)'W_n\bar g_n(\theta)
+=
+\|W_n^{1/2}\bar g_n(\theta)\|^2,
+$$
+
+:::::::::::::::::::
+
+GMM은 $W_n$이 유도하는 metric에서 sample moment vector가 원점에 가장 가까워지도록 parameter를 선택한다. Overidentification에서는 $K$개의 parameter direction만으로 $L$-dimensional moment vector를 일반적으로 정확히 0으로 만들 수 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 12.6 · Smooth GMM first-order condition
+
+:::::::::::::::::::
+
+$W_n$이 parameter-independent이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+G_n(\theta)
+=
+\frac{\partial\bar g_n(\theta)}
+{\partial\theta'}
+\in\mathbb R^{L\times K},
+$$
+
+:::::::::::::::::::
+
+then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\nabla_\theta Q_n(\theta)
+=
+2G_n(\theta)'W_n\bar g_n(\theta).
+}
+$$
+
+:::::::::::::::::::
+
+이면 smooth interior GMM estimator는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+G_n(\widehat\theta)'W_n\bar g_n(\widehat\theta)=0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+quadratic form을 미분하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+dQ_n
+=
+2(d\bar g_n)'W_n\bar g_n.
+$$
+
+:::::::::::::::::::
+
+$d\bar g_n=G_n(\theta)d\theta$이므로 gradient는 $2G_n'W_n\bar g_n$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 12.7.3 2SLS as GMM {#s1273}
+
+linear IV moments:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\bar g_n(\beta)
+=
+\frac1nZ'(Y-X\beta).
+$$
+
+::::::::::::::::::::
+
+weight를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+W_n
+=
+\left(
+\frac1nZ'Z
+\right)^{-1}
+$$
+
+::::::::::::::::::::
+
+로 선택하면 minimizer는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{GMM}
+=
+\widehat\beta_{2SLS}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+통합 관점
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+2SLS는 별개의 ad hoc estimator가 아니라 linear IV moments와 특정 weighting matrix를 사용하는 GMM의 특수사례다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 12.3A · 2SLS is linear-IV GMM
+
+:::::::::::::::::::
+
+For
+
+::::::::::::::::::: {.math-display}
+
+$$
+\bar g_n(\beta)=\frac1nZ'(Y-X\beta),
+\qquad
+W_n=\left(\frac1nZ'Z\right)^{-1},
+$$
+
+:::::::::::::::::::
+
+GMM minimizer는 정확히
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{GMM}
+=
+(X'P_ZX)^{-1}X'P_ZY
+=
+\widehat\beta_{2SLS}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+The FOC is
+
+::::::::::::::::::: {.math-display}
+
+$$
+X'Z(Z'Z)^{-1}Z'(Y-X\beta)=0,
+$$
+
+:::::::::::::::::::
+
+공통의 positive scalar normalization을 무시하면 위와 같다. $P_Z=Z(Z'Z)^{-1}Z'$이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+X'P_ZY=X'P_ZX\beta.
+$$
+
+:::::::::::::::::::
+
+$(X'P_ZX)^{-1}$을 왼쪽에서 곱하면 2SLS formula를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s128}
+
+## [12.8]{.section-number}Consistency and Asymptotic Normality of GMM
+
+::: {.topic-opening}
+Chapter 11의 M-estimation consistency와 local quadratic expansion을 GMM criterion에 적용하면 standard GMM asymptotics가 나온다.
+:::
+
+### 12.8.1 Population criterion {#s1281}
+
+population moment map을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+g(\theta)
+=
+E[g(W,\theta)]
+$$
+
+::::::::::::::::::::
+
+라고 하고 $W_n\overset p\to W\succ0$라 하자. population criterion은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+Q_W(\theta)
+=
+g(\theta)'Wg(\theta).
+}
+$$
+
+::::::::::::::::::::
+
+correct specification 아래
+
+:::::::::::::::::::: {.math-display}
+
+$$
+g(\theta_0)=0
+$$
+
+::::::::::::::::::::
+
+이므로 $Q_W(\theta_0)=0$.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 12.7 · Moment identification equals GMM-criterion identification
+
+:::::::::::::::::::
+
+Let $W\succ0$ and
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_W(\theta)=g(\theta)'Wg(\theta).
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+Q_W(\theta)=0
+\iff
+g(\theta)=0.
+}
+$$
+
+:::::::::::::::::::
+
+따라서 $g(\theta)=0$의 해가 오직 $\theta_0$뿐이라면 $\theta_0$는 population GMM criterion의 유일한 global minimizer다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Positive definiteness implies
+
+::::::::::::::::::: {.math-display}
+
+$$
+x'Wx=0
+\iff
+x=0.
+$$
+
+:::::::::::::::::::
+
+$x=g(\theta)$로 두면 결과가 즉시 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 12.8.2 Consistency {#s1282}
+
+$\theta_0$가 population GMM criterion의 well-separated unique minimizer이고 sample criterion이 uniformly approximate하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_{GMM}
+\overset p\longrightarrow
+\theta_0.
+}
+$$
+
+::::::::::::::::::::
+
+즉 GMM consistency는 Chapter 11의
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{identification}
++
+\text{uniform convergence}
+\Rightarrow
+\text{consistency}
+}
+$$
+
+::::::::::::::::::::
+
+구조의 직접적인 응용이다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 12.3B · GMM consistency as an application of Chapter 11
+
+:::::::::::::::::::
+
+Suppose
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sup_{\theta\in\Theta}
+\|\bar g_n(\theta)-g(\theta)\|
+=
+o_p(1),
+\qquad
+W_n\overset p\longrightarrow W\succ0,
+$$
+
+:::::::::::::::::::
+
+그리고 population criterion $Q_W$가 well-separated된 유일한 minimizer $\theta_0$를 갖는다면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_{GMM}\overset p\longrightarrow\theta_0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Write
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\theta)-Q_W(\theta)
+=
+\bar g_n'W_n\bar g_n
+-
+g'Wg.
+$$
+
+:::::::::::::::::::
+
+$g'W_n g$를 더하고 빼자. Uniform moment convergence와 $W_n$의 stochastic boundedness 아래에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+(\bar g_n-g)'W_n\bar g_n,
+\qquad
+g'W_n(\bar g_n-g),
+\qquad
+g'(W_n-W)g
+$$
+
+:::::::::::::::::::
+
+관련 compact set 위에서 해당 항들은 uniformly $o_p(1)$이다. 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sup_{\theta\in\Theta}|Q_n(\theta)-Q_W(\theta)|=o_p(1).
+$$
+
+:::::::::::::::::::
+
+이제 Chapter 11의 argmin consistency theorem을 적용하면 $\widehat\theta\to_p\theta_0$를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 12.8.3 GMM sandwich variance {#s1283}
+
+derivative matrix를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+G
+=
+E\left[
+\frac{\partial g(W,\theta_0)}
+{\partial\theta'}
+\right]
+\in\mathbb R^{L\times K}
+$$
+
+::::::::::::::::::::
+
+라고 하고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+E[g_i(\theta_0)g_i(\theta_0)']
+$$
+
+::::::::::::::::::::
+
+라 하자. full-column-rank $G$와 regularity 아래
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 12.1 · GMM asymptotic normality
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+\overset d\longrightarrow
+N(0,V_W),
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V_W
+=
+(G'WG)^{-1}
+G'W\Omega WG
+(G'WG)^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 12.3C · GMM asymptotic linear representation
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+G
+=
+E\left[
+\frac{\partial g(W,\theta_0)}{\partial\theta'}
+\right].
+$$
+
+:::::::::::::::::::
+
+consistency, local uniform Jacobian convergence, $W_n\to_pW$, 그리고 smooth interior FOC가 성립하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+=
+-
+(G'WG)^{-1}G'W
+\sqrt n\,\bar g_n(\theta_0)
++
+o_p(1).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+exact integrated-Jacobian expansion을 사용하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\bar g_n(\widehat\theta)
+=
+\bar g_n(\theta_0)
++
+\bar G_n(\widehat\theta-\theta_0),
+$$
+
+:::::::::::::::::::
+
+where
+
+::::::::::::::::::: {.math-display}
+
+$$
+\bar G_n
+=
+\int_0^1
+G_n\{\theta_0+t(\widehat\theta-\theta_0)\}\,dt.
+$$
+
+:::::::::::::::::::
+
+sample FOC는
+
+::::::::::::::::::: {.math-display}
+
+$$
+G_n(\widehat\theta)'W_n\bar g_n(\widehat\theta)=0.
+$$
+
+:::::::::::::::::::
+
+이 expansion을 대입하고 $\widehat\theta-\theta_0$에 대해 풀면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\theta-\theta_0)
+=
+-
+\left[
+G_n(\widehat\theta)'W_n\bar G_n
+\right]^{-1}
+G_n(\widehat\theta)'W_n
+\sqrt n\bar g_n(\theta_0).
+$$
+
+:::::::::::::::::::
+
+consistency와 local uniform convergence에 의해 matrix coefficient는 $(G'WG)^{-1}G'W$로 수렴한다. 따라서 remainder는 $o_p(1)$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · GMM sandwich from the ALR
+
+:::::::::::::::::::
+
+If
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\,\bar g_n(\theta_0)
+\Rightarrow
+N(0,\Omega),
+$$
+
+:::::::::::::::::::
+
+그 결과 limiting normal vector에 를 왼쪽에서 곱하게 된다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+C_W=(G'WG)^{-1}G'W
+$$
+
+:::::::::::::::::::
+
+gives covariance
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V_W
+=
+C_W\Omega C_W'
+=
+(G'WG)^{-1}
+G'W\Omega WG
+(G'WG)^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+Slutsky 정리가 $o_p(1)$ remainder를 처리한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 12.8.4 Just-identified case {#s1284}
+
+$L=K$이고 $G$가 nonsingular한 just-identified case에서는 first-order asymptotics에서 weighting matrix가 사라진다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{weighting matters principally in overidentified systems}.
+}
+$$
+
+::::::::::::::::::::
+
+직관적으로 just identification에서는 sample moments를 정확히 zero로 만들 수 있으므로 moments 사이의 relative weighting이 estimator를 바꾸지 않는다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 12.8 · Just identification removes weighting at first order
+
+:::::::::::::::::::
+
+$L=K$이고 $G$가 nonsingular이면 모든 $W\succ0$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+(G'WG)^{-1}G'W
+=
+G^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V
+=
+G^{-1}\Omega G^{-1'}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Let $C=(G'WG)^{-1}G'W$. Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+CG
+=
+(G'WG)^{-1}G'WG
+=
+I_K.
+$$
+
+:::::::::::::::::::
+
+$G$가 square nonsingular matrix이므로 left inverse는 유일하며 $G^{-1}$과 같다. 따라서 $C=G^{-1}$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s129}
+
+## [12.9]{.section-number}Efficient Weighting and Two-Step GMM
+
+::: {.topic-opening}
+Overidentified GMM에서는 여러 valid moments를 어떻게 결합하는지가 asymptotic efficiency를 결정한다.
+:::
+
+### 12.9.1 Optimal weighting {#s1291}
+
+moment covariance가
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+E[g_i(\theta_0)g_i(\theta_0)']
+$$
+
+::::::::::::::::::::
+
+라면 efficient weighting matrix는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+W^*
+=
+\Omega^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+이때 asymptotic variance는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V_{\mathrm{eff}}
+=
+(G'\Omega^{-1}G)^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+noisy moments에는 낮은 relative weight, precise moments에는 높은 relative weight가 주어지는 covariance-standardized geometry로 이해할 수 있다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 12.4 · Efficient GMM weighting
+
+:::::::::::::::::::
+
+동일한 moment vector를 사용하고 covariance가 $\Omega\succ0$인 regular linearized GMM estimator들 가운데 asymptotically efficient한 weighting matrix는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+W^*=\Omega^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+이며 그 asymptotic variance는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+V_{\mathrm{eff}}
+=
+(G'\Omega^{-1}G)^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+$CG=I_K$를 만족하는 임의의 admissible linear influence matrix $C$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+C^*
+=
+(G'\Omega^{-1}G)^{-1}G'\Omega^{-1}.
+$$
+
+:::::::::::::::::::
+
+Then $C^*G=I_K$. Write
+
+::::::::::::::::::: {.math-display}
+
+$$
+C=C^*+D,
+\qquad
+DG=0.
+$$
+
+:::::::::::::::::::
+
+Now
+
+::::::::::::::::::: {.math-display}
+
+$$
+C\Omega C'
+=
+C^*\Omega C^{*'}
++
+C^*\Omega D'
++
+D\Omega C^{*'}
++
+D\Omega D'.
+$$
+
+:::::::::::::::::::
+
+cross term은 다음 이유로 0이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+C^*\Omega D'
+=
+(G'\Omega^{-1}G)^{-1}G'D'
+=
+0,
+$$
+
+:::::::::::::::::::
+
+as $DG=0$. Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+C\Omega C'
+-
+C^*\Omega C^{*'}
+=
+D\Omega D'
+\succeq0.
+}
+$$
+
+:::::::::::::::::::
+
+따라서 $W=\Omega^{-1}$에 대응하는 $C^*$가 유도하는 covariance는 Loewner order에서 최소다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 12.9.2 Why 2SLS is efficient under homoskedasticity {#s1292}
+
+linear IV에서는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+g_i(\beta)=Z_iu_i,
+\qquad
+\Omega=E[ZZ'u^2].
+$$
+
+::::::::::::::::::::
+
+homoskedasticity $E[u^2\mid Z]=\sigma^2$ 아래
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+\sigma^2E[ZZ'].
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega^{-1}
+\propto
+E[ZZ']^{-1},
+$$
+
+::::::::::::::::::::
+
+즉 scaling을 제외하고 2SLS weighting과 efficient GMM weighting이 일치한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{homoskedasticity}
+\Rightarrow
+\text{2SLS is efficient GMM within this moment class}.
+}
+$$
+
+::::::::::::::::::::
+
+### 12.9.3 Two-step GMM {#s1293}
+
+$\Omega$는 unknown이므로 feasible efficient GMM은 preliminary consistent estimator에서 시작한다.
+
+<ol>
+<li>첫 단계에서 $\widetilde\theta$를 consistent하게 추정한다.</li>
+<li>residual moments
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat g_i
+=
+g(W_i,\widetilde\theta)
+$$
+
+::::::::::::::::::::
+
+를 계산한다.
+</li>
+<li>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\Omega
+=
+\frac1n\sum_i\widehat g_i\widehat g_i'
+$$
+
+::::::::::::::::::::
+
+를 만든다.
+</li>
+<li>$W_n=\widehat\Omega^{-1}$로 두고 GMM criterion을 다시 최소화한다.</li>
+</ol>
+
+linear IV에서는 preliminary estimator로 2SLS를 사용하는 것이 자연스럽다.
+
+### 12.9.4 Centered vs uncentered covariance {#s1294}
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Uncentered
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+\widehat\Omega_U
+=
+\frac1n\sum_i\widehat g_i\widehat g_i'
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+correct specification에서 standard consistent choice.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Centered
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+\widehat\Omega_C
+=
+\frac1n\sum_i
+(\widehat g_i-\bar g)
+(\widehat g_i-\bar g)'
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+moment mean이 nonzero일 수 있는 alternatives나 misspecification 논의에서 구별될 수 있음.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+correct specification 아래에는 두 estimator가 같은 population covariance target으로 간다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+기하 12.3 · Efficient GMM whitens moment space
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q^*(\theta)
+=
+g(\theta)'\Omega^{-1}g(\theta)
+=
+\|\Omega^{-1/2}g(\theta)\|^2.
+$$
+
+:::::::::::::::::::
+
+Efficient GMM은 먼저 moment들을 covariance geometry에 맞게 표준화한 뒤 원점까지의 ordinary Euclidean distance를 최소화한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{efficient GMM}
+=
+\text{least squares in whitened moment space}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 12.9 · Positive scalar rescaling of $W$ does not change the GMM minimizer
+
+:::::::::::::::::::
+
+If $W_2=cW_1$ for $c\gt0$, then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\bar g'W_2\bar g
+=
+c\,\bar g'W_1\bar g.
+$$
+
+:::::::::::::::::::
+
+따라서 두 criterion의 argmin set은 일치한다. 이것이 homoskedasticity 아래에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Omega^{-1}
+=
+\sigma^{-2}Q_{ZZ}^{-1}
+$$
+
+:::::::::::::::::::
+
+와 2SLS weighting $Q_{ZZ}^{-1}$이 동일한 estimator를 만드는 이유다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+증명 개요 12.1 · Feasible two-step GMM is first-order efficient
+
+:::::::::::::::::::
+
+preliminary consistent estimator $\widetilde\theta$와 Chapter 11의 random-index plug-in 논리를 사용하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\Omega(\widetilde\theta)
+\overset p\longrightarrow
+\Omega.
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat W=\widehat\Omega^{-1}
+\overset p\longrightarrow
+\Omega^{-1}.
+$$
+
+:::::::::::::::::::
+
+GMM의 ALR에서 $W_n$은 first order에서 probability limit를 통해서만 영향을 미친다. 따라서 feasible two-step GMM과 infeasible efficient GMM은 동일한 first-order asymptotic law를 갖는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+항등식 12.1 · Centered versus uncentered moment covariance
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\Omega_U
+=
+P_n[\widehat g_i\widehat g_i'],
+\qquad
+\widehat\Omega_C
+=
+P_n[(\widehat g_i-\bar g)(\widehat g_i-\bar g)'].
+$$
+
+:::::::::::::::::::
+
+Then exactly
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\Omega_U-\widehat\Omega_C
+=
+\bar g\,\bar g'.
+}
+$$
+
+:::::::::::::::::::
+
+correct specification과 regular estimation 아래에서는 $\bar g=O_p(n^{-1/2})$이므로 그 차이는 $O_p(n^{-1})$이다. Misspecification 아래에서는 pseudo-true target에서 population moment mean이 0이 아닐 수 있으므로 centering이 covariance target 자체를 바꿀 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+centered covariance를 전개하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+P_n[(g_i-\bar g)(g_i-\bar g)']
+&=
+P_n[g_ig_i']
+-\bar g\bar g'
+-\bar g\bar g'
++\bar g\bar g'\\
+&=
+P_n[g_ig_i']
+-\bar g\bar g'.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+항을 정리하면 해당 identity를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1210}
+
+## [12.10]{.section-number}Overidentifying Restrictions and the $J$-Test
+
+::: {.topic-opening}
+Overidentified model에서는 extra moments가 parameter estimation에 정보를 추가하는 동시에 specification restrictions가 된다.
+:::
+
+### 12.10.1 Test statistic {#s12101}
+
+efficient GMM estimator에서 criterion value를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+J
+=
+n\,
+\bar g_n(\widehat\theta)'
+\widehat\Omega^{-1}
+\bar g_n(\widehat\theta)
+}
+$$
+
+::::::::::::::::::::
+
+로 정의한다.
+
+### 12.10.2 Degrees of freedom {#s12102}
+
+correct specification과 regularity 아래
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 12.2 · Overidentification test
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+J
+\overset d\longrightarrow
+\chi^2_{L-K}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+기하 12.4 · $J$-test as residualized standardized moments
+
+:::::::::::::::::::
+
+Define
+
+::::::::::::::::::: {.math-display}
+
+$$
+z_n
+=
+\Omega^{-1/2}\sqrt n\,\bar g_n(\theta_0),
+\qquad
+D
+=
+\Omega^{-1/2}G.
+$$
+
+:::::::::::::::::::
+
+로 두면 $z_n\Rightarrow N(0,I_L)$이다. $K$-dimensional column space $\mathcal C(D)$는 $K$개의 parameter를 변화시켜 설명할 수 있는 local moment variation이다. Efficient GMM은 이 성분을 제거하고, $J$-statistic은 남은 성분의 squared norm을 측정한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · $J$-test chi-square limit
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_D
+=
+D(D'D)^{-1}D'
+$$
+
+:::::::::::::::::::
+
+$\mathcal C(D)$ 위의 orthogonal projection을 라고 하자. Efficient GMM linearization으로부터
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\,\Omega^{-1/2}\bar g_n(\widehat\theta)
+=
+(I-P_D)z_n
++
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+Therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+J
+=
+z_n'(I-P_D)z_n
++
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+$I-P_D$는 symmetric idempotent이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{rank}(I-P_D)
+=
+L-K.
+$$
+
+:::::::::::::::::::
+
+$z_n\Rightarrow N(0,I_L)$이므로 standard quadratic-form result에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+J\Rightarrow\chi^2_{L-K}.
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+degrees of freedom $L-K$는 parameter dimension을 초과하는 extra moment restrictions의 수다.
+
+just-identified case $L=K$에서는 sample moments를 정확히 zero로 만들 수 있으므로 별도의 overidentification restriction이 없다.
+
+### 12.10.3 Interpretation and limits {#s12103}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 12.2 · $J$-test는 instrument-validity oracle이 아니다
+
+:::::::::::::::::::
+
+large $J$는 moment system 전체와 data가 양립하지 않음을 시사하지만 어떤 특정 instrument나 어떤 특정 structural assumption이 잘못되었는지는 알려주지 않는다.
+반대로 non-rejection은 모든 instruments가 valid하다는 증명이 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{J-test rejection}
+\Rightarrow
+\text{model/moment-system tension},
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{but not a diagnosis of the unique source of failure}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 12.3 · Non-rejection is not an instrument-validity certificate
+
+:::::::::::::::::::
+
+$J$-test는 finite power를 가지며 전체 moment system의 joint compatibility를 검정한다. 일부 moment가 invalid하더라도 violation이 sampling noise에 비해 약하거나 moment direction들 사이에서 상쇄되면 non-rejection이 가능하다. 반대로 rejection은 invalid instruments, structural misspecification, 또는 다른 moment-model failure에서 발생할 수 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+J\text{-test}
+=
+\text{joint specification diagnostic},
+\quad
+\text{not an oracle identifying the defective assumption}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1211x}
+
+## [12.11]{.section-number}Weak Instruments, Near-Singularity, and Many Moments
+
+::: {.topic-opening}
+Full-rank identification은 binary condition처럼 보이지만 실제 inferential behavior는 rank condition이 얼마나 강하게 만족되는지에도 민감하다.
+:::
+
+### 12.11.1 Weak identification {#s12111}
+
+formal identification은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{rank}E[ZX']=K
+$$
+
+::::::::::::::::::::
+
+일 수 있지만 smallest singular value가 작다면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sigma_{\min}(E[ZX'])
+\approx0.
+}
+$$
+
+::::::::::::::::::::
+
+moments가 some parameter directions를 매우 약하게 구별한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{identified}
+\neq
+\text{strongly identified}.
+}
+$$
+
+::::::::::::::::::::
+
+### 12.11.2 First-stage diagnostics {#s12112}
+
+excluded instruments의 first-stage explanatory power는 relevance에 대한 실용적 diagnostic을 제공한다.
+하지만
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{strong first stage}
+\neq
+\text{instrument validity}.
+}
+$$
+
+::::::::::::::::::::
+
+또한 하나의 $F$-statistic threshold를 모든 model과 design에 보편적으로 적용하는 것은 적절하지 않다.
+
+### 12.11.3 Many instruments {#s12113}
+
+valid moments를 추가하면 asymptotic information이 증가할 수 있지만 finite-sample performance는 반드시 개선되지 않는다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{more valid instruments}
+\not\Rightarrow
+\text{better finite-sample estimator}.
+}
+$$
+
+::::::::::::::::::::
+
+weak-IV robust inference, LIML, many-instrument asymptotics 등은 이후 advanced treatment로 남긴다.
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+유도 12.3 · Weak scalar IV inflates first-order uncertainty
+
+:::::::::::::::::::
+
+scalar IV에서 estimator는 국소적으로 denominator가 $E[ZX]$인 ratio처럼 행동한다. Regular asymptotic variance에는 대략 에 비례하는 factor가 들어간다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac1{E[ZX]^2}.
+}
+$$
+
+:::::::::::::::::::
+
+따라서 relevance가 약해질수록 first-order variance가 폭증하며, 이후에는 regular approximation 자체도 신뢰하기 어려워진다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+기하 12.5 · Near-singularity of the 2SLS information matrix
+
+:::::::::::::::::::
+
+Recall
+
+::::::::::::::::::: {.math-display}
+
+$$
+A
+=
+Q_{XZ}Q_{ZZ}^{-1}Q_{ZX}.
+$$
+
+:::::::::::::::::::
+
+If
+
+::::::::::::::::::: {.math-display}
+
+$$
+\lambda_{\min}(A)\downarrow0,
+$$
+
+:::::::::::::::::::
+
+then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|A^{-1}\|
+=
+\frac1{\lambda_{\min}(A)}
+$$
+
+:::::::::::::::::::
+
+symmetric positive definite $A$에 대해 위 관계가 성립하므로 asymptotic variance와 numerical sensitivity가 모두 급격히 증가한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .preview}
+
+::::::::::::::::::: {.statement-head}
+
+미리보기 12.1 · Weak identification is a failure of regular asymptotic uniformity
+
+:::::::::::::::::::
+
+Sections 12.6–12.9의 regular proof는 population Jacobian/information matrix가 고정되어 있고 nonsingular하다고 취급한다. Weak-IV sequence에서는 smallest singular value가 $n$과 함께 0으로 가는 $G_n$ 또는 $A_n$이 relevant matrix가 될 수 있다. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat A_n^{-1}=O_p(1)
+$$
+
+:::::::::::::::::::
+
+라는 단계가 uniformly 성립할 필요가 없다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{weak identification}
+\neq
+\text{merely large standard errors};
+}
+$$
+
+:::::::::::::::::::
+
+따라서 usual normal/Wald approximation 자체가 nonuniform하게 실패할 수 있다. 이 nonstandard theory는 Chapter 14에서 다룬다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+경계 12.1 · Fixed-$L$ GMM versus many-instrument asymptotics
+
+:::::::::::::::::::
+
+이 장의 regular theory는 $n\to\infty$일 때 moment의 수 $L$이 고정되어 있다고 본다. 이는 다음과 같은 regime과 다르다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+L=L_n\to\infty.
+$$
+
+:::::::::::::::::::
+
+따라서 fixed $L$ 아래의 “additional valid moments can improve asymptotic information”이라는 진술을 many-instrument asymptotics와 혼동해서는 안 된다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1212x}
+
+## [12.12]{.section-number}Statistical Moment Validity versus Causal IV Interpretation
+
+::: {.topic-opening}
+Statistical IV identification과 causal IV identification은 같은 것이 아니다.
+Moment equations가 parameter를 identify한다고 해서 그 parameter가 자동으로 causal estimand가 되는 것은 아니다.
+:::
+
+### 12.12.1 Statistical IV model {#s12121}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y=X'\beta+u,
+\qquad
+E[Zu]=0,
+\qquad
+\operatorname{rank}E[ZX']=K.
+$$
+
+::::::::::::::::::::
+
+이 conditions는 $\beta$를 moment model의 parameter로 identify할 수 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{moment validity}
++
+\text{rank}
+=
+\text{statistical IV identification}.
+}
+$$
+
+::::::::::::::::::::
+
+### 12.12.2 Causal IV interpretation {#s12122}
+
+causal interpretation에는 $Z$가 왜 $X$를 변화시키고, 왜 $Y$에는 특정 channel을 통해서만 영향을 주는지에 관한 substantive assumptions가 추가로 필요하다.
+구체적인 causal design에 따라 relevance, exclusion, independence/exogeneity, monotonicity 또는 treatment-effect restrictions 등이 등장할 수 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{statistical moment model}
++
+\text{structural assumptions}
+\Longrightarrow
+\text{causal interpretation}.
+}
+$$
+
+::::::::::::::::::::
+
+### 12.12.3 Heterogeneous treatment effects {#s12123}
+
+treatment effects가 heterogeneous하면 conventional IV/2SLS coefficient를 algebra만으로 ATE라고 부를 수 없다.
+특정 design과 assumptions 아래 weighted causal parameters나 LATE-type objects가 나타날 수 있지만,
+그 이론은 causal-IV chapter에서 별도로 전개하는 편이 적절하다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{2SLS coefficient}
+\neq
+\text{ATE by algebra alone}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+비교 12.1 · Statistical IV identification and causal interpretation
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Layer</th><th>Typical requirement</th><th>무엇을 제공하는가</th></tr></thead>
+<tbody>
+<tr><td>통계적 moment validity</td><td>$E[Zu]=0$</td><td>moment restriction</td></tr>
+<tr><td>Statistical relevance</td><td>$\operatorname{rank}E[ZX']=K$</td><td>moment parameter의 point identification</td></tr>
+<tr><td>Causal interpretation</td><td>design-specific exogeneity/exclusion/treatment assumptions가 추가로 필요</td><td>moment parameter에서 causal estimand으로의 mapping</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+strong first stage는 relevance를 다룰 뿐 causal validity를 보장하지 않는다. Heterogeneous treatment effects가 존재할 때 valid statistical IV coefficient가 자동으로 ATE인 것도 아니다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1213x}
+
+## [12.13]{.section-number}요약과 연습문제
+
+### 12.13.1 Chapter map {#s12131}
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 12 in one map
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Xu]\neq0
+\Longrightarrow
+\text{OLS structural moment failure}
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Zu]=0
++
+\operatorname{rank}E[ZX']=K
+\Longrightarrow
+\text{IV identification}
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{IV moments}
+\longrightarrow
+\text{2SLS}
+\longrightarrow
+\text{GMM}
+\longrightarrow
+\text{efficient weighting}
+\longrightarrow
+\text{overidentification testing}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 12.13.2 Core formulas {#s12132}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Z(Y-X'\beta_0)]=0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{rank}E[ZX']=K.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{2SLS}
+=
+(X'P_ZX)^{-1}X'P_ZY.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_{GMM}
+=
+\operatorname*{arg\,min}_{\theta}
+\bar g_n(\theta)'W_n\bar g_n(\theta).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+W^*=\Omega^{-1},
+\qquad
+V_{\mathrm{eff}}
+=
+(G'\Omega^{-1}G)^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+### 12.13.3 IV/GMM checklist {#s12133}
+
+<ol>
+<li><strong>Target:</strong> 어떤 structural/statistical parameter를 moment conditions로 characterize하는가?</li>
+<li><strong>Validity:</strong> $E[Zu]=0$을 정당화하는 model assumption은 무엇인가?</li>
+<li><strong>Relevance:</strong> $\operatorname{rank}E[ZX']=K$가 성립하는가?</li>
+<li><strong>Identification degree:</strong> under-, just-, overidentified 중 어느 경우인가?</li>
+<li><strong>Estimator:</strong> direct IV, 2SLS, or general GMM 중 무엇을 사용하는가?</li>
+<li><strong>Weighting:</strong> 어떤 $W_n$을 사용하며 효율성에 어떤 영향을 주는가?</li>
+<li>Variance에서는 homoskedastic formula를 쓰는가, 아니면 robust GMM sandwich를 쓰는가?</li>
+<li><strong>Specification:</strong> extra moments가 있다면 $J$-test가 어떤 restriction을 검사하는가?</li>
+<li><strong>Strength:</strong> relevance가 formal rank를 넘어 sufficiently strong한가?</li>
+<li><strong>Causality:</strong> statistical moment identification과 causal interpretation을 분리했는가?</li>
+</ol>
+
+### 연습문제 {#exercises}
+
+<ol class="exercise-list">
+<li><strong>OLS structural-target decomposition.</strong> $Y=\beta_0X+u$에서 $\beta^{OLS}-\beta_0=E[Xu]/E[X^2]$를 유도하라.</li>
+<li><strong>Endogenous $X$, valid $Z$.</strong> $X=Z+v,\ u=\rho v+\varepsilon$ DGP에서 $E[Xu]\neq0$와 $E[Zu]=0$를 확인하라.</li>
+<li><strong>Conditional moments.</strong> $E[u\mid Z]=0\Rightarrow E[h(Z)u]=0$를 tower property로 증명하라.</li>
+<li><strong>Instrument transformations.</strong> $E[Zu]=0\Rightarrow E[(AZ)u]=0$를 증명하고 singular $A$가 identification information을 잃을 수 있는 이유를 설명하라.</li>
+<li><strong>Rank identification iff.</strong> $g(\beta)=E[ZY]-E[ZX']\beta$에서 unique solution iff $\operatorname{rank}E[ZX']=K$를 증명하라.</li>
+<li><strong>Rank-failure identification set.</strong> rank가 부족할 때 solution set이 $\beta_0+\operatorname{Null}(E[ZX'])$임을 보이라.</li>
+<li><strong>Valid but irrelevant.</strong> $E[Zu]=0$이지만 $E[ZX']=0$인 explicit DGP를 구성하라.</li>
+<li><strong>Relevant but invalid.</strong> $E[ZX']\neq0$이지만 $E[Zu]\neq0$인 explicit DGP를 구성하라.</li>
+<li><strong>Order versus rank.</strong> $L\ge K$이지만 $Q_{ZX}$가 rank-deficient인 matrix example을 구성하라.</li>
+<li><strong>Exactly identified IV.</strong> sample moment equations에서 $(Z'X)^{-1}Z'Y$를 유도하라.</li>
+<li><strong>Scalar IV decomposition.</strong> $\beta_{IV}=\beta_0+E[Zu]/E[ZX]$를 유도하고 validity/relevance를 구분하라.</li>
+<li><strong>Weak denominator.</strong> IV ratio를 $\mu_{ZY}/\mu_{ZX}$로 보고 두 partial derivatives를 계산해 sensitivity를 분석하라.</li>
+<li><strong>Population first stage.</strong> $\Pi=E[ZZ']^{-1}E[ZX']$와 $E[Z(X-X^*)']=0$를 유도하라.</li>
+<li><strong>Projected validity.</strong> $E[Zu]=0\Rightarrow E[X^*u]=0$를 증명하라.</li>
+<li><strong>Population 2SLS.</strong> $A^{-1}Q_{XZ}Q_{ZZ}^{-1}E[ZY]$가 $\beta_0$로 축약되는 과정을 보이라.</li>
+<li><strong>Sample 2SLS geometry.</strong> $\widehat X=P_ZX$와 $P_Z^2=P_Z$를 이용해 2SLS formula를 유도하라.</li>
+<li><strong>Naive second-stage SE.</strong> $Y-\widehat X\widehat\beta$와 $Y-X\widehat\beta$를 비교하고 왜 structural moment covariance는 후자를 사용해야 하는지 설명하라.</li>
+<li><strong>2SLS consistency.</strong> exact sample identity에서 LLN, rank, inverse continuity를 이용해 consistency를 증명하라.</li>
+<li><strong>2SLS ALR.</strong> exact identity를 root-$n$ scale로 바꾸어 asymptotic linear representation을 유도하라.</li>
+<li><strong>2SLS sandwich.</strong> $n^{-1/2}\sum Z_iu_i\Rightarrow N(0,\Omega)$에서 robust covariance를 유도하라.</li>
+<li><strong>Homoskedastic 2SLS.</strong> $E[u^2\mid Z]=\sigma^2$에서 $\Omega=\sigma^2Q_{ZZ}$와 $V=\sigma^2A^{-1}$를 증명하라.</li>
+<li><strong>GMM geometry.</strong> $Q_n(\theta)=\|W_n^{1/2}\bar g_n(\theta)\|^2$를 해석하고 overidentification과 연결하라.</li>
+<li><strong>GMM FOC.</strong> $\nabla Q_n=2G_n'W_n\bar g_n$를 matrix calculus로 유도하라.</li><li><strong>2SLS as GMM.</strong> linear IV moments와 $W_n=(Z'Z/n)^{-1}$에서 2SLS formula를 복원하라.</li><li><strong>Population GMM identification.</strong> $W\succ0$이면 $Q_W(\theta)=0\iff g(\theta)=0$임을 증명하라.</li><li><strong>GMM consistency.</strong> uniform moment convergence와 $W_n\to_pW$에서 uniform criterion convergence를 보이고 argmin consistency를 적용하라.</li><li><strong>GMM ALR.</strong> integrated Jacobian과 GMM FOC로 $-(G'WG)^{-1}G'W\sqrt n\bar g_n(\theta_0)$ representation을 유도하라.</li><li><strong>GMM sandwich.</strong> ALR와 moment CLT에서 $V_W$를 유도하라.</li><li><strong>Just identification.</strong> $L=K$에서 $(G'WG)^{-1}G'W=G^{-1}$임을 증명하라.</li><li><strong>Efficient weighting.</strong> $C=C^*+D,\ DG=0$ decomposition으로 $W^*=\Omega^{-1}$의 Loewner efficiency를 증명하라.</li><li><strong>Whitened moments.</strong> $g'\Omega^{-1}g=\|\Omega^{-1/2}g\|^2$를 이용해 efficient GMM geometry를 설명하라.</li><li><strong>Two-step GMM.</strong> preliminary consistent estimator에서 $\widehat\Omega\to_p\Omega$, $\widehat W\to_p\Omega^{-1}$를 설명하라.</li><li><strong>Centered versus uncentered.</strong> $\widehat\Omega_U-\widehat\Omega_C=\bar g\bar g'$를 증명하고 correct specification에서 차이의 stochastic order를 구하라.</li><li><strong>$J$-test.</strong> whitened moment vector와 projection matrix를 이용해 $J\Rightarrow\chi^2_{L-K}$를 증명하라.</li><li><strong>Weak-ID audit.</strong> $\sigma_{\min}(Q_{ZX})$ 또는 $\lambda_{\min}(A)$가 작아질 때 regular proof의 어느 단계가 불안정해지는지 설명하라.</li><li><strong>Statistical versus causal IV.</strong> moment validity/rank와 causal exclusion/exogeneity assumptions를 분리해 실제 IV design 하나를 audit하라.</li></ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 다음 장
+
+이 장은 Chapter 11의 moment-equation estimation theory를 linear IV, 2SLS, and GMM으로 구체화한다.
+핵심은 $E[Z(Y-X'\beta_0)]=0$이라는 moment restriction, rank-based identification,
+projected-instrument representation of 2SLS, weighted quadratic GMM criterion,
+sandwich asymptotics, efficient weighting, 그리고 overidentification testing의 연결이다.
+동시에 instrument validity, relevance, strength, causal interpretation을 서로 다른 문제로 분리한다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+다음 장으로
+
+:::::::::::::::::::
+
+Chapter 12에서는 regular moment-based estimation theory를 완성했다.
+다음 단계에서는 두 방향이 가능하다.
+하나는 weak identification, LIML, Anderson–Rubin/CLR inference처럼
+regular IV asymptotics가 실패하는 상황을 분석하는 것이고,
+다른 하나는 likelihood-based estimation으로 이동해 information equality,
+score, Hessian, quasi-maximum likelihood를 M-estimation 관점에서 정리하는 것이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{regular IV/GMM}
+\longrightarrow
+\text{weak-ID robust inference}
+\quad\text{or}\quad
+\text{likelihood-based estimation}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

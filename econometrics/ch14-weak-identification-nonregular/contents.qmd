@@ -1,0 +1,3596 @@
+---
+title: "Weak Identification and Nonregular Asymptotics"
+description: "Local-to-Zero Identification · Weak IV · Nonstandard Limits · Robust Inference · Singular Geometry"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s141}
+
+## [14.1]{.section-number}The Regular Asymptotic Benchmark
+
+::: {.topic-opening}
+Nonregularity를 이해하려면 먼저 regular theory가 무엇을 암묵적으로 요구하는지 분명히 해야 한다.
+핵심은 target 주변의 population map이 locally invertible하며 그 inverse가 sample size가 커져도 stable하다는 점이다.
+:::
+
+### 14.1.1 Regular Z-estimation {#s1411}
+
+population moment equation
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[\psi(W,\theta_0)]=0
+$$
+
+::::::::::::::::::::
+
+과 Jacobian
+
+:::::::::::::::::::: {.math-display}
+
+$$
+A
+=
+\left.
+\frac{\partial E[\psi(W,\theta)]}
+{\partial\theta'}
+\right|_{\theta=\theta_0}
+$$
+
+::::::::::::::::::::
+
+을 생각하자. $A$가 nonsingular이면 Chapter 11의 regular expansion은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+=
+-A^{-1}
+\frac1{\sqrt n}
+\sum_{i=1}^n
+\psi(W_i,\theta_0)
++
+o_p(1).
+}
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+\overset d\longrightarrow
+N(0,A^{-1}BA^{-1'}).
+}
+$$
+
+::::::::::::::::::::
+
+### 14.1.2 Regular GMM and likelihood geometry {#s1412}
+
+GMM에서는 local sensitivity가
+
+:::::::::::::::::::: {.math-display}
+
+$$
+G
+=
+E\left[
+\frac{\partial g(W,\theta_0)}
+{\partial\theta'}
+\right]
+$$
+
+::::::::::::::::::::
+
+에 들어가고 criterion curvature는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+G'WG
+$$
+
+::::::::::::::::::::
+
+에 나타난다. Regular likelihood에서는 같은 역할을 Fisher information
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\mathcal I(\theta_0)
+$$
+
+::::::::::::::::::::
+
+이 한다.
+
+### 14.1.3 Local invertibility as the hidden engine {#s1413}
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Regular theory의 숨은 조건
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+Root-$n$ normality는 단순히 CLT 때문만이 아니다.
+Sampling noise를 parameter error로 변환하는 local Jacobian 또는 curvature가 안정적으로 invertible해야 한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{regular asymptotics}
+=
+\text{CLT}
++
+\text{stable local inverse}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 14.1 · Stable local inversion is stronger than pointwise nonsingularity
+
+:::::::::::::::::::
+
+local Jacobian $A_n$을 갖는 triangular-array sequence를 생각하자. 다음을 가정하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\inf_n \sigma_{\min}(A_n)\ge c\gt0.
+}
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|A_n^{-1}\|
+\le
+\frac1c
+$$
+
+:::::::::::::::::::
+
+$n$에 대해 uniformly 성립한다고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1{\sqrt n}\sum_{i=1}^n\psi_{ni}
+=
+O_p(1),
+$$
+
+:::::::::::::::::::
+
+그리고 usual linearization remainder가 $o_p(1)$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_n)
+=
+O_p(1).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Euclidean operator norm에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|A_n^{-1}\|
+=
+\frac1{\sigma_{\min}(A_n)}
+\le
+\frac1c.
+$$
+
+:::::::::::::::::::
+
+regular expansion은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\theta_n-\theta_n)
+=
+-A_n^{-1}
+\frac1{\sqrt n}\sum_i\psi_{ni}
++
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+uniformly bounded deterministic operator가 $O_p(1)$ vector에 곱해지면 결과도 $O_p(1)$이다. remainder는 order에 영향을 주지 않는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+구분 14.1 · Pointwise validity versus uniform validity
+
+:::::::::::::::::::
+
+각 fixed DGP $P$에 대해서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\{\widehat\theta-\theta(P)\}
+\Rightarrow
+N(0,V(P)).
+$$
+
+:::::::::::::::::::
+
+가 성립할 수 있다. 그러나 이것이 class $\mathcal P$ 전체에서 uniformly accurate한 normal approximation을 의미하지는 않는다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sup_{P\in\mathcal P}
+\left|
+P\{T_n\le t\}-\Phi(t)
+\right|
+\stackrel{?}{\longrightarrow}
+0.
+$$
+
+:::::::::::::::::::
+
+Weak-identification sequence는 stable-inverse condition이 악화되는 $\mathcal P$의 영역을 정확히 탐색한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{pointwise asymptotic validity}
+\not\Rightarrow
+\text{uniform asymptotic validity}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s142}
+
+## [14.2]{.section-number}Identification versus Identification Strength
+
+::: {.topic-opening}
+Point identification은 target이 unique한지를 묻는다.
+Identification strength는 그 uniqueness가 local perturbations에 얼마나 안정적인지를 묻는다.
+:::
+
+### 14.2.1 Binary identification and local strength {#s1421}
+
+linear IV에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Q_{ZX}
+=
+E[ZX']
+$$
+
+::::::::::::::::::::
+
+라 하자. Point identification은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{rank}(Q_{ZX})=K
+$$
+
+::::::::::::::::::::
+
+이면 충분하다. 그러나 rank가 full이라고 해서 모든 singular values가 large한 것은 아니다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Identification}
+\neq
+\text{Strong Identification}.
+}
+$$
+
+::::::::::::::::::::
+
+### 14.2.2 Singular values and noise amplification {#s1422}
+
+smallest singular value가
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sigma_{\min}(Q_{ZX})
+$$
+
+::::::::::::::::::::
+
+라고 하자. 이것이 0에 가까우면 inverse mapping은 매우 민감하다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sigma_{\min}(Q_{ZX})\approx0
+\quad\Rightarrow\quad
+\|Q_{ZX}^{+}\|
+\text{ is large}.
+}
+$$
+
+::::::::::::::::::::
+
+작은 sample-moment perturbation이 큰 parameter perturbation으로 확대될 수 있다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 14.2 · Singular-value noise-amplification bound
+
+:::::::::::::::::::
+
+local perturbation이
+
+::::::::::::::::::: {.math-display}
+
+$$
+A\,\Delta\theta=\Delta m,
+$$
+
+:::::::::::::::::::
+
+를 만족하고 $A$가 square nonsingular이라고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\|\Delta\theta\|
+\le
+\frac{\|\Delta m\|}
+{\sigma_{\min}(A)}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Because
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Delta\theta=A^{-1}\Delta m,
+$$
+
+:::::::::::::::::::
+
+operator norm inequality에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|\Delta\theta\|
+\le
+\|A^{-1}\|\|\Delta m\|.
+$$
+
+:::::::::::::::::::
+
+spectral norm에 대해서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|A^{-1}\|
+=
+\frac1{\sigma_{\min}(A)}.
+$$
+
+:::::::::::::::::::
+
+이고 이를 대입하면 bound가 증명된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 14.1 · Near-singular Jacobian amplifies sampling noise
+
+:::::::::::::::::::
+
+Consider
+
+::::::::::::::::::: {.math-display}
+
+$$
+A_\varepsilon
+=
+\begin{pmatrix}
+1&0\\
+0&\varepsilon
+\end{pmatrix},
+\qquad
+\Delta m
+=
+\begin{pmatrix}
+0\\
+n^{-1/2}Z
+\end{pmatrix}.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Delta\theta
+=
+\begin{pmatrix}
+0\\
+n^{-1/2}Z/\varepsilon
+\end{pmatrix}.
+$$
+
+:::::::::::::::::::
+
+$\varepsilon$이 fixed이면 두 번째 coordinate도 여전히 root-$n$이다. 그러나 $\varepsilon_n=n^{-1/2}$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Delta\theta_2=Z,
+$$
+
+:::::::::::::::::::
+
+가 되어 parameter uncertainty가 더 이상 줄어들지 않는다.
+
+::::::::::::::::::::
+
+### 14.2.3 Weak curvature across estimation frameworks {#s1423}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Framework</th><th>Regular local object</th><th>Weak/nonregular warning sign</th></tr></thead>
+<tbody>
+<tr><td>Z-estimation</td><td>Jacobian $A$</td><td>$\sigma_{\min}(A)$ near zero</td></tr>
+<tr><td>GMM</td><td>$G'WG$</td><td>near-singular curvature</td></tr>
+<tr><td>Likelihood</td><td>$\mathcal I(\theta_0)$</td><td>singular 또는 nearly singular information</td></tr>
+<tr><td>Optimization</td><td>local Hessian</td><td>flat direction / weak curvature</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{weak identification}
+\text{ is a statistical version of unstable local inversion}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+기하 14.1 · Numerical conditioning and statistical weak identification
+
+:::::::::::::::::::
+
+matrix condition number는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\kappa(A)
+=
+\frac{\sigma_{\max}(A)}
+{\sigma_{\min}(A)}
+$$
+
+:::::::::::::::::::
+
+numerical analysis와 econometrics 모두에서 나타난다. 다만 perturbation의 원천은 다르다.
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Problem</th><th>Perturbation</th><th>Amplified object</th></tr></thead>
+<tbody>
+<tr><td>Numerical conditioning</td><td>rounding / algorithmic error</td><td>computed solution</td></tr>
+<tr><td>Weak identification</td><td>sampling-moment noise</td><td>statistical parameter error</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{same matrix geometry}
+\neq
+\text{same source of uncertainty}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+정리표 14.1 · The same inverse geometry across estimation frameworks
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Framework</th><th>Local object</th><th>Regular inverse</th></tr></thead>
+<tbody>
+<tr><td>Z-estimation</td><td>$A$</td><td>$A^{-1}$</td></tr>
+<tr><td>M-estimation</td><td>$H$</td><td>$H^{-1}$</td></tr>
+<tr><td>GMM</td><td>$G'WG$</td><td>$(G'WG)^{-1}$</td></tr>
+<tr><td>Likelihood</td><td>$\mathcal I(\theta_0)$</td><td>$\mathcal I(\theta_0)^{-1}$</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+모든 경우의 공통 mechanism은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{sampling noise}
+\xrightarrow{\text{local inverse}}
+\text{parameter error}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s143}
+
+## [14.3]{.section-number}Local-to-Zero Asymptotics
+
+::: {.topic-opening}
+Weak identification은 하나의 fixed DGP보다 DGP sequence를 통해 더 정확히 분석된다.
+Sample size가 커질수록 identification signal 자체가 함께 약해지는 sequence를 생각한다.
+:::
+
+### 14.3.1 Sequences of data-generating processes {#s1431}
+
+regular asymptotics는 흔히
+
+:::::::::::::::::::: {.math-display}
+
+$$
+G_n\to G_0,
+\qquad
+\operatorname{rank}(G_0)=K
+$$
+
+::::::::::::::::::::
+
+를 암묵적으로 사용한다. Weak-identification sequence에서는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sigma_{\min}(G_n)\to0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+정의 14.1 · Triangular-array weak-identification sequence
+
+:::::::::::::::::::
+
+하나의 fixed DGP가 아니라 row-$n$ observations가 law $P_n$에서 생성되는 sequence를 생각하자. 그러면 population local map도 $n$에 의존할 수 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+G_n.
+$$
+
+:::::::::::::::::::
+
+weak-identification sequence에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sigma_{\min}(G_n)\longrightarrow0.
+}
+$$
+
+:::::::::::::::::::
+
+가 허용된다. 따라서 각 finite-$n$ model이 여전히 point identified일 수 있어도 asymptotic experiment는 singularly identified limit에 접근한다.
+
+::::::::::::::::::::
+
+### 14.3.2 The $n^{-1/2}$ signal scale {#s1432}
+
+IV의 전형적인 local-to-zero specification은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Gamma_n
+=
+\frac{C}{\sqrt n}.
+}
+$$
+
+::::::::::::::::::::
+
+Sampling noise가 보통 $n^{-1/2}$ scale이므로 identifying signal 역시 같은 order다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{signal}
+\asymp
+\text{noise}.
+}
+$$
+
+::::::::::::::::::::
+
+따라서 $n\to\infty$이어도 first-stage uncertainty가 asymptotically 사라지지 않는다.
+
+### 14.3.3 Local alternatives and weak identification {#s1433}
+
+Local-to-zero asymptotics의 핵심은 fixed parameter model을 바꾸는 것이 아니라,
+regular approximation의 uniform validity를 시험하는 것이다.
+Identification strength가 sampling-noise scale과 함께 움직일 때 conventional regular approximation이 얼마나 불안정한지를 보여준다.
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+구분 14.2 · Local alternatives are not local-to-zero identification
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Sequence</th><th>$n$과 함께 무엇이 움직이는가?</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>Local alternative</td><td>$\theta_n=\theta_0+h/\sqrt n$</td><td>fixed regular null 근방의 power</td></tr>
+<tr><td>Weak identification</td><td>$G_n$ 또는 $\pi_n$이 singularity 쪽으로 축소</td><td>local invertibility를 stress-test</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{local parameter drift}
+\neq
+\text{local loss of identification strength}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 14.3 · Three signal-strength regimes
+
+:::::::::::::::::::
+
+identifying coefficient가 다음을 만족한다고 하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\pi_n=c\,n^{-\alpha},
+\qquad
+c\neq0.
+$$
+
+:::::::::::::::::::
+
+sampling noise는 전형적으로 $n^{-1/2}$ order다. 따라서
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Regime</th><th>noise 대비 signal</th><th>Asymptotic implication</th></tr></thead>
+<tbody>
+<tr><td>$\alpha\lt1/2$</td><td>signal dominates</td><td>sampling noise에 비해 identification이 강해짐</td></tr>
+<tr><td>$\alpha=1/2$</td><td>same order</td><td>weak-IV local experiment</td></tr>
+<tr><td>$\alpha\gt1/2$</td><td>noise dominates</td><td>identifying signal이 너무 빠르게 사라짐</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+signal-to-noise ratio는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{n^{-\alpha}}{n^{-1/2}}
+=
+n^{1/2-\alpha}.
+$$
+
+:::::::::::::::::::
+
+에 비례한다. 이는 $\alpha\lt1/2$이면 발산하고, $\alpha=1/2$이면 일정하게 유지되며, $\alpha\gt1/2$이면 0으로 수렴한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s144}
+
+## [14.4]{.section-number}Weak Instruments in the Linear IV Model
+
+::: {.topic-opening}
+Weak IV는 nonregularity를 이해하기 위한 가장 투명한 econometric example이다.
+Random denominator가 identification uncertainty를 직접 드러낸다.
+:::
+
+### 14.4.1 The local first stage {#s1441}
+
+scalar model을 생각하자.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y_i=X_i\beta+e_i,
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+X_i=Z_i\Gamma_n+u_i,
+\qquad
+\Gamma_n=\frac{\mu}{\sqrt n}.
+$$
+
+::::::::::::::::::::
+
+instrument validity는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[Z_ie_i]=0
+$$
+
+::::::::::::::::::::
+
+이지만 first-stage relevance는 sample size와 함께 약해진다.
+
+### 14.4.2 Scalar IV ratio representation {#s1442}
+
+exactly identified IV estimator는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta_{IV}
+=
+\frac{\sum_i Z_iY_i}
+{\sum_i Z_iX_i}.
+$$
+
+::::::::::::::::::::
+
+구조식을 대입하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{IV}-\beta
+=
+\frac{\sum_iZ_ie_i}
+{\sum_iZ_iX_i}.
+}
+$$
+
+::::::::::::::::::::
+
+### 14.4.3 Random denominator and nonnormal limits {#s1443}
+
+strong first stage에서는 denominator의 deterministic identifying component가 dominant하다.
+그러나 $\Gamma_n=\mu/\sqrt n$이면 numerator와 denominator 모두 root-$n$ stochastic terms를 남긴다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{IV}-\beta
+\overset d\longrightarrow
+\frac{\xi_e}
+{c\,q_{ZZ}+\xi_v},
+\qquad
+q_{ZZ}=E[Z_i^2].
+}
+$$
+
+::::::::::::::::::::
+
+여기서 $(\xi_e,\xi_v)$는 $\bigl(n^{-1/2}\sum_i Z_ie_i,\ n^{-1/2}\sum_i Z_iv_i\bigr)$의 joint Gaussian limit이다. $q_{ZZ}=1$이면 normalized form $\xi_e/(c+\xi_v)$로 단순화된다. 핵심은 random denominator가 asymptotically 사라지지 않는다는 점이다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Gaussian numerator}
+/
+\text{random denominator}
+}
+$$
+
+::::::::::::::::::::
+
+가 limit에 남는다는 점이다. 따라서 limit distribution은 일반적으로 Gaussian이 아니다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 14.4 · Strong-IV root-$n$ benchmark
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+X_i=\pi Z_i+v_i,
+\qquad
+\pi\neq0,
+\qquad
+q_{ZZ}=E[Z_i^2]\gt0.
+$$
+
+:::::::::::::::::::
+
+적절한 LLN/CLT conditions 아래에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\beta_{IV}-\beta)
+=
+\frac{
+n^{-1/2}\sum_i Z_ie_i
+}{
+\pi q_{ZZ}+o_p(1)
+}
+=
+O_p(1).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Because
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1n\sum_iZ_iX_i
+=
+\pi\frac1n\sum_iZ_i^2
++
+\frac1n\sum_iZ_iv_i
+\overset p\longrightarrow
+\pi q_{ZZ},
+$$
+
+:::::::::::::::::::
+
+and
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1{\sqrt n}\sum_iZ_ie_i=O_p(1),
+$$
+
+:::::::::::::::::::
+
+we can write
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\beta_{IV}-\beta)
+=
+\frac{
+n^{-1/2}\sum_iZ_ie_i
+}{
+n^{-1}\sum_iZ_iX_i
+},
+$$
+
+:::::::::::::::::::
+
+이고 그 denominator는 nonzero constant $\pi q_{ZZ}$로 수렴한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 14.5 · Weak-IV random-denominator limit
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_i=X_i\beta+e_i,
+\qquad
+X_i=\frac c{\sqrt n}Z_i+v_i,
+$$
+
+:::::::::::::::::::
+
+$E[Z_ie_i]=0$, $q_{ZZ}=E[Z_i^2]\in(0,\infty)$, 그리고 joint CLT가 성립한다고 하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{pmatrix}
+n^{-1/2}\sum_i Z_ie_i\\
+n^{-1/2}\sum_i Z_iv_i
+\end{pmatrix}
+\Rightarrow
+\begin{pmatrix}
+\xi_e\\
+\xi_v
+\end{pmatrix}.
+$$
+
+:::::::::::::::::::
+
+limiting denominator가 almost surely nonzero라면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{IV}-\beta
+\Rightarrow
+\frac{\xi_e}
+{c\,q_{ZZ}+\xi_v}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+exactly identified IV error는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta_{IV}-\beta
+=
+\frac{\sum_iZ_ie_i}
+{\sum_iZ_iX_i}.
+$$
+
+:::::::::::::::::::
+
+이다. numerator와 denominator를 모두 $\sqrt n$으로 나누면 denominator는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\frac1{\sqrt n}\sum_i Z_iX_i
+&=
+\frac c n\sum_i Z_i^2
++
+\frac1{\sqrt n}\sum_i Z_iv_i\\
+&\Rightarrow
+c\,q_{ZZ}+\xi_v,
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+가 된다. LLN과 joint CLT에 의해 denominator는 해당 limit로, numerator는 $\xi_e$로 수렴한다. Ratio에 continuous mapping theorem을 적용하면 결과를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+따름정리 14.1 · Under the weak-IV sequence, estimation error need not shrink
+
+:::::::::::::::::::
+
+Theorem 14.5의 ratio limit가 nondegenerate이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta_{IV}-\beta
+\not\to_p0
+$$
+
+:::::::::::::::::::
+
+해당 local-to-zero sequence를 따라 estimation error는 0으로 수렴하지 않는다. 동치로 그 sequence에서 estimator는 root-$n$ regular하지 않다.
+
+::: {.small}
+이는 sequence에 관한 진술이다. Nonzero relevance를 갖는 모든 fixed DGP에서 IV가 inconsistent하다는 뜻은 아니다.
+:::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 14.1 · Zero local signal can produce a Cauchy limit
+
+:::::::::::::::::::
+
+Suppose $c=0$ and
+
+::::::::::::::::::: {.math-display}
+
+$$
+\xi_e,\xi_v
+\stackrel{ind}{\sim}
+N(0,1).
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac{\xi_e}{\xi_v}
+\sim
+\operatorname{Cauchy}(0,1).
+}
+$$
+
+:::::::::::::::::::
+
+이 limit는 finite mean과 finite variance를 모두 갖지 않는다. 따라서 weak-IV distortion을 단순히 “standard error가 크다”라고 설명할 수 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+서로 independent한 두 standard normal의 ratio는 standard Cauchy distribution을 따른다. Theorem 14.5에 $c=0$을 대입하면 결과가 바로 나온다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s145}
+
+## [14.5]{.section-number}Why Conventional 2SLS Inference Breaks Down
+
+::: {.topic-opening}
+Weak identification은 단순히 standard error가 커지는 문제가 아니다.
+Estimator의 rate와 limiting distribution 자체가 달라질 수 있기 때문에 conventional Wald inference의 기반이 무너진다.
+:::
+
+### 14.5.1 Loss of root-$n$ regularity {#s1451}
+
+regular 2SLS는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\beta_{2SLS}-\beta_0)
+\overset d\longrightarrow
+N(0,V)
+$$
+
+::::::::::::::::::::
+
+를 만족한다. Weak-IV sequence에서는 local inverse가 stable하지 않으므로 일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_{2SLS}-\beta_0
+\neq
+O_p(n^{-1/2})
+}
+$$
+
+::::::::::::::::::::
+
+일 수 있고 estimator 자체가 nondegenerate random limit을 가질 수도 있다.
+
+### 14.5.2 Wald $t$-statistics under weak identification {#s1452}
+
+conventional statistic
+
+:::::::::::::::::::: {.math-display}
+
+$$
+T
+=
+\frac{\widehat\beta-\beta_0}
+{\widehat{se}(\widehat\beta)}
+$$
+
+::::::::::::::::::::
+
+이 있다고 해도 weak identification 아래
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+T\not\Rightarrow N(0,1)
+}
+$$
+
+::::::::::::::::::::
+
+일 수 있다. 즉 robust standard error를 사용하더라도 normal critical values가 정당화되지 않을 수 있다.
+
+### 14.5.3 Bias and inferential distortion {#s1453}
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Estimation distortion
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+\widehat\beta_{2SLS}
+\text{ may be biased / unstable}
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+weak first stage가 denominator noise를 크게 만든다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Inference distortion
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+T\not\approx N(0,1)
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+nominal confidence levels와 actual coverage가 크게 달라질 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+논리 14.1 · Why robust covariance correction is not weak-ID-robust inference
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Problem</th><th>무엇이 regular하게 유지되는가?</th><th>What fails?</th></tr></thead>
+<tbody>
+<tr><td>Heteroskedasticity</td><td>root-$n$ estimator linearization</td><td>classical covariance formula</td></tr>
+<tr><td>Weak identification</td><td>root-$n$ linearization이 반드시 성립하지 않음</td><td>stable inverse와 경우에 따라 limiting law 자체</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{HC/cluster/HAC standard errors}
+\neq
+\text{identification-robust inference}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 14.6 · Weak-IV ratio limits invalidate the usual Wald premise
+
+:::::::::::::::::::
+
+conventional Wald statistic은 다음과 같은 representation에 의해 정당화된다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta-\beta_0
+=
+n^{-1/2}Z_n
++
+o_p(n^{-1/2}),
+\qquad
+Z_n=O_p(1).
+$$
+
+:::::::::::::::::::
+
+Under Theorem 14.5, however,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta-\beta_0
+=
+O_p(1)
+$$
+
+:::::::::::::::::::
+
+그러나 local-to-zero sequence에서는 이 representation이 성립하지 않는다. 따라서 normal Wald critical value를 도출하는 데 필요한 regular root-$n$ premise가 사라진다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s146}
+
+## [14.6]{.section-number}LIML, $k$-Class Estimators, and Weak Identification
+
+::: {.topic-opening}
+LIML은 2SLS와 같은 $k$-class family에 속하며 weak/many-instrument settings에서 중요한 비교 대상이다.
+:::
+
+### 14.6.1 The $k$-class family {#s1461}
+
+general $k$-class estimator를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta(\kappa)
+=
+\left[
+X'(I-\kappa M_Z)X
+\right]^{-1}
+X'(I-\kappa M_Z)Y
+}
+$$
+
+::::::::::::::::::::
+
+로 쓸 수 있다.
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>$\kappa$</th><th>Estimator</th></tr></thead>
+<tbody>
+<tr><td>$0$</td><td>OLS</td></tr>
+<tr><td>$1$</td><td>2SLS</td></tr>
+<tr><td>$\widehat\kappa_{LIML}$</td><td>LIML</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+### 14.6.2 LIML geometry {#s1462}
+
+LIML chooses $\widehat\kappa$ through a generalized-eigenvalue problem associated with the reduced-form covariance structure.
+이 representation은 2SLS와 LIML을 algebraically 연결하고 their distributional differences를 분석하기 쉽게 한다.
+
+### 14.6.3 What LIML does and does not fix {#s1463}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 14.1 · LIML은 weak identification을 제거하지 않는다
+
+:::::::::::::::::::
+
+Weak-IV local-to-zero asymptotics에서는 LIML 역시 conventional consistency와 normality를 잃을 수 있다.
+다만 many-instrument settings에서는 2SLS보다 bias에 덜 민감한 경우가 있어 중요한 대안이 된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{better finite-sample robustness}
+\neq
+\text{restored strong identification}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 14.7 · The $k$-class family nests OLS and 2SLS
+
+:::::::::::::::::::
+
+For
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta(\kappa)
+=
+[X'(I-\kappa M_Z)X]^{-1}
+X'(I-\kappa M_Z)Y,
+$$
+
+:::::::::::::::::::
+
+we have
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta(0)
+=
+(X'X)^{-1}X'Y
+=
+\widehat\beta_{OLS},
+}
+$$
+
+:::::::::::::::::::
+
+and, since $I-M_Z=P_Z$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta(1)
+=
+(X'P_ZX)^{-1}X'P_ZY
+=
+\widehat\beta_{2SLS}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+정의식에 $\kappa=0$과 $\kappa=1$을 직접 대입하자. $\kappa=1$에서는 $M_Z=I-P_Z$를 사용한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+증명 개요 14.1 · LIML and the generalized-eigenvalue geometry
+
+:::::::::::::::::::
+
+LIML은 residualized reduced-form quadratic form을 포함하는 generalized eigenvalue problem을 통해 $k$-class parameter를 선택한다. 이 construction은 first-stage estimation noise가 estimator에 들어오는 방식을 바꾸며 일부 weak/many-instrument design에서 bias behavior를 개선할 수 있다.
+
+그러나 local experiment가 포함하는 identifying information은 여전히 data에 들어 있는 정보뿐이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\pi_n=\frac c{\sqrt n}
+$$
+
+:::::::::::::::::::
+
+estimator를 바꾼다고 해서 weak sequence의 local first-stage coefficient가 fixed nonzero $\pi$로 바뀌는 것은 아니다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{estimator choice can change robustness properties}
+\quad
+\text{but cannot manufacture identification}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s147}
+
+## [14.7]{.section-number}Diagnosing Weak Instruments
+
+::: {.topic-opening}
+Weak-instrument diagnostics는 relevance strength를 평가한다.
+하지만 relevance diagnostics와 instrument validity는 서로 다른 질문이다.
+:::
+
+### 14.7.1 First-stage diagnostics {#s1471}
+
+excluded instruments의 joint predictive strength는 first-stage $F$-type statistic으로 요약할 수 있다.
+Stronger first stages는 conventional IV approximation이 더 안정적일 가능성을 높인다.
+
+### 14.7.2 Why $F\gt10$ is not universal {#s1472}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 14.2 · 하나의 threshold는 모든 design의 theorem이 아니다
+
+:::::::::::::::::::
+
+Weak-IV critical values는 instrument count, number of endogenous regressors, estimator,
+그리고 허용하려는 bias/size distortion에 따라 달라질 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{“first-stage }F\gt10\text{”}
+\text{ is a heuristic, not a universal law}.
+}
+$$
+
+::::::::::::::::::::
+
+### 14.7.3 Relevance diagnostics versus validity {#s1473}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{strong first stage}
+\not\Rightarrow
+E[Ze]=0.
+}
+$$
+
+::::::::::::::::::::
+
+first-stage diagnostics는 relevance를 평가한다.
+exclusion/exogeneity와 같은 validity assumptions는 design과 substantive argument의 문제다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+정의 14.2 · Concentration parameter in a homoskedastic first stage
+
+:::::::::::::::::::
+
+scalar endogenous regressor의 first stage가
+
+::::::::::::::::::: {.math-display}
+
+$$
+X=Z\pi+v,
+\qquad
+E[v^2\mid Z]=\sigma_v^2,
+$$
+
+:::::::::::::::::::
+
+와 같다면 자연스러운 sample signal-to-noise measure는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\lambda_n
+=
+\frac{\pi'Z'Z\pi}
+{\sigma_v^2}.
+}
+$$
+
+:::::::::::::::::::
+
+이다. $\pi$가 fixed이고 $Z'Z/n\to Q_{ZZ}$이면 $\lambda_n\asymp n$이다. 반면 $\pi_n=c/\sqrt n$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\lambda_n
+\longrightarrow
+\frac{c'Q_{ZZ}c}
+{\sigma_v^2},
+}
+$$
+
+:::::::::::::::::::
+
+이므로 weak-IV local experiment에서 first-stage information은 finite하게 남는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Substitute $\pi_n=c/\sqrt n$:
+
+::::::::::::::::::: {.math-display}
+
+$$
+\lambda_n
+=
+\frac{
+c'(Z'Z/n)c
+}
+{\sigma_v^2}.
+$$
+
+:::::::::::::::::::
+
+$Z'Z/n\to_pQ_{ZZ}$를 사용하면 displayed probability limit가 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+해석 14.2 · What a first-stage $F$-type diagnostic can and cannot certify
+
+:::::::::::::::::::
+
+simple homoskedastic design에서는 first-stage $F$-type statistic이 concentration-parameter strength와 밀접하게 연결된다. 그러나 하나의 universal cutoff로는 다음을 모두 반영할 수 없다.
+
+<ul>
+<li>excluded instrument의 수,</li>
+<li>endogenous regressor의 수,</li>
+<li>heteroskedasticity,</li>
+<li>chosen estimator, and</li>
+<li>허용하려는 size 또는 bias distortion의 정도.</li>
+</ul>
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{relevance diagnostic}
+\neq
+\text{validity diagnostic}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s148}
+
+## [14.8]{.section-number}Identification-Robust Inference
+
+::: {.topic-opening}
+Weak identification에서는 estimator의 conventional normal approximation 대신,
+null hypothesis가 implied moment restrictions를 만족하는지를 직접 검사하는 방식이 더 안정적일 수 있다.
+:::
+
+### 14.8.1 Test the null through the moments {#s1481}
+
+null hypothesis
+
+:::::::::::::::::::: {.math-display}
+
+$$
+H_0:\beta=\beta_0
+$$
+
+::::::::::::::::::::
+
+를 생각하자. Null residual은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+u_i(\beta_0)=Y_i-X_i'\beta_0.
+$$
+
+::::::::::::::::::::
+
+instrument validity가 맞다면 null 아래
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Z_i u_i(\beta_0)]=0.
+}
+$$
+
+::::::::::::::::::::
+
+따라서 estimator의 distribution을 직접 근사하기보다 candidate $\beta_0$가 moments와 compatible한지 검사할 수 있다.
+
+### 14.8.2 Anderson–Rubin logic {#s1482}
+
+Anderson–Rubin-type procedure의 핵심은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y-X\beta_0
+$$
+
+::::::::::::::::::::
+
+가 instruments에 의해 systematic하게 예측되는지를 test하는 것이다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+H_0:\beta=\beta_0
+\quad\Longrightarrow\quad
+\text{test }E[Z(Y-X\beta_0)]=0.
+}
+$$
+
+::::::::::::::::::::
+
+이 접근은 $\widehat\beta_{2SLS}$의 conventional root-$n$ normality에 의존하지 않는다는 것이 핵심이다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 14.8 · Heteroskedasticity-robust Anderson–Rubin moment test
+
+:::::::::::::::::::
+
+candidate $\beta_0$에 대해 다음을 정의하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_i(\beta_0)
+=
+Y_i-X_i'\beta_0,
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat g_n(\beta_0)
+=
+\frac1n\sum_{i=1}^n
+Z_i u_i(\beta_0),
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\Omega_n(\beta_0)
+=
+\frac1n\sum_{i=1}^n
+Z_iZ_i'
+u_i(\beta_0)^2.
+$$
+
+:::::::::::::::::::
+
+instrument의 수 $L$이 fixed라고 하자. $H_0:\beta=\beta_0$ 아래에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Z_i u_i(\beta_0)]=0,
+\qquad
+\widehat\Omega_n(\beta_0)\overset p\longrightarrow\Omega\succ0,
+$$
+
+:::::::::::::::::::
+
+이고 CLT가 성립하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+AR_n(\beta_0)
+=
+n\widehat g_n(\beta_0)'
+\widehat\Omega_n(\beta_0)^{-1}
+\widehat g_n(\beta_0)
+\Rightarrow
+\chi_L^2.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+라고 하면 null과 instrument validity 아래에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\,\widehat g_n(\beta_0)
+\Rightarrow
+N(0,\Omega).
+$$
+
+:::::::::::::::::::
+
+consistent whitening matrix $\widehat\Omega_n^{-1/2}$를 왼쪽에서 곱하자. Slutsky에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\,
+\widehat\Omega_n^{-1/2}
+\widehat g_n(\beta_0)
+\Rightarrow
+N(0,I_L).
+$$
+
+:::::::::::::::::::
+
+AR statistic은 이 vector의 squared Euclidean norm이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+AR_n(\beta_0)
+=
+\left\|
+\sqrt n\,
+\widehat\Omega_n^{-1/2}
+\widehat g_n(\beta_0)
+\right\|^2.
+$$
+
+:::::::::::::::::::
+
+$L$-dimensional standard normal vector의 squared norm은 $\chi_L^2$다. 중요한 점은 이 proof 어디에서도 $E[ZX']$를 invert하지 않는다는 것이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 14.8.3 Confidence-set inversion {#s1483}
+
+각 candidate $\beta_0$에 대해 null을 test하고 reject되지 않는 parameter values를 모으면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+C_{1-\alpha}
+=
+\{
+\beta_0:
+H_0:\beta=\beta_0
+\text{ is not rejected}
+\}.
+}
+$$
+
+::::::::::::::::::::
+
+이는 test inversion을 통한 confidence set이다.
+
+### 14.8.4 Wide and unbounded sets as information {#s1484}
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+중요한 해석
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+Weakly identified data에서 identification-robust confidence set이 매우 넓거나 unbounded할 수 있다.
+이는 procedure가 실패했다는 뜻이 아니라 data가 parameter를 정밀하게 구별하지 못한다는 사실을 반영할 수 있다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+기하 14.2 · Wald inverts first; Anderson–Rubin tests primitive moments
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-grid}
+
+:::::::::::::::::: {.comparison-card}
+
+::::::::::::::::: {.comparison-card__title}
+
+Conventional Wald route
+
+:::::::::::::::::
+
+::::::::::::::::: {.comparison-card__formula}
+
+$$
+\widehat g
+\to
+\widehat\beta
+\to
+\frac{\widehat\beta-\beta_0}{se}
+$$
+
+:::::::::::::::::
+
+::::::::::::::::: {.comparison-card__text}
+
+first-stage/local Jacobian geometry의 stable inversion을 필요로 한다.
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card}
+
+::::::::::::::::: {.comparison-card__title}
+
+AR route
+
+:::::::::::::::::
+
+::::::::::::::::: {.comparison-card__formula}
+
+$$
+\beta_0
+\to
+\widehat g_n(\beta_0)
+\to
+AR_n(\beta_0)
+$$
+
+:::::::::::::::::
+
+::::::::::::::::: {.comparison-card__text}
+
+unstable inverse를 먼저 구성하지 않고 null이 함의하는 moments를 직접 검정한다.
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Wald: invert first, test later;}
+\qquad
+\text{AR: test moments without identification inversion}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+따름정리 14.2 · Confidence-set inversion inherits the test's asymptotic coverage
+
+:::::::::::::::::::
+
+Define
+
+::::::::::::::::::: {.math-display}
+
+$$
+C_{1-\alpha}
+=
+\left\{
+\beta:
+AR_n(\beta)
+\le
+\chi^2_{L,1-\alpha}
+\right\}.
+$$
+
+:::::::::::::::::::
+
+true $\beta_0$에서 AR test의 asymptotic size가 $\alpha$라면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+P_{\beta_0}
+\{\beta_0\in C_{1-\alpha}\}
+\longrightarrow
+1-\alpha.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+By construction,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\beta_0\in C_{1-\alpha}
+\iff
+AR_n(\beta_0)
+\le
+\chi^2_{L,1-\alpha}.
+$$
+
+:::::::::::::::::::
+
+오른쪽 사건은 true null을 reject하지 않는 사건과 정확히 같다. 그 probability는 $1-\alpha$로 수렴한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .preview}
+
+::::::::::::::::::: {.statement-head}
+
+확장 14.1 · Other identification-robust procedures
+
+:::::::::::::::::::
+
+Kleibergen-type score/K statistic과 conditional likelihood-ratio procedure는 서로 다른 conditioning 또는 nuisance-elimination argument를 사용하여 weak-ID inference를 정교화한다. Full weak-limit derivation에는 추가 machinery가 필요하다. 이 장의 핵심은 robust procedure가 stability가 의심되는 regular inverse에 의존하지 않는다는 점이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s149}
+
+## [14.9]{.section-number}Many Instruments and Incidental First-Stage Estimation
+
+::: {.topic-opening}
+Weak instruments와 many instruments는 다른 asymptotic phenomena다.
+그러나 두 경우 모두 first-stage estimation error가 conventional fixed-dimensional approximations보다 중요해질 수 있다.
+:::
+
+### 14.9.1 Fixed-$L$ versus many-$L$ asymptotics {#s1491}
+
+standard IV asymptotics는 instrument dimension $L$을 fixed로 둔다.
+Many-instrument asymptotics에서는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac{L_n}{n}
+\longrightarrow
+\alpha\in(0,1).
+}
+$$
+
+::::::::::::::::::::
+
+즉 instrument count 자체가 sample size와 같은 order로 증가한다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 14.9 · Projection dimension equals instrument count
+
+:::::::::::::::::::
+
+$Z$가 full column rank $L$을 가지면
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_Z
+=
+Z(Z'Z)^{-1}Z'
+$$
+
+:::::::::::::::::::
+
+$P_Z$는 symmetric이며 idempotent이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{tr}(P_Z)
+=
+\operatorname{rank}(P_Z)
+=
+L.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+idempotent symmetric matrix의 eigenvalue는 0 또는 1뿐이다. rank는 unit eigenvalue의 수이고 trace는 그 합이다. $P_Z$가 $\mathcal C(Z)$ 위로 projection하므로 rank는 $\operatorname{rank}(Z)=L$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 14.9.2 Overfitting the first stage {#s1492}
+
+2SLS fitted value는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat X=P_ZX.
+$$
+
+::::::::::::::::::::
+
+instrument dimension이 커지면 projection space가 커지고 sample-specific first-stage noise를 더 많이 fit할 수 있다.
+이 때문에 fitted regressor와 structural error 사이의 finite-sample dependence가 커질 수 있다.
+
+### 14.9.3 2SLS, LIML, and many-instrument bias {#s1493}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{weak instruments}
+\neq
+\text{many instruments}.
+}
+$$
+
+::::::::::::::::::::
+
+그러나 둘이 동시에 존재하면 conventional 2SLS approximation은 특히 취약할 수 있다.
+Many-instrument asymptotics에서는 2SLS의 bias가 non-negligible해질 수 있으며,
+일부 homoskedastic frameworks에서 LIML이 더 안정적인 성질을 보인다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 14.10 · The many-instrument endogenous-fitting term is order $L$
+
+:::::::::::::::::::
+
+Consider
+
+::::::::::::::::::: {.math-display}
+
+$$
+X=Z\pi+v,
+\qquad
+Y=X\beta+u.
+$$
+
+:::::::::::::::::::
+
+Suppose conditional on $Z$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[v_i u_j\mid Z]=0
+\quad(i\neq j),
+\qquad
+E[v_i u_i\mid Z]=\sigma_{vu},
+$$
+
+:::::::::::::::::::
+
+and
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[v_i^2\mid Z]=\sigma_v^2.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[v'P_Zu\mid Z]
+=
+\sigma_{vu}L,
+}
+$$
+
+:::::::::::::::::::
+
+and
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[v'P_Zv\mid Z]
+=
+\sigma_v^2L.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Write
+
+::::::::::::::::::: {.math-display}
+
+$$
+v'P_Zu
+=
+\sum_{i,j}P_{Z,ij}v_i u_j.
+$$
+
+:::::::::::::::::::
+
+conditional cross-observation covariance는 사라지므로 $i=j$인 항만 남는다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[v'P_Zu\mid Z]
+=
+\sigma_{vu}
+\sum_iP_{Z,ii}
+=
+\sigma_{vu}\operatorname{tr}(P_Z)
+=
+\sigma_{vu}L.
+$$
+
+:::::::::::::::::::
+
+같은 argument에서 $u$를 $v$로 바꾸면
+$$
+E[v'P_Zv\mid Z]=\sigma_v^2L.
+$$
+을 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+해석 14.3 · Why growing $L$ changes first-stage overfitting
+
+:::::::::::::::::::
+
+2SLS numerator에는
+
+::::::::::::::::::: {.math-display}
+
+$$
+X'P_Zu
+=
+\pi'Z'u
++
+v'P_Zu.
+$$
+
+:::::::::::::::::::
+
+가 포함된다. Validity 아래 첫 번째 항은 centered이고, projected endogenous-noise component의 conditional expectation은 $L$에 비례한다.
+
+With fixed $L$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+L/n\to0,
+$$
+
+:::::::::::::::::::
+
+fixed $L$이면 이 component는 $O(n)$ signal term에 비해 asymptotically negligible하다. 그러나
+
+::::::::::::::::::: {.math-display}
+
+$$
+L_n/n\to\alpha\gt0,
+$$
+
+:::::::::::::::::::
+
+와 같은 many-instrument regime에서는 사라질 필요가 없다. 이것이 기본적인 many-instrument overfitting mechanism이다.
+
+::: {.small}
+이는 mechanism을 보여주는 계산일 뿐, 이 conditional expectation들의 ratio가 exact finite-sample bias와 같다는 주장은 아니다.
+:::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1410}
+
+## [14.10]{.section-number}Singular Information, Boundaries, and Other Nonregular Models
+
+::: {.topic-opening}
+Weak IV는 더 넓은 nonregularity class의 한 예다.
+Regular local quadratic geometry가 깨지는 다른 대표적인 경우를 살펴본다.
+:::
+
+### 14.10.1 Singular information {#s14101}
+
+regular likelihood에서는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\mathcal I(\theta_0)\succ0.
+$$
+
+::::::::::::::::::::
+
+하지만 어떤 parameter direction에서 information이 사라지면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\det\mathcal I(\theta_0)=0
+}
+$$
+
+::::::::::::::::::::
+
+일 수 있고 inverse-information approximation은 정의되지 않는다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{singular information}
+\leftrightarrow
+\text{no stable quadratic inversion in some direction}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+예제 14.2 · Point identification with singular Fisher information
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_i\sim N(\theta^3,1),
+\qquad
+\theta\in\mathbb R,
+\qquad
+\theta_0=0.
+$$
+
+:::::::::::::::::::
+
+$\theta\mapsto\theta^3$는 one-to-one이므로 model은 point identified다. 하지만 score는
+
+::::::::::::::::::: {.math-display}
+
+$$
+s_i(\theta)
+=
+3\theta^2(Y_i-\theta^3),
+$$
+
+:::::::::::::::::::
+
+so
+
+::::::::::::::::::: {.math-display}
+
+$$
+\mathcal I(\theta)
+=
+9\theta^4,
+\qquad
+\boxed{
+\mathcal I(0)=0.
+}
+$$
+
+:::::::::::::::::::
+
+The MLE satisfies
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta^3=\bar Y,
+\qquad
+\widehat\theta=\sqrt[3]{\bar Y}.
+$$
+
+:::::::::::::::::::
+
+Therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+n^{1/6}\widehat\theta
+=
+\sqrt[3]{\sqrt n\,\bar Y}
+\Rightarrow
+\sqrt[3]{Z},
+\qquad
+Z\sim N(0,1).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+unit-variance Gaussian observation에서 mean parameter $m=\theta^3$에 대해 likelihood를 최대화하면 $\widehat m=\bar Y$이다. Cube map이 one-to-one이므로 $\widehat\theta=\sqrt[3]{\bar Y}$이다. $\theta_0=0$ 아래에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\,\bar Y\Rightarrow Z.
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+n^{1/6}\widehat\theta
+=
+n^{1/6}(\bar Y)^{1/3}
+=
+(\sqrt n\,\bar Y)^{1/3}
+\Rightarrow
+Z^{1/3}.
+$$
+
+:::::::::::::::::::
+
+수렴 rate는 $\sqrt n$이 아니라 $n^{1/6}$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 14.10.2 Boundary parameters {#s14102}
+
+예를 들어 variance parameter가
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sigma^2\ge0
+$$
+
+::::::::::::::::::::
+
+인데 true value가
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sigma_0^2=0
+$$
+
+::::::::::::::::::::
+
+이면 target은 parameter-space interior에 있지 않다.
+
+이 경우 usual symmetric Taylor expansion과 ordinary Wald approximation이 달라질 수 있다.
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+예제 14.3 · Boundary-constrained normal mean
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_i\sim N(\theta,1),
+\qquad
+\theta\ge0,
+\qquad
+\theta_0=0.
+$$
+
+:::::::::::::::::::
+
+constrained MLE는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta
+=
+\max(0,\bar Y).
+}
+$$
+
+:::::::::::::::::::
+
+Thus
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n\,\widehat\theta
+\Rightarrow
+\max(0,Z),
+\qquad
+Z\sim N(0,1),
+}
+$$
+
+:::::::::::::::::::
+
+이며 이는 Gaussian distribution이 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+unconstrained maximizer는 $\bar Y$이다. 이를 feasible set $[0,\infty)$에 projection하면
+$$
+\widehat\theta=\max(0,\bar Y).
+$$
+$\theta_0=0$ 아래에서 $\sqrt n\,\bar Y\Rightarrow Z$이고 continuous mapping theorem으로 결과가 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 14.11 · Boundary likelihood-ratio mixture law
+
+:::::::::::::::::::
+
+같은 constrained normal-mean model에서 다음 null을 검정하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+H_0:\theta=0
+\quad\text{against}\quad
+\theta\ge0.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+LR
+\Rightarrow
+\frac12\chi_0^2
++
+\frac12\chi_1^2,
+}
+$$
+
+:::::::::::::::::::
+
+여기서 $\chi_0^2$는 0에 point mass를 갖는 distribution이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+$\bar Y\le0$이면 constrained unrestricted MLE가 null value $0$과 같으므로 $LR=0$이다. $\bar Y\gt0$이면 $\widehat\theta=\bar Y$이고 Gaussian likelihood algebra로
+
+::::::::::::::::::: {.math-display}
+
+$$
+LR=n\bar Y^2.
+$$
+
+:::::::::::::::::::
+
+null 아래에서 $Z_n=\sqrt n\,\bar Y\Rightarrow Z\sim N(0,1)$이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+LR
+\Rightarrow
+[\max(0,Z)]^2.
+$$
+
+:::::::::::::::::::
+
+를 얻는다. Symmetry로 $P(Z\le0)=1/2$이므로 0에 mass $1/2$가 생긴다. $Z\gt0$ 조건 아래 $Z^2$는 $\chi_1^2$의 positive-half contribution과 동일하므로 limit는 stated chi-bar-square mixture다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 14.10.3 Unidentified nuisance parameters {#s14103}
+
+어떤 null hypothesis 아래 nuisance parameter $\eta$가 observed-data law에 영향을 주지 않는다면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\eta
+\text{ is not identified under }H_0.
+}
+$$
+
+::::::::::::::::::::
+
+이때 regular LR/Wald/score theory의 standard chi-square approximation이 실패할 수 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Nonregularity}
+=
+\text{failure of the regular local quadratic and invertible geometry}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 14.4 · A nuisance parameter can disappear under the null
+
+:::::::::::::::::::
+
+다음 mixture family를 생각하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+f(y;\alpha,\eta)
+=
+(1-\alpha)\phi(y)
++
+\alpha\phi(y-\eta).
+$$
+
+:::::::::::::::::::
+
+Testing $H_0:\alpha=0$, we have
+
+::::::::::::::::::: {.math-display}
+
+$$
+f(y;0,\eta)=\phi(y)
+$$
+
+:::::::::::::::::::
+
+for every $\eta$. Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\eta
+\text{ is unidentified under }H_0.
+}
+$$
+
+:::::::::::::::::::
+
+이 경우 likelihood-ratio 또는 score statistic은 ordinary fixed-dimensional quadratic form이 아니라 $\eta$로 index되는 stochastic process를 포함할 수 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1411x}
+
+## [14.11]{.section-number}Nonstandard Rates and Argmax Limits
+
+::: {.topic-opening}
+Root-$n$ convergence와 Gaussian limits는 universal statistical laws가 아니다.
+Criterion의 local stochastic scale과 deterministic curvature가 어떤 balance를 이루는지가 rate와 limit distribution을 결정한다.
+:::
+
+### 14.11.1 Rates are theorem outcomes {#s14111}
+
+regular estimator에서는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\theta-\theta_0)
+=
+O_p(1).
+$$
+
+::::::::::::::::::::
+
+일반적으로는 적절한 sequence $r_n\to\infty$가 존재하여
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+r_n(\widehat\theta-\theta_0)
+=
+O_p(1)
+}
+$$
+
+::::::::::::::::::::
+
+일 뿐이며 $r_n=\sqrt n$일 이유는 없다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+휴리스틱 14.1 · Rate from deterministic drift versus stochastic fluctuation
+
+:::::::::::::::::::
+
+local displacement $\delta=\theta-\theta_0$에 대해 population criterion loss가
+
+::::::::::::::::::: {.math-display}
+
+$$
+|\delta|^p,
+$$
+
+:::::::::::::::::::
+
+처럼 행동하고 local empirical fluctuation이
+
+::::::::::::::::::: {.math-display}
+
+$$
+n^{-1/2}|\delta|^q,
+\qquad
+p\gt q.
+$$
+
+:::::::::::::::::::
+
+처럼 행동한다고 하자. 두 scale의 balance는
+
+::::::::::::::::::: {.math-display}
+
+$$
+|\delta|^p
+\asymp
+n^{-1/2}|\delta|^q,
+$$
+
+:::::::::::::::::::
+
+gives
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+|\widehat\theta-\theta_0|
+\asymp
+n^{-1/[2(p-q)]}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Rate-balance derivation
+
+:::::::::::::::::::
+
+이다. balance equation에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+|\delta|^{p-q}
+\asymp
+n^{-1/2}.
+$$
+
+:::::::::::::::::::
+
+양변을 $1/(p-q)$ 제곱하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+|\delta|
+\asymp
+n^{-1/[2(p-q)]}.
+$$
+
+:::::::::::::::::::
+
+을 얻는다. 이는 scaling heuristic이며 full theorem에는 stochastic-process control과 localization이 추가로 필요하다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 14.11.2 Local criterion processes {#s14112}
+
+local parameter를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+h
+=
+r_n(\theta-\theta_0)
+$$
+
+::::::::::::::::::::
+
+라고 하자. Local criterion process를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+M_n(h)
+=
+a_n
+\left[
+Q_n\left(
+\theta_0+\frac{h}{r_n}
+\right)
+-
+Q_n(\theta_0)
+\right]
+$$
+
+::::::::::::::::::::
+
+로 정의한다. 적절한 process convergence 아래
+
+:::::::::::::::::::: {.math-display}
+
+$$
+M_n(h)\Rightarrow M(h)
+$$
+
+::::::::::::::::::::
+
+이면 near-minimizer의 limit은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+r_n(\widehat\theta-\theta_0)
+\Rightarrow
+\operatorname*{arg\,min}_h M(h)
+}
+$$
+
+::::::::::::::::::::
+
+또는 maximization problem에서는 corresponding argmax form으로 나타난다.
+
+### 14.11.3 Cube-root illustration {#s14113}
+
+일부 shape-constrained or nonsmooth estimation problems에서는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+n^{1/3}(\widehat\theta-\theta_0)
+}
+$$
+
+::::::::::::::::::::
+
+가 nondegenerate limit을 가지며 limit distribution이 Brownian-motion-plus-drift process의 argmax로 주어질 수 있다.
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+핵심 교훈
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+$\sqrt n$ rate와 normal limit은 regular smooth geometry의 결과다.
+Criterion geometry가 달라지면 rate와 limiting law도 함께 달라질 수 있다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 14.4 · Regular root-$n$ rate from the balance formula
+
+:::::::::::::::::::
+
+smooth regular criterion에서는 deterministic curvature가 quadratic하므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+p=2.
+$$
+
+:::::::::::::::::::
+
+이고 local empirical linear term은 $n^{-1/2}|\delta|$로 scale하므로 $q=1$이다. 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+n^{-1/[2(2-1)]}
+=
+n^{-1/2}.
+$$
+
+:::::::::::::::::::
+
+를 얻는다. 즉 root-$n$ convergence는 regular quadratic-versus-linear local geometry의 결과다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 14.5 · Cube-root rate from a different local fluctuation geometry
+
+:::::::::::::::::::
+
+canonical cube-root problem에서는 종종 deterministic drift는 quadratic이라 $p=2$이지만 stochastic fluctuation은
+
+::::::::::::::::::: {.math-display}
+
+$$
+n^{-1/2}|\delta|^{1/2},
+$$
+
+:::::::::::::::::::
+
+order를 가져 $q=1/2$이다. Balance formula는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+|\widehat\theta-\theta_0|
+\asymp
+n^{-1/3}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+증명 개요 14.2 · High-level argmax theorem for nonstandard limits
+
+:::::::::::::::::::
+
+를 준다. $\widehat h_n=r_n(\widehat\theta_n-\theta_0)$라 하고 localized criterion process를 $M_n(h)$라 하자. Typical argmax theorem은 다음을 요구한다.
+
+<ol>
+<li>$M_n\Rightarrow M$가 관련된 모든 compact set에서 성립한다.</li>
+<li>sequence $\widehat h_n$이 tight하거나 compact set으로 localization할 수 있다.</li>
+<li>$\widehat h_n$이 $M_n$의 approximate maximizer/minimizer이다.</li>
+<li>limiting process $M$이 almost surely unique optimizer를 갖는다.</li>
+</ol>
+
+그러면 적절한 topology 아래에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat h_n
+\Rightarrow
+\operatorname*{arg\,max}_h M(h)
+}
+$$
+
+:::::::::::::::::::
+
+또는 대응하는 argmin result가 성립한다.
+
+따라서 process convergence만으로는 충분하지 않으며 optimizer localization과 uniqueness가 theorem의 일부다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+증명 개요 14.3 · Canonical cube-root local process
+
+:::::::::::::::::::
+
+$n^{1/3}$ rescaling 뒤 많은 nonsmooth problem에서 localized criterion은 개략적으로
+
+::::::::::::::::::: {.math-display}
+
+$$
+M_n(h)
+\Rightarrow
+\mathbb G(h)-c h^2,
+\qquad
+c\gt0,
+$$
+
+:::::::::::::::::::
+
+와 같은 process를 갖는다. 여기서 $\mathbb G$는 Gaussian/Brownian-type process다. 따라서 estimator limit는 Gaussian vector의 linear transform이 아니라 argmax functional이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+n^{1/3}(\widehat\theta-\theta_0)
+\Rightarrow
+\operatorname*{arg\,max}_h
+\{
+\mathbb G(h)-ch^2
+\}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1412x}
+
+## [14.12]{.section-number}A Practical Framework for Nonregular Problems
+
+::: {.topic-opening}
+Nonregular problem을 만났을 때는 standard errors를 먼저 계산하기보다 identification, local geometry, scaling, limiting law의 순서로 점검해야 한다.
+:::
+
+### 14.12.1 Step 1: Identification {#s14121}
+
+먼저 infinite-data question을 묻는다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Does }P_0\text{ uniquely determine the target?}
+}
+$$
+
+::::::::::::::::::::
+
+population moment/root/criterion이 unique target을 만드는지 확인한다.
+
+### 14.12.2 Step 2: Identification strength {#s14122}
+
+Jacobian, Hessian, information matrix의 smallest singular/eigenvalue를 생각한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sigma_{\min}(A),
+\quad
+\lambda_{\min}(H),
+\quad
+\lambda_{\min}(\mathcal I).
+}
+$$
+
+::::::::::::::::::::
+
+값이 작으면 sample noise가 parameter uncertainty로 크게 증폭될 수 있다.
+
+### 14.12.3 Step 3: Scaling and limit law {#s14123}
+
+conventional assumption을 검토한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta-\theta_0
+\stackrel{?}{=}
+O_p(n^{-1/2}).
+$$
+
+::::::::::::::::::::
+
+그렇지 않다면 적절한 $r_n$을 찾아야 한다.
+Limit가 Gaussian인지, ratio distribution인지, argmax distribution인지도 확인한다.
+
+### 14.12.4 Step 4: Inference design {#s14124}
+
+standard Wald procedure가 regular approximation에 의존한다면,
+moment restrictions를 직접 test하거나 identification-robust statistic을 사용하는 방식이 필요한지 검토한다.
+
+### 14.12.5 Heteroskedasticity versus weak identification {#s14125}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Problem</th><th>Main failure</th><th>Typical response</th></tr></thead>
+<tbody>
+<tr><td>Heteroskedasticity</td><td>variance formula가 misspecified</td><td>robust sandwich covariance</td></tr>
+<tr><td>Weak identification</td><td>rate / limit law / local inversion failure를 분석</td><td>identification-robust inference</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{weak identification}
+\neq
+\text{a standard-error problem}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+점검표 14.1 · Five questions for a nonregular estimation problem
+
+:::::::::::::::::::
+
+<ol class="audit-list">
+<li>Population target: observed-data law가 target을 유일하게 결정하는가?</li>
+<li>Strength: local map의 smallest singular/eigenvalue가 relevant DGP들 위에서 uniformly 0과 떨어져 있는가?</li>
+<li>Sequence: 어려운 finite-sample region을 어떤 triangular-array sequence로 표현할 것인가?</li>
+<li>Scaling and limit: 어떤 rate $r_n$이 $r_n(\widehat\theta-\theta_0)$를 nondegenerate하게 만들며 resulting limit law는 무엇인가?</li>
+<li>Inference design: unstable parameter inverse를 먼저 만들지 않고 primitive moment를 통해 null을 검정할 수 있는가?</li>
+</ol>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+정리표 14.2 · Different failures require different remedies
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Failure</th><th>Main issue</th><th>전형적인 inferential response</th></tr></thead>
+<tbody>
+<tr><td>Heteroskedasticity</td><td>covariance misspecification</td><td>sandwich covariance</td></tr>
+<tr><td>serially correlated score</td><td>long-run covariance</td><td>HAC/LRV estimation</td></tr>
+<tr><td>Weak identification</td><td>unstable local inversion</td><td>AR/CLR/K-type procedures</td></tr>
+<tr><td>Boundary</td><td>constrained local geometry</td><td>one-sided 또는 mixture critical values</td></tr>
+<tr><td>Singular information</td><td>flat local parameter map</td><td>새로운 rate와 nonstandard limit</td></tr>
+<tr><td>Many instruments</td><td>증가하는 first-stage dimension</td><td>many-instrument asymptotics / bias-aware methods</td></tr>
+<tr><td>Unidentified nuisance</td><td>null-specific nonidentification</td><td>process/supremum-type inference</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1413x}
+
+## [14.13]{.section-number}요약과 연습문제
+
+### 14.13.1 Chapter map {#s14131}
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 14 in one map
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Strong identification}
++
+\text{stable local inverse}
+\Longrightarrow
+\sqrt n\text{-Gaussian regular theory}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sigma_{\min}(A_n)\to0
+\Longrightarrow
+\text{unstable inversion}
+\Longrightarrow
+\text{nonregular asymptotics may emerge}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Gamma_n=\frac{C}{\sqrt n}
+\Longrightarrow
+\text{signal and sampling noise live on the same scale}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+r_n(\widehat\theta-\theta_0)
+\Rightarrow
+\operatorname*{arg\,max/min} M
+}
+$$
+
+:::::::::::::::::::
+
+Weak identification은 standard error가 큰 regular problem이 아니라 local identification geometry 자체가 sample noise scale과 충돌하는 problem이다.
+
+::::::::::::::::::::
+
+### 14.13.2 Regular versus nonregular table {#s14132}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Regular theory</th><th>Weak / nonregular theory</th></tr></thead>
+<tbody>
+<tr><td>fixed strong identification</td><td>identification strength가 $n$과 함께 약해질 수 있음</td></tr>
+<tr><td>nonsingular Jacobian/information</td><td>near-singular 또는 singular local map</td></tr>
+<tr><td>quadratic local criterion</td><td>flat, kinked, 또는 irregular local criterion</td></tr>
+<tr><td>$\sqrt n$-rate</td><td>다른 rate 또는 nonshrinking behavior가 가능</td></tr>
+<tr><td>Gaussian limit</td><td>ratio, mixture, argmax 또는 기타 nonstandard limit</td></tr>
+<tr><td>sandwich SE로 충분할 수 있음</td><td>variance correction만으로 충분하지 않을 수 있음</td></tr>
+<tr><td>Wald inference</td><td>identification-robust inference가 필요할 수 있음</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+### 14.13.3 Nonregularity checklist {#s14133}
+
+<ol>
+<li><strong>Point identification:</strong> target이 population law에 의해 unique한가?</li>
+<li>Strength 측면에서 Jacobian/Hessian/information의 smallest singular value가 stable한가?</li>
+<li><strong>Sequence:</strong> identification strength가 sample size와 함께 약해지는 local sequence가 relevant한가?</li>
+<li><strong>Rate:</strong> $\sqrt n$-rate를 실제로 정당화할 수 있는가?</li>
+<li><strong>Limit:</strong> Gaussian limit인지 nonstandard limit인지 확인했는가?</li>
+<li><strong>Estimator:</strong> 2SLS, LIML 등 estimator choice가 finite-sample/weak-ID behavior에 어떤 영향을 주는가?</li>
+<li><strong>Diagnostics:</strong> first-stage relevance와 instrument validity를 혼동하지 않았는가?</li>
+<li><strong>Inference:</strong> conventional Wald approximation이 valid한가, identification-robust inference가 필요한가?</li>
+<li><strong>Dimension:</strong> instrument/moment dimension이 $n$과 함께 증가하는가?</li>
+<li><strong>Nonregular features:</strong> boundary, singular information, unidentified nuisance parameter가 존재하는가?</li>
+</ol>
+
+### 연습문제 {#exercises}
+
+<ol class="exercise-list">
+<li><strong>Regular Z benchmark.</strong> Chapter 11의 ALR에서 stable local inverse가 어디에 사용되는지 다시 증명하라.</li>
+<li><strong>Uniform stable inverse.</strong> $\inf_n\sigma_{\min}(A_n)\ge c\gt0\Rightarrow\sup_n\|A_n^{-1}\|\le1/c$를 증명하라.</li>
+<li><strong>Noise amplification.</strong> $A\Delta\theta=\Delta m$에서 $\|\Delta\theta\|\le\|\Delta m\|/\sigma_{\min}(A)$를 증명하라.</li>
+<li><strong>Near-singular example.</strong> $A_\varepsilon=\operatorname{diag}(1,\varepsilon)$에서 second-coordinate noise amplification을 계산하라.</li>
+<li><strong>Condition number.</strong> numerical conditioning과 statistical weak identification에서 같은 $\kappa(A)$가 다른 의미를 갖는 이유를 설명하라.</li>
+<li><strong>Pointwise versus uniform.</strong> fixed-DGP asymptotic normality가 weak-ID class에서 uniform validity를 보장하지 않는 이유를 설명하라.</li>
+<li><strong>Triangular arrays.</strong> weak identification을 fixed DGP가 아니라 $P_n$ sequence로 표현하는 이유를 설명하라.</li>
+<li><strong>Local alternative와 weak ID의 구분.</strong> $\theta_n=\theta_0+h/\sqrt n$과 $\pi_n=c/\sqrt n$의 목적 차이를 설명하라.</li>
+<li><strong>Three signal regimes.</strong> $\pi_n=c n^{-\alpha}$에서 $\alpha\lt1/2,\alpha=1/2,\alpha\gt1/2$를 비교하라.</li>
+<li><strong>Scalar IV ratio.</strong> $\widehat\beta_{IV}-\beta=\sum Z_ie_i/\sum Z_iX_i$를 구조식에서 유도하라.</li>
+<li><strong>Strong IV.</strong> fixed $\pi\neq0$에서 root-$n$ IV representation을 증명하라.</li>
+<li><strong>Weak-IV denominator.</strong> $\pi_n=c/\sqrt n$에서 $n^{-1/2}\sum Z_iX_i\Rightarrow cq_{ZZ}+\xi_v$를 유도하라.</li>
+<li><strong>Weak-IV ratio limit.</strong> joint CLT와 continuous mapping theorem으로 ratio limit을 완전히 증명하라.</li>
+<li><strong>Sequence nonconsistency.</strong> nondegenerate ratio limit이 왜 $\widehat\beta-\beta\not\to_p0$를 imply하는지 설명하라.</li>
+<li><strong>Cauchy special case.</strong> independent standard normal ratio가 Cauchy임을 이용해 zero-signal weak-IV limit을 해석하라.</li>
+<li><strong>Wald premise.</strong> regular Wald derivation이 $n^{-1/2}$ estimator error를 어떻게 사용하는지 쓰고 weak IV에서 어느 단계가 실패하는지 설명하라.</li>
+<li><strong>Variance robustness와 ID robustness의 구분.</strong> HC/cluster/HAC correction과 AR-type inference가 해결하는 문제가 왜 다른지 비교하라.</li>
+<li><strong>$k$-class OLS.</strong> $\kappa=0$이 OLS를 주는 것을 확인하라.</li>
+<li><strong>$k$-class 2SLS.</strong> $I-M_Z=P_Z$를 이용해 $\kappa=1$이 2SLS를 주는 것을 증명하라.</li>
+<li><strong>LIML.</strong> estimator choice가 identification strength 자체를 증가시키지 못하는 이유를 local-to-zero sequence로 설명하라.</li>
+<li><strong>Concentration parameter.</strong> $\lambda_n=\pi_n'Z'Z\pi_n/\sigma_v^2$에서 fixed-$\pi$와 $\pi_n=c/\sqrt n$ regimes를 비교하라.</li>
+<li><strong>First-stage diagnostic.</strong> 하나의 $F$-threshold가 모든 IV design의 theorem이 될 수 없는 이유를 열거하라.</li>
+<li><strong>Validity versus relevance.</strong> strong first stage이지만 $E[Ze]\neq0$인 DGP를 구성하라.</li>
+<li><strong>AR statistic.</strong> candidate $\beta_0$의 null residual과 moment vector를 이용해 heteroskedasticity-robust AR statistic을 구성하라.</li><li><strong>AR chi-square theorem.</strong> CLT와 covariance consistency로 $AR_n(\beta_0)\Rightarrow\chi_L^2$를 증명하라.</li><li><strong>AR이 weak ID에 robust한 이유.</strong> AR proof에서 $E[ZX']^{-1}$이 전혀 필요하지 않음을 확인하라.</li><li><strong>Confidence-set inversion.</strong> AR test inversion이 asymptotic coverage $1-\alpha$를 갖는 것을 증명하라.</li><li><strong>Unbounded sets.</strong> weak identification에서 넓거나 unbounded confidence set이 왜 정보 부족을 반영할 수 있는지 설명하라.</li><li><strong>Projection rank.</strong> full-rank $Z$에서 $\operatorname{tr}(P_Z)=\operatorname{rank}(P_Z)=L$을 증명하라.</li><li><strong>Many-instrument numerator.</strong> stated conditional covariance assumptions 아래 $E[v'P_Zu\mid Z]=\sigma_{vu}L$를 증명하라.</li><li><strong>Many-instrument denominator.</strong> $E[v'P_Zv\mid Z]=\sigma_v^2L$를 증명하라.</li><li><strong>Growing dimension.</strong> fixed $L$과 $L_n/n\to\alpha$에서 projected-noise term의 상대적 order를 비교하라.</li><li><strong>Singular information.</strong> $Y\sim N(\theta^3,1)$에서 point identification과 $\mathcal I(0)=0$을 동시에 확인하라.</li><li><strong>Nonstandard $n^{1/6}$ rate.</strong> $\widehat\theta=\sqrt[3]{\bar Y}$에서 $n^{1/6}\widehat\theta\Rightarrow Z^{1/3}$를 증명하라.</li><li><strong>Boundary MLE.</strong> $Y_i\sim N(\theta,1)$, $\theta\ge0$에서 $\widehat\theta=\max(0,\bar Y)$를 유도하라.</li><li><strong>Boundary LR.</strong> 같은 model에서 $LR\Rightarrow\tfrac12\chi_0^2+\tfrac12\chi_1^2$를 증명하라.</li><li><strong>Unidentified nuisance.</strong> two-component normal mixture에서 $H_0:\alpha=0$ 아래 location nuisance $\eta$가 왜 unidentified인지 보이라.</li><li><strong>Rate-balance formula.</strong> deterministic drift $|\delta|^p$와 fluctuation $n^{-1/2}|\delta|^q$를 balance하여 $n^{-1/[2(p-q)]}$ rate를 유도하라.</li><li><strong>Regular versus cube-root rates.</strong> $(p,q)=(2,1)$과 $(2,1/2)$를 rate-balance formula에 넣어 각각 $n^{-1/2}$, $n^{-1/3}$를 얻어라.</li><li><strong>Argmax theorem audit.</strong> process convergence 외에 tightness/localization, near-optimality, unique limit optimizer가 필요한 이유를 설명하라.</li></ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 다음 장
+
+이 장은 regular M/Z, GMM, likelihood theory가 의존하는 stable local geometry를 명시적으로 드러내고,
+weak IV를 중심으로 그 geometry가 약해질 때 conventional root-$n$ normal approximation이 어떻게 무너지는지 설명한다.
+Local-to-zero sequences, random-denominator limits, 2SLS/LIML behavior, first-stage diagnostics,
+identification-robust inference, many instruments, singular information, boundary parameters,
+nonstandard rates와 argmax limits를 하나의 nonregularity framework 안에서 연결했다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+다음 장으로
+
+:::::::::::::::::::
+
+Chapter 14까지로 i.i.d. 또는 cross-sectional setting에서의 identification, estimation, regular/nonregular inference의 핵심 구조가 완성된다.
+다음 Part에서는 data dependence를 명시적으로 도입하여 time series, long-run variance, serial correlation,
+forecasting, dynamic models로 이동하는 것이 자연스럽다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{cross-sectional estimation theory}
+\longrightarrow
+\text{dependent-data and time-series econometrics}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

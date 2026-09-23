@@ -1,0 +1,3190 @@
+---
+title: "General M- and Z-Estimation"
+description: "Uniform Convergence · Consistency · Local Linearization · Sandwich Asymptotics"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s111}
+
+## [11.1]{.section-number}From Least Squares to General Estimation
+
+::: {.topic-opening}
+Least squares는 특수한 estimator가 아니라 일반적인 extremum- and moment-based estimation theory의 가장 투명한 예다.
+Chapter 11의 목적은 Chapter 10에서 OLS에 대해 직접 수행했던 논리를 abstract estimation problem으로 끌어올리는 것이다.
+:::
+
+### 11.1.1 OLS as an M-estimator {#s1111}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Q(\beta)=E[(Y-X'\beta)^2],
+\qquad
+\beta_0=\operatorname*{arg\,min}_{\beta}Q(\beta).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\beta)=\frac1n\sum_{i=1}^n(Y_i-X_i'\beta)^2,
+\qquad
+\boxed{
+\widehat\beta=\operatorname*{arg\,min}_{\beta}Q_n(\beta).
+}
+$$
+
+::::::::::::::::::::
+
+따라서 OLS는 criterion minimization으로 정의되는 M-estimator의 특수사례다.
+
+### 11.1.2 OLS as a Z-estimator {#s1112}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac1n\sum_{i=1}^nX_i(Y_i-X_i'\widehat\beta)=0.
+$$
+
+::::::::::::::::::::
+
+$\psi(W,\beta)=X(Y-X'\beta)$로 정의하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+P\psi_{\beta_0}=0,
+\qquad
+P_n\psi_{\widehat\beta}=0.
+}
+$$
+
+::::::::::::::::::::
+
+즉 OLS는 동시에 Z-estimator이기도 하다.
+
+### 11.1.3 Chapter 4 and Chapter 11 as mirror images {#s1113}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Chapter 4: Population characterization</th><th>Chapter 11: Sample estimation theory</th></tr></thead>
+<tbody>
+<tr><td>population criterion $Q(\theta)$</td><td>sample criterion $Q_n(\theta)$</td></tr>
+<tr><td>population root $\Psi(\theta_0)=0$</td><td>sample root $\Psi_n(\widehat\theta)=0$</td></tr>
+<tr><td>존재성 / 유일성</td><td>consistency</td></tr>
+<tr><td>curvature / Jacobian</td><td>asymptotic linearization</td></tr>
+<tr><td>local population geometry</td><td>sandwich sampling variance</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Chapter 4 ↔ Chapter 11
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+Chapter 4가 population target의 optimization/root characterization을 다뤘다면,
+Chapter 11은 그 sample analogue가 언제 target을 학습하고 어떤 limiting distribution을 갖는지 분석한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+대응표 11.1 · OLS에서 general M/Z notation으로
+
+:::::::::::::::::::
+
+OLS에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\rho(W,\beta)=(Y-X'\beta)^2,
+\qquad
+\psi(W,\beta)=X(Y-X'\beta).
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(\beta)=P\rho_\beta,\quad Q_n(\beta)=P_n\rho_\beta,
+\qquad
+\Psi(\beta)=P\psi_\beta,\quad \Psi_n(\beta)=P_n\psi_\beta.
+$$
+
+:::::::::::::::::::
+
+그리고 smooth interior case에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\nabla_\beta Q(\beta)=-2\Psi(\beta).
+}
+$$
+
+:::::::::::::::::::
+
+Chapter 10의 OLS theory는 Chapter 11의 general M/Z framework의 가장 투명한 special case다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · OLS의 M/Z equivalence
+
+:::::::::::::::::::
+
+$Q(\beta)=E[(Y-X'\beta)^2]$를 미분하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\nabla_\beta Q(\beta)
+=
+-2E[X(Y-X'\beta)]
+=
+-2\Psi(\beta).
+$$
+
+:::::::::::::::::::
+
+Sample criterion에서도 동일하게 $\nabla_\beta Q_n(\beta)=-2\Psi_n(\beta)$. 따라서 OLS normal equations는 smooth M-estimator의 FOC와 일치한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s112}
+
+## [11.2]{.section-number}M-Estimators and Z-Estimators
+
+::: {.topic-opening}
+많은 econometric estimators는 population criterion의 optimizer 또는 population estimating equation의 root로 표현된다.
+두 framework는 겹치지만 동일하지 않다.
+:::
+
+### 11.2.1 M-estimation {#s1121}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+정의 11.1 · M-estimator
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(\theta)=E[\rho(W,\theta)],
+\qquad
+Q_n(\theta)=\frac1n\sum_{i=1}^n\rho(W_i,\theta).
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta_0\in\operatorname*{arg\,min}_{\theta\in\Theta}Q(\theta),
+\qquad
+\widehat\theta_n\in\operatorname*{arg\,min}_{\theta\in\Theta}Q_n(\theta).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+OLS, nonlinear least squares, MLE의 negative-log-likelihood form, LAD, quantile regression 등이 이 구조에 들어간다.
+
+### 11.2.2 Z-estimation {#s1122}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+정의 11.2 · Z-estimator
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Psi(\theta)=E[\psi(W,\theta)],
+\qquad
+\Psi_n(\theta)=\frac1n\sum_{i=1}^n\psi(W_i,\theta).
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Psi(\theta_0)=0,
+\qquad
+\Psi_n(\widehat\theta_n)=0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 11.2.3 M and Z are related but not identical {#s1123}
+
+smooth M-estimation에서는 $\psi(W,\theta)=\nabla_\theta\rho(W,\theta)$로 두어 FOC를 Z-equation으로 쓸 수 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{모든 Z-estimator가 M-estimator의 FOC인 것은 아니다.}
+}
+$$
+
+::::::::::::::::::::
+
+또한 nonsmooth criterion, parameter-dependent support, boundary solution에서는 optimizer representation이 root representation보다 더 근본적일 수 있다.
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 11.1 · FOC root는 global minimizer와 동일하지 않다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(\theta)=(\theta^2-1)^2.
+$$
+
+:::::::::::::::::::
+
+FOC는
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q'(\theta)=4\theta(\theta^2-1)=0,
+$$
+
+:::::::::::::::::::
+
+이므로 roots는 $-1,0,1$. 그러나
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(-1)=Q(1)=0,\qquad Q(0)=1.
+$$
+
+:::::::::::::::::::
+
+따라서 global minimizers는 $-1,1$뿐이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{FOC의 root}
+\neq
+\text{일반적인 global M-minimizer}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 11.2 · 모든 Z-system이 scalar criterion의 gradient인 것은 아니다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\psi(\theta)
+=
+\begin{pmatrix}
+-\theta_2\\
+\theta_1
+\end{pmatrix}.
+$$
+
+:::::::::::::::::::
+
+만약 $\psi=\nabla Q$인 twice continuously differentiable scalar $Q$가 존재한다면 mixed partials가 일치해야 한다. 하지만
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac{\partial\psi_1}{\partial\theta_2}=-1,
+\qquad
+\frac{\partial\psi_2}{\partial\theta_1}=1.
+$$
+
+:::::::::::::::::::
+
+따라서 이 vector field는 gradient field가 아니다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{모든 Z-estimator가 M-estimator의 FOC인 것은 아니다}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s113}
+
+## [11.3]{.section-number}Why Pointwise Convergence Is Not Enough
+
+::: {.topic-opening}
+fixed parameter value마다 sample criterion이 population criterion으로 수렴한다고 해서 sample minimizer가 population minimizer로 수렴하는 것은 아니다.
+argmin은 parameter space 전체를 탐색하므로 convergence도 그 탐색을 통제할 만큼 강해야 한다.
+:::
+
+### 11.3.1 The moving-minimizer problem {#s1131}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\theta)\overset p\longrightarrow Q(\theta)
+\qquad\text{각 고정된 }\theta\text{에 대해}.
+$$
+
+::::::::::::::::::::
+
+그래도 각 $n$마다 다른 위치 $\theta_n^\star$에 좁고 깊은 sample dip이 존재하면
+$\widehat\theta_n=\arg\min_\theta Q_n(\theta)$가 그 dip을 따라 움직일 수 있다.
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 11.1 · Pointwise LLN은 argmin consistency theorem이 아니다
+
+:::::::::::::::::::
+
+estimator가 random minimizer인 이상 각 fixed parameter point에서의 convergence만으로 sample minimizer의 위치를 통제할 수 없다.
+
+::::::::::::::::::::
+
+### 11.3.2 Uniform convergence {#s1132}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sup_{\theta\in\Theta}|Q_n(\theta)-Q(\theta)|
+\overset p\longrightarrow0.
+}
+$$
+
+::::::::::::::::::::
+
+이는 sample criterion 전체 graph가 population graph에서 uniformly 벗어나지 못하도록 한다.
+
+### 11.3.3 Criterion-level geometry {#s1133}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{uniform approximation}
++
+\text{population separation}
+}
+$$
+
+::::::::::::::::::::
+
+uniform convergence는 criterion approximation을 통제하지만 population target의 uniqueness를 대신하지 않는다.
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 11.3 · Moving dip: pointwise convergence이지만 argmin은 inconsistent할 수 있다
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Theta=[0,1],
+\qquad
+Q(\theta)=\theta^2,
+$$
+
+:::::::::::::::::::
+
+so $\theta_0=0$. Define
+
+::::::::::::::::::: {.math-display}
+
+$$
+a_n=\frac12+\frac1n,
+\qquad
+w_n=\frac{1}{3n(n+1)},
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\theta)
+=
+\theta^2
+-
+\mathbf1\{|\theta-a_n|\lt w_n\}.
+$$
+
+:::::::::::::::::::
+
+이 moving interval들은 서로 겹치지 않으므로, 각 고정된 $\theta$는 충분히 큰 $n$에서 모든 dip의 바깥에 놓인다. 따라서 $Q_n(\theta)\to Q(\theta)$가 각 고정된 $\theta$에 대해 pointwise하게 성립한다.
+
+But
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(a_n)=a_n^2-1\lt0=Q_n(0),
+$$
+
+:::::::::::::::::::
+
+따라서 모든 sample minimizer는 해당 dip 내부에 존재하며, 그 결과
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta_n\to\frac12\neq0.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{pointwise convergence}
+\not\Rightarrow
+\text{argmin consistency}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Since
+
+::::::::::::::::::: {.math-display}
+
+$$
+a_n-a_{n+1}=\frac1{n(n+1)}
+$$
+
+:::::::::::::::::::
+
+while
+
+::::::::::::::::::: {.math-display}
+
+$$
+w_n+w_{n+1}
+=
+\frac1{3n(n+1)}
++
+\frac1{3(n+1)(n+2)}
+\lt
+\frac1{n(n+1)},
+$$
+
+:::::::::::::::::::
+
+dip interval들이 서로 겹치지 않으므로 각 고정된 $\theta$는 많아야 하나의 dip에만 포함된다. 따라서 충분히 큰 $n$에서는 $Q_n(\theta)=Q(\theta)$가 성립한다. 또한 $Q_n$이 음수가 되는 유일한 영역이 dip 내부이므로 minimizer는 그 안에 있어야 한다. dip의 중심이 $1/2$로 수렴하고 폭은 0으로 수렴하므로 $\widehat\theta_n\to1/2$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s114}
+
+## [11.4]{.section-number}Consistency of M-Estimators
+
+::: {.topic-opening}
+M-estimator consistency는 population criterion의 identification과 sample criterion의 uniform statistical approximation을 결합한다.
+:::
+
+### 11.4.1 Separated population minimizer {#s1141}
+
+모든 $\varepsilon\gt0$에 대해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\inf_{\theta:\|\theta-\theta_0\|\ge\varepsilon}
+Q(\theta)>Q(\theta_0).
+}
+$$
+
+::::::::::::::::::::
+
+즉 $\theta_0$에서 일정 거리 이상 떨어진 parameter들은 population criterion에서 uniformly worse해야 한다.
+
+### 11.4.2 Argmin consistency theorem {#s1142}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 11.1 · 기본 M-estimator consistency theorem
+
+:::::::::::::::::::
+
+다음이 성립한다고 하자.
+
+<ol>
+<li>$\sup_{\theta\in\Theta}|Q_n(\theta)-Q(\theta)|\overset p\to0$.</li>
+<li>모든 $\varepsilon\gt0$에 대해 separated-minimum condition이 성립한다.</li>
+<li>$\widehat\theta_n$은 exact minimizer이거나 asymptotically exact한 near-minimizer이다.</li>
+</ol>
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_n\overset p\longrightarrow\theta_0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\widehat\theta_n)
+\le
+\inf_{\theta\in\Theta}Q_n(\theta)
++r_n,
+\qquad
+r_n=o_p(1).
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · 기본 argmin consistency
+
+:::::::::::::::::::
+
+Fix $\varepsilon\gt0$ and define
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Delta_\varepsilon
+=
+\inf_{\|\theta-\theta_0\|\ge\varepsilon}
+\{Q(\theta)-Q(\theta_0)\}
+\gt0,
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\delta_n
+=
+\sup_{\theta\in\Theta}|Q_n(\theta)-Q(\theta)|
+=
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+$\delta_n\lt\Delta_\varepsilon/3$이고 $r_n\lt\Delta_\varepsilon/3$인 사건 위에서 $\|\widehat\theta_n-\theta_0\|\ge\varepsilon$라고 가정하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\widehat\theta_n)
+\ge
+Q(\theta_0)+2\Delta_\varepsilon/3,
+$$
+
+:::::::::::::::::::
+
+while
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\theta_0)
+\le
+Q(\theta_0)+\Delta_\varepsilon/3.
+$$
+
+:::::::::::::::::::
+
+따라서 $Q_n(\widehat\theta_n)\gt Q_n(\theta_0)+\Delta_\varepsilon/3$가 되어 near-minimizer 부등식과 모순된다. 그러므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+P(\|\widehat\theta_n-\theta_0\|\ge\varepsilon)\to0.
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 11.4.3 Identification + approximation {#s1143}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\underbrace{\text{Population separation}}_{\text{Identification}}
++
+\underbrace{\text{Uniform sample approximation}}_{\text{Statistical learning}}
+\Longrightarrow
+\underbrace{\text{Consistency}}_{\widehat\theta_n\to_p\theta_0}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 11.4 · Unique minimizer라도 well separated일 필요는 없다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(\theta)
+=
+\frac{\theta^2}{1+\theta^4},
+\qquad
+\Theta=\mathbb R.
+$$
+
+:::::::::::::::::::
+
+$0$은 유일한 minimizer이지만 $|\theta|\to\infty$일 때 $Q(\theta)\to0$이다. 따라서 모든 $\varepsilon\gt0$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\inf_{|\theta|\ge\varepsilon}Q(\theta)
+=
+Q(0)=0.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{uniqueness}
+\not\Rightarrow
+\text{noncompact space에서의 separation}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s115}
+
+## [11.5]{.section-number}Primitive Conditions: Uniform Laws of Large Numbers
+
+::: {.topic-opening}
+Uniform convergence는 편리한 high-level assumption이다.
+실제 model에서는 이를 data, criterion, parameter space에 대한 primitive conditions에서 검증해야 한다.
+:::
+
+### 11.5.1 High-level vs primitive conditions {#s1151}
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+High-level
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+\sup_\theta|Q_n(\theta)-Q(\theta)|\overset p\to0
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+consistency theorem에 직접 넣는 condition.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Primitive
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+\text{i.i.d. + continuity + envelope + compactness}
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+model 구조에서 확인 가능한 sufficient conditions.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 11.5.2 A basic ULLN {#s1152}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 11.2 · 기본 uniform law of large numbers
+
+:::::::::::::::::::
+
+<ol>
+<li>$W_i$는 i.i.d.이다.</li>
+<li>$\Theta$는 compact이다.</li>
+<li>$\rho(W,\theta)$는 거의 확실하게 $\theta$에 대해 연속이다.</li>
+<li>적분가능한 envelope $G(W)$가 존재하여
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sup_{\theta\in\Theta}|\rho(W,\theta)|
+\le G(W),
+\qquad
+E[G(W)]\lt\infty.
+$$
+
+:::::::::::::::::::
+
+</li>
+</ol>
+
+그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sup_{\theta\in\Theta}|P_n\rho_\theta-P\rho_\theta|
+\overset p\longrightarrow0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 11.2A · 기본적인 Lipschitz ULLN
+
+:::::::::::::::::::
+
+$\Theta\subset\mathbb R^p$가 compact하다고 하고, 다음을 가정하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+|\rho(W,\theta)-\rho(W,\vartheta)|
+\le
+L(W)\|\theta-\vartheta\|,
+\qquad
+E[L(W)]\lt\infty,
+$$
+
+:::::::::::::::::::
+
+또한 어떤 $\theta^\star\in\Theta$에 대해 $E|\rho(W,\theta^\star)|\lt\infty$라고 하자. $W_i$가 i.i.d.이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sup_{\theta\in\Theta}
+|(P_n-P)\rho_\theta|
+\overset p\longrightarrow0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+임의의 $\delta\gt0$에 대해 compactness로부터 유한한 $\delta$-net $\theta_1,\ldots,\theta_M$을 잡을 수 있다. 각 $\theta$에 대해 $\|\theta-\theta_{j(\theta)}\|\le\delta$를 만족하는 $j(\theta)$를 선택하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+|(P_n-P)\rho_\theta|
+&\le
+|(P_n-P)\rho_{\theta_{j(\theta)}}|\\
+&\quad+
+P_n|\rho_\theta-\rho_{\theta_{j(\theta)}}|\\
+&\quad+
+P|\rho_\theta-\rho_{\theta_{j(\theta)}}|.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sup_{\theta\in\Theta}|(P_n-P)\rho_\theta|
+\le
+\max_{j\le M}|(P_n-P)\rho_{\theta_j}|
++
+\delta P_nL
++
+\delta PL.
+$$
+
+:::::::::::::::::::
+
+고정된 $\delta$에 대해서 첫 번째 항은 유한 개의 LLN에 의해 0으로 수렴하고, $P_nL\to_pPL$이다. 마지막으로 $\delta\downarrow0$를 취하면 결론을 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 11.5.3 Compactness is sufficient, not sacred {#s1153}
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+Remark · Compactness는 편리한 충분조건
+
+:::::::::::::::::::
+
+compact parameter space는 uniform convergence와 minimizer existence를 다루기 쉽게 하지만 필수조건은 아니다.
+coercivity, local compactness, tightness of near-minimizers, one-sided uniform arguments 등으로 대체할 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+증명 개요 11.1 · Continuity + compactness + envelope에 의한 ULLN
+
+:::::::::::::::::::
+
+정리 11.2의 more general continuity/envelope version은 compact parameter space를 finitely many neighborhoods로 덮고, local oscillation을 integrable envelope로 지배한 뒤 pointwise LLN과 truncation을 결합한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{finite approximation}
++
+\text{oscillation control}
++
+\text{pointwise LLN}
+\Rightarrow
+\text{ULLN}.
+}
+$$
+
+:::::::::::::::::::
+
+General empirical-process theory는 이 finite-dimensional argument를 function-class complexity control로 확장한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s116}
+
+## [11.6]{.section-number}Consistency of Z-Estimators
+
+::: {.topic-opening}
+Z-estimator에는 criterion ordering이 없으므로 population zero의 separation과 sample moment map의 uniform approximation으로 consistency를 증명한다.
+:::
+
+### 11.6.1 Separated zero {#s1161}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Psi(\theta_0)=0.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\inf_{\|\theta-\theta_0\|\ge\varepsilon}
+\|\Psi(\theta)\|>0
+\qquad
+\text{for every }\varepsilon\gt0.
+}
+$$
+
+::::::::::::::::::::
+
+### 11.6.2 Uniform moment convergence {#s1162}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sup_{\theta\in\Theta}
+\|\Psi_n(\theta)-\Psi(\theta)\|
+\overset p\longrightarrow0.
+}
+$$
+
+::::::::::::::::::::
+
+### 11.6.3 Approximate roots {#s1163}
+
+exact equation을 반드시 풀 필요는 없다. consistency 단계에서는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\|\Psi_n(\widehat\theta_n)\|
+=
+o_p(1)
+}
+$$
+
+::::::::::::::::::::
+
+정도의 near-zero도 충분할 수 있다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 11.3 · 기본 Z-estimator consistency
+
+:::::::::::::::::::
+
+separated zero, uniform moment convergence, 그리고 $\|\Psi_n(\widehat\theta_n)\|=o_p(1)$가 성립하면 적절한 regularity conditions 아래
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_n\overset p\longrightarrow\theta_0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · 기본 Z-consistency
+
+:::::::::::::::::::
+
+$\varepsilon\gt0$를 고정하고 separation constant를 다음과 같이 정의하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+c_\varepsilon
+=
+\inf_{\|\theta-\theta_0\|\ge\varepsilon}
+\|\Psi(\theta)\|
+\gt0.
+$$
+
+:::::::::::::::::::
+
+Also let
+
+::::::::::::::::::: {.math-display}
+
+$$
+\delta_n
+=
+\sup_{\theta\in\Theta}
+\|\Psi_n(\theta)-\Psi(\theta)\|
+=
+o_p(1).
+$$
+
+:::::::::::::::::::
+
+If $\|\widehat\theta_n-\theta_0\|\ge\varepsilon$, then $\|\Psi(\widehat\theta_n)\|\ge c_\varepsilon$. But
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|\Psi(\widehat\theta_n)\|
+\le
+\|\Psi_n(\widehat\theta_n)\|
++
+\delta_n
+=
+o_p(1),
+$$
+
+:::::::::::::::::::
+
+이는 probability가 1로 가는 사건 위에서 양의 lower bound와 모순된다. 따라서 $\widehat\theta_n\to_p\theta_0$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s117}
+
+## [11.7]{.section-number}Local Identification, Jacobians, and Curvature
+
+::: {.topic-opening}
+Consistency는 global localization problem이고, root-$n$ asymptotics는 target 주변의 local geometry를 이용한다.
+:::
+
+### 11.7.1 Jacobian geometry {#s1171}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+A
+=
+\left.
+\frac{\partial\Psi(\theta)}
+{\partial\theta'}
+\right|_{\theta=\theta_0}.
+}
+$$
+
+::::::::::::::::::::
+
+$A$가 nonsingular하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Psi(\theta_0+h)\approx Ah
+$$
+
+::::::::::::::::::::
+
+에서 moment perturbation을 parameter perturbation으로 local하게 역변환할 수 있다.
+
+### 11.7.2 Hessian geometry {#s1172}
+
+$g(W,\theta)=\nabla_\theta\rho(W,\theta)$라 하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+H
+=
+\nabla_\theta^2Q(\theta_0)
+=
+E[\nabla_\theta g(W,\theta_0)]
+}
+$$
+
+::::::::::::::::::::
+
+under appropriate interchange conditions. $H\succ0$이면 target 주변에 positive local curvature가 있다.
+
+### 11.7.3 Local is not global {#s1173}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 11.2 · Nonsingular Jacobian은 global identification theorem이 아니다
+
+:::::::::::::::::::
+
+$A$가 nonsingular하거나 $H\succ0$인 것은 target 주변의 regular local geometry를 보장한다.
+멀리 떨어진 다른 root나 global minimizer의 존재 가능성까지 제거하지는 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+증명 개요 11.2 · Nonsingular Jacobian과 regular local identification
+
+:::::::::::::::::::
+
+$\Psi$가 $\theta_0$의 근방에서 continuously differentiable이고 $\Psi(\theta_0)=0$이며
+
+::::::::::::::::::: {.math-display}
+
+$$
+A=\dot\Psi(\theta_0)
+$$
+
+:::::::::::::::::::
+
+가 nonsingular이면 inverse function theorem에 의해 $\Psi$는 $\theta_0$의 어떤 근방에서 one-to-one이다. 따라서 $\theta_0$는 그 근방에서 유일한 root이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 11.5 · Local identification은 global identification이 아니다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Psi(\theta)=\theta^2-1.
+$$
+
+:::::::::::::::::::
+
+$\theta_0=1$에서 $\Psi'(1)=2\neq0$이므로 $1$은 regular하게 locally identified된 root이다. 그러나 $\Psi(-1)=0$도 성립한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{regular local identification}
+\not\Rightarrow
+\text{global uniqueness}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 11.6 · Singular Jacobian에서도 point identification은 성립할 수 있다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Psi(\theta)=\theta^3.
+$$
+
+:::::::::::::::::::
+
+유일한 root는 $\theta_0=0$이지만 $\Psi'(0)=0$이다. target에서의 sample perturbation이 $O_p(n^{-1/2})$라면 다음의 order balance를 고려할 수 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta_n^3
+\asymp
+n^{-1/2}
+$$
+
+:::::::::::::::::::
+
+suggests
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta_n
+=
+O_p(n^{-1/6}),
+$$
+
+:::::::::::::::::::
+
+즉 regular한 $n^{-1/2}$ rate가 아니다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{identification}
+\not\Rightarrow
+\sqrt n\text{-regularity}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s118}
+
+## [11.8]{.section-number}Asymptotic Normality of Smooth M-Estimators
+
+::: {.topic-opening}
+Smooth M-estimator의 asymptotic normality는 sample FOC를 target 주변에서 Taylor-expand한 뒤 score CLT와 Hessian LLN을 결합하여 얻는다.
+:::
+
+### 11.8.1 FOC expansion {#s1181}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\nabla Q_n(\widehat\theta_n)=0.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+0=
+\nabla Q_n(\theta_0)
++
+\nabla^2Q_n(\widetilde\theta_n)(\widehat\theta_n-\theta_0).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_0)
+=
+-
+[\nabla^2Q_n(\widetilde\theta_n)]^{-1}
+\sqrt n\nabla Q_n(\theta_0).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+엄밀화 11.1 · Integrated Hessian을 이용한 multivariate expansion
+
+:::::::::::::::::::
+
+다변량 vector gradient에서는 하나의 common intermediate point를 사용하는 scalar mean-value formula가 자동으로 성립하지 않는다. 대신
+
+::::::::::::::::::: {.math-display}
+
+$$
+\bar H_n
+=
+\int_0^1
+\nabla^2Q_n
+\bigl(
+\theta_0+t(\widehat\theta_n-\theta_0)
+\bigr)
+dt
+$$
+
+:::::::::::::::::::
+
+를 정의하면 exact identity
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\nabla Q_n(\widehat\theta_n)
+-
+\nabla Q_n(\theta_0)
+=
+\bar H_n(\widehat\theta_n-\theta_0)
+}
+$$
+
+:::::::::::::::::::
+
+를 얻는다. Exact interior FOC에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_0)
+=
+-\bar H_n^{-1}
+\sqrt n\nabla Q_n(\theta_0).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Define
+
+::::::::::::::::::: {.math-display}
+
+$$
+g(t)
+=
+\nabla Q_n\bigl(\theta_0+t(\widehat\theta_n-\theta_0)\bigr).
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+g'(t)
+=
+\nabla^2Q_n\bigl(\theta_0+t(\widehat\theta_n-\theta_0)\bigr)
+(\widehat\theta_n-\theta_0).
+$$
+
+:::::::::::::::::::
+
+$0$에서 $1$까지 적분하면 위의 exact matrix expansion을 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 11.8.2 Score CLT {#s1182}
+
+$s_i=\nabla_\theta\rho(W_i,\theta_0)$, $E[s_i]=0$, $B=E[s_is_i']$라 두면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac1{\sqrt n}\sum_{i=1}^n s_i
+\overset d\longrightarrow
+N(0,B).
+$$
+
+::::::::::::::::::::
+
+### 11.8.3 Generic M-sandwich {#s1183}
+
+$\nabla^2Q_n(\widetilde\theta_n)\overset p\to H$이고 $H$가 nonsingular라면
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 11.4 · Smooth M-estimator의 asymptotic normality
+
+:::::::::::::::::::
+
+대표적인 high-level conditions는 다음과 같다.
+
+<ol>
+<li>$\theta_0$는 interior point이고 $\widehat\theta_n\to_p\theta_0$이다.</li>
+<li>probability가 1로 수렴하는 사건 위에서 $\nabla Q_n(\widehat\theta_n)=0$이다.</li>
+<li>$\sqrt n\nabla Q_n(\theta_0)\Rightarrow N(0,B)$인 score CLT가 성립한다.</li>
+<li>$\theta_0$와 $\widehat\theta_n$을 잇는 line segment를 포함하는 근방에서 sample Hessian이 nonsingular한 $H$로 uniformly convergence한다.</li>
+</ol>
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_0)
+\overset d\longrightarrow
+N(0,H^{-1}BH^{-1}).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Smooth M-estimator의 asymptotic normality
+
+:::::::::::::::::::
+
+integrated-Hessian identity에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\theta_n-\theta_0)
+=
+-\bar H_n^{-1}\sqrt n\nabla Q_n(\theta_0).
+$$
+
+:::::::::::::::::::
+
+consistency와 local uniform Hessian convergence를 결합하면 $\bar H_n\to_pH$이고, 따라서 $\bar H_n^{-1}\to_pH^{-1}$이다. 한편 score CLT에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\nabla Q_n(\theta_0)\Rightarrow N(0,B).
+$$
+
+:::::::::::::::::::
+
+따라서 Slutsky 정리에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_0)
+\Rightarrow
+N(0,H^{-1}BH^{-1'}).
+}
+$$
+
+:::::::::::::::::::
+
+Hessian은 symmetric이므로 이 covariance는 $H^{-1}BH^{-1}$로 쓸 수 있다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s119}
+
+## [11.9]{.section-number}Asymptotic Normality of Z-Estimators
+
+::: {.topic-opening}
+Z-estimator에서는 criterion Hessian 대신 population moment map의 Jacobian이 local sensitivity를 결정한다.
+:::
+
+### 11.9.1 Estimating-equation expansion {#s1191}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+0=\Psi_n(\widehat\theta_n)
+=
+\Psi_n(\theta_0)
++
+A_n(\widetilde\theta_n)(\widehat\theta_n-\theta_0).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_0)
+=
+-
+A_n(\widetilde\theta_n)^{-1}
+\sqrt n\Psi_n(\theta_0).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+엄밀화 11.2 · Integrated Jacobian을 이용한 Z-expansion
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\bar A_n
+=
+\int_0^1
+\dot\Psi_n
+\bigl(
+\theta_0+t(\widehat\theta_n-\theta_0)
+\bigr)
+dt.
+$$
+
+:::::::::::::::::::
+
+Then exactly
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Psi_n(\widehat\theta_n)-\Psi_n(\theta_0)
+=
+\bar A_n(\widehat\theta_n-\theta_0).
+}
+$$
+
+:::::::::::::::::::
+
+For an exact root,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_0)
+=
+-\bar A_n^{-1}\sqrt n\Psi_n(\theta_0).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+다음 함수에 fundamental theorem of calculus를 적용하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+g(t)
+=
+\Psi_n\bigl(\theta_0+t(\widehat\theta_n-\theta_0)\bigr).
+$$
+
+:::::::::::::::::::
+
+$g'(t)$를 $0$에서 $1$까지 적분하면 exact identity를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 11.9.2 Moment CLT {#s1192}
+
+$\psi_i=\psi(W_i,\theta_0)$, $E[\psi_i]=0$, $B=E[\psi_i\psi_i']$라 두면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\Psi_n(\theta_0)
+=
+\frac1{\sqrt n}\sum_{i=1}^n\psi_i
+\overset d\longrightarrow
+N(0,B).
+$$
+
+::::::::::::::::::::
+
+### 11.9.3 Generic Z-sandwich {#s1193}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 11.5 · Z-estimator의 asymptotic normality
+
+:::::::::::::::::::
+
+대표적인 sufficient conditions는 $\widehat\theta_n\to_p\theta_0$, $\theta_0$에서의 moment CLT, nonsingular한 $A$로의 local uniform Jacobian convergence, 그리고 exact root 또는 충분히 정확한 approximate root이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_0)
+\overset d\longrightarrow
+N\!\left(0,A^{-1}BA^{-1'}\right).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Z-estimator의 asymptotic normality
+
+:::::::::::::::::::
+
+integrated-Jacobian representation에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widehat\theta_n-\theta_0)
+=
+-\bar A_n^{-1}\sqrt n\Psi_n(\theta_0).
+$$
+
+:::::::::::::::::::
+
+consistency와 local uniform convergence로부터 $\bar A_n\to_pA$이므로 $\bar A_n^{-1}\to_pA^{-1}$이다. 또한 moment CLT에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n\Psi_n(\theta_0)\Rightarrow N(0,B).
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_0)
+\Rightarrow
+N(0,A^{-1}BA^{-1'}).
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+왜 transpose가 있는가
+
+:::::::::::::::::::
+
+일반 Z-estimator의 Jacobian $A$는 symmetric일 필요가 없다.
+smooth M-estimator에서는 Hessian $H=H'$이므로 $H^{-1}BH^{-1}$로 단순화된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 11.6 · Approximate Z-root는 $n^{-1/2}$ scale의 first-order asymptotics를 보존한다
+
+:::::::::::::::::::
+
+$r_n=\Psi_n(\widetilde\theta_n)$라 두자. exact root와 동일한 local regularity conditions 아래에서, 만약
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\|r_n\|=o_p(n^{-1/2}),
+}
+$$
+
+:::::::::::::::::::
+
+이면 $\widetilde\theta_n$은 exact Z-root와 동일한 first-order asymptotic law를 갖는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+위 expansion으로부터
+
+::::::::::::::::::: {.math-display}
+
+$$
+r_n
+=
+\Psi_n(\theta_0)
++
+\bar A_n(\widetilde\theta_n-\theta_0).
+$$
+
+:::::::::::::::::::
+
+Therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt n(\widetilde\theta_n-\theta_0)
+=
+-\bar A_n^{-1}\sqrt n\Psi_n(\theta_0)
++
+\bar A_n^{-1}\sqrt nr_n.
+$$
+
+:::::::::::::::::::
+
+두 번째 항은 $O_p(1)o_p(1)=o_p(1)$이므로 exact root의 first-order limit가 그대로 유지된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1110}
+
+## [11.10]{.section-number}Sandwich Variance and Influence Representations
+
+::: {.topic-opening}
+Generic Z-estimator asymptotics는 estimator error를 observation-level contributions의 평균으로 선형화한다.
+이 representation이 covariance estimation과 이후 GMM 및 semiparametric theory의 출발점이다.
+:::
+
+### 11.10.1 Asymptotic linear representation {#s11101}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta_n-\theta_0)
+=
+-A^{-1}\frac1{\sqrt n}\sum_{i=1}^n\psi(W_i,\theta_0)
++
+o_p(1).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta_n-\theta_0
+=
+\frac1n\sum_{i=1}^nIF(W_i)
++
+o_p(n^{-1/2}),
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+IF(W)=-A^{-1}\psi(W,\theta_0).
+}
+$$
+
+::::::::::::::::::::
+
+### 11.10.2 Influence contribution {#s11102}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[IF(W)]=0,
+\qquad
+\boxed{
+V=E[IF(W)IF(W)']=A^{-1}BA^{-1'}.
+}
+$$
+
+::::::::::::::::::::
+
+Chapter 10의 OLS influence term $Q^{-1}X_ie_i$는 이 구조의 특수사례다.
+
+### 11.10.3 Variance estimation {#s11103}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat A
+=
+\frac1n\sum_{i=1}^n
+\frac{\partial\psi(W_i,\widehat\theta)}
+{\partial\theta'},
+\qquad
+\widehat B
+=
+\frac1n\sum_{i=1}^n
+\psi(W_i,\widehat\theta)\psi(W_i,\widehat\theta)'.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat V
+=
+\widehat A^{-1}\widehat B\widehat A^{-1'}.
+}
+$$
+
+::::::::::::::::::::
+
+이는 $\sqrt n(\widehat\theta-\theta_0)$의 covariance estimator이고,
+$\widehat\theta$ 자체의 asymptotic covariance estimator는 $n^{-1}\widehat V$다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 11.7 · Asymptotic linear representation
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\theta_n-\theta_0
+=
+\frac1n\sum_{i=1}^nIF(W_i)
++
+o_p(n^{-1/2}),
+}
+$$
+
+:::::::::::::::::::
+
+where
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+IF(W)
+=
+-A^{-1}\psi(W,\theta_0).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+root-$n$ Z-representation의 양변을 $\sqrt n$으로 나누면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta_n-\theta_0
+=
+-\frac1n\sum_{i=1}^nA^{-1}\psi(W_i,\theta_0)
++
+o_p(n^{-1/2}).
+$$
+
+:::::::::::::::::::
+
+이는 바로 위에서 제시한 asymptotic linear representation이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Influence covariance가 sandwich와 일치함
+
+:::::::::::::::::::
+
+Since $E[\psi(W,\theta_0)]=0$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[IF(W)]=0.
+$$
+
+:::::::::::::::::::
+
+Also
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[IF(W)IF(W)']
+&=
+A^{-1}E[\psi\psi']A^{-1'}\\
+&=
+\boxed{
+A^{-1}BA^{-1'}.
+}
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+보조정리 11.1 · Random-index plug-in consistency
+
+:::::::::::::::::::
+
+$f(W,\theta)$가 local ULLN을 만족하고, $\widehat\theta_n\to_p\theta_0$이며, $\theta\to\theta_0$일 때 $Pf_\theta\to Pf_{\theta_0}$라고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+P_nf_{\widehat\theta_n}
+\overset p\longrightarrow
+Pf_{\theta_0}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Decompose
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_nf_{\widehat\theta_n}-Pf_{\theta_0}
+=
+(P_n-P)f_{\widehat\theta_n}
++
+P(f_{\widehat\theta_n}-f_{\theta_0}).
+$$
+
+:::::::::::::::::::
+
+첫 번째 항은 local ULLN으로 통제되고, 두 번째 항은 consistency와 population map의 continuity로 통제된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+따름정리 11.1 · Sandwich variance estimator consistency
+
+:::::::::::::::::::
+
+Apply Lemma 11.1 to
+
+::::::::::::::::::: {.math-display}
+
+$$
+f_A(W,\theta)
+=
+\frac{\partial\psi(W,\theta)}{\partial\theta'},
+\qquad
+f_B(W,\theta)
+=
+\psi(W,\theta)\psi(W,\theta)'.
+$$
+
+:::::::::::::::::::
+
+그러면 적절한 local ULLN 아래에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat A\to_pA,
+\qquad
+\widehat B\to_pB,
+$$
+
+:::::::::::::::::::
+
+and therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat V
+=
+\widehat A^{-1}\widehat B\widehat A^{-1'}
+\to_p
+A^{-1}BA^{-1'}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1111x}
+
+## [11.11]{.section-number}Approximate Solutions, Nonsmooth Problems, and Computation
+
+::: {.topic-opening}
+estimator의 mathematical definition과 실제 numerical output 사이에는 optimization error가 존재할 수 있다.
+general asymptotic theory는 exact solution뿐 아니라 충분히 accurate한 approximate solution도 다룬다.
+:::
+
+### 11.11.1 Approximate M-solutions {#s11111}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+Q_n(\widehat\theta_n)
+\le
+\inf_{\theta\in\Theta}Q_n(\theta)
++
+o_p(1).
+}
+$$
+
+::::::::::::::::::::
+
+이러한 near-minimizer도 consistency를 가질 수 있다.
+root-$n$ asymptotics를 보존하려면 더 강한 optimization accuracy가 필요할 수 있다.
+
+### 11.11.2 Approximate Z-roots {#s11112}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\|\Psi_n(\widehat\theta_n)\|
+=
+o_p(n^{-1/2})
+}
+$$
+
+::::::::::::::::::::
+
+정도의 residual은 regular settings에서 exact root와 같은 first-order limit를 유지하는 전형적인 benchmark다.
+
+### 11.11.3 Statistical scale vs optimization tolerance {#s11113}
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Computation meets statistics
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+optimization tolerance의 절대 크기만 보는 것은 충분하지 않다.
+estimator의 statistical fluctuation scale이 $n^{-1/2}$라면 numerical error가 그보다 작은 order인지 비교해야 한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{numerical error}=o_p(n^{-1/2})
+\quad\Rightarrow\quad
+\text{first-order에서 asymptotically negligible}.
+}
+$$
+
+::::::::::::::::::::
+
+### 11.11.4 Nonsmooth problems {#s11114}
+
+<strong>LAD:</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta
+=
+\operatorname*{arg\,min}_{\theta}
+\sum_{i=1}^n|Y_i-X_i'\theta|.
+$$
+
+::::::::::::::::::::
+
+<strong>Quantile regression:</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta_\tau
+=
+\operatorname*{arg\,min}_{b}
+\sum_{i=1}^n\rho_\tau(Y_i-X_i'b),
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\rho_\tau(u)
+=
+u\left(\tau-\mathbf1\{u\lt0\}\right).
+$$
+
+::::::::::::::::::::
+
+criterion이 kink를 가지므로 ordinary Hessian expansion은 그대로 적용되지 않는다.
+subgradient, directional expansion, empirical-process arguments 등이 필요할 수 있다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 11.8 · Objective gap와 parameter error의 rate
+
+:::::::::::::::::::
+
+sample criterion이 exact minimizer $\widehat\theta_n$의 근방에서 다음 local quadratic growth condition을 만족한다고 하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\theta)-Q_n(\widehat\theta_n)
+\ge
+c\|\theta-\widehat\theta_n\|^2.
+$$
+
+:::::::::::::::::::
+
+numerical solution $\widetilde\theta_n$의 objective gap을
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Delta_n
+=
+Q_n(\widetilde\theta_n)-Q_n(\widehat\theta_n),
+$$
+
+:::::::::::::::::::
+
+then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\|\widetilde\theta_n-\widehat\theta_n\|
+\le
+\sqrt{\Delta_n/c}.
+}
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Delta_n=o_p(n^{-1})
+\Rightarrow
+\widetilde\theta_n-\widehat\theta_n=o_p(n^{-1/2}).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+quadratic growth condition에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+c\|\widetilde\theta_n-\widehat\theta_n\|^2
+\le
+\Delta_n.
+$$
+
+:::::::::::::::::::
+
+양변의 제곱근을 취하면 해당 bound를 얻는다. $\Delta_n=o_p(n^{-1})$이면 $\sqrt{\Delta_n}=o_p(n^{-1/2})$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 11.1 · Fixed numerical tolerance가 statistical noise를 지배할 수 있다
+
+:::::::::::::::::::
+
+어떤 solver가 항상 다음을 보장한다고 하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|\widetilde\theta_n-\widehat\theta_n\|
+\le10^{-4}.
+$$
+
+:::::::::::::::::::
+
+But
+
+::::::::::::::::::: {.math-display}
+
+$$
+n^{-1/2}\lt10^{-4}
+\qquad
+\text{once }n\gt10^8.
+$$
+
+:::::::::::::::::::
+
+따라서 fixed absolute tolerance는 반드시 $o(n^{-1/2})$일 필요가 없다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{numerical tolerance는 statistical scale과 비교해야 한다}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+증명 개요 11.3 · Nonsmooth asymptotically linear estimator로서의 sample median
+
+:::::::::::::::::::
+
+population median은 다음 optimization problem의 해이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\theta_0\in\operatorname*{arg\,min}_\theta E|Y-\theta|.
+$$
+
+:::::::::::::::::::
+
+sample median은 $P_n|Y-\theta|$를 최소화한다. $F(\theta_0)=1/2$이고 $f(\theta_0)\gt0$이면 Bahadur expansion으로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+=
+-\frac1{f(\theta_0)}
+\frac1{\sqrt n}\sum_{i=1}^n
+\left(
+\mathbf1\{Y_i\le\theta_0\}-\frac12
+\right)
++
+o_p(1).
+}
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+\Rightarrow
+N\left(
+0,\frac1{4f(\theta_0)^2}
+\right).
+}
+$$
+
+:::::::::::::::::::
+
+nonsmoothness는 expansion 방법을 바꾸지만 asymptotic linearity 자체를 자동으로 제거하지는 않는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1112x}
+
+## [11.12]{.section-number}Examples: OLS, NLLS, MLE, LAD, and Quantile Regression
+
+::: {.topic-opening}
+abstract theory를 concrete estimators에 다시 대입하면 동일한 consistency–linearization–sandwich architecture가 반복됨을 확인할 수 있다.
+:::
+
+### 11.12.1 OLS {#s11121}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\rho(W,\beta)=(Y-X'\beta)^2,
+\qquad
+\psi(W,\beta)=X(Y-X'\beta).
+$$
+
+::::::::::::::::::::
+
+OLS는 M와 Z 양쪽 representation을 모두 갖는다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 11.2 · Generic Z-estimation에서 OLS를 복원하기
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\psi(W,\beta)=X(Y-X'\beta)=Xe.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+A=-E[XX']=-Q,
+\qquad
+B=E[XX'e^2].
+$$
+
+:::::::::::::::::::
+
+Therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+A^{-1}BA^{-1'}
+=
+Q^{-1}E[XX'e^2]Q^{-1},
+}
+$$
+
+:::::::::::::::::::
+
+따라서 Chapter 10의 OLS sandwich를 정확히 복원한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+$A=-Q$이므로 $A^{-1}=-Q^{-1}$이다. 따라서 $A^{-1}BA^{-1'}$에서는 두 개의 음의 부호가 상쇄된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 11.12.2 Nonlinear least squares {#s11122}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\rho(W,\theta)=[Y-m(X,\theta)]^2.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\theta
+=
+\operatorname*{arg\,min}_{\theta}
+\frac1n\sum_i[Y_i-m(X_i,\theta)]^2.
+$$
+
+::::::::::::::::::::
+
+$m_\theta(X,\theta_0)$가 local linearized regressor의 역할을 하며,
+NLLS의 regular asymptotics 역시 sandwich structure로 정리된다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 11.3 · NLLS의 score, Hessian, sandwich 구성요소
+
+:::::::::::::::::::
+
+For
+
+::::::::::::::::::: {.math-display}
+
+$$
+\rho(W,\theta)=[Y-m(X,\theta)]^2,
+\qquad
+e(\theta)=Y-m(X,\theta),
+$$
+
+:::::::::::::::::::
+
+write $m_\theta=\partial m/\partial\theta$. Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+s(W,\theta)
+=
+-2m_\theta(X,\theta)e(\theta).
+}
+$$
+
+:::::::::::::::::::
+
+And
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\nabla_\theta^2\rho(W,\theta)
+=
+2m_\theta m_\theta'
+-
+2e(\theta)m_{\theta\theta}.
+}
+$$
+
+:::::::::::::::::::
+
+Thus at the target
+
+::::::::::::::::::: {.math-display}
+
+$$
+H
+=
+2E[m_\theta m_\theta']
+-
+2E[e\,m_{\theta\theta}],
+\qquad
+B
+=
+4E[e^2m_\theta m_\theta'].
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+$\rho=e^2$를 미분하자. $\nabla_\theta e=-m_\theta$이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\nabla_\theta\rho=-2m_\theta e.
+$$
+
+:::::::::::::::::::
+
+한 번 더 미분하면 $2m_\theta m_\theta'-2e\,m_{\theta\theta}$를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 11.12.3 Maximum likelihood {#s11123}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\rho(W,\theta)=-\log f_\theta(W),
+\qquad
+\widehat\theta_{MLE}
+=
+\operatorname*{arg\,min}_{\theta}
+\left\{-\frac1n\sum_i\log f_\theta(W_i)\right\}.
+$$
+
+::::::::::::::::::::
+
+smooth interior case에서는 score equation으로 Z-estimation form도 갖는다.
+하지만 support가 parameter에 의존하거나 likelihood가 nonsmooth하면 maximizing definition이 더 근본적일 수 있다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 11.4 · MLE에서 information equality가 만드는 특수한 단순화
+
+:::::::::::::::::::
+
+negative log likelihood를 criterion으로 사용하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\rho(W,\theta)=-\log f_\theta(W),
+$$
+
+:::::::::::::::::::
+
+correct specification과 standard regularity conditions 아래에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+B=H.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+H^{-1}BH^{-1}=H^{-1}.
+}
+$$
+
+:::::::::::::::::::
+
+misspecification 아래에서는 일반적으로 이 equality가 성립하지 않으므로 sandwich covariance가 필요하다. 이 구분은 Chapter 13에서 자세히 전개한다.
+
+::::::::::::::::::::
+
+### 11.12.4 LAD and quantile regression {#s11124}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\rho(u)=|u|,
+\qquad
+\rho_\tau(u)=u(\tau-\mathbf1\{u\lt0\}).
+$$
+
+::::::::::::::::::::
+
+이 estimators는 M-estimation framework에는 자연스럽게 포함되지만 smooth-M theorem을 기계적으로 적용할 수는 없다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 11.5 · Quantile regression의 moment map과 sandwich preview
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\psi_\tau(W,\beta)
+=
+X\left[
+\tau-\mathbf1\{Y\le X'\beta\}
+\right].
+$$
+
+:::::::::::::::::::
+
+conditional density가 $X'\beta_\tau$의 근방에서 존재한다면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+A
+=
+-
+E[
+f_{Y|X}(X'\beta_\tau\mid X)XX'
+].
+}
+$$
+
+:::::::::::::::::::
+
+conditional quantile restriction 아래에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+B
+=
+\tau(1-\tau)E[XX'].
+}
+$$
+
+:::::::::::::::::::
+
+asymptotic covariance는 다시 $A^{-1}BA^{-1'}$의 generic form을 갖지만, 그 증명에는 nonsmooth empirical-process argument가 필요하다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1113x}
+
+## [11.13]{.section-number}What the General Theory Does—and Does Not—Guarantee
+
+::: {.topic-opening}
+General theorem은 공통 구조를 드러내지만 그 conclusion을 identification, computation, interpretation까지 자동으로 확대할 수는 없다.
+:::
+
+### 11.13.1 Uniform convergence vs identification {#s11131}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{uniform convergence}
++
+\text{nonunique target}
+\not\Rightarrow
+\text{point consistency}.
+}
+$$
+
+::::::::::::::::::::
+
+### 11.13.2 Consistency vs asymptotic normality {#s11132}
+
+boundary parameter, nondifferentiability, singular Jacobian/Hessian, weak identification, nonstandard rates에서는
+consistency가 있어도 regular root-$n$ Gaussian limit가 깨질 수 있다.
+
+### 11.13.3 Numerical vs statistical convergence {#s11133}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{algorithm이 }\widehat\theta_n\text{으로 수렴}
+\not\Rightarrow
+\widehat\theta_n\overset p\to\theta_0.
+}
+$$
+
+::::::::::::::::::::
+
+sample optimization problem을 정확히 푸는 것과 population target을 statistically 학습하는 것은 다른 theorem을 필요로 한다.
+
+### 11.13.4 Valid inference around the wrong target {#s11134}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\theta^\dagger
+=
+\operatorname*{arg\,min}_{\theta}E[\rho(W,\theta)].
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\theta^\dagger\text{에 대한 valid inference}
+\neq
+\theta^\dagger\text{가}
+\text{economic 또는 causal target이라는 증거}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 11.7 · Perfect uniform convergence도 point identification을 만들지 못한다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\theta)=Q(\theta)=(\theta^2-1)^2.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sup_\theta|Q_n(\theta)-Q(\theta)|=0,
+$$
+
+:::::::::::::::::::
+
+하지만 minimizer set은 $\{-1,1\}$이다. Uniform convergence는 population identification을 대신할 수 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 11.8 · Numerical uniqueness는 population identification을 만들지 못한다
+
+:::::::::::::::::::
+
+original population criterion이 $[-1,1]$에서 flat하다고 하자. numerical procedure가 대신 다음 criterion을 최소화할 수 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(\theta)+\lambda_n\theta^2,
+\qquad
+\lambda_n\gt0,
+$$
+
+:::::::::::::::::::
+
+그 결과 unique optimizer $0$을 반환할 수 있다. 이는 regularization이 만들어 낸 selection일 뿐, original target이 point identified라는 증거는 아니다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{unique regularized optimizer}
+\neq
+\text{original problem의 point identification}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 11.6 · Pseudo-true linear target에 대한 valid inference
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+X\sim N(0,1),
+\qquad
+Y=X^2+\varepsilon,
+\qquad
+E[\varepsilon\mid X]=0.
+$$
+
+:::::::::::::::::::
+
+$(1,X)$에 대한 linear BLP는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\alpha^{BLP}=1,
+\qquad
+\beta^{BLP}=0.
+$$
+
+:::::::::::::::::::
+
+다음과 같이 CEF가 선형이 아니더라도 이 BLP에 대한 OLS와 sandwich inference는 유효할 수 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y\mid X]=X^2\neq1.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{pseudo-true statistical target에 대한 valid inference}
+\neq
+\text{올바른 structural interpretation}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1114x}
+
+## [11.14]{.section-number}요약과 연습문제
+
+### 11.14.1 Chapter map {#s11141}
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 11 in one map
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Population uniqueness}
++
+\text{Uniform sample approximation}
+\Longrightarrow
+\text{Consistency}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Consistency}
++
+\text{Local differentiability}
++
+\text{Nonsingular Jacobian}
++
+\text{CLT}
+\Longrightarrow
+\text{Asymptotic linearity}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+=
+-A^{-1}\frac1{\sqrt n}\sum_{i=1}^n\psi(W_i,\theta_0)+o_p(1).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt n(\widehat\theta-\theta_0)
+\overset d\longrightarrow
+N(0,A^{-1}BA^{-1'}).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 11.14.2 M/Z comparison table {#s11142}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>구조</th><th>M-estimation</th><th>Z-estimation</th></tr></thead>
+<tbody>
+<tr><td>Population characterization</td><td>$\theta_0=\arg\min Q(\theta)$</td><td>$\Psi(\theta_0)=0$</td></tr>
+<tr><td>Sample estimator</td><td>$\arg\min Q_n(\theta)$</td><td>$\Psi_n(\widehat\theta)=0$</td></tr>
+<tr><td>Consistency 도구</td><td>uniform criterion convergence</td><td>uniform moment convergence</td></tr>
+<tr><td>Identification</td><td>separated minimizer</td><td>separated zero</td></tr>
+<tr><td>Local sensitivity</td><td>Hessian $H$</td><td>Jacobian $A$</td></tr>
+<tr><td>Random leading term</td><td>score $s=\nabla\rho$</td><td>moment $\psi$</td></tr>
+<tr><td>Asymptotic variance</td><td>$H^{-1}BH^{-1}$</td><td>$A^{-1}BA^{-1'}$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+### 11.14.3 Estimation-theory checklist {#s11143}
+
+<ol>
+<li><strong>Target:</strong> criterion minimizer인가 moment root인가?</li>
+<li><strong>Identification:</strong> population minimizer/root가 well separated되어 있는가?</li>
+<li><strong>Sample analogue:</strong> $Q_n$ 또는 $\Psi_n$가 어떻게 정의되는가?</li>
+<li><strong>Uniformity:</strong> 필요한 uniform convergence가 성립하는가?</li>
+<li><strong>Consistency:</strong> global localization argument가 완성되는가?</li>
+<li><strong>Local regularity:</strong> target이 interior이고 Jacobian/Hessian이 nonsingular한가?</li>
+<li><strong>CLT object:</strong> 어떤 score/moment contribution에 CLT가 적용되는가?</li>
+<li><strong>Linear representation:</strong> estimator error를 sample average plus remainder로 쓸 수 있는가?</li>
+<li><strong>Sandwich:</strong> $A$와 $B$를 consistent하게 추정할 수 있는가?</li>
+<li><strong>Computation:</strong> numerical tolerance가 statistical scale보다 충분히 작은가?</li>
+<li><strong>Interpretation:</strong> pseudo-true target과 causal/structural target을 구분했는가?</li>
+</ol>
+
+### 연습문제 {#exercises}
+
+<ol class="exercise-list">
+<li><strong>OLS dictionary.</strong> OLS를 M-과 Z-representation으로 각각 쓰고 $\nabla Q(\beta)=-2\Psi(\beta)$를 증명하라.</li>
+<li><strong>M versus FOC roots.</strong> $Q(\theta)=(\theta^2-1)^2$에서 모든 FOC roots와 global minimizers를 구하라.</li>
+<li><strong>Non-gradient Z-system.</strong> $\psi(\theta)=(-\theta_2,\theta_1)'$가 scalar potential의 gradient가 될 수 없음을 보이라.</li>
+<li><strong>Moving dip.</strong> 본문의 moving-dip sequence가 pointwise convergence를 만족하지만 argmin consistency를 실패시키는 것을 완전히 증명하라.</li>
+<li><strong>Separation.</strong> unique minimizer와 separated minimizer의 차이를 $Q(\theta)=\theta^2/(1+\theta^4)$로 보이라.</li>
+<li><strong>M-consistency.</strong> separation gap, uniform convergence, $o_p(1)$ near-minimizer error로 argmin consistency를 완전히 증명하라.</li>
+<li><strong>Lipschitz ULLN.</strong> compactness, finite $\delta$-net, Lipschitz envelope를 이용해 elementary ULLN을 증명하라.</li>
+<li><strong>General ULLN logic.</strong> continuity + compactness + envelope ULLN의 proof architecture를 설명하라.</li>
+<li><strong>Noncompact estimation.</strong> coercive criterion을 가진 noncompact M-estimation example을 만들고 minimizer existence/tightness를 설명하라.</li>
+<li><strong>Z-consistency.</strong> separated zero, uniform moment convergence, approximate-root condition으로 consistency를 증명하라.</li>
+<li><strong>Inverse-function geometry.</strong> nonsingular Jacobian이 local identification을 imply하는 논리를 설명하라.</li>
+<li><strong>Local but not global.</strong> $\Psi(\theta)=\theta^2-1$에서 local identification과 global nonuniqueness를 확인하라.</li>
+<li><strong>Singular but identified.</strong> $\Psi(\theta)=\theta^3$에서 unique root, singular Jacobian, heuristic $n^{-1/6}$ rate를 유도하라.</li>
+<li><strong>Flat curvature.</strong> $Q(\theta)=\theta^4$에서 unique minimizer와 zero Hessian을 확인하라.</li>
+<li><strong>Integrated Hessian.</strong> fundamental theorem of calculus로 exact M-expansion을 증명하라.</li>
+<li><strong>Smooth M asymptotics.</strong> consistency, local Hessian convergence, score CLT로 $H^{-1}BH^{-1'}$ limit를 증명하라.</li>
+<li><strong>Integrated Jacobian.</strong> exact Z-expansion을 증명하라.</li>
+<li><strong>Z asymptotics.</strong> local Jacobian convergence와 moment CLT로 $A^{-1}BA^{-1'}$ limit를 증명하라.</li>
+<li><strong>Approximate roots.</strong> $\|\Psi_n(\tilde\theta_n)\|=o_p(n^{-1/2})$이면 exact root와 first-order equivalent임을 증명하라.</li>
+<li><strong>ALR.</strong> $IF(W)=-A^{-1}\psi(W,\theta_0)$를 유도하고 sample-average representation으로 쓰라.</li>
+<li><strong>Influence covariance.</strong> $E[IF]=0$와 $E[IF\,IF']=A^{-1}BA^{-1'}$를 증명하라.</li><li><strong>Random-index plug-in.</strong> local ULLN과 consistency로 $P_nf_{\hat\theta}\to_pPf_{\theta_0}$를 증명하라.</li><li><strong>Sandwich consistency.</strong> $\hat A\to_pA,\hat B\to_pB$에서 $\hat V\to_pV$를 증명하라.</li><li><strong>Optimization tolerance.</strong> quadratic growth에서 objective gap $o_p(n^{-1})$이 parameter error $o_p(n^{-1/2})$를 imply함을 증명하라.</li><li><strong>Fixed tolerance.</strong> fixed absolute solver tolerance가 큰 $n$에서 statistical scale보다 커질 수 있음을 숫자로 보이라.</li><li><strong>Sample median.</strong> median의 nonsmooth M-representation과 Bahadur expansion에서 asymptotic variance를 계산하라.</li><li><strong>Recover OLS.</strong> generic Z theory에서 Chapter 10 sandwich를 복원하라.</li><li><strong>NLLS.</strong> NLLS score와 Hessian을 직접 계산하고 $H,B$를 쓰라.</li><li><strong>MLE.</strong> correct specification 아래 information equality가 sandwich를 inverse information으로 단순화하는 이유를 설명하라.</li><li><strong>Quantile regression.</strong> QR moment, Jacobian, $B=\tau(1-\tau)E[XX']$를 유도하라.</li><li><strong>Uniform convergence without ID.</strong> $Q_n=Q=(\theta^2-1)^2$로 perfect uniform convergence가 point consistency를 보장하지 않음을 보이라.</li><li><strong>Regularization versus ID.</strong> set-identified criterion에 ridge penalty를 넣어 unique numerical optimizer를 만드는 example을 구성하라.</li><li><strong>Pseudo-true target.</strong> $Y=X^2+\varepsilon$, $X\sim N(0,1)$에서 linear BLP를 계산하고 CEF와 구분하라.</li><li><strong>Estimator audit.</strong> 실제 econometric estimator 하나를 골라 target, identification, uniformity, consistency, local geometry, CLT object, sandwich, numerical tolerance를 점검하라.</li></ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 다음 장
+
+이 장은 Chapter 4의 population optimization/root characterization과 Chapter 10의 OLS asymptotics를 연결하여
+일반 M- and Z-estimation의 consistency와 asymptotic normality를 구축한다.
+핵심 논리는 uniform criterion/moment approximation, well-separated population target,
+local Jacobian or Hessian, 그리고 score/moment CLT다.
+본문은 finite-dimensional econometrics에 필요한 high-level/primitive conditions에 집중하며,
+empirical-process theory는 이후 고급 주제로 남긴다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+다음 장으로
+
+:::::::::::::::::::
+
+Chapter 11의 Z-estimation은 exactly identified moment systems에 자연스럽게 대응한다.
+하지만 실제 econometrics에서는 moment conditions의 수가 parameter dimension보다 많은 경우가 중요하다.
+다음 장에서는 $E[g(W,\theta_0)]=0$이라는 population moments를 출발점으로
+linear IV, 2SLS, overidentification, weighting matrix, generalized method of moments를 통합한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{M/Z estimation}
+\longrightarrow
+\text{moment restrictions}
+\longrightarrow
+\text{IV / 2SLS / GMM}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

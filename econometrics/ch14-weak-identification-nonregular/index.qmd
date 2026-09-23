@@ -1,0 +1,34 @@
+# Chapter 14 · Weak Identification and Nonregular Asymptotics {.unnumbered}
+*Local-to-Zero Identification · Weak IV · Nonstandard Limits · Robust Inference · Singular Geometry*
+
+regular local quadratic geometry가 약해지거나 실패할 때 무엇이 달라지는지 분석한다. weak IV, local-to-zero asymptotics, nonstandard limits, identification-robust inference, many instruments, singular information, boundary parameters, nonstandard rates를 하나의 관점에서 연결한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **14.1–14.4** regular benchmark, identification strength, local-to-zero asymptotics, weak IV
+- **14.5–14.8** 2SLS breakdown, LIML, diagnostics, identification-robust inference
+- **14.9–14.11** many instruments, singular/boundary models, nonstandard rates and argmax limits
+- **14.12–14.13** practical nonregular workflow, 요약과 연습문제
+:::
+
+## Sections
+
+- [14.1 The Regular Asymptotic Benchmark](contents.html#s141)
+- [14.2 Identification versus Identification Strength](contents.html#s142)
+- [14.3 Local-to-Zero Asymptotics](contents.html#s143)
+- [14.4 Weak Instruments in the Linear IV Model](contents.html#s144)
+- [14.5 Why Conventional 2SLS Inference Breaks Down](contents.html#s145)
+- [14.6 LIML, $k$-Class Estimators, and Weak Identification](contents.html#s146)
+- [14.7 Diagnosing Weak Instruments](contents.html#s147)
+- [14.8 Identification-Robust Inference](contents.html#s148)
+- [14.9 Many Instruments and Incidental First-Stage Estimation](contents.html#s149)
+- [14.10 Singular Information, Boundaries, and Other Nonregular Models](contents.html#s1410)
+- [14.11 Nonstandard Rates and Argmax Limits](contents.html#s1411x)
+- [14.12 A Practical Framework for Nonregular Problems](contents.html#s1412x)
+- [14.13 요약과 연습문제](contents.html#s1413x)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
+:::
