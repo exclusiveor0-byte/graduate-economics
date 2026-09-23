@@ -15,7 +15,7 @@
 ## Sections
 
 - [5.1 Conditional expectation을 왜 다시 보는가](contents.html#s51)
-- [$L^2$ Space와 Hilbert-Space Geometry](contents.html#s52)
+- [5.2 $L^2$ Space와 Hilbert-Space Geometry](contents.html#s52)
 - [5.3 Orthogonal Projection Theorem](contents.html#s53)
 - [5.4 Conditional Expectation as the Best Predictor](contents.html#s54)
 - [5.5 Orthogonality and Residual Structure](contents.html#s55)
