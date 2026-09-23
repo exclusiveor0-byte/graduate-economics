@@ -1,0 +1,36 @@
+# Chapter 7 · 대응과 최대정리 {.unnumbered}
+*Correspondences · Hemicontinuity · Berge Maximum Theorem*
+
+단일값 함수로 표현하기 어려운 최적해와 선택의 집합을 대응으로 정식화한다. 상·하반연속성, 닫힌 그래프, 매개변수화된 feasible set과 solution set, Berge 최대정리를 통해 집합값 경제학의 기본 구조를 구축한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **7.1–7.3** 대응의 필요성 · 기본 표기 · 상반연속성
+- **7.4–7.6** 하반연속성 · 연속 대응 · 매개변수화된 feasible/solution correspondence
+- **7.7–7.9** Berge 최대정리와 증명 · 유일한 최적해의 연속성
+- **7.10–7.11** 볼록값 대응 · 고정점 정리와 경제학적 응용으로의 연결
+:::
+
+## Sections
+
+- [7.1 왜 집합값 사상인가](contents.html#s71)
+- [7.2 대응의 표기와 기본 객체](contents.html#s72)
+- [7.3 상반연속성](contents.html#s73)
+- [7.4 하반연속성](contents.html#s74)
+- [7.5 연속 대응과 닫힌 그래프](contents.html#s75)
+- [7.6 매개변수화된 feasible/solution correspondence](contents.html#s76)
+- [7.7 Berge 최대정리](contents.html#s77)
+- [7.8 최대정리의 증명](contents.html#s78)
+- [7.9 유일한 최적해와 연속성](contents.html#s79)
+- [7.10 볼록값 solution correspondence](contents.html#s710)
+- [7.11 경제학적 응용과 고정점으로의 연결](contents.html#s7110)
+- [연습문제](contents.html#exercises)
+- [참고문헌 및 장의 위치](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+대응의 정의와 연속성부터 Berge 최대정리의 증명·응용까지는 [본문 전체](contents.html)에 있다.
+:::
+
+
+

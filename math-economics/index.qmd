@@ -14,6 +14,10 @@
 | [Chapter 02](ch02-limits-continuity/index.html) | **함수의 극한과 연속성** · 다변수 극한, 연속성의 수열적·위상적 특성화, 컴팩트성 보존, 최대최소정리, 연결성, 사이값정리, 균등연속성 | [완료]{.status} |
 | [Chapter 03](ch03-multivariable-differentiation/index.html) | **다변수 미분가능성과 국소 선형화** · 편미분, Fréchet 미분, Jacobian, gradient, 방향미분, 연쇄법칙, Hessian, Taylor 정리, Euler 정리 | [완료]{.status} |
 | [Chapter 04](ch04-inverse-implicit-functions/index.html) | **역함수·음함수 정리와 국소적 해의 구조** · 역함수 정리, 음함수 정리, implicit differentiation, comparative statics, regular level sets, 국소 식별 | [완료]{.status} |
+| [Chapter 05](ch05-convexity/index.html) | **볼록집합과 볼록함수** · 볼록껍질, 분리정리, Jensen 부등식, 일계·이계 특성화, 준볼록성과 준오목성 | [완료]{.status} |
+| [Chapter 06](ch06-optimization/index.html) | **최적화, KKT 조건과 Envelope 정리** · 비제약·제약 최적화, 라그랑주 승수, KKT, 비교정태, 가치함수 | [완료]{.status} |
+| [Chapter 07](ch07-correspondences/index.html) | **대응과 최대정리** · 집합값 대응, 상·하반연속성, Berge 최대정리, 최적해 대응 | [완료]{.status} |
+| [Chapter 08](ch08-fixed-points/index.html) | **고정점 정리와 균형** · Banach, Brouwer, Kakutani, Nash 균형과 경쟁균형의 존재 | [완료]{.status} |
 
 ## Chapters
 
@@ -48,6 +52,38 @@ Jacobian의 비특이성, 역함수 정리(Inverse Function Theorem), 스칼라 
 [Chapter 04 읽기](ch04-inverse-implicit-functions/index.html) →
 
 [13개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 05 · 볼록집합과 볼록함수](ch05-convexity/index.html)
+
+볼록결합과 볼록껍질, 아핀기하와 분리정리에서 출발하여 볼록·오목 함수, epigraph, Jensen 부등식, gradient·Hessian 특성화, 준볼록성과 준오목성까지 전개한다.
+
+[Chapter 05 읽기](ch05-convexity/index.html) →
+
+[11개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 06 · 최적화, KKT 조건과 Envelope 정리](ch06-optimization/index.html)
+
+비제약·제약 최적화, 라그랑주 승수, 부등식제약과 KKT 조건, 제약자격, 매개변수 최적화, 가치함수와 Envelope 정리를 다룬다.
+
+[Chapter 06 읽기](ch06-optimization/index.html) →
+
+[12개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 07 · 대응과 최대정리](ch07-correspondences/index.html)
+
+집합값 대응의 표기와 상·하반연속성, 닫힌 그래프, 매개변수화된 해집합, Berge 최대정리와 경제학적 응용을 정리한다.
+
+[Chapter 07 읽기](ch07-correspondences/index.html) →
+
+[11개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 08 · 고정점 정리와 균형](ch08-fixed-points/index.html)
+
+Banach·Brouwer·Kakutani 고정점 정리를 비교하고, Nash 균형과 경쟁균형의 존재를 고정점 문제로 표현한다.
+
+[Chapter 08 읽기](ch08-fixed-points/index.html) →
+
+[10개 절 · 정리·증명·연습문제 포함]{.status}
 
 ## 주요 참고 문헌
 

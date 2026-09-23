@@ -78,7 +78,7 @@ MATHEMATICAL FOUNDATIONS
 ### [경제학을 위한 수학](math-economics/index.html)
 유클리드 위상 · 함수의 극한과 연속성 · 다변수 미분가능성 · 역함수 및 음함수 정리
 
-[Chapter 01–04 읽기](math-economics/index.html){.study-card__link} →
+[Chapter 01–08 읽기](math-economics/index.html){.study-card__link} →
 
 [위상적 기초·연속성·다변수 미분·음함수정리를 포괄하는 4개 Chapter]{.status}
 :::

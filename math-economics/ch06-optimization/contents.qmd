@@ -1,0 +1,2189 @@
+---
+title: "Chapter 6 · 최적화, KKT 조건과 Envelope 정리"
+description: "제약·비제약 최적화, KKT 조건, 그림자 가격, Envelope 정리, 비교정태와 전역 최적성."
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/math-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s61}
+
+## [6.1]{.section-number}Optimization problems: notation and conventions
+
+::: {.topic-opening}
+최적화에서는 목적함수, feasible set, optimizer, optimal value, multiplier가 서로 다른 수학적 객체다.
+이 장에서는 이후의 부호와 notation이 흔들리지 않도록 먼저 표준형을 고정한다.
+:::
+
+### 6.1.1 Canonical optimization problem {#s611}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+CONVENTION 6.1 · Canonical maximization problem
+
+:::::::::::::::::::
+
+Chapter 6의 표준 최적화 문제는
+
+$$
+\boxed{
+(P_\theta):
+\begin{aligned}
+\max_{x\in\mathbb R^n}\quad
+& f(x,\theta)\\
+\text{s.t.}\quad
+& h(x,\theta)=0,\\
+& g(x,\theta)\ge0
+\end{aligned}
+}
+$$
+
+로 쓴다.
+여기서
+
+$$
+x\in\mathbb R^n
+$$
+
+은 choice variable,
+
+$$
+\theta\in\Theta\subseteq\mathbb R^p
+$$
+
+는 parameter,
+
+$$
+h:\mathbb R^n\times\Theta\to\mathbb R^m,
+\qquad
+g:\mathbb R^n\times\Theta\to\mathbb R^q.
+$$
+
+모든 inequality는 componentwise로 해석한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.notation-ledger}
+
+<table>
+<thead><tr><th>Object</th><th>Notation</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>choice variable</td><td>$x\in\mathbb R^n$</td><td>최적화 대상</td></tr>
+<tr><td>parameter</td><td>$\theta\in\Theta$</td><td>문제를 index하는 외생변수</td></tr>
+<tr><td>objective</td><td>$f(x,\theta)$</td><td>최대화할 scalar function</td></tr>
+<tr><td>equalities</td><td>$h(x,\theta)=0$</td><td>$m$개의 등식제약</td></tr>
+<tr><td>inequalities</td><td>$g(x,\theta)\ge0$</td><td>$q$개의 부등식제약</td></tr>
+<tr><td>feasible set</td><td>$\mathcal F(\theta)$</td><td>허용 가능한 선택들의 집합</td></tr>
+<tr><td>value function</td><td>$v(\theta)$</td><td>최적 목적함수값</td></tr>
+<tr><td>solution set</td><td>$S(\theta)$</td><td>모든 maximizer의 집합</td></tr>
+<tr><td>unique optimizer</td><td>$x^*(\theta)$</td><td>$S(\theta)$가 singleton일 때</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Minimization problems
+
+:::::::::::::::::::
+
+minimization 문제는
+
+$$
+\min_x c(x,\theta)
+\iff
+\max_x[-c(x,\theta)]
+$$
+
+로 변환할 수 있다.
+일반 정리의 부호 convention은 maximization과 $g\ge0$를 기준으로 유지한다.
+
+::::::::::::::::::::
+
+### 6.1.2 Feasible set {#s612}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.1 · Feasible set
+
+:::::::::::::::::::
+
+parameter $\theta$가 주어졌을 때
+
+$$
+\boxed{
+\mathcal F(\theta)
+=
+\left\{
+x\in\mathbb R^n:
+h(x,\theta)=0,\;
+g(x,\theta)\ge0
+\right\}.
+}
+$$
+
+따라서
+
+$$
+(P_\theta):
+\qquad
+\max_{x\in\mathcal F(\theta)}
+f(x,\theta)
+$$
+
+로 간단히 쓸 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Empty feasible set
+
+:::::::::::::::::::
+
+$\mathcal F(\theta)=\varnothing$일 수 있다.
+이 경우 optimizer는 존재하지 않으며, value function을 extended-real convention 없이 실수값으로 정의하려면
+feasible parameter만 대상으로 제한해야 한다.
+
+::::::::::::::::::::
+
+### 6.1.3 Local and global maximizers {#s613}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.2 · Global maximizer
+
+:::::::::::::::::::
+
+$x^*\in\mathcal F(\theta)$가 global maximizer라는 것은
+
+$$
+f(x^*,\theta)
+\ge
+f(x,\theta)
+\qquad
+\forall x\in\mathcal F(\theta)
+$$
+
+를 뜻한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.3 · Local maximizer
+
+:::::::::::::::::::
+
+$x^*\in\mathcal F(\theta)$가 local maximizer라는 것은 어떤 $\varepsilon\gt0$가 존재하여
+
+$$
+f(x^*,\theta)
+\ge
+f(x,\theta)
+$$
+
+for all
+
+$$
+x\in\mathcal F(\theta)\cap B_\varepsilon(x^*)
+$$
+
+가 성립하는 것이다.
+$x\ne x^*$에 대해 strict inequality가 성립하면 strict local maximizer라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+THREE SEPARATE QUESTIONS
+
+:::::::::::::::::::
+
+최적화에서는 다음을 구분해야 한다.
+
+$$
+\boxed{
+\text{existence}
+\neq
+\text{characterization}
+\neq
+\text{uniqueness}.
+}
+$$
+
+Chapter 2는 주로 existence를, Chapter 5는 uniqueness와 global geometry를 준비했고,
+Chapter 6은 characterization을 중심으로 한다.
+
+::::::::::::::::::::
+
+### 6.1.4 Value function and solution set {#s614}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.4 · Value function
+
+:::::::::::::::::::
+
+$$
+\boxed{
+v(\theta)
+=
+\sup_{x\in\mathcal F(\theta)}
+f(x,\theta).
+}
+$$
+
+supremum이 어떤 $x\in\mathcal F(\theta)$에서 달성되면
+
+$$
+v(\theta)
+=
+\max_{x\in\mathcal F(\theta)}
+f(x,\theta).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.5 · Solution correspondence
+
+:::::::::::::::::::
+
+$$
+\boxed{
+S(\theta)
+=
+\operatorname*{arg\,max}_{x\in\mathcal F(\theta)}
+f(x,\theta).
+}
+$$
+
+즉
+
+$$
+S(\theta)
+=
+\left\{
+x\in\mathcal F(\theta):
+f(x,\theta)=v(\theta)
+\right\}
+$$
+
+whenever the optimum is attained.
+
+::::::::::::::::::::
+
+일반적으로 $S(\theta)$는 empty일 수도, 여러 점을 포함할 수도 있다.
+오직
+
+$$
+S(\theta)=\{x^*(\theta)\}
+$$
+
+일 때만 $x^*(\theta)$를 unique optimizer function으로 쓴다.
+
+:::::::::::::::::::: {.dependency-chain}
+
+<span>$\theta$</span>
+<span>→</span>
+<span>$\mathcal F(\theta)$</span>
+<span>→</span>
+<span>$v(\theta),S(\theta)$</span>
+
+::::::::::::::::::::
+
+### 6.1.5 Lagrangian and multiplier convention {#s615}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+CONVENTION 6.2 · Lagrangian
+
+:::::::::::::::::::
+
+표준 문제 $(P_\theta)$에 대해
+
+$$
+\boxed{
+\mathcal L(x,\lambda,\mu;\theta)
+=
+f(x,\theta)
++
+\lambda^\top h(x,\theta)
++
+\mu^\top g(x,\theta).
+}
+$$
+
+여기서
+
+$$
+\lambda\in\mathbb R^m
+$$
+
+은 equality multiplier이고 부호제약이 없으며,
+
+$$
+\boxed{\mu\in\mathbb R_+^q}
+$$
+
+는 inequality multiplier다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 6.1 · Budget constraint in the chapter convention
+
+:::::::::::::::::::
+
+소비자 문제
+
+$$
+\max_x u(x)
+\qquad
+\text{s.t.}\qquad
+w-p^\top x\ge0
+$$
+
+의 Lagrangian은
+
+$$
+\mathcal L(x,\lambda)
+=
+u(x)+\lambda(w-p^\top x),
+\qquad
+\lambda\ge0.
+$$
+
+따라서 interior stationarity는
+
+$$
+\nabla u(x)-\lambda p=0.
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s62}
+
+## [6.2]{.section-number}Unconstrained first-order conditions
+
+::: {.topic-opening}
+제약이 없는 문제에서는 interior optimum에서 모든 작은 방향으로 움직일 수 있다.
+따라서 모든 directional derivative가 optimum에서 0이어야 하며, 이것이 gradient condition으로 요약된다.
+:::
+
+### 6.2.1 Stationary points {#s621}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.6 · Stationary point
+
+:::::::::::::::::::
+
+open set $U\subseteq\mathbb R^n$에서 differentiable $f:U\to\mathbb R$에 대해
+
+$$
+\nabla f(x^*)=0
+$$
+
+이면 $x^*$를 stationary point 또는 critical point라 한다.
+
+::::::::::::::::::::
+
+### 6.2.2 First-order necessary condition {#s622}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.1 · First-Order Necessary Condition
+
+:::::::::::::::::::
+
+$U\subseteq\mathbb R^n$가 open이고 $f:U\to\mathbb R$가 differentiable이라 하자.
+$x^*\in U$가 local maximizer이면
+
+$$
+\boxed{
+\nabla f(x^*)=0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+임의의 $d\in\mathbb R^n$를 고정하고
+
+$$
+\phi(t)=f(x^*+td)
+$$
+
+로 둔다.
+$U$가 open이므로 sufficiently small $t$에 대해 $x^*+td\in U$.
+$x^*$가 local maximizer이므로 $t=0$은 $\phi$의 local maximum이고
+
+$$
+\phi'(0)=0.
+$$
+
+chain rule에 의해
+
+$$
+\phi'(0)
+=
+\nabla f(x^*)^\top d.
+$$
+
+이것이 모든 $d$에 대해 0이므로
+
+$$
+\nabla f(x^*)=0.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 6.2.3 Necessary is not sufficient {#s623}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 6.1 · Stationary but not optimal
+
+:::::::::::::::::::
+
+$$
+f(x)=x^3.
+$$
+
+$$
+f'(0)=0
+$$
+
+이지만 $0$은 local maximum도 local minimum도 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\nabla f(x^*)=0
+\not\Rightarrow
+x^*\text{ is an optimum}.
+}
+$$
+
+FOC는 candidate를 찾는 조건이지 일반적인 optimality certificate가 아니다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s63}
+
+## [6.3]{.section-number}Second-order conditions
+
+::: {.topic-opening}
+stationary point의 종류를 판정하려면 first-order term이 사라진 뒤 남는 second-order curvature를 조사해야 한다.
+:::
+
+### 6.3.1 Second-order necessary condition {#s631}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.2 · Second-Order Necessary Condition
+
+:::::::::::::::::::
+
+$f\in C^2(U)$, $U\subseteq\mathbb R^n$ open이고
+$x^*\in U$가 local maximizer이면
+
+$$
+\nabla f(x^*)=0
+$$
+
+이고
+
+$$
+\boxed{
+\nabla^2f(x^*)\preceq0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+임의의 $d\in\mathbb R^n$에 대해
+
+$$
+\phi(t)=f(x^*+td)
+$$
+
+를 생각한다.
+$t=0$이 일변수 local maximum이므로
+
+$$
+\phi''(0)\le0.
+$$
+
+그런데
+
+$$
+\phi''(0)
+=
+d^\top\nabla^2f(x^*)d.
+$$
+
+모든 $d$에 대해 이 값이 nonpositive이므로 Hessian은 negative semidefinite다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 6.3.2 Second-order sufficient condition {#s632}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.3 · Second-Order Sufficient Condition
+
+:::::::::::::::::::
+
+$f\in C^2(U)$이고
+
+$$
+\nabla f(x^*)=0,
+\qquad
+\nabla^2f(x^*)\prec0
+$$
+
+이면 $x^*$는 strict local maximizer다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof idea
+
+:::::::::::::::::::
+
+negative definiteness와 Hessian의 continuity에 의해 $x^*$ 근처에서 curvature가 모든 방향에서 uniformly negative하게 유지된다.
+Taylor expansion
+
+$$
+f(x^*+h)
+=
+f(x^*)
++
+\frac12
+h^\top\nabla^2f(x^*+\tau h)h
+$$
+
+for some $\tau\in(0,1)$을 적용하면 nonzero sufficiently small $h$에 대해
+
+$$
+f(x^*+h)\lt f(x^*).
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 6.3.3 Semidefinite cases {#s633}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 6.2 · Same first and second derivatives, different conclusions
+
+:::::::::::::::::::
+
+$$
+f(x)=-x^4
+$$
+
+는 $0$에서 strict local maximum을 갖고
+
+$$
+f'(0)=f''(0)=0.
+$$
+
+반면
+
+$$
+g(x)=x^3
+$$
+
+도
+
+$$
+g'(0)=g''(0)=0
+$$
+
+이지만 $0$은 optimum이 아니다.
+
+::::::::::::::::::::
+
+따라서
+
+$$
+\nabla^2f(x^*)\preceq0
+$$
+
+만으로는 일반적으로 sufficiency를 얻을 수 없다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s64}
+
+## [6.4]{.section-number}Concave maximization and global optimality
+
+::: {.topic-opening}
+일반 비선형 최적화에서는 FOC와 SOC가 국소적 정보만 제공한다.
+그러나 feasible set이 convex이고 objective가 concave이면 국소 기하가 전역적 optimality를 통제한다.
+:::
+
+### 6.4.1 First-order variational inequality {#s641}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.4 · First-order characterization on a convex feasible set
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$가 convex이고
+$f:C\to\mathbb R$가 differentiable and concave라 하자.
+$x^*\in C$가
+
+$$
+\boxed{
+\nabla f(x^*)^\top(x-x^*)
+\le0
+\qquad
+\forall x\in C
+}
+$$
+
+를 만족하면 $x^*$는 global maximizer다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+concavity의 first-order characterization에 의해
+
+$$
+f(x)
+\le
+f(x^*)
++
+\nabla f(x^*)^\top(x-x^*).
+$$
+
+가정한 variational inequality로 우변은 $f(x^*)$ 이하이므로
+
+$$
+f(x)\le f(x^*)
+\qquad\forall x\in C.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 6.4.2 Interior unconstrained case {#s642}
+
+:::::::::::::::::::: {.statement .corollary}
+
+::::::::::::::::::: {.statement-head}
+
+COROLLARY 6.5 · FOC is sufficient under concavity
+
+:::::::::::::::::::
+
+$U$가 open and convex이고 $f:U\to\mathbb R$가 differentiable and concave라 하자.
+
+$$
+\nabla f(x^*)=0
+$$
+
+이면 $x^*$는 global maximizer다.
+
+::::::::::::::::::::
+
+### 6.4.3 Uniqueness {#s643}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.6 · Strict concavity and uniqueness
+
+:::::::::::::::::::
+
+$C$가 convex이고 $f$가 strictly concave이면 global maximizer가 존재할 경우 유일하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+서로 다른 두 maximizer $x^*,y^*$가 있다고 하자.
+$0\lt\lambda\lt1$에 대해 strict concavity로
+
+$$
+f(\lambda x^*+(1-\lambda)y^*)
+\gt
+\lambda f(x^*)+(1-\lambda)f(y^*).
+$$
+
+두 우변의 값은 모두 maximum value와 같으므로 모순이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s65}
+
+## [6.5]{.section-number}Equality constraints and Lagrange multipliers
+
+::: {.topic-opening}
+등식제약이 있으면 모든 방향으로 움직일 수 없다.
+optimum에서는 objective gradient가 모든 feasible tangent direction과 직교해야 하며,
+이것이 Lagrange multiplier condition의 기하적 내용이다.
+:::
+
+### 6.5.1 Regularity {#s651}
+
+parameter를 고정하고
+
+$$
+\max_x f(x)
+\qquad
+\text{s.t.}
+\qquad
+h(x)=0
+$$
+
+을 생각하자.
+feasible set은
+
+$$
+M=\{x:h(x)=0\}.
+$$
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.7 · Regular feasible point
+
+:::::::::::::::::::
+
+$x^*\in M$에서
+
+$$
+\operatorname{rank}Dh(x^*)=m
+$$
+
+이면 $x^*$를 regular feasible point라 한다.
+
+::::::::::::::::::::
+
+### 6.5.2 Tangent and normal spaces {#s652}
+
+Chapter 4의 regular level-set theorem에 의해
+
+$$
+T_{x^*}M
+=
+\ker Dh(x^*).
+$$
+
+그리고
+
+$$
+N_{x^*}M
+=
+\operatorname{range}Dh(x^*)^\top.
+$$
+
+linear algebra의 orthogonal-complement relation으로
+
+$$
+\boxed{
+N_{x^*}M
+=
+(T_{x^*}M)^\perp.
+}
+$$
+
+### 6.5.3 Lagrange theorem {#s653}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.7 · Lagrange multiplier theorem
+
+:::::::::::::::::::
+
+$f,h\in C^1$이고 $x^*$가 regular feasible local maximizer라 하자.
+그러면 어떤
+
+$$
+\lambda^*\in\mathbb R^m
+$$
+
+가 존재하여
+
+$$
+\boxed{
+\nabla f(x^*)
++
+Dh(x^*)^\top\lambda^*
+=
+0.
+}
+$$
+
+즉
+
+$$
+\nabla_x\mathcal L(x^*,\lambda^*)=0,
+\qquad
+h(x^*)=0.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$d\in T_{x^*}M$를 임의로 잡는다.
+regular level-set structure에 의해 $d$를 initial velocity로 갖는 feasible $C^1$ curve $\gamma$를 locally 구성할 수 있다.
+$x^*$가 local maximizer이므로
+
+$$
+\frac{d}{dt}f(\gamma(t))
+\bigg|_{t=0}
+=
+\nabla f(x^*)^\top d
+=
+0.
+$$
+
+따라서 $\nabla f(x^*)$는 $T_{x^*}M$에 orthogonal이고
+
+$$
+\nabla f(x^*)
+\in
+(T_{x^*}M)^\perp
+=
+\operatorname{range}Dh(x^*)^\top.
+$$
+
+그러므로 어떤 $\eta\in\mathbb R^m$에 대해
+
+$$
+\nabla f(x^*)=Dh(x^*)^\top\eta.
+$$
+
+$\lambda^*=-\eta$로 두면 결론을 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Lagrange condition is generally necessary, not sufficient
+
+:::::::::::::::::::
+
+Lagrange equations의 해는 candidate일 뿐이다.
+curvature 또는 concavity를 추가로 확인해야 실제 optimum인지 판정할 수 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s66}
+
+## [6.6]{.section-number}Second-order conditions under equality constraints
+
+::: {.topic-opening}
+equality-constrained optimum에서는 모든 방향의 curvature가 아니라
+constraint surface를 따라 움직일 수 있는 tangent directions의 curvature만 중요하다.
+:::
+
+### 6.6.1 Hessian of the Lagrangian {#s661}
+
+$$
+\mathcal L(x,\lambda)
+=
+f(x)+\lambda^\top h(x)
+$$
+
+에 대해
+
+$$
+\nabla^2_{xx}\mathcal L(x,\lambda)
+=
+\nabla^2 f(x)
++
+\sum_{i=1}^m
+\lambda_i\nabla^2 h_i(x).
+$$
+
+### 6.6.2 Restricted curvature conditions {#s662}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.8 · Equality-constrained SONC
+
+:::::::::::::::::::
+
+$f,h\in C^2$, $x^*$가 regular local maximizer이고 $\lambda^*$가 Lagrange multiplier라 하자.
+그러면 모든
+
+$$
+d\in T_{x^*}M
+=
+\ker Dh(x^*)
+$$
+
+에 대해
+
+$$
+\boxed{
+d^\top
+\nabla^2_{xx}\mathcal L(x^*,\lambda^*)
+d
+\le0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.9 · Equality-constrained SOSC
+
+:::::::::::::::::::
+
+Lagrange first-order conditions가 성립하고 모든 nonzero
+$d\in T_{x^*}M$에 대해
+
+$$
+\boxed{
+d^\top
+\nabla^2_{xx}\mathcal L(x^*,\lambda^*)
+d
+\lt0
+}
+$$
+
+이면 $x^*$는 strict local maximizer다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+GEOMETRIC MESSAGE
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{constrained curvature}
+=
+\text{Lagrangian curvature restricted to feasible tangent directions}.
+}
+$$
+
+bordered Hessian은 이 조건을 계산하는 한 방법이지만,
+본질은 tangent-space restriction이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s67}
+
+## [6.7]{.section-number}Inequality constraints and active sets
+
+::: {.topic-opening}
+inequality constraint는 optimum에서 반드시 equality로 묶이지 않는다.
+first-order geometry에 실제로 영향을 미치는 것은 binding, 즉 active constraints다.
+:::
+
+### 6.7.1 Active and inactive constraints {#s671}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.8 · Active set
+
+:::::::::::::::::::
+
+feasible $x\in\mathcal F(\theta)$에서
+
+$$
+\boxed{
+A(x,\theta)
+=
+\{j\in\{1,\ldots,q\}:g_j(x,\theta)=0\}
+}
+$$
+
+를 active set이라 한다.
+$j\in A(x,\theta)$이면 constraint $j$는 active,
+
+$$
+g_j(x,\theta)\gt0
+$$
+
+이면 inactive다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Inactive constraints
+
+:::::::::::::::::::
+
+$g_j(x^*)\gt0$이면 continuity에 의해 $x^*$의 sufficiently small neighborhood에서도 해당 inequality는 slack으로 남는다.
+따라서 local first-order boundary geometry는 active constraints에 의해 결정된다.
+
+::::::::::::::::::::
+
+### 6.7.2 Feasible directions {#s672}
+
+active constraint $g_j(x^*)=0$에서 feasible direction $d$는 first-order로
+
+$$
+\nabla g_j(x^*)^\top d
+\ge0
+$$
+
+를 만족해야 한다.
+equality constraints가 있다면 동시에
+
+$$
+Dh(x^*)d=0.
+$$
+
+따라서 inequality problem에서는 tangent space 대신 feasible-direction cone이 자연스럽게 등장한다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+FROM SUBSPACE TO CONE
+
+:::::::::::::::::::
+
+equality constraints만 있을 때 feasible first-order directions는 linear subspace를 이루지만,
+inequality constraints가 추가되면 일반적으로 cone이 된다.
+KKT 조건은 이 cone geometry를 multiplier로 표현한 first-order theorem이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s68}
+
+## [6.8]{.section-number}Karush–Kuhn–Tucker conditions
+
+::: {.topic-opening}
+KKT 조건은 equality-constrained Lagrange condition에
+inequality multiplier의 부호와 complementary slackness를 결합한 것이다.
+:::
+
+### 6.8.1 KKT system {#s681}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.10 · KKT necessary conditions under regularity
+
+:::::::::::::::::::
+
+$f,h,g\in C^1$이고 $x^*$가 local maximizer라고 하자.
+active equality/inequality gradients에 적절한 constraint qualification이 성립하면
+어떤
+
+$$
+\lambda^*\in\mathbb R^m,
+\qquad
+\mu^*\in\mathbb R_+^q
+$$
+
+가 존재하여 다음을 만족한다.
+
+$$
+\boxed{
+\begin{aligned}
+\text{Stationarity:}\quad&
+\nabla_x\mathcal L(x^*,\lambda^*,\mu^*;\theta)=0,
+\\[1mm]
+\text{Primal feasibility:}\quad&
+h(x^*,\theta)=0,
+\qquad
+g(x^*,\theta)\ge0,
+\\[1mm]
+\text{Dual feasibility:}\quad&
+\mu^*\ge0,
+\\[1mm]
+\text{Complementary slackness:}\quad&
+\mu_j^*g_j(x^*,\theta)=0,
+\quad
+j=1,\ldots,q.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+### 6.8.2 Complementary slackness {#s682}
+
+complementary slackness는 각 inequality에 대해
+
+$$
+\mu_j^*g_j(x^*,\theta)=0
+$$
+
+을 요구한다. 따라서
+
+$$
+g_j(x^*,\theta)\gt0
+\Longrightarrow
+\mu_j^*=0.
+$$
+
+반대로
+
+$$
+\mu_j^*\gt0
+\Longrightarrow
+g_j(x^*,\theta)=0.
+$$
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Converse directions
+
+:::::::::::::::::::
+
+$g_j(x^*)=0$이라고 해서 반드시 $\mu_j^*\gt0$인 것은 아니다.
+active constraint의 multiplier가 0일 수도 있다.
+
+::::::::::::::::::::
+
+### 6.8.3 Example {#s683}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 6.3 · One-dimensional inequality problem
+
+:::::::::::::::::::
+
+$$
+\max_{x\in\mathbb R}
+\;x
+\qquad
+\text{s.t.}
+\qquad
+1-x\ge0.
+$$
+
+Lagrangian은
+
+$$
+\mathcal L(x,\mu)
+=
+x+\mu(1-x),
+\qquad
+\mu\ge0.
+$$
+
+stationarity는
+
+$$
+1-\mu=0.
+$$
+
+따라서 $\mu^*=1$.
+complementary slackness로
+
+$$
+\mu^*(1-x^*)=0
+$$
+
+이므로
+
+$$
+x^*=1.
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s69}
+
+## [6.9]{.section-number}Constraint qualifications and concave-program sufficiency
+
+::: {.topic-opening}
+KKT multiplier가 존재하려면 constraint representation이 지나치게 퇴화하지 않아야 한다.
+이를 constraint qualification이라 한다.
+이 장에서는 필요한 만큼만 LICQ와 Slater condition을 사용한다.
+:::
+
+### 6.9.1 LICQ {#s691}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.9 · Linear Independence Constraint Qualification
+
+:::::::::::::::::::
+
+feasible $x^*$에서 vectors
+
+$$
+\{\nabla h_i(x^*)\}_{i=1}^m
+\cup
+\{\nabla g_j(x^*):j\in A(x^*)\}
+$$
+
+가 linearly independent이면 LICQ가 성립한다고 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+ROLE OF LICQ
+
+:::::::::::::::::::
+
+LICQ는 local optimum 자체를 보장하는 조건이 아니라,
+local optimum에서 multiplier representation이 존재하도록 하는 regularity condition이다.
+
+::::::::::::::::::::
+
+### 6.9.2 KKT sufficiency in concave maximization {#s692}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.11 · KKT sufficiency for a concave program
+
+:::::::::::::::::::
+
+다음 문제를 생각하자.
+
+$$
+\begin{aligned}
+\max_x\quad&f(x)\\
+\text{s.t.}\quad&
+h(x)=0,\\
+&g(x)\ge0.
+\end{aligned}
+$$
+
+다음을 가정하자.
+
+(i) $f$는 concave.
+
+(ii) 각 $g_j$는 concave.
+
+(iii) $h$는 affine.
+
+feasible $x^*$와 multipliers $(\lambda^*,\mu^*)$가 KKT conditions를 만족하면
+$x^*$는 global maximizer다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$\mu^*\ge0$이고 각 $g_j$가 concave이므로
+
+$$
+x\mapsto
+\mathcal L(x,\lambda^*,\mu^*)
+$$
+
+는 concave다.
+stationarity에 의해 $x^*$는 이 Lagrangian의 global maximizer다:
+
+$$
+\mathcal L(x,\lambda^*,\mu^*)
+\le
+\mathcal L(x^*,\lambda^*,\mu^*)
+\qquad\forall x.
+$$
+
+feasible $x$에 대해
+
+$$
+h(x)=0,\qquad g(x)\ge0,\qquad \mu^*\ge0,
+$$
+
+따라서
+
+$$
+\mathcal L(x,\lambda^*,\mu^*)
+=
+f(x)+\mu^{*\top}g(x)
+\ge
+f(x).
+$$
+
+한편 $x^*$에서는 complementary slackness로
+
+$$
+\mathcal L(x^*,\lambda^*,\mu^*)
+=
+f(x^*).
+$$
+
+그러므로
+
+$$
+f(x)
+\le
+f(x^*)
+\qquad
+\forall x\in\mathcal F.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 6.9.3 Slater condition {#s693}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 6.10 · Slater condition in the $g\ge0$ convention
+
+:::::::::::::::::::
+
+concave inequality constraints와 affine equalities에 대해,
+어떤 $\bar x$가 존재하여
+
+$$
+h(\bar x)=0
+$$
+
+이고
+
+$$
+\boxed{
+g_j(\bar x)\gt0
+\qquad
+\forall j
+}
+$$
+
+이면 Slater condition이 성립한다고 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Necessity versus sufficiency
+
+:::::::::::::::::::
+
+concave program에서 KKT의 <em>sufficiency</em>는 위 정리처럼 직접 보일 수 있다.
+Slater condition은 적절한 convex-analytic framework에서 multiplier existence와 KKT의 <em>necessity</em>를 보장하는 대표적 regularity condition이다.
+duality theory 자체는 이 장의 범위를 넘어선다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s610}
+
+## [6.10]{.section-number}Parametric optimization and comparative statics
+
+::: {.topic-opening}
+parameter가 변할 때 관심 대상은 두 가지다.
+첫째, optimizer $x^*(\theta)$가 어떻게 움직이는가.
+둘째, optimal value $v(\theta)$가 어떻게 움직이는가.
+이 둘은 서로 다른 질문이며, 첫 번째에는 Chapter 4의 Implicit Function Theorem이 직접 사용된다.
+:::
+
+### 6.10.1 Unconstrained optimizer sensitivity {#s6101}
+
+interior unique optimizer가
+
+$$
+\nabla_x f(x^*(\theta),\theta)=0
+$$
+
+을 만족한다고 하자.
+
+$$
+F(x,\theta)=\nabla_x f(x,\theta)
+$$
+
+로 두면
+
+$$
+D_xF
+=
+\nabla^2_{xx}f.
+$$
+
+따라서 Hessian이 nonsingular이면 Implicit Function Theorem에 의해 $x^*(\theta)$가 locally differentiable이고
+
+$$
+\boxed{
+D_\theta x^*(\theta)
+=
+-
+[\nabla^2_{xx}f(x^*(\theta),\theta)]^{-1}
+\nabla^2_{x\theta}f(x^*(\theta),\theta).
+}
+$$
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+COMPARATIVE-STATICS READING
+
+:::::::::::::::::::
+
+$$
+\text{optimizer response}
+=
+-
+\text{inverse local curvature}
+\times
+\text{direct parameter effect on FOC}.
+$$
+
+::::::::::::::::::::
+
+### 6.10.2 Equality-constrained KKT-system sensitivity {#s6102}
+
+equality-constrained problem에서는
+
+$$
+z=
+\begin{bmatrix}
+x\\
+\lambda
+\end{bmatrix}
+$$
+
+와
+
+$$
+\Phi(z,\theta)
+=
+\begin{bmatrix}
+\nabla_x\mathcal L(x,\lambda;\theta)\\
+h(x,\theta)
+\end{bmatrix}
+$$
+
+를 사용한다.
+optimum에서
+
+$$
+\Phi(z^*(\theta),\theta)=0.
+$$
+
+만약
+
+$$
+D_z\Phi(z^*,\theta)
+$$
+
+가 nonsingular이면
+
+$$
+\boxed{
+D_\theta z^*(\theta)
+=
+-
+[D_z\Phi(z^*,\theta)]^{-1}
+D_\theta\Phi(z^*,\theta).
+}
+$$
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+SCOPE · Inequality constraints
+
+:::::::::::::::::::
+
+inequality problem에서도 active set이 locally 변하지 않고 필요한 regularity와 strict complementarity 등이 성립하면
+active constraints를 equality처럼 포함한 KKT system에 같은 아이디어를 적용할 수 있다.
+일반적인 active-set 변화와 nonsmooth comparative statics는 이 장의 범위를 넘는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s6110}
+
+## [6.11]{.section-number}Value functions and the Envelope Theorem
+
+::: {.topic-opening}
+optimizer comparative statics가 $x^*(\theta)$의 변화를 묻는다면,
+Envelope Theorem은 최적화가 끝난 뒤의 값
+
+$$
+v(\theta)
+$$
+
+가 parameter에 따라 어떻게 변하는지를 묻는다.
+핵심은 optimizer가 움직이는 효과가 first order에서 stationarity에 의해 소거된다는 것이다.
+:::
+
+### 6.11.1 Unconstrained envelope theorem {#s6111}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.12 · Unconstrained Envelope Theorem
+
+:::::::::::::::::::
+
+$$
+v(\theta)
+=
+f(x^*(\theta),\theta)
+$$
+
+이고 $x^*(\theta)$가 differentiable interior optimizer라고 하자.
+그러면
+
+$$
+\boxed{
+D_\theta v(\theta)
+=
+D_\theta f(x^*(\theta),\theta).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+chain rule에 의해
+
+$$
+D_\theta v
+=
+D_xf(x^*,\theta)
+D_\theta x^*
++
+D_\theta f(x^*,\theta).
+$$
+
+interior FOC로
+
+$$
+D_xf(x^*,\theta)=0.
+$$
+
+따라서 optimizer response term이 사라지고
+
+$$
+D_\theta v
+=
+D_\theta f(x^*,\theta).
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 6.11.2 Constrained Envelope Theorem {#s6112}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 6.13 · Smooth constrained envelope formula
+
+:::::::::::::::::::
+
+parameterized problem
+
+$$
+\begin{aligned}
+v(\theta)=
+\max_x\quad&f(x,\theta)\\
+\text{s.t.}\quad&
+h(x,\theta)=0,\\
+&g(x,\theta)\ge0
+\end{aligned}
+$$
+
+을 생각하자.
+optimizer와 relevant multipliers가 locally unique and differentiable하고,
+KKT conditions가 유지되며 active set이 locally stable하다고 하자.
+그러면
+
+$$
+\boxed{
+D_\theta v(\theta)
+=
+D_\theta
+\mathcal L
+(x^*(\theta),\lambda^*(\theta),\mu^*(\theta);\theta).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof structure
+
+:::::::::::::::::::
+
+직접 미분하면
+
+$$
+D_\theta v
+=
+D_xf\,D_\theta x^*
++
+D_\theta f.
+$$
+
+equality constraints를 미분하면
+
+$$
+D_xh\,D_\theta x^*
++
+D_\theta h
+=
+0.
+$$
+
+locally active inequality $g_j=0$에 대해서도
+
+$$
+D_xg_j\,D_\theta x^*
++
+D_\theta g_j
+=
+0.
+$$
+
+stationarity
+
+$$
+D_xf
++
+\lambda^{*\top}D_xh
++
+\mu^{*\top}D_xg
+=
+0
+$$
+
+와 inactive constraints의 $\mu_j^*=0$을 이용하면 $D_\theta x^*$에 곱해진 항들이 제거되고
+
+$$
+D_\theta v
+=
+D_\theta f
++
+\lambda^{*\top}D_\theta h
++
+\mu^{*\top}D_\theta g
+=
+D_\theta\mathcal L.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+ENVELOPE PRINCIPLE
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{optimizer itself may move with }\theta,
+\text{ but the first-order value effect is read from the Lagrangian partial derivative.}
+}
+$$
+
+::::::::::::::::::::
+
+### 6.11.3 Shadow values {#s6113}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 6.4 · Right-hand-side parameter
+
+:::::::::::::::::::
+
+$$
+v(b)
+=
+\max_x f(x)
+\qquad
+\text{s.t.}
+\qquad
+b-h(x)\ge0.
+$$
+
+Lagrangian을
+
+$$
+\mathcal L(x,\mu;b)
+=
+f(x)+\mu[b-h(x)]
+$$
+
+로 두면
+
+$$
+\boxed{
+\frac{dv}{db}
+=
+\mu^*
+}
+$$
+
+under the smooth envelope assumptions.
+따라서 $\mu^*$는 해당 resource bound를 marginally 완화했을 때 optimal value가 증가하는 속도다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+SIGN CONVENTION MATTERS
+
+:::::::::::::::::::
+
+multiplier의 shadow-value 부호는 constraint를 어떤 방향으로 썼는지와 Lagrangian의 부호 convention에 의존한다.
+이 책에서는
+
+$$
+g\ge0,
+\qquad
+\mathcal L=f+\mu^\top g,
+\qquad
+\mu\ge0
+$$
+
+를 일관되게 사용한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s6120}
+
+## [6.12]{.section-number}Economic applications
+
+::: {.topic-opening}
+최적화 이론의 경제학적 역할은 특정 문제를 하나씩 암기하는 것이 아니라,
+다양한 경제문제를 동일한 feasible-set, KKT, comparative-statics, envelope 구조로 읽는 데 있다.
+:::
+
+### 6.12.1 Consumer utility maximization {#s6121}
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC EXAMPLE 6.1 · Consumer problem
+
+:::::::::::::::::::
+
+$$
+v(p,w)
+=
+\max_{x\ge0}
+u(x)
+\qquad
+\text{s.t.}
+\qquad
+w-p^\top x\ge0.
+$$
+
+nonnegativity constraints도
+
+$$
+x_i\ge0
+$$
+
+형태의 inequalities로 포함할 수 있다.
+budget multiplier를 $\lambda^*\ge0$라 하면
+
+$$
+\mathcal L
+=
+u(x)+\lambda(w-p^\top x)
+$$
+
+이고, smooth interior case에서 envelope theorem은
+
+$$
+\boxed{
+\frac{\partial v}{\partial w}
+=
+\lambda^*
+}
+$$
+
+를 준다.
+또한
+
+$$
+\boxed{
+\frac{\partial v}{\partial p_i}
+=
+-\lambda^*x_i^*
+}
+$$
+
+이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+CONSEQUENCE · Roy-type relation
+
+:::::::::::::::::::
+
+$v_w\gt0$이면 위 두 식으로부터
+
+$$
+x_i^*
+=
+-\frac{v_{p_i}}{v_w}.
+$$
+
+여기서는 envelope formula의 직접 결과로만 기록하고,
+소비자이론의 자세한 duality는 미시경제학 부분에서 다룬다.
+
+::::::::::::::::::::
+
+### 6.12.2 Profit maximization {#s6122}
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC EXAMPLE 6.2 · Profit as a value function
+
+:::::::::::::::::::
+
+technology set $Y$가 주어지고 output/input price vector를 $p$라 하면
+
+$$
+\pi(p)
+=
+\sup_{y\in Y}p^\top y.
+$$
+
+unique differentiable optimizer $y^*(p)$가 존재하는 smooth case에서는
+envelope logic에 의해
+
+$$
+\boxed{
+\nabla_p\pi(p)
+=
+y^*(p).
+}
+$$
+
+즉 optimal net supply가 profit value function의 price derivative로 나타난다.
+
+::::::::::::::::::::
+
+### 6.12.3 Chapter synthesis {#s6123}
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+CHAPTER 6 · CORE LOGIC
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+&\text{existence from continuity/compactness}\\
+&\Downarrow\\
+&\text{FOC/SOC for unconstrained optima}\\
+&\Downarrow\\
+&\text{tangent geometry }\Rightarrow\text{ Lagrange multipliers}\\
+&\Downarrow\\
+&\text{active constraints }\Rightarrow\text{ KKT}\\
+&\Downarrow\\
+&\text{concavity }\Rightarrow\text{ global sufficiency}\\
+&\Downarrow\\
+&\text{IFT }\Rightarrow\text{ optimizer comparative statics}\\
+&\Downarrow\\
+&\text{Envelope Theorem }\Rightarrow\text{ value sensitivity}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+NEXT CHAPTER
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+<strong>Chapter 7. Correspondences and Maximum Theorems.</strong>
+Chapter 6에서는 smooth하고 locally single-valued한 optimizer를 중심으로 comparative statics를 다루었다.
+Chapter 7에서는 feasible set과 optimizer가 correspondence일 수 있는 일반적 parametric optimization으로 이동하여
+upper/lower hemicontinuity와 Berge Maximum Theorem을 다룬다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## 연습문제
+
+::: {.topic-opening}
+연습문제는 최적화 문제를 풀기 전에 notation과 부호 convention을 정확히 정리하고,
+necessary condition과 sufficient condition을 구분하는 데 초점을 둔다.
+:::
+
+<ol class="exercise-list">
+<li>문제 $\max_x f(x)$ subject to $a-b^\top x\ge0$을 이 장의 표준 notation $(f,h,g,\mathcal F)$으로 다시 쓰라.</li>
+<li>$v(\theta)$, $S(\theta)$, $x^*(\theta)$가 각각 어떤 수학적 객체인지 설명하고 세 표기를 서로 혼용하면 안 되는 이유를 설명하라.</li>
+<li>$\sup$와 $\max$의 차이를 보여주는 연속함수 예제를 하나 구성하라.</li>
+<li>$f(x)=-(x-2)^2$에 대해 FOC와 SOC를 사용하여 global maximizer를 구하라.</li>
+<li>$f(x)=x^3$과 $f(x)=-x^4$를 $x=0$에서 비교하여 FOC/SONC의 한계를 설명하라.</li>
+<li>$f(x_1,x_2)=-(x_1^2+2x_2^2)+4x_1+2x_2$의 stationary point를 구하고 Hessian으로 분류하라.</li>
+<li>concave differentiable $f$에서 $\nabla f(x^*)=0$이 global maximizer를 보장함을 Chapter 5의 first-order concavity inequality로 증명하라.</li>
+<li>strictly concave function의 maximizer가 존재하면 유일함을 증명하라.</li>
+<li>$\max xy$ subject to $x+y=2$에서 Lagrange equations를 쓰고 candidate를 구한 뒤 tangent-space SOC로 분류하라.</li>
+<li>$\max x^\top Qx$ subject to $x^\top Px=1$에서 Lagrange condition이 generalized eigenvalue equation으로 연결됨을 보이라.</li>
+<li>equality-constrained local maximizer에서 objective gradient가 tangent space에 orthogonal함을 feasible curve로 증명하라.</li>
+<li>왜 equality-constrained SOC에서는 $\nabla^2 f$가 아니라 $\nabla^2_{xx}\mathcal L$이 나타나는지 설명하라.</li>
+<li>$\max x$ subject to $2-x\ge0$의 KKT system을 쓰고 해와 multiplier를 구하라.</li>
+<li>$\max -(x-3)^2$ subject to $x\ge0$의 KKT system을 풀고 inequality가 active인지 판정하라.</li>
+<li>$\max \log x_1+\log x_2$ subject to $w-p_1x_1-p_2x_2\ge0$, $x_i\ge0$의 KKT conditions를 쓰라.</li>
+<li>inactive inequality의 multiplier가 0이어야 함을 complementary slackness에서 유도하라.</li>
+<li>active constraint의 multiplier가 반드시 positive일 필요가 없음을 보여주는 간단한 예를 구성하라.</li>
+<li>LICQ가 optimizer existence condition이 아니라 multiplier regularity condition인 이유를 설명하라.</li>
+<li>maximization+$g\ge0$ convention에서 concave $g_j$의 superlevel set이 convex임을 증명하라.</li>
+<li>Theorem 6.11의 KKT sufficiency proof를 Lagrangian inequality를 이용하여 다시 증명하라.</li>
+<li>이 장의 convention에서 Slater condition이 $g_j(\bar x)\gt0$로 쓰이는 이유를 설명하라.</li>
+<li>$f(x,\theta)=-(x-\theta)^2$의 optimizer $x^*(\theta)$를 직접 구하고 IFT comparative-statics formula와 비교하라.</li>
+<li>$f(x,\theta)=\theta x-\frac12x^2$의 $x^*(\theta)$, $v(\theta)$를 구하고 $dv/d\theta=f_\theta(x^*(\theta),\theta)$를 확인하라.</li>
+<li>equality-constrained KKT system을 하나 구성하고 block Jacobian을 이용하여 optimizer와 multiplier의 parameter sensitivity formula를 쓰라.</li>
+<li>Envelope Theorem의 proof에서 왜 $D_\theta x^*$를 직접 구할 필요가 없는지 설명하라.</li>
+<li>$\max_x u(x)$ subject to $w-p^\top x\ge0$에서 $v_w=\lambda^*$, $v_{p_i}=-\lambda^*x_i^*$를 유도하라.</li>
+<li>위 결과에서 Roy-type relation $x_i^*=-v_{p_i}/v_w$를 유도하라.</li>
+<li>$\pi(p)=\max_{y\in Y}p^\top y$에서 unique smooth optimizer가 존재한다고 가정하고 $\nabla_p\pi(p)=y^*(p)$를 envelope logic으로 유도하라.</li>
+<li>optimizer comparative statics와 value-function comparative statics가 서로 다른 질문인 이유를 수식으로 설명하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 장의 위치
+
+Chong, E. K. P. and Zak, S. H. <em>An Introduction to Optimization</em>.
+unconstrained first- and second-order conditions, equality-constrained Lagrange conditions,
+tangent/normal-space formulation, inequality constraints와 KKT, convex optimization의 global optimality 구조를 참고하였다.
+
+Jehle, G. A. and Reny, P. J. <em>Advanced Microeconomic Theory</em>, 3rd ed.
+Lagrange/Kuhn–Tucker method, parameterized value functions, Envelope Theorem과 경제학적 multiplier interpretation의 전개를 참고하였다.
+
+본 장의 표준 convention은 경제학적 maximization 문제에 맞추어
+
+$$
+\max f,\qquad g\ge0,\qquad
+\mathcal L=f+\lambda^\top h+\mu^\top g,\qquad
+\mu\ge0
+$$
+
+로 일관되게 고정하였다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+DEPENDENCY MAP
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+\text{Chapter 2: }&\text{existence}\\
+\text{Chapter 3: }&\text{gradient and Hessian}\\
+\text{Chapter 4: }&\text{IFT and comparative statics}\\
+\text{Chapter 5: }&\text{concavity and convex feasible geometry}\\
+&\Downarrow\\
+\text{Chapter 6: }&\text{optimality, KKT, envelope}\\
+&\Downarrow\\
+\text{Chapter 7: }&\text{correspondences and Berge Maximum Theorem}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+
+
+

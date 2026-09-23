@@ -1,0 +1,36 @@
+# Chapter 5 · 볼록집합과 볼록함수 {.unnumbered}
+*Convex Sets · Convex Functions · Quasiconvexity*
+
+Chapter 1의 위상과 Chapter 3의 미분 도구를 바탕으로, 볼록집합·분리정리·볼록함수·준볼록성의 전역 구조를 정리한다. 이후 최적화와 경제학적 선호·기술 집합의 전역 성질로 이어지는 장이다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **5.1–5.3** 볼록결합 · 볼록집합 · 볼록껍질 · 아핀기하 · 분리정리
+- **5.4–5.6** 볼록·오목 함수 · epigraph · Jensen 부등식 · 보존 연산
+- **5.7–5.8** 일계·이계 미분가능성에 의한 볼록성 판정
+- **5.9–5.11** 준볼록성 · 준오목성 · 경제학적 전역 기하
+:::
+
+## Sections
+
+- [5.1 볼록결합과 볼록집합](contents.html#s51)
+- [5.2 볼록껍질, 아핀껍질과 상대내부](contents.html#s52)
+- [5.3 초평면과 분리](contents.html#s53)
+- [5.4 볼록함수와 오목함수](contents.html#s54)
+- [5.5 Epigraph와 볼록성](contents.html#s55)
+- [5.6 Jensen 부등식과 볼록성 보존 연산](contents.html#s56)
+- [5.7 일계 특성화](contents.html#s57)
+- [5.8 이계 특성화](contents.html#s58)
+- [5.9 준볼록성과 준오목성](contents.html#s59)
+- [5.10 엄격한 준오목성과 단조변환](contents.html#s510)
+- [5.11 경제학적 기하와 최적화로의 연결](contents.html#s5110)
+- [연습문제](contents.html#exercises)
+- [참고문헌 및 장의 위치](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+정의·정리·증명·경제학적 예제는 [본문 전체](contents.html)에 있다. 위의 Section 링크로 필요한 주제로 바로 이동할 수 있다.
+:::
+
+
+
