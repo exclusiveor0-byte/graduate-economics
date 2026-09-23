@@ -28,6 +28,13 @@
 .formula-grid--long { grid-template-columns: 1fr; }
 .formula-card { min-width: 0; padding: 1rem; border: 1px solid var(--notes-rule); background: #fffaf5; }
 .formula-card .math-display { margin: .75rem 0 0; }
+.formula-card .formula-card__head { color: #725b70; font-size: .84rem; font-weight: 700; letter-spacing: .04em; margin-bottom: .35rem; }
+.property-sheet { max-width: 47rem; margin: 1.5rem 0; border: 1px solid var(--notes-rule); background: #fff; }
+.property-sheet__head { padding: .75rem 1rem; background: #fdf9f7; color: #725b70; font-weight: 700; font-size: .84rem; letter-spacing: .04em; border-bottom: 1px solid var(--notes-rule); }
+.property-row { display: grid; grid-template-columns: minmax(8rem, .3fr) 1fr; gap: 1rem; padding: .75rem 1rem; border-bottom: 1px solid var(--notes-rule); }
+.property-row:last-child { border-bottom: 0; }
+.property-row__key { color: #725b70; font-weight: 700; font-size: .85rem; }
+.property-row__body p { margin: 0; }
 .callout-strip { max-width: 47rem; display: grid; grid-template-columns: minmax(8rem, .32fr) 1fr; gap: 1rem; margin: 1.6rem 0; padding: .9rem 0; border-top: 1px solid var(--notes-rule); border-bottom: 1px solid var(--notes-rule); }
 .callout-strip .left { color: #725b70; font-weight: 700; }
 .callout-strip .right { color: #665a55; }
@@ -54,5 +61,5 @@
 .section-number { color: #8a4e2d; font-size: .78em; font-weight: 750; margin-right: .35em; }
 @media (max-width: 700px) {
   .target-grid, .comparison-grid, .formula-grid, .logic-chain, .callout-strip { grid-template-columns: 1fr; }
-  .case-study__step { grid-template-columns: 1fr; gap: .3rem; }
+  .case-study__step, .property-row { grid-template-columns: 1fr; gap: .3rem; }
 }

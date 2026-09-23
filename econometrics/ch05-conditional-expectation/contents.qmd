@@ -1,8 +1,9 @@
 ---
 title: "Conditional Expectation and Projection"
+description: "Best Prediction · L^2 Geometry · Orthogonality · Information"
 ---
 
-<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. -->
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
 
 :::::::::::::::::::::::::: {#s51}
 
@@ -10,14 +11,14 @@ title: "Conditional Expectation and Projection"
 
 ::: {.topic-opening}
 Chapter 2에서 $E[Y\mid X]$의 존재와 기본 성질을 이미 다루었다. 따라서 이 장의 목적은 정의를 반복하는 것이 아니다.
-  여기서는 conditional expectation이 왜 regression, forecasting, moment conditions, projection, approximation의 공통 출발점이 되는지를
-  <strong>population prediction problem</strong>으로 다시 해석한다.
+여기서는 conditional expectation이 왜 regression, forecasting, moment conditions, projection, approximation의 공통 출발점이 되는지를
+<strong>population prediction problem</strong>으로 다시 해석한다.
 :::
 
 ### 5.1.1 Prediction problem {#s511}
 
-  $Y\in L^2$를 예측하고 싶지만 사용할 수 있는 정보는 $X$뿐이라고 하자.
-  $X$의 measurable function $g(X)$를 predictor로 사용하면 squared-error risk는
+$Y\in L^2$를 예측하고 싶지만 사용할 수 있는 정보는 $X$뿐이라고 하자.
+$X$의 measurable function $g(X)$를 predictor로 사용하면 squared-error risk는
 
 :::::::::::::::::::: {.math-display}
 
@@ -27,7 +28,7 @@ $$
 
 ::::::::::::::::::::
 
-  우리는 알고리즘을 고르는 것이 아니라 population에서 다음 문제의 해를 묻고 있다.
+우리는 알고리즘을 고르는 것이 아니라 population에서 다음 문제의 해를 묻고 있다.
 
 :::::::::::::::::::: {.math-display}
 
@@ -40,29 +41,100 @@ $$
 
 :::::::::::::::::::: {.callout-strip}
 
-  
-
 ::::::::::::::::::: {.left}
 
 Chapter 4와의 연결
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.right}
 
-    이것은 무한차원 population optimization problem이다. parameter가 유한차원 vector가 아니라 $X$의 square-integrable function 전체라는 점만 다르다.
-  
+이것은 무한차원 population optimization problem이다. parameter가 유한차원 vector가 아니라 $X$의 square-integrable function 전체라는 점만 다르다.
 
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 5.1 · Finite-state prediction problem을 직접 풀기
+
+:::::::::::::::::::
+
+$X\in\{0,1\}$이고 $P(X=0)=P(X=1)=1/2$라 하자. 또한
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y\mid X=0]=1,
+\qquad
+E[Y\mid X=1]=3.
+$$
+
+:::::::::::::::::::
+
+$X$만 사용하는 모든 predictor는
+
+::::::::::::::::::: {.math-display}
+
+$$
+g(X)
+=
+a\,1\{X=0\}
++
+b\,1\{X=1\}
+$$
+
+:::::::::::::::::::
+
+형태로 쓸 수 있다. Risk는
+
+::::::::::::::::::: {.math-display}
+
+$$
+R(a,b)
+=
+\frac12E[(Y-a)^2\mid X=0]
++
+\frac12E[(Y-b)^2\mid X=1].
+$$
+
+:::::::::::::::::::
+
+두 항은 $a$와 $b$에 대해 서로 분리되어 있으므로 각각 conditional mean에서 최소화된다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+a^*=1,
+\qquad
+b^*=3.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+g^*(X)=E[Y\mid X].
+}
+$$
+
+:::::::::::::::::::
+
+5.2–5.4에서는 이 finite-state 계산을 $L^2(\sigma(X))$라는 infinite-dimensional space에서 일반화한다.
+
+::::::::::::::::::::
+
 ### 5.1.2 Definition과 characterization의 분리 {#s512}
 
-  Conditional expectation $E[Y\mid X]$는 원래 $\sigma(X)$-measurable random variable로서 확률론적으로 정의된다.
-  하지만 square-integrability가 주어지면 동일한 객체를 optimization으로 characterize할 수 있다.
+Conditional expectation $E[Y\mid X]$는 원래 $\sigma(X)$-measurable random variable로서 확률론적으로 정의된다.
+하지만 square-integrability가 주어지면 동일한 객체를 optimization으로 characterize할 수 있다.
 
 :::::::::::::::::::: {.math-display}
 
@@ -77,8 +149,8 @@ $$
 
 ::::::::::::::::::::
 
-  이 식은 conditional expectation의 <em>정의</em>를 바꾸는 것이 아니라, 이미 정의된 객체가 어떤 population optimization problem의 유일한 해인지를 보여준다.
-  이 구분은 이후 BLP, BLA, least squares, M-estimation을 읽을 때 계속 중요하다.
+이 식은 conditional expectation의 <em>정의</em>를 바꾸는 것이 아니라, 이미 정의된 객체가 어떤 population optimization problem의 유일한 해인지를 보여준다.
+이 구분은 이후 BLP, BLA, least squares, M-estimation을 읽을 때 계속 중요하다.
 
 ::::::::::::::::::::::::::
 
@@ -88,14 +160,12 @@ $$
 
 ::: {.topic-opening}
 Squared-error prediction의 자연스러운 공간은 $L^2(P)$다. 이 공간에서는 기대값이 inner product가 되고,
-  prediction error의 최소화가 Euclidean geometry와 같은 projection problem으로 바뀐다.
+prediction error의 최소화가 Euclidean geometry와 같은 projection problem으로 바뀐다.
 :::
 
 ### 5.2.1 Inner product와 norm {#s521}
 
 :::::::::::::::::::: {.statement .definition}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -103,18 +173,65 @@ Squared-error prediction의 자연스러운 공간은 $L^2(P)$다. 이 공간에
 
 :::::::::::::::::::
 
-  
 확률변수 $U$가 $E[U^2]\lt\infty$를 만족하면 $U\in L^2(P)$라 한다. 거의 확실하게 같은 random variables는 같은 원소로 본다.
-
-  
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  L^2(P)=\{U:E[U^2]\lt\infty\}/\text{a.s. equality}.
-  $$
+L^2(P)=\{U:E[U^2]\lt\infty\}/\text{a.s. equality}.
+$$
 
 :::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.1 · $L^2$ distance zero와 almost-sure equality
+
+:::::::::::::::::::
+
+$U,V\in L^2(P)$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\|U-V\|_2=0
+\iff
+U=V\quad a.s.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$\|U-V\|_2=0$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[(U-V)^2]=0.
+$$
+
+:::::::::::::::::::
+
+nonnegative random variable의 expectation이 0이면 그 random variable은 a.s. 0이므로
+$(U-V)^2=0$ a.s., 즉 $U=V$ a.s.
+역방향은 즉시 성립한다.
+
+<span class="qed">□</span>
 
 ::::::::::::::::::::
 
@@ -134,14 +251,12 @@ $$
 
 ::::::::::::::::::::
 
-  이 inner product 아래 $L^2(P)$는 complete inner-product space, 즉 Hilbert space다.
-  계량경제학에서 중요한 점은 functional analysis 자체보다, 이 구조가 squared-error loss를 정확히 Euclidean distance처럼 다루게 해 준다는 것이다.
+이 inner product 아래 $L^2(P)$는 complete inner-product space, 즉 Hilbert space다.
+계량경제학에서 중요한 점은 functional analysis 자체보다, 이 구조가 squared-error loss를 정확히 Euclidean distance처럼 다루게 해 준다는 것이다.
 
 ### 5.2.2 Orthogonality와 covariance {#s522}
 
 :::::::::::::::::::: {.statement .definition}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -149,25 +264,21 @@ $$
 
 :::::::::::::::::::
 
-  
 $U,V\in L^2(P)$가
-
-  
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \langle U,V\rangle=E[UV]=0
-  $$
+\langle U,V\rangle=E[UV]=0
+$$
 
 :::::::::::::::::::
 
-  
 을 만족하면 $U\perp V$라고 한다.
 
 ::::::::::::::::::::
 
-  이는 일반적인 zero covariance와 같은 개념이 아니다.
+이는 일반적인 zero covariance와 같은 개념이 아니다.
 
 :::::::::::::::::::: {.math-display}
 
@@ -179,13 +290,73 @@ $$
 
 ::::::::::::::::::::
 
-  $E[U]=0$ 또는 $E[V]=0$ 같은 중심화 조건이 있을 때 두 개념이 연결된다.
-  Projection residual에서는 constant function $1$도 predictor space에 포함되는 경우가 많으므로 residual의 평균이 0이 되고,
-  그때 orthogonality는 익숙한 uncorrelatedness와 자연스럽게 이어진다.
+$E[U]=0$ 또는 $E[V]=0$ 같은 중심화 조건이 있을 때 두 개념이 연결된다.
+Projection residual에서는 constant function $1$도 predictor space에 포함되는 경우가 많으므로 residual의 평균이 0이 되고,
+그때 orthogonality는 익숙한 uncorrelatedness와 자연스럽게 이어진다.
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 5.1 · $L^2$ orthogonality와 zero covariance는 다르다
+
+:::::::::::::::::::
+
+<strong>Orthogonal but correlated.</strong>
+$U\sim Bernoulli(1/2)$, $V=1-U$라 하자. 그러면 $UV=0$ a.s.이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[UV]=0.
+$$
+
+:::::::::::::::::::
+
+하지만
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Cov}(U,V)
+=
+E[UV]-E[U]E[V]
+=
+-\frac14.
+$$
+
+:::::::::::::::::::
+
+<strong>Zero covariance but not orthogonal.</strong>
+반대로 $U=V=1$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Cov}(U,V)=0,
+\qquad
+E[UV]=1.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+U\perp V\text{ in }L^2
+\neq
+\operatorname{Cov}(U,V)=0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
 
 ### 5.2.3 Information-generated subspace {#s523}
 
-  $X$가 제공하는 정보만 사용할 수 있는 predictor의 공간을
+$X$가 제공하는 정보만 사용할 수 있는 predictor의 공간을
 
 :::::::::::::::::::: {.math-display}
 
@@ -199,11 +370,9 @@ $$
 
 ::::::::::::::::::::
 
-  로 둔다. $\mathcal H_X$는 $L^2(P)$의 closed linear subspace다.
+로 둔다. $\mathcal H_X$는 $L^2(P)$의 closed linear subspace다.
 
 :::::::::::::::::::: {.statement .remark}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -211,29 +380,22 @@ $$
 
 :::::::::::::::::::
 
-  
-
-    최소화 sequence가 점점 좋은 predictor를 만들어도 limit가 predictor space 밖으로 빠져나가면 minimizer existence가 깨질 수 있다.
-    Closed subspace라는 사실이 projection theorem의 existence를 보장하는 핵심 조건이다.
-  
+최소화 sequence가 점점 좋은 predictor를 만들어도 limit가 predictor space 밖으로 빠져나가면 minimizer existence가 깨질 수 있다.
+Closed subspace라는 사실이 projection theorem의 existence를 보장하는 핵심 조건이다.
 
 ::::::::::::::::::::
 
 <details class="technical-proof">
-  <summary>Technical note · $L^2(\sigma(X))$가 closed인 이유</summary>
-  
+<summary>Technical note · $L^2(\sigma(X))$가 closed인 이유</summary>
 
 :::::::::::::::::::: {.details-body}
 
-    
+$g_n(X)\in L^2(\sigma(X))$이고 $g_n(X)\to Z$ in $L^2$라 하자.
+$L^2$ convergence로부터 적절한 subsequence가 a.s. convergence하도록 잡을 수 있고,
+$\sigma(X)$-measurable random variables의 a.s. limit는 $\sigma(X)$-measurable한 version을 갖는다.
+따라서 $Z\in L^2(\sigma(X))$이다.
 
-      $g_n(X)\in L^2(\sigma(X))$이고 $g_n(X)\to Z$ in $L^2$라 하자.
-      $L^2$ convergence로부터 적절한 subsequence가 a.s. convergence하도록 잡을 수 있고,
-      $\sigma(X)$-measurable random variables의 a.s. limit는 $\sigma(X)$-measurable한 version을 갖는다.
-      따라서 $Z\in L^2(\sigma(X))$이다.
-    
-
-  
+<strong>결론.</strong> Closedness 때문에 $L^2(\sigma(X))$ 안에서 Cauchy minimizing sequence의 limit가 predictor space 밖으로 빠져나가지 않는다. 따라서 projection theorem의 existence argument를 conditional-prediction problem에 그대로 적용할 수 있다.
 
 ::::::::::::::::::::
 
@@ -247,14 +409,12 @@ $$
 
 ::: {.topic-opening}
 Conditional expectation의 best-prediction 성질은 Hilbert-space projection theorem의 직접적인 응용이다.
-  이 정리는 existence, uniqueness, first-order geometry를 한 번에 제공한다.
+이 정리는 existence, uniqueness, first-order geometry를 한 번에 제공한다.
 :::
 
 ### 5.3.1 Best approximation {#s531}
 
 :::::::::::::::::::: {.statement .theorem}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -262,37 +422,132 @@ Conditional expectation의 best-prediction 성질은 Hilbert-space projection th
 
 :::::::::::::::::::
 
-  
-
-    Hilbert space $\mathcal H$의 nonempty closed linear subspace $\mathcal S$와 $Y\in\mathcal H$가 주어지면,
-    유일한 $P_{\mathcal S}Y\in\mathcal S$가 존재하여
-  
-
-  
+Hilbert space $\mathcal H$의 nonempty closed linear subspace $\mathcal S$와 $Y\in\mathcal H$가 주어지면,
+유일한 $P_{\mathcal S}Y\in\mathcal S$가 존재하여
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \|Y-P_{\mathcal S}Y\|
-  =
-  \inf_{s\in\mathcal S}\|Y-s\|
-  $$
+\|Y-P_{\mathcal S}Y\|
+=
+\inf_{s\in\mathcal S}\|Y-s\|
+$$
 
 :::::::::::::::::::
 
-  
 를 만족한다.
 
 ::::::::::::::::::::
 
-  즉 projection theorem은 “가장 가까운 원소”의 존재와 유일성을 보장한다.
-  Chapter 4의 언어로 말하면 optimization problem의 argmin set이 singleton임을 Hilbert-space geometry가 보장하는 것이다.
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Existence and uniqueness
+
+:::::::::::::::::::
+
+$$
+d
+=
+\inf_{s\in\mathcal S}\|Y-s\|
+$$
+
+라 하고 minimizing sequence $s_n\in\mathcal S$를 잡아
+$\|Y-s_n\|\to d$라 하자. Parallelogram identity를 쓰면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\|s_n-s_m\|^2
+&=
+2\|Y-s_n\|^2
++
+2\|Y-s_m\|^2\\
+&\quad
+-
+4\left\|
+Y-\frac{s_n+s_m}{2}
+\right\|^2.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+$\mathcal S$가 linear subspace이므로
+$(s_n+s_m)/2\in\mathcal S$, 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\left\|
+Y-\frac{s_n+s_m}{2}
+\right\|
+\ge d.
+$$
+
+:::::::::::::::::::
+
+그러므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|s_n-s_m\|^2
+\le
+2\|Y-s_n\|^2
++
+2\|Y-s_m\|^2
+-
+4d^2
+\longrightarrow0.
+$$
+
+:::::::::::::::::::
+
+즉 $\{s_n\}$은 Cauchy. Hilbert-space completeness로 어떤 $s^\star\in\mathcal H$에 수렴하고,
+$\mathcal S$가 closed이므로 $s^\star\in\mathcal S$.
+norm continuity로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|Y-s^\star\|=d,
+$$
+
+:::::::::::::::::::
+
+따라서 minimizer가 존재한다.
+
+이제 $s_1,s_2$가 둘 다 minimizers라고 하자.
+Midpoint도 $\mathcal S$에 있으므로 parallelogram identity에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\left\|
+Y-\frac{s_1+s_2}{2}
+\right\|^2
+=
+d^2-\frac14\|s_1-s_2\|^2.
+$$
+
+:::::::::::::::::::
+
+왼쪽은 최소거리의 제곱 $d^2$보다 작을 수 없으므로
+$\|s_1-s_2\|=0$. 따라서 $s_1=s_2$ in the Hilbert space.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+즉 projection theorem은 “가장 가까운 원소”의 존재와 유일성을 보장한다.
+Chapter 4의 언어로 말하면 optimization problem의 argmin set이 singleton임을 Hilbert-space geometry가 보장하는 것이다.
 
 ### 5.3.2 Orthogonality characterization {#s532}
 
 :::::::::::::::::::: {.statement .theorem}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -300,78 +555,113 @@ $$
 
 :::::::::::::::::::
 
-  
 $s^\star=P_{\mathcal S}Y$일 필요충분조건은
 
-  
-
 ::::::::::::::::::: {.math-display}
 
 $$
-  Y-s^\star
-  \perp
-  \mathcal S,
-  $$
+Y-s^\star
+\perp
+\mathcal S,
+$$
 
 :::::::::::::::::::
 
-  
 즉
 
-  
-
 ::::::::::::::::::: {.math-display}
 
 $$
-  \langle Y-s^\star,s\rangle=0
-  \qquad
-  \forall s\in\mathcal S
-  $$
+\langle Y-s^\star,s\rangle=0
+\qquad
+\forall s\in\mathcal S
+$$
 
 :::::::::::::::::::
 
-  
 이다.
 
 ::::::::::::::::::::
 
 :::::::::::::::::::: {.proof}
 
-  
-
 ::::::::::::::::::: {.proof-label}
 
-Proof sketch
+Proof
 
 :::::::::::::::::::
 
-  
-
-    $s^\star\in\mathcal S$이고 $r=Y-s^\star\perp\mathcal S$라 하자. 임의의 $s\in\mathcal S$에 대해
-    $s^\star-s\in\mathcal S$이므로 $r\perp(s^\star-s)$다. 따라서
-  
-
-  
+<strong>Sufficiency.</strong>
+$s^\star\in\mathcal S$이고 $r=Y-s^\star\perp\mathcal S$라 하자.
+임의의 $s\in\mathcal S$에 대해 $s^\star-s\in\mathcal S$, 따라서
+$\langle r,s^\star-s\rangle=0$. 그러므로
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \|Y-s\|^2
-  =
-  \|r+(s^\star-s)\|^2
-  =
-  \|r\|^2+\|s^\star-s\|^2
-  \ge
-  \|r\|^2.
-  $$
+\begin{aligned}
+\|Y-s\|^2
+&=
+\|r+(s^\star-s)\|^2\\
+&=
+\|r\|^2+\|s^\star-s\|^2\\
+&\ge
+\|r\|^2.
+\end{aligned}
+$$
 
 :::::::::::::::::::
 
-  
+즉 $s^\star$가 minimizer다.
 
-    역방향은 $s^\star+t s$를 모든 작은 $t$에 대해 비교하고 $t=0$에서 quadratic의 minimum condition을 사용하면 얻어진다.
-    <span class="qed">□</span>
-  
+<strong>Necessity.</strong>
+반대로 $s^\star$가 minimizer라고 하자. 임의의 $h\in\mathcal S$에 대해
+$s^\star+th\in\mathcal S$. 함수
+
+::::::::::::::::::: {.math-display}
+
+$$
+\phi(t)
+=
+\|Y-s^\star-th\|^2
+$$
+
+:::::::::::::::::::
+
+는 $t=0$에서 최소다. 전개하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\phi(t)
+=
+\|Y-s^\star\|^2
+-
+2t\langle Y-s^\star,h\rangle
++
+t^2\|h\|^2.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+0
+=
+\phi'(0)
+=
+-2\langle Y-s^\star,h\rangle.
+$$
+
+:::::::::::::::::::
+
+모든 $h\in\mathcal S$에 대해 성립하므로
+$Y-s^\star\perp\mathcal S$.
+
+<span class="qed">□</span>
 
 ::::::::::::::::::::
 
@@ -383,7 +673,7 @@ $$
 
 ::: {.topic-opening}
 이제 projection subspace를 $X$가 생성하는 정보공간으로 선택한다.
-  Conditional expectation은 단순한 “조건부 평균 공식”이 아니라, 이용 가능한 정보 안에서의 optimal $L^2$ predictor다.
+Conditional expectation은 단순한 “조건부 평균 공식”이 아니라, 이용 가능한 정보 안에서의 optimal $L^2$ predictor다.
 :::
 
 ### 5.4.1 CEF as projection {#s541}
@@ -412,7 +702,7 @@ $$
 
 ::::::::::::::::::::
 
-  CEF를
+CEF를
 
 :::::::::::::::::::: {.math-display}
 
@@ -436,11 +726,94 @@ $$
 
 이다. 여기서 $\varepsilon$은 통계적 모델에 임의로 추가한 disturbance가 아니라, $X$의 정보로 예측할 수 없는 projection residual이다.
 
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.2A · Conditional expectation is the orthogonal projection
+
+:::::::::::::::::::
+
+$Y\in L^2(P)$, $\mathcal H_X=L^2(\sigma(X))$라 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Y\mid X]
+=
+P_{\mathcal H_X}Y.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$m(X)=E[Y\mid X]$라 하자. Conditional Jensen inequality로
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[m(X)^2]
+=
+E[(E[Y\mid X])^2]
+\le
+E[E[Y^2\mid X]]
+=
+E[Y^2],
+$$
+
+:::::::::::::::::::
+
+따라서 $m(X)\in L^2(\sigma(X))=\mathcal H_X$.
+이제 임의의 $h(X)\in\mathcal H_X$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[(Y-m(X))h(X)]
+&=
+E\!\left[
+E[(Y-m(X))h(X)\mid X]
+\right]\\
+&=
+E\!\left[
+h(X)E[Y-m(X)\mid X]
+\right]\\
+&=0.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+따라서 $Y-m(X)\perp\mathcal H_X$.
+정리 5.2의 orthogonality characterization과 projection uniqueness에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+m(X)=P_{\mathcal H_X}Y.
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
 ### 5.4.2 Best-predictor theorem {#s542}
 
 :::::::::::::::::::: {.statement .theorem}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -448,44 +821,63 @@ $$
 
 :::::::::::::::::::
 
-  
 모든 $g(X)\in L^2(\sigma(X))$에 대해
-
-  
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  E[(Y-E[Y\mid X])^2]
-  \le
-  E[(Y-g(X))^2].
-  $$
+E[(Y-E[Y\mid X])^2]
+\le
+E[(Y-g(X))^2].
+$$
 
 :::::::::::::::::::
 
-  
 따라서
-
-  
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  E[Y\mid X]
-  =
-  \operatorname*{arg\,min}_{g\in L^2(\sigma(X))}
-  E[(Y-g)^2].
-  }
-  $$
+\boxed{
+E[Y\mid X]
+=
+\operatorname*{arg\,min}_{g\in L^2(\sigma(X))}
+E[(Y-g)^2].
+}
+$$
 
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
-:::::::::::::::::::: {.callout-strip}
+:::::::::::::::::::: {.proof}
 
-  
+::::::::::::::::::: {.proof-label}
+
+Corollary proof
+
+:::::::::::::::::::
+
+정리 5.2A에서 $m(X)=E[Y\mid X]$는 $Y$의 $\mathcal H_X$-projection이다.
+따라서 projection theorem에 의해 모든 $g(X)\in\mathcal H_X$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|Y-m(X)\|_2
+\le
+\|Y-g(X)\|_2.
+$$
+
+:::::::::::::::::::
+
+양변을 제곱하면 best-predictor inequality가 바로 나온다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
 
 ::::::::::::::::::: {.left}
 
@@ -493,13 +885,10 @@ $$
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.right}
 
-    CEF는 임의의 nonlinear predictor를 포함한 모든 square-integrable $X$-measurable predictor 가운데 MSE를 최소화한다.
-    선형성은 아직 어디에도 가정되지 않았다.
-  
+CEF는 임의의 nonlinear predictor를 포함한 모든 square-integrable $X$-measurable predictor 가운데 MSE를 최소화한다.
+선형성은 아직 어디에도 가정되지 않았다.
 
 :::::::::::::::::::
 
@@ -507,8 +896,8 @@ $$
 
 ### 5.4.3 Almost-sure uniqueness {#s543}
 
-  Conditional expectation의 uniqueness는 pointwise uniqueness가 아니라 $P$-almost sure uniqueness다.
-  두 함수 $g_1(X)$와 $g_2(X)$가
+Conditional expectation의 uniqueness는 pointwise uniqueness가 아니라 $P$-almost sure uniqueness다.
+두 함수 $g_1(X)$와 $g_2(X)$가
 
 :::::::::::::::::::: {.math-display}
 
@@ -518,8 +907,45 @@ $$
 
 ::::::::::::::::::::
 
-  이면 $L^2$에서는 같은 predictor다. 따라서 $m(x)$의 값은 $P_X$-null set 위에서는 자유롭게 달라질 수 있다.
-  Chapter 3의 support 논의와 연결하면, CEF가 identified된다는 표현도 본질적으로 support 위의 a.s. object에 대한 말이다.
+이면 $L^2$에서는 같은 predictor다. 따라서 $m(x)$의 값은 $P_X$-null set 위에서는 자유롭게 달라질 수 있다.
+Chapter 3의 support 논의와 연결하면, CEF가 identified된다는 표현도 본질적으로 support 위의 a.s. object에 대한 말이다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Almost-sure uniqueness
+
+:::::::::::::::::::
+
+두 best predictors $g_1,g_2\in L^2(\sigma(X))$가 있다고 하자.
+Projection theorem의 uniqueness로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|g_1-g_2\|_2=0.
+$$
+
+:::::::::::::::::::
+
+Proposition 5.1에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+g_1(X)=g_2(X)\quad a.s.
+}
+$$
+
+:::::::::::::::::::
+
+따라서 CEF의 uniqueness는 $P_X$-null sets를 제외한 almost-sure uniqueness다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ::::::::::::::::::::::::::
 
@@ -529,12 +955,12 @@ $$
 
 ::: {.topic-opening}
 Projection interpretation의 가장 강력한 결과는 residual이 사용 가능한 모든 predictor direction과 orthogonal하다는 것이다.
-  많은 population moment conditions가 바로 여기서 나온다.
+많은 population moment conditions가 바로 여기서 나온다.
 :::
 
 ### 5.5.1 Conditional mean-zero residual {#s551}
 
-  $\varepsilon=Y-E[Y\mid X]$라 하면 conditional expectation의 정의로
+$\varepsilon=Y-E[Y\mid X]$라 하면 conditional expectation의 정의로
 
 :::::::::::::::::::: {.math-display}
 
@@ -546,7 +972,7 @@ $$
 
 ::::::::::::::::::::
 
-  동시에 projection theorem에 의해
+동시에 projection theorem에 의해
 
 :::::::::::::::::::: {.math-display}
 
@@ -560,7 +986,39 @@ $$
 
 ::::::::::::::::::::
 
-  가 성립한다. 두 표현은 적절한 integrability 아래 같은 geometric content를 가진다.
+가 성립한다. 두 표현은 적절한 integrability 아래 같은 geometric content를 가진다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Conditional moment implies unconditional moments
+
+:::::::::::::::::::
+
+$\varepsilon=Y-E[Y\mid X]$라 하자.
+$E[\varepsilon\mid X]=0$이고 적절한 $h(X)$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[h(X)\varepsilon]
+&=
+E[E[h(X)\varepsilon\mid X]]\\
+&=
+E[h(X)E[\varepsilon\mid X]]\\
+&=0.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+따라서 conditional moment restriction은 모든 $X$-measurable directions에 대한 unconditional orthogonality를 생성한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 5.5.2 Unconditional moments {#s552}
 
@@ -568,11 +1026,7 @@ $$
 
 :::::::::::::::::::: {.formula-grid}
 
-  
-
 ::::::::::::::::::: {.formula-card}
-
-    
 
 :::::::::::::::::: {.formula-card__head}
 
@@ -580,25 +1034,17 @@ Constant direction
 
 ::::::::::::::::::
 
-    
-
 :::::::::::::::::: {.math-display}
 
 $$
-    E[\varepsilon]=0.
-    $$
+E[\varepsilon]=0.
+$$
 
 ::::::::::::::::::
 
-  
-
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.formula-card}
-
-    
 
 :::::::::::::::::: {.formula-card__head}
 
@@ -606,25 +1052,17 @@ Linear direction
 
 ::::::::::::::::::
 
-    
-
 :::::::::::::::::: {.math-display}
 
 $$
-    E[X\varepsilon]=0.
-    $$
+E[X\varepsilon]=0.
+$$
 
 ::::::::::::::::::
 
-  
-
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.formula-card}
-
-    
 
 :::::::::::::::::: {.formula-card__head}
 
@@ -632,25 +1070,17 @@ Nonlinear direction
 
 ::::::::::::::::::
 
-    
-
 :::::::::::::::::: {.math-display}
 
 $$
-    E[\phi(X)\varepsilon]=0.
-    $$
+E[\phi(X)\varepsilon]=0.
+$$
 
 ::::::::::::::::::
 
-  
-
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.formula-card}
-
-    
 
 :::::::::::::::::: {.formula-card__head}
 
@@ -658,30 +1088,24 @@ Indicator direction
 
 ::::::::::::::::::
 
-    
-
 :::::::::::::::::: {.math-display}
 
 $$
-    E[\mathbf 1\{X\in A\}\varepsilon]=0.
-    $$
+E[\mathbf 1\{X\in A\}\varepsilon]=0.
+$$
 
 ::::::::::::::::::
-
-  
 
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
-  마지막 식은 residual의 평균이 $X$의 어떤 measurable region에서도 0이라는 뜻이다.
-  단순한 $E[X\varepsilon]=0$보다 훨씬 강한 restriction이다.
+마지막 식은 residual의 평균이 $X$의 어떤 measurable region에서도 0이라는 뜻이다.
+단순한 $E[X\varepsilon]=0$보다 훨씬 강한 restriction이다.
 
 ### 5.5.3 Converse에서 무엇이 필요한가 {#s553}
 
 :::::::::::::::::::: {.statement .warning}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -689,15 +1113,12 @@ $$
 
 :::::::::::::::::::
 
-  
-
-    $E[X\varepsilon]=0$만으로는 일반적으로 $E[\varepsilon\mid X]=0$을 결론낼 수 없다.
-    하지만 $E[h(X)\varepsilon]=0$가 충분히 풍부한 모든 measurable $h$에 대해 성립하면 conditional mean-zero characterization으로 돌아갈 수 있다.
-  
+$E[X\varepsilon]=0$만으로는 일반적으로 $E[\varepsilon\mid X]=0$을 결론낼 수 없다.
+하지만 $E[h(X)\varepsilon]=0$가 충분히 풍부한 모든 measurable $h$에 대해 성립하면 conditional mean-zero characterization으로 돌아갈 수 있다.
 
 ::::::::::::::::::::
 
-  즉 다음 논리적 위계를 기억해야 한다.
+즉 다음 논리적 위계를 기억해야 한다.
 
 :::::::::::::::::::: {.math-display}
 
@@ -713,6 +1134,141 @@ $$
 
 그러나 마지막 조건 하나만으로는 첫 번째 조건을 복원할 수 없다.
 
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.2 · Rich unconditional moments characterize conditional mean zero
+
+:::::::::::::::::::
+
+$\varepsilon\in L^1$라 하자. 다음 두 조건은 동치다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[\varepsilon\mid X]=0\quad a.s.
+$$
+
+:::::::::::::::::::
+
+그리고
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[h(X)\varepsilon]=0
+\quad
+\text{for every bounded }\sigma(X)\text{-measurable }h.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+forward implication은 앞에서 보였다. Converse를 보자.
+$m(X)=E[\varepsilon\mid X]$라 두면 assumption과 tower property에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[h(X)m(X)]
+=
+E[h(X)\varepsilon]
+=
+0
+$$
+
+:::::::::::::::::::
+
+for every bounded measurable $h$.
+특히
+
+::::::::::::::::::: {.math-display}
+
+$$
+h(X)=1\{m(X)\gt0\}
+$$
+
+:::::::::::::::::::
+
+를 취하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[m(X)1\{m(X)\gt0\}]=0.
+$$
+
+:::::::::::::::::::
+
+integrand가 nonnegative이므로 positive part는 a.s. 0.
+마찬가지로 $h(X)=1\{m(X)\lt0\}$를 이용하면 negative part도 a.s. 0.
+따라서 $m(X)=0$ a.s.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 5.2 · 하나의 linear moment만으로는 conditional mean zero를 복원할 수 없다
+
+:::::::::::::::::::
+
+$X\sim N(0,1)$, $\varepsilon=X^2-1$이라 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[X\varepsilon]
+=
+E[X^3]-E[X]
+=
+0.
+$$
+
+:::::::::::::::::::
+
+하지만
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[\varepsilon\mid X]
+=
+X^2-1
+\neq0
+$$
+
+:::::::::::::::::::
+
+with positive probability. 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[X\varepsilon]=0
+\not\Rightarrow
+E[\varepsilon\mid X]=0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::: {#s56}
@@ -721,12 +1277,12 @@ $$
 
 ::: {.topic-opening}
 CEF의 optimality는 부등식보다 더 강한 정확한 equality로 표현할 수 있다.
-  이 decomposition은 Chapter 6의 BLA/BLP 관계를 이해하는 핵심 도구가 된다.
+이 decomposition은 Chapter 6의 BLA/BLP 관계를 이해하는 핵심 도구가 된다.
 :::
 
 ### 5.6.1 Irreducible error와 approximation error {#s561}
 
-  $m(X)=E[Y\mid X]$이고 임의의 $g(X)\in L^2(\sigma(X))$라 하자.
+$m(X)=E[Y\mid X]$이고 임의의 $g(X)\in L^2(\sigma(X))$라 하자.
 
 :::::::::::::::::::: {.math-display}
 
@@ -740,11 +1296,9 @@ $$
 
 ::::::::::::::::::::
 
-  첫 번째 항은 $X$-measurable function인 두 번째 항과 orthogonal하다. 따라서
+첫 번째 항은 $X$-measurable function인 두 번째 항과 orthogonal하다. 따라서
 
 :::::::::::::::::::: {.statement .theorem}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -752,31 +1306,72 @@ $$
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  E[(Y-g(X))^2]
-  =
-  E[(Y-m(X))^2]
-  +
-  E[(m(X)-g(X))^2].
-  }
-  $$
+\boxed{
+E[(Y-g(X))^2]
+=
+E[(Y-m(X))^2]
++
+E[(m(X)-g(X))^2].
+}
+$$
 
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$m(X)=E[Y\mid X]$라 하자. 임의의 $g(X)\in L^2(\sigma(X))$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y-g(X)
+=
+\{Y-m(X)\}
++
+\{m(X)-g(X)\}.
+$$
+
+:::::::::::::::::::
+
+제곱 후 기대값을 취하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[(Y-g(X))^2]
+&=
+E[(Y-m(X))^2]\\
+&\quad+
+E[(m(X)-g(X))^2]\\
+&\quad+
+2E[(Y-m(X))(m(X)-g(X))].
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+마지막 항에서 $m(X)-g(X)$는 $X$-measurable이고 residual은 모든 $X$-measurable directions와 orthogonal이므로 cross term은 0.
+따라서 stated identity가 성립한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
 :::::::::::::::::::: {.comparison-grid}
 
-  
-
 ::::::::::::::::::: {.comparison-card}
-
-    
 
 :::::::::::::::::: {.comparison-card__title}
 
@@ -784,15 +1379,11 @@ Irreducible prediction error
 
 ::::::::::::::::::
 
-    
-
 :::::::::::::::::: {.comparison-card__formula}
 
 $E[(Y-m(X))^2]$
 
 ::::::::::::::::::
-
-    
 
 :::::::::::::::::: {.comparison-card__text}
 
@@ -800,15 +1391,9 @@ $E[(Y-m(X))^2]$
 
 ::::::::::::::::::
 
-  
-
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.comparison-card}
-
-    
 
 :::::::::::::::::: {.comparison-card__title}
 
@@ -816,15 +1401,11 @@ Approximation error
 
 ::::::::::::::::::
 
-    
-
 :::::::::::::::::: {.comparison-card__formula}
 
 $E[(m(X)-g(X))^2]$
 
 ::::::::::::::::::
-
-    
 
 :::::::::::::::::: {.comparison-card__text}
 
@@ -832,15 +1413,13 @@ predictor class를 제한했기 때문에 추가되는 손실.
 
 ::::::::::::::::::
 
-  
-
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
 ### 5.6.2 Excess risk identity {#s562}
 
-  $R(g)=E[(Y-g(X))^2]$, $R^\star=R(m)$라 하면
+$R(g)=E[(Y-g(X))^2]$, $R^\star=R(m)$라 하면
 
 :::::::::::::::::::: {.math-display}
 
@@ -854,8 +1433,46 @@ $$
 
 ::::::::::::::::::::
 
-  즉 squared-error risk에서 optimal predictor보다 얼마나 나쁜지는 predictor 자체와 CEF 사이의 $L^2(P_X)$ distance와 정확히 같다.
-  따라서 approximation theory와 prediction theory가 같은 geometry로 연결된다.
+즉 squared-error risk에서 optimal predictor보다 얼마나 나쁜지는 predictor 자체와 CEF 사이의 $L^2(P_X)$ distance와 정확히 같다.
+따라서 approximation theory와 prediction theory가 같은 geometry로 연결된다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+COROLLARY 5.1 · Squared-error excess risk와 $L^2$ distance는 정확히 같다
+
+:::::::::::::::::::
+
+$R(g)=E[(Y-g(X))^2]$, $m(X)=E[Y\mid X]$라 하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+R(g)-R(m)
+=
+\|g-m\|_{L^2(P_X)}^2.
+$$
+
+:::::::::::::::::::
+
+따라서 sequence $g_n$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+R(g_n)\to R(m)
+\iff
+\|g_n-m\|_{L^2(P_X)}\to0.
+}
+$$
+
+:::::::::::::::::::
+
+squared-error prediction에서는 risk consistency와 $L^2$-prediction consistency가 동일한 geometry를 갖는다.
+
+::::::::::::::::::::
 
 ::::::::::::::::::::::::::
 
@@ -865,12 +1482,12 @@ $$
 
 ::: {.topic-opening}
 Chapter 2에서 정보는 $\sigma$-field로 표현했다. 이제 정보가 많아지는 것을 subspace가 커지는 것으로 볼 수 있다.
-  이 관점에서 tower property와 forecast improvement가 projection geometry의 직접적인 결과가 된다.
+이 관점에서 tower property와 forecast improvement가 projection geometry의 직접적인 결과가 된다.
 :::
 
 ### 5.7.1 More information cannot worsen optimal MSE {#s571}
 
-  두 정보집합이
+두 정보집합이
 
 :::::::::::::::::::: {.math-display}
 
@@ -890,7 +1507,7 @@ $$
 
 ::::::::::::::::::::
 
-  더 큰 subspace에 projection할 수 있으므로
+더 큰 subspace에 projection할 수 있으므로
 
 :::::::::::::::::::: {.math-display}
 
@@ -904,12 +1521,10 @@ $$
 
 ::::::::::::::::::::
 
-  더 많은 정보는 optimal mean-square prediction을 악화시키지 않는다. 다만 finite sample에서 추가 변수를 추정하는 문제와는 구분해야 한다.
-  이 명제는 population best prediction에 관한 것이다.
+더 많은 정보는 optimal mean-square prediction을 악화시키지 않는다. 다만 finite sample에서 추가 변수를 추정하는 문제와는 구분해야 한다.
+이 명제는 population best prediction에 관한 것이다.
 
 :::::::::::::::::::: {.statement .theorem}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -917,27 +1532,82 @@ $$
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.math-display}
 
 $$
-  \begin{aligned}
-  E[(Y-E[Y\mid\mathcal G_1])^2]
-  &=
-  E[(Y-E[Y\mid\mathcal G_2])^2]\\
-  &\quad+
-  E[(E[Y\mid\mathcal G_2]-E[Y\mid\mathcal G_1])^2].
-  \end{aligned}
-  $$
+\begin{aligned}
+E[(Y-E[Y\mid\mathcal G_1])^2]
+&=
+E[(Y-E[Y\mid\mathcal G_2])^2]\\
+&\quad+
+E[(E[Y\mid\mathcal G_2]-E[Y\mid\mathcal G_1])^2].
+\end{aligned}
+$$
 
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$m_j=E[Y\mid\mathcal G_j]$이고 $\mathcal G_1\subseteq\mathcal G_2$라 하자.
+그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y-m_1
+=
+(Y-m_2)+(m_2-m_1).
+$$
+
+:::::::::::::::::::
+
+$m_2-m_1\in L^2(\mathcal G_2)$이고 $Y-m_2\perp L^2(\mathcal G_2)$이므로 cross term은 0.
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[(Y-m_1)^2]
+&=
+E[(Y-m_2)^2]\\
+&\quad+
+E[(m_2-m_1)^2].
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+따라서 더 많은 정보가 optimal MSE를 악화시키지 않으며,
+MSE가 정확히 같을 필요충분조건은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+m_2=m_1\quad a.s.
+}
+$$
+
+:::::::::::::::::::
+
+이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
 ### 5.7.2 Tower property as nested projection {#s572}
 
-  $\mathcal G_1\subseteq\mathcal G_2$이면 tower property
+$\mathcal G_1\subseteq\mathcal G_2$이면 tower property
 
 :::::::::::::::::::: {.math-display}
 
@@ -963,12 +1633,65 @@ $$
 
 ::::::::::::::::::::
 
-  즉 더 풍부한 정보에 먼저 project한 뒤 다시 작은 정보집합으로 project해도,
-  처음부터 작은 정보집합으로 project한 결과와 같다.
+즉 더 풍부한 정보에 먼저 project한 뒤 다시 작은 정보집합으로 project해도,
+처음부터 작은 정보집합으로 project한 결과와 같다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Tower property as projection
+
+:::::::::::::::::::
+
+$m_2=P_{\mathcal G_2}Y$라 하자. Projection residual
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y-m_2
+\perp
+L^2(\mathcal G_2).
+$$
+
+:::::::::::::::::::
+
+$L^2(\mathcal G_1)\subseteq L^2(\mathcal G_2)$이므로 특히
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y-m_2
+\perp
+L^2(\mathcal G_1).
+$$
+
+:::::::::::::::::::
+
+따라서 $Y$와 $m_2$는 작은 subspace $L^2(\mathcal G_1)$에 대해 같은 projection을 갖는다.
+즉
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+P_{\mathcal G_1}P_{\mathcal G_2}Y
+=
+P_{\mathcal G_1}Y.
+}
+$$
+
+:::::::::::::::::::
+
+conditional expectation notation으로 쓰면 tower property다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 5.7.3 Innovation {#s573}
 
-  시간 $t$의 정보 $\mathcal F_t$를 기준으로 미래변수 $Y_{t+1}$의 innovation을
+시간 $t$의 정보 $\mathcal F_t$를 기준으로 미래변수 $Y_{t+1}$의 innovation을
 
 :::::::::::::::::::: {.math-display}
 
@@ -990,8 +1713,66 @@ $$
 
 ::::::::::::::::::::
 
-  따라서 innovation은 현재 정보로 예측 가능한 모든 방향과 orthogonal하다.
-  이 구조는 이후 time-series projection, martingale differences, dynamic moment restrictions의 공통 기반이 된다.
+따라서 innovation은 현재 정보로 예측 가능한 모든 방향과 orthogonal하다.
+이 구조는 이후 time-series projection, martingale differences, dynamic moment restrictions의 공통 기반이 된다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 5.3 · AR(1)에서 innovation은 projection residual이다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_{t+1}
+=
+\rho Y_t+u_{t+1},
+\qquad
+E[u_{t+1}\mid\mathcal F_t]=0,
+$$
+
+:::::::::::::::::::
+
+그리고 $Y_t\in\mathcal F_t$라 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y_{t+1}\mid\mathcal F_t]
+=
+\rho Y_t.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_{t+1}
+=
+Y_{t+1}
+-
+E[Y_{t+1}\mid\mathcal F_t]
+$$
+
+:::::::::::::::::::
+
+는 projection residual이고 모든 $Z_t\in L^2(\mathcal F_t)$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Z_tu_{t+1}]=0.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
 
 ::::::::::::::::::::::::::
 
@@ -1001,12 +1782,12 @@ $$
 
 ::: {.topic-opening}
 Conditional mean이 predictable component를 나타낸다면 conditional variance는 그 정보를 알고도 남는 uncertainty를 측정한다.
-  Projection geometry는 variance decomposition까지 자연스럽게 확장된다.
+Projection geometry는 variance decomposition까지 자연스럽게 확장된다.
 :::
 
 ### 5.8.1 Conditional uncertainty {#s581}
 
-  $m(X)=E[Y\mid X]$일 때
+$m(X)=E[Y\mid X]$일 때
 
 :::::::::::::::::::: {.math-display}
 
@@ -1032,12 +1813,12 @@ $$
 
 ::::::::::::::::::::
 
-  조건부 분산이 $X$에 따라 달라지면 heteroskedasticity가 존재한다.
-  그러나 CEF의 best-prediction property 자체는 homoskedasticity를 필요로 하지 않는다.
+조건부 분산이 $X$에 따라 달라지면 heteroskedasticity가 존재한다.
+그러나 CEF의 best-prediction property 자체는 homoskedasticity를 필요로 하지 않는다.
 
 ### 5.8.2 Law of total variance {#s582}
 
-  상수 predictor $E[Y]$에서 CEF로 information set을 확장한다고 생각하면
+상수 predictor $E[Y]$에서 CEF로 information set을 확장한다고 생각하면
 
 :::::::::::::::::::: {.math-display}
 
@@ -1055,34 +1836,162 @@ $$
 
 :::::::::::::::::::: {.statement .theorem}
 
-  
-
 ::::::::::::::::::: {.statement-head}
 
 정리 5.6 · Law of total variance
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  \operatorname{Var}(Y)
-  =
-  \operatorname{Var}(E[Y\mid X])
-  +
-  E[\operatorname{Var}(Y\mid X)].
-  }
-  $$
+\boxed{
+\operatorname{Var}(Y)
+=
+\operatorname{Var}(E[Y\mid X])
++
+E[\operatorname{Var}(Y\mid X)].
+}
+$$
 
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
-  이 식에서 첫 항은 $X$에 의해 predictable한 variation이고, 두 번째 항은 $X$를 알고도 남는 variation이다.
-  이는 causal “설명력”에 대한 statement가 아니라 prediction decomposition이라는 점을 유지해야 한다.
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$m(X)=E[Y\mid X]$, $\mu=E[Y]$라 하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y-\mu
+=
+\{m(X)-\mu\}
++
+\{Y-m(X)\}.
+$$
+
+:::::::::::::::::::
+
+두 항은 orthogonal하므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(Y)
+=
+E[(m(X)-\mu)^2]
++
+E[(Y-m(X))^2].
+$$
+
+:::::::::::::::::::
+
+첫 항은 $\operatorname{Var}(m(X))$이고, 두 번째 항은
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[(Y-m(X))^2]
+=
+E[\operatorname{Var}(Y\mid X)].
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{Var}(Y)
+=
+\operatorname{Var}(E[Y\mid X])
++
+E[\operatorname{Var}(Y\mid X)].
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+이 식에서 첫 항은 $X$에 의해 predictable한 variation이고, 두 번째 항은 $X$를 알고도 남는 variation이다.
+이는 causal “설명력”에 대한 statement가 아니라 prediction decomposition이라는 점을 유지해야 한다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 5.4 · Total variance를 숫자로 확인하기
+
+:::::::::::::::::::
+
+$P(X=0)=P(X=1)=1/2$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y\mid X=0]=0,
+\qquad
+E[Y\mid X=1]=2,
+$$
+
+:::::::::::::::::::
+
+그리고
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(Y\mid X)=1
+$$
+
+:::::::::::::::::::
+
+이라고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[\operatorname{Var}(Y\mid X)]=1.
+$$
+
+:::::::::::::::::::
+
+또한 $E[Y\mid X]$는 0과 2를 같은 확률로 가지므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(E[Y\mid X])=1.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{Var}(Y)=1+1=2.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
 
 ::::::::::::::::::::::::::
 
@@ -1092,12 +2001,12 @@ $$
 
 ::: {.topic-opening}
 CEF는 강력한 population object지만 기본 지위는 descriptive다.
-  Chapter 1에서 세운 descriptive/causal distinction을 projection language에서도 유지해야 한다.
+Chapter 1에서 세운 descriptive/causal distinction을 projection language에서도 유지해야 한다.
 :::
 
 ### 5.9.1 CEF as a descriptive functional {#s591}
 
-  관측 joint law $P_{Y,X}$가 주어지면
+관측 joint law $P_{Y,X}$가 주어지면
 
 :::::::::::::::::::: {.math-display}
 
@@ -1107,7 +2016,7 @@ $$
 
 ::::::::::::::::::::
 
-  는 observed-data functional이다. 따라서
+는 observed-data functional이다. 따라서
 
 :::::::::::::::::::: {.math-display}
 
@@ -1117,12 +2026,12 @@ $$
 
 ::::::::::::::::::::
 
-  가 존재하더라도 이것은 우선 conditional association의 local slope다.
-  $x_j$를 intervention으로 변화시켰을 때의 causal effect라는 해석은 별도의 identifying assumptions를 요구한다.
+가 존재하더라도 이것은 우선 conditional association의 local slope다.
+$x_j$를 intervention으로 변화시켰을 때의 causal effect라는 해석은 별도의 identifying assumptions를 요구한다.
 
 ### 5.9.2 When conditional means become causal {#s592}
 
-  binary treatment $D$와 covariates $X$에 대해
+binary treatment $D$와 covariates $X$에 대해
 
 :::::::::::::::::::: {.math-display}
 
@@ -1170,29 +2079,78 @@ $$
 
 :::::::::::::::::::: {.callout-strip}
 
-  
-
 ::::::::::::::::::: {.left}
 
 같은 수학적 객체
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.right}
 
-    $E[Y\mid D=d,X=x]$는 데이터만 보면 descriptive object다. Causal interpretation은 conditional mean의 수학적 형태가 아니라,
-    counterfactual과 observed outcome을 연결하는 assumptions에서 온다.
-  
+$E[Y\mid D=d,X=x]$는 데이터만 보면 descriptive object다. Causal interpretation은 conditional mean의 수학적 형태가 아니라,
+counterfactual과 observed outcome을 연결하는 assumptions에서 온다.
 
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Derivation · When the descriptive conditional mean becomes causal
+
+:::::::::::::::::::
+
+$d\in\{0,1\}$를 고정하자.
+Conditional exchangeability
+$(Y(0),Y(1))\perp D\mid X$에 의해
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y(d)\mid X=x]
+=
+E[Y(d)\mid D=d,X=x].
+$$
+
+:::::::::::::::::::
+
+consistency로 $D=d$인 units에서는 $Y=Y(d)$, 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y(d)\mid D=d,X=x]
+=
+E[Y\mid D=d,X=x].
+$$
+
+:::::::::::::::::::
+
+그러므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Y(d)\mid X=x]
+=
+E[Y\mid D=d,X=x].
+}
+$$
+
+:::::::::::::::::::
+
+즉 같은 conditional mean object가 causal하게 해석되는 이유는 projection geometry가 아니라 counterfactual identification assumptions에 있다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
 ### 5.9.3 Linear CEF is a restriction {#s593}
 
-  만약
+만약
 
 :::::::::::::::::::: {.math-display}
 
@@ -1202,7 +2160,7 @@ $$
 
 ::::::::::::::::::::
 
-  라면 CEF 자체가 linear predictor class 안에 놓인다. 이 경우
+라면 CEF 자체가 linear predictor class 안에 놓인다. 이 경우
 
 :::::::::::::::::::: {.math-display}
 
@@ -1214,8 +2172,48 @@ $$
 
 ::::::::::::::::::::
 
-  이것은 단순히 $\beta_0$를 least-squares coefficient로 정의하는 것보다 훨씬 강한 restriction이다.
-  다음 장에서는 CEF가 nonlinear이어도 linear predictor를 사용할 수 있으며, 그때 무엇을 추정하는지 population approximation의 관점에서 분석한다.
+이것은 단순히 $\beta_0$를 least-squares coefficient로 정의하는 것보다 훨씬 강한 restriction이다.
+다음 장에서는 CEF가 nonlinear이어도 linear predictor를 사용할 수 있으며, 그때 무엇을 추정하는지 population approximation의 관점에서 분석한다.
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 5.3 · Conditional mean difference can contain confounding
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y=\tau D+\gamma U+\varepsilon,
+\qquad
+E[\varepsilon\mid D,U]=0,
+$$
+
+:::::::::::::::::::
+
+이고 $D$와 omitted variable $U$가 correlated한다고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[Y\mid D=1]-E[Y\mid D=0]
+&=
+\tau\\
+&\quad+
+\gamma\{
+E[U\mid D=1]-E[U\mid D=0]
+\}.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+따라서 descriptive conditional-mean difference가 causal effect $\tau$와 일치하려면 composition term을 제거하는 추가 identification assumptions가 필요하다.
+
+::::::::::::::::::::
 
 ::::::::::::::::::::::::::
 
@@ -1225,12 +2223,12 @@ $$
 
 ::: {.topic-opening}
 CEF는 $X$의 모든 square-integrable measurable function을 허용한 unrestricted prediction problem의 해다.
-  실제 모형과 계산에서는 predictor class를 더 작은 subspace로 제한한다. 이 제한이 approximation을 만든다.
+실제 모형과 계산에서는 predictor class를 더 작은 subspace로 제한한다. 이 제한이 approximation을 만든다.
 :::
 
 ### 5.10.1 Finite-dimensional spans {#s5101}
 
-  basis functions $\phi_1(X),\ldots,\phi_K(X)$를 모아
+basis functions $\phi_1(X),\ldots,\phi_K(X)$를 모아
 
 :::::::::::::::::::: {.math-display}
 
@@ -1283,7 +2281,7 @@ $$
 
 ### 5.10.2 Population normal equations {#s5102}
 
-  differentiability와 finite second moments 아래 FOC는
+differentiability와 finite second moments 아래 FOC는
 
 :::::::::::::::::::: {.math-display}
 
@@ -1293,7 +2291,7 @@ $$
 
 ::::::::::::::::::::
 
-  Gram matrix를
+Gram matrix를
 
 :::::::::::::::::::: {.math-display}
 
@@ -1317,12 +2315,152 @@ $$
 
 ::::::::::::::::::::
 
-  이는 Chapter 4의 optimization FOC가 population moment equation으로 바뀌는 구체적인 예다.
-  또한 $G_K$의 nonsingularity는 predictor directions가 $L^2(P_X)$에서 중복되지 않는다는 뜻이다.
+이는 Chapter 4의 optimization FOC가 population moment equation으로 바뀌는 구체적인 예다.
+또한 $G_K$의 nonsingularity는 predictor directions가 $L^2(P_X)$에서 중복되지 않는다는 뜻이다.
+
+:::::::::::::::::::: {.statement .claim}
+
+::::::::::::::::::: {.statement-head}
+
+DERIVATION 5.1 · Population normal equations: optimization과 geometry의 두 경로
+
+:::::::::::::::::::
+
+<strong>Optimization route.</strong>
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q(b)
+=
+E[(Y-\phi(X)'b)^2].
+$$
+
+:::::::::::::::::::
+
+미분하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\nabla_bQ(b)
+=
+-2E[\phi(X)(Y-\phi(X)'b)].
+$$
+
+:::::::::::::::::::
+
+따라서 interior optimum $\beta_K$는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[\phi(X)(Y-\phi(X)'\beta_K)]
+=
+0.
+}
+$$
+
+:::::::::::::::::::
+
+<strong>Projection route.</strong>
+restricted residual
+$\varepsilon_K=Y-\phi(X)'\beta_K$는
+$\mathcal S_K=\operatorname{span}\{\phi_1,\ldots,\phi_K\}$에 orthogonal하므로 각 $j$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[\phi_j(X)\varepsilon_K]=0.
+$$
+
+:::::::::::::::::::
+
+이를 stack하면 정확히 같은 normal equations를 얻는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.3 · Gram matrix nonsingularity와 $L^2$-linear independence
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+G_K=E[\phi(X)\phi(X)'].
+$$
+
+:::::::::::::::::::
+
+임의의 $a\in\mathbb R^K$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+a'G_Ka
+=
+E[(a'\phi(X))^2].
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+G_K\succ0
+\iff
+P(a'\phi(X)=0)\lt1
+\quad\forall a\neq0.
+}
+$$
+
+:::::::::::::::::::
+
+즉 Gram matrix가 positive definite라는 것은 basis functions 사이에 a.s. redundant linear direction이 없다는 뜻이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$G_K\succ0$이면 every $a\neq0$에 대해 $a'G_Ka\gt0$, 즉
+$E[(a'\phi(X))^2]\gt0$. 따라서 $a'\phi(X)$는 a.s. zero가 아니다.
+반대로 nonzero $a$가 존재해 $a'\phi(X)=0$ a.s.이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+a'G_Ka
+=
+E[(a'\phi(X))^2]
+=
+0,
+$$
+
+:::::::::::::::::::
+
+이므로 $G_K$는 positive definite일 수 없다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 5.10.3 Nested spaces and Chapter 6 preview {#s5103}
 
-  상수, 선형 predictor, unrestricted $X$-measurable predictor는 다음처럼 nested된다.
+상수, 선형 predictor, unrestricted $X$-measurable predictor는 다음처럼 nested된다.
 
 :::::::::::::::::::: {.math-display}
 
@@ -1340,7 +2478,7 @@ $$
 
 ::::::::::::::::::::
 
-  따라서 population MSE는
+따라서 population MSE는
 
 :::::::::::::::::::: {.math-display}
 
@@ -1358,20 +2496,102 @@ $$
 
 :::::::::::::::::::: {.statement .preview}
 
-  
-
 ::::::::::::::::::: {.statement-head}
 
 Chapter 6 preview · BLP와 BLA
 
 :::::::::::::::::::
 
-  
+다음 장에서는 linear subspace로의 projection을 본격적으로 다룬다.
+$Y$를 linear class에 project하는 Best Linear Predictor와, CEF $m(X)$ 자체를 같은 linear class에 approximate하는
+Best Linear Approximation이 왜 같은 coefficient를 갖는지 Pythagorean decomposition으로 보인다.
 
-    다음 장에서는 linear subspace로의 projection을 본격적으로 다룬다.
-    $Y$를 linear class에 project하는 Best Linear Predictor와, CEF $m(X)$ 자체를 같은 linear class에 approximate하는
-    Best Linear Approximation이 왜 같은 coefficient를 갖는지 Pythagorean decomposition으로 보인다.
-  
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 5.5 · Nonlinear CEF를 linear span에 project하기
+
+:::::::::::::::::::
+
+$X\sim U[-1,1]$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y=X^2+\varepsilon,
+\qquad
+E[\varepsilon\mid X]=0.
+$$
+
+:::::::::::::::::::
+
+그러면 unrestricted CEF는
+
+::::::::::::::::::: {.math-display}
+
+$$
+m(X)=X^2.
+$$
+
+:::::::::::::::::::
+
+이를 $\operatorname{span}\{1,X\}$에 project하자.
+대칭성 때문에
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[X^3]=0
+$$
+
+:::::::::::::::::::
+
+이므로 slope는 0이고 intercept는
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[X^2]=\frac13.
+$$
+
+:::::::::::::::::::
+
+따라서 best linear predictor는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+g_1(X)=\frac13.
+}
+$$
+
+:::::::::::::::::::
+
+CEF와 restricted predictor 사이의 approximation error는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E\!\left[
+\left(X^2-\frac13\right)^2
+\right]
+&=
+E[X^4]-\{E[X^2]\}^2\\
+&=
+\frac15-\frac19\\
+&=
+\frac4{45}.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+Chapter 6에서는 이 restricted linear projection을 BLP/BLA language로 체계화한다.
 
 ::::::::::::::::::::
 
@@ -1385,71 +2605,60 @@ Chapter 6 preview · BLP와 BLA
 
 :::::::::::::::::::: {.chapter-summary}
 
-  
-
 ::::::::::::::::::: {.chapter-summary__head}
 
 Chapter 5 in one map
 
 :::::::::::::::::::
 
-  
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+X\text{-information}
+\longrightarrow
+L^2(\sigma(X))
+\longrightarrow
+P_{L^2(\sigma(X))}Y
+=
+E[Y\mid X]
+}
+$$
+
+:::::::::::::::::::
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  X\text{-information}
-  \longrightarrow
-  L^2(\sigma(X))
-  \longrightarrow
-  P_{L^2(\sigma(X))}Y
-  =
-  E[Y\mid X]
-  }
-  $$
+\boxed{
+Y
+=
+E[Y\mid X]
++
+\varepsilon,
+\qquad
+E[h(X)\varepsilon]=0\ \ \forall h
+}
+$$
 
 :::::::::::::::::::
-
-  
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  Y
-  =
-  E[Y\mid X]
-  +
-  \varepsilon,
-  \qquad
-  E[h(X)\varepsilon]=0\ \ \forall h
-  }
-  $$
-
-:::::::::::::::::::
-
-  
-
-::::::::::::::::::: {.math-display}
-
+\boxed{
+E[(Y-g(X))^2]
+=
+E[(Y-E[Y\mid X])^2]
++
+E[(E[Y\mid X]-g(X))^2].
+}
 $$
-  \boxed{
-  E[(Y-g(X))^2]
-  =
-  E[(Y-E[Y\mid X])^2]
-  +
-  E[(E[Y\mid X]-g(X))^2].
-  }
-  $$
 
 :::::::::::::::::::
 
-  
-
-    첫 식은 conditional expectation의 projection interpretation, 두 번째는 residual orthogonality,
-    세 번째는 irreducible prediction error와 approximation error의 정확한 분해를 요약한다.
-  
+첫 식은 conditional expectation의 projection interpretation, 두 번째는 residual orthogonality,
+세 번째는 irreducible prediction error와 approximation error의 정확한 분해를 요약한다.
 
 ::::::::::::::::::::
 
@@ -1458,32 +2667,32 @@ $$
 앞으로 regression이나 prediction model을 볼 때 다음 순서로 읽는다.
 
 <ol>
-  <li><strong>Information:</strong> predictor가 사용할 수 있는 $\sigma$-field는 무엇인가?</li>
-  <li><strong>Unrestricted target:</strong> 해당 정보에 대한 CEF는 무엇인가?</li>
-  <li><strong>Predictor class:</strong> 모든 measurable function을 허용하는가, 특정 finite-dimensional class로 제한하는가?</li>
-  <li><strong>Residual:</strong> 어떤 subspace에 대해 orthogonality가 성립하는가?</li>
-  <li><strong>Error decomposition:</strong> irreducible error와 approximation error를 분리할 수 있는가?</li>
-  <li><strong>Interpretation:</strong> conditional mean은 descriptive인가, 추가 assumptions 아래 causal한가?</li>
-  <li><strong>Only later:</strong> sample estimator와 numerical computation은 어떻게 정의되는가?</li>
+<li><strong>Information:</strong> predictor가 사용할 수 있는 $\sigma$-field는 무엇인가?</li>
+<li><strong>Unrestricted target:</strong> 해당 정보에 대한 CEF는 무엇인가?</li>
+<li><strong>Predictor class:</strong> 모든 measurable function을 허용하는가, 특정 finite-dimensional class로 제한하는가?</li>
+<li><strong>Residual:</strong> 어떤 subspace에 대해 orthogonality가 성립하는가?</li>
+<li><strong>Error decomposition:</strong> irreducible error와 approximation error를 분리할 수 있는가?</li>
+<li><strong>Interpretation:</strong> conditional mean은 descriptive인가, 추가 assumptions 아래 causal한가?</li>
+<li><strong>Only later:</strong> sample estimator와 numerical computation은 어떻게 정의되는가?</li>
 </ol>
 
 ### 연습문제 {#exercises}
 
 <ol class="exercise-list">
-  <li><strong>Orthogonality와 covariance.</strong> $E[UV]=0$이 $\operatorname{Cov}(U,V)=0$과 동치가 되기 위한 충분조건을 제시하고, 일반적으로 두 개념이 다른 예를 구성하라.</li>
-  <li><strong>Mean as projection.</strong> 상수 subspace $\operatorname{span}\{1\}$에 $Y$를 project한 결과가 $E[Y]$임을 projection theorem으로 보이라.</li>
-  <li><strong>Best predictor.</strong> $m(X)=E[Y\mid X]$에 대해 $E[(Y-g(X))^2]-E[(Y-m(X))^2]=E[(m(X)-g(X))^2]$를 직접 전개하여 증명하라.</li>
-  <li><strong>Residual orthogonality.</strong> $E[\varepsilon\mid X]=0$이면 모든 square-integrable $h(X)$에 대해 $E[h(X)\varepsilon]=0$임을 증명하라.</li>
-  <li><strong>Converse.</strong> $E[X\varepsilon]=0$이지만 $E[\varepsilon\mid X]\neq0$인 간단한 예를 구성하라.</li>
-  <li><strong>Tower property.</strong> $\mathcal G_1\subseteq\mathcal G_2$일 때 $P_{\mathcal G_1}P_{\mathcal G_2}=P_{\mathcal G_1}$를 orthogonality를 이용해 증명하라.</li>
-  <li><strong>Value of information.</strong> nested information sets에 대한 prediction-error decomposition을 유도하고, equality가 성립할 조건을 해석하라.</li>
-  <li><strong>Total variance.</strong> $Y-E[Y]$를 predictable component와 residual component로 분해하여 law of total variance를 증명하라.</li>
-  <li><strong>Heteroskedasticity.</strong> $E[Y\mid X]=0$이지만 $\operatorname{Var}(Y\mid X)$가 $X$에 따라 변하는 예를 구성하고, CEF optimality와 conditional variance를 구분하라.</li>
-  <li><strong>Finite-dimensional projection.</strong> $G_K=E[\phi(X)\phi(X)']\succ0$일 때 population normal equations와 closed-form $\beta_K$를 유도하라.</li>
-  <li><strong>Nested predictors.</strong> $\mathcal S_1\subseteq\mathcal S_2\subseteq L^2(\sigma(X))$일 때 각 best predictor의 MSE ordering을 증명하라.</li>
-  <li><strong>Linear CEF.</strong> $E[Y\mid X]=X'\beta_0$이면 $E[X(Y-X'\beta_0)]=0$임을 보이고, 역이 일반적으로 성립하지 않는 이유를 설명하라.</li>
-  <li><strong>Descriptive vs causal.</strong> $m_d(x)=E[Y\mid D=d,X=x]$가 언제 $E[Y(d)\mid X=x]$와 같아지는지 필요한 assumptions를 명시하고 각 assumption의 역할을 설명하라.</li>
-  <li><strong>Research reading exercise.</strong> 실제 regression application 하나에서 (i) 사용되는 information set, (ii) implied CEF, (iii) restricted predictor class, (iv) orthogonality condition, (v) causal interpretation에 필요한 추가 가정을 분리해 기술하라.</li>
+<li><strong>Orthogonality와 covariance.</strong> $U\sim Bernoulli(1/2),V=1-U$와 $U=V=1$ 두 예를 이용해 $E[UV]=0$과 $\operatorname{Cov}(U,V)=0$가 서로 동치가 아님을 계산으로 보이라.</li>
+<li><strong>Mean as projection.</strong> 상수 subspace $\operatorname{span}\{1\}$에 대한 projection residual orthogonality에서 $E[Y-a]=0$을 유도하고 $a=E[Y]$임을 증명하라. 이어서 Pythagorean identity로 uniqueness를 보이라.</li>
+<li><strong>Projection theorem.</strong> minimizing sequence와 parallelogram identity를 이용해 closed linear subspace 위 projection의 existence를 증명하고, midpoint argument로 uniqueness를 증명하라.</li>
+<li><strong>CEF as projection.</strong> conditional Jensen으로 $E[Y\mid X]\in L^2(\sigma(X))$를 보인 뒤 residual이 $L^2(\sigma(X))$ 전체에 orthogonal함을 증명하라.</li>
+<li><strong>Rich moments and converse.</strong> $E[h(X)\varepsilon]=0$가 모든 bounded $X$-measurable $h$에 대해 성립하면 $E[\varepsilon\mid X]=0$임을 indicator directions를 이용해 증명하라. 이어서 $X\sim N(0,1)$, $\varepsilon=X^2-1$로 single-moment converse가 실패함을 확인하라.</li>
+<li><strong>Pythagorean identity.</strong> $m(X)=E[Y\mid X]$에 대해 $R(g)-R(m)=\|g-m\|_2^2$를 유도하고 $R(g_n)\to R(m)\iff \|g_n-m\|_2\to0$를 보이라.</li>
+<li><strong>Tower property as projection.</strong> $\mathcal G_1\subseteq\mathcal G_2$일 때 residual orthogonality만을 이용해 $P_{\mathcal G_1}P_{\mathcal G_2}=P_{\mathcal G_1}$를 증명하라.</li>
+<li><strong>Value of information.</strong> nested information sets에서 prediction-error decomposition을 증명하고 두 optimal MSE가 같을 필요충분조건이 $E[Y\mid\mathcal G_2]=E[Y\mid\mathcal G_1]$ a.s.임을 보이라.</li>
+<li><strong>Total variance.</strong> $Y-EY=\{E[Y\mid X]-EY\}+\{Y-E[Y\mid X]\}$에서 law of total variance를 증명하고 numerical example을 하나 구성하라.</li>
+<li><strong>Finite-dimensional projection.</strong> optimization과 projection geometry 두 방식으로 population normal equations를 각각 유도하고, $G_K\succ0\iff$ basis functions are $L^2$-linearly independent임을 증명하라.</li>
+<li><strong>Restricted approximation.</strong> $X\sim U[-1,1]$, $Y=X^2+\varepsilon$, $E[\varepsilon\mid X]=0$에서 $m(X)=X^2$를 $\operatorname{span}\{1,X\}$에 project하고 approximation error $4/45$를 직접 계산하라.</li>
+<li><strong>Linear CEF.</strong> $E[Y\mid X]=X'\beta_0$이면 $E[X(Y-X'\beta_0)]=0$을 증명하고, reverse implication이 실패하는 explicit DGP를 구성하라.</li>
+<li><strong>Descriptive vs causal.</strong> $m_d(x)=E[Y\mid D=d,X=x]$가 $E[Y(d)\mid X=x]$와 같아지는 과정을 exchangeability와 consistency를 각각 표시하며 유도하고 overlap의 별도 역할을 설명하라.</li>
+<li><strong>Research reading exercise.</strong> 실제 regression application 하나에서 (i) 사용되는 information set, (ii) implied CEF, (iii) restricted predictor class, (iv) orthogonality condition, (v) causal interpretation에 필요한 추가 가정을 분리해 기술하라.</li>
 </ol>
 
 ::::::::::::::::::::::::::
@@ -1492,13 +2701,11 @@ $$
 
 ## 참고문헌 및 다음 장
 
-  이 장은 conditional expectation을 best mean-square predictor와 orthogonal projection으로 읽는 econometric tradition을 중심으로,
-  Hansen과 Wooldridge의 conditional expectation·linear projection 논의와 표준 Hilbert-space projection geometry를 연결하여 구성했다.
-  목적은 functional analysis 자체를 독립적으로 전개하는 것이 아니라, 이후 population regression과 least squares를 하나의 prediction geometry 안에서 읽기 위한 기반을 만드는 데 있다.
+이 장은 conditional expectation을 best mean-square predictor와 orthogonal projection으로 읽는 econometric tradition을 중심으로,
+Hansen과 Wooldridge의 conditional expectation·linear projection 논의와 표준 Hilbert-space projection geometry를 연결하여 구성했다.
+목적은 functional analysis 자체를 독립적으로 전개하는 것이 아니라, 이후 population regression과 least squares를 하나의 prediction geometry 안에서 읽기 위한 기반을 만드는 데 있다.
 
 :::::::::::::::::::: {.chapter-summary}
-
-  
 
 ::::::::::::::::::: {.chapter-summary__head}
 
@@ -1506,28 +2713,23 @@ $$
 
 :::::::::::::::::::
 
-  
-
-    Chapter 6에서는 unrestricted target $m(X)=E[Y\mid X]$와 linear predictor class 사이의 관계를 본격적으로 분석한다.
-    $Y$의 Best Linear Predictor와 CEF의 Best Linear Approximation이 왜 같은 coefficient를 갖는지 보이고,
-    linear regression coefficient를 “선형모형이 참일 때의 구조계수”뿐 아니라 nonlinear CEF의 population approximation parameter로 해석한다.
-  
-
-  
+Chapter 6에서는 unrestricted target $m(X)=E[Y\mid X]$와 linear predictor class 사이의 관계를 본격적으로 분석한다.
+$Y$의 Best Linear Predictor와 CEF의 Best Linear Approximation이 왜 같은 coefficient를 갖는지 보이고,
+linear regression coefficient를 “선형모형이 참일 때의 구조계수”뿐 아니라 nonlinear CEF의 population approximation parameter로 해석한다.
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  E[Y\mid X]
-  \longrightarrow
-  \text{Best Linear Approximation}
-  \longleftrightarrow
-  \text{Best Linear Predictor}
-  \longrightarrow
-  \text{Population Regression}
-  }
-  $$
+\boxed{
+E[Y\mid X]
+\longrightarrow
+\text{Best Linear Approximation}
+\longleftrightarrow
+\text{Best Linear Predictor}
+\longrightarrow
+\text{Population Regression}
+}
+$$
 
 :::::::::::::::::::
 
