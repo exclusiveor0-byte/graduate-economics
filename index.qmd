@@ -76,11 +76,11 @@ subtitle: Graduate Economics Knowledge Base
 MATHEMATICAL FOUNDATIONS
 :::
 ### [경제학을 위한 수학](math-economics/index.html)
-유클리드 위상 · 함수의 극한과 연속성 · 다변수 미분가능성 · 역함수 및 음함수 정리
+유클리드 위상 · 극한과 연속성 · 다변수 미분 · 역함수·음함수 · 볼록성 · 최적화 · 대응 · 고정점
 
 [Chapter 01–08 읽기](math-economics/index.html){.study-card__link} →
 
-[위상적 기초·연속성·다변수 미분·음함수정리를 포괄하는 4개 Chapter]{.status}
+[위상·해석·최적화·균형의 수학적 기초를 포괄하는 8개 Chapter]{.status}
 :::
 ::: {.study-card .study-card--micro}
 ::: {.study-card__number}
