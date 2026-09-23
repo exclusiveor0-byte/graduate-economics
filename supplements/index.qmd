@@ -37,7 +37,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-guide-box}
 **📚 대학원 경제학 14대 계산·시각화 보충자료 통합 포털**
-미시·거시·계량 전 분야에 걸쳐 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 14편의 통합 인덱스이다. 상단 검색창에서 키워드를 입력하여 즉시 필터링하거나 각 분야별 하위탭으로 이동하여 탐색할 수 있다.
+경제학을 위한 수학 로드맵과 미시·거시·계량 전 분야의 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 14편은 상단 검색창에서 즉시 필터링할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -735,6 +735,41 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+</div>
+```
+
+### 경제학을 위한 수학
+
+::: {.spoon-guide-box}
+**📐 경제학을 위한 수학 Chapter 지도**
+
+수리경제학 과목의 Chapter 01–08을 보충자료와 연결하는 출발점이다. 현재는 별도의 계산·시각화 자료를 추가하기 전 단계이므로, 수학적 정의·정리·증명은 과목 Chapter에서 읽고 이후 필요한 주제에 맞는 interactive supplement를 이 탭에 확장한다.
+
+[경제학을 위한 수학 Chapter 01–08 열기](../math-economics/index.html){.home-button .home-button--primary}
+:::
+
+```{=html}
+<div id="supplement-grid-math" class="spoon-grid">
+<a href="../math-economics/index.html" class="spoon-card" data-subject="math">
+  <div class="spoon-card__header">
+    <span class="chip chip--primary">경제학을 위한 수학</span>
+    <span class="chip chip--topic">Chapter 01–08</span>
+  </div>
+  <div class="spoon-card__title">수리경제학 Chapter 지도</div>
+  <div class="spoon-card__desc">유클리드 위상과 극한·연속성에서 출발하여 다변수 미분, 역함수·음함수 정리, 볼록성, 최적화, 대응과 고정점 정리까지 이어지는 수학적 기초를 한 번에 확인한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">위상·해석</span>
+    <span class="chip chip--topic">다변수 미분</span>
+    <span class="chip chip--topic">볼록성·최적화</span>
+    <span class="chip chip--topic">대응·고정점</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 경제학을 위한 수학 Chapter 01–08</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">Chapter 지도 열기 →</span>
   </div>
 </a>
 </div>
