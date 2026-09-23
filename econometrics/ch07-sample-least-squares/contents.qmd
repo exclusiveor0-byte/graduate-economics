@@ -1,8 +1,9 @@
 ---
 title: "Sample Least Squares and Finite-Sample Geometry"
+description: "Empirical Projection · OLS Algebra · FWL · Numerical Linear Algebra"
 ---
 
-<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. -->
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
 
 :::::::::::::::::::::::::: {#s71}
 
@@ -10,13 +11,13 @@ title: "Sample Least Squares and Finite-Sample Geometry"
 
 ::: {.topic-opening}
 Chapter 6의 population linear projection은 unknown population law $P_0$에 의해 정의되었다.
-  실제 데이터 분석에서는 $P_0$를 직접 알 수 없으므로 observed sample이 만드는 empirical law $P_n$으로 population criterion을 대체한다.
-  OLS는 이 population-to-sample substitution의 가장 기본적인 사례다.
+실제 데이터 분석에서는 $P_0$를 직접 알 수 없으므로 observed sample이 만드는 empirical law $P_n$으로 population criterion을 대체한다.
+OLS는 이 population-to-sample substitution의 가장 기본적인 사례다.
 :::
 
 ### 7.1.1 Population criterion {#s711}
 
-  loss function을
+loss function을
 
 :::::::::::::::::::: {.math-display}
 
@@ -56,7 +57,7 @@ $$
 
 ### 7.1.2 Empirical law and sample criterion {#s712}
 
-  표본 $(Y_i,X_i)$, $i=1,\ldots,n$가 주어졌다고 하자. empirical measure는
+표본 $(Y_i,X_i)$, $i=1,\ldots,n$가 주어졌다고 하자. empirical measure는
 
 :::::::::::::::::::: {.math-display}
 
@@ -87,26 +88,22 @@ $$
 
 :::::::::::::::::::: {.statement .definition}
 
-  
-
 ::::::::::::::::::: {.statement-head}
 
 정의 7.1 · Ordinary Least Squares
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  \widehat\beta
-  \in
-  \operatorname*{arg\,min}_{b\in\mathbb R^k}
-  Q_n(b).
-  }
-  $$
+\boxed{
+\widehat\beta
+\in
+\operatorname*{arg\,min}_{b\in\mathbb R^k}
+Q_n(b).
+}
+$$
 
 :::::::::::::::::::
 
@@ -114,29 +111,118 @@ $$
 
 :::::::::::::::::::: {.callout-strip}
 
-  
-
 ::::::::::::::::::: {.left}
 
 Population → Sample
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.right}
 
-    OLS는 새로운 원리를 갑자기 도입하는 것이 아니다.
-    $P_0$가 정의하는 population squared-error problem을 $P_n$이 정의하는 empirical problem으로 바꾼 sample analogue다.
-  
+OLS는 새로운 원리를 갑자기 도입하는 것이 아니다.
+$P_0$가 정의하는 population squared-error problem을 $P_n$이 정의하는 empirical problem으로 바꾼 sample analogue다.
 
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 7.1 · Empirical law가 실제 OLS criterion을 만든다
+
+:::::::::::::::::::
+
+세 observations가
+
+::::::::::::::::::: {.math-display}
+
+$$
+(Y_i,X_i)
+=
+(1,0),(3,1),(5,2)
+$$
+
+:::::::::::::::::::
+
+이고 intercept를 포함한 predictor가 $a+bX$라고 하자. Empirical law는
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_n
+=
+\frac13
+\sum_{i=1}^{3}
+\delta_{(Y_i,X_i)}.
+$$
+
+:::::::::::::::::::
+
+따라서 empirical criterion은
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(a,b)
+=
+\frac13
+\left[
+(1-a)^2
++
+(3-a-b)^2
++
+(5-a-2b)^2
+\right].
+$$
+
+:::::::::::::::::::
+
+first-order conditions는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+0
+&=
+\frac{\partial Q_n}{\partial a}
+=
+-\frac23
+\{(1-a)+(3-a-b)+(5-a-2b)\},\\
+0
+&=
+\frac{\partial Q_n}{\partial b}
+=
+-\frac23
+\{(3-a-b)+2(5-a-2b)\}.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+이를 풀면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat a=1,
+\qquad
+\widehat b=2.
+}
+$$
+
+:::::::::::::::::::
+
+즉 $T(P_n)$는 추상적인 plug-in notation이 아니라 empirical distribution이 만든 deterministic optimization problem의 해다.
+
+::::::::::::::::::::
+
 ### 7.1.3 Plug-in view {#s713}
 
-  population functional을 개념적으로
+population functional을 개념적으로
 
 :::::::::::::::::::: {.math-display}
 
@@ -163,8 +249,8 @@ $$
 
 ::::::::::::::::::::
 
-  즉 OLS는 empirical distribution을 population functional에 대입하는 plug-in estimator로 볼 수 있다.
-  다만 이 장에서는 아직 $T(P_n)\to T(P_0)$를 증명하지 않는다. 그것은 estimator의 stochastic behavior를 다루는 다음 단계다.
+즉 OLS는 empirical distribution을 population functional에 대입하는 plug-in estimator로 볼 수 있다.
+다만 이 장에서는 아직 $T(P_n)\to T(P_0)$를 증명하지 않는다. 그것은 estimator의 stochastic behavior를 다루는 다음 단계다.
 
 ::::::::::::::::::::::::::
 
@@ -174,12 +260,12 @@ $$
 
 ::: {.topic-opening}
 표본이 주어지면 least squares는 deterministic quadratic optimization problem이 된다.
-  Matrix notation은 criterion, gradient, residual orthogonality, projection geometry를 한꺼번에 드러낸다.
+Matrix notation은 criterion, gradient, residual orthogonality, projection geometry를 한꺼번에 드러낸다.
 :::
 
 ### 7.2.1 Matrix notation {#s721}
 
-  $Y_i$를 쌓아 $Y\in\mathbb R^n$, $X_i'$를 행으로 쌓아 $X\in\mathbb R^{n\times k}$라 하자.
+$Y_i$를 쌓아 $Y\in\mathbb R^n$, $X_i'$를 행으로 쌓아 $X\in\mathbb R^{n\times k}$라 하자.
 
 :::::::::::::::::::: {.math-display}
 
@@ -201,7 +287,7 @@ $$
 
 ::::::::::::::::::::
 
-  그러면 residual vector는
+그러면 residual vector는
 
 :::::::::::::::::::: {.math-display}
 
@@ -225,7 +311,7 @@ $$
 
 ::::::::::::::::::::
 
-  $1/n$은 minimizer를 바꾸지 않으므로
+$1/n$은 minimizer를 바꾸지 않으므로
 
 :::::::::::::::::::: {.math-display}
 
@@ -300,6 +386,110 @@ $$
 
 ::::::::::::::::::::
 
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Normal equations
+
+:::::::::::::::::::
+
+$$
+Q_n(b)
+=
+\frac1n(Y-Xb)'(Y-Xb)
+$$
+
+의 directional derivative를 계산하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\nabla_bQ_n(b)
+=
+-\frac2nX'(Y-Xb).
+$$
+
+:::::::::::::::::::
+
+따라서 interior minimizer는
+
+::::::::::::::::::: {.math-display}
+
+$$
+X'(Y-X\widehat\beta)=0,
+$$
+
+:::::::::::::::::::
+
+즉 sample normal equations를 만족한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .claim}
+
+::::::::::::::::::: {.statement-head}
+
+DERIVATION 7.1 · Sample completion-of-squares identity
+
+:::::::::::::::::::
+
+$\widehat\beta$가 normal equations를 만족한다고 하자. $b=\widehat\beta+\delta$라 두면
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y-Xb
+=
+\widehat e-X\delta,
+\qquad
+\widehat e=Y-X\widehat\beta.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\|Y-Xb\|_2^2
+&=
+\|\widehat e\|_2^2
+-2\delta'X'\widehat e
++\delta'X'X\delta\\
+&=
+\|\widehat e\|_2^2
++\delta'X'X\delta,
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+왜냐하면 $X'\widehat e=0$이기 때문이다. 즉
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+Q_n(b)
+=
+Q_n(\widehat\beta)
++
+\frac1n
+(b-\widehat\beta)'X'X(b-\widehat\beta).
+}
+$$
+
+:::::::::::::::::::
+
+이 한 identity가 coefficient uniqueness, flat directions, rank deficiency를 모두 설명한다.
+
+::::::::::::::::::::
+
 이를 sample normal equations라 한다. $X$가 full column rank이면
 
 :::::::::::::::::::: {.math-display}
@@ -316,20 +506,15 @@ $$
 
 :::::::::::::::::::: {.statement .warning}
 
-  
-
 ::::::::::::::::::: {.statement-head}
 
 주의 7.1 · Closed form은 정의가 아니다
 
 :::::::::::::::::::
 
-  
-
-    OLS의 근본적인 정의는 empirical squared-error criterion의 minimizer다.
-    $(X'X)^{-1}X'Y$는 full-rank case에서 그 optimization problem을 푼 결과일 뿐이다.
-    이 구분은 rank-deficient case와 numerical implementation에서 중요해진다.
-  
+OLS의 근본적인 정의는 empirical squared-error criterion의 minimizer다.
+$(X'X)^{-1}X'Y$는 full-rank case에서 그 optimization problem을 푼 결과일 뿐이다.
+이 구분은 rank-deficient case와 numerical implementation에서 중요해진다.
 
 ::::::::::::::::::::
 
@@ -341,12 +526,12 @@ $$
 
 ::: {.topic-opening}
 Least-squares minimizer의 존재, fitted-value uniqueness, coefficient uniqueness는 서로 다른 문제다.
-  Full-rank condition은 sample quadratic criterion의 strict convexity와 직접 연결된다.
+Full-rank condition은 sample quadratic criterion의 strict convexity와 직접 연결된다.
 :::
 
 ### 7.3.1 Sample Hessian and rank {#s731}
 
-  임의의 $a\in\mathbb R^k$에 대해
+임의의 $a\in\mathbb R^k$에 대해
 
 :::::::::::::::::::: {.math-display}
 
@@ -373,11 +558,80 @@ $$
 
 ::::::::::::::::::::
 
-  이 경우 $Q_n$은 strictly convex하고 coefficient minimizer는 unique하다.
+이 경우 $Q_n$은 strictly convex하고 coefficient minimizer는 unique하다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 7.1 · Full column rank와 coefficient uniqueness
+
+:::::::::::::::::::
+
+sample least-squares problem에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{rank}(X)=k
+\iff
+X'X\succ0
+\iff
+\text{OLS coefficient minimizer is unique}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+임의의 $a\in\mathbb R^k$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+a'X'Xa=\|Xa\|_2^2.
+$$
+
+:::::::::::::::::::
+
+따라서 $X'X\succ0$일 필요충분조건은 $Xa\neq0$ for every $a\neq0$, 즉
+$\mathcal N(X)=\{0\}$, equivalently $\operatorname{rank}(X)=k$.
+이 경우 completion-of-squares identity에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q_n(b)-Q_n(\widehat\beta)
+=
+\frac1n
+(b-\widehat\beta)'X'X(b-\widehat\beta)
+\gt0
+$$
+
+:::::::::::::::::::
+
+for every $b\neq\widehat\beta$, 따라서 coefficient minimizer는 unique하다.
+
+반대로 nonzero $a\in\mathcal N(X)$가 존재하면
+$X(\widehat\beta+a)=X\widehat\beta$, 따라서 같은 criterion value를 갖는 distinct coefficient가 존재한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 7.3.2 Full rank vs sample size {#s732}
 
-  full column rank를 가지려면 최소한
+full column rank를 가지려면 최소한
 
 :::::::::::::::::::: {.math-display}
 
@@ -404,21 +658,17 @@ $$
 예를 들어 다음 상황에서는 rank가 떨어질 수 있다.
 
 <ul>
-  <li>같은 regressor를 두 번 포함한 경우,</li>
-  <li>한 regressor가 다른 regressors의 정확한 선형결합인 경우,</li>
-  <li>intercept와 모든 category dummy를 동시에 포함한 dummy-variable trap,</li>
-  <li>표본 안에서 어떤 regressor가 상수로 관측된 경우.</li>
+<li>같은 regressor를 두 번 포함한 경우,</li>
+<li>한 regressor가 다른 regressors의 정확한 선형결합인 경우,</li>
+<li>intercept와 모든 category dummy를 동시에 포함한 dummy-variable trap,</li>
+<li>표본 안에서 어떤 regressor가 상수로 관측된 경우.</li>
 </ul>
 
 ### 7.3.3 Population rank vs sample rank {#s733}
 
 :::::::::::::::::::: {.comparison-grid}
 
-  
-
 ::::::::::::::::::: {.comparison-card}
-
-    
 
 :::::::::::::::::: {.comparison-card__title}
 
@@ -426,34 +676,23 @@ Population
 
 ::::::::::::::::::
 
-    
-
 :::::::::::::::::: {.comparison-card__formula}
 
 $$
-    E[XX']\succ0
-    $$
+E[XX']\succ0
+$$
 
 ::::::::::::::::::
-
-    
 
 :::::::::::::::::: {.comparison-card__text}
 
-      population linear projection coefficient의 uniqueness와 관련된다.
-    
+population linear projection coefficient의 uniqueness와 관련된다.
 
 ::::::::::::::::::
 
-  
-
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.comparison-card}
-
-    
 
 :::::::::::::::::: {.comparison-card__title}
 
@@ -461,26 +700,19 @@ Sample
 
 ::::::::::::::::::
 
-    
-
 :::::::::::::::::: {.comparison-card__formula}
 
 $$
-    X'X\succ0
-    $$
+X'X\succ0
+$$
 
 ::::::::::::::::::
-
-    
 
 :::::::::::::::::: {.comparison-card__text}
 
-      realized empirical least-squares coefficient의 uniqueness와 관련된다.
-    
+realized empirical least-squares coefficient의 uniqueness와 관련된다.
 
 ::::::::::::::::::
-
-  
 
 :::::::::::::::::::
 
@@ -498,8 +730,52 @@ $$
 
 ::::::::::::::::::::
 
-  population target이 잘 identified되어 있어도 특정 작은 표본에서 accidental collinearity가 발생할 수 있고,
-  반대로 sample matrix가 invertible하더라도 population parameterization의 identification을 자동으로 보장하지 않는다.
+population target이 잘 identified되어 있어도 특정 작은 표본에서 accidental collinearity가 발생할 수 있고,
+반대로 sample matrix가 invertible하더라도 population parameterization의 identification을 자동으로 보장하지 않는다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 7.2 · Population full rank이어도 finite sample은 rank deficient할 수 있다
+
+:::::::::::::::::::
+
+$X_i=(1,D_i)'$, $D_i\sim Bernoulli(1/2)$라 하자. Population matrix는
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[X_iX_i']
+=
+\begin{pmatrix}
+1 & 1/2\\
+1/2 & 1/2
+\end{pmatrix},
+$$
+
+:::::::::::::::::::
+
+이고 determinant는 $1/4$, 따라서 positive definite다.
+
+하지만 finite sample에서 모든 $D_i$가 0이거나 모두 1이면 intercept column과 treatment column이 linearly dependent하다.
+그 확률은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+P(\operatorname{rank}(X)\lt2)
+=
+2\left(\frac12\right)^n.
+}
+$$
+
+:::::::::::::::::::
+
+따라서 population uniqueness와 realized sample full rank는 서로 다른 층위의 statement다.
+
+::::::::::::::::::::
 
 ::::::::::::::::::::::::::
 
@@ -509,17 +785,12 @@ $$
 
 ::: {.topic-opening}
 Chapter 5에서는 random variable $Y$를 $L^2(P)$의 subspace에 projection했다.
-  Chapter 7에서는 observed outcome vector $Y\in\mathbb R^n$를 design matrix $X$의 column space에 Euclidean projection한다.
+Chapter 7에서는 observed outcome vector $Y\in\mathbb R^n$를 design matrix $X$의 column space에 Euclidean projection한다.
 :::
-
-::: {.callout-note appearance="simple" title="VISUAL · OLS 표본 기하와 표본 변동"}
-[OLS 표본 기하와 표본 변동 보충자료](../../supplements/ols-geometry.qmd)에서 표본 수, 참 기울기, 오차 분산을 조작하며 OLS 사영(projection), 잔차 직교성($X'\hat{u}=0$), fixed-$X$ 표본분포를 대화형으로 확인할 수 있다.
-:::
-
 
 ### 7.4.1 Column space {#s741}
 
-  $X$가 생성하는 column space를
+$X$가 생성하는 column space를
 
 :::::::::::::::::::: {.math-display}
 
@@ -549,7 +820,7 @@ $$
 
 ### 7.4.2 Projection matrix {#s742}
 
-  $X$가 full column rank일 때
+$X$가 full column rank일 때
 
 :::::::::::::::::::: {.math-display}
 
@@ -589,7 +860,93 @@ $$
 
 ::::::::::::::::::::
 
-  즉 $P_X$는 $\mathcal C(X)$에 대한 orthogonal projection operator다.
+즉 $P_X$는 $\mathcal C(X)$에 대한 orthogonal projection operator다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Projection-matrix characterization
+
+:::::::::::::::::::
+
+full-column-rank $X$에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_X=X(X'X)^{-1}X'.
+$$
+
+:::::::::::::::::::
+
+<strong>Symmetry:</strong>
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_X'
+=
+X(X'X)^{-1}X'
+=
+P_X.
+$$
+
+:::::::::::::::::::
+
+<strong>Idempotence:</strong>
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+P_X^2
+&=
+X(X'X)^{-1}X'
+X(X'X)^{-1}X'\\
+&=
+X(X'X)^{-1}X'\\
+&=
+P_X.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+<strong>Identity on the column space:</strong>
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_XX
+=
+X(X'X)^{-1}X'X
+=
+X.
+$$
+
+:::::::::::::::::::
+
+따라서 every $z=Xb\in\mathcal C(X)$에 대해 $P_Xz=z$.
+또한 residual은
+
+::::::::::::::::::: {.math-display}
+
+$$
+X'(Y-P_XY)
+=
+X'Y-X'X(X'X)^{-1}X'Y
+=
+0.
+$$
+
+:::::::::::::::::::
+
+즉 $P_XY\in\mathcal C(X)$이고 residual은 $\mathcal C(X)$에 orthogonal하므로 $P_XY$는 Euclidean projection이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 7.4.3 Residual-maker matrix {#s743}
 
@@ -635,9 +992,73 @@ $$
 
 ::::::::::::::::::::
 
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Residual-maker identities
+
+:::::::::::::::::::
+
+$M_X=I-P_X$. 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+M_X'
+=
+I-P_X'
+=
+M_X,
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+M_X^2
+=
+(I-P_X)^2
+=
+I-2P_X+P_X^2
+=
+I-P_X
+=
+M_X.
+$$
+
+:::::::::::::::::::
+
+또한
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_XM_X
+=
+P_X-P_X^2
+=
+0,
+\qquad
+M_XX
+=
+X-P_XX
+=
+0.
+$$
+
+:::::::::::::::::::
+
+따라서 $P_X$와 $M_X$는 complementary orthogonal projections다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
 ### 7.4.4 Orthogonal decomposition {#s744}
 
-  Euclidean space는
+Euclidean space는
 
 :::::::::::::::::::: {.math-display}
 
@@ -669,30 +1090,66 @@ $$
 
 :::::::::::::::::::: {.callout-strip}
 
-  
-
 ::::::::::::::::::: {.left}
 
 Ch.5와 Ch.7
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.right}
 
-    Chapter 5의 $L^2(P)$ projection과 Chapter 7의 $\mathbb R^n$ projection은 다른 공간에서 일어나지만 구조는 동일하다:
-    target space에 가장 가까운 점을 찾고 residual이 해당 subspace와 orthogonal해진다.
-  
+Chapter 5의 $L^2(P)$ projection과 Chapter 7의 $\mathbb R^n$ projection은 다른 공간에서 일어나지만 구조는 동일하다:
+target space에 가장 가까운 점을 찾고 residual이 해당 subspace와 orthogonal해진다.
 
 :::::::::::::::::::
 
 ::::::::::::::::::::
 
-::: {.callout-note}
-### 계산·시각화 보충자료
-관측공간 $\mathbb{R}^3$에서의 직교사영, 모수공간 $\mathbb{R}^2$와의 상호 대응, 변수 추가와 다중공선성의 기하학적 의미는 [보충자료 · OLS 직교사영과 정상방정식의 벡터 기하](../../supplements/ols-projection-geometry.qmd)에서 출판품질 MATLAB 기하도표와 함께 확인할 수 있다.
-:::
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 7.2 · Symmetric idempotent matrix의 eigenvalues
+
+:::::::::::::::::::
+
+$P=P'=P^2$이고 $Pv=\lambda v$, $v\neq0$라 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+P^2v
+=
+\lambda^2v
+$$
+
+:::::::::::::::::::
+
+인 동시에 $P^2v=Pv=\lambda v$. 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\lambda^2=\lambda,
+$$
+
+:::::::::::::::::::
+
+즉
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\lambda\in\{0,1\}.
+}
+$$
+
+:::::::::::::::::::
+
+이 결과는 projection matrix의 trace, rank, leverage bounds를 연결하는 기본 spectral fact다.
+
+::::::::::::::::::::
 
 ::::::::::::::::::::::::::
 
@@ -728,8 +1185,8 @@ $$
 
 ::::::::::::::::::::
 
-  즉 residual vector는 design matrix의 모든 columns와 orthogonal하다.
-  $\widehat Y\in\mathcal C(X)$이므로 특히
+즉 residual vector는 design matrix의 모든 columns와 orthogonal하다.
+$\widehat Y\in\mathcal C(X)$이므로 특히
 
 :::::::::::::::::::: {.math-display}
 
@@ -759,12 +1216,44 @@ $$
 
 ::::::::::::::::::::
 
-  이것은 원점 기준 decomposition이다. Intercept가 포함된 regression에서는 centered decomposition이 더 익숙하다.
+이것은 원점 기준 decomposition이다. Intercept가 포함된 regression에서는 centered decomposition이 더 익숙하다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Pythagorean sum of squares
+
+:::::::::::::::::::
+
+$Y=\widehat Y+\widehat e$이고 $\widehat Y'\widehat e=0$이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\|Y\|_2^2
+&=
+\|\widehat Y+\widehat e\|_2^2\\
+&=
+\|\widehat Y\|_2^2
++
+\|\widehat e\|_2^2.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+이는 origin-centered Pythagorean decomposition이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 7.5.3 Centered decomposition and $R^2$ {#s753}
 
-  $X$에 intercept가 포함되어 있으면 $\mathbf1_n'\widehat e=0$, 따라서 residual mean은 0이다.
-  $\bar Y=n^{-1}\sum_iY_i$라 하면
+$X$에 intercept가 포함되어 있으면 $\mathbf1_n'\widehat e=0$, 따라서 residual mean은 0이다.
+$\bar Y=n^{-1}\sum_iY_i$라 하면
 
 :::::::::::::::::::: {.math-display}
 
@@ -822,12 +1311,10 @@ $$
 
 ::::::::::::::::::::
 
-  intercept가 포함된 conventional regression에서는 $0\le R^2\le1$이다.
-  하지만 $R^2$는 sample fit에 관한 geometric statistic이지 causal validity에 대한 measure가 아니다.
+intercept가 포함된 conventional regression에서는 $0\le R^2\le1$이다.
+하지만 $R^2$는 sample fit에 관한 geometric statistic이지 causal validity에 대한 measure가 아니다.
 
 :::::::::::::::::::: {.statement .remark}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -835,12 +1322,172 @@ $$
 
 :::::::::::::::::::
 
-  
+새로운 regressors를 추가하면 projection subspace가 커진다.
+더 큰 subspace로 projection할 때 최소 residual norm은 증가할 수 없으므로 RSS는 증가하지 않고 $R^2$는 감소하지 않는다.
+이는 statistical significance와는 별개의 geometric property다.
 
-    새로운 regressors를 추가하면 projection subspace가 커진다.
-    더 큰 subspace로 projection할 때 최소 residual norm은 증가할 수 없으므로 RSS는 증가하지 않고 $R^2$는 감소하지 않는다.
-    이는 statistical significance와는 별개의 geometric property다.
-  
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Centered decomposition with an intercept
+
+:::::::::::::::::::
+
+intercept가 포함되어 있으면 $\mathbf1_n\in\mathcal C(X)$, 따라서
+$\mathbf1_n'\widehat e=0$.
+또 $\widehat Y-\bar Y\mathbf1_n\in\mathcal C(X)$, 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+(\widehat Y-\bar Y\mathbf1_n)'\widehat e=0.
+$$
+
+:::::::::::::::::::
+
+그리고
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y-\bar Y\mathbf1_n
+=
+(\widehat Y-\bar Y\mathbf1_n)+\widehat e.
+$$
+
+:::::::::::::::::::
+
+Pythagoras를 적용하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+TSS=ESS+RSS.
+}
+$$
+
+:::::::::::::::::::
+
+따라서 $0\le RSS\le TSS$이고 $TSS\gt0$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+0\le R^2\le1.
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 7.3 · Nested models에서 RSS는 증가하지 않는다
+
+:::::::::::::::::::
+
+$\mathcal C(X_1)\subseteq\mathcal C(X_2)$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+RSS_2
+=
+\min_{z\in\mathcal C(X_2)}\|Y-z\|^2
+\le
+\min_{z\in\mathcal C(X_1)}\|Y-z\|^2
+=
+RSS_1.
+}
+$$
+
+:::::::::::::::::::
+
+더 큰 projection space에서는 기존 fitted vector도 feasible이므로 최소 residual norm이 커질 수 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 7.1 · Intercept가 없으면 centered $R^2$는 음수가 될 수 있다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y=
+\begin{pmatrix}
+1\\2
+\end{pmatrix},
+\qquad
+X=
+\begin{pmatrix}
+1\\0
+\end{pmatrix}.
+$$
+
+:::::::::::::::::::
+
+intercept를 따로 포함하지 않으면 $\widehat\beta=1$,
+$\widehat Y=(1,0)'$, 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+RSS
+=
+(0)^2+(2)^2
+=
+4.
+$$
+
+:::::::::::::::::::
+
+반면 $\bar Y=1.5$이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+TSS
+=
+(1-1.5)^2+(2-1.5)^2
+=
+0.5.
+$$
+
+:::::::::::::::::::
+
+centered formula를 사용하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+R^2
+=
+1-\frac4{0.5}
+=
+-7.
+}
+$$
+
+:::::::::::::::::::
+
+따라서 $0\le R^2\le1$은 intercept가 포함된 conventional centered decomposition에 의존한다.
 
 ::::::::::::::::::::
 
@@ -856,7 +1503,7 @@ Chapter 6의 population partialling-out theorem은 sample에서 projection matri
 
 ### 7.6.1 Partitioned design {#s761}
 
-  design matrix를
+design matrix를
 
 :::::::::::::::::::: {.math-display}
 
@@ -895,50 +1542,199 @@ $$
 
 :::::::::::::::::::: {.statement .theorem}
 
-  
-
 ::::::::::::::::::: {.statement-head}
 
 정리 7.1 · Sample Frisch–Waugh–Lovell
 
 :::::::::::::::::::
 
-  
 적절한 full-rank conditions 아래
-
-  
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  \widehat\beta_2
-  =
-  (X_2'M_1X_2)^{-1}X_2'M_1Y.
-  }
-  $$
+\boxed{
+\widehat\beta_2
+=
+(X_2'M_1X_2)^{-1}X_2'M_1Y.
+}
+$$
 
 :::::::::::::::::::
 
-  
+즉 $Y$와 $X_2$에서 $X_1$의 linear component를 제거한 뒤 residualized variables끼리 least squares를 수행하면
+full regression의 $\widehat\beta_2$와 정확히 같은 coefficient를 얻는다.
 
-    즉 $Y$와 $X_2$에서 $X_1$의 linear component를 제거한 뒤 residualized variables끼리 least squares를 수행하면
-    full regression의 $\widehat\beta_2$와 정확히 같은 coefficient를 얻는다.
-  
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Projection-matrix route
+
+:::::::::::::::::::
+
+전체 model의 residual을
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat e
+=
+Y-X_1\widehat\beta_1-X_2\widehat\beta_2.
+$$
+
+:::::::::::::::::::
+
+첫 block normal equation
+
+::::::::::::::::::: {.math-display}
+
+$$
+X_1'\widehat e=0
+$$
+
+:::::::::::::::::::
+
+은 $\widehat e$가 $\mathcal C(X_1)$에 orthogonal함을 뜻하므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+M_1\widehat e=\widehat e.
+$$
+
+:::::::::::::::::::
+
+full equation에 $M_1$을 적용하면 $M_1X_1=0$이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+M_1Y
+=
+M_1X_2\widehat\beta_2+\widehat e.
+$$
+
+:::::::::::::::::::
+
+이제 $\widehat e$는 $X_2$에도 orthogonal하므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+X_2'M_1(Y-X_2\widehat\beta_2)=0.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+X_2'M_1X_2\widehat\beta_2
+=
+X_2'M_1Y.
+$$
+
+:::::::::::::::::::
+
+nonsingularity 아래
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_2
+=
+(X_2'M_1X_2)^{-1}X_2'M_1Y.
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Block-normal-equation route
+
+:::::::::::::::::::
+
+partitioned normal equations는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{pmatrix}
+X_1'X_1 & X_1'X_2\\
+X_2'X_1 & X_2'X_2
+\end{pmatrix}
+\begin{pmatrix}
+\widehat\beta_1\\
+\widehat\beta_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+X_1'Y\\
+X_2'Y
+\end{pmatrix}.
+$$
+
+:::::::::::::::::::
+
+첫 equation에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta_1
+=
+(X_1'X_1)^{-1}
+X_1'(Y-X_2\widehat\beta_2).
+$$
+
+:::::::::::::::::::
+
+이를 두 번째 equation에 대입하고 정리하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+X_2'
+\left[
+I-X_1(X_1'X_1)^{-1}X_1'
+\right]
+X_2\widehat\beta_2
+=
+X_2'M_1Y.
+$$
+
+:::::::::::::::::::
+
+즉 같은 FWL formula가 block elimination에서도 나온다.
+
+<span class="qed">□</span>
 
 ::::::::::::::::::::
 
 algorithmically는
 
 <ol>
-  <li>$Y$를 $X_1$에 regress하여 residual $\widetilde Y=M_1Y$를 만든다.</li>
-  <li>$X_2$의 각 column을 $X_1$에 regress하여 $\widetilde X_2=M_1X_2$를 만든다.</li>
-  <li>$\widetilde Y$를 $\widetilde X_2$에 regress한다.</li>
+<li>$Y$를 $X_1$에 regress하여 residual $\widetilde Y=M_1Y$를 만든다.</li>
+<li>$X_2$의 각 column을 $X_1$에 regress하여 $\widetilde X_2=M_1X_2$를 만든다.</li>
+<li>$\widetilde Y$를 $\widetilde X_2$에 regress한다.</li>
 </ol>
 
 ### 7.6.3 Demeaning as a special case {#s763}
 
-  $X_1=\mathbf1_n$이면
+$X_1=\mathbf1_n$이면
 
 :::::::::::::::::::: {.math-display}
 
@@ -966,11 +1762,9 @@ $$
 
 ::::::::::::::::::::
 
-  즉 intercept를 partial out하는 것은 demeaning이다.
+즉 intercept를 partial out하는 것은 demeaning이다.
 
 :::::::::::::::::::: {.callout-strip}
-
-  
 
 ::::::::::::::::::: {.left}
 
@@ -978,15 +1772,51 @@ Preview
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.right}
 
-    같은 algebra가 panel-data fixed effects의 within transformation으로 다시 나타난다.
-    수많은 dummy variables를 직접 포함하는 대신 projection/residualization을 이용할 수 있다.
-  
+같은 algebra가 panel-data fixed effects의 within transformation으로 다시 나타난다.
+수많은 dummy variables를 직접 포함하는 대신 projection/residualization을 이용할 수 있다.
 
 :::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+COROLLARY 7.1 · Simple regression with intercept는 centered regression이다
+
+:::::::::::::::::::
+
+$X_1=\mathbf1_n$이고 $X_2=x$인 경우
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widetilde x_i=x_i-\bar x,
+\qquad
+\widetilde y_i=y_i-\bar y.
+$$
+
+:::::::::::::::::::
+
+FWL에 의해 slope는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta_1
+=
+\frac{\sum_{i=1}^n(x_i-\bar x)(y_i-\bar y)}
+{\sum_{i=1}^n(x_i-\bar x)^2}.
+}
+$$
+
+:::::::::::::::::::
+
+Chapter 6의 population covariance/variance formula가 sample covariance/variance formula로 정확히 옮겨온다.
 
 ::::::::::::::::::::
 
@@ -998,7 +1828,7 @@ Preview
 
 ::: {.topic-opening}
 Projection matrix는 fitted values를 생성하기 때문에 hat matrix라고도 불린다.
-  그 diagonal은 각 observation이 design geometry에서 얼마나 특이한 위치를 차지하는지 보여준다.
+그 diagonal은 각 observation이 design geometry에서 얼마나 특이한 위치를 차지하는지 보여준다.
 :::
 
 ### 7.7.1 Fitted values as weighted outcomes {#s771}
@@ -1015,12 +1845,12 @@ $$
 
 ::::::::::::::::::::
 
-  따라서 fitted value는 전체 observed outcomes의 linear combination이다.
-  이 weight structure는 design $X$만으로 결정된다.
+따라서 fitted value는 전체 observed outcomes의 linear combination이다.
+이 weight structure는 design $X$만으로 결정된다.
 
 ### 7.7.2 Diagonal leverage {#s772}
 
-  diagonal element
+diagonal element
 
 :::::::::::::::::::: {.math-display}
 
@@ -1044,12 +1874,77 @@ $$
 
 ::::::::::::::::::::
 
-  $h_{ii}$가 크다는 것은 observation $i$의 regressor vector가 design cloud 안에서 상대적으로 높은 leverage를 갖는다는 뜻이다.
-  아직 이것을 “influential observation”과 동일시하지는 않는다. Influence는 $Y_i$와 residual까지 함께 고려하는 더 후속적인 개념이다.
+$h_{ii}$가 크다는 것은 observation $i$의 regressor vector가 design cloud 안에서 상대적으로 높은 leverage를 갖는다는 뜻이다.
+아직 이것을 “influential observation”과 동일시하지는 않는다. Influence는 $Y_i$와 residual까지 함께 고려하는 더 후속적인 개념이다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Leverage bounds
+
+:::::::::::::::::::
+
+standard basis vector $e_i\in\mathbb R^n$를 사용하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+h_{ii}
+=
+e_i'P_Xe_i.
+$$
+
+:::::::::::::::::::
+
+$P_X=P_X'=P_X^2$이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+e_i'P_Xe_i
+=
+e_i'P_X'P_Xe_i
+=
+\|P_Xe_i\|_2^2
+\ge0.
+$$
+
+:::::::::::::::::::
+
+또한 orthogonal projection은 norm을 증가시키지 않으므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|P_Xe_i\|_2
+\le
+\|e_i\|_2
+=
+1.
+$$
+
+:::::::::::::::::::
+
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+0\le h_{ii}\le1.
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 7.7.3 Trace and average leverage {#s773}
 
-  projection matrix의 eigenvalues는 0 또는 1이므로
+projection matrix의 eigenvalues는 0 또는 1이므로
 
 :::::::::::::::::::: {.math-display}
 
@@ -1077,7 +1972,83 @@ $$
 
 ::::::::::::::::::::
 
-  따라서 평균 leverage는 model dimension과 sample size의 비율로 결정된다.
+따라서 평균 leverage는 model dimension과 sample size의 비율로 결정된다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Trace and average leverage
+
+:::::::::::::::::::
+
+symmetric idempotent $P_X$의 eigenvalues는 모두 0 또는 1이다.
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{tr}(P_X)
+=
+\#\{\text{unit eigenvalues}\}
+=
+\operatorname{rank}(P_X).
+$$
+
+:::::::::::::::::::
+
+또한 $\mathcal R(P_X)=\mathcal C(X)$이므로
+$\operatorname{rank}(P_X)=\operatorname{rank}(X)$.
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sum_{i=1}^n h_{ii}
+=
+\operatorname{rank}(X).
+}
+$$
+
+:::::::::::::::::::
+
+full column rank이면 합은 $k$, 평균은 $k/n$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 7.3 · Simple-regression leverage formula
+
+:::::::::::::::::::
+
+intercept와 scalar regressor $x$가 있는 design에서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+h_{ii}
+=
+\frac1n
++
+\frac{(x_i-\bar x)^2}
+{\sum_{j=1}^n(x_j-\bar x)^2}.
+}
+$$
+
+:::::::::::::::::::
+
+첫 항 $1/n$은 intercept direction에서 오는 baseline leverage이고,
+두 번째 항은 $x_i$가 sample center에서 얼마나 멀리 떨어져 있는지를 측정한다.
+따라서 $x_i$가 design cloud의 중심에서 멀수록 leverage가 커진다.
+
+::::::::::::::::::::
 
 ::::::::::::::::::::::::::
 
@@ -1087,12 +2058,12 @@ $$
 
 ::: {.topic-opening}
 $X'X$가 singular하다고 해서 least-squares fitting problem 자체가 사라지는 것은 아니다.
-  사라지는 것은 coefficient representation의 uniqueness다.
+사라지는 것은 coefficient representation의 uniqueness다.
 :::
 
 ### 7.8.1 Least squares without full rank {#s781}
 
-  rank deficiency가 있어도
+rank deficiency가 있어도
 
 :::::::::::::::::::: {.math-display}
 
@@ -1102,7 +2073,7 @@ $$
 
 ::::::::::::::::::::
 
-  는 항상 well-defined하다. 모든 minimizer는 normal equation
+는 항상 well-defined하다. 모든 minimizer는 normal equation
 
 :::::::::::::::::::: {.math-display}
 
@@ -1114,7 +2085,7 @@ $$
 
 을 만족한다.
 
-  다만 null space $\mathcal N(X)$가 nontrivial하면 하나의 minimizer $b_0$에 대해
+다만 null space $\mathcal N(X)$가 nontrivial하면 하나의 minimizer $b_0$에 대해
 
 :::::::::::::::::::: {.math-display}
 
@@ -1130,7 +2101,7 @@ $$
 
 ### 7.8.2 Unique fitted values {#s782}
 
-  $b_1,b_2$가 둘 다 least-squares minimizer라면
+$b_1,b_2$가 둘 다 least-squares minimizer라면
 
 :::::::::::::::::::: {.math-display}
 
@@ -1154,11 +2125,64 @@ $$
 
 ::::::::::::::::::::
 
-  이것은 Chapter 6의 “unique population projected function vs nonunique coefficient representation”의 exact sample analogue다.
+이것은 Chapter 6의 “unique population projected function vs nonunique coefficient representation”의 exact sample analogue다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 7.4 · 모든 least-squares minimizers의 구조
+
+:::::::::::::::::::
+
+$b_0$가 한 least-squares minimizer이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname*{arg\,min}_b\|Y-Xb\|_2^2
+=
+b_0+\mathcal N(X).
+}
+$$
+
+:::::::::::::::::::
+
+특히 모든 minimizers는 동일한 fitted value $Xb_0$를 만든다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$v\in\mathcal N(X)$이면 $X(b_0+v)=Xb_0$, 따라서 same fitted values and same residual norm.
+반대로 $b_1,b_2$가 둘 다 minimizers라면 $Xb_1$과 $Xb_2$는 모두 $Y$의
+$\mathcal C(X)$-orthogonal projection이다.
+Euclidean projection은 unique이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+Xb_1=Xb_2.
+$$
+
+:::::::::::::::::::
+
+따라서 $b_1-b_2\in\mathcal N(X)$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 7.8.3 Moore–Penrose selection {#s783}
 
-  Moore–Penrose pseudoinverse $X^+$를 사용하면
+Moore–Penrose pseudoinverse $X^+$를 사용하면
 
 :::::::::::::::::::: {.math-display}
 
@@ -1172,11 +2196,9 @@ $$
 
 ::::::::::::::::::::
 
-  를 정의할 수 있다. 이는 least-squares minimizers 중 minimum Euclidean norm solution을 선택한다.
+를 정의할 수 있다. 이는 least-squares minimizers 중 minimum Euclidean norm solution을 선택한다.
 
 :::::::::::::::::::: {.statement .warning}
-
-  
 
 ::::::::::::::::::: {.statement-head}
 
@@ -1184,11 +2206,131 @@ $$
 
 :::::::::::::::::::
 
-  
+pseudoinverse가 하나의 coefficient vector를 선택한다는 사실은 original parameterization이 identified되었다는 뜻이 아니다.
+이는 nonunique solution set 안에서 특정 representative를 선택하는 algebraic convention이다.
 
-    pseudoinverse가 하나의 coefficient vector를 선택한다는 사실은 original parameterization이 identified되었다는 뜻이 아니다.
-    이는 nonunique solution set 안에서 특정 representative를 선택하는 algebraic convention이다.
-  
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 7.5 · Moore–Penrose solution은 minimum-norm LS representative다
+
+:::::::::::::::::::
+
+thin SVD를
+
+::::::::::::::::::: {.math-display}
+
+$$
+X=U_r\Sigma_rV_r'
+$$
+
+:::::::::::::::::::
+
+라 하자. 모든 LS solutions는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+b
+=
+X^+Y
++
+v,
+\qquad
+v\in\mathcal N(X).
+}
+$$
+
+:::::::::::::::::::
+
+또한 $X^+Y\in\mathcal R(X')$이고
+$\mathcal R(X')\perp\mathcal N(X)$, 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\|b\|_2^2
+=
+\|X^+Y\|_2^2
++
+\|v\|_2^2.
+$$
+
+:::::::::::::::::::
+
+그러므로 $v=0$일 때 norm이 최소이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta^+=X^+Y
+}
+$$
+
+:::::::::::::::::::
+
+가 unique minimum-Euclidean-norm least-squares coefficient다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 7.4 · Rank deficiency에서 pseudoinverse가 한 대표를 선택한다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+X=
+\begin{pmatrix}
+1&1\\
+1&1
+\end{pmatrix},
+\qquad
+Y=
+\begin{pmatrix}
+1\\3
+\end{pmatrix}.
+$$
+
+:::::::::::::::::::
+
+fitted values는 column space $\operatorname{span}\{(1,1)'\}$ 위 projection이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat Y
+=
+\begin{pmatrix}
+2\\2
+\end{pmatrix}.
+$$
+
+:::::::::::::::::::
+
+coefficient condition은 $b_1+b_2=2$, 따라서 infinitely many solutions.
+Minimum norm은 symmetry로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+b_1=b_2=1.
+}
+$$
+
+:::::::::::::::::::
+
+pseudoinverse는 이 representative를 고르지만 original coefficient directions를 identify한 것은 아니다.
 
 ::::::::::::::::::::
 
@@ -1200,12 +2342,12 @@ $$
 
 ::: {.topic-opening}
 수학적 closed form과 실제 numerical algorithm은 같은 것이 아니다.
-  OLS를 안정적으로 계산하려면 least-squares problem의 linear-algebra structure를 이용해야 한다.
+OLS를 안정적으로 계산하려면 least-squares problem의 linear-algebra structure를 이용해야 한다.
 :::
 
 ### 7.9.1 Normal equations and Cholesky {#s791}
 
-  가장 직접적인 접근은
+가장 직접적인 접근은
 
 :::::::::::::::::::: {.math-display}
 
@@ -1239,11 +2381,11 @@ $$
 
 라는 두 triangular systems를 푼다.
 
-  이 방식은 빠르고 효율적일 수 있지만 $X'X$를 명시적으로 형성한다는 점이 numerical conditioning 측면에서 약점이다.
+이 방식은 빠르고 효율적일 수 있지만 $X'X$를 명시적으로 형성한다는 점이 numerical conditioning 측면에서 약점이다.
 
 ### 7.9.2 QR factorization {#s792}
 
-  full-column-rank $X$에 대해 thin QR factorization을
+full-column-rank $X$에 대해 thin QR factorization을
 
 :::::::::::::::::::: {.math-display}
 
@@ -1285,8 +2427,8 @@ $$
 
 ::::::::::::::::::::
 
-  따라서 inverse를 만들 필요 없이 upper-triangular system만 풀면 된다.
-  또한 projection matrix는
+따라서 inverse를 만들 필요 없이 upper-triangular system만 풀면 된다.
+또한 projection matrix는
 
 :::::::::::::::::::: {.math-display}
 
@@ -1298,11 +2440,69 @@ $$
 
 ::::::::::::::::::::
 
-  즉 QR factorization은 계산법이면서 동시에 sample projection geometry를 직접 드러낸다.
+즉 QR factorization은 계산법이면서 동시에 sample projection geometry를 직접 드러낸다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · QR criterion decomposition
+
+:::::::::::::::::::
+
+thin QR $X=QR$, $Q'Q=I_k$라 하자.
+Orthogonal decomposition으로
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y
+=
+QQ'Y+(I-QQ')Y.
+$$
+
+:::::::::::::::::::
+
+그리고 $QRb\in\mathcal C(Q)$, 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y-QRb
+=
+Q(Q'Y-Rb)
++
+(I-QQ')Y.
+$$
+
+:::::::::::::::::::
+
+두 항은 orthogonal이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\|Y-QRb\|_2^2
+=
+\|Q'Y-Rb\|_2^2
++
+\|(I-QQ')Y\|_2^2.
+}
+$$
+
+:::::::::::::::::::
+
+두 번째 항은 $b$와 무관하므로 least squares는
+$R\widehat\beta=Q'Y$를 푸는 문제로 축약된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 7.9.3 SVD and rank revelation {#s793}
 
-  singular value decomposition을
+singular value decomposition을
 
 :::::::::::::::::::: {.math-display}
 
@@ -1338,7 +2538,7 @@ $$
 
 ::::::::::::::::::::
 
-  SVD는 exact rank deficiency뿐 아니라 near-collinearity도 singular values를 통해 드러낸다.
+SVD는 exact rank deficiency뿐 아니라 near-collinearity도 singular values를 통해 드러낸다.
 
 :::::::::::::::::::: {.math-display}
 
@@ -1348,7 +2548,49 @@ $$
 
 ::::::::::::::::::::
 
-  매우 작은 $\sigma_r(X)$는 coefficient solution이 일부 directions에서 perturbation에 민감할 수 있음을 시사한다.
+매우 작은 $\sigma_r(X)$는 coefficient solution이 일부 directions에서 perturbation에 민감할 수 있음을 시사한다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED MAP 7.5 · Normal equations, QR, SVD가 계산하는 object는 같다
+
+:::::::::::::::::::
+
+full-column-rank $X$의 exact arithmetic에서 세 representation은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta
+=
+(X'X)^{-1}X'Y
+=
+R^{-1}Q'Y
+=
+V\Sigma^{-1}U'Y.
+$$
+
+:::::::::::::::::::
+
+그리고 fitted values는 모두
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat Y
+=
+P_XY.
+}
+$$
+
+:::::::::::::::::::
+
+즉 algorithms가 다른 target을 계산하는 것이 아니다. 차이는 같은 least-squares projection을 어떤 numerical representation으로 계산하는가에 있다.
+
+::::::::::::::::::::
 
 ::::::::::::::::::::::::::
 
@@ -1358,7 +2600,7 @@ $$
 
 ::: {.topic-opening}
 “multicollinearity”, “weak identification”, “ill-conditioning”은 종종 같은 말처럼 사용되지만 서로 다른 층위의 문제다.
-  이 노트에서는 population, sample, numerical 문제를 끝까지 구분한다.
+이 노트에서는 population, sample, numerical 문제를 끝까지 구분한다.
 :::
 
 ### 7.10.1 Three distinct conditioning problems {#s7101}
@@ -1406,7 +2648,7 @@ $$
 
 ### 7.10.2 Condition numbers {#s7102}
 
-  full-column-rank $X$의 spectral condition number는
+full-column-rank $X$의 spectral condition number는
 
 :::::::::::::::::::: {.math-display}
 
@@ -1421,12 +2663,61 @@ $$
 
 ::::::::::::::::::::
 
-  $\kappa_2(X)$가 크면 least-squares coefficient는 certain perturbations에 민감해질 수 있다.
-  이때 문제는 coefficient formula의 existence가 아니라 computational sensitivity다.
+$\kappa_2(X)$가 크면 least-squares coefficient는 certain perturbations에 민감해질 수 있다.
+이때 문제는 coefficient formula의 existence가 아니라 computational sensitivity다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Condition-number squaring
+
+:::::::::::::::::::
+
+SVD $X=U\Sigma V'$를 쓰면
+
+::::::::::::::::::: {.math-display}
+
+$$
+X'X
+=
+V\Sigma^2V'.
+$$
+
+:::::::::::::::::::
+
+따라서 $X'X$의 positive eigenvalues는 정확히
+$\sigma_j(X)^2$. Full column rank이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\kappa_2(X'X)
+&=
+\frac{\lambda_{\max}(X'X)}
+{\lambda_{\min}(X'X)}\\
+&=
+\frac{\sigma_{\max}(X)^2}
+{\sigma_{\min}(X)^2}\\
+&=
+\boxed{
+\kappa_2(X)^2
+}.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+즉 normal equations를 위해 $X'X$를 형성하면 spectral condition number를 제곱한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
 
 ### 7.10.3 Why $X'X$ can be dangerous {#s7103}
 
-  singular values of $X'X$는 $\sigma_j(X)^2$이므로
+singular values of $X'X$는 $\sigma_j(X)^2$이므로
 
 :::::::::::::::::::: {.math-display}
 
@@ -1440,12 +2731,10 @@ $$
 
 ::::::::::::::::::::
 
-  따라서 normal equations를 위해 $X'X$를 직접 만들면 condition number를 제곱시킬 수 있다.
-  이것이 QR 또는 SVD가 numerical stability 측면에서 더 선호되는 주요 이유 중 하나다.
+따라서 normal equations를 위해 $X'X$를 직접 만들면 condition number를 제곱시킬 수 있다.
+이것이 QR 또는 SVD가 numerical stability 측면에서 더 선호되는 주요 이유 중 하나다.
 
 :::::::::::::::::::: {.callout-strip}
-
-  
 
 ::::::::::::::::::: {.left}
 
@@ -1453,16 +2742,69 @@ Closed form ≠ algorithm
 
 :::::::::::::::::::
 
-  
-
 ::::::::::::::::::: {.right}
 
-    $\widehat\beta=(X'X)^{-1}X'Y$는 훌륭한 algebraic identity지만,
-    실제 계산에서는 explicit matrix inverse를 형성하는 것이 일반적으로 권장되는 구현이 아니다.
-    수학적 표현과 numerical implementation을 분리해서 읽어야 한다.
-  
+$\widehat\beta=(X'X)^{-1}X'Y$는 훌륭한 algebraic identity지만,
+실제 계산에서는 explicit matrix inverse를 형성하는 것이 일반적으로 권장되는 구현이 아니다.
+수학적 표현과 numerical implementation을 분리해서 읽어야 한다.
 
 :::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WORKED EXAMPLE 7.6 · Near-collinearity가 numerical sensitivity를 증폭한다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+X_\varepsilon
+=
+\begin{pmatrix}
+1&1\\
+1&1+\varepsilon
+\end{pmatrix},
+\qquad
+0\lt\varepsilon\ll1.
+$$
+
+:::::::::::::::::::
+
+$\varepsilon\to0$이면 두 columns가 서로 거의 같아져 smallest singular value가 0으로 접근한다.
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\kappa_2(X_\varepsilon)
+\to\infty,
+\qquad
+\kappa_2(X_\varepsilon'X_\varepsilon)
+=
+\kappa_2(X_\varepsilon)^2.
+$$
+
+:::::::::::::::::::
+
+예를 들어 $\kappa_2(X_\varepsilon)$가 order $10^4$이면 normal-equation matrix는 order $10^8$의 condition number를 가질 수 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{forming }X'X
+\text{ can magnify numerical sensitivity quadratically.}
+}
+$$
+
+:::::::::::::::::::
+
+이것은 population identification failure와는 다른 finite-precision numerical issue다.
 
 ::::::::::::::::::::
 
@@ -1476,80 +2818,69 @@ Closed form ≠ algorithm
 
 :::::::::::::::::::: {.chapter-summary}
 
-  
-
 ::::::::::::::::::: {.chapter-summary__head}
 
 Chapter 7 in one map
 
 :::::::::::::::::::
 
-  
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\begin{array}{ccccc}
+P_0
+&\longrightarrow&
+Q(b)=P_0\ell_b
+&\longrightarrow&
+\beta^L
+\\
+\downarrow&&\downarrow&&\downarrow
+\\
+P_n
+&\longrightarrow&
+Q_n(b)=P_n\ell_b
+&\longrightarrow&
+\widehat\beta
+\end{array}
+}
+$$
+
+:::::::::::::::::::
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  \begin{array}{ccccc}
-  P_0
-  &\longrightarrow&
-  Q(b)=P_0\ell_b
-  &\longrightarrow&
-  \beta^L
-  \\
-  \downarrow&&\downarrow&&\downarrow
-  \\
-  P_n
-  &\longrightarrow&
-  Q_n(b)=P_n\ell_b
-  &\longrightarrow&
-  \widehat\beta
-  \end{array}
-  }
-  $$
+\boxed{
+\widehat\beta
+=
+\operatorname*{arg\,min}_b\|Y-Xb\|_2^2
+\Longleftrightarrow
+X'(Y-X\widehat\beta)=0
+}
+$$
 
 :::::::::::::::::::
-
-  
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  \widehat\beta
-  =
-  \operatorname*{arg\,min}_b\|Y-Xb\|_2^2
-  \Longleftrightarrow
-  X'(Y-X\widehat\beta)=0
-  }
-  $$
-
-:::::::::::::::::::
-
-  
-
-::::::::::::::::::: {.math-display}
-
+\boxed{
+Y
+=
+P_XY
++
+M_XY
+=
+\widehat Y+\widehat e,
+\qquad
+\widehat Y\perp\widehat e.
+}
 $$
-  \boxed{
-  Y
-  =
-  P_XY
-  +
-  M_XY
-  =
-  \widehat Y+\widehat e,
-  \qquad
-  \widehat Y\perp\widehat e.
-  }
-  $$
 
 :::::::::::::::::::
 
-  
-
-    동일한 OLS object가 optimization, normal equations, Euclidean projection, factorization이라는 네 언어로 표현된다.
-  
+동일한 OLS object가 optimization, normal equations, Euclidean projection, factorization이라는 네 언어로 표현된다.
 
 ::::::::::::::::::::
 
@@ -1558,38 +2889,38 @@ $$
 Sample least squares problem을 볼 때 다음 순서로 읽는다.
 
 <ol>
-  <li><strong>Population target:</strong> 어떤 population projection coefficient가 배경에 있는가?</li>
-  <li><strong>Empirical criterion:</strong> 어떤 sample loss를 최소화하는가?</li>
-  <li><strong>Rank:</strong> $X$는 full column rank인가?</li>
-  <li><strong>Geometry:</strong> 어떤 column space에 projection하는가?</li>
-  <li><strong>Residual:</strong> 어떤 sample orthogonality가 정확히 성립하는가?</li>
-  <li><strong>Partialling out:</strong> FWL로 coefficient를 어떻게 residualized variation으로 읽을 수 있는가?</li>
-  <li><strong>Representation:</strong> coefficients와 fitted values 중 무엇이 unique한가?</li>
-  <li><strong>Computation:</strong> normal equations, QR, SVD 중 어떤 numerical representation이 적절한가?</li>
-  <li><strong>Only later:</strong> sample randomness 아래 estimator의 distribution과 inference는 어떻게 되는가?</li>
+<li><strong>Population target:</strong> 어떤 population projection coefficient가 배경에 있는가?</li>
+<li><strong>Empirical criterion:</strong> 어떤 sample loss를 최소화하는가?</li>
+<li><strong>Rank:</strong> $X$는 full column rank인가?</li>
+<li><strong>Geometry:</strong> 어떤 column space에 projection하는가?</li>
+<li><strong>Residual:</strong> 어떤 sample orthogonality가 정확히 성립하는가?</li>
+<li><strong>Partialling out:</strong> FWL로 coefficient를 어떻게 residualized variation으로 읽을 수 있는가?</li>
+<li><strong>Representation:</strong> coefficients와 fitted values 중 무엇이 unique한가?</li>
+<li><strong>Computation:</strong> normal equations, QR, SVD 중 어떤 numerical representation이 적절한가?</li>
+<li><strong>Only later:</strong> sample randomness 아래 estimator의 distribution과 inference는 어떻게 되는가?</li>
 </ol>
 
 ### 연습문제 {#exercises}
 
 <ol class="exercise-list">
-  <li><strong>Empirical analogue.</strong> $Q(b)=E[(Y-X'b)^2]$에서 $P_0$를 $P_n$으로 바꾸어 $Q_n(b)$를 유도하고 $\widehat\beta=T(P_n)$라는 plug-in interpretation을 설명하라.</li>
-  <li><strong>Normal equations.</strong> $Q_n(b)=n^{-1}(Y-Xb)'(Y-Xb)$의 gradient와 Hessian을 계산하고 normal equations를 유도하라.</li>
-  <li><strong>Strict convexity.</strong> $\operatorname{rank}(X)=k$와 $X'X\succ0$가 동치임을 증명하고 coefficient uniqueness와 연결하라.</li>
-  <li><strong>Dummy-variable trap.</strong> intercept와 세 category dummy를 모두 포함한 design matrix가 왜 rank deficient한지 null vector를 직접 구성하라.</li>
-  <li><strong>Projection matrix.</strong> $P_X'=P_X$, $P_X^2=P_X$, $P_XX=X$를 증명하라.</li>
-  <li><strong>Residual maker.</strong> $M_X'=M_X$, $M_X^2=M_X$, $P_XM_X=0$을 증명하라.</li>
-  <li><strong>Pythagoras.</strong> $Y=\widehat Y+\widehat e$와 $\widehat Y'\widehat e=0$에서 $\|Y\|^2=\|\widehat Y\|^2+\|\widehat e\|^2$를 보이라.</li>
-  <li><strong>Centered decomposition.</strong> intercept가 있을 때 $TSS=ESS+RSS$를 증명하고 $R^2\in[0,1]$임을 보이라.</li>
-  <li><strong>Nested models.</strong> $\mathcal C(X_1)\subseteq\mathcal C(X_2)$이면 $RSS_2\le RSS_1$임을 projection geometry로 증명하라.</li>
-  <li><strong>Sample FWL.</strong> partitioned regression의 normal equations 또는 block matrix algebra를 사용해 $\widehat\beta_2=(X_2'M_1X_2)^{-1}X_2'M_1Y$를 증명하라.</li>
-  <li><strong>Demeaning.</strong> $X_1=\mathbf1_n$일 때 $M_1Y=Y-\bar Y\mathbf1_n$임을 보이고 simple regression with intercept의 slope formula를 centered variables로 다시 유도하라.</li>
-  <li><strong>Leverage.</strong> $\sum_i h_{ii}=k$를 trace identity로 증명하고 average leverage $k/n$을 해석하라.</li>
-  <li><strong>Rank deficiency.</strong> $\mathcal N(X)\neq\{0\}$일 때 minimizer $b_0$와 $b_0+v$, $v\in\mathcal N(X)$가 같은 fitted values를 만드는 것을 보이라.</li>
-  <li><strong>Pseudoinverse.</strong> SVD $X=U\Sigma V'$를 이용해 $X^+=V\Sigma^+U'$를 쓰고 minimum-norm least-squares solution이 어떻게 선택되는지 설명하라.</li>
-  <li><strong>QR.</strong> $X=QR$에서 least-squares criterion을 $Q'Y$와 orthogonal complement로 분해하고 $R\widehat\beta=Q'Y$를 유도하라.</li>
-  <li><strong>Condition number.</strong> $X'X$의 singular values가 $\sigma_j(X)^2$임을 이용해 $\kappa_2(X'X)=\kappa_2(X)^2$를 증명하라.</li>
-  <li><strong>Conceptual separation.</strong> population $E[XX']$가 nearly singular한 경우, realized $X$가 nearly rank deficient한 경우, floating-point computation이 ill-conditioned한 경우를 각각 구분해 설명하라.</li>
-  <li><strong>Research implementation exercise.</strong> 임의의 regression dataset을 골라 normal-equation solution, QR solution, SVD solution을 비교하고 coefficient differences, residual norm, smallest singular value, condition number를 보고하라.</li>
+<li><strong>Empirical analogue.</strong> 세 observations를 직접 정해 $P_n$과 $Q_n(b)$를 쓰고 $T(P_n)$을 직접 계산하라. 이어서 population functional $T(P_0)$와 논리적 역할을 비교하라.</li>
+<li><strong>Normal equations and objective gap.</strong> $Q_n(b)=n^{-1}\|Y-Xb\|^2$의 gradient와 Hessian을 계산하고 normal equations를 유도하라. 이어서 $Q_n(b)-Q_n(\hat\beta)=n^{-1}(b-\hat\beta)'X'X(b-\hat\beta)$를 증명하라.</li>
+<li><strong>Strict convexity and uniqueness.</strong> $\operatorname{rank}(X)=k\iff X'X\succ0\iff$ coefficient minimizer unique임을 증명하라.</li>
+<li><strong>Dummy-variable trap.</strong> intercept와 세 category dummies를 모두 포함한 design에서 explicit nonzero null vector를 구성하고 coefficient equivalence class를 기술하라.</li>
+<li><strong>Projection matrix.</strong> $P_X'=P_X$, $P_X^2=P_X$, $P_XX=X$를 증명하고 $\mathcal R(P_X)=\mathcal C(X)$, $\mathcal N(P_X)=\mathcal C(X)^\perp$를 보이라.</li>
+<li><strong>Residual maker.</strong> $M_X'=M_X$, $M_X^2=M_X$, $P_XM_X=0$, $M_XX=0$을 증명하고 $\mathbb R^n=\mathcal C(X)\oplus\mathcal C(X)^\perp$와 연결하라.</li>
+<li><strong>Pythagoras.</strong> $Y=\hat Y+\hat e$에서 origin-centered decomposition을 증명하고, intercept가 있는 경우 centered $TSS=ESS+RSS$를 별도로 증명하라.</li>
+<li><strong>$R^2$.</strong> intercept가 있을 때 $0\le R^2\le1$을 증명하고, intercept가 없는 regression에서 centered $R^2$가 음수가 되는 explicit example을 구성하라.</li>
+<li><strong>Nested models.</strong> $\mathcal C(X_1)\subseteq\mathcal C(X_2)$이면 $RSS_2\le RSS_1$임을 minimization-domain argument와 projection geometry 두 방식으로 증명하라.</li>
+<li><strong>Sample FWL.</strong> projection-matrix route와 block normal-equation route 두 방식으로 $\hat\beta_2=(X_2'M_1X_2)^{-1}X_2'M_1Y$를 증명하라.</li>
+<li><strong>Demeaning.</strong> $X_1=\mathbf1_n$이면 $M_1Y=Y-\bar Y\mathbf1_n$임을 보이고 centered simple-regression slope formula를 FWL로 유도하라.</li>
+<li><strong>Leverage.</strong> $h_{ii}=e_i'P_Xe_i=\|P_Xe_i\|^2$를 이용해 $0\le h_{ii}\le1$을 증명하고 $\sum_i h_{ii}=\operatorname{rank}(X)$를 trace/eigenvalue argument로 증명하라.</li>
+<li><strong>Simple-regression leverage.</strong> intercept와 scalar regressor $x$에서 $h_{ii}=1/n+(x_i-\bar x)^2/\sum_j(x_j-\bar x)^2$를 유도하고 high-leverage observation의 geometry를 설명하라.</li>
+<li><strong>Rank deficiency and pseudoinverse.</strong> 모든 LS minimizers가 $X^+Y+\mathcal N(X)$ 형태임을 보이고 $X^+Y$가 minimum-norm representative임을 row-space/null-space orthogonality로 증명하라.</li>
+<li><strong>QR.</strong> $Y=QQ'Y+(I-QQ')Y$에서 시작해 QR least-squares criterion decomposition을 증명하고 $R\hat\beta=Q'Y$를 유도하라.</li>
+<li><strong>SVD.</strong> full-rank case에서 $X=U\Sigma V'$로부터 $\hat\beta=V\Sigma^{-1}U'Y$와 $P_X=UU'$를 유도하라.</li>
+<li><strong>Condition number.</strong> $\kappa_2(X'X)=\kappa_2(X)^2$를 SVD로 증명하고 nearly-collinear $2\times2$ matrix family에서 condition number가 어떻게 폭증하는지 계산하라.</li>
+<li><strong>Research implementation exercise.</strong> 하나의 regression dataset에서 normal-equation, QR, SVD solutions를 비교하라. coefficient 차이뿐 아니라 fitted values, residual norm, smallest singular value, $\kappa_2(X)$, $\kappa_2(X'X)$를 함께 보고하라.</li>
 </ol>
 
 ::::::::::::::::::::::::::
@@ -1598,14 +2929,12 @@ Sample least squares problem을 볼 때 다음 순서로 읽는다.
 
 ## 참고문헌 및 다음 장
 
-  이 장은 population linear projection을 empirical least-squares problem으로 옮긴 뒤,
-  OLS를 optimization, Euclidean projection, normal equations, matrix factorization의 네 관점에서 통합적으로 해석한다.
-  finite-sample geometry에서는 projection matrix와 residual maker, FWL, leverage를 중심으로 하고,
-  numerical layer에서는 normal equations, QR, SVD, pseudoinverse, condition number를 구분하여 다룬다.
+이 장은 population linear projection을 empirical least-squares problem으로 옮긴 뒤,
+OLS를 optimization, Euclidean projection, normal equations, matrix factorization의 네 관점에서 통합적으로 해석한다.
+finite-sample geometry에서는 projection matrix와 residual maker, FWL, leverage를 중심으로 하고,
+numerical layer에서는 normal equations, QR, SVD, pseudoinverse, condition number를 구분하여 다룬다.
 
 :::::::::::::::::::: {.chapter-summary}
-
-  
 
 ::::::::::::::::::: {.chapter-summary__head}
 
@@ -1613,25 +2942,20 @@ Sample least squares problem을 볼 때 다음 순서로 읽는다.
 
 :::::::::::::::::::
 
-  
-
-    Chapter 7에서는 표본 $(X,Y)$가 주어졌을 때 OLS가 무엇을 계산하는지를 deterministic algebra로 분석했다.
-    Chapter 8에서는 이제 그 표본 자체를 random object로 보고 $\widehat\beta$의 statistical properties를 분석한다.
-    unbiasedness와 conditional variance, homoskedasticity와 heteroskedasticity, Gauss–Markov,
-    그리고 finite-sample distribution과 inference의 출발점을 구분하여 전개한다.
-  
-
-  
+Chapter 7에서는 표본 $(X,Y)$가 주어졌을 때 OLS가 무엇을 계산하는지를 deterministic algebra로 분석했다.
+Chapter 8에서는 이제 그 표본 자체를 random object로 보고 $\widehat\beta$의 statistical properties를 분석한다.
+unbiasedness와 conditional variance, homoskedasticity와 heteroskedasticity, Gauss–Markov,
+그리고 finite-sample distribution과 inference의 출발점을 구분하여 전개한다.
 
 ::::::::::::::::::: {.math-display}
 
 $$
-  \boxed{
-  \text{Given sample: OLS geometry}
-  \quad\longrightarrow\quad
-  \text{Random sample: sampling theory}.
-  }
-  $$
+\boxed{
+\text{Given sample: OLS geometry}
+\quad\longrightarrow\quad
+\text{Random sample: sampling theory}.
+}
+$$
 
 :::::::::::::::::::
 
