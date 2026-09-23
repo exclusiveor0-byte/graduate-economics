@@ -1,0 +1,3932 @@
+---
+title: "Chapter 15 · Dependent Data and Time-Series Foundations"
+description: "Stationarity, ergodicity, white noise, MDS, innovations, Wold representation, long-run variance, dependent OLS, HAC covariance estimation."
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/econometrics-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s151}
+
+## [15.1]{.section-number}From Independent Samples to Dependent Sequences
+
+::: {.topic-opening}
+Cross-sectional asymptotics에서는 observations가 i.i.d. 또는 독립에 가까운 sampling structure를 갖는 경우가 중심이었다.
+Time-series econometrics에서는 한 stochastic process의 ordered realization을 관측하며 인접 observations는 일반적으로 dependent하다.
+:::
+
+### 15.1.1 One realization, ordered observations {#s1511}
+
+stochastic process를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\{W_t:t\in\mathbb Z\}
+$$
+
+::::::::::::::::::::
+
+라고 하고 실제 sample은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+W_1,W_2,\ldots,W_T
+$$
+
+::::::::::::::::::::
+
+라고 하자. 일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+W_t\not\perp W_{t-1}.
+}
+$$
+
+::::::::::::::::::::
+
+우리는 여러 independent economies를 관측하는 것이 아니라 하나의 economy의 긴 path를 관측한다고 생각할 수 있다.
+
+### 15.1.2 The empirical-analogue question under dependence {#s1512}
+
+관심 population moment가
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[h(W_t)]
+$$
+
+::::::::::::::::::::
+
+라면 자연스러운 sample analogue는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac1T\sum_{t=1}^{T}h(W_t).
+$$
+
+::::::::::::::::::::
+
+그러나 이 quantity가 population expectation으로 수렴하는 이유는 더 이상 i.i.d. LLN일 수 없다.
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Chapter 15의 첫 질문
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+하나의 dependent realization만 가지고도 time averages가 population averages를 학습할 수 있는가?
+이에 대한 핵심 답이 stationarity와 ergodicity다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+연결 15.1 · 같은 sample average라도 정당화하는 확률론은 다르다
+
+:::::::::::::::::::
+
+Cross section과 time series 모두 empirical average를 사용한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_n h
+=
+\frac1n\sum_{i=1}^n h(W_i),
+\qquad
+P_T^{time}h
+=
+\frac1T\sum_{t=1}^T h(W_t).
+$$
+
+:::::::::::::::::::
+
+그러나 첫 번째는 i.i.d. LLN으로, 두 번째는 ergodic/weak-dependence LLN으로 정당화될 수 있다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{same empirical formula}
+\neq
+\text{same probabilistic justification}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s152}
+
+## [15.2]{.section-number}Time, Information, and Stochastic Processes
+
+::: {.topic-opening}
+Time series에서는 현재와 미래를 구분하는 information structure가 model의 일부다.
+Chapter 2의 sigma-field와 Chapter 5의 conditional expectation이 forecasting language로 다시 등장한다.
+:::
+
+### 15.2.1 Filtrations and available information {#s1521}
+
+time $t$까지 이용 가능한 information을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\mathcal F_t
+=
+\sigma(W_t,W_{t-1},W_{t-2},\ldots)
+$$
+
+::::::::::::::::::::
+
+처럼 표현할 수 있다. 보다 일반적으로 filtration은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\mathcal F_{t-1}\subseteq\mathcal F_t
+$$
+
+::::::::::::::::::::
+
+를 만족하는 increasing sequence of information sets다.
+
+### 15.2.2 Conditional expectation as forecasting {#s1522}
+
+Chapter 5의 conditional expectation은 time series에서 natural forecast target이 된다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Y_{t+h}\mid\mathcal F_t].
+}
+$$
+
+::::::::::::::::::::
+
+따라서 conditional expectation은 단순한 statistical decomposition을 넘어 “현재 정보로 미래를 얼마나 예측할 수 있는가?”라는 dynamic question을 표현한다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 15.1 · Conditional forecast error is orthogonal to current information
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+m_t
+=
+E[Y_{t+1}\mid\mathcal F_t],
+\qquad
+e_{t+1}
+=
+Y_{t+1}-m_t.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[e_{t+1}\mid\mathcal F_t]=0.
+$$
+
+:::::::::::::::::::
+
+따라서 square-integrable하고 $\mathcal F_t$-measurable한 모든 $Z_t$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[Z_te_{t+1}]=0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[Z_te_{t+1}]
+&=
+E\!\left[
+E[Z_te_{t+1}\mid\mathcal F_t]
+\right]\\
+&=
+E\!\left[
+Z_tE[e_{t+1}\mid\mathcal F_t]
+\right]\\
+&=0.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+두 번째 equality는 $Z_t$가 $\mathcal F_t$-measurable이라는 사실을 사용한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 15.1 · Conditional expectation and linear projection are not the same object
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t=X_{t-1}^2+\varepsilon_t,
+\qquad
+X_{t-1}\sim N(0,1),
+\qquad
+E[\varepsilon_t\mid X_{t-1}]=0.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y_t\mid X_{t-1}]
+=
+X_{t-1}^2.
+$$
+
+:::::::::::::::::::
+
+그러나 $\{1,X_{t-1}\}$에 대한 best linear projection은
+
+::::::::::::::::::: {.math-display}
+
+$$
+P_L(Y_t\mid 1,X_{t-1})
+=
+1,
+$$
+
+:::::::::::::::::::
+
+because $E[X_{t-1}^3]=0$. Thus
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{linear projection on the past}
+\neq
+\text{conditional expectation given the past}
+}
+$$
+
+:::::::::::::::::::
+
+in general.
+
+::::::::::::::::::::
+
+### 15.2.3 Time ordering is part of the model {#s1523}
+
+Cross section에서는 observation order를 바꾸어도 likelihood or sample moments가 변하지 않는 경우가 많다.
+Time series에서는 lag가 dependence structure를 결정한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{Law}(Y_t,Y_{t-1})
+\text{ need not equal }
+\operatorname{Law}(Y_t,Y_{t-10}).
+}
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{ordering is part of the statistical structure}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s153}
+
+## [15.3]{.section-number}Stationarity: Strict and Covariance
+
+::: {.topic-opening}
+Stationarity는 time-series population law가 calendar time에 따라 drift하지 않는다는 stability condition이다.
+하지만 stationarity 자체가 independence나 learnability를 의미하지는 않는다.
+:::
+
+### 15.3.1 Strict stationarity {#s1531}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+정의 15.1 · Strict stationarity
+
+:::::::::::::::::::
+
+모든 $m$, 모든 integers $t_1,\ldots,t_m$, 모든 shift $h$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+(Y_{t_1},\ldots,Y_{t_m})
+\overset d=
+(Y_{t_1+h},\ldots,Y_{t_m+h}).
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+즉 finite-dimensional joint distributions가 time shift에 invariant하다.
+
+### 15.3.2 Covariance stationarity {#s1532}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+정의 15.2 · Covariance stationarity
+
+:::::::::::::::::::
+
+second moments가 finite이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y_t]=\mu,
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(Y_t)=\gamma(0),
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{Cov}(Y_t,Y_{t-h})
+=
+\gamma(h),
+}
+$$
+
+:::::::::::::::::::
+
+즉 covariance가 calendar time $t$가 아니라 lag $h$에만 의존한다.
+
+::::::::::::::::::::
+
+finite second moments가 존재하면 strict stationarity는 covariance stationarity를 imply하지만 converse는 일반적으로 성립하지 않는다.
+
+### 15.3.3 Stationarity is not independence {#s1533}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{stationarity}
+\not\Rightarrow
+\text{independence}.
+}
+$$
+
+::::::::::::::::::::
+
+stationary AR, MA, ARMA processes는 대표적으로 serial dependence를 허용한다.
+Stationarity는 law의 temporal stability를 말하는 것이지 observations 사이의 independence를 말하는 것이 아니다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 15.2 · Strict stationarity plus finite second moments implies covariance stationarity
+
+:::::::::::::::::::
+
+$\{Y_t\}$가 strictly stationary이고 $E[Y_t^2]\lt\infty$이면 mean과 variance는 $t$에 의존하지 않으며
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Cov}(Y_t,Y_{t-h})
+=
+\gamma(h).
+$$
+
+:::::::::::::::::::
+
+따라서 이 process는 covariance stationary다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Strict stationarity gives
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t\overset d=Y_{t+k}
+$$
+
+:::::::::::::::::::
+
+모든 $k$에 대해 strict stationarity가 성립하므로 finite moments 아래 $E[Y_t]$와 $E[Y_t^2]$는 time invariant하다. 또한
+
+::::::::::::::::::: {.math-display}
+
+$$
+(Y_t,Y_{t-h})
+\overset d=
+(Y_{t+k},Y_{t+k-h}),
+$$
+
+:::::::::::::::::::
+
+이고, 따라서 $E[Y_tY_{t-h}]$는 $h$에만 의존한다. 그러므로 covariance도 lag에만 의존한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 15.2 · Covariance stationary need not be strictly stationary
+
+:::::::::::::::::::
+
+$\{Y_t\}$가 independent이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t\sim
+\begin{cases}
+N(0,1), & t\text{ even},\\
+\text{Rademacher}(\pm1), & t\text{ odd}.
+\end{cases}
+$$
+
+:::::::::::::::::::
+
+Then for every $t$,
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y_t]=0,
+\qquad
+\operatorname{Var}(Y_t)=1,
+$$
+
+:::::::::::::::::::
+
+라고 하자. Independence에 의해 $h\neq0$이면 $\gamma(h)=0$이므로 covariance stationary다. 그러나 one-dimensional marginal distribution이 even/odd에 따라 달라지므로 strictly stationary는 아니다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s154}
+
+## [15.4]{.section-number}Autocovariance, Autocorrelation, and Dependence
+
+::: {.topic-opening}
+Stationary process의 linear serial dependence는 autocovariance function과 autocorrelation function으로 요약할 수 있다.
+:::
+
+### 15.4.1 Population autocovariances {#s1541}
+
+covariance-stationary scalar process에서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\gamma(h)
+=
+\operatorname{Cov}(Y_t,Y_{t-h}).
+}
+$$
+
+::::::::::::::::::::
+
+autocovariance는 symmetric하다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\gamma(-h)=\gamma(h).
+}
+$$
+
+::::::::::::::::::::
+
+scale-free autocorrelation은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\rho(h)
+=
+\frac{\gamma(h)}{\gamma(0)}.
+}
+$$
+
+::::::::::::::::::::
+
+### 15.4.2 Sample autocovariances {#s1542}
+
+sample mean:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\bar Y
+=
+\frac1T\sum_{t=1}^{T}Y_t.
+$$
+
+::::::::::::::::::::
+
+sample autocovariance:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\gamma(h)
+=
+\frac1T
+\sum_{t=h+1}^{T}
+(Y_t-\bar Y)(Y_{t-h}-\bar Y).
+$$
+
+::::::::::::::::::::
+
+sample autocorrelation:
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\rho(h)
+=
+\frac{\widehat\gamma(h)}
+{\widehat\gamma(0)}.
+}
+$$
+
+::::::::::::::::::::
+
+### 15.4.3 Zero autocorrelation versus independence {#s1543}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 15.1 · Autocorrelation은 linear dependence measure
+
+:::::::::::::::::::
+
+$\rho(h)=0$은 lag-$h$ linear covariance가 zero라는 뜻이지 일반적인 independence를 의미하지 않는다.
+Nonlinear dependence는 autocorrelation이 zero여도 남을 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\rho(h)=0
+\not\Rightarrow
+Y_t\perp Y_{t-h}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Autocovariance symmetry
+
+:::::::::::::::::::
+
+covariance-stationary scalar process에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\gamma(-h)
+&=
+\operatorname{Cov}(Y_t,Y_{t+h})\\
+&=
+\operatorname{Cov}(Y_{t+h},Y_t)\\
+&=
+\gamma(h).
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 15.3 · Zero autocorrelation can hide nonlinear dependence
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t
+=
+\varepsilon_t\varepsilon_{t-1},
+\qquad
+\varepsilon_t\stackrel{iid}{\sim}N(0,1).
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y_tY_{t-1}]
+=
+E[
+\varepsilon_t\varepsilon_{t-1}^2\varepsilon_{t-2}
+]
+=
+0.
+$$
+
+:::::::::::::::::::
+
+따라서 lag-one autocovariance는 0이다. 그러나
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Cov}(Y_t^2,Y_{t-1}^2)
+=
+E[\varepsilon^4]-1
+=
+2.
+$$
+
+:::::::::::::::::::
+
+그러므로 $Y_t$와 $Y_{t-1}$는 zero linear autocorrelation에도 불구하고 dependent하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Gaussian innovations가 independent이고 centered이므로 첫 번째 covariance는 $E[\varepsilon_t]=0$을 포함하는 곱으로 factorization된다. Squares에 대해서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[Y_t^2Y_{t-1}^2]
+=
+E[\varepsilon_t^2]
+E[\varepsilon_{t-1}^4]
+E[\varepsilon_{t-2}^2]
+=
+3,
+$$
+
+:::::::::::::::::::
+
+이고 $E[Y_t^2]=E[Y_{t-1}^2]=1$이므로 covariance는 $3-1=2$다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s155}
+
+## [15.5]{.section-number}Ergodicity and the Law of Large Numbers
+
+::: {.topic-opening}
+Stationarity는 population을 stable하게 만들지만 한 개의 path에서 그 population을 학습할 수 있게 해주는 조건은 아니다.
+그 역할을 하는 핵심 개념이 ergodicity다.
+:::
+
+### 15.5.1 Why stationarity alone is insufficient {#s1551}
+
+다음 process를 생각하자.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y_t=Z
+\qquad
+\text{for every }t,
+$$
+
+::::::::::::::::::::
+
+where $Z$ is a nondegenerate random variable.
+이 process는 strictly stationary일 수 있지만 sample mean은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\bar Y_T=Z
+$$
+
+::::::::::::::::::::
+
+이므로 일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\bar Y_T
+\not\to
+E[Z].
+$$
+
+::::::::::::::::::::
+
+따라서 stationarity alone은 time average consistency를 주지 않는다.
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+정의 15.3A · Ergodicity
+
+:::::::::::::::::::
+
+strictly stationary process는 모든 shift-invariant event $A$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+P(A)\in\{0,1\}.
+}
+$$
+
+:::::::::::::::::::
+
+가 성립하면 ergodic이라고 한다. 직관적으로 이는 하나의 realization이 영원히 머무를 수 있는 서로 다른 persistent stochastic regime들로 process가 분해되지 않는다는 뜻이다.
+
+::::::::::::::::::::
+
+### 15.5.2 Ergodic theorem {#s1552}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 15.1 · Ergodic theorem
+
+:::::::::::::::::::
+
+$\{Y_t\}$가 strictly stationary and ergodic이고 $E|Y_t|\lt\infty$이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac1T\sum_{t=1}^{T}Y_t
+\overset p\longrightarrow
+E[Y_t].
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .preview}
+
+::::::::::::::::::: {.statement-head}
+
+증명 범위 · Birkhoff ergodic theorem
+
+:::::::::::::::::::
+
+Birkhoff ergodic theorem의 full proof에는 이 장의 범위를 넘어서는 machinery가 필요하다. 여기서는 stationarity와 ergodicity를 하나의 긴 realization로부터의 learnability로 연결하는 fundamental pathwise LLN으로 사용한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Interpretation
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+Stationarity는 population law가 시간에 따라 변하지 않게 하고,
+ergodicity는 한 sufficiently long realization이 그 population을 탐색하도록 한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 15.5.3 Transformed stationary-ergodic processes {#s1553}
+
+$\{W_t\}$가 stationary and ergodic이고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+X_t
+=
+h(W_t,W_{t-1},W_{t-2},\ldots)
+$$
+
+::::::::::::::::::::
+
+가 integrable measurable transformation이면 많은 standard settings에서 $\{X_t\}$ 역시 stationary and ergodic하다.
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac1T\sum_{t=1}^{T}X_t
+\overset p\longrightarrow
+E[X_t].
+}
+$$
+
+::::::::::::::::::::
+
+이 결과가 regressions의 sample cross-products와 score moments에 LLN을 적용하게 해준다.
+
+### 15.5.4 i.i.d. LLN versus ergodic LLN {#s1554}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Cross section</th><th>Dependent time series</th></tr></thead>
+<tbody>
+<tr><td>$W_i$는 i.i.d.</td><td>$\{W_t\}$는 stationary and ergodic</td></tr>
+<tr><td>$n^{-1}\sum h(W_i)$</td><td>$T^{-1}\sum h(W_t)$</td></tr>
+<tr><td>i.i.d. LLN</td><td>ergodic theorem</td></tr>
+<tr><td>$P_n h\to Ph$</td><td>time average $\to$ population average</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 15.1A · A mean-square LLN from summable autocovariances
+
+:::::::::::::::::::
+
+mean $\mu$를 갖는 covariance-stationary process $\{Y_t\}$를 생각하자. 만약
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sum_{h=0}^{\infty}
+|\gamma(h)|
+\lt\infty,
+$$
+
+:::::::::::::::::::
+
+then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\bar Y_T
+=
+\frac1T\sum_{t=1}^T Y_t
+\overset p\longrightarrow
+\mu.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Write
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(\bar Y_T)
+=
+\frac1T
+\left[
+\gamma(0)
++
+2\sum_{h=1}^{T-1}
+\left(
+1-\frac hT
+\right)
+\gamma(h)
+\right].
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{Var}(\bar Y_T)
+\le
+\frac1T
+\left[
+|\gamma(0)|
++
+2\sum_{h=1}^{\infty}
+|\gamma(h)|
+\right]
+\to0.
+$$
+
+:::::::::::::::::::
+
+이면 $E[\bar Y_T]=\mu$이고 Chebyshev inequality로 $\bar Y_T\to_p\mu$를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 15.3 · Finite-lag measurable transformations preserve stationarity and ergodicity
+
+:::::::::::::::::::
+
+$\{W_t\}$가 stationary and ergodic이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+X_t
+=
+h(W_t,\ldots,W_{t-k})
+$$
+
+:::::::::::::::::::
+
+measurable integrable $h$에 대해 위와 같이 정의하면 $\{X_t\}$도 stationary and ergodic이다.
+
+::: {.small}
+이 standard factor-property result의 full measure-theoretic proof는 여기서 생략한다.
+:::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s156}
+
+## [15.6]{.section-number}White Noise, Martingale Differences, and Innovations
+
+::: {.topic-opening}
+“Unpredictable shock”라는 말을 엄밀하게 사용하려면 white noise, martingale difference, innovation을 구분해야 한다.
+:::
+
+### 15.6.1 White noise {#s1561}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+정의 15.3 · White noise
+
+:::::::::::::::::::
+
+scalar process $\{e_t\}$가
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[e_t]=0,
+\qquad
+E[e_t^2]=\sigma^2\lt\infty,
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[e_te_{t-h}]=0,
+\qquad
+h\neq0
+}
+$$
+
+:::::::::::::::::::
+
+을 만족하면 white noise라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{white noise}
+\neq
+\text{i.i.d. noise}.
+}
+$$
+
+::::::::::::::::::::
+
+### 15.6.2 Martingale difference sequences {#s1562}
+
+filtration $\{\mathcal F_t\}$에 대해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[e_t\mid\mathcal F_{t-1}]=0
+}
+$$
+
+::::::::::::::::::::
+
+이면 $\{e_t\}$는 martingale difference sequence다.
+즉 past information으로 conditional mean을 예측할 수 없다.
+
+suitable integrability 아래 MDS는 past-measurable variables와 orthogonal하다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[Z_{t-1}e_t]=0
+\qquad
+\text{for suitable }Z_{t-1}\in\mathcal F_{t-1}.
+$$
+
+::::::::::::::::::::
+
+### 15.6.3 Linear innovations {#s1563}
+
+$Y_t$를 past linear information에 projection한 값을 $P_{t-1}Y_t$라 하자.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+Y_t
+=
+P_{t-1}Y_t
++
+e_t.
+}
+$$
+
+::::::::::::::::::::
+
+여기서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+e_t
+=
+Y_t-P_{t-1}Y_t
+$$
+
+::::::::::::::::::::
+
+를 linear innovation이라 한다.
+이는 past linear span에 orthogonal한 projection error다.
+
+### 15.6.4 A hierarchy of unpredictability concepts {#s1564}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Concept</th><th>Core restriction</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>i.i.d.</td><td>full independence + identical law</td><td>가장 강한 common benchmark</td></tr>
+<tr><td>MDS</td><td>$E[e_t\mid\mathcal F_{t-1}]=0$</td><td>past로부터 conditional-mean predictability가 없음</td></tr>
+<tr><td>White noise</td><td>zero autocovariances</td><td>linear serial correlation이 없음</td></tr>
+<tr><td>Innovation</td><td>projection error</td><td>선택한 predictor space에 대한 unpredictable component</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+이 concepts는 조건에 따라 서로 implication이 있을 수 있지만 일반적으로 동일하지 않다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 15.4 · MDS implies serial uncorrelatedness
+
+:::::::::::::::::::
+
+$\{e_t\}$가 square-integrable이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[e_t\mid\mathcal F_{t-1}]=0.
+$$
+
+:::::::::::::::::::
+
+If $e_{t-h}\in\mathcal F_{t-1}$ for $h\ge1$, then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[e_te_{t-h}]=0.
+}
+$$
+
+:::::::::::::::::::
+
+라고 하자. 그러면 covariance-stationary square-integrable MDS는 second-order sense에서 white noise다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+E[e_te_{t-h}]
+&=
+E\!\left[
+e_{t-h}E[e_t\mid\mathcal F_{t-1}]
+\right]\\
+&=0.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 15.4 · White noise need not be an MDS
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+e_t
+=
+\xi_t
++
+a(\xi_{t-1}^2-1),
+\qquad
+\xi_t\stackrel{iid}{\sim}N(0,1),
+\qquad
+a\neq0.
+$$
+
+:::::::::::::::::::
+
+이 경우 $E[e_t]=0$이고 모든 nonzero-lag autocovariance는 0이다. 그러나
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[e_t\mid\mathcal F_{t-1}]
+=
+a(\xi_{t-1}^2-1)
+\neq0
+$$
+
+:::::::::::::::::::
+
+with positive probability.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+$h\ge2$이면 두 변수는 independent centered factor를 제외하고 서로 겹치지 않는 innovation set에 의존하므로 covariance가 0이다. $h=1$에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[e_te_{t-1}]
+=
+E[
+\{\xi_t+a(\xi_{t-1}^2-1)\}
+\{\xi_{t-1}+a(\xi_{t-2}^2-1)\}
+]
+=
+0,
+$$
+
+:::::::::::::::::::
+
+모든 항이 independent centered innovation 또는 $E[\xi(\xi^2-1)]=0$을 포함하므로 covariance가 0이다. 그러나 past에 conditioning하면 predictable nonlinear term $a(\xi_{t-1}^2-1)$이 남는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 15.1 · MDS need not be i.i.d.
+
+:::::::::::::::::::
+
+다음 ARCH-type sequence를 생각하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+e_t=\sigma_t z_t,
+\qquad
+z_t\stackrel{iid}{\sim}(0,1),
+\qquad
+\sigma_t^2=\alpha_0+\alpha_1e_{t-1}^2.
+$$
+
+:::::::::::::::::::
+
+$z_t$가 $\mathcal F_{t-1}$와 independent이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[e_t\mid\mathcal F_{t-1}]
+=
+\sigma_tE[z_t]=0.
+$$
+
+:::::::::::::::::::
+
+따라서 $e_t$는 MDS이지만
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[e_t^2\mid\mathcal F_{t-1}]
+=
+\sigma_t^2
+$$
+
+:::::::::::::::::::
+
+conditional variance가 past에 의존하므로 이 process는 일반적으로 i.i.d.가 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+함의 관계 15.1 · Unpredictability concepts
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{mean-zero i.i.d.}
+\Rightarrow
+\text{MDS}
+\Rightarrow
+\text{serially uncorrelated}.
+}
+$$
+
+:::::::::::::::::::
+
+converse들은 일반적으로 성립하지 않는다. Linear innovation은 projection-error concept이므로 conditional-mean unpredictability와 구분해야 한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s157}
+
+## [15.7]{.section-number}Linear Projection on the Past and the Wold Representation
+
+::: {.topic-opening}
+Chapter 5의 Hilbert-space projection geometry는 time series에서 “best linear forecast from the infinite past”로 재해석된다.
+:::
+
+### 15.7.1 Projection on the infinite past {#s1571}
+
+past linear space를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\mathcal H_{t-1}
+=
+\overline{\operatorname{span}}
+\{1,Y_{t-1},Y_{t-2},\ldots\}
+$$
+
+::::::::::::::::::::
+
+라 하자. Best linear predictor는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+P_{t-1}Y_t
+=
+P[Y_t\mid\mathcal H_{t-1}]
+$$
+
+::::::::::::::::::::
+
+이고 innovation은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+e_t
+=
+Y_t-P_{t-1}Y_t.
+$$
+
+::::::::::::::::::::
+
+### 15.7.2 Innovation orthogonality {#s1572}
+
+projection theorem에 의해
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[e_tY_{t-j}]=0,
+\qquad
+j\ge1.
+}
+$$
+
+::::::::::::::::::::
+
+더 일반적으로 $e_t$는 $\mathcal H_{t-1}$의 모든 element와 orthogonal하다.
+
+### 15.7.3 Wold decomposition {#s1573}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 15.2 · Wold representation, schematic form
+
+:::::::::::::::::::
+
+covariance-stationary process는 다음 Wold decomposition을 갖는다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+Y_t-\mu
+=
+Y_t^{D}
++
+\sum_{j=0}^{\infty}
+\psi_j e_{t-j},
+\qquad
+\psi_0=1,
+\qquad
+\sum_{j=0}^{\infty}\psi_j^2\lt\infty,
+}
+$$
+
+:::::::::::::::::::
+
+여기서 $Y_t^{D}$는 deterministic component이고 $e_t$는 one-step linear innovation이다. Process가 purely nondeterministic이면 $Y_t^{D}=0$이고 representation은 pure one-sided MA$(\infty)$가 된다.
+
+::: {.small}
+full Hilbert-space proof는 뒤로 미룬다. 핵심은 square summability가 Wold representation의 일부인 반면 absolute summability는 이후 LRV 계산에 자주 쓰이는 더 강한 short-memory condition이라는 점이다.
+:::
+
+::::::::::::::::::::
+
+### 15.7.4 Why Wold matters for modeling {#s1574}
+
+Wold theorem의 econometric 의미는 finite-order ARMA models를 임의적 functional form이 아니라 stationary dynamics의 parsimonious approximations로 볼 수 있게 한다는 데 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{stationary process}
+\approx
+\text{linear filter of innovations}.
+}
+$$
+
+::::::::::::::::::::
+
+Chapter 16에서는 이 infinite representation을 finite-dimensional AR, MA, ARMA models로 parameterize한다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 15.5 · Linear innovations are serially uncorrelated
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+e_t
+=
+Y_t-P_{t-1}Y_t
+$$
+
+:::::::::::::::::::
+
+를 one-step linear innovation이라 하자. 그러면 모든 $h\ge1$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[e_te_{t-h}]=0.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+Projection theory gives
+
+::::::::::::::::::: {.math-display}
+
+$$
+e_t\perp\mathcal H_{t-1}.
+$$
+
+:::::::::::::::::::
+
+그러나 $e_{t-h}$는 $t-1$보다 늦지 않은 변수들의 linear combination/limit이므로 $e_{t-h}\in\mathcal H_{t-1}$이다. 따라서 $E[e_te_{t-h}]=0$이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 15.1A · Linear innovation need not be an MDS
+
+:::::::::::::::::::
+
+past linear span에 대한 orthogonality는 full sigma-field에 대한 conditional-mean orthogonality보다 약하다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+e_t\perp\mathcal H_{t-1}
+\not\Rightarrow
+E[e_t\mid\mathcal F_{t-1}]=0.
+}
+$$
+
+:::::::::::::::::::
+
+두 개념은 joint Gaussianity나 correctly specified linear conditional mean 같은 추가 구조 아래에서 일치할 수 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s158}
+
+## [15.8]{.section-number}Central Limit Theory and Long-Run Variance
+
+::: {.topic-opening}
+LLN이 consistency를 설명했다면 inference에는 CLT가 필요하다.
+Dependence가 있으면 sampling variance는 contemporaneous variance만이 아니라 모든 serial covariance를 포함한다.
+:::
+
+### 15.8.1 Ergodicity is not enough for a CLT {#s1581}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{ergodicity}
+\not\Rightarrow
+\text{CLT in general}.
+}
+$$
+
+::::::::::::::::::::
+
+Central limit theory에는 MDS structure, mixing conditions, linear-process summability 등 dependence를 더 강하게 통제하는 assumptions가 필요할 수 있다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 15.3A · Exact finite-$T$ variance of a dependent partial sum
+
+:::::::::::::::::::
+
+mean-zero covariance-stationary vector process $\{u_t\}$가 다음 autocovariance를 갖는다고 하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Gamma(h)
+=
+E[u_tu_{t-h}'].
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{Var}\!\left(
+\frac1{\sqrt T}\sum_{t=1}^Tu_t
+\right)
+=
+\Gamma(0)
++
+\sum_{h=1}^{T-1}
+\left(
+1-\frac hT
+\right)
+[
+\Gamma(h)+\Gamma(h)'
+].
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+sum의 covariance를 전개하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1T
+\sum_{t=1}^T\sum_{s=1}^T
+E[u_tu_s'].
+$$
+
+:::::::::::::::::::
+
+lag $h=t-s\gt0$마다 $t-s=h$를 만족하는 ordered pair는 정확히 $T-h$개다. 대응하는 negative-lag contribution은 transpose이므로 lag별로 묶으면 stated formula를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 15.8.2 Long-run variance {#s1582}
+
+mean-zero vector process $\{u_t\}$의 autocovariance matrix를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Gamma(h)
+=
+E[u_tu_{t-h}']
+$$
+
+::::::::::::::::::::
+
+라 하자. Long-run variance는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega
+=
+\sum_{h=-\infty}^{\infty}
+\Gamma(h).
+}
+$$
+
+::::::::::::::::::::
+
+동치로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega
+=
+\Gamma(0)
++
+\sum_{h=1}^{\infty}
+\left[
+\Gamma(h)+\Gamma(h)'
+\right].
+}
+$$
+
+::::::::::::::::::::
+
+### 15.8.3 Dependent-process CLT {#s1583}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 15.3 · Generic dependent-process CLT
+
+:::::::::::::::::::
+
+라고 하면 suitable weak-dependence and moment conditions 아래
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac1{\sqrt T}
+\sum_{t=1}^{T}u_t
+\overset d\longrightarrow
+N(0,\Omega).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Sampling uncertainty under dependence
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+Dependence는 단순히 “standard error가 커진다”는 의미가 아니다.
+Positive serial covariance는 variance를 키울 수 있고 negative serial covariance는 줄일 수도 있다.
+핵심은 모든 relevant autocovariances가 long-run variance에 누적된다는 점이다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 15.8.4 i.i.d. variance as a special case {#s1584}
+
+i.i.d.이면 $h\neq0$에 대해 $\Gamma(h)=0$이므로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega=\Gamma(0).
+}
+$$
+
+::::::::::::::::::::
+
+즉 Chapter 10의 contemporaneous covariance는 long-run variance의 special case다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 15.6 · Covariance summability makes the long-run variance well defined
+
+:::::::::::::::::::
+
+If
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sum_{h=-\infty}^{\infty}
+\|\Gamma(h)\|
+\lt\infty,
+$$
+
+:::::::::::::::::::
+
+then the series
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+\sum_{h=-\infty}^{\infty}\Gamma(h)
+$$
+
+:::::::::::::::::::
+
+converges absolutely and
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\operatorname{Var}\!\left(
+T^{-1/2}\sum_{t=1}^Tu_t
+\right)
+\longrightarrow
+\Omega.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+finite-$T$ variance는 $|h|\lt T$에서 $1-|h|/T$, 그 밖에서는 0인 weight를 사용한다. 이 weight는 pointwise하게 1로 수렴하고 절댓값이 1로 bounded된다. 따라서 absolute summability로 lag index에 대해 dominated convergence를 적용할 수 있다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+반례 15.5 · Stationarity does not imply a short-memory LRV
+
+:::::::::::::::::::
+
+stationary process의 autocovariance가
+
+::::::::::::::::::: {.math-display}
+
+$$
+\gamma(h)
+\sim
+c\,h^{-\alpha},
+\qquad
+0\lt\alpha\lt1,
+$$
+
+:::::::::::::::::::
+
+then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sum_{h=1}^{\infty}|\gamma(h)|
+=
+\infty.
+$$
+
+:::::::::::::::::::
+
+처럼 감소한다면 이는 standard absolutely summable short-memory LRV theory 밖의 long-memory behavior이며 $\sqrt T$와 다른 normalization이 필요할 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 15.2 · AR(1) long-run variance
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_t
+=
+\rho u_{t-1}+\varepsilon_t,
+\qquad
+|\rho|\lt1,
+\qquad
+\operatorname{Var}(\varepsilon_t)=\sigma_\varepsilon^2.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\gamma(h)
+=
+\frac{\sigma_\varepsilon^2}{1-\rho^2}
+\rho^{|h|}.
+$$
+
+:::::::::::::::::::
+
+Therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega
+=
+\gamma(0)+2\sum_{h=1}^{\infty}\gamma(h)
+=
+\frac{\sigma_\varepsilon^2}{(1-\rho)^2}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\Omega
+&=
+\frac{\sigma_\varepsilon^2}{1-\rho^2}
+\left(
+1+2\sum_{h=1}^{\infty}\rho^h
+\right)\\
+&=
+\frac{\sigma_\varepsilon^2}{1-\rho^2}
+\left(
+1+\frac{2\rho}{1-\rho}
+\right)\\
+&=
+\frac{\sigma_\varepsilon^2}{(1-\rho)^2}.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+따름정리 15.1 · MDS long-run variance has no lag terms
+
+:::::::::::::::::::
+
+$\{u_t\}$가 square-integrable MDS이면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Gamma(h)=0,
+\qquad
+h\neq0.
+$$
+
+:::::::::::::::::::
+
+Therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega=\Gamma(0).
+}
+$$
+
+:::::::::::::::::::
+
+이다. 이는 $u_t$가 conditionally heteroskedastic하여 statistically dependent하더라도 그대로 성립한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .preview}
+
+::::::::::::::::::: {.statement-head}
+
+정리 지도 15.1 · Three common routes to a dependent-data CLT
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Route</th><th>Typical structure</th><th>Main control</th></tr></thead>
+<tbody>
+<tr><td>Martingale CLT</td><td>MDS score + conditional variance stabilization 조건</td><td>conditional moments</td></tr>
+<tr><td>Mixing CLT</td><td>strong/α-mixing + moment/decay restrictions 조건</td><td>dependence coefficients</td></tr>
+<tr><td>Linear-process CLT</td><td>sufficiently regular innovation의 summable filter</td><td>filter decay + innovation moments</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+::: {.small}
+full proof에는 상당한 probability machinery가 필요하므로 여기서는 stated theorem으로 사용한다.
+:::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .preview}
+
+::::::::::::::::::: {.statement-head}
+
+스펙트럴 미리보기 15.1 · Long-run variance is zero-frequency uncertainty
+
+:::::::::::::::::::
+
+spectral density가 suitable summability conditions 아래 존재하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+f_u(\lambda)
+=
+\frac1{2\pi}
+\sum_{h=-\infty}^{\infty}
+\Gamma(h)e^{-ih\lambda}.
+$$
+
+:::::::::::::::::::
+
+At frequency zero,
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega
+=
+2\pi f_u(0).
+}
+$$
+
+:::::::::::::::::::
+
+이 identity는 뒤에서 HAC estimation을 frequency zero에서의 spectral-density estimation과 연결한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s159}
+
+## [15.9]{.section-number}Least Squares with Dependent Data
+
+::: {.topic-opening}
+OLS algebra는 변하지 않지만 LLN과 CLT가 dependent-data versions로 교체되고,
+asymptotic covariance의 meat는 long-run covariance가 된다.
+:::
+
+### 15.9.1 Population projection and sample OLS {#s1591}
+
+regression을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y_t=X_t'\beta+e_t
+$$
+
+::::::::::::::::::::
+
+로 쓰자. Population projection condition은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+E[X_te_t]=0.
+$$
+
+::::::::::::::::::::
+
+sample OLS는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta
+=
+\left(
+\frac1T\sum_{t=1}^{T}X_tX_t'
+\right)^{-1}
+\left(
+\frac1T\sum_{t=1}^{T}X_tY_t
+\right).
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta-\beta
+=
+\widehat Q^{-1}
+\frac1T\sum_{t=1}^{T}X_te_t,
+}
+$$
+
+::::::::::::::::::::
+
+where
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q
+=
+\frac1T\sum_{t=1}^{T}X_tX_t'.
+$$
+
+::::::::::::::::::::
+
+### 15.9.2 Consistency under stationarity and ergodicity {#s1592}
+
+$\{(X_t,Y_t)\}$가 stationary and ergodic이고 suitable moments가 존재하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q
+\overset p\longrightarrow
+Q
+=
+E[X_tX_t'],
+$$
+
+::::::::::::::::::::
+
+그리고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac1T\sum_{t=1}^{T}X_te_t
+\overset p\longrightarrow
+E[X_te_t]
+=
+0.
+$$
+
+::::::::::::::::::::
+
+$Q\succ0$이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta
+\overset p\longrightarrow
+\beta.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 15.4A · Dependent-data OLS consistency in primitive LLN form
+
+:::::::::::::::::::
+
+Suppose
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q_T
+=
+\frac1T\sum_{t=1}^TX_tX_t'
+\overset p\longrightarrow
+Q\succ0,
+$$
+
+:::::::::::::::::::
+
+and
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1T\sum_{t=1}^TX_te_t
+\overset p\longrightarrow
+0.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\beta\overset p\longrightarrow\beta.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+exact identity로부터
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\beta-\beta
+=
+\widehat Q_T^{-1}
+\frac1T\sum_tX_te_t,
+$$
+
+:::::::::::::::::::
+
+inverse continuity로 $\widehat Q_T^{-1}\to_pQ^{-1}$이고 sample score average는 0으로 수렴한다. 따라서 Slutsky에 의해 consistency가 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 15.9.3 Dependent-data sandwich asymptotics {#s1593}
+
+score process를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+u_t=X_te_t
+$$
+
+::::::::::::::::::::
+
+라 하고 long-run covariance를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+\sum_{h=-\infty}^{\infty}
+E[u_tu_{t-h}']
+$$
+
+::::::::::::::::::::
+
+라 하자. Appropriate CLT 아래
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 15.4 · Dependent-data OLS asymptotic normality
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt T(\widehat\beta-\beta)
+\overset d\longrightarrow
+N(0,Q^{-1}\Omega Q^{-1}).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명 · Dependent-data OLS sandwich asymptotics
+
+:::::::::::::::::::
+
+exact OLS identity의 양변에 $\sqrt T$를 곱하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sqrt T(\widehat\beta-\beta)
+=
+\widehat Q_T^{-1}
+\frac1{\sqrt T}\sum_{t=1}^T X_te_t.
+$$
+
+:::::::::::::::::::
+
+If
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat Q_T\to_pQ
+$$
+
+:::::::::::::::::::
+
+그리고 score process $u_t=X_te_t$가
+
+::::::::::::::::::: {.math-display}
+
+$$
+\frac1{\sqrt T}\sum_{t=1}^Tu_t
+\Rightarrow
+N(0,\Omega),
+$$
+
+:::::::::::::::::::
+
+then Slutsky gives
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt T(\widehat\beta-\beta)
+\Rightarrow
+N(0,Q^{-1}\Omega Q^{-1}).
+}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{cross-sectional sandwich meat}
+\longrightarrow
+\text{long-run covariance of regression scores}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+핵심 구분 15.1 · HAC depends on score dependence, not data dependence alone
+
+:::::::::::::::::::
+
+를 만족한다고 하자. OLS의 asymptotic variance는 score process
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_t
+=
+X_te_t,
+$$
+
+:::::::::::::::::::
+
+through
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Omega_u
+=
+\sum_{h=-\infty}^{\infty}
+E[u_tu_{t-h}'].
+$$
+
+:::::::::::::::::::
+
+Therefore
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{serially dependent }Y_t
+\not\Rightarrow
+\text{HAC lag correction is automatically needed}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+따름정리 15.2 · Predetermined regressors + MDS errors imply an MDS regression score
+
+:::::::::::::::::::
+
+Suppose
+
+::::::::::::::::::: {.math-display}
+
+$$
+X_t\in\mathcal F_{t-1}
+$$
+
+:::::::::::::::::::
+
+and
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[e_t\mid\mathcal F_{t-1}]=0.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+E[X_te_t\mid\mathcal F_{t-1}]=0.
+}
+$$
+
+:::::::::::::::::::
+
+에 의해 결정된다. 따라서 score $u_t=X_te_t$는 MDS이고
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega_u
+=
+E[X_tX_t'e_t^2].
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[X_te_t\mid\mathcal F_{t-1}]
+=
+X_tE[e_t\mid\mathcal F_{t-1}]
+=
+0.
+$$
+
+:::::::::::::::::::
+
+MDS property에 의해 모든 nonzero-lag score autocovariance는 0이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 15.3 · AR(1) data can be serially dependent without requiring HAC lag correction
+
+:::::::::::::::::::
+
+Consider
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t
+=
+\rho Y_{t-1}+e_t,
+\qquad
+|\rho|\lt1,
+$$
+
+:::::::::::::::::::
+
+mean-zero i.i.d. innovation의 variance가 $\sigma^2$라고 하자. $X_t=Y_{t-1}$이면 $X_t\in\mathcal F_{t-1}$이고 $e_t$가 MDS이므로 $u_t=Y_{t-1}e_t$도 MDS다.
+
+Moreover,
+
+::::::::::::::::::: {.math-display}
+
+$$
+Q
+=
+E[Y_{t-1}^2]
+=
+\frac{\sigma^2}{1-\rho^2},
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+E[Y_{t-1}^2e_t^2]
+=
+\sigma^2Q.
+$$
+
+:::::::::::::::::::
+
+Hence
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt T(\widehat\rho-\rho)
+\Rightarrow
+N(0,1-\rho^2).
+}
+$$
+
+:::::::::::::::::::
+
+$Y_t$ 자체는 serially correlated이지만 regression score에는 serial covariance term이 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 15.4 · Intercept estimation with AR(1) errors genuinely needs the long-run variance
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t
+=
+\beta+e_t,
+\qquad
+e_t=\rho e_{t-1}+\eta_t,
+\qquad
+|\rho|\lt1.
+$$
+
+:::::::::::::::::::
+
+이 경우 $\widehat\beta=\bar Y$이고 score는 $u_t=e_t$이다. 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+\frac{\sigma_\eta^2}{(1-\rho)^2},
+$$
+
+:::::::::::::::::::
+
+반면 contemporaneous variance는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\gamma(0)
+=
+\frac{\sigma_\eta^2}{1-\rho^2}.
+$$
+
+:::::::::::::::::::
+
+The ratio is
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac{\Omega}{\gamma(0)}
+=
+\frac{1+\rho}{1-\rho}.
+}
+$$
+
+:::::::::::::::::::
+
+$\rho\gt0$이면 i.i.d.-style variance formula는 sampling uncertainty를 과소평가한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+구분 15.2 · Predeterminedness and strict exogeneity
+
+:::::::::::::::::::
+
+dynamic regression에서는 흔히 $e_t$가 실현되기 전에 이용 가능한 information에 대해 $X_t$가 measurable이면 충분하다. 이는 future regressors까지 conditioning하는 strict exogeneity보다 약한 조건이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{predetermined}
+\neq
+\text{strictly exogenous}.
+}
+$$
+
+:::::::::::::::::::
+
+위의 MDS-score corollary는 strict exogeneity가 아니라 predeterminedness와 conditional-mean restriction을 사용한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1510}
+
+## [15.10]{.section-number}HAC Covariance Estimation and Newey–West
+
+::: {.topic-opening}
+Dependent-data inference에서는 unknown long-run covariance $\Omega$를 sample score autocovariances로 추정해야 한다.
+:::
+
+### 15.10.1 Sample score autocovariances {#s15101}
+
+estimated score를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat u_t
+=
+X_t\widehat e_t
+$$
+
+::::::::::::::::::::
+
+라 하자. $h\ge0$에서 sample lag-$h$ covariance를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\Gamma(h)
+=
+\frac1T
+\sum_{t=h+1}^{T}
+\widehat u_t
+\widehat u_{t-h}'
+$$
+
+::::::::::::::::::::
+
+로 정의할 수 있다.
+
+### 15.10.2 Truncation and bandwidth {#s15102}
+
+infinite sum을 finite sample에서 직접 계산할 수 없으므로 lag truncation $M$을 사용한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\widehat\Omega_M
+=
+\sum_{h=-M}^{M}
+\widehat\Gamma(h).
+$$
+
+::::::::::::::::::::
+
+$M$은 lag truncation number 또는 bandwidth라 불린다.
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Small bandwidth
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+M\text{ small}
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+distant serial covariance를 많이 생략하여 truncation bias가 커질 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.comparison-card}
+
+:::::::::::::::::: {.comparison-card__title}
+
+Large bandwidth
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__formula}
+
+$$
+M\text{ large}
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.comparison-card__text}
+
+많은 noisy sample autocovariances를 포함하여 estimation variability가 커질 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 15.10.3 Newey–West weighting {#s15103}
+
+Bartlett weights를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+w_h
+=
+1-\frac{h}{M+1},
+\qquad
+h=1,\ldots,M
+$$
+
+::::::::::::::::::::
+
+라 하면 Newey–West HAC estimator는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\Omega_{NW}
+=
+\widehat\Gamma(0)
++
+\sum_{h=1}^{M}
+w_h
+\left[
+\widehat\Gamma(h)
++
+\widehat\Gamma(h)'
+\right].
+}
+$$
+
+::::::::::::::::::::
+
+tapered weighting은 abrupt truncation보다 smoother하며 standard construction은 positive-semidefinite covariance estimation과 연결된다.
+
+### 15.10.4 HAC regression covariance {#s15104}
+
+이고 regression asymptotic covariance estimator는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat V_{HAC}
+=
+\widehat Q^{-1}
+\widehat\Omega_{NW}
+\widehat Q^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+이는 $\sqrt T(\widehat\beta-\beta)$의 covariance estimate다.
+따라서 $\widehat\beta$ 자체의 covariance estimate는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\frac1T\widehat V_{HAC}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+대상 15.1 · HAC estimates the long-run covariance of scores
+
+:::::::::::::::::::
+
+Newey–West가 추정하는 것은 $Y_t$ 자체의 long-run variance가 아니다. Regression에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega_u
+=
+\sum_{h=-\infty}^{\infty}
+E[
+X_te_t
+e_{t-h}X_{t-h}'
+].
+}
+$$
+
+:::::::::::::::::::
+
+를 target으로 한다. 따라서 HAC의 relevance는 estimating score의 level에서 판단해야 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+대역폭 15.1 · Canonical small-$b$ requirements
+
+:::::::::::::::::::
+
+대표적인 consistency regime에서는 bandwidth가 증가하되 sample size에 비해 작게 유지되도록 한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+M_T\to\infty,
+\qquad
+\frac{M_T}{T}\to0.
+$$
+
+:::::::::::::::::::
+
+이는 canonical small-$b$ requirements다. 정확한 rate, moment, kernel, dependence restriction은 어떤 HAC consistency theorem을 사용하는지에 따라 달라진다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+분해 15.1 · HAC error has truncation and estimation components
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\Omega_{NW}-\Omega
+=
+\underbrace{\text{sample autocovariance estimation error}}_{\text{sampling variability}}
++
+\underbrace{\text{kernel/truncation error}}_{\text{bias}}.
+$$
+
+:::::::::::::::::::
+
+bandwidth가 너무 작으면 relevant serial covariance를 누락할 수 있고, 너무 크면 noise가 큰 high-lag sample covariance estimate를 과도하게 포함한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 15.5 · Bartlett/Newey–West construction is positive semidefinite
+
+:::::::::::::::::::
+
+estimated score vector를 sample 밖에서는 0으로 두고 다음을 정의하자.
+
+::::::::::::::::::: {.math-display}
+
+$$
+S_r
+=
+\sum_{j=0}^{M}\widehat u_{r-j}.
+$$
+
+:::::::::::::::::::
+
+Then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\widehat\Omega_{NW}
+=
+\frac1{T(M+1)}
+\sum_r S_rS_r'
+\succeq0.
+}
+$$
+
+:::::::::::::::::::
+
+오른쪽을 전개하면 Bartlett weight $1-h/(M+1)$가 나타난다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+각 outer product $S_rS_r'$는 positive semidefinite이므로 그 평균도 positive semidefinite다. 이를 전개하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sum_rS_rS_r'
+=
+\sum_{j=0}^{M}\sum_{k=0}^{M}\sum_r
+\widehat u_{r-j}\widehat u_{r-k}'.
+$$
+
+:::::::::::::::::::
+
+lag $h=j-k$마다 $(j,k)$ pair는 $M+1-|h|$개 존재한다. $T(M+1)$로 나누면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\widehat\Gamma(0)
++
+\sum_{h=1}^{M}
+\left(
+1-\frac h{M+1}
+\right)
+[
+\widehat\Gamma(h)+\widehat\Gamma(h)'
+],
+$$
+
+:::::::::::::::::::
+
+를 얻으며, 이는 정확히 Bartlett/Newey–West form이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+증명 개요 15.1 · Replacing true regression scores by residual-based scores
+
+:::::::::::::::::::
+
+infeasible score는 $u_t=X_te_t$이고 HAC는 $\widehat u_t=X_t\widehat e_t$를 사용한다. OLS consistency, suitable moment bound, 그리고 HAC theorem의 bandwidth/dependence conditions 아래에서 $\widehat u_t$와 $u_t$로 만든 autocovariance의 aggregate difference는 $o_p(1)$이다.
+
+이는 Chapter 11의 random-index plug-in principle을 dependent data에 적용한 analogue다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1511x}
+
+## [15.11]{.section-number}Dynamic Specification versus Robust Inference
+
+::: {.topic-opening}
+Residual serial correlation이 나타났을 때 “standard error 문제”와 “dynamic model 문제”를 구분해야 한다.
+:::
+
+### 15.11.1 Serial correlation as an inferential problem {#s15111}
+
+population coefficient target과 orthogonality condition은 적절하지만 regression score가 serially correlated할 수 있다.
+이 경우 coefficient estimator는 consistent하면서 conventional covariance formula만 잘못될 수 있다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{correct target}
++
+\text{serially correlated scores}
+\Longrightarrow
+\text{HAC inference problem}.
+}
+$$
+
+::::::::::::::::::::
+
+### 15.11.2 Serial correlation as dynamic misspecification {#s15112}
+
+반면 true predictive structure가
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y_t
+=
+\alpha_0
++
+\sum_{j=1}^{p}\alpha_jY_{t-j}
++
+\sum_{k=0}^{q}\beta_k'Z_{t-k}
++
+e_t
+$$
+
+::::::::::::::::::::
+
+처럼 dynamic인데 static equation만 estimate하면 residual serial correlation은 omitted dynamic structure의 신호일 수 있다.
+
+### 15.11.3 HAC does not repair the estimand {#s15113}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+주의 15.2 · Robust covariance와 model specification을 혼동하지 말 것
+
+:::::::::::::::::::
+
+HAC standard errors는 given coefficient estimator의 sampling covariance를 robust하게 추정하는 도구다.
+누락된 lags, simultaneity, 잘못 정의된 conditional mean, 잘못된 causal interpretation을 수정하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{HAC standard errors}
+\neq
+\text{dynamic model repair}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+세 경우 비교 15.1 · Serial correlation can mean three different econometric problems
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Case</th><th>Population condition</th><th>Correct response</th></tr></thead>
+<tbody>
+<tr><td>A. 올바른 target, serially correlated score</td><td>$E[X_te_t]=0$이지만 score LRV에 lag term이 존재</td><td>HAC covariance</td></tr>
+<tr><td>B. Dynamic data, score는 MDS</td><td>$E[X_te_t\mid\mathcal F_{t-1}]=0$</td><td>score LRV에는 lag correction이 필요하지 않음</td></tr>
+<tr><td>C. Misspecified target/endogeneity</td><td>$E[X_te_t]\neq0$</td><td>model/identification strategy를 변경</td></tr>
+</tbody>
+</table>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{HAC repairs covariance estimation,
+not orthogonality or the estimand}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+예제 15.5 · Valid HAC inference can coexist with a scientifically wrong dynamic model
+
+:::::::::::::::::::
+
+true process가
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t
+=
+\rho Y_{t-1}+\varepsilon_t,
+$$
+
+:::::::::::::::::::
+
+이지만 intercept-only model
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t
+=
+\alpha+u_t.
+$$
+
+:::::::::::::::::::
+
+만 estimate한다고 하자. HAC는 unconditional mean target에 대한 $\widehat\alpha=\bar Y$의 sampling variance를 consistently estimate할 수 있다. 그러나 $\widehat\alpha$는 persistence parameter $\rho$를 estimate하지 않는다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{valid inference for one estimand}
+\neq
+\text{correct model for another scientific question}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1512x}
+
+## [15.12]{.section-number}Linear Processes and the Road to AR, MA, and ARMA
+
+::: {.topic-opening}
+Wold representation은 stationary processes를 innovation filters로 표현한다.
+AR, MA, ARMA models는 이 general representation을 finite-dimensional parameterizations로 다루는 방법이다.
+:::
+
+### 15.12.1 Linear processes {#s15121}
+
+general one-sided linear process는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+Y_t
+=
+\mu
++
+\sum_{j=0}^{\infty}
+\psi_j e_{t-j}.
+}
+$$
+
+::::::::::::::::::::
+
+예를 들어 absolute summability
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sum_{j=0}^{\infty}
+|\psi_j|
+\lt\infty
+$$
+
+::::::::::::::::::::
+
+와 suitable conditions on innovations는 standard stationary/ergodic properties를 확보하는 대표적 sufficient conditions다.
+
+### 15.12.2 MA, AR, and ARMA previews {#s15122}
+
+<strong>MA(q):</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y_t
+=
+\mu
++
+e_t
++
+\theta_1e_{t-1}
++\cdots+
+\theta_qe_{t-q}.
+$$
+
+::::::::::::::::::::
+
+<strong>AR(p):</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Y_t
+=
+\alpha_0
++
+\alpha_1Y_{t-1}
++\cdots+
+\alpha_pY_{t-p}
++
+e_t.
+$$
+
+::::::::::::::::::::
+
+<strong>ARMA(p,q):</strong>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\alpha(L)(Y_t-\mu)
+=
+\theta(L)e_t.
+}
+$$
+
+::::::::::::::::::::
+
+### 15.12.3 What is deferred to Chapter 16 {#s15123}
+
+다음 장에서는 다음을 본격적으로 다룬다.
+
+<ul>
+<li>lag operator와 characteristic root,</li>
+<li>AR stationarity,</li>
+<li>MA invertibility,</li>
+<li>ARMA representations,</li>
+<li>ACF and PACF,</li>
+<li>estimation과 model selection,</li>
+<li>stationary linear model에서의 forecasting.</li>
+</ul>
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Chapter 15: why dependent-data inference works}
+\quad\longrightarrow\quad
+\text{Chapter 16: how stationary dynamics are parameterized}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+명제 15.7 · Autocovariance function of a one-sided linear process
+
+:::::::::::::::::::
+
+Let
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t-\mu
+=
+\sum_{j=0}^{\infty}
+\psi_j\varepsilon_{t-j},
+$$
+
+:::::::::::::::::::
+
+여기서 $\varepsilon_t$는 variance $\sigma_\varepsilon^2$인 white noise이고 coefficient sum들은 square summable이라고 하자. 그러면
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\gamma(h)
+=
+\sigma_\varepsilon^2
+\sum_{j=0}^{\infty}
+\psi_j\psi_{j+|h|}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+For $h\ge0$, expand
+
+::::::::::::::::::: {.math-display}
+
+$$
+E[(Y_t-\mu)(Y_{t-h}-\mu)]
+=
+\sum_{j,k\ge0}
+\psi_j\psi_k
+E[\varepsilon_{t-j}\varepsilon_{t-h-k}].
+$$
+
+:::::::::::::::::::
+
+white-noise orthogonality에 의해 $t-j=t-h-k$, 즉 $j=h+k$인 항을 제외한 모든 term이 사라진다. 따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\gamma(h)
+=
+\sigma_\varepsilon^2
+\sum_{k=0}^{\infty}
+\psi_{h+k}\psi_k.
+$$
+
+:::::::::::::::::::
+
+symmetry를 사용하면 negative $h$에 대한 formula도 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+정리 15.6 · Long-run variance of an absolutely summable linear process
+
+:::::::::::::::::::
+
+If additionally
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sum_{j=0}^{\infty}
+|\psi_j|
+\lt\infty,
+$$
+
+:::::::::::::::::::
+
+then
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega
+=
+\sigma_\varepsilon^2
+\left(
+\sum_{j=0}^{\infty}\psi_j
+\right)^2.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+증명
+
+:::::::::::::::::::
+
+absolute summability가 rearrangement를 정당화한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+\Omega
+&=
+\sum_{h=-\infty}^{\infty}\gamma(h)\\
+&=
+\sigma_\varepsilon^2
+\sum_{j=0}^{\infty}
+\sum_{k=0}^{\infty}
+\psi_j\psi_k\\
+&=
+\sigma_\varepsilon^2
+\left(
+\sum_{j=0}^{\infty}\psi_j
+\right)^2.
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+예제 15.6 · AR(1) as a linear process
+
+:::::::::::::::::::
+
+For
+
+::::::::::::::::::: {.math-display}
+
+$$
+Y_t
+=
+\rho Y_{t-1}+\varepsilon_t,
+\qquad
+|\rho|\lt1,
+$$
+
+:::::::::::::::::::
+
+AR(1)에서는 MA coefficient가 $\psi_j=\rho^j$이므로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Omega
+=
+\sigma_\varepsilon^2
+\left(
+\sum_{j=0}^{\infty}\rho^j
+\right)^2
+=
+\boxed{
+\frac{\sigma_\varepsilon^2}{(1-\rho)^2}
+}.
+$$
+
+:::::::::::::::::::
+
+이는 Section 15.8에서 직접 계산한 LRV와 일치한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1513x}
+
+## [15.13]{.section-number}What Stationarity Does—and Does Not—Give Us
+
+::: {.topic-opening}
+Stationarity는 강력한 stability assumption이지만 consistency, Gaussian inference, correct dynamics를 자동으로 제공하지 않는다.
+:::
+
+### 15.13.1 Stationarity versus independence {#s15131}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{stationarity}
+\not\Rightarrow
+\text{i.i.d.}
+}
+$$
+
+::::::::::::::::::::
+
+stationary process는 rich serial dependence를 가질 수 있다.
+
+### 15.13.2 Stationarity versus ergodicity {#s15132}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{stationarity}
+\not\Rightarrow
+\text{ergodicity}.
+}
+$$
+
+::::::::::::::::::::
+
+$Y_t=Z$ example처럼 law는 stable하지만 한 sample path가 population distribution을 충분히 탐색하지 않을 수 있다.
+
+### 15.13.3 Ergodicity versus CLT {#s15133}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{ergodicity}
+\Rightarrow
+\text{LLN-type learning},
+}
+$$
+
+::::::::::::::::::::
+
+그러나 일반적으로
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{ergodicity alone}
+\not\Rightarrow
+\sqrt T\text{-Gaussian CLT}.
+}
+$$
+
+::::::::::::::::::::
+
+inference에는 stronger weak-dependence conditions가 필요할 수 있다.
+
+### 15.13.4 Robust covariance versus correct dynamics {#s15134}
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{valid HAC covariance}
+\neq
+\text{correctly specified dynamic model}.
+}
+$$
+
+::::::::::::::::::::
+
+robust covariance는 uncertainty calculation을 고칠 수 있지만 population target의 interpretation과 dynamic specification은 별개의 문제다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+함의 관계 15.2 · What the chapter's dependence assumptions actually imply
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{mean-zero i.i.d.}
+\Rightarrow
+\text{MDS}
+\Rightarrow
+\text{serially uncorrelated},
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{stationary + ergodic}
+\Rightarrow
+\text{LLN-type learning},
+}
+$$
+
+:::::::::::::::::::
+
+but generally
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{ergodic}
+\not\Rightarrow
+\text{CLT},
+\qquad
+\text{stationary}
+\not\Rightarrow
+\text{short memory}.
+}
+$$
+
+:::::::::::::::::::
+
+regression inference에서 relevant dependence object는 $Y_t$ 자체의 serial correlation이 아니라 score $X_te_t$다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1514x}
+
+## [15.14]{.section-number}요약과 연습문제
+
+### 15.14.1 Chapter map {#s15141}
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+Chapter 15 in one map
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{One dependent realization}
+\longrightarrow
+\text{Stationarity}
++
+\text{Ergodicity}
+\longrightarrow
+\text{time-average consistency}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{additional weak-dependence conditions}
+\longrightarrow
+\text{CLT with long-run variance}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\Omega
+=
+\sum_{h=-\infty}^{\infty}\Gamma(h).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\sqrt T(\widehat\beta-\beta)
+\overset d\longrightarrow
+N(0,Q^{-1}\Omega Q^{-1}).
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Long-run variance}
+\longrightarrow
+\text{HAC / Newey–West inference}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 15.14.2 i.i.d. versus dependent-data asymptotics {#s15142}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th>Chapter 10: i.i.d. asymptotics 기준</th><th>Chapter 15: dependent-data asymptotics</th></tr></thead>
+<tbody>
+<tr><td>i.i.d. LLN</td><td>ergodic theorem</td></tr>
+<tr><td>i.i.d. CLT</td><td>dependent-process CLT</td></tr>
+<tr><td>$E[u_iu_i']$</td><td>$\sum_h E[u_tu_{t-h}']$</td></tr>
+<tr><td>contemporaneous covariance만 사용</td><td>모든 relevant serial autocovariance</td></tr>
+<tr><td>HC covariance</td><td>HAC covariance</td></tr>
+<tr><td>observation order가 대체로 irrelevant</td><td>time ordering이 essential</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+### 15.14.3 Time-series foundations checklist {#s15143}
+
+<ol>
+<li><strong>Stochastic object:</strong> 어떤 process $\{W_t\}$의 realization을 관측하는가?</li>
+<li><strong>Information:</strong> $\mathcal F_t$에는 무엇이 포함되는가?</li>
+<li><strong>Stationarity:</strong> law 또는 first two moments가 time shift에 stable한가?</li>
+<li><strong>Dependence:</strong> 어떤 autocovariance/autocorrelation pattern이 존재하는가?</li>
+<li><strong>Ergodicity:</strong> time averages가 population moments를 학습하는가?</li>
+<li><strong>Prediction error:</strong> shock을 white noise, MDS, innovation 중 어떤 개념으로 정의하는가?</li>
+<li><strong>Representation:</strong> linear projection/Wold representation이 적절한가?</li>
+<li><strong>CLT:</strong> 어떤 additional weak-dependence assumptions가 필요한가?</li>
+<li><strong>Long-run variance:</strong> serial covariances를 포함한 $\Omega$가 무엇인가?</li>
+<li><strong>Regression:</strong> OLS target의 population orthogonality가 무엇인가?</li>
+<li><strong>Inference:</strong> conventional, HC, HAC 중 어떤 covariance estimator가 필요한가?</li>
+<li><strong>Specification:</strong> serial correlation이 covariance 문제인가 dynamic misspecification의 신호인가?</li>
+</ol>
+
+### 연습문제 {#exercises}
+
+<ol class="exercise-list">
+<li><strong>Sampling structure.</strong> i.i.d. sample average와 dependent time average가 같은 algebra를 가지지만 다른 LLN이 필요한 이유를 설명하라.</li>
+<li><strong>Filtration.</strong> $\mathcal F_{t-1}\subseteq\mathcal F_t$의 의미와 forecasting에서의 역할을 설명하라.</li>
+<li><strong>Forecast-error orthogonality.</strong> $e_{t+1}=Y_{t+1}-E[Y_{t+1}\mid\mathcal F_t]$에서 $E[Z_te_{t+1}]=0$를 증명하라.</li>
+<li><strong>Projection versus conditional mean.</strong> $Y=X^2+\varepsilon$ 예제에서 conditional expectation과 BLP를 각각 계산하라.</li>
+<li><strong>Strict stationarity.</strong> finite-dimensional distribution definition을 쓰고 time-shift invariance를 설명하라.</li>
+<li><strong>Strict implies covariance stationarity.</strong> finite second moments 아래 증명하라.</li>
+<li><strong>Converse failure.</strong> even/odd Normal–Rademacher sequence가 covariance stationary지만 strict stationary가 아님을 확인하라.</li>
+<li><strong>Autocovariance symmetry.</strong> $\gamma(-h)=\gamma(h)$를 증명하라.</li>
+<li><strong>Zero ACF but dependence.</strong> $Y_t=\varepsilon_t\varepsilon_{t-1}$에서 $\gamma(1)=0$이나 squared process가 dependent임을 증명하라.</li>
+<li><strong>Stationary but nonergodic.</strong> $Y_t=Z$ example을 ergodicity 관점에서 분석하라.</li>
+<li><strong>Ergodic theorem.</strong> Birkhoff theorem이 cross-sectional LLN과 수행하는 역할을 비교하라.</li>
+<li><strong>Summable-covariance LLN.</strong> $\sum_h|\gamma(h)|\lt\infty$에서 $\bar Y_T\to_p\mu$를 variance bound로 증명하라.</li>
+<li><strong>Transformation.</strong> finite-lag measurable transform of an ergodic process가 왜 regression scores에 중요하지 설명하라.</li>
+<li><strong>MDS orthogonality.</strong> MDS가 past-measurable variables와 orthogonal함을 증명하라.</li>
+<li><strong>MDS implies white noise.</strong> covariance-stationary square-integrable MDS의 nonzero-lag autocovariances가 0임을 증명하라.</li>
+<li><strong>MDS not iid.</strong> ARCH-type shock이 MDS지만 i.i.d.가 아님을 conditional variance로 설명하라.</li>
+<li><strong>White noise not MDS.</strong> $e_t=\xi_t+a(\xi_{t-1}^2-1)$ example의 autocovariances와 conditional mean을 계산하라.</li>
+<li><strong>Innovation orthogonality.</strong> projection theorem으로 $e_t\perp\mathcal H_{t-1}$를 설명하라.</li>
+<li><strong>Wold distinction.</strong> deterministic component와 purely nondeterministic component를 구분하라.</li>
+<li><strong>Wold innovations.</strong> one-step linear innovations가 serially uncorrelated함을 증명하라.</li>
+<li><strong>Partial-sum variance.</strong> $T^{-1/2}\sum_tu_t$의 finite-$T$ variance를 lag covariance별로 완전히 전개하라.</li>
+<li><strong>LRV existence.</strong> absolute covariance summability가 $\Omega=\sum_h\Gamma(h)$의 존재와 finite-$T$ variance convergence를 주는 이유를 증명하라.</li>
+<li><strong>AR(1) LRV.</strong> $\Omega=\sigma_\varepsilon^2/(1-\rho)^2$를 유도하라.</li>
+<li><strong>Negative serial correlation.</strong> $\rho\lt0$인 AR(1)에서 LRV가 contemporaneous variance보다 작을 수 있음을 계산하라.</li>
+<li><strong>MDS LRV.</strong> square-integrable MDS의 LRV가 $\Gamma(0)$로 축약됨을 증명하라.</li><li><strong>Dependent CLT routes.</strong> martingale, mixing, linear-process CLT의 assumptions가 어떤 dependence feature를 통제하는지 비교하라.</li><li><strong>OLS consistency.</strong> $\widehat Q_T\to_pQ\succ0$와 $T^{-1}\sum X_te_t\to_p0$에서 OLS consistency를 증명하라.</li><li><strong>Dependent OLS ALR.</strong> exact OLS identity와 score CLT에서 $Q^{-1}\Omega Q^{-1}$ sandwich를 유도하라.</li><li><strong>Predetermined + MDS.</strong> $X_t\in\mathcal F_{t-1}$, $E[e_t\mid\mathcal F_{t-1}]=0$에서 $X_te_t$가 MDS임을 증명하라.</li><li><strong>HAC lag correction이 필요하지 않은 AR(1) regression.</strong> $Y_t=\rho Y_{t-1}+e_t$에서 $\sqrt T(\hat\rho-\rho)\Rightarrow N(0,1-\rho^2)$를 유도하라.</li><li><strong>Intercept with AR(1) errors.</strong> $\Omega/\gamma(0)=(1+\rho)/(1-\rho)$를 유도하고 conventional variance distortion을 해석하라.</li><li><strong>Score dependence와 data dependence의 구분.</strong> serially correlated $Y_t$가 왜 자동으로 HAC를 요구하지 않는지 설명하라.</li><li><strong>HAC target.</strong> regression에서 Newey–West가 추정해야 하는 LRV가 $Y_t$가 아니라 $X_te_t$ score의 LRV임을 쓰라.</li><li><strong>Bandwidth.</strong> $M_T\to\infty$, $M_T/T\to0$의 small-$b$ logic과 bias–variance trade-off를 설명하라.</li><li><strong>Bartlett PSD.</strong> moving-sum outer-product representation으로 Newey–West covariance가 positive semidefinite임을 증명하라.</li><li><strong>Residual plug-in.</strong> $\widehat u_t=X_t\widehat e_t$ 사용이 왜 first-order asymptotics에서 허용될 수 있는지 설명하라.</li><li><strong>HAC는 endogeneity를 고치지 못한다.</strong> $E[X_te_t]\neq0$인 경우 HAC covariance가 coefficient target을 고치지 못하는 이유를 설명하라.</li><li><strong>Linear-process autocovariance.</strong> $\gamma(h)=\sigma_\varepsilon^2\sum_j\psi_j\psi_{j+|h|}$를 증명하라.</li><li><strong>Linear-process LRV.</strong> absolute summability 아래 $\Omega=\sigma_\varepsilon^2(\sum_j\psi_j)^2$를 증명하라.</li><li><strong>Research audit.</strong> 실제 dependent-data regression 하나를 골라 stationarity, ergodicity, score dependence, CLT route, LRV, HAC necessity, dynamic specification을 순서대로 점검하라.</li></ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 다음 장
+
+이 장은 dependent observations 아래에서 population learning과 inference가 어떻게 작동하는지를
+stationarity, ergodicity, filtration, projection, innovations, Wold representation,
+dependent-process CLT, long-run variance, HAC covariance estimation의 언어로 정리한다.
+핵심은 i.i.d. sampling의 논리를 단순히 복사하는 것이 아니라,
+LLN을 ergodic theorem으로, one-period covariance를 long-run covariance로 교체하는 것이다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+다음 장으로
+
+:::::::::::::::::::
+
+Chapter 15에서 dependent-data inference의 statistical foundations를 구축했다.
+Chapter 16에서는 stationary linear dynamics를 구체적으로 parameterize한다:
+AR, MA, ARMA, characteristic roots, invertibility, ACF/PACF, estimation, model selection, forecasting.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{dependent-data foundations}
+\longrightarrow
+\text{stationary linear time-series models}.
+}
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

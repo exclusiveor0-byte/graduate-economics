@@ -1,0 +1,35 @@
+# Chapter 15 · Dependent Data and Time-Series Foundations {.unnumbered}
+*Stationarity · Ergodicity · Prediction · Long-Run Variance · HAC Inference*
+
+한 개의 긴 dependent realization만 관측할 때 population moments를 어떻게 학습하고, sampling uncertainty를 어떻게 계산할 것인가를 다룬다. stationarity, ergodicity, white noise, MDS, innovations, Wold decomposition, long-run variance, dependent-data OLS, HAC/Newey–West inference를 체계적으로 연결한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **15.1–15.5** dependent sequences, filtration, stationarity, autocorrelation, ergodic theorem
+- **15.6–15.8** white noise, MDS, innovations, Wold decomposition, long-run variance
+- **15.9–15.11** dependent-data OLS, HAC/Newey–West, dynamic specification versus robust inference
+- **15.12–15.14** linear-process preview, limits of stationarity, summary and exercises
+:::
+
+## Sections
+
+- [15.1 From Independent Samples to Dependent Sequences](contents.html#s151)
+- [15.2 Time, Information, and Stochastic Processes](contents.html#s152)
+- [15.3 Stationarity: Strict and Covariance](contents.html#s153)
+- [15.4 Autocovariance, Autocorrelation, and Dependence](contents.html#s154)
+- [15.5 Ergodicity and the Law of Large Numbers](contents.html#s155)
+- [15.6 White Noise, Martingale Differences, and Innovations](contents.html#s156)
+- [15.7 Linear Projection on the Past and the Wold Representation](contents.html#s157)
+- [15.8 Central Limit Theory and Long-Run Variance](contents.html#s158)
+- [15.9 Least Squares with Dependent Data](contents.html#s159)
+- [15.10 HAC Covariance Estimation and Newey–West](contents.html#s1510)
+- [15.11 Dynamic Specification versus Robust Inference](contents.html#s1511x)
+- [15.12 Linear Processes and the Road to AR, MA, and ARMA](contents.html#s1512x)
+- [15.13 What Stationarity Does—and Does Not—Give Us](contents.html#s1513x)
+- [15.14 요약과 연습문제](contents.html#s1514x)
+- [참고문헌 및 다음 장](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+원본의 수식·정리·증명·연습문제를 보존한 [본문 전체](contents.html)를 순서대로 읽거나, 위 링크로 바로 이동할 수 있다.
+:::

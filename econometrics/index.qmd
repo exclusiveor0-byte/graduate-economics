@@ -130,10 +130,22 @@ Consistency·asymptotic normality·sandwich variance·HC covariance·delta metho
 
 [13개 절 · 정리·증명·연습문제 포함]{.status}
 
+### [Chapter 15 · Dependent Data and Time-Series Foundations](ch15-dependent-data-time-series/index.html)
+
+시계열 종속성 아래의 정상성(stationarity), 에르고딕성(ergodicity), Wold 분해,
+장기분산(LRV), 종속표본 OLS와 점근 샌드위치 분포, Newey–West HAC 추론을 다룬다.
+
+[Chapter 15 읽기](ch15-dependent-data-time-series/index.html) →
+
+[14개 절 · 정리·증명·연습문제 포함]{.status}
+
 ## 이후 확장
 
-Chapter 01–14는 확률모형, 식별, OLS, 점근이론, M/Z 추정, IV/GMM, MLE/QMLE, 약한 식별까지의 횡단면 계량경제이론을 완비했다. 이후에는 다음 순서로 확장한다.
+Chapter 01–14의 횡단면 계량경제이론에 이어, Chapter 15부터는 시계열 및 동태적 거시계량 모형 트랙을 구축한다.
 
-1. 시계열 및 동태적 거시계량 모형
-2. 패널 자료 및 고정효과·확률효과
-3. 비모수 및 준모수 계량경제학
+1. 정상 시계열 선형모형(AR, MA, ARMA) 및 예측 (Chapter 16)
+2. 비정상 시계열, 단위근 및 공적분
+3. 다변량 시계열(VAR, SVAR) 및 거시 충격 식별
+4. 패널 자료 및 고정효과·확률효과
+5. 비모수 및 준모수 계량경제학
+
