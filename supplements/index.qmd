@@ -15,10 +15,10 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 :::
 
 ::: {.spoon-hero__tags}
+[경제학을 위한 수학 (1편)]{.chip .chip--primary}
 [미시경제학 (5편)]{.chip .chip--micro}
 [거시경제학 (4편)]{.chip .chip--macro}
 [계량경제학 (4편)]{.chip .chip--metrics}
-[경제학을 위한 수학 (1편)]{.chip .chip--primary}
 [31종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
@@ -47,6 +47,29 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ```{=html}
 <div id="supplement-grid-all" class="spoon-grid">
+<!-- Math 1: Correspondence -->
+<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="math">
+  <div class="spoon-card__header">
+    <span class="chip chip--primary">경제학을 위한 수학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">대응의 반연속성과 닫힌 그래프: UHC와 LHC</div>
+  <div class="spoon-card__desc">집합값 대응(Correspondence)의 상반연속(UHC: 외측 폭발 억제)과 하반연속(LHC: 내측 소멸 방지), 닫힌 그래프 정리 및 Berge 최대정리의 기하학적 정합성을 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">상반연속(UHC)</span>
+    <span class="chip chip--topic">하반연속(LHC)</span>
+    <span class="chip chip--topic">닫힌 그래프 정리</span>
+    <span class="chip chip--topic">Berge 최대정리</span>
+    <span class="chip chip--topic">Kakutani 고정점</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 경제학을 위한 수학 Chapter 07 대응과 Chapter 08 고정점 정리</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
 <!-- Micro 1: Slutsky -->
 <a href="slutsky-decomposition.html" class="spoon-card" data-subject="micro">
   <div class="spoon-card__header">
@@ -86,29 +109,6 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 미시 5권 제15장 일반균형이론 및 제16장 후생경제학 기본정리</span>
-  </div>
-  <div class="spoon-card__footer">
-    <span class="status">보충자료 탐색하기 →</span>
-  </div>
-</a>
-
-<!-- Math 1: Correspondence -->
-<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="math">
-  <div class="spoon-card__header">
-    <span class="chip chip--primary">경제학을 위한 수학</span>
-    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
-  </div>
-  <div class="spoon-card__title">대응의 반연속성과 닫힌 그래프: UHC와 LHC</div>
-  <div class="spoon-card__desc">집합값 대응(Correspondence)의 상반연속(UHC: 외측 폭발 억제)과 하반연속(LHC: 내측 소멸 방지), 닫힌 그래프 정리 및 Berge 최대정리의 기하학적 정합성을 검증한다.</div>
-  <div class="spoon-card__topics">
-    <span class="chip chip--topic">상반연속(UHC)</span>
-    <span class="chip chip--topic">하반연속(LHC)</span>
-    <span class="chip chip--topic">닫힌 그래프 정리</span>
-    <span class="chip chip--topic">Berge 최대정리</span>
-    <span class="chip chip--topic">Kakutani 고정점</span>
-  </div>
-  <div class="spoon-card__chapter">
-    <span>📖 연계: 경제학을 위한 수학 Chapter 07 대응과 Chapter 08 고정점 정리</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
@@ -363,6 +363,44 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 계량 1권 제9장 정확추론(Exact Inference) 및 제10장 대표본이론</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+</div>
+```
+
+### 경제학을 위한 수학
+
+::: {.spoon-guide-box}
+**📐 경제학을 위한 수학 보충자료**
+
+경제학을 위한 수학의 핵심 개념을 계산과 시각화로 보완하는 자료를 모아두는 탭이다. 대응의 상반연속(UHC)·하반연속(LHC), 닫힌 그래프, Berge 최대정리와 Kakutani 고정점 정리의 구조와 직관을 interactive supplement로 탐색한다.
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 경제학을 위한 수학 보충자료가 없다.
+:::
+
+```{=html}
+<div id="supplement-grid-math" class="spoon-grid">
+<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="math">
+  <div class="spoon-card__header">
+    <span class="chip chip--primary">경제학을 위한 수학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">대응의 반연속성과 닫힌 그래프: UHC와 LHC</div>
+  <div class="spoon-card__desc">집합값 대응의 상반연속(UHC: 외측 폭발 억제)과 하반연속(LHC: 내측 소멸 방지), 닫힌 그래프 정리 및 Berge 최대정리의 기하학적 정합성을 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">상반연속(UHC)</span>
+    <span class="chip chip--topic">하반연속(LHC)</span>
+    <span class="chip chip--topic">닫힌 그래프 정리</span>
+    <span class="chip chip--topic">Berge 최대정리</span>
+    <span class="chip chip--topic">Kakutani 고정점</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 경제학을 위한 수학 Chapter 07 대응과 Chapter 08 고정점 정리</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
@@ -710,40 +748,6 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 계량 1권 제9장 정확추론(Exact Inference) 및 제10장 대표본이론</span>
-  </div>
-  <div class="spoon-card__footer">
-    <span class="status">보충자료 탐색하기 →</span>
-  </div>
-</a>
-</div>
-```
-
-### 경제학을 위한 수학
-
-::: {.spoon-guide-box}
-**📐 경제학을 위한 수학 보충자료**
-
-경제학을 위한 수학의 핵심 개념을 계산과 시각화로 보완하는 자료를 모아두는 탭이다. 대응의 상반연속(UHC)·하반연속(LHC), 닫힌 그래프, Berge 최대정리와 Kakutani 고정점 정리의 구조와 직관을 interactive supplement로 탐색한다.
-:::
-
-```{=html}
-<div id="supplement-grid-math" class="spoon-grid">
-<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="math">
-  <div class="spoon-card__header">
-    <span class="chip chip--primary">경제학을 위한 수학</span>
-    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
-  </div>
-  <div class="spoon-card__title">대응의 반연속성과 닫힌 그래프: UHC와 LHC</div>
-  <div class="spoon-card__desc">집합값 대응의 상반연속(UHC: 외측 폭발 억제)과 하반연속(LHC: 내측 소멸 방지), 닫힌 그래프 정리 및 Berge 최대정리의 기하학적 정합성을 검증한다.</div>
-  <div class="spoon-card__topics">
-    <span class="chip chip--topic">상반연속(UHC)</span>
-    <span class="chip chip--topic">하반연속(LHC)</span>
-    <span class="chip chip--topic">닫힌 그래프 정리</span>
-    <span class="chip chip--topic">Berge 최대정리</span>
-    <span class="chip chip--topic">Kakutani 고정점</span>
-  </div>
-  <div class="spoon-card__chapter">
-    <span>📖 연계: 경제학을 위한 수학 Chapter 07 대응과 Chapter 08 고정점 정리</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>

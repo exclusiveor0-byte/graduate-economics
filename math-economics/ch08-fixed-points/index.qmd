@@ -31,5 +31,9 @@
 Banach·Brouwer·Kakutani의 조건을 비교하고 균형 존재 논리로 연결하는 내용은 [본문 전체](contents.html)에 있다.
 :::
 
+::: {.callout-note title="계산·시각화 보충자료"}
+Kakutani 부동점 정리의 볼록값·닫힌 그래프 조건 및 균형 존재로의 연결 시각화는 [보충자료 · 대응의 반연속성과 닫힌 그래프](../../supplements/correspondence-hemicontinuity.qmd)에서 인터랙티브하게 탐색할 수 있다.
+:::
+
 
 
