@@ -8,8 +8,9 @@
     if (!sidebarUl || sidebarUl.dataset.subjectAccordionInit) return;
     sidebarUl.dataset.subjectAccordionInit = "true";
 
-    // 6 primary subject definitions
+    // 7 primary subject definitions
     const subjectDefs = [
+      { key: "math", id: "sidebar-subj-math", pattern: "math-economics/" },
       { key: "micro", id: "sidebar-subj-micro", pattern: "microeconomics/" },
       { key: "macro", id: "sidebar-subj-macro", pattern: "macroeconomics/" },
       { key: "metrics", id: "sidebar-subj-metrics", pattern: "econometrics/" },
