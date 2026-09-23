@@ -11,13 +11,14 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 # 계산·시각화 보충자료 (Supplements)
 
 ::: {.spoon-hero__desc}
-본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 14대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학의 핵심 정리와 위상도, 직교사영 기하를 31종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 14대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학, 경제학을 위한 수학의 핵심 정리와 위상도, 직교사영 기하를 31종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
-[미시경제학 (6편)]{.chip .chip--micro}
+[미시경제학 (5편)]{.chip .chip--micro}
 [거시경제학 (4편)]{.chip .chip--macro}
 [계량경제학 (4편)]{.chip .chip--metrics}
+[경제학을 위한 수학 (1편)]{.chip .chip--primary}
 [31종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
@@ -37,7 +38,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-guide-box}
 **📚 대학원 경제학 14대 계산·시각화 보충자료 통합 포털**
-경제학을 위한 수학 로드맵과 미시·거시·계량 전 분야의 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 14편은 상단 검색창에서 즉시 필터링할 수 있다.
+미시·거시·계량·수리경제학 전 분야의 계산·시각화 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 14편은 상단 검색창에서 즉시 필터링할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -91,10 +92,10 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
 </a>
 
-<!-- Micro 3: Correspondence -->
-<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="micro">
+<!-- Math 1: Correspondence -->
+<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="math">
   <div class="spoon-card__header">
-    <span class="chip chip--micro">미시경제학</span>
+    <span class="chip chip--primary">경제학을 위한 수학</span>
     <span class="chip chip--gif">2종 동적 시뮬레이션</span>
   </div>
   <div class="spoon-card__title">대응의 반연속성과 닫힌 그래프: UHC와 LHC</div>
@@ -107,14 +108,14 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
     <span class="chip chip--topic">Kakutani 고정점</span>
   </div>
   <div class="spoon-card__chapter">
-    <span>📖 연계: 미시 수학 부록 / 제3장 최적화와 쌍대성, 일반균형 존재 정리</span>
+    <span>📖 연계: 경제학을 위한 수학 Chapter 07 대응과 Chapter 08 고정점 정리</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
   </div>
 </a>
 
-<!-- Micro 4: Producer Cost Envelope -->
+<!-- Micro 3: Producer Cost Envelope -->
 <a href="producer-cost-envelope.html" class="spoon-card" data-subject="micro">
   <div class="spoon-card__header">
     <span class="chip chip--micro">미시경제학</span>
@@ -137,7 +138,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
 </a>
 
-<!-- Micro 5: Oligopoly Game Theory -->
+<!-- Micro 4: Oligopoly Game Theory -->
 <a href="oligopoly-game-theory.html" class="spoon-card" data-subject="micro">
   <div class="spoon-card__header">
     <span class="chip chip--micro">미시경제학</span>
@@ -161,7 +162,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
 </a>
 
-<!-- Micro 6: Core Convergence -->
+<!-- Micro 5: Core Convergence -->
 <a href="core-competitive-convergence.html" class="spoon-card" data-subject="micro">
   <div class="spoon-card__header">
     <span class="chip chip--micro">미시경제학</span>
@@ -374,8 +375,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-guide-box}
 **🎯 미시경제학 (Microeconomics) 보충자료 아카이브**
-- **주요 영역**: 소비자 쌍대성 이론(Slutsky 분해), 생산자이론과 비용 포락선(확장경로와 Envelope 정리), 과점 게임이론(Cournot·Stackelberg 반응곡선과 후생), 일반균형과 후생경제학(Edgeworth 상자), 복제경제와 코어 수렴(Debreu–Scarf 정리), 고급 미시 수학(집합값 대응의 반연속성과 Berge 최대정리).
-- **시각화 특징**: 12종의 고해상도 GIF를 통해 보상수요의 곡률, 등량곡선과 비용 포락선의 접점 동학, 과점 최적대응 거미집 수렴과 등이윤 외접, 경매인의 타토느망 탐색 경로, 복제경제 연합 블로킹과 코어 수축 기하, 상반연속·하반연속의 위상수학적 포섭 조건을 엄밀하게 시각화한다.
+- **주요 영역**: 소비자 쌍대성 이론(Slutsky 분해), 생산자이론과 비용 포락선(확장경로와 Envelope 정리), 과점 게임이론(Cournot·Stackelberg 반응곡선과 후생), 일반균형과 후생경제학(Edgeworth 상자), 복제경제와 코어 수렴(Debreu–Scarf 정리).
+- **시각화 특징**: 10종의 고해상도 GIF를 통해 보상수요의 곡률, 등량곡선과 비용 포락선의 접점 동학, 과점 최적대응 거미집 수렴과 등이윤 외접, 경매인의 타토느망 탐색 경로, 복제경제 연합 블로킹과 코어 수축 기하를 엄밀하게 시각화한다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -429,30 +430,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
 </a>
 
-<!-- Micro 3: Correspondence -->
-<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="micro">
-  <div class="spoon-card__header">
-    <span class="chip chip--micro">미시경제학</span>
-    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
-  </div>
-  <div class="spoon-card__title">대응의 반연속성과 닫힌 그래프: UHC와 LHC</div>
-  <div class="spoon-card__desc">집합값 대응(Correspondence)의 상반연속(UHC: 외측 폭발 억제)과 하반연속(LHC: 내측 소멸 방지), 닫힌 그래프 정리 및 Berge 최대정리의 기하학적 정합성을 검증한다.</div>
-  <div class="spoon-card__topics">
-    <span class="chip chip--topic">상반연속(UHC)</span>
-    <span class="chip chip--topic">하반연속(LHC)</span>
-    <span class="chip chip--topic">닫힌 그래프 정리</span>
-    <span class="chip chip--topic">Berge 최대정리</span>
-    <span class="chip chip--topic">Kakutani 고정점</span>
-  </div>
-  <div class="spoon-card__chapter">
-    <span>📖 연계: 미시 수학 부록 / 제3장 최적화와 쌍대성, 일반균형 존재 정리</span>
-  </div>
-  <div class="spoon-card__footer">
-    <span class="status">보충자료 탐색하기 →</span>
-  </div>
-</a>
-
-<!-- Micro 4: Producer Cost Envelope -->
+<!-- Micro 3: Producer Cost Envelope -->
 <a href="producer-cost-envelope.html" class="spoon-card" data-subject="micro">
   <div class="spoon-card__header">
     <span class="chip chip--micro">미시경제학</span>
@@ -475,7 +453,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
 </a>
 
-<!-- Micro 5: Oligopoly Game Theory -->
+<!-- Micro 4: Oligopoly Game Theory -->
 <a href="oligopoly-game-theory.html" class="spoon-card" data-subject="micro">
   <div class="spoon-card__header">
     <span class="chip chip--micro">미시경제학</span>
@@ -499,7 +477,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
 </a>
 
-<!-- Micro 6: Core Convergence -->
+<!-- Micro 5: Core Convergence -->
 <a href="core-competitive-convergence.html" class="spoon-card" data-subject="micro">
   <div class="spoon-card__header">
     <span class="chip chip--micro">미시경제학</span>
@@ -743,33 +721,32 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 ### 경제학을 위한 수학
 
 ::: {.spoon-guide-box}
-**📐 경제학을 위한 수학 Chapter 지도**
+**📐 경제학을 위한 수학 보충자료**
 
-수리경제학 과목의 Chapter 01–08을 보충자료와 연결하는 출발점이다. 현재는 별도의 계산·시각화 자료를 추가하기 전 단계이므로, 수학적 정의·정리·증명은 과목 Chapter에서 읽고 이후 필요한 주제에 맞는 interactive supplement를 이 탭에 확장한다.
-
-[경제학을 위한 수학 Chapter 01–08 열기](../math-economics/index.html){.home-button .home-button--primary}
+수리경제학의 정의·정리·증명을 계산과 시각화로 보완하는 자료를 모아두는 탭이다. 현재는 대응의 상반연속(UHC)·하반연속(LHC), 닫힌 그래프, Berge 최대정리와 Kakutani 고정점 정리를 다룬 자료가 연결되어 있다. 수리경제학 본문과 Chapter 지도는 전공 과목 메뉴에서 읽는다.
 :::
 
 ```{=html}
 <div id="supplement-grid-math" class="spoon-grid">
-<a href="../math-economics/index.html" class="spoon-card" data-subject="math">
+<a href="correspondence-hemicontinuity.html" class="spoon-card" data-subject="math">
   <div class="spoon-card__header">
     <span class="chip chip--primary">경제학을 위한 수학</span>
-    <span class="chip chip--topic">Chapter 01–08</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
   </div>
-  <div class="spoon-card__title">수리경제학 Chapter 지도</div>
-  <div class="spoon-card__desc">유클리드 위상과 극한·연속성에서 출발하여 다변수 미분, 역함수·음함수 정리, 볼록성, 최적화, 대응과 고정점 정리까지 이어지는 수학적 기초를 한 번에 확인한다.</div>
+  <div class="spoon-card__title">대응의 반연속성과 닫힌 그래프: UHC와 LHC</div>
+  <div class="spoon-card__desc">집합값 대응의 상반연속(UHC: 외측 폭발 억제)과 하반연속(LHC: 내측 소멸 방지), 닫힌 그래프 정리 및 Berge 최대정리의 기하학적 정합성을 검증한다.</div>
   <div class="spoon-card__topics">
-    <span class="chip chip--topic">위상·해석</span>
-    <span class="chip chip--topic">다변수 미분</span>
-    <span class="chip chip--topic">볼록성·최적화</span>
-    <span class="chip chip--topic">대응·고정점</span>
+    <span class="chip chip--topic">상반연속(UHC)</span>
+    <span class="chip chip--topic">하반연속(LHC)</span>
+    <span class="chip chip--topic">닫힌 그래프 정리</span>
+    <span class="chip chip--topic">Berge 최대정리</span>
+    <span class="chip chip--topic">Kakutani 고정점</span>
   </div>
   <div class="spoon-card__chapter">
-    <span>📖 연계: 경제학을 위한 수학 Chapter 01–08</span>
+    <span>📖 연계: 경제학을 위한 수학 Chapter 07 대응과 Chapter 08 고정점 정리</span>
   </div>
   <div class="spoon-card__footer">
-    <span class="status">Chapter 지도 열기 →</span>
+    <span class="status">보충자료 탐색하기 →</span>
   </div>
 </a>
 </div>
