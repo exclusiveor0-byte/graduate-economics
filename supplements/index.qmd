@@ -723,7 +723,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 ::: {.spoon-guide-box}
 **📐 경제학을 위한 수학 보충자료**
 
-수리경제학의 정의·정리·증명을 계산과 시각화로 보완하는 자료를 모아두는 탭이다. 현재는 대응의 상반연속(UHC)·하반연속(LHC), 닫힌 그래프, Berge 최대정리와 Kakutani 고정점 정리를 다룬 자료가 연결되어 있다. 수리경제학 본문과 Chapter 지도는 전공 과목 메뉴에서 읽는다.
+경제학을 위한 수학의 핵심 개념을 계산과 시각화로 보완하는 자료를 모아두는 탭이다. 대응의 상반연속(UHC)·하반연속(LHC), 닫힌 그래프, Berge 최대정리와 Kakutani 고정점 정리의 구조와 직관을 interactive supplement로 탐색한다.
 :::
 
 ```{=html}
