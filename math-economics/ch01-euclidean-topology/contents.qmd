@@ -1,0 +1,2667 @@
+---
+title: "Chapter 1 · 유클리드 공간의 위상적 기초"
+description: "노름, 거리, 열린집합, 닫힌집합, 닫개, 집적점, 상대위상, 수열적 특성화, Bolzano–Weierstrass, 컴팩트성, Heine–Borel."
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/math-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s11}
+
+## [1.1]{.section-number}유클리드 공간, 노름과 거리
+
+::: {.topic-opening}
+위상적 개념을 정의하려면 먼저 “두 점이 얼마나 가까운가”를 측정할 수 있어야 한다.
+$\mathbb R^n$에서는 벡터의 길이를 나타내는 노름과 두 점 사이의 거리가 그 역할을 한다.
+이후 열린집합, 경계, 수열의 수렴, 컴팩트성은 모두 이 거리구조 위에서 정의된다.
+:::
+
+:::::::::::::::::::: {.dependency-chain}
+
+::::::::::::::::::: {.dependency-chain__step}
+
+<span class="dependency-chain__num">01</span><span class="dependency-chain__text">Inner product</span><span class="dependency-chain__sub">각도와 길이</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.dependency-chain__step}
+
+<span class="dependency-chain__num">02</span><span class="dependency-chain__text">Norm</span><span class="dependency-chain__sub">벡터의 크기</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.dependency-chain__step}
+
+<span class="dependency-chain__num">03</span><span class="dependency-chain__text">Distance</span><span class="dependency-chain__sub">두 점의 근접성</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.dependency-chain__step}
+
+<span class="dependency-chain__num">04</span><span class="dependency-chain__text">Ball</span><span class="dependency-chain__sub">국소적 이웃</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.dependency-chain__step}
+
+<span class="dependency-chain__num">05</span><span class="dependency-chain__text">Topology</span><span class="dependency-chain__sub">열린집합 구조</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.dependency-chain__step}
+
+<span class="dependency-chain__num">06</span><span class="dependency-chain__text">Compactness</span><span class="dependency-chain__sub">전역적 유한성</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 1.1.1 $\mathbb R^n$, 내적과 Cauchy–Schwarz 부등식 {#s111}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.1 · Euclidean space
+
+:::::::::::::::::::
+
+자연수 $n\ge1$에 대해
+
+$$
+\mathbb R^n
+=
+\{x=(x_1,\ldots,x_n):x_i\in\mathbb R,\ i=1,\ldots,n\}
+$$
+
+를 $n$-차원 유클리드 공간이라 한다.
+
+::::::::::::::::::::
+
+이 장에서 벡터는 기본적으로 열벡터로 생각한다. $x,y\in\mathbb R^n$, $\alpha\in\mathbb R$에 대해
+벡터합과 스칼라곱은 좌표별로 정의한다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+x+y=(x_1+y_1,\ldots,x_n+y_n),\qquad
+\alpha x=(\alpha x_1,\ldots,\alpha x_n).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.2 · Euclidean inner product
+
+:::::::::::::::::::
+
+$x,y\in\mathbb R^n$에 대해
+
+$$
+\langle x,y\rangle
+=
+x^\top y
+=
+\sum_{i=1}^n x_i y_i
+$$
+
+를 유클리드 내적이라 한다.
+
+::::::::::::::::::::
+
+내적은 대칭성 $\langle x,y\rangle=\langle y,x\rangle$, 선형성, 양의 정부호성
+$\langle x,x\rangle\ge0$ 및 $\langle x,x\rangle=0\iff x=0$을 만족한다.
+유클리드 노름은 이 내적으로부터 유도된다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.1 · Cauchy–Schwarz inequality
+
+:::::::::::::::::::
+
+모든 $x,y\in\mathbb R^n$에 대해
+
+$$
+|\langle x,y\rangle|
+\le
+\sqrt{\langle x,x\rangle}\sqrt{\langle y,y\rangle}
+$$
+
+가 성립한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$y=0$이면 자명하다. $y\neq0$라 하자. 임의의 $t\in\mathbb R$에 대해
+
+$$
+0\le \|x-ty\|_2^2
+=
+\langle x-ty,x-ty\rangle
+=
+\langle x,x\rangle
+-2t\langle x,y\rangle
++t^2\langle y,y\rangle.
+$$
+
+우변은 $t$에 대한 이차식이며 모든 $t$에서 음이 아니므로 판별식이 0 이하이다.
+따라서
+
+$$
+4\langle x,y\rangle^2
+-
+4\langle x,x\rangle\langle y,y\rangle
+\le0,
+$$
+
+즉
+
+$$
+|\langle x,y\rangle|
+\le
+\sqrt{\langle x,x\rangle}\sqrt{\langle y,y\rangle}.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 1.1.2 노름과 거리 {#s112}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.3 · Euclidean norm
+
+:::::::::::::::::::
+
+$x\in\mathbb R^n$에 대해
+
+$$
+\|x\|_2
+=
+\sqrt{\langle x,x\rangle}
+=
+\left(\sum_{i=1}^n x_i^2\right)^{1/2}
+$$
+
+를 유클리드 노름이라 한다. 혼동의 우려가 없으면 $\|x\|$로 쓴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.2 · Properties of the Euclidean norm
+
+:::::::::::::::::::
+
+모든 $x,y\in\mathbb R^n$, $\alpha\in\mathbb R$에 대해
+
+$$
+\|x\|\ge0,\qquad \|x\|=0\iff x=0,
+$$
+
+$$
+\|\alpha x\|=|\alpha|\|x\|,
+$$
+
+$$
+\|x+y\|\le\|x\|+\|y\|
+$$
+
+가 성립한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof of the triangle inequality
+
+:::::::::::::::::::
+
+첫 두 성질은 정의에서 즉시 따른다. 삼각부등식은
+
+$$
+\|x+y\|^2
+=
+\|x\|^2+2\langle x,y\rangle+\|y\|^2
+\le
+\|x\|^2+2\|x\|\|y\|+\|y\|^2
+=
+(\|x\|+\|y\|)^2
+$$
+
+와 Cauchy–Schwarz 부등식에서 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.3 · Reverse triangle inequality
+
+:::::::::::::::::::
+
+모든 $x,y\in\mathbb R^n$에 대해
+
+$$
+\big|\|x\|-\|y\|\big|
+\le
+\|x-y\|
+$$
+
+가 성립한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$x=(x-y)+y$이므로
+
+$$
+\|x\|\le\|x-y\|+\|y\|,
+$$
+
+따라서 $\|x\|-\|y\|\le\|x-y\|$. $x,y$를 바꾸면
+$\|y\|-\|x\|\le\|x-y\|$를 얻는다. 두 부등식을 합치면 결론이 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.4 · Euclidean distance
+
+:::::::::::::::::::
+
+$x,y\in\mathbb R^n$에 대해
+
+$$
+d(x,y)=\|x-y\|
+$$
+
+를 두 점 $x,y$ 사이의 유클리드 거리라 한다.
+
+::::::::::::::::::::
+
+거리함수는 비음성, 분리성, 대칭성, 삼각부등식을 만족한다. 이후 대부분의 표현에서는
+$d(x,y)$ 대신 $\|x-y\|$를 사용한다.
+
+### 1.1.3 열린 공, 닫힌 공, 그리고 표준 노름 {#s113}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.5 · Open ball and neighborhood
+
+:::::::::::::::::::
+
+$x\in\mathbb R^n$, $r>0$에 대해
+
+$$
+\boxed{
+B_r(x)
+=
+\{y\in\mathbb R^n:\|y-x\|<r\}
+}
+$$
+
+를 중심 $x$, 반지름 $r$인 <strong>열린 공(open ball)</strong>이라 한다.
+이 책에서는 $B_r(x)$를 $x$의 반지름 $r$인 <strong>이웃(neighborhood)</strong>으로도 부른다.
+따라서 이후 등장하는
+
+$$
+B_r(x)\subseteq E,\qquad
+B_r(x)\cap E\neq\varnothing
+$$
+
+같은 표현은 모두 이 정의를 사용한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.6 · Closed ball and punctured ball
+
+:::::::::::::::::::
+
+같은 $x\in\mathbb R^n$, $r>0$에 대해
+
+$$
+\overline B_r(x)
+=
+\{y\in\mathbb R^n:\|y-x\|\le r\}
+$$
+
+를 닫힌 공(closed ball)이라 하고,
+
+$$
+B_r^\circ(x)
+=
+B_r(x)\setminus\{x\}
+$$
+
+를 구멍 뚫린 열린 공(punctured open ball)이라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.7 · $1$-norm and $\infty$-norm
+
+:::::::::::::::::::
+
+$x=(x_1,\ldots,x_n)$에 대해
+
+$$
+\|x\|_1=\sum_{i=1}^n|x_i|,
+\qquad
+\|x\|_\infty=\max_{1\le i\le n}|x_i|
+$$
+
+로 정의한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.4 · Comparison of standard norms
+
+:::::::::::::::::::
+
+모든 $x\in\mathbb R^n$에 대해
+
+$$
+\|x\|_\infty
+\le
+\|x\|_2
+\le
+\sqrt n\,\|x\|_\infty
+$$
+
+이다. 또한
+
+$$
+\|x\|_2\le\|x\|_1\le\sqrt n\,\|x\|_2.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+각 $i$에 대해 $|x_i|\le\|x\|_2$이므로 $\|x\|_\infty\le\|x\|_2$.
+반대로
+
+$$
+\|x\|_2^2=\sum_{i=1}^n x_i^2
+\le
+n\|x\|_\infty^2.
+$$
+
+또한 $\|x\|_2\le\|x\|_1$은 제곱 후 교차항이 비음이 아님에서 따르고,
+Cauchy–Schwarz에 의해
+
+$$
+\|x\|_1
+=
+\langle (|x_1|,\ldots,|x_n|),(1,\ldots,1)\rangle
+\le
+\|x\|_2\sqrt n.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 1.1 · Unit balls in $\mathbb R^2$
+
+:::::::::::::::::::
+
+$$
+\|x\|_1<1
+\iff
+|x_1|+|x_2|<1,
+$$
+
+$$
+\|x\|_2<1
+\iff
+x_1^2+x_2^2<1,
+$$
+
+$$
+\|x\|_\infty<1
+\iff
+|x_1|<1,\ |x_2|<1.
+$$
+
+세 unit ball의 기하학적 모양은 다르지만, 유한차원에서 이들 표준 노름은 같은 수렴개념과 같은 열린집합 구조를 만든다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 왜 여러 노름을 소개하는가?
+
+:::::::::::::::::::
+
+경제학과 계량경제학에서는 목적에 따라 서로 다른 노름이 편리하다.
+예를 들어 $\|\cdot\|_\infty$는 균등근사와 sup-distance에 자연스럽고,
+$\|\cdot\|_2$는 최소제곱과 이차형식에 자연스럽다.
+이 장의 핵심 위상적 결과는 $\mathbb R^n$에서는 이런 선택에 본질적으로 의존하지 않는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s12}
+
+## [1.2]{.section-number}내부, 외부와 경계
+
+::: {.topic-opening}
+집합 $E\subseteq\mathbb R^n$가 주어졌을 때 각 점은 $E$와 어떤 관계를 갖는가?
+국소적으로 $E$ 안에 완전히 머무는 점, $E$ 밖에 완전히 머무는 점,
+그리고 아무리 확대해도 $E$의 안과 밖을 동시에 보게 되는 점을 구분한다.
+:::
+
+### 1.2.1 내점, 외점, 경계점 {#s121}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.8 · Interior point
+
+:::::::::::::::::::
+
+$x\in\mathbb R^n$에 대해 어떤 $r>0$가 존재하여
+
+$$
+B_r(x)\subseteq E
+$$
+
+이면 $x$를 $E$의 내점이라 한다.
+$E$의 모든 내점의 집합을 $\operatorname{int}E$로 쓴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.9 · Exterior point
+
+:::::::::::::::::::
+
+어떤 $r>0$가 존재하여
+
+$$
+B_r(x)\subseteq E^c
+$$
+
+이면 $x$를 $E$의 외점이라 한다.
+외점들의 집합을 $\operatorname{ext}E$로 쓴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.10 · Boundary point
+
+:::::::::::::::::::
+
+모든 $r>0$에 대해
+
+$$
+B_r(x)\cap E\neq\varnothing,
+\qquad
+B_r(x)\cap E^c\neq\varnothing
+$$
+
+이면 $x$를 $E$의 경계점이라 한다.
+경계점들의 집합을 $\partial E$로 쓴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.concept-grid}
+
+::::::::::::::::::: {.concept-card}
+
+::: {.concept-card__label}
+INTERIOR
+:::
+
+:::::::::::::::::: {.concept-card__formula}
+
+$\exists r>0:\ B_r(x)\subseteq E$
+
+::::::::::::::::::
+
+::: {.concept-card__text}
+충분히 작은 perturbation을 해도 집합 안에 남는다.
+:::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.concept-card}
+
+::: {.concept-card__label}
+BOUNDARY
+:::
+
+:::::::::::::::::: {.concept-card__formula}
+
+$\forall r>0:\ B_r(x)\cap E\neq\varnothing,\ B_r(x)\cap E^c\neq\varnothing$
+
+::::::::::::::::::
+
+::: {.concept-card__text}
+아무리 작은 이웃에서도 안과 밖이 동시에 나타난다.
+:::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 1.2 · Open and closed unit balls
+
+:::::::::::::::::::
+
+$E=B_1(0)$이면
+
+$$
+\operatorname{int}E=B_1(0),\qquad
+\partial E=\{x:\|x\|=1\},\qquad
+\operatorname{ext}E=\{x:\|x\|>1\}.
+$$
+
+$F=\overline B_1(0)$에서도
+
+$$
+\operatorname{int}F=B_1(0),\qquad
+\partial F=\{x:\|x\|=1\},\qquad
+\operatorname{ext}F=\{x:\|x\|>1\}.
+$$
+
+즉 집합이 경계를 포함하는지 여부는 interior와 boundary 자체를 바꾸지 않을 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 1.1 · 집합의 원소가 모두 내점인 것은 아니다
+
+:::::::::::::::::::
+
+$E=[0,1]\subset\mathbb R$에서 $0,1\in E$이지만 둘 다 내점이 아니다.
+예를 들어 $0$의 모든 열린 이웃은 음수를 포함하므로 $B_r(0)\subseteq[0,1]$인 $r>0$는 존재하지 않는다.
+
+::::::::::::::::::::
+
+### 1.2.2 내부–경계–외부 분할 {#s122}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.5 · Interior–boundary–exterior decomposition
+
+:::::::::::::::::::
+
+임의의 $E\subseteq\mathbb R^n$에 대해
+
+$$
+\mathbb R^n
+=
+\operatorname{int}E
+\,\dot\cup\,
+\partial E
+\,\dot\cup\,
+\operatorname{ext}E
+$$
+
+이다. 여기서 $\dot\cup$는 서로소 합집합을 뜻한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+임의의 $x\in\mathbb R^n$를 잡자. $x\in\operatorname{int}E$이거나
+$x\in\operatorname{ext}E$이면 끝이다. 둘 다 아니라면 모든 $r>0$에 대해
+$B_r(x)\not\subseteq E$이고 $B_r(x)\not\subseteq E^c$.
+따라서
+
+$$
+B_r(x)\cap E^c\neq\varnothing,\qquad B_r(x)\cap E\neq\varnothing
+$$
+
+이므로 $x\in\partial E$. 따라서 세 집합의 합집합이 $\mathbb R^n$이다.
+서로소성은 정의에서 즉시 따른다. 예를 들어 $x\in\operatorname{int}E$이면 어떤 $r>0$에 대해
+$B_r(x)\subseteq E$이므로 같은 이웃이 $E^c$와 만나야 하는 경계점일 수 없다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.6 · Complement symmetry of the boundary
+
+:::::::::::::::::::
+
+$$
+\partial E=\partial(E^c).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$x\in\partial E$라는 조건은 모든 $r>0$에 대해
+$B_r(x)$가 $E$와 $E^c$를 모두 만난다는 것이다.
+이 조건은 $E$와 $E^c$를 서로 바꾸어도 동일하다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s13}
+
+## [1.3]{.section-number}열린집합과 닫힌집합
+
+::: {.topic-opening}
+내점과 경계점은 개별 점의 국소적 성질이다. 이제 이 국소적 성질을 집합 전체의 성질로 올린다.
+열린집합은 모든 점에서 작은 perturbation을 허용하는 집합이고, 닫힌집합은 그 여집합이 열린 집합이다.
+:::
+
+### 1.3.1 열린집합 {#s131}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.11 · Open set
+
+:::::::::::::::::::
+
+집합 $U\subseteq\mathbb R^n$의 모든 점이 $U$의 내점이면 $U$를 열린집합이라 한다.
+동치로,
+
+$$
+U\text{ open}
+\iff
+\forall x\in U,\ \exists r>0:\ B_r(x)\subseteq U.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.7 · Open ball is open
+
+:::::::::::::::::::
+
+모든 $x\in\mathbb R^n$, $r>0$에 대해 $B_r(x)$는 열린집합이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$y\in B_r(x)$를 잡자. 그러면 $\|y-x\|<r$이고
+
+$$
+\rho=r-\|y-x\|>0.
+$$
+
+$z\in B_\rho(y)$이면 삼각부등식으로
+
+$$
+\|z-x\|
+\le
+\|z-y\|+\|y-x\|
+<
+\rho+\|y-x\|
+=
+r.
+$$
+
+따라서 $z\in B_r(x)$, 즉 $B_\rho(y)\subseteq B_r(x)$.
+$y$가 임의였으므로 $B_r(x)$는 open이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.8 · Algebra of open sets
+
+:::::::::::::::::::
+
+열린집합족 $\{U_\alpha\}_{\alpha\in A}$에 대해
+
+$$
+\bigcup_{\alpha\in A}U_\alpha
+$$
+
+는 열린집합이다. 또한 유한개의 열린집합 $U_1,\ldots,U_m$에 대해
+
+$$
+\bigcap_{j=1}^m U_j
+$$
+
+는 열린집합이다. $\varnothing$과 $\mathbb R^n$도 열린집합이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+합집합의 경우 $x\in\bigcup_\alpha U_\alpha$이면 어떤 $\alpha_0$에 대해 $x\in U_{\alpha_0}$.
+$U_{\alpha_0}$가 open이므로 $B_r(x)\subseteq U_{\alpha_0}\subseteq\bigcup_\alpha U_\alpha$인 $r>0$가 존재한다.
+
+유한교집합의 경우 $x\in\bigcap_{j=1}^mU_j$이면 각 $j$에 대해
+$B_{r_j}(x)\subseteq U_j$인 $r_j>0$가 존재한다.
+$r=\min_j r_j>0$로 두면 $B_r(x)\subseteq\bigcap_{j=1}^mU_j$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 1.2 · 무한교집합은 open일 필요가 없다
+
+:::::::::::::::::::
+
+$$
+U_n=\left(-\frac1n,\frac1n\right)
+$$
+
+는 모두 열린집합이지만
+
+$$
+\bigcap_{n=1}^\infty U_n=\{0\}
+$$
+
+은 열린집합이 아니다.
+
+::::::::::::::::::::
+
+### 1.3.2 닫힌집합 {#s132}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.12 · Closed set
+
+:::::::::::::::::::
+
+$F\subseteq\mathbb R^n$에 대해 $F^c$가 열린집합이면 $F$를 닫힌집합이라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.9 · Algebra of closed sets
+
+:::::::::::::::::::
+
+닫힌집합족 $\{F_\alpha\}_{\alpha\in A}$에 대해
+
+$$
+\bigcap_{\alpha\in A}F_\alpha
+$$
+
+는 닫힌집합이다. 또한 유한개의 닫힌집합 $F_1,\ldots,F_m$에 대해
+
+$$
+\bigcup_{j=1}^mF_j
+$$
+
+는 닫힌집합이다. $\varnothing$과 $\mathbb R^n$도 닫힌집합이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+De Morgan 법칙
+
+$$
+\left(\bigcap_{\alpha}F_\alpha\right)^c
+=
+\bigcup_{\alpha}F_\alpha^c
+$$
+
+와 열린집합의 arbitrary union 성질을 이용하면 첫 번째 결과가 따른다.
+유한합집합에 대해서는
+
+$$
+\left(\bigcup_{j=1}^mF_j\right)^c
+=
+\bigcap_{j=1}^mF_j^c
+$$
+
+와 열린집합의 finite intersection 성질을 이용한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 1.3.3 표준 예제와 직접 판정 {#s133}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 1.3 · Positive orthants
+
+:::::::::::::::::::
+
+$$
+\mathbb R_{++}^n=\{x\in\mathbb R^n:x_i>0,\ i=1,\ldots,n\}
+$$
+
+는 open이다. 반면
+
+$$
+\mathbb R_+^n=\{x\in\mathbb R^n:x_i\ge0,\ i=1,\ldots,n\}
+$$
+
+는 closed이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 1.4 · Half-spaces
+
+:::::::::::::::::::
+
+$a\in\mathbb R^n\setminus\{0\}$, $b\in\mathbb R$라 하자.
+
+$$
+H^-=\{x:a^\top x\le b\}
+$$
+
+는 closed이고,
+
+$$
+H^+=\{x:a^\top x>b\}
+$$
+
+는 open이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Direct proof that $H^+$ is open
+
+:::::::::::::::::::
+
+$x\in H^+$이면 $a^\top x-b>0$. $r=(a^\top x-b)/(2\|a\|)>0$로 두자.
+$y\in B_r(x)$이면 Cauchy–Schwarz로
+
+$$
+a^\top y
+=
+a^\top x+a^\top(y-x)
+\ge
+a^\top x-\|a\|\,\|y-x\|
+>
+a^\top x-\frac{a^\top x-b}{2}
+>
+b.
+$$
+
+따라서 $B_r(x)\subseteq H^+$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · open/closed는 서로의 반대말이 아니다
+
+:::::::::::::::::::
+
+어떤 집합은 open이면서 closed일 수 있다. $\varnothing$과 $\mathbb R^n$이 대표적이다.
+또한 $(0,1]\subset\mathbb R$처럼 open도 closed도 아닌 집합도 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s14}
+
+## [1.4]{.section-number}내부, 닫개와 경계 연산자
+
+::: {.topic-opening}
+이제 $\operatorname{int}E$, $\overline E$, $\partial E$를 단순한 점들의 모임이 아니라
+집합을 다른 집합으로 보내는 연산자로 본다. 이 관점은 위상적 성질을 계산하고 비교할 때 특히 유용하다.
+:::
+
+### 1.4.1 Interior operator {#s141}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.10 · Basic properties of the interior
+
+:::::::::::::::::::
+
+임의의 $E\subseteq\mathbb R^n$에 대해
+
+$$
+\operatorname{int}E\subseteq E,
+\qquad
+\operatorname{int}E\text{ is open},
+$$
+
+$$
+E\text{ open}
+\iff
+E=\operatorname{int}E,
+$$
+
+$$
+\operatorname{int}(\operatorname{int}E)=\operatorname{int}E.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof that $\operatorname{int}E$ is open
+
+:::::::::::::::::::
+
+$x\in\operatorname{int}E$이면 어떤 $r>0$에 대해 $B_r(x)\subseteq E$.
+$y\in B_{r/2}(x)$이면 $B_{r/2}(y)\subseteq B_r(x)\subseteq E$.
+따라서 $y\in\operatorname{int}E$, 즉
+$B_{r/2}(x)\subseteq\operatorname{int}E$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.11 · Interior and set operations
+
+:::::::::::::::::::
+
+$$
+\operatorname{int}(A\cap B)
+=
+\operatorname{int}A\cap\operatorname{int}B.
+$$
+
+또한
+
+$$
+\operatorname{int}A\cup\operatorname{int}B
+\subseteq
+\operatorname{int}(A\cup B),
+$$
+
+이며 등호는 일반적으로 성립하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 1.3 · Interior does not distribute over union
+
+:::::::::::::::::::
+
+$A=[0,1]$, $B=[1,2]$라 하면
+
+$$
+\operatorname{int}A\cup\operatorname{int}B
+=
+(0,1)\cup(1,2),
+$$
+
+그러나
+
+$$
+\operatorname{int}(A\cup B)
+=
+(0,2).
+$$
+
+::::::::::::::::::::
+
+### 1.4.2 닫개 {#s142}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.13 · Closure
+
+:::::::::::::::::::
+
+$E\subseteq\mathbb R^n$에 대해
+
+$$
+\overline E
+=
+\{x\in\mathbb R^n:
+B_r(x)\cap E\neq\varnothing
+\text{ for every }r>0\}
+$$
+
+를 $E$의 닫개라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.12 · Basic properties of closure
+
+:::::::::::::::::::
+
+$$
+E\subseteq\overline E,
+\qquad
+\overline E\text{ is closed},
+$$
+
+$$
+E\text{ closed}
+\iff
+E=\overline E,
+$$
+
+$$
+\overline{\overline E}=\overline E.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.13 · Closure as the smallest closed superset
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\overline E
+=
+\bigcap
+\{F\subseteq\mathbb R^n:
+E\subseteq F,\ F\text{ closed}\}.
+}
+$$
+
+즉 $\overline E$는 $E$를 포함하는 가장 작은 닫힌집합이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+우선 $\overline E$는 closed이고 $E\subseteq\overline E$이므로 우변에 나타나는 닫힌집합족 중 하나이다.
+따라서
+
+$$
+\bigcap\{F:E\subseteq F,\ F\text{ closed}\}
+\subseteq
+\overline E.
+$$
+
+반대로 $F$가 $E$를 포함하는 임의의 closed set이라 하자.
+$x\notin F$이면 $F^c$가 open이므로 어떤 $r>0$에 대해 $B_r(x)\subseteq F^c$.
+$E\subseteq F$이므로 $B_r(x)\cap E=\varnothing$, 따라서 $x\notin\overline E$.
+즉 $\overline E\subseteq F$. 모든 그런 $F$에 대해 성립하므로
+
+$$
+\overline E
+\subseteq
+\bigcap\{F:E\subseteq F,\ F\text{ closed}\}.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 1.4.3 경계의 표현 {#s143}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.14 · Boundary identities
+
+:::::::::::::::::::
+
+임의의 $E\subseteq\mathbb R^n$에 대해
+
+$$
+\boxed{
+\partial E
+=
+\overline E\setminus\operatorname{int}E
+=
+\overline E\cap\overline{E^c}.
+}
+$$
+
+따라서 $\partial E$는 항상 닫힌집합이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$x\in\partial E$이면 모든 $r>0$에 대해 $B_r(x)$가 $E$와 만나므로 $x\in\overline E$.
+동시에 $E^c$와도 만나므로 $x\notin\operatorname{int}E$.
+따라서 $\partial E\subseteq\overline E\setminus\operatorname{int}E$.
+
+반대로 $x\in\overline E\setminus\operatorname{int}E$이면 모든 $r>0$에 대해
+$B_r(x)\cap E\neq\varnothing$. 또한 $x\notin\operatorname{int}E$이므로 모든 $r>0$에 대해
+$B_r(x)\not\subseteq E$, 즉 $B_r(x)\cap E^c\neq\varnothing$.
+따라서 $x\in\partial E$.
+
+두 번째 등식은 $x\in\overline E\cap\overline{E^c}$가 모든 이웃이 $E$와 $E^c$를 모두 만난다는 뜻이므로 따른다.
+마지막으로 닫개는 closed이고 닫힌집합의 교집합은 closed이므로 $\partial E$도 closed이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s15}
+
+## [1.5]{.section-number}집적점, 고립점과 조밀성
+
+::: {.topic-opening}
+닫개는 한 점이 집합 자체에 속하는 경우와 집합의 점들이 그 점에 끝없이 접근하는 경우를 함께 포함한다.
+이 둘을 분리하기 위해 집적점과 고립점을 정의한다. 이후 수열적 수렴과 compactness를 이해하는 데 핵심적인 개념이다.
+:::
+
+### 1.5.1 집적점과 고립점 {#s151}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.14 · Accumulation point
+
+:::::::::::::::::::
+
+$x\in\mathbb R^n$에 대해 모든 $r>0$에서
+
+$$
+B_r(x)\cap(E\setminus\{x\})\neq\varnothing
+$$
+
+이면 $x$를 $E$의 집적점 또는 극한점이라 한다.
+모든 집적점의 집합을 $E'$로 쓴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.15 · Isolated point
+
+:::::::::::::::::::
+
+$x\in E$이지만 $x\notin E'$이면 $x$를 $E$의 고립점이라 한다.
+동치로, 어떤 $r>0$가 존재하여
+
+$$
+B_r(x)\cap E=\{x\}
+$$
+
+이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 1.5 · $E=\{1/n:n\in\mathbb N\}$
+
+:::::::::::::::::::
+
+각 $1/n$은 $E$의 고립점이다. 반면 $0$은 $E$의 집적점이지만 $0\notin E$.
+따라서 집적점은 원래 집합에 속할 필요가 없다.
+
+::::::::::::::::::::
+
+### 1.5.2 Derived set와 닫개 {#s152}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.15 · Closure via accumulation points
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\overline E=E\cup E'.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$x\in E$이면 모든 $r>0$에 대해 $x\in B_r(x)\cap E$, 따라서 $x\in\overline E$.
+$x\in E'$이면 정의상 모든 이웃이 $E\setminus\{x\}$와 만나므로 역시 $x\in\overline E$.
+따라서 $E\cup E'\subseteq\overline E$.
+
+반대로 $x\in\overline E$. $x\in E$이면 끝이다.
+$x\notin E$이면 $E\setminus\{x\}=E$이고 모든 $r>0$에 대해
+$B_r(x)\cap E\neq\varnothing$. 따라서 $x\in E'$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.16 · The derived set is closed
+
+:::::::::::::::::::
+
+$E'$는 닫힌집합이다.
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>증명 펼치기</summary>
+
+:::::::::::::::::::: {.details-body}
+
+$x\notin E'$라 하자. 그러면 어떤 $r>0$가 존재하여
+
+$$
+B_r(x)\cap(E\setminus\{x\})=\varnothing.
+$$
+
+$y\in B_{r/2}(x)$에 대해 $B_{r/2}(y)\subseteq B_r(x)$.
+특히 $B_{r/2}(y)$ 안에는 $E$의 점이 있어도 최대 $x$ 하나뿐이다.
+그런데 $y\neq x$인 경우 $x$ 자체도 $y$의 sufficiently small punctured neighborhood에서 제외할 수 있고,
+$y=x$인 경우 처음 가정이 직접 적용된다.
+따라서 $B_{r/2}(x)\subseteq(E')^c$인 더 작은 반지름을 선택할 수 있다.
+즉 $(E')^c$가 open이므로 $E'$는 closed이다.
+
+::::::::::::::::::::
+
+</details>
+
+### 1.5.3 조밀성 {#s153}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.16 · Dense set
+
+:::::::::::::::::::
+
+$E\subseteq X\subseteq\mathbb R^n$에 대해
+
+$$
+\overline E\supseteq X
+$$
+
+이면 $E$가 $X$에서 조밀하다고 한다.
+특히 $\overline E=X$이면 $E$는 $X$의 조밀부분집합이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.17 · Characterization of density
+
+:::::::::::::::::::
+
+$E\subseteq X$에 대해 다음은 동치이다.
+
+(i) $\overline E=X$.
+
+(ii) $X$의 모든 비공집합 상대열린집합은 $E$와 교차한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 1.6 · Rational and irrational numbers
+
+:::::::::::::::::::
+
+$$
+\overline{\mathbb Q}=\mathbb R,
+\qquad
+\overline{\mathbb R\setminus\mathbb Q}=\mathbb R.
+$$
+
+즉 유리수와 무리수는 모두 실수선에서 조밀하다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s16}
+
+## [1.6]{.section-number}부분공간과 상대위상
+
+::: {.topic-opening}
+경제학의 정의역은 대개 $\mathbb R^n$ 전체가 아니다.
+소비집합 $\mathbb R_+^L$, 확률 simplex, budget set, parameter space처럼 제약이 있는 부분집합 위에서 분석한다.
+따라서 “open”과 “interior”는 어떤 ambient space를 기준으로 하는지를 명시해야 한다.
+:::
+
+### 1.6.1 Relative open and closed sets {#s161}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.17 · Relative topology
+
+:::::::::::::::::::
+
+$X\subseteq\mathbb R^n$를 고정하자.
+$U\subseteq X$가 $X$에서 열린집합이라는 것은 어떤 $\mathbb R^n$의 열린집합 $V$가 존재하여
+
+$$
+U=X\cap V
+$$
+
+로 쓸 수 있다는 뜻이다.
+마찬가지로 $F\subseteq X$가 $X$에서 닫혔다는 것은 어떤 $\mathbb R^n$의 닫힌집합 $C$가 존재하여
+
+$$
+F=X\cap C
+$$
+
+로 쓸 수 있다는 뜻이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 1.7 · $[0,1)$ in $\mathbb R_+$
+
+:::::::::::::::::::
+
+$[0,1)$는 $\mathbb R$에서는 open이 아니지만
+
+$$
+[0,1)
+=
+(-1,1)\cap\mathbb R_+
+$$
+
+이므로 $\mathbb R_+$에서는 relatively open이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.18 · Relative-open ball characterization
+
+:::::::::::::::::::
+
+$U\subseteq X\subseteq\mathbb R^n$에 대해 다음은 동치이다.
+
+(i) $U$는 $X$에서 open.
+
+(ii) 모든 $x\in U$에 대해 어떤 $r>0$가 존재하여
+
+$$
+B_r(x)\cap X\subseteq U.
+$$
+
+::::::::::::::::::::
+
+### 1.6.2 상대내부와 simplex {#s162}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.18 · Relative interior
+
+:::::::::::::::::::
+
+$E\subseteq\mathbb R^n$의 affine hull을 $\operatorname{aff}E$라 할 때,
+$E$의 상대내부 $\operatorname{ri}E$는 $\operatorname{aff}E$에서의 interior이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 1.8 · Probability simplex
+
+:::::::::::::::::::
+
+$$
+\Delta^{n-1}
+=
+\left\{
+p\in\mathbb R_+^n:
+\sum_{i=1}^n p_i=1
+\right\}.
+$$
+
+이 집합은 $\mathbb R^n$에서 interior가 비어 있지만,
+자신의 affine hull
+
+$$
+\left\{p\in\mathbb R^n:\sum_i p_i=1\right\}
+$$
+
+안에서는
+
+$$
+\operatorname{ri}\Delta^{n-1}
+=
+\left\{p:p_i>0,\ \sum_i p_i=1\right\}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC READING · Relative interior
+
+:::::::::::::::::::
+
+확률벡터, 혼합전략, 가격 simplex는 낮은 차원의 affine subspace 위에 놓인다.
+따라서 “interior point”를 ambient space $\mathbb R^n$에서만 이해하면 interior가 공집합이 되어
+경제학적 의미를 잃는다. 제약집합 위에서의 국소적 perturbation을 논하려면 relative topology가 자연스럽다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s17}
+
+## [1.7]{.section-number}수열과 위상적 특성화
+
+::: {.topic-opening}
+이 장에서는 수열을 위상적 개념의 출발점으로 사용하지 않았다.
+이제 이미 정의한 닫개·집적점·닫힌집합을 수열의 수렴으로 다시 표현한다.
+$\mathbb R^n$에서는 이 수열적 언어가 매우 강력하여 이후 존재성·연속성·최적화 증명의 표준 도구가 된다.
+:::
+
+### 1.7.1 벡터수열의 수렴 {#s171}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.19 · Convergence of a sequence
+
+:::::::::::::::::::
+
+수열 $\{x_k\}\subseteq\mathbb R^n$이 $x\in\mathbb R^n$로 수렴한다는 것은
+
+$$
+\forall\varepsilon>0,\ \exists K\in\mathbb N
+\text{ such that }
+k\ge K\Rightarrow \|x_k-x\|<\varepsilon
+$$
+
+이라는 뜻이다. 이때 $x_k\to x$ 또는 $\lim_{k\to\infty}x_k=x$로 쓴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.19 · Coordinatewise convergence
+
+:::::::::::::::::::
+
+$x_k=(x_{k1},\ldots,x_{kn})$, $x=(x_1,\ldots,x_n)$라 하자. 그러면
+
+$$
+x_k\to x
+\iff
+x_{kj}\to x_j
+\quad(j=1,\ldots,n).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$x_k\to x$이면 각 $j$에 대해
+
+$$
+|x_{kj}-x_j|
+\le
+\|x_k-x\|_2\to0.
+$$
+
+반대로 모든 좌표가 수렴하면
+
+$$
+\|x_k-x\|_2^2
+=
+\sum_{j=1}^n|x_{kj}-x_j|^2\to0
+$$
+
+이므로 $x_k\to x$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 1.7.2 닫개와 집적점의 수열적 표현 {#s172}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.20 · Sequential characterization of closure
+
+:::::::::::::::::::
+
+$E\subseteq\mathbb R^n$, $x\in\mathbb R^n$에 대해
+
+$$
+\boxed{
+x\in\overline E
+\iff
+\exists\{x_k\}\subseteq E
+\text{ such that }x_k\to x.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$x\in\overline E$이면 모든 $k$에 대해
+$B_{1/k}(x)\cap E\neq\varnothing$.
+$x_k\in B_{1/k}(x)\cap E$를 선택하면
+$\|x_k-x\|<1/k$, 따라서 $x_k\to x$.
+
+반대로 $x_k\in E$, $x_k\to x$라 하자.
+임의의 $r>0$에 대해 충분히 큰 $k$에서는 $x_k\in B_r(x)$.
+따라서 $B_r(x)\cap E\neq\varnothing$, 즉 $x\in\overline E$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.21 · Sequential characterization of accumulation points
+
+:::::::::::::::::::
+
+$$
+x\in E'
+\iff
+\exists x_k\in E\setminus\{x\}
+\text{ such that }x_k\to x.
+$$
+
+::::::::::::::::::::
+
+### 1.7.3 닫힌집합의 수열적 판정 {#s173}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.22 · Sequential characterization of closed sets
+
+:::::::::::::::::::
+
+$F\subseteq\mathbb R^n$에 대해 다음은 동치이다.
+
+(i) $F$는 closed.
+
+(ii) $F$ 안의 모든 수렴수열 $\{x_k\}$에 대해
+
+$$
+x_k\to x
+\quad\Longrightarrow\quad
+x\in F.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$F$가 closed이고 $x_k\in F$, $x_k\to x$라 하자.
+Theorem 1.20에 의해 $x\in\overline F=F$.
+
+반대로 모든 $F$-내 수렴수열의 극한이 $F$에 속한다고 하자.
+$x\in\overline F$이면 Theorem 1.20에 의해 $x_k\in F$, $x_k\to x$인 수열이 존재한다.
+가정에 의해 $x\in F$, 따라서 $\overline F\subseteq F$.
+항상 $F\subseteq\overline F$이므로 $F=\overline F$, 즉 $F$는 closed이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC READING · Closedness as feasibility under limits
+
+:::::::::::::::::::
+
+경제학적으로 closedness는 “가능한 선택들의 수열이 한 점으로 수렴할 때, 그 극한점도 여전히 가능하다”는 의미로 읽을 수 있다.
+예산집합, 생산가능집합, parameter space의 closedness를 증명할 때 이 수열적 판정은 매우 자주 사용된다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s18}
+
+## [1.8]{.section-number}유계성과 Bolzano–Weierstrass 정리
+
+::: {.topic-opening}
+컴팩트성을 이해하기 전에 “집합이 무한히 멀리 뻗어가지 않는다”는 유계성을 분리해 보자.
+유계성 자체는 compactness보다 약하지만, 유클리드 공간에서는 수렴하는 부분수열의 존재와 깊게 연결된다.
+:::
+
+### 1.8.1 유계집합과 유계수열 {#s181}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.20 · Bounded set
+
+:::::::::::::::::::
+
+$E\subseteq\mathbb R^n$에 대해 어떤 $M<\infty$가 존재하여
+
+$$
+\|x\|\le M
+\quad\forall x\in E
+$$
+
+이면 $E$를 유계집합이라 한다.
+동치로 어떤 $R>0$에 대해 $E\subseteq B_R(0)$.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.21 · Bounded sequence
+
+:::::::::::::::::::
+
+수열 $\{x_k\}\subseteq\mathbb R^n$에 대해
+
+$$
+\sup_k\|x_k\|<\infty
+$$
+
+이면 유계수열이라 한다.
+
+::::::::::::::::::::
+
+### 1.8.2 Bolzano–Weierstrass 정리 {#s182}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.23 · Bolzano–Weierstrass
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{Every bounded sequence in }\mathbb R^n
+\text{ has a convergent subsequence.}
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof by nested cubes
+
+:::::::::::::::::::
+
+유계수열 $\{x_k\}$는 어떤 닫힌 상자 $Q_1$ 안에 포함된다.
+$Q_1$을 각 좌표방향으로 이등분하면 $2^n$개의 닫힌 부분상자를 얻는다.
+그중 적어도 하나에는 수열의 항이 무한히 많이 포함된다. 이를 $Q_2$라 하자.
+
+같은 과정을 반복하여
+
+$$
+Q_1\supseteq Q_2\supseteq\cdots
+$$
+
+이고 각 $Q_m$에는 수열의 항이 무한히 많이 포함되며,
+$Q_m$의 각 변의 길이가 $m\to\infty$일 때 0으로 가도록 만든다.
+각 단계에서 $k_1<k_2<\cdots$를 선택하여 $x_{k_m}\in Q_m$가 되도록 한다.
+
+닫힌 상자들의 좌표별 구간을 보면 각 좌표에서 서로 포함되는 닫힌구간열을 얻고,
+완비성에 의해 공통점 $x\in\bigcap_mQ_m$가 존재한다.
+$Q_m$의 지름이 0으로 가므로
+
+$$
+\|x_{k_m}-x\|
+\le
+\operatorname{diam}(Q_m)\to0.
+$$
+
+따라서 $x_{k_m}\to x$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>Alternative proof · coordinatewise subsequence argument</summary>
+
+:::::::::::::::::::: {.details-body}
+
+$\{x_k\}$가 유계이면 첫 번째 좌표수열 $\{x_{k1}\}$도 유계이다.
+일변수 Bolzano–Weierstrass에 의해 첫 좌표가 수렴하는 부분수열을 선택한다.
+그 부분수열에서 다시 두 번째 좌표가 수렴하는 부분수열을 선택하고 이를 $n$번 반복한다.
+최종 부분수열에서는 모든 좌표가 수렴하므로 Theorem 1.19에 의해 벡터수열도 수렴한다.
+
+::::::::::::::::::::
+
+</details>
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · bounded $\not\Rightarrow$ convergent
+
+:::::::::::::::::::
+
+유계수열 자체가 수렴할 필요는 없다.
+예를 들어 $x_k=(-1)^k$는 $\mathbb R$에서 유계지만 수렴하지 않는다.
+Bolzano–Weierstrass가 보장하는 것은 <em>수렴하는 부분수열의 존재</em>다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s19}
+
+## [1.9]{.section-number}컴팩트성
+
+::: {.topic-opening}
+컴팩트성은 무한한 집합을 다루면서도 유한집합과 유사한 통제가능성을 확보하는 개념이다.
+경제학에서 연속함수의 최대·최소 존재, 최적화 해의 존재, 고정점 정리, 비교정태의 안정성 등은
+반복해서 compactness에 의존한다.
+:::
+
+### 1.9.1 Cover와 open cover {#s191}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.22 · Cover and subcover
+
+:::::::::::::::::::
+
+집합족 $\{U_\alpha\}_{\alpha\in A}$가 $K\subseteq\mathbb R^n$에 대해
+
+$$
+K\subseteq\bigcup_{\alpha\in A}U_\alpha
+$$
+
+를 만족하면 $K$의 덮개라 한다.
+$B\subseteq A$가 있고
+
+$$
+K\subseteq\bigcup_{\alpha\in B}U_\alpha
+$$
+
+이면 $\{U_\alpha\}_{\alpha\in B}$를 부분덮개라 한다.
+모든 $U_\alpha$가 open이면 열린덮개라 한다.
+
+::::::::::::::::::::
+
+### 1.9.2 Compact set {#s192}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 1.23 · Compact set
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$의 모든 열린덮개가 유한 부분덮개를 가지면 $K$를 컴팩트 집합이라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 1.9 · Finite sets are compact
+
+:::::::::::::::::::
+
+$K=\{x_1,\ldots,x_m\}$라 하자. $K$의 열린덮개가 주어지면 각 $x_j$를 포함하는 덮개 원소 하나씩만 선택해도
+$m$개 이하의 집합으로 $K$를 덮을 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 1.4 · $(0,1)$ is not compact
+
+:::::::::::::::::::
+
+$$
+U_n=\left(\frac1n,1\right),\qquad n\ge2
+$$
+
+와 $V=(0,3/4)$를 함께 사용하면 $(0,1)$의 열린덮개를 만들 수 있지만
+어떤 유한 부분집합만으로는 $1$에 임의로 가까운 점들을 모두 덮을 수 없도록 구성할 수 있다.
+더 간단한 판정은 뒤의 Heine–Borel 정리에서 나온다. $(0,1)$은 bounded이지만 closed가 아니므로 compact가 아니다.
+
+::::::::::::::::::::
+
+### 1.9.3 컴팩트성의 기본 성질 {#s193}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.24 · Compact subsets of $\mathbb R^n$ are bounded
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$가 compact이면 $K$는 bounded이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$\{B_m(0)\}_{m\in\mathbb N}$은 $\mathbb R^n$을 덮으므로 $K$의 열린덮개다.
+compactness에 의해 유한 부분덮개
+$B_{m_1}(0),\ldots,B_{m_\ell}(0)$가 존재한다.
+$M=\max_jm_j$라 하면 $K\subseteq B_M(0)$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.25 · Compact subsets of $\mathbb R^n$ are closed
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$가 compact이면 $K$는 closed이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$x\notin K$를 잡자. 각 $y\in K$에 대해
+
+$$
+r_y=\frac12\|x-y\|>0
+$$
+
+로 두고 $B_{r_y}(y)$를 생각하자.
+이들은 $K$의 열린덮개이므로 유한 부분덮개
+$B_{r_{y_1}}(y_1),\ldots,B_{r_{y_m}}(y_m)$가 존재한다.
+
+$$
+\delta=\min_{1\le j\le m}r_{y_j}>0
+$$
+
+로 두자.
+만약 $z\in B_\delta(x)\cap K$라면 어떤 $j$에 대해
+$z\in B_{r_{y_j}}(y_j)$이고,
+
+$$
+\|x-y_j\|
+\le
+\|x-z\|+\|z-y_j\|
+<
+\delta+r_{y_j}
+\le
+2r_{y_j}
+=
+\|x-y_j\|,
+$$
+
+모순이다. 따라서 $B_\delta(x)\subseteq K^c$.
+즉 $K^c$가 open이므로 $K$는 closed이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.26 · Closed subsets of compact sets are compact
+
+:::::::::::::::::::
+
+$K$가 compact이고 $F\subseteq K$가 closed이면 $F$는 compact이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$\{U_\alpha\}$가 $F$의 열린덮개라 하자.
+$F^c$는 open이므로
+
+$$
+\{U_\alpha\}\cup\{F^c\}
+$$
+
+는 $K$의 열린덮개다.
+$K$의 compactness에 의해 유한 부분덮개가 존재하고,
+그중 $F^c$를 제거하면 $F$의 유한 부분덮개를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 1.27 · Finite unions of compact sets are compact
+
+:::::::::::::::::::
+
+$K_1,\ldots,K_m$이 compact이면
+
+$$
+\bigcup_{j=1}^mK_j
+$$
+
+도 compact이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s110}
+
+## [1.10]{.section-number}Heine–Borel 정리와 sequential compactness
+
+::: {.topic-opening}
+추상적인 open-cover 정의는 강력하지만 직접 확인하기 어렵다.
+$\mathbb R^n$에서는 compactness가 놀랍도록 간단한 조건, 즉 closedness와 boundedness로 완전히 특성화된다.
+또한 compactness는 수열의 언어로도 동치적으로 표현할 수 있다.
+:::
+
+### 1.10.1 닫힌 상자의 컴팩트성 {#s1101}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.28 · Closed boxes are compact
+
+:::::::::::::::::::
+
+닫힌구간 $I_j=[a_j,b_j]$에 대해
+
+$$
+Q=\prod_{j=1}^n[a_j,b_j]
+$$
+
+는 compact이다.
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>증명 펼치기 · nested-box argument</summary>
+
+:::::::::::::::::::: {.details-body}
+
+$Q$의 어떤 열린덮개가 유한 부분덮개를 갖지 않는다고 가정하자.
+$Q$의 각 변을 이등분하여 $2^n$개의 닫힌 부분상자를 만든다.
+이들 모두가 유한 부분덮개를 갖는다면 그 유한한 합집합으로 $Q$도 유한 부분덮개를 가지므로 모순이다.
+따라서 적어도 하나의 부분상자는 유한 부분덮개를 갖지 않는다. 이를 $Q_1$이라 하자.
+
+같은 절차를 반복하여
+
+$$
+Q\supseteq Q_1\supseteq Q_2\supseteq\cdots
+$$
+
+를 얻고, 각 $Q_m$은 유한 부분덮개를 갖지 않으며 지름은 0으로 간다.
+nested interval argument로 $\bigcap_mQ_m$에 한 점 $x$가 존재한다.
+원래 열린덮개의 어떤 원소 $U$가 $x$를 포함한다.
+$U$가 open이므로 $B_r(x)\subseteq U$인 $r>0$가 존재한다.
+충분히 큰 $m$에서는 $Q_m\subseteq B_r(x)\subseteq U$.
+그러면 $Q_m$은 $U$ 하나로 덮이므로 유한 부분덮개를 갖는다는 모순.
+
+::::::::::::::::::::
+
+</details>
+
+### 1.10.2 Heine–Borel 정리 {#s1102}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.29 · Heine–Borel theorem
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$에 대해
+
+$$
+\boxed{
+K\text{ compact}
+\iff
+K\text{ closed and bounded}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$(\Rightarrow)$는 Theorems 1.24와 1.25에서 이미 증명했다.
+
+$(\Leftarrow)$ $K$가 closed and bounded라 하자.
+boundedness에 의해 어떤 닫힌 상자 $Q$가 존재하여 $K\subseteq Q$.
+Theorem 1.28에 의해 $Q$는 compact이다.
+$K$는 $Q$의 closed subset이므로 Proposition 1.26에 의해 $K$도 compact이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 1.5 · closed alone / bounded alone is not enough
+
+:::::::::::::::::::
+
+$$
+[0,\infty)
+$$
+
+는 closed이지만 unbounded이므로 compact가 아니다.
+반면
+
+$$
+(0,1)
+$$
+
+은 bounded이지만 closed가 아니므로 compact가 아니다.
+
+::::::::::::::::::::
+
+### 1.10.3 Sequential compactness {#s1103}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.30 · Sequential characterization of compactness in $\mathbb R^n$
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$에 대해 다음은 동치이다.
+
+(i) $K$는 compact.
+
+(ii) $K$는 closed and bounded.
+
+(iii) $K$ 안의 모든 수열은 $K$의 한 점으로 수렴하는 부분수열을 가진다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof of (ii) $\Rightarrow$ (iii)
+
+:::::::::::::::::::
+
+$\{x_k\}\subseteq K$라 하자.
+$K$가 bounded이므로 $\{x_k\}$도 bounded.
+Bolzano–Weierstrass에 의해 $x_{k_j}\to x$인 부분수열이 존재한다.
+$K$가 closed이므로 Theorem 1.22에 의해 $x\in K$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof of (iii) $\Rightarrow$ (ii)
+
+:::::::::::::::::::
+
+먼저 $K$가 unbounded라고 가정하자.
+각 $m$에 대해 $\|x_m\|>m$인 $x_m\in K$를 선택하면
+어떤 부분수열도 수렴할 수 없다. 따라서 $K$는 bounded.
+
+이제 $x_k\in K$, $x_k\to x$라 하자.
+(iii)에 의해 $x_{k_j}\to y\in K$인 부분수열이 존재한다.
+원수열이 $x$로 수렴하면 모든 부분수열도 $x$로 수렴하므로 $y=x$.
+따라서 $x\in K$. Theorem 1.22에 의해 $K$는 closed이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+THREE EQUIVALENT LANGUAGES IN $\mathbb R^n$
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{open-cover compactness}
+\iff
+\text{closed + bounded}
+\iff
+\text{sequential compactness}.
+}
+$$
+
+이후 경제학에서는 상황에 따라 이 세 표현 중 가장 편리한 것을 사용한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s1110}
+
+## [1.11]{.section-number}경제학에서 자주 등장하는 집합
+
+::: {.topic-opening}
+지금까지의 위상적 언어는 곧바로 경제학의 표준 선택집합과 parameter space에 적용된다.
+이 절의 목적은 새로운 정리를 도입하는 것이 아니라, 앞으로 반복해서 나타날 집합들의 위상적 성질을 미리 확인하는 것이다.
+:::
+
+### 1.11.1 소비집합과 예산집합 {#s11101}
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC SET 1 · Consumption set
+
+:::::::::::::::::::
+
+$L$개의 재화를 생각하면 표준 소비집합은
+
+$$
+X=\mathbb R_+^L.
+$$
+
+$X$는 closed이지만 unbounded이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.31 · Compactness of the budget set
+
+:::::::::::::::::::
+
+$p\in\mathbb R_{++}^L$, $w\ge0$라 하자.
+
+$$
+B(p,w)
+=
+\{x\in\mathbb R_+^L:p^\top x\le w\}
+$$
+
+는 nonempty, closed, bounded이며 따라서 compact이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$0\in B(p,w)$이므로 nonempty.
+$\mathbb R_+^L$는 closed이고
+
+$$
+\{x:p^\top x\le w\}
+$$
+
+도 closed이므로 그 교집합인 $B(p,w)$는 closed.
+
+$p_i>0$이므로 $x\in B(p,w)$에 대해
+
+$$
+p_i x_i\le p^\top x\le w,
+\qquad
+0\le x_i\le\frac{w}{p_i}.
+$$
+
+따라서 각 좌표가 uniformly bounded이고 $B(p,w)$는 bounded.
+Heine–Borel에 의해 compact.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+PREVIEW · 왜 $p\gg0$가 중요한가?
+
+:::::::::::::::::::
+
+어떤 가격 $p_i$가 0이면 해당 재화의 양 $x_i$에 대한 상한이 예산제약에서 나오지 않는다.
+따라서 budget set이 unbounded가 될 수 있다. 즉 $p\gg0$는 compactness를 위한 핵심 가정 중 하나다.
+
+::::::::::::::::::::
+
+### 1.11.2 확률 simplex {#s11102}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 1.32 · Compactness of the probability simplex
+
+:::::::::::::::::::
+
+$$
+\Delta^{n-1}
+=
+\left\{
+p\in\mathbb R_+^n:
+\sum_{i=1}^n p_i=1
+\right\}
+$$
+
+는 compact이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$\mathbb R_+^n$은 closed이고,
+연속선형함수 $p\mapsto\sum_i p_i$의 level set
+
+$$
+\left\{p:\sum_i p_i=1\right\}
+$$
+
+역시 closed이므로 $\Delta^{n-1}$는 closed.
+또한 $0\le p_i\le1$이므로 bounded.
+따라서 Heine–Borel에 의해 compact.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 1.11.3 Compact parameter spaces {#s11103}
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC SET 3 · Parameter space
+
+:::::::::::::::::::
+
+예를 들어
+
+$$
+\Theta=
+[\underline\theta_1,\overline\theta_1]
+\times\cdots\times
+[\underline\theta_k,\overline\theta_k]
+$$
+
+는 compact하다.
+extremum estimator, maximum theorem, dynamic programming, fixed-point arguments에서는
+parameter 또는 choice set의 compactness가 존재성 증명의 표준 가정으로 반복해서 나타난다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+NEXT CHAPTER
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+다음 장에서는 $f:X\subseteq\mathbb R^n\to\mathbb R^m$의 극한과 연속성을 다룬다.
+Chapter 1의 핵심 결과는 곧
+<strong>continuous image of a compact set is compact</strong>와
+<strong>Extreme Value Theorem</strong>으로 연결된다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## 연습문제
+
+::: {.topic-opening}
+연습문제는 정의의 기계적 적용보다 정리의 가정이 왜 필요한지, 서로 다른 characterization을 어떻게 오가야 하는지를 확인하도록 구성한다.
+:::
+
+<ol class="exercise-list">
+<li>$\|x\|_\infty\le\|x\|_2\le\sqrt n\|x\|_\infty$를 직접 증명하고, 이 부등식으로 $\|\cdot\|_2$-수렴과 $\|\cdot\|_\infty$-수렴이 동치임을 보여라.</li>
+<li>reverse triangle inequality $|\|x\|-\|y\||\le\|x-y\|$를 이용하여 함수 $x\mapsto\|x\|$가 Lipschitz continuous임을 보여라.</li>
+<li>$E=\{x\in\mathbb R^n:\|x\|<1\}$, $F=\{x:\|x\|\le1\}$에 대해 interior, exterior, boundary, closure, derived set을 모두 계산하라.</li>
+<li>$\partial E=\overline E\cap\overline{E^c}$를 정의에서 직접 증명하라.</li>
+<li>$\operatorname{int}(A\cup B)\supsetneq\operatorname{int}A\cup\operatorname{int}B$가 되는 예를 하나 더 구성하라.</li>
+<li>$\overline{A\cup B}=\overline A\cup\overline B$를 증명하라. 무한 합집합에 대해서도 같은 결과가 성립하는지 반례를 찾아라.</li>
+<li>$\overline{A\cap B}\subseteq\overline A\cap\overline B$를 증명하고 등호가 실패하는 예를 제시하라.</li>
+<li>$E=\{1/n:n\in\mathbb N\}$에 대해 $E'$, $\overline E$, $\partial E$를 구하라.</li>
+<li>$\mathbb Q$와 $\mathbb R\setminus\mathbb Q$가 모두 $\mathbb R$에서 조밀함을 보이라.</li>
+<li>$[0,1)$가 $\mathbb R_+$에서는 open이고 $\mathbb R$에서는 open이 아님을 relative topology 정의로 설명하라.</li>
+<li>$\Delta^{n-1}$의 $\mathbb R^n$-interior가 공집합임을 보이고, relative interior는 $\{p_i>0,\sum_i p_i=1\}$임을 증명하라.</li>
+<li>$\{x_k\}\subseteq\mathbb R^n$에서 coordinatewise convergence와 norm convergence의 동치를 증명하라.</li>
+<li>$F$가 closed일 필요충분조건이 $F$ 안의 모든 수렴수열의 극한이 $F$에 속하는 것임을 다시 증명하라. 이번에는 complement가 open이라는 정의에서 직접 출발하라.</li>
+<li>Bolzano–Weierstrass 정리의 coordinatewise subsequence proof를 완성하라.</li>
+<li>$(0,1)$이 compact가 아님을 open-cover 정의만으로 직접 보이는 열린덮개를 구성하라.</li>
+<li>compact subset of $\mathbb R^n$이 closed임을 “점과 compact set 사이의 거리가 양수”라는 보조정리를 먼저 증명하는 방식으로 다시 증명하라.</li>
+<li>closed subset of a compact set is compact임을 open-cover 정의에서 직접 증명하라.</li>
+<li>Heine–Borel 정리에서 $\mathbb R^n$이라는 유한차원 가정이 왜 중요한지 조사하고, 무한차원 normed space에서는 closed and bounded가 compact를 의미하지 않는다는 사실을 설명하라.</li>
+<li>$p\gg0$일 때 budget set $B(p,w)$가 compact임을 증명하고, $p_i=0$인 재화가 하나 있을 때 compactness가 실패할 수 있음을 예로 보여라.</li>
+<li>$\Delta^{n-1}$가 compact임을 closed-and-bounded argument와 sequential compactness argument 두 방식으로 각각 증명하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 장의 위치
+
+해석학II 강의록. $\mathbb R^n$에서 열린집합·닫힌집합·극한점·컴팩트성·Heine–Borel 및 수열적 특성화를 전개하는 기본 구조를 참고하였다.
+
+<em>맛있는 해석학 다변수</em>. 유클리드 공간의 노름·거리·열린구·위상적 구조와 다변수 해석학의 표준 전개를 참고하였다.
+
+Jehle, G. A. and Reny, P. J. <em>Advanced Microeconomic Theory</em>, 3rd ed. 경제학의 수학 부록에서 open/closed sets, relative topology, simplex와 compactness의 경제학적 사용을 참고하였다.
+
+Chong, E. K. P. and Zak, S. H. <em>An Introduction to Optimization</em>, 4th ed. 이후 최적화 장과의 연결을 위한 유클리드 공간·기하·해석학적 기초의 사용을 참고하였다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+CHAPTER SPINE
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{norm}
+\to
+\text{distance}
+\to
+\text{ball}
+\to
+\text{open/closed}
+\to
+\text{closure/accumulation}
+\to
+\text{sequence}
+\to
+\text{compactness}
+\to
+\text{existence arguments}.
+}
+$$
+
+Chapter 2에서는 이 위상적 기반 위에 함수의 극한과 연속성을 구축한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

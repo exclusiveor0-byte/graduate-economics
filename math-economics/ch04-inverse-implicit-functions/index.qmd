@@ -1,0 +1,36 @@
+# Chapter 4 · 역함수·음함수 정리와 국소적 해의 구조 {.unnumbered}
+*Inverse and Implicit Function Theorems · Local Solvability · Comparative Statics*
+
+Jacobian의 비특이성, 역함수 정리(Inverse Function Theorem), 스칼라 및 일반 음함수 정리(Implicit Function Theorem), implicit differentiation, 비교정태분석(Comparative Statics), 정규 등위집합과 접공간, 국소 식별(Local Identification)과 특이점 실패 유형을 다룬다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **4.1–4.4** 국소 가역성 · 역함수 정리 · inverse sensitivity · 가정과 반례
+- **4.5–4.8** 스칼라/일반 음함수 정리 · implicit differentiation · 증명 구조
+- **4.9–4.11** comparative statics · regular level sets · tangent spaces · identification
+- **4.12–4.13** singular points · failure modes · local theorem의 범위
+:::
+
+## Sections
+
+- [4.1 국소적 해와 Jacobian의 역할](contents.html#s41)
+- [4.2 국소적 가역성과 역함수 정리](contents.html#s42)
+- [4.3 역함수의 미분과 국소 민감도](contents.html#s43)
+- [4.4 역함수 정리의 가정과 반례](contents.html#s44)
+- [4.5 스칼라 음함수 정리](contents.html#s45)
+- [4.6 일반 음함수 정리](contents.html#s46)
+- [4.7 음함수의 미분](contents.html#s47)
+- [4.8 음함수 정리의 증명: augmented map](contents.html#s48)
+- [4.9 Implicit comparative statics](contents.html#s49)
+- [4.10 Regular level sets와 tangent spaces](contents.html#s410)
+- [4.11 Rank condition과 local identification](contents.html#s4110)
+- [4.12 Singular points와 failure modes](contents.html#s4120)
+- [4.13 Local theorem의 범위와 다음 장으로의 연결](contents.html#s4130)
+- [연습문제](contents.html#exercises)
+- [참고문헌 및 장의 위치](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+수식·정리·증명은 원본 구조를 보존한 [본문 전체](contents.html)에 있다.
+위의 Section 링크로 바로 이동하거나 순서대로 읽을 수 있다.
+:::

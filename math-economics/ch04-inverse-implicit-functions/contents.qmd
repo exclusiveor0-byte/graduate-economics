@@ -1,0 +1,2317 @@
+---
+title: "Chapter 4 · 역함수·음함수 정리와 국소적 해의 구조"
+description: "Jacobian의 비특이성, 역함수 정리, 음함수 정리, implicit differentiation, comparative statics, regular level sets, tangent spaces, 국소 식별."
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/math-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s41}
+
+## [4.1]{.section-number}국소적 해와 Jacobian의 역할
+
+::: {.topic-opening}
+역함수 정리와 음함수 정리는 “방정식을 실제로 풀어 공식으로 쓸 수 있는가?”보다 더 기본적인 질문을 다룬다.
+어떤 해 $x_0$가 이미 주어졌을 때 그 근처에서 해가 유일한가, parameter가 조금 바뀌면 해도 매끄럽게 움직이는가,
+그리고 그 변화율을 어떻게 계산할 수 있는가가 핵심이다.
+:::
+
+### 4.1.1 선형계에서 비선형계로 {#s411}
+
+먼저 선형방정식
+
+$$
+Ax=b,
+\qquad
+A\in\mathbb R^{n\times n}
+$$
+
+를 생각하자. $A$가 가역적이면 유일한 해는
+
+$$
+x=A^{-1}b.
+$$
+
+따라서 $b$가 $b+\Delta b$로 변하면
+
+$$
+\Delta x=A^{-1}\Delta b.
+$$
+
+즉 선형계에서는 하나의 조건
+
+$$
+\det A\ne0
+$$
+
+이 해의 존재, 유일성, 그리고 민감도를 동시에 통제한다.
+
+비선형함수 $f:U\subseteq\mathbb R^n\to\mathbb R^n$를 $a\in U$ 근처에서 보면
+
+$$
+f(a+h)
+=
+f(a)+Df(a)h+o(\|h\|).
+$$
+
+따라서 방정식
+
+$$
+f(x)=y
+$$
+
+를 $x=a+h$, $y=f(a)+k$로 쓰면 first-order approximation은
+
+$$
+Df(a)h\approx k.
+$$
+
+그러므로 $Df(a)$가 invertible인지가 비선형 문제에서도 자연스러운 regularity condition으로 등장한다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+LINEARIZATION PRINCIPLE
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{nonlinear local problem}
+\approx
+\text{linear problem governed by }Df(a).
+}
+$$
+
+$Df(a)$가 가역적이면 선형근사는 모든 작은 방향을 일대일로 구분하며,
+역함수 정리는 이 성질이 실제 비선형함수에도 국소적으로 지속됨을 말한다.
+
+::::::::::::::::::::
+
+### 4.1.2 Regular point와 singular point {#s412}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 4.1 · Regular and singular points for a square map
+
+:::::::::::::::::::
+
+$U\subseteq\mathbb R^n$가 open이고 $f:U\to\mathbb R^n$가 differentiable이라고 하자.
+$a\in U$에서
+
+$$
+\det Df(a)\ne0
+$$
+
+이면 $a$를 $f$의 regular point라 하고,
+
+$$
+\det Df(a)=0
+$$
+
+이면 singular point라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 4.1 · Equivalent nonsingularity conditions
+
+:::::::::::::::::::
+
+$A\in\mathbb R^{n\times n}$에 대해 다음은 동치이다.
+
+(i) $\det A\ne0$.
+
+(ii) $A$는 invertible.
+
+(iii) $\ker A=\{0\}$.
+
+(iv) $\operatorname{rank}A=n$.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · determinant보다 rank가 더 일반적인 언어다
+
+:::::::::::::::::::
+
+square map에서는 determinant가 편리하지만,
+음함수 정리와 level-set theorem에서는 rectangular Jacobian이 등장한다.
+따라서 이후의 구조를 이해하려면 본질적인 조건은 determinant 자체보다
+<strong>필요한 변수방향에 대한 full rank</strong>라고 보는 것이 좋다.
+
+::::::::::::::::::::
+
+### 4.1.3 Local과 global의 구분 {#s413}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 4.2 · Local property
+
+:::::::::::::::::::
+
+어떤 성질이 $a$의 sufficiently small neighborhood에서 성립하면 그 성질을 $a$에서 국소적으로(local) 성립한다고 한다.
+역함수 정리와 음함수 정리는 본질적으로 local theorem이다.
+
+::::::::::::::::::::
+
+예를 들어 함수가 $a$ 근처에서 one-to-one라는 사실은 정의역 전체에서 one-to-one라는 사실보다 훨씬 약하다.
+이후 계속해서
+
+$$
+\text{local uniqueness}
+\qquad\text{vs}\qquad
+\text{global uniqueness}
+$$
+
+를 구분한다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s42}
+
+## [4.2]{.section-number}국소적 가역성과 역함수 정리
+
+::: {.topic-opening}
+역함수 정리는 미분가능한 비선형함수가 한 점에서 nonsingular Jacobian을 가지면
+그 점 근처에서는 smooth한 좌표변환처럼 행동한다는 정리다.
+:::
+
+### 4.2.1 Local diffeomorphism {#s421}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 4.3 · $C^1$-diffeomorphism
+
+:::::::::::::::::::
+
+열린집합 $V,W\subseteq\mathbb R^n$ 사이의 함수
+
+$$
+f:V\to W
+$$
+
+가 bijective이고 $f$와 $f^{-1}$가 모두 $C^1$이면 $f$를 $C^1$-diffeomorphism이라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 4.4 · Local diffeomorphism
+
+:::::::::::::::::::
+
+$f:U\to\mathbb R^n$가 $a\in U$에서 local diffeomorphism이라는 것은
+$a$를 포함하는 open neighborhood $V\subseteq U$가 존재하여
+
+$$
+f|_V:V\to f(V)
+$$
+
+가 $C^1$-diffeomorphism이라는 뜻이다.
+
+::::::::::::::::::::
+
+### 4.2.2 Inverse Function Theorem {#s422}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 4.2 · Inverse Function Theorem
+
+:::::::::::::::::::
+
+$U\subseteq\mathbb R^n$가 open이고
+
+$$
+f:U\to\mathbb R^n
+$$
+
+가 $C^1$라 하자.
+$a\in U$에서
+
+$$
+\det Df(a)\ne0
+$$
+
+이면 $a$를 포함하는 open set $V\subseteq U$와 $f(a)$를 포함하는 open set $W\subseteq\mathbb R^n$가 존재하여
+
+$$
+f|_V:V\to W
+$$
+
+는 $C^1$-diffeomorphism이다.
+또한 모든 $y\in W$에 대해
+
+$$
+\boxed{
+D(f^{-1})(y)
+=
+\left[
+Df(f^{-1}(y))
+\right]^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .corollary}
+
+::::::::::::::::::: {.statement-head}
+
+COROLLARY 4.3 · Derivative at the base point
+
+:::::::::::::::::::
+
+$b=f(a)$라 하면
+
+$$
+\boxed{
+D(f^{-1})(b)
+=
+[Df(a)]^{-1}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 4.1 · Polar-type transformation
+
+:::::::::::::::::::
+
+$$
+f(x,y)
+=
+(e^x\cos y,e^x\sin y).
+$$
+
+Jacobian은
+
+$$
+Df(x,y)
+=
+\begin{bmatrix}
+e^x\cos y & -e^x\sin y\\
+e^x\sin y & e^x\cos y
+\end{bmatrix},
+$$
+
+따라서
+
+$$
+\det Df(x,y)=e^{2x}\gt0.
+$$
+
+모든 점에서 local inverse가 존재한다.
+그러나
+
+$$
+f(x,y)=f(x,y+2\pi)
+$$
+
+이므로 $f$는 global one-to-one가 아니다.
+
+::::::::::::::::::::
+
+### 4.2.3 정리의 증명 구조 {#s423}
+
+역함수 정리의 완전한 증명은 여러 개의 아이디어를 결합한다.
+여기서는 Chapter 2–3에서 확보한 도구만을 사용하여 핵심 구조를 정리한다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+LEMMA 4.4 · Jacobian remains nonsingular nearby
+
+:::::::::::::::::::
+
+$Df$가 continuous이고 $\det Df(a)\ne0$이면 어떤 $r\gt0$가 존재하여
+
+$$
+\det Df(x)\ne0
+\qquad
+\forall x\in B_r(a).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+행렬식은 행렬성분들의 다항식이므로 continuous이고,
+
+$$
+x\mapsto\det Df(x)
+$$
+
+역시 continuous이다.
+$\det Df(a)\ne0$이므로 연속성에 의해 충분히 작은 neighborhood에서는 값이 0에서 떨어져 있다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>역함수 정리의 상세한 증명 구조</summary>
+
+:::::::::::::::::::: {.details-body}
+
+증명은 세 단계로 나눌 수 있다.
+
+<strong>Step 1. Local injectivity.</strong>
+$Df(a)$가 invertible이고 $Df$가 continuous이므로 충분히 작은 convex neighborhood $V$에서
+
+$$
+\|Df(x)-Df(a)\|
+\le
+\frac{1}{2\|Df(a)^{-1}\|}
+$$
+
+이 되게 할 수 있다.
+$x,z\in V$에 대해
+
+$$
+f(x)-f(z)
+=
+Df(a)(x-z)+R,
+$$
+
+그리고 mean-value bound로
+
+$$
+\|R\|
+\le
+\frac{1}{2\|Df(a)^{-1}\|}
+\|x-z\|.
+$$
+
+$m=1/\|Df(a)^{-1}\|$라 하면
+
+$$
+\|Df(a)(x-z)\|
+\ge
+m\|x-z\|,
+$$
+
+따라서
+
+$$
+\|f(x)-f(z)\|
+\ge
+\frac m2\|x-z\|.
+$$
+
+특히 $f(x)=f(z)$이면 $x=z$. 즉 $f$는 $V$에서 injective다.
+
+<strong>Step 2. Local surjectivity onto a neighborhood.</strong>
+더 작은 닫힌 공 $\overline B_\rho(a)\subset V$를 택한다.
+경계 $\partial B_\rho(a)$는 compact이고 $f(x)\ne f(a)$이므로
+
+$$
+m_0
+=
+\min_{x\in\partial B_\rho(a)}
+\|f(x)-f(a)\|
+\gt0.
+$$
+
+$y$가 $f(a)$에 충분히 가까울 때
+
+$$
+H_y(x)=\frac12\|f(x)-y\|^2
+$$
+
+는 $\overline B_\rho(a)$에서 minimum을 갖는다.
+경계에서는 $H_y$가 $a$에서의 값보다 크도록 $y$를 충분히 가깝게 잡을 수 있으므로 minimizer $c$는 interior에 있다.
+따라서
+
+$$
+\nabla H_y(c)
+=
+Df(c)^\top(f(c)-y)
+=
+0.
+$$
+
+$Df(c)$가 invertible이므로 $Df(c)^\top$도 invertible이고,
+
+$$
+f(c)=y.
+$$
+
+따라서 $f(V)$는 $f(a)$의 neighborhood를 포함한다.
+
+<strong>Step 3. Smoothness of the inverse.</strong>
+local inverse $g=f^{-1}$가 존재하면
+
+$$
+f(g(y))=y.
+$$
+
+chain rule을 적용하여
+
+$$
+Df(g(y))Dg(y)=I,
+$$
+
+따라서
+
+$$
+Dg(y)=[Df(g(y))]^{-1}.
+$$
+
+$Df$, $g$, matrix inversion이 nonsingular matrices 위에서 continuous이므로 $Dg$도 continuous.
+즉 $g\in C^1$.
+
+::::::::::::::::::::
+
+</details>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s43}
+
+## [4.3]{.section-number}역함수의 미분과 국소 민감도
+
+::: {.topic-opening}
+역함수의 derivative formula는 단순한 계산공식이 아니다.
+원래 좌표계에서의 작은 변화가 역좌표계에서 얼마나 확대되거나 축소되는지를 직접 측정한다.
+:::
+
+### 4.3.1 Inverse derivative formula {#s431}
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Chain-rule derivation
+
+:::::::::::::::::::
+
+$g=f^{-1}$라 하자. 항등식
+
+$$
+g(f(x))=x
+$$
+
+에 chain rule을 적용하면
+
+$$
+Dg(f(x))Df(x)=I.
+$$
+
+따라서
+
+$$
+\boxed{
+Dg(f(x))
+=
+[Df(x)]^{-1}.
+}
+$$
+
+마찬가지로 $f(g(y))=y$를 미분하면 같은 결과를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 4.2 · 일변수 inverse derivative
+
+:::::::::::::::::::
+
+$n=1$이면
+
+$$
+(f^{-1})'(f(x))
+=
+\frac1{f'(x)}.
+$$
+
+이는 일변수 미적분에서 익숙한 역함수 미분공식의 정확한 다변수 일반화다.
+
+::::::::::::::::::::
+
+### 4.3.2 Conditioning과 sensitivity {#s432}
+
+$y=f(x)$에서 작은 변화 $\Delta y$를 생각하자.
+역함수의 1차 근사에 의해
+
+$$
+\Delta x
+\approx
+[Df(x)]^{-1}\Delta y.
+$$
+
+따라서
+
+$$
+\|\Delta x\|
+\lesssim
+\|[Df(x)]^{-1}\|
+\,\|\Delta y\|.
+$$
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+INTERPRETATION · 거의 singular한 Jacobian
+
+:::::::::::::::::::
+
+$Df(x)$가 invertible이더라도
+
+$$
+\|[Df(x)]^{-1}\|
+$$
+
+가 매우 크면 역문제는 민감하다.
+즉 output의 작은 perturbation이 input의 큰 변화를 만들 수 있다.
+따라서 “invertible인가?”와 “well-conditioned인가?”는 서로 다른 질문이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC READING · local sensitivity
+
+:::::::::::::::::::
+
+equilibrium equation이나 moment condition을 역으로 풀 때 Jacobian의 작은 singular value는
+parameter response를 크게 만들 수 있다.
+이 관점은 이후 comparative statics, numerical conditioning, 그리고 계량경제학의 identification strength와 연결된다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s44}
+
+## [4.4]{.section-number}역함수 정리의 가정과 반례
+
+::: {.topic-opening}
+정리의 가정을 이해하려면 정리가 실패하는 경우를 구분해야 한다.
+특히 singular derivative는 여러 서로 다른 현상을 포함하므로 단순히 “역함수가 없다”라고 해석하면 안 된다.
+:::
+
+### 4.4.1 비특이성은 smooth inverse의 충분조건이다 {#s441}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 4.1 · Inverse exists although derivative is singular
+
+:::::::::::::::::::
+
+$$
+f(x)=x^3.
+$$
+
+$f$는 $\mathbb R$에서 strictly increasing이고 global inverse
+
+$$
+f^{-1}(y)=y^{1/3}
+$$
+
+를 갖는다.
+그러나
+
+$$
+f'(0)=0.
+$$
+
+또한 $f^{-1}$는 $0$에서 finite derivative를 갖지 않는다.
+
+::::::::::::::::::::
+
+따라서
+
+$$
+Df(a)\text{ singular}
+$$
+
+이라고 해서 inverse 자체가 존재하지 않는 것은 아니다.
+역함수 정리의 정확한 방향은
+
+$$
+\boxed{
+Df(a)\text{ nonsingular}
+\Longrightarrow
+\text{unique smooth local inverse}.
+}
+$$
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 4.5 · Nonsingularity is necessary for a differentiable local inverse
+
+:::::::::::::::::::
+
+$f$가 $a$에서 differentiable이고, local inverse $g$가 $f(a)$에서 differentiable이면
+$Df(a)$는 invertible이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$g\circ f=I$를 미분하면
+
+$$
+Dg(f(a))Df(a)=I.
+$$
+
+따라서 $Df(a)$는 left inverse를 가지며 square matrix이므로 invertible이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 4.4.2 국소 가역성은 전역 가역성을 의미하지 않는다 {#s442}
+
+Example 4.1의 exponential-polar map처럼
+
+$$
+\det Df(x)\ne0
+\qquad\forall x
+$$
+
+이더라도 periodicity나 topology 때문에 global injectivity가 실패할 수 있다.
+따라서 global inverse를 얻으려면 monotonicity, properness, global univalence condition 등 추가적인 구조가 필요하다.
+
+### 4.4.3 왜 $C^1$ regularity가 필요한가? {#s443}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · $Df(a)$ 하나만으로는 충분하지 않다
+
+:::::::::::::::::::
+
+어떤 점에서 derivative가 존재하고 그 derivative가 invertible하다는 사실만으로
+그 점 주변에서 함수가 반드시 one-to-one라고 결론내릴 수는 없다.
+역함수 정리는 derivative가 주변에서 안정적으로 변한다는 $C^1$ regularity를 함께 사용한다.
+
+::::::::::::::::::::
+
+따라서 이 장에서 사용하는 표준형은
+
+$$
+f\in C^1,
+\qquad
+\det Df(a)\ne0
+$$
+
+이다. 더 약한 가정 아래의 inverse function theorem도 존재하지만 이 책에서는 필요한 경제학적 응용에 맞춰 $C^1$ version을 기본으로 사용한다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s45}
+
+## [4.5]{.section-number}스칼라 음함수 정리
+
+::: {.topic-opening}
+많은 경제학적 관계는 처음부터 $y=\varphi(x)$처럼 explicit function으로 주어지지 않는다.
+오히려
+
+$$
+F(x,y)=0
+$$
+
+같은 equilibrium equation이나 constraint relation으로 주어진다.
+음함수 정리는 어떤 변수를 다른 변수의 함수로 국소적으로 풀 수 있는 조건을 제공한다.
+:::
+
+### 4.5.1 Implicitly defined function {#s451}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 4.6 · Scalar Implicit Function Theorem
+
+:::::::::::::::::::
+
+$U\subseteq\mathbb R^2$가 open이고
+
+$$
+F:U\to\mathbb R
+$$
+
+가 $C^1$라 하자.
+
+$$
+F(x_0,y_0)=0
+$$
+
+이고
+
+$$
+F_y(x_0,y_0)\ne0
+$$
+
+이면 $x_0$의 open neighborhood $I$와 $y_0$의 open neighborhood $J$가 존재하여,
+각 $x\in I$에 대해 유일한 $y=\varphi(x)\in J$가
+
+$$
+F(x,\varphi(x))=0
+$$
+
+을 만족한다.
+또한 $\varphi\in C^1(I)$.
+
+::::::::::::::::::::
+
+### 4.5.2 음함수의 derivative {#s452}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 4.7 · Scalar implicit derivative formula
+
+:::::::::::::::::::
+
+위 정리의 조건 아래
+
+$$
+\boxed{
+\varphi'(x)
+=
+-
+\frac{F_x(x,\varphi(x))}
+{F_y(x,\varphi(x))}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+항등식
+
+$$
+F(x,\varphi(x))=0
+$$
+
+을 $x$에 대해 미분하면
+
+$$
+F_x(x,\varphi(x))
++
+F_y(x,\varphi(x))\varphi'(x)
+=
+0.
+$$
+
+$F_y\ne0$이므로 정리하면 원하는 식을 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 4.5.3 원과 branch 선택 {#s453}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 4.3 · The unit circle
+
+:::::::::::::::::::
+
+$$
+F(x,y)=x^2+y^2-1.
+$$
+
+$F(x_0,y_0)=0$이고 $y_0\ne0$이면
+
+$$
+F_y(x_0,y_0)=2y_0\ne0.
+$$
+
+따라서 $x_0$ 근처에서는
+
+$$
+y=\varphi(x)
+$$
+
+로 유일하게 표현할 수 있고
+
+$$
+\varphi'(x)
+=
+-\frac{x}{\varphi(x)}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+BRANCH SELECTION
+
+:::::::::::::::::::
+
+전체 원은 하나의 함수 $y=\varphi(x)$로 표현되지 않는다.
+그러나 $(0,1)$ 근처에서는 upper branch,
+$(0,-1)$ 근처에서는 lower branch가 각각 유일한 local function이 된다.
+음함수 정리의 유일성은 항상 선택한 기준점과 neighborhood에 상대적이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 4.4 · 어떤 변수를 풀 것인가?
+
+:::::::::::::::::::
+
+$(1,0)$에서는
+
+$$
+F_y(1,0)=0
+$$
+
+이므로 $y$를 $x$의 $C^1$ 함수로 푸는 정리를 적용할 수 없다.
+그러나
+
+$$
+F_x(1,0)=2\ne0
+$$
+
+이므로 그 점 근처에서는
+
+$$
+x=\psi(y)
+$$
+
+로 풀 수 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s46}
+
+## [4.6]{.section-number}일반 음함수 정리
+
+::: {.topic-opening}
+경제학적 응용에서는 하나의 식과 하나의 endogenous variable보다 여러 방정식과 여러 endogenous variables가 일반적이다.
+일반 음함수 정리는 변수들을 block으로 나누어 어느 block을 다른 block의 함수로 풀 수 있는지를 결정한다.
+:::
+
+### 4.6.1 변수의 block 분할 {#s461}
+
+$$
+x\in\mathbb R^k,
+\qquad
+\theta\in\mathbb R^p
+$$
+
+로 두고
+
+$$
+F:
+U\subseteq
+\mathbb R^k\times\mathbb R^p
+\to
+\mathbb R^k
+$$
+
+를 생각하자.
+$x$는 endogenous variables, $\theta$는 exogenous parameter로 해석할 수 있다.
+
+전체 Jacobian은 block form으로
+
+$$
+DF(x,\theta)
+=
+\begin{bmatrix}
+D_xF(x,\theta) &
+D_\theta F(x,\theta)
+\end{bmatrix}
+$$
+
+이고
+
+$$
+D_xF(x,\theta)\in\mathbb R^{k\times k},
+\qquad
+D_\theta F(x,\theta)\in\mathbb R^{k\times p}.
+$$
+
+### 4.6.2 General Implicit Function Theorem {#s462}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 4.8 · General Implicit Function Theorem
+
+:::::::::::::::::::
+
+$U\subseteq\mathbb R^{k+p}$가 open이고
+
+$$
+F:U\to\mathbb R^k
+$$
+
+가 $C^1$라 하자.
+어떤 $(x_0,\theta_0)\in U$에서
+
+$$
+F(x_0,\theta_0)=0
+$$
+
+이고
+
+$$
+D_xF(x_0,\theta_0)
+$$
+
+가 invertible이라고 하자.
+그러면 $x_0$의 neighborhood $V\subseteq\mathbb R^k$,
+$\theta_0$의 neighborhood $W\subseteq\mathbb R^p$,
+그리고 유일한 $C^1$ 함수
+
+$$
+\varphi:W\to V
+$$
+
+가 존재하여
+
+$$
+\varphi(\theta_0)=x_0
+$$
+
+이고 모든 $\theta\in W$에 대해
+
+$$
+\boxed{
+F(\varphi(\theta),\theta)=0.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+LOCAL UNIQUENESS · 정확한 의미
+
+:::::::::::::::::::
+
+정리는 $\theta\in W$에 대해 $V$ 안에서의 해가 유일하다고 말한다.
+$V$ 밖에 다른 해가 존재하지 않는다는 뜻은 아니다.
+
+::::::::::::::::::::
+
+### 4.6.3 Partial Jacobian의 의미 {#s463}
+
+조건
+
+$$
+\det D_xF(x_0,\theta_0)\ne0
+$$
+
+은 $x$-block을 움직였을 때 $F$가 $k$개의 독립적인 first-order 방향을 모두 구분한다는 뜻이다.
+따라서 locally $k$개의 equation을 $k$개의 unknown $x$에 대해 풀 수 있다.
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 4.5 · Two equations, two endogenous variables
+
+:::::::::::::::::::
+
+$x=(x_1,x_2)$, $\theta\in\mathbb R$이고
+
+$$
+F(x_1,x_2,\theta)
+=
+\begin{bmatrix}
+F_1(x_1,x_2,\theta)\\
+F_2(x_1,x_2,\theta)
+\end{bmatrix}.
+$$
+
+기준점에서
+
+$$
+\det
+\begin{bmatrix}
+\partial F_1/\partial x_1 &
+\partial F_1/\partial x_2\\
+\partial F_2/\partial x_1 &
+\partial F_2/\partial x_2
+\end{bmatrix}
+\ne0
+$$
+
+이면 locally
+
+$$
+x_1=\varphi_1(\theta),
+\qquad
+x_2=\varphi_2(\theta)
+$$
+
+로 유일하게 풀 수 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s47}
+
+## [4.7]{.section-number}음함수의 미분과 implicit differentiation
+
+::: {.topic-opening}
+음함수 정리는 해의 존재와 매끄러움을 보장할 뿐 아니라,
+해를 explicit formula로 구하지 않고도 parameter에 대한 derivative를 계산할 수 있게 한다.
+경제학에서는 이 식이 comparative statics의 기본 공식이 된다.
+:::
+
+### 4.7.1 Implicit differentiation {#s471}
+
+항등식
+
+$$
+F(\varphi(\theta),\theta)=0
+$$
+
+을 $\theta$에 대해 미분하면 chain rule에 의해
+
+$$
+D_xF(\varphi(\theta),\theta)D\varphi(\theta)
++
+D_\theta F(\varphi(\theta),\theta)
+=
+0.
+$$
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 4.9 · Derivative of an implicit function
+
+:::::::::::::::::::
+
+General Implicit Function Theorem의 조건 아래
+
+$$
+\boxed{
+D\varphi(\theta)
+=
+-
+[D_xF(\varphi(\theta),\theta)]^{-1}
+D_\theta F(\varphi(\theta),\theta).
+}
+$$
+
+특히 기준점에서
+
+$$
+\boxed{
+D\varphi(\theta_0)
+=
+-
+[D_xF(x_0,\theta_0)]^{-1}
+D_\theta F(x_0,\theta_0).
+}
+$$
+
+::::::::::::::::::::
+
+### 4.7.2 Dimension check {#s472}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>Object</th><th>Dimension</th><th>Role</th></tr>
+</thead>
+<tbody>
+<tr><td>$D_xF$</td><td>$k\times k$</td><td>endogenous-variable response of equations</td></tr>
+<tr><td>$[D_xF]^{-1}$</td><td>$k\times k$</td><td>local inverse sensitivity</td></tr>
+<tr><td>$D_\theta F$</td><td>$k\times p$</td><td>direct parameter effect on equations</td></tr>
+<tr><td>$D\varphi$</td><td>$k\times p$</td><td>equilibrium response to parameters</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+따라서
+
+$$
+(k\times k)(k\times p)=k\times p
+$$
+
+로 차원이 정확히 맞는다.
+
+### 4.7.3 고계 implicit differentiation {#s473}
+
+$F$가 $C^2$이고 scalar equation
+
+$$
+F(x,\theta)=0,
+\qquad
+x=\varphi(\theta)
+$$
+
+을 생각하자.
+첫 번째 derivative는
+
+$$
+F_x\varphi'+F_\theta=0.
+$$
+
+다시 미분하면
+
+$$
+F_x\varphi''
++
+F_{xx}(\varphi')^2
++
+2F_{x\theta}\varphi'
++
+F_{\theta\theta}
+=
+0.
+$$
+
+따라서
+
+$$
+\boxed{
+\varphi''
+=
+-
+\frac{
+F_{xx}(\varphi')^2
++
+2F_{x\theta}\varphi'
++
+F_{\theta\theta}
+}{F_x}.
+}
+$$
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · curvature comparative statics
+
+:::::::::::::::::::
+
+first-order implicit differentiation이 response의 방향과 크기를 주는 반면,
+second-order formula는 response가 parameter에 따라 어떻게 굽는지를 측정한다.
+이후 optimization과 comparative statics에서 유용하지만 기본 정리는 first-order formula다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s48}
+
+## [4.8]{.section-number}음함수 정리의 증명: augmented map
+
+::: {.topic-opening}
+음함수 정리는 역함수 정리와 독립된 현상이 아니다.
+적절히 좌표를 추가하면 implicit equation을 하나의 square map의 역함수 문제로 바꿀 수 있다.
+:::
+
+### 4.8.1 Augmented map {#s481}
+
+$$
+F:
+U\subseteq\mathbb R^k\times\mathbb R^p
+\to
+\mathbb R^k
+$$
+
+에 대해
+
+$$
+G(x,\theta)
+=
+\big(F(x,\theta),\theta\big)
+$$
+
+를 정의한다.
+그러면
+
+$$
+G:U\to\mathbb R^{k+p}
+$$
+
+이므로 domain과 codomain의 차원이 같다.
+
+### 4.8.2 Block Jacobian {#s482}
+
+$G$의 Jacobian은
+
+$$
+DG(x,\theta)
+=
+\begin{bmatrix}
+D_xF(x,\theta) & D_\theta F(x,\theta)\\
+0 & I_p
+\end{bmatrix}.
+$$
+
+block triangular matrix이므로
+
+$$
+\det DG(x_0,\theta_0)
+=
+\det D_xF(x_0,\theta_0).
+$$
+
+따라서 음함수 정리의 partial Jacobian condition은 정확히 augmented map $G$에 역함수 정리를 적용하기 위한 조건이다.
+
+### 4.8.3 Inverse theorem에서 implicit theorem으로 {#s483}
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof of the General Implicit Function Theorem
+
+:::::::::::::::::::
+
+$D_xF(x_0,\theta_0)$가 invertible이므로
+
+$$
+DG(x_0,\theta_0)
+$$
+
+도 invertible.
+역함수 정리에 의해 $G$는 $(x_0,\theta_0)$ 근처에서 local $C^1$-diffeomorphism이다.
+
+$G^{-1}$를 block form으로
+
+$$
+G^{-1}(u,\theta)
+=
+\big(H(u,\theta),\theta\big)
+$$
+
+로 쓸 수 있다. 이제 $u=0$으로 고정하여
+
+$$
+\varphi(\theta)=H(0,\theta)
+$$
+
+로 정의하면
+
+$$
+G(\varphi(\theta),\theta)
+=
+(0,\theta).
+$$
+
+$G$의 첫 block 정의에 의해
+
+$$
+F(\varphi(\theta),\theta)=0.
+$$
+
+$G^{-1}$의 local uniqueness로부터 $\varphi$의 local uniqueness도 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+STRUCTURAL IDENTITY
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{Implicit Function Theorem}
+=
+\text{Inverse Function Theorem applied to }
+(F(x,\theta),\theta).
+}
+$$
+
+이 관계를 이해하면 두 정리의 가정과 derivative formula가 따로 암기할 내용이 아니라 하나의 구조로 보인다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s49}
+
+## [4.9]{.section-number}Implicit comparative statics
+
+::: {.topic-opening}
+경제학에서는 equilibrium이나 optimality condition이 explicit solution으로 주어지는 경우보다
+연립방정식 $F(x,\theta)=0$으로 주어지는 경우가 더 일반적이다.
+음함수 정리를 사용하면 해를 직접 풀지 않고도 parameter 변화에 대한 equilibrium response를 계산할 수 있다.
+:::
+
+### 4.9.1 Scalar equilibrium {#s491}
+
+$$
+F(x,\theta)=0
+$$
+
+이 equilibrium condition이고
+
+$$
+F_x(x_0,\theta_0)\ne0
+$$
+
+이면 locally $x=x^*(\theta)$가 존재하고
+
+$$
+\boxed{
+\frac{dx^*}{d\theta}
+=
+-\frac{F_\theta}{F_x}.
+}
+$$
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+SIGN COMPARATIVE STATICS
+
+:::::::::::::::::::
+
+scalar case에서는 equilibrium response의 부호가
+
+$$
+-\operatorname{sgn}(F_\theta)\operatorname{sgn}(F_x)
+$$
+
+로 결정된다.
+따라서 explicit solution이 없어도 monotonicity를 판단할 수 있다.
+
+::::::::::::::::::::
+
+### 4.9.2 Vector equilibrium {#s492}
+
+$$
+F(x,\theta)=0,
+\qquad
+x\in\mathbb R^k,
+\quad
+\theta\in\mathbb R^p
+$$
+
+이고 $D_xF$가 invertible이면
+
+$$
+\boxed{
+D_\theta x^*(\theta)
+=
+-
+[D_xF]^{-1}D_\theta F.
+}
+$$
+
+여기서 중요한 점은 vector case에서는 일반적으로 inverse matrix의 각 원소 부호를 단순히 알 수 없다는 것이다.
+따라서 scalar comparative statics와 달리 sign result를 얻으려면
+matrix structure, monotonicity, diagonal dominance, $M$-matrix 등의 추가 구조가 필요할 수 있다.
+
+### 4.9.3 시장균형 예제 {#s493}
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC EXAMPLE 4.1 · Market-clearing price
+
+:::::::::::::::::::
+
+demand와 supply를
+
+$$
+D(p,\alpha),
+\qquad
+S(p,\beta)
+$$
+
+라 하고 equilibrium condition을
+
+$$
+F(p,\alpha,\beta)
+=
+D(p,\alpha)-S(p,\beta)=0
+$$
+
+로 둔다.
+기준점에서
+
+$$
+F_p
+=
+D_p-S_p
+\ne0
+$$
+
+이면 locally
+
+$$
+p^*=p^*(\alpha,\beta).
+$$
+
+따라서
+
+$$
+\frac{\partial p^*}{\partial\alpha}
+=
+-\frac{D_\alpha}{D_p-S_p},
+$$
+
+$$
+\frac{\partial p^*}{\partial\beta}
+=
+\frac{S_\beta}{D_p-S_p}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+PREVIEW · Optimizer comparative statics
+
+:::::::::::::::::::
+
+이후 optimization 장에서는 FOC를
+
+$$
+F(x,\theta)=\nabla_x f(x,\theta)=0
+$$
+
+로 보고 같은 공식을 optimizer $x^*(\theta)$의 변화에 적용한다.
+반면 optimal value의 변화는 별도의 Envelope Theorem으로 다룬다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s410}
+
+## [4.10]{.section-number}Regular level sets와 tangent spaces
+
+::: {.topic-opening}
+음함수 정리는 단순히 변수를 다른 변수의 함수로 푸는 정리를 넘어,
+등식제약으로 정의된 집합이 국소적으로 어떤 차원을 가지며 어떤 방향으로 움직일 수 있는지를 설명한다.
+:::
+
+### 4.10.1 Regular level-set theorem {#s4101}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 4.10 · Local structure of a regular level set
+
+:::::::::::::::::::
+
+$U\subseteq\mathbb R^n$가 open이고
+
+$$
+F:U\to\mathbb R^m,
+\qquad
+m\le n,
+$$
+
+가 $C^1$라 하자.
+$a\in U$에서
+
+$$
+F(a)=c,
+\qquad
+\operatorname{rank}DF(a)=m.
+$$
+
+그러면 $a$ 근처에서 level set
+
+$$
+M
+=
+\{x\in U:F(x)=c\}
+$$
+
+는 $n-m$개의 자유변수로 $C^1$-parameterize될 수 있다.
+즉 locally $M$은 $\mathbb R^{n-m}$와 같은 차원의 매끄러운 집합이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof idea
+
+:::::::::::::::::::
+
+$\operatorname{rank}DF(a)=m$이므로 $DF(a)$의 어떤 $m\times m$ minor가 nonsingular이다.
+좌표를 재배열하여 그 minor가 마지막 $m$개 변수에 해당한다고 하자.
+그러면 변수들을
+
+$$
+x=(u,v),
+\qquad
+u\in\mathbb R^{n-m},
+\quad
+v\in\mathbb R^m
+$$
+
+로 나누었을 때
+
+$$
+D_vF(a)
+$$
+
+가 invertible.
+General Implicit Function Theorem으로
+
+$$
+v=\varphi(u)
+$$
+
+로 locally 풀 수 있다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 4.10.2 Tangent space {#s4102}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 4.5 · Tangent vectors via feasible paths
+
+:::::::::::::::::::
+
+$a\in M$에서 $C^1$ curve
+
+$$
+\gamma:(-\varepsilon,\varepsilon)\to M,
+\qquad
+\gamma(0)=a
+$$
+
+의 velocity $\gamma'(0)$를 $M$의 $a$에서의 tangent vector라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 4.11 · Tangent space of a regular level set
+
+:::::::::::::::::::
+
+Theorem 4.10의 조건 아래
+
+$$
+\boxed{
+T_aM
+=
+\ker DF(a).
+}
+$$
+
+따라서
+
+$$
+\dim T_aM
+=
+n-m.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof of the necessary direction
+
+:::::::::::::::::::
+
+$\gamma(t)\in M$이면
+
+$$
+F(\gamma(t))=c
+$$
+
+이다. $t=0$에서 미분하면
+
+$$
+DF(a)\gamma'(0)=0.
+$$
+
+따라서 모든 tangent vector는 $\ker DF(a)$에 속한다.
+반대 포함관계는 local graph parameterization에서 각 kernel direction에 대응하는 feasible curve를 구성하면 얻어진다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 4.10.3 Gradient as a normal vector {#s4103}
+
+:::::::::::::::::::: {.statement .corollary}
+
+::::::::::::::::::: {.statement-head}
+
+COROLLARY 4.12 · Scalar constraint
+
+:::::::::::::::::::
+
+$g:U\subseteq\mathbb R^n\to\mathbb R$가 $C^1$이고
+
+$$
+M=\{x:g(x)=c\},
+\qquad
+\nabla g(a)\ne0
+$$
+
+라 하자.
+그러면
+
+$$
+T_aM
+=
+\{v\in\mathbb R^n:
+\nabla g(a)^\top v=0\}.
+$$
+
+즉 $\nabla g(a)$는 level surface의 normal direction이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+PREVIEW · Lagrange multipliers
+
+:::::::::::::::::::
+
+equality-constrained optimum에서 목적함수의 gradient가 모든 feasible tangent direction과 직교해야 하므로
+regular scalar constraint 아래
+
+$$
+\nabla f(a)
+=
+\lambda\nabla g(a)
+$$
+
+가 자연스럽게 등장한다.
+이를 최적화 정리로 완성하는 것은 Chapter 6의 역할이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s4110}
+
+## [4.11]{.section-number}Rank condition과 local identification
+
+::: {.topic-opening}
+경제학과 계량경제학에서 parameter는 종종 방정식 또는 moment condition의 해로 정의된다.
+역함수 정리의 rank condition은 이런 해의 국소적 유일성을 보장하는 강력한 충분조건을 제공한다.
+그러나 rank failure를 곧바로 nonidentification과 동일시해서는 안 된다.
+:::
+
+### 4.11.1 Square systems {#s4111}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 4.13 · Full-rank sufficient condition for local identification
+
+:::::::::::::::::::
+
+$m:\Theta\subseteq\mathbb R^p\to\mathbb R^p$가 $C^1$이고
+
+$$
+m(\theta_0)=0.
+$$
+
+만약
+
+$$
+\det Dm(\theta_0)\ne0
+$$
+
+이면 어떤 neighborhood $N$ of $\theta_0$가 존재하여
+
+$$
+m(\theta)=0,\quad \theta\in N
+$$
+
+의 유일한 해는 $\theta_0$이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+Inverse Function Theorem에 의해 $m$은 $\theta_0$의 sufficiently small neighborhood에서 injective.
+$m(\theta_0)=0$이므로 같은 neighborhood 안에서 $m(\theta)=0$을 만족하는 다른 $\theta$는 존재할 수 없다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 4.11.2 Overidentified systems {#s4112}
+
+이제
+
+$$
+m:\Theta\subseteq\mathbb R^p\to\mathbb R^q,
+\qquad
+q\ge p
+$$
+
+를 생각하자.
+
+$$
+\operatorname{rank}Dm(\theta_0)=p
+$$
+
+이면 $Dm(\theta_0)$의 어떤 $p\times p$ minor가 nonsingular이다.
+해당 $p$개의 moment만 모은 함수
+
+$$
+\widetilde m:\Theta\to\mathbb R^p
+$$
+
+에 Inverse Function Theorem을 적용하면 $\widetilde m$, 따라서 전체 $m$도 $\theta_0$ 근처에서 injective다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 4.14 · Full column rank implies local injectivity
+
+:::::::::::::::::::
+
+$m:\mathbb R^p\to\mathbb R^q$, $q\ge p$, $m\in C^1$이고
+
+$$
+\operatorname{rank}Dm(\theta_0)=p
+$$
+
+이면 $m$은 $\theta_0$의 어떤 neighborhood에서 injective이다.
+
+::::::::::::::::::::
+
+### 4.11.3 Rank failure의 해석 {#s4113}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 4.2 · Rank failure does not imply nonidentification
+
+:::::::::::::::::::
+
+$$
+m(\theta)=\theta^3.
+$$
+
+방정식
+
+$$
+m(\theta)=0
+$$
+
+의 유일한 해는
+
+$$
+\theta_0=0.
+$$
+
+따라서 $\theta_0$는 locally identified이다.
+그러나
+
+$$
+m'(0)=0.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+IDENTIFICATION READING
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\operatorname{rank}Dm(\theta_0)=p
+\Longrightarrow
+\text{first-order local identification},
+}
+$$
+
+그러나 역은 일반적으로 거짓이다.
+rank failure는 first-order information이 퇴화했다는 뜻이지,
+population equation의 해가 반드시 여러 개라는 뜻은 아니다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s4120}
+
+## [4.12]{.section-number}Singular points와 failure modes
+
+::: {.topic-opening}
+$D_xF$가 singular하다는 사실은 하나의 결론이 아니라 regularity theorem을 사용할 수 없다는 신호다.
+실제로 singular point에서는 서로 전혀 다른 현상이 발생할 수 있다.
+:::
+
+### 4.12.1 Multiple branches {#s4121}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 4.6 · $x^2-\theta=0$
+
+:::::::::::::::::::
+
+$$
+F(x,\theta)=x^2-\theta.
+$$
+
+$$
+F(0,0)=0,
+\qquad
+F_x(0,0)=0.
+$$
+
+$\theta\gt0$이면
+
+$$
+x=\pm\sqrt{\theta}
+$$
+
+두 branch가 존재한다.
+따라서 기준점에서 local uniqueness가 안정적으로 지속되지 않는다.
+
+::::::::::::::::::::
+
+### 4.12.2 Nonsmooth unique branch {#s4122}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 4.7 · $x^3-\theta=0$
+
+:::::::::::::::::::
+
+$$
+F(x,\theta)=x^3-\theta.
+$$
+
+모든 $\theta$에 대해 유일한 해는
+
+$$
+x(\theta)=\theta^{1/3}.
+$$
+
+그러나
+
+$$
+F_x(0,0)=0
+$$
+
+이고 $x(\theta)$는 $\theta=0$에서 differentiable하지 않다.
+즉 existence와 uniqueness는 유지되지만 smooth comparative statics가 실패한다.
+
+::::::::::::::::::::
+
+### 4.12.3 Loss of existence {#s4123}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 4.8 · $x^2+\theta^2=0$
+
+:::::::::::::::::::
+
+$$
+F(x,\theta)=x^2+\theta^2.
+$$
+
+$$
+F(0,0)=0,
+\qquad
+F_x(0,0)=0.
+$$
+
+그러나 $\theta\ne0$이면 실수 $x$에 대해
+
+$$
+x^2+\theta^2=0
+$$
+
+을 만족하는 해가 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>Singular example</th><th>Nearby behavior</th><th>What fails?</th></tr>
+</thead>
+<tbody>
+<tr><td>$x^2-\theta=0$</td><td>두 개의 branch</td><td>local uniqueness</td></tr>
+<tr><td>$x^3-\theta=0$</td><td>유일하지만 nonsmooth</td><td>differentiable sensitivity</td></tr>
+<tr><td>$x^2+\theta^2=0$</td><td>근처 parameter에서 해 없음</td><td>existence</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Rank failure is not a complete diagnosis
+
+:::::::::::::::::::
+
+$$
+D_xF\text{ singular}
+$$
+
+만으로는 multiple solutions, nonsmoothness, nonexistence 중 무엇이 일어나는지 알 수 없다.
+따라서 singularity는 추가 분석이 필요한 지점이지 최종 결론이 아니다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s4130}
+
+## [4.13]{.section-number}Local theorem의 범위와 다음 장으로의 연결
+
+::: {.topic-opening}
+역함수·음함수 정리는 매우 강력하지만 그 강력함은 어디까지나 local regularity에 관한 것이다.
+마지막으로 정리가 정확히 무엇을 주고 무엇을 주지 않는지 분리한다.
+:::
+
+### 4.13.1 정리가 보장하는 것 {#s4131}
+
+:::::::::::::::::::: {.concept-grid}
+
+::::::::::::::::::: {.concept-card}
+
+::: {.concept-card__label}
+LOCAL EXISTENCE
+:::
+
+:::::::::::::::::: {.concept-card__formula}
+
+$F(x_0,\theta_0)=0$
+
+::::::::::::::::::
+
+::: {.concept-card__text}
+기준해를 주변 parameter로 continuation할 수 있다.
+:::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.concept-card}
+
+::: {.concept-card__label}
+LOCAL UNIQUENESS
+:::
+
+:::::::::::::::::: {.concept-card__formula}
+
+$D_xF(x_0,\theta_0)$ invertible
+
+::::::::::::::::::
+
+::: {.concept-card__text}
+선택한 작은 neighborhood 안에서 solution branch가 하나다.
+:::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.concept-card}
+
+::: {.concept-card__label}
+SMOOTHNESS
+:::
+
+:::::::::::::::::: {.concept-card__formula}
+
+$F\in C^1\Rightarrow\varphi\in C^1$
+
+::::::::::::::::::
+
+::: {.concept-card__text}
+parameter 변화에 대한 solution response가 미분가능하다.
+:::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.concept-card}
+
+::: {.concept-card__label}
+SENSITIVITY
+:::
+
+:::::::::::::::::: {.concept-card__formula}
+
+$D\varphi=-[D_xF]^{-1}D_\theta F$
+
+::::::::::::::::::
+
+::: {.concept-card__text}
+explicit solution 없이 local comparative statics를 계산한다.
+:::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 4.13.2 정리가 보장하지 않는 것 {#s4132}
+
+일반적으로 다음은 별도로 분석해야 한다.
+
+<ul class="rule-list">
+<li>정의역 전체에서의 global uniqueness</li>
+<li>모든 parameter 값에서의 global existence</li>
+<li>solution branch의 전역적 monotonicity</li>
+<li>주어진 해가 optimum인지 여부</li>
+<li>singular point에서의 branch 구조</li>
+</ul>
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+IMPORTANT · known root가 출발점이다
+
+:::::::::::::::::::
+
+표준 음함수 정리는 먼저
+
+$$
+F(x_0,\theta_0)=0
+$$
+
+인 기준해가 주어졌다고 가정한다.
+정리는 그 기준해를 주변 parameter 값으로 <em>smoothly continue</em>할 수 있음을 보장하지,
+아무 정보도 없는 상태에서 최초의 해 $x_0$를 찾아주는 정리는 아니다.
+
+::::::::::::::::::::
+
+### 4.13.3 다음 장: local regularity에서 global geometry로 {#s4133}
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+NEXT CHAPTER
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+<strong>Chapter 5. 볼록집합과 볼록함수.</strong>
+Chapter 4가 Jacobian과 rank를 통해 <em>국소적</em> 존재·유일성·민감도를 분석했다면,
+Chapter 5에서는 convexity, strict convexity, concavity, quasi-convexity, quasi-concavity를 통해
+집합과 함수의 <em>전역적 기하</em>를 구축한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+CHAPTER 4 · CORE LOGIC
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{local linearization}
++
+\text{rank regularity}
+\Longrightarrow
+\text{local solvability}
++
+\text{local uniqueness}
++
+\text{sensitivity}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## 연습문제
+
+::: {.topic-opening}
+이 장의 연습문제는 정리의 기계적 적용보다
+“어떤 Jacobian block을 검사해야 하는가”, “결론이 local인지 global인지”,
+“rank failure에서 무엇을 결론낼 수 없는가”를 구분하도록 설계한다.
+:::
+
+<ol class="exercise-list">
+<li>$f(x,y)=(x+y,x-y)$에 Inverse Function Theorem을 적용하고 $f^{-1}$와 $D(f^{-1})$를 직접 계산하여 theorem formula와 비교하라.</li>
+<li>$f(x,y)=(e^x\cos y,e^x\sin y)$가 모든 점에서 local diffeomorphism임을 보이고 global injective가 아닌 이유를 설명하라.</li>
+<li>$f(x)=x^3$가 global inverse를 가지지만 $0$에서 Inverse Function Theorem을 적용할 수 없는 이유를 설명하라.</li>
+<li>local inverse $g$가 differentiable이면 $Dg(f(a))Df(a)=I$임을 chain rule로 증명하고 $Df(a)$가 nonsingular임을 결론내려라.</li>
+<li>$F(x,y)=x^2+y^2-1$에 Scalar Implicit Function Theorem을 적용하여 $(0,1)$ 근처의 $y=\varphi(x)$와 $(1,0)$ 근처의 $x=\psi(y)$의 derivative를 구하라.</li>
+<li>$F(x,y)=e^{xy}+x+y-2$에 대해 $(0,1)$ 근처에서 $y=\varphi(x)$가 존재하는지 판정하고 $\varphi'(0)$을 구하라.</li>
+<li>$F(x,\theta)=x^2+\theta x-1=0$에서 $F_x\ne0$인 해 branch에 대해 $dx/d\theta$를 implicit differentiation으로 구하라.</li>
+<li>General Implicit Function Theorem에서 $D_xF$, $D_\theta F$, $D\varphi$의 dimension을 확인하고 matrix multiplication이 왜 가능한지 설명하라.</li>
+<li>augmented map $G(x,\theta)=(F(x,\theta),\theta)$의 Jacobian determinant가 $\det D_xF$와 같음을 block determinant를 이용해 증명하라.</li>
+<li>$F(x_1,x_2,\theta)=(x_1+x_2-\theta,\ x_1x_2-1)$에 대해 적절한 기준점에서 $D_xF$를 계산하고 local solution $x(\theta)$의 derivative를 구하라.</li>
+<li>시장균형 $D(p,\alpha)=a+\alpha-bp$, $S(p,\beta)=c+\beta+dp$에서 equilibrium price의 $\alpha,\beta$에 대한 derivative를 implicit formula와 explicit solution 두 방식으로 계산하라.</li>
+<li>$F(x,y,z)=x^2+y^2+z^2-1$의 level set에서 $(0,0,1)$의 tangent space를 구하라.</li>
+<li>$F:\mathbb R^3\to\mathbb R^2$, $F(x,y,z)=(x+y+z,\ x^2+y^2+z^2)$에 대해 regular point에서 $\ker DF(a)$를 계산하고 level set의 local dimension을 확인하라.</li>
+<li>regular scalar constraint $g(x)=c$에서 모든 feasible tangent vector $v$가 $\nabla g(a)^\top v=0$을 만족함을 feasible path definition으로 증명하라.</li>
+<li>$m(\theta)=\theta^3$가 rank condition을 만족하지 않지만 $0$에서 locally identified임을 설명하라.</li>
+<li>$m(\theta_1,\theta_2)=(\theta_1,\theta_1+\theta_2,\theta_2)$의 Jacobian rank를 계산하고 local injectivity를 확인하라.</li>
+<li>$m:\mathbb R^p\to\mathbb R^q$, $q\ge p$, $\operatorname{rank}Dm(\theta_0)=p$이면 적절한 $p$개의 component를 골라 square Inverse Function Theorem을 적용할 수 있음을 증명하라.</li>
+<li>$x^2-\theta=0$, $x^3-\theta=0$, $x^2+\theta^2=0$ 세 식에서 singularity가 각각 어떤 다른 failure mode를 만드는지 비교하라.</li>
+<li>$F(x,\theta)=0$의 해가 global하게 여러 개 존재하더라도 Implicit Function Theorem이 한 기준점 근처에서 local uniqueness를 줄 수 있는 예를 구성하라.</li>
+<li>음함수 정리가 “초기 해의 존재”를 처음부터 보장하는 정리가 아닌 이유를 정리의 가정을 이용해 설명하라.</li>
+<li>$F(x,\theta)=\nabla_x f(x,\theta)$로 둘 때 $D_xF$가 Hessian $H_{xx}f$와 같음을 보이고, nonsingular Hessian 아래 optimizer candidate의 local sensitivity formula를 유도하라.</li>
+<li>위 문제의 결과가 그 candidate가 실제 maximum 또는 minimum임을 보장하지 않는 이유를 설명하라.</li>
+<li>역함수 정리의 결론이 global invertibility를 보장하지 않는 반례를 하나 더 구성하라.</li>
+<li>singular Jacobian이 solution multiplicity를 의미하지 않는 반례를 두 개 이상 비교하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 장의 위치
+
+<em>맛있는 해석학 다변수</em>. 역함수 정리의 $C^1$ 정식화, inverse derivative formula,
+partial Jacobian을 이용한 음함수 정리, augmented map을 통한 음함수 정리의 증명구조를 기본 골격으로 참고하였다.
+
+해석학II 강의록. 다변수 미분가능성, Jacobian, 국소적 선형화와 이후 역함수·음함수 정리로 이어지는 해석학적 맥락을 참고하였다.
+
+Jehle, G. A. and Reny, P. J. <em>Advanced Microeconomic Theory</em>, 3rd ed.
+implicit comparative statics, regularity condition, 경제학의 등식관계 및 최적화 문제와의 연결을 위한 notation과 응용 방향을 참고하였다.
+
+이 책의 확장: regular level sets와 tangent spaces, rank condition과 local identification,
+singular-point failure modes는 이후 convexity, optimization, equilibrium theory와 econometrics를 연결하기 위해 본 장에서 체계적으로 통합하였다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+DEPENDENCY MAP
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+\text{Chapter 3: }&Df(a)\text{ as local linearization}\\
+&\Downarrow\\
+\text{Chapter 4: }&\text{rank regularity }\Rightarrow\text{ local solvability}\\
+&\Downarrow\\
+\text{Chapter 5: }&\text{convexity and global geometry}\\
+&\Downarrow\\
+\text{Chapter 6: }&\text{optimization, KKT, envelope theorem}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

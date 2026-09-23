@@ -76,11 +76,11 @@ subtitle: Graduate Economics Knowledge Base
 MATHEMATICAL FOUNDATIONS
 :::
 ### [경제학을 위한 수학](math-economics/index.html)
-선형대수 · 위상 및 실해석 · 정적·동적 최적화 · 동태계 · 부동점 정리
+유클리드 위상 · 함수의 극한과 연속성 · 다변수 미분가능성 · 역함수 및 음함수 정리
 
-[Chapter 01부터 읽기](math-economics/index.html){.study-card__link} →
+[Chapter 01–04 읽기](math-economics/index.html){.study-card__link} →
 
-[경제학 연구와 분석을 뒷받침하는 수리적 언어와 공통 기초]{.status}
+[위상적 기초·연속성·다변수 미분·음함수정리를 포괄하는 4개 Chapter]{.status}
 :::
 ::: {.study-card .study-card--micro}
 ::: {.study-card__number}

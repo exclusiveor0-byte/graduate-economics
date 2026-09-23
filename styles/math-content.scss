@@ -1,0 +1,28 @@
+/* Source-compatible presentation for imported math-economics chapter bodies. */
+/*-- scss:rules --*/
+.concept-grid { max-width: 47rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin: 1.4rem 0; }
+.concept-card { min-width: 0; padding: 1rem; border: 1px solid var(--notes-rule); background: #fbfcfd; }
+.concept-card__label { color: #23566f; font-size: .82rem; font-weight: 700; letter-spacing: .045em; margin-bottom: .35rem; }
+.concept-card__formula { overflow-x: auto; margin: .4rem 0; color: #263946; font-size: .88rem; }
+.concept-card__text { margin: 0; color: #52636e; font-size: .88rem; line-height: 1.6; }
+
+.dependency-chain { max-width: 47rem; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; margin: 1.6rem 0; padding: .9rem 0; border-top: 1px solid var(--notes-rule); border-bottom: 1px solid var(--notes-rule); }
+.dependency-chain__step { min-width: 0; padding: .25rem .75rem .35rem 0; color: #53636d; font-size: .78rem; line-height: 1.45; }
+.dependency-chain__step + .dependency-chain__step { padding-left: .75rem; border-left: 1px solid var(--notes-rule); }
+.dependency-chain__num { display: block; color: #23566f; font-size: .75rem; font-weight: 800; letter-spacing: .1em; margin-bottom: .25rem; }
+.dependency-chain__text { display: block; font-weight: 700; color: #324754; font-size: .82rem; }
+.dependency-chain__sub { display: block; margin-top: .2rem; color: #6a7881; font-size: .75rem; }
+
+.statement.economic { border-left-color: #6a5279; }
+.statement.economic .statement-head { color: #6a5279; }
+.statement.example { border-left-color: #5c607a; }
+.statement.example .statement-head { color: #5c607a; }
+.statement.corollary { border-left-color: #4e6d5b; }
+.statement.corollary .statement-head { color: #4e6d5b; }
+
+@media (max-width: 700px) {
+  .concept-grid { grid-template-columns: 1fr; }
+  .dependency-chain { display: block; }
+  .dependency-chain__step, .dependency-chain__step + .dependency-chain__step { border-left: 0; border-top: 1px solid var(--notes-rule); padding: .5rem 0; }
+  .dependency-chain__step:first-child { border-top: 0; }
+}
