@@ -120,9 +120,9 @@ ECONOMETRICS
 ### [계량경제학](econometrics/index.html)
 식별과 추정, 확률모형과 계산을 연결하는 정리노트이다.
 
-[Chapter 01–14 읽기](econometrics/index.html){.study-card__link} →
+[Chapter 01–15 읽기](econometrics/index.html){.study-card__link} →
 
-[확률·식별·OLS·점근이론·GMM·MLE를 연결하는 14개 Chapter]{.status}
+[확률·식별·OLS·점근이론·GMM·MLE·시계열기초를 연결하는 15개 Chapter]{.status}
 :::
 ::: {.study-card .study-card--supplements}
 ::: {.study-card__number}
