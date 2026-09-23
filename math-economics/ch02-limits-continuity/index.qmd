@@ -1,0 +1,33 @@
+# Chapter 2 · 함수의 극한과 연속성 {.unnumbered}
+*Limits · Continuity · Compactness · Connectedness · Existence*
+
+다변수 함수의 극한, 연속성의 수열적·위상적 특성화, 컴팩트성의 보존, 최대최소정리(Extreme Value Theorem), 연결성과 사이값정리, 균등연속성(Heine–Cantor), 그리고 경제학적 최적화 문제에서의 해의 존재성을 다룬다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **2.1–2.3** 함수 · 상과 역상 · 다변수 극한 · 수열적 판정
+- **2.4–2.6** 연속성 · 위상적 특성화 · 연속함수의 연산
+- **2.7–2.8** 컴팩트성 보존 · 최대최소정리 · 연결성 · 사이값정리
+- **2.9–2.10** 균등연속성 · 존재성 · 경제학적 최적화 문제
+:::
+
+## Sections
+
+- [2.1 함수, 상과 역상](contents.html#s21)
+- [2.2 다변수 함수의 극한](contents.html#s22)
+- [2.3 극한의 구조와 판정법](contents.html#s23)
+- [2.4 연속성](contents.html#s24)
+- [2.5 연속성의 위상적 특성화](contents.html#s25)
+- [2.6 연속함수의 구성과 연산](contents.html#s26)
+- [2.7 연속성과 컴팩트성](contents.html#s27)
+- [2.8 연결성과 사이값정리](contents.html#s28)
+- [2.9 균등연속성](contents.html#s29)
+- [2.10 경제학적 존재성](contents.html#s210)
+- [연습문제](contents.html#exercises)
+- [참고문헌 및 장의 위치](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+수식·정리·증명은 원본 구조를 보존한 [본문 전체](contents.html)에 있다.
+위의 Section 링크로 바로 이동하거나 순서대로 읽을 수 있다.
+:::

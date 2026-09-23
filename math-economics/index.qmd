@@ -2,7 +2,7 @@
 
 ## 대학원 수리경제이론 및 수리적 기초
 
-**선형대수, 실해석, 최적화 이론, 동태계 분석, 그리고 부동점 정리**
+**유클리드 위상, 다변수 해석학, 미분가능성, 그리고 국소적 해의 구조**
 
 이 과목은 미시경제학, 거시경제학, 계량경제학 전반의 이론적 모형화와 엄밀한 증명에 필수적인 수학적 언어와 기초 이론을 체계적으로 다룬다. 직관적 경제학적 서술을 수리적 엄밀성으로 뒷받침하며, 대학원 코어 코스와 종합시험(Qualifying Exam)을 위한 탄탄한 기초를 제공한다.
 
@@ -10,26 +10,44 @@
 
 | Chapter | 대주제 및 주요 내용 | 상태 |
 |---|---|---|
-| [Chapter 01](ch01-linear-algebra/index.qmd) | **선형대수학과 행렬해석** · 벡터공간, 선형변환, 정사영, 행렬식 | 업로드 준비 완료 |
-| Chapter 02 | **고유값, 스펙트럼 정리 및 2차형식** · 대칭행렬, 정부호성, 행렬분해(QR, SVD) | 업로드 대기 |
-| Chapter 03 | **유클리드 공간과 거리공간** · 노름공간, 열린집합·닫힌집합, 위상적 기초 | 업로드 대기 |
-| Chapter 04 | **위상구조, 점렬 및 콤팩트성** · 완비성, Bolzano–Weierstrass, Heine–Borel | 업로드 대기 |
-| Chapter 05 | **함수의 연속성과 극값정리** · 연속사상, 균등연속, Weierstrass 최대값 정리 | 업로드 대기 |
-| Chapter 06 | **다변수 미분과 국소 극값 조건** · 전미분, 야코비안, 헤시안, 음함수정리, Taylor 전개 | 업로드 대기 |
-| Chapter 07 | **등식 및 부등식 제약최적화** · 라그랑주 승수법, KKT 조건, 상보여유성 | 업로드 대기 |
-| Chapter 08 | **볼록집합, 볼록함수와 초평면 분리정리** · Convexity, 준볼록성, Minkowski 분리정리 | 업로드 대기 |
-| Chapter 09 | **매개변수 최적화와 포락선·최대값 정리** · Envelope Theorem, 대응, Berge 최대값 정리 | 업로드 대기 |
-| Chapter 10 | **차분방정식과 이산시간 동태계** · 선형 차분방정식계, Schur–Cohn 안정성 판정 | 업로드 대기 |
-| Chapter 11 | **미분방정식계와 위상도 분석** · 연립 ODE, 2차원 위상도, 안장점 경로(Saddle-Path) | 업로드 대기 |
-| Chapter 12 | **변분법과 폰트랴긴 최대원리** · Euler–Lagrange, 해밀토니안, 횡단성 조건 | 업로드 대기 |
-| Chapter 13 | **동적계획법과 수축사상정리** · Bellman 방정식, Banach 부동점 정리, Blackwell 조건 | 업로드 대기 |
-| Chapter 14 | **Brouwer·Kakutani 부동점 정리와 균형 존재성** · 대응의 연속성, 일반균형 및 내시균형 존재 증명 | 업로드 대기 |
+| [Chapter 01](ch01-euclidean-topology/index.html) | **유클리드 공간의 위상적 기초** · 노름, 거리, 열린집합·닫힌집합, 닫개, 집적점, 상대위상, 컴팩트성, Heine–Borel | [완료]{.status} |
+| [Chapter 02](ch02-limits-continuity/index.html) | **함수의 극한과 연속성** · 다변수 극한, 연속성의 수열적·위상적 특성화, 컴팩트성 보존, 최대최소정리, 연결성, 사이값정리, 균등연속성 | [완료]{.status} |
+| [Chapter 03](ch03-multivariable-differentiation/index.html) | **다변수 미분가능성과 국소 선형화** · 편미분, Fréchet 미분, Jacobian, gradient, 방향미분, 연쇄법칙, Hessian, Taylor 정리, Euler 정리 | [완료]{.status} |
+| [Chapter 04](ch04-inverse-implicit-functions/index.html) | **역함수·음함수 정리와 국소적 해의 구조** · 역함수 정리, 음함수 정리, implicit differentiation, comparative statics, regular level sets, 국소 식별 | [완료]{.status} |
 
-::: {.callout-note title="원고 업로드 및 편제 안내"}
-- 강의노트 원고는 미시·거시·계량경제학 과목과 동일하게 준비되는 대로 Chapter 단위로 순차 업로드됩니다.
-- 각 Chapter는 목차와 요약을 담은 `index.qmd`와 원문 수식·증명을 담은 `contents.qmd`의 2-file 표준 구조로 운영됩니다.
-- 본문의 정리, 명제, 증명 보완 및 수정 제안은 GitHub Pull Request를 통해 참여할 수 있습니다.
-:::
+## Chapters
+
+### [Chapter 01 · 유클리드 공간의 위상적 기초](ch01-euclidean-topology/index.html)
+
+$\mathbb R^n$의 노름과 거리에서 출발하여 열린집합, 닫힌집합, 닫개, 집적점, 상대위상, 수열적 특성화, Bolzano–Weierstrass, 컴팩트성, Heine–Borel을 하나의 논리적 체계로 구축한다.
+
+[Chapter 01 읽기](ch01-euclidean-topology/index.html) →
+
+[11개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 02 · 함수의 극한과 연속성](ch02-limits-continuity/index.html)
+
+다변수 함수의 극한, 연속성의 수열적·위상적 특성화, 컴팩트성 보존, 최대최소정리(Extreme Value Theorem), 연결성과 사이값정리, 균등연속성(Heine–Cantor), 그리고 경제학적 최적화 문제에서의 해의 존재성을 다룬다.
+
+[Chapter 02 읽기](ch02-limits-continuity/index.html) →
+
+[10개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 03 · 다변수 미분가능성과 국소 선형화](ch03-multivariable-differentiation/index.html)
+
+편미분, Fréchet 전미분, Jacobian과 gradient, 방향미분과 최대 증가방향, 전미분과 접평면, 연쇄법칙, 평균값정리와 Lipschitz 한계, Hessian과 대칭성, 1차·2차 Taylor 전개, 동차함수와 Euler 정리, 탄력성과 한계효과를 다룬다.
+
+[Chapter 03 읽기](ch03-multivariable-differentiation/index.html) →
+
+[13개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 04 · 역함수·음함수 정리와 국소적 해의 구조](ch04-inverse-implicit-functions/index.html)
+
+Jacobian의 비특이성, 역함수 정리(Inverse Function Theorem), 스칼라 및 일반 음함수 정리(Implicit Function Theorem), implicit differentiation, 비교정태분석(Comparative Statics), 정규 등위집합과 접공간, 국소 식별(Local Identification)과 특이점 실패 유형을 다룬다.
+
+[Chapter 04 읽기](ch04-inverse-implicit-functions/index.html) →
+
+[13개 절 · 정리·증명·연습문제 포함]{.status}
 
 ## 주요 참고 문헌
 

@@ -1,0 +1,2680 @@
+---
+title: "Chapter 2 · 함수의 극한과 연속성"
+description: "다변수 함수의 극한, 연속성의 수열적·위상적 특성화, 컴팩트성, 최대최소정리, 연결성, 사이값정리, 균등연속성."
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/math-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s21}
+
+## [2.1]{.section-number}함수, 상과 역상
+
+::: {.topic-opening}
+함수의 연속성을 위상적으로 표현하려면 함수가 집합을 어떻게 이동시키는지부터 정확히 구분해야 한다.
+특히 연속성은 함수의 <em>상(image)</em>이 아니라 <em>역상(preimage)</em>을 통해 가장 자연스럽게 표현된다.
+이 절에서는 이후 전개에 필요한 함수와 집합연산의 최소한의 언어를 정리한다.
+:::
+
+### 2.1.1 함수와 기본 표기 {#s211}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.1 · Function
+
+:::::::::::::::::::
+
+$X\subseteq\mathbb R^n$, $Y\subseteq\mathbb R^m$라 하자.
+함수
+
+$$
+f:X\to Y
+$$
+
+는 각 $x\in X$에 정확히 하나의 $f(x)\in Y$를 대응시키는 규칙이다.
+$X$를 정의역(domain), $Y$를 공역(codomain)이라 한다.
+
+::::::::::::::::::::
+
+실제 함수가 취하는 값들의 집합
+
+$$
+f(X)=\{f(x):x\in X\}
+$$
+
+을 함수의 상 또는 range라 한다. 일반적으로 $f(X)\subseteq Y$이며 등호일 필요는 없다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 기본 객체
+
+:::::::::::::::::::
+
+이 장에서는 특별한 언급이 없으면
+
+$$
+f:X\subseteq\mathbb R^n\to Y\subseteq\mathbb R^m
+$$
+
+을 기본 객체로 삼는다. 따라서 일변수 실함수는 $n=m=1$인 특별한 경우다.
+
+::::::::::::::::::::
+
+### 2.1.2 Image와 preimage {#s212}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.2 · Image and preimage
+
+:::::::::::::::::::
+
+$A\subseteq X$, $B\subseteq Y$에 대해
+
+$$
+f(A)
+=
+\{f(x)\in Y:x\in A\}
+$$
+
+를 $A$의 상이라 하고,
+
+$$
+f^{-1}(B)
+=
+\{x\in X:f(x)\in B\}
+$$
+
+를 $B$의 역상이라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · $f^{-1}(B)$는 역함수를 뜻하지 않는다
+
+:::::::::::::::::::
+
+$f^{-1}(B)$라는 표기는 $f$가 일대일인지 여부와 무관하게 정의된다.
+여기서 $f^{-1}$는 집합 $B$의 preimage를 뜻하며, inverse function의 존재를 가정하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.1 · Image and preimage of an image
+
+:::::::::::::::::::
+
+$A\subseteq X$, $B\subseteq Y$에 대해
+
+$$
+A\subseteq f^{-1}(f(A)),
+\qquad
+f(f^{-1}(B))\subseteq B.
+$$
+
+첫 번째 등호는 $f$가 $A$ 위에서 injective일 때, 두 번째 등호는 $B\subseteq f(X)$일 때 성립한다.
+
+::::::::::::::::::::
+
+### 2.1.3 집합연산과 역상 {#s213}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.2 · Images and set operations
+
+:::::::::::::::::::
+
+$\{A_\alpha\}_{\alpha\in I}\subseteq X$에 대해
+
+$$
+f\!\left(\bigcup_{\alpha\in I}A_\alpha\right)
+=
+\bigcup_{\alpha\in I}f(A_\alpha),
+$$
+
+반면
+
+$$
+f\!\left(\bigcap_{\alpha\in I}A_\alpha\right)
+\subseteq
+\bigcap_{\alpha\in I}f(A_\alpha).
+$$
+
+두 번째 포함관계는 일반적으로 strict하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 2.1 · Image does not preserve intersections
+
+:::::::::::::::::::
+
+$f(x)=x^2$, $A=\{-1\}$, $B=\{1\}$라 하자. 그러면
+
+$$
+A\cap B=\varnothing,
+\qquad
+f(A\cap B)=\varnothing,
+$$
+
+하지만
+
+$$
+f(A)\cap f(B)=\{1\}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.3 · Preimages preserve Boolean operations
+
+:::::::::::::::::::
+
+$\{B_\alpha\}_{\alpha\in I}\subseteq Y$에 대해
+
+$$
+f^{-1}\!\left(\bigcup_{\alpha\in I}B_\alpha\right)
+=
+\bigcup_{\alpha\in I}f^{-1}(B_\alpha),
+$$
+
+$$
+f^{-1}\!\left(\bigcap_{\alpha\in I}B_\alpha\right)
+=
+\bigcap_{\alpha\in I}f^{-1}(B_\alpha),
+$$
+
+그리고
+
+$$
+f^{-1}(Y\setminus B)
+=
+X\setminus f^{-1}(B).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof of the intersection identity
+
+:::::::::::::::::::
+
+임의의 $x\in X$에 대해
+
+$$
+\begin{aligned}
+x\in f^{-1}\!\left(\bigcap_\alpha B_\alpha\right)
+&\iff
+f(x)\in\bigcap_\alpha B_\alpha\\
+&\iff
+f(x)\in B_\alpha\quad\text{for every }\alpha\\
+&\iff
+x\in f^{-1}(B_\alpha)\quad\text{for every }\alpha\\
+&\iff
+x\in\bigcap_\alpha f^{-1}(B_\alpha).
+\end{aligned}
+$$
+
+다른 두 식도 같은 방식으로 증명된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+STRUCTURAL POINT
+
+:::::::::::::::::::
+
+Image는 교집합을 정확히 보존하지 않지만 preimage는 합집합, 교집합, 여집합을 모두 정확히 보존한다.
+따라서 위상적 구조를 함수의 정의역으로 끌어올리는 연속성의 정의는 자연스럽게 preimage를 사용한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s22}
+
+## [2.2]{.section-number}다변수 함수의 극한
+
+::: {.topic-opening}
+수열의 극한은 점들의 수렴을 다뤘다면, 함수의 극한은 입력 $x$가 어떤 점 $a$에 가까워질 때
+함수값 $f(x)$가 어떤 값 $L$에 가까워지는지를 다룬다.
+함수값 $f(a)$가 정의되어 있는지는 극한의 존재와 별개의 문제다.
+:::
+
+### 2.2.1 극한을 정의할 수 있는 점 {#s221}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.4 · Admissible limit point
+
+:::::::::::::::::::
+
+함수 $f:X\to\mathbb R^m$에 대해 $a\in\overline X$가 $X$의 집적점,
+즉 $a\in X'$일 때 $x\to a$에서의 함수극한을 정의한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 왜 집적점이 필요한가?
+
+:::::::::::::::::::
+
+$a$가 $X$의 고립점이면 어떤 $\delta\gt0$에 대해
+
+$$
+0\lt\|x-a\|\lt\delta,\qquad x\in X
+$$
+
+를 만족하는 $x$가 존재하지 않는다.
+그러면 $\varepsilon$-$\delta$ 조건이 모든 $L$에 대해 공허하게 참이 될 수 있어 극한의 유일성을 잃는다.
+
+::::::::::::::::::::
+
+### 2.2.2 $\varepsilon$-$\delta$ 정의 {#s222}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.5 · Limit of a function
+
+:::::::::::::::::::
+
+$a\in X'$이고 $L\in\mathbb R^m$라 하자.
+
+$$
+\lim_{x\to a}f(x)=L
+$$
+
+이라는 것은 임의의 $\varepsilon\gt0$에 대해 어떤 $\delta\gt0$가 존재하여
+
+$$
+x\in X,\qquad
+0\lt\|x-a\|\lt\delta
+$$
+
+이면
+
+$$
+\|f(x)-L\|\lt\varepsilon
+$$
+
+이 성립한다는 뜻이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 2.1 · 함수값과 극한값은 다를 수 있다
+
+:::::::::::::::::::
+
+$$
+f(x)
+=
+\begin{cases}
+\dfrac{x^2-1}{x-1}, & x\ne1,\\[4pt]
+7, & x=1.
+\end{cases}
+$$
+
+$x\ne1$에서는 $f(x)=x+1$이므로
+
+$$
+\lim_{x\to1}f(x)=2,
+$$
+
+그러나 $f(1)=7$. 극한은 punctured neighborhood의 값들로 결정되며 $f(a)$ 자체에는 의존하지 않는다.
+
+::::::::::::::::::::
+
+### 2.2.3 정의역에 상대적인 접근 {#s223}
+
+$f:X\to\mathbb R^m$의 $x\to a$ 극한은 항상 $x\in X$라는 제한 아래에서 이해한다.
+따라서 동일한 식이라도 정의역이 달라지면 극한의 의미가 달라질 수 있다.
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 2.2 · 경계점에서의 상대적 접근
+
+:::::::::::::::::::
+
+$X=\mathbb R_+=[0,\infty)$, $f(x)=\sqrt{x}$라 하자.
+$x\to0$은 $\mathbb R$의 양쪽에서 접근하는 것이 아니라 $x\ge0$인 점들로만 접근하는 것을 뜻한다.
+따라서
+
+$$
+\lim_{\substack{x\to0\\x\in\mathbb R_+}}\sqrt{x}=0.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC READING · Feasible-direction limits
+
+:::::::::::::::::::
+
+소비집합이 $X=\mathbb R_+^L$인 경우 boundary bundle에서의 극한은 음의 소비량 방향을 고려하지 않는다.
+즉 함수의 극한은 ambient space 전체가 아니라 실제 정의역의 위상에 상대적이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s23}
+
+## [2.3]{.section-number}극한의 구조와 판정법
+
+::: {.topic-opening}
+$\varepsilon$-$\delta$ 정의는 극한의 본질을 제공하지만 실제 판정에는 여러 동치표현과 보조정리가 필요하다.
+특히 $\mathbb R^n$에서는 수열이 위상적 구조를 충분히 포착하므로 함수극한을 수열로 완전히 characterization할 수 있다.
+:::
+
+### 2.3.1 극한의 유일성 {#s231}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.4 · Uniqueness of limits
+
+:::::::::::::::::::
+
+$a\in X'$이고
+
+$$
+\lim_{x\to a}f(x)=L,
+\qquad
+\lim_{x\to a}f(x)=M
+$$
+
+이면 $L=M$.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$L\ne M$라고 가정하고 $\varepsilon=\|L-M\|/3\gt0$로 둔다.
+두 극한의 정의에 의해 충분히 작은 punctured neighborhood에서 동시에
+
+$$
+\|f(x)-L\|\lt\varepsilon,
+\qquad
+\|f(x)-M\|\lt\varepsilon
+$$
+
+이다. $a\in X'$이므로 그 neighborhood에는 $x\in X\setminus\{a\}$가 존재한다.
+삼각부등식으로
+
+$$
+\|L-M\|
+\le
+\|L-f(x)\|+\|f(x)-M\|
+\lt
+2\varepsilon
+=
+\frac23\|L-M\|,
+$$
+
+모순이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.3.2 수열적 특성화 {#s232}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.5 · Sequential characterization of function limits
+
+:::::::::::::::::::
+
+$a\in X'$에 대해 다음은 동치이다.
+
+(i)
+
+$$
+\lim_{x\to a}f(x)=L.
+$$
+
+(ii) 모든 수열 $x_k\in X\setminus\{a\}$에 대해
+
+$$
+x_k\to a
+\quad\Longrightarrow\quad
+f(x_k)\to L.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · (i) $\Rightarrow$ (ii)
+
+:::::::::::::::::::
+
+임의의 $\varepsilon\gt0$를 잡자. 함수극한의 정의로 어떤 $\delta\gt0$가 존재하여
+
+$$
+0\lt\|x-a\|\lt\delta
+\Rightarrow
+\|f(x)-L\|\lt\varepsilon.
+$$
+
+$x_k\to a$이므로 충분히 큰 $k$에서는 $\|x_k-a\|\lt\delta$.
+$x_k\ne a$이므로 $f(x_k)\to L$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · (ii) $\Rightarrow$ (i)
+
+:::::::::::::::::::
+
+(i)가 거짓이라고 하자. 그러면 어떤 $\varepsilon_0\gt0$가 존재하여 모든 $\delta\gt0$에 대해
+
+$$
+x\in X,\qquad
+0\lt\|x-a\|\lt\delta,
+\qquad
+\|f(x)-L\|\ge\varepsilon_0
+$$
+
+인 $x$가 존재한다.
+$\delta=1/k$를 대입하여 그런 점을 $x_k$라 선택하면
+
+$$
+0\lt\|x_k-a\|\lt\frac1k,
+$$
+
+따라서 $x_k\to a$, 하지만
+
+$$
+\|f(x_k)-L\|\ge\varepsilon_0
+$$
+
+이므로 $f(x_k)\not\to L$. 이는 (ii)에 모순이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.3.3 경로와 다변수 극한 {#s233}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 2.3 · 경로에 따라 다른 극한
+
+:::::::::::::::::::
+
+$$
+f(x,y)=\frac{xy}{x^2+y^2},
+\qquad
+(x,y)\ne(0,0).
+$$
+
+$y=x$를 따라가면
+
+$$
+f(x,x)=\frac12,
+$$
+
+$y=-x$를 따라가면
+
+$$
+f(x,-x)=-\frac12.
+$$
+
+따라서
+
+$$
+\lim_{(x,y)\to(0,0)}f(x,y)
+$$
+
+는 존재하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 2.2 · 모든 직선 경로를 확인해도 충분하지 않다
+
+:::::::::::::::::::
+
+$$
+f(x,y)
+=
+\frac{x^2y}{x^4+y^2},
+\qquad
+(x,y)\ne(0,0).
+$$
+
+$y=mx$이면
+
+$$
+f(x,mx)
+=
+\frac{mx^3}{x^4+m^2x^2}
+=
+\frac{mx}{x^2+m^2}\to0
+$$
+
+($m=0$인 경우도 0).
+그러나 $y=x^2$이면
+
+$$
+f(x,x^2)=\frac12.
+$$
+
+따라서 모든 직선경로에서 같은 극한을 얻는 것은 다변수 극한의 존재를 보장하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+READING RULE · 경로검사는 부존재를 보이는 도구다
+
+:::::::::::::::::::
+
+두 경로에서 서로 다른 극한이 나오면 전체 극한은 즉시 존재하지 않는다.
+반대로 몇 개 또는 모든 직선 경로에서 같은 값이 나온다는 사실만으로 전체 극한을 결론내릴 수는 없다.
+
+::::::::::::::::::::
+
+### 2.3.4 성분별 극한과 극한의 대수 {#s234}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.6 · Componentwise convergence
+
+:::::::::::::::::::
+
+$f=(f_1,\ldots,f_m)$, $L=(L_1,\ldots,L_m)$라 하자.
+그러면
+
+$$
+\lim_{x\to a}f(x)=L
+\iff
+\lim_{x\to a}f_j(x)=L_j
+\quad(j=1,\ldots,m).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.7 · Algebra of limits
+
+:::::::::::::::::::
+
+$f(x)\to L$, $g(x)\to M$일 때 적절한 차원 아래
+
+$$
+\alpha f(x)+\beta g(x)\to\alpha L+\beta M.
+$$
+
+scalar-valued 함수라면
+
+$$
+f(x)g(x)\to LM,
+$$
+
+$M\ne0$이고 $g$가 scalar-valued이면
+
+$$
+\frac{f(x)}{g(x)}\to\frac{L}{M}.
+$$
+
+또한
+
+$$
+\|f(x)\|\to\|L\|.
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s24}
+
+## [2.4]{.section-number}연속성
+
+::: {.topic-opening}
+함수의 극한은 $a$ 근처의 함수값을 보고, 연속성은 그 극한이 실제 함수값 $f(a)$와 일치하는지를 묻는다.
+연속성은 “작은 입력 변화가 작은 출력 변화만을 만든다”는 국소적 안정성을 수학적으로 표현한다.
+:::
+
+### 2.4.1 한 점에서의 연속 {#s241}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.6 · Continuity at a point
+
+:::::::::::::::::::
+
+$a\in X$에 대해 $f:X\to\mathbb R^m$가 $a$에서 연속이라는 것은
+임의의 $\varepsilon\gt0$에 대해 어떤 $\delta\gt0$가 존재하여
+
+$$
+x\in X,\qquad
+\|x-a\|\lt\delta
+$$
+
+이면
+
+$$
+\|f(x)-f(a)\|\lt\varepsilon
+$$
+
+이 성립한다는 뜻이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.8 · Limit characterization at accumulation points
+
+:::::::::::::::::::
+
+$a\in X\cap X'$이면
+
+$$
+f\text{ is continuous at }a
+\iff
+\lim_{x\to a}f(x)=f(a).
+$$
+
+::::::::::::::::::::
+
+### 2.4.2 고립점과 연속 {#s242}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.9 · Every function is continuous at isolated points
+
+:::::::::::::::::::
+
+$a\in X$가 $X$의 고립점이면 모든 함수 $f:X\to\mathbb R^m$는 $a$에서 연속이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$a$가 고립점이므로 어떤 $r\gt0$가 존재하여
+
+$$
+B_r(a)\cap X=\{a\}.
+$$
+
+임의의 $\varepsilon\gt0$에 대해 $\delta=r$로 두면
+$\|x-a\|\lt\delta$이고 $x\in X$인 유일한 점은 $x=a$.
+따라서
+
+$$
+\|f(x)-f(a)\|=0\lt\varepsilon.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 함수극한과 연속성은 정의되는 점이 다르다
+
+:::::::::::::::::::
+
+함수극한 $\lim_{x\to a}f(x)$은 $a\in X'$에서 정의하고,
+연속성은 $a\in X$에서 정의한다.
+따라서 고립점에서는 함수극한을 정의하지 않더라도 연속성은 자연스럽게 정의된다.
+
+::::::::::::::::::::
+
+### 2.4.3 수열적 특성화 {#s243}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.10 · Sequential criterion for continuity
+
+:::::::::::::::::::
+
+$f:X\to\mathbb R^m$와 $a\in X$에 대해 다음은 동치이다.
+
+(i) $f$는 $a$에서 continuous.
+
+(ii) 모든 수열 $\{x_k\}\subseteq X$에 대해
+
+$$
+x_k\to a
+\quad\Longrightarrow\quad
+f(x_k)\to f(a).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 2.3 · 수열 하나로 불연속성을 보일 수 있다
+
+:::::::::::::::::::
+
+$$
+f(x)=
+\begin{cases}
+1,&x\ge0,\\
+0,&x\lt0.
+\end{cases}
+$$
+
+$x_k=-1/k\to0$이지만
+
+$$
+f(x_k)=0\not\to1=f(0).
+$$
+
+따라서 $f$는 $0$에서 불연속이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s25}
+
+## [2.5]{.section-number}연속성의 위상적 특성화
+
+::: {.topic-opening}
+$\varepsilon$-$\delta$ 정의는 거리를 이용한다. 그러나 연속성의 핵심은 더 위상적이다.
+연속함수는 공역의 열린집합을 역상으로 끌어왔을 때 정의역에서도 열린집합을 만든다.
+이 characterization은 Chapter 1의 open/closed set 구조와 함수론을 직접 연결한다.
+:::
+
+### 2.5.1 Open-set criterion {#s251}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.11 · Topological characterization of continuity
+
+:::::::::::::::::::
+
+$f:X\to Y$에 대해 다음은 동치이다.
+
+(i) $f$는 $X$에서 continuous.
+
+(ii) $Y$의 모든 열린집합 $V$에 대해
+
+$$
+f^{-1}(V)
+$$
+
+는 $X$에서 relatively open.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · (i) $\Rightarrow$ (ii)
+
+:::::::::::::::::::
+
+$x\in f^{-1}(V)$라 하자. 그러면 $f(x)\in V$.
+$V$가 open이므로 어떤 $\varepsilon\gt0$에 대해
+
+$$
+B_\varepsilon(f(x))\subseteq V.
+$$
+
+$f$가 $x$에서 continuous이므로 어떤 $\delta\gt0$가 존재하여
+
+$$
+f(B_\delta(x)\cap X)
+\subseteq
+B_\varepsilon(f(x))
+\subseteq V.
+$$
+
+따라서
+
+$$
+B_\delta(x)\cap X
+\subseteq
+f^{-1}(V).
+$$
+
+모든 $x\in f^{-1}(V)$가 상대내점이므로 $f^{-1}(V)$는 $X$에서 open.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · (ii) $\Rightarrow$ (i)
+
+:::::::::::::::::::
+
+$x\in X$와 $\varepsilon\gt0$를 잡자.
+$B_\varepsilon(f(x))$는 $Y$에서 open이므로
+
+$$
+f^{-1}(B_\varepsilon(f(x)))
+$$
+
+는 $X$에서 relatively open이며 $x$를 포함한다.
+따라서 어떤 $\delta\gt0$에 대해
+
+$$
+B_\delta(x)\cap X
+\subseteq
+f^{-1}(B_\varepsilon(f(x))).
+$$
+
+이는
+
+$$
+\|z-x\|\lt\delta,\ z\in X
+\Rightarrow
+\|f(z)-f(x)\|\lt\varepsilon
+$$
+
+를 뜻하므로 $f$는 $x$에서 continuous.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.5.2 Closed-set criterion {#s252}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.12 · Closed-set criterion
+
+:::::::::::::::::::
+
+$f:X\to Y$가 continuous일 필요충분조건은 $Y$의 모든 closed set $F$에 대해
+
+$$
+f^{-1}(F)
+$$
+
+가 $X$에서 closed인 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+Theorem 2.11과
+
+$$
+f^{-1}(Y\setminus F)
+=
+X\setminus f^{-1}(F)
+$$
+
+를 사용하면 된다. 열린집합과 닫힌집합이 여집합 관계이므로 두 characterization은 동치다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.5.3 Level set과 sublevel set {#s253}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.13 · Closed level and sublevel sets
+
+:::::::::::::::::::
+
+연속함수 $g:X\to\mathbb R$와 $c\in\mathbb R$에 대해
+
+$$
+\{x\in X:g(x)=c\}
+$$
+
+와
+
+$$
+\{x\in X:g(x)\le c\}
+$$
+
+는 $X$에서 closed.
+반면
+
+$$
+\{x\in X:g(x)\lt c\}
+$$
+
+는 $X$에서 open.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$\{c\}$와 $(-\infty,c]$는 $\mathbb R$에서 closed이고
+$(-\infty,c)$는 open이다.
+각각의 집합은
+
+$$
+g^{-1}(\{c\}),\qquad
+g^{-1}((-\infty,c]),\qquad
+g^{-1}((-\infty,c))
+$$
+
+이므로 Theorems 2.11–2.12에서 결론이 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC READING · 연속 제약식과 closed feasible set
+
+:::::::::::::::::::
+
+연속함수 $g_i:\mathbb R^n\to\mathbb R$들로
+
+$$
+F
+=
+\{x:g_i(x)\le0,\ i=1,\ldots,k\}
+$$
+
+를 정의하면
+
+$$
+F=\bigcap_{i=1}^k g_i^{-1}((-\infty,0])
+$$
+
+이므로 $F$는 closed이다.
+경제학과 최적화에서 feasible set의 closedness를 확인하는 가장 표준적인 방법 중 하나다.
+
+::::::::::::::::::::
+
+### 2.5.4 연속함수의 그래프 {#s254}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.7 · Graph of a function
+
+:::::::::::::::::::
+
+$f:X\to Y$의 그래프는
+
+$$
+\operatorname{Gr}(f)
+=
+\{(x,y)\in X\times Y:y=f(x)\}
+=
+\{(x,f(x)):x\in X\}
+$$
+
+로 정의한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.14 · Continuous functions have closed graphs
+
+:::::::::::::::::::
+
+$X\subseteq\mathbb R^n$, $Y\subseteq\mathbb R^m$이고 $f:X\to Y$가 continuous이면
+
+$$
+\operatorname{Gr}(f)
+$$
+
+는 $X\times Y$에서 closed이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Sequential proof
+
+:::::::::::::::::::
+
+$$
+(x_k,f(x_k))\to(x,y)
+$$
+
+이고 모든 $(x_k,f(x_k))\in\operatorname{Gr}(f)$라 하자.
+첫 좌표에서 $x_k\to x$. 연속성으로
+
+$$
+f(x_k)\to f(x).
+$$
+
+하지만 둘째 좌표에서는 $f(x_k)\to y$. 극한의 유일성에 의해 $y=f(x)$.
+따라서 $(x,y)\in\operatorname{Gr}(f)$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 2.4 · Closed graph does not imply continuity in general
+
+:::::::::::::::::::
+
+$$
+f(x)
+=
+\begin{cases}
+1/x,&x\ne0,\\
+0,&x=0
+\end{cases}
+\qquad (x\in\mathbb R)
+$$
+
+는 $0$에서 불연속이지만 그래프는 $\mathbb R^2$에서 closed이다.
+따라서 closed graph는 함수 연속성보다 일반적으로 약한 조건이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s26}
+
+## [2.6]{.section-number}연속함수의 구성과 연산
+
+::: {.topic-opening}
+실제 분석에서는 매번 $\varepsilon$-$\delta$ 정의로 연속성을 확인하지 않는다.
+몇 개의 기본 연속함수를 확보하고, 연속성이 대수연산과 합성에 의해 보존된다는 사실을 사용하여 복잡한 함수의 연속성을 구축한다.
+:::
+
+### 2.6.1 대수연산 {#s261}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.15 · Algebra of continuous functions
+
+:::::::::::::::::::
+
+$f,g:X\to\mathbb R$가 $a\in X$에서 continuous이고 $\alpha,\beta\in\mathbb R$라 하자.
+그러면
+
+$$
+\alpha f+\beta g,\qquad fg
+$$
+
+도 $a$에서 continuous.
+$g(a)\ne0$이면 $f/g$도 $a$에서 continuous.
+
+::::::::::::::::::::
+
+벡터값 함수의 경우 덧셈과 scalar multiplication은 componentwise하게 같은 결과를 갖는다.
+
+### 2.6.2 합성함수 {#s262}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.16 · Continuity of compositions
+
+:::::::::::::::::::
+
+$f:X\to Y$, $g:Y\to Z$라 하자.
+$f$가 $a\in X$에서 continuous이고 $g$가 $f(a)$에서 continuous이면
+
+$$
+g\circ f:X\to Z
+$$
+
+는 $a$에서 continuous이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Sequential proof
+
+:::::::::::::::::::
+
+$x_k\to a$인 임의의 수열을 잡자.
+$f$의 연속성으로
+
+$$
+f(x_k)\to f(a).
+$$
+
+다시 $g$의 연속성으로
+
+$$
+g(f(x_k))\to g(f(a)).
+$$
+
+Theorem 2.10에 의해 $g\circ f$는 $a$에서 continuous.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.6.3 기본 연속함수 {#s263}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.17 · Basic continuous maps
+
+:::::::::::::::::::
+
+다음 함수들은 모두 연속이다.
+
+$$
+x\mapsto x_i,
+\qquad
+x\mapsto a^\top x,
+\qquad
+x\mapsto\|x\|,
+$$
+
+그리고
+
+$$
+(x,y)\mapsto\|x-y\|.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof for the norm map
+
+:::::::::::::::::::
+
+reverse triangle inequality에서
+
+$$
+\big|\|x\|-\|y\|\big|
+\le
+\|x-y\|.
+$$
+
+따라서 $x\mapsto\|x\|$는 Lipschitz constant $1$을 가지며 연속이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.18 · Polynomials and rational functions
+
+:::::::::::::::::::
+
+좌표함수의 유한한 합과 곱으로 만들어지는 모든 polynomial
+
+$$
+p:\mathbb R^n\to\mathbb R
+$$
+
+은 continuous.
+$p,q$가 polynomial이면
+
+$$
+x\mapsto\frac{p(x)}{q(x)}
+$$
+
+는 $q(x)\ne0$인 영역에서 continuous.
+
+::::::::::::::::::::
+
+### 2.6.4 max/min 연산 {#s264}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.19 · Max and min preserve continuity
+
+:::::::::::::::::::
+
+$f,g:X\to\mathbb R$가 continuous이면
+
+$$
+x\mapsto\max\{f(x),g(x)\},
+\qquad
+x\mapsto\min\{f(x),g(x)\}
+$$
+
+도 continuous이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+항등식
+
+$$
+\max\{a,b\}
+=
+\frac{a+b+|a-b|}{2},
+\qquad
+\min\{a,b\}
+=
+\frac{a+b-|a-b|}{2}
+$$
+
+를 사용한다. 절댓값 함수와 덧셈·뺄셈·scalar multiplication이 연속성을 보존하므로 결론이 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s27}
+
+## [2.7]{.section-number}연속성과 컴팩트성
+
+::: {.topic-opening}
+Chapter 1의 compactness는 그 자체보다 연속함수와 결합될 때 진정한 힘을 발휘한다.
+연속함수는 compact set을 다시 compact set으로 보내며, 실수값 함수에서는 이것이 최대·최소의 실제 달성으로 이어진다.
+경제학에서 “최적해가 존재한다”는 주장의 가장 기본적인 해석학적 근거가 여기서 완성된다.
+:::
+
+### 2.7.1 Continuous image of a compact set {#s271}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.20 · Continuous images preserve compactness
+
+:::::::::::::::::::
+
+$K\subseteq X$가 compact이고 $f:X\to Y$가 continuous이면
+
+$$
+f(K)
+$$
+
+도 compact이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof by open covers
+
+:::::::::::::::::::
+
+$\{V_\alpha\}_{\alpha\in A}$가 $f(K)$의 임의의 열린덮개라 하자.
+$f$가 continuous이므로
+
+$$
+f^{-1}(V_\alpha)
+$$
+
+는 $X$에서 relatively open.
+또한
+
+$$
+K
+\subseteq
+\bigcup_{\alpha\in A}f^{-1}(V_\alpha),
+$$
+
+따라서 이들은 $K$의 열린덮개다.
+
+$K$가 compact이므로 유한한 $\alpha_1,\ldots,\alpha_r$가 존재하여
+
+$$
+K
+\subseteq
+\bigcup_{j=1}^r f^{-1}(V_{\alpha_j}).
+$$
+
+양변에 $f$를 적용하면
+
+$$
+f(K)
+\subseteq
+\bigcup_{j=1}^r V_{\alpha_j}.
+$$
+
+따라서 $f(K)$는 compact.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.7.2 Extreme Value Theorem {#s272}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.21 · Extreme Value Theorem
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$가 nonempty and compact이고
+$f:K\to\mathbb R$가 continuous이면,
+어떤 $x_{\min},x_{\max}\in K$가 존재하여
+
+$$
+f(x_{\min})
+=
+\min_{x\in K}f(x),
+\qquad
+f(x_{\max})
+=
+\max_{x\in K}f(x).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+Theorem 2.20에 의해 $f(K)\subseteq\mathbb R$는 nonempty compact.
+Chapter 1의 Heine–Borel 정리에 의해 $f(K)$는 closed and bounded.
+따라서
+
+$$
+M=\sup f(K),\qquad m=\inf f(K)
+$$
+
+가 존재하고, $f(K)$가 closed이므로 $M,m\in f(K)$.
+따라서 어떤 $x_{\max},x_{\min}\in K$가 존재하여
+
+$$
+f(x_{\max})=M,\qquad f(x_{\min})=m.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 2.5 · Continuity alone is not enough
+
+:::::::::::::::::::
+
+$f(x)=x$는 $(0,1)$에서 continuous이고 bounded이지만
+
+$$
+\sup_{x\in(0,1)}f(x)=1
+$$
+
+을 달성하지 못하며 minimum도 없다.
+따라서 continuity만으로는 extrema의 존재를 보장할 수 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 2.6 · Closed but unbounded domain
+
+:::::::::::::::::::
+
+$f(x)=e^{-x}$를 $X=[0,\infty)$에서 생각하자.
+$X$는 closed이고 $f$는 continuous이지만
+
+$$
+\inf_{x\in X}f(x)=0
+$$
+
+은 어느 유한한 $x$에서도 달성되지 않는다.
+compactness에서 boundedness도 필수적임을 보여준다.
+
+::::::::::::::::::::
+
+### 2.7.3 Argmax와 argmin 집합 {#s273}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.8 · Argmax and argmin
+
+:::::::::::::::::::
+
+$f:K\to\mathbb R$에 대해
+
+$$
+\operatorname*{arg\,max}_{x\in K}f(x)
+=
+\{x\in K:f(x)=\sup_{z\in K}f(z)\},
+$$
+
+$$
+\operatorname*{arg\,min}_{x\in K}f(x)
+=
+\{x\in K:f(x)=\inf_{z\in K}f(z)\}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.22 · Compactness of the solution set
+
+:::::::::::::::::::
+
+$K$가 nonempty compact이고 $f:K\to\mathbb R$가 continuous이면
+
+$$
+\operatorname*{arg\,max}_{x\in K}f(x)
+$$
+
+와
+
+$$
+\operatorname*{arg\,min}_{x\in K}f(x)
+$$
+
+는 모두 nonempty compact sets이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof for argmax
+
+:::::::::::::::::::
+
+Extreme Value Theorem에 의해
+
+$$
+M=\max_{x\in K}f(x)
+$$
+
+가 존재하므로 argmax는 nonempty.
+또한
+
+$$
+\operatorname*{arg\,max}_{x\in K}f(x)
+=
+f^{-1}(\{M\}).
+$$
+
+$\{M\}$은 closed이고 $f$가 continuous이므로 이 역상은 $K$에서 closed.
+compact set의 closed subset은 compact이므로 결론이 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.7.4 Positive minimum principle과 집합 사이의 거리 {#s274}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.23 · Positive minimum principle
+
+:::::::::::::::::::
+
+$K$가 compact이고 $f:K\to\mathbb R$가 continuous이며
+
+$$
+f(x)\gt0
+\quad\forall x\in K
+$$
+
+이면 어떤 $\delta\gt0$가 존재하여
+
+$$
+f(x)\ge\delta
+\quad\forall x\in K.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+Extreme Value Theorem에 의해 $f$는 $K$에서 minimum $m$을 갖는다.
+어떤 $x^*\in K$에 대해 $m=f(x^*)$, 그리고 모든 점에서 $f\gt0$이므로 $m\gt0$.
+$\delta=m$으로 두면 된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.9 · Distance between sets
+
+:::::::::::::::::::
+
+nonempty $A,B\subseteq\mathbb R^n$에 대해
+
+$$
+\operatorname{dist}(A,B)
+=
+\inf\{\|x-y\|:x\in A,\ y\in B\}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.24 · Separation of a compact set and a disjoint closed set
+
+:::::::::::::::::::
+
+$A\subseteq\mathbb R^n$가 compact, $B\subseteq\mathbb R^n$가 closed이고
+
+$$
+A\cap B=\varnothing
+$$
+
+이면
+
+$$
+\operatorname{dist}(A,B)\gt0.
+$$
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>증명 펼치기</summary>
+
+:::::::::::::::::::: {.details-body}
+
+$d_B(x)=\inf_{y\in B}\|x-y\|$로 두자. 삼각부등식에서
+
+$$
+|d_B(x)-d_B(z)|
+\le
+\|x-z\|,
+$$
+
+따라서 $d_B$는 continuous.
+$B$가 closed이고 $x\notin B$이면 $d_B(x)\gt0$.
+특히 $A\cap B=\varnothing$이므로 모든 $x\in A$에서 $d_B(x)\gt0$.
+Proposition 2.23에 의해 어떤 $\delta\gt0$가 존재하여
+
+$$
+d_B(x)\ge\delta
+\quad\forall x\in A.
+$$
+
+따라서 $\operatorname{dist}(A,B)\ge\delta\gt0$.
+
+::::::::::::::::::::
+
+</details>
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+EXISTENCE PRINCIPLE
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{nonempty compact feasible set}
++
+\text{continuous objective}
+\Longrightarrow
+\text{nonempty compact argmax/argmin set}.
+}
+$$
+
+이 결과는 미분가능성이나 first-order condition을 전혀 사용하지 않는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s28}
+
+## [2.8]{.section-number}연결성과 사이값정리
+
+::: {.topic-opening}
+컴팩트성이 “무한한 집합을 유한하게 통제하는 성질”이라면 connectedness는 “집합이 서로 떨어진 두 조각으로 분리되지 않는 성질”이다.
+연속함수는 compactness뿐 아니라 connectedness도 보존한다. 실수선에서는 이 사실이 곧 사이값정리로 이어진다.
+:::
+
+### 2.8.1 Connected set {#s281}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.10 · Connected set
+
+:::::::::::::::::::
+
+$X\subseteq\mathbb R^n$가 disconnected라는 것은
+$X$에서 relatively open인 두 집합 $U,V$가 존재하여
+
+$$
+U\ne\varnothing,\qquad
+V\ne\varnothing,
+$$
+
+$$
+U\cap V=\varnothing,
+\qquad
+X=U\cup V
+$$
+
+를 만족한다는 뜻이다.
+이런 분할이 존재하지 않으면 $X$를 connected라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.25 · Clopen characterization
+
+:::::::::::::::::::
+
+$X$가 connected일 필요충분조건은 $X$에서 open이면서 closed인 집합이
+
+$$
+\varnothing,\qquad X
+$$
+
+두 개뿐인 것이다.
+
+::::::::::::::::::::
+
+### 2.8.2 연속상과 연결성 {#s282}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.26 · Continuous images preserve connectedness
+
+:::::::::::::::::::
+
+$X$가 connected이고 $f:X\to Y$가 continuous이면
+
+$$
+f(X)
+$$
+
+도 connected이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$f(X)$가 disconnected라고 가정하자.
+그러면 $f(X)$에서 nonempty, disjoint, relatively open인 $U,V$가 존재하여
+
+$$
+f(X)=U\cup V.
+$$
+
+연속성으로
+
+$$
+f^{-1}(U),\qquad f^{-1}(V)
+$$
+
+는 $X$에서 relatively open.
+$U,V$가 $f(X)$를 분할하므로 두 역상은 nonempty, disjoint이고
+
+$$
+X=f^{-1}(U)\cup f^{-1}(V).
+$$
+
+이는 $X$의 connectedness에 모순.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.8.3 실수선의 연결집합 {#s283}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.27 · Connected subsets of $\mathbb R$ are intervals
+
+:::::::::::::::::::
+
+$S\subseteq\mathbb R$에 대해
+
+$$
+S\text{ connected}
+\iff
+S\text{ is an interval}
+$$
+
+이다. 여기서 interval은 끝점 포함 여부와 boundedness를 모두 허용한다.
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>핵심 증명 아이디어</summary>
+
+:::::::::::::::::::: {.details-body}
+
+$S$가 connected이고 $a,b\in S$, $a\lt c\lt b$인데 $c\notin S$라고 하자.
+그러면
+
+$$
+U=S\cap(-\infty,c),
+\qquad
+V=S\cap(c,\infty)
+$$
+
+는 $S$에서 nonempty, disjoint, relatively open이고 $S=U\cup V$.
+이는 connectedness에 모순. 따라서 $S$는 중간점을 모두 포함하는 interval이다.
+
+::::::::::::::::::::
+
+</details>
+
+### 2.8.4 Intermediate Value Theorem {#s284}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.28 · Intermediate Value Theorem
+
+:::::::::::::::::::
+
+$f:[a,b]\to\mathbb R$가 continuous이고
+
+$$
+f(a)\lt c\lt f(b)
+$$
+
+또는 $f(b)\lt c\lt f(a)$이면 어떤 $x\in(a,b)$가 존재하여
+
+$$
+f(x)=c.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof via connectedness
+
+:::::::::::::::::::
+
+$[a,b]$는 interval이므로 connected.
+Theorem 2.26에 의해 $f([a,b])$도 connected.
+Theorem 2.27에 의해 $f([a,b])\subseteq\mathbb R$는 interval이다.
+$f(a),f(b)\in f([a,b])$이고 $c$가 둘 사이에 있으므로
+
+$$
+c\in f([a,b]).
+$$
+
+따라서 어떤 $x\in[a,b]$에 대해 $f(x)=c$.
+$c$가 두 endpoint value 사이에 strict하게 있으므로 $x\in(a,b)$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.8.5 Path connectedness {#s285}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.11 · Path connectedness
+
+:::::::::::::::::::
+
+$X\subseteq\mathbb R^n$에서 임의의 $x,y\in X$에 대해 continuous map
+
+$$
+\gamma:[0,1]\to X
+$$
+
+가 존재하여
+
+$$
+\gamma(0)=x,\qquad
+\gamma(1)=y
+$$
+
+를 만족하면 $X$를 path connected라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.29 · Path connected implies connected
+
+:::::::::::::::::::
+
+$$
+X\text{ path connected}
+\Longrightarrow
+X\text{ connected}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.30 · Convex sets are path connected
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$가 convex라 하자.
+$x,y\in C$에 대해
+
+$$
+\gamma(t)=(1-t)x+ty,\qquad t\in[0,1]
+$$
+
+는 $C$ 안의 continuous path다.
+따라서
+
+$$
+\boxed{
+\text{convex}
+\Rightarrow
+\text{path connected}
+\Rightarrow
+\text{connected}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+PREVIEW · Convexity
+
+:::::::::::::::::::
+
+여기서는 convexity를 연결성을 보장하는 충분조건으로만 사용했다.
+convex set, convex/concave function, quasi-convexity와 quasi-concavity는 이후 별도 장에서 정식으로 다룬다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s29}
+
+## [2.9]{.section-number}균등연속성
+
+::: {.topic-opening}
+점별 연속성에서는 입력점 $x$마다 허용되는 $\delta$가 달라질 수 있다.
+균등연속성은 하나의 $\delta$가 정의역 전체에서 동시에 작동하도록 요구한다.
+이는 국소적 연속성을 전역적 안정성으로 강화한 개념이다.
+:::
+
+### 2.9.1 Uniform continuity {#s291}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.12 · Uniform continuity
+
+:::::::::::::::::::
+
+$f:X\to\mathbb R^m$가 uniformly continuous라는 것은
+임의의 $\varepsilon\gt0$에 대해 어떤 $\delta\gt0$가 존재하여
+모든 $x,y\in X$에 대해
+
+$$
+\|x-y\|\lt\delta
+\quad\Longrightarrow\quad
+\|f(x)-f(y)\|\lt\varepsilon
+$$
+
+가 성립한다는 뜻이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>개념</th><th>양화구조</th><th>$\delta$의 의존성</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Continuity at each point</td>
+<td>$\forall x\ \forall\varepsilon\ \exists\delta$</td>
+<td>$\delta=\delta(x,\varepsilon)$</td>
+</tr>
+<tr>
+<td>Uniform continuity</td>
+<td>$\forall\varepsilon\ \exists\delta\ \forall x,y$</td>
+<td>$\delta=\delta(\varepsilon)$</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 2.7 · $x^2$ on $\mathbb R$
+
+:::::::::::::::::::
+
+$f(x)=x^2$는 $\mathbb R$에서 continuous이지만 uniformly continuous가 아니다.
+$x_n=n$, $y_n=n+1/n$이라 하면
+
+$$
+|x_n-y_n|=\frac1n\to0,
+$$
+
+그러나
+
+$$
+|f(y_n)-f(x_n)|
+=
+\left(n+\frac1n\right)^2-n^2
+=
+2+\frac1{n^2}\to2.
+$$
+
+따라서 하나의 global $\delta$로 전체 실수선을 통제할 수 없다.
+
+::::::::::::::::::::
+
+### 2.9.2 Lipschitz continuity {#s292}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.13 · Lipschitz continuity
+
+:::::::::::::::::::
+
+어떤 $L\ge0$가 존재하여 모든 $x,y\in X$에 대해
+
+$$
+\|f(x)-f(y)\|
+\le
+L\|x-y\|
+$$
+
+이면 $f$를 Lipschitz continuous라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.31 · Lipschitz implies uniform continuity
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{Lipschitz}
+\Rightarrow
+\text{uniformly continuous}
+\Rightarrow
+\text{continuous}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof of the first implication
+
+:::::::::::::::::::
+
+$L=0$이면 $f$는 constant이므로 자명하다.
+$L\gt0$이면 주어진 $\varepsilon\gt0$에 대해
+
+$$
+\delta=\frac{\varepsilon}{L}
+$$
+
+로 두면
+
+$$
+\|x-y\|\lt\delta
+\Rightarrow
+\|f(x)-f(y)\|
+\le L\|x-y\|
+\lt\varepsilon.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 2.8 · Uniform continuity need not be Lipschitz
+
+:::::::::::::::::::
+
+$f(x)=\sqrt{x}$는 $[0,1]$에서 uniformly continuous이지만 Lipschitz는 아니다.
+만약 Lipschitz constant $L$이 존재한다면
+
+$$
+\sqrt{x}
+=
+|\sqrt{x}-\sqrt0|
+\le
+Lx
+$$
+
+이어야 하므로 $1/\sqrt{x}\le L$가 $x\downarrow0$에서 성립해야 하는데 불가능하다.
+
+::::::::::::::::::::
+
+### 2.9.3 Heine–Cantor theorem {#s293}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.32 · Heine–Cantor
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$가 compact이고 $f:K\to\mathbb R^m$가 continuous이면
+
+$$
+f
+$$
+
+는 uniformly continuous이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof by contradiction and sequential compactness
+
+:::::::::::::::::::
+
+$f$가 uniformly continuous가 아니라고 하자.
+그러면 어떤 $\varepsilon_0\gt0$에 대해 모든 $k$에 대해
+$x_k,y_k\in K$를 선택할 수 있어
+
+$$
+\|x_k-y_k\|\lt\frac1k,
+\qquad
+\|f(x_k)-f(y_k)\|\ge\varepsilon_0.
+$$
+
+$K$의 sequential compactness에 의해 부분수열 $x_{k_j}\to x\in K$가 존재한다.
+또한
+
+$$
+\|y_{k_j}-x\|
+\le
+\|y_{k_j}-x_{k_j}\|+\|x_{k_j}-x\|
+\to0,
+$$
+
+따라서 $y_{k_j}\to x$.
+
+$f$의 연속성으로
+
+$$
+f(x_{k_j})\to f(x),
+\qquad
+f(y_{k_j})\to f(x),
+$$
+
+따라서
+
+$$
+\|f(x_{k_j})-f(y_{k_j})\|\to0,
+$$
+
+이는 항상 $\varepsilon_0$ 이상이라는 가정과 모순.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 2.9.4 균등연속성과 Cauchy 수열 {#s294}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.33 · Uniformly continuous maps preserve Cauchy sequences
+
+:::::::::::::::::::
+
+$f:X\to Y$가 uniformly continuous이고 $\{x_k\}\subseteq X$가 Cauchy이면
+
+$$
+\{f(x_k)\}
+$$
+
+도 $Y$에서 Cauchy이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+임의의 $\varepsilon\gt0$를 잡자.
+uniform continuity로 어떤 $\delta\gt0$가 존재하여
+
+$$
+\|x-y\|\lt\delta
+\Rightarrow
+\|f(x)-f(y)\|\lt\varepsilon.
+$$
+
+$\{x_k\}$가 Cauchy이므로 어떤 $N$이 존재하여 $i,j\ge N$이면
+
+$$
+\|x_i-x_j\|\lt\delta.
+$$
+
+따라서
+
+$$
+\|f(x_i)-f(x_j)\|\lt\varepsilon.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s210}
+
+## [2.10]{.section-number}경제학적 존재성
+
+::: {.topic-opening}
+이 장의 위상적 결과들은 경제학의 최적화 문제에서 바로 사용된다.
+중요한 순서는 “미분해서 일계조건을 구한다”가 아니다.
+먼저 feasible set이 compact인지, objective가 continuous인지 확인하여 최적해의 존재를 확보해야 한다.
+:::
+
+### 2.10.1 소비자 문제 {#s2101}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.34 · Existence of utility maximization
+
+:::::::::::::::::::
+
+$p\in\mathbb R_{++}^L$, $w\ge0$이고
+
+$$
+B(p,w)
+=
+\{x\in\mathbb R_+^L:p^\top x\le w\}.
+$$
+
+Chapter 1에서 $B(p,w)$가 nonempty compact임을 보였다.
+$u:\mathbb R_+^L\to\mathbb R$가 continuous이면
+
+$$
+\operatorname*{arg\,max}_{x\in B(p,w)}u(x)
+\ne\varnothing.
+$$
+
+더 나아가 이 argmax set은 compact이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$B(p,w)$가 nonempty compact이고 $u$가 그 위에서 continuous이므로
+Theorem 2.22를 직접 적용한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC READING · 존재성은 FOC보다 먼저다
+
+:::::::::::::::::::
+
+이 정리는 utility의 differentiability를 전혀 요구하지 않는다.
+따라서
+
+$$
+\nabla u(x)=\lambda p
+$$
+
+같은 일계조건을 쓰기 전에, 실제 최적점이 feasible set 안에 존재한다는 사실부터 별도로 확보해야 한다.
+
+::::::::::::::::::::
+
+### 2.10.2 기업 문제 {#s2102}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.35 · Existence of profit maximization on a compact technology set
+
+:::::::::::::::::::
+
+$Y\subseteq\mathbb R^L$가 nonempty compact이고
+
+$$
+\pi:Y\to\mathbb R
+$$
+
+가 continuous이면
+
+$$
+\operatorname*{arg\,max}_{y\in Y}\pi(y)
+\ne\varnothing.
+$$
+
+::::::::::::::::::::
+
+실제 생산이론에서는 technology set이 unbounded일 수 있으므로 compactness를 직접 가정하지 않고
+가격과 기술의 구조를 이용해 효과적으로 maximizer가 존재하는 bounded region으로 문제를 줄이는 경우가 많다.
+이 구분은 이후 최적화 장에서 다시 다룬다.
+
+### 2.10.3 Extremum problem과 계량경제학 {#s2103}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.36 · Existence of an extremum target
+
+:::::::::::::::::::
+
+$\Theta\subseteq\mathbb R^p$가 nonempty compact이고
+$Q:\Theta\to\mathbb R$가 continuous이면
+
+$$
+\operatorname*{arg\,min}_{\theta\in\Theta}Q(\theta)
+\ne\varnothing.
+$$
+
+마찬가지로
+
+$$
+\operatorname*{arg\,max}_{\theta\in\Theta}Q(\theta)
+\ne\varnothing.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMETRIC READING · Target existence
+
+:::::::::::::::::::
+
+M-estimation이나 GMM에서 population criterion $Q(\theta)$의 minimizer를 target으로 정의하려면
+먼저 그 minimizer의 존재가 필요하다.
+compact parameter space와 continuous criterion은 가장 기본적인 existence route다.
+
+::::::::::::::::::::
+
+### 2.10.4 존재와 유일성은 다른 문제다 {#s2104}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Existence $\neq$ uniqueness
+
+:::::::::::::::::::
+
+continuity와 compactness는
+
+$$
+\arg\max f\ne\varnothing
+$$
+
+을 보장하지만
+
+$$
+|\arg\max f|=1
+$$
+
+을 보장하지 않는다.
+예를 들어 $f(x)=0$을 $K=[0,1]$에서 최대화하면 모든 점이 maximizer다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+CHAPTER 2 · CORE LOGIC
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{limits}
+\to
+\text{continuity}
+\to
+\text{topological preservation}
+\to
+\text{compactness/connectedness}
+\to
+\text{existence}.
+}
+$$
+
+존재성이 확보된 다음에야 다음 장의 미분가능성, 이후의 convexity와 optimization이
+최적점의 local/global characterization과 uniqueness를 다룬다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+NEXT CHAPTER
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+<strong>Chapter 3. 다변수 미분가능성.</strong>
+함수의 연속성이 작은 변화에 대한 안정성을 말한다면,
+미분가능성은 그 변화를 국소적으로 선형사상으로 근사할 수 있음을 말한다.
+Fréchet derivative, Jacobian, gradient, directional derivative, chain rule을 중심으로 전개한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## 연습문제
+
+::: {.topic-opening}
+연습문제는 $\varepsilon$-$\delta$, 수열, 위상적 역상, compactness와 connectedness를 서로 다른 방식으로 오가도록 구성한다.
+:::
+
+<ol class="exercise-list">
+<li>$f(x)=x^2$, $A=[-2,-1]$, $B=[1,2]$에 대해 $f(A)$, $f(B)$, $f(A\cap B)$, $f(A)\cap f(B)$를 계산하고 image가 교집합을 보존하지 않는 이유를 설명하라.</li>
+<li>임의의 함수 $f:X\to Y$와 집합족 $\{B_\alpha\}\subseteq Y$에 대해 $f^{-1}(\bigcap_\alpha B_\alpha)=\bigcap_\alpha f^{-1}(B_\alpha)$를 증명하라.</li>
+<li>함수극한을 정의할 때 $a\in X'$라는 조건이 없으면 극한의 유일성이 어떻게 무너지는지 고립점 정의역의 예를 구성하라.</li>
+<li>$\varepsilon$-$\delta$ 정의만을 사용하여 $\lim_{x\to a}Ax=Aa$를 보이라. 여기서 $A$는 고정된 $m\times n$ 행렬이다.</li>
+<li>Sequential criterion을 사용하여 $f(x,y)=xy/(x^2+y^2)$의 $(0,0)$에서의 극한이 존재하지 않음을 증명하라.</li>
+<li>$f(x,y)=x^2y/(x^4+y^2)$가 모든 직선 $y=mx$을 따라 0으로 수렴하지만 전체 극한은 존재하지 않음을 확인하라.</li>
+<li>$f=(f_1,\ldots,f_m)$에 대해 vector limit과 componentwise limits의 동치를 증명하라.</li>
+<li>$a$가 $X$의 고립점이면 모든 $f:X\to Y$가 $a$에서 continuous임을 직접 $\varepsilon$-$\delta$ 정의로 증명하라.</li>
+<li>연속성의 sequential criterion을 사용하여 합성함수 $g\circ f$의 연속성을 증명하라.</li>
+<li>$f:X\to\mathbb R$가 continuous이면 $\{x:f(x)\ge c\}$도 closed임을 보이라.</li>
+<li>연속함수 $g_i:\mathbb R^n\to\mathbb R$에 대해 $F=\{x:g_i(x)\le0,\ i=1,\ldots,k\}$가 closed임을 증명하라.</li>
+<li>연속함수의 그래프가 closed임을 open-set 방법으로 다시 증명하라.</li>
+<li>closed graph를 가지지만 continuous가 아닌 함수의 예를 하나 더 구성하라.</li>
+<li>$x\mapsto\|x\|$가 Lipschitz constant $1$을 갖는다는 사실에서 연속성을 유도하라.</li>
+<li>$\max\{f_1,\ldots,f_k\}$가 유한개의 continuous real-valued functions $f_j$에 대해 continuous임을 증명하라.</li>
+<li>continuous image of compact is compact 정리를 sequential compactness만 사용하여 다시 증명하라.</li>
+<li>$f(x)=1/x$를 $(0,1)$에서 생각하여 continuity가 boundedness 또는 extrema의 existence를 보장하지 않음을 설명하라.</li>
+<li>nonempty compact $K$와 continuous $f:K\to\mathbb R$에 대해 argmax가 compact임을 level-set 표현으로 증명하라.</li>
+<li>compact $A$와 closed $B$가 disjoint이면 $\operatorname{dist}(A,B)\gt0$임을 minimizing sequence를 이용해 다시 증명하라.</li>
+<li>$[a,b]$가 connected임을 separation definition으로 직접 증명하라.</li>
+<li>continuous image of a connected set is connected임을 preimage를 사용해 증명하라.</li>
+<li>Intermediate Value Theorem을 connectedness를 사용하지 않고 supremum argument로 다시 증명하라.</li>
+<li>convex set이 path connected임을 증명하고, path connected가 connected임을 증명하라.</li>
+<li>$f(x)=x^2$가 $[0,M]$에서는 uniformly continuous이지만 $\mathbb R$에서는 그렇지 않음을 각각 증명하라.</li>
+<li>$\sqrt{x}$가 $[0,1]$에서 uniformly continuous임을 Heine–Cantor로 보이고 Lipschitz가 아님을 증명하라.</li>
+<li>Heine–Cantor theorem을 open-cover argument로 다시 증명하라.</li>
+<li>uniformly continuous map이 Cauchy sequence를 Cauchy sequence로 보내는 정리를 증명하라.</li>
+<li>$p\gg0$, $w\ge0$, continuous utility $u$ 아래 소비자문제의 argmax set이 nonempty compact임을 Chapter 1과 Chapter 2의 정리만 사용하여 증명하라.</li>
+<li>compactness와 continuity가 uniqueness를 보장하지 않는 경제학적 목적함수의 예를 하나 구성하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 장의 위치
+
+해석학II 강의록. 함수의 극한, 연속성의 $\varepsilon$-$\delta$ 및 수열적 특성화,
+열린집합·닫힌집합의 역상을 통한 연속성 판정, continuous image of compact,
+최대최소정리, connectedness와 사이값정리, uniform continuity의 전개를 기본 골격으로 참고하였다.
+
+<em>맛있는 해석학 다변수</em>. 유클리드 공간에서의 함수극한과 연속함수,
+수열적 판정, 위상적 연속성, connectedness의 일반적 정식화를 참고하였다.
+
+Jehle, G. A. and Reny, P. J. <em>Advanced Microeconomic Theory</em>, 3rd ed.
+compact feasible set, continuous preferences/objectives, 소비자 문제와 경제학적 existence arguments의 연결을 참고하였다.
+
+Chong, E. K. P. and Zak, S. H. <em>An Introduction to Optimization</em>.
+이후 convexity와 optimization으로 넘어가기 위한 continuity, compactness, solution existence의 역할을 참고하였다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+CHAPTER SPINE
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{function}
+\to
+\text{limit}
+\to
+\text{continuity}
+\to
+\text{preimage topology}
+\to
+\text{compactness/connectedness}
+\to
+\text{existence and stability}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::

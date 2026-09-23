@@ -29,9 +29,18 @@ book:
   - index.qmd
   - collaboration.qmd
   - math-economics/index.qmd
-  - part: math-economics/ch01-linear-algebra/index.qmd
+  - part: math-economics/ch01-euclidean-topology/index.qmd
     chapters:
-    - math-economics/ch01-linear-algebra/contents.qmd
+    - math-economics/ch01-euclidean-topology/contents.qmd
+  - part: math-economics/ch02-limits-continuity/index.qmd
+    chapters:
+    - math-economics/ch02-limits-continuity/contents.qmd
+  - part: math-economics/ch03-multivariable-differentiation/index.qmd
+    chapters:
+    - math-economics/ch03-multivariable-differentiation/contents.qmd
+  - part: math-economics/ch04-inverse-implicit-functions/index.qmd
+    chapters:
+    - math-economics/ch04-inverse-implicit-functions/contents.qmd
   - microeconomics/index.qmd
   - part: microeconomics/ch00-foundations/index.qmd
     chapters:
@@ -238,6 +247,7 @@ format:
     - styles/notes.scss
     - styles/macro-content.scss
     - styles/econometrics-content.scss
+    - styles/math-content.scss
     toc: true
     toc-title: 이 페이지에서
     grid:
