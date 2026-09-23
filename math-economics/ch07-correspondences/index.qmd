@@ -32,5 +32,9 @@
 대응의 정의와 연속성부터 Berge 최대정리의 증명·응용까지는 [본문 전체](contents.html)에 있다.
 :::
 
+::: {.callout-note title="계산·시각화 보충자료"}
+대응의 상반연속(UHC: 외측 폭발 억제)과 하반연속(LHC: 내측 소멸 방지), 닫힌 그래프 정리 및 Berge 최대정리의 동적 기하학적 시각화는 [보충자료 · 대응의 반연속성과 닫힌 그래프](../../supplements/correspondence-hemicontinuity.qmd)에서 인터랙티브하게 탐색할 수 있다.
+:::
+
 
 

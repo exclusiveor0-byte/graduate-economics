@@ -203,11 +203,13 @@ book:
     chapters:
     - econometrics/ch15-dependent-data-time-series/contents.qmd
   - supplements/index.qmd
+  - part: "보충자료 · 경제학을 위한 수학"
+    chapters:
+    - supplements/correspondence-hemicontinuity.qmd
   - part: "보충자료 · 미시경제학"
     chapters:
     - supplements/slutsky-decomposition.qmd
     - supplements/edgeworth-first-welfare.qmd
-    - supplements/correspondence-hemicontinuity.qmd
     - supplements/producer-cost-envelope.qmd
     - supplements/oligopoly-game-theory.qmd
     - supplements/core-competitive-convergence.qmd

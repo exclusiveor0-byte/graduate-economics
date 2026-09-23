@@ -25,7 +25,7 @@ description: "미시경제학과 수리경제학의 필수 기초인 집합값 �
    - **Berge 최대정리**: 제약대응 $B(x)$가 콤팩트값을 갖고 **연속(UHC + LHC)**일 때에만 가치함수 $v(x) = \max_{y \in B(x)} f(x, y)$가 연속함수가 되며, 최적해 대응 $D(x)$가 UHC를 만족한다. LHC가 깨지면 가치함수가 하방으로 급락(또는 상방으로 점프)하여 경제학적 최적화의 연속성이 파괴된다.
 :::
 
-관련 교재 본문은 [Chapter 00 · 0.5 함수와 대응](../microeconomics/ch00-foundations/05-functions-correspondences.qmd)과 [0.8 모수화된 최적화, Berge 최대정리, Envelope 정리](../microeconomics/ch00-foundations/08-parameterized-optimization.qmd)에서 공리적 기초와 다차원 일반화를 다룬다.
+관련 교재 본문은 [경제학을 위한 수학 제7장 대응과 최대정리](../math-economics/ch07-correspondences/index.qmd) 및 [제8장 고정점 정리와 균형](../math-economics/ch08-fixed-points/index.qmd)에서 공리적 정의와 이론 증명을 다루며, [미시경제학 Chapter 00 · 0.5 함수와 대응](../microeconomics/ch00-foundations/05-functions-correspondences.qmd)과 [0.8 모수화된 최적화, Berge 최대정리, Envelope 정리](../microeconomics/ch00-foundations/08-parameterized-optimization.qmd)에서 미시경제학적 응용 기초를 다룬다.
 
 ---
 
