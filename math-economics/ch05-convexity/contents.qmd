@@ -1,0 +1,2290 @@
+---
+title: "Chapter 5 · 볼록집합과 볼록함수"
+description: "볼록집합, 볼록함수, 분리정리, Jensen 부등식, Hessian 조건, quasiconvexity와 quasiconcavity."
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/math-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s51}
+
+## [5.1]{.section-number}Convex combinations and convex sets
+
+::: {.topic-opening}
+볼록성은 “두 점을 잇는 선분 전체가 집합 안에 남는가?”라는 단순한 질문에서 출발한다.
+이 기하적 조건 하나가 이후 함수의 전역적 곡률, 최적화 문제의 구조, 소비자의 선호집합과 생산가능집합까지 연결된다.
+:::
+
+### 5.1.1 Convex combination {#s511}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.1 · Convex combination
+
+:::::::::::::::::::
+
+$x_1,\ldots,x_k\in\mathbb R^n$와
+
+$$
+\lambda_i\ge0,
+\qquad
+\sum_{i=1}^k\lambda_i=1
+$$
+
+에 대해
+
+$$
+\sum_{i=1}^k\lambda_i x_i
+$$
+
+를 $x_1,\ldots,x_k$의 convex combination이라 한다.
+
+::::::::::::::::::::
+
+두 점 $x,y$의 경우 convex combination은
+
+$$
+\lambda x+(1-\lambda)y,
+\qquad
+0\le\lambda\le1.
+$$
+
+이는 $x$와 $y$를 잇는 line segment 전체를 나타낸다.
+
+### 5.1.2 Convex set {#s512}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.2 · Convex set
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$가 convex라는 것은 모든 $x,y\in C$와 모든
+$\lambda\in[0,1]$에 대해
+
+$$
+\lambda x+(1-\lambda)y\in C
+$$
+
+가 성립한다는 뜻이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.1 · Finite convex combinations
+
+:::::::::::::::::::
+
+$C$가 convex이면 임의의 $x_1,\ldots,x_k\in C$와
+
+$$
+\lambda_i\ge0,
+\qquad
+\sum_{i=1}^k\lambda_i=1
+$$
+
+에 대해
+
+$$
+\sum_{i=1}^k\lambda_i x_i\in C.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof by induction
+
+:::::::::::::::::::
+
+$k=2$는 정의다. $k-1$개에 대해 성립한다고 하자.
+$\lambda_k=1$이면 자명하다. $\lambda_k\lt1$이면
+
+$$
+\mu_i=\frac{\lambda_i}{1-\lambda_k},
+\qquad i=1,\ldots,k-1
+$$
+
+로 두면 $\sum_{i=1}^{k-1}\mu_i=1$.
+귀납가정으로
+
+$$
+z=\sum_{i=1}^{k-1}\mu_i x_i\in C.
+$$
+
+따라서
+
+$$
+\sum_{i=1}^k\lambda_i x_i
+=
+(1-\lambda_k)z+\lambda_k x_k\in C.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 5.1.3 대표적인 convex sets {#s513}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.2 · Basic convex sets
+
+:::::::::::::::::::
+
+다음 집합들은 convex이다.
+
+$$
+\mathbb R^n,\qquad
+\varnothing,\qquad
+\mathbb R_+^n,
+$$
+
+affine subspace, hyperplane, half-space, open/closed Euclidean ball.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 5.1 · Budget set
+
+:::::::::::::::::::
+
+$p\in\mathbb R_+^L$, $w\ge0$에 대해
+
+$$
+B(p,w)
+=
+\{x\in\mathbb R_+^L:p^\top x\le w\}
+$$
+
+는 convex이다.
+실제로 $x,y\in B(p,w)$, $\lambda\in[0,1]$이면
+
+$$
+p^\top[\lambda x+(1-\lambda)y]
+=
+\lambda p^\top x+(1-\lambda)p^\top y
+\le w,
+$$
+
+그리고 $\lambda x+(1-\lambda)y\ge0$.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 5.2 · Probability simplex
+
+:::::::::::::::::::
+
+$$
+\Delta^{n-1}
+=
+\left\{
+p\in\mathbb R_+^n:
+\sum_{i=1}^n p_i=1
+\right\}
+$$
+
+는 convex이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.3 · Operations preserving convexity
+
+:::::::::::::::::::
+
+$\{C_\alpha\}$가 convex sets의 임의의 family이면
+
+$$
+\bigcap_\alpha C_\alpha
+$$
+
+는 convex이다.
+또한 $C,D$가 convex이고 $a,b\in\mathbb R$이면
+
+$$
+aC+bD
+=
+\{ax+by:x\in C,\ y\in D\}
+$$
+
+도 convex이다.
+특히 affine map
+
+$$
+T(x)=Ax+b
+$$
+
+의 image $T(C)$도 convex이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 5.1 · Union need not preserve convexity
+
+:::::::::::::::::::
+
+$$
+C=[-2,-1],
+\qquad
+D=[1,2]
+$$
+
+는 각각 convex이지만
+
+$$
+C\cup D
+$$
+
+는 convex가 아니다. $-1$과 $1$의 midpoint $0$이 union에 속하지 않기 때문이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s52}
+
+## [5.2]{.section-number}Convex hull, affine hull, and relative interior
+
+::: {.topic-opening}
+convex set이 반드시 full-dimensional일 필요는 없다.
+예를 들어 simplex나 budget line은 $\mathbb R^n$ 안에 놓이지만 더 낮은 차원의 affine space 위에 존재할 수 있다.
+따라서 convex geometry에서는 affine hull과 relative interior가 자연스러운 기본 언어가 된다.
+:::
+
+### 5.2.1 Affine combinations and affine hull {#s521}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.3 · Affine combination
+
+:::::::::::::::::::
+
+$x_1,\ldots,x_k\in\mathbb R^n$와
+
+$$
+\sum_{i=1}^k\lambda_i=1
+$$
+
+에 대해
+
+$$
+\sum_{i=1}^k\lambda_i x_i
+$$
+
+를 affine combination이라 한다. convex combination과 달리 $\lambda_i$의 부호는 제한하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.4 · Affine hull
+
+:::::::::::::::::::
+
+$A\subseteq\mathbb R^n$의 affine hull은
+
+$$
+\operatorname{aff}(A)
+=
+\left\{
+\sum_{i=1}^k\lambda_i x_i:
+x_i\in A,\
+\sum_{i=1}^k\lambda_i=1,\
+k\in\mathbb N
+\right\}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.4 · Minimal affine set
+
+:::::::::::::::::::
+
+$\operatorname{aff}(A)$는 $A$를 포함하는 가장 작은 affine set이다.
+
+::::::::::::::::::::
+
+### 5.2.2 Convex hull {#s522}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.5 · Convex hull
+
+:::::::::::::::::::
+
+$A\subseteq\mathbb R^n$의 convex hull은
+
+$$
+\operatorname{co}(A)
+=
+\left\{
+\sum_{i=1}^k\lambda_i x_i:
+x_i\in A,\
+\lambda_i\ge0,\
+\sum_{i=1}^k\lambda_i=1,\
+k\in\mathbb N
+\right\}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.5 · Convex hull as the smallest convex superset
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\operatorname{co}(A)
+=
+\bigcap
+\{C:
+A\subseteq C,\
+C\text{ convex}\}.
+}
+$$
+
+즉 $\operatorname{co}(A)$는 $A$를 포함하는 가장 작은 convex set이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+먼저 $\operatorname{co}(A)$ 자체가 convex임을 finite convex combinations의 결합으로 확인할 수 있다.
+또한 $A\subseteq\operatorname{co}(A)$.
+이제 $C$가 $A$를 포함하는 임의의 convex set이라 하자.
+Theorem 5.1에 의해 $A$의 모든 finite convex combination은 $C$에 속하므로
+
+$$
+\operatorname{co}(A)\subseteq C.
+$$
+
+따라서 $\operatorname{co}(A)$는 가장 작은 convex superset이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 5.2.3 Relative interior {#s523}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.6 · Relative interior
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$에 대해
+
+$$
+\operatorname{ri}(C)
+=
+\operatorname{int}_{\operatorname{aff}(C)}C
+$$
+
+를 $C$의 relative interior라 한다.
+즉 ambient space $\mathbb R^n$가 아니라 $C$가 실제로 놓여 있는 affine hull 안에서 interior를 취한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 5.3 · A line segment in $\mathbb R^2$
+
+:::::::::::::::::::
+
+$$
+C=\{(t,0):0\le t\le1\}.
+$$
+
+$\mathbb R^2$에서
+
+$$
+\operatorname{int}(C)=\varnothing,
+$$
+
+하지만
+
+$$
+\operatorname{aff}(C)
+=
+\{(t,0):t\in\mathbb R\}
+$$
+
+안에서는
+
+$$
+\operatorname{ri}(C)
+=
+\{(t,0):0\lt t\lt1\}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 왜 relative interior가 필요한가?
+
+:::::::::::::::::::
+
+equality constraint나 simplex처럼 낮은 차원의 feasible set을 다룰 때 ambient interior는 비어 있을 수 있다.
+relative interior는 그런 집합에서도 “경계가 아닌 점”을 정확히 정의해준다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s53}
+
+## [5.3]{.section-number}Hyperplanes and separation
+
+::: {.topic-opening}
+convexity의 핵심적인 힘은 집합을 선형함수로 지지하고 분리할 수 있다는 데 있다.
+이 절에서는 hyperplane과 half-space를 정리한 뒤,
+convex set 밖의 점을 하나의 hyperplane으로 분리할 수 있음을 보인다.
+:::
+
+### 5.3.1 Hyperplane and half-space {#s531}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.7 · Hyperplane and half-spaces
+
+:::::::::::::::::::
+
+$a\in\mathbb R^n\setminus\{0\}$, $\alpha\in\mathbb R$에 대해
+
+$$
+H(a,\alpha)
+=
+\{x:a^\top x=\alpha\}
+$$
+
+를 hyperplane이라 한다.
+이에 대응하는 closed half-spaces는
+
+$$
+H^-(a,\alpha)
+=
+\{x:a^\top x\le\alpha\},
+$$
+
+$$
+H^+(a,\alpha)
+=
+\{x:a^\top x\ge\alpha\}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.6 · Half-spaces are closed and convex
+
+:::::::::::::::::::
+
+모든 hyperplane과 closed half-space는 closed convex sets이다.
+
+::::::::::::::::::::
+
+### 5.3.2 Nearest-point lemma {#s532}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+LEMMA 5.7 · Nearest point in a closed convex set
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$가 nonempty, closed, convex이고 $x_0\in\mathbb R^n$라 하자.
+그러면
+
+$$
+\min_{z\in C}\|x_0-z\|
+$$
+
+을 달성하는 유일한 점 $p\in C$가 존재한다.
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>증명 펼치기</summary>
+
+:::::::::::::::::::: {.details-body}
+
+$d=\inf_{z\in C}\|x_0-z\|$라 하고 minimizing sequence $z_k\in C$를 잡자.
+충분히 큰 $k$에서는 $\|x_0-z_k\|\le d+1$이므로 $z_k$는 bounded.
+Bolzano–Weierstrass에 의해 어떤 subsequence가 $p$로 수렴한다.
+$C$가 closed이므로 $p\in C$, 연속성으로
+
+$$
+\|x_0-p\|=d.
+$$
+
+유일성은 parallelogram identity와 convexity를 사용한다.
+두 minimizer $p,q$가 있다면 $(p+q)/2\in C$이고,
+$p\ne q$일 때 midpoint는 $x_0$에 더 가까워져 minimality에 모순된다.
+
+::::::::::::::::::::
+
+</details>
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.8 · Variational characterization of the nearest point
+
+:::::::::::::::::::
+
+$p\in C$가 $x_0$의 nearest point이면
+
+$$
+\boxed{
+(x_0-p)^\top(z-p)\le0
+\qquad
+\forall z\in C.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$z\in C$를 고정하고
+
+$$
+p_t=(1-t)p+tz,\qquad t\in[0,1].
+$$
+
+convexity로 $p_t\in C$.
+함수
+
+$$
+\phi(t)=\|x_0-p_t\|^2
+$$
+
+는 $t=0$에서 minimum을 갖는다. 따라서 right derivative가 nonnegative:
+
+$$
+\phi'(0)
+=
+-2(x_0-p)^\top(z-p)
+\ge0.
+$$
+
+따라서 원하는 부등식이 성립한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 5.3.3 Separation theorem {#s533}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.9 · Strict separation of a point and a closed convex set
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$가 nonempty, closed, convex이고
+
+$$
+x_0\notin C
+$$
+
+라 하자. 그러면 어떤 $a\ne0$, $\alpha\in\mathbb R$가 존재하여
+
+$$
+\boxed{
+a^\top x_0
+\gt
+\alpha
+\ge
+a^\top z
+\qquad
+\forall z\in C.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$p\in C$를 $x_0$의 nearest point라 하고
+
+$$
+a=x_0-p\ne0.
+$$
+
+Proposition 5.8에 의해
+
+$$
+a^\top(z-p)\le0
+\qquad\forall z\in C,
+$$
+
+따라서
+
+$$
+a^\top z\le a^\top p.
+$$
+
+한편
+
+$$
+a^\top x_0-a^\top p
+=
+(x_0-p)^\top(x_0-p)
+=
+\|x_0-p\|^2
+\gt0.
+$$
+
+$\alpha=a^\top p$로 두면 된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 5.3.4 Supporting hyperplane {#s534}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.8 · Supporting hyperplane
+
+:::::::::::::::::::
+
+convex set $C$와 $x_0\in\partial C$에 대해
+
+$$
+H=\{x:a^\top x=a^\top x_0\}
+$$
+
+가 $x_0$를 지나고
+
+$$
+a^\top x\le a^\top x_0
+\qquad
+\forall x\in C
+$$
+
+를 만족하면 $H$를 $C$의 $x_0$에서의 supporting hyperplane이라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.10 · Supporting hyperplane theorem
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$가 nonempty closed convex이고 $x_0\in\partial C$이면
+$x_0$에서 $C$를 지지하는 hyperplane이 존재한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 이후의 역할
+
+:::::::::::::::::::
+
+supporting hyperplane은 이후 convex optimization의 optimality condition과
+경제학의 supporting-price argument에서 반복해서 등장한다.
+여기서는 존재성과 기하만 확보하고, multiplier와 KKT는 Chapter 6에서 다룬다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s54}
+
+## [5.4]{.section-number}Convex and concave functions
+
+::: {.topic-opening}
+convex set이 선분을 보존하는 집합이라면, convex function은 두 점 사이에서 함수값이 chord보다 위로 솟지 않는 함수다.
+concavity는 그 반대이며, 경제학의 maximization 문제에서는 concavity가 특히 자연스럽다.
+:::
+
+### 5.4.1 Definitions {#s541}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.9 · Convex function
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$가 convex이고 $f:C\to\mathbb R$라 하자.
+모든 $x,y\in C$, $\lambda\in[0,1]$에 대해
+
+$$
+f(\lambda x+(1-\lambda)y)
+\le
+\lambda f(x)+(1-\lambda)f(y)
+$$
+
+이면 $f$를 convex라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.10 · Concave function
+
+:::::::::::::::::::
+
+모든 $x,y\in C$, $\lambda\in[0,1]$에 대해
+
+$$
+f(\lambda x+(1-\lambda)y)
+\ge
+\lambda f(x)+(1-\lambda)f(y)
+$$
+
+이면 $f$를 concave라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.11 · Convexity–concavity duality
+
+:::::::::::::::::::
+
+$$
+f\text{ is concave}
+\iff
+-f\text{ is convex}.
+$$
+
+::::::::::::::::::::
+
+### 5.4.2 Strict convexity and strict concavity {#s542}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.11 · Strict convexity
+
+:::::::::::::::::::
+
+$x\ne y$, $0\lt\lambda\lt1$일 때
+
+$$
+f(\lambda x+(1-\lambda)y)
+\lt
+\lambda f(x)+(1-\lambda)f(y)
+$$
+
+이면 $f$를 strictly convex라 한다.
+strictly concave는 부등호를 반대로 둔다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Strictness의 의미
+
+:::::::::::::::::::
+
+convexity는 chord와 graph가 일부 구간에서 일치하는 것을 허용하지만,
+strict convexity는 서로 다른 두 점 사이의 interior에서 이를 금지한다.
+
+::::::::::::::::::::
+
+### 5.4.3 Basic examples {#s543}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 5.4 · Affine functions
+
+:::::::::::::::::::
+
+$$
+f(x)=a^\top x+b
+$$
+
+는 convex이면서 concave다. 실제로
+
+$$
+f(\lambda x+(1-\lambda)y)
+=
+\lambda f(x)+(1-\lambda)f(y).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 5.5 · Quadratic functions
+
+:::::::::::::::::::
+
+$$
+f(x)=\frac12x^\top Qx+b^\top x+c
+$$
+
+에서 $Q=Q^\top$라 하자.
+이후 Hessian criterion에서
+
+$$
+Q\succeq0
+\iff
+f\text{ convex},
+$$
+
+$$
+Q\preceq0
+\iff
+f\text{ concave}
+$$
+
+임을 보인다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 5.2 · Neither convex nor concave
+
+:::::::::::::::::::
+
+$$
+f(x)=x^3
+$$
+
+는 $\mathbb R$ 전체에서는 convex도 concave도 아니다.
+곡률의 부호가 $x=0$을 지나며 바뀌기 때문이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s55}
+
+## [5.5]{.section-number}Epigraphs and convexity
+
+::: {.topic-opening}
+함수의 convexity는 함수 자체만의 성질이 아니라 그 graph 위쪽에 놓인 집합의 convexity로 완전히 표현할 수 있다.
+이 관점은 집합의 convexity와 함수의 convexity를 하나의 언어로 통합한다.
+:::
+
+### 5.5.1 Epigraph and hypograph {#s551}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.12 · Epigraph and hypograph
+
+:::::::::::::::::::
+
+$f:C\to\mathbb R$에 대해
+
+$$
+\operatorname{epi}f
+=
+\{(x,t)\in C\times\mathbb R:t\ge f(x)\}
+$$
+
+를 epigraph라 하고,
+
+$$
+\operatorname{hypo}f
+=
+\{(x,t)\in C\times\mathbb R:t\le f(x)\}
+$$
+
+를 hypograph라 한다.
+
+::::::::::::::::::::
+
+### 5.5.2 Epigraph characterization {#s552}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.12 · Epigraph characterization
+
+:::::::::::::::::::
+
+$C$가 convex일 때
+
+$$
+\boxed{
+f\text{ convex}
+\iff
+\operatorname{epi}f\text{ convex}.
+}
+$$
+
+마찬가지로
+
+$$
+\boxed{
+f\text{ concave}
+\iff
+\operatorname{hypo}f\text{ convex}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof of the epigraph result
+
+:::::::::::::::::::
+
+$f$가 convex라고 하자.
+$(x,s),(y,t)\in\operatorname{epi}f$이면
+
+$$
+s\ge f(x),
+\qquad
+t\ge f(y).
+$$
+
+따라서
+
+$$
+\lambda s+(1-\lambda)t
+\ge
+\lambda f(x)+(1-\lambda)f(y)
+\ge
+f(\lambda x+(1-\lambda)y).
+$$
+
+즉 convex combination도 epigraph에 속한다.
+
+반대로 epigraph가 convex라고 하자.
+$(x,f(x))$, $(y,f(y))$는 epigraph에 속하므로
+
+$$
+\big(
+\lambda x+(1-\lambda)y,\,
+\lambda f(x)+(1-\lambda)f(y)
+\big)
+$$
+
+도 epigraph에 속한다.
+따라서
+
+$$
+f(\lambda x+(1-\lambda)y)
+\le
+\lambda f(x)+(1-\lambda)f(y).
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s56}
+
+## [5.6]{.section-number}Jensen inequality and convexity-preserving operations
+
+### 5.6.1 Finite Jensen inequality {#s561}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.13 · Finite Jensen inequality
+
+:::::::::::::::::::
+
+$f:C\to\mathbb R$가 convex이고
+$x_1,\ldots,x_k\in C$,
+
+$$
+\lambda_i\ge0,
+\qquad
+\sum_{i=1}^k\lambda_i=1
+$$
+
+이면
+
+$$
+\boxed{
+f\left(
+\sum_{i=1}^k\lambda_i x_i
+\right)
+\le
+\sum_{i=1}^k\lambda_i f(x_i).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$k=2$는 convexity의 정의다.
+일반 $k$에 대해서는 Theorem 5.1과 같은 normalization argument를 사용하여 induction한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+PREVIEW · Probabilistic Jensen
+
+:::::::::::::::::::
+
+확률론을 도입한 뒤에는 적절한 조건 아래
+
+$$
+f(E[X])
+\le
+E[f(X)]
+$$
+
+로 확장된다.
+이 장에서는 finite convex combinations까지만 사용한다.
+
+::::::::::::::::::::
+
+### 5.6.2 Convexity-preserving operations {#s562}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.14 · Basic operations
+
+:::::::::::::::::::
+
+$f,g:C\to\mathbb R$가 convex이고 $a,b\ge0$이면
+
+$$
+af+bg
+$$
+
+는 convex이다.
+또한 finite family $f_1,\ldots,f_m$이 convex이면
+
+$$
+h(x)=\max_{1\le j\le m}f_j(x)
+$$
+
+도 convex이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof for pointwise maximum
+
+:::::::::::::::::::
+
+$z=\lambda x+(1-\lambda)y$라 하자.
+각 $j$에 대해
+
+$$
+f_j(z)
+\le
+\lambda f_j(x)+(1-\lambda)f_j(y)
+\le
+\lambda h(x)+(1-\lambda)h(y).
+$$
+
+$j$에 대해 maximum을 취하면
+
+$$
+h(z)
+\le
+\lambda h(x)+(1-\lambda)h(y).
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 5.3 · Minimum need not preserve convexity
+
+:::::::::::::::::::
+
+$$
+f_1(x)=x,
+\qquad
+f_2(x)=-x
+$$
+
+는 affine이므로 convex이지만
+
+$$
+\min\{f_1(x),f_2(x)\}
+=
+-|x|
+$$
+
+는 convex가 아니다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s57}
+
+## [5.7]{.section-number}First-order characterization
+
+::: {.topic-opening}
+Chapter 3에서 gradient는 국소적인 선형근사를 나타냈다.
+convexity가 추가되면 그 국소 선형근사가 함수 전체에 대한 전역적인 하한이 된다.
+이것이 differentiable convex function의 가장 중요한 characterization이다.
+:::
+
+### 5.7.1 Tangent inequality {#s571}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.15 · First-order characterization of convexity
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$가 open and convex이고
+$f:C\to\mathbb R$가 differentiable이라 하자.
+그러면
+
+$$
+\boxed{
+f\text{ convex}
+\iff
+f(y)
+\ge
+f(x)+\nabla f(x)^\top(y-x)
+\quad
+\forall x,y\in C.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof · Convexity $\Rightarrow$ tangent inequality
+
+:::::::::::::::::::
+
+$x,y\in C$를 고정하고
+
+$$
+\phi(t)=f(x+t(y-x)),
+\qquad
+t\in[0,1].
+$$
+
+convexity로
+
+$$
+\phi(t)
+\le
+(1-t)\phi(0)+t\phi(1).
+$$
+
+따라서
+
+$$
+\frac{\phi(t)-\phi(0)}{t}
+\le
+\phi(1)-\phi(0).
+$$
+
+$t\downarrow0$을 취하면
+
+$$
+\nabla f(x)^\top(y-x)
+\le
+f(y)-f(x).
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>역방향 증명 펼치기</summary>
+
+:::::::::::::::::::: {.details-body}
+
+tangent inequality가 모든 $x,y\in C$에 대해 성립한다고 하자.
+$z=\lambda x+(1-\lambda)y$라 두고 $0\lt\lambda\lt1$.
+$z$에서 $x$와 $y$를 향한 두 inequality를 쓰면
+
+$$
+f(x)\ge f(z)+\nabla f(z)^\top(x-z),
+$$
+
+$$
+f(y)\ge f(z)+\nabla f(z)^\top(y-z).
+$$
+
+첫 식에 $\lambda$, 둘째 식에 $1-\lambda$를 곱해 더하면
+
+$$
+\lambda f(x)+(1-\lambda)f(y)
+\ge
+f(z)
++
+\nabla f(z)^\top
+\left[
+\lambda(x-z)+(1-\lambda)(y-z)
+\right].
+$$
+
+bracket는 0이므로
+
+$$
+f(z)
+\le
+\lambda f(x)+(1-\lambda)f(y).
+$$
+
+::::::::::::::::::::
+
+</details>
+
+:::::::::::::::::::: {.statement .corollary}
+
+::::::::::::::::::: {.statement-head}
+
+COROLLARY 5.16 · Concave version
+
+:::::::::::::::::::
+
+differentiable $f$가 concave일 필요충분조건은
+
+$$
+f(y)
+\le
+f(x)+\nabla f(x)^\top(y-x)
+\qquad
+\forall x,y\in C.
+$$
+
+::::::::::::::::::::
+
+### 5.7.2 Gradient monotonicity {#s572}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.17 · Monotonicity of the gradient
+
+:::::::::::::::::::
+
+differentiable convex $f:C\to\mathbb R$에 대해
+
+$$
+\boxed{
+(\nabla f(x)-\nabla f(y))^\top(x-y)
+\ge0
+\qquad
+\forall x,y\in C.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+first-order characterization으로
+
+$$
+f(y)\ge f(x)+\nabla f(x)^\top(y-x),
+$$
+
+$$
+f(x)\ge f(y)+\nabla f(y)^\top(x-y).
+$$
+
+두 식을 더하면
+
+$$
+0
+\ge
+\nabla f(x)^\top(y-x)
++
+\nabla f(y)^\top(x-y),
+$$
+
+즉 원하는 inequality를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s58}
+
+## [5.8]{.section-number}Second-order characterization
+
+::: {.topic-opening}
+$C^2$ 함수에서는 convexity를 Hessian의 부호로 판정할 수 있다.
+Chapter 3의 국소적 curvature object가 여기서는 함수 전체의 global shape를 characterise한다.
+:::
+
+### 5.8.1 Hessian test {#s581}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.18 · Hessian characterization
+
+:::::::::::::::::::
+
+$C\subseteq\mathbb R^n$가 open and convex이고
+$f\in C^2(C)$라 하자.
+그러면
+
+$$
+\boxed{
+f\text{ convex}
+\iff
+\nabla^2f(x)\succeq0
+\quad
+\forall x\in C.
+}
+$$
+
+또한
+
+$$
+\boxed{
+f\text{ concave}
+\iff
+\nabla^2f(x)\preceq0
+\quad
+\forall x\in C.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof idea
+
+:::::::::::::::::::
+
+임의의 $x,y\in C$에 대해
+
+$$
+\phi(t)=f(x+t(y-x))
+$$
+
+를 두면
+
+$$
+\phi''(t)
+=
+(y-x)^\top
+\nabla^2f(x+t(y-x))
+(y-x).
+$$
+
+Hessian이 positive semidefinite이면 $\phi''(t)\ge0$, 따라서 모든 line restriction이 convex이고 $f$도 convex이다.
+역방향은 임의의 direction $v$에 대해
+
+$$
+t\mapsto f(x+tv)
+$$
+
+가 convex라는 사실에서
+
+$$
+v^\top\nabla^2f(x)v\ge0
+$$
+
+를 얻는다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 5.8.2 Strict convexity and positive definiteness {#s582}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.19 · Positive definite Hessian is sufficient for strict convexity
+
+:::::::::::::::::::
+
+$f\in C^2(C)$이고
+
+$$
+\nabla^2f(x)\succ0
+\qquad
+\forall x\in C
+$$
+
+이면 $f$는 strictly convex이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · 충분조건이지 필요조건은 아니다
+
+:::::::::::::::::::
+
+$$
+f(x)=x^4
+$$
+
+는 $\mathbb R$에서 strictly convex이지만
+
+$$
+f''(0)=0.
+$$
+
+따라서 strict convexity를 모든 점에서 positive definite Hessian과 동일시하면 안 된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 5.6 · Quadratic form
+
+:::::::::::::::::::
+
+$$
+f(x)=\frac12x^\top Qx+b^\top x+c,
+\qquad Q=Q^\top.
+$$
+
+$$
+\nabla^2f(x)=Q.
+$$
+
+따라서
+
+$$
+Q\succeq0
+\iff
+f\text{ convex},
+$$
+
+$$
+Q\preceq0
+\iff
+f\text{ concave}.
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s59}
+
+## [5.9]{.section-number}Quasiconvexity and quasiconcavity
+
+::: {.topic-opening}
+convexity와 concavity는 함수값의 크기 자체를 제한한다.
+그러나 경제학에서는 함수값의 cardinal magnitude보다 contour set의 모양만 중요한 경우가 많다.
+quasiconvexity와 quasiconcavity는 바로 이 contour-set geometry를 포착한다.
+:::
+
+### 5.9.1 Level, sublevel, and superlevel sets {#s591}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.13 · Level and contour sets
+
+:::::::::::::::::::
+
+$f:C\to\mathbb R$, $\alpha\in\mathbb R$에 대해
+
+$$
+L_\alpha(f)
+=
+\{x\in C:f(x)=\alpha\}
+$$
+
+를 level set이라 하고,
+
+$$
+S^-_\alpha(f)
+=
+\{x\in C:f(x)\le\alpha\}
+$$
+
+를 sublevel set,
+
+$$
+S^+_\alpha(f)
+=
+\{x\in C:f(x)\ge\alpha\}
+$$
+
+를 superlevel set이라 한다.
+
+::::::::::::::::::::
+
+### 5.9.2 Quasiconvexity {#s592}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.14 · Quasiconvex function
+
+:::::::::::::::::::
+
+convex domain $C$ 위의 함수 $f:C\to\mathbb R$가 모든 $x,y\in C$,
+$\lambda\in[0,1]$에 대해
+
+$$
+\boxed{
+f(\lambda x+(1-\lambda)y)
+\le
+\max\{f(x),f(y)\}
+}
+$$
+
+를 만족하면 quasiconvex라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.20 · Sublevel-set characterization
+
+:::::::::::::::::::
+
+$$
+\boxed{
+f\text{ quasiconvex}
+\iff
+S^-_\alpha(f)\text{ is convex for every }\alpha\in\mathbb R.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$f$가 quasiconvex이고 $x,y\in S^-_\alpha(f)$라 하자.
+그러면
+
+$$
+f(x)\le\alpha,
+\qquad
+f(y)\le\alpha.
+$$
+
+따라서
+
+$$
+f(\lambda x+(1-\lambda)y)
+\le
+\max\{f(x),f(y)\}
+\le\alpha,
+$$
+
+즉 convex combination도 sublevel set에 속한다.
+
+반대로 모든 sublevel set이 convex라고 하자.
+$x,y\in C$에 대해
+
+$$
+\alpha=\max\{f(x),f(y)\}
+$$
+
+로 두면 $x,y\in S^-_\alpha(f)$.
+convexity에 의해
+
+$$
+\lambda x+(1-\lambda)y\in S^-_\alpha(f),
+$$
+
+따라서 quasiconvex inequality가 성립한다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 5.9.3 Quasiconcavity {#s593}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.15 · Quasiconcave function
+
+:::::::::::::::::::
+
+$f:C\to\mathbb R$가 모든 $x,y\in C$, $\lambda\in[0,1]$에 대해
+
+$$
+\boxed{
+f(\lambda x+(1-\lambda)y)
+\ge
+\min\{f(x),f(y)\}
+}
+$$
+
+를 만족하면 quasiconcave라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.21 · Superlevel-set characterization
+
+:::::::::::::::::::
+
+$$
+\boxed{
+f\text{ quasiconcave}
+\iff
+S^+_\alpha(f)\text{ is convex for every }\alpha\in\mathbb R.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.22 · Convexity implies quasiconvexity
+
+:::::::::::::::::::
+
+convex function은 quasiconvex이고, concave function은 quasiconcave이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof for concavity
+
+:::::::::::::::::::
+
+concavity에 의해
+
+$$
+f(\lambda x+(1-\lambda)y)
+\ge
+\lambda f(x)+(1-\lambda)f(y).
+$$
+
+weighted average는 두 수의 minimum 이상이므로
+
+$$
+\lambda f(x)+(1-\lambda)f(y)
+\ge
+\min\{f(x),f(y)\}.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s510}
+
+## [5.10]{.section-number}Strict quasiconcavity and monotone transformations
+
+### 5.10.1 Strict quasiconcavity {#s5101}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.16 · Strict quasiconcavity
+
+:::::::::::::::::::
+
+$x\ne y$, $0\lt\lambda\lt1$일 때
+
+$$
+\boxed{
+f(\lambda x+(1-\lambda)y)
+\gt
+\min\{f(x),f(y)\}
+}
+$$
+
+이면 $f$를 strictly quasiconcave라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.17 · Strict quasiconvexity
+
+:::::::::::::::::::
+
+$x\ne y$, $0\lt\lambda\lt1$일 때
+
+$$
+f(\lambda x+(1-\lambda)y)
+\lt
+\max\{f(x),f(y)\}
+$$
+
+이면 $f$를 strictly quasiconvex라 한다.
+
+::::::::::::::::::::
+
+### 5.10.2 Concavity versus quasiconcavity {#s5102}
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+LOGICAL HIERARCHY
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{strict concavity}
+\Longrightarrow
+\text{strict quasiconcavity}
+\Longrightarrow
+\text{quasiconcavity},
+}
+$$
+
+그리고
+
+$$
+\boxed{
+\text{concavity}
+\Longrightarrow
+\text{quasiconcavity}.
+}
+$$
+
+역방향은 일반적으로 성립하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 5.7 · Quasiconcave but not concave
+
+:::::::::::::::::::
+
+$$
+u(x_1,x_2)=x_1x_2,
+\qquad
+(x_1,x_2)\in\mathbb R_{++}^2.
+$$
+
+이 함수는 concave가 아니다.
+그러나
+
+$$
+\log u(x_1,x_2)
+=
+\log x_1+\log x_2
+$$
+
+는 concave이고 $\log$는 strictly increasing이므로,
+다음 subsection의 monotone-transformation result에 의해 $u$는 quasiconcave이다.
+
+::::::::::::::::::::
+
+### 5.10.3 Monotone transformations {#s5103}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.23 · Increasing transformations preserve quasiconcavity
+
+:::::::::::::::::::
+
+$g:\mathbb R\to\mathbb R$가 strictly increasing이고 $f:C\to\mathbb R$라 하자.
+그러면
+
+$$
+\boxed{
+f\text{ quasiconcave}
+\iff
+g\circ f\text{ quasiconcave}.
+}
+$$
+
+quasiconvexity에 대해서도 동일하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof via contour sets
+
+:::::::::::::::::::
+
+$g$가 strictly increasing이므로
+
+$$
+f(x)\ge f(y)
+\iff
+g(f(x))\ge g(f(y)).
+$$
+
+따라서 $f$와 $g\circ f$는 같은 ordering을 만들고, 서로 대응하는 superlevel sets의 모양이 동일하다.
+Theorem 5.21을 적용하면 quasiconcavity의 동치가 따른다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Concavity itself is ordinally invariant하지 않다
+
+:::::::::::::::::::
+
+strictly increasing transformation은 quasiconcavity는 보존하지만 concavity를 일반적으로 보존하지 않는다.
+따라서 utility representation에서 concavity와 quasiconcavity는 서로 다른 역할을 한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s5110}
+
+## [5.11]{.section-number}Economic geometry and bridge to optimization
+
+::: {.topic-opening}
+Chapter 5의 목적은 특정 경제모형을 푸는 것이 아니라,
+경제학에서 반복되는 feasible set과 contour set의 모양을 해석할 수 있는 공통 언어를 만드는 것이다.
+:::
+
+### 5.11.1 Convex preferences {#s5111}
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC READING · Utility and convex upper contour sets
+
+:::::::::::::::::::
+
+utility representation $u:X\to\mathbb R$에서
+
+$$
+\{x\in X:u(x)\ge\bar u\}
+$$
+
+는 $\bar u$ 이상의 utility를 주는 upper contour set이다.
+$u$가 quasiconcave이면 모든 upper contour set이 convex이다.
+따라서 quasiconcavity는 preference의 convexity를 함수 representation의 언어로 표현한다.
+
+::::::::::::::::::::
+
+특히 $x,y$가 같은 utility level을 준다면
+
+$$
+u(x)=u(y)=\bar u
+$$
+
+quasiconcavity는 모든 mixture
+
+$$
+\lambda x+(1-\lambda)y
+$$
+
+가 최소한 $\bar u$ 이상의 utility를 주도록 요구한다.
+strict quasiconcavity는 interior mixture에서 strict improvement를 요구한다.
+
+### 5.11.2 Convex technologies and feasible sets {#s5112}
+
+생산집합 $Y\subseteq\mathbb R^L$의 convexity는
+두 feasible production plans의 convex combination도 feasible하다는 의미다.
+마찬가지로 budget set은 linear inequality의 intersection으로 convex이고,
+probability simplex도 convex하다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+GEOMETRIC COMMONALITY
+
+:::::::::::::::::::
+
+소비자 budget set, mixed strategies의 simplex, linear constraints로 정의된 feasible set은
+모두 convex set이라는 동일한 기하적 구조를 공유한다.
+
+::::::::::::::::::::
+
+### 5.11.3 Global optimality preview {#s5113}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.24 · Local minima of convex functions are global
+
+:::::::::::::::::::
+
+$C$가 convex이고 $f:C\to\mathbb R$가 convex라 하자.
+$x^*\in C$가 local minimum이면 $x^*$는 global minimum이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+global minimum이 아니라고 하자. 그러면 어떤 $y\in C$가 존재하여
+
+$$
+f(y)\lt f(x^*).
+$$
+
+$0\lt\lambda\lt1$에 대해
+
+$$
+x_\lambda=(1-\lambda)x^*+\lambda y.
+$$
+
+$\lambda\downarrow0$이면 $x_\lambda\to x^*$.
+convexity로
+
+$$
+f(x_\lambda)
+\le
+(1-\lambda)f(x^*)+\lambda f(y)
+\lt
+f(x^*),
+$$
+
+이는 $x^*$가 local minimum이라는 사실에 모순이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .corollary}
+
+::::::::::::::::::: {.statement-head}
+
+COROLLARY 5.25 · Strict convexity and uniqueness
+
+:::::::::::::::::::
+
+strictly convex function이 global minimum을 갖는다면 그 minimizer는 유일하다.
+strictly concave function의 global maximizer도 존재한다면 유일하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+SCOPE · Chapter 6에서 할 일
+
+:::::::::::::::::::
+
+여기서는 convexity가 local problem을 global problem으로 바꾸는 이유까지만 확인했다.
+실제 optimization calculus,
+
+$$
+\text{FOC},\quad
+\text{SOC},\quad
+\text{Lagrange multipliers},\quad
+\text{KKT},\quad
+\text{Envelope Theorem}
+$$
+
+은 Chapter 6에서 체계적으로 다룬다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+CHAPTER 5 · CORE LOGIC
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{convex sets}
+\to
+\text{separation}
+\to
+\text{convex functions}
+\to
+\text{gradient/Hessian tests}
+\to
+\text{quasiconcavity}
+\to
+\text{global optimization geometry}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+NEXT CHAPTER
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+<strong>Chapter 6. 최적화의 해석학적 기초.</strong>
+존재성에서 출발하여 unconstrained optimization, second-order conditions,
+equality constraints, Lagrange multipliers, inequality constraints, KKT,
+comparative statics와 Envelope Theorem으로 이어진다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## 연습문제
+
+::: {.topic-opening}
+연습문제는 정의 확인보다 서로 다른 characterization을 오가도록 구성한다.
+집합의 convexity, epigraph, gradient inequality, Hessian, contour sets가 같은 구조의 다른 표현임을 확인하는 것이 목적이다.
+:::
+
+<ol class="exercise-list">
+<li>$\mathbb R_+^n$, closed ball, hyperplane, half-space가 convex임을 정의에서 직접 증명하라.</li>
+<li>convex sets의 임의의 intersection이 convex임을 증명하고 union에 대해서는 반례를 구성하라.</li>
+<li>affine map $T(x)=Ax+b$가 convex set을 convex set으로 보낸다는 것을 증명하라.</li>
+<li>$A=\{e_1,\ldots,e_n\}\subseteq\mathbb R^n$에 대해 $\operatorname{co}(A)=\Delta^{n-1}$임을 보이라.</li>
+<li>$\operatorname{co}(A)$가 $A$를 포함하는 가장 작은 convex set임을 직접 증명하라.</li>
+<li>$\operatorname{aff}(A)$가 $A$를 포함하는 가장 작은 affine set임을 증명하라.</li>
+<li>line segment $C=\{(t,0):0\le t\le1\}\subseteq\mathbb R^2$의 interior와 relative interior를 각각 구하라.</li>
+<li>nonempty closed convex set의 nearest point가 유일함을 parallelogram identity를 사용하여 증명하라.</li>
+<li>nearest-point characterization $(x_0-p)^\top(z-p)\le0$을 증명하라.</li>
+<li>nearest-point characterization에서 point–set separation theorem을 유도하라.</li>
+<li>affine function이 동시에 convex이고 concave임을 증명하라.</li>
+<li>$f(x)=\|x\|^2$가 strictly convex임을 정의에서 직접 증명하라.</li>
+<li>$f(x)=x^4$가 strictly convex이지만 $f''(0)=0$임을 확인하라.</li>
+<li>$f(x)=e^x$, $f(x)=-\log x$의 convexity를 Hessian criterion으로 판정하라.</li>
+<li>epigraph characterization of convexity를 처음부터 끝까지 증명하라.</li>
+<li>finite Jensen inequality를 induction으로 증명하라.</li>
+<li>두 convex functions의 pointwise maximum이 convex임을 증명하고 pointwise minimum에 대한 반례를 제시하라.</li>
+<li>differentiable convex function의 first-order characterization을 증명하라.</li>
+<li>first-order characterization에서 gradient monotonicity를 유도하라.</li>
+<li>$f(x)=\frac12x^\top Qx+b^\top x+c$의 convexity를 $Q$의 eigenvalues로 characterize하라.</li>
+<li>sublevel sets가 모두 convex일 필요충분조건이 quasiconvexity임을 증명하라.</li>
+<li>superlevel sets가 모두 convex일 필요충분조건이 quasiconcavity임을 증명하라.</li>
+<li>concavity가 quasiconcavity를 함의함을 증명하고 converse가 실패하는 예를 구성하라.</li>
+<li>strictly increasing transformation이 quasiconcavity를 보존함을 contour-set argument로 증명하라.</li>
+<li>$u(x_1,x_2)=x_1x_2$가 $\mathbb R_{++}^2$에서 quasiconcave임을 두 가지 방식으로 보이라.</li>
+<li>quasiconcavity가 concavity보다 utility representation에서 더 ordinal한 조건인 이유를 설명하라.</li>
+<li>convex function의 local minimum이 global minimum임을 증명하라.</li>
+<li>strictly convex function의 minimizer가 존재하면 유일함을 증명하라.</li>
+<li>budget set $B(p,w)$와 probability simplex가 각각 convex임을 다시 증명하고 두 집합의 affine hull 또는 relative interior를 논하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 장의 위치
+
+Jehle, G. A. and Reny, P. J. <em>Advanced Microeconomic Theory</em>, 3rd ed.
+superior/inferior sets, quasiconcavity, strict quasiconcavity와 경제학적 contour-set interpretation의 전개를 참고하였다.
+
+Chong, E. K. P. and Zak, S. H. <em>An Introduction to Optimization</em>.
+convex sets, epigraph representation, differentiable convex functions의 first-order inequality,
+Hessian characterization과 convex optimization으로의 연결을 참고하였다.
+
+본 장에서는 Chapter 1의 topology, Chapter 3의 gradient/Hessian, Chapter 4의 local geometry를
+하나의 global convexity framework로 통합하였다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+DEPENDENCY MAP
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+\text{Chapter 1: }&\text{topology and relative topology}\\
+&\Downarrow\\
+\text{Chapter 3: }&\text{gradient and Hessian}\\
+&\Downarrow\\
+\text{Chapter 5: }&\text{global convex geometry}\\
+&\Downarrow\\
+\text{Chapter 6: }&\text{optimization and envelope results}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+
+
+

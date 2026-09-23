@@ -1,0 +1,37 @@
+# Chapter 6 · 최적화, KKT 조건과 Envelope 정리 {.unnumbered}
+*Optimization · KKT Conditions · Envelope Theorem*
+
+Chapter 5의 볼록성 구조를 최적화 문제에 적용한다. 비제약·제약 최적화, 라그랑주 승수, KKT 조건, 매개변수화된 가치함수와 Envelope 정리를 하나의 논리로 연결한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **6.1–6.4** 최적화 표기 · 일계·이계 조건 · 오목 maximization과 전역 최적성
+- **6.5–6.8** 등식제약 · 라그랑주 승수 · 부등식제약 · KKT 조건
+- **6.9–6.11** 제약자격 · 매개변수 최적화 · 가치함수와 Envelope 정리
+- **6.12** 소비자·생산자·정책 문제에 대한 경제학적 응용
+:::
+
+## Sections
+
+- [6.1 최적화 문제의 표기와 관례](contents.html#s61)
+- [6.2 비제약 일계조건](contents.html#s62)
+- [6.3 이계조건](contents.html#s63)
+- [6.4 오목 maximization과 전역 최적성](contents.html#s64)
+- [6.5 등식제약과 라그랑주 승수](contents.html#s65)
+- [6.6 등식제약 아래의 이계조건](contents.html#s66)
+- [6.7 부등식제약과 active set](contents.html#s67)
+- [6.8 Karush–Kuhn–Tucker 조건](contents.html#s68)
+- [6.9 제약자격과 오목문제의 충분조건](contents.html#s69)
+- [6.10 매개변수 최적화와 비교정태](contents.html#s610)
+- [6.11 가치함수와 Envelope 정리](contents.html#s6110)
+- [6.12 경제학적 응용](contents.html#s6120)
+- [연습문제](contents.html#exercises)
+- [참고문헌 및 장의 위치](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+최적화 문제의 설정부터 KKT·Envelope 정리와 응용까지의 전개는 [본문 전체](contents.html)에 있다.
+:::
+
+
+

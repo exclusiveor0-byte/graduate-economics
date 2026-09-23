@@ -1,0 +1,1633 @@
+---
+title: "Chapter 8 · 고정점 정리와 균형"
+description: "Banach·Brouwer·Kakutani 고정점 정리와 일반균형 존재 논리."
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/math-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s81}
+
+## [8.1]{.section-number}Fixed points and equilibrium problems
+
+::: {.topic-opening}
+fixed-point theorem은 방정식을 직접 푸는 정리가 아니다.
+오히려 어떤 문제를
+
+$$
+x=T(x)
+$$
+
+또는
+
+$$
+x\in\Gamma(x)
+$$
+
+의 형태로 바꾸었을 때, 그러한 자기일치점이 존재함을 보장하는 존재정리다.
+:::
+
+### 8.1.1 Fixed points of functions {#s811}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 8.1 · Fixed point of a function
+
+:::::::::::::::::::
+
+$X$가 집합이고
+
+$$
+T:X\to X
+$$
+
+라 하자.
+$x^*\in X$가
+
+$$
+\boxed{
+T(x^*)=x^*
+}
+$$
+
+를 만족하면 $x^*$를 $T$의 fixed point라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 8.1 · Fixed point as a root problem
+
+:::::::::::::::::::
+
+방정식
+
+$$
+F(x)=0
+$$
+
+은 적절한 $\alpha\ne0$에 대해
+
+$$
+T(x)=x-\alpha F(x)
+$$
+
+로 두면
+
+$$
+F(x^*)=0
+\iff
+T(x^*)=x^*.
+$$
+
+따라서 root-finding problem도 fixed-point problem으로 바꿀 수 있다.
+
+::::::::::::::::::::
+
+### 8.1.2 Fixed points of correspondences {#s812}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 8.2 · Fixed point of a correspondence
+
+:::::::::::::::::::
+
+$$
+\Gamma:X\rightrightarrows X
+$$
+
+에 대해 $x^*\in X$가
+
+$$
+\boxed{
+x^*\in\Gamma(x^*)
+}
+$$
+
+를 만족하면 $x^*$를 $\Gamma$의 fixed point라 한다.
+
+::::::::::::::::::::
+
+function은 singleton-valued correspondence의 특별한 경우이므로,
+
+$$
+\Gamma_T(x)=\{T(x)\}
+$$
+
+로 두면
+
+$$
+x^*\in\Gamma_T(x^*)
+\iff
+x^*=T(x^*).
+$$
+
+### 8.1.3 Fixed points versus local solvability {#s813}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>Question</th><th>Typical theorem</th><th>Main conclusion</th></tr>
+</thead>
+<tbody>
+<tr><td>알려진 해 근처에서 해를 매끄럽게 풀 수 있는가?</td><td>Inverse / Implicit Function Theorem</td><td>local uniqueness, differentiability, sensitivity</td></tr>
+<tr><td>해가 적어도 하나 존재하는가?</td><td>Fixed-point theorem</td><td>existence</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Existence precedes characterization
+
+:::::::::::::::::::
+
+fixed-point theorem은 보통 해의 공식, uniqueness, comparative statics를 주지 않는다.
+존재를 확보한 뒤에야 Chapter 4–6의 local tools를 적용하여 특정 equilibrium의 structure를 더 분석할 수 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s82}
+
+## [8.2]{.section-number}Contractions and the Banach Fixed-Point Theorem
+
+::: {.topic-opening}
+Banach theorem은 가장 강한 fixed-point theorem 중 하나다.
+강한 contraction assumption을 요구하는 대신 existence뿐 아니라 uniqueness와 iteration convergence까지 제공한다.
+:::
+
+### 8.2.1 Complete metric spaces {#s821}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 8.3 · Cauchy sequence
+
+:::::::::::::::::::
+
+metric space $(X,d)$의 sequence $\{x_k\}$가 Cauchy라는 것은
+
+$$
+\forall\varepsilon\gt0,\;
+\exists N:
+m,n\ge N
+\Longrightarrow
+d(x_m,x_n)\lt\varepsilon
+$$
+
+이라는 뜻이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 8.4 · Complete metric space
+
+:::::::::::::::::::
+
+$X$의 모든 Cauchy sequence가 $X$의 어떤 점으로 수렴하면
+$(X,d)$를 complete라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 8.1 · Completeness in Euclidean space
+
+:::::::::::::::::::
+
+$\mathbb R^n$은 Euclidean metric 아래 complete이고,
+$\mathbb R^n$의 closed subset은 induced metric 아래 complete이다.
+
+::::::::::::::::::::
+
+### 8.2.2 Contractions {#s822}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 8.5 · Contraction
+
+:::::::::::::::::::
+
+$T:X\to X$가 어떤
+
+$$
+q\in(0,1)
+$$
+
+에 대해
+
+$$
+\boxed{
+d(Tx,Ty)
+\le
+q\,d(x,y)
+\qquad
+\forall x,y\in X
+}
+$$
+
+를 만족하면 $T$를 contraction이라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+INTERPRETATION
+
+:::::::::::::::::::
+
+contraction은 모든 pairwise distance를 동일한 factor $q\lt1$ 이하로 줄인다.
+따라서 반복할수록 서로 다른 초기점의 image가 geometric rate로 가까워진다.
+
+::::::::::::::::::::
+
+### 8.2.3 Banach Fixed-Point Theorem {#s823}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 8.2 · Banach Fixed-Point Theorem
+
+:::::::::::::::::::
+
+$(X,d)$가 nonempty complete metric space이고
+$T:X\to X$가 contraction이라 하자.
+그러면 유일한 fixed point $x^*\in X$가 존재한다.
+또한 임의의 $x_0\in X$에서
+
+$$
+x_{k+1}=T(x_k)
+$$
+
+로 정의하면
+
+$$
+\boxed{
+x_k\to x^*.
+}
+$$
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>Banach Fixed-Point Theorem 증명</summary>
+
+:::::::::::::::::::: {.details-body}
+
+$x_{k+1}=T(x_k)$라 하자.
+contraction property로
+
+$$
+d(x_{k+1},x_k)
+\le
+q^k d(x_1,x_0).
+$$
+
+$m\gt n$이면 triangle inequality에 의해
+
+$$
+d(x_m,x_n)
+\le
+\sum_{j=n}^{m-1}d(x_{j+1},x_j)
+\le
+\frac{q^n}{1-q}d(x_1,x_0).
+$$
+
+우변은 $n\to\infty$에서 0으로 가므로 $\{x_k\}$는 Cauchy.
+completeness로 어떤 $x^*\in X$가 존재하여 $x_k\to x^*$.
+
+contraction은 Lipschitz이므로 continuous.
+따라서
+
+$$
+T(x^*)
+=
+T\left(\lim_k x_k\right)
+=
+\lim_k T(x_k)
+=
+\lim_k x_{k+1}
+=
+x^*.
+$$
+
+이제 $y^*$도 fixed point라고 하면
+
+$$
+d(x^*,y^*)
+=
+d(Tx^*,Ty^*)
+\le
+q\,d(x^*,y^*).
+$$
+
+$q\lt1$이므로
+
+$$
+d(x^*,y^*)=0,
+$$
+
+따라서 $x^*=y^*$.
+
+::::::::::::::::::::
+
+</details>
+
+### 8.2.4 Error bounds and failure without completeness {#s824}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 8.3 · A priori iteration bound
+
+:::::::::::::::::::
+
+Banach iteration에서
+
+$$
+\boxed{
+d(x_k,x^*)
+\le
+\frac{q^k}{1-q}
+d(x_1,x_0).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 8.1 · Completeness cannot simply be dropped
+
+:::::::::::::::::::
+
+$$
+X=(0,1],
+\qquad
+T(x)=\frac{x}{2}.
+$$
+
+$T:X\to X$이고 contraction constant는 $q=1/2$.
+그러나 fixed-point equation
+
+$$
+x=\frac{x}{2}
+$$
+
+의 유일한 해는 $x=0$, 그런데 $0\notin X$.
+따라서 $X$가 complete하지 않으면 fixed point가 존재하지 않을 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+BANACH'S STRENGTH
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{existence}
++
+\text{uniqueness}
++
+\text{constructive iteration}
++
+\text{error bound}.
+}
+$$
+
+이후 Brouwer와 Kakutani는 훨씬 약한 assumptions로 existence만 보장한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s83}
+
+## [8.3]{.section-number}The Brouwer Fixed-Point Theorem
+
+::: {.topic-opening}
+Brouwer theorem은 contraction을 요구하지 않는다.
+finite-dimensional Euclidean space에서 compactness, convexity, continuity만으로 fixed-point existence를 보장한다.
+:::
+
+### 8.3.1 Statement {#s831}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 8.4 · Brouwer Fixed-Point Theorem
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$가 nonempty, compact, convex이고
+
+$$
+T:K\to K
+$$
+
+가 continuous라고 하자.
+그러면
+
+$$
+\boxed{
+\exists x^*\in K:
+T(x^*)=x^*.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+SELF-MAPPING IS PART OF THE ASSUMPTION
+
+:::::::::::::::::::
+
+$T:K\to K$는 단순한 notation이 아니다.
+fixed point를 $K$ 안에서 찾으려면 map이 $K$를 다시 $K$ 안으로 보내야 한다.
+
+::::::::::::::::::::
+
+### 8.3.2 One-dimensional Brouwer from the Intermediate Value Theorem {#s832}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 8.5 · Brouwer on a closed interval
+
+:::::::::::::::::::
+
+continuous
+
+$$
+T:[a,b]\to[a,b]
+$$
+
+는 fixed point를 갖는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$$
+F(x)=T(x)-x
+$$
+
+로 두면 $F$는 continuous.
+$T(a)\in[a,b]$이므로
+
+$$
+F(a)=T(a)-a\ge0.
+$$
+
+또한 $T(b)\in[a,b]$이므로
+
+$$
+F(b)=T(b)-b\le0.
+$$
+
+Intermediate Value Theorem에 의해 어떤 $x^*\in[a,b]$가 존재하여
+
+$$
+F(x^*)=0.
+$$
+
+따라서
+
+$$
+T(x^*)=x^*.
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 8.3.3 Existence does not imply uniqueness {#s833}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 8.2 · Many fixed points
+
+:::::::::::::::::::
+
+$$
+T(x)=x
+\qquad
+(x\in K)
+$$
+
+이면 모든 $x\in K$가 fixed point다.
+따라서 Brouwer는 uniqueness를 주장하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Iteration need not converge
+
+:::::::::::::::::::
+
+Brouwer의 가정만으로
+
+$$
+x_{k+1}=T(x_k)
+$$
+
+가 fixed point로 수렴한다고 결론낼 수 없다.
+예를 들어
+
+$$
+T(x)=1-x
+\qquad
+\text{on }[0,1]
+$$
+
+은 fixed point $1/2$를 가지지만,
+$x_0\ne1/2$이면 iteration은 두 점 사이를 반복한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s84}
+
+## [8.4]{.section-number}Brouwer assumptions, counterexamples, and proof structure
+
+### 8.4.1 Why compactness matters {#s841}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 8.3 · Open interval
+
+:::::::::::::::::::
+
+$$
+K=(0,1),
+\qquad
+T(x)=\frac{x+1}{2}.
+$$
+
+$T:K\to K$는 continuous하지만
+
+$$
+x=T(x)
+\iff
+x=1,
+$$
+
+그리고 $1\notin K$.
+따라서 fixed point가 없다.
+
+::::::::::::::::::::
+
+### 8.4.2 Why convexity matters {#s842}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 8.4 · Rotation of the circle
+
+:::::::::::::::::::
+
+unit circle
+
+$$
+S^1
+=
+\{x\in\mathbb R^2:\|x\|=1\}
+$$
+
+는 compact하지만 convex가 아니다.
+$S^1$을 $90^\circ$ 회전시키는 map
+
+$$
+T:S^1\to S^1
+$$
+
+은 continuous이고 fixed point가 없다.
+
+::::::::::::::::::::
+
+### 8.4.3 Why continuity matters {#s843}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 8.5 · Discontinuous self-map
+
+:::::::::::::::::::
+
+$$
+T(x)
+=
+\begin{cases}
+1,&x\lt1/2,\\
+0,&x\ge1/2,
+\end{cases}
+\qquad x\in[0,1].
+$$
+
+$T:[0,1]\to[0,1]$이지만 fixed point는 없다.
+
+::::::::::::::::::::
+
+### 8.4.4 Proof route via the simplex and Sperner's Lemma {#s844}
+
+general Brouwer theorem의 완전한 증명은 이 장에서 사용하는 다른 정리보다 위상적이다.
+본문의 흐름을 유지하기 위해 핵심 논리를 다음과 같이 정리한다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+BROUWER PROOF ARCHITECTURE
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{triangulate simplex}
+\to
+\text{label vertices}
+\to
+\text{Sperner's Lemma}
+\to
+\text{fully labelled small simplex}
+\to
+\text{mesh size }\downarrow0
+\to
+\text{compactness}
+\to
+\text{fixed point}.
+}
+$$
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>Sperner route의 핵심 아이디어</summary>
+
+:::::::::::::::::::: {.details-body}
+
+표준 simplex
+
+$$
+\Delta^{n-1}
+=
+\left\{
+x\in\mathbb R_+^n:
+\sum_{i=1}^n x_i=1
+\right\}
+$$
+
+위의 continuous self-map $T$를 생각한다.
+simplex를 mesh size가 점점 작아지는 유한개의 subsimplices로 나눈다.
+각 vertex $x$에는 어떤 coordinate $i$를 선택하여
+
+$$
+x_i\ge T_i(x)
+$$
+
+인 label $i$를 부여한다.
+$\sum_i x_i=\sum_iT_i(x)=1$이므로 적어도 하나의 coordinate에서 이런 inequality가 성립한다.
+
+boundary에서는 Sperner boundary rule과 양립하도록 label을 선택할 수 있다.
+Sperner's Lemma에 의해 각 triangulation에는 모든 labels를 포함하는 fully labelled simplex가 존재한다.
+mesh size가 0으로 가는 sequence를 택하면,
+compactness로 fully labelled simplices의 vertices에서 convergent subsequence를 얻는다.
+diameter가 0으로 가므로 모든 vertices는 동일한 limit $x^*$로 수렴한다.
+
+continuity를 사용하면 각 coordinate에 대해
+
+$$
+x_i^*\ge T_i(x^*).
+$$
+
+그런데 양변의 coordinate sum이 모두 1이므로 모든 inequality는 equality:
+
+$$
+x_i^*=T_i(x^*)
+\qquad
+\forall i.
+$$
+
+따라서
+
+$$
+x^*=T(x^*).
+$$
+
+general compact convex set에 대한 Brouwer는 simplex/ball version과 표준적인 finite-dimensional reduction을 통해 얻어진다.
+
+::::::::::::::::::::
+
+</details>
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+SCOPE
+
+:::::::::::::::::::
+
+이 책의 목적은 algebraic topology를 전개하는 것이 아니라 Brouwer의 가정과 economic use를 정확히 이해하는 것이다.
+따라서 Sperner lemma 자체의 combinatorial proof는 연습·확장 대상으로 두고,
+fixed-point theorem은 이후 equilibrium existence의 도구로 사용한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s85}
+
+## [8.5]{.section-number}The Kakutani Fixed-Point Theorem
+
+::: {.topic-opening}
+Brouwer는 function에 대한 정리다.
+그러나 Chapter 7에서 demand, supply, best response는 자연스럽게 correspondence가 될 수 있음을 보았다.
+Kakutani theorem은 바로 이 set-valued 상황에 필요한 fixed-point theorem이다.
+:::
+
+### 8.5.1 Statement {#s851}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 8.6 · Kakutani Fixed-Point Theorem
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$가 nonempty, compact, convex이고
+
+$$
+\Gamma:K\rightrightarrows K
+$$
+
+가 다음을 만족한다고 하자.
+
+(i) $\Gamma(x)\ne\varnothing$ for every $x\in K$.
+
+(ii) $\Gamma(x)$ is compact for every $x\in K$.
+
+(iii) $\Gamma(x)$ is convex for every $x\in K$.
+
+(iv) $\Gamma$ is upper hemicontinuous.
+
+그러면
+
+$$
+\boxed{
+\exists x^*\in K:
+x^*\in\Gamma(x^*).
+}
+$$
+
+::::::::::::::::::::
+
+### 8.5.2 Brouwer as a special case {#s852}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 8.7 · Brouwer is contained in Kakutani
+
+:::::::::::::::::::
+
+continuous function
+
+$$
+T:K\to K
+$$
+
+에 대해
+
+$$
+\Gamma_T(x)=\{T(x)\}
+$$
+
+로 두자.
+singleton은 nonempty, compact, convex이고,
+$T$의 continuity는 $\Gamma_T$의 UHC를 함의한다.
+따라서 Kakutani를 적용하면
+
+$$
+x^*\in\{T(x^*)\},
+$$
+
+즉
+
+$$
+x^*=T(x^*).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+GENERALIZATION
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\text{Brouwer: continuous function}
+\quad\Longrightarrow\quad
+\text{Kakutani: UHC convex-valued correspondence}.
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s86}
+
+## [8.6]{.section-number}Why the Kakutani assumptions matter
+
+### 8.6.1 Convex-valuedness {#s861}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 8.6 · Nonconvex values can destroy fixed points
+
+:::::::::::::::::::
+
+$K=[0,1]$에서
+
+$$
+\Gamma(x)
+=
+\begin{cases}
+\{1\},&x\lt1/2,\\
+\{0,1\},&x=1/2,\\
+\{0\},&x\gt1/2.
+\end{cases}
+$$
+
+각 value는 nonempty compact이고 $\Gamma$는 UHC이다.
+그러나
+
+$$
+\Gamma(1/2)=\{0,1\}
+$$
+
+은 convex가 아니며,
+어떤 $x\in[0,1]$도
+
+$$
+x\in\Gamma(x)
+$$
+
+를 만족하지 않는다.
+
+::::::::::::::::::::
+
+### 8.6.2 Upper hemicontinuity {#s862}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 8.7 · Convex values without UHC
+
+:::::::::::::::::::
+
+$K=[0,1]$에서
+
+$$
+\Gamma(x)
+=
+\begin{cases}
+\{1\},&x\lt1,\\
+\{0\},&x=1.
+\end{cases}
+$$
+
+모든 value는 nonempty compact convex이지만
+$x=1$에서 UHC가 실패하며 fixed point도 없다.
+
+::::::::::::::::::::
+
+### 8.6.3 Compactness and self-mapping {#s863}
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+DOMAIN CONDITIONS
+
+:::::::::::::::::::
+
+Brouwer와 마찬가지로 Kakutani에서도
+
+$$
+\Gamma(x)\subseteq K
+$$
+
+인 self-mapping condition과 domain의 nonempty compact convex structure가 핵심이다.
+compactness는 approximating sequences의 limit를 domain 안에 유지하고,
+convexity는 set-valued averaging argument를 가능하게 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Kakutani gives existence, not uniqueness
+
+:::::::::::::::::::
+
+Kakutani의 가정은 equilibrium candidate가 적어도 하나 존재함을 보장할 뿐,
+fixed point의 수나 comparative statics는 결정하지 않는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s87}
+
+## [8.7]{.section-number}From the Maximum Theorem to fixed points
+
+::: {.topic-opening}
+Chapter 7의 Maximum Theorem과 Chapter 5의 quasiconcavity를 결합하면
+Kakutani의 가정이 optimization problem에서 자연스럽게 생성된다.
+이 연결이 경제학에서 fixed-point theorem이 반복해서 등장하는 핵심 이유다.
+:::
+
+### 8.7.1 Optimization-generated correspondences {#s871}
+
+parameter $a$에 대해
+
+$$
+B(a)
+=
+\operatorname*{arg\,max}_{x\in\mathcal F(a)}
+u(a,x)
+$$
+
+를 생각하자.
+Chapter 7의 Berge Maximum Theorem 아래
+
+$$
+B
+$$
+
+는 nonempty, compact-valued, UHC가 된다.
+
+### 8.7.2 Berge plus quasiconcavity {#s872}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 8.8 · A standard route to Kakutani hypotheses
+
+:::::::::::::::::::
+
+$K\subseteq\mathbb R^n$가 nonempty compact convex이고,
+각 $a\in K$에 대해 feasible set $\mathcal F(a)\subseteq K$가 nonempty compact convex라고 하자.
+$\mathcal F$가 continuous correspondence이고
+$u:K\times K\to\mathbb R$가 continuous이며,
+$x\mapsto u(a,x)$가 quasiconcave라고 하자.
+
+그러면
+
+$$
+B(a)
+=
+\operatorname*{arg\,max}_{x\in\mathcal F(a)}
+u(a,x)
+$$
+
+는
+
+$$
+\boxed{
+\text{nonempty}
++
+\text{compact-valued}
++
+\text{convex-valued}
++
+\text{UHC}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+Berge Maximum Theorem으로 nonemptiness, compact-valuedness, UHC를 얻는다.
+Chapter 7의 quasiconcavity result에 의해 convex feasible set 위의 argmax set은 convex.
+따라서 모든 Kakutani value conditions가 확보된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+THE CENTRAL CHAIN
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+\text{compact feasible sets}
+&\Longrightarrow
+\text{optimizer exists},\\
+\text{Berge}
+&\Longrightarrow
+\text{optimizer correspondence is UHC},\\
+\text{quasiconcavity}
+&\Longrightarrow
+\text{optimizer values are convex},\\
+\text{Kakutani}
+&\Longrightarrow
+\text{fixed point exists}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s88}
+
+## [8.8]{.section-number}Nash equilibrium as a fixed point
+
+::: {.topic-opening}
+game theory에서 Nash equilibrium은 각 player의 선택이 다른 players의 선택에 대한 best response라는 상호일치조건이다.
+따라서 best-response correspondence의 fixed point로 정확히 표현된다.
+:::
+
+### 8.8.1 Best-response correspondence {#s881}
+
+players를
+
+$$
+i=1,\ldots,N
+$$
+
+으로 두고,
+player $i$의 strategy set을 $A_i$,
+joint strategy space를
+
+$$
+A=\prod_{i=1}^N A_i
+$$
+
+라 하자.
+payoff는
+
+$$
+u_i:A\to\mathbb R.
+$$
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 8.6 · Best-response correspondence
+
+:::::::::::::::::::
+
+$$
+\boxed{
+B_i(a_{-i})
+=
+\operatorname*{arg\,max}_{a_i\in A_i}
+u_i(a_i,a_{-i}).
+}
+$$
+
+joint best-response correspondence는
+
+$$
+\boxed{
+B(a)
+=
+\prod_{i=1}^N B_i(a_{-i}).
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 8.7 · Nash equilibrium
+
+:::::::::::::::::::
+
+$a^*\in A$가 Nash equilibrium이라는 것은
+
+$$
+a_i^*\in B_i(a_{-i}^*)
+\qquad
+\forall i
+$$
+
+이며, 동치로
+
+$$
+\boxed{
+a^*\in B(a^*).
+}
+$$
+
+::::::::::::::::::::
+
+### 8.8.2 Existence theorem via Kakutani {#s882}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 8.9 · Nash existence under compact-convex strategy sets
+
+:::::::::::::::::::
+
+각 player $i$에 대해
+
+(i) $A_i\subseteq\mathbb R^{n_i}$ is nonempty, compact, convex;
+
+(ii) $u_i(a_i,a_{-i})$ is continuous in $a$;
+
+(iii) $u_i(\cdot,a_{-i})$ is quasiconcave on $A_i$.
+
+그러면 Nash equilibrium이 적어도 하나 존재한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+각 $i$에 대해 feasible set $A_i$는 parameter $a_{-i}$와 무관한 nonempty compact convex set.
+Berge Maximum Theorem으로
+
+$$
+B_i:A_{-i}\rightrightarrows A_i
+$$
+
+는 nonempty compact-valued UHC.
+quasiconcavity로 각 $B_i(a_{-i})$는 convex.
+
+따라서 product correspondence
+
+$$
+B:A\rightrightarrows A
+$$
+
+는 nonempty compact convex-valued UHC이고,
+$A=\prod_iA_i$ 역시 nonempty compact convex.
+Kakutani에 의해 어떤 $a^*\in A$가 존재하여
+
+$$
+a^*\in B(a^*).
+$$
+
+이것이 Nash equilibrium이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 8.8.3 Finite games and mixed strategies {#s883}
+
+finite game에서 player $i$의 pure-strategy set이 유한하면 mixed-strategy set은 simplex
+
+$$
+\Delta_i
+=
+\left\{
+\sigma_i\in\mathbb R_+^{m_i}:
+\sum_{j=1}^{m_i}\sigma_{ij}=1
+\right\}.
+$$
+
+$\Delta_i$는 nonempty compact convex.
+expected payoff는 own mixed strategy $\sigma_i$에 affine이므로 quasiconcave.
+따라서 Theorem 8.9를 적용하여 mixed-strategy Nash equilibrium이 존재한다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+AN ALTERNATIVE BROUWER ROUTE
+
+:::::::::::::::::::
+
+finite games의 Nash existence는 적절한 continuous self-map을 mixed-strategy simplex 위에 직접 구성하고
+Brouwer theorem을 적용하여도 증명할 수 있다.
+correspondence language를 이미 갖추고 있는 이 책에서는 best response와 Kakutani를 주된 경로로 사용한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s89}
+
+## [8.9]{.section-number}Competitive equilibrium: fixed-point formulation
+
+::: {.topic-opening}
+competitive equilibrium의 상세한 존재증명은 미시경제학의 일반균형 파트에서 다루는 것이 적절하다.
+여기서는 fixed-point theorem이 어떤 형식으로 사용되는지만 구조적으로 정리한다.
+:::
+
+### 8.9.1 Excess demand and price maps {#s891}
+
+normalized price simplex를
+
+$$
+\Delta
+=
+\left\{
+p\in\mathbb R_+^L:
+\sum_{\ell=1}^L p_\ell=1
+\right\}
+$$
+
+라 하고 aggregate excess demand를
+
+$$
+z:\Delta\to\mathbb R^L
+$$
+
+로 생각하자.
+equilibrium price는
+
+$$
+z(p^*)\le0
+$$
+
+와 appropriate complementarity conditions를 만족하는 price다.
+
+존재증명에서는 excess demand를 사용하여
+
+$$
+T:\Delta\to\Delta
+$$
+
+인 continuous price-adjustment map을 만들고,
+Brouwer fixed point
+
+$$
+p^*=T(p^*)
+$$
+
+가 market-clearing condition을 함의하도록 설계할 수 있다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WHY THE SIMPLEX?
+
+:::::::::::::::::::
+
+price는 scale에 대해 homogeneous하게 해석되는 경우가 많으므로
+
+$$
+\sum_\ell p_\ell=1
+$$
+
+같은 normalization을 통해 nonempty compact convex domain을 만든다.
+이것이 Brouwer를 적용하기 위한 전형적인 단계다.
+
+::::::::::::::::::::
+
+### 8.9.2 Why correspondences may be necessary {#s892}
+
+demand 또는 supply가 unique하지 않으면
+
+$$
+p\mapsto x(p),
+\qquad
+p\mapsto y(p)
+$$
+
+를 ordinary function으로 쓸 수 없다.
+대신 demand/supply correspondence가 등장하며,
+Chapter 7의 maximum theorem으로 UHC·compact-valuedness를,
+convexity/quasiconcavity로 convex-valuedness를 확보한 뒤
+Kakutani theorem을 사용하는 것이 자연스럽다.
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+SCOPE
+
+:::::::::::::::::::
+
+Walras' law, boundary behavior of excess demand, free disposal, aggregate production,
+price normalization을 포함한 완전한 general-equilibrium existence proof는
+이 장의 fixed-point framework를 적용하는 별도의 경제이론 문제다.
+여기서는 theorem의 수학적 역할까지만 다룬다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s810}
+
+## [8.10]{.section-number}Comparing fixed-point theorems
+
+### 8.10.1 Banach versus Brouwer versus Kakutani {#s8101}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>Theorem</th><th>Object</th><th>Main assumptions</th><th>Existence</th><th>Uniqueness</th><th>Iteration convergence</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Banach</td>
+<td>function $T:X\to X$</td>
+<td>complete metric space + contraction</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Brouwer</td>
+<td>continuous function $T:K\to K$</td>
+<td>$K$ nonempty compact convex in $\mathbb R^n$</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Kakutani</td>
+<td>correspondence $\Gamma:K\rightrightarrows K$</td>
+<td>nonempty compact convex domain; nonempty compact convex values; UHC</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+STRENGTH OF ASSUMPTIONS AND CONCLUSIONS
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+\text{Banach: }&
+\text{strong metric contraction}
+\Rightarrow
+\text{existence + uniqueness + computation},
+\\
+\text{Brouwer: }&
+\text{continuity + compact convex geometry}
+\Rightarrow
+\text{existence},
+\\
+\text{Kakutani: }&
+\text{UHC + convex-valued correspondence}
+\Rightarrow
+\text{existence}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+### 8.10.2 What existence theorems do not say {#s8102}
+
+<ul class="rule-list">
+<li>fixed point가 unique인지 일반적으로 말해주지 않는다.</li>
+<li>fixed point가 stable한지 일반적으로 말해주지 않는다.</li>
+<li>naive iteration이 fixed point로 수렴하는지 보장하지 않는다.</li>
+<li>여러 equilibrium 중 어떤 것이 선택되는지 설명하지 않는다.</li>
+<li>parameter 변화에 equilibrium이 differentiably 반응하는지 보장하지 않는다.</li>
+</ul>
+
+이런 질문은 필요에 따라 contraction, local regularity, differentiability,
+comparative statics, stability theory 같은 추가 도구를 요구한다.
+
+### 8.10.3 Analysis-part synthesis {#s8103}
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+CHAPTERS 1–8 · COMPLETE LOGIC
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+\text{Topology}
+&\to
+\text{continuity and compactness}
+\\
+&\to
+\text{differentiability}
+\\
+&\to
+\text{inverse / implicit functions}
+\\
+&\to
+\text{convexity}
+\\
+&\to
+\text{optimization and KKT}
+\\
+&\to
+\text{correspondences and Berge}
+\\
+&\to
+\text{fixed points and equilibrium existence}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+END OF PART
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+<strong>해석학적 기초의 완성.</strong>
+Chapter 1–8은 유클리드 공간의 topology에서 시작하여
+continuity, differentiability, local solvability, convex geometry,
+optimization, set-valued stability, fixed-point existence까지 하나의 의존관계로 연결한다.
+이후의 선형대수·확률론·계량경제학·경제이론에서는 이 구조를 반복적으로 사용한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## 연습문제
+
+<ol class="exercise-list">
+<li>$T(x)=\cos x$의 fixed-point equation을 쓰고, 적절한 closed interval에서 self-map과 contraction 여부를 조사하라.</li>
+<li>$F(x)=0$을 $x=T(x)$로 바꾸는 방법이 유일하지 않음을 예제로 설명하라.</li>
+<li>$\Gamma:X\rightrightarrows X$의 fixed point와 ordinary function의 fixed point가 singleton correspondence 아래 어떻게 일치하는지 증명하라.</li>
+<li>closed subset of $\mathbb R^n$이 complete임을 증명하라.</li>
+<li>Banach iteration에서 $d(x_{k+1},x_k)\le q^k d(x_1,x_0)$를 induction으로 증명하라.</li>
+<li>Banach theorem의 a priori error bound를 geometric series로 유도하라.</li>
+<li>$X=(0,1]$, $T(x)=x/2$에서 contraction임에도 fixed point가 없는 이유를 completeness와 연결하여 설명하라.</li>
+<li>$[a,b]$에 대한 Brouwer theorem을 Intermediate Value Theorem으로 증명하라.</li>
+<li>$T(x)=1-x$ on $[0,1]$에서 fixed point를 구하고 naive iteration의 behavior를 분석하라.</li>
+<li>Brouwer theorem이 uniqueness를 보장하지 않는 continuous self-map을 세 가지 이상 구성하라.</li>
+<li>compactness를 제거하면 Brouwer conclusion이 실패하는 예를 하나 구성하라.</li>
+<li>convexity를 제거하면 Brouwer conclusion이 실패하는 예를 circle rotation 이외의 방식으로 구성하라.</li>
+<li>continuity를 제거하면 compact convex domain에서도 fixed point가 없을 수 있음을 예제로 보이라.</li>
+<li>simplex $\Delta^{n-1}$가 nonempty, compact, convex임을 증명하라.</li>
+<li>Brouwer의 Sperner proof에서 왜 각 vertex에 $x_i\ge T_i(x)$인 coordinate가 적어도 하나 존재하는지 설명하라.</li>
+<li>Kakutani theorem에서 singleton-valued correspondence가 Brouwer theorem으로 줄어듦을 증명하라.</li>
+<li>Counterexample 8.6의 correspondence가 UHC임을 정의에서 확인하고 fixed point가 없음을 보이라.</li>
+<li>Counterexample 8.7에서 UHC가 정확히 어느 점에서 실패하는지 정의로 확인하라.</li>
+<li>Berge Maximum Theorem과 quasiconcavity가 Kakutani의 네 가지 value/continuity 조건을 어떻게 만드는지 각각 대응시켜 설명하라.</li>
+<li>두 players가 compact convex strategy sets를 갖고 continuous quasiconcave payoff를 가질 때 joint best-response correspondence가 Kakutani 조건을 만족함을 상세히 증명하라.</li>
+<li>Nash equilibrium condition $a_i^*\in B_i(a_{-i}^*)$가 $a^*\in B(a^*)$와 동치임을 증명하라.</li>
+<li>finite game의 mixed-strategy simplex가 compact convex이고 expected payoff가 own mixed strategy에 affine임을 증명하라.</li>
+<li>affine function이 quasiconcave이면서 quasiconvex임을 이용하여 finite-game best-response values의 convexity를 설명하라.</li>
+<li>strict quasiconcavity가 best response를 singleton으로 만들지만 Nash equilibrium 자체의 uniqueness까지 보장하지 않는 이유를 설명하라.</li>
+<li>competitive equilibrium에서 price normalization이 Brouwer/Kakutani의 compact-domain requirement와 어떻게 연결되는지 설명하라.</li>
+<li>fixed-point existence와 local stability가 서로 다른 질문임을 간단한 one-dimensional map 두 개를 비교하여 설명하라.</li>
+<li>Banach, Brouwer, Kakutani의 assumptions와 conclusions를 implication strength 관점에서 비교하라.</li>
+<li>Chapter 4의 Implicit Function Theorem과 Chapter 8의 fixed-point theorems가 equilibrium analysis에서 서로 어떤 역할을 담당하는지 설명하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 장의 위치
+
+Jehle, G. A. and Reny, P. J. <em>Advanced Microeconomic Theory</em>, 3rd ed.
+Brouwer Fixed-Point Theorem의 finite-dimensional statement와 simplex-based proof,
+Nash equilibrium existence에서 Brouwer를 사용하는 구조,
+그리고 set-valued demand/supply에서 correspondence와 Kakutani가 필요해지는 경제학적 동기를 참고하였다.
+
+Chapter 7의 Berge Maximum Theorem과 quasiconcavity 결과를 직접 사용하여,
+optimization-generated correspondence가 Kakutani의
+nonempty·compact-valued·convex-valued·UHC 조건을 만족하는 경로를 정리하였다.
+
+Banach Fixed-Point Theorem은 Brouwer/Kakutani와 결론의 강도를 비교하기 위한
+metric fixed-point benchmark로 포함하였다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+FINAL DEPENDENCY MAP
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+\text{Chapter 5: }&\text{quasiconcavity}\\
+\text{Chapter 6: }&\text{optimization}\\
+\text{Chapter 7: }&\text{Berge Maximum Theorem}\\
+&\Downarrow\\
+\text{Chapter 8: }&\text{Kakutani fixed point}\\
+&\Downarrow\\
+&\text{equilibrium existence}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+
+
+

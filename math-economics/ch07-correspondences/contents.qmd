@@ -1,0 +1,1908 @@
+---
+title: "Chapter 7 · 대응과 최대정리"
+description: "집합값 대응, 상·하반연속성, Berge 최대정리와 경제학적 응용."
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/math-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s71}
+
+## [7.1]{.section-number}Why set-valued maps?
+
+::: {.topic-opening}
+함수는 하나의 입력에 하나의 출력을 대응시킨다. 그러나 경제학의 최적화 문제는
+하나의 parameter에서 여러 개의 최적해를 가질 수 있다.
+이 경우 optimizer를 함수로 쓰는 것 자체가 잘못된 notation이 된다.
+correspondence는 이런 set-valued dependence를 직접 표현하는 언어다.
+:::
+
+### 7.1.1 Functions versus correspondences {#s711}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 7.1 · Correspondence
+
+:::::::::::::::::::
+
+집합 $X,Y$에 대해 correspondence
+
+$$
+\boxed{
+\Gamma:X\rightrightarrows Y
+}
+$$
+
+는 각 $x\in X$에 $Y$의 부분집합
+
+$$
+\Gamma(x)\subseteq Y
+$$
+
+를 대응시키는 set-valued map이다.
+
+::::::::::::::::::::
+
+ordinary function
+
+$$
+f:X\to Y
+$$
+
+는
+
+$$
+\Gamma_f(x)=\{f(x)\}
+$$
+
+로 정의하면 singleton-valued correspondence의 특별한 경우가 된다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+NOTATION
+
+:::::::::::::::::::
+
+함수에는
+
+$$
+f:X\to Y
+$$
+
+를, correspondence에는
+
+$$
+\Gamma:X\rightrightarrows Y
+$$
+
+를 사용하여 single-valued와 set-valued object를 시각적으로 구분한다.
+
+::::::::::::::::::::
+
+### 7.1.2 Optimization-generated correspondences {#s712}
+
+Chapter 6의 parameterized maximization problem을 다시 쓰면
+
+$$
+(P_\theta):
+\qquad
+\max_{x\in\mathcal F(\theta)}f(x,\theta).
+$$
+
+여기서 이미 두 개의 correspondence가 자연스럽게 등장한다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+TWO CENTRAL CORRESPONDENCES
+
+:::::::::::::::::::
+
+feasible correspondence:
+
+$$
+\boxed{
+\mathcal F:\Theta\rightrightarrows X
+}
+$$
+
+solution correspondence:
+
+$$
+\boxed{
+S(\theta)
+=
+\operatorname*{arg\,max}_{x\in\mathcal F(\theta)}
+f(x,\theta).
+}
+$$
+
+::::::::::::::::::::
+
+경제학에서는 이 밖에도 demand correspondence, supply correspondence,
+best-response correspondence가 반복해서 등장한다.
+따라서 correspondence의 continuity는 단순한 추상화가 아니라
+parameter 변화에 따른 경제적 선택집합의 stability를 기술하는 기본 언어다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s72}
+
+## [7.2]{.section-number}Correspondences: notation and basic objects
+
+### 7.2.1 Values, domain, and graph {#s721}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 7.2 · Value, effective domain, and graph
+
+:::::::::::::::::::
+
+$\Gamma:X\rightrightarrows Y$에 대해 $\Gamma(x)$를 $x$에서의 value라 한다.
+effective domain은
+
+$$
+\operatorname{dom}\Gamma
+=
+\{x\in X:\Gamma(x)\ne\varnothing\},
+$$
+
+graph는
+
+$$
+\boxed{
+\operatorname{Gr}(\Gamma)
+=
+\{(x,y)\in X\times Y:y\in\Gamma(x)\}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 7.1 · Interval-valued correspondence
+
+:::::::::::::::::::
+
+$$
+\Gamma(x)=[-\,|x|,|x|]
+\qquad
+(x\in\mathbb R)
+$$
+
+라 두면
+
+$$
+\operatorname{Gr}(\Gamma)
+=
+\{(x,y):|y|\le|x|\}.
+$$
+
+각 입력에 하나의 점이 아니라 하나의 interval이 대응된다.
+
+::::::::::::::::::::
+
+### 7.2.2 Images and inverse images {#s722}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 7.3 · Image of a set
+
+:::::::::::::::::::
+
+$A\subseteq X$에 대해
+
+$$
+\Gamma(A)
+=
+\bigcup_{x\in A}\Gamma(x).
+$$
+
+::::::::::::::::::::
+
+correspondence에서는 ordinary function과 달리 두 종류의 inverse-image notion이 유용하다.
+$B\subseteq Y$에 대해
+
+$$
+\boxed{
+\Gamma^{+}(B)
+=
+\{x\in X:\Gamma(x)\subseteq B\}
+}
+$$
+
+를 strong inverse image,
+
+$$
+\boxed{
+\Gamma^{-}(B)
+=
+\{x\in X:\Gamma(x)\cap B\ne\varnothing\}
+}
+$$
+
+를 weak inverse image라 한다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+WHY TWO INVERSE IMAGES?
+
+:::::::::::::::::::
+
+UHC는 “전체 value가 작은 open set 안에 남는가?”를 묻고,
+LHC는 “value 중 적어도 하나가 주어진 open set과 계속 만나는가?”를 묻는다.
+따라서 각각 $\Gamma^+$와 $\Gamma^-$가 자연스럽게 등장한다.
+
+::::::::::::::::::::
+
+### 7.2.3 Selections {#s723}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 7.4 · Selection
+
+:::::::::::::::::::
+
+함수
+
+$$
+s:X\to Y
+$$
+
+가 모든 $x\in X$에 대해
+
+$$
+s(x)\in\Gamma(x)
+$$
+
+를 만족하면 $s$를 $\Gamma$의 selection이라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+SCOPE
+
+:::::::::::::::::::
+
+모든 correspondence가 continuous selection을 갖는 것은 아니다.
+이 장에서는 selection의 정의만 사용하며, general selection theorem은 다루지 않는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s73}
+
+## [7.3]{.section-number}Upper hemicontinuity
+
+::: {.topic-opening}
+ordinary continuity를 correspondence에 그대로 적용할 수는 없다.
+먼저 parameter가 조금 변했을 때 value set이 갑자기 바깥으로 크게 팽창하지 않는다는 개념을 정의한다.
+:::
+
+### 7.3.1 Definition {#s731}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 7.5 · Upper hemicontinuity
+
+:::::::::::::::::::
+
+$X,Y$가 metric spaces이고
+
+$$
+\Gamma:X\rightrightarrows Y
+$$
+
+라 하자.
+$\Gamma$가 $x_0\in X$에서 upper hemicontinuous(UHC)라는 것은
+$\Gamma(x_0)$를 포함하는 모든 open set $V\subseteq Y$에 대해
+$x_0$의 neighborhood $U\subseteq X$가 존재하여
+
+$$
+x\in U
+\Longrightarrow
+\Gamma(x)\subseteq V
+$$
+
+가 성립하는 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+INTERPRETATION · No sudden outward expansion
+
+:::::::::::::::::::
+
+UHC는 $x$가 $x_0$에 가까울 때
+$\Gamma(x)$가 $\Gamma(x_0)$와 전혀 무관한 먼 값을 갑자기 새로 만들어내지 못하도록 한다.
+set-valued map의 “outer stability”라고 생각할 수 있다.
+
+::::::::::::::::::::
+
+### 7.3.2 Sequential interpretation {#s732}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 7.1 · A useful sequential consequence of UHC
+
+:::::::::::::::::::
+
+$Y=\mathbb R^m$이고 $\Gamma$가 $x_0$에서 UHC이며 $\Gamma(x_0)$가 compact라고 하자.
+$x_k\to x_0$, $y_k\in\Gamma(x_k)$라면 $\{y_k\}$는 eventually bounded이다.
+또한 $\Gamma$가 closed-valued이면
+$y_k\to y$인 모든 convergent subsequence의 limit은
+
+$$
+y\in\Gamma(x_0)
+$$
+
+를 만족한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+compact $\Gamma(x_0)$를 포함하는 bounded open set $V$를 잡는다.
+UHC에 의해 sufficiently large $k$에서
+
+$$
+\Gamma(x_k)\subseteq V,
+$$
+
+따라서 $y_k$는 eventually bounded.
+이제 $y_k\to y$라고 하자.
+만약 $y\notin\Gamma(x_0)$이고 $\Gamma(x_0)$가 closed이면,
+$y$와 $\Gamma(x_0)$를 분리하는 open neighborhood를 잡을 수 있다.
+이는 UHC와 $y_k\to y$에 모순된다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 7.3.3 Examples and failure {#s733}
+
+:::::::::::::::::::: {.statement .example}
+
+::::::::::::::::::: {.statement-head}
+
+EXAMPLE 7.2 · A UHC correspondence
+
+:::::::::::::::::::
+
+$$
+\Gamma(x)
+=
+\begin{cases}
+\{0\},&x\ne0,\\
+\{0,1\},&x=0.
+\end{cases}
+$$
+
+$x=0$에서 $\Gamma(0)$는 두 점을 포함하고,
+nearby values는 그 안의 $\{0\}$만 취한다.
+따라서 새로운 값이 밖으로 튀어나오지 않으므로 $0$에서 UHC다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 7.1 · Failure of UHC
+
+:::::::::::::::::::
+
+$$
+\Gamma(x)
+=
+\begin{cases}
+\{0,1/x\},&x\ne0,\\
+\{0\},&x=0.
+\end{cases}
+$$
+
+$x\to0$일 때 $1/x$ branch가 arbitrarily far away로 이동한다.
+따라서 $\Gamma$는 $0$에서 UHC가 아니다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s74}
+
+## [7.4]{.section-number}Lower hemicontinuity
+
+::: {.topic-opening}
+UHC가 새로운 값의 갑작스러운 출현을 막는다면,
+LHC는 현재 가능한 값이 작은 parameter 변화 때문에 갑자기 사라지지 않도록 한다.
+:::
+
+### 7.4.1 Definition {#s741}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 7.6 · Lower hemicontinuity
+
+:::::::::::::::::::
+
+$\Gamma:X\rightrightarrows Y$가 $x_0$에서 lower hemicontinuous(LHC)라는 것은
+
+$$
+V\cap\Gamma(x_0)\ne\varnothing
+$$
+
+인 모든 open set $V\subseteq Y$에 대해
+$x_0$의 neighborhood $U$가 존재하여
+
+$$
+x\in U
+\Longrightarrow
+\Gamma(x)\cap V\ne\varnothing
+$$
+
+가 성립하는 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+INTERPRETATION · No sudden disappearance
+
+:::::::::::::::::::
+
+$y_0\in\Gamma(x_0)$가 가능했다면,
+nearby parameter에서도 $y_0$에 arbitrarily close한 가능한 값이 계속 존재해야 한다.
+
+::::::::::::::::::::
+
+### 7.4.2 Sequential characterization {#s742}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 7.2 · Sequential characterization of LHC in metric spaces
+
+:::::::::::::::::::
+
+$X,Y$가 metric spaces라고 하자.
+$\Gamma$가 $x_0$에서 LHC일 필요충분조건은
+모든 sequence $x_k\to x_0$와 모든
+
+$$
+y_0\in\Gamma(x_0)
+$$
+
+에 대해 적절한
+
+$$
+y_k\in\Gamma(x_k)
+$$
+
+를 선택하여
+
+$$
+y_k\to y_0
+$$
+
+로 만들 수 있는 것이다.
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>증명 펼치기</summary>
+
+:::::::::::::::::::: {.details-body}
+
+먼저 LHC를 가정한다.
+$y_0\in\Gamma(x_0)$이고 $x_k\to x_0$라 하자.
+각 $r\in\mathbb N$에 대해 open ball
+
+$$
+B_{1/r}(y_0)
+$$
+
+는 $\Gamma(x_0)$와 만난다.
+LHC에 의해 sufficiently large $k$에서는
+
+$$
+\Gamma(x_k)\cap B_{1/r}(y_0)\ne\varnothing.
+$$
+
+이를 diagonal하게 선택하여 $y_k\to y_0$인 selection을 구성할 수 있다.
+
+반대로 sequential property를 가정하고 LHC가 실패한다고 하자.
+그러면 어떤 open $V$가 $\Gamma(x_0)$와 만나지만,
+$x_0$로 수렴하는 sequence $x_k$를 골라
+
+$$
+\Gamma(x_k)\cap V=\varnothing
+$$
+
+이 되게 할 수 있다.
+$y_0\in\Gamma(x_0)\cap V$를 잡으면 sequential property에 의해
+$y_k\in\Gamma(x_k)$, $y_k\to y_0$가 가능해야 한다.
+$V$가 open이므로 eventually $y_k\in V$, 모순이다.
+
+::::::::::::::::::::
+
+</details>
+
+### 7.4.3 Examples and failure {#s743}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 7.2 · UHC but not LHC
+
+:::::::::::::::::::
+
+다시
+
+$$
+\Gamma(x)
+=
+\begin{cases}
+\{0\},&x\ne0,\\
+\{0,1\},&x=0
+\end{cases}
+$$
+
+를 생각하자.
+$1\in\Gamma(0)$이지만 $x\ne0$에서는 $1$ 근처의 값이 전혀 없다.
+따라서 $0$에서 LHC가 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+UHC AND LHC ARE DIFFERENT
+
+:::::::::::::::::::
+
+UHC는 set의 outward expansion을 통제하고,
+LHC는 기존 points의 persistence를 통제한다.
+어느 하나가 다른 하나를 일반적으로 함의하지 않는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s75}
+
+## [7.5]{.section-number}Continuous correspondences and closed graphs
+
+### 7.5.1 Continuous correspondence {#s751}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 7.7 · Continuous correspondence
+
+:::::::::::::::::::
+
+$\Gamma:X\rightrightarrows Y$가 $x_0$에서
+UHC이면서 LHC이면 $x_0$에서 continuous라고 한다.
+모든 $x\in X$에서 continuous이면 simply continuous correspondence라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 7.3 · Ordinary continuity as a special case
+
+:::::::::::::::::::
+
+ordinary function $f:X\to Y$를 singleton-valued correspondence
+
+$$
+\Gamma_f(x)=\{f(x)\}
+$$
+
+로 보면
+
+$$
+f\text{ continuous}
+\iff
+\Gamma_f\text{ continuous}.
+$$
+
+::::::::::::::::::::
+
+### 7.5.2 Closed graph {#s752}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 7.8 · Closed graph
+
+:::::::::::::::::::
+
+$$
+\operatorname{Gr}(\Gamma)
+=
+\{(x,y):y\in\Gamma(x)\}
+$$
+
+가 $X\times Y$에서 closed이면 $\Gamma$가 closed graph를 갖는다고 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 7.4 · Sequential closed-graph criterion
+
+:::::::::::::::::::
+
+$X,Y$가 metric spaces일 때 graph가 closed일 필요충분조건은
+
+$$
+x_k\to x,\qquad
+y_k\to y,\qquad
+y_k\in\Gamma(x_k)
+$$
+
+이면
+
+$$
+y\in\Gamma(x)
+$$
+
+가 성립하는 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 7.5 · UHC with closed values implies closed graph
+
+:::::::::::::::::::
+
+$X,Y$가 metric spaces이고 $\Gamma$가 UHC이며 각 $\Gamma(x)$가 closed라고 하자.
+그러면
+
+$$
+\operatorname{Gr}(\Gamma)
+$$
+
+는 closed이다.
+
+::::::::::::::::::::
+
+### 7.5.3 When closed graph and UHC agree {#s753}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 7.6 · Closed graph plus local boundedness
+
+:::::::::::::::::::
+
+$X\subseteq\mathbb R^p$, $Y=\mathbb R^n$라 하자.
+$\Gamma:X\rightrightarrows Y$가 closed graph를 갖고,
+$x_0$의 어떤 neighborhood $U$에서
+
+$$
+\bigcup_{x\in U}\Gamma(x)
+$$
+
+가 bounded라고 하자.
+또한 $\Gamma(x_0)$가 nonempty라 하자.
+그러면 $\Gamma$는 $x_0$에서 UHC이다.
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>증명 펼치기</summary>
+
+:::::::::::::::::::: {.details-body}
+
+UHC가 실패한다고 하자.
+그러면 $\Gamma(x_0)\subseteq V$인 어떤 open $V$와
+$x_k\to x_0$, $y_k\in\Gamma(x_k)\setminus V$를 선택할 수 있다.
+local boundedness로 $\{y_k\}$는 bounded이므로 subsequence를 취해
+
+$$
+y_{k_\ell}\to y.
+$$
+
+closed graph로
+
+$$
+y\in\Gamma(x_0)\subseteq V.
+$$
+
+$V$가 open이므로 sufficiently large $\ell$에서 $y_{k_\ell}\in V$,
+이는 선택과 모순이다.
+
+::::::::::::::::::::
+
+</details>
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Closed graph alone is not UHC
+
+:::::::::::::::::::
+
+$$
+\Gamma(x)
+=
+\begin{cases}
+\{1/x\},&x\ne0,\\
+\{0\},&x=0
+\end{cases}
+$$
+
+는 $\mathbb R\times\mathbb R$에서 closed graph를 갖지만 $0$ 근처에서 locally bounded하지 않고,
+$0$에서 UHC도 아니다.
+따라서
+
+$$
+\boxed{
+\text{closed graph}
+\not\Rightarrow
+\text{UHC}
+}
+$$
+
+를 추가 가정 없이 사용하면 안 된다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s76}
+
+## [7.6]{.section-number}Parametric feasible and solution correspondences
+
+::: {.topic-opening}
+Chapter 6의 notation을 correspondence language로 다시 읽으면
+parameterized optimization 전체가
+
+$$
+(f,\mathcal F)\longmapsto(v,S)
+$$
+
+라는 stability problem으로 바뀐다.
+:::
+
+### 7.6.1 Chapter 6 notation revisited {#s761}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 7.9 · Parametric maximization problem
+
+:::::::::::::::::::
+
+$$
+\boxed{
+(P_\theta):
+\qquad
+\max_{x\in\mathcal F(\theta)}
+f(\theta,x)
+}
+$$
+
+를 생각하자.
+여기서
+
+$$
+\mathcal F:\Theta\rightrightarrows X
+$$
+
+는 feasible correspondence,
+
+$$
+v(\theta)
+=
+\sup_{x\in\mathcal F(\theta)}f(\theta,x)
+$$
+
+는 value function,
+
+$$
+S(\theta)
+=
+\operatorname*{arg\,max}_{x\in\mathcal F(\theta)}
+f(\theta,x)
+$$
+
+는 solution correspondence다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.dependency-chain}
+
+<span>$f,\mathcal F$</span>
+<span>→</span>
+<span>$v$</span>
+<span>and</span>
+<span>$S$</span>
+
+::::::::::::::::::::
+
+### 7.6.2 Constraint continuity {#s762}
+
+Chapter 6의 constraint notation
+
+$$
+h(x,\theta)=0,
+\qquad
+g(x,\theta)\ge0
+$$
+
+로 feasible correspondence를
+
+$$
+\mathcal F(\theta)
+=
+\{x:h(x,\theta)=0,\ g(x,\theta)\ge0\}
+$$
+
+로 정의할 수 있다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 7.7 · Continuous constraints give a closed feasible graph
+
+:::::::::::::::::::
+
+$h,g$가 continuous이면
+
+$$
+\operatorname{Gr}(\mathcal F)
+=
+\{(\theta,x):h(x,\theta)=0,\ g(x,\theta)\ge0\}
+$$
+
+는 closed이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$(\theta_k,x_k)\to(\theta,x)$이고 $x_k\in\mathcal F(\theta_k)$라 하자.
+continuity로
+
+$$
+h(x,\theta)
+=
+\lim_k h(x_k,\theta_k)
+=
+0,
+$$
+
+그리고 componentwise
+
+$$
+g_j(x,\theta)
+=
+\lim_k g_j(x_k,\theta_k)
+\ge0.
+$$
+
+따라서 $x\in\mathcal F(\theta)$.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 7.6.3 Continuity of constraints is not enough for LHC {#s763}
+
+:::::::::::::::::::: {.statement .counterexample}
+
+::::::::::::::::::: {.statement-head}
+
+COUNTEREXAMPLE 7.3 · Continuous constraint, discontinuous feasible correspondence
+
+:::::::::::::::::::
+
+$X=[-1,1]$, parameter $\theta\in\mathbb R$이고
+
+$$
+\mathcal F(\theta)
+=
+\{x\in[-1,1]:\theta x\ge0\}.
+$$
+
+constraint function
+
+$$
+g(x,\theta)=\theta x
+$$
+
+는 continuous이다.
+그러나
+
+$$
+\mathcal F(0)=[-1,1],
+$$
+
+$$
+\mathcal F(\theta)=[0,1]\quad(\theta\gt0),
+$$
+
+$$
+\mathcal F(\theta)=[-1,0]\quad(\theta\lt0).
+$$
+
+$\theta=0$에서 $x=1\in\mathcal F(0)$이지만
+$\theta_k\lt0$, $\theta_k\to0$이면
+$1$ 근처의 feasible point는 존재하지 않는다.
+따라서 $\mathcal F$는 $0$에서 LHC가 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+LESSON
+
+:::::::::::::::::::
+
+constraint functions의 continuity는 feasible graph의 closedness를 보장하지만,
+feasible set이 parameter 변화에 따라 “갑자기 줄어드는 것”까지 막아주지는 않는다.
+Maximum Theorem에서 feasible correspondence의 LHC가 별도로 필요한 이유다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s77}
+
+## [7.7]{.section-number}Berge Maximum Theorem
+
+::: {.topic-opening}
+Berge Maximum Theorem은 parameterized optimization의 primitive continuity가
+value와 optimizer set의 stability로 전달되는 방식을 한 번에 정리한다.
+:::
+
+### 7.7.1 Statement {#s771}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 7.8 · Berge Maximum Theorem
+
+:::::::::::::::::::
+
+$\Theta\subseteq\mathbb R^p$, $X\subseteq\mathbb R^n$라 하자.
+
+$$
+f:\Theta\times X\to\mathbb R
+$$
+
+가 continuous이고
+
+$$
+\mathcal F:\Theta\rightrightarrows X
+$$
+
+가 nonempty-valued, compact-valued, continuous correspondence라고 하자.
+즉 $\mathcal F$는 UHC이면서 LHC이다.
+
+각 $\theta\in\Theta$에 대해
+
+$$
+v(\theta)
+=
+\max_{x\in\mathcal F(\theta)}
+f(\theta,x),
+$$
+
+$$
+S(\theta)
+=
+\operatorname*{arg\,max}_{x\in\mathcal F(\theta)}
+f(\theta,x)
+$$
+
+로 정의하면 다음이 성립한다.
+
+(i)
+
+$$
+S(\theta)\ne\varnothing
+$$
+
+이고 $S(\theta)$는 compact.
+
+(ii)
+
+$$
+\boxed{
+v:\Theta\to\mathbb R
+\text{ is continuous}.
+}
+$$
+
+(iii)
+
+$$
+\boxed{
+S:\Theta\rightrightarrows X
+\text{ is UHC}.
+}
+$$
+
+::::::::::::::::::::
+
+### 7.7.2 What each assumption does {#s772}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th>Assumption</th><th>Role in the theorem</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>$f$ continuous</td>
+<td>nearby $(\theta,x)$에서 objective value가 안정적으로 변한다.</td>
+</tr>
+<tr>
+<td>$\mathcal F(\theta)$ nonempty</td>
+<td>optimization problem이 각 parameter에서 feasible하다.</td>
+</tr>
+<tr>
+<td>$\mathcal F(\theta)$ compact</td>
+<td>maximum existence와 maximizing sequence의 subsequence control을 준다.</td>
+</tr>
+<tr>
+<td>$\mathcal F$ UHC</td>
+<td>nearby feasible sets가 바깥으로 갑자기 팽창하는 것을 막는다.</td>
+</tr>
+<tr>
+<td>$\mathcal F$ LHC</td>
+<td>현재 feasible point가 nearby parameter에서 갑자기 사라지는 것을 막는다.</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Berge does not require uniqueness
+
+:::::::::::::::::::
+
+Maximum Theorem의 핵심 장점은
+
+$$
+S(\theta)
+$$
+
+가 multi-valued여도 적용된다는 것이다.
+uniqueness는 $S$를 ordinary continuous optimizer function으로 바꿀 때만 필요하다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s78}
+
+## [7.8]{.section-number}Proof of the Maximum Theorem
+
+::: {.topic-opening}
+증명의 핵심은 value function의 lower bound와 upper bound가 서로 다른 hemicontinuity를 사용한다는 데 있다.
+LHC는 현재 optimizer를 nearby feasible points로 근사하게 하고,
+UHC는 nearby optimizers가 limit에서 feasible set 밖으로 빠져나가지 않게 한다.
+:::
+
+### 7.8.1 Existence and compactness of the solution set {#s781}
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Step 1
+
+:::::::::::::::::::
+
+$\theta$를 고정하자.
+$\mathcal F(\theta)$는 nonempty compact이고
+
+$$
+x\mapsto f(\theta,x)
+$$
+
+는 continuous.
+Extreme Value Theorem에 의해 maximum이 달성되므로
+
+$$
+S(\theta)\ne\varnothing.
+$$
+
+또한
+
+$$
+S(\theta)
+=
+\mathcal F(\theta)
+\cap
+\{x:f(\theta,x)=v(\theta)\}
+$$
+
+이고 level set은 closed이므로 $S(\theta)$는 compact set의 closed subset,
+따라서 compact이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 7.8.2 Lower bound: LHC prevents feasible points from disappearing {#s782}
+
+$\theta_k\to\theta$라 하자.
+$x^*\in S(\theta)$를 하나 선택한다.
+$\mathcal F$가 LHC이므로 Theorem 7.2에 의해
+
+$$
+x_k\in\mathcal F(\theta_k)
+$$
+
+를 선택하여
+
+$$
+x_k\to x^*
+$$
+
+로 만들 수 있다.
+
+정의상
+
+$$
+v(\theta_k)
+\ge
+f(\theta_k,x_k).
+$$
+
+$f$의 continuity로
+
+$$
+f(\theta_k,x_k)
+\to
+f(\theta,x^*)
+=
+v(\theta).
+$$
+
+따라서
+
+$$
+\boxed{
+\liminf_{k\to\infty}v(\theta_k)
+\ge
+v(\theta).
+}
+$$
+
+### 7.8.3 Upper bound: UHC prevents maximizing choices from escaping {#s783}
+
+각 $k$에서
+
+$$
+x_k^*\in S(\theta_k)
+$$
+
+를 잡는다.
+$\mathcal F(\theta)$는 compact하므로 이를 포함하는 bounded open set $V$를 잡을 수 있다.
+UHC에 의해 sufficiently large $k$에 대해
+
+$$
+\mathcal F(\theta_k)\subseteq V.
+$$
+
+따라서 $\{x_k^*\}$는 eventually bounded.
+
+임의의 subsequence에서 다시 convergent subsequence를 취해
+
+$$
+x_{k_\ell}^*\to\bar x
+$$
+
+로 둘 수 있다.
+$\mathcal F$는 UHC이고 compact-valued이므로 closed graph를 가지며
+
+$$
+\bar x\in\mathcal F(\theta).
+$$
+
+continuity로
+
+$$
+v(\theta_{k_\ell})
+=
+f(\theta_{k_\ell},x_{k_\ell}^*)
+\to
+f(\theta,\bar x)
+\le
+v(\theta).
+$$
+
+따라서
+
+$$
+\boxed{
+\limsup_{k\to\infty}v(\theta_k)
+\le
+v(\theta).
+}
+$$
+
+:::::::::::::::::::: {.statement .corollary}
+
+::::::::::::::::::: {.statement-head}
+
+COROLLARY 7.9 · Continuity of the value function
+
+:::::::::::::::::::
+
+두 inequality를 결합하면
+
+$$
+\lim_{k\to\infty}v(\theta_k)=v(\theta).
+$$
+
+따라서 $v$는 continuous이다.
+
+::::::::::::::::::::
+
+### 7.8.4 UHC of the solution correspondence {#s784}
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Step 4
+
+:::::::::::::::::::
+
+먼저 optimizer graph가 closed임을 보자.
+
+$$
+\theta_k\to\theta,
+\qquad
+x_k\in S(\theta_k),
+\qquad
+x_k\to x
+$$
+
+라 하자.
+feasible graph가 closed이므로
+
+$$
+x\in\mathcal F(\theta).
+$$
+
+또한 value continuity와 objective continuity로
+
+$$
+f(\theta,x)
+=
+\lim_k f(\theta_k,x_k)
+=
+\lim_k v(\theta_k)
+=
+v(\theta).
+$$
+
+따라서
+
+$$
+x\in S(\theta).
+$$
+
+즉 $\operatorname{Gr}(S)$는 closed이다.
+
+또한
+
+$$
+S(\theta)\subseteq\mathcal F(\theta),
+$$
+
+그리고 $\mathcal F$의 UHC와 compact-valuedness 때문에 $S$는 locally bounded.
+Theorem 7.6에 의해 $S$는 UHC이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+PROOF LOGIC
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+\text{LHC of }\mathcal F
+&\Longrightarrow
+\liminf v(\theta_k)\ge v(\theta),
+\\
+\text{UHC of }\mathcal F
+&\Longrightarrow
+\limsup v(\theta_k)\le v(\theta),
+\\
+\text{continuity of }v
+&+
+\text{closed feasible graph}
+\Longrightarrow
+S\text{ UHC}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s79}
+
+## [7.9]{.section-number}Unique optimizers and continuity
+
+### 7.9.1 Singleton-valued solution correspondence {#s791}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 7.10 · Unique optimizer corollary
+
+:::::::::::::::::::
+
+Berge Maximum Theorem의 가정 아래,
+모든 $\theta\in\Theta$에 대해
+
+$$
+S(\theta)=\{x^*(\theta)\}
+$$
+
+라고 하자.
+그러면
+
+$$
+\boxed{
+x^*:\Theta\to X
+\text{ is continuous}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$S$는 UHC이고 singleton-valued다.
+$x^*(\theta_0)$를 포함하는 임의의 open set $V$를 잡으면
+UHC에 의해 $\theta$가 $\theta_0$에 충분히 가까울 때
+
+$$
+S(\theta)
+=
+\{x^*(\theta)\}
+\subseteq V.
+$$
+
+이것이 ordinary continuity의 정의다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 7.9.2 Berge versus the Implicit Function Theorem {#s792}
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead>
+<tr><th></th><th>Berge Maximum Theorem</th><th>Implicit Function Theorem</th></tr>
+</thead>
+<tbody>
+<tr><td>주요 대상</td><td>value와 argmax correspondence</td><td>local solution function</td></tr>
+<tr><td>미분가능성</td><td>필요 없음</td><td>$C^1$ structure 사용</td></tr>
+<tr><td>compactness</td><td>핵심</td><td>일반적으로 필요 없음</td></tr>
+<tr><td>solution uniqueness</td><td>필요 없음</td><td>local branch를 함수로 풀기 위해 중요</td></tr>
+<tr><td>결론</td><td>$v$ continuous, $S$ UHC</td><td>local differentiability와 derivative formula</td></tr>
+<tr><td>comparative statics</td><td>qualitative stability</td><td>quantitative derivative</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+COMPLEMENTARY ROLES
+
+:::::::::::::::::::
+
+Berge와 IFT는 경쟁하는 정리가 아니다.
+Berge는 약한 smoothness 아래 set-valued optimizer까지 다루고,
+IFT는 더 강한 regularity 아래 unique local branch의 derivative를 계산한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s710}
+
+## [7.10]{.section-number}Convex-valued solution correspondences
+
+::: {.topic-opening}
+Chapter 5의 quasiconcavity는 단지 utility contour의 모양을 설명하는 데 그치지 않는다.
+parameterized maximization에서 argmax set 자체의 convexity와 uniqueness를 통제한다.
+:::
+
+### 7.10.1 Quasiconcavity and convex argmax sets {#s7101}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 7.11 · Quasiconcavity implies convex-valued argmax
+
+:::::::::::::::::::
+
+$\theta$를 고정하자.
+$\mathcal F(\theta)$가 convex이고
+
+$$
+x\mapsto f(\theta,x)
+$$
+
+가 quasiconcave이면
+
+$$
+\boxed{
+S(\theta)\text{ is convex}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+$x,y\in S(\theta)$라 하자.
+그러면
+
+$$
+f(\theta,x)
+=
+f(\theta,y)
+=
+v(\theta).
+$$
+
+$\lambda\in[0,1]$에 대해 feasible-set convexity로
+
+$$
+z_\lambda
+=
+\lambda x+(1-\lambda)y
+\in\mathcal F(\theta).
+$$
+
+quasiconcavity로
+
+$$
+f(\theta,z_\lambda)
+\ge
+\min\{f(\theta,x),f(\theta,y)\}
+=
+v(\theta).
+$$
+
+$v(\theta)$가 maximum이므로 equality이고
+
+$$
+z_\lambda\in S(\theta).
+$$
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+### 7.10.2 Strict quasiconcavity and uniqueness {#s7102}
+
+:::::::::::::::::::: {.statement .corollary}
+
+::::::::::::::::::: {.statement-head}
+
+COROLLARY 7.12 · Strict quasiconcavity implies uniqueness
+
+:::::::::::::::::::
+
+$\mathcal F(\theta)$가 convex이고
+$x\mapsto f(\theta,x)$가 strictly quasiconcave이며
+$S(\theta)\ne\varnothing$이면
+
+$$
+\boxed{
+S(\theta)\text{ is a singleton}.
+}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+Proof
+
+:::::::::::::::::::
+
+서로 다른 maximizers $x,y$가 있다고 하자.
+$0\lt\lambda\lt1$이면 strict quasiconcavity로
+
+$$
+f(\theta,\lambda x+(1-\lambda)y)
+\gt
+\min\{f(\theta,x),f(\theta,y)\}
+=
+v(\theta),
+$$
+
+maximum value의 정의에 모순이다.
+
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+CHAIN OF CONSEQUENCES
+
+:::::::::::::::::::
+
+Berge의 가정과 strict quasiconcavity가 함께 성립하면
+
+$$
+\boxed{
+\text{existence}
++
+\text{uniqueness}
++
+\text{continuity of }x^*(\theta).
+}
+$$
+
+즉 Chapter 2의 existence, Chapter 5의 shape, Chapter 7의 stability가 하나의 결과로 결합된다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s7110}
+
+## [7.11]{.section-number}Economic applications and bridge to fixed points
+
+### 7.11.1 Demand correspondence {#s7111}
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC EXAMPLE 7.1 · Consumer demand
+
+:::::::::::::::::::
+
+소비자 problem을
+
+$$
+\max_{x\in B(p,w)}u(x)
+$$
+
+로 두자.
+positive prices에서 budget correspondence
+
+$$
+(p,w)
+\rightrightarrows
+B(p,w)
+=
+\{x\ge0:p^\top x\le w\}
+$$
+
+가 nonempty compact-valued and continuous이고 $u$가 continuous이면
+Berge theorem으로 indirect utility
+
+$$
+v(p,w)
+$$
+
+는 continuous이고 demand correspondence
+
+$$
+D(p,w)
+=
+\arg\max_{x\in B(p,w)}u(x)
+$$
+
+는 nonempty compact-valued UHC이다.
+
+::::::::::::::::::::
+
+$u$가 quasiconcave이면 $D(p,w)$는 convex-valued,
+strictly quasiconcave이면 unique demand가 존재하고
+
+$$
+x(p,w)
+$$
+
+는 continuous function이 된다.
+
+### 7.11.2 Supply and best-response correspondences {#s7112}
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC EXAMPLE 7.2 · Supply correspondence
+
+:::::::::::::::::::
+
+production set $Y$가 compact이고 price $p$에서 firm이
+
+$$
+\max_{y\in Y}p^\top y
+$$
+
+를 푼다고 하자.
+objective가 $(p,y)$에 continuous이므로
+
+$$
+Y^*(p)
+=
+\arg\max_{y\in Y}p^\top y
+$$
+
+는 nonempty compact-valued UHC.
+strict convexity-type assumptions가 없으면 supply가 set-valued일 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .economic}
+
+::::::::::::::::::: {.statement-head}
+
+ECONOMIC EXAMPLE 7.3 · Best-response correspondence
+
+:::::::::::::::::::
+
+player $i$의 strategy set $A_i$와 payoff
+
+$$
+u_i(a_i,a_{-i})
+$$
+
+가 주어졌을 때
+
+$$
+B_i(a_{-i})
+=
+\operatorname*{arg\,max}_{a_i\in A_i}
+u_i(a_i,a_{-i})
+$$
+
+는 best-response correspondence다.
+compact strategy sets와 payoff continuity 아래 Berge theorem은
+$B_i$의 nonemptiness, compact-valuedness, UHC를 제공한다.
+payoff가 own strategy에 quasiconcave이면 values는 convex하다.
+
+::::::::::::::::::::
+
+### 7.11.3 Bridge to Kakutani {#s7113}
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+FROM MAXIMUM THEOREM TO FIXED POINTS
+
+:::::::::::::::::::
+
+optimization-generated correspondence가
+
+$$
+\boxed{
+\text{nonempty}
++
+\text{compact-valued}
++
+\text{convex-valued}
++
+\text{UHC}
+}
+$$
+
+를 만족하면 Chapter 8의 Kakutani fixed-point theorem을 적용할 준비가 된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+NEXT CHAPTER
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+<strong>Chapter 8. Fixed-Point Theorems.</strong>
+Banach contraction theorem에서 시작하여 Brouwer fixed-point theorem,
+그리고 UHC·nonempty·compact·convex-valued correspondence에 대한 Kakutani theorem으로 확장한다.
+Chapter 7의 best-response correspondence가 Chapter 8에서 equilibrium existence의 직접적인 입력이 된다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## 연습문제
+
+<ol class="exercise-list">
+<li>ordinary function $f:X\to Y$를 singleton-valued correspondence로 보고 graph notation을 다시 쓰라.</li>
+<li>$\Gamma(x)=[-x^2,x^2]$의 graph와 $\Gamma([-1,1])$을 구하라.</li>
+<li>strong inverse image $\Gamma^+(B)$와 weak inverse image $\Gamma^-(B)$가 일반적으로 다른 예를 구성하라.</li>
+<li>$\Gamma(x)=[0,x]$ for $x\ge0$에 대해 continuous selection을 두 개 이상 구성하라.</li>
+<li>$\Gamma(x)=\{0\}$ for $x\ne0$, $\Gamma(0)=\{0,1\}$가 $0$에서 UHC지만 LHC가 아님을 정의에서 증명하라.</li>
+<li>$\Gamma(x)=\{0,1/x\}$ for $x\ne0$, $\Gamma(0)=\{0\}$가 $0$에서 UHC가 아님을 증명하라.</li>
+<li>LHC의 sequential characterization을 처음부터 증명하라.</li>
+<li>singleton-valued correspondence의 UHC와 ordinary function의 continuity가 동치임을 증명하라.</li>
+<li>UHC와 closed-valuedness가 closed graph를 함의함을 증명하라.</li>
+<li>$\Gamma(x)=\{1/x\}$ for $x\ne0$, $\Gamma(0)=\{0\}$가 closed graph지만 UHC가 아닌 이유를 설명하라.</li>
+<li>Theorem 7.6에서 local boundedness가 어디에 사용되는지 proof를 따라 설명하라.</li>
+<li>$\mathcal F(\theta)=\{x\in[-1,1]:\theta x\ge0\}$가 $\theta=0$에서 LHC가 아님을 sequential criterion으로 보이라.</li>
+<li>continuous constraint functions가 feasible graph closedness는 주지만 LHC를 자동으로 주지 않는 이유를 설명하라.</li>
+<li>Berge Maximum Theorem에서 compact-valuedness가 maximum existence와 proof의 subsequence step에 각각 어떻게 사용되는지 설명하라.</li>
+<li>Berge proof에서 LHC가 $\liminf v(\theta_k)\ge v(\theta)$에 사용되는 과정을 다시 증명하라.</li>
+<li>Berge proof에서 UHC가 $\limsup v(\theta_k)\le v(\theta)$에 사용되는 과정을 다시 증명하라.</li>
+<li>value continuity를 이용하여 solution correspondence의 graph가 closed임을 증명하라.</li>
+<li>Berge theorem의 가정 아래 unique optimizer가 존재하면 optimizer function이 continuous임을 증명하라.</li>
+<li>Berge Maximum Theorem과 Implicit Function Theorem의 가정과 결론을 비교하라.</li>
+<li>convex feasible set과 quasiconcave objective 아래 argmax set이 convex임을 증명하라.</li>
+<li>strict quasiconcavity가 optimizer uniqueness를 보장함을 증명하라.</li>
+<li>$u(x)=\min\{x_1,x_2\}$와 compact convex budget set을 사용하여 multi-valued demand가 가능한 parameter를 찾아 demand correspondence를 논하라.</li>
+<li>profit maximization $\max_{y\in Y}p^\top y$에서 non-strictly convex technology가 multi-valued supply를 만들 수 있는 예를 구성하라.</li>
+<li>finite game에서 player $i$의 mixed-strategy best-response correspondence를 정의하고, payoff continuity와 own-strategy quasiconcavity가 어떤 성질을 주는지 설명하라.</li>
+<li>Chapter 8의 Kakutani theorem을 적용하기 위해 Chapter 7에서 미리 확보해야 할 네 가지 correspondence 성질을 정리하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌 및 장의 위치
+
+Jehle, G. A. and Reny, P. J. <em>Advanced Microeconomic Theory</em>, 3rd ed.
+Theorem of the Maximum의 existence, value-function continuity, optimizer-sequence stability,
+unique solution일 때 optimizer continuity의 전개를 참고하였다.
+본 장에서는 이를 표준 correspondence notation과 upper/lower hemicontinuity로 다시 정식화하였다.
+
+Chapter 6의 notation
+
+$$
+\mathcal F(\theta),\qquad
+v(\theta),\qquad
+S(\theta)
+$$
+
+을 그대로 유지하여 smooth optimization과 set-valued parametric optimization 사이의 연결을 명확히 했다.
+
+:::::::::::::::::::: {.chapter-summary}
+
+::::::::::::::::::: {.chapter-summary__head}
+
+DEPENDENCY MAP
+
+:::::::::::::::::::
+
+$$
+\boxed{
+\begin{aligned}
+\text{Chapter 2: }&\text{compactness and continuity}\\
+\text{Chapter 5: }&\text{quasiconcavity and convexity}\\
+\text{Chapter 6: }&\text{parametric optimization}\\
+&\Downarrow\\
+\text{Chapter 7: }&\text{Berge Maximum Theorem}\\
+&\Downarrow\\
+\text{Chapter 8: }&\text{Brouwer and Kakutani fixed points}.
+\end{aligned}
+}
+$$
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+
+
+

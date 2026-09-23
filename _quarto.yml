@@ -41,6 +41,18 @@ book:
   - part: math-economics/ch04-inverse-implicit-functions/index.qmd
     chapters:
     - math-economics/ch04-inverse-implicit-functions/contents.qmd
+  - part: math-economics/ch05-convexity/index.qmd
+    chapters:
+    - math-economics/ch05-convexity/contents.qmd
+  - part: math-economics/ch06-optimization/index.qmd
+    chapters:
+    - math-economics/ch06-optimization/contents.qmd
+  - part: math-economics/ch07-correspondences/index.qmd
+    chapters:
+    - math-economics/ch07-correspondences/contents.qmd
+  - part: math-economics/ch08-fixed-points/index.qmd
+    chapters:
+    - math-economics/ch08-fixed-points/contents.qmd
   - microeconomics/index.qmd
   - part: microeconomics/ch00-foundations/index.qmd
     chapters:
