@@ -86,7 +86,9 @@ Banach·Brouwer·Kakutani 고정점 정리를 비교하고, Nash 균형과 경�
 [10개 절 · 정리·증명·연습문제 포함]{.status}
 
 ::: {.callout-note title="계산·시각화 보충자료 (Supplements)"}
-이론의 기하학적 이해와 직관을 돕는 인터랙티브 시뮬레이션은 [보충자료 · 대응의 반연속성과 닫힌 그래프](../supplements/correspondence-hemicontinuity.qmd)에서 탐색할 수 있다.
+수리 이론의 기하학적 이해와 직관을 돕는 인터랙티브 시뮬레이션 자료를 제공한다:
+- [보충자료 · 부등식 제약하 최적화와 KKT 조건 (제6장 최적화·승수의 기하학과 그림자 가격)](../supplements/kkt-inequality-optimization.qmd)
+- [보충자료 · 대응의 반연속성과 닫힌 그래프 (제7장 대응·제8장 고정점 정리의 기하학)](../supplements/correspondence-hemicontinuity.qmd)
 :::
 
 ## 주요 참고 문헌
