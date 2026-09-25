@@ -10,6 +10,7 @@
 - [도구변수와 약한 도구변수](iv-weak-instruments.qmd): MATLAB 기준 실험과 브라우저 Monte Carlo로 OLS 편향과 2SLS의 약한 도구변수 문제를 비교한다.
 - [IS–LM 재정충격: 단기 균형의 이동](islm-fiscal-shock.qmd): MATLAB 정적 도표와 애니메이션 GIF로 재정지출 확대 뒤 IS–LM 단기 균형이 이동하는 과정을 읽는다.
 - [Edgeworth 상자: 경쟁균형과 후생경제학 제1정리](edgeworth-first-welfare.qmd): 초기부존, 계약곡선, 경쟁균형을 한 도표에서 비교해 경쟁균형의 Pareto 효율성을 확인한다.
+- [부등식 제약하 최적화와 KKT 조건: 기하학, 제약자격, 그리고 그림자 가격](kkt-inequality-optimization.qmd): 실행가능 원뿔과 활성 집합, 법선 원뿔에서의 힘의 평형, KKT 승수의 이중성(벽의 반작용력 vs 가치함수 접선 기울기), 그리고 코너해에서의 평행사변형 승수 분해와 상보여유성을 확인한다.
 - [대응의 반연속성과 닫힌 그래프: UHC와 LHC](correspondence-hemicontinuity.qmd): 개집합 포섭 조건과 수열 수렴 조건을 직관적으로 조작하며 대응의 상반연속, 하반연속, 닫힌 그래프 성질을 확인한다.
 - [생산자이론: 등량곡선, 확장경로, 그리고 장단기 비용 포락선](producer-cost-envelope.qmd): 2요소 생산기술에서 비용최소화 확장경로, 단기 자본 제약의 비용 쐐기, 그리고 포락선 정리(Envelope Theorem)에 따른 장단기 평균·한계비용 곡선의 형성과 접점 동학을 확인한다.
 - [과점 게임이론: Cournot, Bertrand, Stackelberg 반응곡선과 균형 동학](oligopoly-game-theory.qmd): 2기업 과점 시장에서 산출량 및 가격 최적대응 동학, Stackelberg 등이윤곡선의 외접 기하학, 그리고 시장구조별 후생 손실과 N-기업 완전경쟁 수렴을 확인한다.

@@ -205,6 +205,7 @@ book:
   - supplements/index.qmd
   - part: "보충자료 · 경제학을 위한 수학"
     chapters:
+    - supplements/kkt-inequality-optimization.qmd
     - supplements/correspondence-hemicontinuity.qmd
   - part: "보충자료 · 미시경제학"
     chapters:
