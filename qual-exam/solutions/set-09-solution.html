@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 한 스푼 #9 · 손풀이 해설</title>
+<style>
+body{margin:0;background:#f6f7f9;color:#17191d;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;line-height:1.75}
+.wrap{width:min(920px,calc(100% - 32px));margin:40px auto 72px}
+.hero,.card{background:#fff;border:1px solid #dfe3e8;border-radius:18px}
+.hero{padding:32px 34px 28px;margin-bottom:20px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#68707a;margin-bottom:8px}
+h1{margin:0 0 10px;font-size:31px;letter-spacing:-.03em}
+.subtitle{color:#68707a;font-size:15px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.chip{border:1px solid #dfe3e8;background:#f1f3f5;border-radius:999px;padding:6px 10px;font-size:13px;color:#444b54}
+.card{padding:30px 34px;margin-top:20px}
+.card h2{margin:0 0 8px;font-size:24px;letter-spacing:-.02em}
+.topic{color:#68707a;font-size:14px;font-weight:700;margin-bottom:18px}
+.step{margin:22px 0 0}
+.step h3{margin:0 0 10px;font-size:18px}
+.flow{border-left:3px solid #cfd5dc;padding-left:18px;margin:12px 0 0}
+.note{margin-top:18px;padding:14px 16px;border:1px dashed #dfe3e8;border-radius:12px;background:#fafbfc;color:#4d5560;font-size:14px}
+.footer{margin-top:28px;text-align:center;color:#68707a;font-size:13px}
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],processEscapes:true},chtml:{scale:1.02}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<main class="wrap">
+
+<section class="hero">
+<div class="eyebrow">Graduate Microeconomics · Daily Practice</div>
+<h1>문제 한 스푼 #9 · 손풀이 해설</h1>
+<div class="subtitle">시장의 종류 · 부분균형 · 손풀이 전개 순서와 계산 흐름 중심 해설본</div>
+<div class="meta">
+<span class="chip">Third-Degree Price Discrimination</span>
+<span class="chip">Uniform Pricing</span>
+<span class="chip">Subsidy Incidence</span>
+<span class="chip">Deadweight Loss</span>
+<span class="chip">MathJax CHTML</span>
+</div>
+</section>
+
+<section class="card">
+<h2>Problem 1. Market Structure</h2>
+<div class="topic">Monopoly · Third-Degree Price Discrimination · Uniform Pricing</div>
+
+<div class="step">
+<h3>1) 3급 가격차별 하의 최적화</h3>
+<div class="flow">
+각 시장의 inverse demand는
+\[
+p_A(Q_A)=50-Q_A,\qquad p_B(Q_B)=30-Q_B
+\]
+이고, 한계비용은 \(MC=10\), 고정비용은 없다.
+
+시장 A의 총수입과 한계수입은
+\[
+TR_A(Q_A)=(50-Q_A)Q_A=50Q_A-Q_A^2
+\quad\Rightarrow\quad
+MR_A(Q_A)=50-2Q_A.
+\]
+
+시장 B의 총수입과 한계수입은
+\[
+TR_B(Q_B)=(30-Q_B)Q_B=30Q_B-Q_B^2
+\quad\Rightarrow\quad
+MR_B(Q_B)=30-2Q_B.
+\]
+
+내부해에서 이윤극대화 1계 조건(FOC)은
+\[
+MR_A(Q_A^*)=MC=10
+\quad\Rightarrow\quad
+50-2Q_A=10
+\quad\Rightarrow\quad
+Q_A^*=20,
+\]
+\[
+MR_B(Q_B^*)=MC=10
+\quad\Rightarrow\quad
+30-2Q_B=10
+\quad\Rightarrow\quad
+Q_B^*=10.
+\]
+
+최적가격은
+\[
+p_A^*=50-20=30,\qquad p_B^*=30-10=20.
+\]
+
+내부해에서 성립하는 한계수입 조건은
+\[
+MR_A(Q_A^*)=MR_B(Q_B^*)=MC=10.
+\]
+
+각 시장의 이윤 및 총이윤은
+\[
+\pi_A^*=(p_A^*-MC)Q_A^*=(30-10)\cdot20=400,
+\]
+\[
+\pi_B^*=(p_B^*-MC)Q_B^*=(20-10)\cdot10=100,
+\]
+\[
+\pi^*=\pi_A^*+\pi_B^*=400+100=500.
+\]
+
+총판매량은
+\[
+Q^*=Q_A^*+Q_B^*=20+10=30.
+\]
+</div>
+</div>
+
+<div class="step">
+<h3>2) 단일가격 독점(Single-Price Monopoly)</h3>
+<div class="flow">
+동일가격 \(p\) 부과 시 각 시장의 수요함수는
+\[
+q_A(p)=\max\{50-p,0\},\qquad q_B(p)=\max\{30-p,0\}.
+\]
+
+시장의 aggregate demand \(Q(p)\)는
+\[
+Q(p)=
+\begin{cases}
+0, & p > 50 \\
+50-p, & 30 < p \le 50 \\
+(50-p)+(30-p)=80-2p, & p \le 30.
+\end{cases}
+\]
+
+두 시장 모두에 판매하는 구간(\(p \le 30\))에서 aggregate inverse demand는
+\[
+p(Q)=40-\frac12Q \qquad (Q \ge 20).
+\]
+
+한계수입은
+\[
+MR(Q)=40-Q.
+\]
+
+이윤극대화 조건 \(MR=MC\)를 적용하면
+\[
+40-Q=10
+\quad\Rightarrow\quad
+Q=30.
+\]
+
+최적 단일가격은
+\[
+p=40-\frac12(30)=25 \le 30
+\]
+이므로 조건과 일치한다.
+
+(참고: \(p > 30\) 구간에서는 \(p(Q)=50-Q \Rightarrow MR=50-2Q=10 \Rightarrow Q=20, p=30\), 이윤은 \((30-10)\cdot20=400 \lt 450\)이므로 \(p^*=25\)가 전역 최적이다.)
+
+각 시장의 판매량은
+\[
+Q_A=50-25=25,\qquad Q_B=30-25=5.
+\]
+
+총판매량은
+\[
+Q=25+5=30.
+\]
+
+총이윤은
+\[
+\pi=(p-MC)Q=(25-10)\cdot30=450.
+\]
+</div>
+</div>
+
+<div class="step">
+<h3>3) Prove or Disprove 및 이윤 효과와의 구분</h3>
+<div class="flow">
+주어진 명제는 <strong>Disprove (거짓)</strong>이다.
+
+<strong>산출량 효과 (Robinson 정리)</strong>:
+위 1번과 2번의 결과에서 3급 가격차별 하의 총판매량은
+\[
+Q_{\text{disc}} = Q_A^* + Q_B^* = 20 + 10 = 30
+\]
+이고, 단일가격 독점 하의 총판매량도
+\[
+Q_{\text{unif}} = 25 + 5 = 30
+\]
+으로 정확히 같다:
+\[
+Q_{\text{disc}} = Q_{\text{unif}} = 30.
+\]
+따라서 3급 가격차별이 총산출량을 엄격히 증가시킨다는 명제는 성립하지 않는다.
+
+선형 수요함수와 일정한 한계비용 하에서 단일가격으로 두 시장 모두에 양(+)의 공급이 이루어지는 경우, 가격차별 도입 시 상대적으로 탄력적인 시장에서의 판매량 증가분(\(\Delta Q_B = 10 - 5 = +5\))과 비탄력적인 시장에서의 판매량 감소분(\(\Delta Q_A = 20 - 25 = -5\))이 정확히 상쇄되어 총산출량은 변하지 않는다.
+
+<strong>기업 이윤 효과와의 구분</strong>:
+산출량은 동일하게 유지되지만 기업의 총이윤은 엄격히 증가한다:
+\[
+\pi_{\text{disc}} = 500 > \pi_{\text{unif}} = 450.
+\]
+단일가격 독점 문제는 가격차별 문제에서 \(p_A = p_B\)라는 제약조건이 추가된 부분집합 최적화 문제이다. 가격차별 하의 최적가격은 \(p_A^* = 30 \ne p_B^* = 20\)이므로 단일가격 제약이 바인딩되어 기업의 선택을 제한한다. 기업은 각 시장의 한계수입을 독립적으로 \(MC\)에 맞추는 유연성을 확보함으로써 항상 단일가격보다 엄격히 높은 이윤을 얻는다.
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>Problem 2. Partial Equilibrium</h2>
+<div class="topic">Competitive Equilibrium · Per-Unit Subsidy · Incidence · Deadweight Loss</div>
+
+<div class="step">
+<h3>1) 정부개입이 없을 때 경쟁균형</h3>
+<div class="flow">
+inverse demand와 inverse supply는
+\[
+p_D(Q)=24-Q,\qquad p_S(Q)=4+\frac12Q
+\]
+이다.
+
+경쟁균형 조건 \(p_D(Q)=p_S(Q)\)에서
+\[
+24-Q=4+\frac12Q
+\quad\Rightarrow\quad
+\frac32Q=20
+\quad\Rightarrow\quad
+Q^*=\frac{40}{3}.
+\]
+
+균형가격은
+\[
+p^*=24-\frac{40}{3}=\frac{32}{3}.
+\]
+
+따라서 경쟁균형은
+\[
+(Q^*,p^*)=\left(\frac{40}{3},\,\frac{32}{3}\right).
+\]
+</div>
+</div>
+
+<div class="step">
+<h3>2) 단위당 보조금 \(s=6\)과 귀착</h3>
+<div class="flow">
+보조금 지급 하에서 시장가격 관계는
+\[
+p_s=p_c+6.
+\]
+
+소비자 가격 \(p_c=24-Q_s\), 생산자 가격 \(p_s=4+\frac12Q_s\)를 대입하면
+\[
+4+\frac12Q_s=(24-Q_s)+6=30-Q_s
+\quad\Rightarrow\quad
+\frac32Q_s=26
+\quad\Rightarrow\quad
+Q_s=\frac{52}{3}.
+\]
+
+새로운 균형가격은
+\[
+p_c=24-\frac{52}{3}=\frac{20}{3},
+\]
+\[
+p_s=\frac{20}{3}+6=\frac{38}{3}.
+\]
+
+보조금의 단위당 귀착(Incidence)은
+\[
+\text{소비자 귀착 (가격 하락분)}:\quad \Delta p_c = p^* - p_c = \frac{32}{3} - \frac{20}{3} = \frac{12}{3} = 4,
+\]
+\[
+\text{생산자 귀착 (수취가격 상승분)}:\quad \Delta p_s = p_s - p^* = \frac{38}{3} - \frac{32}{3} = \frac{6}{3} = 2.
+\]
+
+두 귀착의 합은
+\[
+\Delta p_c+\Delta p_s=4+2=6=s
+\]
+와 일치한다.
+</div>
+</div>
+
+<div class="step">
+<h3>3) 정부 재정지출, Deadweight Loss 및 후생 원리</h3>
+<div class="flow">
+정부의 총보조금 지출은
+\[
+\text{Gov Exp} = s \cdot Q_s = 6 \cdot \frac{52}{3} = 104.
+\]
+
+Deadweight Loss(사중손실)는
+\[
+DWL = \frac12 \cdot s \cdot (Q_s - Q^*) = \frac12 \cdot 6 \cdot \left(\frac{52}{3}-\frac{40}{3}\right) = 3 \cdot \frac{12}{3} = 12.
+\]
+
+<strong>Marginal Benefit과 Marginal Cost 관점에서의 설명</strong>:
+경쟁균형 \(Q^*=40/3\)에서는 한계편익과 한계비용이 \(MB=MC=32/3\)로 일치하여 사회적 순잉여가 극대화된다.
+그러나 보조금 지급으로 인해 거래량이 \(Q_s=52/3\)로 인위적으로 팽창하면서, 균형을 초과하여 생산되는 모든 구간(\(Q^* \lt Q \le Q_s\))에서
+\[
+MC(Q) = 4+\frac12Q > MB(Q) = 24-Q
+\]
+가 성립한다.
+즉, 재화를 한 단위 추가로 생산하는 데 투입되는 사회적 기회비용(\(MC\))이 소비자가 누리는 주관적 편익(\(MB\))보다 크기 때문에 매 단위마다 사회적 순손실(\(MC-MB\))이 발생한다.
+이 초과비용을 정부 보조금 재정으로 메우는 과정에서 정부 지출 증가분이 소비자 및 생산자 잉여의 증가분을 초과하여 \(DWL=12\)의 순손실이 발생한다.
+</div>
+</div>
+</section>
+
+<div class="footer">문제 한 스푼 #9 · Solution Notes</div>
+</main>
+</body>
+</html>

@@ -19,7 +19,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [단일 종합문제]{.chip}
 [약 30–40분]{.chip}
 [6개 연결 문항]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -103,6 +103,204 @@ $$
 
 ::: {.spoon-hint}
 **권장 풀이 순서**: **individual demand → market clearing → welfare verification → Pareto set → planner problem → decentralization → prove/disprove**.<br>5번에서는 “Pareto efficient”와 “주어진 초기부존에서 competitive equilibrium으로 구현 가능”이 서로 다른 명제라는 점을 구분하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem. General Equilibrium"}
+::: {.topic}
+Walrasian Equilibrium · Pareto Efficiency · Welfare Theorems
+:::
+
+#### 1) Competitive equilibrium
+
+가격을 $(p_x, p_y) = (p, 1)$로 둔다.
+
+각 소비자의 소득(Wealth)은
+$$
+m_1(p) = 8p + 2, \qquad m_2(p) = 2p + 8.
+$$
+
+효용함수는 $u_i(x_i, y_i) = \ln x_i + \ln y_i$이므로 1계 조건에서
+$$
+\frac{MU_{x_i}}{MU_{y_i}} = \frac{1/x_i}{1/y_i} = \frac{y_i}{x_i} = p \implies y_i = px_i.
+$$
+
+예산제약식 $px_i + y_i = m_i$에 대입하면
+$$
+px_i + px_i = m_i \implies x_i = \frac{m_i}{2p}, \qquad y_i = \frac{m_i}{2}.
+$$
+
+따라서 각 소비자의 마샬 수요함수(Marshallian demand)는
+$$
+x_1(p) = \frac{8p + 2}{2p}, \qquad y_1(p) = \frac{8p + 2}{2},
+$$
+$$
+x_2(p) = \frac{2p + 8}{2p}, \qquad y_2(p) = \frac{2p + 8}{2}.
+$$
+
+$x$-재화 시장청산조건 $x_1 + x_2 = 10$을 적용하면:
+$$
+\frac{8p + 2}{2p} + \frac{2p + 8}{2p} = 10 \implies \frac{10p + 10}{2p} = 10 \implies 10p + 10 = 20p \implies 10p = 10.
+$$
+
+따라서 경쟁균형 가격은
+$$
+p^* = 1.
+$$
+
+이때 각 소비자의 균형 소득은 $m_1 = m_2 = 10$이 되므로 균형 배분은
+$$
+x_1^* = \frac{10}{2(1)} = 5, \qquad y_1^* = \frac{10}{2} = 5,
+$$
+$$
+x_2^* = \frac{10}{2(1)} = 5, \qquad y_2^* = \frac{10}{2} = 5.
+$$
+
+따라서 competitive equilibrium allocation은
+$$
+(x_1^*, y_1^*) = (5, 5), \qquad (x_2^*, y_2^*) = (5, 5).
+$$
+
+또한
+$$
+y_1^* + y_2^* = 5 + 5 = 10
+$$
+이므로 왈라스 법칙에 의해 $y$-재화 시장도 완벽히 청산된다.
+
+#### 2) First Welfare Theorem
+
+각 소비자의 한계대체율(MRS):
+$$
+MRS_i = \frac{MU_{x_i}}{MU_{y_i}} = \frac{y_i}{x_i}.
+$$
+
+1번에서 구한 competitive equilibrium allocation $(5, 5)$에서:
+$$
+MRS_1 = \frac{5}{5} = 1, \qquad MRS_2 = \frac{5}{5} = 1.
+$$
+
+또한 균형 상대가격은
+$$
+\frac{p_x}{p_y} = \frac{1}{1} = 1.
+$$
+
+따라서
+$$
+MRS_1 = MRS_2 = \frac{p_x}{p_y} = 1
+$$
+이 성립한다.
+
+**설명**:
+이 배분은 왈라스 경쟁균형 배분이고 두 소비자의 선호는 강단조성(Strong monotonicity) 및 국소불포화(Locally nonsatiated)를 만족하므로, **후생경제학 제1정리(First Fundamental Theorem of Welfare Economics)**에 의해 해당 균형 배분은 반드시 파레토 효율적(Pareto efficient)이다.
+
+#### 3) Pareto set characterize
+
+내점 파레토 효율적 배분(Interior Pareto-efficient allocation)에서는 무차별곡선 접선 조건인 한계대체율 일치조건이 성립한다:
+$$
+MRS_1 = MRS_2 \implies \frac{y_1}{x_1} = \frac{y_2}{x_2}.
+$$
+
+실행가능성(Feasibility) 제약에 의해 $x_2 = 10 - x_1$, $y_2 = 10 - y_1$이므로:
+$$
+\frac{y_1}{x_1} = \frac{10 - y_1}{10 - x_1}.
+$$
+
+교차 곱(Cross-multiplication)하여 정리하면:
+$$
+y_1(10 - x_1) = x_1(10 - y_1) \implies 10y_1 - x_1 y_1 = 10x_1 - x_1 y_1 \implies y_1 = x_1.
+$$
+
+스칼라 모수 $t$를 $t = x_1 = y_1$로 정의하면:
+$$
+x_2 = y_2 = 10 - t.
+$$
+
+모든 소비량이 엄격히 양수인 내점 해이므로 $t$의 허용 범위(admissible range)는 $0 < t < 10$이다.
+따라서 모든 interior Pareto-efficient allocation은 다음과 같이 특성화된다:
+$$
+(x_1, y_1) = (t, t), \qquad (x_2, y_2) = (10 - t, 10 - t), \qquad t \in (0, 10).
+$$
+(에지워스 상자의 원점 $(0, 0)$과 $(10, 10)$을 잇는 $45^\circ$ 주대각선이 계약곡선을 형성한다.)
+
+#### 4) Social planner
+
+파레토 가중치 $\alpha \in (0, 1)$에 대한 사회계획자의 최적화 문제:
+$$
+\max_{\{x_1, y_1\}} \; \alpha (\ln x_1 + \ln y_1) + (1-\alpha) [\ln(10 - x_1) + \ln(10 - y_1)].
+$$
+
+$x_1$과 $y_1$에 대해 각각 1계 조건(FOC)을 구하면:
+$$
+\frac{\alpha}{x_1} - \frac{1-\alpha}{10 - x_1} = 0 \implies \alpha(10 - x_1) = (1-\alpha)x_1 \implies x_1^* = 10\alpha,
+$$
+$$
+\frac{\alpha}{y_1} - \frac{1-\alpha}{10 - y_1} = 0 \implies \alpha(10 - y_1) = (1-\alpha)y_1 \implies y_1^* = 10\alpha.
+$$
+
+따라서 소비자 2의 배분은
+$$
+x_2^* = 10 - 10\alpha = 10(1-\alpha), \qquad y_2^* = 10 - 10\alpha = 10(1-\alpha).
+$$
+
+사회계획자의 최적 배분은
+$$
+(x_1^*, y_1^*) = (10\alpha, 10\alpha), \qquad (x_2^*, y_2^*) = (10(1-\alpha), 10(1-\alpha)).
+$$
+
+이제 $t = 10\alpha$로 두면, 가중치가 $\alpha \in (0, 1)$을 순회함에 따라 $t$는 구간 $(0, 10)$ 전체를 일대일 대응으로 정확히 채운다.
+따라서 3번에서 구한 Pareto set 전체가 적절한 파레토 가중치 $\alpha = t/10$를 선택함으로써 완벽히 생성된다.
+
+#### 5) Lump-sum transfer를 통한 decentralization
+
+가격벡터를 $(p_x, p_y) = (1, 1)$로 고정한다.
+이 가격에서 각 소비자의 마샬 수요는 $x_i = m_i'/2, y_i = m_i'/2$이다.
+
+- **소비자 1**:
+  목표 배분 $(t, t)$를 수요하기 위해 필요한 총소득은
+  $$
+  \frac{m_1'}{2} = t \implies m_1' = 2t.
+  $$
+  원래 초기부존 $\omega_1 = (8, 2)$의 시장가치는 $m_1 = 1 \cdot 8 + 1 \cdot 2 = 10$이므로, 필요한 정액 이전지출은
+  $$
+  T_1(t) = m_1' - m_1 = 2t - 10.
+  $$
+
+- **소비자 2**:
+  목표 배분 $(10 - t, 10 - t)$를 수요하기 위해 필요한 총소득은
+  $$
+  \frac{m_2'}{2} = 10 - t \implies m_2' = 20 - 2t.
+  $$
+  원래 초기부존 $\omega_2 = (2, 8)$의 시장가치는 $m_2 = 1 \cdot 2 + 1 \cdot 8 = 10$이므로, 필요한 정액 이전지출은
+  $$
+  T_2(t) = m_2' - m_2 = (20 - 2t) - 10 = 10 - 2t.
+  $$
+
+정부의 재정 균형 검증:
+$$
+T_1(t) + T_2(t) = (2t - 10) + (10 - 2t) = 0.
+$$
+
+**후생경제학 제2정리와의 관계**:
+두 소비자의 선호가 볼록(Convex)하고 연속적이며 국소불포화를 만족하므로, 임의의 파레토 효율적 배분 $(t, t)$는 적절한 정액소득 재분배($T_1, T_2$)를 통해 가격체계 $(1, 1)$ 하의 경쟁균형으로 분권화(decentralize)될 수 있다. 이는 **제2후생경제학 정리(Second Fundamental Theorem of Welfare Economics)**의 완벽한 실현이다.
+
+#### 6) Prove or disprove
+
+주어진 명제는 **False (거짓/반증)**이다.
+
+**증명 및 논거**:
+1번에서 보았듯이 원래의 초기부존 $\omega_1 = (8, 2), \omega_2 = (2, 8)$ 하에서 추가적인 이전지출 없는 자생적 경쟁균형 배분은
+$$
+(x_1^*, y_1^*) = (5, 5), \qquad (x_2^*, y_2^*) = (5, 5)
+$$
+으로 유일하며, 이는 3번 파레토 집합에서 $t = 5$인 단 하나의 점에 불과하다.
+
+만약 $t \ne 5$인 임의의 내점 파레토 효율적 배분을 달성하고자 한다면, 5번에서 도출한 정액이전
+$$
+T_1(t) = 2t - 10 \ne 0
+$$
+이 반드시 필요하다. 이전지출이 없다면($T_1 = T_2 = 0$), 소비자들의 부존가치는 10으로 고정되어 오직 $t = 5$ 이외의 파레토 효율적 배분은 시장균형으로 실현될 수 없다.
+
+**결론**:
+어떤 배분이 "파레토 효율적(Pareto efficient)"이라는 정태적 성질과, "주어진 초기부존에서 별도의 이전지출 없이 자생적 경쟁균형으로 분권화 가능함(Decentralizability without transfers)"은 완전히 구분되는 별개의 개념이다.
 :::
 :::
 
