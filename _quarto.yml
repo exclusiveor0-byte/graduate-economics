@@ -252,6 +252,8 @@ book:
     - qual-exam/micro/set-06.qmd
     - qual-exam/micro/set-07.qmd
     - qual-exam/micro/set-08.qmd
+    - qual-exam/micro/set-09.qmd
+    - qual-exam/micro/set-10.qmd
   - references.qmd
   page-footer:
     center: Collaborative graduate economics knowledge base

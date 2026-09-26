@@ -1,0 +1,88 @@
+---
+title: "문제 한 스푼 #9"
+subtitle: "시장의 종류 · 부분균형"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #9
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **시장의 종류 · 부분균형**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[문제당 약 10–15분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Market Structure
+::: {.topic}
+Monopoly · Third-Degree Price Discrimination · Uniform Pricing
+:::
+
+한 독점기업이 서로 재판매가 불가능한 두 시장 $A, B$에 동일한 재화를 판매한다. 각 시장의 inverse demand는
+
+$$
+p_A(Q_A) = 50 - Q_A, \qquad p_B(Q_B) = 30 - Q_B
+$$
+
+이고, 기업의 한계비용은 모든 산출량에 대해
+
+$$
+MC = 10
+$$
+
+이다. 고정비용은 없다.
+
+1. 기업이 두 시장에 서로 다른 가격을 부과할 수 있다고 하자. third-degree price discrimination 하에서 $Q_A^*, Q_B^*, p_A^*, p_B^*$와 총이윤을 구하시오. 또한 내부해에서 어떤 marginal revenue 조건이 성립하는지 쓰시오.
+2. 이제 두 시장에 반드시 동일한 가격 $p$를 부과해야 한다고 하자. 시장의 aggregate demand를 구하고, single-price monopoly의 최적가격, 각 시장의 판매량, 총판매량 및 총이윤을 계산하시오.
+3. 다음 명제를 prove or disprove 하시오.
+
+   > **“Third-degree price discrimination strictly increases the monopolist's total output relative to uniform pricing.”**
+
+   이 문제에서 구한 결과를 이용하여 답하고, 가격차별이 기업의 이윤에 미치는 효과와 구분하여 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **discriminatory pricing → uniform pricing → compare / prove or disprove**. 단일가격의 aggregate demand는 가격구간에 따라 달라질 수 있으므로 먼저 정확히 구성하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Partial Equilibrium
+::: {.topic}
+Competitive Equilibrium · Per-Unit Subsidy · Incidence · Deadweight Loss
+:::
+
+어떤 경쟁시장의 inverse demand와 inverse supply가 각각
+
+$$
+p_D(Q) = 24 - Q, \qquad p_S(Q) = 4 + \frac{1}{2}Q
+$$
+
+로 주어진다.
+
+1. 정부개입이 없을 때 경쟁균형의 거래량 $Q^*$과 가격 $p^*$을 구하시오.
+2. 정부가 판매자에게 단위당 $s = 6$의 보조금을 지급한다고 하자. 소비자가 지불하는 가격을 $p_c$, 생산자가 보조금을 포함하여 실제로 받는 가격을 $p_s$라 할 때,
+   $$
+   p_s = p_c + 6
+   $$
+   이다. 새로운 균형거래량 $Q_s$, $p_c$, $p_s$를 구하시오. 보조금의 단위당 귀착을 소비자와 생산자로 나누어 계산하시오.
+3. 정부의 총보조금 지출과 deadweight loss를 계산하시오. 보조금으로 인해 거래량이 경쟁균형보다 증가하는데도 왜 deadweight loss가 발생하는지 marginal benefit과 marginal cost의 관점에서 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **competitive equilibrium → subsidy wedge → incidence → welfare**. $p_c$와 $p_s$를 구분하여 계산하고, 귀착과 consumer/producer surplus의 변화는 서로 다른 개념임에 유의하시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

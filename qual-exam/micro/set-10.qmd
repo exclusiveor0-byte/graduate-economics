@@ -1,0 +1,111 @@
+---
+title: "문제 한 스푼 #10"
+subtitle: "일반균형 종합문제"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #10
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: 일반균형 · **석사 졸업시험형 종합문제**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[단일 종합문제]{.chip}
+[약 30–40분]{.chip}
+[6개 연결 문항]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem. Competitive Equilibrium, Pareto Set, and Decentralization
+::: {.topic}
+Walrasian Equilibrium · Pareto Efficiency · Social Planner · First & Second Welfare Theorems
+:::
+
+두 소비자 $1, 2$와 두 재화 $x, y$로 이루어진 pure exchange economy를 생각하자. 소비자의 효용함수와 초기부존은 다음과 같다.
+
+$$
+u_1(x_1, y_1) = \ln x_1 + \ln y_1, \qquad \omega_1 = (8, 2),
+$$
+
+$$
+u_2(x_2, y_2) = \ln x_2 + \ln y_2, \qquad \omega_2 = (2, 8).
+$$
+
+따라서 총부존은
+
+$$
+\bar{\omega} = (10, 10).
+$$
+
+모든 소비량은 양수라고 가정한다. $p_y = 1$로 normalize하고 $p_x = p > 0$라 하자.
+
+1. **Competitive equilibrium.**
+   각 소비자의 wealth $m_i(p)$와 Marshallian demand를 구하시오. $x$-재화 시장청산조건을 이용하여 competitive equilibrium price $p^*$를 구하고, equilibrium allocation
+   $$
+   \bigl((x_1^*, y_1^*), (x_2^*, y_2^*)\bigr)
+   $$
+   을 계산하시오. 마지막으로 $y$-재화 시장도 청산되는지 확인하시오.
+2. **First Welfare Theorem.**
+   두 소비자의 MRS를 각각 구하고, 1번에서 구한 equilibrium allocation에서
+   $$
+   MRS_1 = MRS_2 = \frac{p_x}{p_y}
+   $$
+   가 성립함을 보이시오. 이 allocation이 Pareto efficient라는 결론을 First Welfare Theorem과 연결하여 설명하시오.
+3. **Characterize the Pareto set.**
+   feasible allocation은
+   $$
+   x_1 + x_2 = 10, \qquad y_1 + y_2 = 10
+   $$
+   을 만족한다. interior Pareto efficiency의 필요조건
+   $$
+   MRS_1 = MRS_2
+   $$
+   를 이용하여 모든 interior Pareto-efficient allocation을 하나의 scalar parameter $t$로 characterize하시오. $t$의 admissible range도 명시하시오.
+4. **Social planner.**
+   Pareto weight $\alpha \in (0, 1)$에 대해 다음 사회계획자의 문제를 풀어라.
+   $$
+   \max_{\{x_i, y_i\}_{i=1}^2} \; \alpha u_1(x_1, y_1) + (1-\alpha) u_2(x_2, y_2)
+   $$
+   subject to
+   $$
+   x_1 + x_2 = 10, \qquad y_1 + y_2 = 10.
+   $$
+   최적 allocation을 $\alpha$의 함수로 구하고, 3번에서 구한 Pareto set 전체가 적절한 $\alpha$를 선택함으로써 생성되는지 보이시오.
+5. **Decentralization with lump-sum transfers.**
+   3번에서 구한 임의의 interior Pareto-efficient allocation을
+   $$
+   (x_1, y_1) = (t, t), \qquad (x_2, y_2) = (10 - t, 10 - t)
+   $$
+   라고 하자. 가격벡터
+   $$
+   (p_x, p_y) = (1, 1)
+   $$
+   을 그대로 유지하면서 이 allocation을 competitive equilibrium으로 decentralize하기 위해 소비자 1에게 필요한 lump-sum wealth transfer $T_1(t)$를 구하시오. 소비자 2의 transfer $T_2(t)$도 구하고,
+   $$
+   T_1(t) + T_2(t) = 0
+   $$
+   임을 확인하시오. 이 결과를 Second Welfare Theorem과 연결하여 설명하시오.
+6. **Prove or disprove.**
+   다음 명제를 판단하고 증명하시오.
+
+   > **“Every interior Pareto-efficient allocation in this economy can be decentralized as a competitive equilibrium using the original endowments $\omega_1 = (8, 2)$, $\omega_2 = (2, 8)$, without any transfers.”**
+
+   필요한 경우 1번에서 구한 competitive equilibrium과 3번에서 구한 Pareto set의 관계를 이용하시오.
+
+::: {.spoon-hint}
+**권장 풀이 순서**: **individual demand → market clearing → welfare verification → Pareto set → planner problem → decentralization → prove/disprove**.<br>5번에서는 “Pareto efficient”와 “주어진 초기부존에서 competitive equilibrium으로 구현 가능”이 서로 다른 명제라는 점을 구분하시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

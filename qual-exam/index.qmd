@@ -161,6 +161,30 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
+
+<a href="micro/set-09.html" class="spoon-card" data-subject="micro" data-round="9">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#9 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 · 부분균형</div>
+  <div class="spoon-card__desc">3급 가격차별과 단일가격 독점의 산출량 및 이윤 비교, 종량 보조금 지급에 따른 조세 귀착과 사중손실(DWL)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-10.html" class="spoon-card" data-subject="micro" data-round="10">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#10 회차 (종합)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">일반균형 종합문제</div>
+  <div class="spoon-card__desc">순수교환경제 경쟁균형, 제1후생경제학 정리, 파레토 집합 매개변수화, 사회계획자 문제 및 정액이전 분권화(제2정리)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -289,6 +313,30 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">부분균형 · 일반균형</div>
   <div class="spoon-card__desc">경쟁시장 가격상한제와 후생손실(DWL), 순수교환경제 경쟁균형 가격·배분 및 제1후생경제학 정리 검증</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-09.html" class="spoon-card" data-subject="micro" data-round="9">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#9 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 · 부분균형</div>
+  <div class="spoon-card__desc">3급 가격차별과 단일가격 독점의 산출량 및 이윤 비교, 종량 보조금 지급에 따른 조세 귀착과 사중손실(DWL)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-10.html" class="spoon-card" data-subject="micro" data-round="10">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#10 회차 (종합)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">일반균형 종합문제</div>
+  <div class="spoon-card__desc">순수교환경제 경쟁균형, 제1후생경제학 정리, 파레토 집합 매개변수화, 사회계획자 문제 및 정액이전 분권화(제2정리)</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
