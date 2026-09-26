@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -47,6 +47,82 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **competitive equilibrium → policy intervention → welfare comparison**. 가격상한제가 binding인지 먼저 확인한 뒤 실제 거래량을 결정하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Partial Equilibrium"}
+::: {.topic}
+Competitive Equilibrium · Price Ceiling · Efficient Rationing · Welfare
+:::
+
+#### 1) 경쟁균형
+
+inverse demand와 inverse supply는
+$$
+p_D(Q) = 26 - Q, \qquad p_S(Q) = 2 + Q
+$$
+이다.
+
+경쟁균형에서는
+$$
+26 - Q = 2 + Q \implies 2Q = 24 \implies Q^* = 12, \quad p^* = 14.
+$$
+
+따라서
+$$
+(Q^*, p^*) = (12, 14).
+$$
+
+경쟁균형의 total surplus는
+$$
+TS^* = \frac{1}{2}(26 - 2) \cdot 12 = \frac{1}{2} \cdot 24 \cdot 12 = 144.
+$$
+
+#### 2) 가격상한제 $\bar{p} = 8$
+
+$$
+\bar{p} = 8 < 14 = p^*
+$$
+이므로 실효성 있는(binding) 가격상한제이다.
+
+- **수요량**:
+  $$
+  8 = 26 - Q_D \implies Q_D = 18.
+  $$
+- **공급량**:
+  $$
+  8 = 2 + Q_S \implies Q_S = 6.
+  $$
+
+공급량이 더 작으므로 실제 거래량은 짧은 쪽이 거래량을 결정하는 원칙(Short-side rule)에 따라
+$$
+Q = 6.
+$$
+
+#### 3) Efficient rationing과 후생
+
+efficient rationing을 가정하므로 willingness to pay가 가장 높은 소비자부터 6단위를 우선 구매한다.
+
+- **Consumer Surplus**:
+  $$
+  CS = \int_0^6 [(26 - Q) - 8] \, dQ = \int_0^6 (18 - Q) \, dQ = \left[ 18Q - \frac{1}{2}Q^2 \right]_0^6 = 108 - 18 = 90.
+  $$
+- **Producer Surplus**:
+  $$
+  PS = \int_0^6 [8 - (2 + Q)] \, dQ = \int_0^6 (6 - Q) \, dQ = \left[ 6Q - \frac{1}{2}Q^2 \right]_0^6 = 36 - 18 = 18.
+  $$
+
+따라서
+$$
+TS = CS + PS = 90 + 18 = 108.
+$$
+
+경쟁균형의 total surplus는 144였으므로 Deadweight Loss는
+$$
+DWL = TS^* - TS = 144 - 108 = 36.
+$$
+
+**경제적 설명**:
+가격상한제가 균형가격보다 낮아 $Q_D = 18 > Q_S = 6$의 초과수요가 발생하고, 실제 거래량이 12에서 6으로 급감한다. 그 결과 한계편익이 한계비용을 초과($MB > MC$)하여 경쟁균형에서 이루어졌을 일부 상호이익적 거래(mutually beneficial trades)가 인위적으로 차단되어 deadweight loss가 발생한다.
 :::
 :::
 
@@ -82,6 +158,105 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **individual demand → market clearing → allocation → welfare verification**. 두 소비자의 Cobb–Douglas 지수가 다르므로 지출비중을 구분하여 계산하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. General Equilibrium"}
+::: {.topic}
+Marshallian Demand · Market Clearing · Competitive Equilibrium · First Welfare Theorem
+:::
+
+#### 1) 개별수요와 균형가격
+
+총부존은
+$$
+\bar{x} = 8 + 2 = 10, \qquad \bar{y} = 2 + 8 = 10.
+$$
+
+$p_y = 1, p_x = p > 0$로 정규화한다.
+
+- **소비자 1**:
+  wealth는 $m_1 = 8p + 2$.
+  $u_1 = x_1^{1/2} y_1^{1/2}$이므로
+  $$
+  x_1^M = \frac{1}{2}\frac{m_1}{p} = 4 + \frac{1}{p}, \qquad y_1^M = \frac{1}{2}m_1 = 4p + 1.
+  $$
+
+- **소비자 2**:
+  wealth는 $m_2 = 2p + 8$.
+  $u_2 = x_2^{1/3} y_2^{2/3}$이므로
+  $$
+  x_2^M = \frac{1}{3}\frac{m_2}{p} = \frac{2}{3} + \frac{8}{3p}, \qquad y_2^M = \frac{2}{3}m_2 = \frac{4p + 16}{3}.
+  $$
+
+$x$-시장 청산조건 $x_1 + x_2 = 10$을 적용하면:
+$$
+4 + \frac{1}{p} + \frac{2}{3} + \frac{8}{3p} = 10.
+$$
+
+좌변을 정리하면:
+$$
+\frac{14}{3} + \frac{11}{3p} = 10 \implies \frac{11}{3p} = \frac{16}{3} \implies \frac{11}{p} = 16.
+$$
+
+따라서
+$$
+p^* = \frac{11}{16}.
+$$
+
+#### 2) Competitive equilibrium allocation
+
+$p^* = \frac{11}{16}$을 각 수요함수에 대입하면:
+
+- **소비자 1**:
+  $$
+  x_1^* = 4 + \frac{16}{11} = \frac{60}{11}, \qquad y_1^* = 4\left(\frac{11}{16}\right) + 1 = \frac{11}{4} + 1 = \frac{15}{4}.
+  $$
+- **소비자 2**:
+  $$
+  x_2^* = \frac{2}{3} + \frac{8}{3}\left(\frac{16}{11}\right) = \frac{2}{3} + \frac{128}{33} = \frac{22 + 128}{33} = \frac{150}{33} = \frac{50}{11},
+  $$
+  $$
+  y_2^* = \frac{4(11/16) + 16}{3} = \frac{11/4 + 64/4}{3} = \frac{75/4}{3} = \frac{25}{4}.
+  $$
+
+따라서 competitive equilibrium allocation은
+$$
+\left[ \left(\frac{60}{11}, \frac{15}{4}\right), \; \left(\frac{50}{11}, \frac{25}{4}\right) \right].
+$$
+
+또한
+$$
+y_1^* + y_2^* = \frac{15}{4} + \frac{25}{4} = \frac{40}{4} = 10
+$$
+이므로 왈라스 법칙(Walras' Law)에 따라 $y$-시장도 자동으로 청산된다.
+
+#### 3) MRS와 Pareto efficiency
+
+소비자 1의 한계대체율(MRS):
+$$
+MRS_1 = \frac{MU_x}{MU_y} = \frac{y_1}{x_1}.
+$$
+균형에서:
+$$
+MRS_1 = \frac{15/4}{60/11} = \frac{15 \cdot 11}{4 \cdot 60} = \frac{11}{16}.
+$$
+
+소비자 2의 한계대체율(MRS):
+$$
+MRS_2 = \frac{MU_x}{MU_y} = \frac{(1/3)x_2^{-2/3}y_2^{2/3}}{(2/3)x_2^{1/3}y_2^{-1/3}} = \frac{1}{2}\frac{y_2}{x_2}.
+$$
+균형에서:
+$$
+MRS_2 = \frac{1}{2} \cdot \frac{25/4}{50/11} = \frac{1}{2} \cdot \frac{25 \cdot 11}{4 \cdot 50} = \frac{11}{16}.
+$$
+
+그러므로
+$$
+MRS_1 = MRS_2 = \frac{p_x}{p_y} = \frac{11}{16}.
+$$
+
+**후생경제학 제1정리와의 관계**:
+이 배분은 왈라스 경쟁균형 배분(Competitive equilibrium allocation)이고 소비자의 효용함수는 국소불포화(locally nonsatiated)를 만족하므로, **제1후생경제학 정리(First Welfare Theorem)**에 의해 Pareto efficient(파레토 효율적)이다.
 :::
 :::
 

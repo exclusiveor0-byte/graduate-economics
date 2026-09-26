@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -54,6 +54,139 @@ $$
 ::: {.spoon-hint}
 **형식**: **discriminatory pricing → uniform pricing → compare / prove or disprove**. 단일가격의 aggregate demand는 가격구간에 따라 달라질 수 있으므로 먼저 정확히 구성하시오.
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Market Structure"}
+::: {.topic}
+Monopoly · Third-Degree Price Discrimination · Uniform Pricing
+:::
+
+#### 1) 3급 가격차별 하의 최적화
+
+각 시장의 inverse demand는
+$$
+p_A(Q_A) = 50 - Q_A, \qquad p_B(Q_B) = 30 - Q_B
+$$
+이고, 한계비용은 $MC = 10$, 고정비용은 없다.
+
+- **시장 A의 총수입과 한계수입**:
+  $$
+  TR_A(Q_A) = (50 - Q_A)Q_A = 50Q_A - Q_A^2 \implies MR_A(Q_A) = 50 - 2Q_A.
+  $$
+- **시장 B의 총수입과 한계수입**:
+  $$
+  TR_B(Q_B) = (30 - Q_B)Q_B = 30Q_B - Q_B^2 \implies MR_B(Q_B) = 30 - 2Q_B.
+  $$
+
+내부해에서 이윤극대화 1계 조건(FOC)은 각 시장의 한계수입이 한계비용과 일치하는 것이다:
+$$
+MR_A(Q_A^*) = MC = 10 \implies 50 - 2Q_A = 10 \implies Q_A^* = 20,
+$$
+$$
+MR_B(Q_B^*) = MC = 10 \implies 30 - 2Q_B = 10 \implies Q_B^* = 10.
+$$
+
+최적가격은
+$$
+p_A^* = 50 - 20 = 30, \qquad p_B^* = 30 - 10 = 20.
+$$
+
+내부해에서 성립하는 한계수입 조건은
+$$
+MR_A(Q_A^*) = MR_B(Q_B^*) = MC = 10.
+$$
+
+각 시장의 이윤 및 총이윤은
+$$
+\pi_A^* = (p_A^* - MC)Q_A^* = (30 - 10) \cdot 20 = 400,
+$$
+$$
+\pi_B^* = (p_B^* - MC)Q_B^* = (20 - 10) \cdot 10 = 100,
+$$
+$$
+\pi^* = \pi_A^* + \pi_B^* = 400 + 100 = 500.
+$$
+
+총판매량은
+$$
+Q^* = Q_A^* + Q_B^* = 20 + 10 = 30.
+$$
+
+#### 2) 단일가격 독점(Single-Price Monopoly)
+
+동일가격 $p$ 부과 시 각 시장의 수요함수는
+$$
+q_A(p) = \max\{50 - p, 0\}, \qquad q_B(p) = \max\{30 - p, 0\}.
+$$
+
+시장의 aggregate demand $Q(p)$는 가격 구간에 따라 꺾인(kinked) 형태를 띤다:
+$$
+Q(p) =
+\begin{cases}
+0, & p > 50 \\
+50 - p, & 30 < p \le 50 \\
+(50 - p) + (30 - p) = 80 - 2p, & p \le 30.
+\end{cases}
+$$
+
+- **구간 1: $p \le 30$ (두 시장 모두 공급)**
+  역수요함수는
+  $$
+  p(Q) = 40 - \frac{1}{2}Q \qquad (Q \ge 20).
+  $$
+  한계수입은
+  $$
+  MR(Q) = 40 - Q.
+  $$
+  이윤극대화 조건 $MR = MC$:
+  $$
+  40 - Q = 10 \implies Q = 30.
+  $$
+  최적 단일가격은
+  $$
+  p = 40 - \frac{1}{2}(30) = 25 \le 30 \quad (\text{구간 조건 충족}).
+  $$
+  각 시장의 판매량은
+  $$
+  Q_A = 50 - 25 = 25, \qquad Q_B = 30 - 25 = 5.
+  $$
+  총판매량:
+  $$
+  Q = 25 + 5 = 30.
+  $$
+  총이윤:
+  $$
+  \pi = (p - MC)Q = (25 - 10) \cdot 30 = 450.
+  $$
+
+- **구간 2: $30 < p \le 50$ (시장 A에만 공급)**
+  $p(Q) = 50 - Q \implies MR = 50 - 2Q = 10 \implies Q = 20, p = 30$.
+  이때 이윤은 $\pi = (30 - 10) \cdot 20 = 400 < 450$.
+
+따라서 최적 단일가격 $p^* = 25$, 각 시장 판매량 $(Q_A, Q_B) = (25, 5)$, 총판매량 $Q = 30$, 총이윤 $\pi = 450$이다.
+
+#### 3) Prove or Disprove 및 이윤 효과와의 구분
+
+주어진 명제는 **Disprove (거짓)**이다.
+
+- **산출량 효과 (Robinson 정리)**:
+  위 1번과 2번의 결과에서 3급 가격차별 하의 총판매량은
+  $$
+  Q_{\text{disc}} = Q_A^* + Q_B^* = 20 + 10 = 30
+  $$
+  이고, 단일가격 독점 하의 총판매량도
+  $$
+  Q_{\text{unif}} = 25 + 5 = 30
+  $$
+  으로 정확히 일치한다 ($Q_{\text{disc}} = Q_{\text{unif}} = 30$). 따라서 "엄격히 증가한다(strictly increases)"는 명제는 성립하지 않는다.
+  일반적으로 선형 수요함수와 일정한 한계비용 하에서 단일가격으로 두 시장 모두에 양(+)의 공급이 이루어지는 경우, 가격차별 도입 시 상대적으로 탄력적인 시장에서의 판매량 증가분($\Delta Q_B = 10 - 5 = +5$)과 비탄력적인 시장에서의 판매량 감소분($\Delta Q_A = 20 - 25 = -5$)이 정확히 상쇄되어 총산출량은 불변이다 (Joan Robinson의 정리).
+
+- **기업 이윤 효과와의 구분**:
+  산출량은 불변이지만 기업의 총이윤은 엄격히 증가한다:
+  $$
+  \pi_{\text{disc}} = 500 > \pi_{\text{unif}} = 450.
+  $$
+  단일가격 독점 문제는 가격차별 문제에 $p_A = p_B$라는 제약조건이 추가된 제한된(constrained) 최적화 문제이다. 가격차별 하의 비제약 최적해는 $p_A^* = 30 \ne p_B^* = 20$이므로 단일가격 제약이 바인딩(binding)되어 기업의 선택을 제한한다. 기업은 각 시장의 한계수입을 독립적으로 $MC$에 일치시키는 유연성을 확보함으로써 항상 단일가격보다 엄격히 높은 이윤을 획득한다.
+:::
 :::
 
 ::: {.spoon-problem}
@@ -80,6 +213,92 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **competitive equilibrium → subsidy wedge → incidence → welfare**. $p_c$와 $p_s$를 구분하여 계산하고, 귀착과 consumer/producer surplus의 변화는 서로 다른 개념임에 유의하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Partial Equilibrium"}
+::: {.topic}
+Competitive Equilibrium · Per-Unit Subsidy · Incidence · Deadweight Loss
+:::
+
+#### 1) 정부개입이 없을 때 경쟁균형
+
+inverse demand와 inverse supply는
+$$
+p_D(Q) = 24 - Q, \qquad p_S(Q) = 4 + \frac{1}{2}Q
+$$
+이다.
+
+경쟁균형 조건 $p_D(Q) = p_S(Q)$에서
+$$
+24 - Q = 4 + \frac{1}{2}Q \implies \frac{3}{2}Q = 20 \implies Q^* = \frac{40}{3}.
+$$
+
+균형가격은
+$$
+p^* = 24 - \frac{40}{3} = \frac{32}{3}.
+$$
+
+따라서 경쟁균형은
+$$
+(Q^*, p^*) = \left(\frac{40}{3}, \; \frac{32}{3}\right).
+$$
+
+#### 2) 단위당 보조금 $s = 6$과 귀착
+
+보조금 지급 하에서 가격 쐐기(Price wedge) 관계는
+$$
+p_s = p_c + 6.
+$$
+
+소비자 가격 $p_c = 24 - Q_s$, 생산자 가격 $p_s = 4 + \frac{1}{2}Q_s$를 대입하면:
+$$
+4 + \frac{1}{2}Q_s = (24 - Q_s) + 6 = 30 - Q_s \implies \frac{3}{2}Q_s = 26 \implies Q_s = \frac{52}{3}.
+$$
+
+새로운 균형가격은
+$$
+p_c = 24 - \frac{52}{3} = \frac{20}{3},
+$$
+$$
+p_s = \frac{20}{3} + 6 = \frac{38}{3}.
+$$
+
+보조금의 단위당 귀착(Incidence):
+- **소비자 귀착 (지불가격 하락폭)**:
+  $$
+  \Delta p_c = p^* - p_c = \frac{32}{3} - \frac{20}{3} = \frac{12}{3} = 4.
+  $$
+- **생산자 귀착 (수취가격 상승폭)**:
+  $$
+  \Delta p_s = p_s - p^* = \frac{38}{3} - \frac{32}{3} = \frac{6}{3} = 2.
+  $$
+
+두 귀착의 합은
+$$
+\Delta p_c + \Delta p_s = 4 + 2 = 6 = s
+$$
+와 정확히 일치한다. (수요곡선 기울기 절댓값 $|-1|=1$이 공급곡선 기울기 $1/2$의 2배이므로, 상대적으로 비탄력적인 소비자가 보조금 혜택의 $2/3$인 4를, 생산자가 $1/3$인 2를 가져간다).
+
+#### 3) 정부 재정지출, Deadweight Loss 및 후생 원리
+
+- **정부의 총보조금 지출**:
+  $$
+  \text{Gov Exp} = s \cdot Q_s = 6 \cdot \frac{52}{3} = 104.
+  $$
+
+- **사중손실 (Deadweight Loss)**:
+  $$
+  DWL = \frac{1}{2} \cdot s \cdot (Q_s - Q^*) = \frac{1}{2} \cdot 6 \cdot \left(\frac{52}{3} - \frac{40}{3}\right) = 3 \cdot \frac{12}{3} = 3 \cdot 4 = 12.
+  $$
+
+**Marginal Benefit과 Marginal Cost 관점에서의 설명**:
+경쟁균형 $Q^* = 40/3$에서는 한계편익과 한계비용이 $MB = MC = 32/3$로 일치하여 사회적 총잉여가 극대화된다.
+그러나 보조금 지급으로 인해 거래량이 $Q_s = 52/3$로 인위적으로 팽창하면서, 균형을 초과하여 거래되는 모든 구간($Q^* < Q \le Q_s$)에서
+$$
+MC(Q) = 4 + \frac{1}{2}Q > MB(Q) = 24 - Q
+$$
+가 성립한다.
+즉, 재화를 한 단위 추가로 생산하는 데 소요되는 사회적 기회비용($MC$)이 소비자가 해당 재화로부터 누리는 지불용의($MB$)보다 크므로, 거래될 때마다 $MC - MB > 0$만큼의 사회적 순손실이 발생한다. 이 격차를 메우기 위해 지출된 정부 재정부담(104)이 소비자 및 생산자 잉여의 증가분($\Delta CS + \Delta PS = 92$)을 초과하게 되며, 그 차액이 바로 $DWL = 12$이다.
 :::
 :::
 

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문제 한 스푼 #8 · 손풀이 해설</title>
+<style>
+body{margin:0;background:#f6f7f9;color:#17191d;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;line-height:1.75}
+.wrap{width:min(920px,calc(100% - 32px));margin:40px auto 72px}
+.hero,.card{background:#fff;border:1px solid #dfe3e8;border-radius:18px}
+.hero{padding:32px 34px 28px;margin-bottom:20px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#68707a;margin-bottom:8px}
+h1{margin:0 0 10px;font-size:31px;letter-spacing:-.03em}
+.subtitle{color:#68707a;font-size:15px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.chip{border:1px solid #dfe3e8;background:#f1f3f5;border-radius:999px;padding:6px 10px;font-size:13px;color:#444b54}
+.card{padding:30px 34px;margin-top:20px}
+.card h2{margin:0 0 8px;font-size:24px;letter-spacing:-.02em}
+.topic{color:#68707a;font-size:14px;font-weight:700;margin-bottom:18px}
+.step{margin:22px 0 0}
+.step h3{margin:0 0 10px;font-size:18px}
+.flow{border-left:3px solid #cfd5dc;padding-left:18px;margin:12px 0 0}
+.footer{margin-top:28px;text-align:center;color:#68707a;font-size:13px}
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],processEscapes:true},chtml:{scale:1.02}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<main class="wrap">
+
+<section class="hero">
+<div class="eyebrow">Graduate Microeconomics · Daily Practice</div>
+<h1>문제 한 스푼 #8 · 손풀이 해설</h1>
+<div class="subtitle">손풀이의 전개 순서와 계산 흐름을 유지하여 정리한 내용 중심 해설본</div>
+<div class="meta">
+<span class="chip">부분균형</span>
+<span class="chip">일반균형</span>
+<span class="chip">원본 이미지 제외</span>
+<span class="chip">MathJax CHTML</span>
+</div>
+</section>
+
+<section class="card">
+<h2>Problem 1. Partial Equilibrium</h2>
+<div class="topic">Competitive Equilibrium · Price Ceiling · Efficient Rationing · Welfare</div>
+
+<div class="step">
+<h3>1) 경쟁균형</h3>
+<div class="flow">
+inverse demand와 inverse supply는
+\[
+p_D(Q)=26-Q,\qquad p_S(Q)=2+Q
+\]
+이다.
+
+경쟁균형에서는
+\[
+26-Q=2+Q
+\]
+이므로
+\[
+Q^*=12,\qquad p^*=14.
+\]
+
+따라서
+\[
+(Q^*,p^*)=(12,14).
+\]
+
+경쟁균형의 total surplus는
+\[
+TS^*=\frac12(26-2)\cdot12=144.
+\]
+</div>
+</div>
+
+<div class="step">
+<h3>2) 가격상한제 \(\bar p=8\)</h3>
+<div class="flow">
+\[
+8\lt14=p^*
+\]
+이므로 binding price ceiling이다.
+
+수요량은
+\[
+8=26-Q_D
+\quad\Rightarrow\quad
+Q_D=18.
+\]
+
+공급량은
+\[
+8=2+Q_S
+\quad\Rightarrow\quad
+Q_S=6.
+\]
+
+공급량이 더 작으므로 실제 거래량은
+\[
+Q=6.
+\]
+</div>
+</div>
+
+<div class="step">
+<h3>3) Efficient rationing과 후생</h3>
+<div class="flow">
+efficient rationing을 가정하므로 willingness to pay가 가장 높은 소비자부터 6단위를 구매한다.
+
+Consumer surplus는
+\[
+CS
+=
+\int_0^6[(26-Q)-8]\,dQ
+=
+\int_0^6(18-Q)\,dQ
+=
+90.
+\]
+
+Producer surplus는
+\[
+PS
+=
+\int_0^6[8-(2+Q)]\,dQ
+=
+\int_0^6(6-Q)\,dQ
+=
+18.
+\]
+
+따라서
+\[
+TS=CS+PS=90+18=108.
+\]
+
+경쟁균형의 total surplus는 144였으므로
+\[
+DWL=144-108=36.
+\]
+
+가격상한제가 균형가격보다 낮아
+\[
+Q_D=18\gt Q_S=6
+\]
+의 초과수요가 발생하고, 실제 거래량이 12에서 6으로 감소한다.
+그 결과 경쟁균형에서 이루어졌을 일부 상호이익적 거래가 사라져 deadweight loss가 발생한다.
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>Problem 2. General Equilibrium</h2>
+<div class="topic">Marshallian Demand · Market Clearing · Competitive Equilibrium · First Welfare Theorem</div>
+
+<div class="step">
+<h3>1) 개별수요와 균형가격</h3>
+<div class="flow">
+총부존은
+\[
+\bar x=8+2=10,\qquad \bar y=2+8=10.
+\]
+
+\(p_y=1\), \(p_x=p\gt0\)로 normalize한다.
+
+소비자 1의 wealth는
+\[
+m_1=8p+2.
+\]
+
+\[
+u_1=x_1^{1/2}y_1^{1/2}
+\]
+이므로
+\[
+x_1^M
+=
+\frac12\frac{m_1}{p}
+=
+4+\frac1p,
+\]
+\[
+y_1^M
+=
+\frac12m_1
+=
+4p+1.
+\]
+
+소비자 2의 wealth는
+\[
+m_2=2p+8.
+\]
+
+\[
+u_2=x_2^{1/3}y_2^{2/3}
+\]
+이므로
+\[
+x_2^M
+=
+\frac13\frac{m_2}{p}
+=
+\frac23+\frac{8}{3p},
+\]
+\[
+y_2^M
+=
+\frac23m_2
+=
+\frac{4p+16}{3}.
+\]
+
+\(x\)-시장 청산조건
+\[
+x_1+x_2=10
+\]
+을 적용하면
+\[
+4+\frac1p+\frac23+\frac{8}{3p}=10.
+\]
+
+따라서
+\[
+\frac{11}{p}=16
+\]
+이고
+\[
+p^*=\frac{11}{16}.
+\]
+</div>
+</div>
+
+<div class="step">
+<h3>2) Competitive equilibrium allocation</h3>
+<div class="flow">
+\(p^*=\frac{11}{16}\)을 대입하면
+
+소비자 1:
+\[
+x_1^*
+=
+4+\frac{16}{11}
+=
+\frac{60}{11},
+\]
+\[
+y_1^*
+=
+4\left(\frac{11}{16}\right)+1
+=
+\frac{15}{4}.
+\]
+
+소비자 2:
+\[
+x_2^*
+=
+\frac23
++
+\frac83\frac{16}{11}
+=
+\frac{50}{11},
+\]
+\[
+y_2^*
+=
+\frac{4(11/16)+16}{3}
+=
+\frac{25}{4}.
+\]
+
+따라서 competitive equilibrium allocation은
+\[
+\left[
+\left(\frac{60}{11},\frac{15}{4}\right),
+\left(\frac{50}{11},\frac{25}{4}\right)
+\right].
+\]
+
+또한
+\[
+y_1^*+y_2^*
+=
+\frac{15}{4}+\frac{25}{4}
+=
+10
+\]
+이므로 \(y\)-시장도 청산된다.
+</div>
+</div>
+
+<div class="step">
+<h3>3) MRS와 Pareto efficiency</h3>
+<div class="flow">
+소비자 1의 MRS는
+\[
+MRS_1
+=
+\frac{MU_x}{MU_y}
+=
+\frac{y_1}{x_1}.
+\]
+
+균형에서
+\[
+MRS_1
+=
+\frac{15/4}{60/11}
+=
+\frac{11}{16}.
+\]
+
+소비자 2의 MRS는
+\[
+MRS_2
+=
+\frac{MU_x}{MU_y}
+=
+\frac12\frac{y_2}{x_2}.
+\]
+
+따라서
+\[
+MRS_2
+=
+\frac12
+\frac{25/4}{50/11}
+=
+\frac{11}{16}.
+\]
+
+그러므로
+\[
+MRS_1=MRS_2=\frac{p_x}{p_y}=\frac{11}{16}.
+\]
+
+이 allocation은 competitive equilibrium allocation이고 효용함수는 locally nonsatiated이므로,
+First Welfare Theorem에 의해 Pareto efficient이다.
+</div>
+</div>
+</section>
+
+<div class="footer">문제 한 스푼 #8 · Solution Notes</div>
+</main>
+</body>
+</html>
