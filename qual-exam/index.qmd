@@ -194,6 +194,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
+
+<a href="micro/set-11.html" class="spoon-card" data-subject="micro" data-round="11">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#11 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 생산자이론</div>
+  <div class="spoon-card__desc">마샬/힉스 수요와 슬러츠키 방정식(Slutsky Equation) 분해, 이윤극대화와 공급함수 및 호텔링 보조정리(Hotelling's Lemma)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -357,6 +369,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   <div class="spoon-card__desc">순수교환경제 경쟁균형, 제1후생경제학 정리, 파레토 집합 매개변수화, 사회계획자 문제 및 정액이전 분권화(제2정리)</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 · 해설 수록 →</span>
+  </div>
+</a>
+
+<a href="micro/set-11.html" class="spoon-card" data-subject="micro" data-round="11">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#11 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 생산자이론</div>
+  <div class="spoon-card__desc">마샬/힉스 수요와 슬러츠키 방정식(Slutsky Equation) 분해, 이윤극대화와 공급함수 및 호텔링 보조정리(Hotelling's Lemma)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
   </div>
 </a>
 </div>
