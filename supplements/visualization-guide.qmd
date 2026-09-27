@@ -16,6 +16,8 @@
 - [과점 게임이론: Cournot, Bertrand, Stackelberg 반응곡선과 균형 동학](oligopoly-game-theory.qmd): 2기업 과점 시장에서 산출량 및 가격 최적대응 동학, Stackelberg 등이윤곡선의 외접 기하학, 그리고 시장구조별 후생 손실과 N-기업 완전경쟁 수렴을 확인한다.
 - [코어(Core)와 경쟁균형 수렴: 에지워스 상자에서 Debreu–Scarf 복제경제 동학](core-competitive-convergence.qmd): 2인 에지워스 상자에서의 코어 선분, r-복제경제에서의 불균등 연합 블로킹, 그리고 왈라스 경쟁균형으로의 Debreu–Scarf 수렴 동학을 고해상도 시뮬레이션으로 확인한다.
 - [실물경기변동(RBC) 모형: 기술충격과 동태적 충격반응(IRF) 전파](rbc-technology-shock.qmd): 표준 RBC 모형에서 1% 기술충격에 따른 노동시장 균형(기간간 대체)과 자원배분(소비 평활화 vs 투자 변동성), 내생적 자본축적, 그리고 6대 거시변수 충격반응함수(IRF)와 충격 지속성 비교를 확인한다.
+- [3대 고전 가설검정의 기하학: Wald, 우도비(LR), 라그랑주 승수(LM/Score)](classical-testing-trinity.qmd): 로그우도 곡면 위에서 Wald의 모수 수평거리, LR의 우도 높이갭, LM의 접선경사를 비교하고 선형회귀에서의 W ≥ LR ≥ LM 부등식 및 비선형 불변성 상충을 시뮬레이션한다.
+- [위상수학 기초: 닫힌집합(Closed Set)·폐포(Closure)·도집합(Derived Set)](topology-closed-sets-closure.qmd): 2차원 평면에서의 수열적 수렴과 극한점, 도집합과 폐포의 3대 동치 특성화, 닫힌집합 판별, 그리고 바이어슈트라스 극값정리와 경제학적 최적화의 수학적 토대를 해부한다.
 
 ## 선택 기준
 
