@@ -11,15 +11,15 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 # 계산·시각화 보충자료 (Supplements)
 
 ::: {.spoon-hero__desc}
-본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 15대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학, 경제학을 위한 수학의 핵심 정리와 위상도, 직교사영 기하를 33종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 16대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학, 경제학을 위한 수학의 핵심 정리와 위상도, 직교사영 기하를 35종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
-[경제학을 위한 수학 (2편)]{.chip .chip--primary}
+[경제학을 위한 수학 (3편)]{.chip .chip--primary}
 [미시경제학 (5편)]{.chip .chip--micro}
 [거시경제학 (4편)]{.chip .chip--macro}
 [계량경제학 (4편)]{.chip .chip--metrics}
-[33종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
+[35종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
 :::
@@ -27,7 +27,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-search-wrapper}
 ::: {.spoon-search-box}
-<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 주제어, 모형, 정리 검색 (예: KKT, 승수, 그림자 가격, Slutsky, Solow, Ramsey, OLS, 사영, FWL, 후생정리, 도구변수, Wald, LR, LM...)" autocomplete="off">
+<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 주제어, 모형, 정리 검색 (예: 닫힌집합, 폐포, 도집합, KKT, 승수, 그림자 가격, Slutsky, Solow, Ramsey, OLS, 사영, FWL, 후생정리, 도구변수, Wald, LR, LM...)" autocomplete="off">
 <span id="spoon-search-count" class="spoon-count-badge">실시간 검색 대기 중</span>
 :::
 :::
@@ -37,8 +37,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 ### 전체 보기
 
 ::: {.spoon-guide-box}
-**📚 대학원 경제학 15대 계산·시각화 보충자료 통합 포털**
-미시·거시·계량·수리경제학 전 분야의 계산·시각화 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 15편은 상단 검색창에서 즉시 필터링할 수 있다.
+**📚 대학원 경제학 16대 계산·시각화 보충자료 통합 포털**
+미시·거시·계량·수리경제학 전 분야의 계산·시각화 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 16편은 상단 검색창에서 즉시 필터링할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -47,7 +47,31 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ```{=html}
 <div id="supplement-grid-all" class="spoon-grid">
-<!-- Math 1: KKT Inequality Optimization -->
+<!-- Math 1: Topology Closed Sets, Closure, Derived Set -->
+<a href="topology-closed-sets-closure.html" class="spoon-card" data-subject="math">
+  <div class="spoon-card__header">
+    <span class="chip chip--primary">경제학을 위한 수학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">위상수학 기초: 닫힌집합(Closed Set)·폐포(Closure)·도집합(Derived Set)</div>
+  <div class="spoon-card__desc">2차원 평면에서의 수열적 수렴과 극한점, 도집합과 폐포의 3대 동치 특성화, 닫힌집합 판별, 그리고 바이어슈트라스 극값정리와 경제학적 최적화의 수학적 토대를 해부한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">닫힌집합(Closed Set)</span>
+    <span class="chip chip--topic">폐포(Closure)</span>
+    <span class="chip chip--topic">도집합(Derived Set)</span>
+    <span class="chip chip--topic">집적점(Accumulation)</span>
+    <span class="chip chip--topic">수열적 닫힘성</span>
+    <span class="chip chip--topic">바이어슈트라스 극값정리</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 경제학을 위한 수학 Chapter 01 유클리드 공간의 위상</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Math 2: KKT Inequality Optimization -->
 <a href="kkt-inequality-optimization.html" class="spoon-card" data-subject="math">
   <div class="spoon-card__header">
     <span class="chip chip--primary">경제학을 위한 수학</span>
@@ -409,7 +433,31 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ```{=html}
 <div id="supplement-grid-math" class="spoon-grid">
-<!-- Math 1: KKT Inequality Optimization -->
+<!-- Math 1: Topology Closed Sets, Closure, Derived Set -->
+<a href="topology-closed-sets-closure.html" class="spoon-card" data-subject="math">
+  <div class="spoon-card__header">
+    <span class="chip chip--primary">경제학을 위한 수학</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">위상수학 기초: 닫힌집합(Closed Set)·폐포(Closure)·도집합(Derived Set)</div>
+  <div class="spoon-card__desc">2차원 평면에서의 수열적 수렴과 극한점, 도집합과 폐포의 3대 동치 특성화, 닫힌집합 판별, 그리고 바이어슈트라스 극값정리와 경제학적 최적화의 수학적 토대를 해부한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">닫힌집합(Closed Set)</span>
+    <span class="chip chip--topic">폐포(Closure)</span>
+    <span class="chip chip--topic">도집합(Derived Set)</span>
+    <span class="chip chip--topic">집적점(Accumulation)</span>
+    <span class="chip chip--topic">수열적 닫힘성</span>
+    <span class="chip chip--topic">바이어슈트라스 극값정리</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 경제학을 위한 수학 Chapter 01 유클리드 공간의 위상</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Math 2: KKT Inequality Optimization -->
 <a href="kkt-inequality-optimization.html" class="spoon-card" data-subject="math">
   <div class="spoon-card__header">
     <span class="chip chip--primary">경제학을 위한 수학</span>

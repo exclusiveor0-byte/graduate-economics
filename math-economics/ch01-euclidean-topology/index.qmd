@@ -28,6 +28,10 @@ $\mathbb R^n$의 노름과 거리에서 출발하여 열린집합, 닫힌집합,
 - [연습문제](contents.html#exercises)
 - [참고문헌 및 장의 위치](contents.html#references)
 
+::: {.callout-note appearance="simple" title="🎬 시각화 보충자료"}
+본 장의 핵심 개념인 닫힌집합, 폐포, 도집합, 그리고 2차원 평면에서의 수열적 수렴과 바이어슈트라스 극값정리에 관한 동적 시뮬레이션은 [보충자료 · 닫힌집합(Closed Set)·폐포(Closure)·도집합(Derived Set)](../../supplements/topology-closed-sets-closure.qmd)에서 확인할 수 있다.
+:::
+
 ::: {.callout-tip title="본문 읽기"}
 수식·정리·증명은 원본 구조를 보존한 [본문 전체](contents.html)에 있다.
 위의 Section 링크로 바로 이동하거나 순서대로 읽을 수 있다.
