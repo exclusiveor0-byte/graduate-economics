@@ -206,6 +206,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
+
+<a href="micro/set-12.html" class="spoon-card" data-subject="micro" data-round="12">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#12 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 · 일반균형</div>
+  <div class="spoon-card__desc">동질재 베르트랑 가격경쟁과 내시균형·역설, 생산을 포함한 왈라스 일반균형 및 사회계획자 최적배분(제1후생경제학 정리)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -379,6 +391,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">소비자이론 · 생산자이론</div>
   <div class="spoon-card__desc">마샬/힉스 수요와 슬러츠키 방정식(Slutsky Equation) 분해, 이윤극대화와 공급함수 및 호텔링 보조정리(Hotelling's Lemma)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-12.html" class="spoon-card" data-subject="micro" data-round="12">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#12 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 · 일반균형</div>
+  <div class="spoon-card__desc">동질재 베르트랑 가격경쟁과 내시균형·역설, 생산을 포함한 왈라스 일반균형 및 사회계획자 최적배분(제1후생경제학 정리)</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
