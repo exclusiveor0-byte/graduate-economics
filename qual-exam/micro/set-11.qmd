@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -52,6 +52,158 @@ $$
 ::: {.spoon-hint}
 **형식**: **Marshallian demand → expenditure/Hicksian demand → Slutsky decomposition**.<br>Slutsky equation의 Hicksian derivative는 $u = V(p, m)$에서 평가하시오.
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Consumer Theory"}
+::: {.topic}
+Marshallian Demand · Hicksian Demand · Slutsky Equation
+:::
+
+#### 1) Utility maximization
+
+효용함수와 가격을
+$$
+u(x, y) = x^{1/2} y^{1/2}, \qquad p_x = p > 0, \quad p_y = 1, \quad m > 0
+$$
+로 둔다.
+
+소비자의 utility maximization problem은
+$$
+\max_{x, y \ge 0} \; x^{1/2} y^{1/2} \qquad \text{s.t.} \qquad px + y \le m
+$$
+이다.
+
+Lagrangian을
+$$
+\mathcal{L} = x^{1/2} y^{1/2} + \lambda(m - px - y) + \nu_x x + \nu_y y
+$$
+로 둔다.
+
+KKT stationarity 조건은
+$$
+\frac{\partial\mathcal{L}}{\partial x} = \frac{1}{2} x^{-1/2} y^{1/2} - \lambda p + \nu_x = 0,
+$$
+$$
+\frac{\partial\mathcal{L}}{\partial y} = \frac{1}{2} x^{1/2} y^{-1/2} - \lambda + \nu_y = 0.
+$$
+
+complementary slackness는
+$$
+\lambda(m - px - y) = 0, \qquad \nu_x x = 0, \qquad \nu_y y = 0.
+$$
+
+한계효용이 원점에서 무한대로 발산하므로 내부해(interior solution)를 갖는다:
+$$
+x > 0, \quad y > 0 \implies \nu_x = \nu_y = 0.
+$$
+
+두 1계 조건(FOC)을 나누면
+$$
+\frac{y}{x} = p \implies y = px.
+$$
+
+효용함수가 강단조성을 만족하므로 예산제약은 등호로 결합한다:
+$$
+px + y = m \implies px + px = m \implies 2px = m.
+$$
+
+따라서 마샬 수요함수(Marshallian demand)는
+$$
+x(p, m) = \frac{m}{2p}, \qquad y(p, m) = \frac{m}{2}.
+$$
+
+이를 효용함수에 대입하면 간접효용함수(indirect utility function)는
+$$
+V(p, m) = u(x(p, m), y(p, m)) = \left(\frac{m}{2p}\right)^{1/2} \left(\frac{m}{2}\right)^{1/2} = \frac{m}{2\sqrt{p}}.
+$$
+
+#### 2) Expenditure minimization
+
+목표효용을 $u^0$라 하자. expenditure minimization problem은
+$$
+\min_{x, y \ge 0} \; px + y \qquad \text{s.t.} \qquad x^{1/2} y^{1/2} \ge u^0
+$$
+이다.
+
+Lagrangian은
+$$
+\mathcal{L} = px + y - \lambda\left(x^{1/2} y^{1/2} - u^0\right) - \nu_x x - \nu_y y.
+$$
+
+내부해에서 stationarity 조건은
+$$
+p - \frac{\lambda}{2} x^{-1/2} y^{1/2} = 0,
+$$
+$$
+1 - \frac{\lambda}{2} x^{1/2} y^{-1/2} = 0.
+$$
+
+두 식을 나누면
+$$
+p = \frac{y}{x} \implies y = px.
+$$
+
+목표효용 제약은 최적점에서 등호로 결합하므로
+$$
+x^{1/2} y^{1/2} = x^{1/2} (px)^{1/2} = \sqrt{p} x = u^0.
+$$
+
+따라서 힉스 수요함수(Hicksian demand)는
+$$
+h_x(p, u^0) = \frac{u^0}{\sqrt{p}}, \qquad h_y(p, u^0) = u^0 \sqrt{p}.
+$$
+
+지출함수(expenditure function)는
+$$
+e(p, u^0) = p\,h_x(p, u^0) + h_y(p, u^0) = p \frac{u^0}{\sqrt{p}} + u^0 \sqrt{p} = 2u^0 \sqrt{p}.
+$$
+
+이제 간접효용함수의 값 $u^0 = V(p, m) = \frac{m}{2\sqrt{p}}$를 대입하면
+$$
+h_x(p, V(p, m)) = \frac{\frac{m}{2\sqrt{p}}}{\sqrt{p}} = \frac{m}{2p} = x(p, m).
+$$
+따라서 쌍대성 항등식 $h_x(p, V(p, m)) = x(p, m)$이 정확히 성립한다.
+
+#### 3) Slutsky equation
+
+마샬 수요함수(Marshallian demand)는
+$$
+x(p, m) = \frac{m}{2p} = \frac{m}{2} p^{-1}
+$$
+이므로 가격에 대한 총효과(Total price effect)는
+$$
+\frac{\partial x(p, m)}{\partial p} = -\frac{m}{2p^2}.
+$$
+
+힉스 수요함수(Hicksian demand)는
+$$
+h_x(p, u) = u p^{-1/2}
+$$
+이므로 가격에 대한 대체효과(Substitution effect)는
+$$
+\frac{\partial h_x(p, u)}{\partial p} = -\frac{1}{2} u p^{-3/2}.
+$$
+
+이를 $u = V(p, m) = \frac{m}{2\sqrt{p}}$에서 평가하면
+$$
+\left. \frac{\partial h_x(p, u)}{\partial p} \right|_{u=V(p, m)} = -\frac{1}{2} \left(\frac{m}{2\sqrt{p}}\right) p^{-3/2} = -\frac{m}{4p^2}.
+$$
+
+또한 소득효과(Income effect) 항을 계산하면:
+$$
+\frac{\partial x(p, m)}{\partial m} = \frac{1}{2p} \implies x(p, m) \frac{\partial x(p, m)}{\partial m} = \left(\frac{m}{2p}\right) \left(\frac{1}{2p}\right) = \frac{m}{4p^2}.
+$$
+
+따라서 슬러츠키 방정식의 우변(대체효과 - 소득효과)은
+$$
+\left. \frac{\partial h_x(p, u)}{\partial p} \right|_{u=V(p, m)} - x(p, m) \frac{\partial x(p, m)}{\partial m} = -\frac{m}{4p^2} - \frac{m}{4p^2} = -\frac{m}{2p^2} = \frac{\partial x(p, m)}{\partial p}.
+$$
+그러므로 Slutsky equation이 정확히 성립함을 확인한다.
+
+**부호 해석**:
+- **대체효과(Substitution effect)**: $\left. \frac{\partial h_x}{\partial p} \right|_{u=V} = -\frac{m}{4p^2} < 0$으로 항상 음(-)이다. 가격이 상승하면 동일한 실질효용을 유지하기 위해 상대적으로 비싸진 $x$-재화의 소비를 줄이고 $y$-재화로 대체한다.
+- **소득효과(Income effect)**: $\frac{\partial x}{\partial m} = \frac{1}{2p} > 0$이므로 $x$-재화는 정상재(normal good)이다. 가격 상승에 따라 소비자의 구매력(실질소득)이 감소하므로, 소득효과 항 $-x \frac{\partial x}{\partial m} = -\frac{m}{4p^2} < 0$ 역시 $x$의 수요를 감소시키는 방향으로 작용한다.
+- **총효과(Total effect)**: 대체효과와 소득효과가 모두 음(-)의 방향으로 작용하므로 총가격효과 $\frac{\partial x}{\partial p} = -\frac{m}{2p^2} < 0$가 되어 수요의 법칙(Law of demand)이 성립한다.
+:::
 :::
 
 ::: {.spoon-problem}
@@ -82,6 +234,82 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **profit maximization → supply/input demand → profit function → Hotelling**.<br>생산함수가 concave이므로 interior FOC가 global maximum을 주는지 함께 확인하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Producer Theory"}
+::: {.topic}
+Profit Maximization · Supply · Profit Function · Hotelling's Lemma
+:::
+
+#### 1) Profit maximization
+
+생산함수는
+$$
+q = f(L) = \sqrt{L}, \qquad L \ge 0
+$$
+이다.
+
+투입요소 $L$을 산출량 $q$로 표현하면 $L = q^2$이므로 기업의 비용함수는
+$$
+C(q) = wL = wq^2.
+$$
+
+따라서 기업의 profit maximization problem은 산출량 $q$에 대해 다음과 같이 설정할 수 있다:
+$$
+\max_{q \ge 0} \; \{pq - wq^2\}.
+$$
+목적함수(이윤)를 $\pi(q) = pq - wq^2$라 할 때, 1계 조건(FOC)은
+$$
+\frac{d\pi}{dq} = p - 2wq = 0 \implies q^s(p, w) = \frac{p}{2w}.
+$$
+
+최적 투입량(요소수요함수)은 $L = q^2$에 대입하여
+$$
+L^*(p, w) = \left(\frac{p}{2w}\right)^2 = \frac{p^2}{4w^2}.
+$$
+
+또한 2계 도함수는
+$$
+\frac{d^2\pi}{dq^2} = -2w < 0 \qquad (\because w > 0)
+$$
+이므로 목적함수는 모든 $q \ge 0$에서 엄격히 오목(Strictly concave)하며, 따라서 내부해 FOC가 유일한 전역 최댓값(Global maximum)을 준다.
+
+*(참고: 투입량 $L$에 대해 직접 문제를 설정하는 경우 $\max_{L \ge 0} \{p\sqrt{L} - wL\} \implies \frac{p}{2\sqrt{L}} - w = 0 \implies \sqrt{L} = \frac{p}{2w} \implies L^* = \frac{p^2}{4w^2}, q^s = \frac{p}{2w}$로 동일하게 유도된다.)*
+
+#### 2) Profit function과 degree-1 homogeneity
+
+최적 산출량 및 투입량을 기업의 총수입과 총비용에 대입하면 이윤함수(Profit function)는
+$$
+\pi(p, w) = p\,q^s(p, w) - w\,L^*(p, w) = p \left(\frac{p}{2w}\right) - w \left(\frac{p^2}{4w^2}\right) = \frac{p^2}{2w} - \frac{p^2}{4w} = \frac{p^2}{4w}.
+$$
+
+임의의 스칼라 $t > 0$에 대해 가격벡터를 $(tp, tw)$로 스케일링하면:
+$$
+\pi(tp, tw) = \frac{(tp)^2}{4(tw)} = \frac{t^2 p^2}{4tw} = t \left(\frac{p^2}{4w}\right) = t\,\pi(p, w).
+$$
+따라서 profit function $\pi(p, w)$는 $(p, w)$에 대해 **1차 동차(Degree 1 homogeneous)**이다. 즉, 산출물 가격과 요소 가격이 동일한 비율로 변하면 기업의 명목 이윤도 같은 비율로 증가한다.
+
+#### 3) Hotelling's lemma
+
+도출된 profit function은
+$$
+\pi(p, w) = \frac{p^2}{4w} = \frac{1}{4w} p^2 = \frac{p^2}{4} w^{-1}.
+$$
+
+- **산출물 가격 $p$에 대한 편미분**:
+  $$
+  \frac{\partial\pi(p, w)}{\partial p} = \frac{2p}{4w} = \frac{p}{2w} = q^s(p, w).
+  $$
+- **투입요소 가격 $w$에 대한 편미분**:
+  $$
+  \frac{\partial\pi(p, w)}{\partial w} = -\frac{p^2}{4w^2} \implies -\frac{\partial\pi(p, w)}{\partial w} = \frac{p^2}{4w^2} = \left(\frac{p}{2w}\right)^2 = L^*(p, w).
+  $$
+
+따라서 호텔링 보조정리(Hotelling's Lemma)의 두 항등식
+$$
+\frac{\partial\pi(p, w)}{\partial p} = q^s(p, w), \qquad -\frac{\partial\pi(p, w)}{\partial w} = L^*(p, w)
+$$
+가 실제로 완벽히 성립함을 확인한다. (포락선 정리 Envelope Theorem의 자연스러운 귀결)
 :::
 :::
 
