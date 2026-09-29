@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -57,6 +57,92 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **profit by cases → profitable deviation → Nash equilibrium → interpretation**.<br>단순히 $p = MC$라고 쓰는 데서 끝내지 말고, 다른 가격쌍이 왜 equilibrium이 될 수 없는지 논리적으로 보이시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Market Structure"}
+::: {.topic}
+Bertrand Competition · Homogeneous Goods · Nash Equilibrium
+:::
+
+#### 1) 이윤함수 (Profit functions)
+
+시장수요는
+$$
+Q(p) = 50 - p \quad (0 \le p \le 50)
+$$
+이고, 두 기업의 한계비용은 동일하게 $MC_1 = MC_2 = 8$이다. 고정비용은 없다.
+
+기업 1의 가격 $p_1$과 기업 2의 가격 $p_2$의 대소 관계에 따른 기업 1의 이윤함수 $\pi_1(p_1, p_2)$는 다음과 같다:
+$$
+\pi_1(p_1, p_2) =
+\begin{cases}
+(p_1 - 8)(50 - p_1), & p_1 < p_2, \\[6pt]
+\dfrac{1}{2}(p_1 - 8)(50 - p_1), & p_1 = p_2, \\[6pt]
+0, & p_1 > p_2.
+\end{cases}
+$$
+
+대칭적으로 기업 2의 이윤함수 $\pi_2(p_1, p_2)$는 다음과 같다:
+$$
+\pi_2(p_1, p_2) =
+\begin{cases}
+0, & p_2 > p_1, \\[6pt]
+\dfrac{1}{2}(p_2 - 8)(50 - p_2), & p_2 = p_1, \\[6pt]
+(p_2 - 8)(50 - p_2), & p_2 < p_1.
+\end{cases}
+$$
+
+*(단, $p_i > 50$이면 해당 가격에서 수요가 0이므로 $\pi_i = 0$이다.)*
+
+#### 2) 내시균형(Nash equilibrium) 판정 및 세 경우의 검토
+
+순수전략 가격쌍 $(p_1, p_2)$에 대해 일방적 이탈(Unilateral deviation) 가능성을 세 영역으로 나누어 검토한다.
+
+- **Case 1. $p_1 = p_2 = p > 8$ 인 경우**:
+  - $8 < p \le 50$에서 각 기업은 시장수요를 절반씩 나누어 가지며 양(+)의 이윤을 얻는다:
+    $$
+    \pi_i(p, p) = \frac{1}{2}(p - 8)(50 - p) > 0.
+    $$
+  - 그러나 한 기업 $i$가 상대 가격 $p$보다 아주 작은 $\varepsilon > 0$만큼 낮은 가격 $p_i' = p - \varepsilon$을 선택(undercutting)하면 시장 전체 수요 $50 - (p - \varepsilon)$을 독점한다.
+  - 이탈 후의 이윤은
+    $$
+    \pi_i(p - \varepsilon, p) = (p - \varepsilon - 8)(50 - p + \varepsilon).
+    $$
+  - $\varepsilon \to 0$일 때 이탈 이윤은 $(p - 8)(50 - p)$에 수렴하여 원래 이윤 $\frac{1}{2}(p - 8)(50 - p)$의 거의 2배가 되므로, 충분히 작은 $\varepsilon > 0$에 대해 항상 수익성 있는 이탈(Profitable deviation)이 존재한다.
+  - 따라서 $p_1 = p_2 > 8$은 내시균형이 될 수 없다.
+
+- **Case 2. $p_1 = p_2 = p < 8$ 인 경우**:
+  - 가격이 한계비용보다 낮으므로 각 기업의 이윤은 음(-)이다:
+    $$
+    \pi_i(p, p) = \frac{1}{2}(p - 8)(50 - p) < 0.
+    $$
+  - 이때 한 기업이 가격을 상대방보다 높게 $p_i' > p$로 인상하면 판매량이 0이 되어 손실을 피하고 이윤 0을 달성할 수 있다 ($\pi_i = 0 > \pi_i(p, p)$).
+  - 즉, 손실을 제거하는 profitable deviation이 존재하므로 $p_1 = p_2 < 8$ 역시 내시균형이 될 수 없다.
+
+- **Case 3. $p_1 = p_2 = 8$ 인 경우**:
+  - 각 기업의 가격이 한계비용과 일치하므로 이윤은 0이다:
+    $$
+    \pi_1 = \pi_2 = 0.
+    $$
+  - **하향 이탈($p_i' < 8$) 검토**: 가격을 한계비용 아래로 낮추어 시장 전체를 공급하더라도 단위당 손실($p_i' - 8 < 0$)이 발생하므로 이윤은 음(-)이 되어 이탈 유인이 없다.
+  - **상향 이탈($p_i' > 8$) 검토**: 가격을 올리면 상대 기업이 $p_j = 8$로 시장 전체를 공급하므로 판매량이 0이 되어 이윤은 여전히 0이다. 즉 엄격한 이윤 증가가 불가능하다.
+  - 또한 $p_1 \ne p_2$인 비대칭 가격쌍의 경우, 높은 가격을 제시한 기업은 판매량과 이윤이 0이므로 상대 가격 바로 아래로 가격을 낮추려는 유인이 있어 균형이 성립할 수 없다.
+  - 따라서 유일한 순수전략 내시균형은 다음과 같이 유일하게 특성화된다:
+    $$
+    (p_1^*, p_2^*) = (8, 8).
+    $$
+
+#### 3) Bertrand equilibrium과 Bertrand paradox의 해석
+
+- **균형 시장가격**: $p^* = 8$
+- **총산출량**: $Q^* = 50 - 8 = 42$
+- **각 기업의 판매량**: $q_1^* = q_2^* = \frac{42}{2} = 21$
+- **각 기업의 경제적 이윤**: $\pi_1^* = \pi_2^* = (8 - 8) \times 21 = 0$
+
+**베르트랑 역설(Bertrand Paradox)의 의의**:
+- 시장에 단 두 개의 기업(Duopoly)만 존재하는 과점 상태임에도 불구하고, 제품이 완전히 동질적(Homogeneous goods)이고 가격경쟁(Price competition)을 벌이는 경우, 가격 인하 유인이 $p = MC$에 도달할 때까지 멈추지 않는다.
+- 그 결과 단 두 기업만으로도 수많은 무한개의 경쟁기업이 존재하는 **완전경쟁시장(Perfect competition)과 동일하게 가격이 한계비용과 일치($p^* = MC = 8$)하고 경제적 이윤이 0이 되는 극단적 결과**를 초래한다.
+- 이처럼 현실의 과점 시장에서 관찰되는 양(+)의 이윤과 괴리되는 이론적 귀결을 **베르트랑 역설(Bertrand Paradox)**이라고 부르며, 실제 경제에서는 제품 차별화(Product differentiation), 생산용량 제약(Capacity constraints/Edgeworth paradox), 반복게임 하의 암묵적 담합(Collusion) 등을 통해 이 역설이 완화된다.
 :::
 :::
 
@@ -123,6 +209,142 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **firm optimization → profit income → consumer demand → market clearing → planner verification**.<br>pure exchange가 아니라 생산이 포함되어 있으므로 소비자의 wealth에 firm profit이 포함된다는 점에 유의하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. General Equilibrium with Production"}
+::: {.topic}
+Firm Optimization · Profit Income · Market Clearing · First Welfare Theorem
+:::
+
+#### 1) 기업의 이윤극대화 (Firm Optimization)
+
+기업은 $y$-재화 $z$단위를 투입하여 $x_s = \sqrt{z}$를 생산한다. $y$-재화 가격이 1, $x$-재화 가격이 $p$이므로 기업의 이윤극대화 문제는
+$$
+\max_{z \ge 0} \; \{p\sqrt{z} - z\}
+$$
+이다.
+
+투입량 $z$에 대한 1계 조건(FOC)은
+$$
+\frac{p}{2\sqrt{z}} - 1 = 0 \implies \sqrt{z} = \frac{p}{2}.
+$$
+양변을 제곱하면 최적 투입량은
+$$
+z^*(p) = \frac{p^2}{4}.
+$$
+
+따라서 $x$-재화의 공급함수는
+$$
+x_s(p) = \sqrt{z^*(p)} = \frac{p}{2}.
+$$
+
+기업의 이윤함수(Profit function)는
+$$
+\pi(p) = p\,x_s(p) - z^*(p) = p\left(\frac{p}{2}\right) - \frac{p^2}{4} = \frac{p^2}{2} - \frac{p^2}{4} = \frac{p^2}{4}.
+$$
+(2계 도함수가 $-\frac{p}{4} z^{-3/2} < 0$이므로 목적함수는 엄격히 오목하여 전역 최댓값이다.)
+
+#### 2) 소비자의 소득과 마샬 수요함수 (Consumer Demand)
+
+소비자는 $y$-재화 4단위의 초기부존($\omega = (0, 4)$)을 보유하고 기업을 100% 소유하므로 기업의 이윤 $\pi(p)$를 모두 배당받는다.
+따라서 소비자의 총소득(Wealth)은
+$$
+m(p) = 1 \cdot \omega_y + \pi(p) = 4 + \frac{p^2}{4}.
+$$
+
+소비자의 효용극대화 문제는
+$$
+\max_{x_c, y_c > 0} \; \{\ln x_c + \ln y_c\} \qquad \text{s.t.} \qquad px_c + y_c = m(p).
+$$
+
+효용함수의 대칭성에 의해 한계대체율 일치조건(FOC)은
+$$
+MRS_{xy} = \frac{MU_x}{MU_y} = \frac{1/x_c}{1/y_c} = \frac{y_c}{x_c} = p \implies y_c = px_c.
+$$
+
+예산제약식에 대입하면
+$$
+px_c + px_c = 2px_c = m(p) \implies x_c(p) = \frac{m(p)}{2p}, \quad y_c(p) = \frac{m(p)}{2}.
+$$
+
+소득 $m(p) = 4 + \frac{p^2}{4}$를 대입하면 마샬 수요함수는
+$$
+x_c(p) = \frac{4 + \frac{p^2}{4}}{2p} = \frac{2}{p} + \frac{p}{8},
+$$
+$$
+y_c(p) = \frac{4 + \frac{p^2}{4}}{2} = 2 + \frac{p^2}{8}.
+$$
+
+#### 3) 경쟁균형 (Competitive Equilibrium)
+
+$x$-재화 시장청산조건 $x_c(p) = x_s(p)$를 적용하면:
+$$
+\frac{2}{p} + \frac{p}{8} = \frac{p}{2}.
+$$
+우변으로 이항하여 정리하면
+$$
+\frac{2}{p} = \frac{p}{2} - \frac{p}{8} = \frac{3p}{8} \implies 3p^2 = 16 \implies p^2 = \frac{16}{3}.
+$$
+$p > 0$이므로 균형 상대가격은
+$$
+p^* = \frac{4}{\sqrt{3}} = \frac{4\sqrt{3}}{3}.
+$$
+
+이 균형가격을 각 변수에 대입하면:
+- **기업의 균형 투입량**:
+  $$
+  z^* = \frac{(p^*)^2}{4} = \frac{16/3}{4} = \frac{4}{3}.
+  $$
+- **$x$-재화의 균형 생산·소비량**:
+  $$
+  x_c^* = x_s^* = \frac{p^*}{2} = \frac{2}{\sqrt{3}} = \frac{2\sqrt{3}}{3} \quad \left(\sqrt{z^*} = \sqrt{4/3} = \frac{2}{\sqrt{3}} \text{와 일치}\right).
+  $$
+- **소비자의 $y$-재화 균형 소비량**:
+  $$
+  y_c^* = 2 + \frac{(p^*)^2}{8} = 2 + \frac{16/3}{8} = 2 + \frac{2}{3} = \frac{8}{3}.
+  $$
+
+- **$y$-재화 자원제약(시장청산) 검증**:
+  $$
+  y_c^* + z^* = \frac{8}{3} + \frac{4}{3} = \frac{12}{3} = 4 = \omega_y.
+  $$
+  따라서 왈라스 법칙에 의해 $y$-재화 시장 역시 정확하게 청산된다.
+
+#### 4) 사회계획자 문제와 후생경제학 제1정리 (Social Planner & First Welfare Theorem)
+
+경제의 전체 자원실행가능성(Feasibility)은
+$$
+x_c = \sqrt{z}, \qquad y_c = 4 - z \quad (0 < z < 4)
+$$
+이다. 사회계획자(Social Planner)는 소비자의 효용을 직접 극대화하므로:
+$$
+\max_{0 < z < 4} \; W(z) = \ln(\sqrt{z}) + \ln(4 - z) = \frac{1}{2}\ln z + \ln(4 - z).
+$$
+
+$z$에 대해 미분하여 1계 조건(FOC)을 구하면:
+$$
+\frac{dW}{dz} = \frac{1}{2z} - \frac{1}{4 - z} = 0 \implies \frac{1}{2z} = \frac{1}{4 - z}.
+$$
+양변을 정리하면
+$$
+4 - z = 2z \implies 3z = 4 \implies z^{SP} = \frac{4}{3}.
+$$
+
+이에 따른 사회계획자의 최적 배분은
+$$
+x_c^{SP} = \sqrt{z^{SP}} = \sqrt{\frac{4}{3}} = \frac{2}{\sqrt{3}},
+$$
+$$
+y_c^{SP} = 4 - z^{SP} = 4 - \frac{4}{3} = \frac{8}{3}.
+$$
+
+**비교 및 후생경제학 제1정리와의 관계**:
+- 사회계획자의 최적 자원배분과 3번에서 구한 분권화된 시장경쟁균형 배분이 완벽히 일치한다:
+  $$
+  z^{SP} = z^* = \frac{4}{3}, \qquad x_c^{SP} = x_c^* = \frac{2}{\sqrt{3}}, \qquad y_c^{SP} = y_c^* = \frac{8}{3}.
+  $$
+- **설명**: 생산이 존재하는 경제에서도 완전경쟁 시장 메커니즘은 가격신호($p^*$)를 통해 기업의 한계생산성($\frac{p}{2\sqrt{z}} = 1$)과 소비자의 한계대체율($MRS_{xy} = p$)을 일치시킨다.
+- 외부효과나 정보비대칭이 없는 완전경쟁 환경에서 소비자의 선호가 국소불포화성을 만족하므로, **후생경제학 제1정리(First Fundamental Theorem of Welfare Economics)**에 따라 경쟁균형 배분은 사회계획자가 달성하는 파레토 효율적(Pareto efficient) 배분과 필연적으로 일치한다.
 :::
 :::
 
