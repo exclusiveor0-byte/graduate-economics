@@ -213,12 +213,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-12.html" class="spoon-card" data-subject="micro" data-round="12">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#12 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">시장의 종류 · 일반균형</div>
   <div class="spoon-card__desc">동질재 베르트랑 가격경쟁과 내시균형·역설, 생산을 포함한 왈라스 일반균형 및 사회계획자 최적배분(제1후생경제학 정리)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 </div>
@@ -405,12 +408,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-12.html" class="spoon-card" data-subject="micro" data-round="12">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#12 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">시장의 종류 · 일반균형</div>
   <div class="spoon-card__desc">동질재 베르트랑 가격경쟁과 내시균형·역설, 생산을 포함한 왈라스 일반균형 및 사회계획자 최적배분(제1후생경제학 정리)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 </div>
