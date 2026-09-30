@@ -224,6 +224,21 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
+
+<a href="micro/set-13.html" class="spoon-card" data-subject="micro" data-round="13">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#13 회차</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 부분균형</div>
+  <div class="spoon-card__desc">간접효용함수와 지출함수를 통한 대등변화(EV)·보상변화(CV) 후생평가, 소국개방경제 관세 부과와 후생손실(DWL) 분해</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 · 해설 수록 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -415,6 +430,21 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">시장의 종류 · 일반균형</div>
   <div class="spoon-card__desc">동질재 베르트랑 가격경쟁과 내시균형·역설, 생산을 포함한 왈라스 일반균형 및 사회계획자 최적배분(제1후생경제학 정리)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 · 해설 수록 →</span>
+  </div>
+</a>
+
+<a href="micro/set-13.html" class="spoon-card" data-subject="micro" data-round="13">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#13 회차</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 부분균형</div>
+  <div class="spoon-card__desc">간접효용함수와 지출함수를 통한 대등변화(EV)·보상변화(CV) 후생평가, 소국개방경제 관세 부과와 후생손실(DWL) 분해</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
