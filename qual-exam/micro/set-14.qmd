@@ -1,0 +1,126 @@
+---
+title: "문제 한 스푼 #14"
+subtitle: "생산자이론 · 시장의 종류"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #14
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **생산자이론 · 시장의 종류**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[문제당 약 10–15분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Producer Theory
+::: {.topic}
+Short Run · Long Run · Cost Duality · Envelope Property
+:::
+
+한 기업의 생산함수가
+
+$$
+q = f(L, K) = L^{1/2} K^{1/2}
+$$
+
+로 주어진다. 노동과 자본의 요소가격은 각각 $w > 0$, $r > 0$이다.
+
+1. 장기에는 $L, K$를 모두 조정할 수 있다. 산출량 $q > 0$을 생산하기 위한 cost minimization problem을 설정하고, conditional factor demands
+   $$
+   L^c(w, r, q), \qquad K^c(w, r, q)
+   $$
+   와 long-run cost function
+   $$
+   C^{LR}(w, r, q)
+   $$
+   을 구하시오.
+2. 단기에는 자본이
+   $$
+   K = \bar{K} > 0
+   $$
+   로 고정되어 있다고 하자. 산출량 $q$를 생산하는 데 필요한 노동량을 구하고, short-run total cost
+   $$
+   C^{SR}(w, r, q; \bar{K})
+   $$
+   와 short-run marginal cost를 구하시오. 이때 어떤 부분이 fixed cost이고 어떤 부분이 variable cost인지 명시하시오.
+3. 다음 부등식을 직접 보이시오.
+   $$
+   C^{LR}(w, r, q) \le C^{SR}(w, r, q; \bar{K}) \qquad \text{for every } q > 0.
+   $$
+   그리고 두 비용함수가 같아지는 산출량 $q_0$를 구하시오. 마지막으로 $q = q_0$에서
+   $$
+   MC^{LR} = MC^{SR}
+   $$
+   가 성립하는지 확인하고, 이를 long-run cost가 short-run cost curves의 envelope라는 관점에서 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **long-run cost minimization → short-run restriction → cost comparison → envelope**.<br>3번에서는 장기의 최적 자본수요와 단기의 고정자본 $\bar{K}$가 언제 일치하는지 이용해도 좋다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Market Structure
+::: {.topic}
+Bertrand Competition · Capacity Constraints · Nash Equilibrium
+:::
+
+두 기업 $1, 2$가 완전히 동질적인 재화를 생산하며 동시에 가격을 선택한다. 각 기업의 한계비용은
+
+$$
+MC_1 = MC_2 = 2
+$$
+
+이고, 각 기업은 최대
+
+$$
+k_1 = k_2 = 4
+$$
+
+단위까지만 생산할 수 있다. 시장수요는 다음과 같다.
+
+$$
+Q(p) =
+\begin{cases}
+8, & 0 \le p \le 10, \\
+0, & p > 10.
+\end{cases}
+$$
+
+소비자들은 항상 더 낮은 가격의 기업으로 먼저 가지만, 그 기업이 capacity를 모두 판매하면 남은 수요는 더 높은 가격의 기업으로 이동한다고 하자. 두 기업의 가격이 같으면 수요를 동일하게 나눈다.
+
+1. 상대 기업의 가격이 $p_j \le 10$일 때, 기업 $i$가
+   $$
+   p_i < p_j, \qquad p_i = p_j, \qquad p_i > p_j
+   $$
+   를 선택한 각각의 경우에 기업 $i$의 판매량과 이윤을 쓰시오. capacity constraint가 없을 때의 Bertrand 모형과 어떤 점이 달라지는지 확인하시오.
+2. 다음 후보를 검토하시오.
+   $$
+   (p_1, p_2) = (10, 10).
+   $$
+   한 기업이 가격을 낮추거나 높이는 unilateral deviation을 했을 때 이윤이 증가할 수 있는지 판단하고, $(10, 10)$이 Nash equilibrium인지 보이시오.
+3. 이 equilibrium에서 시장가격, 총산출량, 각 기업의 판매량과 이윤을 구하시오. 이어서 capacity constraint가 없는 표준적인 homogeneous-good Bertrand equilibrium
+   $$
+   p = MC
+   $$
+   와 비교하시오. 왜 이 문제에서는 두 기업이 존재함에도 가격이 한계비용까지 내려가지 않는지 capacity constraint의 역할을 중심으로 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **sales under capacity → deviation check → Nash equilibrium → compare with standard Bertrand**.<br>낮은 가격을 제시한 기업도 최대 4단위까지만 판매할 수 있다는 점이 핵심이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
