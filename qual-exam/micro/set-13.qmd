@@ -1,0 +1,283 @@
+---
+title: "문제 한 스푼 #13"
+subtitle: "소비자이론 · 부분균형"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #13
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **소비자이론 · 부분균형**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[문제당 약 10–15분]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Consumer Theory
+::: {.topic}
+Indirect Utility · Expenditure Function · EV · CV
+:::
+
+소비자의 효용함수는
+
+$$
+u(x, y) = x^{1/2} y^{1/2}
+$$
+
+이고, $y$-재화의 가격을 1로 normalize한다 ($p_y = 1$). 소비자의 소득은 $m = 12$이다.
+$x$-재화의 가격이 초기 가격 $p_0 = 1$에서 새로운 가격 $p_1 = 4$로 상승하였다.
+
+1. utility maximization problem을 풀어 Marshallian demand $x^M(p, m), y^M(p, m)$와 indirect utility function $V(p, m)$을 구하시오. 이어서 가격변화 전후의 효용수준 $u_0 = V(p_0, m)$과 $u_1 = V(p_1, m)$을 각각 계산하시오.
+2. expenditure minimization problem을 풀어 Hicksian demand $x^h(p, u), y^h(p, u)$와 expenditure function $e(p, u)$를 구하시오.
+3. 가격상승에 따른 대등변화(Equivalent Variation, $EV$)와 보상변화(Compensating Variation, $CV$)를 expenditure function을 이용하여 정의하고 각각 계산하시오. 이어서 $EV$와 $CV$의 대소관계를 비교하고, 왜 가격상승 시 $CV > EV$가 성립하는지 경제학적 직관을 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **Marshallian demand → expenditure function → EV/CV calculation & comparison**.<br>가격 상승 시 $EV$와 $CV$의 기준 가격과 기준 효용 수준을 명확히 구분하여 계산하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Consumer Theory"}
+::: {.topic}
+Indirect Utility · Expenditure Function · EV · CV
+:::
+
+#### 1) Marshallian demand와 indirect utility
+
+소비자는 다음 효용극대화 문제(UMP)를 푼다:
+$$
+\max_{x, y \ge 0} \; x^{1/2} y^{1/2} \qquad \text{s.t.} \qquad px + y = m.
+$$
+
+동일한 지출비중($\alpha = \beta = 1/2$)을 갖는 Cobb–Douglas 효용함수이므로 마샬 수요함수(Marshallian demand)는
+$$
+x^M(p, m) = \frac{m}{2p}, \qquad y^M(p, m) = \frac{m}{2}.
+$$
+
+간접효용함수(Indirect utility function)는
+$$
+V(p, m) = \left(\frac{m}{2p}\right)^{1/2} \left(\frac{m}{2}\right)^{1/2} = \frac{m}{2\sqrt{p}}.
+$$
+
+소득 $m = 12$일 때 가격변화 전후의 효용수준은:
+$$
+u_0 = V(p_0, m) = V(1, 12) = \frac{12}{2\sqrt{1}} = 6,
+$$
+$$
+u_1 = V(p_1, m) = V(4, 12) = \frac{12}{2\sqrt{4}} = \frac{12}{4} = 3.
+$$
+
+#### 2) Expenditure minimization
+
+지출최소화 문제(EMP):
+$$
+\min_{x, y \ge 0} \; px + y \qquad \text{s.t.} \qquad x^{1/2} y^{1/2} = u.
+$$
+
+효용제약은 $xy = u^2$이고, Lagrangian을
+$$
+\mathcal{L} = px + y + \lambda(u^2 - xy)
+$$
+로 두면 내부해 1계 조건(FOC)은
+$$
+p - \lambda y = 0, \qquad 1 - \lambda x = 0.
+$$
+
+두 식을 나누면
+$$
+p = \frac{y}{x} \implies y = px.
+$$
+
+이를 $xy = u^2$에 대입하면 $px^2 = u^2 \implies x = \frac{u}{\sqrt{p}}$이다.
+따라서 힉스 수요함수(Hicksian demand)는
+$$
+x^h(p, u) = \frac{u}{\sqrt{p}}, \qquad y^h(p, u) = u\sqrt{p}.
+$$
+
+그러므로 지출함수(Expenditure function)는
+$$
+e(p, u) = p\,x^h(p, u) + y^h(p, u) = p \frac{u}{\sqrt{p}} + u\sqrt{p} = 2u\sqrt{p}.
+$$
+
+#### 3) EV와 CV
+
+지출함수를 이용한 대등변화($EV$)와 보상변화($CV$)의 표준 정의:
+$$
+EV = e(p_0, u_0) - e(p_0, u_1) = m - e(p_0, u_1),
+$$
+$$
+CV = e(p_1, u_0) - e(p_1, u_1) = e(p_1, u_0) - m.
+$$
+
+- **대등변화(Equivalent Variation, $EV$)**:
+  $$
+  EV = e(1, 6) - e(1, 3) = 2(6)\sqrt{1} - 2(3)\sqrt{1} = 12 - 6 = 6.
+  $$
+- **보상변화(Compensating Variation, $CV$)**:
+  $$
+  CV = e(4, 6) - e(4, 3) = 2(6)\sqrt{4} - 2(3)\sqrt{4} = 24 - 12 = 12.
+  $$
+
+- **대소관계 및 경제학적 해석**:
+  $$
+  EV = 6, \qquad CV = 12 \implies CV > EV.
+  $$
+  - **평가 기준 가격의 차이**:
+    $EV$는 가격 변화 전의 초기 저가격($p_0 = 1$)을 평가 기준으로 삼는 반면, $CV$는 가격 변화 후의 고가격($p_1 = 4$)을 평가 기준으로 삼는다.
+  - **직관적 해석**:
+    지출함수 $e(p, u) = 2u\sqrt{p}$에서 보듯, 주어진 효용 변화($\Delta u = 3$)를 달성하는 데 필요한 화폐 지출액은 물가수준 $p$가 높을수록 커진다.
+    따라서 물가가 비싸진 고가격 체계($p_1 = 4$)에서 초기 효용($u_0 = 6$)을 보전해 주기 위해 정부가 지급해야 하는 보상소득($CV = 12$)이, 물가가 저렴했던 초기 가격($p_0 = 1$)에서 가격 인상($p_0 \to p_1$)의 피해를 막기 위해 소비자가 기꺼이 정부에 지불할 용의가 있는 금액($EV = 6$)보다 크다.
+  - $x$-재화가 정상재(Normal good)이므로 가격 상승 시 일반적으로 $CV > \Delta CS > EV$ 관계가 성립한다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Partial Equilibrium
+::: {.topic}
+Small Open Economy · Import Tariff · Welfare
+:::
+
+어떤 소국개방경제(small open economy)의 특정 재화에 대한 국내수요곡선과 국내공급곡선이 각각
+
+$$
+p = 20 - Q_D, \qquad p = 2 + Q_S
+$$
+
+로 주어져 있다. 세계시장가격(world price)은
+
+$$
+p_w = 5
+$$
+
+이며, 이 국가는 소국이므로 세계가격에 영향을 미치지 못하는 가격수용자(price taker)이다.
+
+1. 자유무역(Free trade) 하에서 국내가격 $p^F$, 국내수요량 $Q_D^F$, 국내공급량 $Q_S^F$, 수입량 $M^F$을 구하시오. 또한 소비자잉여 $CS^F$, 생산자잉여 $PS^F$, 총후생 $TS^F$를 계산하시오.
+2. 정부가 수입품에 대해 단위당 $t = 3$의 종량 관세(import tariff)를 부과한다고 하자. 관세 부과 후의 국내가격 $p^T$, 국내수요량 $Q_D^T$, 국내공급량 $Q_S^T$, 수입량 $M^T$ 및 정부의 관세 수입(tariff revenue, $TR$)을 구하시오.
+3. 관세 부과 후의 소비자잉여 $CS^T$, 생산자잉여 $PS^T$, 총후생 $TS^T$를 계산하고, 자유무역 대비 발생하는 사중손실(Deadweight Loss, $DWL$)을 구하시오. 이어서 $DWL$을 생산왜곡(production distortion)과 소비왜곡(consumption distortion)으로 분해하여 설명하고, 왜 소국에서는 최적관세(optimal tariff)가 0인지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **free trade equilibrium → tariff intervention → welfare & DWL decomposition**.<br>소국개방경제이므로 국내 관세 부과가 세계가격 $p_w$에 영향을 주지 못한다는 점에 유의하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Partial Equilibrium"}
+::: {.topic}
+Small Open Economy · Import Tariff · Welfare
+:::
+
+#### 1) Free trade
+
+소국개방경제(Small open economy)이므로 자유무역 하에서 국내가격은 세계시장가격과 일치한다:
+$$
+p^F = p_w = 5.
+$$
+
+국내수요량과 공급량은
+$$
+5 = 20 - Q_D^F \implies Q_D^F = 15,
+$$
+$$
+5 = 2 + Q_S^F \implies Q_S^F = 3.
+$$
+
+따라서 수입량은
+$$
+M^F = Q_D^F - Q_S^F = 15 - 3 = 12.
+$$
+
+- **소비자잉여 (Consumer Surplus)**:
+  $$
+  CS^F = \frac{1}{2}(20 - 5) \times 15 = \frac{1}{2} \times 15 \times 15 = 112.5.
+  $$
+- **생산자잉여 (Producer Surplus)**:
+  $$
+  PS^F = \frac{1}{2}(5 - 2) \times 3 = \frac{1}{2} \times 3 \times 3 = 4.5.
+  $$
+- **총후생 (Total Surplus)**:
+  $$
+  TS^F = CS^F + PS^F = 112.5 + 4.5 = 117.
+  $$
+
+#### 2) 단위당 관세 $t = 3$
+
+소국이므로 세계가격은 변하지 않고, 관세 부과 후 국내가격은 관세만큼 상승한다:
+$$
+p^T = p_w + t = 5 + 3 = 8.
+$$
+
+새로운 국내수요량과 국내공급량:
+$$
+8 = 20 - Q_D^T \implies Q_D^T = 12,
+$$
+$$
+8 = 2 + Q_S^T \implies Q_S^T = 6.
+$$
+
+따라서 새로운 수입량은
+$$
+M^T = Q_D^T - Q_S^T = 12 - 6 = 6.
+$$
+
+정부의 관세 수입(Tariff Revenue):
+$$
+TR = t \times M^T = 3 \times 6 = 18.
+$$
+
+#### 3) Welfare와 deadweight loss
+
+관세 부과 후 후생:
+- **소비자잉여**:
+  $$
+  CS^T = \frac{1}{2}(20 - 8) \times 12 = \frac{1}{2} \times 12 \times 12 = 72.
+  $$
+- **생산자잉여**:
+  $$
+  PS^T = \frac{1}{2}(8 - 2) \times 6 = \frac{1}{2} \times 6 \times 6 = 18.
+  $$
+- **총후생 (소비자잉여 + 생산자잉여 + 정부수입)**:
+  $$
+  TS^T = CS^T + PS^T + TR = 72 + 18 + 18 = 108.
+  $$
+
+- **사중손실 (Deadweight Loss, $DWL$)**:
+  $$
+  DWL = TS^F - TS^T = 117 - 108 = 9.
+  $$
+
+**사중손실 분해 (DWL Decomposition)**:
+1. **생산왜곡 손실 (Production Distortion, $DWL_P$)**:
+   - 국내생산이 $3 \to 6$으로 증가($\Delta Q_S = 3$).
+   - 세계시장에서 $p_w = 5$에 수입할 수 있는 재화를 한계비용 $5 \sim 8$의 비효율적인 국내자원을 투입하여 추가 생산함으로써 발생하는 후생손실:
+     $$
+     DWL_P = \frac{1}{2} \times t \times \Delta Q_S = \frac{1}{2} \times 3 \times 3 = 4.5.
+     $$
+2. **소비왜곡 손실 (Consumption Distortion, $DWL_C$)**:
+   - 국내소비가 $15 \to 12$로 감소($\Delta Q_D = 3$).
+   - 세계가격 $p_w = 5$ 이상의 지불용의가 있는 소비자의 소비가 가격 인상($p=8$)으로 인해 위축됨으로써 발생하는 후생손실:
+     $$
+     DWL_C = \frac{1}{2} \times t \times \Delta Q_D = \frac{1}{2} \times 3 \times 3 = 4.5.
+     $$
+
+따라서 전체 사중손실은 두 삼각형 왜곡의 합과 일치한다:
+$$
+DWL = DWL_P + DWL_C = 4.5 + 4.5 = 9.
+$$
+
+**최적관세(Optimal Tariff) 논의**:
+- 대국(Large country)은 관세 부과를 통해 세계가격을 낮추어 교역조건 개선 이득(Terms-of-trade gain)을 누릴 수 있으므로 양(+)의 최적관세가 존재한다.
+- 반면 **소국개방경제(Small open economy)**는 세계시장에서 가격수용자이므로 관세를 부과해도 외국 수출가격이 낮아지지 않아 **교역조건 이득이 0**이다.
+- 따라서 관세는 순수하게 생산왜곡($DWL_P$)과 소비왜곡($DWL_C$)만을 발생시키므로, 소국의 국민후생을 극대화하는 **최적관세는 항상 0($t^* = 0$, 즉 자유무역)**이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
