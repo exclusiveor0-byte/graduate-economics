@@ -251,6 +251,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
+
+<a href="micro/set-15.html" class="spoon-card" data-subject="micro" data-round="15">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#15 회차 (종합)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 종합문제</div>
+  <div class="spoon-card__desc">마샬/힉스 수요, 간접효용·지출함수 쌍대성(Roy/Shephard), 슬러츠키 분해와 보상수요법칙, EV/CV 후생평가</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -469,6 +481,18 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">생산자이론 · 시장의 종류</div>
   <div class="spoon-card__desc">단기·장기 비용함수의 쌍대성과 포락선 성질(Envelope Property), 생산용량 제약(Capacity Constraint) 하의 베르트랑 가격경쟁과 내시균형</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-15.html" class="spoon-card" data-subject="micro" data-round="15">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#15 회차 (종합)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 종합문제</div>
+  <div class="spoon-card__desc">마샬/힉스 수요, 간접효용·지출함수 쌍대성(Roy/Shephard), 슬러츠키 분해와 보상수요법칙, EV/CV 후생평가</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
