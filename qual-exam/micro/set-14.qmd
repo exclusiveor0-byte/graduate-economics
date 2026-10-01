@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -67,6 +67,118 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **long-run cost minimization → short-run restriction → cost comparison → envelope**.<br>3번에서는 장기의 최적 자본수요와 단기의 고정자본 $\bar{K}$가 언제 일치하는지 이용해도 좋다.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Producer Theory"}
+::: {.topic}
+Long Run · Short Run · Cost Duality · Envelope Property
+:::
+
+#### 1) Long-run cost minimization
+
+생산함수는
+$$
+q = f(L, K) = L^{1/2} K^{1/2}, \qquad w > 0, \quad r > 0.
+$$
+장기에는 $L$과 $K$를 모두 조정할 수 있으므로, 산출량 $q > 0$를 생산하기 위한 비용최소화 문제는 다음과 같다:
+$$
+\min_{L, K \ge 0} \; wL + rK \qquad \text{s.t.} \qquad L^{1/2} K^{1/2} \ge q.
+$$
+$q > 0$이고 요소가격이 양수이므로 최적점에서 생산제약은 등호로 결합한다 ($L^{1/2} K^{1/2} = q$).
+
+Lagrangian을
+$$
+\mathcal{L} = wL + rK - \lambda\left(L^{1/2} K^{1/2} - q\right)
+$$
+로 두면 내부해 1계 조건(FOC)은
+$$
+\frac{\partial\mathcal{L}}{\partial L} = w - \frac{\lambda}{2} L^{-1/2} K^{1/2} = 0 \implies w = \lambda \frac{\sqrt{K}}{2\sqrt{L}},
+$$
+$$
+\frac{\partial\mathcal{L}}{\partial K} = r - \frac{\lambda}{2} L^{1/2} K^{-1/2} = 0 \implies r = \lambda \frac{\sqrt{L}}{2\sqrt{K}}.
+$$
+
+두 식을 나누면 한계기술대체율(MRTS)과 요소상대가격 일치조건을 얻는다:
+$$
+\frac{w}{r} = \frac{K}{L} \implies K = \frac{w}{r} L.
+$$
+
+이를 생산제약식 $q^2 = LK$에 대입하면:
+$$
+q^2 = L \left(\frac{w}{r} L\right) = \frac{w}{r} L^2 \implies L^c(w, r, q) = q\sqrt{\frac{r}{w}},
+$$
+$$
+K^c(w, r, q) = \frac{w}{r} \left(q\sqrt{\frac{r}{w}}\right) = q\sqrt{\frac{w}{r}}.
+$$
+
+따라서 장기총비용함수(Long-run cost function)는
+$$
+C^{LR}(w, r, q) = w\,L^c + r\,K^c = w\left(q\sqrt{\frac{r}{w}}\right) + r\left(q\sqrt{\frac{w}{r}}\right) = q\sqrt{wr} + q\sqrt{wr} = 2q\sqrt{wr}.
+$$
+
+#### 2) Short-run cost
+
+단기에는 자본이 $K = \bar{K} > 0$로 고정되어 있다. 생산제약식은
+$$
+q = L^{1/2} \bar{K}^{1/2}
+$$
+이므로 산출량 $q$를 생산하는 데 필요한 단기 노동투입량은
+$$
+L^{SR}(q; \bar{K}) = \frac{q^2}{\bar{K}}.
+$$
+
+따라서 단기총비용함수(Short-run total cost)는
+$$
+C^{SR}(w, r, q; \bar{K}) = w\,L^{SR} + r\bar{K} = w\frac{q^2}{\bar{K}} + r\bar{K}.
+$$
+- **가변비용(Variable Cost, $VC$)**: $w\frac{q^2}{\bar{K}}$ (산출량 $q$에 따라 변동하는 노동비용)
+- **고정비용(Fixed Cost, $FC$)**: $r\bar{K}$ (산출량에 무관하게 지출되는 고정자본비용)
+
+단기한계비용(Short-run marginal cost)은
+$$
+MC^{SR} = \frac{\partial C^{SR}}{\partial q} = \frac{2wq}{\bar{K}}.
+$$
+
+#### 3) Long-run cost와 short-run cost 비교 및 포락선 성질
+
+단기총비용과 장기총비용의 차이를 계산하면:
+$$
+C^{SR} - C^{LR} = \frac{wq^2}{\bar{K}} + r\bar{K} - 2q\sqrt{wr}.
+$$
+이를 완전제곱식으로 정리하면:
+$$
+C^{SR} - C^{LR} = \left(q\sqrt{\frac{w}{\bar{K}}} - \sqrt{r\bar{K}}\right)^2 \ge 0.
+$$
+실수의 제곱은 항상 0 이상이므로, 모든 $q > 0$에 대해
+$$
+C^{LR}(w, r, q) \le C^{SR}(w, r, q; \bar{K})
+$$
+가 성립한다.
+
+두 비용함수가 일치하는($C^{SR} = C^{LR}$) 산출량 $q_0$는 괄호 안이 0이 되는 점이다:
+$$
+q_0\sqrt{\frac{w}{\bar{K}}} = \sqrt{r\bar{K}} \implies q_0 = \bar{K}\sqrt{\frac{r}{w}}.
+$$
+*(이 산출량은 장기 최적 자본수요 $K^c(w, r, q_0) = q_0\sqrt{\frac{w}{r}} = \bar{K}$가 고정자본과 정확히 일치하는 산출량이다.)*
+
+장기한계비용(Long-run marginal cost)은
+$$
+MC^{LR} = \frac{\partial C^{LR}}{\partial q} = 2\sqrt{wr}.
+$$
+$q = q_0$에서 단기한계비용을 평가하면:
+$$
+MC^{SR}(q_0) = \frac{2w q_0}{\bar{K}} = \frac{2w}{\bar{K}} \left(\bar{K}\sqrt{\frac{r}{w}}\right) = 2\sqrt{wr}.
+$$
+따라서 $q = q_0$에서
+$$
+MC^{LR} = MC^{SR}(q_0)
+$$
+가 완벽히 성립한다.
+
+**포락선 성질(Envelope Property) 설명**:
+- $q = q_0$에서 장기총비용곡선과 단기총비용곡선은 비용 수준($C^{LR} = C^{SR}$)뿐만 아니라 접선의 기울기인 한계비용($MC^{LR} = MC^{SR}$)까지 정확히 일치하여 접한다.
+- 장기에는 자본을 포함한 모든 생산요소를 자유롭게 선택할 수 있는 반면, 단기에는 자본이 $\bar{K}$로 고정되어 있어 선택의 자유가 제약된다. 따라서 임의의 산출량에서 장기비용은 단기비용보다 클 수 없다.
+- 결과적으로 장기총비용곡선 $C^{LR}(q)$는 다양한 고정자본 수준 $\bar{K}$에 대응하는 무수히 많은 단기총비용곡선 $C^{SR}(q; \bar{K})$들을 아래에서 감싸는 **하포락선(Lower Envelope)**을 형성한다.
 :::
 :::
 
@@ -118,6 +230,86 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **sales under capacity → deviation check → Nash equilibrium → compare with standard Bertrand**.<br>낮은 가격을 제시한 기업도 최대 4단위까지만 판매할 수 있다는 점이 핵심이다.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Market Structure"}
+::: {.topic}
+Bertrand Competition · Capacity Constraints · Nash Equilibrium
+:::
+
+#### 1) Capacity constraint와 판매량
+
+두 기업의 한계비용과 생산용량(Capacity)은
+$$
+MC_1 = MC_2 = 2, \qquad k_1 = k_2 = 4.
+$$
+시장수요는 $p \le 10$일 때 $Q(p) = 8$, $p > 10$일 때 $Q(p) = 0$이다.
+
+시장 전체 수요가 8이고 각 기업의 용량이 4이므로, 상대 기업의 가격이 $p_j \le 10$일 때 기업 $i$의 가격 선택에 따른 판매량 $q_i$와 이윤 $\pi_i$는 다음과 같다:
+- **$p_i < p_j \le 10$인 경우**:
+  소비자가 가격이 더 낮은 기업 $i$를 먼저 찾는다. 수요는 8이지만 기업 $i$의 생산용량이 4이므로 판매량은 용량 상한인 $q_i = 4$이다.
+- **$p_i = p_j \le 10$인 경우**:
+  두 기업이 수요 8을 절반씩 분할하므로 $q_i = \frac{8}{2} = 4$이다.
+- **$p_j < p_i \le 10$인 경우**:
+  소비자가 기업 $j$로 먼저 가서 기업 $j$의 용량 4단위가 전량 소진된다. 남은 잔여수요(Residual demand) $8 - 4 = 4$단위가 더 높은 가격을 제시한 기업 $i$로 이동하므로, 기업 $i$ 역시 $q_i = 4$단위를 전량 판매한다.
+- **$p_i > 10$인 경우**:
+  소비자의 지불용의(유보가격 10)를 초과하므로 수요가 0이 되어 $q_i = 0$이다.
+
+따라서 $p_j \le 10$인 한, 기업 $i$의 판매량과 이윤함수는 상대 가격과의 대소 관계와 무관하게 다음과 같이 결정된다:
+$$
+q_i(p_i, p_j) =
+\begin{cases}
+4, & 0 \le p_i \le 10, \\
+0, & p_i > 10.
+\end{cases}
+$$
+$$
+\pi_i(p_i, p_j) = (p_i - MC_i) q_i =
+\begin{cases}
+4(p_i - 2), & 0 \le p_i \le 10, \\
+0, & p_i > 10.
+\end{cases}
+$$
+
+**표준 베르트랑 모형과의 차이점**:
+표준 베르트랑 모형에서는 상대 가격보다 미세하게 낮은 가격을 책정하면 경쟁자의 수요를 모두 빼앗아 시장 전체(8단위)를 독점 판매할 수 있지만, 여기서는 생산용량 제약($k_i = 4$) 때문에 가격을 낮추더라도 판매량을 4단위 이상 늘릴 수 없다.
+
+#### 2) $(p_1, p_2) = (10, 10)$의 내시균형(Nash equilibrium) 검토
+
+후보 가격쌍 $(p_1, p_2) = (10, 10)$에서 각 기업은 4단위를 판매하며 이윤은 다음과 같다:
+$$
+\pi_i = 4(10 - 2) = 32.
+$$
+
+기업 1이 일방적 이탈(Unilateral deviation)을 시도한다고 하자:
+- **가격 인하 ($p_1' < 10$)**:
+  가격을 낮추더라도 생산용량 제약($k_1 = 4$) 때문에 판매량은 여전히 4단위에 머무른다. 따라서 이탈 후 이윤은
+  $$
+  \pi_1' = 4(p_1' - 2) < 4(10 - 2) = 32.
+  $$
+  예를 들어 $p_1' = 9$로 인하하면 판매량은 4로 동일하지만 이윤은 $4(9 - 2) = 28 < 32$로 감소하므로 수익성 있는 이탈(Profitable deviation)이 아니다.
+- **가격 인상 ($p_1' > 10$)**:
+  소비자의 최대 지불용의를 초과하여 시장수요가 0이 되므로 판매량 $q_1' = 0$, 이윤 $\pi_1' = 0 < 32$가 된다.
+
+기업 2에 대해서도 완벽히 대칭이므로, 어느 기업도 $(10, 10)$에서 일방적으로 가격을 변경하여 이윤을 증가시킬 수 없다.
+따라서
+$$
+(p_1^*, p_2^*) = (10, 10)
+$$
+은 순수전략 내시균형(Nash equilibrium)이다.
+
+#### 3) Equilibrium 결과 및 표준 베르트랑과의 비교
+
+- **균형 시장가격**: $p^* = 10$
+- **총산출량**: $Q^* = 8$
+- **각 기업의 판매량**: $q_1^* = q_2^* = 4$
+- **각 기업의 경제적 이윤**: $\pi_1^* = \pi_2^* = 32$
+
+**표준 베르트랑 결과와의 비교 및 용량 제약의 역할**:
+- 용량 제약이 없는 표준적인 동질재 베르트랑 경쟁에서는 한 기업이 가격을 조금만 깎아도 상대방의 시장을 모두 빼앗아올 수 있으므로 극단적인 가격 인하 경쟁이 $p = MC = 2$에 도달할 때까지 지속된다.
+- 그러나 본 문제에서는 두 기업의 총용량($k_1 + k_2 = 4 + 4 = 8$)이 시장수요($Q = 8$)와 정확히 일치한다.
+- 따라서 상대 기업이 높은 가격을 부과하더라도 시장수요가 남아 자신의 용량을 100% 판매할 수 있기 때문에, 상대방을 배제하기 위해 가격을 깎을 유인(Undercutting incentive)이 완전히 소멸한다.
+- 이처럼 **생산용량 제약(Capacity Constraint)**은 과점 시장에서 가격경쟁의 파괴력을 원천적으로 차단하며, 두 기업만 존재하는 복점(Duopoly) 시장에서도 기업들이 독점가격($p^* = 10$)을 책정하고 막대한 양(+)의 경제적 이윤을 달성할 수 있도록 보장한다 (에지워스 과점 모형의 핵심 원리).
 :::
 :::
 
