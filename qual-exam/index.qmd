@@ -243,12 +243,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-14.html" class="spoon-card" data-subject="micro" data-round="14">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#14 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 · 시장의 종류</div>
   <div class="spoon-card__desc">단기·장기 비용함수의 쌍대성과 포락선 성질(Envelope Property), 생산용량 제약(Capacity Constraint) 하의 베르트랑 가격경쟁과 내시균형</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -477,12 +480,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-14.html" class="spoon-card" data-subject="micro" data-round="14">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#14 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 · 시장의 종류</div>
   <div class="spoon-card__desc">단기·장기 비용함수의 쌍대성과 포락선 성질(Envelope Property), 생산용량 제약(Capacity Constraint) 하의 베르트랑 가격경쟁과 내시균형</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
