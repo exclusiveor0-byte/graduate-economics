@@ -1,0 +1,301 @@
+---
+title: "문제 한 스푼 #15"
+subtitle: "도구변수와 GMM 종합 심화 (IV · 2SLS · Efficient GMM · Weak Instruments)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #15
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Instrumental Variables & GMM — Identification · Efficiency · Weak Instruments**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[종합 1문제]{.chip}
+[예상 80–90분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험형]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Comprehensive Problem. IV, GMM & Weak Identification
+::: {.topic}
+Endogeneity · Rank Identification · 2SLS · Efficient GMM · $J$-test · Weak IV · Robust Inference · Many Instruments
+:::
+
+다음 linear structural model을 생각하자.
+
+$$
+Y_i=X_i'\beta_0+u_i,
+$$
+
+여기서 $X_i\in\mathbb R^k$, $Z_i\in\mathbb R^L$, $L\ge k$이며,
+
+$$
+E[Z_i u_i]=0
+$$
+
+를 만족한다고 하자. $X_i$의 일부 성분은 endogenous하여
+$E[X_iu_i]\neq0$일 수 있다.
+
+::: {.assumption}
+적절한 유한 적률, full-rank, LLN/CLT regularity conditions를 가정한다.
+각 문항에서 추가로 필요한 조건은 명시하시오.
+:::
+
+a. **Endogeneity와 OLS failure.**
+
+   $$
+   \hat\beta_{OLS}
+   =
+   \left(\frac1n\sum_iX_iX_i'\right)^{-1}
+   \left(\frac1n\sum_iX_iY_i\right)
+   $$
+
+   의 probability limit를 구하고,
+
+   $$
+   E[X_iu_i]\neq0
+   $$
+
+   일 때 왜 일반적으로 $\hat\beta_{OLS}$가 inconsistent한지 설명하시오.
+b. **IV moment와 identification.**
+
+   $$
+   E[Z_i(Y_i-X_i'\beta_0)]=0
+   $$
+
+   로부터
+
+   $$
+   E[Z_iY_i]
+   =
+   E[Z_iX_i']\beta_0
+   $$
+
+   를 얻으시오.
+
+   $$
+   Q_{ZX}:=E[Z_iX_i']
+   $$
+
+   에 대해
+
+   $$
+   \operatorname{rank}(Q_{ZX})=k
+   $$
+
+   가 왜 $\beta_0$의 식별에 필요한지 설명하시오.
+c. **Under-, exact-, over-identification.**
+   $L<k$, $L=k$, $L>k$의 경우를 각각 비교하시오.
+   단순히 instrument 수만 세는 것과 rank condition을 확인하는 것이 왜 다른지 설명하시오.
+d. **Just-identified scalar IV.**
+   scalar model
+
+   $$
+   Y_i=\beta_0X_i+u_i
+   $$
+
+   에서 scalar instrument $Z_i$를 사용한다고 하자.
+
+   $$
+   \hat\beta_{IV}
+   =
+   \frac{\sum_iZ_iY_i}{\sum_iZ_iX_i}
+   $$
+
+   를 유도하고
+
+   $$
+   \hat\beta_{IV}-\beta_0
+   =
+   \frac{
+   n^{-1}\sum_iZ_iu_i
+   }{
+   n^{-1}\sum_iZ_iX_i
+   }
+   $$
+
+   를 이용해 consistency를 보이시오.
+e. **2SLS derivation.**
+
+   $$
+   P_Z=Z(Z'Z)^{-1}Z'
+   $$
+
+   라 할 때
+
+   $$
+   \hat\beta_{2SLS}
+   =
+   (X'P_ZX)^{-1}X'P_ZY
+   $$
+
+   를 유도하시오.
+   또한
+
+   $$
+   \hat X=P_ZX
+   $$
+
+   를 이용하여 2SLS가 “$Z$가 설명하는 $X$의 variation”을 이용하는 estimator라는 projection interpretation을 설명하시오.
+f. **2SLS asymptotic distribution.**
+
+   $$
+   Q_{ZZ}=E[Z_iZ_i'],
+   \qquad
+   \Omega=E[Z_iZ_i'u_i^2]
+   $$
+
+   라 하자.
+   2SLS를 GMM estimator로 보아
+
+   $$
+   \sqrt n(\hat\beta_{2SLS}-\beta_0)
+   \xrightarrow{d}
+   N(0,V_{2SLS})
+   $$
+
+   의 asymptotic variance를 sandwich form으로 쓰시오.
+   homoskedasticity가 추가되면 어떻게 단순화되는지 설명하시오.
+g. **2SLS as GMM.**
+   moment function을
+
+   $$
+   g_i(\beta)=Z_i(Y_i-X_i'\beta)
+   $$
+
+   로 두고
+
+   $$
+   \bar g_n(\beta)=\frac1n\sum_ig_i(\beta)
+   $$
+
+   라 하자.
+   GMM criterion
+
+   $$
+   Q_n(\beta)
+   =
+   \bar g_n(\beta)'W_n\bar g_n(\beta)
+   $$
+
+   에서
+
+   $$
+   W_n
+   =
+   \left(\frac{Z'Z}{n}\right)^{-1}
+   $$
+
+   를 사용하면 2SLS가 도출됨을 보이시오.
+h. **Efficient GMM.**
+   heteroskedasticity가 존재할 때 optimal weighting matrix가
+
+   $$
+   W=\Omega^{-1}
+   $$
+
+   임을 쓰고,
+   corresponding efficient asymptotic variance
+
+   $$
+   V_{eff}
+   =
+   \left(
+   Q_{XZ}\Omega^{-1}Q_{ZX}
+   \right)^{-1}
+   $$
+
+   의 구조를 설명하시오.
+   왜 consistency와 efficiency는 별개의 문제인지 서술하시오.
+i. **Overidentifying restrictions.**
+   $L>k$이고 efficient GMM을 사용한다고 하자.
+
+   $$
+   J
+   =
+   n\,
+   \bar g_n(\hat\beta)'
+   \hat\Omega^{-1}
+   \bar g_n(\hat\beta)
+   $$
+
+   의 귀무가설 아래 점근분포를 쓰시오.
+   자유도가 왜 $L-k$인지 설명하시오.
+   또한 $J$-test를 기각하지 못했다는 사실이 “모든 instrument가 개별적으로 유효함을 증명한다”는 뜻이 아닌 이유를 설명하시오.
+j. **Weak instruments.**
+   scalar first stage
+
+   $$
+   X_i=\pi Z_i+v_i
+   $$
+
+   를 생각하자.
+   $\pi$가 0에 가까울 때
+
+   $$
+   \hat\beta_{IV}-\beta_0
+   =
+   \frac{\sum_iZ_iu_i}{\sum_iZ_iX_i}
+   $$
+
+   의 denominator가 불안정해지는 이유를 설명하시오.
+   이로 인해 finite-sample bias, nonnormality, Wald inference distortion이 발생할 수 있는 이유를 서술하시오.
+k. **Local-to-zero identification.**
+
+   $$
+   \pi_n=\frac{c}{\sqrt n}
+   $$
+
+   와 같은 sequence를 생각하자.
+   표본이 커질수록 first-stage signal도 약해지는 이 설정에서 conventional strong-IV asymptotics가 왜 실패할 수 있는지 설명하시오.
+   정확한 limiting distribution 유도는 요구하지 않는다.
+l. **First-stage diagnostics.**
+   first-stage $F$-statistic이 instrument relevance를 진단하는 데 사용되는 이유를 설명하시오.
+   하지만 “$F>10$이면 instrument validity가 보장된다”는 주장이 왜 잘못인지
+   relevance와 exogeneity/exclusion을 구분하여 설명하시오.
+m. **Weak-IV robust inference.**
+   귀무가설
+
+   $$
+   H_0:\beta=\beta_0
+   $$
+
+   아래
+
+   $$
+   Y-X\beta_0=u
+   $$
+
+   이므로 valid instruments라면
+
+   $$
+   E[Z(Y-X\beta_0)]=0
+   $$
+
+   임을 이용할 수 있다.
+   Anderson–Rubin-type reasoning이 왜 $\hat\beta_{IV}$의 approximate normality에 덜 의존하는지 설명하시오.
+n. **Many instruments.**
+   $L$이 커질수록 first-stage fitted values가 sample noise까지 과도하게 설명할 수 있는 이유를 설명하시오.
+   이로 인해 finite sample에서 2SLS가 OLS 쪽으로 bias될 수 있다는 many-instrument intuition을 서술하시오.
+   왜 “instrument를 더 많이 넣을수록 항상 좋다”는 주장이 잘못인지 설명하시오.
+o. **통합 비교.**
+   다음 세 층위를 분리하여 정리하시오.
+
+   (i) **Identification:** $\beta_0$가 population moments로 유일하게 결정되는가?<br>
+   (ii) **Estimation/Efficiency:** 어떤 weighting matrix와 instruments가 더 작은 asymptotic variance를 주는가?<br>
+   (iii) **Inference:** finite sample 또는 weak identification 아래 conventional approximation을 신뢰할 수 있는가?
+
+   세 질문이 서로 다른 이유를 설명하시오.
+
+::: {.spoon-hint}
+**형식**: 전체 형식: **Endogeneity → IV moment → rank identification → 2SLS → GMM → efficient weighting → $J$-test → weak IV → weak-IV robust inference → many instruments**. 이번 회차의 핵심은 **식별, 일관성, 효율성, 추론을 한 개념으로 뭉뚱그리지 않는 것**이다.
+:::
+:::

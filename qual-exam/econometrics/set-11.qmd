@@ -1,0 +1,450 @@
+---
+title: "문제 한 스푼 #11"
+subtitle: "이항반응모형과 토빗 · 포아송 QMLE (Binary Response · Tobit · Poisson QMLE)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #11
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Binary Response Models · Tobit · Censoring/Truncation · Poisson QMLE**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 70–85분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Binary Response Models: LPM, Logit, Probit & Marginal Effects
+::: {.topic}
+Bernoulli Mean · Latent Variable · Likelihood · Score · Partial Effects · APE
+:::
+
+$Y_i\in\{0,1\}$이고 $X_i\in\mathbb R^k$라 하자.
+binary response model의 conditional probability를
+
+$$
+P(Y_i=1\mid X_i=x)=G(x'\beta_0)
+$$
+
+로 나타낸다.
+
+1. binary outcome에서는
+
+   $$
+   E[Y_i\mid X_i]=P(Y_i=1\mid X_i)
+   $$
+
+   임을 보이시오.
+   이를 이용하여 Linear Probability Model
+
+   $$
+   E[Y_i\mid X_i]=X_i'\beta
+   $$
+
+   를 해석하시오.
+2. LPM에서 conditional variance가
+
+   $$
+   \operatorname{Var}(Y_i\mid X_i)
+   =
+   p_i(1-p_i),
+   \qquad
+   p_i=P(Y_i=1\mid X_i)
+   $$
+
+   임을 보이시오.
+   왜 binary outcome의 LPM에서 heteroskedasticity가 구조적으로 발생하는지 설명하고,
+   conventional homoskedastic OLS standard error 대신 robust inference가 필요한 이유를 #3의 결과와 연결하시오.
+3. LPM의 fitted value
+
+   $$
+   \hat p_i=X_i'\hat\beta
+   $$
+
+   가 $[0,1]$ 밖에 위치할 수 있는 이유를 설명하시오.
+   이것이 probability model의 관점에서 어떤 문제를 만드는지 서술하시오.
+4. latent-variable model
+
+   $$
+   Y_i^*=X_i'\beta_0+\varepsilon_i,
+   \qquad
+   Y_i=1\{Y_i^*>0\}
+   $$
+
+   을 생각하자.
+   $\varepsilon_i\mid X_i$의 CDF를 $F_\varepsilon$라 할 때
+
+   $$
+   P(Y_i=1\mid X_i)
+   =
+   1-F_\varepsilon(-X_i'\beta_0)
+   $$
+
+   임을 보이시오.
+5. $\varepsilon_i$가 logistic distribution이면 logit,
+   standard normal distribution이면 probit이 된다는 점을 설명하시오.
+   즉
+
+   $$
+   P(Y_i=1\mid X_i)
+   =
+   \Lambda(X_i'\beta_0)
+   $$
+
+   또는
+
+   $$
+   P(Y_i=1\mid X_i)
+   =
+   \Phi(X_i'\beta_0)
+   $$
+
+   형태를 얻으시오.
+6. $p_i(\beta)=G(X_i'\beta)$라 하자.
+   Bernoulli likelihood contribution
+
+   $$
+   L_i(\beta)
+   =
+   p_i(\beta)^{Y_i}
+   [1-p_i(\beta)]^{1-Y_i}
+   $$
+
+   와 log-likelihood
+
+   $$
+   \ell_i(\beta)
+   =
+   Y_i\log p_i(\beta)
+   +
+   (1-Y_i)\log[1-p_i(\beta)]
+   $$
+
+   를 쓰시오.
+   MLE를
+
+   $$
+   \hat\beta
+   =
+   \arg\max_\beta
+   \sum_{i=1}^n\ell_i(\beta)
+   $$
+
+   로 표현하고 #4의 일반적인 M-estimation/MLE framework와 연결하시오.
+7. logit model에서
+
+   $$
+   p_i(\beta)=\Lambda(X_i'\beta)
+   $$
+
+   일 때
+
+   $$
+   \frac{\partial p_i(\beta)}{\partial\beta}
+   =
+   p_i(\beta)[1-p_i(\beta)]X_i
+   $$
+
+   를 이용하여 score가
+
+   $$
+   s_i(\beta)
+   =
+   X_i\{Y_i-p_i(\beta)\}
+   $$
+
+   로 단순화됨을 보이시오.
+8. $X_j$가 연속형 regressor라고 하자.
+   일반적인 binary response model에서
+
+   $$
+   \frac{\partial P(Y=1\mid X=x)}
+   {\partial x_j}
+   =
+   g(x'\beta_0)\beta_{0j},
+   \qquad
+   g(z)=G'(z)
+   $$
+
+   를 유도하시오.
+   따라서 $\beta_j$ 자체가 probability의 marginal effect가 아닌 이유를 설명하시오.
+9. logit과 probit에서 각각
+
+   $$
+   \frac{\partial P(Y=1\mid X=x)}
+   {\partial x_j}
+   =
+   \Lambda(x'\beta)
+   [1-\Lambda(x'\beta)]\beta_j
+   $$
+
+   및
+
+   $$
+   \frac{\partial P(Y=1\mid X=x)}
+   {\partial x_j}
+   =
+   \phi(x'\beta)\beta_j
+   $$
+
+   임을 쓰시오.
+   왜 partial effect가 일반적으로 $x$에 따라 달라지는지 설명하시오.
+10. $X_j$가 binary regressor라면 derivative보다
+
+   $$
+   G(\beta_j+X_{-j}'\beta_{-j})
+   -
+   G(X_{-j}'\beta_{-j})
+   $$
+
+   형태의 discrete change가 자연스러운 이유를 설명하시오.
+11. 다음 두 quantity를 비교하시오.
+
+   $$
+   APE_j
+   =
+   E[g(X'\beta_0)\beta_{0j}]
+   $$
+
+   와
+
+   $$
+   g(E[X]'\beta_0)\beta_{0j}.
+   $$
+
+   왜 average partial effect와 marginal effect at the mean은 일반적으로 같지 않은지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **LPM → latent-variable model → logit/probit likelihood → score → marginal effect → discrete change → APE**. 핵심은 비선형모형에서 **coefficient와 probability effect를 구분**하는 것이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Tobit, Censoring/Truncation & Poisson QMLE
+::: {.topic}
+Limited Dependent Variable · Censored Likelihood · Selection · Conditional Mean · QMLE
+:::
+
+#### Part A. Tobit and Censoring
+
+latent outcome이
+
+$$
+Y_i^*=X_i'\beta_0+u_i,
+\qquad
+u_i\mid X_i\sim N(0,\sigma^2)
+$$
+
+를 따르고, 실제로 관측되는 outcome은
+
+$$
+Y_i=\max(0,Y_i^*)
+$$
+
+라고 하자.
+
+1. 위 관측과정을
+
+   $$
+   Y_i=
+   \begin{cases}
+   0,&Y_i^*\le0,\\
+   Y_i^*,&Y_i^*>0
+   \end{cases}
+   $$
+
+   로 쓰고, 이것이 left censoring인 이유를 설명하시오.
+2. censoring과 truncation을 구분하시오.
+   특히 $Y_i^*\le0$인 개인이
+
+   (i) censoring에서는 표본에 어떻게 남는지,<br>
+   (ii) truncation에서는 표본에서 어떻게 처리되는지
+
+   설명하고, 왜 두 경우의 likelihood가 달라지는지 논하시오.
+3. $Y_i=0$인 관측치의 likelihood contribution이
+
+   $$
+   P(Y_i^*\le0\mid X_i)
+   =
+   \Phi\left(
+   -\frac{X_i'\beta}{\sigma}
+   \right)
+   $$
+
+   임을 보이시오.
+4. $Y_i>0$인 관측치의 likelihood contribution이
+
+   $$
+   \frac1{\sigma}
+   \phi\left(
+   \frac{Y_i-X_i'\beta}{\sigma}
+   \right)
+   $$
+
+   임을 보이시오.
+   이를 이용하여 전체 Tobit likelihood 또는 log-likelihood를 censored observations와 uncensored observations의 두 부분으로 나누어 쓰시오.
+5. 한 연구자가 $Y_i>0$인 관측치만 선택한 후
+
+   $$
+   Y_i=X_i'\beta+u_i
+   $$
+
+   를 OLS로 추정하려 한다.
+   왜 일반적으로
+
+   $$
+   E[u_i\mid X_i,Y_i>0]\neq0
+   $$
+
+   인지 설명하시오.
+   selection이 error distribution을 변화시킨다는 점을 이용하여 이 OLS가 왜 문제가 될 수 있는지 논하시오.
+6. Tobit 모형에서
+
+   $$
+   E[Y_i^*\mid X_i]=X_i'\beta_0
+   $$
+
+   이지만 관측 outcome의 조건부 평균
+
+   $$
+   E[Y_i\mid X_i]
+   $$
+
+   는 일반적으로 $X_i'\beta_0$와 같지 않음을 설명하시오.
+   따라서 $\beta_j$를 관측 $Y$의 marginal effect로 곧바로 해석하면 안 되는 이유를 서술하시오.
+
+---
+
+#### Part B. Poisson Regression and QMLE
+
+이제 count outcome
+
+$$
+Y_i\in\{0,1,2,\ldots\}
+$$
+
+를 생각하자.
+conditional mean이
+
+$$
+E[Y_i\mid X_i]
+=
+\mu_i
+=
+\exp(X_i'\beta_0)
+$$
+
+라고 하자.
+
+7. conditional Poisson model이라면
+
+   $$
+   P(Y_i=y\mid X_i)
+   =
+   \frac{e^{-\mu_i}\mu_i^y}{y!},
+   \qquad
+   \mu_i=\exp(X_i'\beta)
+   $$
+
+   임을 쓰고, log-likelihood의 $\beta$-관련 부분이
+
+   $$
+   \ell_i(\beta)
+   =
+   Y_iX_i'\beta
+   -
+   \exp(X_i'\beta)
+   +
+   \text{constant}
+   $$
+
+   임을 보이시오.
+8. Poisson score가
+
+   $$
+   s_i(\beta)
+   =
+   X_i
+   \left[
+   Y_i-\exp(X_i'\beta)
+   \right]
+   $$
+
+   임을 유도하시오.
+   따라서 $\beta_0$에서
+
+   $$
+   E[s_i(\beta_0)]=0
+   $$
+
+   이 되는 데 필요한 조건을 conditional mean restriction을 이용하여 설명하시오.
+9. 실제 conditional distribution이 Poisson이 아니더라도
+
+   $$
+   E[Y_i\mid X_i]
+   =
+   \exp(X_i'\beta_0)
+   $$
+
+   가 올바르게 지정되어 있다면 Poisson QMLE가 $\beta_0$에 대해 consistent할 수 있는 이유를 설명하시오.
+   이를 #4의 pseudo-likelihood / QMLE 논리와 연결하시오.
+10. genuine Poisson distribution에서는
+
+   $$
+   \operatorname{Var}(Y_i\mid X_i)
+   =
+   E[Y_i\mid X_i]
+   $$
+
+   라는 equidispersion property가 성립한다.
+   실제 데이터가 overdispersion 또는 underdispersion을 보이면 likelihood-based conventional variance formula가 왜 잘못될 수 있는지 설명하시오.
+11. conditional mean은 올바르지만 variance specification이 잘못된 경우
+
+   $$
+   A^{-1}BA^{-1}
+   $$
+
+   형태의 sandwich covariance estimator가 필요한 이유를 설명하시오.
+   이를 #3의 heteroskedasticity-robust inference 및 #4의 QMLE와 연결하시오.
+12. 마지막으로 다음 세 구분의 의미를 설명하시오.
+
+   $$
+   \boxed{
+   \text{coefficient}
+   \neq
+   \text{marginal effect}
+   }
+   $$
+
+   $$
+   \boxed{
+   \text{censoring}
+   \neq
+   \text{truncation}
+   }
+   $$
+
+   $$
+   \boxed{
+   \text{correct likelihood}
+   \neq
+   \text{correct conditional mean}
+   }
+   $$
+
+   각 구분이 어떤 추정 또는 해석상의 오류를 예방하는지 서술하시오.
+
+::: {.spoon-hint}
+**형식**: **Tobit observation rule → censored likelihood → selection → conditional mean → Poisson likelihood → QMLE → robust covariance**. 이번 문제의 핵심은 **관측 메커니즘과 분포가정, 평균함수 가정을 서로 구분**하는 것이다.
+:::
+:::
