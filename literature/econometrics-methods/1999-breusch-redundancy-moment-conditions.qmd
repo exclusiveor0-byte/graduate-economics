@@ -7,7 +7,7 @@ description: "GMM 최적 적률조건에서 추가 적률의 잉여성(redundanc
 ::: {.paper-citation}
 **서지정보** Trevor Breusch, Hailong Qian, Peter Schmidt, Donald Wyhowski. (1999). “Redundancy of Moment Conditions.” *Journal of Econometrics*, 91(1), 89–111.
 
-**원문 링크** [DOI: 10.1016/S0304-4076(98)00052-1](https://doi.org/10.1016/S0304-4076(98)00052-1)
+**원문 링크** [DOI: 10.1016/S0304-4076(98)00050-5](https://doi.org/10.1016/S0304-4076(98)00050-5)
 :::
 
 ::: {.callout-note appearance="simple" title="초록 (Abstract)"}
