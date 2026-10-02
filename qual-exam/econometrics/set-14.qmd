@@ -1,0 +1,456 @@
+---
+title: "문제 한 스푼 #14"
+subtitle: "부트스트랩과 재표본추출 (Bootstrap · Resampling · Wild · Block Bootstrap)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #14
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Bootstrap · Resampling · Confidence Intervals · Regression/Time-Series Bootstrap**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 70–80분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Nonparametric Bootstrap, Standard Errors & Confidence Intervals
+::: {.topic}
+Empirical Distribution · Plug-in Principle · Bootstrap SE · Bias · Percentile · Studentized Bootstrap
+:::
+
+$X_1,\ldots,X_n\overset{iid}{\sim}F$이고,
+관심 parameter가 distributional functional
+
+$$
+\theta=T(F)
+$$
+
+로 주어진다고 하자.
+empirical distribution을
+
+$$
+\hat F_n(x)
+=
+\frac1n\sum_{i=1}^n1\{X_i\le x\}
+$$
+
+라 하고 plug-in estimator를
+
+$$
+\hat\theta=T(\hat F_n)
+$$
+
+로 정의한다.
+
+1. 원래 sampling distribution
+
+   $$
+   \mathcal L_F
+   \left(
+   \sqrt n(\hat\theta-\theta)
+   \right)
+   $$
+
+   를 직접 알기 어려운 이유를 설명하시오.
+   Bootstrap에서 $F$를 $\hat F_n$으로 대체하는 논리를 설명하시오.
+2. bootstrap sample
+
+   $$
+   X_1^*,\ldots,X_n^*
+   \overset{iid}{\sim}\hat F_n
+   $$
+
+   를 조건부로 생성하고,
+
+   $$
+   \hat\theta^*=T(\hat F_n^*)
+   $$
+
+   를 계산한다고 하자.
+   왜
+
+   $$
+   \mathcal L^*
+   \left(
+   \sqrt n(\hat\theta^*-\hat\theta)
+   \right)
+   $$
+
+   를
+
+   $$
+   \mathcal L
+   \left(
+   \sqrt n(\hat\theta-\theta)
+   \right)
+   $$
+
+   의 근사로 사용하려 하는지 설명하시오.
+3. $\theta=E[X]$, $\hat\theta=\bar X$인 경우를 생각하자.
+   bootstrap sample mean을
+
+   $$
+   \bar X^*
+   =
+   \frac1n\sum_{i=1}^nX_i^*
+   $$
+
+   라 할 때
+
+   $$
+   E^*[\bar X^*]=\bar X
+   $$
+
+   임을 보이시오.
+   또한 $\operatorname{Var}^*(\bar X^*)$가 원래 sample mean의 sampling variance를 어떻게 근사하는지 설명하시오.
+4. $B$개의 bootstrap replications
+
+   $$
+   \hat\theta^{*(1)},\ldots,\hat\theta^{*(B)}
+   $$
+
+   를 얻었다고 하자.
+   bootstrap standard error를
+
+   $$
+   \widehat{se}_{boot}(\hat\theta)
+   =
+   \left[
+   \frac1{B-1}
+   \sum_{b=1}^B
+   \left(
+   \hat\theta^{*(b)}-\bar\theta^*
+   \right)^2
+   \right]^{1/2}
+   $$
+
+   로 정의하시오.
+   여기서
+
+   $$
+   \bar\theta^*
+   =
+   \frac1B\sum_{b=1}^B\hat\theta^{*(b)}.
+   $$
+
+   $n\to\infty$와 $B\to\infty$가 각각 어떤 종류의 오차를 줄이는지 구분하여 설명하시오.
+5. bootstrap bias estimator를
+
+   $$
+   \widehat{\operatorname{Bias}}_{boot}
+   =
+   E^*[\hat\theta^*]-\hat\theta
+   $$
+
+   로 정의하고,
+
+   $$
+   \hat\theta_{BC}
+   =
+   \hat\theta-
+   \widehat{\operatorname{Bias}}_{boot}
+   $$
+
+   를 쓰시오.
+   bias correction이 항상 finite-sample MSE를 개선하는 것은 아닌 이유를 설명하시오.
+6. bootstrap empirical quantile을 $q_\alpha^*$라 하자.
+   percentile interval
+
+   $$
+   \left[
+   q_{\alpha/2}^*,
+   q_{1-\alpha/2}^*
+   \right]
+   $$
+
+   의 construction을 설명하시오.
+   이 방식이 $\hat\theta^*$의 bootstrap distribution을 직접 이용한다는 점을 서술하시오.
+7. bootstrap error
+
+   $$
+   \hat\theta^*-\hat\theta
+   $$
+
+   의 distribution을 이용하면 basic bootstrap interval이
+
+   $$
+   \left[
+   2\hat\theta-q_{1-\alpha/2}^*,
+   \,
+   2\hat\theta-q_{\alpha/2}^*
+   \right]
+   $$
+
+   형태가 됨을 설명하시오.
+   percentile interval과 center가 다르게 보이는 이유를 서술하시오.
+8. studentized statistic
+
+   $$
+   T
+   =
+   \frac{\hat\theta-\theta}
+   {\widehat{se}(\hat\theta)}
+   $$
+
+   와 bootstrap analog
+
+   $$
+   T^*
+   =
+   \frac{
+   \hat\theta^*-\hat\theta
+   }{
+   \widehat{se}^*(\hat\theta^*)
+   }
+   $$
+
+   를 정의하시오.
+   $T^*$의 bootstrap quantiles를 이용해 percentile-$t$ confidence interval을 구성하는 논리를 설명하시오.
+9. 왜 $\hat\theta$ 자체보다 studentized statistic을 bootstrap하는 것이 더 정확한 approximation을 줄 수 있는지
+   “pivotality”의 관점에서 설명하시오.
+   nuisance scale을 표준화하는 것이 어떤 역할을 하는지도 서술하시오.
+10. 마지막으로 bootstrap consistency의 개념을 다음과 같은 형태로 설명하시오.
+
+   $$
+   \sup_t
+   \left|
+   P^*\left(
+   \sqrt n(\hat\theta^*-\hat\theta)\le t
+   \right)
+   -
+   P\left(
+   \sqrt n(\hat\theta-\theta)\le t
+   \right)
+   \right|
+   \xrightarrow{p}0.
+   $$
+
+   estimator consistency와 bootstrap consistency가 서로 다른 주장인 이유를 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **empirical distribution → resampling → bootstrap law → SE → bias → percentile/basic CI → studentization → consistency**. 핵심은 bootstrap이 단순 simulation이 아니라 **sampling distribution을 empirical distribution 아래에서 재구성하는 plug-in procedure**라는 점이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Regression Bootstrap & Dependent-Data Resampling
+::: {.topic}
+Pairs · Residual · Wild · Parametric · Block · Recursive Bootstrap
+:::
+
+먼저 다음 선형회귀모형을 생각하자.
+
+$$
+Y_i=X_i'\beta_0+u_i.
+$$
+
+1. **Pairs bootstrap**에서는 관측쌍
+
+   $$
+   (Y_i,X_i)
+   $$
+
+   자체를 empirical distribution에서 복원추출하여
+
+   $$
+   (Y_i^*,X_i^*)
+   $$
+
+   를 만든다.
+   이후
+
+   $$
+   \hat\beta^*
+   =
+   (X^{*'}X^*)^{-1}X^{*'}Y^*
+   $$
+
+   를 계산한다.
+   이 방식이 random-$X$ 관점에서 자연스러운 이유를 설명하시오.
+2. **Residual bootstrap**을 생각하자.
+   원자료에서
+
+   $$
+   \hat u_i=Y_i-X_i'\hat\beta
+   $$
+
+   를 구하고 centered residuals를
+
+   $$
+   \tilde u_i
+   =
+   \hat u_i-\bar{\hat u}
+   $$
+
+   로 만든 뒤
+
+   $$
+   u_i^*
+   $$
+
+   를 이 residual들에서 복원추출한다고 하자.
+   bootstrap outcome을
+
+   $$
+   Y_i^*
+   =
+   X_i'\hat\beta+u_i^*
+   $$
+
+   로 생성하는 절차를 설명하시오.
+3. residual bootstrap이 fixed-design homoskedastic regression에 특히 자연스러운 이유를 설명하시오.
+   왜 단순 residual resampling이
+
+   $$
+   \operatorname{Var}(u_i\mid X_i)
+   =
+   \sigma^2
+   $$
+
+   와 유사한 error structure를 암묵적으로 사용한다고 볼 수 있는지 논하시오.
+4. 실제로
+
+   $$
+   \operatorname{Var}(u_i\mid X_i)
+   =
+   \sigma^2(X_i)
+   $$
+
+   인 heteroskedastic model이라 하자.
+   residual들을 $X_i$와 무관하게 뒤섞어 resample할 경우 어떤 conditional variance structure가 파괴될 수 있는지 설명하시오.
+5. **Wild bootstrap**의 기본 아이디어를
+
+   $$
+   u_i^*=\hat u_i v_i,
+   \qquad
+   E[v_i]=0,
+   \qquad
+   E[v_i^2]=1
+   $$
+
+   로 표현하시오.
+   왜 이 방식이 residual magnitude와 $X_i$ 사이의 heteroskedastic pattern을 보존하는 데 더 적합할 수 있는지 설명하시오.
+6. 모형이
+
+   $$
+   Y_i\mid X_i
+   \sim
+   f(y\mid X_i;\theta_0)
+   $$
+
+   로 완전히 parametric하게 지정되어 있다고 하자.
+   **Parametric bootstrap**에서
+
+   $$
+   Y_i^*
+   \sim
+   f(y\mid X_i;\hat\theta)
+   $$
+
+   로 데이터를 생성하는 절차를 설명하시오.
+   nonparametric bootstrap에 비해 더 강한 distributional assumption을 사용한다는 점을 논하시오.
+7. 이제 serially dependent time series
+
+   $$
+   Y_1,\ldots,Y_T
+   $$
+
+   를 생각하자.
+   각 $Y_t$를 독립적으로 i.i.d. resampling하면
+
+   $$
+   \operatorname{Cov}(Y_t,Y_{t-k})
+   $$
+
+   와 같은 dependence structure가 파괴되는 이유를 설명하시오.
+   따라서 naive i.i.d. bootstrap이 time-series statistics의 distribution을 잘못 근사할 수 있는 이유를 서술하시오.
+8. 길이 $\ell$인 consecutive block
+
+   $$
+   (Y_t,\ldots,Y_{t+\ell-1})
+   $$
+
+   을 resample하는 **block bootstrap**의 아이디어를 설명하시오.
+   block 내부 dependence가 보존되는 이유를 서술하시오.
+9. block length $\ell$에 대해 다음 trade-off를 설명하시오.
+
+   $$
+   \ell\text{ too small}
+   \Rightarrow
+   \text{dependence preservation 부족},
+   $$
+
+   $$
+   \ell\text{ too large}
+   \Rightarrow
+   \text{effective number of independent blocks 감소}.
+   $$
+
+   이를 #12의 bandwidth choice와 비교하여 tuning-parameter trade-off라는 공통점을 설명하시오.
+10. AR(1)
+
+   $$
+   Y_t=\rho_0Y_{t-1}+u_t
+   $$
+
+   를 추정한 후 bootstrap errors $u_t^*$를 생성하고
+
+   $$
+   Y_t^*
+   =
+   \hat\rho Y_{t-1}^*+u_t^*
+   $$
+
+   로 bootstrap series를 recursively 생성한다고 하자.
+   이 **recursive bootstrap**이 AR dynamics를 보존하는 이유를 설명하시오.
+11. VAR($p$)
+
+   $$
+   Y_t
+   =
+   c+A_1Y_{t-1}+\cdots+A_pY_{t-p}+\varepsilon_t
+   $$
+
+   에서
+
+   $$
+   Y_t^*
+   =
+   \hat c
+   +
+   \hat A_1Y_{t-1}^*
+   +\cdots+
+   \hat A_pY_{t-p}^*
+   +
+   \varepsilon_t^*
+   $$
+
+   로 bootstrap path를 생성하는 아이디어를 설명하시오.
+   #8의 IRF 또는 forecast statistic의 bootstrap inference와 어떻게 연결될 수 있는지 서술하시오.
+12. 다음 bootstrap 방법들을 비교하시오.
+
+   | Method | 주로 보존하려는 구조 |
+   |:---|:---:|
+   | Pairs bootstrap | $(Y,X)$의 joint empirical distribution |
+   | Residual bootstrap | Specified regression mean structure + homoskedastic error structure |
+   | Wild bootstrap | Regression structure + heteroskedasticity pattern |
+   | Block bootstrap | Local serial dependence |
+   | Recursive bootstrap | Specified dynamic model |
+
+   “bootstrap은 무조건 관측치를 복원추출하면 된다”는 주장이 왜 잘못되었는지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **pairs → residual → heteroskedasticity failure → wild → parametric → dependent-data failure → block → recursive bootstrap**. 핵심은 **resampling scheme이 원래 DGP의 stochastic structure를 충분히 재현해야 한다**는 점이다.
+:::
+:::

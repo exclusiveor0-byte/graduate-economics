@@ -386,6 +386,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
+
+<a href="econometrics/set-11.html" class="spoon-card" data-subject="metrics" data-round="11">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#11 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">이항반응 · Tobit과 Poisson QMLE</div>
+  <div class="spoon-card__desc">LPM의 이분산과 한계, Logit/Probit 우도함수·Score 및 한계효과(APE), Tobit 절단우도와 표본선택 편의, Poisson QMLE 강건추론</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-12.html" class="spoon-card" data-subject="metrics" data-round="12">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#12 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">비모수 회귀 · 차원의 저주</div>
+  <div class="spoon-card__desc">Nadaraya–Watson 커널회귀 편의-분산 상충과 최적 대역폭, 국소선형회귀(LL) 경계편의 완화, Series 회귀, 차원의 저주와 비모수 수렴속도</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-13.html" class="spoon-card" data-subject="metrics" data-round="13">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#13 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">준모수 모형 · 분위회귀</div>
+  <div class="spoon-card__desc">부분선형모형 Robinson 잔차화와 Semiparametric 점근정규성, Neyman 직교성, 분위회귀 Check Loss와 LAD, 조건부분포 이질성과 Quantile Crossing</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-14.html" class="spoon-card" data-subject="metrics" data-round="14">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#14 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">부트스트랩 · 재표본추출</div>
+  <div class="spoon-card__desc">경험분포 플러그인과 부트스트랩 신뢰구간(Percentile, Studentized), 회귀 Pairs/Residual/Wild 부트스트랩, 시계열 의존성과 Block 부트스트랩</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-15.html" class="spoon-card" data-subject="metrics" data-round="15">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#15 회차 (종합)</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">도구변수와 GMM 종합 심화</div>
+  <div class="spoon-card__desc">도구변수 계수식별(Rank)과 2SLS 투영기하, 효율적 GMM과 J-검정, 약한 도구변수(Weak IV) 점근분포 왜곡과 Anderson–Rubin 강건추론, Many Instruments 편의</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -769,6 +829,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">인과추론 설계 종합문제</div>
   <div class="spoon-card__desc">이중차분법(DiD) 평행추세 가정과 사건연구(Event Study), 다원고정효과(TWFE), Sharp/Fuzzy 회귀단절(RDD) 연속성 식별과 대역폭(Bandwidth) 진단</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-11.html" class="spoon-card" data-subject="metrics" data-round="11">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#11 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">이항반응 · Tobit과 Poisson QMLE</div>
+  <div class="spoon-card__desc">LPM의 이분산과 한계, Logit/Probit 우도함수·Score 및 한계효과(APE), Tobit 절단우도와 표본선택 편의, Poisson QMLE 강건추론</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-12.html" class="spoon-card" data-subject="metrics" data-round="12">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#12 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">비모수 회귀 · 차원의 저주</div>
+  <div class="spoon-card__desc">Nadaraya–Watson 커널회귀 편의-분산 상충과 최적 대역폭, 국소선형회귀(LL) 경계편의 완화, Series 회귀, 차원의 저주와 비모수 수렴속도</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-13.html" class="spoon-card" data-subject="metrics" data-round="13">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#13 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">준모수 모형 · 분위회귀</div>
+  <div class="spoon-card__desc">부분선형모형 Robinson 잔차화와 Semiparametric 점근정규성, Neyman 직교성, 분위회귀 Check Loss와 LAD, 조건부분포 이질성과 Quantile Crossing</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-14.html" class="spoon-card" data-subject="metrics" data-round="14">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#14 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">부트스트랩 · 재표본추출</div>
+  <div class="spoon-card__desc">경험분포 플러그인과 부트스트랩 신뢰구간(Percentile, Studentized), 회귀 Pairs/Residual/Wild 부트스트랩, 시계열 의존성과 Block 부트스트랩</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-15.html" class="spoon-card" data-subject="metrics" data-round="15">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#15 회차 (종합)</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">도구변수와 GMM 종합 심화</div>
+  <div class="spoon-card__desc">도구변수 계수식별(Rank)과 2SLS 투영기하, 효율적 GMM과 J-검정, 약한 도구변수(Weak IV) 점근분포 왜곡과 Anderson–Rubin 강건추론, Many Instruments 편의</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>

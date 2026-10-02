@@ -1,0 +1,402 @@
+---
+title: "문제 한 스푼 #13"
+subtitle: "준모수 모형과 분위회귀 (Partially Linear · Robinson · Quantile Regression)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #13
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Partially Linear Model · Robinson Residualization · Orthogonality · Quantile Regression**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 70–80분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Partially Linear Model & Robinson Residualization
+::: {.topic}
+Semiparametric Identification · Partialling-Out · Nonparametric First Stage · Orthogonality
+:::
+
+다음 partially linear model을 생각하자.
+
+$$
+Y_i=D_i\theta_0+g_0(X_i)+u_i,
+\qquad
+E[u_i\mid D_i,X_i]=0,
+$$
+
+여기서 $\theta_0$는 scalar parameter of interest이고,
+$g_0(\cdot)$는 미지의 smooth function이다.
+
+::: {.assumption}
+$$
+E[D_i^2]<\infty,\qquad E[Y_i^2]<\infty,
+$$
+
+그리고 필요한 regularity conditions와 nonparametric first-stage consistency를 가정한다.
+:::
+
+1. $g_0(X_i)$를 무시하고
+
+   $$
+   Y_i=D_i\theta+e_i
+   $$
+
+   를 OLS로 추정한다고 하자.
+   일반적으로
+
+   $$
+   e_i=g_0(X_i)+u_i
+   $$
+
+   이므로
+
+   $$
+   E[D_ie_i]
+   $$
+
+   가 0이 아닐 수 있음을 설명하시오.
+   이를 omitted-variable bias와 연결하여 해석하시오.
+2. 다음 conditional mean functions를 정의하시오.
+
+   $$
+   m_Y(X)=E[Y\mid X],
+   \qquad
+   m_D(X)=E[D\mid X].
+   $$
+
+   원모형에 $X$에 대한 조건부기대를 취하여
+
+   $$
+   m_Y(X)
+   =
+   \theta_0m_D(X)+g_0(X)
+   $$
+
+   를 보이시오.
+3. 원모형에서 위 conditional mean equation을 빼서
+
+   $$
+   Y-m_Y(X)
+   =
+   \theta_0\{D-m_D(X)\}+u
+   $$
+
+   를 유도하시오.
+   다음 residualized variables를 정의하자.
+
+   $$
+   \widetilde Y=Y-m_Y(X),
+   \qquad
+   \widetilde D=D-m_D(X).
+   $$
+
+   그러면
+
+   $$
+   \widetilde Y=\theta_0\widetilde D+u
+   $$
+
+   임을 보이시오.
+4. $E[u\mid D,X]=0$를 이용하여
+
+   $$
+   E[\widetilde D\,u]=0
+   $$
+
+   임을 보이시오.
+   따라서
+
+   $$
+   E[\widetilde D\widetilde Y]
+   =
+   \theta_0E[\widetilde D^2]
+   $$
+
+   이고
+
+   $$
+   \theta_0
+   =
+   \frac{
+   E[\widetilde D\widetilde Y]
+   }{
+   E[\widetilde D^2]
+   }
+   $$
+
+   임을 유도하시오.
+5. identification을 위해
+
+   $$
+   E[\widetilde D^2]>0
+   $$
+
+   가 필요한 이유를 설명하시오.
+   이 조건을 “$X$를 통제한 뒤에도 $D$에 남아 있는 variation”이라는 관점에서 해석하시오.
+6. 실제로는 $m_Y(\cdot)$와 $m_D(\cdot)$를 모르므로,
+   kernel 또는 series regression을 이용하여
+
+   $$
+   \hat m_Y(X_i),
+   \qquad
+   \hat m_D(X_i)
+   $$
+
+   를 추정한다고 하자.
+   residuals를
+
+   $$
+   \hat{\widetilde Y}_i
+   =
+   Y_i-\hat m_Y(X_i),
+   \qquad
+   \hat{\widetilde D}_i
+   =
+   D_i-\hat m_D(X_i)
+   $$
+
+   로 정의하고,
+   Robinson estimator를
+
+   $$
+   \hat\theta
+   =
+   \frac{
+   \sum_{i=1}^n
+   \hat{\widetilde D}_i
+   \hat{\widetilde Y}_i
+   }{
+   \sum_{i=1}^n
+   \hat{\widetilde D}_i^2
+   }
+   $$
+
+   로 쓰시오.
+7. 위 추정절차를
+
+   $$
+   \boxed{
+   \text{nonparametric first stage}
+   \rightarrow
+   \text{residualization}
+   \rightarrow
+   \text{parametric second stage}
+   }
+   $$
+
+   로 요약하시오.
+   왜 이 구조가 “semiparametric”이라고 불리는지 설명하시오.
+8. #12에서 $m_Y(\cdot)$와 $m_D(\cdot)$ 같은 nonparametric function estimators는 일반적으로
+   $n^{-1/2}$보다 느린 rate를 갖는다고 배웠다.
+   그럼에도 적절한 조건 아래 $\theta_0$는
+
+   $$
+   \sqrt n(\hat\theta-\theta_0)
+   $$
+
+   의 점근정규성을 가질 수 있다.
+   왜 nuisance functions의 느린 추정률이 반드시 $\theta$의 느린 추정률을 의미하지 않는지 개념적으로 설명하시오.
+9. nuisance collection을
+
+   $$
+   \eta=(m_Y,m_D)
+   $$
+
+   라 하고 moment function을
+
+   $$
+   \psi(W;\theta,\eta)
+   =
+   [D-m_D(X)]
+   \left[
+   Y-m_Y(X)-\theta\{D-m_D(X)\}
+   \right]
+   $$
+
+   로 정의하자.
+
+   $$
+   E[\psi(W;\theta_0,\eta_0)]=0
+   $$
+
+   임을 확인하고,
+   이 moment가 nuisance perturbation에 대해 first-order sensitivity가 작아지는 구조를 가진다는
+   orthogonality intuition을 설명하시오.
+   formal tangent-space theory는 요구하지 않는다.
+10. 마지막으로 partially linear model과 Frisch–Waugh–Lovell theorem을 비교하시오.
+   둘 다 partialling-out을 사용하지만,
+   FWL에서는 nuisance가 선형 projection이고 여기서는 $E[\cdot\mid X]$라는 비모수 conditional mean이라는 점을 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **omitted nonlinear nuisance → conditional expectation → residualization → identification → Robinson estimator → orthogonality intuition**. 핵심은 관심 parameter와 nuisance function을 분리하여 추정하는 논리다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Quantile Regression, LAD & Asymptotic Interpretation
+::: {.topic}
+Conditional Quantiles · Check Loss · M-estimation · Subgradient · Heterogeneity · Quantile Crossing
+:::
+
+$\tau\in(0,1)$에 대해 conditional $\tau$-quantile이
+
+$$
+Q_Y(\tau\mid X)
+=
+X'\beta_0(\tau)
+$$
+
+로 선형이라고 가정하자.
+
+1. scalar random variable $Y$의 $\tau$-quantile $q_\tau$를 정의하시오.
+   check loss를
+
+   $$
+   \rho_\tau(u)
+   =
+   u\{\tau-1(u<0)\}
+   $$
+
+   로 정의할 때,
+
+   $$
+   q_\tau
+   =
+   \arg\min_q
+   E[\rho_\tau(Y-q)]
+   $$
+
+   가 되는 이유를 설명하시오.
+2. $\tau=\frac12$인 경우
+
+   $$
+   \rho_{1/2}(u)
+   =
+   \frac12|u|
+   $$
+
+   임을 보이고,
+   median regression과 LAD(least absolute deviations)의 관계를 설명하시오.
+3. linear quantile regression estimator를
+
+   $$
+   \hat\beta(\tau)
+   =
+   \arg\min_\beta
+   \sum_{i=1}^n
+   \rho_\tau(Y_i-X_i'\beta)
+   $$
+
+   로 정의하시오.
+   이 추정량이 #4에서 다룬 M-estimator의 특수한 경우임을 설명하시오.
+4. check loss는 $u=0$에서 미분가능하지 않다.
+   따라서 smooth FOC 대신 subgradient condition이 등장한다.
+   직관적으로
+
+   $$
+   \sum_{i=1}^n
+   X_i
+   \left[
+   \tau-
+   1\{Y_i<X_i'\hat\beta(\tau)\}
+   \right]
+   \approx0
+   $$
+
+   라는 sample moment가 성립하는 이유를 설명하시오.
+5. $$
+   Q_Y(\tau\mid X=x)
+   =
+   x'\beta_0(\tau)
+   $$
+
+   에서 $\beta_j(\tau)$를 어떻게 해석하는지 설명하시오.
+   특히
+
+   $$
+   \beta_j(0.10),\qquad
+   \beta_j(0.50),\qquad
+   \beta_j(0.90)
+   $$
+
+   가 서로 다를 수 있다는 것이 conditional distribution의 어떤 heterogeneity를 의미하는지 서술하시오.
+6. OLS와 quantile regression을 다음 관점에서 비교하시오.
+
+   (i) target functional,<br>
+   (ii) loss function,<br>
+   (iii) error distribution의 tail에 대한 민감도,<br>
+   (iv) distributional heterogeneity를 포착하는 능력.
+
+   특히 OLS가 conditional mean을, quantile regression이 conditional quantile을 대상으로 한다는 점을 분명히 하시오.
+7. 적절한 regularity conditions 아래
+
+   $$
+   \sqrt n
+   \left[
+   \hat\beta(\tau)-\beta_0(\tau)
+   \right]
+   \xrightarrow{d}
+   N(0,V_\tau)
+   $$
+
+   가 성립한다고 하자.
+   $V_\tau$가
+
+   $$
+   f_{Y\mid X}
+   \left(
+   X'\beta_0(\tau)\mid X
+   \right)
+   $$
+
+   와 같은 conditional density at the quantile에 의존하는 이유를 설명하시오.
+   quantile 부근의 density가 작을수록 추정이 불안정해질 수 있는 이유도 서술하시오.
+8. 단순한 location-shift model
+
+   $$
+   Y=X'\beta+\varepsilon,
+   \qquad
+   \varepsilon\perp X
+   $$
+
+   에서 오차의 모든 conditional quantile이 $X$와 무관하게 평행이동한다고 하자.
+   이 경우 slope coefficients가 $\tau$에 따라 어떻게 달라질 것으로 기대되는지 설명하시오.
+   반대로 slope가 quantile마다 크게 달라진다면 무엇을 시사하는지 논하시오.
+9. 여러 $\tau$를 별도로 추정했더니 어떤 $x$에서
+
+   $$
+   \hat Q_Y(0.75\mid x)
+   <
+   \hat Q_Y(0.50\mid x)
+   $$
+
+   가 나타났다고 하자.
+   왜 이것이 true conditional quantile function의 monotonicity와 충돌하는지 설명하시오.
+   finite sample에서 quantile crossing이 발생할 수 있는 이유도 개념적으로 서술하시오.
+10. 한 실증분석에서 OLS coefficient는 거의 0이지만
+
+   $$
+   \hat\beta_j(0.90)
+   $$
+
+   는 크고 양(+)의 값이라고 하자.
+   이 결과가 평균효과와 upper-tail response의 차이에 대해 어떤 정보를 줄 수 있는지 설명하시오.
+   단, 이를 자동적으로 causal effect로 해석해서는 안 되는 이유도 함께 서술하시오.
+
+::: {.spoon-hint}
+**형식**: **quantile characterization → check loss → LAD → M-estimation → subgradient → conditional quantile interpretation → asymptotics → crossing**. 핵심은 평균 하나가 아니라 **조건부분포의 여러 위치에서 covariate–outcome 관계를 분석**하는 것이다.
+:::
+:::

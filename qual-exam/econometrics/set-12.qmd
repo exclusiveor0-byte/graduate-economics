@@ -1,0 +1,354 @@
+---
+title: "문제 한 스푼 #12"
+subtitle: "비모수 계량경제학 (Kernel Regression · Series · Curse of Dimensionality)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #12
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Kernel Regression · Local Linear · Bandwidth · Series Regression · Curse of Dimensionality**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 70–80분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Kernel Regression, Local Linear & Bandwidth Choice
+::: {.topic}
+Nonparametric CEF · Nadaraya–Watson · Bias–Variance · Boundary Bias · Cross-Validation
+:::
+
+$\{(Y_i,X_i)\}_{i=1}^n$가 i.i.d.이고
+
+$$
+Y_i=m(X_i)+u_i,
+\qquad
+E[u_i\mid X_i]=0,
+$$
+
+라고 하자. 여기서
+
+$$
+m(x)=E[Y_i\mid X_i=x]
+$$
+
+는 미지의 smooth function이다. $X_i$는 우선 scalar라고 하자.
+
+::: {.assumption}
+$m(\cdot)$는 필요한 차수만큼 미분 가능하고,
+$X$의 density $f_X(x)$는 관심점 $x$에서 양수이며 smooth하다고 가정한다.
+Kernel $K$는 적절한 대칭성과 적률조건을 만족한다고 하자.
+:::
+
+1. bandwidth $h>0$에 대해
+
+   $$
+   K_h(X_i-x)
+   =
+   \frac1h
+   K\left(\frac{X_i-x}{h}\right)
+   $$
+
+   를 정의한다.
+   Kernel smoothing이 $x$에 가까운 관측치에 더 큰 weight를 부여하는 방식임을 설명하시오.
+   $h$가 작아질수록 effective neighborhood가 어떻게 변하는지도 서술하시오.
+2. $x$ 근방의 weighted constant approximation
+
+   $$
+   \hat a
+   =
+   \arg\min_a
+   \sum_{i=1}^n
+   K\left(\frac{X_i-x}{h}\right)
+   (Y_i-a)^2
+   $$
+
+   를 생각하자.
+   first-order condition을 이용하여
+
+   $$
+   \hat m_{NW}(x)
+   =
+   \frac{
+   \sum_{i=1}^n
+   K\left(\frac{X_i-x}{h}\right)Y_i
+   }{
+   \sum_{i=1}^n
+   K\left(\frac{X_i-x}{h}\right)
+   }
+   $$
+
+   를 유도하시오.
+   이 추정량을 local weighted average로 해석하시오.
+3. 내부점 $x$에서 적절한 regularity conditions 아래
+
+   $$
+   \operatorname{Bias}[\hat m_{NW}(x)]
+   =
+   O(h^2),
+   $$
+
+   $$
+   \operatorname{Var}[\hat m_{NW}(x)]
+   =
+   O\left(\frac1{nh}\right)
+   $$
+
+   라고 하자.
+   이 두 결과의 직관을 설명하시오.
+   특히 $h$가 커질 때와 작아질 때 bias와 variance가 각각 어떻게 변하는지 서술하시오.
+4. pointwise MSE의 leading order가
+
+   $$
+   MSE(h)
+   \approx
+   C_1h^4+\frac{C_2}{nh},
+   \qquad
+   C_1,C_2>0
+   $$
+
+   라고 하자.
+   $h$에 대해 최소화하여
+
+   $$
+   h_{\mathrm{opt}}
+   \asymp
+   n^{-1/5}
+   $$
+
+   를 유도하시오.
+   이 결과가 parametric estimation에서의 고정된 smoothing parameter와 어떤 점에서 다른지 설명하시오.
+5. local linear estimator를
+
+   $$
+   (\hat a,\hat b)
+   =
+   \arg\min_{a,b}
+   \sum_{i=1}^n
+   K\left(\frac{X_i-x}{h}\right)
+   \left[
+   Y_i-a-b(X_i-x)
+   \right]^2
+   $$
+
+   로 정의하고
+
+   $$
+   \hat m_{LL}(x)=\hat a
+   $$
+
+   라 하자.
+   왜 이것이 $m(\cdot)$를 $x$ 주변에서 1차 Taylor approximation으로 근사하는 방법인지 설명하시오.
+6. Nadaraya–Watson estimator와 local linear estimator를 비교하시오.
+   특히 support의 boundary 근처에서는 kernel neighborhood가 한쪽으로 잘리므로
+   local constant estimator의 bias가 커질 수 있음을 설명하고,
+   local linear estimator가 boundary bias를 완화하는 이유를 직관적으로 서술하시오.
+7. bandwidth가 지나치게 큰 경우와 지나치게 작은 경우를 각각
+
+   (i) oversmoothing,<br>
+   (ii) undersmoothing
+
+   으로 부른다고 하자.
+   두 경우의 추정함수 모양, bias, variance를 비교하시오.
+8. leave-one-out estimator $\hat m_{-i,h}(X_i)$를 이용하여
+
+   $$
+   CV(h)
+   =
+   \frac1n
+   \sum_{i=1}^n
+   \left[
+   Y_i-\hat m_{-i,h}(X_i)
+   \right]^2
+   $$
+
+   를 정의하자.
+   왜 이를 최소화하는 $h$가 prediction-oriented bandwidth 선택방법이 될 수 있는지 설명하시오.
+   동일 관측치를 자기 자신의 예측에 그대로 사용하는 대신 leave-one-out을 사용하는 이유도 서술하시오.
+9. 마지막으로 #10의 RDD에서 bandwidth 선택이 중요했던 이유와 이번 kernel regression의 bandwidth 문제를 비교하시오.
+   두 경우 모두 local approximation을 사용하지만,
+   estimand와 identification problem은 어떻게 다른지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **nonparametric CEF → kernel weights → Nadaraya–Watson → bias/variance → optimal bandwidth → local linear → boundary bias → cross-validation**. 핵심은 bandwidth가 단순 tuning parameter가 아니라 **smoothness와 sampling noise 사이의 trade-off를 결정**한다는 점이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Series Regression, Nonparametric Rates & Curse of Dimensionality
+::: {.topic}
+Basis Approximation · Sieve Dimension · Approximation Error · Effective Sample Size · Slow Rates
+:::
+
+다시
+
+$$
+Y_i=m(X_i)+u_i,
+\qquad
+E[u_i\mid X_i]=0
+$$
+
+를 생각하자.
+이번에는 $m(x)$를 $K$개의 basis functions로 근사한다.
+
+$$
+m(x)
+\approx
+p_K(x)'\beta_K,
+$$
+
+여기서
+
+$$
+p_K(x)
+=
+\bigl(
+p_1(x),\ldots,p_K(x)
+\bigr)'.
+$$
+
+1. polynomial, spline, Fourier-type basis 등 다양한 $p_K(x)$를 사용할 수 있음을 설명하시오.
+   $K$가 고정된 경우에는
+
+   $$
+   Y_i
+   =
+   p_K(X_i)'\beta_K+\text{error}
+   $$
+
+   가 일반적인 linear regression problem과 동일한 구조를 갖는 이유를 설명하시오.
+2. $P$를 $i$번째 행이 $p_K(X_i)'$인 $n\times K$ matrix라 하자.
+   least-squares series estimator가
+
+   $$
+   \hat\beta_K
+   =
+   (P'P)^{-1}P'Y
+   $$
+
+   이고
+
+   $$
+   \hat m_K(x)
+   =
+   p_K(x)'\hat\beta_K
+   $$
+
+   임을 쓰시오.
+3. $K$가 너무 작으면 approximation bias가 크고,
+   $K$가 너무 크면 estimation variance가 커지는 이유를 설명하시오.
+   이를 Problem 1의 bandwidth $h$와 비교하여
+
+   $$
+   h\downarrow
+   \quad\Longleftrightarrow\quad
+   K\uparrow
+   $$
+
+   가 모두 model flexibility를 증가시키는 방향임을 설명하시오.
+4. nonparametric consistency를 위해 일반적으로 $n\to\infty$와 함께
+
+   $$
+   K=K_n\to\infty
+   $$
+
+   로 두어야 하는 이유를 설명하시오.
+   동시에 $K_n$가 너무 빠르게 증가해서는 안 되는 이유를 variance와 matrix estimation 관점에서 설명하시오.
+5. 이제 $X_i\in\mathbb R^d$라고 하자.
+   product kernel을 사용하여 각 좌표 방향의 bandwidth가 $h$라고 단순화할 때,
+   $x$ 주변 local neighborhood의 부피가 대략
+
+   $$
+   h^d
+   $$
+
+   인 이유를 설명하시오.
+   따라서 실질적으로 사용되는 local observations의 수가 대략
+
+   $$
+   nh^d
+   $$
+
+   임을 해석하시오.
+6. 위 논리에서 variance의 leading order가
+
+   $$
+   O\left(\frac1{nh^d}\right)
+   $$
+
+   로 악화되는 이유를 설명하시오.
+   $d$가 커질수록 동일한 $h$에서도 local neighborhood 안에 충분한 관측치를 확보하기 어려워지는 현상을 curse of dimensionality와 연결하시오.
+7. 2차 smoothness를 가정하여 MSE의 order가
+
+   $$
+   MSE(h)
+   \approx
+   C_1h^4
+   +
+   \frac{C_2}{nh^d}
+   $$
+
+   라고 하자.
+   $h$를 최소화하여
+
+   $$
+   h_{\mathrm{opt}}
+   \asymp
+   n^{-1/(4+d)}
+   $$
+
+   를 유도하시오.
+   이어서
+
+   $$
+   MSE_{\mathrm{opt}}
+   \asymp
+   n^{-4/(4+d)}
+   $$
+
+   임을 보이시오.
+8. 위 rate에서 $d=1,2,5,10$일 때 exponent
+
+   $$
+   \frac{4}{4+d}
+   $$
+
+   가 어떻게 변하는지 비교하고,
+   차원이 증가할수록 convergence rate가 느려지는 이유를 설명하시오.
+9. parametric estimator는 일반적으로
+
+   $$
+   \hat\theta-\theta_0
+   =
+   O_p(n^{-1/2})
+   $$
+
+   의 rate를 갖는 반면,
+   nonparametric function estimator는 보통 더 느린 rate를 갖는다.
+   이 차이를
+
+   (i) finite-dimensional parameter estimation,<br>
+   (ii) infinite-dimensional function estimation
+
+   의 차이와 연결하여 설명하시오.
+10. 마지막으로 다음 주장에 대해 논하시오.
+
+   *“함수형태를 거의 가정하지 않는 nonparametric method는 언제나 parametric method보다 우월하다.”*
+
+   specification robustness, finite-sample variance, interpretability, dimensionality의 관점에서 평가하시오.
+
+::: {.spoon-hint}
+**형식**: **basis approximation → series OLS → $K$-selection → kernel/series correspondence → high-dimensional neighborhoods → curse of dimensionality → nonparametric rates**. 핵심은 함수형태에 대한 가정을 줄이면 그 대가로 **더 느린 수렴과 더 큰 데이터 요구량**을 부담한다는 점이다.
+:::
+:::
