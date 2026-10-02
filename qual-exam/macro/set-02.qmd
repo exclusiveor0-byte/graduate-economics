@@ -1,0 +1,250 @@
+---
+title: "문제 한 스푼 #2"
+subtitle: "동태적 최적화 II (Dynamic Optimization II — Maximum Principle · Costate Dynamics · Transversality Condition)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MACROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #2
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Dynamic Optimization II — Maximum Principle · Costate Dynamics · Transversality Condition**
+:::
+
+::: {.spoon-hero__tags}
+[거시경제학]{.chip .chip--macro}
+[총 2문제]{.chip}
+[예상 55–70분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Maximum Principle and the Optimal Consumption Path
+::: {.topic}
+Present-Value Hamiltonian · Current-Value Hamiltonian · Costate Equation · Euler Equation · Calculation
+:::
+
+한 가계가 무한기간 동안 소비경로를 선택한다고 하자. 가계의 목적함수는
+
+$$
+\max_{\{c(t)\}_{t\ge 0}}
+\int_0^\infty
+e^{-\rho t}
+\frac{c(t)^{1-\sigma}-1}{1-\sigma}\,dt,
+\qquad
+\rho>0,\ \sigma>0,\ \sigma\neq1,
+$$
+
+이고 자산의 운동법칙은
+
+$$
+\dot a(t)=r\,a(t)+w-c(t),
+\qquad
+a(0)=a_0,
+$$
+
+로 주어진다. $r$과 $w$는 상수이고, interior solution이 존재한다고 가정하시오.
+
+1. present-value Hamiltonian을
+
+   $$
+   H^P
+   =
+   e^{-\rho t}
+   \frac{c^{1-\sigma}-1}{1-\sigma}
+   +
+   \lambda^P(ra+w-c)
+   $$
+
+   로 두고, Maximum Principle의 first-order condition과 costate equation을 쓰시오.
+
+2. 위 두 식을 결합하여
+
+   $$
+   \frac{\dot c}{c}
+   =
+   \frac{r-\rho}{\sigma}
+   $$
+
+   를 유도하시오.
+   특히 $\dot\lambda^P/\lambda^P$와 $\dot c/c$의 관계를 중간단계에서 명시하시오.
+
+3. current-value costate를
+
+   $$
+   \lambda^C(t):=e^{\rho t}\lambda^P(t)
+   $$
+
+   로 정의한다.
+   current-value Hamiltonian을 쓰고,
+
+   $$
+   \dot\lambda^C
+   =
+   \rho\lambda^C
+   -
+   \frac{\partial H^C}{\partial a}
+   $$
+
+   를 이용하여 같은 Euler equation을 다시 유도하시오.
+   present-value formulation과 current-value formulation의 차이를 설명하시오.
+
+4. $r,\rho,\sigma$가 상수일 때 소비경로를
+
+   $$
+   c(t)=c(0)\exp\!\left(\frac{r-\rho}{\sigma}t\right)
+   $$
+
+   의 형태로 나타내시오.
+   $r>\rho$, $r=\rho$, $r<\rho$인 세 경우의 소비성장률을 비교하시오.
+
+5. 다음 값을 가정하자.
+
+   $$
+   r=0.06,\qquad
+   \rho=0.03,\qquad
+   \sigma=2,\qquad
+   c(0)=10.
+   $$
+
+   (i) 최적 소비의 연속시간 성장률을 계산하고,<br>
+   (ii) $t=10$에서의 $c(10)$을 계산하시오.
+
+6. Euler equation
+
+   $$
+   \frac{\dot c}{c}
+   =
+   \frac{r-\rho}{\sigma}
+   $$
+
+   에서 $\sigma$가 커질수록 동일한 $r-\rho$에 대해 소비성장률의 반응이 작아지는 이유를
+   intertemporal substitution의 관점에서 설명하시오.
+
+7. costate variable의 경제적 의미를 설명하시오.
+   특히 $a(t)$를 한 단위 추가로 보유할 때 lifetime utility의 최적값이 어떻게 변하는지와
+   $\lambda^P(t)$, $\lambda^C(t)$를 연결하여 논하시오.
+
+::: {.spoon-hint}
+형식: **Hamiltonian → FOC → costate dynamics → Euler equation → path calculation → interpretation**. present-value와 current-value costate를 혼동하지 말고 할인항이 어디에 들어가는지 명확히 하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Capital Accumulation, TVC and Optimality
+::: {.topic}
+State–Control System · Modified Golden Rule · Transversality Condition · Prove or Disprove · Error Diagnosis
+:::
+
+사회계획자가 다음 연속시간 자본축적 문제를 푼다고 하자.
+
+$$
+\max_{\{c(t)\}_{t\ge0}}
+\int_0^\infty
+e^{-\rho t}\log c(t)\,dt
+$$
+
+subject to
+
+$$
+\dot k(t)
+=
+A k(t)^\alpha
+-
+c(t)
+-
+\delta k(t),
+\qquad
+k(0)=k_0>0,
+$$
+
+$$
+A>0,\qquad
+0<\alpha<1,\qquad
+\delta\ge0,\qquad
+\rho>0.
+$$
+
+1. current-value Hamiltonian을 설정하고,
+   control $c(t)$에 대한 FOC와 costate equation을 유도하시오.
+
+2. FOC와 costate equation을 결합하여 소비동학
+
+   $$
+   \frac{\dot c}{c}
+   =
+   \alpha A k^{\alpha-1}
+   -
+   \delta
+   -
+   \rho
+   $$
+
+   을 유도하시오.
+
+3. steady state $(k^*,c^*)$를 구하시오.
+   특히
+
+   $$
+   \alpha A(k^*)^{\alpha-1}
+   =
+   \rho+\delta
+   $$
+
+   가 성립함을 보이고,
+   이를 modified golden rule condition으로 해석하시오.
+
+   $$
+   A=1,\qquad
+   \alpha=\frac13,\qquad
+   \delta=0.05,\qquad
+   \rho=0.03
+   $$
+
+   라 하자.
+   $k^*$와 $c^*$를 계산하시오.
+
+5. 이 문제에 적절한 transversality condition을 present-value costate를 사용하여 쓰시오.
+   이어 current-value costate를 이용한 동치 표현을 제시하시오.
+   TVC가 경제적으로 어떤 종류의 비최적 경로를 배제하는지 설명하시오.
+
+6. 다음 명제를 **prove or disprove** 하시오.
+
+   > Any feasible path satisfying the Hamiltonian first-order condition,
+   > the state equation, and the costate equation is necessarily optimal.
+
+   단순히 참·거짓만 쓰지 말고, 왜 transversality condition 또는 추가적인 충분조건이 필요한지 설명하시오.
+
+7. 한 학생이 다음과 같이 주장하였다.
+
+   > “$f'(k)>\rho+\delta$이면 $\dot c>0$이므로,
+   > 자본이 적은 경제에서는 소비가 영원히 증가한다.”
+
+   이 논증의 오류를 찾으시오.
+   $k(t)$ 역시 내생적으로 변화한다는 사실과 steady-state condition을 이용하여 답하시오.
+
+8. 마지막으로 다음 두 문장을 구분하여 논하시오.
+
+   $$
+   \text{(A) TVC is a boundary condition at infinity.}
+   $$
+
+   $$
+   \text{(B) TVC by itself is a sufficient condition for global optimality.}
+   $$
+
+   (A)와 (B)의 논리적 차이를 설명하시오.
+
+::: {.spoon-hint}
+형식: **Maximum Principle → Euler dynamics → steady state → numerical calculation → TVC → prove/disprove → diagnose**. FOC, feasibility, boundary condition, sufficient condition을 서로 다른 논리적 역할로 구분하시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

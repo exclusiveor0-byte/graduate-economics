@@ -267,6 +267,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
 </a>
 
+<a href="macro/set-01.html" class="spoon-card" data-subject="macro" data-round="1">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#1 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">동태적 최적화 I · 다기간 선택</div>
+  <div class="spoon-card__desc">라그랑지안과 현가가치 예산제약식 유도, 오일러 방정식 도출 및 소비·저축 닫힌해, Envelope 정리와 부의 잠재가격(Shadow Price)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-02.html" class="spoon-card" data-subject="macro" data-round="2">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#2 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">동태적 최적화 II · 최대원리</div>
+  <div class="spoon-card__desc">현재가치/현가가치 해밀토니안(Hamiltonian), 공변수(Costate) 운동법칙 및 오일러 방정식 유도, 횡단성 조건(TVC)과 수정된 황금률(Modified Golden Rule)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-03.html" class="spoon-card" data-subject="macro" data-round="3">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#3 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">동태적 최적화 III · 벨만방정식</div>
+  <div class="spoon-card__desc">순차적 문제의 재귀적(Recursive) 전환, 벨만방정식과 포락선 조건(Envelope Condition), 추측검증법(Guess-and-Verify) 및 정책함수(Policy Function) 검증</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-04.html" class="spoon-card" data-subject="macro" data-round="4">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#4 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경제성장이론 I · 솔로우 모형</div>
+  <div class="spoon-card__desc">유효노동 단위 집약생산함수, 솔로우 자본축적 방정식과 균제상태(Steady State), 균형성장경로(BGP), 황금률 저축률($s_{GR}=\alpha$) 및 국소 수렴속도</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-05.html" class="spoon-card" data-subject="macro" data-round="5">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#5 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경제성장이론 II · 램지 모형</div>
+  <div class="spoon-card__desc">무한기간 유량 예산제약식 전방반복, 폰지사기 금지조건(No-Ponzi Game)과 현가가치 예산제약, Ramsey–Cass–Koopmans 동태시스템 및 경쟁균형</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
 <a href="econometrics/set-01.html" class="spoon-card" data-subject="metrics" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
@@ -697,9 +757,69 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 검색 조건과 일치하는 문제가 없다.
 :::
 
-::: {#spoon-grid-macro .spoon-grid}
-<!-- 거시경제학 회차 카드가 여기에 표시된다 -->
-:::
+```{=html}
+<div id="spoon-grid-macro" class="spoon-grid">
+<a href="macro/set-01.html" class="spoon-card" data-subject="macro" data-round="1">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#1 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">동태적 최적화 I · 다기간 선택</div>
+  <div class="spoon-card__desc">라그랑지안과 현가가치 예산제약식 유도, 오일러 방정식 도출 및 소비·저축 닫힌해, Envelope 정리와 부의 잠재가격(Shadow Price)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-02.html" class="spoon-card" data-subject="macro" data-round="2">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#2 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">동태적 최적화 II · 최대원리</div>
+  <div class="spoon-card__desc">현재가치/현가가치 해밀토니안(Hamiltonian), 공변수(Costate) 운동법칙 및 오일러 방정식 유도, 횡단성 조건(TVC)과 수정된 황금률(Modified Golden Rule)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-03.html" class="spoon-card" data-subject="macro" data-round="3">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#3 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">동태적 최적화 III · 벨만방정식</div>
+  <div class="spoon-card__desc">순차적 문제의 재귀적(Recursive) 전환, 벨만방정식과 포락선 조건(Envelope Condition), 추측검증법(Guess-and-Verify) 및 정책함수(Policy Function) 검증</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-04.html" class="spoon-card" data-subject="macro" data-round="4">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#4 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경제성장이론 I · 솔로우 모형</div>
+  <div class="spoon-card__desc">유효노동 단위 집약생산함수, 솔로우 자본축적 방정식과 균제상태(Steady State), 균형성장경로(BGP), 황금률 저축률($s_{GR}=\alpha$) 및 국소 수렴속도</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-05.html" class="spoon-card" data-subject="macro" data-round="5">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#5 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경제성장이론 II · 램지 모형</div>
+  <div class="spoon-card__desc">무한기간 유량 예산제약식 전방반복, 폰지사기 금지조건(No-Ponzi Game)과 현가가치 예산제약, Ramsey–Cass–Koopmans 동태시스템 및 경쟁균형</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+</div>
+```
 
 ### 계량경제학
 
