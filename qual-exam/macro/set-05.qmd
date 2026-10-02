@@ -36,7 +36,7 @@ a_{t+1}
 =
 (1+r)a_t+w_t-c_t,
 \qquad
-r&gt;0,
+r>0,
 $$
 
 여기서 $a_t$는 $t$기 초의 자산, $w_t$는 노동소득, $c_t$는 소비이다.
@@ -179,7 +179,7 @@ k:=\frac{K}{AL}.
 $$
 
 <div class="assumption">
-$f'&gt;0$, $f''&lt;0$, $\delta\ge0$, $\rho&gt;0$, $\theta&gt;0$이고,
+$f'>0$, $f''<0$, $\delta\ge0$, $\rho>0$, $\theta>0$이고,
 완전경쟁과 interior solution을 가정한다.
 </div>
 
