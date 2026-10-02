@@ -33,7 +33,7 @@ Effective Labor · Intensive Form · Steady State · Balanced Growth Path · Num
 
 $$
 Y(t)=K(t)^\alpha [A(t)L(t)]^{1-\alpha},
-\qquad 0&lt;\alpha&lt;1.
+\qquad 0<\alpha<1.
 $$
 
 기술과 노동은 각각
@@ -45,7 +45,7 @@ $$
 $$
 
 의 일정한 성장률로 증가한다. 저축률은 $s\in(0,1)$, 감가상각률은
-$\delta&gt;0$이며 자본축적식은
+$\delta>0$이며 자본축적식은
 
 $$
 \dot K=sY-\delta K
@@ -80,7 +80,7 @@ $$
 
    여기서 $(n+g+\delta)k$가 왜 break-even investment로 해석되는지 설명하시오.
 
-3. 비자명한 steady state $k^*&gt;0$를 구하고,
+3. 비자명한 steady state $k^*>0$를 구하고,
 
    $$
    k^*
@@ -93,7 +93,7 @@ $$
    임을 보이시오.
    이어 $y^*$와 유효노동 한 단위당 소비 $c^*$를 구하시오.
 
-4. $k&lt;k^*$와 $k&gt;k^*$일 때 각각 $\dot k$의 부호를 판단하시오.
+4. $k<k^*$와 $k>k^*$일 때 각각 $\dot k$의 부호를 판단하시오.
    이 결과를 이용하여 $k^*$의 동태적 안정성을 설명하시오.
 
 5. steady state에서 다음 변수들의 장기성장률을 각각 구하시오.
@@ -249,7 +249,7 @@ $$
    를 이용하여 성장률을 직접 계산하시오.
 
 7. 한 경제가 초기 steady state에 있고 정부가 외생적으로 저축률을 $s_0$에서
-   $s_1&gt;s_0$로 영구적으로 높였다고 하자.
+   $s_1>s_0$로 영구적으로 높였다고 하자.
    자본은 predetermined variable이라고 가정한다.
    정책변화 직후 $k$, $y$, $c$가 각각 점프할 수 있는지 판단하고,
    이후 새로운 steady state까지의 전이경로를 설명하시오.
