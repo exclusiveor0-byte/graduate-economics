@@ -1,0 +1,285 @@
+---
+title: "문제 한 스푼 #10"
+subtitle: "인과추론 설계 종합문제 (DiD · Event Study · TWFE · Sharp/Fuzzy RDD)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #10
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Causal Designs — DiD · Event Study · TWFE · Sharp/Fuzzy RDD**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[종합 1문제]{.chip}
+[예상 80–90분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험형]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Comprehensive Problem. Causal Designs
+::: {.topic}
+Difference-in-Differences · Event Study · Two-Way Fixed Effects · Regression Discontinuity
+:::
+
+무작위배정이 없는 관찰자료에서 causal effect를 식별하기 위해
+연구설계 자체가 어떤 counterfactual comparison을 만들어내는지를 분석하시오.
+아래 Part A와 Part B는 서로 다른 identification strategy를 사용한다.
+
+::: {.assumption}
+필요한 유한 적률 및 regularity conditions는 성립한다고 가정한다.
+각 문항에서 식별을 위해 필요한 추가 가정은 명시적으로 쓰시오.
+:::
+
+#### Part A. Difference-in-Differences & Event Study
+
+$D_i\in\{0,1\}$는 treatment group indicator이고,
+$t\in\{0,1\}$은 pre/post period를 나타낸다.
+potential outcome을 $Y_{it}(0),Y_{it}(1)$라 하자.
+treatment는 $D_i=1$인 집단에 대해 $t=1$에서만 시작된다고 하자.
+
+a. post-treatment ATT를
+
+   $$
+   ATT
+   =
+   E[Y_{i1}(1)-Y_{i1}(0)\mid D_i=1]
+   $$
+
+   로 정의하시오.
+   실제로 관측되지 않는 counterfactual quantity가 무엇인지 설명하시오.
+b. 관측 평균을 이용한 Difference-in-Differences estimand
+
+   $$
+   \delta_{DID}
+   =
+   \{E[Y_1\mid D=1]-E[Y_0\mid D=1]\}
+   -
+   \{E[Y_1\mid D=0]-E[Y_0\mid D=0]\}
+   $$
+
+   을 쓰시오.
+   이를 treatment effect와 untreated potential outcome trend의 차이로 분해하시오.
+c. parallel-trends assumption
+
+   $$
+   E[Y_1(0)-Y_0(0)\mid D=1]
+   =
+   E[Y_1(0)-Y_0(0)\mid D=0]
+   $$
+
+   의 의미를 설명하고,
+   이 가정 아래
+
+   $$
+   \delta_{DID}=ATT
+   $$
+
+   임을 potential-outcomes notation으로 직접 보이시오.
+   이 가정이 관측된 outcome path 자체에 대한 동일추세 가정이 아니라
+   untreated counterfactual trend에 관한 가정이라는 점을 분명히 하시오.
+d. 다음 regression을 생각하자.
+
+   $$
+   Y_{it}
+   =
+   \alpha
+   +
+   \gamma D_i
+   +
+   \lambda Post_t
+   +
+   \tau(D_i\times Post_t)
+   +
+   u_{it}.
+   $$
+
+   네 개의 group-time cell mean을 이용하여
+
+   $$
+   \hat\tau=\widehat\delta_{DID}
+   $$
+
+   임을 보이시오.
+   $\alpha,\gamma,\lambda,\tau$의 의미를 각각 설명하시오.
+e. 여러 시점이 있고 treatment가 $T_i$에서 시작된다고 하자.
+   event time을 $k=t-T_i$로 정의하고
+
+   $$
+   Y_{it}
+   =
+   \alpha_i+\lambda_t
+   +
+   \sum_{k\neq -1}
+   \beta_k\,1\{t-T_i=k\}
+   +
+   u_{it}
+   $$
+
+   를 생각하자.
+
+   (i) 왜 $k=-1$과 같은 하나의 시점을 normalization하여 제외해야 하는지 설명하시오.
+   <br>
+   (ii) $k<0$, $k=0$, $k>0$의 $\beta_k$를 각각 어떻게 해석하는지 설명하시오.
+   <br>
+   (iii) no-anticipation assumption의 의미를 서술하시오.
+f. 한 연구자가 treatment 이전의 모든 $\hat\beta_k$가 통계적으로 유의하지 않았으므로
+   parallel trends가 증명되었다고 주장한다.
+   이 주장을 평가하시오.
+   pre-trend coefficients가 useful diagnostic일 수는 있지만,
+   왜 식별가정 자체를 증명하는 것은 아닌지 설명하시오.
+g. staggered adoption 상황에서 treatment timing이 집단마다 다르다고 하자.
+   다음 TWFE regression을 생각한다.
+
+   $$
+   Y_{it}
+   =
+   \alpha_i+\lambda_t+\tau D_{it}+u_{it}.
+   $$
+
+   treatment effect가 cohort와 time에 걸쳐 heterogeneous할 수 있을 때
+   $\tau$의 해석이 단순한 $2\times2$ DiD의 ATT와 달라질 수 있는 이유를 설명하시오.
+   복잡한 decomposition 공식은 요구하지 않는다.
+h. 동일한 individual 또는 treatment cluster 내에서
+
+   $$
+   \operatorname{Cov}(u_{it},u_{is})\neq0
+   $$
+
+   일 수 있다고 하자.
+   DiD/Event-Study inference에서 cluster-robust standard error가 자연스러운 이유를 설명하시오.
+   #5의 panel-data inference와 연결하여 답하시오.
+
+---
+
+#### Part B. Regression Discontinuity Design
+
+running variable을 $X_i$, cutoff를 $c$라 하자.
+먼저 sharp RDD에서 treatment assignment가
+
+$$
+D_i=1\{X_i\ge c\}
+$$
+
+로 결정된다고 하자.
+
+i. potential outcome regression functions를
+
+   $$
+   \mu_d(x)=E[Y_i(d)\mid X_i=x],
+   \qquad d\in\{0,1\}
+   $$
+
+   로 정의하자.
+   $\mu_0(x)$와 $\mu_1(x)$가 $x=c$에서 연속이라고 할 때
+
+   $$
+   \tau_{RDD}
+   =
+   \lim_{x\downarrow c}E[Y\mid X=x]
+   -
+   \lim_{x\uparrow c}E[Y\mid X=x]
+   $$
+
+   가
+
+   $$
+   E[Y(1)-Y(0)\mid X=c]
+   $$
+
+   를 식별하는 이유를 보이시오.
+j. RDD identification이 random assignment를 직접 가정하는 것이 아니라
+   cutoff 주변에서 potential outcome regression functions의 continuity에 의존한다는 점을 설명하시오.
+   왜 이 설계의 causal effect는 일반적인 population ATE가 아니라 cutoff에서의 local effect인지 설명하시오.
+k. cutoff 근방에서 다음 local linear specification을 생각하자.
+
+   $$
+   Y_i
+   =
+   \alpha
+   +
+   \tau D_i
+   +
+   \beta_1(X_i-c)
+   +
+   \beta_2D_i(X_i-c)
+   +
+   u_i.
+   $$
+
+   $\tau$가 cutoff에서의 outcome jump를 나타내는 이유를 설명하시오.
+   $\beta_2$를 포함함으로써 cutoff 양쪽의 slope를 다르게 허용하는 이유도 설명하시오.
+l. $$
+   |X_i-c|\le h
+   $$
+
+   인 관측치만 이용한다고 하자.
+   bandwidth $h$를 줄일 때와 늘릴 때의 bias–variance trade-off를 설명하시오.
+   특히
+
+   (i) 너무 큰 $h$,<br>
+   (ii) 너무 작은 $h$
+
+   각각에서 어떤 문제가 발생할 수 있는지 서술하시오.
+m. 이제 fuzzy RDD를 생각하자.
+   cutoff에서 treatment probability가 0에서 1로 완전히 뛰는 것이 아니라
+   불연속적으로 변화한다고 하자.
+   다음 local Wald ratio를 쓰시오.
+
+   $$
+   \tau_{FRD}
+   =
+   \frac{
+   \lim_{x\downarrow c}E[Y\mid X=x]
+   -
+   \lim_{x\uparrow c}E[Y\mid X=x]
+   }{
+   \lim_{x\downarrow c}E[D\mid X=x]
+   -
+   \lim_{x\uparrow c}E[D\mid X=x]
+   }.
+   $$
+
+   cutoff indicator
+
+   $$
+   Z_i=1\{X_i\ge c\}
+   $$
+
+   가 instrument처럼 작동한다는 점을 설명하시오.
+n. #9에서 배운 LATE와 연결하여,
+   fuzzy RDD가 어떤 local complier population의 causal effect를 식별한다고 해석할 수 있는지 설명하시오.
+   왜 이를 전체 population의 ATE로 바로 해석해서는 안 되는지 서술하시오.
+o. RDD의 credibility를 평가하기 위해 다음 diagnostics가 왜 중요한지 각각 설명하시오.
+
+   (i) cutoff 주변 running variable density의 비정상적 불연속,<br>
+   (ii) predetermined covariates의 cutoff discontinuity,<br>
+   (iii) 다른 제도나 처치가 동일한 cutoff에서 동시에 바뀌는 경우,<br>
+   (iv) bandwidth sensitivity.
+p. 한 연구자가 cutoff에서 outcome이 유의하게 jump했으므로 treatment effect가 확인되었다고 주장한다.
+   이 주장을 평가하시오.
+   어떤 identification assumption과 diagnostic evidence가 추가로 필요할 수 있는지 설명하시오.
+q. 마지막으로 DiD와 RDD를 다음 관점에서 비교하시오.
+
+   (i) counterfactual을 어떻게 구성하는가,<br>
+   (ii) 핵심 식별가정은 무엇인가,<br>
+   (iii) 어떤 population/local region의 effect를 식별하는가,<br>
+   (iv) panel/time variation과 cross-sectional cutoff variation 중 무엇을 이용하는가.
+
+<div class="note">
+전체 형식:
+**Potential Outcomes → DiD → Parallel Trends → Event Study → TWFE → Sharp RDD → Bandwidth → Fuzzy RDD → LATE**.
+모든 문항에서 계산 자체보다 **무엇이 causal effect를 식별하는지**를 명시적으로 서술하시오.
+</div>
+
+::: {.spoon-hint}
+**형식**: Part A의 핵심: **DiD는 단순한 전후 비교가 아니라, untreated counterfactual trend를 control group으로 복원하는 설계**이다.
+:::
+:::

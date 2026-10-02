@@ -1,0 +1,262 @@
+---
+title: "문제 한 스푼 #7"
+subtitle: "단위근과 가짜회귀 · 공적분과 오차수정모형 (Unit Root · Cointegration & ECM)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #7
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Unit Root · DF/ADF · Spurious Regression · Cointegration · Engle–Granger · ECM**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 60–75분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Unit Root, Spurious Regression & DF/ADF
+::: {.topic}
+Random Walk · $I(1)$ · Nonstandard Asymptotics · Dickey–Fuller · ADF · KPSS
+:::
+
+다음 AR(1) process를 생각하자.
+
+$$
+y_t=\rho y_{t-1}+u_t,
+\qquad
+t=1,\ldots,T,
+$$
+
+여기서 $\{u_t\}$는 평균 0, 분산 $\sigma_u^2$인 white noise이며,
+$y_0$는 유한한 분산을 가진 확률변수라고 하자.
+
+1. $\rho=1$일 때
+
+   $$
+   y_t=y_{t-1}+u_t
+   $$
+
+   이므로 반복대입을 통해
+
+   $$
+   y_t=y_0+\sum_{s=1}^t u_s
+   $$
+
+   를 보이시오.
+   이를 이용하여 $E[y_t]$와 $\operatorname{Var}(y_t)$를 구하고,
+   왜 $\{y_t\}$가 covariance stationary하지 않은지 설명하시오.
+2. $y_t$가 $I(1)$이고
+
+   $$
+   \Delta y_t=u_t
+   $$
+
+   가 $I(0)$임을 설명하시오.
+   $I(0)$, $I(1)$, 일반적인 $I(d)$의 의미를 정의하고,
+   stochastic trend와 deterministic trend의 차이를 설명하시오.
+3. 서로 독립적인 두 random walk
+
+   $$
+   y_t=y_{t-1}+u_t,
+   \qquad
+   x_t=x_{t-1}+v_t
+   $$
+
+   를 생각하자.
+   실제로는 두 과정 사이에 구조적 관계가 없음에도 불구하고
+
+   $$
+   y_t=\alpha+\beta x_t+e_t
+   $$
+
+   를 levels OLS로 추정하면 높은 $R^2$, 유의한 $t$-통계량 등이 나타날 수 있는
+   spurious regression 현상을 설명하시오.
+   이 현상이 stationary regressions에서의 통상적 직관과 왜 다른지 논하시오.
+4. unit-root testing을 위해
+
+   $$
+   y_t=\rho y_{t-1}+u_t
+   $$
+
+   를
+
+   $$
+   \Delta y_t=\gamma y_{t-1}+u_t,
+   \qquad
+   \gamma=\rho-1
+   $$
+
+   로 다시 쓰자.
+   다음 귀무가설과 대립가설의 의미를 설명하시오.
+
+   $$
+   H_0:\gamma=0,
+   \qquad
+   H_1:\gamma<0.
+   $$
+
+   왜 $H_0$ 아래의 $t$-통계량이 통상적인 Student-$t$ 또는 asymptotic normal critical value를 따르지 않는지 설명하시오.
+5. 다음 세 가지 Dickey–Fuller regression을 비교하시오.
+
+   $$
+   \Delta y_t=\gamma y_{t-1}+u_t,
+   $$
+
+   $$
+   \Delta y_t=\alpha+\gamma y_{t-1}+u_t,
+   $$
+
+   $$
+   \Delta y_t=\alpha+\delta t+\gamma y_{t-1}+u_t.
+   $$
+
+   deterministic component의 specification이 critical value에 영향을 주는 이유를 설명하시오.
+   실제 검정에서 intercept와 trend를 기계적으로 추가하거나 제거하면 안 되는 이유도 논하시오.
+6. $u_t$가 serially correlated할 수 있다고 하자.
+   Augmented Dickey–Fuller regression
+
+   $$
+   \Delta y_t
+   =
+   \alpha+\delta t+\gamma y_{t-1}
+   +
+   \sum_{j=1}^{p}\phi_j\Delta y_{t-j}
+   +
+   \varepsilon_t
+   $$
+
+   의 목적을 설명하시오.
+   특히 lagged differences가 unit-root hypothesis 자체를 바꾸는 것이 아니라,
+   residual dynamics를 흡수하기 위해 포함된다는 점을 설명하시오.
+7. 한 연구자가 ADF 회귀에서 $\hat\gamma<0$이고 ordinary $t$-statistic이 $-2.3$이므로
+   통상적인 5% 정규근사 임계값 $-1.96$과 비교하여 unit root를 기각한다고 주장한다.
+   이 주장의 오류를 설명하시오.
+8. KPSS-type stationarity test와 DF/ADF test의 귀무가설 구조를 비교하시오.
+   왜 두 검정을 함께 살펴보는 것이 진단적으로 유용할 수 있는지 설명하시오.
+   단, KPSS test statistic의 세부 공식을 유도할 필요는 없다.
+
+::: {.spoon-hint}
+**형식**: **stationary boundary → random walk → $I(1)$ → spurious regression → DF → ADF → specification**. 핵심은 unit root가 단순히 “$\rho$가 1에 가깝다”는 문제가 아니라, **통상적인 $\sqrt T$-점근이론과 검정분포가 바뀌는 경계점**이라는 점이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Cointegration, Engle–Granger & Error Correction
+::: {.topic}
+Long-Run Equilibrium · Superconsistency · Residual-Based Test · ECM
+:::
+
+$Y_t=(y_t,x_t)'$의 두 성분 $y_t,x_t$가 각각 $I(1)$이라고 하자.
+다음 long-run relation을 생각한다.
+
+$$
+y_t=\alpha_0+\beta_0x_t+e_t.
+$$
+
+1. $y_t$와 $x_t$가 각각 $I(1)$이지만
+
+   $$
+   e_t
+   =
+   y_t-\alpha_0-\beta_0x_t
+   $$
+
+   가 $I(0)$이면 두 변수가 cointegrated되었다고 한다.
+   cointegration의 정의를 쓰고,
+
+   $$
+   (1,-\beta_0)'
+   $$
+
+   이 cointegrating vector가 되는 이유를 설명하시오.
+2. 위 관계를 long-run equilibrium의 관점에서 해석하시오.
+   특히 $e_t$가 stationary라는 것이
+
+   $$
+   y_t-\alpha_0-\beta_0x_t
+   $$
+
+   가 장기적으로 어떤 성질을 가진다는 뜻인지 설명하시오.
+   두 $I(1)$ 변수가 cointegrated되지 않았을 때와 비교하시오.
+3. 두 변수가 cointegrated되어 있다고 하자.
+   cointegrating regression
+
+   $$
+   y_t=\alpha+\beta x_t+e_t
+   $$
+
+   를 OLS로 추정할 때 $\hat\beta$가 통상적인 stationary regression보다 더 빠른 rate로
+   $\beta_0$에 수렴하는 superconsistency 현상을 설명하시오.
+   정확한 limiting distribution의 유도는 요구하지 않는다.
+   다만 superconsistency가 곧바로 통상적인 $t$-검정의 유효성을 의미하지 않는 이유를 설명하시오.
+4. Engle–Granger two-step procedure를 설명하시오.
+
+   (i) levels regression으로 $\hat\alpha,\hat\beta$를 구한다.<br>
+   (ii) residual
+
+   $$
+   \hat e_t=y_t-\hat\alpha-\hat\beta x_t
+   $$
+
+   에 대해 unit-root test를 수행한다.
+
+   이때 귀무가설과 대립가설을 쓰시오.
+5. 왜 Engle–Granger residual-based test에서 ordinary Dickey–Fuller critical value를 그대로 사용할 수 없는지 설명하시오.
+   특히 첫 단계에서 cointegrating coefficient가 추정되었다는 사실이 residual의 null distribution에 미치는 영향을 개념적으로 설명하시오.
+6. 다음 error-correction representation을 생각하자.
+
+   $$
+   \Delta y_t
+   =
+   \lambda
+   \bigl(
+   y_{t-1}-\alpha_0-\beta_0x_{t-1}
+   \bigr)
+   +
+   \delta\,\Delta x_t
+   +
+   u_t.
+   $$
+
+   (i)
+
+   $$
+   y_{t-1}-\alpha_0-\beta_0x_{t-1}
+   $$
+
+   의 경제적 의미를 설명하시오.
+   <br>
+   (ii) $\lambda$를 adjustment coefficient로 해석하시오.
+   <br>
+   (iii) 안정적인 error correction을 위해 일반적으로 $\lambda$의 부호에 대해 어떤 조건을 기대하는지 설명하시오.
+7. 다음 두 상황을 비교하시오.
+
+   **Case A.** $y_t,x_t$가 서로 독립적인 $I(1)$ 과정이다.<br>
+   **Case B.** $y_t,x_t$가 각각 $I(1)$이지만 $y_t-\beta_0x_t$가 $I(0)$이다.
+
+   levels regression의 해석이 두 경우에서 왜 근본적으로 달라지는지 설명하시오.
+   특히 “두 변수가 모두 $I(1)$이면 levels regression은 항상 spurious하다”는 주장에 대해 논하시오.
+8. 마지막으로 두 변수보다 더 큰 $m$-차원 system $Y_t$을 생각하자.
+   cointegration rank $r$의 의미를 설명하시오.
+
+   $$
+   0<r<m
+   $$
+
+   일 때 장기균형관계와 common stochastic trends의 수가 어떻게 연결되는지 개념적으로 설명하시오.
+   Johansen procedure나 VECM의 세부 추정은 다음 회차 범위로 남긴다.
+
+::: {.spoon-hint}
+**형식**: **$I(1)$ variables → stationary linear combination → cointegration → Engle–Granger → ECM → rank intuition**. 핵심은 **비정상성 자체와 공적분의 존재 여부를 구분**하는 것이다.
+:::
+:::

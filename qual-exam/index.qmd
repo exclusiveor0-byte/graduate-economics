@@ -326,6 +326,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
+
+<a href="econometrics/set-06.html" class="spoon-card" data-subject="metrics" data-round="6">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#6 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">동적 패널 · 정상 시계열</div>
+  <div class="spoon-card__desc">동적 패널 Nickell 편의와 Arellano–Bond 차분 GMM, AR(1) 과정의 공분산 정상성·MA(∞) 표현·ACF 및 예측오차</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-07.html" class="spoon-card" data-subject="metrics" data-round="7">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#7 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">단위근과 가짜회귀 · 공적분과 ECM</div>
+  <div class="spoon-card__desc">확률보행과 비표준 점근분포, DF/ADF 및 KPSS 검정, 가짜회귀(Spurious Regression), Engle–Granger 공적분 검정 및 오차수정모형(ECM)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-08.html" class="spoon-card" data-subject="metrics" data-round="8">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#8 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">VAR 충격반응 · VECM과 Johansen 공적분</div>
+  <div class="spoon-card__desc">VAR 안정성 조건과 직교화 충격반응함수(OIRF)·예측오차 분산분해(FEVD), Granger 인과성, VECM 축소계수 구조와 Johansen Trace 공적분 검정</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-09.html" class="spoon-card" data-subject="metrics" data-round="9">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#9 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">잠재적 결과와 성향점수 · 인과적 IV와 LATE</div>
+  <div class="spoon-card__desc">선택편의 분해와 조건부 독립성(Unconfoundedness), 성향점수 회귀조정 및 IPW 가중치, Causal IV의 단조성(Monotonicity)과 LATE 국소인과효과 식별</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-10.html" class="spoon-card" data-subject="metrics" data-round="10">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#10 회차 (종합)</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">인과추론 설계 종합문제</div>
+  <div class="spoon-card__desc">이중차분법(DiD) 평행추세 가정과 사건연구(Event Study), 다원고정효과(TWFE), Sharp/Fuzzy 회귀단절(RDD) 연속성 식별과 대역폭(Bandwidth) 진단</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -649,6 +709,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">정적 패널데이터 종합문제</div>
   <div class="spoon-card__desc">미관측 이질성과 합동 OLS 편의, 고정효과(FE) 내변환과 엄격한 외생성, 1차 차분(FD) 비교, 클러스터 강건추론, 확률효과(RE)와 Hausman 검정</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-06.html" class="spoon-card" data-subject="metrics" data-round="6">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#6 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">동적 패널 · 정상 시계열</div>
+  <div class="spoon-card__desc">동적 패널 Nickell 편의와 Arellano–Bond 차분 GMM, AR(1) 과정의 공분산 정상성·MA(∞) 표현·ACF 및 예측오차</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-07.html" class="spoon-card" data-subject="metrics" data-round="7">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#7 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">단위근과 가짜회귀 · 공적분과 ECM</div>
+  <div class="spoon-card__desc">확률보행과 비표준 점근분포, DF/ADF 및 KPSS 검정, 가짜회귀(Spurious Regression), Engle–Granger 공적분 검정 및 오차수정모형(ECM)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-08.html" class="spoon-card" data-subject="metrics" data-round="8">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#8 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">VAR 충격반응 · VECM과 Johansen 공적분</div>
+  <div class="spoon-card__desc">VAR 안정성 조건과 직교화 충격반응함수(OIRF)·예측오차 분산분해(FEVD), Granger 인과성, VECM 축소계수 구조와 Johansen Trace 공적분 검정</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-09.html" class="spoon-card" data-subject="metrics" data-round="9">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#9 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">잠재적 결과와 성향점수 · 인과적 IV와 LATE</div>
+  <div class="spoon-card__desc">선택편의 분해와 조건부 독립성(Unconfoundedness), 성향점수 회귀조정 및 IPW 가중치, Causal IV의 단조성(Monotonicity)과 LATE 국소인과효과 식별</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-10.html" class="spoon-card" data-subject="metrics" data-round="10">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#10 회차 (종합)</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">인과추론 설계 종합문제</div>
+  <div class="spoon-card__desc">이중차분법(DiD) 평행추세 가정과 사건연구(Event Study), 다원고정효과(TWFE), Sharp/Fuzzy 회귀단절(RDD) 연속성 식별과 대역폭(Bandwidth) 진단</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
