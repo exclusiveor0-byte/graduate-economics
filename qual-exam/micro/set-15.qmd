@@ -19,7 +19,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [단일 종합문제]{.chip}
 [약 30–40분]{.chip}
 [7개 연결 문항]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -125,6 +125,513 @@ $$
 
 ::: {.spoon-hint}
 **권장 풀이 순서**: **primal problem → indirect utility → dual problem → duality identities → Roy / Shephard → Slutsky → compensated demand → EV/CV**.<br>각 identity는 단순히 정리를 적는 데 그치지 말고, 앞에서 구한 함수들을 실제로 대입하거나 미분하여 확인하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem. Consumer Theory"}
+::: {.topic}
+Utility Maximization · Indirect Utility · Expenditure Minimization · Duality · Slutsky · Welfare Measurement
+:::
+
+#### 1) Utility maximization
+
+소비자는
+$$
+\max_{x_1,x_2\ge0}\;x_1^{1/3}x_2^{2/3}
+\qquad\text{s.t.}\qquad
+p_1x_1+p_2x_2=m
+$$
+을 푼다.
+
+Lagrangian은
+$$
+\mathcal L
+=
+x_1^{1/3}x_2^{2/3}
++
+\lambda(m-p_1x_1-p_2x_2).
+$$
+
+FOC는
+$$
+\frac13x_1^{-2/3}x_2^{2/3}=\lambda p_1,
+\qquad
+\frac23x_1^{1/3}x_2^{-1/3}=\lambda p_2.
+$$
+
+따라서
+$$
+\frac{MU_1}{MU_2}
+=
+\frac12\frac{x_2}{x_1}
+=
+\frac{p_1}{p_2},
+$$
+즉
+$$
+x_2=\frac{2p_1}{p_2}x_1.
+$$
+
+이를 예산제약에 대입하면
+$$
+p_1x_1+p_2\left(\frac{2p_1}{p_2}x_1\right)=m
+$$
+이므로
+$$
+3p_1x_1=m.
+$$
+
+따라서 Marshallian demands는
+$$
+x_1(p_1,p_2,m)=\frac{m}{3p_1},
+\qquad
+x_2(p_1,p_2,m)=\frac{2m}{3p_2}.
+$$
+
+Budget exhaustion은
+$$
+p_1x_1+p_2x_2
+=
+\frac m3+\frac{2m}{3}
+=
+m
+$$
+으로 확인된다.
+
+또한 모든 가격과 소득을 $t>0$배 하면
+$$
+x_1(tp_1,tp_2,tm)
+=
+\frac{tm}{3tp_1}
+=
+x_1(p_1,p_2,m),
+$$
+$$
+x_2(tp_1,tp_2,tm)
+=
+\frac{2tm}{3tp_2}
+=
+x_2(p_1,p_2,m).
+$$
+
+따라서 Marshallian demand는 $(p_1,p_2,m)$에 대해 degree 0 homogeneous이다.
+
+---
+
+#### 2) Indirect utility
+
+Marshallian demands를 효용함수에 대입하면
+$$
+V(p_1,p_2,m)
+=
+\left(\frac{m}{3p_1}\right)^{1/3}
+\left(\frac{2m}{3p_2}\right)^{2/3}.
+$$
+
+정리하면
+$$
+V(p_1,p_2,m)
+=
+\frac{2^{2/3}}{3}\,
+m p_1^{-1/3}p_2^{-2/3}.
+$$
+
+$$
+A=\frac{2^{2/3}}{3}>0
+$$
+라 두면
+$$
+V=Am p_1^{-1/3}p_2^{-2/3}.
+$$
+
+따라서
+$$
+\frac{\partial V}{\partial p_1}
+=
+-\frac13Am p_1^{-4/3}p_2^{-2/3}<0,
+$$
+$$
+\frac{\partial V}{\partial p_2}
+=
+-\frac23Am p_1^{-1/3}p_2^{-5/3}<0,
+$$
+$$
+\frac{\partial V}{\partial m}
+=
+A p_1^{-1/3}p_2^{-2/3}>0.
+$$
+
+즉 indirect utility는 가격에는 감소하고 소득에는 증가한다.
+
+---
+
+#### 3) Expenditure minimization and Hicksian demand
+
+소비자는 목표효용 $u$를 달성하기 위해
+$$
+\min_{x_1,x_2\ge0}\;p_1x_1+p_2x_2
+\qquad\text{s.t.}\qquad
+x_1^{1/3}x_2^{2/3}=u
+$$
+를 푼다.
+
+FOC로부터
+$$
+\frac{p_1}{p_2}
+=
+\frac12\frac{x_2}{x_1},
+$$
+따라서
+$$
+x_2=\frac{2p_1}{p_2}x_1.
+$$
+
+이를 효용제약에 대입하면
+$$
+x_1^{1/3}
+\left(\frac{2p_1}{p_2}x_1\right)^{2/3}
+=
+u.
+$$
+
+따라서 Hicksian demands는
+$$
+h_1(p_1,p_2,u)
+=
+\frac{u}{2^{2/3}}
+p_1^{-2/3}p_2^{2/3},
+$$
+$$
+h_2(p_1,p_2,u)
+=
+2^{1/3}u
+p_1^{1/3}p_2^{-1/3}.
+$$
+
+Expenditure function은
+$$
+e(p_1,p_2,u)
+=
+p_1h_1+p_2h_2.
+$$
+
+즉
+$$
+e
+=
+\frac{u}{2^{2/3}}p_1^{1/3}p_2^{2/3}
++
+2^{1/3}u p_1^{1/3}p_2^{2/3},
+$$
+따라서
+$$
+e(p_1,p_2,u)
+=
+\frac{3}{2^{2/3}}
+u p_1^{1/3}p_2^{2/3}.
+$$
+
+---
+
+#### 4) Duality identities, Roy's identity, and Shephard's lemma
+
+먼저
+$$
+e(p,V(p,m))
+=
+\frac{3}{2^{2/3}}
+V(p,m)p_1^{1/3}p_2^{2/3}.
+$$
+
+여기에
+$$
+V(p,m)
+=
+\frac{2^{2/3}}{3}
+m p_1^{-1/3}p_2^{-2/3}
+$$
+를 대입하면
+$$
+e(p,V(p,m))=m.
+$$
+
+반대로
+$$
+V(p,e(p,u))
+=
+\frac{2^{2/3}}{3}
+e(p,u)p_1^{-1/3}p_2^{-2/3}
+$$
+이고
+$$
+e(p,u)
+=
+\frac{3}{2^{2/3}}
+u p_1^{1/3}p_2^{2/3}
+$$
+이므로
+$$
+V(p,e(p,u))=u.
+$$
+
+Roy's identity를 적용하면
+$$
+x_i(p,m)
+=
+-\frac{V_{p_i}}{V_m}.
+$$
+
+실제로
+$$
+-\frac{V_{p_1}}{V_m}
+=
+\frac{m}{3p_1}
+=
+x_1,
+$$
+$$
+-\frac{V_{p_2}}{V_m}
+=
+\frac{2m}{3p_2}
+=
+x_2.
+$$
+
+Shephard's lemma에 의해
+$$
+h_i(p,u)
+=
+\frac{\partial e(p,u)}{\partial p_i}.
+$$
+
+실제로
+$$
+\frac{\partial e}{\partial p_1}
+=
+\frac{u}{2^{2/3}}
+p_1^{-2/3}p_2^{2/3}
+=
+h_1,
+$$
+$$
+\frac{\partial e}{\partial p_2}
+=
+2^{1/3}u
+p_1^{1/3}p_2^{-1/3}
+=
+h_2.
+$$
+
+---
+
+#### 5) Slutsky equation
+
+재화 1에 대해
+$$
+x_1=\frac{m}{3p_1}.
+$$
+
+따라서
+$$
+\frac{\partial x_1}{\partial p_1}
+=
+-\frac{m}{3p_1^2},
+\qquad
+\frac{\partial x_1}{\partial m}
+=
+\frac{1}{3p_1}.
+$$
+
+Hicksian demand는
+$$
+h_1
+=
+\frac{u}{2^{2/3}}
+p_1^{-2/3}p_2^{2/3}.
+$$
+
+따라서
+$$
+\frac{\partial h_1}{\partial p_1}
+=
+-\frac23
+\frac{u}{2^{2/3}}
+p_1^{-5/3}p_2^{2/3}.
+$$
+
+여기서 $u=V(p,m)$를 대입하면
+$$
+\frac{\partial h_1}{\partial p_1}
+=
+-\frac{2m}{9p_1^2}.
+$$
+
+Income-effect term은
+$$
+-x_1\frac{\partial x_1}{\partial m}
+=
+-\frac{m}{3p_1}\cdot\frac{1}{3p_1}
+=
+-\frac{m}{9p_1^2}.
+$$
+
+따라서
+$$
+\frac{\partial h_1}{\partial p_1}
+-
+x_1\frac{\partial x_1}{\partial m}
+=
+-\frac{2m}{9p_1^2}
+-\frac{m}{9p_1^2}
+=
+-\frac{m}{3p_1^2}
+=
+\frac{\partial x_1}{\partial p_1}.
+$$
+
+즉 Slutsky equation
+$$
+\frac{\partial x_1}{\partial p_1}
+=
+\frac{\partial h_1}{\partial p_1}
+-
+x_1\frac{\partial x_1}{\partial m}
+$$
+이 성립한다.
+
+Substitution effect는
+$$
+-\frac{2m}{9p_1^2}<0
+$$
+이고 income-effect term은
+$$
+-\frac{m}{9p_1^2}<0.
+$$
+
+또한
+$$
+\frac{\partial x_1}{\partial m}
+=
+\frac{1}{3p_1}>0
+$$
+이므로 재화 1은 정상재(normal good)이다.
+
+---
+
+#### 6) Compensated law of demand
+
+Hicksian demand에 대해
+$$
+\frac{\partial h_1}{\partial p_1}
+=
+-\frac23
+\frac{u}{2^{2/3}}
+p_1^{-5/3}p_2^{2/3}
+<0.
+$$
+
+따라서 compensated law of demand가 성립한다.
+
+Hicksian own-price effect는 효용을 일정하게 유지하므로 substitution effect만을 측정한다. 반면 Marshallian own-price effect에는 substitution effect와 income effect가 모두 포함된다.
+
+즉
+$$
+\text{Total price effect}
+=
+\text{Substitution effect}
++
+\text{Income effect}.
+$$
+
+---
+
+#### 7) Equivalent variation and compensating variation
+
+이제
+$$
+m=12,\qquad p_2=1,
+\qquad p_1^0=1,\qquad p_1^1=4
+$$
+라고 하자.
+
+Indirect utility는
+$$
+V(p_1,p_2,m)
+=
+\frac{2^{2/3}}{3}
+m p_1^{-1/3}p_2^{-2/3}.
+$$
+
+따라서 초기효용과 최종효용은
+$$
+u_0
+=
+V(1,1,12)
+=
+4\cdot2^{2/3},
+$$
+$$
+u_1
+=
+V(4,1,12)
+=
+4.
+$$
+
+Expenditure function
+$$
+e(p_1,p_2,u)
+=
+\frac{3}{2^{2/3}}
+u p_1^{1/3}p_2^{2/3}
+$$
+을 사용하면, 가격상승으로 인한 welfare loss를 양수로 표시하는 정의에서
+$$
+EV
+=
+e(1,1,u_0)-e(1,1,u_1).
+$$
+
+따라서
+$$
+EV
+=
+12-\frac{12}{2^{2/3}}
+=
+12\left(1-4^{-1/3}\right)
+\approx4.44.
+$$
+
+또한
+$$
+CV
+=
+e(4,1,u_0)-e(4,1,u_1),
+$$
+따라서
+$$
+CV
+=
+12\cdot2^{2/3}-12
+=
+12\left(4^{1/3}-1\right)
+\approx7.05.
+$$
+
+그러므로
+$$
+CV>EV.
+$$
+
+EV는 초기 가격에서 효용변화를 화폐단위로 평가하고, CV는 새로운 가격에서 같은 효용변화를 평가한다. 이 경우
+$$
+e(p_1,p_2,u)
+=
+\frac{3}{2^{2/3}}u p_1^{1/3}p_2^{2/3}
+$$
+가 $p_1$에 대해 증가하므로, 동일한 효용격차를 더 높은 새 가격에서 보상하는 비용이 더 크다. 따라서
+$$
+CV>EV.
+$$
 :::
 :::
 
