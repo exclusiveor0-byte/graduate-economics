@@ -266,6 +266,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
+
+<a href="econometrics/set-01.html" class="spoon-card" data-subject="metrics" data-round="1">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#1 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">선형투영 · 점근이론</div>
+  <div class="spoon-card__desc">조건부기댓값(CEF)과 선형투영의 직교성, OLS 추정량의 일치성(LLN/CMT) 및 점근정규성(CLT/Slutsky) 유도와 조건 진단</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-02.html" class="spoon-card" data-subject="metrics" data-round="2">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#2 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">FWL 정리 · 가설검정</div>
+  <div class="spoon-card__desc">Frisch–Waugh–Lovell 정리와 잔차화(Residualization), 누락변수 편의(OVB) 공식 분해, 제약최소자승(RLS)과 exact F 및 점근 Wald 검정</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-03.html" class="spoon-card" data-subject="metrics" data-round="3">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#3 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">이분산과 GLS · 도구변수/2SLS</div>
+  <div class="spoon-card__desc">샌드위치 분산 및 HC 강건추론, GLS 구면오차 변환과 FGLS, 도구변수 식별조건(Exogeneity/Relevance) 및 2SLS 기하학과 약한 도구변수</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-04.html" class="spoon-card" data-subject="metrics" data-round="4">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#4 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">GMM · M-추정과 최대우도/QMLE</div>
+  <div class="spoon-card__desc">GMM 최적 가중행렬과 overidentification J-검정, 일반 M-추정량의 일치성과 점근분산, MLE 정보행렬 일치와 QMLE 샌드위치 분산</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-05.html" class="spoon-card" data-subject="metrics" data-round="5">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#5 회차 (종합)</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">정적 패널데이터 종합문제</div>
+  <div class="spoon-card__desc">미관측 이질성과 합동 OLS 편의, 고정효과(FE) 내변환과 엄격한 외생성, 1차 차분(FD) 비교, 클러스터 강건추론, 확률효과(RE)와 Hausman 검정</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -532,9 +592,69 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 검색 조건과 일치하는 문제가 없다.
 :::
 
-::: {#spoon-grid-metrics .spoon-grid}
-<!-- 계량경제학 회차 카드가 여기에 표시된다 -->
-:::
+```{=html}
+<div id="spoon-grid-metrics" class="spoon-grid">
+<a href="econometrics/set-01.html" class="spoon-card" data-subject="metrics" data-round="1">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#1 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">선형투영 · 점근이론</div>
+  <div class="spoon-card__desc">조건부기댓값(CEF)과 선형투영의 직교성, OLS 추정량의 일치성(LLN/CMT) 및 점근정규성(CLT/Slutsky) 유도와 조건 진단</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-02.html" class="spoon-card" data-subject="metrics" data-round="2">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#2 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">FWL 정리 · 가설검정</div>
+  <div class="spoon-card__desc">Frisch–Waugh–Lovell 정리와 잔차화(Residualization), 누락변수 편의(OVB) 공식 분해, 제약최소자승(RLS)과 exact F 및 점근 Wald 검정</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-03.html" class="spoon-card" data-subject="metrics" data-round="3">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#3 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">이분산과 GLS · 도구변수/2SLS</div>
+  <div class="spoon-card__desc">샌드위치 분산 및 HC 강건추론, GLS 구면오차 변환과 FGLS, 도구변수 식별조건(Exogeneity/Relevance) 및 2SLS 기하학과 약한 도구변수</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-04.html" class="spoon-card" data-subject="metrics" data-round="4">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#4 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">GMM · M-추정과 최대우도/QMLE</div>
+  <div class="spoon-card__desc">GMM 최적 가중행렬과 overidentification J-검정, 일반 M-추정량의 일치성과 점근분산, MLE 정보행렬 일치와 QMLE 샌드위치 분산</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-05.html" class="spoon-card" data-subject="metrics" data-round="5">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#5 회차 (종합)</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">정적 패널데이터 종합문제</div>
+  <div class="spoon-card__desc">미관측 이질성과 합동 OLS 편의, 고정효과(FE) 내변환과 엄격한 외생성, 1차 차분(FD) 비교, 클러스터 강건추론, 확률효과(RE)와 Hausman 검정</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+</div>
+```
 
 ### 문제 업로드 가이드
 

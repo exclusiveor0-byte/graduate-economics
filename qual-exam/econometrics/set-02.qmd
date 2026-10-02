@@ -1,0 +1,265 @@
+---
+title: "문제 한 스푼 #2"
+subtitle: "FWL 정리와 누락변수 편의 · 선형제약 가설검정"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #2
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **FWL & Omitted Variable Bias · Hypothesis Testing & Wald/F**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 50–65분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. FWL Theorem & Omitted Variable Bias
+::: {.topic}
+Partitioned Regression · Residualization · Partial Effect · Misspecification
+:::
+
+모집단에서 $Y,X_1,X_2$는 모두 평균이 0이고 유한한 2차 적률을 가지며,
+$E[XX']$가 양의 정부호라고 하자. 여기서
+
+$$
+X=(X_1,X_2)'.
+$$
+
+다음 population linear regression을 생각하자.
+
+$$
+Y=\beta_1X_1+\beta_2X_2+u,
+\qquad
+E[X_1u]=E[X_2u]=0.
+$$
+
+1. $X_1$을 $X_2$에 선형투영하여
+
+   $$
+   X_1=\pi X_2+v,
+   \qquad
+   \pi=\frac{E[X_1X_2]}{E[X_2^2]}
+   $$
+
+   라 하자.
+   $E[X_2v]=0$임을 보인 뒤,
+
+   $$
+   \beta_1
+   =
+   \frac{E[vY]}{E[v^2]}
+   $$
+
+   를 유도하시오.
+   이 결과가 Frisch–Waugh–Lovell theorem의 population version임을 설명하시오.
+2. 표본에서 $y=X_1\beta_1+X_2\beta_2+u$라 하자.
+   $X_2$의 residual-maker를
+
+   $$
+   M_2=I-X_2(X_2'X_2)^{-1}X_2'
+   $$
+
+   로 정의한다.
+   전체 회귀에서 얻는 $\hat\beta_1$이
+
+   $$
+   \hat\beta_1
+   =
+   (X_1'M_2X_1)^{-1}X_1'M_2y
+   $$
+
+   와 동일함을 보이시오.
+   이 식을 “$X_2$의 효과를 제거한 $X_1$과 $Y$의 관계”라는 관점에서 해석하시오.
+3. 이제 연구자가 $X_2$를 누락하고
+
+   $$
+   Y=\widetilde\beta_1X_1+\text{error}
+   $$
+
+   를 추정한다고 하자.
+   population coefficient
+
+   $$
+   \widetilde\beta_1
+   =
+   \frac{E[X_1Y]}{E[X_1^2]}
+   $$
+
+   를 이용하여
+
+   $$
+   \widetilde\beta_1
+   =
+   \beta_1
+   +
+   \beta_2
+   \frac{E[X_1X_2]}{E[X_1^2]}
+   $$
+
+   를 유도하시오.
+4. 위 식을 이용하여 omitted-variable bias가 발생하기 위한 두 조건을 설명하시오.
+   특히 다음 경우 각각에서 bias의 부호를 판단하시오.
+
+   $$
+   \beta_2>0,\qquad E[X_1X_2]>0,
+   $$
+
+   $$
+   \beta_2<0,\qquad E[X_1X_2]>0,
+   $$
+
+   $$
+   \beta_2>0,\qquad E[X_1X_2]<0.
+   $$
+5. $E[X_1X_2]=0$이면 $X_2$를 누락해도 $\widetilde\beta_1=\beta_1$이다.
+   그렇다고 해서 $X_2$를 항상 제거해도 된다는 뜻은 아니다.
+   왜 그런지 추정의 정밀도와 residual variation의 관점에서 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **residualization → FWL → partial effect → omitted regression → bias decomposition → interpretation**. “상관관계가 있으면 bias”라고만 쓰지 말고, 어떤 계수와 어떤 covariance가 bias를 결정하는지 식으로 제시하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Linear Restrictions, Wald Test & Exact F Inference
+::: {.topic}
+Restricted Least Squares · Joint Hypothesis · Wald · $F$ · Robust Inference
+:::
+
+선형회귀모형
+
+$$
+y=X\beta+u
+$$
+
+을 생각하자. $X$는 $n\times k$ full-column-rank matrix이고,
+우선
+
+$$
+u\mid X\sim N(0,\sigma^2I_n)
+$$
+
+를 가정한다.
+다음 $q$개의 선형제약을 검정하고자 한다.
+
+$$
+H_0:R\beta=r,
+$$
+
+여기서 $R$은 $q\times k$ full-row-rank matrix이다.
+
+1. unrestricted OLS estimator를 $\hat\beta$라 하자.
+   제약조건 $R\beta=r$ 아래에서
+
+   $$
+   (y-X\beta)'(y-X\beta)
+   $$
+
+   를 최소화하는 restricted least-squares estimator가
+
+   $$
+   \hat\beta_R
+   =
+   \hat\beta
+   -
+   (X'X)^{-1}R'
+   \left[R(X'X)^{-1}R'\right]^{-1}
+   (R\hat\beta-r)
+   $$
+
+   임을 Lagrange multiplier를 이용하여 유도하시오.
+2. unrestricted와 restricted residual sum of squares를 각각
+
+   $$
+   SSR_U,\qquad SSR_R
+   $$
+
+   라 하자.
+   다음 등식을 보이시오.
+
+   $$
+   SSR_R-SSR_U
+   =
+   (R\hat\beta-r)'
+   \left[R(X'X)^{-1}R'\right]^{-1}
+   (R\hat\beta-r).
+   $$
+
+   제약이 데이터와 잘 맞지 않을수록 $SSR_R-SSR_U$가 커지는 이유를 설명하시오.
+3. $$
+   \hat\sigma^2=\frac{SSR_U}{n-k}
+   $$
+
+   라 하고
+
+   $$
+   F
+   =
+   \frac{(SSR_R-SSR_U)/q}
+   {SSR_U/(n-k)}
+   $$
+
+   를 정의한다.
+   $H_0$ 아래에서
+
+   $$
+   F\sim F_{q,n-k}
+   $$
+
+   라는 exact finite-sample result가 성립하는 데 필요한 가정을 명시하시오.
+4. homoskedastic OLS variance estimator를 사용한 Wald statistic
+
+   $$
+   W
+   =
+   (R\hat\beta-r)'
+   \left[
+   \hat\sigma^2
+   R(X'X)^{-1}R'
+   \right]^{-1}
+   (R\hat\beta-r)
+   $$
+
+   를 생각하자.
+
+   $$
+   W=qF
+   $$
+
+   임을 보이시오.
+   특히 $q=1$일 때
+
+   $$
+   W=F=t^2
+   $$
+
+   임을 설명하시오.
+5. 이제 정규성과 homoskedasticity를 더 이상 가정하지 않고,
+   적절한 regularity conditions 아래
+
+   $$
+   \sqrt n(\hat\beta-\beta_0)
+   \xrightarrow{d}
+   N(0,V)
+   $$
+
+   만 성립한다고 하자.
+   consistent estimator $\hat V$를 이용한 robust Wald statistic을 쓰고,
+   $H_0$ 아래에서 그 점근분포를 제시하시오.
+   또한 classical $F$-test의 exact finite-sample justification과 robust Wald test의 asymptotic justification이 어떻게 다른지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **restriction → constrained estimation → SSR comparison → exact $F$ → Wald equivalence → robust asymptotic inference**. “검정통계량이 크면 기각”이라고만 쓰지 말고, finite-sample result와 asymptotic result를 구분하시오.
+:::
+:::

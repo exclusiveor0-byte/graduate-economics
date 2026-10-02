@@ -1,0 +1,425 @@
+---
+title: "문제 한 스푼 #4"
+subtitle: "적률조건과 GMM · M-추정과 최대우도/QMLE"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #4
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Method of Moments & GMM · M-estimation & Maximum Likelihood**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 60–80분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Method of Moments, GMM & Efficient Weighting
+::: {.topic}
+Moment Conditions · Identification · Asymptotic Variance · Optimal GMM · $J$-test
+:::
+
+$\{W_i\}_{i=1}^n$가 i.i.d.이고,
+$\theta_0\in\Theta\subset\mathbb R^k$가 다음 $m$-차원 moment condition에 의해 식별된다고 하자.
+
+$$
+E[g(W_i,\theta_0)]=0,
+\qquad
+g(W_i,\theta)\in\mathbb R^m,
+\qquad
+m\ge k.
+$$
+
+sample moment를
+
+$$
+\bar g_n(\theta)=\frac1n\sum_{i=1}^n g(W_i,\theta)
+$$
+
+라 하고, 양의 정부호 weighting matrix $W_n$에 대해 GMM estimator를
+
+$$
+\hat\theta
+=
+\arg\min_{\theta\in\Theta}
+\bar g_n(\theta)'W_n\bar g_n(\theta)
+$$
+
+로 정의한다.
+
+::: {.assumption}
+다음 regularity conditions를 가정한다.
+
+$$
+W_n\xrightarrow{p}W>0,
+$$
+
+$$
+G
+:=
+E\!\left[
+\frac{\partial g(W_i,\theta_0)}
+{\partial\theta'}
+\right]
+$$
+
+는 $m\times k$ full-column-rank matrix이고,
+
+$$
+\Omega
+:=
+E[g(W_i,\theta_0)g(W_i,\theta_0)']
+$$
+
+는 양의 정부호이다.
+:::
+
+1. $m=k$인 exactly identified case를 생각하자.
+
+   $$
+   \bar g_n(\hat\theta)=0
+   $$
+
+   를 만족하는 해가 존재한다면 그것이 GMM criterion의 최소점임을 설명하시오.
+   이 경우 weighting matrix가 추정량 자체에 본질적으로 영향을 주지 않는 이유를 서술하시오.
+2. population criterion
+
+   $$
+   Q(\theta)
+   =
+   E[g(W_i,\theta)]'W\,E[g(W_i,\theta)]
+   $$
+
+   를 정의하자.
+   $Q(\theta)$가 $\theta_0$에서 유일하게 최소화되고 sample criterion이 $Q(\theta)$로 적절히 수렴한다고 할 때,
+
+   $$
+   \hat\theta\xrightarrow{p}\theta_0
+   $$
+
+   가 성립하는 논리를 설명하시오.
+   여기서 identification과 weighting matrix의 역할을 구분하여 설명하시오.
+3. GMM first-order condition을 $\theta_0$ 주위에서 선형화하여
+
+   $$
+   \sqrt n(\hat\theta-\theta_0)
+   =
+   -
+   (G'WG)^{-1}G'W
+   \sqrt n\,\bar g_n(\theta_0)
+   +o_p(1)
+   $$
+
+   을 유도하시오.
+   따라서
+
+   $$
+   \sqrt n(\hat\theta-\theta_0)
+   \xrightarrow{d}
+   N(0,V_W)
+   $$
+
+   이고
+
+   $$
+   V_W
+   =
+   (G'WG)^{-1}
+   G'W\Omega WG
+   (G'WG)^{-1}
+   $$
+
+   임을 보이시오.
+4. optimal weighting matrix가
+
+   $$
+   W=\Omega^{-1}
+   $$
+
+   일 때 asymptotic variance가
+
+   $$
+   V_{\mathrm{eff}}
+   =
+   (G'\Omega^{-1}G)^{-1}
+   $$
+
+   로 단순화됨을 보이시오.
+   또한 consistent weighting matrix를 사용하는 여러 GMM estimator가 모두 consistent할 수 있지만 asymptotic efficiency는 서로 다를 수 있는 이유를 설명하시오.
+5. $\Omega$가 미지일 때의 two-step GMM을 설명하시오.
+   즉,
+
+   (i) 임의의 positive definite $W_n^{(1)}$로 preliminary estimator $\hat\theta^{(1)}$를 구하고,<br>
+   (ii) $\hat\theta^{(1)}$을 이용하여 $\Omega$를 추정한 뒤,<br>
+   (iii) 그 역행렬을 weighting matrix로 사용해 $\hat\theta^{(2)}$를 구하는 절차를 쓰시오.
+
+   왜 이 절차가 asymptotically efficient GMM을 구현하는지 설명하시오.
+6. $m>k$인 overidentified case에서
+
+   $$
+   J_n
+   =
+   n\,
+   \bar g_n(\hat\theta)'
+   \widehat\Omega^{-1}
+   \bar g_n(\hat\theta)
+   $$
+
+   를 생각하자.
+   귀무가설 아래
+
+   $$
+   J_n\xrightarrow{d}\chi^2_{m-k}
+   $$
+
+   라는 결과를 쓰고,
+   자유도가 왜 $m-k$인지 설명하시오.
+   또한 $J$-test가 “모든 instrument가 individually valid인지”를 직접 검정하는 것이 아님을 설명하시오.
+7. 마지막으로 linear IV model
+
+   $$
+   Y_i=X_i'\beta_0+u_i,
+   \qquad
+   E[Z_i u_i]=0
+   $$
+
+   을 생각하자.
+
+   $$
+   g_i(\beta)=Z_i(Y_i-X_i'\beta)
+   $$
+
+   로 두고,
+
+   $$
+   W_n=\left(\frac{Z'Z}{n}\right)^{-1}
+   $$
+
+   를 사용한 GMM estimator가
+
+   $$
+   \hat\beta
+   =
+   (X'P_ZX)^{-1}X'P_ZY,
+   \qquad
+   P_Z=Z(Z'Z)^{-1}Z'
+   $$
+
+   와 동일함을 보이시오.
+   즉, 2SLS가 GMM의 특수한 경우임을 확인하시오.
+
+::: {.spoon-hint}
+**형식**: **moment condition → identification → GMM criterion → linearization → asymptotic variance → optimal weighting → overidentification**. consistency를 결정하는 조건과 efficiency를 결정하는 조건을 구분하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. M-estimation, Maximum Likelihood & QMLE
+::: {.topic}
+Criterion Optimization · Score · Hessian · Information Matrix · Sandwich Variance
+:::
+
+$\{W_i\}_{i=1}^n$가 i.i.d.이고,
+M-estimator를
+
+$$
+\hat\theta
+=
+\arg\min_{\theta\in\Theta}
+Q_n(\theta),
+\qquad
+Q_n(\theta)
+=
+\frac1n\sum_{i=1}^n\rho(W_i,\theta)
+$$
+
+로 정의한다. population criterion은
+
+$$
+Q(\theta)=E[\rho(W_i,\theta)]
+$$
+
+이고 $\theta_0$가 $Q(\theta)$의 유일한 최소점이라고 하자.
+
+::: {.assumption}
+$$
+\psi(W_i,\theta)
+:=
+\frac{\partial\rho(W_i,\theta)}{\partial\theta},
+\qquad
+H(W_i,\theta)
+:=
+\frac{\partial^2\rho(W_i,\theta)}
+{\partial\theta\partial\theta'}.
+$$
+
+또한
+
+$$
+A:=E[H(W_i,\theta_0)]
+$$
+
+가 nonsingular이고,
+
+$$
+B:=E[\psi(W_i,\theta_0)\psi(W_i,\theta_0)']
+$$
+
+가 유한하다고 하자.
+:::
+
+1. $Q_n(\theta)$가 $Q(\theta)$로 적절히 uniform하게 수렴하고 $\theta_0$가 unique minimizer일 때
+
+   $$
+   \hat\theta\xrightarrow{p}\theta_0
+   $$
+
+   라는 M-estimator consistency 논리를 설명하시오.
+   pointwise convergence만으로 충분하지 않을 수 있는 이유도 간단히 설명하시오.
+2. interior solution에서 first-order condition
+
+   $$
+   \frac1n\sum_{i=1}^n\psi(W_i,\hat\theta)=0
+   $$
+
+   을 사용하자.
+   $\theta_0$ 주위의 Taylor expansion을 통해
+
+   $$
+   \sqrt n(\hat\theta-\theta_0)
+   =
+   -A^{-1}
+   \frac1{\sqrt n}
+   \sum_{i=1}^n
+   \psi(W_i,\theta_0)
+   +o_p(1)
+   $$
+
+   을 유도하시오.
+   따라서
+
+   $$
+   \sqrt n(\hat\theta-\theta_0)
+   \xrightarrow{d}
+   N(0,A^{-1}BA^{-1})
+   $$
+
+   임을 보이시오.
+3. 이제 $\rho(W_i,\theta)=-\log f(W_i;\theta)$로 두어 M-estimator를 MLE로 특수화하자.
+   score와 Hessian을
+
+   $$
+   s_i(\theta)
+   =
+   \frac{\partial\log f(W_i;\theta)}{\partial\theta},
+   \qquad
+   \mathcal H_i(\theta)
+   =
+   \frac{\partial^2\log f(W_i;\theta)}
+   {\partial\theta\partial\theta'}
+   $$
+
+   로 정의하시오.
+   이때
+
+   $$
+   A=-E[\mathcal H_i(\theta_0)],
+   \qquad
+   B=E[s_i(\theta_0)s_i(\theta_0)']
+   $$
+
+   가 됨을 확인하시오.
+4. likelihood가 correctly specified되고 표준 regularity conditions가 성립한다고 하자.
+   information matrix equality
+
+   $$
+   E[s_i(\theta_0)s_i(\theta_0)']
+   =
+   -E[\mathcal H_i(\theta_0)]
+   =
+   I(\theta_0)
+   $$
+
+   를 이용하여
+
+   $$
+   \sqrt n(\hat\theta_{MLE}-\theta_0)
+   \xrightarrow{d}
+   N\!\left(0,I(\theta_0)^{-1}\right)
+   $$
+
+   를 도출하시오.
+   왜 이 경우 일반 sandwich variance가 inverse information matrix로 단순화되는지 설명하시오.
+5. 구체적으로 binary logit model
+
+   $$
+   Y_i\in\{0,1\},
+   \qquad
+   P(Y_i=1\mid X_i)
+   =
+   \Lambda(X_i'\beta),
+   \qquad
+   \Lambda(t)=\frac{e^t}{1+e^t}
+   $$
+
+   을 생각하자.
+   log-likelihood contribution
+
+   $$
+   \ell_i(\beta)
+   =
+   Y_i\log p_i+(1-Y_i)\log(1-p_i),
+   \qquad
+   p_i=\Lambda(X_i'\beta)
+   $$
+
+   로부터 score
+
+   $$
+   s_i(\beta)
+   =
+   X_i(Y_i-p_i)
+   $$
+
+   와 Hessian
+
+   $$
+   \mathcal H_i(\beta)
+   =
+   -p_i(1-p_i)X_iX_i'
+   $$
+
+   을 유도하시오.
+6. 마지막으로 likelihood family가 실제 데이터생성과 정확히 일치하지 않는다고 하자.
+   QMLE가
+
+   $$
+   \theta^*
+   =
+   \arg\max_{\theta}
+   E[\log f(W_i;\theta)]
+   $$
+
+   로 정의되는 pseudo-true value에 수렴할 수 있는 논리를 설명하시오.
+   이 경우 information matrix equality가 일반적으로 성립하지 않으므로
+
+   $$
+   A^{-1}BA^{-1}
+   $$
+
+   형태의 sandwich variance가 다시 필요해지는 이유를 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **population criterion → consistency → first-order condition → Taylor expansion → MLE specialization → information equality → QMLE**. MLE를 독립된 공식을 외우는 방식보다 일반적인 M-estimation의 특수한 경우로 연결하여 서술하시오.
+:::
+:::
