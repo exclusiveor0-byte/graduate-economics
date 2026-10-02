@@ -312,7 +312,7 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="chip chip--macro">거시경제학</span>
   </div>
   <div class="spoon-card__title">경제성장이론 I · 솔로우 모형</div>
-  <div class="spoon-card__desc">유효노동 단위 집약생산함수, 솔로우 자본축적 방정식과 균제상태(Steady State), 균형성장경로(BGP), 황금률 저축률($s_{GR}=\alpha$) 및 국소 수렴속도</div>
+  <div class="spoon-card__desc">유효노동 단위 집약생산함수, 솔로우 자본축적 방정식과 균제상태(Steady State), 균형성장경로(BGP), 황금률 저축률(s_GR = α) 및 국소 수렴속도</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
@@ -807,7 +807,7 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="chip chip--macro">거시경제학</span>
   </div>
   <div class="spoon-card__title">경제성장이론 I · 솔로우 모형</div>
-  <div class="spoon-card__desc">유효노동 단위 집약생산함수, 솔로우 자본축적 방정식과 균제상태(Steady State), 균형성장경로(BGP), 황금률 저축률($s_{GR}=\alpha$) 및 국소 수렴속도</div>
+  <div class="spoon-card__desc">유효노동 단위 집약생산함수, 솔로우 자본축적 방정식과 균제상태(Steady State), 균형성장경로(BGP), 황금률 저축률(s_GR = α) 및 국소 수렴속도</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
