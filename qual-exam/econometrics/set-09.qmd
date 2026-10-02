@@ -1,0 +1,353 @@
+---
+title: "문제 한 스푼 #9"
+subtitle: "잠재적 결과와 성향점수 · 인과적 도구변수와 LATE (Potential Outcomes · Propensity Score · Causal IV/LATE)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #9
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Potential Outcomes · Unconfoundedness · Propensity Score · IPW · Causal IV · LATE**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 65–80분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Potential Outcomes, Selection on Observables & Propensity Score
+::: {.topic}
+ATE · ATT · Selection Bias · Unconfoundedness · Overlap · Regression Adjustment · IPW
+:::
+
+각 개인 $i$에 대해 treatment를 받았을 때와 받지 않았을 때의 potential outcomes를
+
+$$
+Y_i(1),\qquad Y_i(0)
+$$
+
+라 하고, 실제 treatment indicator를 $D_i\in\{0,1\}$라 하자.
+관측되는 outcome은
+
+$$
+Y_i
+=
+D_iY_i(1)+(1-D_i)Y_i(0)
+$$
+
+이다.
+
+1. individual treatment effect
+
+   $$
+   \tau_i=Y_i(1)-Y_i(0)
+   $$
+
+   를 정의하고, 왜 한 개인에 대해 $\tau_i$를 직접 관측할 수 없는지 설명하시오.
+   이를 fundamental problem of causal inference와 연결하여 서술하시오.
+2. 다음 두 causal estimands를 정의하시오.
+
+   $$
+   ATE=E[Y(1)-Y(0)],
+   $$
+
+   $$
+   ATT=E[Y(1)-Y(0)\mid D=1].
+   $$
+
+   두 값이 일반적으로 같지 않을 수 있는 이유를 treatment effect heterogeneity와 연결하여 설명하시오.
+3. 단순한 관측 평균차
+
+   $$
+   E[Y\mid D=1]-E[Y\mid D=0]
+   $$
+
+   를
+
+   $$
+   ATT
+   +
+   \Big(
+   E[Y(0)\mid D=1]
+   -
+   E[Y(0)\mid D=0]
+   \Big)
+   $$
+
+   로 분해하시오.
+   두 번째 항을 selection bias로 해석하고, 왜 observational data에서 단순 평균차를 곧바로 causal effect로 해석하면 안 되는지 설명하시오.
+4. treatment가 randomized되어
+
+   $$
+   D\perp (Y(1),Y(0))
+   $$
+
+   라고 하자.
+   이 경우
+
+   $$
+   E[Y\mid D=1]-E[Y\mid D=0]
+   =
+   ATE
+   $$
+
+   임을 보이시오.
+   random assignment가 selection bias를 제거하는 논리를 설명하시오.
+5. 이제 observational study를 생각하고,
+   covariate vector $X$가 주어졌을 때
+
+   $$
+   (Y(1),Y(0))\perp D\mid X
+   $$
+
+   를 가정하자.
+   또한 overlap condition
+
+   $$
+   0<P(D=1\mid X)<1
+   $$
+
+   이 성립한다고 하자.
+
+   (i) 위 조건이 conditional independence 또는 unconfoundedness라고 불리는 이유를 설명하시오.
+   <br>
+   (ii) overlap이 왜 identification에 필요한지 설명하시오.
+6. unconfoundedness 아래에서
+
+   $$
+   E[Y(d)\mid X]
+   =
+   E[Y\mid D=d,X]
+   $$
+
+   를 이용하여
+
+   $$
+   ATE
+   =
+   E\left[
+   E[Y\mid D=1,X]
+   -
+   E[Y\mid D=0,X]
+   \right]
+   $$
+
+   를 유도하시오.
+   이 결과가 regression adjustment 또는 outcome regression과 어떤 관계를 가지는지 설명하시오.
+7. propensity score를
+
+   $$
+   p(X)=P(D=1\mid X)
+   $$
+
+   로 정의하자.
+   propensity score가 고차원 $X$를 scalar balancing score로 축약하는 아이디어를 설명하시오.
+   특히
+
+   $$
+   D\perp X\mid p(X)
+   $$
+
+   라는 balancing property의 의미를 서술하시오.
+8. unconfoundedness가 $X$에 대해 성립할 때 propensity score를 조건으로도
+
+   $$
+   (Y(1),Y(0))\perp D\mid p(X)
+   $$
+
+   라는 결과가 왜 유용한지 설명하시오.
+   이를 matching 또는 stratification의 기본 논리와 연결하시오.
+9. 다음 inverse probability weighting identity를 유도하시오.
+
+   $$
+   E\left[
+   \frac{DY}{p(X)}
+   \right]
+   =
+   E[Y(1)].
+   $$
+
+   마찬가지로
+
+   $$
+   E\left[
+   \frac{(1-D)Y}{1-p(X)}
+   \right]
+   =
+   E[Y(0)]
+   $$
+
+   임을 보이고,
+   따라서
+
+   $$
+   ATE
+   =
+   E\left[
+   \frac{DY}{p(X)}
+   -
+   \frac{(1-D)Y}{1-p(X)}
+   \right]
+   $$
+
+   를 유도하시오.
+10. propensity score가 0 또는 1에 매우 가까운 관측치가 많을 때 IPW estimator가 불안정해질 수 있는 이유를 설명하시오.
+   이를 overlap과 large weights의 문제와 연결하여 답하시오.
+
+::: {.spoon-hint}
+**형식**: **potential outcomes → selection bias → randomization → unconfoundedness → overlap → regression adjustment → propensity score → IPW**. 핵심은 estimator보다 먼저 **어떤 가정이 어떤 observable estimand를 식별하는지**를 명확히 하는 것이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Instrumental Variables as Causal Identification & LATE
+::: {.topic}
+Principal Strata · Relevance · Independence · Exclusion · Monotonicity · Wald Estimand
+:::
+
+binary treatment $D_i\in\{0,1\}$와 binary instrument $Z_i\in\{0,1\}$를 생각하자.
+outcome potential outcomes는
+
+$$
+Y_i(1),\qquad Y_i(0)
+$$
+
+이고, instrument assignment에 따른 potential treatment status를
+
+$$
+D_i(1),\qquad D_i(0)
+$$
+
+로 정의한다.
+
+| Type | $D(0)$ | $D(1)$ |
+|:---|:---:|:---:|
+| Never-taker | 0 | 0 |
+| Complier | 0 | 1 |
+| Always-taker | 1 | 1 |
+| Defier | 1 | 0 |
+
+1. 위 네 principal strata의 의미를 설명하시오.
+   특히 complier와 defier를 instrument 변화에 대한 treatment response 관점에서 해석하시오.
+2. 다음 네 IV assumptions를 각각 설명하시오.
+
+   **(i) Relevance**
+
+   $$
+   E[D\mid Z=1]\neq E[D\mid Z=0].
+   $$
+
+   <br>
+   **(ii) Independence**
+
+   $$
+   Z
+   \perp
+   \{Y(1),Y(0),D(1),D(0)\}.
+   $$
+
+   <br>
+   **(iii) Exclusion restriction**
+
+   $$
+   Y(d,z)=Y(d).
+   $$
+
+   <br>
+   **(iv) Monotonicity**
+
+   $$
+   D(1)\ge D(0).
+   $$
+
+   네 조건이 서로 다른 역할을 한다는 점을 분명히 설명하시오.
+3. monotonicity
+
+   $$
+   D(1)\ge D(0)
+   $$
+
+   가 defier를 배제한다는 것을 보이시오.
+   또한
+
+   $$
+   E[D\mid Z=1]-E[D\mid Z=0]
+   $$
+
+   가 위 가정들 아래에서 complier proportion과 어떤 관계를 가지는지 유도하시오.
+4. exclusion과 independence를 이용하여 reduced-form difference
+
+   $$
+   E[Y\mid Z=1]-E[Y\mid Z=0]
+   $$
+
+   가 각 principal stratum의 treatment response와 어떻게 연결되는지 전개하시오.
+   never-taker와 always-taker가 reduced-form difference에 기여하지 않는 이유를 설명하시오.
+5. 위 결과를 이용하여 Wald estimand
+
+   $$
+   \frac{
+   E[Y\mid Z=1]-E[Y\mid Z=0]
+   }{
+   E[D\mid Z=1]-E[D\mid Z=0]
+   }
+   $$
+
+   가
+
+   $$
+   E[Y(1)-Y(0)\mid D(1)>D(0)]
+   $$
+
+   와 같음을 보이시오.
+   이를 Local Average Treatment Effect, 즉 LATE로 해석하시오.
+6. 왜 위 Wald estimand를 일반적으로
+
+   $$
+   ATE=E[Y(1)-Y(0)]
+   $$
+
+   로 해석할 수 없는지 설명하시오.
+   treatment effect heterogeneity가 존재할 때 LATE의 대상 population이 누구인지 명확히 하시오.
+7. treatment effect가 homogeneous하여
+
+   $$
+   Y_i(1)-Y_i(0)=\tau
+   $$
+
+   가 모든 개인에게 동일하다고 하자.
+   이 경우 LATE와 ATE의 관계를 설명하시오.
+8. first stage가 약하여
+
+   $$
+   E[D\mid Z=1]-E[D\mid Z=0]
+   \approx0
+   $$
+
+   라고 하자.
+   Wald ratio가 불안정해질 수 있는 이유를 설명하고,
+   이를 앞서 학습한 weak instrument 문제와 연결하시오.
+9. 한 연구자가 “$Z$가 $D$와 강하게 상관되어 있으므로 좋은 instrument이다”라고 주장한다.
+   이 주장이 불충분한 이유를 relevance, independence, exclusion, monotonicity의 관점에서 평가하시오.
+10. 마지막으로 conventional linear IV에서의
+
+   $$
+   E[Zu]=0
+   $$
+
+   라는 orthogonality condition과, potential-outcomes framework에서의 LATE assumptions를 비교하시오.
+   전자가 통계적 moment condition이라면 후자는 어떤 추가적인 causal interpretation을 제공하는지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **principal strata → IV assumptions → first stage → reduced form → Wald ratio → LATE → weak first stage**. 핵심은 IV가 단순히 내생성을 “고치는” 도구가 아니라, **어떤 population의 어떤 causal effect를 식별하는지**를 분명히 하는 것이다.
+:::
+:::

@@ -267,6 +267,11 @@ book:
     - qual-exam/econometrics/set-03.qmd
     - qual-exam/econometrics/set-04.qmd
     - qual-exam/econometrics/set-05.qmd
+    - qual-exam/econometrics/set-06.qmd
+    - qual-exam/econometrics/set-07.qmd
+    - qual-exam/econometrics/set-08.qmd
+    - qual-exam/econometrics/set-09.qmd
+    - qual-exam/econometrics/set-10.qmd
   - references.qmd
   page-footer:
     center: Collaborative graduate economics knowledge base

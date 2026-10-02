@@ -1,0 +1,318 @@
+---
+title: "문제 한 스푼 #8"
+subtitle: "VAR 충격반응 · VECM과 Johansen 공적분 (VAR · IRF · VECM · Johansen)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #8
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **VAR · Granger Causality · IRF · FEVD · VECM · Johansen Cointegration Rank**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 70–85분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. VAR, Granger Causality, IRF & FEVD
+::: {.topic}
+Stability · MA($\infty$) Representation · Reduced-form Shocks · Orthogonalization
+:::
+
+다음 $m$-차원 VAR($1$) process를 생각하자.
+
+$$
+Y_t=c+AY_{t-1}+\varepsilon_t,
+$$
+
+여기서
+
+$$
+E[\varepsilon_t]=0,\qquad
+E[\varepsilon_t\varepsilon_t']=\Sigma,
+$$
+
+이고 $\{\varepsilon_t\}$는 serially uncorrelated라고 하자.
+
+::: {.assumption}
+$A$의 모든 eigenvalue가 단위원 내부에 있다고 가정한다.
+:::
+
+1. stationary mean $\mu_Y$가
+
+   $$
+   \mu_Y=(I-A)^{-1}c
+   $$
+
+   임을 보이시오.
+   이후 $\widetilde Y_t=Y_t-\mu_Y$로 중심화하여
+
+   $$
+   \widetilde Y_t=A\widetilde Y_{t-1}+\varepsilon_t
+   $$
+
+   를 얻으시오.
+2. 반복대입을 통해
+
+   $$
+   \widetilde Y_t
+   =
+   \sum_{j=0}^{\infty}A^j\varepsilon_{t-j}
+   $$
+
+   라는 MA($\infty$) representation을 유도하시오.
+   $A$의 eigenvalue 조건이 이 표현의 수렴과 stability에 어떤 역할을 하는지 설명하시오.
+3. $h$-step-ahead forecast
+
+   $$
+   E[Y_{t+h}\mid\mathcal F_t]
+   $$
+
+   를 구하고, forecast error가
+
+   $$
+   Y_{t+h}-E[Y_{t+h}\mid\mathcal F_t]
+   =
+   \sum_{j=0}^{h-1}A^j\varepsilon_{t+h-j}
+   $$
+
+   로 표현됨을 보이시오.
+4. VAR($p$)
+
+   $$
+   Y_t=c+A_1Y_{t-1}+\cdots+A_pY_{t-p}+\varepsilon_t
+   $$
+
+   를 companion form으로 나타낼 수 있음을 설명하고,
+   companion matrix의 eigenvalue와 stability 조건의 관계를 서술하시오.
+   세부적인 고차원 행렬 계산은 요구하지 않는다.
+5. $Y_t=(y_{1t},y_{2t})'$인 bivariate VAR에서 $y_{2}$가 $y_{1}$을 Granger-cause하지 않는다는 귀무가설을
+   lagged coefficients에 대한 restriction으로 표현하시오.
+   Granger causality가 structural causality와 동일한 개념이 아닌 이유를 설명하시오.
+6. MA representation
+
+   $$
+   Y_t-\mu_Y
+   =
+   \sum_{h=0}^{\infty}\Theta_h\varepsilon_{t-h}
+   $$
+
+   를 생각하자.
+   VAR($1$)에서는
+
+   $$
+   \Theta_h=A^h
+   $$
+
+   임을 보이시오.
+   $\Theta_h$의 $(i,j)$ 원소가 reduced-form innovation $\varepsilon_{jt}$에 대한 $Y_{i,t+h}$의 impulse response와 어떻게 연결되는지 설명하시오.
+7. 일반적으로
+
+   $$
+   \Sigma
+   =
+   E[\varepsilon_t\varepsilon_t']
+   $$
+
+   가 diagonal일 필요는 없다.
+   이때 reduced-form innovations가 서로 contemporaneously correlated할 수 있으므로 개별 shock의 구조적 해석이 모호해지는 이유를 설명하시오.
+8. Cholesky decomposition
+
+   $$
+   \Sigma=PP'
+   $$
+
+   를 이용하여
+
+   $$
+   \varepsilon_t=P\eta_t,
+   \qquad
+   E[\eta_t\eta_t']=I
+   $$
+
+   로 두자.
+   orthogonalized impulse response가
+
+   $$
+   \Theta_hP
+   $$
+
+   로 표현됨을 설명하시오.
+   또한 변수 ordering이 바뀌면 Cholesky factor $P$가 달라질 수 있으므로 OIRF의 해석도 달라질 수 있는 이유를 설명하시오.
+9. $h$-step forecast error variance가
+
+   $$
+   \operatorname{Var}
+   \left(
+   Y_{t+h}-E[Y_{t+h}\mid\mathcal F_t]
+   \right)
+   =
+   \sum_{j=0}^{h-1}
+   \Theta_j\Sigma\Theta_j'
+   $$
+
+   로 표현됨을 보이시오.
+   이를 바탕으로 forecast error variance decomposition이 각 structural shock의 상대적 기여도를 측정한다는 점을 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **VAR stability → MA representation → forecast → Granger causality → reduced-form IRF → orthogonalization → FEVD**. 핵심은 reduced-form dynamics와 structural interpretation을 구분하는 것이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. VECM, Cointegration Rank & Johansen Method
+::: {.topic}
+Reduced Rank · $\Pi=\alpha\beta'$ · Long-run Relations · Trace Test · Deterministic Terms
+:::
+
+$m$-차원 $I(1)$ vector $Y_t$가 다음 VAR($p$) representation을 따른다고 하자.
+
+$$
+Y_t
+=
+A_1Y_{t-1}
++\cdots+
+A_pY_{t-p}
++
+\varepsilon_t.
+$$
+
+1. 위 VAR($p$)를 다음 VECM 형태로 다시 쓸 수 있음을 보이시오.
+
+   $$
+   \Delta Y_t
+   =
+   \Pi Y_{t-1}
+   +
+   \sum_{j=1}^{p-1}
+   \Gamma_j\Delta Y_{t-j}
+   +
+   \varepsilon_t,
+   $$
+
+   여기서
+
+   $$
+   \Pi
+   =
+   \sum_{j=1}^{p}A_j-I.
+   $$
+
+   $\Gamma_j$가 short-run dynamics를 포착한다는 점을 설명하시오.
+2. cointegration rank를
+
+   $$
+   r=\operatorname{rank}(\Pi)
+   $$
+
+   로 정의하자.
+   다음 세 경우를 비교하시오.
+
+   $$
+   r=0,
+   \qquad
+   0<r<m,
+   \qquad
+   r=m.
+   $$
+
+   각각이 no cointegration, cointegration, levels stationarity와 어떻게 연결되는지 설명하시오.
+3. $0<r<m$이라고 하자.
+   이때
+
+   $$
+   \Pi=\alpha\beta'
+   $$
+
+   로 factorization할 수 있으며
+
+   $$
+   \beta'Y_{t-1}
+   $$
+
+   이 $r$-차원 stationary vector가 된다고 하자.
+   $\beta$를 cointegrating vectors의 공간으로, $\alpha$를 adjustment coefficients로 해석하시오.
+4. $m=2,r=1$인 경우를 생각하자.
+
+   $$
+   \beta'
+   =
+   (1,-\beta_0)
+   $$
+
+   로 정규화할 수 있다고 하자.
+   VECM의 두 방정식에서 adjustment coefficients
+
+   $$
+   \alpha_1,\alpha_2
+   $$
+
+   의 부호와 크기가 disequilibrium에 대한 각 변수의 반응속도를 어떻게 나타내는지 설명하시오.
+5. Johansen 방법이 VECM의
+
+   $$
+   \Pi=\alpha\beta'
+   $$
+
+   에 imposed된 reduced-rank structure를 이용하는 system estimation method임을 설명하시오.
+   Engle–Granger 방식과 달리 여러 개의 cointegrating vectors를 동시에 다룰 수 있는 이유를 설명하시오.
+6. Johansen estimation에서 generalized eigenvalue problem이 등장하고,
+   ordered eigenvalues
+
+   $$
+   \hat\lambda_1\ge\hat\lambda_2\ge\cdots\ge\hat\lambda_m
+   $$
+
+   가 cointegration strength와 관련된다는 점을 설명하시오.
+   eigenvalue 문제의 세부 유도는 요구하지 않는다.
+7. trace statistic의 일반형
+
+   $$
+   LR_{\mathrm{trace}}(r)
+   =
+   -T
+   \sum_{j=r+1}^{m}
+   \log(1-\hat\lambda_j)
+   $$
+
+   를 생각하자.
+   귀무가설
+
+   $$
+   H_0:\operatorname{rank}(\Pi)\le r
+   $$
+
+   의 의미를 설명하고,
+   $r=0,1,\ldots$에 대해 sequential testing을 수행하여 cointegration rank를 결정하는 논리를 서술하시오.
+8. Johansen test statistic의 limiting distribution이 standard $\chi^2$가 아닌 이유를 개념적으로 설명하시오.
+   특히 unit roots와 stochastic trends 때문에 비표준 점근분포가 등장한다는 점을 서술하시오.
+9. VECM에 intercept 또는 deterministic trend를 어디에 포함하느냐에 따라
+   cointegrating relation과 levels process의 deterministic component가 달라질 수 있다.
+   왜 Johansen rank test의 critical value가 이러한 trend specification에 의존하는지 설명하시오.
+10. 마지막으로 다음 두 접근을 비교하시오.
+
+   **Engle–Granger:** residual-based single-equation approach<br>
+   **Johansen:** reduced-rank system approach
+
+   각각의 장단점을 다음 관점에서 비교하시오.
+   <br>
+   (i) cointegration rank,<br>
+   (ii) multiple cointegrating vectors,<br>
+   (iii) normalization,<br>
+   (iv) system dynamics,<br>
+   (v) small-system interpretation.
+
+::: {.spoon-hint}
+**형식**: **VAR in levels → VECM → rank of $\Pi$ → $\alpha\beta'$ decomposition → Johansen eigenvalues → trace test → deterministic specification**. $\beta$와 $\alpha$의 역할을 혼동하지 말고, **long-run equilibrium relation과 short-run adjustment를 분리하여 해석**하시오.
+:::
+:::
