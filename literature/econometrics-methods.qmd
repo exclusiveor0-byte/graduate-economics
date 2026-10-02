@@ -14,6 +14,13 @@ description: "식별, 추정·추론, GMM/적률조건, 시계열·패널, 인�
 - **핵심 기여**: GMM specification test를 피트먼 국소 이동과 사영행렬 $P_W$를 통한 신호 흡수 기하학으로 정식화하여, (i) 맹점 방향(blind directions)의 존재, (ii) 최대 자유도 검정(maximal-df tests)의 점근적 동등성, (iii) 표적 최적 검정(targeted optimal tests)의 도출 원리를 규명함.
 :::
 
+::: {.callout-note appearance="simple" icon=false}
+### [Breusch et al. (1999) Redundancy of Moment Conditions](econometrics-methods/1999-breusch-redundancy-moment-conditions.qmd)
+- **저자**: Trevor Breusch, Hailong Qian, Peter Schmidt, Donald Wyhowski (*Journal of Econometrics*, 1999)
+- **주제**: GMM 적률조건의 잉여성(redundancy), 점근 효율성(asymptotic efficiency), 직교 사영(orthogonal projection), 선형 IV 및 조건부 적률제약
+- **핵심 기여**: 추가 적률조건의 정보 기여도를 기존 적률에 대한 잔차화(residualization)를 통해 분해하고, 잔차화된 적률의 모수 감응도($G_2 = \mathbf{0}$)로 redundancy의 필요충분조건을 규명함. 3개 이상 적률 블록에서의 비단조성, 관심 모수에 대한 부분 잉여성(partial redundancy), 도구변수 잉여성과 1단계 적합치의 관계를 정식화함.
+:::
+
 ::: {.callout-tip appearance="simple" title="새 논문 추가 안내"}
 `templates/paper-note-template.qmd`를 복사해 `literature/econometrics-methods/`에 추가한다. 파일명은 `연도-저자-핵심어.qmd` 규칙을 따른다.
 :::
