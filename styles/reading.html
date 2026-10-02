@@ -9,41 +9,57 @@
     sidebarUl.dataset.subjectAccordionInit = "true";
 
     // 7 primary subject definitions
+    // Order matters for fallback prefix matching: specialized/nested paths (qual-exam, supplements, literature)
+    // precede generic patterns (econometrics) to prevent false-positive subject matches (e.g., qual-exam/econometrics/).
     const subjectDefs = [
+      { key: "qual-exam", id: "sidebar-subj-qual", pattern: "qual-exam/" },
+      { key: "supplements", id: "sidebar-subj-supplements", pattern: "supplements/" },
+      { key: "literature", id: "sidebar-subj-literature", pattern: "literature/" },
       { key: "math", id: "sidebar-subj-math", pattern: "math-economics/" },
       { key: "micro", id: "sidebar-subj-micro", pattern: "microeconomics/" },
       { key: "macro", id: "sidebar-subj-macro", pattern: "macroeconomics/" },
-      { key: "metrics", id: "sidebar-subj-metrics", pattern: "econometrics/" },
-      { key: "supplements", id: "sidebar-subj-supplements", pattern: "supplements/" },
-      { key: "literature", id: "sidebar-subj-literature", pattern: "literature/" },
-      { key: "qual-exam", id: "sidebar-subj-qual", pattern: "qual-exam/" }
+      { key: "metrics", id: "sidebar-subj-metrics", pattern: "econometrics/" }
     ];
 
-    // Determine active subject from current page URL or active link
-    const currentPath = window.location.pathname.replace(/\\/g, "/");
+    const items = Array.from(sidebarUl.children);
+
+    // Determine active subject:
+    // Pass 1: Walk the DOM hierarchy of sidebar items to find which subject group encloses the active link.
     let activeSubjKey = null;
-    for (const subj of subjectDefs) {
-      if (currentPath.includes("/" + subj.pattern) || currentPath.endsWith(subj.pattern)) {
-        activeSubjKey = subj.key;
+    const activeLink = sidebarUl.querySelector("a.sidebar-link.active");
+
+    let runningDef = null;
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const link = item.querySelector(":scope > .sidebar-item-container > a.sidebar-link") || item.querySelector("a.sidebar-link");
+      const href = link ? (link.getAttribute("href") || "").replace(/\\/g, "/") : "";
+      const matched = subjectDefs.find(s => href.includes(s.pattern + "index.") || href.endsWith(s.pattern));
+      if (matched) {
+        runningDef = matched;
+      } else if (runningDef && (item.classList.contains("sidebar-item-section") || (link && href.includes(runningDef.pattern)))) {
+        // continues in current subject
+      } else {
+        runningDef = null;
+      }
+
+      if (activeLink && item.contains(activeLink)) {
+        activeSubjKey = runningDef ? runningDef.key : null;
         break;
       }
     }
 
+    // Pass 2: Fallback to current URL pathname matching if no active link in DOM
     if (!activeSubjKey) {
-      const activeLink = sidebarUl.querySelector("a.sidebar-link.active");
-      if (activeLink) {
-        const href = (activeLink.getAttribute("href") || "").replace(/\\/g, "/");
-        for (const subj of subjectDefs) {
-          if (href.includes(subj.pattern)) {
-            activeSubjKey = subj.key;
-            break;
-          }
+      const currentPath = window.location.pathname.replace(/\\/g, "/");
+      for (const subj of subjectDefs) {
+        if (currentPath.includes("/" + subj.pattern) || currentPath.endsWith(subj.pattern)) {
+          activeSubjKey = subj.key;
+          break;
         }
       }
     }
 
     // Traverse top-level items of sidebarUl and group chapters under their subject
-    const items = Array.from(sidebarUl.children);
     let currentSubjDef = null;
     let currentSubjUl = null;
 
@@ -112,7 +128,7 @@
       });
     });
 
-    // In the active subject: collapse any chapters that don't contain the active link
+    // In the active subject: ensure chapter containing active link is open, collapse others
     if (activeSubjKey) {
       const activeSubjEl = document.getElementById("sidebar-subj-" + activeSubjKey);
       if (activeSubjEl) {
@@ -126,6 +142,12 @@
             if (secToggle) {
               secToggle.classList.add("collapsed");
               secToggle.setAttribute("aria-expanded", "false");
+            }
+          } else if (hasActiveChild && secUl) {
+            secUl.classList.add("show");
+            if (secToggle) {
+              secToggle.classList.remove("collapsed");
+              secToggle.setAttribute("aria-expanded", "true");
             }
           }
         });
