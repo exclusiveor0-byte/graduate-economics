@@ -1,0 +1,297 @@
+---
+title: "문제 한 스푼 #5"
+subtitle: "경제성장이론 II (Economic Growth II — Infinite-Horizon Budget · Ramsey–Cass–Koopmans I)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MACROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #5
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Economic Growth II — Infinite-Horizon Budget Constraints · Ramsey–Cass–Koopmans I**
+:::
+
+::: {.spoon-hero__tags}
+[거시경제학]{.chip .chip--macro}
+[총 2문제]{.chip}
+[예상 60–80분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Infinite-Horizon Budget Constraint and Solvency
+::: {.topic}
+Flow Budget Constraint · Forward Iteration · Present-Value Budget · No-Ponzi Condition · TVC · Prove or Disprove
+:::
+
+한 가계의 이산시간 자산축적식이 다음과 같다고 하자.
+
+$$
+a_{t+1}
+=
+(1+r)a_t+w_t-c_t,
+\qquad
+r&gt;0,
+$$
+
+여기서 $a_t$는 $t$기 초의 자산, $w_t$는 노동소득, $c_t$는 소비이다.
+초기자산 $a_0$는 주어져 있으며, 이자율 $r$은 상수라고 하자.
+
+1. 위 flow budget constraint를 한 기 앞으로 풀어
+
+   $$
+   a_t
+   =
+   \frac{a_{t+1}+c_t-w_t}{1+r}
+   $$
+
+   로 쓴 뒤, 이를 반복적으로 forward iteration하여 임의의 $T\ge1$에 대해
+
+   $$
+   a_0
+   =
+   \sum_{t=0}^{T-1}
+   \frac{c_t-w_t}{(1+r)^{t+1}}
+   +
+   \frac{a_T}{(1+r)^T}
+   $$
+
+   형태의 관계를 유도하시오.
+
+2. 다음 no-Ponzi condition을 생각하자.
+
+   $$
+   \liminf_{T\to\infty}
+   \frac{a_T}{(1+r)^T}
+   \ge 0.
+   $$
+
+   이것이 왜 가계가 부채를 영구히 roll over하여 현재소비를 무한히 늘리는 경로를 배제하는 조건인지 설명하시오.
+
+3. 적절한 equality 형태의 terminal condition 아래,
+
+   $$
+   \lim_{T\to\infty}
+   \frac{a_T}{(1+r)^T}
+   =0
+   $$
+
+   이 성립한다고 하자.
+   이때 infinite-horizon present-value budget constraint를 유도하시오.
+
+   $$
+   \sum_{t=0}^{\infty}
+   \frac{c_t}{(1+r)^{t+1}}
+   =
+   a_0
+   +
+   \sum_{t=0}^{\infty}
+   \frac{w_t}{(1+r)^{t+1}}.
+   $$
+
+   우변을 lifetime wealth의 관점에서 해석하시오.
+
+4. 노동소득이 모든 $t$에 대해 $w_t=\bar w$로 일정하다고 하자.
+
+   $$
+   \sum_{t=0}^{\infty}
+   \frac{\bar w}{(1+r)^{t+1}}
+   $$
+
+   을 계산하고, lifetime wealth를 $a_0,\bar w,r$의 함수로 나타내시오.
+
+5. 다음 명제를 **prove or disprove** 하시오.
+
+   > The no-Ponzi condition and the transversality condition are exactly the same economic condition.
+
+   두 조건이 각각 무엇을 제한하는지 구분하여 논하시오.
+   필요하다면 no-Ponzi condition은 feasibility/solvency와,
+   transversality condition은 optimization의 boundary condition과 관련됨을 이용하시오.
+
+6. 다음 두 자산경로를 비교하시오.
+
+   $$
+   \text{Path A: } a_T=0,
+   $$
+
+   $$
+   \text{Path B: } a_T=-(1+r)^T.
+   $$
+
+   각각이
+
+   $$
+   \frac{a_T}{(1+r)^T}
+   $$
+
+   에 대해 어떤 극한을 가지는지 계산하고, 어떤 경로가 no-Ponzi condition을 위반하는지 판정하시오.
+
+7. 한 학생이 다음과 같이 주장하였다.
+
+   > “가계가 모든 기간의 flow budget constraint를 만족하면 intertemporal budget constraint도 자동으로 만족하므로,
+   > 별도의 terminal condition은 필요 없다.”
+
+   이 주장의 오류를 forward iteration에서 남는 terminal asset term을 이용하여 설명하시오.
+
+::: {.spoon-hint}
+형식: **flow constraint → forward iteration → terminal term → no-Ponzi → present value → prove/disprove → diagnose**. 단순히 무한합 공식을 쓰는 데서 끝내지 말고, terminal asset term이 어떤 경제적 역할을 하는지 설명하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Ramsey–Cass–Koopmans: From Optimization to the Dynamic System
+::: {.topic}
+Household Optimization · Firm FOCs · Euler Equation · Capital Accumulation · Competitive Equilibrium · Solow Comparison
+:::
+
+연속시간 Ramsey–Cass–Koopmans 경제를 생각하자.
+인구와 노동증진적 기술은
+
+$$
+\frac{\dot L}{L}=n,
+\qquad
+\frac{\dot A}{A}=g
+$$
+
+로 성장한다. 대표가계의 효용은 CRRA이며, 유효노동 한 단위당 소비를 $c(t)$라 할 때
+
+$$
+\int_0^\infty
+e^{-(\rho-n)t}
+\frac{C(t)^{1-\theta}-1}{1-\theta}\,dt
+$$
+
+와 같은 표준 무한기간 선호를 생각한다.
+계산의 편의를 위해 유효노동 기준 동학으로 정리할 때 나타나는 소비성장식을 사용해도 좋다.
+생산기술은 CRS이고
+
+$$
+Y=F(K,AL),
+\qquad
+f(k):=F(k,1),
+\qquad
+k:=\frac{K}{AL}.
+$$
+
+<div class="assumption">
+$f'&gt;0$, $f''&lt;0$, $\delta\ge0$, $\rho&gt;0$, $\theta&gt;0$이고,
+완전경쟁과 interior solution을 가정한다.
+</div>
+
+1. 완전경쟁기업의 이윤극대화 문제를 쓰고,
+   자본의 임대가격과 노동의 보수를 한계생산물과 연결하시오.
+   특히 유효노동 기준에서 자본의 순수익률이 어떤 객체와 연결되는지 설명하시오.
+
+2. 대표가계의 동태적 소비–저축 문제에서 Maximum Principle을 사용하여
+   intertemporal Euler equation을 유도하시오.
+   CRRA 효용 아래에서 소비성장률이 자본수익률과 시간선호율에 어떻게 의존하는지 보이시오.
+
+3. 경쟁균형의 factor-price condition을 Euler equation에 대입하여,
+   유효노동 한 단위당 소비가 다음 동학을 만족함을 보이시오.
+
+   $$
+   \frac{\dot c}{c}
+   =
+   \frac{1}{\theta}
+   \left[
+   f'(k)-\delta-\rho-\theta g
+   \right].
+   $$
+
+   $g=0$인 경우와 비교하여 노동증진적 기술진보가 왜 추가항으로 들어가는지 설명하시오.
+
+4. 자원제약과 자본축적식으로부터
+
+   $$
+   \dot k
+   =
+   f(k)-c-(n+g+\delta)k
+   $$
+
+   를 유도하시오.
+   따라서 Ramsey 경제를 다음 2차원 동태계로 정리하시오.
+
+   $$
+   \dot k
+   =
+   f(k)-c-(n+g+\delta)k,
+   $$
+
+   $$
+   \frac{\dot c}{c}
+   =
+   \frac{1}{\theta}
+   \left[
+   f'(k)-\delta-\rho-\theta g
+   \right].
+   $$
+
+5. $\dot c=0$을 만족하는 $k^*$가
+
+   $$
+   f'(k^*)
+   =
+   \rho+\delta+\theta g
+   $$
+
+   를 만족함을 보이시오.
+   이 조건을 4회차 Solow–Swan 모형의 steady-state condition과 비교하시오.
+
+6. $f(k)=k^\alpha$라 하자.
+
+   $$
+   \alpha(k^*)^{\alpha-1}
+   =
+   \rho+\delta+\theta g
+   $$
+
+   로부터 $k^*$를 구하고,
+
+   $$
+   c^*
+   =
+   (k^*)^\alpha-(n+g+\delta)k^*
+   $$
+
+   를 이용하여 $c^*$를 구하시오.
+
+7. 다음 값을 사용하시오.
+
+   $$
+   \alpha=\frac13,\qquad
+   \rho=0.02,\qquad
+   \delta=0.06,\qquad
+   \theta=2,\qquad
+   g=0.02,\qquad
+   n=0.01.
+   $$
+
+   $k^*$와 $c^*$를 계산하시오.
+
+8. 다음 명제를 **prove or disprove** 하시오.
+
+   > In the Ramsey model, a higher saving rate necessarily implies a higher steady-state capital stock.
+
+   Ramsey 모형에서는 저축률이 외생적 parameter가 아니라 최적 소비선택의 결과라는 점을 이용하여 답하시오.
+
+9. Solow–Swan 모형과 Ramsey–Cass–Koopmans 모형을 다음 세 기준에서 비교하시오.
+   <br><br>
+   (i) 저축의 결정방식,<br>
+   (ii) steady-state capital의 결정조건,<br>
+   (iii) welfare와 optimality의 역할.
+   <br><br>
+   단순한 서술에 그치지 말고 각 모형의 핵심 방정식을 함께 제시하시오.
+
+::: {.spoon-hint}
+형식: **household → firm → factor prices → Euler equation → capital accumulation → dynamic system → steady state → compare models**. 이번 회차의 목표는 phase diagram을 완성하는 것이 아니라, Ramsey 모형의 2차원 동태계를 처음부터 구축하는 것이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

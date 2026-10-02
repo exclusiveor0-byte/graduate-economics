@@ -1,0 +1,258 @@
+---
+title: "문제 한 스푼 #3"
+subtitle: "동태적 최적화 III (Dynamic Optimization III — Bellman Equation · Value Function · Policy Function)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MACROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #3
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Dynamic Optimization III — Bellman Equation · Value Function · Policy Function · Verification**
+:::
+
+::: {.spoon-hero__tags}
+[거시경제학]{.chip .chip--macro}
+[총 2문제]{.chip}
+[예상 55–70분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Bellman Equation, Envelope Condition & Euler Equation
+::: {.topic}
+Recursive Formulation · First-Order Condition · Envelope Theorem · Euler Equation · Steady State
+:::
+
+다음과 같은 결정론적 무한기간 성장문제를 생각하자. 사회계획자는 초기자본
+$k_0>0$이 주어졌을 때
+
+$$
+\max_{\{c_t,k_{t+1}\}_{t=0}^{\infty}}
+\sum_{t=0}^{\infty}\beta^t u(c_t),
+\qquad
+0<\beta<1,
+$$
+
+을 극대화한다. 자원제약은
+
+$$
+c_t+k_{t+1}
+=
+f(k_t)+(1-\delta)k_t,
+\qquad
+0\le\delta\le1,
+$$
+
+이며 $u'&gt;0$, $u''&lt;0$, $f'&gt;0$, $f''&lt;0$를 가정한다.
+interior solution이 존재한다고 하자.
+
+1. 이 문제의 state variable과 control variable을 식별하시오.
+   이어 sequential formulation을 recursive formulation으로 바꾸어 Bellman equation을 쓰시오.
+
+2. 다음 Bellman equation을
+
+   $$
+   V(k)
+   =
+   \max_{k'}
+   \left\{
+   u\!\left(f(k)+(1-\delta)k-k'\right)
+   +
+   \beta V(k')
+   \right\}
+   $$
+
+   로 두고, $k'$에 대한 first-order condition을 유도하시오.
+
+3. envelope theorem을 적용하여 $V'(k)$를 구하시오.
+   특히 current state $k$가 한 단위 증가할 때 최적 lifetime utility가 어떻게 변하는지를
+   $V'(k)$의 경제적 의미와 연결하여 설명하시오.
+
+4. 2번의 FOC와 3번의 envelope condition을 결합하여 다음 Euler equation을 유도하시오.
+
+   $$
+   u'(c_t)
+   =
+   \beta u'(c_{t+1})
+   \left[
+   f'(k_{t+1})+1-\delta
+   \right].
+   $$
+
+   필요한 시점표기를 명확히 하시오.
+
+5. $u(c)=\log c$, $f(k)=Ak^\alpha$라 하자.
+   steady state에서 $c_{t+1}=c_t=c^*$, $k_{t+1}=k_t=k^*$이므로
+
+   $$
+   1
+   =
+   \beta
+   \left[
+   \alpha A(k^*)^{\alpha-1}+1-\delta
+   \right]
+   $$
+
+   임을 보이시오.
+   이어 $k^*$를 $(A,\alpha,\beta,\delta)$의 함수로 나타내시오.
+
+6. 다음 값을 사용하시오.
+
+   $$
+   A=1,\qquad
+   \alpha=\frac13,\qquad
+   \beta=0.96,\qquad
+   \delta=0.08.
+   $$
+
+   steady-state $k^*$를 계산하고,
+
+   $$
+   c^*=A(k^*)^\alpha-\delta k^*
+   $$
+
+   를 이용하여 $c^*$를 계산하시오.
+
+7. 2회차의 Maximum Principle에서 얻는 intertemporal optimality condition과
+   이번 문제에서 Bellman equation으로부터 얻은 Euler equation이 어떤 의미에서 같은 조건인지 설명하시오.
+   특히 Hamiltonian의 costate와 $V'(k)$ 사이의 대응관계를 서술하시오.
+
+8. 다음 명제를 **prove or disprove** 하시오.
+
+   > If the environment is stationary and the Bellman equation is time invariant,
+   > the optimal control must be constant over time.
+
+   stationary decision rule과 constant time path를 구분하여 논증하시오.
+
+::: {.spoon-hint}
+형식: **sequential problem → recursive formulation → FOC → envelope → Euler equation → steady state → calculation → compare methods**. Bellman equation을 단순히 적는 데서 끝내지 말고, FOC와 envelope condition의 결합으로 Euler equation을 직접 만들어내시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Guess-and-Verify, Policy Function & Verification Logic
+::: {.topic}
+Value-Function Guess · Functional Equation · Policy Rule · Verification · Prove or Disprove · Error Diagnosis
+:::
+
+다음 deterministic savings problem을 생각하자.
+
+$$
+V(k)
+=
+\max_{0&lt;k'&lt;Ak}
+\left\{
+\log(Ak-k')
++
+\beta V(k')
+\right\},
+\qquad
+A&gt;0,\quad 0&lt;\beta&lt;1.
+$$
+
+현재자본은 $k&gt;0$, 다음 기 자본은 $k'$, 현재소비는
+
+$$
+c=Ak-k'
+$$
+
+이다.
+
+1. value function이
+
+   $$
+   V(k)=a+b\log k
+   $$
+
+   의 형태라고 추측하자.
+   이 conjecture를 Bellman equation에 대입하고 $k'$에 대한 FOC를 구하시오.
+
+2. 1번의 결과를 이용하여 optimal policy function이
+
+   $$
+   k'=g(k)=\beta Ak
+   $$
+
+   임을 보이시오.
+   따라서 optimal consumption policy
+
+   $$
+   c(k)=(1-\beta)Ak
+   $$
+
+   를 구하시오.
+
+3. 위 policy를 Bellman equation에 다시 대입하여
+
+   $$
+   b=\frac{1}{1-\beta}
+   $$
+
+   임을 보이고, 상수 $a$를 구하시오.
+   즉 conjectured value function이 실제 functional equation을 만족하는지 verify하시오.
+
+4. policy function을 반복하여
+
+   $$
+   k_t=(\beta A)^t k_0
+   $$
+
+   를 보이시오.
+   $\beta A&lt;1$, $\beta A=1$, $\beta A&gt;1$인 경우 자본경로가 어떻게 달라지는지 비교하시오.
+   또한 이것이 time-invariant policy rule과 constant policy를 혼동해서는 안 되는 이유를 보여주는지 설명하시오.
+
+5. 다음 값을 가정하자.
+
+   $$
+   A=1.10,\qquad
+   \beta=0.90,\qquad
+   k_0=10.
+   $$
+
+   $k_1,k_2,c_0,c_1$을 계산하시오.
+
+6. 다음 명제를 **prove or disprove** 하시오.
+
+   > Any differentiable function $V$ and policy $g$ that satisfy the Bellman first-order condition
+   > necessarily constitute the global solution to the dynamic programming problem.
+
+   FOC와 global maximization, feasibility, concavity, boundary behavior 또는 verification의 역할을 구분하여 답하시오.
+
+7. 한 학생이 다음과 같이 주장하였다.
+
+   > “Bellman equation은 현재기의 payoff와 다음 기 value를 더한 식이므로,
+   > 매기 myopic하게 현재 payoff를 가장 크게 만드는 선택을 하면 된다.”
+
+   이 주장의 오류를 설명하시오.
+
+   $$
+   \beta V(k')
+   $$
+
+   항이 현재 선택 $k'$에 어떻게 의존하는지 명시적으로 이용하시오.
+
+8. 마지막으로 다음 두 개념을 구분하여 설명하시오.
+
+   $$
+   \text{value function }V(k),
+   \qquad
+   \text{policy function }g(k).
+   $$
+
+   두 함수가 각각 무엇을 map하는지 쓰고,
+   “optimal value를 아는 것”과 “optimal action을 아는 것”이 왜 서로 다른 객체인지 설명하시오.
+
+::: {.spoon-hint}
+형식: **guess → optimize → obtain policy → substitute back → verify → iterate policy → prove/disprove → diagnose**. guess-and-verify에서는 함수형을 추측했다는 사실과, 그 추측이 Bellman equation 전체를 실제로 만족함을 확인했다는 사실을 구분하시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

@@ -1,0 +1,279 @@
+---
+title: "문제 한 스푼 #4"
+subtitle: "경제성장이론 I (Economic Growth I — Solow–Swan Model · Balanced Growth · Transitional Dynamics · Golden Rule)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MACROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #4
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Economic Growth I — Solow–Swan Model · Balanced Growth · Transitional Dynamics · Golden Rule**
+:::
+
+::: {.spoon-hero__tags}
+[거시경제학]{.chip .chip--macro}
+[총 2문제]{.chip}
+[예상 60–75분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Solow–Swan Dynamics and Balanced Growth
+::: {.topic}
+Effective Labor · Intensive Form · Steady State · Balanced Growth Path · Numerical Calculation · Local Convergence
+:::
+
+폐쇄경제의 생산함수가 다음 Cobb–Douglas 형태라고 하자.
+
+$$
+Y(t)=K(t)^\alpha [A(t)L(t)]^{1-\alpha},
+\qquad 0&lt;\alpha&lt;1.
+$$
+
+기술과 노동은 각각
+
+$$
+\frac{\dot A}{A}=g,
+\qquad
+\frac{\dot L}{L}=n,
+$$
+
+의 일정한 성장률로 증가한다. 저축률은 $s\in(0,1)$, 감가상각률은
+$\delta&gt;0$이며 자본축적식은
+
+$$
+\dot K=sY-\delta K
+$$
+
+로 주어진다. 정부와 국제거래는 없다고 하자.
+
+1. 유효노동 한 단위당 변수
+
+   $$
+   k:=\frac{K}{AL},
+   \qquad
+   y:=\frac{Y}{AL}
+   $$
+
+   를 정의한다.
+   CRS를 이용하여
+
+   $$
+   y=f(k)=k^\alpha
+   $$
+
+   임을 보이시오.
+
+2. $k=K/(AL)$를 시간에 대해 미분하여 다음 운동법칙을 유도하시오.
+
+   $$
+   \dot k
+   =
+   s k^\alpha-(n+g+\delta)k.
+   $$
+
+   여기서 $(n+g+\delta)k$가 왜 break-even investment로 해석되는지 설명하시오.
+
+3. 비자명한 steady state $k^*&gt;0$를 구하고,
+
+   $$
+   k^*
+   =
+   \left(
+   \frac{s}{n+g+\delta}
+   \right)^{\frac{1}{1-\alpha}}
+   $$
+
+   임을 보이시오.
+   이어 $y^*$와 유효노동 한 단위당 소비 $c^*$를 구하시오.
+
+4. $k&lt;k^*$와 $k&gt;k^*$일 때 각각 $\dot k$의 부호를 판단하시오.
+   이 결과를 이용하여 $k^*$의 동태적 안정성을 설명하시오.
+
+5. steady state에서 다음 변수들의 장기성장률을 각각 구하시오.
+
+   $$
+   k,\quad y,\quad \frac{K}{L},\quad \frac{Y}{L},\quad K,\quad Y,\quad C.
+   $$
+
+   특히 “steady state에서는 경제가 성장하지 않는다”라는 문장이 왜 정확하지 않은지 설명하시오.
+
+6. 다음 값을 사용하시오.
+
+   $$
+   \alpha=\frac13,\qquad
+   s=0.24,\qquad
+   n=0.01,\qquad
+   g=0.02,\qquad
+   \delta=0.05.
+   $$
+
+   $k^*,y^*,c^*$를 계산하시오.
+
+7. steady-state capital에 대한 saving rate의 elasticity
+
+   $$
+   \frac{\partial\log k^*}{\partial\log s}
+   $$
+
+   를 구하시오.
+   왜 $\alpha$가 1에 가까울수록 $s$의 변화가 steady-state capital에 더 큰 영향을 주는지 설명하시오.
+
+8. 운동법칙을
+
+   $$
+   \dot k = G(k)
+   $$
+
+   라 쓰자. $k^*$ 주위에서 1차 선형화하여
+
+   $$
+   \dot k
+   \approx
+   G'(k^*)(k-k^*)
+   $$
+
+   를 얻고,
+
+   $$
+   G'(k^*)
+   =
+   -(1-\alpha)(n+g+\delta)
+   $$
+
+   임을 보이시오.
+   이를 local convergence speed의 관점에서 해석하시오.
+
+::: {.spoon-hint}
+형식: **aggregate model → intensive form → law of motion → steady state → BGP growth rates → numerical calculation → local dynamics**. steady state와 balanced growth path를 구분하고, 유효노동 기준 변수와 1인당 변수의 성장률을 혼동하지 마시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Saving, Golden Rule and Transitional Growth
+::: {.topic}
+Comparative Dynamics · Golden Rule · Welfare Criterion · Prove or Disprove · Error Diagnosis
+:::
+
+동일한 Solow–Swan 경제를 생각하자. 일반적인 CRS 생산함수를 유효노동 기준으로
+$y=f(k)$라 쓰며,
+
+$$
+\dot k=s f(k)-(n+g+\delta)k
+$$
+
+이다. 유효노동 한 단위당 소비는
+
+$$
+c=(1-s)f(k).
+$$
+
+1. steady state에서는
+
+   $$
+   s f(k^*)=(n+g+\delta)k^*
+   $$
+
+   이므로 steady-state consumption을
+
+   $$
+   c^*
+   =
+   f(k^*)-(n+g+\delta)k^*
+   $$
+
+   로 다시 쓸 수 있음을 보이시오.
+
+2. steady-state consumption을 최대화하는 Golden-Rule capital $k_{GR}$이 interior solution이라면
+
+   $$
+   f'(k_{GR})=n+g+\delta
+   $$
+
+   를 만족함을 유도하시오.
+   이 조건의 경제적 의미를 marginal product와 break-even investment의 관점에서 설명하시오.
+
+3. $f(k)=k^\alpha$인 Cobb–Douglas 경우,
+
+   $$
+   k_{GR}
+   =
+   \left(
+   \frac{\alpha}{n+g+\delta}
+   \right)^{\frac{1}{1-\alpha}}
+   $$
+
+   임을 보이고, Golden-Rule steady state를 유지시키는 저축률이
+
+   $$
+   s_{GR}=\alpha
+   $$
+
+   임을 증명하시오.
+
+4. Problem 1의 수치
+
+   $$
+   \alpha=\frac13,\quad
+   s=0.24,\quad
+   n+g+\delta=0.08
+   $$
+
+   를 사용하여 $k_{GR}$와 Golden-Rule consumption $c_{GR}$을 계산하시오.
+   현재 $s=0.24$인 steady state가 Golden Rule보다 자본을 과소축적하는지 과다축적하는지 판정하시오.
+
+5. 다음 명제를 **prove or disprove** 하시오.
+
+   > A permanent increase in the saving rate permanently raises the long-run growth rate
+   > of output per worker in the standard Solow model with exogenous technological progress.
+
+   저축률 상승 직후의 transition과 새로운 balanced growth path를 구분하여 답하시오.
+
+6. 다음 명제를 **prove or disprove** 하시오.
+
+   > If an economy is dynamically below its steady-state capital per effective worker,
+   > then output per worker grows faster than the exogenous rate of technological progress.
+
+   Cobb–Douglas 생산함수에서
+
+   $$
+   \frac{Y}{L}=A k^\alpha
+   $$
+
+   를 이용하여 성장률을 직접 계산하시오.
+
+7. 한 경제가 초기 steady state에 있고 정부가 외생적으로 저축률을 $s_0$에서
+   $s_1&gt;s_0$로 영구적으로 높였다고 하자.
+   자본은 predetermined variable이라고 가정한다.
+   정책변화 직후 $k$, $y$, $c$가 각각 점프할 수 있는지 판단하고,
+   이후 새로운 steady state까지의 전이경로를 설명하시오.
+   장기 $c^*$가 반드시 증가한다고 말할 수 있는지도 Golden Rule과 연결하여 논하시오.
+
+8. 한 학생이 다음과 같이 주장하였다.
+
+   > “저축률이 높아지면 자본이 더 빨리 축적되고 새로운 steady state의 자본도 더 크다.
+   > 따라서 자본축적이 만들어내는 추가적인 성장효과도 새로운 steady state 이후까지 영구적으로 지속된다.”
+
+   이 논증의 오류를 찾으시오.
+   수확체감, $k$의 운동법칙, 새로운 steady state에서의
+
+   $$
+   \dot k=0
+   $$
+
+   조건을 명시적으로 이용하여 설명하시오.
+
+::: {.spoon-hint}
+형식: **steady-state consumption → Golden Rule → calculation → prove/disprove → transition → error diagnosis**. *level effect*, *transitional growth effect*, *balanced-growth rate*를 서로 구분하여 논증하시오.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
