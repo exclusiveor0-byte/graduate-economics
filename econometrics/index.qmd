@@ -1,13 +1,36 @@
 # 계량경제학 {.unnumbered}
 
-관측분포의 기술, 인과적 해석, 식별, 추정과 계산을 분리해 읽는 계량경제학 정리노트이다.
+## 대학원 계량경제이론 및 식별기초
+
+**확률모형, 식별, 최소자승법(OLS), 대표본 점근이론, M/Z-추정, GMM, 최우추정법, 그리고 시계열 기초**
+
+이 과목은 관측분포의 기술, 인과적 해석, 식별(Identification), 추정과 계산을 엄밀하게 분리하여 경제 데이터를 통계적으로 분석하는 대학원 수준의 계량경제학(Econometrics) 정리노트이다. 확률모형과 조건부기대값의 기하학에서 출발하여 OLS와 유한표본 기하, 대표본 점근이론(Consistency & Asymptotic Normality), 도구변수와 GMM, 최우추정법(MLE/QMLE), 약한 식별, 그리고 종속 시계열 자료의 기초까지 체계적으로 다룬다.
+
+## Chapter 로드맵 및 편성 현황
+
+| Chapter | 대주제 및 주요 내용 | 상태 |
+|---|---|---|
+| [Chapter 01](ch01-foundations/index.html) | **계량경제학의 구조** · 기술·인과·식별·추정, CEF와 BLP/BLA, OLS의 기술적 기본값 | [완료]{.status} |
+| [Chapter 02](ch02-probability-information/index.html) | **확률모형, 정보집합, 그리고 자료배열** · Full/Observed data, 조건부기대값, 독립성, 경험법칙 | [완료]{.status} |
+| [Chapter 03](ch03-target-model-identification/index.html) | **Target, Model, and Identification** · Estimand, 모형제약, 관측동등성, 점·부분·약식별 | [완료]{.status} |
+| [Chapter 04](ch04-population-optimization/index.html) | **Population Characterization and Optimization** · Criterion 최소화, 추정방정식 근, 존재성·유일성·볼록성 | [완료]{.status} |
+| [Chapter 05](ch05-conditional-expectation/index.html) | **Conditional Expectation and Projection** · $L^2$ 최적예측, 직교사영, 잔차 직교성, 분산분해 | [완료]{.status} |
+| [Chapter 06](ch06-population-linear-regression/index.html) | **Population Linear Regression and Linear Approximation** · 모집단 정규방정식, FWL 정리, 누락변수 편향 | [완료]{.status} |
+| [Chapter 07](ch07-sample-least-squares/index.html) | **Sample Least Squares and Finite-Sample Geometry** · 표본 OLS, 사영기하, 잔차화, 지레대값(Leverage), QR·SVD | [완료]{.status} |
+| [Chapter 08](ch08-sampling-theory-least-squares/index.html) | **Sampling Theory of Least Squares** · 오차분해, 불편성, 이분산성, Gauss–Markov 정리, 정규표본이론 | [완료]{.status} |
+| [Chapter 09](ch09-exact-inference/index.html) | **Exact Inference in Linear Regression** · 가설검정, 유의수준·검정력, 엄밀 $t$·$F$ 검정, 신뢰구간·신뢰영역 | [완료]{.status} |
+| [Chapter 10](ch10-large-sample-least-squares/index.html) | **Large-Sample Theory for Least Squares** · 일치성, 점근정규성, 샌드위치 분산, HC 공분산, Delta 방법, Wald 검정 | [완료]{.status} |
+| [Chapter 11](ch11-m-z-estimation/index.html) | **General M- and Z-Estimation** · 균등수렴, 국소 선형화, 점근정규성, 샌드위치 공분산 행렬 | [완료]{.status} |
+| [Chapter 12](ch12-instrumental-variables-gmm/index.html) | **Moment Restrictions, Instrumental Variables, and GMM** · 내생성, 2SLS 사영기하, 최적가중행렬, 과대식별 검정 | [완료]{.status} |
+| [Chapter 13](ch13-likelihood-quasi-likelihood/index.html) | **Likelihood-Based Estimation and Quasi-Likelihood** · 최대우도법(MLE), KL 투영, 정보행렬등식, QMLE 샌드위치 추론 | [완료]{.status} |
+| [Chapter 14](ch14-weak-identification-nonregular/index.html) | **Weak Identification and Nonregular Asymptotics** · 국소대립가설, 약한 도구변수 비정규 극한, Anderson–Rubin 추론 | [완료]{.status} |
+| [Chapter 15](ch15-dependent-data-time-series/index.html) | **Dependent Data and Time-Series Foundations** · 정상성, 에르고딕성, Wold 분해, 장기분산(LRV), Newey–West HAC | [완료]{.status} |
 
 ## Chapters
 
 ### [Chapter 01 · 계량경제학의 구조](ch01-foundations/index.html)
 
-Description · Causality · Identification · Estimation의 관계를 정리하고,
-CEF와 BLP/BLA, OLS의 기술적 기본값, 식별가정과 표본추정의 순서를 다룬다.
+Description · Causality · Identification · Estimation의 관계를 정리하고, CEF와 BLP/BLA, OLS의 기술적 기본값, 식별가정과 표본추정의 순서를 다룬다.
 
 [Chapter 01 읽기](ch01-foundations/index.html) →
 
@@ -15,8 +38,7 @@ CEF와 BLP/BLA, OLS의 기술적 기본값, 식별가정과 표본추정의 순�
 
 ### [Chapter 02 · 확률모형, 정보집합, 그리고 자료배열](ch02-probability-information/index.html)
 
-Full data와 observed data, 조건부기대값, 독립성, 자료배열, empirical law를
-계량경제학의 확률언어로 정리한다.
+Full data와 observed data, 조건부기대값, 독립성, 자료배열, empirical law를 계량경제학의 확률언어로 정리한다.
 
 [Chapter 02 읽기](ch02-probability-information/index.html) →
 
@@ -24,8 +46,7 @@ Full data와 observed data, 조건부기대값, 독립성, 자료배열, empiric
 
 ### [Chapter 03 · Target, Model, and Identification](ch03-target-model-identification/index.html)
 
-Estimand와 model restriction, observational equivalence, point·set·weak
-identification을 구분하고 causal·moment model의 식별 논리를 다룬다.
+Estimand와 model restriction, observational equivalence, point·set·weak identification을 구분하고 causal·moment model의 식별 논리를 다룬다.
 
 [Chapter 03 읽기](ch03-target-model-identification/index.html) →
 
@@ -33,8 +54,7 @@ identification을 구분하고 causal·moment model의 식별 논리를 다룬�
 
 ### [Chapter 04 · Population Characterization and Optimization](ch04-population-optimization/index.html)
 
-Identified target을 criterion minimizer·estimating-equation root·constrained solution으로 표현하고,
-existence·uniqueness·convexity·KKT·local geometry를 연결한다.
+Identified target을 criterion minimizer·estimating-equation root·constrained solution으로 표현하고, existence·uniqueness·convexity·KKT·local geometry를 연결한다.
 
 [Chapter 04 읽기](ch04-population-optimization/index.html) →
 
@@ -42,8 +62,7 @@ existence·uniqueness·convexity·KKT·local geometry를 연결한다.
 
 ### [Chapter 05 · Conditional Expectation and Projection](ch05-conditional-expectation/index.html)
 
-Conditional expectation을 $L^2$ 공간의 best predictor와 orthogonal projection으로 해석하고,
-residual orthogonality·variance decomposition·information set을 다룬다.
+Conditional expectation을 $L^2$ 공간의 best predictor와 orthogonal projection으로 해석하고, residual orthogonality·variance decomposition·information set을 다룬다.
 
 [Chapter 05 읽기](ch05-conditional-expectation/index.html) →
 
@@ -51,8 +70,7 @@ residual orthogonality·variance decomposition·information set을 다룬다.
 
 ### [Chapter 06 · Population Linear Regression and Linear Approximation](ch06-population-linear-regression/index.html)
 
-BLP·BLA·population normal equations·FWL·omitted variables를 통해 회귀계수의
-descriptive·causal 해석과 approximation limit을 분리한다.
+BLP·BLA·population normal equations·FWL·omitted variables를 통해 회귀계수의 descriptive·causal 해석과 approximation limit을 분리한다.
 
 [Chapter 06 읽기](ch06-population-linear-regression/index.html) →
 
@@ -60,8 +78,7 @@ descriptive·causal 해석과 approximation limit을 분리한다.
 
 ### [Chapter 07 · Sample Least Squares and Finite-Sample Geometry](ch07-sample-least-squares/index.html)
 
-OLS의 normal equations, projection geometry, residualization, leverage, rank deficiency와
-QR·SVD 계산을 finite-sample 관점에서 정리한다.
+OLS의 normal equations, projection geometry, residualization, leverage, rank deficiency와 QR·SVD 계산을 finite-sample 관점에서 정리한다.
 
 [Chapter 07 읽기](ch07-sample-least-squares/index.html) →
 
@@ -69,8 +86,7 @@ QR·SVD 계산을 finite-sample 관점에서 정리한다.
 
 ### [Chapter 08 · Sampling Theory of Least Squares](ch08-sampling-theory-least-squares/index.html)
 
-OLS error decomposition, unbiasedness, heteroskedasticity, Gauss–Markov,
-error variance와 exact normal sampling theory를 다룬다.
+OLS error decomposition, unbiasedness, heteroskedasticity, Gauss–Markov, error variance와 exact normal sampling theory를 다룬다.
 
 [Chapter 08 읽기](ch08-sampling-theory-least-squares/index.html) →
 
@@ -78,8 +94,7 @@ error variance와 exact normal sampling theory를 다룬다.
 
 ### [Chapter 09 · Exact Inference in Linear Regression](ch09-exact-inference/index.html)
 
-Hypothesis·size·power부터 exact $t$·$F$ test, confidence interval·region과
-economic significance까지 finite-sample inference를 전개한다.
+Hypothesis·size·power부터 exact $t$·$F$ test, confidence interval·region과 economic significance까지 finite-sample inference를 전개한다.
 
 [Chapter 09 읽기](ch09-exact-inference/index.html) →
 
@@ -87,8 +102,7 @@ economic significance까지 finite-sample inference를 전개한다.
 
 ### [Chapter 10 · Large-Sample Theory for Least Squares](ch10-large-sample-least-squares/index.html)
 
-Consistency·asymptotic normality·sandwich variance·HC covariance·delta method·Wald inference를
-연결하고 robust inference의 범위를 분명히 한다.
+Consistency·asymptotic normality·sandwich variance·HC covariance·delta method·Wald inference를 연결하고 robust inference의 범위를 분명히 한다.
 
 [Chapter 10 읽기](ch10-large-sample-least-squares/index.html) →
 
@@ -96,8 +110,7 @@ Consistency·asymptotic normality·sandwich variance·HC covariance·delta metho
 
 ### [Chapter 11 · General M- and Z-Estimation](ch11-m-z-estimation/index.html)
 
-일반적인 M-추정량과 Z-추정량의 균등수렴, 일관성, 국소 선형화, 점근정규성과
-샌드위치 공분산 행렬 구조를 정식화한다.
+일반적인 M-추정량과 Z-추정량의 균등수렴, 일관성, 국소 선형화, 점근정규성과 샌드위치 공분산 행렬 구조를 정식화한다.
 
 [Chapter 11 읽기](ch11-m-z-estimation/index.html) →
 
@@ -105,8 +118,7 @@ Consistency·asymptotic normality·sandwich variance·HC covariance·delta metho
 
 ### [Chapter 12 · Moment Restrictions, Instrumental Variables, and GMM](ch12-instrumental-variables-gmm/index.html)
 
-내생성과 도구변수 모멘트 조건, 2SLS 사영 기하, GMM 목적함수와 효율적 가중행렬,
-과대식별 제약 검정($J$-test)을 통합한다.
+내생성과 도구변수 모멘트 조건, 2SLS 사영 기하, GMM 목적함수와 효율적 가중행렬, 과대식별 제약 검정($J$-test)을 통합한다.
 
 [Chapter 12 읽기](ch12-instrumental-variables-gmm/index.html) →
 
@@ -114,8 +126,7 @@ Consistency·asymptotic normality·sandwich variance·HC covariance·delta metho
 
 ### [Chapter 13 · Likelihood-Based Estimation and Quasi-Likelihood](ch13-likelihood-quasi-likelihood/index.html)
 
-모수적 확률모형의 최대우도추정(MLE), 쿨백-라이블러 투영, 정보행렬 등식,
-준최대우도(QMLE)와 로버스트 샌드위치 추론을 다룬다.
+모수적 확률모형의 최대우도추정(MLE), 쿨백-라이블러 투영, 정보행렬 등식, 준최대우도(QMLE)와 로버스트 샌드위치 추론을 다룬다.
 
 [Chapter 13 읽기](ch13-likelihood-quasi-likelihood/index.html) →
 
@@ -123,8 +134,7 @@ Consistency·asymptotic normality·sandwich variance·HC covariance·delta metho
 
 ### [Chapter 14 · Weak Identification and Nonregular Asymptotics](ch14-weak-identification-nonregular/index.html)
 
-국소 0 수렴 점근이론, 약한 도구변수의 비정규 극한, Anderson–Rubin 식별-로버스트 추론,
-특이 정보행렬과 경계 모수를 다룬다.
+국소 0 수렴 점근이론, 약한 도구변수의 비정규 극한, Anderson–Rubin 식별-로버스트 추론, 특이 정보행렬과 경계 모수를 다룬다.
 
 [Chapter 14 읽기](ch14-weak-identification-nonregular/index.html) →
 
@@ -132,20 +142,16 @@ Consistency·asymptotic normality·sandwich variance·HC covariance·delta metho
 
 ### [Chapter 15 · Dependent Data and Time-Series Foundations](ch15-dependent-data-time-series/index.html)
 
-시계열 종속성 아래의 정상성(stationarity), 에르고딕성(ergodicity), Wold 분해,
-장기분산(LRV), 종속표본 OLS와 점근 샌드위치 분포, Newey–West HAC 추론을 다룬다.
+시계열 종속성 아래의 정상성(stationarity), 에르고딕성(ergodicity), Wold 분해, 장기분산(LRV), 종속표본 OLS와 점근 샌드위치 분포, Newey–West HAC 추론을 다룬다.
 
 [Chapter 15 읽기](ch15-dependent-data-time-series/index.html) →
 
 [14개 절 · 정리·증명·연습문제 포함]{.status}
 
-## 이후 확장
+## 주요 참고 문헌
 
-Chapter 01–14의 횡단면 계량경제이론에 이어, Chapter 15부터는 시계열 및 동태적 거시계량 모형 트랙을 구축한다.
-
-1. 정상 시계열 선형모형(AR, MA, ARMA) 및 예측 (Chapter 16)
-2. 비정상 시계열, 단위근 및 공적분
-3. 다변량 시계열(VAR, SVAR) 및 거시 충격 식별
-4. 패널 자료 및 고정효과·확률효과
-5. 비모수 및 준모수 계량경제학
-
+- Bruce E. Hansen, *Econometrics*, Princeton University Press.
+- Jeffrey M. Wooldridge, *Econometric Analysis of Cross Section and Panel Data*, MIT Press.
+- Fumio Hayashi, *Econometrics*, Princeton University Press.
+- James D. Hamilton, *Time Series Analysis*, Princeton University Press.
+- Joshua D. Angrist and Jörn-Steffen Pischke, *Mostly Harmless Econometrics: An Empiricist's Companion*, Princeton University Press.
