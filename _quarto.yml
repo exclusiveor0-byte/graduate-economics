@@ -8,6 +8,7 @@ project:
     - supplements/matlab/**
     - styles/macro-content.scss
     - styles/econometrics-content.scss
+    - styles/game-theory-content.scss
 lang: ko
 bibliography: references.bib
 number-sections: false
@@ -108,6 +109,21 @@ book:
     - microeconomics/ch04-pure-exchange/supplement-examples-exercises.qmd
     - microeconomics/ch04-pure-exchange/references.qmd
   - game-theory/index.qmd
+  - part: game-theory/ch01-strategic-interaction/index.qmd
+    chapters:
+    - game-theory/ch01-strategic-interaction/contents.qmd
+  - part: game-theory/ch02-dominance-reasoning/index.qmd
+    chapters:
+    - game-theory/ch02-dominance-reasoning/contents.qmd
+  - part: game-theory/ch03-best-response-nash/index.qmd
+    chapters:
+    - game-theory/ch03-best-response-nash/contents.qmd
+  - part: game-theory/ch04-mixed-strategies-existence/index.qmd
+    chapters:
+    - game-theory/ch04-mixed-strategies-existence/contents.qmd
+  - part: game-theory/ch05-dynamic-extensive-form/index.qmd
+    chapters:
+    - game-theory/ch05-dynamic-extensive-form/contents.qmd
   - macroeconomics/index.qmd
   - part: macroeconomics/ch00-foundations/index.qmd
     chapters:
@@ -297,6 +313,7 @@ format:
     - styles/macro-content.scss
     - styles/econometrics-content.scss
     - styles/math-content.scss
+    - styles/game-theory-content.scss
     toc: true
     toc-title: 이 페이지에서
     grid:

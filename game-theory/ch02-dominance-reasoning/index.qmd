@@ -1,0 +1,37 @@
+# Chapter 2 · 우월전략과 반복적 추론 {.unnumbered}
+*Dominance · Dominated Strategies · IESDS · Mixed Dominance · Rationalizability*
+
+이 장에서는 **우월전략과 반복적 추론**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토한다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **2.1** Belief-free reasoning과 강·약 지배
+- **2.2–2.3** IESDS·축소게임·약지배의 한계
+- **2.4–2.6** Mixed dominance·Rationalizability·고차 추론
+- **2.7–2.11** 풀이 프로토콜·예제 지도·IO 응용·연습문제
+:::
+
+## Sections
+
+- [2.1 Dominance: 상대를 예측하지 않고 할 수 있는 추론](contents.html#s21)
+- [2.2 IESDS: 지배논리를 반복하면 어디까지 갈 수 있는가?](contents.html#s22)
+- [2.3 Weak Dominance: equality가 만드는 차이](contents.html#s23)
+- [2.4 혼합전략에 의한 지배](contents.html#s24)
+- [2.5 Rationalizability](contents.html#s25)
+- [2.6 Higher-Order Reasoning: 몇 단계까지 상대를 생각하는가?](contents.html#s26)
+- [2.7 How to Solve a Dominance Problem](contents.html#s27)
+- [2.8 Canonical Examples Atlas](contents.html#s28)
+- [2.9 경제학과 산업조직에서의 응용 예고](contents.html#s29)
+- [2.10 Chapter Summary](contents.html#summary)
+- [2.11 연습문제](contents.html#exercises)
+- [참고문헌](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+수식·표·연습문제는 원본 구조를 보존한 [본문 전체](contents.html)에 있다.
+위의 Section 링크로 바로 이동하거나 순서대로 읽을 수 있다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 제출한다.
+:::

@@ -1,0 +1,2415 @@
+---
+title: "Chapter 3 · 최적반응과 Nash 균형"
+description: "최적반응, 순수전략 Nash 균형, Fixed Point, Cournot, Bertrand, 다중균형"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/game-theory-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s31}
+
+## [3.1]{.section-number}최적반응
+
+::: {.topic-opening}
+Nash 균형의 핵심 객체는 best response다.
+플레이어 $i$는 다른 플레이어들의 전략 $s_{-i}$를 주어진 것으로 보고 자신의 보수를 최대화한다.
+하나의 $s_{-i}$에 여러 최적전략이 존재할 수 있으므로 일반적으로 best response는 함수가 아니라 correspondence다.
+:::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+이 장의 논리
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+$$
+s_{-i}
+\longrightarrow
+BR_i(s_{-i})
+\longrightarrow
+BR(s)
+\longrightarrow
+s^*\in BR(s^*)
+\longrightarrow
+\text{Nash equilibrium}.
+$$
+
+Nash 균형은 각 플레이어의 독립적인 최적화 문제를 하나의 상호일관적 조건으로 묶는다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 3.1.1 Best-response correspondence {#s311}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Best response는 equilibrium이 아니라 조건부 최적화다
+
+:::::::::::::::::::
+
+“내가 무엇을 해야 하는가?”라는 질문에 답하려면 먼저 상대가 무엇을 한다고 둘 것인지가 필요하다.
+Cournot에서는 “상대가 $q_j$를 생산한다고 할 때 내 최적 생산량은 얼마인가?”를 묻고,
+가격경쟁에서는 “상대가 $p_j$를 선택한다고 할 때 내 최적 가격은 무엇인가?”를 묻는다.
+
+따라서 best response는 상대전략 $s_{-i}$를 고정한 조건부 최적화 문제의 해다.
+Nash equilibrium은 이런 개별 best responses가 서로 동시에 일치하는지를 한 단계 더 묻는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 3.1 · Best Response
+
+:::::::::::::::::::
+
+전략형 게임 $G=(N,(S_i),(u_i))$에서 상대 전략 profile $s_{-i}$가 주어졌을 때
+플레이어 $i$의 best-response correspondence는
+
+::::::::::::::::::: {.math-display}
+
+$$
+BR_i(s_{-i})
+=
+\operatorname{arg\,max}_{s_i\in S_i}
+u_i(s_i,s_{-i})
+$$
+
+:::::::::::::::::::
+
+로 정의한다. 따라서 $s_i\in BR_i(s_{-i})$는
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_i(s_i,s_{-i})
+\ge
+u_i(\tilde s_i,s_{-i})
+\qquad
+\forall \tilde s_i\in S_i
+$$
+
+:::::::::::::::::::
+
+를 뜻한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · correspondence로 쓰는 이유
+
+:::::::::::::::::::
+
+어떤 상대전략에 대해 둘 이상의 전략이 같은 최대보수를 줄 수 있다.
+이 경우 $BR_i(s_{-i})$는 여러 전략을 포함한다.
+따라서 일반적인 기호는 $BR_i:S_{-i}\rightrightarrows S_i$다.
+유일한 최적반응이 보장되는 경우에만 이를 단일값 함수처럼 다룰 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.bridge-example}
+
+::::::::::::::::::: {.bridge-example__head}
+
+EXAMPLE · 왜 function이 아니라 correspondence인가?
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.bridge-example__body}
+
+Player 1의 payoff만 다음과 같다고 하자.
+
+:::::::::::::::::: {.display-table-wrap}
+
+<table>
+<thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td>$U$</td><td>2</td><td>1</td></tr>
+<tr><td>$D$</td><td>2</td><td>0</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+상대가 $L$을 선택하면 $U,D$가 모두 payoff 2를 주므로
+
+$$
+BR_1(L)=\{U,D\}.
+$$
+
+하나의 input $L$에 두 개의 outputs가 대응할 수 있으므로 일반적인 best response는 correspondence다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 3.1.2 행렬게임에서 best response를 찾는 법 {#s312}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 3.1 · Best Response 표시</span>
+<span class="game-card__tag">FINITE GAME</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(3,2)$</td><td>$(0,1)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(1,0)$</td><td>$(2,3)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+Player 1은 열을 고정하고 첫 번째 payoff를 비교한다.
+
+:::::::::::::::::: {.math-display}
+
+$$
+BR_1(L)=\{U\},
+\qquad
+BR_1(R)=\{D\}.
+$$
+
+::::::::::::::::::
+
+Player 2는 행을 고정하고 두 번째 payoff를 비교한다.
+
+:::::::::::::::::: {.math-display}
+
+$$
+BR_2(U)=\{L\},
+\qquad
+BR_2(D)=\{R\}.
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+읽는 법
+
+:::::::::::::::::
+
+$(U,L)$에서는 $U\in BR_1(L)$이고 $L\in BR_2(U)$다.
+마찬가지로 $(D,R)$에서도 두 전략이 서로의 best response다.
+따라서 이 두 셀이 이후 정의할 pure-strategy Nash equilibrium 후보가 된다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.protocol}
+
+::::::::::::::::::: {.protocol__head}
+
+FINITE GAME · Best-response marking protocol
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+01
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Player 1</strong>열을 하나 고정하고 각 행의 첫 번째 payoff를 비교한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+02
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Player 2</strong>행을 하나 고정하고 각 열의 두 번째 payoff를 비교한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+03
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Ties도 모두 표시</strong>같은 최대payoff를 주는 전략이 여러 개면 모두 best responses다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+04
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Mutual best-response cells</strong>두 플레이어의 best-response 표시가 동시에 겹치는 셀이 pure Nash equilibrium 후보가 된다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 3.1.3 연속전략에서의 best response {#s313}
+
+전략집합이 구간이나 $\mathbb R_+$처럼 연속적인 경우에는 payoff matrix가 아니라 최적화 문제를 직접 푼다.
+$u_i$가 미분가능하고 내부해가 존재한다면 후보 best response는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\frac{\partial u_i(s_i,s_{-i})}{\partial s_i}=0
+$$
+
+::::::::::::::::::::
+
+에서 구할 수 있다.
+그러나 이것은 내부해의 1차 조건일 뿐이므로 concavity, 경계조건, feasibility를 함께 확인해야 한다.
+
+:::::::::::::::::::: {.protocol}
+
+::::::::::::::::::: {.protocol__head}
+
+CONTINUOUS GAME · Best response 계산 순서
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+01
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Feasible set</strong>$S_i$와 boundary를 먼저 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+02
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Interior candidate</strong>미분가능하면 FOC로 내부 후보를 구한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+03
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Global optimality</strong>concavity, SOC 또는 직접 비교로 후보가 실제 최대인지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+04
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Corner</strong>FOC 해가 feasible하지 않거나 boundary가 더 높은 payoff를 주는지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+05
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Piecewise BR</strong>필요하면 $\max\{\cdot\}$, $\min\{\cdot\}$ 형태로 전체 best-response correspondence를 쓴다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · FOC = best response는 아니다
+
+:::::::::::::::::::
+
+$\partial u_i/\partial s_i=0$은 일반적으로 후보조건이다.
+목적함수가 concave하지 않거나 corner solution이 가능하면 1차 조건만으로 best response를 결정할 수 없다.
+Bertrand 경쟁처럼 payoff가 불연속적인 게임에서는 미분 자체가 적절한 도구가 아닐 수도 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s32}
+
+## [3.2]{.section-number}순수전략 Nash 균형
+
+::: {.topic-opening}
+Best response는 한 플레이어의 최적화 문제다.
+Nash 균형은 모든 플레이어의 best-response 조건이 동시에 성립하는 전략 profile이다.
+즉 상대의 전략을 주어진 것으로 했을 때 어느 플레이어도 혼자 전략을 바꾸어 이득을 얻을 수 없다.
+:::
+
+### 3.2.1 정의와 unilateral deviation {#s321}
+
+:::::::::::::::::::: {.interpretation-grid}
+
+::::::::::::::::::: {.interpretation-card}
+
+:::::::::::::::::: {.interpretation-card__head}
+
+MUTUAL OPTIMALITY
+
+::::::::::::::::::
+
+각 플레이어의 전략이 실제 상대전략에 대한 best response다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.interpretation-card}
+
+:::::::::::::::::: {.interpretation-card__head}
+
+CONSISTENCY
+
+::::::::::::::::::
+
+내가 반응하는 상대전략이 실제 profile 안에서 상대가 선택한 전략과 일치한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.interpretation-card}
+
+:::::::::::::::::: {.interpretation-card__head}
+
+NO UNILATERAL DEVIATION
+
+::::::::::::::::::
+
+다른 플레이어의 전략을 고정했을 때 혼자 바꾸어 payoff를 높일 수 없다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Deviation할 때 상대는 움직이지 않는다
+
+:::::::::::::::::::
+
+Nash 조건에서 Player $i$의 deviation은
+
+$$
+(s_i^*,s_{-i}^*)\longrightarrow(s_i,s_{-i}^*)
+$$
+
+를 비교한다. Player $i$가 전략을 바꾸는 동안 $s_{-i}^*$는 고정한다.
+
+상대가 내 deviation을 본 뒤 다시 최적화할 것이라고 여기서 가정하지 않는다.
+dynamic game에서 continuation behavior의 신뢰성까지 분석하려면 이후의 SPE와 sequential rationality가 필요하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 3.2 · Pure-Strategy Nash Equilibrium
+
+:::::::::::::::::::
+
+전략 profile $s^*=(s_1^*,\ldots,s_n^*)\in S$가 pure-strategy Nash equilibrium이라는 것은
+모든 플레이어 $i$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_i(s_i^*,s_{-i}^*)
+\ge
+u_i(s_i,s_{-i}^*)
+\qquad
+\forall s_i\in S_i
+$$
+
+:::::::::::::::::::
+
+가 성립하는 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 3.1 · Best-Response Characterization
+
+:::::::::::::::::::
+
+$s^*$가 Nash equilibrium일 필요충분조건은
+
+::::::::::::::::::: {.math-display}
+
+$$
+s_i^*\in BR_i(s_{-i}^*)
+\qquad
+\forall i\in N
+$$
+
+:::::::::::::::::::
+
+이 성립하는 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+PROOF
+
+:::::::::::::::::::
+
+$s_i^*\in BR_i(s_{-i}^*)$의 정의가 바로
+
+$$
+u_i(s_i^*,s_{-i}^*)
+\ge
+u_i(s_i,s_{-i}^*)
+\quad\forall s_i\in S_i
+$$
+
+이므로 두 조건은 동일한 명제를 서로 다른 표기로 쓴 것이다.
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.equilibrium-check}
+
+::::::::::::::::::: {.equilibrium-check__head}
+
+NASH EQUILIBRIUM을 검사하는 순서
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.equilibrium-check__row}
+
+:::::::::::::::::: {.equilibrium-check__key}
+
+1. Profile 고정
+
+::::::::::::::::::
+
+:::::::::::::::::: {.equilibrium-check__body}
+
+후보 $s^*$를 하나 고른다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.equilibrium-check__row}
+
+:::::::::::::::::: {.equilibrium-check__key}
+
+2. Player 1
+
+::::::::::::::::::
+
+:::::::::::::::::: {.equilibrium-check__body}
+
+$s_{-1}^*$를 고정한 채 $1$이 일방적으로 바꾸어 이득을 얻는지 본다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.equilibrium-check__row}
+
+:::::::::::::::::: {.equilibrium-check__key}
+
+3. 모든 Player
+
+::::::::::::::::::
+
+:::::::::::::::::: {.equilibrium-check__body}
+
+같은 검사를 $i=2,\ldots,n$에 대해 반복한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.equilibrium-check__row}
+
+:::::::::::::::::: {.equilibrium-check__key}
+
+4. 결론
+
+::::::::::::::::::
+
+:::::::::::::::::: {.equilibrium-check__body}
+
+어느 플레이어도 profitable unilateral deviation이 없을 때에만 Nash equilibrium이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Nash는 공동이탈을 막지 않는다
+
+:::::::::::::::::::
+
+Nash equilibrium은 한 플레이어의 unilateral deviation만 검사한다.
+두 명 이상이 동시에 전략을 바꾸면 모두 더 좋아지는 경우가 있어도 Nash 조건 자체는 위배되지 않는다.
+따라서 Nash equilibrium은 coalition-proofness나 Pareto efficiency와 다른 개념이다.
+
+::::::::::::::::::::
+
+### 3.2.2 Nash equilibrium의 fixed-point 해석 {#s322}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Fixed point는 넣은 전략과 최적반응으로 나온 전략이 같은 상태다
+
+:::::::::::::::::::
+
+어떤 strategy profile $s$를 가정하고 각 플레이어의 best response를 계산해 보자.
+그 결과 나온 best-response profile이 다시 처음의 $s$와 일치한다면 누구의 전략도 수정할 이유가 없다.
+
+2인 게임에서는
+
+$$
+s_1=BR_1(s_2),\qquad s_2=BR_2(s_1)
+$$
+
+을 동시에 만족시키는 점을 찾는 문제로 읽을 수 있다.
+
+::::::::::::::::::::
+
+전체 best-response correspondence를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+BR(s)
+=
+\prod_{i\in N}BR_i(s_{-i})
+$$
+
+::::::::::::::::::::
+
+로 정의하면 Nash equilibrium은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+s^*\in BR(s^*)
+}
+$$
+
+::::::::::::::::::::
+
+로 쓸 수 있다.
+즉 Nash equilibrium은 best-response correspondence의 fixed point다.
+Chapter 4에서는 mixed-strategy space를 도입한 뒤 이 관점에 Kakutani fixed-point theorem을 적용하여
+모든 유한게임의 Nash equilibrium 존재를 보인다.
+
+:::::::::::::::::::: {.relation-chain}
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">OPTIMIZATION</span><span class="text">각 $BR_i$ 계산</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">CONSISTENCY</span><span class="text">모든 반응을 동시에 결합</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">FIXED POINT</span><span class="text">$s^*\in BR(s^*)$</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">EQUILIBRIUM</span><span class="text">일방적 이탈 유인 없음</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+연속전략 게임에서는 best-response curves의 교점을 찾는다
+
+:::::::::::::::::::
+
+두 플레이어의 best response가 단일값 함수로 주어지면
+
+$$
+s_1=BR_1(s_2),
+\qquad
+s_2=BR_2(s_1)
+$$
+
+이라는 두 방정식을 동시에 푸는 것과 같다.
+따라서 두 reaction functions가 만나는 점은 두 플레이어가 동시에 자신의 최적반응을 선택하는 지점이다.
+
+이후 Cournot 모형에서 두 reaction functions의 동시해를 구하는 계산은
+바로 이 fixed-point 해석을 구체적인 생산량 경쟁에 적용한 것이다.
+
+::::::::::::::::::::
+
+### 3.2.3 Strict Nash equilibrium {#s323}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 3.3 · Strict Nash Equilibrium
+
+:::::::::::::::::::
+
+전략 profile $s^*$가 strict Nash equilibrium이라는 것은 모든 $i$와 모든 $s_i\neq s_i^*$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_i(s_i^*,s_{-i}^*)
+>
+u_i(s_i,s_{-i}^*)
+$$
+
+:::::::::::::::::::
+
+가 성립하는 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 3.2 · Strict Nash는 Nash를 함의한다
+
+:::::::::::::::::::
+
+모든 strict Nash equilibrium은 Nash equilibrium이다.
+그러나 Nash equilibrium이 strict일 필요는 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · strictness의 의미
+
+:::::::::::::::::::
+
+strict Nash equilibrium에서는 각 플레이어의 equilibrium strategy가
+$s_{-i}^*$에 대한 유일한 best response다.
+반면 일반 Nash equilibrium에서는 여러 best response 중 하나일 수 있다.
+이 차이는 equilibrium의 robustness와 refinement를 논의할 때 다시 중요해진다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · strict equilibrium $\neq$ unique equilibrium
+
+:::::::::::::::::::
+
+strictness는 주어진 equilibrium profile에서 각 플레이어의 best response가 유일하다는 뜻이다.
+게임 전체에 equilibrium이 하나뿐이라는 뜻은 아니다.
+다음 절의 Coordination Game처럼 두 개의 pure Nash equilibria가 모두 strict일 수 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#finite}
+
+## [3.3]{.section-number}유한게임에서의 Nash 균형
+
+::: {.topic-opening}
+같은 Nash 정의를 적용해도 게임의 구조에 따라 균형은 하나일 수도, 여러 개일 수도, 순수전략으로는 존재하지 않을 수도 있다.
+네 개의 기준게임을 이용해 이 차이를 비교한다.
+:::
+
+:::::::::::::::::::: {#pd .game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 3.2 · 죄수의 딜레마</span>
+<span class="game-card__tag">UNIQUE PURE NE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$C_2$</th><th>$D_2$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$C_1$</td><td>$(3,3)$</td><td>$(0,5)$</td></tr>
+<tr><td class="row-label">$D_1$</td><td>$(5,0)$</td><td>$(1,1)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+:::::::::::::::::: {.math-display}
+
+$$
+BR_1(C_2)=BR_1(D_2)=\{D_1\},
+$$
+
+$$
+BR_2(C_1)=BR_2(D_1)=\{D_2\}.
+$$
+
+::::::::::::::::::
+
+따라서 유일한 pure-strategy Nash equilibrium은
+
+$$
+(D_1,D_2)
+$$
+
+이다. 이 게임에서는 dominant-strategy reasoning과 Nash reasoning이 같은 결과를 낸다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {#coord .game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 3.3 · 조정게임</span>
+<span class="game-card__tag">MULTIPLE PURE NE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(2,2)$</td><td>$(0,0)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(0,0)$</td><td>$(1,1)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+$$
+(U,L),\qquad(D,R)
+$$
+
+은 모두 Nash equilibrium이다.
+두 equilibrium 모두 strict하다.
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+핵심
+
+:::::::::::::::::
+
+Nash equilibrium의 존재는 equilibrium selection을 해결하지 않는다.
+여러 equilibrium이 있을 때 어떤 결과가 실제로 실현될지는 추가적인 제도, 기대, 학습, focal point 또는 refinement에 의존할 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {#chicken .game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 3.4 · Chicken / Hawk–Dove</span>
+<span class="game-card__tag">ASYMMETRIC PURE NE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$S$</th><th>$T$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$S$</td><td>$(2,2)$</td><td>$(1,3)$</td></tr>
+<tr><td class="row-label">$T$</td><td>$(3,1)$</td><td>$(0,0)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+여기서 $S$는 yield, $T$는 tough action이라 하자.
+상대가 $S$면 $T$가 최적반응이고, 상대가 $T$면 $S$가 최적반응이다.
+따라서
+
+$$
+(T,S),\qquad(S,T)
+$$
+
+두 개의 asymmetric pure Nash equilibria가 존재한다.
+
+Coordination game과 달리 양쪽이 같은 행동을 하는 것이 아니라,
+누가 양보하고 누가 강경하게 나설지에 대한 anti-coordination 문제가 핵심이다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {#mp .game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 3.5 · 동전 맞추기</span>
+<span class="game-card__tag">NO PURE NE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$H_2$</th><th>$T_2$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$H_1$</td><td>$(1,-1)$</td><td>$(-1,1)$</td></tr>
+<tr><td class="row-label">$T_1$</td><td>$(-1,1)$</td><td>$(1,-1)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+어느 pure profile에서도 한 플레이어가 일방적으로 행동을 바꾸고 싶어 한다.
+따라서 pure-strategy Nash equilibrium이 없다.
+
+:::::::::::::::::: {.callout-strip}
+
+::::::::::::::::: {.left}
+
+Chapter 4로
+
+:::::::::::::::::
+
+::::::::::::::::: {.right}
+
+순수전략 Nash equilibrium의 부재가 “게임에 equilibrium이 없다”는 뜻은 아니다.
+혼합전략을 허용하면 두 플레이어가 각각 $H,T$를 $1/2$의 확률로 선택하는 Nash equilibrium이 존재한다.
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.comparison-band}
+
+::::::::::::::::::: {.import-block}
+
+<strong>존재</strong>
+<span>순수전략 Nash equilibrium은 모든 유한게임에서 존재하는 것이 아니다. Matching Pennies가 반례다.</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>유일성</strong>
+<span>존재하더라도 유일할 필요가 없다. Coordination과 Chicken에는 두 개의 pure equilibrium이 있다.</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.pattern-table}
+
+<table>
+<thead><tr><th>게임</th><th>Best-response pattern</th><th>Pure NE</th><th>핵심 구조</th></tr></thead>
+<tbody>
+<tr><td>Prisoner's Dilemma</td><td>한 행동이 상대행동과 무관하게 BR</td><td>1개</td><td>dominance</td></tr>
+<tr><td>Coordination</td><td>상대 행동에 맞추는 반응</td><td>2개</td><td>coordination</td></tr>
+<tr><td>Chicken</td><td>상대와 반대 역할을 선택하는 반응</td><td>2개</td><td>anti-coordination</td></tr>
+<tr><td>Matching Pennies</td><td>best responses가 순환</td><td>0개</td><td>zero-sum conflict</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+균형 개수의 차이는 best-response 구조에서 나온다
+
+:::::::::::::::::::
+
+네 게임에 같은 Nash 정의를 적용해도 결과가 다른 이유는 각 게임의 payoff가 서로 다른 best-response correspondence를 만들고,
+그 correspondences가 만나는 방식이 다르기 때문이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s34}
+
+## [3.4]{.section-number}Dominance, IESDS와 Nash의 관계
+
+::: {.topic-opening}
+Chapter 2의 elimination reasoning과 Nash equilibrium은 경쟁하는 개념이 아니라 서로 다른 수준의 추론이다.
+dominance는 상대의 정확한 전략을 몰라도 일부 전략을 제거하고,
+Nash는 서로의 best response가 일치하는 profile을 찾는다.
+:::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 3.3 · Dominant-Strategy Equilibrium은 Nash Equilibrium이다
+
+:::::::::::::::::::
+
+모든 플레이어가 dominant strategy $s_i^*$를 갖는다면
+$s^*=(s_1^*,\ldots,s_n^*)$는 Nash equilibrium이다.
+각 $s_i^*$는 특히 $s_{-i}^*$에 대해서도 best response이기 때문이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · 역은 성립하지 않는다
+
+:::::::::::::::::::
+
+Nash equilibrium의 전략이 상대의 모든 가능한 전략에 대해 최적일 필요는 없다.
+equilibrium에서 실제로 주어진 $s_{-i}^*$에 대해 최적이면 충분하다.
+Coordination game의 $U$는 $L$에 대해서는 best response지만 $R$에 대해서는 그렇지 않다.
+
+::::::::::::::::::::
+
+### 3.4.1 IESDS와 Nash equilibrium {#s341}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+왜 Nash strategy는 strict dominance로 제거될 수 없는가?
+
+:::::::::::::::::::
+
+Nash equilibrium에서 $s_i^*$는 실제 상대전략 $s_{-i}^*$에 대한 best response다.
+그런데 strictly dominated strategy는 어떤 surviving opponent strategy에 대해서도 best response가 될 수 없다.
+따라서 equilibrium에서 실제로 사용되는 전략이 strict-dominance elimination으로 사라질 수는 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 3.1 · Pure-strategy strict-dominance IESDS는 Pure Nash를 보존한다
+
+:::::::::::::::::::
+
+유한게임에서 strictly dominated pure strategies를 반복 제거하더라도
+원래 게임의 pure-strategy Nash equilibrium에 사용되는 전략은 제거되지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+PROOF
+
+:::::::::::::::::::
+
+$s^*$가 pure Nash equilibrium이라고 하자.
+$s_i^*$가 어떤 surviving strategy $\hat s_i$에 의해 strictly dominated된다면,
+특히 $s_{-i}^*$에 대해서
+
+$$
+u_i(\hat s_i,s_{-i}^*)
+>
+u_i(s_i^*,s_{-i}^*)
+$$
+
+가 되어 $s_i^*\in BR_i(s_{-i}^*)$와 모순이다.
+첫 round에서 equilibrium strategy는 제거될 수 없다.
+같은 논리를 각 reduced game에 반복하면 모든 equilibrium strategy가 끝까지 살아남는다.
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 3.4 · Dominance solvability와 Nash
+
+:::::::::::::::::::
+
+IESDS가 각 플레이어에게 하나의 전략만 남기는 유한게임이라면,
+그 surviving profile은 그 게임의 유일한 pure-strategy Nash equilibrium이다.
+
+::::::::::::::::::::
+
+### 3.4.2 약열등전략은 Nash equilibrium에 나타날 수 있다 {#s342}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 3.6 · Weakly Dominated Strategy in Nash Equilibrium</span>
+<span class="game-card__tag">WEAK DOMINANCE ≠ EXCLUSION</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(1,1)$</td><td>$(1,0)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(1,1)$</td><td>$(0,1)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+Player 1에게 $U$는 $D$를 weakly dominates한다.
+$L$에서는 둘 다 1이고 $R$에서는 $1>0$이다.
+그러나 $(D,L)$에서는 Player 1이 $U$로 바꾸어도 보수가 1로 같고,
+Player 2도 $L$에서 $R$로 바꾸어 보수가 증가하지 않는다.
+
+:::::::::::::::::: {.math-display}
+
+$$
+(D,L)\text{ is a Nash equilibrium}
+$$
+
+::::::::::::::::::
+
+이 예제는 weakly dominated strategy가 Nash equilibrium에 포함될 수 있음을 보여준다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 3.4.3 Rationalizability vs Nash Equilibrium {#s343}
+
+Chapter 2의 rationalizability는 어떤 전략을 최적으로 만드는 belief가 존재하는지를 묻는다.
+따라서 각 플레이어가 서로 다른 belief를 사용해 자신의 전략을 정당화할 수 있다.
+Nash equilibrium은 여기에 한 단계 더 강한 consistency를 요구한다.
+
+:::::::::::::::::::: {.comparison-band}
+
+::::::::::::::::::: {.import-block}
+
+<strong>Rationalizability</strong><span>$\exists\,\mu_i$ such that $s_i\in BR_i(\mu_i)$. 전략을 최적으로 만드는 admissible belief가 하나라도 있으면 된다.</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>Nash Equilibrium</strong><span>$s_i^*\in BR_i(s_{-i}^*)$ for all $i$. belief의 내용과 실제 상대전략이 한 profile 안에서 서로 맞아야 한다.</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.bridge-example}
+
+::::::::::::::::::: {.bridge-example__head}
+
+Coordination Game으로 다시 보기
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.bridge-example__body}
+
+표준 Coordination Game에서는 Player 1의 $U,D$, Player 2의 $L,R$ 모두 적절한 belief 아래에서 best response가 될 수 있으므로 rationalizable하다.
+그러나 $(U,R)$은 Nash equilibrium이 아니다. $R$이 실제로 선택되어 있다면 Player 1은 $D$로 바꾸는 것이 더 좋기 때문이다.
+
+따라서 Nash equilibrium에서 사용되는 전략은 rationalizable하지만,
+rationalizable strategies를 임의로 조합한 profile이 Nash가 되는 것은 아니다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#cournot}
+
+## [3.5]{.section-number}연속전략 게임: Cournot 경쟁
+
+::: {.topic-opening}
+Nash equilibrium은 payoff matrix에만 적용되는 개념이 아니다.
+Cournot 경쟁에서는 각 기업의 전략이 생산량 $q_i\in\mathbb R_+$이라는 연속변수다.
+equilibrium은 두 기업의 reaction function이 서로 일치하는 점으로 계산된다.
+:::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+SETUP · Linear Cournot Duopoly
+
+:::::::::::::::::::
+
+두 기업 $i=1,2$가 동시에 생산량 $q_i\ge0$를 선택한다.
+시장의 역수요와 비용은
+
+::::::::::::::::::: {.math-display}
+
+$$
+P(Q)=a-bQ,
+\qquad
+Q=q_1+q_2,
+\qquad
+C_i(q_i)=cq_i,
+$$
+
+$$
+a>c\ge0,\qquad b>0.
+$$
+
+:::::::::::::::::::
+
+따라서 기업 $i$의 이윤은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\pi_i(q_i,q_j)
+=
+\bigl[a-b(q_i+q_j)-c\bigr]q_i.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 3.5.1 Cournot reaction function {#cournot-br}
+
+기업 $i$는 $q_j$를 주어진 것으로 보고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\max_{q_i\ge0}
+\bigl[a-c-bq_j-bq_i\bigr]q_i
+$$
+
+::::::::::::::::::::
+
+를 푼다. 목적함수는 $q_i$에 대해 strictly concave이고 내부해의 1차 조건은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+a-c-bq_j-2bq_i=0.
+$$
+
+::::::::::::::::::::
+
+따라서 best response는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+BR_i(q_j)
+=
+\max\left\{
+0,\,
+\frac{a-c-bq_j}{2b}
+\right\}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+왜 $\max\{0,\cdot\}$ 형태인가?
+
+:::::::::::::::::::
+
+FOC가 주는 unconstrained optimum
+
+$$
+\frac{a-c-bq_j}{2b}
+$$
+
+가 음수일 수 있지만 생산량은 $q_i\ge0$이어야 한다.
+내부 후보가 음수이면 실제 best response는 boundary $q_i=0$이 된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.reaction-sheet}
+
+::::::::::::::::::: {.reaction-sheet__head}
+
+COURNOT REACTION FUNCTIONS
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.reaction-sheet__grid}
+
+:::::::::::::::::: {.reaction-sheet__cell}
+
+::::::::::::::::: {.reaction-sheet__label}
+
+Firm 1
+
+:::::::::::::::::
+
+::::::::::::::::: {.math-display}
+
+$$
+q_1=BR_1(q_2)
+=
+\max\left\{0,\frac{a-c-bq_2}{2b}\right\}.
+$$
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::: {.reaction-sheet__cell}
+
+::::::::::::::::: {.reaction-sheet__label}
+
+Firm 2
+
+:::::::::::::::::
+
+::::::::::::::::: {.math-display}
+
+$$
+q_2=BR_2(q_1)
+=
+\max\left\{0,\frac{a-c-bq_1}{2b}\right\}.
+$$
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · reaction function은 시간적으로 뒤에서 반응한다는 뜻이 아니다
+
+:::::::::::::::::::
+
+Cournot 게임에서는 두 기업이 동시에 생산량을 선택한다.
+따라서 $BR_i(q_j)$는 Firm $i$가 실제로 $q_j$를 먼저 관찰한 뒤 행동한다는 뜻이 아니다.
+이는 “상대 생산량이 $q_j$라고 주어졌다면 내 최적 생산량은 무엇인가?”라는
+조건부 최적화 규칙이며, 두 규칙의 상호일치점을 찾기 위해 사용한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Cournot quantities는 strategic substitutes다
+
+:::::::::::::::::::
+
+내부구간에서
+
+$$
+BR_i(q_j)=\frac{a-c-bq_j}{2b}
+$$
+
+이므로
+
+$$
+\frac{\partial BR_i(q_j)}{\partial q_j}=-\frac12\lt 0.
+$$
+
+상대 생산량이 증가하면 residual demand가 줄어 내 최적 생산량도 감소한다.
+이런 관계를 strategic substitutes라 부른다.
+
+::::::::::::::::::::
+
+### 3.5.2 Cournot-Nash equilibrium {#cournot-ne}
+
+$a>c$인 내부균형에서는 두 기업의 best-response equations를 동시에 만족해야 한다.
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+2q_1^*+q_2^*=\frac{a-c}{b},
+\qquad
+q_1^*+2q_2^*=\frac{a-c}{b}.
+$$
+
+::::::::::::::::::::
+
+두 식을 빼면 $q_1^*=q_2^*$가 나온다.
+symmetry는 동일한 primitives와 두 best-response equations의 동시해에서 도출된다.
+이를 다시 대입하면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+q_1^*=q_2^*
+=
+\frac{a-c}{3b}
+}.
+$$
+
+::::::::::::::::::::
+
+총생산량, 시장가격, 각 기업의 이윤은 각각
+
+:::::::::::::::::::: {.math-display}
+
+$$
+Q^*
+=
+\frac{2(a-c)}{3b},
+\qquad
+P^*
+=
+\frac{a+2c}{3},
+$$
+
+$$
+\pi_i^*
+=
+\frac{(a-c)^2}{9b}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Cournot equilibrium은 상호 최적반응이다
+
+:::::::::::::::::::
+
+각 기업은 상대의 equilibrium output을 주어진 것으로 했을 때 자신의 생산량을 바꿀 유인이 없다.
+중요한 점은 두 기업이 산업 전체 이윤을 공동으로 최대화하는 것이 아니라,
+각각 상대 생산량을 고정한 상태에서 자신의 이윤을 최대화한다는 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.market-comparison}
+
+::::::::::::::::::: {.market-comparison__row}
+
+:::::::::::::::::: {.market-comparison__key}
+
+Monopoly
+
+::::::::::::::::::
+
+:::::::::::::::::: {.market-comparison__body}
+
+$$
+Q^M=\frac{a-c}{2b}.
+$$
+한 기업이 전체 산업이윤을 최대화한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.market-comparison__row}
+
+:::::::::::::::::: {.market-comparison__key}
+
+Cournot Duopoly
+
+::::::::::::::::::
+
+:::::::::::::::::: {.market-comparison__body}
+
+$$
+Q^C=\frac{2(a-c)}{3b}.
+$$
+각 기업이 상대 생산량을 주어진 것으로 하고 자신의 이윤을 최대화한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.market-comparison__row}
+
+:::::::::::::::::: {.market-comparison__key}
+
+Competitive benchmark
+
+::::::::::::::::::
+
+:::::::::::::::::: {.market-comparison__body}
+
+$$
+Q^{PC}=\frac{a-c}{b},\qquad P=c.
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+따라서
+
+$$
+Q^M\lt Q^C\lt Q^{PC},
+\qquad
+P^M>P^C>c.
+$$
+
+Cournot competition은 monopoly보다 생산량을 늘리고 가격을 낮추지만 완전경쟁 수준까지 도달하지는 않는다.
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Cournot 해를 식으로 읽는 법
+
+:::::::::::::::::::
+
+$$
+q_i^*=\frac{a-c}{3b}
+$$
+
+에서 시장규모 또는 수요절편 $a$가 커지면 equilibrium output은 증가하고,
+한계비용 $c$가 커지면 감소한다.
+수요곡선의 기울기 $b$가 커져 수요가 수량증가에 더 민감하게 반응하면 equilibrium output도 작아진다.
+
+이런 comparative statics는 equilibrium 공식을 단순히 암기하는 대신
+어떤 primitive가 기업의 전략적 선택을 어떻게 움직이는지 읽게 해준다.
+
+::::::::::::::::::::
+
+<details class="extension">
+<summary>확장 · $J$개의 동일한 Cournot 기업</summary>
+
+:::::::::::::::::::: {.details-body}
+
+$J$개 기업이 모두 동일한 한계비용 $c$를 가지면 대칭 Cournot equilibrium에서 각 기업의 생산량은
+
+$$
+q_j^*
+=
+\frac{a-c}{b(J+1)}
+$$
+
+이고 총생산량은
+
+$$
+Q^*
+=
+\frac{J(a-c)}{b(J+1)}
+$$
+
+이다. $J$가 커질수록 총생산은 경쟁시장 수준 $(a-c)/b$에 접근하고 가격은 $c$에 접근한다.
+
+::::::::::::::::::::
+
+</details>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#bertrand}
+
+## [3.6]{.section-number}Bertrand 경쟁
+
+::: {.topic-opening}
+Cournot에서는 생산량을 전략변수로 사용했다.
+Bertrand에서는 동일한 동질재를 판매하는 두 기업이 동시에 가격을 선택한다.
+비용과 수요가 같더라도 전략변수와 배분규칙이 달라지면 equilibrium은 크게 달라질 수 있다.
+:::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+SETUP · Homogeneous-Good Bertrand Duopoly
+
+:::::::::::::::::::
+
+두 기업은 동일한 한계비용 $c$를 가지며 연속적인 가격집합에서 $p_i\ge c$를 선택한다.
+시장수요를 $D(p)$라 하고 관련 가격범위에서 $D(p)>0$라 하자.
+기업에는 capacity constraint가 없으며 낮은 가격을 제시한 기업이 시장 전체 수요를 얻고,
+가격이 같으면 시장을 절반씩 나눈다고 하자.
+
+이 가정들은 “조금 더 낮은 가격으로 전체 시장을 차지할 수 있다”는 undercutting 논리를 가능하게 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 3.2 · Bertrand Equilibrium
+
+:::::::::::::::::::
+
+위의 표준 가정 아래 유일한 pure-strategy Nash equilibrium은
+
+::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+p_1^*=p_2^*=c
+}
+$$
+
+:::::::::::::::::::
+
+이며 두 기업의 이윤은 0이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+PROOF · Undercutting Argument
+
+:::::::::::::::::::
+
+먼저 $(p_1,p_2)=(c,c)$를 보자. 두 기업의 이윤은 0이다.
+한 기업이 $c$보다 높은 가격으로 올리면 상대보다 비싸져 수요를 잃고,
+$p_i\lt c$는 전략집합에서 허용하지 않는다.
+따라서 profitable unilateral deviation이 없으므로 $(c,c)$는 Nash equilibrium이다.
+
+<strong>Case 1: $p_1=p_2=p>c$.</strong>
+충분히 작은 $\varepsilon>0$에 대해 $p-\varepsilon>c$가 되도록 가격을 조금 낮추면
+전체 수요를 얻으므로 tie에서 시장 절반만 얻는 것보다 이윤을 높일 수 있다.
+
+<strong>Case 2: $c\lt p_1\lt p_2$.</strong>
+Firm 2는 현재 수요를 얻지 못해 이윤이 0이다.
+충분히 작은 $\varepsilon>0$에 대해 $p_1-\varepsilon>c$로 가격을 낮추면
+전체 시장을 얻고 양의 이윤을 얻을 수 있다.
+
+<strong>Case 3: $p_1=c\lt p_2$.</strong>
+Firm 1은 현재 전체 수요를 얻지만 margin이 0이다.
+$c\lt p_1'\lt p_2$인 가격으로 조금 올리면 여전히 더 낮은 가격을 유지해 전체 수요를 얻으면서 양의 margin을 확보할 수 있다.
+
+대칭적인 경우도 동일하다. 따라서 $c$보다 높은 가격을 포함하는 어떤 profile도 Nash equilibrium이 될 수 없으며,
+유일한 pure-strategy Nash equilibrium은
+
+$$
+(p_1^*,p_2^*)=(c,c)
+$$
+
+이다. <span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Bertrand Paradox
+
+:::::::::::::::::::
+
+단 두 기업만 존재해도 동질재, 동일 한계비용, 무용량제약, 가격의 연속성 같은 표준 가정 아래
+가격이 한계비용까지 내려가고 이윤이 0이 되는 결과를 흔히 Bertrand paradox라고 부른다.
+제품차별화, capacity constraints, 반복상호작용, 소비자 search frictions 등을 도입하면 이 결과는 달라질 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.comparison-band}
+
+::::::::::::::::::: {.import-block}
+
+<strong>Cournot</strong>
+<span>
+전략은 생산량. 선형수요·동일비용의 duopoly에서
+$q_i^*=(a-c)/(3b)$, $P^*=(a+2c)/3>c$.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>Bertrand</strong>
+<span>
+전략은 가격. 동질재·동일 한계비용 아래
+$p_1^*=p_2^*=c$. 가격경쟁이 한계비용까지 가격을 밀어내린다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Cournot과 Bertrand의 결과는 서로 모순되지 않는다
+
+:::::::::::::::::::
+
+두 모형은 같은 수요와 비용을 사용할 수 있지만 플레이어가 선택하는 전략변수가 다르고,
+그 전략이 시장수요를 배분하는 방식도 다르다.
+따라서 두 결과의 차이는 “어느 계산이 맞는가?”의 문제가 아니라
+어떤 전략적 환경을 모델링하고 있는가의 차이다.
+
+실제 산업을 분석할 때는 가격과 생산량 중 무엇이 더 적절한 전략변수인지,
+capacity가 사전에 고정되어 있는지, 제품이 얼마나 차별화되어 있는지를 먼저 판단해야 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Bertrand에서 FOC를 기계적으로 쓰지 말 것
+
+:::::::::::::::::::
+
+낮은 가격을 제시한 기업이 시장 전체를 얻는다는 배분규칙 때문에 이윤함수는 상대가격과 같은 지점에서 불연속적이거나 비매끄럽다.
+따라서 Cournot처럼 미분 후 1차 조건을 푸는 방식이 적절하지 않다.
+equilibrium은 deviation과 undercutting 논리로 직접 확인해야 한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s37}
+
+## [3.7]{.section-number}Nash equilibrium의 해석과 한계
+
+::: {.topic-opening}
+Nash equilibrium은 게임이론의 중심 해 개념이지만 “합리적 결과”라는 표현을 과도하게 읽어서는 안 된다.
+정확히는 전략 profile이 일방적 이탈에 대해 안정적이라는 조건이다.
+:::
+
+:::::::::::::::::::: {.property-sheet}
+
+::::::::::::::::::: {.property-sheet__head}
+
+NASH EQUILIBRIUM이 말하는 것과 말하지 않는 것
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+말하는 것
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+상대의 equilibrium strategy가 주어졌을 때 각 플레이어의 strategy는 best response다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Self-enforcing
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+해당 strategy profile이 실제로 예상되고 주어져 있다는 조건 아래에서 어느 한 플레이어도 혼자 전략을 바꿀 유인이 없다. Nash 조건 자체는 플레이어들이 그 equilibrium에 어떻게 도달하는지는 설명하지 않는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+효율성 아님
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+죄수의 딜레마처럼 Nash equilibrium이 Pareto dominated될 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+유일성 아님
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+Coordination 또는 Chicken처럼 여러 Nash equilibria가 존재할 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+순수균형 존재 아님
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+Matching Pennies처럼 pure-strategy Nash equilibrium이 없을 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+동태적 신뢰성 아님
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+전략형 Nash는 off-path 행동의 신뢰성을 충분히 제한하지 않는다. 이 문제는 이후 SPE와 sequential equilibrium에서 다룬다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Nash equilibrium은 도달과정을 설명하지 않는다
+
+:::::::::::::::::::
+
+Nash equilibrium은 profile이 주어졌을 때 일방적으로 이탈할 유인이 없는지를 말한다.
+그러나 플레이어들이 그 profile을 어떻게 예상하게 되었는지,
+학습과 조정과정을 통해 그 equilibrium으로 실제 수렴하는지,
+여러 equilibrium 중 무엇이 선택되는지는 별도의 문제다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Equilibrium multiplicity
+
+:::::::::::::::::::
+
+Nash equilibrium이 여러 개 존재하면 theory가 가능한 결과의 집합을 좁혀 주기는 하지만 하나의 예측을 선택하지 못할 수 있다.
+payoff dominance, risk dominance, focal points, learning, communication, institutions,
+equilibrium refinements 등은 이러한 multiplicity를 추가로 분석하는 서로 다른 접근이다.
+
+::::::::::::::::::::
+
+<details class="extension">
+<summary>확장 · Payoff dominance와 risk dominance의 예고</summary>
+
+:::::::::::::::::::: {.details-body}
+
+Stag Hunt 유형의 $2\times2$ coordination game에서는 한 equilibrium이 두 플레이어 모두에게 더 높은 보수를 줄 수 있다.
+이를 payoff-dominant equilibrium이라 부른다.
+그러나 상대의 행동에 대한 불확실성이 클 때 더 안전한 equilibrium이 선택될 수 있으며,
+$2\times2$ coordination game에서는 이를 risk dominance로 정식화할 수 있다.
+이 장에서는 개념만 예고하고, equilibrium selection과 refinement를 별도의 심화 주제로 남겨 둔다.
+
+::::::::::::::::::::
+
+</details>
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Chapter 4로
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+지금까지는 pure strategies만 사용했다.
+그러나 Matching Pennies처럼 pure Nash equilibrium이 없는 유한게임도 있다.
+다음 장에서는 mixed strategy를 확률분포로 정의하고 기대보수를 도입한 뒤,
+모든 유한게임에 mixed-strategy Nash equilibrium이 존재한다는 Nash existence theorem으로 이동한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s38}
+
+## [3.8]{.section-number}How to Solve a Nash Problem
+
+::: {.topic-opening}
+Nash 문제에서는 각 플레이어의 conditional optimization을 먼저 풀고 그 해들을 서로 일치시킨다.
+유한게임과 연속전략 게임의 계산법은 다르지만 논리구조는 동일하다.
+:::
+
+:::::::::::::::::::: {.protocol}
+
+::::::::::::::::::: {.protocol__head}
+
+FINITE GAME · Pure Nash solver
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+01
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Player별 payoff 분리</strong>각 player 자신의 payoff만 보면서 상대의 각 action을 하나씩 고정한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+02
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Best responses 표시</strong>상대 action별 최대 payoff를 주는 모든 전략을 표시한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+03
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Mutual BR 찾기</strong>모든 player의 best-response 표시가 동시에 겹치는 cells가 pure Nash equilibria다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+04
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Strictness</strong>각 equilibrium strategy가 유일한 best response인지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+05
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>No pure NE</strong>mutual BR cell이 없으면 pure equilibrium은 없으며 Chapter 4의 mixed-strategy analysis로 넘어간다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.protocol}
+
+::::::::::::::::::: {.protocol__head}
+
+CONTINUOUS GAME · Nash solver
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+01
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Optimization problem</strong>각 $u_i(s_i,s_{-i})$와 feasible set $S_i$를 쓴다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+02
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Best-response correspondence</strong>FOC뿐 아니라 concavity, SOC, boundary와 feasibility를 확인해 $BR_i(s_{-i})$를 구한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+03
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Simultaneous solution</strong>$s_i^*\in BR_i(s_{-i}^*)$를 모든 player에 대해 동시에 푼다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+04
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Candidate verification</strong>얻은 해가 feasible하고 각 player의 global best response인지 원래 목적함수에서 다시 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+05
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Interpretation</strong>reaction slope, strategic substitutes/complements, comparative statics를 통해 균형의 경제적 의미를 읽는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+COMMON ERROR · simultaneous move game에서 상대의 반응까지 내 deviation에 포함하지 않는다
+
+:::::::::::::::::::
+
+Nash deviation은 $s_{-i}^*$를 고정한 채 내 전략만 바꾸는 비교다.
+“내가 바꾸면 상대가 다시 반응할 것”이라는 reasoning은 순차게임 또는 동태게임에서 별도로 다룬다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+계산을 끝낸 뒤 결과를 구분해서 적는다
+
+:::::::::::::::::::
+
+Nash 문제의 답은 단순히 한 전략 profile을 적는 것으로 끝나지 않는다.
+pure equilibrium이 몇 개인지, 각 equilibrium이 strict한지,
+uniqueness가 성립하는지, pure equilibrium이 없다면 mixed analysis가 필요한지를 구분해 적는다.
+
+연속전략 게임에서는 candidate solution이 interior인지 corner인지,
+feasibility와 global optimality가 실제로 확인되었는지도 함께 기록한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#summary}
+
+## [3.9]{.section-number}Chapter Summary
+
+:::::::::::::::::::: {.narrative-block}
+
+Chapter 2에서는 어떤 전략이 적절한 belief 아래에서 합리적일 수 있는지를 물었다.
+Chapter 3에서는 한 단계 더 나아가 <strong>각 플레이어의 optimal response가 실제 상대전략과 동시에 맞아떨어지는가</strong>를 묻는다.
+이것이 Nash equilibrium의 consistency다.
+그러나 mutual best response라는 사실만으로 효율성, 유일성, 동태적 신뢰성,
+equilibrium으로의 실제 학습·수렴 과정까지 보장되는 것은 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.property-sheet}
+
+::::::::::::::::::: {.property-sheet__head}
+
+CHAPTER 3 · 핵심 정리
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Best response
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+$BR_i(s_{-i})=\arg\max_{s_i\in S_i}u_i(s_i,s_{-i})$.
+일반적으로 여러 최적전략이 가능하므로 correspondence다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Pure Nash
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+$s_i^*\in BR_i(s_{-i}^*)$가 모든 $i$에 대해 성립하는 전략 profile이다.
+어느 플레이어도 profitable unilateral deviation을 갖지 않는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Fixed point
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+전체 best-response correspondence에 대해 $s^*\in BR(s^*)$로 표현된다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Dominance와의 관계
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+dominant-strategy equilibrium은 Nash equilibrium이지만 역은 일반적으로 성립하지 않는다.
+pure Nash equilibrium은 strict-dominance IESDS를 살아남는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Pure equilibrium
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+존재할 수도, 여러 개일 수도, 전혀 없을 수도 있다.
+이 차이가 mixed strategies를 도입하는 직접적인 동기다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Cournot vs Bertrand
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+동일한 시장에서도 quantity competition과 price competition은 다른 best-response 구조와 equilibrium을 만든다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## [3.10]{.section-number}연습문제
+
+::: {.topic-opening}
+각 문제에서는 먼저 best-response correspondence를 계산한 뒤 Nash 조건을 확인하라.
+연속전략 문제에서는 1차 조건을 쓰기 전에 목적함수의 곡률과 경계조건을 확인하라.
+:::
+
+### A. Best Response와 Pure Nash
+
+<ol class="exercise-list exercise-list--a">
+<li>
+다음 게임에서 각 플레이어의 best-response correspondence와 모든 pure Nash equilibria를 구하라:
+
+$$
+\begin{array}{c|cc}
+& L & R\\ \hline
+U&(4,2)&(0,0)\\
+D&(1,1)&(3,4)
+\end{array}.
+$$
+
+</li>
+<li>pure Nash equilibrium이 strict equilibrium인지 판별하는 일반적인 절차를 서술하라.</li>
+<li>dominant-strategy equilibrium은 항상 Nash equilibrium이지만 그 역은 성립하지 않음을 $2\times2$ 반례로 보여라.</li>
+<li>profitable unilateral deviation이 없다는 조건과 best-response 조건이 동치임을 증명하라.</li>
+</ol>
+
+### B. 대표게임
+
+<ol class="exercise-list exercise-list--b">
+<li>죄수의 딜레마, Coordination, Chicken, Matching Pennies의 pure Nash equilibrium 개수를 각각 비교하라.</li>
+<li>Battle of the Sexes의 두 pure Nash equilibria를 구하고 두 equilibrium에서 플레이어들의 선호가 어떻게 충돌하는지 설명하라.</li>
+<li>weakly dominated strategy가 Nash equilibrium에 사용될 수 있는 Example 3.6을 직접 best-response 방식으로 검증하라.</li>
+<li>Matching Pennies에 pure Nash equilibrium이 없음을 네 개의 pure profile을 모두 검사하여 보이라.</li>
+</ol>
+
+### C. Cournot
+
+<ol class="exercise-list exercise-list--c">
+<li>선형 Cournot duopoly에서 각 기업의 profit function이 자신의 생산량에 대해 strictly concave임을 확인하라.</li>
+<li>$a=100$, $b=1$, $c=10$일 때 $q_1^*,q_2^*,Q^*,P^*,\pi_i^*$를 계산하라.</li>
+<li>기업 1의 한계비용이 $c_1$, 기업 2의 한계비용이 $c_2$로 다를 때 interior Cournot equilibrium을 구하라.</li>
+<li>$J$개의 동일 기업 모형에서 $J\to\infty$일 때 가격과 총생산량의 극한을 구하고 경제적으로 해석하라.</li>
+</ol>
+
+### D. Bertrand와 해석
+
+<ol class="exercise-list exercise-list--d">
+<li>동질재 Bertrand duopoly에서 $p_1=p_2>c$가 Nash equilibrium이 될 수 없는 이유를 $\varepsilon$-undercutting으로 보이라.</li>
+<li>Bertrand 모형에서 한 기업의 가격이 다른 기업보다 높을 때 profitable deviation이 존재하는 조건을 설명하라.</li>
+<li>Cournot과 Bertrand의 equilibrium 결과가 다른 이유를 “전략변수”와 “잔여수요”라는 표현을 사용해 설명하라.</li>
+<li>Nash equilibrium이 Pareto efficiency, uniqueness, pure-strategy existence 중 어느 것도 보장하지 않음을 각각 반례와 함께 설명하라.</li>
+</ol>
+
+### E. 연결과 검증
+
+<ol class="exercise-list exercise-list--e">
+<li>Rationalizability와 Nash equilibrium의 차이를 Coordination Game을 이용해 설명하라.</li>
+<li>두 개의 strict Nash equilibria가 존재하는 게임을 제시하고 strictness가 uniqueness를 뜻하지 않는 이유를 설명하라.</li>
+<li>Cournot reaction function의 기울기 $-1/2$를 계산하고 strategic substitutes라는 표현의 경제적 의미를 설명하라.</li>
+<li>선형수요에서 monopoly, Cournot duopoly, competitive benchmark의 총생산량을 비교하라.</li>
+<li>Bertrand proof의 세 cases를 각각 profitable unilateral deviation으로 다시 검증하라.</li>
+<li>3.8의 Nash solver를 사용하여 finite game과 continuous game에서 무엇을 각각 검증해야 하는지 비교하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌
+
+Jehle, G. A., and P. J. Reny. <em>Advanced Microeconomic Theory</em>, 3rd ed., Chapter 7; Cournot and Bertrand applications in Chapter 4.
+
+Mas-Colell, A., M. D. Whinston, and J. R. Green. <em>Microeconomic Theory</em>, Chapters 7–8.
+
+Osborne, M. J. <em>An Introduction to Game Theory</em>. Best responses, Nash equilibrium, and strategic-form games.
+
+Nash, J. F. (1951). “Non-Cooperative Games.” <em>Annals of Mathematics</em>.
+
+::::::::::::::::::::::::::
+

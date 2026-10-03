@@ -1,0 +1,2580 @@
+---
+title: "Chapter 4 · 혼합전략과 Nash 균형의 존재"
+description: "혼합전략, 무차별조건, Support Theorem, 2x2 및 3x3 균형, Nash 존재정리"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/game-theory-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s41}
+
+## [4.1]{.section-number}혼합전략
+
+::: {.topic-opening}
+유한 전략형 게임에서 순수전략집합 $S_i$가 주어졌다고 하자.
+혼합전략은 $S_i$의 원소들을 확률적으로 선택하는 규칙이며,
+수학적으로는 $S_i$ 위의 probability distribution이다.
+:::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+왜 deterministic choice를 probability distribution으로 바꾸는가?
+
+:::::::::::::::::::
+
+Matching Pennies에서는 어느 pure profile에서도 한 플레이어가 다른 행동으로 바꾸고 싶다.
+문제는 특정 pure action이 잘못되어서가 아니라,
+자신의 행동이 완전히 예측되면 상대가 그 예측을 이용해 best respond할 수 있다는 데 있다.
+
+따라서 혼합전략은
+
+$$
+\text{하나의 행동을 확정적으로 선택}
+\quad\longrightarrow\quad
+\text{행동들 위의 확률분포를 선택}
+$$
+
+하는 전략공간의 확장이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+핵심 전환
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+$$
+S_i
+\quad\longrightarrow\quad
+\Delta(S_i).
+$$
+
+순수전략의 유한집합을 그 위의 확률 simplex로 확장하면 전략공간이 convex해진다.
+이 convexification이 Nash 존재정리에서 핵심적인 역할을 한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 4.1.1 확률분포와 mixed-strategy simplex {#s411}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 4.1 · Mixed Strategy
+
+:::::::::::::::::::
+
+플레이어 $i$의 순수전략집합을
+
+$$
+S_i=\{s_i^1,\ldots,s_i^{K_i}\}
+$$
+
+라 하자. 혼합전략 $\sigma_i$는 $S_i$ 위의 확률분포다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\sigma_i
+=
+(\sigma_i^1,\ldots,\sigma_i^{K_i}),
+\qquad
+\sigma_i^k\ge0,
+\qquad
+\sum_{k=1}^{K_i}\sigma_i^k=1.
+$$
+
+:::::::::::::::::::
+
+혼합전략집합은
+
+$$
+\Delta(S_i)
+=
+\left\{
+\sigma_i\in\mathbb R_+^{K_i}:
+\sum_{k=1}^{K_i}\sigma_i^k=1
+\right\}
+$$
+
+로 쓴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.simplex-note}
+
+<strong>GEOMETRY · simplex</strong>
+<span>
+두 개의 순수전략이면 $\Delta(S_i)$는 선분, 세 개면 삼각형, 네 개면 3차원 simplex다.
+모든 mixed strategy는 순수전략에 대응하는 꼭짓점들의 convex combination이다.
+</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.geometry-grid}
+
+::::::::::::::::::: {.geometry-card}
+
+:::::::::::::::::: {.geometry-card__head}
+
+VERTEX
+
+::::::::::::::::::
+
+$(1,0,0)$처럼 한 전략에 확률 1을 주는 점이다. pure strategy에 해당한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.geometry-card}
+
+:::::::::::::::::: {.geometry-card__head}
+
+EDGE / FACE
+
+::::::::::::::::::
+
+$(1/2,1/2,0)$처럼 일부 전략만 positive probability를 갖는다. partial-support mixture다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.geometry-card}
+
+:::::::::::::::::: {.geometry-card__head}
+
+INTERIOR
+
+::::::::::::::::::
+
+$(1/3,1/3,1/3)$처럼 모든 전략이 positive probability를 갖는다. full-support mixture다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · convexification
+
+:::::::::::::::::::
+
+유한 pure-strategy set $S_i$는 일반적으로 convex하지 않지만
+$\Delta(S_i)$는 compact하고 convex하다.
+mixed strategy를 도입하면 경제적 선택집합을 확장하는 동시에
+fixed-point theorem을 적용할 수 있는 기하구조가 생긴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 4.2 · Support
+
+:::::::::::::::::::
+
+혼합전략 $\sigma_i$의 support는 양의 확률을 부여받는 순수전략들의 집합이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{supp}(\sigma_i)
+=
+\{s_i\in S_i:\sigma_i(s_i)>0\}.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 4.1 · 세 순수전략 위의 혼합</span>
+<span class="game-card__tag">SIMPLEX · SUPPORT</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+$S_i=\{A,B,C\}$이고
+
+$$
+\sigma_i=(1/2,\,1/3,\,1/6)
+$$
+
+이면 세 순수전략 모두 support에 속한다.
+반면
+
+$$
+\hat\sigma_i=(3/4,\,1/4,\,0)
+$$
+
+의 support는 $\{A,B\}$다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 4.1.2 기대보수 {#s412}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+먼저 2×2에서 기대보수를 직접 써보자
+
+:::::::::::::::::::
+
+Player 1이 $U$를 확률 $p$, Player 2가 $L$을 확률 $q$로 선택한다고 하자.
+네 pure profiles의 확률은 $pq$, $p(1-q)$, $(1-p)q$, $(1-p)(1-q)$다.
+따라서
+
+::::::::::::::::::: {.math-display}
+
+$$
+\begin{aligned}
+U_1(p,q)
+={}&
+pq\,u_1(U,L)
++p(1-q)u_1(U,R)\\
+&+(1-p)q\,u_1(D,L)
++(1-p)(1-q)u_1(D,R).
+\end{aligned}
+$$
+
+:::::::::::::::::::
+
+일반 $n$-player 식은 이 계산을 모든 pure-strategy profiles에 대해 합한 것이다.
+
+::::::::::::::::::::
+
+플레이어들이 서로 독립적으로 혼합전략을 사용한다고 하자.
+전체 혼합전략 profile을
+
+$$
+\sigma=(\sigma_1,\ldots,\sigma_n)
+$$
+
+라 쓰면 순수전략 profile $s=(s_1,\ldots,s_n)$가 실현될 확률은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Pr(s\mid \sigma)
+=
+\prod_{j=1}^n \sigma_j(s_j)
+$$
+
+::::::::::::::::::::
+
+이다. 따라서 플레이어 $i$의 기대보수는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+U_i(\sigma)
+=
+\sum_{s\in S}
+\left[
+\prod_{j=1}^n \sigma_j(s_j)
+\right]
+u_i(s).
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · mixed strategy에서는 payoff의 vNM 해석이 중요하다
+
+:::::::::::::::::::
+
+mixed strategy profile은 pure outcomes 위의 lottery를 유도하므로
+$u_i$는 그 lottery에 대해 기대값을 취할 수 있는
+von Neumann–Morgenstern expected-utility representation으로 이해한다.
+따라서
+
+$$
+\tilde u_i=a_i u_i+b_i,
+\qquad a_i>0
+$$
+
+같은 positive affine transformation은 mixed-strategy best responses와 Nash equilibria를 보존한다.
+반면 일반적인 strictly increasing transformation은 expected-payoff 비교를 반드시 보존하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · Multilinearity
+
+:::::::::::::::::::
+
+다른 플레이어들의 혼합전략 $\sigma_{-i}$를 고정하면
+$U_i(\sigma_i,\sigma_{-i})$는 자신의 혼합확률 $\sigma_i$에 대해 선형이다.
+따라서 자신의 혼합전략 최적화에서 interior probability가 양수가 되려면
+support 안의 순수전략들이 동일한 최대 기대보수를 주어야 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+왜 섞으려면 무차별해야 하는가?
+
+:::::::::::::::::::
+
+상대 mixture가 고정되어 있고
+
+$$
+U_i(A,\sigma_{-i})>U_i(B,\sigma_{-i})
+$$
+
+라고 하자. 그러면 $B$에 주던 작은 확률질량을 $A$로 옮기기만 해도 기대보수가 증가한다.
+따라서 equilibrium에서 $A$와 $B$를 둘 다 positive probability로 사용한다면
+두 전략은 반드시 동일한 최대 기대보수를 주어야 한다.
+
+<strong>Indifference가 mixing을 만들어내는 것이 아니라, mixing이 equilibrium이기 위해 indifference가 필요하다.</strong>
+
+::::::::::::::::::::
+
+### 4.1.3 순수전략은 혼합전략의 특수한 경우 {#s413}
+
+순수전략 $s_i^k$는 $\sigma_i^k=1$이고 나머지 확률이 0인 degenerate mixed strategy로 볼 수 있다.
+따라서 mixed-strategy space는 pure-strategy space를 포함한다.
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 4.1 · Pure Nash는 Mixed Nash이기도 하다
+
+:::::::::::::::::::
+
+순수전략 Nash equilibrium을 각 equilibrium strategy에 확률 1을 두는 degenerate mixed strategy로 표현하면,
+그 profile은 mixed-strategy Nash equilibrium이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · 독립혼합과 상관된 randomization은 다르다
+
+:::::::::::::::::::
+
+표준 mixed-strategy Nash equilibrium에서는 플레이어들의 randomization이 독립적이므로
+순수 profile의 확률은 확률들의 곱으로 계산된다.
+공통 random device를 통해 플레이어들의 행동이 상관될 수 있는 경우는 correlated equilibrium이라는 별도의 개념으로 다룬다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s42}
+
+## [4.2]{.section-number}혼합전략 Nash 균형
+
+::: {.topic-opening}
+Nash의 논리는 순수전략에서 달라지지 않는다.
+상대방들의 혼합전략이 주어졌을 때 자신의 기대보수를 최대화하는 mixed strategy를 선택하고,
+모든 플레이어의 선택이 서로 일관되면 Nash equilibrium이다.
+:::
+
+### 4.2.1 정의 {#s421}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 4.3 · Mixed-Strategy Nash Equilibrium
+
+:::::::::::::::::::
+
+유한 전략형 게임에서 혼합전략 profile
+
+$$
+\sigma^*=(\sigma_1^*,\ldots,\sigma_n^*)
+$$
+
+가 Nash equilibrium이라는 것은 모든 플레이어 $i$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+U_i(\sigma_i^*,\sigma_{-i}^*)
+\ge
+U_i(\sigma_i,\sigma_{-i}^*)
+\qquad
+\forall \sigma_i\in\Delta(S_i)
+$$
+
+:::::::::::::::::::
+
+가 성립하는 것이다.
+
+::::::::::::::::::::
+
+### 4.2.2 Support theorem {#s422}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 4.1 · Support Characterization of Mixed-Strategy Nash Equilibrium
+
+:::::::::::::::::::
+
+유한게임에서 $\sigma^*$가 Nash equilibrium일 필요충분조건은 각 플레이어 $i$에 대해 다음이 성립하는 것이다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+U_i(s_i,\sigma_{-i}^*)
+=
+U_i(\sigma_i^*,\sigma_{-i}^*)
+\quad
+\forall s_i\in\operatorname{supp}(\sigma_i^*),
+$$
+
+$$
+U_i(s_i,\sigma_{-i}^*)
+\le
+U_i(\sigma_i^*,\sigma_{-i}^*)
+\quad
+\forall s_i\notin\operatorname{supp}(\sigma_i^*).
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+PROOF
+
+:::::::::::::::::::
+
+먼저 equilibrium이라 하자. support 안에 있는 어떤 $s_i$가 equilibrium 기대보수보다 낮은 보수를 준다면,
+$\sigma_i^*$의 기대보수는 support 안의 순수전략 보수들의 convex combination이므로
+다른 support 전략 중 적어도 하나는 equilibrium 기대보수보다 높은 보수를 주어야 한다.
+그러면 그 순수전략으로 확률 1을 옮기는 profitable deviation이 생겨 모순이다.
+따라서 support의 모든 순수전략은 동일한 최대 기대보수를 주어야 한다.
+support 밖의 전략이 더 높은 보수를 주어도 역시 그 전략으로 일방적으로 바꾸면 되므로 equilibrium일 수 없다.
+
+반대로 모든 pure strategy가 equilibrium payoff보다 높은 기대보수를 주지 않는다고 하자.
+임의의 mixed deviation은 pure-strategy 기대보수들의 convex combination이므로
+equilibrium payoff보다 높을 수 없다.
+따라서 mixed deviation까지 모두 배제된다.
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.support-card}
+
+::::::::::::::::::: {.support-card__head}
+
+SUPPORT PRINCIPLE
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.support-card__body}
+
+:::::::::::::::::: {.math-display}
+
+$$
+s_i\in\operatorname{supp}(\sigma_i^*)
+\quad\Longrightarrow\quad
+s_i\in BR_i(\sigma_{-i}^*).
+$$
+
+::::::::::::::::::
+
+즉 equilibrium에서 양의 확률로 사용되는 모든 순수전략은 상대의 equilibrium mixture에 대한 best response다.
+단, best response라고 해서 반드시 positive probability를 받을 필요는 없다.
+equilibrium에서 확률 0인 전략이 같은 최대보수를 주는 degeneracy도 가능하다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\operatorname{supp}(\sigma_i^*)
+\subseteq
+BR_i(\sigma_{-i}^*).
+$$
+
+::::::::::::::::::::
+
+이 포함관계의 역은 일반적으로 성립하지 않는다.
+어떤 pure strategy가 best response이더라도 equilibrium mixture가 그 전략에 확률 0을 줄 수 있기 때문이다.
+
+### 4.2.3 “상대를 무차별하게 만든다”의 정확한 의미 {#s423}
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · 자신의 mixing probability가 자신을 무차별하게 만드는 것이 아니다
+
+:::::::::::::::::::
+
+Player 1이 $U,D$를 섞을 때 $U$와 $D$의 기대보수를 같게 만드는 것은 Player 1 자신의 mixing probability가 아니라
+<strong>Player 2의 mixing probability</strong>다.
+자신의 support condition을 결정하는 것은 상대방의 mixture다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+“상대를 무차별하게 만든다”는 말을 정확히 읽기
+
+:::::::::::::::::::
+
+Player 1이 문자 그대로 Player 2를 무차별하게 만드는 것을 목적함수로 삼는 것은 아니다.
+equilibrium에서 Player 2가 자신의 support 안의 여러 행동을 실제로 섞으려면
+그 행동들이 모두 best responses여야 하고, 그 조건을 결정하는 변수가 Player 1의 equilibrium mixture다.
+
+그래서 2×2 계산에서는
+
+$$
+\boxed{\text{내 probability는 상대의 indifference equation에서 구한다}}
+$$
+
+는 규칙이 나온다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.formula-grid}
+
+::::::::::::::::::: {.formula-card}
+
+:::::::::::::::::: {.formula-card__head}
+
+PLAYER 1의 무차별조건
+
+::::::::::::::::::
+
+$U_1(U,\sigma_2^*)=U_1(D,\sigma_2^*)$. 이 식으로 $\sigma_2^*$를 결정한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.formula-card}
+
+:::::::::::::::::: {.formula-card__head}
+
+PLAYER 2의 무차별조건
+
+::::::::::::::::::
+
+$U_2(L,\sigma_1^*)=U_2(R,\sigma_1^*)$. 이 식으로 $\sigma_1^*$를 결정한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 4.2.4 확률공간에서의 Best-Response Correspondence {#s424}
+
+$2\times2$ 게임에서 Player 1이 $U$를 선택할 확률을 $p\in[0,1]$,
+Player 2가 $L$을 선택할 확률을 $q\in[0,1]$라 하자.
+$q$가 주어졌을 때 Player 1의 mixed best response는
+
+:::::::::::::::::::: {.math-display}
+
+$$
+BR_1(q)
+=
+\begin{cases}
+\{1\},
+& U_1(U,q)>U_1(D,q),\\
+[0,1],
+& U_1(U,q)=U_1(D,q),\\
+\{0\},
+& U_1(U,q)\lt U_1(D,q).
+\end{cases}
+$$
+
+::::::::::::::::::::
+
+여기서 $p=1$은 pure strategy $U$, $p=0$은 pure strategy $D$를 뜻한다.
+두 pure strategies가 정확히 같은 최대 expected payoff를 줄 때에만
+그 둘을 섞는 모든 $p\in[0,1]$가 best response가 된다.
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Chapter 3의 fixed point가 확률공간으로 확장된다
+
+:::::::::::::::::::
+
+mixed-strategy Nash equilibrium은 단순히 indifference equations를 푸는 계산기법이 아니다.
+두 플레이어의 equilibrium probabilities는
+
+$$
+p^*\in BR_1(q^*),
+\qquad
+q^*\in BR_2(p^*)
+$$
+
+를 동시에 만족해야 한다.
+즉 Chapter 3에서 전략공간 위에서 찾았던 mutual best response의 fixed point를
+이제 probability simplex 위에서 찾는 것이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s43}
+
+## [4.3]{.section-number}대표적인 혼합전략 균형
+
+::: {.topic-opening}
+$2\times2$ 게임의 완전혼합 equilibrium은 각 플레이어가 상대를 두 순수전략 사이에서 무차별하게 만드는 확률을 계산하면 된다.
+그러나 계산 전에 pure equilibrium의 존재와 support 후보를 확인해야 한다.
+:::
+
+:::::::::::::::::::: {.solver-sheet}
+
+::::::::::::::::::: {.solver-sheet__head}
+
+MIXED-NASH SOLVER · 2×2 GAME
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+01
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>Pure Nash 먼저 확인</strong>best-response marking으로 pure equilibria를 먼저 찾는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+02
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>Support 후보 결정</strong>full support인지 partial support인지 명시한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+03
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>Probabilities 정의</strong>$p=\Pr_1(U)$, $q=\Pr_2(L)$처럼 변수를 둔다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+04
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>Player 1 indifference</strong>Player 1의 support 전략들을 무차별하게 만드는 $q$를 구한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+05
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>Player 2 indifference</strong>Player 2의 support 전략들을 무차별하게 만드는 $p$를 구한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+06
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>Probability check</strong>계산된 확률이 실제로 $[0,1]$ 안에 있는지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+07
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>Off-support check</strong>support 밖 전략이 더 높은 expected payoff를 주지 않는지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+08
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>Equilibrium set 보고</strong>pure와 mixed equilibria를 모두 함께 적는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {#matching .game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 4.2 · Matching Pennies</span>
+<span class="game-card__tag">UNIQUE FULLY MIXED NE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$H_2$</th><th>$T_2$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$H_1$</td><td>$(1,-1)$</td><td>$(-1,1)$</td></tr>
+<tr><td class="row-label">$T_1$</td><td>$(-1,1)$</td><td>$(1,-1)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+$p=\Pr_1(H)$, $q=\Pr_2(H)$라 하자.
+Player 1이 $H$와 $T$를 모두 양의 확률로 사용하려면
+
+:::::::::::::::::: {.math-display}
+
+$$
+U_1(H,q)
+=
+q-(1-q)
+=
+2q-1,
+$$
+
+$$
+U_1(T,q)
+=
+-q+(1-q)
+=
+1-2q.
+$$
+
+::::::::::::::::::
+
+따라서
+
+:::::::::::::::::: {.math-display}
+
+$$
+2q-1=1-2q
+\quad\Longrightarrow\quad
+q^*=\frac12.
+$$
+
+::::::::::::::::::
+
+대칭적으로 Player 2를 무차별하게 만드는 조건은
+
+$$
+p^*=\frac12.
+$$
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+NASH EQUILIBRIUM
+
+:::::::::::::::::
+
+$$
+\boxed{
+p^*=q^*=\frac12
+}.
+$$
+
+각 플레이어의 equilibrium expected payoff는 0이다.
+한쪽이 예측가능하게 편향되면 상대방이 그 편향을 exploit할 수 있기 때문에 정확히 1/2–1/2의 randomization이 필요하다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {#bos .game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 4.3 · Battle of the Sexes</span>
+<span class="game-card__tag">PURE + MIXED EQUILIBRIA</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(2,1)$</td><td>$(0,0)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(0,0)$</td><td>$(1,2)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+이미 pure Nash equilibria $(U,L)$, $(D,R)$가 존재한다.
+이제 완전혼합 equilibrium을 구하자.
+$p=\Pr_1(U)$, $q=\Pr_2(L)$라 하자.
+
+Player 1의 무차별조건:
+
+:::::::::::::::::: {.math-display}
+
+$$
+2q
+=
+1-q
+\quad\Longrightarrow\quad
+q^*=\frac13.
+$$
+
+::::::::::::::::::
+
+Player 2의 무차별조건:
+
+:::::::::::::::::: {.math-display}
+
+$$
+p
+=
+2(1-p)
+\quad\Longrightarrow\quad
+p^*=\frac23.
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+세 번째 NASH EQUILIBRIUM
+
+:::::::::::::::::
+
+$$
+\boxed{
+\Pr_1(U)=\frac23,
+\qquad
+\Pr_2(L)=\frac13
+}.
+$$
+
+따라서 mixed strategy를 도입하면 pure equilibrium을 대체하는 것이 아니라
+기존 pure equilibria에 추가적인 equilibrium이 생길 수도 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::: {.plain-language}
+
+::::::::::::::::: {.plain-language__head}
+
+Mixed equilibrium payoff까지 비교해 보자
+
+:::::::::::::::::
+
+Player 1은 $U,D$ 사이에서 무차별하므로
+
+$$
+U_1^*=2q^*=\frac23,
+$$
+
+Player 2도
+
+$$
+U_2^*=p^*=\frac23
+$$
+
+를 얻는다. 따라서 mixed equilibrium payoff는
+
+$$
+\left(\frac23,\frac23\right).
+$$
+
+pure equilibria의 payoff는 각각 $(2,1)$, $(1,2)$이므로
+이 예에서는 mixed equilibrium이 두 pure equilibria 각각에 의해 Pareto dominated된다.
+mixed Nash equilibrium도 효율성을 보장하지 않는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · mixed equilibrium은 항상 “예측불가능성이 필요한 게임”만의 현상이 아니다
+
+:::::::::::::::::::
+
+Matching Pennies에서는 strategic unpredictability가 핵심이다.
+그러나 Battle of the Sexes와 같은 coordination game에서도 mixed equilibrium이 존재한다.
+이 경우 상대 플레이어는 equilibrium mixed strategy와 일치하는 확률적 belief를 가질 수 있다.
+다만 mixed strategy 자체와 상대방의 belief는 형식적으로 서로 다른 객체이며,
+equilibrium에서 양자가 일관되게 연결된다고 이해하는 것이 정확하다.
+
+::::::::::::::::::::
+
+### 4.3.1 일반 2×2 게임의 완전혼합 공식 {#general22}
+
+다음 2인 게임을 생각하자.
+
+:::::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(a,e)$</td><td>$(b,f)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(c,g)$</td><td>$(d,h)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::::
+
+$p=\Pr_1(U)$, $q=\Pr_2(L)$라 하자. Player 1의 무차별조건은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+qa+(1-q)b
+=
+qc+(1-q)d.
+$$
+
+::::::::::::::::::::
+
+분모가 0이 아니면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+q^*
+=
+\frac{d-b}{a-b-c+d}
+}.
+$$
+
+::::::::::::::::::::
+
+Player 2의 무차별조건은
+
+:::::::::::::::::::: {.math-display}
+
+$$
+pe+(1-p)g
+=
+pf+(1-p)h,
+$$
+
+::::::::::::::::::::
+
+따라서
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+p^*
+=
+\frac{h-g}{e-f-g+h}
+}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · 공식에 대입했다고 equilibrium이 되는 것은 아니다
+
+:::::::::::::::::::
+
+완전혼합 equilibrium이 존재하려면 계산된 $p^*,q^*$가 실제로 $(0,1)$ 안에 있어야 한다.
+분모가 0이거나 확률이 구간 밖으로 나가면 full-support equilibrium이 없거나 degeneracy가 발생한다.
+따라서 먼저 best-response structure와 pure equilibria를 확인하는 것이 안전하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 분모가 0이라는 것의 의미
+
+:::::::::::::::::::
+
+Player 1의 두 pure strategies 사이 expected-payoff difference를
+
+$$
+\Delta_1(q)
+=
+U_1(U,q)-U_1(D,q)
+=
+q(a-b-c+d)+(b-d)
+$$
+
+라 쓰자.
+$a-b-c+d=0$이면 $\Delta_1(q)=b-d$가 되어 상대의 mixing probability $q$에 따라
+두 전략의 상대적 매력이 전혀 변하지 않는다.
+
+이때 $b-d\neq0$이면 한 전략이 모든 $q$에서 엄격히 더 좋으므로
+Player 1을 무차별하게 만드는 $q$는 존재하지 않는다.
+반대로 $b=d$까지 성립하면
+
+$$
+\Delta_1(q)=0
+\qquad\forall q\in[0,1],
+$$
+
+즉 모든 $q$에서 $U,D$가 서로 무차별하다.
+Player 2의 분모가 0인 경우도 동일한 방식으로 해석한다.
+
+::::::::::::::::::::
+
+### 4.3.2 3×3 Rock–Paper–Scissors {#rps}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 4.4 · 3×3 가위바위보</span>
+<span class="game-card__tag">FULL SUPPORT · UNIQUE MIXED NE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+두 플레이어가 각각
+
+$$
+S_i=\{R,P,S\}
+$$
+
+를 선택한다고 하자. 이기면 $1$, 지면 $-1$, 비기면 $0$의 보수를 얻는다.
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead>
+<tr><th></th><th>$R_2$</th><th>$P_2$</th><th>$S_2$</th></tr>
+</thead>
+<tbody>
+<tr><td class="row-label">$R_1$</td><td>$(0,0)$</td><td>$(-1,1)$</td><td>$(1,-1)$</td></tr>
+<tr><td class="row-label">$P_1$</td><td>$(1,-1)$</td><td>$(0,0)$</td><td>$(-1,1)$</td></tr>
+<tr><td class="row-label">$S_1$</td><td>$(-1,1)$</td><td>$(1,-1)$</td><td>$(0,0)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+Player 2의 mixture를
+
+$$
+q_R+q_P+q_S=1
+$$
+
+로 쓰자. Player 1의 세 순수전략 기대보수는
+
+:::::::::::::::::: {.math-display}
+
+$$
+U_1(R,q)=q_S-q_P,
+$$
+
+$$
+U_1(P,q)=q_R-q_S,
+$$
+
+$$
+U_1(S,q)=q_P-q_R.
+$$
+
+::::::::::::::::::
+
+Player 1이 세 전략을 모두 positive probability로 사용하려면 support theorem에 의해
+
+:::::::::::::::::: {.math-display}
+
+$$
+q_S-q_P
+=
+q_R-q_S
+=
+q_P-q_R.
+$$
+
+::::::::::::::::::
+
+세 기대보수의 합은 항상 $0$이므로 공통값은 $0$이어야 한다. 따라서
+
+:::::::::::::::::: {.math-display}
+
+$$
+q_S=q_P,\qquad
+q_R=q_S,\qquad
+q_P=q_R,
+$$
+
+$$
+\boxed{
+q_R=q_P=q_S=\frac13
+}.
+$$
+
+::::::::::::::::::
+
+대칭적으로 Player 2도 Player 1의 세 행동 사이에서 무차별해야 하므로
+
+:::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+p_R=p_P=p_S=\frac13
+}.
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+NASH EQUILIBRIUM
+
+:::::::::::::::::
+
+가위바위보의 유일한 Nash equilibrium은
+
+$$
+\sigma_1^*=\sigma_2^*
+=
+\left(\frac13,\frac13,\frac13\right)
+$$
+
+이며 equilibrium expected payoff는 두 플레이어 모두 $0$이다.
+
+::::::::::::::::::
+
+:::::::::::::::::: {.statement .remark}
+
+::::::::::::::::: {.statement-head}
+
+REMARK · 2×2와 달라지는 점
+
+:::::::::::::::::
+
+$2\times2$ 완전혼합에서는 상대의 하나의 mixing probability만 구하면 되지만,
+$3\times3$에서는 상대의 세 확률 중 두 개의 독립적인 확률을 결정해야 한다.
+따라서 full-support equilibrium에서는 일반적으로 support 안의 세 전략을 모두 무차별하게 만드는
+두 개의 독립적인 indifference equations와 확률합 조건을 함께 사용한다.
+
+::::::::::::::::::
+
+:::::::::::::::::: {.statement .warning}
+
+::::::::::::::::: {.statement-head}
+
+CAUTION · 모든 3×3 게임이 세 전략을 모두 섞는 것은 아니다
+
+:::::::::::::::::
+
+가위바위보는 full-support equilibrium이 자연스럽게 발생하는 대칭적 예제다.
+일반적인 $3\times3$ game에서는 equilibrium support가
+$\{1,2\}$처럼 두 전략만 포함할 수도 있고,
+pure strategy 하나만 포함할 수도 있다.
+따라서 큰 게임에서는 먼저 support를 추측하고 검증하는 support-enumeration 절차가 중요하다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s44}
+
+## [4.4]{.section-number}Support Enumeration
+
+::: {.topic-opening}
+전략이 두 개보다 많아지면 “모든 전략을 동일한 확률로 섞는다”는 식으로 접근할 수 없다.
+equilibrium에서 실제로 어떤 전략들이 positive probability를 갖는지 support를 먼저 가정하고,
+그 support에 대해 무차별조건과 비support 전략의 부등식을 함께 검사해야 한다.
+:::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Support enumeration은 어떤 전략을 실제로 섞는지를 먼저 가정하는 방법이다
+
+:::::::::::::::::::
+
+$3\times3$처럼 전략이 많아지면 모든 전략을 positive probability로 사용하는 full-support equilibrium만 찾으면 충분하지 않다.
+equilibrium이 두 전략만 섞는 partial-support 형태일 수 있기 때문이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.worked-enumeration}
+
+::::::::::::::::::: {.worked-enumeration__head}
+
+WORKED EXAMPLE · Partial-Support Equilibrium
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.worked-enumeration__body}
+
+다음 게임을 생각하자.
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$M$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(2,1)$</td><td>$(0,0)$</td><td>$(0,-1)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(0,0)$</td><td>$(1,2)$</td><td>$(0,-1)$</td></tr>
+<tr><td class="row-label">$B$</td><td>$(-1,0)$</td><td>$(-1,0)$</td><td>$(-1,-1)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+후보 support를
+
+$$
+T_1=\{U,D\},
+\qquad
+T_2=\{L,M\}
+$$
+
+로 가정하자. Player 1의 $U,D$ indifference는
+
+$$
+2q=1-q
+\quad\Longrightarrow\quad
+q=\frac13
+$$
+
+을 준다.
+
+Player 2의 $L,M$ indifference는
+
+$$
+p=2(1-p)
+\quad\Longrightarrow\quad
+p=\frac23
+$$
+
+을 준다.
+
+이제 off-support 전략을 확인한다.
+Player 1의 $B$는 항상 payoff $-1$을 주고,
+Player 2의 $R$도 support 전략보다 높은 payoff를 주지 않는다.
+따라서
+
+$$
+\sigma_1^*=\left(\frac23,\frac13,0\right),
+\qquad
+\sigma_2^*=\left(\frac13,\frac23,0\right)
+$$
+
+는 partial-support Nash equilibrium이다.
+
+:::::::::::::::::: {.statement .remark}
+
+::::::::::::::::: {.statement-head}
+
+VERIFY · 다른 support도 반드시 확인한다
+
+:::::::::::::::::
+
+이 게임에는 pure equilibria $(U,L)$과 $(D,M)$도 존재한다.
+또한 $B$와 $R$은 equilibrium에서 사용할 이유가 없는 열등한 전략이므로,
+남는 $2\times2$ subgame은 두 pure equilibria와 위의 mixed equilibrium을 갖는다.
+따라서 하나의 support pair에서 후보를 찾았다고 계산을 끝내지 말고,
+다른 support들을 검사하여 전체 equilibrium set을 완성해야 한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.algorithm-sheet}
+
+::::::::::::::::::: {.algorithm-step}
+
+:::::::::::::::::: {.algorithm-step__key}
+
+STEP 1
+
+::::::::::::::::::
+
+:::::::::::::::::: {.algorithm-step__body}
+
+각 플레이어의 후보 support $T_i\subseteq S_i$를 정한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.algorithm-step}
+
+:::::::::::::::::: {.algorithm-step__key}
+
+STEP 2
+
+::::::::::::::::::
+
+:::::::::::::::::: {.algorithm-step__body}
+
+$T_i$ 안의 모든 순수전략이 같은 기대보수를 갖도록 상대방의 mixing probabilities에 대한 방정식을 세운다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.algorithm-step}
+
+:::::::::::::::::: {.algorithm-step__key}
+
+STEP 3
+
+::::::::::::::::::
+
+:::::::::::::::::: {.algorithm-step__body}
+
+확률합이 1이고 각 probability가 양수라는 조건을 함께 풀어 후보 mixture를 구한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.algorithm-step}
+
+:::::::::::::::::: {.algorithm-step__key}
+
+STEP 4
+
+::::::::::::::::::
+
+:::::::::::::::::: {.algorithm-step__body}
+
+support 밖의 모든 전략이 support 전략보다 더 높은 기대보수를 주지 않는지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.algorithm-step}
+
+:::::::::::::::::: {.algorithm-step__key}
+
+STEP 5
+
+::::::::::::::::::
+
+:::::::::::::::::: {.algorithm-step__body}
+
+모든 후보 support를 검사하여 equilibrium set을 완성한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 4.2 · Support size와 indifference equations
+
+:::::::::::::::::::
+
+플레이어 $i$가 $k$개의 순수전략을 positive probability로 사용하는 equilibrium에서는
+그 $k$개 전략이 모두 동일한 최대 기대보수를 가져야 한다.
+따라서 독립적인 무차별식은 일반적으로 $k-1$개가 필요하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · Equal support size는 일반적인 필요조건이 아니다
+
+:::::::::::::::::::
+
+$2\times2$ 완전혼합 예제에서는 두 플레이어가 각각 두 전략을 섞기 때문에 support 크기가 같다.
+그러나 일반적인 bimatrix game에서는 equilibrium에서 두 플레이어의 support 크기가 반드시 같아야 하는 것은 아니다.
+degeneracy나 payoff 구조에 따라 서로 다른 support 크기가 가능하다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s45}
+
+## [4.5]{.section-number}Nash 균형 존재정리
+
+::: {.topic-opening}
+pure-strategy Nash equilibrium은 존재하지 않을 수 있지만,
+mixed strategies까지 허용하면 모든 유한 전략형 게임에 적어도 하나의 Nash equilibrium이 존재한다.
+이것은 단순한 계산상의 편의가 아니라 Nash equilibrium이라는 해 개념의 논리적 정합성을 보장하는 핵심 정리다.
+:::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 4.2 · Nash Existence Theorem
+
+:::::::::::::::::::
+
+모든 유한 전략형 게임은 적어도 하나의 mixed-strategy Nash equilibrium을 갖는다.
+여기서 finite란 플레이어 수가 유한하고 각 플레이어의 pure-strategy set도 유한하다는 뜻이다:
+
+$$
+n\lt\infty,
+\qquad
+|S_i|\lt\infty
+\quad\forall i.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+SCOPE · finite strategic-form games에 대한 존재정리
+
+:::::::::::::::::::
+
+전략집합이 무한하거나 연속인 게임에서는 mixed strategies를 허용했다는 사실만으로 equilibrium existence가 자동 보장되지는 않는다.
+그런 게임에서는 compactness, continuity, quasiconcavity 등 추가 조건이 필요할 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+mixed strategy가 fixed-point theorem에 필요한 기하구조를 만든다
+
+:::::::::::::::::::
+
+pure-strategy set은 몇 개의 떨어진 점으로 이루어진 비convex 집합일 수 있다.
+반면 mixed-strategy simplex $\Delta(S_i)$는 compact하고 convex하다.
+randomization의 도입은 행동의 확률화를 넘어 fixed-point theorem을 적용할 수 있는 전략공간을 만들어낸다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof-roadmap}
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">1</span><span class="text">Mixed-strategy space를 simplex로 구성</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">2</span><span class="text">profitable deviation을 반영하는 연속함수 구성</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">3</span><span class="text">Brouwer로 fixed point 존재</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">4</span><span class="text">fixed point가 Nash임을 확인</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 4.5.1 Brouwer fixed-point proof {#s451}
+
+각 플레이어 $i$의 순수전략을 $1,\ldots,K_i$로 번호 매기고,
+혼합전략을
+
+$$
+\sigma_i=(\sigma_{i1},\ldots,\sigma_{iK_i})
+$$
+
+라 쓰자. 전체 mixed-strategy space
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\Sigma
+=
+\prod_{i=1}^n\Delta(S_i)
+$$
+
+::::::::::::::::::::
+
+는 nonempty, compact, convex set이다.
+
+:::::::::::::::::::: {.proof-intuition}
+
+::::::::::::::::::: {.proof-intuition__head}
+
+PROOF IDEA · $F$는 profitable deviation 쪽으로 확률질량을 이동시킨다
+
+:::::::::::::::::::
+
+현재 mixture에서 어떤 pure strategy로 바꾸면 더 높은 payoff를 얻을 수 있다면
+그 전략에 positive deviation gain을 부여하고 probability weight를 더해준다.
+마지막에는 확률들의 합이 다시 1이 되도록 normalize한다.
+
+따라서
+
+$$
+\text{profitable deviations}
+\to
+\text{probability adjustment}
+\to
+\text{fixed point}
+\to
+\text{no profitable deviation}
+$$
+
+가 증명의 전체 논리다.
+
+::::::::::::::::::::
+
+현재 profile $\sigma$에서 순수전략 $k$로 바꾸는 positive gain을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+g_{ik}(\sigma)
+=
+\max\left\{
+0,\,
+U_i(s_i^k,\sigma_{-i})-U_i(\sigma)
+\right\}
+$$
+
+::::::::::::::::::::
+
+라 정의한다. 그리고 새로운 확률을
+
+:::::::::::::::::::: {.math-display}
+
+$$
+F_{ik}(\sigma)
+=
+\frac{
+\sigma_{ik}+g_{ik}(\sigma)
+}{
+1+\sum_{\ell=1}^{K_i}g_{i\ell}(\sigma)
+}
+$$
+
+::::::::::::::::::::
+
+로 정의한다.
+각 성분은 비음이고,
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\sum_{k=1}^{K_i}F_{ik}(\sigma)
+=
+\frac{
+\sum_k\sigma_{ik}+\sum_k g_{ik}(\sigma)
+}{
+1+\sum_k g_{ik}(\sigma)
+}
+=
+1.
+$$
+
+::::::::::::::::::::
+
+따라서 $F_i(\sigma)\in\Delta(S_i)$이고 $F:\Sigma\to\Sigma$다.
+기대보수는 혼합확률에 대해 연속이고 $\max\{0,\cdot\}$도 연속이므로 $F$는 continuous하다.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+BROUWER FIXED-POINT THEOREM · 적용형
+
+:::::::::::::::::::
+
+nonempty compact convex subset $X\subset\mathbb R^m$에서
+continuous mapping $F:X\to X$는 적어도 하나의 fixed point $x^*=F(x^*)$를 갖는다.
+
+::::::::::::::::::::
+
+따라서 어떤 $\sigma^*\in\Sigma$가 존재하여
+
+$$
+F(\sigma^*)=\sigma^*
+$$
+
+가 성립한다. 이제 이 fixed point가 Nash equilibrium임을 보이면 된다.
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+PROOF · Fixed point $\Rightarrow$ Nash
+
+:::::::::::::::::::
+
+$G_i=\sum_k g_{ik}(\sigma^*)$라 하자.
+fixed-point 조건에서
+
+$$
+\sigma_{ik}^*
+=
+\frac{\sigma_{ik}^*+g_{ik}(\sigma^*)}{1+G_i}
+$$
+
+이므로
+
+$$
+g_{ik}(\sigma^*)
+=
+\sigma_{ik}^*G_i
+\qquad\forall k.
+$$
+
+만약 $G_i>0$라면 $\sigma_{ik}^*>0$인 모든 support 전략에 대해 $g_{ik}>0$,
+즉
+
+$$
+U_i(s_i^k,\sigma_{-i}^*)
+>
+U_i(\sigma^*)
+$$
+
+가 된다.
+그러나 $U_i(\sigma^*)$는 support 전략들의 기대보수의 $\sigma_i^*$-weighted average이므로
+support의 모든 보수가 그 평균보다 엄격히 클 수는 없다. 모순이다.
+
+따라서 $G_i=0$이고 모든 $k$에 대해
+
+$$
+g_{ik}(\sigma^*)=0.
+$$
+
+즉 어떤 pure deviation도 현재 기대보수보다 더 높은 보수를 주지 않는다.
+Theorem 4.1에 의해 mixed deviation도 profitable할 수 없으므로
+$\sigma^*$는 Nash equilibrium이다.
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 존재정리는 유일성을 말하지 않는다
+
+:::::::::::::::::::
+
+Brouwer는 fixed point의 존재만 보장한다.
+Battle of the Sexes처럼 Nash equilibrium이 여러 개 존재할 수 있으며,
+existence theorem만으로 equilibrium selection 문제는 해결되지 않는다.
+
+::::::::::::::::::::
+
+### 4.5.2 Kakutani를 이용한 대안적 증명 {#s452}
+
+대학원 수준에서는 Nash equilibrium을 best-response correspondence의 fixed point로 직접 보는 증명이 더 구조적이다.
+각 플레이어의 mixed best response를
+
+:::::::::::::::::::: {.math-display}
+
+$$
+BR_i(\sigma_{-i})
+=
+\operatorname{arg\,max}_{\sigma_i\in\Delta(S_i)}
+U_i(\sigma_i,\sigma_{-i})
+$$
+
+::::::::::::::::::::
+
+로 정의하고
+
+:::::::::::::::::::: {.math-display}
+
+$$
+BR(\sigma)
+=
+\prod_{i=1}^n BR_i(\sigma_{-i})
+$$
+
+::::::::::::::::::::
+
+라 하자.
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+KAKUTANI FIXED-POINT THEOREM · 필요한 형태
+
+:::::::::::::::::::
+
+$X\subset\mathbb R^m$가 nonempty, compact, convex이고
+$\Phi:X\rightrightarrows X$가 nonempty, convex values를 가지며 upper hemicontinuous이면
+어떤 $x^*\in X$가 존재하여
+
+$$
+x^*\in\Phi(x^*)
+$$
+
+가 성립한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.property-sheet}
+
+::::::::::::::::::: {.property-sheet__head}
+
+BEST-RESPONSE CORRESPONDENCE에 KAKUTANI를 적용하는 이유
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Domain
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+$\Sigma=\prod_i\Delta(S_i)$는 유한차원에서 nonempty, compact, convex다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Nonempty values
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+각 $\Delta(S_i)$는 compact하고 기대보수는 continuous이므로 maximizer가 존재한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Convex values
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+$U_i$는 자신의 mixture에 대해 linear이므로 두 best responses의 convex combination도 best response다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Upper hemicontinuity
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+기대보수의 continuity와 compact choice set에서 maximum theorem을 적용하면 $BR_i$는 upper hemicontinuous다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Kakutani의 조건을 문장으로 읽기
+
+:::::::::::::::::::
+
+<strong>Nonempty values:</strong> 상대 mixture가 무엇이든 최적반응은 적어도 하나 존재한다.
+
+<strong>Convex values:</strong> 두 mixtures가 모두 최적이라면 그 둘을 다시 섞어도 최적이다.
+
+<strong>Upper hemicontinuity:</strong> 상대 mixture가 조금 변할 때 best-response set이 근거 없이 멀리 튀어 새로 나타나는 식의 불안정성이 없다.
+
+현재의 compact finite-dimensional setting에서는 다음 closed-graph 형태로도 읽을 수 있다:
+
+$$
+\sigma_{-i}^m\to\sigma_{-i},
+\qquad
+\tau_i^m\in BR_i(\sigma_{-i}^m),
+\qquad
+\tau_i^m\to\tau_i
+$$
+
+이면
+
+$$
+\tau_i\in BR_i(\sigma_{-i}).
+$$
+
+즉 근사게임들의 best responses가 수렴하면 그 극한도 극한게임의 best response로 남는다.
+
+<strong>Fixed point:</strong> 입력한 mixture profile이 best-response correspondence의 output set 안에 자기 자신을 포함한다.
+
+::::::::::::::::::::
+
+따라서 Kakutani에 의해 어떤 $\sigma^*$가 존재하여
+
+$$
+\sigma^*\in BR(\sigma^*)
+$$
+
+가 된다. 이는 바로 mixed-strategy Nash equilibrium의 정의다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\begin{aligned}
+\text{Brouwer: }&\ \text{single-valued continuous map }F\text{를 구성}\\
+\text{Kakutani: }&\ \text{set-valued best-response correspondence }BR\text{를 그대로 사용}
+\end{aligned}}
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.comparison-band}
+
+::::::::::::::::::: {.import-block}
+
+<strong>Brouwer route</strong>
+<span>
+profitable deviation을 확률조정 함수 $F$ 안에 넣어 single-valued continuous map을 만든다.
+Jehle–Reny의 존재증명은 이 방식을 따른다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>Kakutani route</strong>
+<span>
+best-response correspondence를 그대로 사용한다.
+correspondence, convex values, upper hemicontinuity를 알고 있다면 equilibrium 구조가 더 직접적으로 드러난다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s46}
+
+## [4.6]{.section-number}혼합전략의 경제적 해석
+
+::: {.topic-opening}
+혼합전략은 “플레이어가 실제로 주사위를 던진다”는 한 가지 해석만을 갖지 않는다.
+게임의 맥락에 따라 deliberate randomization 또는 다른 플레이어들의 uncertainty/belief로 읽을 수 있다.
+:::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · mixed strategy와 belief는 같은 객체가 아니다
+
+:::::::::::::::::::
+
+$\sigma_i$는 Player $i$가 자신의 actions에 대해 선택하는 probability distribution이고,
+$\mu_j$는 다른 Player $j$가 $i$의 행동에 대해 갖는 belief다.
+Nash equilibrium에서는 beliefs가 equilibrium play와 일치한다고 해석할 수 있지만,
+strategy와 belief를 형식적으로 동일시해서는 안 된다.
+이 구분은 Bayesian games와 sequential equilibrium에서 더 중요해진다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.interpretation-grid}
+
+::::::::::::::::::: {.import-block}
+
+<strong>DELIBERATE RANDOMIZATION</strong>
+<span>
+플레이어가 자신의 행동을 예측하기 어렵게 만들기 위해 실제 random device를 사용하는 해석.
+Matching Pennies, penalty kick, serve direction과 같은 adversarial setting에서 자연스럽다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>BELIEF INTERPRETATION</strong>
+<span>
+다른 플레이어들은 equilibrium mixed strategy와 일치하는 확률적 belief를 가질 수 있다.
+이때 strategy 자체와 belief는 구분되지만, equilibrium에서는 양자가 일관되게 연결된다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 4.6.1 Penalty-kick game {#penalty}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 4.5 · Penalty Kick</span>
+<span class="game-card__tag">STRATEGIC UNPREDICTABILITY</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+키커가 $L,R$, 골키퍼가 $L,R$을 선택한다고 하자.
+같은 방향을 고르면 골키퍼의 선방확률이 높고, 다른 방향이면 득점확률이 높다고 하자.
+키커가 항상 한 방향을 선택하면 골키퍼가 그 편향을 exploit할 수 있다.
+
+:::::::::::::::::: {.statement .remark}
+
+::::::::::::::::: {.statement-head}
+
+ILLUSTRATIVE PAYOFFS
+
+:::::::::::::::::
+
+아래 숫자는 혼합전략 계산을 설명하기 위한 가상적 예시이며 실제 penalty-kick 자료의 추정치가 아니다.
+첫 번째 성분은 키커의 득점 payoff, 두 번째 성분은 그 보완적인 골키퍼 payoff로 둔
+constant-sum normalization이다.
+
+::::::::::::::::::
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>GK $L$</th><th>GK $R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">Kicker $L$</td><td>$(0.4,0.6)$</td><td>$(0.8,0.2)$</td></tr>
+<tr><td class="row-label">Kicker $R$</td><td>$(0.9,0.1)$</td><td>$(0.5,0.5)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+$p=\Pr(\text{Kicker }L)$, $q=\Pr(\text{GK }L)$라 하자.
+키커의 두 방향을 무차별하게 만드는 조건은
+
+$$
+0.4q+0.8(1-q)=0.9q+0.5(1-q),
+$$
+
+따라서
+
+$$
+q^*=\frac38.
+$$
+
+골키퍼의 두 방향을 무차별하게 만드는 조건은
+
+$$
+0.6p+0.1(1-p)=0.2p+0.5(1-p),
+$$
+
+따라서
+
+$$
+p^*=\frac12.
+$$
+
+equilibrium에서 키커의 expected payoff는
+
+$$
+V_K
+=
+0.4\left(\frac38\right)
++
+0.8\left(\frac58\right)
+=
+0.65,
+$$
+
+이고 constant-sum normalization 아래 골키퍼의 expected payoff는 $0.35$다.
+
+이 예에서 randomization은 단순한 noise가 아니라 상대가 한쪽 방향을 체계적으로 exploit하지 못하게 하는 equilibrium behavior다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 4.6.2 Inspection Game: 경제학적 randomization {#inspection}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 4.6 · Worker–Inspector</span>
+<span class="game-card__tag">ENFORCEMENT · MIXED INCENTIVES</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+Worker는 Work 또는 Shirk를 선택하고 Inspector는 Inspect 또는 Not Inspect를 선택한다고 하자.
+inspection이 확실하면 Worker는 Work할 유인이 커지고,
+Worker가 항상 Work한다면 Inspector는 inspection cost를 아끼고 싶어진다.
+반대로 inspection이 전혀 없으면 Shirk의 유인이 커진다.
+
+다음은 이 유인구조를 보여주기 위한 간단한 illustrative payoff matrix다.
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>Inspect</th><th>Not Inspect</th></tr></thead>
+<tbody>
+<tr><td class="row-label">Work</td><td>$(1,-1)$</td><td>$(1,0)$</td></tr>
+<tr><td class="row-label">Shirk</td><td>$(-1,1)$</td><td>$(2,-2)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+$p=\Pr(\text{Work})$, $q=\Pr(\text{Inspect})$라 하자.
+Worker의 indifference condition은
+
+$$
+1
+=
+-q+2(1-q)
+$$
+
+이므로
+
+$$
+q^*=\frac13.
+$$
+
+Inspector의 indifference condition은
+
+$$
+-p+(1-p)
+=
+-2(1-p),
+$$
+
+따라서
+
+$$
+p^*=\frac34.
+$$
+
+따라서 equilibrium inspection rate는 $1/3$, shirking rate는 $1-p^*=1/4$다.
+Inspector의 inspection probability가 Worker의 행동유인을 조정하고,
+Worker의 shirking frequency가 Inspector의 monitoring incentive를 조정한다.
+이런 의미에서 mixed probabilities는 enforcement intensity와 violation frequency 같은 경제적 행동빈도로 해석될 수 있다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 4.6.3 주요 주의점 {#cautions}
+
+:::::::::::::::::::: {.property-sheet}
+
+::::::::::::::::::: {.property-sheet__head}
+
+MIXED STRATEGY에서 자주 생기는 오류
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+오류 1
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+“내 mixing probability를 내 무차별조건으로 구한다.” 잘못이다. 상대의 확률이 내 pure strategies를 무차별하게 만든다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+오류 2
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+“support 안의 전략만 서로 같으면 된다.” 아니다. support 밖 전략이 더 높은 기대보수를 주지 않는지도 확인해야 한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+오류 3
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+“mixed equilibrium이 있으면 pure equilibrium은 없다.” 아니다. Battle of the Sexes에는 pure equilibria와 mixed equilibrium이 함께 존재한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+오류 4
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+“모든 equilibrium에서 반드시 실제 random device를 사용한다.” 아니다. belief interpretation도 가능하다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+오류 5
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+“Nash existence theorem은 pure equilibrium의 존재를 보장한다.” 아니다. finite game에서 보장되는 것은 mixed strategies를 허용한 Nash equilibrium이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+다음 장으로
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+혼합전략을 도입하면 모든 유한 전략형 게임에서 Nash equilibrium의 존재가 확보된다.
+다음 Chapter 5에서는 strategic-form representation을 넘어
+행동의 순서, 관찰 가능한 history, information set을 명시하는 dynamic games와 extensive-form representation으로 이동한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#summary}
+
+## Chapter Summary
+
+:::::::::::::::::::: {.narrative-block}
+
+이 장의 핵심은 단순히 혼합확률을 계산하는 데 있지 않다.
+pure choices를 probability distributions로 확장하면 expected-payoff optimization이 가능해지고,
+equilibrium support에서는 모든 positive-probability actions가 동일한 최대 expected payoff를 가져야 한다.
+이러한 indifference와 best-response consistency는 mixed-strategy simplex 위의 fixed-point 문제로 연결되며,
+그 결과 모든 finite strategic-form game에서 Nash equilibrium의 존재가 확보된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.property-sheet}
+
+::::::::::::::::::: {.property-sheet__head}
+
+CHAPTER 4 · 핵심 정리
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Mixed strategy
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+$\sigma_i\in\Delta(S_i)$는 순수전략집합 위의 probability distribution이다.
+pure strategy는 degenerate mixed strategy의 특수한 경우다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Expected payoff
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+독립혼합 아래 순수 profile의 확률은 $\prod_j\sigma_j(s_j)$이며,
+기대보수는 이 확률에 대한 $u_i(s)$의 기대값이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Expected utility
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+mixed strategy가 outcome lottery를 만들기 때문에 payoff는 vNM expected-utility representation으로 읽는다.
+positive affine transformations는 mixed-strategy best responses와 equilibrium을 보존한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Support condition
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+equilibrium에서 positive probability를 갖는 모든 pure strategy는 동일한 최대 기대보수를 준다.
+off-support strategy는 그보다 더 높은 보수를 줄 수 없다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Indifference
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+Player $i$의 support 전략을 무차별하게 만드는 것은 상대방의 equilibrium mixture다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Existence
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+모든 finite strategic-form game은 mixed-strategy Nash equilibrium을 적어도 하나 갖는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Fixed point
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+Brouwer의 continuous-map 접근과 Kakutani의 best-response-correspondence 접근 모두 Nash equilibrium을 fixed point로 이해한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Strategy vs belief
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+$\sigma_i$는 Player $i$의 전략이고 상대의 belief $\mu_j$와는 다른 객체다.
+Nash equilibrium에서는 상대의 belief가 actual mixed play와 일치하도록 해석할 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+3×3 games
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+가위바위보처럼 full-support equilibrium에서는 여러 순수전략을 동시에 무차별하게 만드는 연립조건이 필요하다.
+일반 게임에서는 support가 전체 전략집합보다 작을 수 있으므로 support enumeration이 필요하다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## [4.7]{.section-number}연습문제
+
+::: {.topic-opening}
+혼합전략 문제에서는 pure equilibria를 먼저 찾고, 후보 support를 명시한 다음,
+상대의 확률을 이용해 무차별조건을 세우고 off-support deviation까지 검사하라.
+:::
+
+### A. Mixed Strategies와 Support
+
+<ol class="exercise-list exercise-list--a">
+<li>$S_i=\{A,B,C,D\}$에서 $\sigma_i=(1/2,0,1/4,1/4)$의 support를 구하라.</li>
+<li>혼합전략의 기대보수가 자신의 mixture에 대해 선형임을 식으로 보이라.</li>
+<li>순수전략이 mixed-strategy simplex의 extreme point라는 의미를 설명하라.</li>
+<li>mixed Nash equilibrium에서 support 안의 모든 전략이 best response여야 함을 deviation argument로 증명하라.</li>
+</ol>
+
+### B. 2×2 Mixed Equilibria
+
+<ol class="exercise-list exercise-list--b">
+<li>Matching Pennies의 equilibrium $p^*=q^*=1/2$를 다시 도출하고 각 플레이어의 equilibrium expected payoff를 계산하라.</li>
+<li>Battle of the Sexes의 두 pure equilibria와 하나의 mixed equilibrium을 모두 구하고 payoff를 비교하라.</li>
+<li>
+다음 game의 모든 Nash equilibria를 구하라:
+
+$$
+\begin{array}{c|cc}
+& L & R\\ \hline
+U&(4,1)&(0,0)\\
+D&(0,0)&(1,3)
+\end{array}.
+$$
+
+</li>
+<li>일반 $2\times2$ full-support 공식에서 $p^*,q^*\in(0,1)$이 되기 위한 payoff 조건을 정리해 보라.</li>
+</ol>
+
+### C. Support Enumeration
+
+<ol class="exercise-list exercise-list--c">
+<li>$3\times2$ bimatrix game을 하나 구성하고 가능한 support pair를 나열하라.</li>
+<li>support 안의 indifference만 맞추고 off-support 전략이 더 높은 보수를 주는 예를 구성하라.</li>
+<li>equilibrium에서 확률 0인 전략도 best response일 수 있는 degenerate game을 하나 구성하라.</li>
+</ol>
+
+### D. Nash Existence
+
+<ol class="exercise-list exercise-list--d">
+<li>각 $\Delta(S_i)$가 nonempty, compact, convex임을 증명하라.</li>
+<li>Brouwer 증명에서 $F_i(\sigma)$의 좌표가 모두 비음이 아니고 합이 1임을 확인하라.</li>
+<li>fixed point에서 positive deviation gain이 존재하면 왜 기대보수의 weighted-average identity와 모순되는지 설명하라.</li>
+<li>Kakutani 접근에서 mixed best-response set이 convex인 이유를 기대보수의 linearity를 이용해 증명하라.</li>
+<li>Nash existence theorem이 equilibrium의 uniqueness나 efficiency를 보장하지 않음을 각각 반례로 설명하라.</li>
+</ol>
+
+### E. 해석과 검증
+
+<ol class="exercise-list exercise-list--e">
+<li>“indifference가 mixing을 만든다”와 “mixing이 equilibrium이기 위해 indifference가 필요하다”의 차이를 설명하라.</li>
+<li>Battle of the Sexes에서 mixed equilibrium payoff $(2/3,2/3)$를 계산하고 두 pure equilibria와 비교하라.</li>
+<li>일반 $2\times2$ 공식에서 분모가 0이 되는 payoff 구조가 무엇을 의미하는지 expected-payoff difference를 이용해 설명하라.</li>
+<li>4.4의 partial-support 예제에서 off-support 전략 검증을 생략하면 왜 잘못된 equilibrium candidate를 받아들일 수 있는지 설명하라.</li>
+<li>Brouwer proof의 $F$가 profitable deviation 정보를 probability adjustment로 바꾸는 방식을 설명하라.</li>
+<li>mixed strategy $\sigma_i$와 opponent belief $\mu_j$가 왜 서로 다른 객체인지 설명하라.</li>
+<li>finite-game Nash existence theorem이 continuous-action games에 그대로 적용되지 않는 이유를 설명하라.</li>
+<li>mixed-strategy expected payoff에서 일반적인 increasing transformation이 아니라 positive affine transformation이 중요한 이유를 vNM utility 관점에서 설명하라.</li>
+<li>2×2 게임에서 $BR_1(q)$가 $\{0\}$, $[0,1]$, $\{1\}$ 중 하나가 되는 조건을 설명하고 이를 mixed Nash의 fixed-point 조건과 연결하라.</li>
+<li>Inspection Game의 illustrative payoff matrix에서 $q^*=1/3$, $p^*=3/4$를 다시 도출하고 두 확률의 경제적 의미를 해석하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌
+
+Jehle, G. A., and P. J. Reny. <em>Advanced Microeconomic Theory</em>, 3rd ed., Chapter 7: mixed strategies, Nash equilibrium tests, and existence.
+
+Mas-Colell, A., M. D. Whinston, and J. R. Green. <em>Microeconomic Theory</em>, Chapters 7–8.
+
+Osborne, M. J. <em>An Introduction to Game Theory</em>. Mixed strategies and strategic-form equilibrium.
+
+Nash, J. F. (1951). “Non-Cooperative Games.” <em>Annals of Mathematics</em>.
+
+Kakutani, S. (1941). “A Generalization of Brouwer’s Fixed Point Theorem.” <em>Duke Mathematical Journal</em>.
+
+::::::::::::::::::::::::::
+

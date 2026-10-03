@@ -1,0 +1,35 @@
+# Chapter 5 · 동태게임과 전개형 표현 {.unnumbered}
+*Histories · Nodes · Actions · Information Sets · Strategies · Behavioral Strategies · Perfect Recall*
+
+이 장에서는 **동태게임과 전개형 표현**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토한다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **5.1** 동태게임과 extensive-form 객체
+- **5.2** History·node·information set
+- **5.3** Action과 strategy의 엄밀한 구분
+- **5.4–5.7** 전략형 변환·behavioral strategy·perfect recall·표현 프로토콜
+:::
+
+## Sections
+
+- [5.1 동태게임의 기본구조](contents.html#s51)
+- [5.2 Histories, Nodes, Information Sets](contents.html#s52)
+- [5.3 Action과 Strategy](contents.html#s53)
+- [5.4 Extensive Form에서 Strategic Form으로](contents.html#s54)
+- [5.5 Information Structure가 게임을 바꾸는 방식](contents.html#s55)
+- [5.6 Mixed Strategies, Behavioral Strategies, Perfect Recall](contents.html#s56)
+- [5.7 Extensive-Form Reading Protocol과 대표 예제](contents.html#s57)
+- [Chapter Summary](contents.html#summary)
+- [5.8 연습문제](contents.html#exercises)
+- [참고문헌](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+수식·표·연습문제는 원본 구조를 보존한 [본문 전체](contents.html)에 있다.
+위의 Section 링크로 바로 이동하거나 순서대로 읽을 수 있다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 제출한다.
+:::
