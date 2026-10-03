@@ -107,6 +107,7 @@ book:
     - microeconomics/ch04-pure-exchange/07-core-competitive-limit.qmd
     - microeconomics/ch04-pure-exchange/supplement-examples-exercises.qmd
     - microeconomics/ch04-pure-exchange/references.qmd
+  - game-theory/index.qmd
   - macroeconomics/index.qmd
   - part: macroeconomics/ch00-foundations/index.qmd
     chapters:

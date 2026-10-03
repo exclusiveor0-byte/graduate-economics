@@ -38,6 +38,11 @@ subtitle: Graduate Economics Knowledge Base
 수학적 기초에서 소비자·생산자·시장·순수교환경제로 이어지는 과정
 :::
 ::: {.home-archive-item}
+**게임이론**
+
+전략형·전개형 게임, 부분게임 완전성, 불완전정보와 베이지안 균형을 포괄하는 전략적 상호작용 분석
+:::
+::: {.home-archive-item}
 **거시경제학**
 
 성장·변동·정책·금융을 하나의 거시경제학 지도로 연결하는 과정
@@ -96,9 +101,23 @@ THEORY
 
 [Chapter 지도를 따라 Section별 독립 페이지로 이동]{.status}
 :::
-::: {.study-card .study-card--macro}
+::: {.study-card .study-card--game-theory}
 ::: {.study-card__number}
 03
+:::
+::: {.study-card__eyebrow}
+STRATEGIC INTERACTION
+:::
+### [게임이론](game-theory/index.html)
+전략형 게임 · 전개형 게임 · 부분게임 완전성 · 반복게임 · 베이지안 균형
+
+[과목 로드맵 보기](game-theory/index.html){.study-card__link} →
+
+[전략적 상호작용 및 정보경제학 정리노트 편성 중]{.status}
+:::
+::: {.study-card .study-card--macro}
+::: {.study-card__number}
+04
 :::
 ::: {.study-card__eyebrow}
 MACROECONOMICS
@@ -112,7 +131,7 @@ MACROECONOMICS
 :::
 ::: {.study-card .study-card--econometrics}
 ::: {.study-card__number}
-04
+05
 :::
 ::: {.study-card__eyebrow}
 ECONOMETRICS
@@ -126,7 +145,7 @@ ECONOMETRICS
 :::
 ::: {.study-card .study-card--supplements}
 ::: {.study-card__number}
-05
+06
 :::
 ::: {.study-card__eyebrow}
 COMPUTATION
@@ -140,7 +159,7 @@ COMPUTATION
 :::
 ::: {.study-card .study-card--literature}
 ::: {.study-card__number}
-06
+07
 :::
 ::: {.study-card__eyebrow}
 LITERATURE
@@ -154,7 +173,7 @@ LITERATURE
 :::
 ::: {.study-card .study-card--qual}
 ::: {.study-card__number}
-07
+08
 :::
 ::: {.study-card__eyebrow}
 QUALIFYING EXAM
