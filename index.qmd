@@ -109,11 +109,11 @@ THEORY
 STRATEGIC INTERACTION
 :::
 ### [게임이론](game-theory/index.html)
-전략형 게임 · 전개형 게임 · 부분게임 완전성 · 반복게임 · 베이지안 균형
+전략적 상호작용 · 우월전략 · Nash 균형 · 혼합전략과 존재성 · 전개형 동태게임
 
-[과목 로드맵 보기](game-theory/index.html){.study-card__link} →
+[Chapter 01–05 읽기](game-theory/index.html){.study-card__link} →
 
-[전략적 상호작용 및 정보경제학 정리노트 편성 중]{.status}
+[전략형·전개형 기본 이론을 포괄하는 5개 Chapter]{.status}
 :::
 ::: {.study-card .study-card--macro}
 ::: {.study-card__number}

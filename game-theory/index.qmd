@@ -2,25 +2,67 @@
 
 ## 대학원 전략적 상호작용 및 게임이론
 
-**전략형 게임, 전개형 게임, 정보의 비대칭성, 반복게임, 그리고 메커니즘 디자인**
+**전략적 사고, 지배전략, 내쉬 균형, 혼합전략, 전개형 게임, 그리고 동태적 합리성**
 
-이 과목은 경제 주체들 간의 전략적 상호작용(Strategic Interactions)을 수학적으로 모형화하고 분석하는 대학원 수준의 게임이론(Game Theory) 및 정보경제학(Information Economics) 정리노트이다. 개인의 합리적 선택이 상호의존적인 환경에서 최적대응(Best Response), 내쉬 균형(Nash Equilibrium), 부분게임 완전성(Subgame Perfection), 그리고 베이지안 균형(Bayesian Equilibrium)의 존재와 특성을 엄밀하게 다룬다.
+이 과목은 경제 주체들 간의 전략적 상호작용(Strategic Interactions)을 수학적으로 모형화하고 분석하는 대학원 수준의 게임이론(Game Theory) 및 정보경제학(Information Economics) 정리노트이다. 개인의 합리적 선택이 상호의존적인 환경에서 전략적 사고, 지배전략과 합리화가능성(Rationalizability), 최적대응(Best Response), 내쉬 균형(Nash Equilibrium), 혼합전략과 균형의 존재성, 그리고 동태게임의 전개형 표현과 순차적 합리성을 체계적으로 다룬다.
 
 ---
 
-## 향후 편성 및 로드맵 안내
-
-현재 게임이론 교과목 정리노트를 순차적으로 정리·업로드하기 위한 기본 틀이 마련되었습니다. 아래의 로드맵에 따라 핵심 주제별 Chapter가 순차적으로 추가될 예정입니다.
+## Chapter 로드맵 및 편성 현황
 
 | Chapter | 대주제 및 주요 내용 | 상태 |
 |:---|:---|:---:|
-| **Chapter 01** | **전략형 게임과 내쉬 균형** · 정적 완전정보 게임, 순수전략 및 혼합전략, 최적대응, 지배전략 제거, Brouwer/Kakutani 부동점정리를 통한 균형 존재 증명 | [작성 예정]{.status} |
-| **Chapter 02** | **전개형 게임과 부분게임 완전성** · 동태 완전정보 게임, 게임 트리, 정보집합, 역진귀납법(Backward Induction), 부분게임 완전 내쉬 균형(SPNE) | [작성 예정]{.status} |
-| **Chapter 03** | **반복게임과 포크 정리** · 무한반복 게임, 할인인자, 담합과 보복 전략(Trigger Strategies), Folk Theorems | [작성 예정]{.status} |
-| **Chapter 04** | **정적 불완전정보 게임과 베이지안 내쉬 균형** · Harsanyi 유형 모형, 베이지안 내쉬 균형(BNE), 경매이론(Auctions) 기초 | [작성 예정]{.status} |
-| **Chapter 05** | **동태 불완전정보 게임과 정제 개념** · 완전 베이지안 균형(PBE), 순차균형(Sequential Equilibrium), 신호발송 게임(Signaling Games), 맥주-키슈 균형 정제 | [작성 예정]{.status} |
-| **Chapter 06** | **정보경제학과 메커니즘 디자인** · 역선택(Adverse Selection), 도덕적 해이(Moral Hazard), 본인-대리인 모형, 현시원리(Revelation Principle) | [작성 예정]{.status} |
+| [Chapter 01](ch01-strategic-interaction/index.html) | **게임과 전략적 상호작용** · 전략적 사고, 게임의 구성요소, Timing과 Information, 8대 Canonical Games, Diagnostic Protocol | [완료]{.status} |
+| [Chapter 02](ch02-dominance-reasoning/index.html) | **우월전략과 반복적 추론** · 강우월·강열등, IESDS, 약우월의 한계 및 순서의존성, 혼합지배, Rationalizability, 고차 추론 | [완료]{.status} |
+| [Chapter 03](ch03-best-response-nash/index.html) | **최적반응과 Nash 균형** · Best Response Correspondence, 순수전략 Nash 균형, Fixed Point 해석, Cournot·Bertrand 과점경쟁, 다중균형 | [완료]{.status} |
+| [Chapter 04](ch04-mixed-strategies-existence/index.html) | **혼합전략과 Nash 균형의 존재** · 확률분포와 Simplex, Support Theorem, 무차별조건, 2×2 및 3×3 혼합균형 계산, Brouwer/Kakutani Nash 존재정리 | [완료]{.status} |
+| [Chapter 05](ch05-dynamic-extensive-form/index.html) | **동태게임과 전개형 표현** · Histories, Nodes, Information Sets, 완전조건부계획(Strategy), Behavioral Strategy, Perfect Recall과 Kuhn 정리 | [완료]{.status} |
+| **Chapter 06** | **역진귀납법과 부분게임 완전균형** · 순차적 합리성, Credibility, Backward Induction, Subgame Perfection, 연립교섭(Bargaining) | [작성 예정]{.status} |
+| **Chapter 07** | **반복게임과 협조의 지속** · 무한반복게임, 할인인자, Trigger Strategies, Folk Theorems, 암묵적 담합(Collusion) | [작성 예정]{.status} |
+| **Chapter 08** | **정적 불완전정보와 베이지안 내쉬 균형** · Harsanyi Type 모형, 베이지안 내쉬 균형(BNE), 경매이론(Auctions) | [작성 예정]{.status} |
+| **Chapter 09** | **동태 불완전정보와 정제 개념** · 완전 베이지안 균형(PBE), 순차균형(Sequential Equilibrium), 신호발송(Signaling Games) | [작성 예정]{.status} |
+| **Chapter 10** | **정보경제학과 메커니즘 디자인** · 역선택(Adverse Selection), 도덕적 해이(Moral Hazard), 본인-대리인 모형, 현시원리 | [작성 예정]{.status} |
 
-::: {.callout-note appearance="simple" title="정리노트 작성 및 기여 안내"}
-게임이론 정리노트는 대학원 미시경제학 및 응용미시·산업조직론의 필수 기초를 다룹니다. 각 Chapter별 본문 및 정리가 준비되는 대로 개별 페이지로 분할되어 수록될 예정입니다.
-:::
+---
+
+## Chapters
+
+### [Chapter 01 · 게임과 전략적 상호작용](ch01-strategic-interaction/index.html)
+
+전략적 상호작용의 본질, 게임의 기본 객체(Players, Actions, Strategies, Outcomes, Payoffs), Timing과 Information 구조의 분류, 8대 대표게임(PD, MP, Coordination, BoS, Stag Hunt, Chicken, RPS, Beauty Contest)과 낯선 게임을 읽는 10단계 진단 프로토콜을 다룬다.
+
+[Chapter 01 읽기](ch01-strategic-interaction/index.html) →
+
+[10개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 02 · 우월전략과 반복적 추론](ch02-dominance-reasoning/index.html)
+
+상대에 대한 구체적 예측 없이 작동하는 Belief-free reasoning으로서의 강우월과 강열등, IESDS와 축소게임, 약우월의 제거순서 의존 문제, 혼합전략에 의한 지배, Rationalizability와 고차 추론(Higher-order reasoning)을 체계화한다.
+
+[Chapter 02 읽기](ch02-dominance-reasoning/index.html) →
+
+[11개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 03 · 최적반응과 Nash 균형](ch03-best-response-nash/index.html)
+
+상대 전략을 주어진 것으로 했을 때의 조건부 최적화(Best Response), 순수전략 Nash 균형의 정의와 일방적 이탈 안정성, Fixed point 해석, Dominance와의 관계, 그리고 연속전략 게임인 Cournot 수량경쟁과 Bertrand 가격경쟁을 심층 비교한다.
+
+[Chapter 03 읽기](ch03-best-response-nash/index.html) →
+
+[10개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 04 · 혼합전략과 Nash 균형의 존재](ch04-mixed-strategies-existence/index.html)
+
+전략공간의 볼록화(Convexification)로서의 혼합전략 Simplex, 기대보수와 Support Theorem, 균형 무차별조건, 2×2 및 3×3(가위바위보) 혼합균형 계산법, Support Enumeration 알고리즘, 그리고 Brouwer 및 Kakutani 부동점정리를 통한 Nash 존재정리를 엄밀하게 증명한다.
+
+[Chapter 04 읽기](ch04-mixed-strategies-existence/index.html) →
+
+[7개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 05 · 동태게임과 전개형 표현](ch05-dynamic-extensive-form/index.html)
+
+행동의 순서와 관찰가능성을 보존하는 전개형 표현(Extensive Form), Histories, Nodes, Information Sets, 완전조건부계획으로서의 전략 정의, 전략형 변환(Induced Strategic Form), 행동전략(Behavioral Strategy), Perfect Recall과 Kuhn 동등성 정리를 다룬다.
+
+[Chapter 05 읽기](ch05-dynamic-extensive-form/index.html) →
+
+[8개 절 · 정리·증명·연습문제 포함]{.status}

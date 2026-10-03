@@ -1,0 +1,2312 @@
+---
+title: "Chapter 5 · 동태게임과 전개형 표현"
+description: "Histories, Nodes, Information Sets, 완전조건부계획, Behavioral Strategy, Perfect Recall"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/game-theory-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s51}
+
+## [5.1]{.section-number}동태게임의 기본구조
+
+::: {.topic-opening}
+동태게임의 핵심은 “순서가 있다”는 사실 자체보다,
+순서와 관찰가능성이 플레이어의 전략을 조건부 계획으로 만든다는 데 있다.
+따라서 strategic form보다 더 풍부한 표현이 필요하다.
+:::
+
+### 5.1.1 Timing과 information {#s511}
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.import-block}
+
+<strong>STATIC GAME</strong>
+<span>
+상대방의 현재 행동을 관찰하지 않은 채 전략을 선택한다.
+분석의 기본 객체는 $S_i$, $u_i$, best response, Nash equilibrium이다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>DYNAMIC GAME</strong>
+<span>
+행동의 순서와 history가 중요하며, 플레이어가 자신의 차례에 무엇을 알고 있는지가 전략집합 자체를 바꾼다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · sequential move $\neq$ perfect information
+
+:::::::::::::::::::
+
+Player 2가 Player 1보다 나중에 움직인다는 사실만으로 Player 1의 행동을 관찰한다고 결론내릴 수 없다.
+timing과 information은 서로 다른 차원이다.
+나중에 움직이면서도 앞선 행동을 관찰하지 못하는 imperfect-information dynamic game이 가능하다.
+
+::::::::::::::::::::
+
+### 5.1.2 Extensive-form game의 구성요소 {#s512}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Tuple을 외우기 전에 여섯 질문으로 읽는다
+
+:::::::::::::::::::
+
+extensive form의 여러 기호는 서로 독립적인 장식이 아니라
+하나의 동태적 의사결정문제를 완전히 기술하기 위해 필요한 정보다.
+게임을 읽을 때 먼저 다음 질문에 답하면 formal tuple이 자연스럽게 따라온다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.question-grid}
+
+::::::::::::::::::: {.question-card}
+
+:::::::::::::::::: {.question-card__head}
+
+WHO?
+
+::::::::::::::::::
+
+누가 전략적 플레이어이고, Nature가 움직이는가?
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.question-card}
+
+:::::::::::::::::: {.question-card__head}
+
+WHEN?
+
+::::::::::::::::::
+
+어떤 history에서 누가 움직이는가?
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.question-card}
+
+:::::::::::::::::: {.question-card__head}
+
+WHAT?
+
+::::::::::::::::::
+
+각 decision point에서 어떤 actions가 가능한가?
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.question-card}
+
+:::::::::::::::::: {.question-card__head}
+
+WHAT IS KNOWN?
+
+::::::::::::::::::
+
+움직이는 플레이어는 실제 history를 얼마나 구별할 수 있는가?
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.question-card}
+
+:::::::::::::::::: {.question-card__head}
+
+WHEN DOES IT END?
+
+::::::::::::::::::
+
+어떤 histories가 terminal인가?
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.question-card}
+
+:::::::::::::::::: {.question-card__head}
+
+WHAT IS VALUED?
+
+::::::::::::::::::
+
+각 terminal history에서 각 플레이어는 어떤 payoff를 얻는가?
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.1 · Finite Extensive-Form Game
+
+:::::::::::::::::::
+
+이 노트에서는 유한 extensive-form game을 history-based notation으로
+
+::::::::::::::::::: {.math-display}
+
+$$
+\Gamma
+=
+\left\langle
+N,\,
+H,\,
+Z,\,
+P,\,
+(A(h))_{h\in H\setminus Z},\,
+\mathcal I,\,
+\rho,\,
+(u_i)_{i\in N}
+\right\rangle
+$$
+
+:::::::::::::::::::
+
+로 표현한다. 이 표기는 tree의 각 node를 그 node에 이르는 history와 식별한다.
+$H$는 prefix-closed한 feasible histories의 집합이며,
+$Z\subseteq H$는 더 이상 continuation이 없는 terminal histories의 집합이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.info-sheet}
+
+::::::::::::::::::: {.info-row}
+
+:::::::::::::::::: {.info-key}
+
+$N$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.info-body}
+
+전략적 플레이어들의 유한 집합.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.info-row}
+
+:::::::::::::::::: {.info-key}
+
+$H$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.info-body}
+
+feasible histories의 prefix-closed 집합. 초기 history $\emptyset$을 포함하고,
+$h'\in H$이면 $h'$의 모든 prefixes도 $H$에 속한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.info-row}
+
+:::::::::::::::::: {.info-key}
+
+$Z\subseteq H$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.info-body}
+
+terminal histories의 집합. $z\in Z$에서는 더 이상의 feasible continuation이 없다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.info-row}
+
+:::::::::::::::::: {.info-key}
+
+$P(h)$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.info-body}
+
+$h\in H\setminus Z$에서 누가 움직이는지를 지정하는 player function.
+$P(h)\in N\cup\{0\}$로 쓰고 $0$은 Nature를 나타낸다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.info-row}
+
+:::::::::::::::::: {.info-key}
+
+$A(h)$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.info-body}
+
+nonterminal history $h$에서 가능한 actions의 집합.
+$a\in A(h)$이면 successor history $(h,a)\in H$가 된다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.info-row}
+
+:::::::::::::::::: {.info-key}
+
+$\mathcal I$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.info-body}
+
+전략적 플레이어들의 decision histories를 묶는 information partition.
+같은 information set 안에서는 mover와 feasible action set이 동일해야 한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.info-row}
+
+:::::::::::::::::: {.info-key}
+
+$\rho(\cdot\mid h)$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.info-body}
+
+$P(h)=0$인 chance history에서 Nature가 사용하는 exogenous probability distribution,
+$\rho(\cdot\mid h)\in\Delta(A(h))$.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.info-row}
+
+:::::::::::::::::: {.info-key}
+
+$u_i:Z\to\mathbb R$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.info-body}
+
+각 terminal history $z$에 플레이어 $i$의 payoff를 할당한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+왜 $A(h)$와 $\rho(\cdot\mid h)$처럼 history별로 적는가?
+
+:::::::::::::::::::
+
+동태게임에서는 가능한 action과 chance probabilities가 게임의 모든 지점에서 같을 필요가 없다.
+현재 history가 달라지면 feasible actions도 달라질 수 있으므로,
+extensive form은 선택가능성과 chance rule을 각각의 history에 조건부로 기록해야 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.representation-band}
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">TIMING</span><span class="text">history가 행동의 순서를 기록</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">INFORMATION</span><span class="text">information set이 무엇을 구별할 수 있는지 기록</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">INCENTIVES</span><span class="text">terminal payoff가 선택의 목적을 규정</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s52}
+
+## [5.2]{.section-number}Histories, Nodes, Information Sets
+
+::: {.topic-opening}
+Extensive form의 핵심 언어는 history와 information set이다.
+history는 객관적으로 지금까지 어떤 행동들이 일어났는지를 기록하고,
+information set은 플레이어가 그 histories 중 무엇을 구별할 수 있는지를 기록한다.
+:::
+
+### 5.2.1 History와 terminal history {#s521}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.2 · History
+
+:::::::::::::::::::
+
+history는 지금까지 발생한 행동들의 유한한 sequence다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+h=(a^1,\ldots,a^t).
+$$
+
+:::::::::::::::::::
+
+초기 history는
+
+$$
+h^0=\emptyset
+$$
+
+로 쓸 수 있다.
+어떤 history 뒤에 action $a$가 가능하면 continuation history를 $(h,a)$로 쓴다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.3 · Terminal History
+
+:::::::::::::::::::
+
+더 이상 가능한 continuation action이 없는 history를 terminal history 또는 end node라 한다.
+terminal-history set을 $Z$라 하면 payoff는
+
+$$
+u_i:Z\to\mathbb R
+$$
+
+로 terminal history에 정의된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · node와 history
+
+:::::::::::::::::::
+
+유한 perfect-information game에서는 “node”와 “그 node에 이르는 history”를 사실상 동일시할 수 있다.
+중요한 것은 node를 단순한 점이 아니라 지금까지의 play를 요약하는 상태로 읽는 것이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+History는 tree 위의 위치를 행동의 sequence로 표현한다
+
+:::::::::::::::::::
+
+history $h=(a^1,\ldots,a^t)$가 더 긴 history
+$h'=(a^1,\ldots,a^t,a^{t+1},\ldots)$의 앞부분이라면
+
+$$
+h\prec h'
+$$
+
+라고 쓸 수 있다. 즉 $h'$는 $h$의 continuation이다.
+
+게임이 실제로 진행되면 초기 history $h^0=\emptyset$에서 시작하여
+successive actions를 따라 하나의 terminal history까지 하나의 realized path가 형성된다.
+extensive form의 tree는 가능한 모든 paths를 함께 기록하고,
+실제 play는 그중 하나만 실현한다.
+
+::::::::::::::::::::
+
+### 5.2.2 Player function과 Nature {#s522}
+
+nonterminal history $h$마다
+
+$$
+P(h)\in N\cup\{0\}
+$$
+
+를 통해 누가 움직이는지를 지정한다. 여기서 $P(h)=0$은 Nature의 move를 뜻한다.
+Nature는 전략적 플레이어가 아니며 payoff를 최대화하지도 않는다.
+chance history에서는 주어진 exogenous rule
+
+$$
+\rho(\cdot\mid h)\in\Delta(A(h))
+$$
+
+에 따라 action이 선택된다. 이 chance rule과 그 확률은 게임의 primitives로 취급한다.
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 5.1 · Chance가 먼저 움직이는 게임</span>
+<span class="game-card__tag">NATURE · PRIVATE INFORMATION PREVIEW</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+Nature가 먼저
+
+$$
+\theta\in\{\theta_L,\theta_H\}
+$$
+
+를 각각 $p$, $1-p$의 확률로 선택하고,
+이후 Player 1이 자신의 type $\theta$를 관찰한 뒤 행동한다고 하자.
+이 구조는 이후 Bayesian game과 signaling game의 extensive-form representation에서 반복적으로 사용된다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+PREVIEW · Harsanyi transformation
+
+:::::::::::::::::::
+
+payoff-relevant type에 대한 incomplete information을
+Nature가 먼저 types를 추첨하는 extensive form으로 표현하는 방식을
+Harsanyi transformation이라 부른다.
+중요한 점은 Nature가 type을 뽑았다는 사실만으로 누가 그 type을 아는지가 결정되지는 않는다는 것이다.
+각 플레이어가 무엇을 관찰하는지는 이후의 information sets가 규정한다.
+
+::::::::::::::::::::
+
+### 5.2.3 Information set {#s523}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Information set은 플레이어가 구별할 수 없는 decision situations를 묶는다
+
+:::::::::::::::::::
+
+실제 history는 객관적으로 하나가 실현되어 있다.
+하지만 플레이어가 그 history를 정확히 관찰하지 못한다면,
+자신의 관점에서는 여러 nodes가 동시에 가능해 보인다.
+information set은 바로 이 <strong>관찰가능성의 제한</strong>을 표현한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.4 · Information Set
+
+:::::::::::::::::::
+
+플레이어 $i$가 움직이는 decision nodes의 일부를 하나의 집합 $I$로 묶고,
+$i$가 $I$ 안에서 실제로 어떤 node가 도달했는지 구별할 수 없다고 하자.
+이 집합 $I$를 information set이라 한다.
+
+같은 information set 안의 nodes에서는
+
+::::::::::::::::::: {.math-display}
+
+$$
+P(h)=P(h')=i
+\quad\text{and}\quad
+A(h)=A(h')
+$$
+
+:::::::::::::::::::
+
+가 성립해야 한다.
+플레이어는 자신이 누구인지 또는 어떤 action set을 가지고 있는지를 통해
+자신이 information set 안의 어느 history에 있는지를 역추론할 수 없어야 하기 때문이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 5.2 · 관찰된 선행행동과 관찰되지 않은 선행행동</span>
+<span class="game-card__tag">INFORMATION SETS</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.game-flow}
+
+::::::::::::::::: {.game-flow__head}
+
+Case A · Player 2가 Player 1의 행동을 관찰
+
+:::::::::::::::::
+
+::::::::::::::::: {.game-flow__body}
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Player 1
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+$L$ 또는 $R$
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Player 2 after $L$
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+$A$ 또는 $B$
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Player 2 after $R$
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+$A$ 또는 $B$
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+두 decision nodes는 서로 다른 singleton information sets다.
+
+:::::::::::::::::: {.game-flow}
+
+::::::::::::::::: {.game-flow__head}
+
+Case B · Player 2가 Player 1의 행동을 관찰하지 못함
+
+:::::::::::::::::
+
+::::::::::::::::: {.game-flow__body}
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Player 1
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+$L$ 또는 $R$
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Player 2
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+자신이 $L$ 뒤 node에 있는지 $R$ 뒤 node에 있는지 모른 채 $A$ 또는 $B$를 선택.
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+이 경우 두 decision nodes가 하나의 information set으로 묶인다.
+따라서 Player 2는 $L$과 $R$에 따라 다른 action을 조건부로 선택할 수 없다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 5.2.4 Information Set과 Belief는 다르다 {#info-belief}
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.import-block}
+
+<strong>INFORMATION SET</strong>
+<span>
+플레이어가 어떤 nodes를 서로 구별하지 못하는지를 게임의 구조로 기록한다.
+즉 “어떤 states가 가능하다고 느끼는가?”의 범위를 정한다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>BELIEF</strong>
+<span>
+하나의 information set 안에서 각 node가 실제일 probability를 어떻게 평가하는지를 기록한다.
+이 장에서는 구조만 정의하고, beliefs를 이용한 sequential rationality는 뒤의 PBE·sequential equilibrium에서 본격적으로 다룬다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.bridge-example}
+
+::::::::::::::::::: {.bridge-example__head}
+
+BRIDGE · simultaneous-move game도 extensive form으로 표현할 수 있다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.bridge-example__body}
+
+tree 그림에서 Player 1을 먼저 배치하더라도 Player 2가 Player 1의 action을 관찰하지 못하도록
+두 decision nodes를 하나의 information set으로 묶으면,
+Player 2는 $L$ 이후와 $R$ 이후에 다른 actions를 조건부로 선택할 수 없다.
+
+따라서 그림상 “두 번째로 움직인다”는 사실과 경제적으로 first move를 관찰한다는 사실은 다르다.
+적절한 information set을 사용하면 simultaneous-move strategic interaction도 extensive form 안에 포함시킬 수 있다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 5.2.5 Perfect vs Imperfect Information {#s524}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.5 · Perfect Information
+
+:::::::::::::::::::
+
+모든 information set이 singleton이면 그 extensive-form game을 perfect-information game이라 한다.
+즉 플레이어는 자신의 차례가 되었을 때 이전 play의 정확한 history를 알고 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.6 · Imperfect Information
+
+:::::::::::::::::::
+
+적어도 하나의 information set이 둘 이상의 node를 포함하면 imperfect-information game이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · complete information과 perfect information은 다르다
+
+:::::::::::::::::::
+
+<strong>Complete information</strong>은 payoff-relevant game primitives가 플레이어들에게 알려져 있고
+그 사실이 common knowledge인지에 관한 개념이다.
+<strong>Perfect information</strong>은 extensive form에서 과거의 실제 actions를 자신의 차례에 모두 관찰하는지를 묻는다.
+따라서 complete-information game도 imperfect information일 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.concept-triad}
+
+::::::::::::::::::: {.import-block}
+
+<strong>COMPLETE INFORMATION</strong>
+<span>Payoff-relevant game primitives가 알려져 있고 그 사실이 common knowledge인가?</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>PERFECT INFORMATION</strong>
+<span>자신이 움직일 때 이전의 실제 play history를 정확히 관찰하는가?</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>PERFECT RECALL</strong>
+<span>자신이 과거에 알고 있던 정보와 자신이 취한 actions를 잊지 않는가? 5.6에서 정식화한다.</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s53}
+
+## [5.3]{.section-number}Action과 Strategy
+
+::: {.topic-opening}
+동태게임에서 가장 중요한 개념적 구분은 action과 strategy다.
+action은 현재 node에서 실제로 취하는 선택이고,
+strategy는 플레이어가 직면할 수 있는 모든 information set에서 무엇을 할지를 미리 지정한 완전한 계획이다.
+:::
+
+### 5.3.1 Strategy as a complete contingent plan {#s531}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.7 · Pure Strategy in an Extensive-Form Game
+
+:::::::::::::::::::
+
+플레이어 $i$의 information sets의 모음을 $\mathcal I_i$라 하자.
+pure strategy는
+
+::::::::::::::::::: {.math-display}
+
+$$
+s_i:\mathcal I_i\to A
+$$
+
+:::::::::::::::::::
+
+로서 각 information set $I\in\mathcal I_i$에 대해
+
+$$
+s_i(I)\in A(I)
+$$
+
+를 지정하는 함수다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+핵심 문장
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+$$
+\boxed{
+\text{Strategy}
+=
+\text{complete contingent plan}
+}.
+$$
+
+실제 play에서 도달하지 않는 information set의 행동도 전략에 포함된다.
+그 off-path prescription이 다른 플레이어의 현재 선택에 영향을 줄 수 있기 때문이다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+왜 일어나지 않을 수도 있는 상황의 행동까지 적어야 하는가?
+
+:::::::::::::::::::
+
+Entrant가 먼저 Out 또는 Enter를 선택하고 Incumbent가 Enter 이후 Fight 또는 Accommodate를 선택한다고 하자.
+실제 equilibrium path가 Out으로 끝난다면 Incumbent는 실제로 아무 action도 취하지 않는다.
+그래도 Incumbent의 strategy는 “Enter가 일어나면 무엇을 할 것인가?”를 반드시 포함해야 한다.
+
+Entrant의 현재 진입결정은 바로 그 continuation prescription에 의존할 수 있다.
+따라서 off-path behavior는 실현되지 않았다는 이유만으로 전략적 의미를 잃지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 5.3 · Player 2의 네 개 전략</span>
+<span class="game-card__tag">ACTION $\neq$ STRATEGY</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+Player 1이 $L,R$ 중 하나를 선택하고,
+Player 2가 이를 관찰한 뒤 각각의 경우 $A,B$ 중 하나를 선택한다고 하자.
+Player 2에게는 information set이 두 개이므로 전략은
+
+:::::::::::::::::: {.math-display}
+
+$$
+S_2
+=
+\{AA,AB,BA,BB\}.
+$$
+
+::::::::::::::::::
+
+첫 번째 글자는 $L$ 이후 action, 두 번째 글자는 $R$ 이후 action을 뜻한다.
+예를 들어 $AB$는
+
+$$
+L\Rightarrow A,
+\qquad
+R\Rightarrow B
+$$
+
+라는 완전한 조건부 계획이다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 5.3.2 Strategy counting {#s532}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.1 · Pure Strategy Count
+
+:::::::::::::::::::
+
+플레이어 $i$가 $m$개의 information sets를 가지고,
+각 information set $I^k$에서 가능한 actions의 수가 $|A(I^k)|$라면,
+pure strategies의 수는
+
+::::::::::::::::::: {.math-display}
+
+$$
+|S_i|
+=
+\prod_{k=1}^{m}|A(I^k)|.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.strategy-count}
+
+information set이 두 개이고 각 지점에서 두 actions가 가능하면 $2\times2=4$ strategies.
+세 information sets에서 각각 $2,3,2$ actions가 가능하면 $2\times3\times2=12$ strategies다.
+Extensive-form game이 조금만 커져도 strategic-form representation의 전략수가 급격하게 증가하는 이유다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s54}
+
+## [5.4]{.section-number}Extensive Form에서 Strategic Form으로
+
+::: {.topic-opening}
+extensive-form game도 각 플레이어의 complete contingent plans를 pure strategies로 모으면 strategic form으로 변환할 수 있다.
+따라서 Chapter 2–4에서 배운 dominance와 Nash equilibrium을 extensive-form game에도 적용할 수 있다.
+다만 strategic form으로 변환하면 timing과 information의 구조가 압축되어 보이지 않게 된다.
+:::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.2 · Induced Strategic Form
+
+:::::::::::::::::::
+
+유한 extensive-form game에서 각 플레이어의 pure-strategy set $S_i$를 구성하자.
+joint strategy profile $s\in\prod_iS_i$와 chance rule $\rho$는
+terminal histories $z\in Z$ 위의 probability distribution을 유도한다.
+따라서 strategic-form payoff를
+
+::::::::::::::::::: {.math-display}
+
+$$
+\bar u_i(s)
+=
+\sum_{z\in Z}
+\Pr(z\mid s,\rho)\,u_i(z)
+$$
+
+:::::::::::::::::::
+
+로 정의하면
+
+::::::::::::::::::: {.math-display}
+
+$$
+G(\Gamma)
+=
+\left(
+N,(S_i)_{i\in N},(\bar u_i)_{i\in N}
+\right)
+$$
+
+:::::::::::::::::::
+
+라는 induced strategic-form game을 얻는다.
+chance move가 없으면 각 pure strategy profile이 보통 하나의 terminal history를 결정하므로 위 기대값은 해당 terminal payoff로 단순화된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · $\Gamma\mapsto G(\Gamma)$는 일반적으로 one-to-one이 아니다
+
+:::::::::::::::::::
+
+서로 다른 timing이나 information structure를 가진 extensive forms가 동일한 induced strategic form을 만들 수 있다.
+따라서 strategic form은 complete contingent plans의 payoff 비교에는 충분하지만,
+원래 tree의 어느 history에서 어떤 continuation game이 시작되는지는 직접 보여주지 않는다.
+
+이 때문에 Nash equilibrium은 induced strategic form에서 정의할 수 있어도,
+subgame perfection처럼 continuation rationality를 검사하는 refinement는 원래 extensive-form structure를 다시 필요로 한다.
+
+::::::::::::::::::::
+
+<details class="extension">
+<summary>확장 · Reduced strategic form</summary>
+
+:::::::::::::::::::: {.details-body}
+
+full strategic form은 모든 off-path prescriptions를 complete plans에 포함하므로
+큰 extensive-form game에서는 매우 많은 pure strategies를 생성한다.
+서로의 realized consequences를 바꾸지 않는 일부 전략 차이를 적절히 묶어 표현하는
+reduced strategic form을 사용할 수도 있다.
+
+다만 이 장에서는 off-path prescriptions와 credibility의 차이를 분명히 보기 위해
+complete contingent plans로 이루어진 full strategic form을 기본으로 유지한다.
+
+::::::::::::::::::::
+
+</details>
+
+### 5.4.1 기본 순차게임 {#seq-basic}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 5.4 · 순차게임의 strategic form</span>
+<span class="game-card__tag">EXTENSIVE → STRATEGIC</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+Player 1이 $L,R$을 선택하고 Player 2가 관찰 후 $A,B$를 선택한다고 하자.
+terminal payoffs를
+
+:::::::::::::::::: {.math-display}
+
+$$
+(L,A)\mapsto(3,2),\quad
+(L,B)\mapsto(0,0),
+$$
+
+$$
+(R,A)\mapsto(1,1),\quad
+(R,B)\mapsto(2,3)
+$$
+
+::::::::::::::::::
+
+로 두자. 전략집합은
+
+:::::::::::::::::: {.math-display}
+
+$$
+S_1=\{L,R\},
+\qquad
+S_2=\{AA,AB,BA,BB\}.
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead>
+<tr><th></th><th>$AA$</th><th>$AB$</th><th>$BA$</th><th>$BB$</th></tr>
+</thead>
+<tbody>
+<tr>
+<td class="row-label">$L$</td>
+<td>$(3,2)$</td><td>$(3,2)$</td><td>$(0,0)$</td><td>$(0,0)$</td>
+</tr>
+<tr>
+<td class="row-label">$R$</td>
+<td>$(1,1)$</td><td>$(2,3)$</td><td>$(1,1)$</td><td>$(2,3)$</td>
+</tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+Player 2의 전략 중 실제 경로에서 사용되지 않는 prescription도 matrix의 column을 구분한다.
+예를 들어 Player 1이 $L$을 선택하면 $AA$와 $AB$는 동일한 realized action $A$를 유도하지만,
+$R$ 이후 행동이 다르므로 서로 다른 strategies다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.bridge-example}
+
+::::::::::::::::::: {.bridge-example__head}
+
+PREVIEW · 같은 realized path, 다른 complete strategy
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.bridge-example__body}
+
+Example 5.4의 induced strategic form에서 pure Nash equilibria를 확인하면
+
+$$
+(L,AA),\qquad(L,AB),\qquad(R,BB)
+$$
+
+를 얻는다.
+이 중 $(L,AA)$와 $(L,AB)$는 모두 realized path $L\to A$를 만든다.
+하지만 Player 2가 $R$ 이후 무엇을 할지에 대한 off-path prescription은 서로 다르다.
+
+Strategic-form Nash equilibrium은 이런 off-path prescription이 실제 그 node에 도달했을 때도 최적인지까지
+자동으로 검사하지 않는다.
+Chapter 6의 backward induction과 subgame perfection은 바로 이 continuation rationality를 추가로 요구한다.
+
+:::::::::::::::::: {.math-display}
+
+$$
+\boxed{
+\text{Nash: complete plans의 mutual optimality}
+\qquad\not\Rightarrow\qquad
+\text{every continuation에서의 optimality}
+}
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 5.4.2 Sequential Matching Pennies {#seq-mp}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 5.5 · Matching Pennies에 timing을 추가</span>
+<span class="game-card__tag">TIMING + OBSERVABILITY</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+Chapter 4의 Matching Pennies를 생각하자.
+이제 Player 1이 먼저 $H,T$ 중 하나를 선택하고,
+Player 2가 이를 <strong>관찰한 뒤</strong> $H,T$를 선택한다고 하자.
+Player 2의 pure strategies는
+
+:::::::::::::::::: {.math-display}
+
+$$
+S_2=\{HH,HT,TH,TT\},
+$$
+
+::::::::::::::::::
+
+여기서 첫 글자는 $H_1$ 이후 action, 두 번째 글자는 $T_1$ 이후 action이다.
+따라서 정태 Matching Pennies의 Player 2 strategy set $\{H,T\}$보다 훨씬 크다.
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+핵심
+
+:::::::::::::::::
+
+payoff table의 terminal outcomes가 같더라도 timing과 observability를 바꾸면 strategy set과 strategic possibilities가 달라진다.
+이 점 때문에 extensive form 자체가 경제적 모델의 일부다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s55}
+
+## [5.5]{.section-number}Information Structure가 게임을 바꾸는 방식
+
+::: {.topic-opening}
+Extensive form에서 정보는 단순한 부가설명이 아니다.
+어떤 nodes가 같은 information set에 묶이는지가 플레이어의 가능한 contingent plans를 제한하고,
+따라서 induced strategic form 자체를 바꾼다.
+:::
+
+### 5.5.1 Buyer–Seller: 순차적이지만 imperfect information {#buyer-seller}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 5.6 · Used-Car Buyer–Seller</span>
+<span class="game-card__tag">SEQUENTIAL + IMPERFECT INFORMATION</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.game-flow}
+
+::::::::::::::::: {.game-flow__head}
+
+게임의 순서
+
+:::::::::::::::::
+
+::::::::::::::::: {.game-flow__body}
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Seller
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+Repair / No Repair
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Seller
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+High Price / Low Price
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Buyer
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+가격은 관찰하지만 repair 여부는 관찰하지 못한 채 Accept / Reject
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+Buyer가 high price를 관찰했을 때 자신이
+
+$$
+(\text{Repair},H)
+\quad\text{or}\quad
+(\text{No Repair},H)
+$$
+
+중 어느 history에 있는지 구별하지 못한다면 두 nodes는 하나의 information set에 속한다.
+따라서 이 게임은 sequential move를 가지지만 perfect-information game은 아니다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 5.5.2 같은 terminal payoff, 다른 information structure {#same-payoff}
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.import-block}
+
+<strong>OBSERVED FIRST MOVE</strong>
+<span>
+후행자는 선행자의 action에 따라 서로 다른 conditional action을 선택할 수 있다.
+전략은 각 관찰가능 history에 대한 action prescription을 포함한다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>UNOBSERVED FIRST MOVE</strong>
+<span>
+관련 nodes가 하나의 information set에 묶이면 후행자는 그 nodes에서 같은 action을 선택해야 한다.
+contingent strategy의 범위가 줄어든다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 5.3 · Information refinement expands contingent behavior
+
+:::::::::::::::::::
+
+다른 요소를 고정한 채 플레이어의 information partition을 세분화하면,
+coarse partition 아래에서 구현 가능했던 모든 contingent behavior를 여전히 구현할 수 있고,
+추가로 이전에는 구별하지 못했던 histories에 서로 다른 actions를 조건부로 지정할 수 있다.
+
+엄밀히 말해 refinement 전후의 pure-strategy sets는 정의역인 information sets 자체가 달라지므로
+단순한 집합포함으로 비교하기보다, <strong>구현 가능한 history-contingent behavior의 범위가 넓어진다</strong>고 해석하는 것이 안전하다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · more information $\neq$ necessarily higher equilibrium payoff
+
+:::::::::::::::::::
+
+information refinement는 플레이어가 조건부로 선택할 수 있는 행동의 범위를 넓힌다는 뜻이다.
+그러나 equilibrium에서 더 많은 정보가 반드시 그 플레이어의 payoff나 사회후생을 높인다는 뜻은 아니다.
+정보가 다른 플레이어의 strategic response와 equilibrium selection을 바꿀 수 있기 때문이다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s56}
+
+## [5.6]{.section-number}Mixed Strategies, Behavioral Strategies, Perfect Recall
+
+::: {.topic-opening}
+extensive-form game에서는 randomization을 두 가지 방식으로 생각할 수 있다.
+하나는 게임 시작 전에 complete contingent plan을 하나 뽑는 mixed strategy이고,
+다른 하나는 각 information set에 도달할 때 그곳의 actions 위에서 다시 randomize하는 behavioral strategy다.
+:::
+
+### 5.6.1 두 randomization 방식 {#s561}
+
+:::::::::::::::::::: {.comparison-grid}
+
+::::::::::::::::::: {.import-block}
+
+<strong>MIXED STRATEGY</strong>
+<span>
+
+$$
+\sigma_i\in\Delta(S_i).
+$$
+
+게임 시작 전에 pure strategy 하나를 확률적으로 선택하고,
+이후에는 선택된 complete plan을 그대로 따른다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<strong>BEHAVIORAL STRATEGY</strong>
+<span>
+각 information set $I\in\mathcal I_i$마다
+
+$$
+\beta_i(\cdot\mid I)\in\Delta(A(I))
+$$
+
+를 지정한다. 각 information set에서 local randomization을 수행한다.
+</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+NOTATION · $\sigma_i$와 $\beta_i$
+
+:::::::::::::::::::
+
+Chapter 4와 일관되게 complete pure plans 위의 mixed strategy는
+$\sigma_i\in\Delta(S_i)$로 쓰고,
+각 information set에서 local randomization을 지정하는 behavioral strategy는 $\beta_i$로 쓴다.
+이후 $\mu$는 beliefs를 나타내는 기호로 남겨두는 편이 혼동을 줄인다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.8 · Behavioral Strategy
+
+:::::::::::::::::::
+
+behavioral strategy $\beta_i$는 플레이어 $i$의 각 information set $I\in\mathcal I_i$에 대해
+가능한 actions $A(I)$ 위의 확률분포를 지정한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+\beta_i(a\mid I)\ge0,
+\qquad
+\sum_{a\in A(I)}\beta_i(a\mid I)=1.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Mixed strategy의 correlation과 behavioral strategy의 local lotteries
+
+:::::::::::::::::::
+
+mixed strategy는 게임 시작 전에 complete plan 전체를 하나 추첨하므로
+서로 다른 information sets에서의 actions가 같은 plan draw를 통해 상관될 수 있다.
+반면 behavioral strategy는 각 information set마다 local lottery
+$\beta_i(\cdot\mid I)$를 직접 지정한다.
+
+perfect recall이 있을 때는 이 차이가 terminal-history realization probabilities의 관점에서 제거될 수 있다는 것이
+바로 Kuhn theorem의 핵심이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 5.7 · 두 information sets에서의 local randomization</span>
+<span class="game-card__tag">BEHAVIORAL STRATEGY</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+Player $i$가 두 information sets $I_1,I_2$를 가지고 각 지점에서 $L,R$을 선택할 수 있다고 하자.
+한 behavioral strategy는 예를 들어
+
+:::::::::::::::::: {.math-display}
+
+$$
+\beta_i(L\mid I_1)=\frac12,
+\qquad
+\beta_i(R\mid I_1)=\frac12,
+$$
+
+$$
+\beta_i(L\mid I_2)=\frac23,
+\qquad
+\beta_i(R\mid I_2)=\frac13
+$$
+
+::::::::::::::::::
+
+처럼 각 information set별 conditional randomization을 직접 지정한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 5.6.2 Perfect Recall {#s562}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 5.9 · Perfect Recall
+
+:::::::::::::::::::
+
+직관적으로 extensive-form game이 perfect recall을 갖는다는 것은
+각 플레이어가 이전에 자신이 알고 있던 정보와 자신이 취했던 행동을 잊지 않는다는 뜻이다.
+현재 구별하지 못하는 histories가 자신의 과거 action 차이 때문에 발생해서는 안 된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Perfect recall은 기억력에 대한 비유가 아니라 tree의 구조적 조건이다
+
+:::::::::::::::::::
+
+Player $i$의 동일한 information set $I$에 속하는 두 histories $h,h'$를 생각하자.
+perfect recall은 $i$가 $h$와 $h'$에 도달하기 전에 경험한
+자신의 information sets와 그곳에서 자신이 선택한 actions의 sequence가 서로 모순되지 않도록 요구한다.
+
+즉 현재 같은 information set에 있으면서도 한 history에서는 과거에 $L$을 선택했고
+다른 history에서는 $R$을 선택했다는 사실을 자신이 기억한다면,
+그 두 histories를 현재 하나의 information set으로 묶어서는 안 된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.verify-box}
+
+::::::::::::::::::: {.verify-box__head}
+
+FORMAL READING · own information-action history
+
+:::::::::::::::::::
+
+$h,h'\in I$가 같은 information set에 속한다고 하자.
+$i$가 $h$에 도달하기 전에 경험한 자신의 information sets와 own actions를
+
+$$
+(I_i^1,a_i^1,\ldots,I_i^m,a_i^m)
+$$
+
+로 기록한다면, $h'$에 이르는 과정에서도 동일한 own-information/action sequence가 재현되어야 한다.
+자신의 과거 선택이나 자신이 과거에 알고 있던 정보를 통해 현재의 두 histories를 구별할 수 있다면 perfect recall이 아니다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · perfect recall은 perfect information이 아니다
+
+:::::::::::::::::::
+
+플레이어가 상대의 모든 과거행동을 관찰하지 못하더라도 자신의 과거 정보와 행동을 기억한다면 perfect recall을 가질 수 있다.
+perfect information은 정보의 풍부함, perfect recall은 기억의 일관성에 관한 조건이다.
+
+::::::::::::::::::::
+
+### 5.6.3 Kuhn's equivalence theorem {#s563}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 5.1 · Kuhn Equivalence
+
+:::::::::::::::::::
+
+유한 extensive-form game이 perfect recall을 가지면,
+각 플레이어의 mixed strategy와 behavioral strategy는 적절한 의미에서
+<strong>realization equivalent</strong>하게 대응시킬 수 있다.
+즉 한 randomization 방식에 대해 다른 방식을 선택하여,
+<strong>모든 opponents' strategy profiles에 대해</strong>
+동일한 terminal histories에 동일한 realization probabilities를 유도할 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 왜 중요한가
+
+:::::::::::::::::::
+
+mixed strategy는 complete plans 전체 위의 distribution이므로 전략수가 커지면 계산이 매우 복잡해질 수 있다.
+perfect recall 아래에서는 각 information set에서 local randomization을 지정하는 behavioral strategy를 사용해도
+realization-equivalent한 play를 구현할 수 있다.
+따라서 extensive form의 local structure를 보존한 채 전략을 계산하고 해석하기가 훨씬 쉬워진다.
+
+::::::::::::::::::::
+
+<details class="extension">
+<summary>확장 · perfect recall이 실패하면 왜 equivalence가 깨질 수 있는가</summary>
+
+:::::::::::::::::::: {.details-body}
+
+플레이어가 자신의 과거 행동을 잊는다면,
+게임 시작 전에 pure plan을 하나 뽑아 행동들 사이에 correlation을 만들어내는 mixed strategy와
+각 information set에서 독립적으로 randomize하는 behavioral strategy가
+동일한 terminal-outcome distribution을 만들지 못할 수 있다.
+즉 perfect recall은 두 randomization 방식의 equivalence를 보장하는 실질적인 조건이다.
+
+::::::::::::::::::::
+
+</details>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s57}
+
+## [5.7]{.section-number}Extensive-Form Reading Protocol과 대표 예제
+
+::: {.topic-opening}
+이 장의 목적은 dynamic game을 바로 푸는 것이 아니라 정확하게 표현하는 것이다.
+따라서 계산에 들어가기 전에 players, histories, information sets와 complete strategies를 체계적으로 확인하는 절차가 필요하다.
+그 뒤 representative games를 통해 이 표현이 backward induction과 credibility 분석의 기반이 되는 이유를 확인한다.
+:::
+
+### 5.7.1 How to Read an Extensive-Form Game {#reading-protocol}
+
+:::::::::::::::::::: {.protocol}
+
+::::::::::::::::::: {.protocol__head}
+
+EXTENSIVE-FORM READING PROTOCOL
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+01
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Players and Nature</strong>전략적 플레이어와 chance mover가 있는지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+02
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Histories</strong>초기 history, 가능한 continuations와 terminal histories를 기록한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+03
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Player function</strong>각 nonterminal history에서 누가 움직이는지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+04
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Available actions</strong>각 decision situation에서 가능한 actions를 기록한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+05
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Information sets</strong>플레이어가 어떤 nodes를 구별할 수 있고 구별할 수 없는지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+06
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Terminal payoffs</strong>각 terminal history에서 payoff vector를 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+07
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Complete strategies</strong>각 플레이어가 자신의 모든 information sets에서 무엇을 할지 나열한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.protocol__row}
+
+:::::::::::::::::: {.protocol__no}
+
+08
+
+::::::::::::::::::
+
+:::::::::::::::::: {.protocol__body}
+
+<strong>Classify and convert</strong>perfect/imperfect information, perfect recall을 판정하고 필요하면 induced strategic form을 구성한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.verify-box}
+
+::::::::::::::::::: {.verify-box__head}
+
+VERIFY · tree에서 먼저 그려졌다고 반드시 정보상 first mover는 아니다
+
+:::::::::::::::::::
+
+move order와 observability를 분리해서 확인한다.
+후행자의 nodes가 하나의 information set에 묶여 있다면 선행 action을 관찰하지 못한 것이다.
+
+::::::::::::::::::::
+
+### 5.7.2 Take-Away Game {#takeaway}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 5.8 · Take-Away</span>
+<span class="game-card__tag">PERFECT INFORMATION</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+테이블 위에 유한한 수의 동전이 있고 두 플레이어가 번갈아 $1,2,3$개를 제거한다고 하자.
+각 플레이어는 자신의 차례에 지금까지 몇 개가 제거되었는지 정확히 안다.
+따라서 모든 decision node가 singleton information set에 속하는 perfect-information game이다.
+
+한 player의 strategy는 단순히 “이번에 2개를 제거한다”가 아니라,
+자신이 차례를 맞을 수 있는 <em>모든 가능한 remaining-coin history</em>에서 몇 개를 제거할지 지정해야 한다.
+이 예제는 complete contingent plan의 의미와 backward induction의 자연스러운 출발점을 동시에 보여준다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 5.7.3 Entry Game preview {#entry-preview}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 5.9 · Entry Deterrence의 구조</span>
+<span class="game-card__tag">NASH VS CREDIBILITY PREVIEW</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.game-flow}
+
+::::::::::::::::: {.game-flow__head}
+
+게임의 순서
+
+:::::::::::::::::
+
+::::::::::::::::: {.game-flow__body}
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Entrant
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+Out / Enter
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::: {.flow-row}
+
+::::::::::::::: {.flow-player}
+
+Incumbent after Enter
+
+:::::::::::::::
+
+::::::::::::::: {.flow-arrow}
+
+→
+
+:::::::::::::::
+
+::::::::::::::: {.flow-body}
+
+Fight / Accommodate
+
+:::::::::::::::
+
+::::::::::::::::
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+Incumbent의 strategy는 Enter가 실제로 일어나는지와 관계없이
+Enter 이후 무엇을 할지를 지정해야 한다.
+따라서 “진입하면 Fight하겠다”는 off-path prescription도 strategic form에서는 하나의 전략이 된다.
+
+:::::::::::::::::: {.statement .remark}
+
+::::::::::::::::: {.statement-head}
+
+ILLUSTRATIVE PAYOFFS · credibility를 예고하는 수치 예제
+
+:::::::::::::::::
+
+다음 숫자는 개념 설명을 위한 예시다:
+
+$$
+\text{Out}\mapsto(0,2),\qquad
+(\text{Enter},\text{Fight})\mapsto(-1,0),\qquad
+(\text{Enter},\text{Accommodate})\mapsto(1,1).
+$$
+
+Enter 이후 실제로 그 node에 도달했다면 Incumbent는 Fight보다 Accommodate를 선호한다.
+따라서 “Enter하면 Fight”라는 prescription이 strategic-form Nash reasoning에는 나타날 수 있어도
+continuation optimality 관점에서 credible한지는 별도로 검사해야 한다.
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+INDUCED STRATEGIC FORM · Nash equilibria
+
+:::::::::::::::::
+
+Entrant의 strategies를 $\{\text{Out},\text{Enter}\}$,
+Incumbent의 strategies를 $\{\text{Fight},\text{Accommodate}\}$라 하면
+pure Nash equilibria는
+
+$$
+(\text{Out},\text{Fight}),
+\qquad
+(\text{Enter},\text{Accommodate})
+$$
+
+두 개다.
+
+첫 번째 equilibrium에서 Fight는 off-path prescription이다.
+하지만 Enter가 실제로 일어난 continuation에서는 Incumbent가
+
+$$
+1>0
+$$
+
+이므로 Accommodate를 선호한다.
+따라서 이 Nash equilibrium은 continuation rationality를 통과하지 못한다.
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+다음 장의 질문
+
+:::::::::::::::::
+
+Nash equilibrium은 이런 off-path prescription이 실제로 그 node에 도달했을 때 최적인지까지 항상 요구하지 않는다.
+Chapter 6에서는 backward induction과 subgame perfect equilibrium을 도입하여
+<strong>credible continuation behavior</strong>를 요구한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+Chapter 6로
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+$$
+\boxed{
+\text{Extensive Form}
+\rightarrow
+\text{Backward Induction}
+\rightarrow
+\text{Subgame}
+\rightarrow
+\text{SPE}
+}.
+$$
+
+이제 timing과 information을 정확히 표현했으므로,
+다음 장에서는 “각 continuation game에서도 합리적인가?”라는 sequential rationality의 문제로 넘어간다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#summary}
+
+## Chapter Summary
+
+:::::::::::::::::::: {.narrative-block}
+
+Extensive form은 새로운 equilibrium concept 자체가 아니라
+<strong>전략적 선택이 일어나는 시간과 정보의 구조를 보존하는 representation</strong>이다.
+history는 가능한 play의 경로를 기록하고, information set은 플레이어가 그 histories를 얼마나 구별하는지를 기록한다.
+이 구조가 주어지면 strategy는 각 information set에서의 action을 모두 지정하는 complete contingent plan이 된다.
+따라서
+
+$$
+\text{history}
+\to
+\text{information}
+\to
+\text{contingent strategy}
+\to
+\text{strategic-form representation}
+\to
+\text{sequential rationality}
+$$
+
+라는 흐름이 만들어진다.
+다음 장에서는 이 표현 위에서 continuation behavior의 credibility를 검사한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.property-sheet}
+
+::::::::::::::::::: {.property-sheet__head}
+
+CHAPTER 5 · 핵심 정리
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Extensive form
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+timing, available actions, information sets, chance, terminal payoffs를 명시적으로 포함하는 동태게임의 표현이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Formal primitives
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+$H$는 feasible histories, $Z$는 terminal histories, $P(h)$는 mover, $A(h)$는 feasible actions,
+$\rho(\cdot\mid h)$는 chance rule을 나타낸다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+History
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+지금까지 발생한 actions의 sequence. terminal history는 더 이상 continuation action이 없는 history다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Information set
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+플레이어가 자신의 차례에 서로 구별할 수 없는 decision nodes의 집합이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Information vs belief
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+information set은 구별할 수 없는 nodes의 범위를 정하고, belief는 그 nodes에 부여하는 probabilities를 나타낸다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Strategy
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+각 information set에서 어떤 action을 취할지 지정하는 complete contingent plan이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Strategic form
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+extensive form의 pure contingent plans를 전략집합으로 모으면 strategic form으로 변환할 수 있지만 timing과 information structure가 압축되어 보이지 않게 된다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Behavioral strategy
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+각 information set에서 available actions 위의 local probability distribution을 지정한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Perfect recall
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+플레이어가 자신의 과거 정보와 행동을 잊지 않는 조건. perfect recall 아래 mixed와 behavioral strategies는 realization-equivalent하게 대응될 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## [5.8]{.section-number}연습문제
+
+::: {.topic-opening}
+각 문제에서는 먼저 histories와 information sets를 정확히 정의한 뒤 strategies를 나열하라.
+action과 strategy를 혼동하지 않는 것이 이 장의 가장 중요한 훈련이다.
+:::
+
+### A. Histories와 Information Sets
+
+<ol class="exercise-list exercise-list--a">
+<li>
+Player 1이 $L,R$을 선택하고 Player 2가 관찰 후 $A,B$를 선택하는 게임의
+nonterminal histories와 terminal histories를 모두 나열하라.
+</li>
+<li>
+위 게임에서 Player 2가 Player 1의 action을 관찰하지 못한다면 information partition이 어떻게 달라지는지 적어라.
+</li>
+<li>
+complete information이지만 imperfect information인 간단한 게임을 하나 구성하라.
+</li>
+<li>
+sequential move와 perfect information이 다른 개념임을 하나의 반례로 설명하라.
+</li>
+</ol>
+
+### B. Strategy as a Complete Plan
+
+<ol class="exercise-list exercise-list--b">
+<li>Example 5.4에서 Player 2의 $AA,AB,BA,BB$ 각각이 어떤 contingent actions를 뜻하는지 설명하라.</li>
+<li>플레이어가 세 information sets를 갖고 각 지점에서 $2,2,3$개의 actions를 가진다면 pure strategy 수를 구하라.</li>
+<li>실제 play에서 도달하지 않는 information set의 action도 strategy에 포함해야 하는 이유를 entry deterrence와 연결해 설명하라.</li>
+</ol>
+
+### C. Extensive Form과 Strategic Form
+
+<ol class="exercise-list exercise-list--c">
+<li>Example 5.4의 strategic-form matrix를 직접 다시 구성하고 모든 pure Nash equilibria를 구하라.</li>
+<li>Sequential Matching Pennies의 strategic-form matrix를 작성하라.</li>
+<li>
+Player 2가 선행행동을 관찰하는 Sequential Matching Pennies와 관찰하지 못하는 버전의
+strategy sets를 비교하라.
+</li>
+<li>같은 terminal payoffs를 가진 두 extensive forms가 다른 information structures를 가질 수 있음을 설명하라.</li>
+</ol>
+
+### D. Behavioral Strategies와 Perfect Recall
+
+<ol class="exercise-list exercise-list--d">
+<li>
+두 information sets $I_1,I_2$에서 각각 $L,R$이 가능한 플레이어의 behavioral strategy를 일반형으로 적어라.
+</li>
+<li>mixed strategy가 “게임 시작 전 한 번의 randomization”, behavioral strategy가 “각 information set에서의 local randomization”이라는 차이를 설명하라.</li>
+<li>perfect recall과 perfect information의 차이를 설명하고, imperfect information이지만 perfect recall인 예를 제시하라.</li>
+<li>perfect recall이 mixed–behavioral equivalence에서 왜 중요한지 직관적으로 설명하라.</li>
+</ol>
+
+### E. Representation과 Credibility Preview
+
+<ol class="exercise-list exercise-list--e">
+<li>complete information, perfect information, perfect recall의 차이를 각각 한 문장과 하나의 예로 설명하라.</li>
+<li>information set과 belief가 왜 다른 객체인지 설명하고, belief가 필요한 분석이 어느 단계에서 등장하는지 서술하라.</li>
+<li>Example 5.4의 pure Nash equilibria $(L,AA),(L,AB),(R,BB)$를 확인하고, 같은 realized path를 만드는 서로 다른 strategies가 왜 가능한지 설명하라.</li>
+<li>move order는 순차적이지만 후행자가 선행 action을 관찰하지 못하는 게임을 extensive form으로 표현하고 induced strategy sets를 적어라.</li>
+<li>5.7의 Extensive-Form Reading Protocol을 Entry Game에 적용하여 players, histories, information sets, terminal payoffs와 strategies를 순서대로 기록하라.</li>
+<li>Kuhn theorem에서 realization equivalence가 단순히 “한 번의 play에서 같은 outcome이 나온다”는 뜻보다 강한 이유를 설명하라.</li>
+<li>$\Gamma\mapsto G(\Gamma)$가 일반적으로 one-to-one이 아닌 이유를 설명하고, 이것이 SPE 분석에 왜 중요한지 서술하라.</li>
+<li>Nature가 있는 extensive-form game에서 $\bar u_i(s)=\sum_{z\in Z}\Pr(z\mid s,\rho)u_i(z)$가 induced strategic-form payoff가 되는 이유를 설명하라.</li>
+<li>Entry Game의 두 Nash equilibria를 직접 확인하고, $(\text{Out},\text{Fight})$가 continuation rationality를 만족하지 않는 이유를 설명하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌
+
+Jehle, G. A., and P. J. Reny. <em>Advanced Microeconomic Theory</em>, 3rd ed., Chapter 7.3: Extensive Form Games.
+
+Mas-Colell, A., M. D. Whinston, and J. R. Green. <em>Microeconomic Theory</em>, Chapter 9: Dynamic Games.
+
+Osborne, M. J. <em>An Introduction to Game Theory</em>. Extensive games with perfect and imperfect information.
+
+Kuhn, H. W. (1953). “Extensive Games and the Problem of Information.” In <em>Contributions to the Theory of Games II</em>.
+
+::::::::::::::::::::::::::
+

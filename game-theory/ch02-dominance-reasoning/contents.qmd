@@ -1,0 +1,2809 @@
+---
+title: "Chapter 2 · 우월전략과 반복적 추론"
+description: "우월전략, 열등전략, IESDS, 약우월의 한계, 혼합지배, Rationalizability"
+---
+
+<!-- 원본 HTML의 section id와 설명 요소를 보존한 마이그레이션. 공유 CSS는 styles/game-theory-content.scss에서 관리한다. -->
+
+:::::::::::::::::::::::::: {#s21}
+
+## [2.1]{.section-number}Dominance: 상대를 예측하지 않고 할 수 있는 추론
+
+::: {.topic-opening}
+dominance의 핵심 질문은 “상대가 무엇을 할 것인가?”가 아니라 “상대가 무엇을 하더라도 이 전략을 선택할 이유가 있는가?”다.
+따라서 dominance는 상대 행동에 대한 구체적인 예측이나 equilibrium 가정 없이도 일부 전략을 합리적 선택에서 배제할 수 있는 매우 강한 추론도구다.
+:::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+이 절의 논리
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+$$
+\text{pairwise comparison}
+\longrightarrow
+\text{dominant / dominated strategy}
+\longrightarrow
+\text{elimination}
+\longrightarrow
+\text{reduced game}.
+$$
+
+우월은 “무엇을 선택해도 되는가”보다 먼저 “무엇을 선택할 이유가 없는가”를 판별하는 도구다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 2.1.1 왜 dominance인가? {#s210}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+상대 행동을 몰라도 결론을 낼 수 있는 경우
+
+:::::::::::::::::::
+
+보통 전략적 의사결정에서는 상대가 무엇을 할지 예상해야 한다. 그런데 전략 $A$가 상대의 모든 가능한 선택에서 전략 $B$보다 더 높은 payoff를 준다면, 상대에 대한 예상은 필요 없다. 상대가 무엇을 하든 $A$가 낫기 때문이다.
+
+그래서 dominance는 <strong>belief-free reasoning</strong>에 가깝다. 여기서 belief-free라는 말은 상대전략에 대한 <em>특정 확률분포</em>를 가정하지 않는다는 뜻이다. 가능한 상대전략집합 $S_{-i}$ 자체는 알고 있어야 하며, dominance는 그 집합의 모든 원소를 한꺼번에 비교한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.equivalence-strip}
+
+$$
+\text{상대를 정확히 예측하지 못함}+\text{모든 경우의 payoff 비교}\Longrightarrow\text{일부 전략의 확실한 배제}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.reading-aid}
+
+::::::::::::::::::: {.reading-aid__head}
+
+Dominance의 강점과 한계
+
+:::::::::::::::::::
+
+<strong>강점:</strong> 상대 행동에 대한 정확한 belief가 없어도 결론을 낼 수 있다.
+
+<strong>한계:</strong> 많은 게임에서는 어느 전략도 다른 전략을 모든 경우에 지배하지 않는다. 따라서 dominance만으로 게임 전체를 풀 수 없는 경우가 일반적이다.
+
+::::::::::::::::::::
+
+### 2.1.2 강우월과 강열등 {#s211}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.1 · Strict Dominance
+
+:::::::::::::::::::
+
+플레이어 $i$의 두 전략 $\hat s_i,\bar s_i\in S_i$에 대해
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_i(\hat s_i,s_{-i})
+>
+u_i(\bar s_i,s_{-i})
+\qquad
+\text{for every }s_{-i}\in S_{-i}
+$$
+
+:::::::::::::::::::
+
+이면 $\hat s_i$가 $\bar s_i$를 <strong>strictly dominates</strong>한다고 한다.
+같은 내용을 반대 방향에서 보면 $\bar s_i$는 $\hat s_i$에 의해 <strong>strictly dominated</strong>된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.2 · Strictly Dominant Strategy
+
+:::::::::::::::::::
+
+전략 $s_i^*$가 플레이어 $i$의 모든 다른 전략 $s_i\neq s_i^*$을 강하게 지배하면
+$s_i^*$를 strictly dominant strategy라 한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_i(s_i^*,s_{-i})
+>
+u_i(s_i,s_{-i})
+\quad
+\forall s_i\neq s_i^*,\ \forall s_{-i}.
+$$
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 2.1.3 Dominant, Dominated, Undominated를 구분하기 {#s211b}
+
+“어떤 전략을 지배한다”와 “모든 다른 전략을 지배한다”는 다른 주장이다. 다음 네 표현을 분리해 두면 이후 IESDS가 훨씬 명확해진다.
+
+:::::::::::::::::::: {.term-grid}
+
+::::::::::::::::::: {.term-card}
+
+:::::::::::::::::: {.term-card__head}
+
+$a_i$ dominates $b_i$
+
+::::::::::::::::::
+
+두 전략의 비교다. $a_i$가 $b_i$보다 모든 관련 상대전략에서 더 낫다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.term-card}
+
+:::::::::::::::::: {.term-card__head}
+
+$b_i$ is dominated
+
+::::::::::::::::::
+
+$b_i$를 항상 더 잘 대체하는 다른 전략이 존재한다는 뜻이다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.term-card}
+
+:::::::::::::::::: {.term-card__head}
+
+Dominant strategy
+
+::::::::::::::::::
+
+하나의 전략이 자신의 모든 다른 전략을 지배한다. 매우 강한 조건이다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.term-card}
+
+:::::::::::::::::: {.term-card__head}
+
+Undominated strategy
+
+::::::::::::::::::
+
+다른 전략에 지배되지 않았을 뿐이다. 다른 모든 전략보다 좋다는 뜻은 아니다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · dominant $\neq$ undominated
+
+:::::::::::::::::::
+
+dominant strategy는 모든 다른 전략보다 낫지만, undominated strategy는 단지 “항상 더 좋은 대안이 발견되지 않았다”는 뜻이다. 한 게임에 dominant strategy는 없어도 여러 undominated strategies가 존재할 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 2.1A · dominated strategy는 있지만 dominant strategy는 없는 게임</span><span class="game-card__tag">TERMINOLOGY CHECK</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix"><thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead><tbody><tr><td class="row-label">$U$</td><td>$(3,1)$</td><td>$(1,2)$</td></tr><tr><td class="row-label">$M$</td><td>$(2,0)$</td><td>$(0,1)$</td></tr><tr><td class="row-label">$D$</td><td>$(1,3)$</td><td>$(4,0)$</td></tr></tbody></table>
+
+::::::::::::::::::
+
+Player 1에게 $U$는 $M$을 strictly dominates한다: $L$에서는 $3>2$, $R$에서는 $1>0$이다. 그러나 $U$와 $D$는 서로 지배하지 않는다. 따라서 $M$은 dominated지만 Player 1에게 strictly dominant strategy는 없다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 2.1B · dominance가 아무것도 제거하지 못하는 경우</span><span class="game-card__tag">LIMIT OF DOMINANCE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+Matching Pennies나 표준 Coordination Game에서는 상대 행동에 따라 더 좋은 행동이 바뀐다. 이런 게임에서는 어느 pure strategy도 다른 pure strategy를 모든 경우에 지배하지 않는다. 즉 dominance는 강력하지만 항상 충분하지는 않다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 2.1 · 죄수의 딜레마</span>
+<span class="game-card__tag">STRICT DOMINANCE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$C_2$</th><th>$D_2$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$C_1$</td><td>$(3,3)$</td><td>$(0,5)$</td></tr>
+<tr><td class="row-label">$D_1$</td><td>$(5,0)$</td><td>$(1,1)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+Player 1에게 상대가 $C$이면 $5>3$, 상대가 $D$이면 $1>0$이므로 $D\succ C$다.
+Player 2도 대칭적으로 $D\succ C$다.
+
+:::::::::::::::::: {.math-display}
+
+$$
+D_i \text{ is strictly dominant},
+\qquad
+C_i \text{ is strictly dominated},
+\qquad i=1,2.
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+해석
+
+:::::::::::::::::
+
+상대의 선택을 전혀 예측하지 않아도 $C$를 배제할 수 있다.
+지배전략은 상대의 전략에 대한 belief와 무관하게 최적이라는 점에서 매우 강한 개념이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 2.1.4 약우월과 약열등 {#s212}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Strict와 weak의 차이는 equality 한 줄에서 시작한다
+
+:::::::::::::::::::
+
+strict dominance는 상대가 무엇을 하든 반드시 더 높은 payoff를 요구한다. weak dominance는 어떤 경우에는 payoff가 같아도 허용하되, 적어도 한 경우에는 엄격하게 더 좋아야 한다.
+
+이 equality는 사소해 보이지만 이후 제거순서와 best-response 가능성을 바꾼다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.3 · Weak Dominance
+
+:::::::::::::::::::
+
+$\hat s_i$가 $\bar s_i$를 weakly dominates한다는 것은
+
+::::::::::::::::::: {.math-display}
+
+$$
+u_i(\hat s_i,s_{-i})
+\ge
+u_i(\bar s_i,s_{-i})
+\qquad\forall s_{-i}\in S_{-i},
+$$
+
+$$
+u_i(\hat s_i,\tilde s_{-i})
+>
+u_i(\bar s_i,\tilde s_{-i})
+\qquad
+\text{for at least one }\tilde s_{-i}\in S_{-i}
+$$
+
+:::::::::::::::::::
+
+이 성립하는 경우다. 따라서 약지배는 “항상 나쁘지 않고, 적어도 한 경우에는 더 좋다”는 비교다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 2.2 · 약열등전략</span>
+<span class="game-card__tag">WEAK DOMINANCE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(2,1)$</td><td>$(1,1)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(2,0)$</td><td>$(0,0)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+Player 1에게 $L$에서는 $U$와 $D$가 모두 2를 주지만, $R$에서는 $1>0$이다.
+따라서 $U$는 $D$를 weakly dominates하지만 strictly dominates하지는 않는다.
+
+:::::::::::::::::: {.reading-aid}
+
+::::::::::::::::: {.reading-aid__head}
+
+그런데 $D$도 best response가 될 수 있다
+
+:::::::::::::::::
+
+Player 1이 Player 2가 $L$을 확실히 선택한다고 믿는다면
+$$
+u_1(U,L)=u_1(D,L)=2.
+$$
+따라서 $D$도 이 belief에 대해서는 best response다. 이 점이 strictly dominated strategy와 weakly dominated strategy의 결정적인 차이다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.formula-grid}
+
+::::::::::::::::::: {.formula-card}
+
+:::::::::::::::::: {.formula-card__head}
+
+STRICT DOMINANCE
+
+::::::::::::::::::
+
+$>$ everywhere. 모든 상대 전략에 대해 엄격하게 더 높은 보수를 준다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.formula-card}
+
+:::::::::::::::::: {.formula-card__head}
+
+WEAK DOMINANCE
+
+::::::::::::::::::
+
+$\ge$ everywhere and $>$ somewhere. 일부 경우 동률을 허용한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 2.1.5 Best response와 지배의 관계 {#s213}
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.1 · 강열등전략은 best response가 될 수 없다
+
+:::::::::::::::::::
+
+$\bar s_i$가 $\hat s_i$에 의해 strictly dominated되면,
+어떤 순수 상대전략 $s_{-i}$에 대해서도 $\bar s_i\notin BR_i(s_{-i})$다.
+더 나아가 어떤 belief $\mu_i\in\Delta(S_{-i})$에 대해서도 $\bar s_i$는 기대보수의 best response가 될 수 없다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+PROOF
+
+:::::::::::::::::::
+
+모든 $s_{-i}$에 대해
+
+$$
+u_i(\hat s_i,s_{-i})>u_i(\bar s_i,s_{-i})
+$$
+
+이므로, 임의의 belief $\mu_i$에 대해 기대값을 취하면
+
+$$
+\mathbb E_{\mu_i}[u_i(\hat s_i,s_{-i})]
+>
+\mathbb E_{\mu_i}[u_i(\bar s_i,s_{-i})].
+$$
+
+따라서 $\bar s_i$는 어떤 belief에 대해서도 기대보수를 최대화할 수 없다.
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.reading-aid}
+
+::::::::::::::::::: {.reading-aid__head}
+
+이 명제가 Chapter 2 전체를 연결한다
+
+:::::::::::::::::::
+
+strict dominance는 한 전략이 <em>never a best response</em>임을 보장한다. 그런데 어떤 전략은 다른 단일 pure strategy에 지배되지는 않으면서도 여전히 어떤 belief에도 best response가 되지 못할 수 있다.
+
+그 빈틈을 메우는 것이 2.4의 mixed-strategy dominance다. 유한게임에서는 mixed dominance까지 허용하면 never-best-response와 strict mixed dominance가 정확히 연결된다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · 약열등전략은 best response가 될 수 있다
+
+:::::::::::::::::::
+
+약지배에서는 일부 상대 전략에 대해 payoff equality가 허용된다.
+따라서 weakly dominated strategy도 특정 상대 전략이나 특정 belief 아래에서는 best response가 될 수 있다.
+이 차이가 약열등전략의 반복 제거가 강열등전략 제거보다 훨씬 민감한 이유다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s22}
+
+## [2.2]{.section-number}IESDS: 지배논리를 반복하면 어디까지 갈 수 있는가?
+
+::: {.topic-opening}
+처음 게임에서 강열등이 아닌 전략도 다른 전략들이 제거된 축소게임에서는 강열등이 될 수 있다.
+IESDS는 이 논리를 더 이상 제거할 전략이 없을 때까지 반복한다.
+:::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+반복 제거는 단순한 행·열 삭제가 아니다
+
+:::::::::::::::::::
+
+첫 번째 round에서는 “나는 합리적이므로 내 dominated strategy를 쓰지 않는다”고 생각한다. 다음 round에서는 “상대도 합리적이므로 상대의 dominated strategy를 쓰지 않을 것이다”를 반영한다. 그 결과 고려해야 할 상대전략의 범위가 줄어들고, 이전에는 지배되지 않던 전략이 새롭게 dominated될 수 있다.
+
+따라서 IESDS는 <strong>higher-order rationality가 전략선택에 주는 함의를 계산하는 삭제절차</strong>로 읽는 것이 좋다. 다만 각 deletion round를 엄밀히 하나의 epistemic level과 동일시하려면 belief hierarchy나 type-space 구조가 추가로 필요하므로, 여기서는 전략적 함의의 직관으로 이해한다.
+
+::::::::::::::::::::
+
+### 2.2.1 왜 반복 제거인가? {#s220}
+
+:::::::::::::::::::: {.logic-chain}
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">ROUND 0</span><span class="text">나는 합리적이다</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">ROUND 1</span><span class="text">상대도 합리적이다</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">ROUND 2</span><span class="text">상대도 나의 합리성을 고려한다</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">REPEAT</span><span class="text">가능한 전략집합을 계속 축소한다</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+핵심은 한 전략이 원래 게임에서 dominated인지 여부만 확인하는 것이 아니라, 상대방의 비합리적인 전략을 제외한 <em>reduced game</em>에서 다시 비교하는 것이다.
+
+### 2.2.2 축소게임과 IESDS 알고리즘 {#s221}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.4 · IESDS
+
+:::::::::::::::::::
+
+초기 전략집합을 $S_i^0=S_i$라 하자.
+$k$번째 round에서 축소된 게임 $S^k=\prod_i S_i^k$ 안에서 strictly dominated된 전략들을 제거하여
+다음 전략집합 $S_i^{k+1}\subseteq S_i^k$를 얻는다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+S_i^0
+\supseteq
+S_i^1
+\supseteq
+S_i^2
+\supseteq
+\cdots.
+$$
+
+:::::::::::::::::::
+
+모든 round를 살아남는 전략을 iteratively strictly undominated strategy라고 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.solver-flow}
+
+::::::::::::::::::: {.solver-flow__head}
+
+IESDS를 실제 payoff matrix에서 수행하는 순서
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+01
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>한 player씩 본다</strong>Player 1이면 행끼리, Player 2이면 열끼리 비교한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+02
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>모든 상대전략에서 payoff를 비교한다</strong>한 곳이라도 부등호 방향이 뒤집히면 strict dominance는 아니다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+03
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>strictly dominated strategy를 제거한다</strong>남은 전략들로 reduced game을 다시 만든다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+04
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>처음부터 다시 검사한다</strong>상대전략이 줄어들었기 때문에 새로운 dominance가 생길 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+05
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>더 이상 제거할 것이 없을 때 멈춘다</strong>각 player에게 하나씩만 남으면 dominance-solvable하다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.logic-chain}
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">ROUND 0</span><span class="text">원래 게임</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">CHECK</span><span class="text">강열등전략 탐색</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">REDUCE</span><span class="text">전략 제거·축소게임</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">REPEAT</span><span class="text">새 지배관계 재검사</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · “Iterated”의 정확한 의미
+
+:::::::::::::::::::
+
+한 전략이 원래 게임에서는 지배되지 않았다는 사실은 그 전략이 끝까지 살아남는다는 뜻이 아니다.
+상대방의 일부 전략이 제거되면 비교해야 할 $s_{-i}$의 범위가 줄어들고,
+그 결과 이전에는 실패했던 strict inequality가 축소게임에서는 모든 경우에 성립할 수 있다.
+
+::::::::::::::::::::
+
+### 2.2.3 3×2 방향지시게임: 단계별 제거 {#direction}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 2.3 · 방향지시게임</span>
+<span class="game-card__tag">IESDS · REDUCED GAME</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(3,3)$</td><td>$(1,2)$</td></tr>
+<tr><td class="row-label">$M$</td><td>$(2,2)$</td><td>$(0,1)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(1,3)$</td><td>$(2,2)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+:::::::::::::::::: {.elimination-stage}
+
+::::::::::::::::: {.elimination-stage__head}
+
+ROUND 1 · $M$과 $R$의 지배
+
+:::::::::::::::::
+
+::::::::::::::::: {.elimination-stage__body}
+
+Player 1에게
+
+$$
+3>2,\qquad 1>0
+$$
+
+이므로 $U$가 $M$을 strictly dominates한다.
+Player 2에게는 각 행에서 $L$의 보수가 $R$보다 크므로
+
+$$
+L\succ R.
+$$
+
+따라서 $M$과 $R$은 제거 가능하다.
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::: {.elimination-stage}
+
+::::::::::::::::: {.elimination-stage__head}
+
+ROUND 2 · $R$ 제거 후 $D$의 지위 변화
+
+:::::::::::::::::
+
+::::::::::::::::: {.elimination-stage__body}
+
+원래 게임에서는 $U$와 $D$를 비교하면
+
+$$
+L:\ 3>1,\qquad R:\ 1<2
+$$
+
+이므로 어느 쪽도 다른 쪽을 강하게 지배하지 않는다.
+그러나 $R$이 제거되어 $L$만 남으면
+
+$$
+u_1(U,L)=3>1=u_1(D,L),
+$$
+
+따라서 축소게임에서 $D$가 새롭게 strictly dominated된다.
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+IESDS 결과
+
+:::::::::::::::::
+
+최종적으로 $(U,L)$만 남는다.
+이 게임은 IESDS만으로 하나의 전략 profile이 남는 dominance-solvable game의 간단한 예다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 2.2.4 Dominance-Solvable Games {#dominance-solvable}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+dominance만으로 하나의 결과까지 갈 수 있다면
+
+:::::::::::::::::::
+
+IESDS가 각 플레이어의 전략을 정확히 하나씩 남긴다면, Nash consistency를 별도로 도입하기 전에도 반복적인 합리성 추론만으로 하나의 profile까지 도달할 수 있다. 이런 게임은 매우 강한 예측력을 갖는다.
+
+하지만 대부분의 경제게임은 dominance-solvable하지 않다. dominance의 강점은 belief를 거의 요구하지 않는다는 데 있고, 한계는 많은 게임을 완전히 풀지 못한다는 데 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.5 · Dominance-Solvable Game
+
+:::::::::::::::::::
+
+IESDS를 반복한 결과 각 플레이어에게 정확히 하나의 전략만 남으면 그 게임을 dominance solvable하다고 한다.
+이때 남는 유일한 전략 profile은 별도의 equilibrium 계산 없이 지배논리만으로 선택된다.
+
+::::::::::::::::::::
+
+### 2.2.5 유한종료와 순서독립성 {#s223}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.1 · 유한게임에서 IESDS의 종료
+
+:::::::::::::::::::
+
+유한게임에서 매 round 적어도 하나의 전략을 제거한다면 IESDS는 유한한 단계 안에 종료한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+PROOF
+
+:::::::::::::::::::
+
+전체 순수전략의 개수
+
+$$
+\sum_{i\in N}|S_i|
+$$
+
+가 유한하고, 각 비종료 round에서는 적어도 하나의 전략이 제거된다.
+따라서 제거할 수 있는 횟수는 유한하며 절차는 반드시 종료한다.
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+순서독립성을 먼저 직관으로 이해하자
+
+:::::::::::::::::::
+
+전략 $B$가 $A$에 의해 strictly dominated되어 있고, 나중에 $A$ 자체가 $C$에 의해 제거된다고 하자. 관련된 모든 상대전략에서
+$$
+C>A>B
+$$
+라면 $C$가 $A$를 대신해 $B$를 제거할 수 있다.
+
+strict inequality의 이런 전이적 성격이 삭제순서가 최종 surviving set을 바꾸지 않게 만드는 핵심 직관이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.2 · 강열등전략 제거의 순서독립성
+
+:::::::::::::::::::
+
+유한 전략형 게임에서 strictly dominated pure strategies를 반복적으로 제거할 때,
+제거 가능한 전략을 한꺼번에 지우든 일부만 먼저 지우든 완전히 감소시킨 최종 surviving set은 제거 순서에 의존하지 않는다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.proof}
+
+::::::::::::::::::: {.proof-label}
+
+PROOF SKETCH · 순서독립성의 핵심 논리
+
+:::::::::::::::::::
+
+어떤 전략 $b_i$가 $a_i$에 의해 강하게 지배되어 제거 가능하다고 하자.
+이후 $a_i$ 자체가 다른 전략 $c_i$에 의해 제거되더라도
+
+$$
+u_i(c_i,s_{-i})
+>
+u_i(a_i,s_{-i})
+>
+u_i(b_i,s_{-i})
+$$
+
+가 관련 축소게임의 모든 $s_{-i}$에 대해 성립하므로 $c_i$가 $b_i$를 대신 지배한다.
+유한게임에서는 이러한 지배관계를 제거과정에 따라 추적할 수 있고,
+한 제거경로에서 사라지는 전략은 다른 완전한 제거경로에서도 결국 제거된다.
+따라서 완전히 감소시킨 게임의 surviving set은 동일하다.
+<span class="qed">□</span>
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.comparison-note}
+
+엄밀한 순서독립성 정리는 “한 번 지배되었던 전략의 지배자가 제거되면 그 전략이 다시 살아날 수 있는가?”라는 문제를 다룬다.
+strict inequality는 지배자의 대체와 전이를 허용하기 때문에 이 문제가 발생하지 않는다.
+아래의 weak dominance에서는 equality 때문에 이 논리가 깨질 수 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s23}
+
+## [2.3]{.section-number}Weak Dominance: equality가 만드는 차이
+
+::: {.topic-opening}
+약열등전략도 “항상 나쁘지 않은 대안이 존재한다”는 의미에서 비합리적으로 보일 수 있다.
+그러나 약열등전략은 특정 belief에 대해 best response가 될 수 있고,
+반복 제거의 결과도 제거순서에 따라 달라질 수 있다.
+:::
+
+### 2.3.1 왜 equality가 중요한가? {#s230}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+weak dominance의 strictness는 특정 칸에 걸려 있다
+
+:::::::::::::::::::
+
+weak dominance는 모든 경우에 적어도 같고, 적어도 한 경우에만 더 좋으면 된다. 따라서 그 “유일하게 더 좋은 경우”에 해당하는 상대전략이 먼저 제거되면 남은 reduced game에서는 두 전략의 payoff가 완전히 같아질 수 있다.
+
+그 순간 원래 존재하던 weak dominance가 사라진다. 그래서 weak dominance에서는 삭제순서가 결과를 바꿀 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.equivalence-strip}
+
+$$
+\text{weak dominance의 민감성}=\text{strict inequality가 어느 contingency에서 발생하는가에 대한 민감성}.
+$$
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · IEWDS는 일반적으로 order dependent
+
+:::::::::::::::::::
+
+Iterated Elimination of Weakly Dominated Strategies는 strict dominance와 달리
+어떤 전략을 먼저 제거하느냐에 따라 이후의 equality와 strict inequality가 달라질 수 있다.
+따라서 최종 surviving set이 유일하게 정해지지 않을 수 있다.
+
+::::::::::::::::::::
+
+### 2.3.2 제거순서가 결과를 바꾸는 3×3 게임 {#weak-order}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 2.4 · Weak-Dominance Order Dependence</span>
+<span class="game-card__tag">ORDER MATTERS</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$M$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(2,1)$</td><td>$(1,1)$</td><td>$(0,0)$</td></tr>
+<tr><td class="row-label">$C$</td><td>$(1,2)$</td><td>$(3,1)$</td><td>$(2,1)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(2,-2)$</td><td>$(1,-1)$</td><td>$(-1,-1)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+처음 게임에서 Player 1의 $D$는 $U$에 의해 weakly dominated된다.
+$L,M$에서는 동률이고 $R$에서는 $0>-1$이기 때문이다.
+Player 2의 $R$은 $M$에 의해 weakly dominated된다.
+
+:::::::::::::::::: {.elimination-stage}
+
+::::::::::::::::: {.elimination-stage__head}
+
+경로 A · $D$를 먼저 제거
+
+:::::::::::::::::
+
+::::::::::::::::: {.elimination-stage__body}
+
+$D$가 제거되면 Player 2의 보수는 $U,C$ 두 행에서만 비교한다.
+이때 $L$은 $M$을 weakly dominates하고, $M$은 $R$을 weakly dominates한다.
+결국 $L$만 남길 수 있고, $L$ 아래에서 Player 1은 $U$를 선택한다.
+한 완전한 제거경로는 최종적으로 $(U,L)$을 남긴다.
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::: {.elimination-stage}
+
+::::::::::::::::: {.elimination-stage__head}
+
+경로 B · $R$을 먼저 제거
+
+:::::::::::::::::
+
+::::::::::::::::: {.elimination-stage__body}
+
+$R$을 먼저 제거하면 $L,M$만 남는다.
+이 축소게임에서 Player 1의 $U$와 $D$의 보수는
+
+$$
+(2,1)\quad\text{vs.}\quad(2,1)
+$$
+
+로 완전히 같아진다.
+weak dominance의 표준 정의는 적어도 한 곳의 strict inequality를 요구하므로
+$U$는 더 이상 $D$를 weakly dominate하지 않는다.
+또한 다른 새로운 weak dominance도 자동으로 생기지 않는다.
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+결론
+
+:::::::::::::::::
+
+약열등전략의 반복 제거에서는 “무엇을 먼저 지웠는가”가 이후의 strict inequality를 없애거나 만들어낼 수 있다.
+따라서 strict dominance와 달리 최종 surviving set이 제거순서에 의존할 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 2.3.3 Weakly dominated strategy도 best response가 될 수 있다 {#s233}
+
+2.1의 약지배 예제에서 Player 1에게 $U$가 $D$를 weakly dominates하지만,
+Player 2가 $L$을 확률 1로 선택한다고 믿으면
+
+$$
+u_1(U,L)=u_1(D,L)=2.
+$$
+
+따라서 $D$도 그 belief에 대해서는 best response다.
+
+:::::::::::::::::::: {.bridge-example}
+
+::::::::::::::::::: {.bridge-example__head}
+
+PREVIEW · weakly dominated strategy가 포함된 Nash equilibrium
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.bridge-example__body}
+
+Example 2.2의 $(D,L)$을 보자.
+Player 1은 $L$이 주어졌을 때 $U$와 $D$에서 모두 payoff 2를 받으므로 $D$도 best response다.
+Player 2는 $D$가 주어졌을 때 $L$과 $R$에서 모두 payoff 0을 받으므로 $L$도 best response다.
+
+:::::::::::::::::: {.math-display}
+
+$$
+D\in BR_1(L),
+\qquad
+L\in BR_2(D).
+$$
+
+::::::::::::::::::
+
+따라서 $(D,L)$은 Nash equilibrium이 될 수 있다.
+그런데 $D$는 $U$에 의해 weakly dominated되어 있다.
+즉 weakly dominated strategy를 무조건 지우면 원래 게임에 존재하는 Nash equilibrium을 실제로 제거할 수 있다.
+Nash equilibrium의 엄밀한 정의는 Chapter 3에서 다룬다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · weak elimination은 equilibrium을 보존한다고 자동으로 말할 수 없다
+
+:::::::::::::::::::
+
+weakly dominated strategy는 특정 belief에 대해 best response가 될 수 있고 Nash equilibrium에서 사용될 수도 있다. 따라서 weakly dominated strategies를 기계적으로 반복 제거하면 원래 게임의 equilibrium을 일부 잃을 수 있다.
+
+::::::::::::::::::::
+
+### 2.3.4 Weak elimination에서 무엇을 잃을 수 있는가?
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 약열등전략을 제거할 때 잃을 수 있는 것
+
+:::::::::::::::::::
+
+weakly dominated strategy는 어떤 belief 아래에서는 best response일 수 있다.
+따라서 weak dominance elimination은 단순히 “절대로 합리적일 수 없는 전략”만 제거하는 절차가 아니다.
+이 때문에 equilibrium 분석에서 weakly dominated strategy를 배제하려면 추가적인 refinement 논리가 필요할 수 있다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s24}
+
+## [2.4]{.section-number}혼합전략에 의한 지배
+
+::: {.topic-opening}
+순수전략끼리만 비교하면 어떤 전략이 합리적 선택에서 배제되어야 한다는 사실을 놓칠 수 있다.
+한 순수전략이 어떤 다른 단일 순수전략에는 지배되지 않지만, 여러 순수전략을 섞은 lottery에는 강하게 지배될 수 있기 때문이다.
+:::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+혼합전략은 각 상황의 payoff를 평균내는 방법이다
+
+:::::::::::::::::::
+
+$L$은 어떤 상대행동에서는 좋고 다른 상대행동에서는 나쁠 수 있고, $R$은 그 반대일 수 있다. 두 전략을 적절히 섞으면 각각의 장점을 평균내어 제3의 전략 $M$보다 모든 상대행동에서 높은 기대payoff를 만들 수 있다.
+
+따라서 어떤 pure strategy 하나가 $M$을 지배하는지만 보면 합리적으로 제거해야 할 전략을 놓칠 수 있다.
+
+::::::::::::::::::::
+
+### 2.4.1 순수전략 비교의 한계 {#mixed-dom}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.6 · Mixed Strategy Dominance
+
+:::::::::::::::::::
+
+플레이어 $i$의 혼합전략 $\sigma_i\in\Delta(S_i)$가 순수전략 $\bar s_i$를 strictly dominates한다는 것은
+
+::::::::::::::::::: {.math-display}
+
+$$
+U_i(\sigma_i,s_{-i})
+>
+u_i(\bar s_i,s_{-i})
+\qquad
+\forall s_{-i}\in S_{-i}
+$$
+
+:::::::::::::::::::
+
+이 성립하는 경우다. 여기서 $U_i$는 혼합전략에 대한 기대보수다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 2.5 · $M$을 지배하는 $L/R$ 혼합</span>
+<span class="game-card__tag">MIXED DOMINANCE</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$M$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(3,0)$</td><td>$(0,-3)$</td><td>$(0,-4)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(2,4)$</td><td>$(4,5)$</td><td>$(-1,8)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+Player 2에게 $L$도 $R$도 단독으로 $M$을 강하게 지배하지 않는다.
+그러나
+
+$$
+\sigma_2=\frac12L+\frac12R
+$$
+
+를 고려하면,
+
+:::::::::::::::::: {.math-display}
+
+$$
+U_2(\sigma_2,U)
+=
+\frac12(0)+\frac12(-4)
+=
+-2
+>
+-3
+=
+u_2(M,U),
+$$
+
+$$
+U_2(\sigma_2,D)
+=
+\frac12(4)+\frac12(8)
+=
+6
+>
+5
+=
+u_2(M,D).
+$$
+
+::::::::::::::::::
+
+따라서 $M$은 어떤 pure strategy에도 strict하게 지배되지 않지만,
+혼합전략 $\tfrac12L+\tfrac12R$에 의해 strictly dominated된다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+### 2.4.2 지배하는 혼합확률을 직접 구하기 {#mixed-p}
+
+일반적인 혼합
+$$
+\sigma_2(p)=pL+(1-p)R
+$$
+이 $M$을 strictly dominate하는 $p$의 범위를 구해 보자.
+
+Player 1이 $U$일 때
+$$
+U_2(\sigma_2(p),U)=p(0)+(1-p)(-4)=-4+4p>-3
+$$
+이므로 $p>\tfrac14$가 필요하다.
+
+Player 1이 $D$일 때
+$$
+U_2(\sigma_2(p),D)=4p+8(1-p)=8-4p>5
+$$
+이므로 $p<\tfrac34$가 필요하다.
+
+:::::::::::::::::::: {.math-display}
+
+$$
+\boxed{\frac14<p<\frac34}.
+$$
+
+::::::::::::::::::::
+
+즉 $M$을 지배하는 mixture는 하나가 아니라 연속적으로 많다. 기존의 $p=\tfrac12$는 이 구간 안의 편리한 한 예일 뿐이다.
+
+### 2.4.3 Payoff vectors와 convex-hull 직관 {#convex}
+
+:::::::::::::::::::: {.payoff-vector}
+
+Player 2의 한 전략 $s_2$를 두 개의 상대행동에 대한 payoff vector로 적자.
+첫 번째 좌표는 Player 1이 $U$를 선택했을 때의 payoff,
+두 번째 좌표는 Player 1이 $D$를 선택했을 때의 payoff다.
+
+$$
+v(s_2)
+=
+\begin{pmatrix}
+u_2(s_2,U)\\
+u_2(s_2,D)
+\end{pmatrix}.
+$$
+
+따라서 Example 2.5에서는
+
+$$
+v(L)=(0,4),\qquad
+v(M)=(-3,5),\qquad
+v(R)=(-4,8).
+$$
+
+::::::::::::::::::::
+
+혼합전략 $\sigma_2(p)=pL+(1-p)R$의 payoff vector는 기대값의 선형성 때문에
+
+:::::::::::::::::::: {.math-display}
+
+$$
+v(\sigma_2(p))
+=
+p\,v(L)+(1-p)\,v(R).
+$$
+
+::::::::::::::::::::
+
+따라서 mixed dominance 문제는 $L$과 $R$의 convex combinations 가운데
+$v(M)$보다 <em>모든 좌표에서 동시에</em> 높은 점이 존재하는지를 묻는 문제다.
+앞에서 구한 $\frac14<p<\frac34$는 바로 이 좌표별 strict inequalities를 동시에 만족시키는 범위다.
+
+<details class="technical-proof"><summary>심화 · 왜 convex hull과 separation theorem이 등장하는가</summary>
+
+:::::::::::::::::::: {.details-body}
+
+finite game에서 mixed strategy가 만들 수 있는 payoff vectors의 집합은 pure payoff vectors의 convex hull이다. 어떤 pure strategy가 모든 belief에서 best response가 될 수 없다면, 적절한 분리정리를 통해 그 전략보다 모든 opponent states에서 높은 payoff를 만드는 convex combination의 존재를 보일 수 있다.
+
+::::::::::::::::::::
+
+</details>
+
+:::::::::::::::::::: {.statement .proposition}
+
+::::::::::::::::::: {.statement-head}
+
+PROPOSITION 2.2 · 혼합지배가 순수지배보다 강한 제거기준이다
+
+:::::::::::::::::::
+
+pure strategy에 의해 strictly dominated된 전략은 당연히 mixed strategy에 의해서도 dominated된다
+— 해당 pure strategy를 확률 1로 두면 되기 때문이다.
+그러나 역은 성립하지 않는다. 따라서 mixed-strategy dominance를 허용하면 더 많은 전략을 제거할 수 있다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+CAUTION · “혼합전략은 나중에 Nash에서만 필요하다”는 오해
+
+:::::::::::::::::::
+
+혼합전략은 mixed Nash equilibrium을 계산할 때만 필요한 것이 아니다.
+어떤 순수전략이 모든 가능한 belief에 대해 best response가 될 수 있는지 판별하는 단계에서도
+mixed-strategy dominance가 핵심 역할을 한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s25}
+
+## [2.5]{.section-number}Rationalizability
+
+::: {.topic-opening}
+지배전략 접근은 payoff를 직접 비교한다.
+Rationalizability는 관점을 바꾸어 “이 전략이 어떤 합리적인 belief에 대해서라도 최적반응이 될 수 있는가?”를 묻는다.
+가능한 belief가 하나라도 존재하면 그 전략은 일단 합리화될 수 있다.
+:::
+
+### 2.5.1 전략을 rationalize한다는 것은 무엇인가? {#s250}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+그 전략을 선택할 만한 belief를 하나라도 만들 수 있는가?
+
+:::::::::::::::::::
+
+rationalizability에서 중요한 것은 실제 상대가 무엇을 선택하는지 맞히는 것이 아니다. 어떤 strategy $s_i$를 최선으로 만드는 <strong>합리적인 belief가 적어도 하나 존재하는가</strong>를 묻는다.
+
+예를 들어 상대가 $L$을 선택할 가능성이 충분히 높다고 믿으면 $U$가 최적이라고 설명할 수 있다면 $U$는 rationalize할 수 있다. 반대로 어떤 probability를 붙여도 다른 전략보다 나아지지 않는다면 그 전략은 rationalizable하지 않다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.equivalence-strip}
+
+$$
+\text{rationalizable}\quad\Longleftrightarrow\quad\text{어떤 admissible belief에 대해서는 best response가 될 수 있음}.
+$$
+
+::::::::::::::::::::
+
+### 2.5.2 Belief에 대한 best response {#s251}
+
+:::::::::::::::::::: {.belief-box}
+
+::::::::::::::::::: {.belief-box__head}
+
+Belief는 상대전략에 대한 probability distribution이다
+
+:::::::::::::::::::
+
+상대가 두 전략 $L,R$을 가진다면 Player $i$의 belief는
+
+$$
+\mu_i(L)=p,\qquad
+\mu_i(R)=1-p
+$$
+
+와 같이 표현할 수 있다.
+
+일반적인 유한게임에서 전략 $s_i$의 기대payoff는
+
+$$
+EU_i(s_i;\mu_i)
+=
+\sum_{s_{-i}\in S_{-i}}
+\mu_i(s_{-i})u_i(s_i,s_{-i}).
+$$
+
+따라서 belief에 대한 best response는 이 expected payoff를 가장 크게 만드는 전략이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.7 · Best Response to a Belief
+
+:::::::::::::::::::
+
+플레이어 $i$가 상대 전략에 대한 belief
+
+$$
+\mu_i\in\Delta(S_{-i})
+$$
+
+를 가진다고 하자. 전략 $s_i$가 $\mu_i$에 대한 best response라는 것은
+
+::::::::::::::::::: {.math-display}
+
+$$
+s_i\in
+\arg\max_{\tilde s_i\in S_i}
+\mathbb E_{\mu_i}
+\bigl[
+u_i(\tilde s_i,s_{-i})
+\bigr]
+$$
+
+:::::::::::::::::::
+
+이 성립하는 것이다.
+
+::::::::::::::::::::
+
+### 2.5.3 수치 예제: 어떤 belief에서 $U$가 best response가 되는가? {#belief-example}
+
+Player 1이 $U,D$ 중 하나를 선택하고 Player 2가 $L$을 선택할 확률에 대한 Player 1의 belief를
+$$
+\mu_1(L)=p,\qquad \mu_1(R)=1-p
+$$
+라 하자. Player 1의 payoff가 다음과 같다고 하자.
+
+:::::::::::::::::::: {.display-table-wrap}
+
+<table><thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead><tbody><tr><td>$U$</td><td>4</td><td>0</td></tr><tr><td>$D$</td><td>1</td><td>2</td></tr></tbody></table>
+
+::::::::::::::::::::
+
+기대payoff는
+
+$$
+EU_1(U)=4p,
+\qquad
+EU_1(D)=p+2(1-p)=2-p.
+$$
+
+두 기대payoff가 같아지는 cutoff는
+
+$$
+4p=2-p
+\quad\Longleftrightarrow\quad
+p=\frac25.
+$$
+
+:::::::::::::::::::: {.threshold-grid}
+
+::::::::::::::::::: {.threshold-card}
+
+:::::::::::::::::: {.threshold-card__head}
+
+$p>\frac25$
+
+::::::::::::::::::
+
+$U$가 유일한 best response다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.threshold-card}
+
+:::::::::::::::::: {.threshold-card__head}
+
+$p<\frac25$
+
+::::::::::::::::::
+
+$D$가 유일한 best response다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.threshold-card}
+
+:::::::::::::::::: {.threshold-card__head}
+
+$p=\frac25$
+
+::::::::::::::::::
+
+$U,D$가 모두 best responses다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+따라서 $U$를 rationalize하려면 $p\ge\frac25$인 belief 하나만 존재하면 충분하고,
+$D$도 $p\le\frac25$인 belief에 의해 rationalize할 수 있다.
+
+:::::::::::::::::::: {.reading-aid}
+
+::::::::::::::::::: {.reading-aid__head}
+
+핵심
+
+:::::::::::::::::::
+
+rationalizability는 “이 전략이 항상 좋은가?”가 아니라 “이 전략이 최적이 되는 belief가 존재하는가?”를 묻는다. 따라서 dominance보다 훨씬 넓은 전략집합을 허용한다.
+
+::::::::::::::::::::
+
+### 2.5.4 Never Best Response와 Mixed Dominance {#s254}
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.3 · 유한게임에서 never-best-response와 혼합지배
+
+:::::::::::::::::::
+
+유한게임에서 한 순수전략이 어떤 belief에 대해서도 best response가 될 수 없다는 것과,
+그 전략이 어떤 mixed strategy에 의해 strictly dominated된다는 것은 동치다.
+
+::::::::::::::::::::
+
+<details class="technical-proof">
+<summary>기술적 설명 · 왜 mixed dominance가 등장하는가</summary>
+
+:::::::::::::::::::: {.details-body}
+
+한 순수전략 $s_i$의 각 상대전략 $s_{-i}$에 대한 payoff들을 하나의 벡터로 생각할 수 있다.
+다른 혼합전략들이 만들어 내는 payoff 벡터들의 집합은 유한한 순수전략 payoff 벡터들의 convex hull이다.
+$s_i$가 어떤 belief에서도 best response가 아니라면,
+$s_i$의 payoff 벡터는 적절한 의미에서 이 convex set의 상단 경계에 놓일 수 없다.
+유한차원 분리정리를 이용하면 $s_i$보다 모든 상태에서 엄격히 높은 payoff를 주는 convex combination,
+즉 mixed strategy를 구성할 수 있다.
+
+::::::::::::::::::::
+
+</details>
+
+:::::::::::::::::::: {.reading-aid}
+
+::::::::::::::::::: {.reading-aid__head}
+
+한 번의 rationalization으로 끝나지 않는 이유
+
+:::::::::::::::::::
+
+내가 어떤 전략을 합리화할 때 사용하는 belief도 상대가 합리적으로 행동할 수 있다는 사실과 양립해야 한다. 따라서 상대의 never-best-response strategies가 제거되면 내가 고려할 belief의 support도 함께 줄어든다.
+
+이 과정을 다시 반복하면 rationalizability도 IESDS처럼 higher-order reasoning의 구조를 가진다.
+
+::::::::::::::::::::
+
+### 2.5.5 반복적 합리화 {#s252}
+
+:::::::::::::::::::: {.statement .definition}
+
+::::::::::::::::::: {.statement-head}
+
+DEFINITION 2.8 · Rationalizable Strategy
+
+:::::::::::::::::::
+
+초기 집합을 $R_i^0=S_i$라 하자. 다음을 반복한다.
+
+::::::::::::::::::: {.math-display}
+
+$$
+R_i^{k+1}
+=
+\left\{
+s_i\in R_i^k:
+\exists\mu_i\in\Delta(R_{-i}^k)
+\text{ such that }
+s_i\in BR_i(\mu_i)
+\right\}.
+$$
+
+:::::::::::::::::::
+
+모든 단계에서 살아남는 전략
+
+$$
+s_i\in R_i^\infty
+\equiv
+\bigcap_{k\ge0}R_i^k
+$$
+
+을 rationalizable strategy라 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.logic-chain}
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">1ST ORDER</span><span class="text">나는 합리적이다</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">2ND ORDER</span><span class="text">상대도 합리적이다</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">3RD ORDER</span><span class="text">상대도 나의 합리성을 안다</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.import-block}
+
+<span class="label">COMMON BELIEF</span><span class="text">합리성이 반복적으로 유지된다</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+첫 round에서는 어떤 belief에도 best response가 될 수 없는 전략을 제거한다.
+다음 round에서는 상대방이 이미 그런 전략을 사용하지 않을 것이라는 점을 반영하여 belief의 support를 축소한다.
+이를 반복하면 higher-order belief in rationality가 전략집합에 미치는 함의를 얻는다.
+
+### 2.5.6 Rationalizability와 Nash Equilibrium은 무엇이 다른가? {#s256}
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+가능한 belief와 실제 전략의 일치 여부
+
+:::::::::::::::::::
+
+rationalizability는 각 전략을 최적으로 만드는 belief가 <em>존재</em>하기만 하면 된다. 그 belief가 실제 상대 행동과 맞아야 한다고 요구하지 않는다.
+
+Nash equilibrium은 더 강한 mutual-consistency condition을 요구한다. 내가 상대가 $s_{-i}^*$를 선택한다고 예상하고 그에 best respond할 뿐 아니라, 실제 상대도 바로 $s_{-i}^*$를 선택해야 한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.formula-grid}
+
+::::::::::::::::::: {.formula-card}
+
+:::::::::::::::::: {.formula-card__head}
+
+RATIONALIZABILITY
+
+::::::::::::::::::
+
+$$
+\exists\,\mu_i\ \text{s.t.}\ s_i\in BR_i(\mu_i).
+$$
+어떤 admissible belief에 대해서라도 최적이면 된다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.formula-card}
+
+:::::::::::::::::: {.formula-card__head}
+
+NASH CONSISTENCY
+
+::::::::::::::::::
+
+$$
+s_i^*\in BR_i(s_{-i}^*)\quad\forall i.
+$$
+belief의 내용과 실제 상대전략이 서로 일치해야 한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+따라서 일반적으로 Nash equilibrium에서 실제로 사용되는 전략은 rationalizable이지만, rationalizable strategy profile이라고 해서 Nash equilibrium일 필요는 없다.
+
+:::::::::::::::::::: {.bridge-example}
+
+::::::::::::::::::: {.bridge-example__head}
+
+EXAMPLE · rationalizable strategies가 모두 Nash profile을 만드는 것은 아니다
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.bridge-example__body}
+
+다음 coordination game을 생각하자.
+
+:::::::::::::::::: {.payoff-wrap}
+
+<table class="payoff-matrix">
+<thead><tr><th></th><th>$L$</th><th>$R$</th></tr></thead>
+<tbody>
+<tr><td class="row-label">$U$</td><td>$(2,2)$</td><td>$(0,0)$</td></tr>
+<tr><td class="row-label">$D$</td><td>$(0,0)$</td><td>$(1,1)$</td></tr>
+</tbody>
+</table>
+
+::::::::::::::::::
+
+Player 1의 $U$는 $L$에 충분히 높은 probability를 주는 belief에 대해 best response이고,
+$D$는 $R$에 충분히 높은 probability를 주는 belief에 대해 best response다.
+따라서 $U,D$는 모두 rationalizable하다. Player 2도 대칭적으로 $L,R$ 모두 rationalizable하다.
+
+그러나 $(U,R)$은 Nash equilibrium이 아니다.
+$R$이 주어지면 Player 1은 $U$에서 $D$로 바꾸고 싶기 때문이다.
+즉 rationalizability는 각 전략을 설명하는 belief의 존재만 요구하지만,
+Nash는 그 belief와 실제 상대전략이 하나의 profile 안에서 동시에 맞아떨어져야 한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.property-sheet}
+
+::::::::::::::::::: {.property-sheet__head}
+
+DOMINANCE와 RATIONALIZABILITY의 관계
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Pure IESDS
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+순수전략이 다른 순수전략에 의해 strictly dominated되는지만 검사한다.
+계산은 단순하지만 혼합전략에 의한 지배를 놓칠 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Mixed IESDS
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+순수전략이 어떤 mixed strategy에 의해 strictly dominated되는지도 제거한다.
+유한게임에서는 이 절차가 rationalizability와 정확히 연결된다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Rationalizability
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+어떤 surviving opponents' strategies 위의 belief에 대해서라도 best response가 될 수 있는 전략들을 반복적으로 남긴다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .theorem}
+
+::::::::::::::::::: {.statement-head}
+
+THEOREM 2.4 · 유한게임의 Rationalizability Characterization
+
+:::::::::::::::::::
+
+유한게임에서 pure strategy $s_i$가 rationalizable일 필요충분조건은
+$s_i$가 mixed strategies에 의한 strict dominance의 반복 제거를 살아남는 것이다.
+
+::::::::::::::::::::
+
+### 2.5.7 Epistemic Interpretation: 합리성에 대한 고차 믿음 {#s257}
+
+rationalizability를 단순한 삭제 알고리즘으로만 이해하면 핵심이 빠진다. 각 round는 상대가 합리적이라는 belief, 상대가 나의 합리성을 고려한다는 higher-order belief를 전략집합에 반영하는 과정으로 해석할 수 있다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · common belief in rationality
+
+:::::::::::::::::::
+
+적절한 epistemic model에서는 rationalizable strategies를 플레이어들의 rationality가 반복적으로 믿어지는 상황과 연결할 수 있다. 이 장에서는 type spaces나 knowledge operators를 사용한 formal epistemic game theory까지 전개하지 않고, “상대도 합리적이며 그 사실이 반복적으로 반영된다”는 해석만 사용한다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s26}
+
+## [2.6]{.section-number}Higher-Order Reasoning: 몇 단계까지 상대를 생각하는가?
+
+::: {.topic-opening}
+반복적 제거의 경제적 의미는 행렬에서 열과 행을 지우는 계산 자체보다
+“상대도 합리적이라는 사실을 몇 단계까지 추론하는가”에 있다.
+다음 변형된 평균 맞히기 게임은 이 higher-order reasoning을 투명하게 보여준다.
+:::
+
+### 2.6.1 $2/3$-Mean Guessing Game {#guessing}
+
+:::::::::::::::::::: {.game-card}
+
+::::::::::::::::::: {.game-card__head}
+
+<span class="game-card__title">EXAMPLE 2.6 · $2/3$-Mean-of-Others Guessing Game</span>
+<span class="game-card__tag">HIGHER-ORDER REASONING</span>
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.game-card__body}
+
+각 플레이어는 $x_i\in[0,100]$을 선택한다.
+플레이어 $i$는 다른 플레이어들의 평균
+
+$$
+\bar x_{-i}
+$$
+
+의 $2/3$에 자신의 숫자가 가까울수록 높은 보수를 얻는다고 하자.
+이를 가장 간단하게는
+
+:::::::::::::::::: {.math-display}
+
+$$
+u_i(x_i,x_{-i})
+=
+-
+\left(
+x_i-\frac23\bar x_{-i}
+\right)^2
+$$
+
+::::::::::::::::::
+
+로 표현할 수 있다.
+이 변형에서는 자신의 선택 $x_i$가 target $\frac23\bar x_{-i}$ 자체에는 들어가지 않는다.
+따라서 target에서 더 멀리 떨어진 숫자는 더 낮은 payoff를 준다.
+
+:::::::::::::::::: {.elimination-stage}
+
+::::::::::::::::: {.elimination-stage__head}
+
+1차 추론
+
+:::::::::::::::::
+
+::::::::::::::::: {.elimination-stage__body}
+
+다른 플레이어들의 선택이 모두 $[0,100]$에 있으므로
+
+$$
+\frac23\bar x_{-i}
+\le
+\frac23\cdot100
+=
+\frac{200}{3}
+\approx66.7.
+$$
+
+따라서 66.7보다 큰 숫자는 target이 될 수 없다.
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::: {.elimination-stage}
+
+::::::::::::::::: {.elimination-stage__head}
+
+2차 추론
+
+:::::::::::::::::
+
+::::::::::::::::: {.elimination-stage__body}
+
+모든 플레이어가 1차 추론을 한다는 것을 안다면 상대의 선택은 $[0,66.7]$ 안에 있다고 본다.
+그러면 target의 상한은
+
+$$
+\frac23\cdot66.7\approx44.4
+$$
+
+로 다시 내려간다.
+
+:::::::::::::::::
+
+::::::::::::::::::
+
+:::::::::::::::::: {.math-display}
+
+$$
+100
+\longrightarrow
+\frac23 100
+\longrightarrow
+\left(\frac23\right)^2 100
+\longrightarrow
+\cdots
+\longrightarrow
+0.
+$$
+
+::::::::::::::::::
+
+:::::::::::::::::: {.reading-aid}
+
+::::::::::::::::: {.reading-aid__head}
+
+$k$번째 round의 상한
+
+:::::::::::::::::
+
+같은 논리를 반복하면 $k$번의 elimination reasoning 뒤 surviving numbers의 상한은
+
+$$
+100\left(\frac23\right)^k
+$$
+
+로 쓸 수 있다. $k\to\infty$이면 이 상한은 0으로 수렴한다.
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solution-block}
+
+::::::::::::::::: {.solution-block__head}
+
+핵심
+
+:::::::::::::::::
+
+반복적 추론의 각 단계는 단순한 개인 합리성보다 한 단계 더 높은 “상대의 합리성에 대한 믿음”을 사용한다.
+무한히 반복되는 공통의 합리성 추론은 surviving set을 점점 축소한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.reading-aid}
+
+::::::::::::::::::: {.reading-aid__head}
+
+각 round는 무엇을 의미하는가?
+
+:::::::::::::::::::
+
+$100\to66.7$은 “나 자신이 payoff 구조를 이해한다”는 1차 추론이다. $66.7\to44.4$는 “상대도 1차 추론을 했을 것”이라는 2차 추론을 사용한다. 그 다음 round는 상대가 나 역시 같은 추론을 한다고 생각한다는 사실까지 반영한다.
+
+따라서 숫자가 줄어드는 계산은 higher-order beliefs가 깊어질수록 가능한 전략집합이 축소되는 과정을 보여준다.
+
+::::::::::::::::::::
+
+### 2.6.2 Traveler's Dilemma: 반복추론의 또 다른 canonical example {#traveler}
+
+:::::::::::::::::::: {.story-block}
+
+<strong>게임의 이야기.</strong> 두 여행자가 잃어버린 동일한 물건의 가치를 각각 정수로 신고한다. 두 신고가 같으면 그 금액을 둘 다 받고, 다르면 더 낮은 신고액을 기준으로 보상을 지급하되 낮게 신고한 사람에게 보너스, 높게 신고한 사람에게 벌점을 준다.
+
+::::::::::::::::::::
+
+각 플레이어가
+
+$$
+x_i\in\{L,L+1,\ldots,H\}
+$$
+
+중 하나를 신고하고 보너스/벌점 크기를 $b>0$라 하자.
+두 신고가 같으면
+
+$$
+u_i(x_i,x_i)=x_i.
+$$
+
+만약 $x_i<x_j$이면
+
+:::::::::::::::::::: {.math-display}
+
+$$
+u_i=x_i+b,
+\qquad
+u_j=x_i-b.
+$$
+
+::::::::::::::::::::
+
+상대가 $H$를 신고한다고 예상하면 $H-1$을 신고해 보너스를 얻는 것이 유리할 수 있다.
+그런데 상대도 같은 생각을 한다고 보면 $H-2$가 유리해지고,
+같은 논리가 반복되면서
+
+$$
+H\to H-1\to H-2\to\cdots
+$$
+
+처럼 선택범위가 아래쪽으로 내려간다.
+구체적인 elimination 결과는 $b$와 허용된 신고범위에 의존하지만,
+핵심은 상대도 한 단계 낮출 것이라는 추론이 다시 내 선택을 낮춘다는 데 있다.
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+Beauty Contest와의 공통점
+
+:::::::::::::::::::
+
+두 게임 모두 “내가 합리적이다”만으로는 끝나지 않는다. 상대도 같은 추론을 한다는 사실을 반복적으로 반영할수록 전략집합이 축소된다.
+
+::::::::::::::::::::
+
+### 2.6.3 Theory와 실제 reasoning depth
+
+이론에서 common reasoning을 무한히 반복하면 매우 강한 결론에 도달할 수 있다. 하지만 실제 의사결정에서는 사람들이 몇 단계까지만 상대의 추론을 예상하는 경우가 흔하다. 이 차이는 bounded rationality, level-$k$, cognitive hierarchy 같은 행동게임이론의 주제로 이어진다. 여기서는 표준 rationality benchmark와 실제 reasoning depth를 구분한다는 점만 기억하면 충분하다.
+
+:::::::::::::::::::: {.statement .remark}
+
+::::::::::::::::::: {.statement-head}
+
+REMARK · 표준 Beauty Contest와의 구분
+
+:::::::::::::::::::
+
+여기서는 IESDS의 higher-order logic을 깨끗하게 보이기 위해 target을 “다른 플레이어 평균의 $2/3$”로 정의했다.
+표준 beauty contest처럼 자신의 선택까지 포함한 전체 평균을 사용하면 유한한 플레이어 수에서는 상한 계산에 자신의 영향이 들어가므로
+정확한 제거경계가 조금 달라진다. 핵심인 반복적 추론의 구조는 동일하다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s27}
+
+## [2.7]{.section-number}How to Solve a Dominance Problem
+
+::: {.topic-opening}
+dominance 문제는 계산이 복잡해서 틀리기보다, strict와 weak를 섞거나 reduced game에서 다시 비교해야 한다는 사실을 놓쳐서 틀리는 경우가 많다. 다음 절차를 고정된 체크리스트로 사용하면 대부분의 유한 전략형 게임을 안정적으로 분석할 수 있다.
+:::
+
+:::::::::::::::::::: {.solver-flow}
+
+::::::::::::::::::: {.solver-flow__head}
+
+DOMINANCE SOLVER · 처음 보는 payoff matrix의 접근순서
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+01
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>한 player씩 분석한다</strong>Player 1이면 첫 번째 숫자, Player 2이면 두 번째 숫자만 본다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+02
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>두 전략을 모든 상대전략에서 비교한다</strong>상대전략마다 payoff 부등호를 직접 적는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+03
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>strict와 weak를 구분한다</strong>$>$ everywhere인지, $\ge$ everywhere and $>$ somewhere인지 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+04
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>strictly dominated strategy부터 제거한다</strong>강지배 제거는 order independence를 가지므로 먼저 처리하기 좋다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+05
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>reduced game을 새로 읽는다</strong>새로운 dominance가 생겼는지 다시 검사한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+06
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>weak dominance는 별도로 표시한다</strong>제거순서와 best-response 가능성을 확인한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+07
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>pure dominance가 없으면 mixed dominance를 본다</strong>$p$-mixture의 기대payoff inequality를 세운다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+08
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>belief에 대한 best response 가능성을 본다</strong>어떤 belief에서도 최적이 될 수 없다면 rationalizability에서 제거된다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+09
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>더 이상 줄어들지 않으면 멈춘다</strong>dominance가 충분하지 않으면 Chapter 3의 best response/Nash 분석으로 넘어간다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.solver-step}
+
+:::::::::::::::::: {.solver-step__no}
+
+10
+
+::::::::::::::::::
+
+:::::::::::::::::: {.solver-step__body}
+
+<strong>무엇을 실제로 확립했는지 확인한다</strong>strict/weak/mixed dominance 중 무엇을 사용했는지, 하나의 profile까지 도달했는지, rationalizable set만 남긴 것인지, equilibrium까지 구한 것인지를 구분한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.statement .warning}
+
+::::::::::::::::::: {.statement-head}
+
+COMMON ERROR · 상대 payoff를 섞어 읽지 말 것
+
+:::::::::::::::::::
+
+Player 1의 행을 비교할 때는 각 칸의 첫 번째 숫자만, Player 2의 열을 비교할 때는 두 번째 숫자만 비교한다. dominance는 각 player 자신의 payoff ordering에 관한 개념이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.verify-box}
+
+::::::::::::::::::: {.verify-box__head}
+
+VERIFY · 삭제가 곧 equilibrium 계산은 아니다
+
+:::::::::::::::::::
+
+IESDS가 하나의 profile을 남기면 강한 예측을 얻지만, 여러 전략이 살아남는다고 해서 그 surviving profiles가 모두 equilibrium이라는 뜻은 아니다.
+
+또한 weak dominance를 사용했는지, mixed dominance까지 허용했는지에 따라 “살아남았다”는 문장의 의미가 달라진다. 마지막에는 어떤 기준으로 무엇을 제거했고 무엇을 아직 주장하지 않았는지를 분리해서 적는다.
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s28}
+
+## [2.8]{.section-number}Canonical Examples Atlas
+
+::: {.topic-opening}
+아래 예제들은 payoff 숫자를 외우기 위한 목록이 아니라 dominance와 반복추론의 구조를 빠르게 식별하기 위한 기준점이다.
+:::
+
+:::::::::::::::::::: {.atlas-grid}
+
+::::::::::::::::::: {.atlas-card}
+
+:::::::::::::::::: {.atlas-card__title}
+
+Prisoner's Dilemma
+
+::::::::::::::::::
+
+:::::::::::::::::: {.atlas-card__body}
+
+양쪽 모두 strictly dominant strategy를 가진 benchmark.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.atlas-card}
+
+:::::::::::::::::: {.atlas-card__title}
+
+Dominated-but-no-Dominant
+
+::::::::::::::::::
+
+:::::::::::::::::: {.atlas-card__body}
+
+dominated strategy 존재와 dominant strategy 존재가 다름을 보여준다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.atlas-card}
+
+:::::::::::::::::: {.atlas-card__title}
+
+Weak-Dominance Game
+
+::::::::::::::::::
+
+:::::::::::::::::: {.atlas-card__body}
+
+equality 때문에 weakly dominated strategy도 특정 belief에서 best response가 될 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.atlas-card}
+
+:::::::::::::::::: {.atlas-card__title}
+
+Direction Game
+
+::::::::::::::::::
+
+:::::::::::::::::: {.atlas-card__body}
+
+reduced game에서 새로운 dominance가 생기는 IESDS benchmark.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.atlas-card}
+
+:::::::::::::::::: {.atlas-card__title}
+
+Weak-Order Game
+
+::::::::::::::::::
+
+:::::::::::::::::: {.atlas-card__body}
+
+weak elimination의 order dependence를 보여준다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.atlas-card}
+
+:::::::::::::::::: {.atlas-card__title}
+
+Mixed-Dominance Game
+
+::::::::::::::::::
+
+:::::::::::::::::: {.atlas-card__body}
+
+pure strategies에는 지배되지 않아도 mixture에는 지배될 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.atlas-card}
+
+:::::::::::::::::: {.atlas-card__title}
+
+Beauty Contest
+
+::::::::::::::::::
+
+:::::::::::::::::: {.atlas-card__body}
+
+higher-order reasoning과 common rationality의 전형.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.atlas-card}
+
+:::::::::::::::::: {.atlas-card__title}
+
+Traveler's Dilemma
+
+::::::::::::::::::
+
+:::::::::::::::::: {.atlas-card__body}
+
+한 단계 더 낮게 선택하려는 유인이 반복되는 iterated reasoning example.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#s29}
+
+## [2.9]{.section-number}경제학과 산업조직에서의 응용 예고
+
+::: {.topic-opening}
+산업조직의 핵심 모형 대부분은 dominance만으로 완전히 풀리지 않는다. 그럼에도 dominance reasoning은 극단적으로 열등한 행동을 사전에 배제하는 첫 번째 진단도구로 유용하다.
+:::
+
+:::::::::::::::::::: {.io-preview-grid}
+
+::::::::::::::::::: {.io-preview-card}
+
+:::::::::::::::::: {.io-preview-card__title}
+
+가격선택
+
+::::::::::::::::::
+
+어떤 가격이 모든 rival prices에서 다른 가격보다 낮은 profit을 준다면 그 가격은 dominated strategy다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.io-preview-card}
+
+:::::::::::::::::: {.io-preview-card__title}
+
+시장진입
+
+::::::::::::::::::
+
+어떤 시장상황에서도 Entry payoff가 Stay Out보다 낮다면 Entry는 dominance로 배제할 수 있다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.io-preview-card}
+
+:::::::::::::::::: {.io-preview-card__title}
+
+기술선택
+
+::::::::::::::::::
+
+새 기술이 모든 rival actions에서 더 높은 profit을 보장한다면 old technology는 dominated된다.
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.io-preview-card}
+
+:::::::::::::::::: {.io-preview-card__title}
+
+실제 IO의 일반적 경우
+
+::::::::::::::::::
+
+Cournot·Bertrand·Cartel에서는 상대 행동에 따라 최적전략이 달라지는 경우가 많아 best response, Nash, repeated-game analysis가 필요하다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+다음 장으로
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+dominance가 더 이상 전략을 제거하지 못하면 “상대가 특정 전략을 선택한다고 할 때 나는 무엇이 최적인가?”라는 conditional optimization으로 이동한다. 이것이 Chapter 3의 best response와 Nash equilibrium이다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#summary}
+
+## [2.10]{.section-number}Chapter Summary
+
+:::::::::::::::::::: {.narrative-block}
+
+이 장의 핵심은 하나의 equilibrium을 반드시 찾아내는 것이 아니라
+<strong>합리적 행동으로 설명될 수 없는 전략들을 어디까지 제거할 수 있는가</strong>를 밝히는 데 있다.
+strict dominance는 어떤 belief에서도 선택될 이유가 없는 전략을 제거하고,
+rationalizability는 가능한 belief에 대한 best-response 가능성을 반복적으로 점검한다.
+그러나 rationalizable strategies가 남았다는 사실만으로 서로의 beliefs와 실제 행동이 일치한 것은 아니다.
+바로 그 상호 일관성을 추가하는 개념이 다음 장의 Nash equilibrium이다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.plain-language}
+
+::::::::::::::::::: {.plain-language__head}
+
+이 장을 한 문장으로 요약하면
+
+:::::::::::::::::::
+
+dominance는 “상대를 정확히 예측하지 않고도 버릴 수 있는 전략”을 찾고, IESDS는 상대도 그런 전략을 버릴 것이라는 higher-order reasoning을 반복하며, rationalizability는 그 논리를 “어떤 belief에 대해서라도 best response가 될 수 있는가?”라는 언어로 일반화한다.
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.property-sheet}
+
+::::::::::::::::::: {.property-sheet__head}
+
+CHAPTER 2 · 핵심 정리
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Strict dominance
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+$u_i(\hat s_i,s_{-i})>u_i(\bar s_i,s_{-i})$가 모든 $s_{-i}$에 대해 성립한다.
+strictly dominated strategy는 어떤 belief에 대해서도 best response가 될 수 없다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Weak dominance
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+항상 적어도 같고 일부 경우에 더 좋다. weakly dominated strategy는 특정 belief에 대해 best response일 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+IESDS
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+강열등전략 제거 후 축소게임에서 지배관계를 다시 검사한다.
+유한게임의 pure strict dominance 반복 제거는 최종 surviving set이 제거순서에 의존하지 않는다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Weak elimination
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+equality가 허용되므로 제거순서가 이후 지배관계를 바꿀 수 있고, 최종 결과가 달라질 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Mixed dominance
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+순수전략에 지배되지 않는 전략도 mixed strategy에는 strict하게 지배될 수 있다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Rationalizability
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+어떤 surviving-belief에 대해서라도 best response가 될 수 있는 전략을 반복적으로 남긴다.
+유한게임에서는 mixed-strategy strict dominance의 반복 제거와 동치다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+무엇까지 말할 수 있는가?
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+Dominance는 전략을 제거하는 이론이지 항상 하나의 outcome을 선택하는 이론은 아니다.
+여러 전략이 살아남으면 추가적인 solution concept이 필요하다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.property-row}
+
+:::::::::::::::::: {.property-row__key}
+
+Nash로의 연결
+
+::::::::::::::::::
+
+:::::::::::::::::: {.property-row__body}
+
+Rationalizability는 각 전략을 정당화하는 belief의 존재를 요구하지만,
+Nash equilibrium은 그 beliefs와 실제 상대전략의 상호 일치까지 요구한다.
+
+::::::::::::::::::
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+:::::::::::::::::::: {.callout-strip}
+
+::::::::::::::::::: {.left}
+
+다음 장으로
+
+:::::::::::::::::::
+
+::::::::::::::::::: {.right}
+
+dominance는 상대의 정확한 전략을 몰라도 일부 전략을 배제할 수 있지만, 대개의 게임을 완전히 풀지는 못한다.
+Chapter 3에서는 상대 전략을 주어진 것으로 보고 최적반응 $BR_i$를 정의한 뒤,
+모든 플레이어의 최적반응이 서로 일치하는 Nash equilibrium으로 이동한다.
+
+:::::::::::::::::::
+
+::::::::::::::::::::
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#exercises}
+
+## [2.11]{.section-number}연습문제
+
+::: {.topic-opening}
+각 문제에서는 “원래 게임에서의 지배”와 “축소게임에서 새롭게 생긴 지배”를 구분하고,
+strict와 weak dominance를 혼동하지 않도록 부등식을 직접 확인하라.
+:::
+
+### A. Dominance
+
+<ol class="exercise-list exercise-list--a">
+<li>죄수의 딜레마에서 $D$가 strictly dominant라는 사실을 두 상대전략 각각에 대해 부등식으로 확인하라.</li>
+<li>약열등전략이 특정 상대전략에 대해 best response가 될 수 있는 $2\times2$ 게임을 하나 구성하라.</li>
+<li>strictly dominated strategy가 어떤 mixed belief에 대해서도 best response가 될 수 없음을 기대보수 부등식으로 증명하라.</li>
+<li>strict dominance가 weak dominance를 함의하지만 역은 성립하지 않음을 반례와 함께 설명하라.</li>
+</ol>
+
+### B. IESDS
+
+<ol class="exercise-list exercise-list--b">
+<li>Example 2.3에서 $M$을 먼저 제거하는 경로와 $R$을 먼저 제거하는 경로를 각각 끝까지 수행하라.</li>
+<li>처음에는 지배되지 않지만 축소게임에서 지배되는 전략을 포함하는 새로운 $3\times2$ 게임을 구성하라.</li>
+<li>유한게임에서 IESDS가 유한 단계 내 종료하는 이유를 전체 전략수의 상한을 사용하여 설명하라.</li>
+<li>dominance-solvable game의 surviving profile이 왜 Nash equilibrium과 일치해야 하는지 Chapter 3의 정의를 미리 사용하여 논증해 보라.</li>
+</ol>
+
+### C. Weak Dominance와 제거순서
+
+<ol class="exercise-list exercise-list--c">
+<li>Example 2.4에서 $D$와 $R$이 각각 weakly dominated되는지 모든 payoff를 직접 비교하라.</li>
+<li>$D$를 먼저 제거한 경우와 $R$을 먼저 제거한 경우의 reduced game을 각각 작성하고 surviving set을 비교하라.</li>
+<li>strict dominance에서는 유지되는 순서독립성 논리가 weak dominance에서 왜 깨지는지 equality의 역할을 중심으로 설명하라.</li>
+</ol>
+
+### D. Mixed Dominance와 Rationalizability
+
+<ol class="exercise-list exercise-list--d">
+<li>Example 2.5에서 $\sigma_2=pL+(1-p)R$가 $M$을 strictly dominate하는 $p$의 범위를 구하라.</li>
+<li>어떤 pure strategy에도 지배되지 않지만 mixed strategy에 지배되는 전략이 왜 “어떤 belief에도 best response가 될 수 없다”는 주장과 연결되는지 설명하라.</li>
+<li>rationalizable strategy와 Nash equilibrium strategy의 차이를 belief consistency의 관점에서 설명하라.</li>
+<li>Example 2.6에서 $k$단계 추론 후 가능한 숫자의 상한을 식으로 나타내고 $k\to\infty$에서 극한을 구하라.</li>
+</ol>
+
+### E. Beliefs와 Rationalizability
+<ol class="exercise-list"><li>Player 1의 payoff가 $U:(4,0)$, $D:(1,2)$이고 $p=\mu(L)$라 할 때 $U$와 $D$ 각각이 best response가 되는 $p$의 범위를 구하라.</li><li>rationalizable strategy는 실제 상대전략을 정확히 예측할 필요가 없다는 문장을 Nash equilibrium과 비교하여 설명하라.</li><li>pure strategy에는 지배되지 않지만 never best response인 전략의 예를 찾아 mixed dominance가 왜 필요한지 설명하라.</li></ol>
+
+### F. 문제 진단과 응용
+<ol class="exercise-list"><li>처음 보는 $3\times3$ payoff matrix를 하나 정하고 2.7의 Dominance Solver를 순서대로 적용하라.</li><li>기업의 세 가격전략 중 하나가 모든 rival prices에서 낮은 이윤을 준다고 하자. 이를 dominance 언어로 표현하고 이 사실만으로 시장의 최종 equilibrium price가 결정되는지 논하라.</li><li>weakly dominated strategy를 제거하는 것이 strictly dominated strategy 제거보다 왜 강한 가정을 요구하는지 belief와 best-response 가능성을 이용해 설명하라.</li><li>Beauty Contest와 Traveler's Dilemma가 higher-order reasoning을 어떻게 보여주는지 비교하라.</li></ol>
+
+### G. 연결과 검증
+
+<ol class="exercise-list">
+<li>Example 2.2의 $(D,L)$이 Nash equilibrium이 되는 이유를 두 플레이어의 best-response 조건으로 확인하라. 동시에 $D$가 weakly dominated임을 확인하라.</li>
+<li>2.5.3의 belief 예제에서 $p=\frac25$일 때 왜 $U,D$가 모두 best responses인지 설명하라.</li>
+<li>Coordination Game에서 네 pure strategies가 모두 rationalizable하지만 모든 pure strategy profile이 Nash equilibrium은 아님을 보이라.</li>
+<li>mixed dominance의 payoff-vector 표현에서 “모든 좌표에서 더 크다”는 조건이 왜 모든 opponent pure strategies에 대한 strict dominance와 같은지 설명하라.</li>
+<li>Dominance Solver를 마친 뒤 surviving set, rationalizable set, equilibrium set을 서로 구분하여 설명하라.</li>
+</ol>
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {.references}
+
+## 범위와 표기
+
+이 장은 유한 전략형 게임을 중심으로 dominance, iterated elimination, mixed dominance, rationalizability의 기본 논리를 정리한다.
+무한 전략집합에서의 order independence나 정교한 epistemic foundations는 별도의 추가 조건이 필요할 수 있으므로 여기서는 다루지 않는다.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: {#references .references}
+
+## 참고문헌
+
+Jehle, G. A., and P. J. Reny. <em>Advanced Microeconomic Theory</em>, 3rd ed., Chapter 7: dominance and iterated elimination.
+
+Mas-Colell, A., M. D. Whinston, and J. R. Green. <em>Microeconomic Theory</em>, Chapters 7–8.
+
+Osborne, M. J. <em>An Introduction to Game Theory</em>. Strategic games, dominance, and rationalizability.
+
+Pearce, D. G. (1984). “Rationalizable Strategic Behavior and the Problem of Perfection.” <em>Econometrica</em>.
+
+::::::::::::::::::::::::::
+
