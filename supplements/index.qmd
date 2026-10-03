@@ -1,6 +1,6 @@
 ---
 title: "계산·시각화 보충자료 (Supplements)"
-subtitle: "대학원 경제학 14대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
+subtitle: "대학원 경제학 17대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
 ---
 
 ::: {.spoon-hero}
@@ -11,15 +11,16 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 # 계산·시각화 보충자료 (Supplements)
 
 ::: {.spoon-hero__desc}
-본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 16대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학, 경제학을 위한 수학의 핵심 정리와 위상도, 직교사영 기하를 35종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 17대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학, 게임이론, 경제학을 위한 수학의 핵심 정리와 위상도, 직교사영 기하를 37종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
 [경제학을 위한 수학 (3편)]{.chip .chip--primary}
 [미시경제학 (5편)]{.chip .chip--micro}
+[게임이론 (1편)]{.chip .chip--gt}
 [거시경제학 (4편)]{.chip .chip--macro}
 [계량경제학 (4편)]{.chip .chip--metrics}
-[35종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
+[37종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
 :::
@@ -27,7 +28,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-search-wrapper}
 ::: {.spoon-search-box}
-<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 주제어, 모형, 정리 검색 (예: 닫힌집합, 폐포, 도집합, KKT, 승수, 그림자 가격, Slutsky, Solow, Ramsey, OLS, 사영, FWL, 후생정리, 도구변수, Wald, LR, LM...)" autocomplete="off">
+<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 주제어, 모형, 정리 검색 (예: 닫힌집합, 폐포, 도집합, KKT, 승수, 그림자 가격, Slutsky, Solow, Ramsey, OLS, 사영, FWL, 후생정리, 도구변수, Wald, LR, LM, Folk Theorem, Grim Trigger...)" autocomplete="off">
 <span id="spoon-search-count" class="spoon-count-badge">실시간 검색 대기 중</span>
 :::
 :::
@@ -37,8 +38,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 ### 전체 보기
 
 ::: {.spoon-guide-box}
-**📚 대학원 경제학 16대 계산·시각화 보충자료 통합 포털**
-미시·거시·계량·수리경제학 전 분야의 계산·시각화 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 16편은 상단 검색창에서 즉시 필터링할 수 있다.
+**📚 대학원 경제학 17대 계산·시각화 보충자료 통합 포털**
+미시·거시·계량·수리경제학·게임이론 전 분야의 계산·시각화 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 17편은 상단 검색창에서 즉시 필터링할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -229,6 +230,31 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 미시 4권 제4장 순수교환경제 제7절 Core와 competitive limit</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- GT 1: Repeated Games & Folk Theorem -->
+<a href="repeated-game-folk-theorem.html" class="spoon-card" data-subject="gt">
+  <div class="spoon-card__header">
+    <span class="chip chip--gt">게임이론</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">반복 게임과 Folk Theorem: 할인인자 $\delta$와 협조의 기하학</div>
+  <div class="spoon-card__desc">무한반복 죄수의 딜레마에서 실행가능 보수 집합의 볼록껍질(Convex Hull), 미니맥스 하한선과 엄격한 개인적 합리성, 할인인자 $\delta$ 상승에 따른 SPE 보수집합의 팽창, 그리고 Grim Trigger 일탈 유인과 누적 보수 역전 동학을 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">무한반복게임</span>
+    <span class="chip chip--topic">포크 정리(Folk Theorem)</span>
+    <span class="chip chip--topic">보수 볼록껍질(Convex Hull)</span>
+    <span class="chip chip--topic">미니맥스(Minimax)</span>
+    <span class="chip chip--topic">방아쇠 전략(Grim Trigger)</span>
+    <span class="chip chip--topic">임계 할인인자 $\delta^*$</span>
+    <span class="chip chip--topic">암묵적 담합</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 게임이론 Chapter 06 부분게임 완전균형 및 Chapter 07 반복게임</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
@@ -631,6 +657,47 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 미시 4권 제4장 순수교환경제 제7절 Core와 competitive limit</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+</div>
+```
+
+### 게임이론
+
+::: {.spoon-guide-box}
+**🎲 게임이론 (Game Theory) 보충자료 아카이브**
+- **주요 영역**: 무한반복게임(Infinitely Repeated Games), 할인인자 $\delta$와 시간 선호, 실행가능 보수 집합의 볼록껍질(Convex Hull), 미니맥스 하한선과 엄격한 개인적 합리성, 포크 정리(Folk Theorems: Friedman 1971, Fudenberg–Maskin 1986), Grim Trigger 및 Tit-for-Tat 전략 동학, 과점 시장의 암묵적 담합(Tacit Collusion).
+- **시각화 특징**: 2종의 고해상도 애니메이션을 통해 할인인자 $\delta$의 상승에 따른 SPE 균형 보수 집합의 볼록껍질 팽창 기하학, 1기 배반의 단기 유혹과 장기 내쉬 응징 손실, 그리고 인내심($\delta \ge 0.5$) vs 조급함($\delta < 0.5$)의 누적 보수 역전 동학을 수리적으로 엄밀하게 재현한다.
+:::
+
+::: {.spoon-empty-msg}
+검색 조건과 일치하는 게임이론 보충자료가 없다.
+:::
+
+```{=html}
+<div id="supplement-grid-gt" class="spoon-grid">
+<!-- GT 1: Repeated Games & Folk Theorem -->
+<a href="repeated-game-folk-theorem.html" class="spoon-card" data-subject="gt">
+  <div class="spoon-card__header">
+    <span class="chip chip--gt">게임이론</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">반복 게임과 Folk Theorem: 할인인자 $\delta$와 협조의 기하학</div>
+  <div class="spoon-card__desc">무한반복 죄수의 딜레마에서 실행가능 보수 집합의 볼록껍질(Convex Hull), 미니맥스 하한선과 엄격한 개인적 합리성, 할인인자 $\delta$ 상승에 따른 SPE 보수집합의 팽창, 그리고 Grim Trigger 일탈 유인과 누적 보수 역전 동학을 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">무한반복게임</span>
+    <span class="chip chip--topic">포크 정리(Folk Theorem)</span>
+    <span class="chip chip--topic">보수 볼록껍질(Convex Hull)</span>
+    <span class="chip chip--topic">미니맥스(Minimax)</span>
+    <span class="chip chip--topic">방아쇠 전략(Grim Trigger)</span>
+    <span class="chip chip--topic">임계 할인인자 $\delta^*$</span>
+    <span class="chip chip--topic">암묵적 담합</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 게임이론 Chapter 06 부분게임 완전균형 및 Chapter 07 반복게임</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
