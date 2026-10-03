@@ -238,6 +238,7 @@ book:
   - part: "보충자료 · 게임이론"
     chapters:
     - supplements/repeated-game-folk-theorem.qmd
+    - supplements/centipede-game-backward-induction.qmd
   - part: "보충자료 · 거시경제학"
     chapters:
     - supplements/solow-growth.qmd

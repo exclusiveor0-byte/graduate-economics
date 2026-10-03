@@ -1,6 +1,6 @@
 ---
 title: "계산·시각화 보충자료 (Supplements)"
-subtitle: "대학원 경제학 17대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
+subtitle: "대학원 경제학 18대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
 ---
 
 ::: {.spoon-hero}
@@ -11,16 +11,16 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 # 계산·시각화 보충자료 (Supplements)
 
 ::: {.spoon-hero__desc}
-본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 17대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학, 게임이론, 경제학을 위한 수학의 핵심 정리와 위상도, 직교사영 기하를 37종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 18대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학, 게임이론, 경제학을 위한 수학의 핵심 정리와 위상도, 직교사영 기하를 39종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
 [경제학을 위한 수학 (3편)]{.chip .chip--primary}
 [미시경제학 (5편)]{.chip .chip--micro}
-[게임이론 (1편)]{.chip .chip--gt}
+[게임이론 (2편)]{.chip .chip--gt}
 [거시경제학 (4편)]{.chip .chip--macro}
 [계량경제학 (4편)]{.chip .chip--metrics}
-[37종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
+[39종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
 :::
@@ -28,7 +28,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-search-wrapper}
 ::: {.spoon-search-box}
-<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 주제어, 모형, 정리 검색 (예: 닫힌집합, 폐포, 도집합, KKT, 승수, 그림자 가격, Slutsky, Solow, Ramsey, OLS, 사영, FWL, 후생정리, 도구변수, Wald, LR, LM, Folk Theorem, Grim Trigger...)" autocomplete="off">
+<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 주제어, 모형, 정리 검색 (예: 닫힌집합, 폐포, 도집합, KKT, 승수, 그림자 가격, Slutsky, Solow, Ramsey, OLS, 사영, FWL, 후생정리, 도구변수, Wald, LR, LM, Folk Theorem, Grim Trigger, Centipede, 지네 게임...)" autocomplete="off">
 <span id="spoon-search-count" class="spoon-count-badge">실시간 검색 대기 중</span>
 :::
 :::
@@ -38,8 +38,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 ### 전체 보기
 
 ::: {.spoon-guide-box}
-**📚 대학원 경제학 17대 계산·시각화 보충자료 통합 포털**
-미시·거시·계량·수리경제학·게임이론 전 분야의 계산·시각화 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 17편은 상단 검색창에서 즉시 필터링할 수 있다.
+**📚 대학원 경제학 18대 계산·시각화 보충자료 통합 포털**
+미시·거시·계량·수리경제학·게임이론 전 분야의 계산·시각화 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 MATLAB/R/Python 수치 시뮬레이션으로 제작된 보충자료 18편은 상단 검색창에서 즉시 필터링할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -255,6 +255,31 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 게임이론 Chapter 06 부분게임 완전균형 및 Chapter 07 반복게임</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- GT 2: Centipede Game & Backward Induction -->
+<a href="centipede-game-backward-induction.html" class="spoon-card" data-subject="gt">
+  <div class="spoon-card__header">
+    <span class="chip chip--gt">게임이론</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">지네 게임과 역진귀납법의 역설: 합리성의 공통지식과 행동적 해법</div>
+  <div class="spoon-card__desc">유한 전개형 게임에서 역진귀납법이 초래하는 1단계 즉시 종료의 파레토 최악성, 합리성의 공통지식(CKR)의 인식론적 딜레마, McKelvey–Palfrey QRE 생존 확률 동학과 '적당한 비합리성의 이득'을 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">역진귀납법(Backward Induction)</span>
+    <span class="chip chip--topic">지네 게임(Centipede Game)</span>
+    <span class="chip chip--topic">합리성의 공통지식(CKR)</span>
+    <span class="chip chip--topic">롤백(Rollback)</span>
+    <span class="chip chip--topic">양자반응균형(QRE)</span>
+    <span class="chip chip--topic">행동 게임이론</span>
+    <span class="chip chip--topic">평판 모형</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 게임이론 Chapter 06 후진귀납법과 SPE 및 Chapter 02 합리화가능성</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
@@ -698,6 +723,31 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 게임이론 Chapter 06 부분게임 완전균형 및 Chapter 07 반복게임</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- GT 2: Centipede Game & Backward Induction -->
+<a href="centipede-game-backward-induction.html" class="spoon-card" data-subject="gt">
+  <div class="spoon-card__header">
+    <span class="chip chip--gt">게임이론</span>
+    <span class="chip chip--gif">2종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">지네 게임과 역진귀납법의 역설: 합리성의 공통지식과 행동적 해법</div>
+  <div class="spoon-card__desc">유한 전개형 게임에서 역진귀납법이 초래하는 1단계 즉시 종료의 파레토 최악성, 합리성의 공통지식(CKR)의 인식론적 딜레마, McKelvey–Palfrey QRE 생존 확률 동학과 '적당한 비합리성의 이득'을 검증한다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">역진귀납법(Backward Induction)</span>
+    <span class="chip chip--topic">지네 게임(Centipede Game)</span>
+    <span class="chip chip--topic">합리성의 공통지식(CKR)</span>
+    <span class="chip chip--topic">롤백(Rollback)</span>
+    <span class="chip chip--topic">양자반응균형(QRE)</span>
+    <span class="chip chip--topic">행동 게임이론</span>
+    <span class="chip chip--topic">평판 모형</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 게임이론 Chapter 06 후진귀납법과 SPE 및 Chapter 02 합리화가능성</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
