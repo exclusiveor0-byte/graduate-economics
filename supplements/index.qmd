@@ -242,15 +242,15 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
     <span class="chip chip--gt">게임이론</span>
     <span class="chip chip--gif">2종 동적 시뮬레이션</span>
   </div>
-  <div class="spoon-card__title">반복 게임과 Folk Theorem: 할인인자 $\delta$와 협조의 기하학</div>
-  <div class="spoon-card__desc">무한반복 죄수의 딜레마에서 실행가능 보수 집합의 볼록껍질(Convex Hull), 미니맥스 하한선과 엄격한 개인적 합리성, 할인인자 $\delta$ 상승에 따른 SPE 보수집합의 팽창, 그리고 Grim Trigger 일탈 유인과 누적 보수 역전 동학을 검증한다.</div>
+  <div class="spoon-card__title">반복 게임과 Folk Theorem: 할인인자 δ와 협조의 기하학</div>
+  <div class="spoon-card__desc">무한반복 죄수의 딜레마에서 실행가능 보수 집합의 볼록껍질(Convex Hull), 미니맥스 하한선과 엄격한 개인적 합리성, 할인인자 δ 상승에 따른 SPE 보수집합의 팽창, 그리고 Grim Trigger 일탈 유인과 누적 보수 역전 동학을 검증한다.</div>
   <div class="spoon-card__topics">
     <span class="chip chip--topic">무한반복게임</span>
     <span class="chip chip--topic">포크 정리(Folk Theorem)</span>
     <span class="chip chip--topic">보수 볼록껍질(Convex Hull)</span>
     <span class="chip chip--topic">미니맥스(Minimax)</span>
     <span class="chip chip--topic">방아쇠 전략(Grim Trigger)</span>
-    <span class="chip chip--topic">임계 할인인자 $\delta^*$</span>
+    <span class="chip chip--topic">임계 할인인자 δ*</span>
     <span class="chip chip--topic">암묵적 담합</span>
   </div>
   <div class="spoon-card__chapter">
@@ -710,15 +710,15 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
     <span class="chip chip--gt">게임이론</span>
     <span class="chip chip--gif">2종 동적 시뮬레이션</span>
   </div>
-  <div class="spoon-card__title">반복 게임과 Folk Theorem: 할인인자 $\delta$와 협조의 기하학</div>
-  <div class="spoon-card__desc">무한반복 죄수의 딜레마에서 실행가능 보수 집합의 볼록껍질(Convex Hull), 미니맥스 하한선과 엄격한 개인적 합리성, 할인인자 $\delta$ 상승에 따른 SPE 보수집합의 팽창, 그리고 Grim Trigger 일탈 유인과 누적 보수 역전 동학을 검증한다.</div>
+  <div class="spoon-card__title">반복 게임과 Folk Theorem: 할인인자 δ와 협조의 기하학</div>
+  <div class="spoon-card__desc">무한반복 죄수의 딜레마에서 실행가능 보수 집합의 볼록껍질(Convex Hull), 미니맥스 하한선과 엄격한 개인적 합리성, 할인인자 δ 상승에 따른 SPE 보수집합의 팽창, 그리고 Grim Trigger 일탈 유인과 누적 보수 역전 동학을 검증한다.</div>
   <div class="spoon-card__topics">
     <span class="chip chip--topic">무한반복게임</span>
     <span class="chip chip--topic">포크 정리(Folk Theorem)</span>
     <span class="chip chip--topic">보수 볼록껍질(Convex Hull)</span>
     <span class="chip chip--topic">미니맥스(Minimax)</span>
     <span class="chip chip--topic">방아쇠 전략(Grim Trigger)</span>
-    <span class="chip chip--topic">임계 할인인자 $\delta^*$</span>
+    <span class="chip chip--topic">임계 할인인자 δ*</span>
     <span class="chip chip--topic">암묵적 담합</span>
   </div>
   <div class="spoon-card__chapter">
