@@ -1,0 +1,36 @@
+# Chapter 6 · 후진귀납법과 부분게임 완전균형 {.unnumbered}
+*Backward Induction · Credibility · Subgames · Subgame Perfect Equilibrium · Sequential Rationality*
+
+이 장에서는 **후진귀납법과 부분게임 완전균형**의 핵심 질문, 모형의 구성, 주요 결과와 한계를 순서대로 검토한다. 아래 Section 링크는 원본 통합 본문의 해당 위치로 이동한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **6.1** Backward induction algorithm
+- **6.2** Entry deterrence와 credible threats
+- **6.3–6.4** Subgame·proper subgame·SPE·one-shot deviation
+- **6.5–6.8** BI=SPE·solver·응용·존재·SPE의 한계
+:::
+
+## Sections
+
+- [6.1 Backward Induction](contents.html#s61)
+- [6.2 Entry Deterrence](contents.html#entry)
+- [6.3 Subgames](contents.html#s63)
+- [6.4 Subgame Perfect Equilibrium](contents.html#s64)
+- [6.5 BI와 SPE의 동치](contents.html#s65)
+- [6.6 경제학적 응용](contents.html#s66)
+- [6.7 Imperfect Information과 SPE](contents.html#s67)
+- [6.8 SPE의 한계와 다음 단계](contents.html#s68)
+- [Chapter Summary](contents.html#summary)
+- [6.9 연습문제](contents.html#exercises)
+- [참고문헌](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+수식·표·연습문제는 원본 구조를 보존한 [본문 전체](contents.html)에 있다.
+위의 Section 링크로 바로 이동하거나 순서대로 읽을 수 있다.
+:::
+
+::: {.callout-tip title="협업 단위"}
+본문 수정 제안에는 해당 Section의 제목과 앵커를 Pull Request에 함께 적어 제출한다.
+:::

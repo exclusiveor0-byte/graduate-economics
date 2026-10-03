@@ -17,7 +17,7 @@
 | [Chapter 03](ch03-best-response-nash/index.html) | **최적반응과 Nash 균형** · Best Response Correspondence, 순수전략 Nash 균형, Fixed Point 해석, Cournot·Bertrand 과점경쟁, 다중균형 | [완료]{.status} |
 | [Chapter 04](ch04-mixed-strategies-existence/index.html) | **혼합전략과 Nash 균형의 존재** · 확률분포와 Simplex, Support Theorem, 무차별조건, 2×2 및 3×3 혼합균형 계산, Brouwer/Kakutani Nash 존재정리 | [완료]{.status} |
 | [Chapter 05](ch05-dynamic-extensive-form/index.html) | **동태게임과 전개형 표현** · Histories, Nodes, Information Sets, 완전조건부계획(Strategy), Behavioral Strategy, Perfect Recall과 Kuhn 정리 | [완료]{.status} |
-| **Chapter 06** | **역진귀납법과 부분게임 완전균형** · 순차적 합리성, Credibility, Backward Induction, Subgame Perfection, 연립교섭(Bargaining) | [작성 예정]{.status} |
+| [Chapter 06](ch06-backward-induction-spe/index.html) | **후진귀납법과 부분게임 완전균형** · 후진귀납법, 신뢰성 있는 위협, 부분게임(Subgame), 부분게임 완전균형(SPE), Stackelberg, 최후통첩 게임 | [완료]{.status} |
 | **Chapter 07** | **반복게임과 협조의 지속** · 무한반복게임, 할인인자, Trigger Strategies, Folk Theorems, 암묵적 담합(Collusion) | [작성 예정]{.status} |
 | **Chapter 08** | **정적 불완전정보와 베이지안 내쉬 균형** · Harsanyi Type 모형, 베이지안 내쉬 균형(BNE), 경매이론(Auctions) | [작성 예정]{.status} |
 | **Chapter 09** | **동태 불완전정보와 정제 개념** · 완전 베이지안 균형(PBE), 순차균형(Sequential Equilibrium), 신호발송(Signaling Games) | [작성 예정]{.status} |
@@ -66,3 +66,11 @@
 [Chapter 05 읽기](ch05-dynamic-extensive-form/index.html) →
 
 [8개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 06 · 후진귀납법과 부분게임 완전균형](ch06-backward-induction-spe/index.html)
+
+동태게임에서의 신뢰할 수 없는 위협(Non-credible threat) 제거, 후진귀납법(Backward Induction)과 Zermelo-Kuhn 정리, 부분게임(Subgame)의 엄밀한 정의, 부분게임 완전균형(Subgame Perfect Equilibrium, SPE), One-Shot Deviation Principle(OSDP), Stackelberg 수량선도 및 Rubinstein/최후통첩 협상 모형의 순차적 합리성을 체계적으로 규명한다.
+
+[Chapter 06 읽기](ch06-backward-induction-spe/index.html) →
+
+[9개 절 · 정리·증명·연습문제 포함]{.status}

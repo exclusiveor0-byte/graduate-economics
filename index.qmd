@@ -109,11 +109,11 @@ THEORY
 STRATEGIC INTERACTION
 :::
 ### [게임이론](game-theory/index.html)
-전략적 상호작용 · 우월전략 · Nash 균형 · 혼합전략과 존재성 · 전개형 동태게임
+전략적 상호작용 · 우월전략 · Nash 균형 · 혼합전략과 존재성 · 전개형 게임 · 후진귀납법과 SPE
 
-[Chapter 01–05 읽기](game-theory/index.html){.study-card__link} →
+[Chapter 01–06 읽기](game-theory/index.html){.study-card__link} →
 
-[전략형·전개형 기본 이론을 포괄하는 5개 Chapter]{.status}
+[전략형·전개형 및 순차적 합리성을 포괄하는 6개 Chapter]{.status}
 :::
 ::: {.study-card .study-card--macro}
 ::: {.study-card__number}

@@ -124,6 +124,9 @@ book:
   - part: game-theory/ch05-dynamic-extensive-form/index.qmd
     chapters:
     - game-theory/ch05-dynamic-extensive-form/contents.qmd
+  - part: game-theory/ch06-backward-induction-spe/index.qmd
+    chapters:
+    - game-theory/ch06-backward-induction-spe/contents.qmd
   - macroeconomics/index.qmd
   - part: macroeconomics/ch00-foundations/index.qmd
     chapters:
