@@ -2,35 +2,165 @@
 
 ## 대학원 거시경제이론
 
-**시간, 성장, 변동, 화폐, 위험, 그리고 정책**
+**시간, 성장, 동태최적화, 불확실성, 시장구조, 경기변동, 그리고 거시정책**
 
-현재 마이그레이션 범위는 **Chapter 00–15**이다. 거시경제학의 질문과
-최적화 방법에서 출발해 성장·불확실성·완전시장·불완전시장·경기변동으로
-이어진다.
+이 과목은 시간의 흐름과 불확실성 속에서 집계 경제변수의 동태적 결정과 자원배분을 분석하는 대학원 수준의 거시경제이론 정리노트이다. 동태최적화와 재귀적 방법(Recursive Methods)의 기초에서 출발하여 Solow 및 Ramsey 경제성장모형, 내생적 성장, 불확실성하 완전시장 및 불완전시장 일반균형, 그리고 선형 합리적 기대와 실물경기변동(RBC) 이론을 체계적으로 다룬다.
 
-## Chapter 선택
+## Chapter 로드맵 및 편성 현황
 
-| Chapter | 내용 |
-|---|---|
-| [Chapter 00](ch00-foundations/index.qmd) | 현대 거시경제학의 문제와 방법 |
-| [Chapter 01](ch01-constrained-optimization/index.qmd) | 제약최적화와 기간간 선택 |
-| [Chapter 02](ch02-continuous-time-dynamics/index.qmd) | 연속시간 동태최적화 |
-| [Chapter 03](ch03-dynamic-programming/index.qmd) | 동적계획법과 재귀적 방법 |
-| [Chapter 04](ch04-two-period-macro/index.qmd) | 2기간 거시경제 모형 |
-| [Chapter 05](ch05-solow-swan/index.qmd) | Solow–Swan 성장모형 |
-| [Chapter 06](ch06-infinite-horizon-consumption/index.qmd) | 무한기간 예산제약과 소비 |
-| [Chapter 07](ch07-ramsey-cks/index.qmd) | Ramsey–Cass–Koopmans 성장모형 |
-| [Chapter 08](ch08-endogenous-growth/index.qmd) | 내생적 성장과 지식축적 |
-| [Chapter 09](ch09-growth-accounting/index.qmd) | 성장모형의 평가 |
-| [Chapter 10](ch10-stochastic-dynamics/index.qmd) | 불확실성하 동태선택 |
-| [Chapter 11](ch11-complete-markets/index.qmd) | 완전시장 |
-| [Chapter 12](ch12-incomplete-markets/index.qmd) | 불완전시장과 자기보험 |
-| [Chapter 13](ch13-business-cycle-facts/index.qmd) | 경기변동의 사실과 측정 |
-| [Chapter 14](ch14-linear-rational-expectations/index.qmd) | 선형 동태계와 합리적 기대 |
-| [Chapter 15](ch15-real-business-cycles/index.qmd) | 실물경기변동이론 |
+| Chapter | 대주제 및 주요 내용 | 상태 |
+|---|---|---|
+| [Chapter 00](ch00-foundations/index.html) | **현대 거시경제학의 문제와 방법** · 동태 일반균형, 상태변수, 재귀적 표현, 미시적 기초 | [완료]{.status} |
+| [Chapter 01](ch01-constrained-optimization/index.html) | **제약최적화와 기간간 선택** · 라그랑주 승수, 오일러 방정식, 한계대체율, 자산축적 | [완료]{.status} |
+| [Chapter 02](ch02-continuous-time-dynamics/index.html) | **연속시간 동태최적화** · 변분법, Hamiltonian, Pontryagin 최대원리, 횡단성 조건 | [완료]{.status} |
+| [Chapter 03](ch03-dynamic-programming/index.html) | **동적계획법과 재귀적 방법** · Bellman 방정식, 가치함수 반복법, 축약사상 정리, 포락선 정리 | [완료]{.status} |
+| [Chapter 04](ch04-two-period-macro/index.html) | **2기간 거시경제 모형** · 기간간 차입과 저축, 실질이자율, 리카도 대등정리, 재정정책 | [완료]{.status} |
+| [Chapter 05](ch05-solow-swan/index.html) | **Solow–Swan 성장모형** · 자본축적, 균제상태, 황금률, 전이동학, 수렴가설 | [완료]{.status} |
+| [Chapter 06](ch06-infinite-horizon-consumption/index.html) | **무한기간 예산제약과 소비** · No-Ponzi 조건, 항상소득가설, Euler 방정식, 소비평활화 | [완료]{.status} |
+| [Chapter 07](ch07-ramsey-cks/index.html) | **Ramsey–Cass–Koopmans 성장모형** · 최적저축, 위상평면 분석, 안장점 경로, 수정 황금률 | [완료]{.status} |
+| [Chapter 08](ch08-endogenous-growth/index.html) | **내생적 성장과 지식축적** · AK 모형, 인적자본 축적, R&D 모형, 창조적 파괴, 외부효과 | [완료]{.status} |
+| [Chapter 09](ch09-growth-accounting/index.html) | **성장모형의 평가** · 성장회계, 총요소생산성(TFP), 절대적·조건부 수렴, 발전회계 | [완료]{.status} |
+| [Chapter 10](ch10-stochastic-dynamics/index.html) | **불확실성하 동태선택** · 마르코프 과정, 확률적 Euler 방정식, 확률적 Bellman 방정식 | [완료]{.status} |
+| [Chapter 11](ch11-complete-markets/index.html) | **완전시장과 위험공유** · Arrow–Debreu 증권, 상태가격, 완전 위험공유, 자산가격결정 | [완료]{.status} |
+| [Chapter 12](ch12-incomplete-markets/index.html) | **불완전시장과 자기보험** · 비차입제약, 예비적 저축, 비부보 위험, Huggett–Aiyagari 모형 | [완료]{.status} |
+| [Chapter 13](ch13-business-cycle-facts/index.html) | **경기변동의 사실과 측정** · Hodrick–Prescott 필터, 공분산 구조, 경기동행성 및 변동성 | [완료]{.status} |
+| [Chapter 14](ch14-linear-rational-expectations/index.html) | **선형 동태계와 합리적 기대** · 로그선형화, Blanchard–Kahn 조건, Klein 해법, 충격반응 | [완료]{.status} |
+| [Chapter 15](ch15-real-business-cycles/index.html) | **실물경기변동이론** · 기술충격, 노동공급 기간간 대체, 모형 캘리브레이션, 전달기제 | [완료]{.status} |
 
-::: {.callout-note title="Source migration"}
-각 Chapter의 본문은 새 강의노트의 수식, 표, 연습문제, 참조 문헌을 보존해
-마이그레이션했다. 문장·수식·참고문헌 수정은 해당 Chapter의 본문 페이지에서
-Pull Request로 제안한다.
-:::
+## Chapters
+
+### [Chapter 00 · 현대 거시경제학의 문제와 방법](ch00-foundations/index.html)
+
+거시경제학의 기본 질문과 동태 일반균형의 틀, 상태변수와 정책함수, 재귀적(Recursive) 모형 표현의 기본 논리와 균형을 읽는 방법을 정리한다.
+
+[Chapter 00 읽기](ch00-foundations/index.html) →
+
+[5개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 01 · 제약최적화와 기간간 선택](ch01-constrained-optimization/index.html)
+
+다기간 예산제약하 가계의 기간간 효용극대화, 라그랑주 승수의 그림자가격 해석, 오일러 방정식(Euler equation)의 도출 및 자산축적 결정을 다룬다.
+
+[Chapter 01 읽기](ch01-constrained-optimization/index.html) →
+
+[11개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 02 · 연속시간 동태최적화](ch02-continuous-time-dynamics/index.html)
+
+변분법(Calculus of Variations), 현재가치 및 현재가치 해밀토니안(Hamiltonian), Pontryagin의 최대원리, 공변량 변수 동학 및 횡단성(Transversality) 조건을 전개한다.
+
+[Chapter 02 읽기](ch02-continuous-time-dynamics/index.html) →
+
+[15개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 03 · 동적계획법과 재귀적 방법](ch03-dynamic-programming/index.html)
+
+시불변 환경에서의 Bellman 방정식, 축약사상 정리(Contraction Mapping Theorem), Blackwell 조건, 가치함수 반복법(VFI), 그리고 Benveniste–Scheinkman 포락선 정리를 체계화한다.
+
+[Chapter 03 읽기](ch03-dynamic-programming/index.html) →
+
+[18개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 04 · 2기간 거시경제 모형](ch04-two-period-macro/index.html)
+
+가계의 기간간 차입·저축, 기업의 투자결정, 정부의 재정정책과 공채 발행, 리카도 대등정리(Ricardian Equivalence)의 성립과 붕괴 조건을 분석한다.
+
+[Chapter 04 읽기](ch04-two-period-macro/index.html) →
+
+[15개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 05 · Solow–Swan 성장모형](ch05-solow-swan/index.html)
+
+외생적 저축률 가정하 자본축적 동학과 균제상태(Steady State), 황금률(Golden Rule) 자본량, 전이동학의 속도 및 국가 간 소득 수렴가설을 규명한다.
+
+[Chapter 05 읽기](ch05-solow-swan/index.html) →
+
+[18개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 06 · 무한기간 예산제약과 소비](ch06-infinite-horizon-consumption/index.html)
+
+No-Ponzi Game 조건과 통합 예산제약, Hall의 항상소득가설 및 무작위보행(Random Walk) 소비 가설, 유동성 제약과 예비적 저축의 기초를 다룬다.
+
+[Chapter 06 읽기](ch06-infinite-horizon-consumption/index.html) →
+
+[19개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 07 · Ramsey–Cass–Koopmans 성장모형](ch07-ramsey-cks/index.html)
+
+내생적 최적저축을 도입한 신고전학파 성장모형, 자본과 소비의 2차원 연립미분방정식 동학, 위상평면 및 안장점 경로(Saddle-Path), 수정 황금률을 분석한다.
+
+[Chapter 07 읽기](ch07-ramsey-cks/index.html) →
+
+[24개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 08 · 내생적 성장과 지식축적](ch08-endogenous-growth/index.html)
+
+수확체감 극복을 위한 AK 모형, Lucas 인적자본 축적 모형, Romer의 R&D 기반 내생적 성장모형 및 Aghion–Howitt의 창조적 파괴 모형을 체계화한다.
+
+[Chapter 08 읽기](ch08-endogenous-growth/index.html) →
+
+[19개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 09 · 성장모형의 평가](ch09-growth-accounting/index.html)
+
+Solow 잔차와 총요소생산성(TFP) 측정, 성장회계(Growth Accounting), 발전회계(Development Accounting), 그리고 횡단면·패널 데이터 수렴 검증을 다룬다.
+
+[Chapter 09 읽기](ch09-growth-accounting/index.html) →
+
+[19개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 10 · 불확실성하 동태선택](ch10-stochastic-dynamics/index.html)
+
+마르코프 정보구조, 확률적 오일러 방정식과 자산가격결정, 확률적 동적계획법, 그리고 2차 근사하 Certainty Equivalence의 한계를 규명한다.
+
+[Chapter 10 읽기](ch10-stochastic-dynamics/index.html) →
+
+[20개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 11 · 완전시장과 위험공유](ch11-complete-markets/index.html)
+
+Arrow–Debreu 상태조건부 증권 체계, 상태가격과 확률할인계수(SDF), 파레토 최적 위험공유 조건 및 가계 간 소비 공통변동성을 정식화한다.
+
+[Chapter 11 읽기](ch11-complete-markets/index.html) →
+
+[21개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 12 · 불완전시장과 자기보험](ch12-incomplete-markets/index.html)
+
+비부보 특유위험(Idiosyncratic Risk), 차입제약과 무위험 자산을 통한 자기보험, Bewley–Huggett–Aiyagari 정상상태 불평등 일반균형을 다룬다.
+
+[Chapter 12 읽기](ch12-incomplete-markets/index.html) →
+
+[23개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 13 · 경기변동의 사실과 측정](ch13-business-cycle-facts/index.html)
+
+거시경제 시계열의 추세·순환 변동 분해, Hodrick–Prescott(HP) 필터의 성질, 주요 거시변수의 변동성, 동행성, 지속성 등 실증적 양식화된 사실을 정리한다.
+
+[Chapter 13 읽기](ch13-business-cycle-facts/index.html) →
+
+[24개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 14 · 선형 동태계와 합리적 기대](ch14-linear-rational-expectations/index.html)
+
+동태 비선형 시스템의 테일러 로그선형화, 선형 합리적 기대 모형의 구조, Blanchard–Kahn 조건과 고유값 분해, Klein Schur 분해 해법을 전개한다.
+
+[Chapter 14 읽기](ch14-linear-rational-expectations/index.html) →
+
+[24개 절 · 정리·수식·연습문제 포함]{.status}
+
+### [Chapter 15 · 실물경기변동이론](ch15-real-business-cycles/index.html)
+
+기본 RBC 모형의 설정, 솔로우 잔차를 통한 기술충격 보정(Calibration), 노동공급의 기간간 대체와 자본축적 전달기제, 그리고 모형의 정량적 평가를 완성한다.
+
+[Chapter 15 읽기](ch15-real-business-cycles/index.html) →
+
+[29개 절 · 정리·수식·연습문제 포함]{.status}
+
+## 주요 참고 문헌
+
+- David Romer, *Advanced Macroeconomics*, McGraw-Hill.
+- Daron Acemoglu, *Introduction to Modern Economic Growth*, Princeton University Press.
+- Nancy L. Stokey and Robert E. Lucas Jr. with Edward C. Prescott, *Recursive Methods in Economic Dynamics*, Harvard University Press.
+- Jordi Galí, *Monetary Policy, Inflation, and the Business Cycle*, Princeton University Press.
+- Dirk Krueger, *Macroeconomic Theory*, Lecture Notes, University of Pennsylvania.

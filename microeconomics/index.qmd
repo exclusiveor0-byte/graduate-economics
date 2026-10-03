@@ -2,21 +2,72 @@
 
 ## 대학원 미시경제이론
 
-**선택, 생산, 시장, 균형, 그리고 후생**
+**선택, 선호와 효용, 생산과 비용, 부분균형, 순수교환 일반균형, 그리고 후생**
 
-현재 마이그레이션 범위는 **Chapter 0–4**이며, 수학적 기초 → 소비자이론 → 생산자이론 → 부분균형 → 순수교환 일반균형의 순서로 구성한다.
+이 과목은 개별 경제주체의 최적화 선택과 시장 메커니즘을 통한 자원배분을 엄밀한 수리적 구조로 다루는 대학원 수준의 미시경제이론 정리노트이다. 미시경제학의 수학적 기초에서 출발하여 소비자이론, 생산자이론, 경쟁 및 시장구조의 부분균형분석, 그리고 순수교환경제에서의 Walrasian 일반균형과 후생경제학 제1·제2정리 및 Core 수렴을 체계적으로 다룬다.
 
-## Chapter 선택
+## Chapter 로드맵 및 편성 현황
 
-| Chapter | 내용 |
-|---|---|
-| [Chapter 0](ch00-foundations/index.qmd) | 미시경제이론의 수학적 언어와 존재 논리 |
-| [Chapter 1](ch01-consumer/index.qmd) | 소비자이론 |
-| [Chapter 2](ch02-producer/index.qmd) | 생산자이론 |
-| [Chapter 3](ch03-partial-equilibrium/index.qmd) | 부분균형분석 |
-| [Chapter 4](ch04-pure-exchange/index.qmd) | 순수교환경제 |
+| Chapter | 대주제 및 주요 내용 | 상태 |
+|---|---|---|
+| [Chapter 00](ch00-foundations/index.html) | **미시경제이론의 수학적 언어와 존재 논리** · 집합, 대응, 위상, 볼록성, 정적 최적화, KKT, 분리정리, 고정점 | [완료]{.status} |
+| [Chapter 01](ch01-consumer/index.html) | **소비자이론** · 선호관계, 효용표현, Marshallian/Hicksian 수요, 간접효용·지출함수, Roy's Identity, Slutsky 분해, CV·EV | [완료]{.status} |
+| [Chapter 02](ch02-producer/index.html) | **생산자이론** · 생산기술, 등량곡선, 비용최소화, 비용함수, 이윤극대화, Hotelling의 보조정리, 생산의 Duality | [완료]{.status} |
+| [Chapter 03](ch03-partial-equilibrium/index.html) | **부분균형분석** · 완전경쟁시장, 시장청산, 불완전경쟁 conduct, 자원배분의 효율성, 마샬 후생삼각형 | [완료]{.status} |
+| [Chapter 04](ch04-pure-exchange/index.html) | **순수교환경제** · Edgeworth 상자, Walras 법칙, 경쟁균형의 존재, 후생경제학 기본정리, Core와 경쟁적 극한 | [완료]{.status} |
 
-::: {.callout-note title="Source migration"}
-기존 통합 미시경제학 정리노트의 내용과 수식을 Section 단위 독립 페이지로 옮겼다.
-Quarto Book에서는 각 Section을 개별 URL로 읽고 검토할 수 있다.
+## Chapters
+
+### [Chapter 00 · 미시경제이론의 수학적 언어와 존재 논리](ch00-foundations/index.html)
+
+소비자 선택, 기업 공급, 최적반응, Walrasian 균형, 효율적 배분의 가격지지에 공통으로 사용되는 집합, 위상, 대응(Correspondence), 볼록성, 정적 최적화와 KKT, 분리정리, 그리고 Kakutani 고정점 정리의 수학적 논리를 다룬다.
+
+[Chapter 00 읽기](ch00-foundations/index.html) →
+
+[11개 절 · 정리·증명·연습문제 포함]{.status}
+
+### [Chapter 01 · 소비자이론](ch01-consumer/index.html)
+
+선호관계의 공리체계와 연속 효용함수 표현, Marshallian 수요함수, 간접효용함수와 지출함수의 쌍대성(Duality), Roy's Identity와 Shephard's Lemma, Slutsky 방정식, 그리고 가격변화의 화폐적 후생측도인 CV·EV를 체계화한다.
+
+[Chapter 01 읽기](ch01-consumer/index.html) →
+
+[6개 절 · 보충자료·연습문제 포함]{.status}
+
+### [Chapter 02 · 생산자이론](ch02-producer/index.html)
+
+생산기술과 생산가능집합, 등량곡선과 MRTS, 비용최소화 문제와 비용함수의 성질, 생산의 Duality, 경쟁기업의 이윤극대화와 Hotelling's Lemma, 공급함수 및 조건부 요소수요함수의 비교정태를 도출한다.
+
+[Chapter 02 읽기](ch02-producer/index.html) →
+
+[6개 절 · 보충자료·연습문제 포함]{.status}
+
+### [Chapter 03 · 부분균형분석](ch03-partial-equilibrium/index.html)
+
+개별 소비자와 기업의 최적화가 만나는 단일 시장의 청산조건, 완전경쟁 시장균형, 독점 및 과점(Cournot·Bertrand) 시장구조 하에서의 conduct 차이, 그리고 소비자잉여·생산자잉여와 총후생을 비교 분석한다.
+
+[Chapter 03 읽기](ch03-partial-equilibrium/index.html) →
+
+[4개 절 · 정리·선형모형·연습문제 포함]{.status}
+
+### [Chapter 04 · 순수교환경제](ch04-pure-exchange/index.html)
+
+초기부존이 주어진 다수의 소비자가 자발적 교환을 통해 도달하는 Walrasian 일반경쟁균형, 초과수요함수와 Walras 법칙, Brouwer/Kakutani를 이용한 균형 존재성 증명, 후생경제학 제1·제2정리, 그리고 Edgeworth Core와 경쟁균형 수렴(Core Convergence)을 정식화한다.
+
+[Chapter 04 읽기](ch04-pure-exchange/index.html) →
+
+[8개 절 · 보충자료·연습문제 포함]{.status}
+
+::: {.callout-note title="계산·시각화 보충자료 (Supplements)"}
+미시경제이론의 직관과 기하학적 이해를 돕는 인터랙티브 시뮬레이션 자료를 제공한다:
+- [보충자료 · 가격변화와 보상수요: Slutsky 분해 (소비자이론)](../supplements/slutsky-decomposition.qmd)
+- [보충자료 · Edgeworth Box와 후생경제학 제1정리 (순수교환경제)](../supplements/edgeworth-first-welfare.qmd)
+- [보충자료 · 생산자 비용함수와 Envelope 정리 (생산자이론)](../supplements/producer-cost-envelope.qmd)
 :::
+
+## 주요 참고 문헌
+
+- Andreu Mas-Colell, Michael D. Whinston, and Jerry R. Green, *Microeconomic Theory*, Oxford University Press.
+- Hal R. Varian, *Microeconomic Analysis*, W. W. Norton & Company.
+- Geoffrey A. Jehle and Philip J. Reny, *Advanced Microeconomic Theory*, Financial Times/Prentice Hall.
+- David M. Kreps, *A Course in Microeconomic Theory*, Princeton University Press.

@@ -6,24 +6,16 @@
 
 이 과목은 경제 주체들 간의 전략적 상호작용(Strategic Interactions)을 수학적으로 모형화하고 분석하는 대학원 수준의 게임이론(Game Theory) 및 정보경제학(Information Economics) 정리노트이다. 개인의 합리적 선택이 상호의존적인 환경에서 전략적 사고, 지배전략과 합리화가능성(Rationalizability), 최적대응(Best Response), 내쉬 균형(Nash Equilibrium), 혼합전략과 균형의 존재성, 그리고 동태게임의 전개형 표현과 순차적 합리성을 체계적으로 다룬다.
 
----
-
 ## Chapter 로드맵 및 편성 현황
 
 | Chapter | 대주제 및 주요 내용 | 상태 |
-|:---|:---|:---:|
+|---|---|---|
 | [Chapter 01](ch01-strategic-interaction/index.html) | **게임과 전략적 상호작용** · 전략적 사고, 게임의 구성요소, Timing과 Information, 8대 Canonical Games, Diagnostic Protocol | [완료]{.status} |
 | [Chapter 02](ch02-dominance-reasoning/index.html) | **우월전략과 반복적 추론** · 강우월·강열등, IESDS, 약우월의 한계 및 순서의존성, 혼합지배, Rationalizability, 고차 추론 | [완료]{.status} |
 | [Chapter 03](ch03-best-response-nash/index.html) | **최적반응과 Nash 균형** · Best Response Correspondence, 순수전략 Nash 균형, Fixed Point 해석, Cournot·Bertrand 과점경쟁, 다중균형 | [완료]{.status} |
 | [Chapter 04](ch04-mixed-strategies-existence/index.html) | **혼합전략과 Nash 균형의 존재** · 확률분포와 Simplex, Support Theorem, 무차별조건, 2×2 및 3×3 혼합균형 계산, Brouwer/Kakutani Nash 존재정리 | [완료]{.status} |
 | [Chapter 05](ch05-dynamic-extensive-form/index.html) | **동태게임과 전개형 표현** · Histories, Nodes, Information Sets, 완전조건부계획(Strategy), Behavioral Strategy, Perfect Recall과 Kuhn 정리 | [완료]{.status} |
 | [Chapter 06](ch06-backward-induction-spe/index.html) | **후진귀납법과 부분게임 완전균형** · 후진귀납법, 신뢰성 있는 위협, 부분게임(Subgame), 부분게임 완전균형(SPE), Stackelberg, 최후통첩 게임 | [완료]{.status} |
-| **Chapter 07** | **반복게임과 협조의 지속** · 무한반복게임, 할인인자, Trigger Strategies, Folk Theorems, 암묵적 담합(Collusion) | [작성 예정]{.status} |
-| **Chapter 08** | **정적 불완전정보와 베이지안 내쉬 균형** · Harsanyi Type 모형, 베이지안 내쉬 균형(BNE), 경매이론(Auctions) | [작성 예정]{.status} |
-| **Chapter 09** | **동태 불완전정보와 정제 개념** · 완전 베이지안 균형(PBE), 순차균형(Sequential Equilibrium), 신호발송(Signaling Games) | [작성 예정]{.status} |
-| **Chapter 10** | **정보경제학과 메커니즘 디자인** · 역선택(Adverse Selection), 도덕적 해이(Moral Hazard), 본인-대리인 모형, 현시원리 | [작성 예정]{.status} |
-
----
 
 ## Chapters
 
@@ -74,3 +66,10 @@
 [Chapter 06 읽기](ch06-backward-induction-spe/index.html) →
 
 [9개 절 · 정리·증명·연습문제 포함]{.status}
+
+## 주요 참고 문헌
+
+- Robert Gibbons, *Game Theory for Applied Economists*, Princeton University Press.
+- Martin J. Osborne and Ariel Rubinstein, *A Course in Game Theory*, MIT Press.
+- Drew Fudenberg and Jean Tirole, *Game Theory*, MIT Press.
+- Andreu Mas-Colell, Michael D. Whinston, and Jerry R. Green, *Microeconomic Theory*, Oxford University Press.
