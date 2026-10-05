@@ -285,6 +285,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
 </a>
 
+<a href="micro/set-17.html" class="spoon-card" data-subject="micro" data-round="17">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#17 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 일반균형</div>
+  <div class="spoon-card__desc">Production set의 convexity와 규모수익(Returns to Scale) 판별, Hotelling's lemma 검증, 생산을 포함한 왈라스 균형 및 왈라스 법칙(Walras' Law) 증명</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-18.html" class="spoon-card" data-subject="micro" data-round="18">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#18 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 시장의 종류</div>
+  <div class="spoon-card__desc">현시선호이론(Direct Revealed Preference)과 WARP 검증 및 효용극대화 정합성, 진입저지 게임의 후진귀납법(SPE)·위협의 신빙성·불가역적 투자 공약(Commitment)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-19.html" class="spoon-card" data-subject="micro" data-round="19">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#19 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 부분균형</div>
+  <div class="spoon-card__desc">조건부 요소수요와 비용함수 쌍대성(Shephard's Lemma) 및 요소가격 오목성(Concavity), 완전경쟁 산업의 단기 균형·자유진입 장기 균형 및 수요충격 조정과정</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-20.html" class="spoon-card" data-subject="micro" data-round="20">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#20 회차 (종합)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 종합문제</div>
+  <div class="spoon-card__desc">3요소 생산기술의 규모수익·오목성, 비용최소화와 쌍대성(Shephard), 요소가격 오목성·평균비용 형태, 이윤극대화·호텔링 보조정리 및 비교정태 분석 (7문항 연결)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-21.html" class="spoon-card" data-subject="micro" data-round="21">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#21 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 · 일반균형</div>
+  <div class="spoon-card__desc">지배적 기업(Dominant Firm)과 경쟁적 주변기업(Competitive Fringe)의 잔여수요(Residual Demand) 균형, 준선형 효용함수(Quasilinear) 순수교환경제의 경쟁균형과 파레토 효율성</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
 <a href="macro/set-01.html" class="spoon-card" data-subject="macro" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
@@ -780,6 +840,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   <div class="spoon-card__desc">음의 외부효과와 피구세(Pigouvian Tax) 후생분석 및 분권화, 순수교환경제의 파레토 집합·개인적 합리성·코어(Core)와 블로킹(Blocking) 메커니즘</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 · 해설 수록 →</span>
+  </div>
+</a>
+
+<a href="micro/set-17.html" class="spoon-card" data-subject="micro" data-round="17">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#17 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 일반균형</div>
+  <div class="spoon-card__desc">Production set의 convexity와 규모수익(Returns to Scale) 판별, Hotelling's lemma 검증, 생산을 포함한 왈라스 균형 및 왈라스 법칙(Walras' Law) 증명</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-18.html" class="spoon-card" data-subject="micro" data-round="18">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#18 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 시장의 종류</div>
+  <div class="spoon-card__desc">현시선호이론(Direct Revealed Preference)과 WARP 검증 및 효용극대화 정합성, 진입저지 게임의 후진귀납법(SPE)·위협의 신빙성·불가역적 투자 공약(Commitment)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-19.html" class="spoon-card" data-subject="micro" data-round="19">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#19 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 부분균형</div>
+  <div class="spoon-card__desc">조건부 요소수요와 비용함수 쌍대성(Shephard's Lemma) 및 요소가격 오목성(Concavity), 완전경쟁 산업의 단기 균형·자유진입 장기 균형 및 수요충격 조정과정</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-20.html" class="spoon-card" data-subject="micro" data-round="20">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#20 회차 (종합)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 종합문제</div>
+  <div class="spoon-card__desc">3요소 생산기술의 규모수익·오목성, 비용최소화와 쌍대성(Shephard), 요소가격 오목성·평균비용 형태, 이윤극대화·호텔링 보조정리 및 비교정태 분석 (7문항 연결)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-21.html" class="spoon-card" data-subject="micro" data-round="21">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#21 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 · 일반균형</div>
+  <div class="spoon-card__desc">지배적 기업(Dominant Firm)과 경쟁적 주변기업(Competitive Fringe)의 잔여수요(Residual Demand) 균형, 준선형 효용함수(Quasilinear) 순수교환경제의 경쟁균형과 파레토 효율성</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
   </div>
 </a>
 </div>

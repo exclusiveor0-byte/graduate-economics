@@ -1,0 +1,154 @@
+---
+title: "문제 한 스푼 #21"
+subtitle: "시장의 종류 · 일반균형"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #21
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **시장의 종류 · 일반균형**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[문제당 약 10–15분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Market Structure
+::: {.topic}
+Dominant Firm · Competitive Fringe · Residual Demand · Market Outcome
+:::
+
+어떤 시장의 inverse market demand가
+
+$$
+p = 100 - Q
+$$
+
+로 주어진다. 시장에는 하나의 dominant firm과 다수의 작은 경쟁기업으로 이루어진 competitive fringe가 존재한다.
+
+competitive fringe의 aggregate supply는
+
+$$
+Q_F(p) = \begin{cases}
+0, & p \le 10, \\[4pt]
+p - 10, & p > 10,
+\end{cases}
+$$
+
+이고, dominant firm의 marginal cost는
+
+$$
+MC_D = 20
+$$
+
+으로 일정하며 fixed cost는 없다.
+
+1. 시장수요와 fringe supply를 이용하여 dominant firm이 직면하는 residual demand를 구하시오. 특히 $p > 10$인 구간에서 residual inverse demand를
+   $$
+   p = P_R(Q_D)
+   $$
+   의 형태로 나타내시오.
+
+2. dominant firm이 residual demand를 고려하여 profit을 극대화한다고 하자. dominant firm's optimal output $Q_D^*$와 market price $p^*$를 구하시오.
+
+   이어서 equilibrium에서 competitive fringe의 총공급량 $Q_F^*$과 market total quantity $Q^*$를 계산하고,
+   $$
+   Q_D^* + Q_F^* = Q^*
+   $$
+   가 성립하는지 확인하시오.
+
+3. competitive fringe가 전혀 존재하지 않아 dominant firm이 동일한 시장수요를 독점한다고 하자. monopoly price와 quantity를 구하시오.
+
+   이를 2번의 dominant-firm equilibrium과 비교하여, competitive fringe의 존재가 시장가격과 총산출량에 어떤 영향을 주는지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **market demand − fringe supply → residual demand → dominant-firm optimization → market clearing → monopoly comparison**.<br>dominant firm은 전체 시장수요가 아니라 fringe가 공급하고 남은 residual demand를 마주한다는 점이 핵심이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. General Equilibrium
+::: {.topic}
+Quasilinear Preferences · Individual Demand · Market Clearing · Pareto Efficiency
+:::
+
+두 소비자와 두 재화 $x, y$로 이루어진 pure exchange economy를 생각하자. 소비자들의 효용함수와 초기부존은
+
+$$
+u_1(x_1, y_1) = 2\sqrt{x_1} + y_1, \qquad \omega_1 = (4, 2),
+$$
+$$
+u_2(x_2, y_2) = 4\sqrt{x_2} + y_2, \qquad \omega_2 = (1, 8).
+$$
+
+총부존은
+
+$$
+(\bar{x}, \bar{y}) = (5, 10)
+$$
+
+이다. $y$-재화를 numeraire로 두어 $p_y = 1$, $p_x = p > 0$라 하자. 아래에서 구하는 competitive equilibrium에서는 두 소비자의 $y$-재화 소비가 양수라고 가정하고, 최종적으로 이를 확인하시오.
+
+1. 각 소비자의 wealth를
+   $$
+   m_i(p) = p \omega_{ix} + \omega_{iy}
+   $$
+   로 쓰시오.
+
+   $y_i > 0$인 interior case에서 utility maximization problem의 FOC를 이용하여 각 소비자의 $x$-재화 Marshallian demand
+   $$
+   x_1(p), \qquad x_2(p)
+   $$
+   를 구하시오. 이어서 budget constraint를 이용하여
+   $$
+   y_1(p), \qquad y_2(p)
+   $$
+   를 나타내시오.
+
+2. $x$-재화 시장청산조건
+   $$
+   x_1(p) + x_2(p) = 5
+   $$
+   를 이용하여 competitive equilibrium price $p^*$를 구하시오.
+
+   이어서 equilibrium allocation
+   $$
+   (x_1^*, y_1^*), \qquad (x_2^*, y_2^*)
+   $$
+   을 계산하고,
+   $$
+   y_1^* + y_2^* = 10
+   $$
+   이 성립하는지 확인하시오. 또한 실제로
+   $$
+   y_1^* > 0, \qquad y_2^* > 0
+   $$
+   인지 확인하여 1번에서 사용한 interior assumption을 검증하시오.
+
+3. 이 allocation에서 두 소비자의 marginal rate of substitution을 계산하시오. 즉
+   $$
+   MRS_i = \frac{\partial u_i / \partial x_i}{\partial u_i / \partial y_i}, \qquad i = 1, 2
+   $$
+   를 구하고,
+   $$
+   MRS_1 = MRS_2 = p^*
+   $$
+   가 성립하는지 확인하시오.
+
+   마지막으로 feasibility와 MRS 조건을 이용하여 이 competitive equilibrium allocation이 Pareto efficient한 이유를 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **quasilinear demand → market clearing → equilibrium allocation → MRS comparison → Pareto efficiency**.<br>Cobb–Douglas와 달리 quasilinear preference에서는 $x$-재화의 interior demand가 wealth와 무관하게 결정되는 구조에 주목하시오.
+:::
+:::
