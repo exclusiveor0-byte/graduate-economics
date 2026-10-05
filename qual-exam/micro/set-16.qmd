@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -54,12 +54,157 @@ $$
 ::: {.spoon-hint}
 **형식**: **private equilibrium → social optimum → welfare loss → Pigouvian decentralization**.<br>Pigouvian tax는 사회적으로 최적인 산출량에서의 marginal external damage와 연결하여 구하시오.
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Partial Equilibrium"}
+::: {.topic}
+Negative Externality · Social Optimum · Pigouvian Tax · Welfare
+:::
+
+#### 1) Private equilibrium과 social optimum
+
+주어진 한계편익과 사적 한계비용은
+$$
+MB(Q) = 30 - Q, \qquad PMC(Q) = 6 + Q.
+$$
+
+생산에 따른 marginal external damage가
+$$
+MED(Q) = Q
+$$
+이므로 social marginal cost는
+$$
+SMC(Q) = PMC(Q) + MED(Q) = 6 + 2Q.
+$$
+
+외부효과가 시장가격에 반영되지 않는 경쟁시장에서는
+$$
+MB = PMC
+$$
+가 성립하므로
+$$
+30 - Q = 6 + Q.
+$$
+
+따라서
+$$
+Q^P = 12, \qquad p^P = 18.
+$$
+
+이 균형에서는 생산자가 생산과정에서 발생하는 외부피해를 부담하지 않으므로 사회적 한계비용 $SMC$가 아니라 사적 한계비용 $PMC$만을 기준으로 생산한다. 따라서 생산량이 사회적으로 바람직한 수준보다 과다해진다.
+
+반면 사회적 효율성은
+$$
+MB = SMC
+$$
+에서 결정된다. 따라서
+$$
+30 - Q = 6 + 2Q
+$$
+이므로
+$$
+Q^S = 8.
+$$
+
+이때 한계편익은
+$$
+MB(8) = 22.
+$$
+
+따라서
+$$
+Q^P = 12 > Q^S = 8, \qquad p^P = 18 < 22.
+$$
+
+---
+
+#### 2) Deadweight loss
+
+규제되지 않은 시장에서는 $Q = 8$ 이후 $Q = 12$까지
+$$
+SMC(Q) > MB(Q)
+$$
+인 생산이 이루어진다.
+
+$Q = 12$에서
+$$
+SMC(12) = 6 + 2(12) = 30, \qquad MB(12) = 30 - 12 = 18.
+$$
+
+따라서 deadweight loss는
+$$
+DWL = \frac{1}{2}(12 - 8)(30 - 18) = \frac{1}{2} \cdot 4 \cdot 12 = 24.
+$$
+
+따라서
+$$
+DWL = 24.
+$$
+
+---
+
+#### 3) Pigouvian tax
+
+정부가 생산자에게 단위당 세금 $t$를 부과하면 생산자가 직면하는 한계비용은
+$$
+PMC(Q) + t = 6 + Q + t
+$$
+가 된다.
+
+social optimum $Q^S = 8$을 경쟁균형으로 구현하려면 소비자가 지불하는 가격이
+$$
+MB(8) = 22
+$$
+이고, 생산자의 사적 한계비용은
+$$
+PMC(8) = 6 + 8 = 14
+$$
+이므로
+$$
+22 = 14 + t.
+$$
+
+따라서 필요한 Pigouvian tax는
+$$
+t^* = 8.
+$$
+
+이는
+$$
+t^* = MED(Q^S) = MED(8) = 8
+$$
+과도 일치한다.
+
+세금하에서 소비자가 지불하는 가격은
+$$
+p_c = 22,
+$$
+생산자가 세후에 받는 가격은
+$$
+p_s = 14.
+$$
+
+따라서
+$$
+p_c - p_s = 22 - 14 = 8 = t^*.
+$$
+
+정부의 조세수입은
+$$
+TR = t^* Q^S = 8 \cdot 8 = 64.
+$$
+
+결국
+$$
+Q = 8 = Q^S
+$$
+이므로 Pigouvian tax가 social optimum을 decentralize한다.
+:::
 :::
 
 ::: {.spoon-problem}
 ### Problem 2. General Equilibrium
 ::: {.topic}
-Pure Exchange Economy · Pareto Set · Individual Rationality · Core · Blocking
+Pure Exchange Economy · Pareto Set · Individual Rationality · Core · Blocking · Competitive Equilibrium
 :::
 
 두 소비자와 두 재화 $x, y$로 이루어진 pure exchange economy를 생각하자. 효용함수와 초기부존은
@@ -91,6 +236,219 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **Pareto set → individual rationality → core → blocking → competitive equilibrium**.<br>두 소비자 경제에서는 singleton coalition과 grand coalition이 각각 어떤 allocation을 block할 수 있는지 구분하여 생각하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. General Equilibrium"}
+::: {.topic}
+Pure Exchange Economy · Pareto Set · Individual Rationality · Core · Blocking · Competitive Equilibrium
+:::
+
+#### 1) Interior Pareto set
+
+총부존이
+$$
+(\bar{x}, \bar{y}) = (8, 8)
+$$
+이므로 feasibility에 의해
+$$
+x_2 = 8 - x_1, \qquad y_2 = 8 - y_1.
+$$
+
+소비자 2의 효용수준을 $\bar{u}_2$ 이상으로 유지하면서 소비자 1의 효용을 극대화하는 문제는
+$$
+\max_{x_1, y_1} \; x_1 y_1 \qquad \text{subject to} \qquad (8 - x_1)(8 - y_1) \ge \bar{u}_2
+$$
+로 쓸 수 있다.
+
+interior Pareto-efficient allocation에서는
+$$
+MRS_1 = MRS_2.
+$$
+
+각 소비자에 대해
+$$
+MRS_i = \frac{y_i}{x_i}.
+$$
+
+따라서
+$$
+\frac{y_1}{x_1} = \frac{8 - y_1}{8 - x_1}.
+$$
+
+정리하면
+$$
+y_1(8 - x_1) = x_1(8 - y_1)
+$$
+이므로
+$$
+x_1 = y_1.
+$$
+
+이를
+$$
+x_1 = y_1 = t
+$$
+라고 두면
+$$
+(x_1, y_1) = (t, t), \qquad (x_2, y_2) = (8 - t, 8 - t).
+$$
+
+interior allocation이므로
+$$
+0 < t < 8.
+$$
+
+---
+
+#### 2) Individual rationality와 core
+
+초기부존은
+$$
+\omega_1 = (6, 2), \qquad \omega_2 = (2, 6)
+$$
+이므로 초기효용은
+$$
+u_1(\omega_1) = 12, \qquad u_2(\omega_2) = 12.
+$$
+
+Pareto set 위에서는
+$$
+u_1 = t^2, \qquad u_2 = (8 - t)^2.
+$$
+
+소비자 1의 individual rationality는
+$$
+t^2 \ge 12
+$$
+이므로
+$$
+t \ge 2\sqrt{3}.
+$$
+
+소비자 2의 individual rationality는
+$$
+(8 - t)^2 \ge 12
+$$
+이므로
+$$
+t \le 8 - 2\sqrt{3}.
+$$
+
+따라서 interior core는
+$$
+\operatorname{Core} = \left\{ (t, t), (8 - t, 8 - t) : 2\sqrt{3} \le t \le 8 - 2\sqrt{3} \right\}.
+$$
+
+---
+
+#### 3) Blocking
+
+Pareto-efficient allocation이라고 해서 모두 core에 속하는 것은 아니다.
+
+예를 들어
+$$
+t > 8 - 2\sqrt{3}
+$$
+이면
+$$
+(8 - t)^2 < 12
+$$
+이므로 소비자 2는 해당 allocation보다 자신의 초기부존을 더 선호한다. 따라서 singleton coalition
+$$
+\{2\}
+$$
+가 이를 block할 수 있다.
+
+마찬가지로
+$$
+t < 2\sqrt{3}
+$$
+이면
+$$
+t^2 < 12
+$$
+이므로 singleton coalition
+$$
+\{1\}
+$$
+이 block할 수 있다.
+
+반면
+$$
+2\sqrt{3} \le t \le 8 - 2\sqrt{3}
+$$
+이면 두 소비자 모두 자신의 초기부존보다 적어도 약하게 선호하므로 singleton coalition에 의해 block되지 않는다.
+
+또한 이 allocation들은 이미 Pareto efficient이므로 grand coalition
+$$
+\{1, 2\}
+$$
+도 두 소비자를 동시에 더 낫게 만드는 feasible reallocation을 찾을 수 없다.
+
+---
+
+#### 4) Competitive equilibrium
+
+$y$-재화를 numeraire로 두어
+$$
+p_y = 1, \qquad p_x = p > 0
+$$
+로 normalize한다.
+
+소비자 1의 wealth는
+$$
+m_1 = 6p + 2.
+$$
+
+효용함수 $u_1 = x_1 y_1$에서 두 재화에 wealth의 절반씩 지출하므로
+$$
+x_1(p) = \frac{6p + 2}{2p} = 3 + \frac{1}{p}, \qquad y_1(p) = \frac{6p + 2}{2} = 3p + 1.
+$$
+
+소비자 2의 wealth는
+$$
+m_2 = 2p + 6.
+$$
+
+따라서
+$$
+x_2(p) = \frac{2p + 6}{2p} = 1 + \frac{3}{p}, \qquad y_2(p) = \frac{2p + 6}{2} = p + 3.
+$$
+
+$x$-재화 시장청산조건은
+$$
+x_1 + x_2 = 8.
+$$
+
+따라서
+$$
+3 + \frac{1}{p} + 1 + \frac{3}{p} = 8,
+$$
+즉
+$$
+4 + \frac{4}{p} = 8.
+$$
+
+그러므로
+$$
+p^* = 1.
+$$
+
+이를 대입하면
+$$
+(x_1^*, y_1^*) = (4, 4), \qquad (x_2^*, y_2^*) = (4, 4).
+$$
+
+Pareto-set parameter로는
+$$
+t = 4.
+$$
+
+그리고
+$$
+2\sqrt{3} < 4 < 8 - 2\sqrt{3}
+$$
+이므로 competitive equilibrium allocation은 core 안에 존재한다.
 :::
 :::
 
