@@ -1,0 +1,143 @@
+---
+title: "문제 한 스푼 #17"
+subtitle: "생산자이론 · 일반균형"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #17
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **생산자이론 · 일반균형**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[문제당 약 10–15분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Producer Theory
+::: {.topic}
+Production Set · Convexity · Returns to Scale · Profit Maximization
+:::
+
+한 기업의 production set이
+
+$$
+Y = \left\{ (y, -x) \in \mathbb{R}^2 : y \le \sqrt{x}, \; x \ge 0 \right\}
+$$
+
+로 주어진다. 여기서 $x$는 투입량, $y$는 산출량이다. 산출물 가격은 $p > 0$, 투입요소 가격은 $w > 0$이다.
+
+1. 이 production set이 convex인지 보이시오. 이어서 생산함수
+   $$
+   f(x) = \sqrt{x}
+   $$
+   가 concave라는 사실과 production set의 convexity 사이의 관계를 설명하시오.
+
+2. 이 기술이 increasing, constant, decreasing returns to scale 중 어느 것에 해당하는지 판별하시오. 즉 임의의 $t > 1$에 대해
+   $$
+   f(tx)
+   $$
+   와
+   $$
+   t f(x)
+   $$
+   를 비교하여 답하시오.
+
+3. 기업의 profit maximization problem을
+   $$
+   \max_{x \ge 0} \{ p\sqrt{x} - wx \}
+   $$
+   로 쓰고, optimal input demand $x^*(p,w)$, supply $y^s(p,w)$, profit function
+   $$
+   \pi(p,w)
+   $$
+   을 구하시오. 마지막으로
+   $$
+   \frac{\partial \pi}{\partial p} = y^s(p,w), \qquad -\frac{\partial \pi}{\partial w} = x^*(p,w)
+   $$
+   가 성립하는지 확인하시오.
+
+::: {.spoon-hint}
+**형식**: **technology → convexity → returns to scale → profit maximization → Hotelling**.<br>production set의 convexity와 생산함수의 concavity를 혼동하지 말고 둘의 연결관계를 명확히 쓰시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. General Equilibrium with Production
+::: {.topic}
+Profit Distribution · Walras' Law · Market Clearing · Competitive Equilibrium
+:::
+
+한 소비자와 한 경쟁기업이 있는 경제를 생각하자. 두 재화는 소비재 $x$와 numeraire 재화 $y$이다. $p_y = 1$, $p_x = p > 0$로 normalize한다.
+
+소비자의 효용함수와 초기부존은
+
+$$
+u(x_c, y_c) = \ln x_c + \ln y_c, \qquad \omega = (0, 9)
+$$
+
+이다. 소비자는 기업을 전부 소유한다. 기업은 $y$-재화 $z$를 투입하여 $x$-재화를 생산하며 기술은
+
+$$
+x_s = \sqrt{z}, \qquad z \ge 0
+$$
+
+로 주어진다.
+
+1. 기업의 profit maximization problem을 풀어
+   $$
+   z^*(p), \qquad x_s(p), \qquad \pi(p)
+   $$
+   를 구하시오.
+
+2. 소비자의 wealth가
+   $$
+   m(p) = 9 + \pi(p)
+   $$
+   임을 이용하여 Marshallian demands
+   $$
+   x_c(p), \qquad y_c(p)
+   $$
+   를 구하시오.
+
+3. $x$-재화 시장청산조건
+   $$
+   x_c(p) = x_s(p)
+   $$
+   을 이용하여 competitive equilibrium price $p^*$를 구하고,
+   $$
+   z^*, \qquad x_c^* = x_s^*, \qquad y_c^*
+   $$
+   를 계산하시오. 이어서 $y$-재화 resource constraint
+   $$
+   y_c^* + z^* = 9
+   $$
+   가 자동으로 성립하는지 확인하시오.
+
+4. aggregate excess demand를
+   $$
+   Z_x(p) = x_c(p) - x_s(p),
+   $$
+   $$
+   Z_y(p) = y_c(p) + z^*(p) - 9
+   $$
+   로 정의하자. 소비자의 budget identity와 기업의 profit identity를 이용하여
+   $$
+   p Z_x(p) + Z_y(p) = 0
+   $$
+   임을 보이시오. 이를 이용하여, $x$-재화 시장이 청산되면 왜 $y$-재화 시장도 자동으로 청산되는지 Walras' law와 연결하여 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **firm optimization → profit income → consumer demand → market clearing → Walras' law**.<br>이 문제에서는 기업이 사용한 $y$-재화 $z$도 aggregate resource constraint에 포함된다는 점에 유의하시오.
+:::
+:::

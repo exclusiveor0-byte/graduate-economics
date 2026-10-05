@@ -1,0 +1,102 @@
+---
+title: "문제 한 스푼 #18"
+subtitle: "소비자이론 · 시장의 종류"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #18
+
+::: {.spoon-hero__desc}
+오늘의 랜덤 토픽: **소비자이론 · 시장의 종류**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[문제당 약 10–15분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Consumer Theory
+::: {.topic}
+Revealed Preference · Direct Revealed Preference · WARP · Rationalizability
+:::
+
+한 소비자의 세 시점에서의 가격, 소득, 선택 bundle이 다음과 같이 관찰되었다. 모든 재화는 비음수이고, 소비자는 각 시점에서 자신의 budget set 안에서 bundle을 선택한다.
+
+| Observation | Prices $(p_1, p_2)$ | Income $m$ | Chosen bundle |
+|:---:|:---:|:---:|:---:|
+| A | $(2, 1)$ | $8$ | $x^A = (3, 2)$ |
+| B | $(1, 2)$ | $8$ | $x^B = (2, 3)$ |
+| C | $(1, 1)$ | $5$ | $x^C = (4, 1)$ |
+
+1. 각 observation의 선택 bundle이 실제로 해당 budget line 위에 있는지 확인하시오. 이어서 다른 두 bundle이 각 observation의 budget set에서 affordable한지 계산하시오.
+
+2. 다음 정의를 사용하자.
+   $$
+   x^t R^D x^s \quad\Longleftrightarrow\quad p^t \cdot x^t \ge p^t \cdot x^s.
+   $$
+   관찰자료로부터 성립하는 모든 direct revealed preference 관계를 찾으시오. strict affordability가 성립하는 경우에는 이를 별도로 표시하시오.
+
+3. 이 자료가 WARP를 만족하는지 판단하시오. 만족하지 않는다면 어떤 두 observations가 WARP violation을 만드는지 명시하고, 왜 이러한 자료가 locally nonsatiated preference의 utility maximization과 양립할 수 없는지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **budget comparison → revealed preference relation → WARP → rationalizability**.<br>선택 bundle끼리 단순히 효용을 비교하는 것이 아니라, 각 시점의 가격에서 다른 bundle이 실제로 구매 가능했는지를 먼저 확인하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Market Structure
+::: {.topic}
+Entry Game · Credibility · Backward Induction · Entry Deterrence
+:::
+
+한 시장에 incumbent $I$와 potential entrant $E$가 있다. 먼저 entrant가 **Enter** 또는 **Stay Out**을 선택한다. entrant가 Stay Out을 선택하면 게임이 끝나고 payoff는
+
+$$
+(u_I, u_E) = (4, 0)
+$$
+
+이다. entrant가 Enter를 선택하면 incumbent는 **Fight** 또는 **Accommodate**를 선택한다. payoff는 다음과 같다.
+
+$$
+\text{Enter, Fight}: (1, -1),
+$$
+$$
+\text{Enter, Accommodate}: (2, 2).
+$$
+
+1. backward induction을 이용하여 이 entry game의 subgame perfect equilibrium을 구하시오. entrant의 entry decision과 entry 이후 incumbent의 행동을 모두 명시하시오.
+
+2. incumbent가 entry 이전에 *“진입하면 반드시 Fight하겠다”*고 선언한다고 하자. 이 위협이 credible한지 판단하고, Nash equilibrium과 subgame perfect equilibrium의 차이를 이용하여 설명하시오.
+
+3. 이제 entrant가 움직이기 전에 incumbent가 비용 1을 들여 irreversible capacity investment를 할 수 있다고 하자.
+
+   투자를 하지 않으면 위 payoff가 그대로 유지된다.
+   투자를 하면 entry 이후 payoff가 다음과 같이 바뀐다:
+   $$
+   \text{Enter, Fight}: (3, -1),
+   $$
+   $$
+   \text{Enter, Accommodate}: (2, 2).
+   $$
+
+   entrant가 Stay Out할 경우 incumbent의 payoff는 투자비용을 차감하여
+   $$
+   4 - 1 = 3
+   $$
+   이다.
+
+   전체 게임을 backward induction으로 풀어 investment, entry, post-entry action을 포함한 subgame perfect equilibrium을 구하시오. 이 investment가 왜 entry deterrence를 가능하게 하는 commitment device인지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **backward induction → credibility → commitment → entry deterrence**.<br>단순한 위협과 실제 payoff structure를 바꾸는 사전적 commitment를 구분하시오.
+:::
+:::
