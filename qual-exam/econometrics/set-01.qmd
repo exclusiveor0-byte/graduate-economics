@@ -18,7 +18,7 @@ GRADUATE ECONOMETRICS · DAILY PRACTICE
 [계량경제학]{.chip .chip--metrics}
 [총 2문제]{.chip}
 [예상 45–60분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -117,6 +117,212 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **population minimization → first-order condition → orthogonality → conditional expectation decomposition → CEF와 linear projection 비교**. 단순 공식을 쓰기보다 각 등식에서 어떤 조건부기댓값 성질을 사용했는지 명시하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Conditional Expectation & Linear Projection"}
+::: {.topic}
+BLP · Projection Error · Conditional Mean · Best Predictor · Orthogonal Projection
+:::
+
+#### 1) BLP coefficient와 projection error
+
+목적함수를
+$$
+Q(a, b) = E[(Y - a - bX)^2]
+$$
+라 두자.
+
+$a$에 대한 일차조건(FOC)은
+$$
+\frac{\partial Q(a, b)}{\partial a} = -2E[Y - a - bX] = 0.
+$$
+따라서
+$$
+E[Y] - a - bE[X] = 0 \implies a^* = E[Y] - b^*E[X].
+$$
+
+$b$에 대한 일차조건(FOC)은
+$$
+\frac{\partial Q(a, b)}{\partial b} = -2E[X(Y - a - bX)] = 0.
+$$
+즉
+$$
+E[XY] - aE[X] - bE[X^2] = 0.
+$$
+위에서 구한 $a^* = E[Y] - b^*E[X]$를 대입하면
+$$
+E[XY] - \{E[Y] - b^*E[X]\}E[X] - b^*E[X^2] = 0.
+$$
+정리하면
+$$
+E[XY] - E[X]E[Y] = b^*\{E[X^2] - (E[X])^2\}.
+$$
+따라서
+$$
+\operatorname{Cov}(X, Y) = b^*\operatorname{Var}(X),
+$$
+그리고 $\operatorname{Var}(X) > 0$이므로
+$$
+b^* = \frac{\operatorname{Cov}(X, Y)}{\operatorname{Var}(X)}, \qquad a^* = E[Y] - b^*E[X].
+$$
+
+이제 projection error를
+$$
+e = Y - a^* - b^*X
+$$
+로 정의한다. $a$에 대한 FOC에서
+$$
+E[e] = 0,
+$$
+따라서 $e$는 상수 $1$과 직교한다. 또한 $b$에 대한 FOC에서
+$$
+E[Xe] = 0,
+$$
+따라서 $e$는 $X$와도 직교한다.
+
+---
+
+#### 2) $m(X) = E[Y\mid X]$는 mean-square best predictor
+
+$$
+m(X) = E[Y\mid X]
+$$
+라 하고, $X$의 임의의 제곱적분가능한 함수 $g(X)$를 생각하자.
+
+먼저
+$$
+Y - g(X) = Y - m(X) + m(X) - g(X).
+$$
+제곱하면
+$$
+(Y - g(X))^2 = (Y - m(X))^2 + (m(X) - g(X))^2 + 2(Y - m(X))(m(X) - g(X)).
+$$
+양변에 기댓값을 취하면
+$$
+E[(Y - g(X))^2] = E[(Y - m(X))^2] + E[(m(X) - g(X))^2] + 2E[(Y - m(X))(m(X) - g(X))].
+$$
+
+마지막 교차항에 반복기댓값법칙(Law of Iterated Expectations, LIE)을 적용하면
+$$
+\begin{aligned}
+E[(Y - m(X))(m(X) - g(X))]
+&= E\!\left[ E[(Y - m(X))(m(X) - g(X))\mid X] \right] \\
+&= E\!\left[ (m(X) - g(X)) E[Y - m(X)\mid X] \right].
+\end{aligned}
+$$
+여기서
+$$
+E[Y - m(X)\mid X] = E[Y\mid X] - m(X) = 0
+$$
+이므로 교차항의 기대값은 $0$이다:
+$$
+E[(Y - m(X))(m(X) - g(X))] = 0.
+$$
+
+따라서
+$$
+E[(Y - g(X))^2] = E[(Y - m(X))^2] + E[(m(X) - g(X))^2].
+$$
+두 번째 항 $E[(m(X) - g(X))^2]$은 항상 $0$ 이상이므로 최소값은 $g(X) = m(X)$일 때 달성된다. 따라서
+$$
+E[Y\mid X] = \arg\min_{g(X)} E[(Y - g(X))^2].
+$$
+즉 $E[Y\mid X]$는 $X$에 기초한 mean-square best predictor이다.
+
+---
+
+#### 2-A) 기하학적 해석: $E[Y\mid X]$는 $X$-함수공간으로의 직교사영
+
+제곱적분가능한 확률변수 전체의 공간을 $\mathcal H = L^2(\Omega, \mathcal F, P)$라 하고, 그중 $X$의 함수들로 이루어진 부분공간을
+$$
+\mathcal H_X = L^2(\sigma(X)) = \{g(X) : E[g(X)^2] < \infty\}
+$$
+라 하자. 그러면 conditional expectation은
+$$
+E[Y\mid X] = P_{\mathcal H_X} Y
+$$
+이다. 즉 $Y$를 $\mathcal H_X$ 위로 orthogonal projection한 점이 $E[Y\mid X]$이다.
+
+이제
+$$
+\xi := Y - E[Y\mid X]
+$$
+라 두면, 조건부기댓값의 정의에 의해 $E[\xi\mid X] = 0$이다. 따라서 임의의 $h(X) \in \mathcal H_X$에 대해
+$$
+E[\xi h(X)] = E\!\left[h(X)E[\xi\mid X]\right] = 0.
+$$
+즉
+$$
+\xi \perp \mathcal H_X
+$$
+이다. 여기서 중요한 점은 $\xi$가 특정 하나의 함수와만 직교하는 것이 아니라 $X$의 모든 제곱적분가능한 함수와 직교한다는 것이다.
+
+이제 임의의 후보 $g(X) \in \mathcal H_X$에 대해 $E[Y\mid X] - g(X) \in \mathcal H_X$이므로
+$$
+Y - g(X) = \underbrace{Y - E[Y\mid X]}_{\xi} + \underbrace{E[Y\mid X] - g(X)}_{\in \mathcal H_X}.
+$$
+두 성분은 서로 직교하므로 $L^2$ 공간에서 피타고라스 정리가 성립한다:
+$$
+E[(Y - g(X))^2] = E[\xi^2] + E[(E[Y\mid X] - g(X))^2].
+$$
+따라서 $E[(Y - g(X))^2] \ge E[\xi^2]$이며, 등호는 $g(X) = E[Y\mid X]$ a.s.일 때 성립한다.
+
+::: {.callout-tip appearance="simple"}
+**의미**: $E[Y\mid X]$가 mean-square best predictor라는 사실은 단순한 대수적 우연이 아니라 $Y$를 $X$-함수공간 $\mathcal H_X$ 위로 내린 **직교사영(Orthogonal Projection)**이기 때문이다. 예측오차는 **제거할 수 없는 본질적 오차($Y - E[Y\mid X]$)**와 **잘못된 예측함수 선택으로 인한 추가 오차**로 직교 분해된다.
+:::
+
+---
+
+#### 3) $Y$의 BLP와 $m(X)$의 BLP의 일치
+
+앞에서
+$$
+E[(Y - g(X))^2] = E[(Y - m(X))^2] + E[(m(X) - g(X))^2]
+$$
+임을 보였다. 여기서 $g(X) = a + bX$로 두면
+$$
+E[(Y - a - bX)^2] = E[(Y - m(X))^2] + E[(m(X) - a - bX)^2].
+$$
+첫 번째 항 $E[(Y - m(X))^2]$에는 $a, b$가 포함되지 않는다. 따라서
+$$
+\min_{a, b} E[(Y - a - bX)^2] \iff \min_{a, b} E[(m(X) - a - bX)^2].
+$$
+즉
+$$
+\arg\min_{a, b} E[(Y - a - bX)^2] = \arg\min_{a, b} E[(m(X) - a - bX)^2].
+$$
+따라서 $Y$의 BLP coefficient와 $m(X)$의 BLP coefficient는 완전히 동일하다.
+
+---
+
+#### 4) CEF가 선형인 경우와 비선형인 경우
+
+만약
+$$
+m(X) = E[Y\mid X] = \alpha_0 + \beta_0X
+$$
+라면, 앞의 결과에 의해
+$$
+\arg\min_{a, b} E[(Y - a - bX)^2] = \arg\min_{a, b} E[(m(X) - a - bX)^2].
+$$
+$m(X)$가 선형이므로
+$$
+m(X) - a - bX = (\alpha_0 - a) + (\beta_0 - b)X.
+$$
+$a = \alpha_0, b = \beta_0$를 선택하면 $m(X) - a - bX = 0$이 되어 $E[(m(X) - a - bX)^2] = 0$이 달성된다. 제곱오차의 최솟값은 $0$이므로
+$$
+(a^*, b^*) = (\alpha_0, \beta_0).
+$$
+
+반대로 $m(X)$가 비선형이어도
+$$
+b^* = \frac{\operatorname{Cov}(X, Y)}{\operatorname{Var}(X)}, \qquad a^* = E[Y] - b^*E[X]
+$$
+는 모멘트 조건만 성립하면 항상 고유하게 잘 정의된다. 이때 $a^* + b^*X$는 비선형 CEF $m(X)$를 MSE(평균제곱오차) 기준으로 가장 잘 근사하는 최선의 선형근사선(Best Linear Approximation)이라는 명확한 경제학적·통계학적 의미를 갖는다.
+
+::: {.callout-note appearance="simple"}
+**핵심 요약**: $E[Y\mid X]$가 모든 $X$-기반 예측함수 중 MSE를 최소화하고, BLP는 그 conditional expectation의 best linear approximation이라는 점이다.
+:::
 :::
 :::
 
@@ -239,4 +445,134 @@ $$
 ::: {.spoon-hint}
 **형식**: **estimator decomposition → LLN/CMT → consistency → CLT/Slutsky → asymptotic variance → assumption diagnostic**. 확률수렴과 분포수렴을 혼용하지 말고, 각 정리의 적용대상을 명확히 구분하시오.
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Consistency & Asymptotic Normality"}
+::: {.topic}
+LLN · Continuous Mapping · CLT · Slutsky · Homoskedasticity vs Heteroskedasticity
 :::
+
+#### 1) OLS decomposition과 consistency
+
+모형식 $Y_i = \theta_0 X_i + u_i$를 추정량 정의식에 대입하면
+$$
+\hat\theta = \frac{\sum_{i=1}^n X_i(\theta_0 X_i + u_i)}{\sum_{i=1}^n X_i^2} = \theta_0 + \frac{\sum_{i=1}^n X_i u_i}{\sum_{i=1}^n X_i^2}.
+$$
+양변에서 $\theta_0$를 빼고 분자·분모를 $n$으로 나누면
+$$
+\hat\theta - \theta_0 = \frac{n^{-1}\sum_{i=1}^n X_i u_i}{n^{-1}\sum_{i=1}^n X_i^2}.
+$$
+
+- **분자(Numerator)**: $\{X_i u_i\}_{i=1}^n$은 i.i.d.이고 $E[X_i u_i] = 0$이므로, Khinchine 대수의 법칙(LLN)에 의해
+  $$
+  \frac{1}{n}\sum_{i=1}^n X_i u_i \xrightarrow{p} E[X_i u_i] = 0.
+  $$
+- **분모(Denominator)**: $\{X_i^2\}_{i=1}^n$은 i.i.d.이고 $E[X_i^2] = Q < \infty$이므로, LLN에 의해
+  $$
+  \frac{1}{n}\sum_{i=1}^n X_i^2 \xrightarrow{p} E[X_i^2] = Q.
+  $$
+
+함수 $g(u, v) = u / v$는 $v = Q > 0$에서 연속이므로, 연속사상정리(Continuous Mapping Theorem, CMT)를 적용하면
+$$
+\hat\theta - \theta_0 = \frac{n^{-1}\sum_{i=1}^n X_i u_i}{n^{-1}\sum_{i=1}^n X_i^2} \xrightarrow{p} \frac{0}{Q} = 0.
+$$
+따라서
+$$
+\hat\theta \xrightarrow{p} \theta_0.
+$$
+
+---
+
+#### 2) Asymptotic normality
+
+$\Omega := E[X_i^2 u_i^2] < \infty$라 하자. 오차 분해식의 양변에 $\sqrt{n}$을 곱하면
+$$
+\sqrt{n}(\hat\theta - \theta_0) = \frac{n^{-1/2}\sum_{i=1}^n X_i u_i}{n^{-1}\sum_{i=1}^n X_i^2}.
+$$
+
+- **분자**: $Z_i = X_i u_i$라 두면, $Z_i$는 i.i.d.이고 $E[Z_i] = 0$, $\operatorname{Var}(Z_i) = E[X_i^2 u_i^2] - (E[X_i u_i])^2 = \Omega < \infty$이다. 따라서 Lindeberg–Lévy 중심극한정리(CLT)에 의해
+  $$
+  \frac{1}{\sqrt{n}}\sum_{i=1}^n X_i u_i \xrightarrow{d} N(0, \Omega).
+  $$
+- **분모**: 1번에서 보았듯이 LLN에 의해
+  $$
+  \frac{1}{n}\sum_{i=1}^n X_i^2 \xrightarrow{p} Q.
+  $$
+
+$Q > 0$이므로 Slutsky 정리에 의해
+$$
+\sqrt{n}(\hat\theta - \theta_0) = \frac{n^{-1/2}\sum_{i=1}^n X_i u_i}{n^{-1}\sum_{i=1}^n X_i^2} \xrightarrow{d} \frac{1}{Q} \cdot N(0, \Omega) \sim N\!\left(0, \frac{\Omega}{Q^2}\right).
+$$
+따라서 점근분산(Asymptotic Variance)은 다음과 같다:
+$$
+\operatorname{Avar}(\hat\theta) = \frac{\Omega}{Q^2} = \frac{E[X_i^2 u_i^2]}{(E[X_i^2])^2}.
+$$
+
+---
+
+#### 3) Homoskedasticity 아래의 단순화
+
+$\Omega = E[X_i^2 u_i^2]$에 반복기댓값법칙을 적용하면
+$$
+\Omega = E\!\left[ E[X_i^2 u_i^2 \mid X_i] \right] = E\!\left[ X_i^2 E[u_i^2 \mid X_i] \right].
+$$
+조건부 등분산성(Conditional Homoskedasticity) $E[u_i^2 \mid X_i] = \sigma^2$를 가정하면
+$$
+\Omega = E[X_i^2 \sigma^2] = \sigma^2 E[X_i^2] = \sigma^2 Q.
+$$
+따라서 점근분산은
+$$
+\frac{\Omega}{Q^2} = \frac{\sigma^2 Q}{Q^2} = \frac{\sigma^2}{Q}
+$$
+로 단순화되며,
+$$
+\sqrt{n}(\hat\theta - \theta_0) \xrightarrow{d} N\!\left(0, \frac{\sigma^2}{Q}\right).
+$$
+
+반면 조건부 이분산성(Heteroskedasticity)이 존재하면 $E[u_i^2 \mid X_i] = h(X_i)$가 되어 $\Omega = E[X_i^2 h(X_i)] \neq \sigma^2 Q$이다. 따라서 $\sigma^2 / Q$는 점근분산의 일치추정량이 될 수 없으며, Huber–White 샌드위치 분산 추정량 $\hat\Omega / \hat{Q}^2$을 사용해야 한다.
+
+---
+
+#### 4) $E[X_i u_i] = \delta \neq 0$인 경우의 불일치성
+
+$E[X_i u_i] = \delta \neq 0$이라면, 분해식에 LLN을 적용했을 때
+$$
+\frac{1}{n}\sum_{i=1}^n X_i u_i \xrightarrow{p} \delta, \qquad \frac{1}{n}\sum_{i=1}^n X_i^2 \xrightarrow{p} Q.
+$$
+따라서 연속사상정리에 의해
+$$
+\hat\theta - \theta_0 \xrightarrow{p} \frac{\delta}{Q} \implies \operatorname{plim}\hat\theta = \theta_0 + \frac{\delta}{Q}.
+$$
+$\delta \neq 0$이므로 $\operatorname{plim}\hat\theta \neq \theta_0$이며, $\hat\theta$는 참값 $\theta_0$에 대해 **inconsistent(불일치)**하다. 즉, $E[Xu] = 0$은 OLS 추정량의 점근적 편향을 $0$으로 만들어 일치성을 보장하는 가장 본질적인 직교조건(Orthogonality Condition)이다.
+
+---
+
+#### 5) $E[u\mid X] = 0$와 $E[Xu] = 0$의 관계 비교
+
+반복기댓값법칙에 의해
+$$
+E[Xu] = E\!\left[ E[Xu \mid X] \right] = E\!\left[ X E[u \mid X] \right].
+$$
+따라서 $E[u\mid X] = 0$이면 $E[Xu] = E[X \cdot 0] = 0$이 반드시 성립한다:
+$$
+E[u\mid X] = 0 \implies E[Xu] = 0.
+$$
+
+그러나 역은 일반적으로 성립하지 않는다 ($E[Xu] = 0 \centernot\implies E[u\mid X] = 0$). $E[Xu] = 0$은 $X$와 $u$ 사이의 선형 무상관만을 요구하는 단 하나의 무조건부 직교조건이지만, $E[u\mid X] = 0$은 $X$의 모든 (비선형 포함) 함수와 $u$가 무상관이어야 함을 의미하므로 **$E[u\mid X] = 0$가 훨씬 더 강한 조건**이다.
+
+이 문제에서:
+- **일치성(Consistency)**: 약한 조건인 $E[Xu] = 0$만으로 충분하다.
+- **점근정규성(Asymptotic Normality)**: 역시 $E[Xu] = 0$과 4차 적률조건 $E[X^2 u^2] < \infty$만으로 유도되며, $E[u\mid X] = 0$는 필수가 아니다 (단, 등분산 단순화 $\sigma^2/Q$를 보장하기 위해 사용됨).
+
+::: {.callout-note appearance="simple"}
+**핵심 요약**:
+$$
+\hat\theta - \theta_0 = \frac{n^{-1}\sum X_i u_i}{n^{-1}\sum X_i^2}
+$$
+라는 분해에서 출발해, consistency는 LLN과 orthogonality로, asymptotic normality는 분자에 대한 CLT와 분모에 대한 LLN, 그리고 Slutsky 정리로 얻는다는 것이다.
+:::
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
