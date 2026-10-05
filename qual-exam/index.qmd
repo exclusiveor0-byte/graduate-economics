@@ -273,15 +273,12 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-16.html" class="spoon-card" data-subject="micro" data-round="16">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#16 회차</span>
-    <div>
-      <span class="chip chip--micro">미시경제학</span>
-      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
-    </div>
+    <span class="chip chip--micro">미시경제학</span>
   </div>
   <div class="spoon-card__title">부분균형 · 일반균형</div>
   <div class="spoon-card__desc">음의 외부효과와 피구세(Pigouvian Tax) 후생분석 및 분권화, 순수교환경제의 파레토 집합·개인적 합리성·코어(Core)와 블로킹(Blocking) 메커니즘</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 · 해설 수록 →</span>
+    <span class="status">문제 풀기 →</span>
   </div>
 </a>
 
@@ -768,15 +765,12 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-16.html" class="spoon-card" data-subject="micro" data-round="16">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#16 회차</span>
-    <div>
-      <span class="chip chip--micro">미시경제학</span>
-      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
-    </div>
+    <span class="chip chip--micro">미시경제학</span>
   </div>
   <div class="spoon-card__title">부분균형 · 일반균형</div>
   <div class="spoon-card__desc">음의 외부효과와 피구세(Pigouvian Tax) 후생분석 및 분권화, 순수교환경제의 파레토 집합·개인적 합리성·코어(Core)와 블로킹(Blocking) 메커니즘</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 · 해설 수록 →</span>
+    <span class="status">문제 풀기 →</span>
   </div>
 </a>
 </div>
