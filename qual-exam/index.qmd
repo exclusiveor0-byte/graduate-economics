@@ -348,12 +348,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-01.html" class="spoon-card" data-subject="metrics" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">선형투영 · 점근이론</div>
   <div class="spoon-card__desc">조건부기댓값(CEF)과 선형투영의 직교성, OLS 추정량의 일치성(LLN/CMT) 및 점근정규성(CLT/Slutsky) 유도와 조건 진단</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -873,12 +876,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-01.html" class="spoon-card" data-subject="metrics" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">선형투영 · 점근이론</div>
   <div class="spoon-card__desc">조건부기댓값(CEF)과 선형투영의 직교성, OLS 추정량의 일치성(LLN/CMT) 및 점근정규성(CLT/Slutsky) 유도와 조건 진단</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
