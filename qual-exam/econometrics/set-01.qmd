@@ -435,6 +435,11 @@ $$
 **의미**: $E[Y\mid X]$가 mean-square best predictor라는 사실은 단순한 대수적 우연이 아니라 $Y$를 $X$-함수공간 $\mathcal H_X$ 위로 내린 **직교사영(Orthogonal Projection)**이기 때문이다. 예측오차는 **제거할 수 없는 본질적 오차($Y - E[Y\mid X]$)**와 **잘못된 예측함수 선택으로 인한 추가 오차**로 직교 분해된다.
 :::
 
+::: {.callout-note appearance="simple" icon=false}
+🔗 **관련 보충자료 연계**:
+확률변수 힐베르트 공간($L^2$)에서의 직교사영과 피타고라스 분해가 유한표본 관측공간($\mathbb{R}^n$) 및 모수공간($\mathbb{R}^k$)에서 어떻게 쌍대적으로 전개되는지는 [보충자료 · OLS 직교사영과 정상방정식의 벡터 기하 (동적 시각화 1: 3D 관측공간 직교사영과 모수공간 쌍대 최적화)](../../supplements/ols-projection-geometry.qmd#sec-ols-projection-3d)에서 3D 회전 애니메이션과 함께 직관적으로 확인할 수 있습니다.
+:::
+
 ---
 
 #### 3) $Y$의 BLP와 $m(X)$의 BLP의 일치
