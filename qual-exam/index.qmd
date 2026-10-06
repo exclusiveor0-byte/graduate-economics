@@ -429,12 +429,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-02.html" class="spoon-card" data-subject="metrics" data-round="2">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#2 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">FWL 정리 · 가설검정</div>
   <div class="spoon-card__desc">Frisch–Waugh–Lovell 정리와 잔차화(Residualization), 누락변수 편의(OVB) 공식 분해, 제약최소자승(RLS)과 exact F 및 점근 Wald 검정</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1023,12 +1026,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-02.html" class="spoon-card" data-subject="metrics" data-round="2">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#2 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">FWL 정리 · 가설검정</div>
   <div class="spoon-card__desc">Frisch–Waugh–Lovell 정리와 잔차화(Residualization), 누락변수 편의(OVB) 공식 분해, 제약최소자승(RLS)과 exact F 및 점근 Wald 검정</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
