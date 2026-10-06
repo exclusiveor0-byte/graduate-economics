@@ -52,36 +52,78 @@ e_hat = vec_y - y_hat                   # [2/3, -4/3, 2/3] = [0.667, -1.333, 0.6
 # ==============================================================================
 # 1. GIF 1: 3D Observation Space Orthogonal Projection & Dual Parameter Space
 # ==============================================================================
-def generate_gif_projection_3d():
-    print("Generating GIF 1: ols-projection-3d-geometry.gif ...")
+from matplotlib.lines import Line2D
 
-    # Sequence of 17 frames:
-    t_vals = np.linspace(0, 1, 10)
-    t_hold = np.array([1.0] * 3)
-    t_back = np.linspace(1, 0, 4)
-    t_seq = np.concatenate([t_vals, t_hold, t_back])
+def generate_gif_projection_3d():
+    print("Generating GIF 1: ols-projection-3d-geometry.gif (High-FPS Smooth Edition) ...")
 
     # Initial candidate in parameter space
     b0_init, b1_init = 0.8, -0.4
     b0_target, b1_target = 7.0 / 3.0, 1.0
 
+    # Smooth frame schedule (100 frames @ 20 fps = 5.0 seconds cycle)
+    # - n_start: 10 frames (500ms) hold at initial candidate
+    # - n_fwd:   45 frames (2250ms) smooth forward convergence with cosine easing
+    # - n_hold:  25 frames (1250ms) hold at optimum while camera rotates smoothly
+    # - n_bwd:   20 frames (1000ms) smooth rewind back to start
+    n_start = 10
+    n_fwd = 45
+    n_hold = 25
+    n_bwd = 20
+    total_frames = n_start + n_fwd + n_hold + n_bwd
+
+    s_start = np.zeros(n_start)
+    s_fwd = 0.5 * (1.0 - np.cos(np.pi * np.linspace(0, 1, n_fwd)))
+    s_hold = np.ones(n_hold)
+    s_bwd = 0.5 * (1.0 + np.cos(np.pi * np.linspace(0, 1, n_bwd)))
+    prog_seq = np.concatenate([s_start, s_fwd, s_hold, s_bwd])
+
+    # Precomputed contour grid for parameter space S(beta)
+    b0_grid = np.linspace(0.0, 4.0, 100)
+    b1_grid = np.linspace(-1.0, 2.5, 100)
+    B0, B1 = np.meshgrid(b0_grid, b1_grid)
+    S_grid = 8.0 / 3.0 + 3.0 * (B0 - 7.0 / 3.0)**2 + 2.0 * (B1 - 1.0)**2
+    levels = [2.7, 3.5, 5.0, 8.0, 13.0, 20.0, 30.0]
+
+    # Precomputed subspace plane C(X) = span(1, x)
+    u_p = np.linspace(0.2, 3.8, 10)
+    v_p = np.linspace(-1.5, 1.5, 10)
+    U_p, V_p = np.meshgrid(u_p, v_p)
+    P_x1 = U_p * vec_1[0] + V_p * vec_x[0]
+    P_x2 = U_p * vec_1[1] + V_p * vec_x[1]
+    P_x3 = U_p * vec_1[2] + V_p * vec_x[2]
+
+    # Fixed legend proxy elements to prevent UI jitter/resize during playback
+    legend_ax2 = [
+        Line2D([0], [0], color=GOLD_COLOR, lw=2.0, label=r"$\mathbf{1} = (1, 1, 1)'$"),
+        Line2D([0], [0], color=MUTED_COLOR, lw=2.0, label=r"$x = (-1, 0, 1)'$"),
+        Line2D([0], [0], color=NAVY_COLOR, lw=2.5, label=r"$y = (2, 1, 4)'$"),
+        Line2D([0], [0], color=TEAL_COLOR, lw=2.2, label=r"$\hat{y} = P_X y$ (사영 벡터)"),
+        Line2D([0], [0], color=RED_COLOR, lw=2.2, label=r"$\hat{e} \perp \mathcal{C}(X)$ (직교 잔차)"),
+        Line2D([0], [0], color=PLUM_COLOR, lw=1.8, linestyle="--", label=r"$X\beta(t)$ (수렴 동학)"),
+    ]
+
     frames = []
 
-    for idx, t in enumerate(t_seq):
+    for idx, prog in enumerate(prog_seq):
         # Current candidate beta
-        prog = 1.0 - (1.0 - t)**2
         b0_cur = b0_init + prog * (b0_target - b0_init)
         b1_cur = b1_init + prog * (b1_target - b1_init)
         beta_cur = np.array([b0_cur, b1_cur])
         y_cur = X_mat @ beta_cur
-        rss_cur = np.sum((vec_y - y_cur)**2)
-        grad_norm = 2.0 * np.linalg.norm(X_mat.T @ (vec_y - y_cur))
+        err_cur = vec_y - y_cur
+        rss_cur = np.sum(err_cur**2)
+        grad_norm = 2.0 * np.linalg.norm(X_mat.T @ err_cur)
 
-        # Camera azimuth rotation
-        azim = -50.0 + 65.0 * np.sin(idx / len(t_seq) * np.pi)
-        elev = 22.0
+        # Smooth continuous camera orbit (seamless loop: zero velocity at turnaround)
+        azim = -52.0 + 64.0 * (0.5 * (1.0 - np.cos(2.0 * np.pi * idx / total_frames)))
+        elev = 22.0 + 3.0 * np.sin(2.0 * np.pi * idx / total_frames)
 
-        fig = plt.figure(figsize=(10.5, 4.6), dpi=95)
+        is_opt = prog >= 0.999
+        face_c = "#e8f5e9" if is_opt else "#f3ede2"
+        edge_c = "#2e7d32" if is_opt else "#d5c7b5"
+
+        fig = plt.figure(figsize=(10.2, 4.5), dpi=90)
         fig.patch.set_facecolor(BG_COLOR)
 
         # ----------------------------------------------------------------------
@@ -93,31 +135,25 @@ def generate_gif_projection_3d():
             spine.set_color(GRID_COLOR)
         ax1.grid(True, linestyle="--", alpha=0.6, color=GRID_COLOR)
 
-        # Grid for S(beta)
-        b0_grid = np.linspace(0.0, 4.0, 100)
-        b1_grid = np.linspace(-1.0, 2.5, 100)
-        B0, B1 = np.meshgrid(b0_grid, b1_grid)
-        # S(beta) = 8/3 + 3*(B0 - 7/3)^2 + 2*(B1 - 1)^2
-        S_grid = 8.0 / 3.0 + 3.0 * (B0 - 7.0 / 3.0)**2 + 2.0 * (B1 - 1.0)**2
-
-        levels = [2.7, 3.5, 5.0, 8.0, 13.0, 20.0, 30.0]
         cs = ax1.contour(B0, B1, S_grid, levels=levels, colors="#9c8c7c", alpha=0.6, linewidths=1.2)
         ax1.clabel(cs, inline=True, fontsize=7.5, fmt="%.1f")
 
-        # Optimal point hat_beta
-        ax1.scatter(b0_target, b1_target, color=TEAL_COLOR, s=90, marker="*",
+        # Static proxy handles for stable legend
+        ax1.scatter(b0_target, b1_target, color=TEAL_COLOR, s=95, marker="*",
                     edgecolor=INK_COLOR, lw=1.0, label=r"OLS 최적점 $\hat{\beta} = (7/3, 1)$", zorder=6)
+        line_dummy, = ax1.plot([], [], "--", color=PLUM_COLOR, lw=1.8, label="수렴 궤적")
+        ax1.scatter([], [], color=RED_COLOR, s=60, edgecolor="#ffffff",
+                    lw=1.2, label=r"현재 후보점 $\beta(t)$")
 
-        # Optimization trajectory
-        t_track = np.linspace(0, t, 30)
-        p_track = 1.0 - (1.0 - t_track)**2
-        b0_tr = b0_init + p_track * (b0_target - b0_init)
-        b1_tr = b1_init + p_track * (b1_target - b1_init)
-        ax1.plot(b0_tr, b1_tr, "--", color=PLUM_COLOR, lw=1.8, label="경사하강 궤적", zorder=4)
+        # Optimization trajectory trace
+        if prog > 0.005:
+            p_track = np.linspace(0, prog, 30)
+            b0_tr = b0_init + p_track * (b0_target - b0_init)
+            b1_tr = b1_init + p_track * (b1_target - b1_init)
+            ax1.plot(b0_tr, b1_tr, "--", color=PLUM_COLOR, lw=1.8, zorder=4)
 
         # Current candidate marker
-        ax1.scatter(b0_cur, b1_cur, color=RED_COLOR, s=55, edgecolor="#ffffff",
-                    lw=1.0, label=rf"현재 후보점 $\beta(t)$", zorder=5)
+        ax1.scatter(b0_cur, b1_cur, color=RED_COLOR, s=60, edgecolor="#ffffff", lw=1.2, zorder=5)
 
         ax1.set_xlim(0.0, 4.0)
         ax1.set_ylim(-1.0, 2.5)
@@ -127,15 +163,23 @@ def generate_gif_projection_3d():
                       fontsize=11.0, fontweight="bold", color=INK_COLOR, pad=8)
         ax1.legend(loc="upper left", framealpha=0.92, facecolor=BG_COLOR, edgecolor=GRID_COLOR, fontsize=8.0)
 
-        # Badge left
-        badge_left = (
-            rf"$S(\beta) = {rss_cur:.3f}$  ($\min = {8.0/3.0:.3f}$)" "\n"
-            rf"$\|\nabla S\| = {grad_norm:.2f}$" "\n"
-            rf"$(\beta_0, \beta_1) = ({b0_cur:.2f}, {b1_cur:.2f})$"
-        )
+        # Badge Left (Clean formatting without raw \n escapes)
+        if is_opt:
+            badge_left = (
+                "[최적화 수렴 완료]\n"
+                + rf"$S(\hat{{\beta}}) = {8.0/3.0:.3f}$  (전역 최소)" + "\n"
+                + r"$\|\nabla S\| = 0.00$" + "\n"
+                + rf"$\hat{{\beta}} = ({b0_target:.2f}, {b1_target:.2f})$"
+            )
+        else:
+            badge_left = (
+                rf"$S(\beta) = {rss_cur:.3f}$  ($\min = {8.0/3.0:.3f}$)" + "\n"
+                + rf"$\|\nabla S\| = {grad_norm:.2f}$" + "\n"
+                + rf"$(\beta_0, \beta_1) = ({b0_cur:.2f}, {b1_cur:.2f})$"
+            )
         ax1.text(0.96, 0.05, badge_left, transform=ax1.transAxes,
                  fontsize=8.5, va="bottom", ha="right",
-                 bbox=dict(boxstyle="round,pad=0.4", facecolor="#f3ede2", edgecolor="#d5c7b5", alpha=0.95))
+                 bbox=dict(boxstyle="round,pad=0.4", facecolor=face_c, edgecolor=edge_c, alpha=0.95))
 
         # ----------------------------------------------------------------------
         # Right Panel: 3D Observation Space Orthogonal Projection
@@ -145,41 +189,40 @@ def generate_gif_projection_3d():
         ax2.view_init(elev=elev, azim=azim)
 
         # Transparent plane for C(X) = span(1, x)
-        # grid of u in [0.5, 3.5], v in [-1.5, 1.5]
-        u_p = np.linspace(0.2, 3.8, 10)
-        v_p = np.linspace(-1.5, 1.5, 10)
-        U_p, V_p = np.meshgrid(u_p, v_p)
-        P_x1 = U_p * vec_1[0] + V_p * vec_x[0]
-        P_x2 = U_p * vec_1[1] + V_p * vec_x[1]
-        P_x3 = U_p * vec_1[2] + V_p * vec_x[2]
         ax2.plot_surface(P_x1, P_x2, P_x3, color="#087e8b", alpha=0.18, edgecolor="none", shade=False)
-
-        # Draw origin
         ax2.scatter(0, 0, 0, color=INK_COLOR, s=20)
 
         # Basis vectors 1 and x
-        ax2.quiver(0, 0, 0, vec_1[0], vec_1[1], vec_1[2], color=GOLD_COLOR, lw=1.6,
-                   arrow_length_ratio=0.10, label=r"$\mathbf{1} = (1, 1, 1)'$")
-        ax2.quiver(0, 0, 0, vec_x[0], vec_x[1], vec_x[2], color=MUTED_COLOR, lw=1.6,
-                   arrow_length_ratio=0.10, label=r"$x = (-1, 0, 1)'$")
+        ax2.quiver(0, 0, 0, vec_1[0], vec_1[1], vec_1[2], color=GOLD_COLOR, lw=1.6, arrow_length_ratio=0.10)
+        ax2.quiver(0, 0, 0, vec_x[0], vec_x[1], vec_x[2], color=MUTED_COLOR, lw=1.6, arrow_length_ratio=0.10)
 
         # Dependent variable vector y
-        ax2.quiver(0, 0, 0, vec_y[0], vec_y[1], vec_y[2], color=NAVY_COLOR, lw=2.4,
-                   arrow_length_ratio=0.08, label=r"$y = (2, 1, 4)'$")
+        ax2.quiver(0, 0, 0, vec_y[0], vec_y[1], vec_y[2], color=NAVY_COLOR, lw=2.4, arrow_length_ratio=0.08)
 
-        # OLS projection y_hat
-        ax2.quiver(0, 0, 0, y_hat[0], y_hat[1], y_hat[2], color=TEAL_COLOR, lw=2.2,
-                   arrow_length_ratio=0.09, label=rf"$\hat{{y}} = P_X y$")
+        # Target OLS projection y_hat
+        ax2.quiver(0, 0, 0, y_hat[0], y_hat[1], y_hat[2], color=TEAL_COLOR, lw=2.2, arrow_length_ratio=0.09)
 
-        # Residual vector e_hat: from y_hat to y
-        ax2.quiver(y_hat[0], y_hat[1], y_hat[2], e_hat[0], e_hat[1], e_hat[2],
-                   color=RED_COLOR, lw=2.2, arrow_length_ratio=0.12,
-                   label=rf"$\hat{{e}} = M_X y$ (직교 잔차)")
-
-        # Current point X*beta_cur and current residual line
-        ax2.scatter(y_cur[0], y_cur[1], y_cur[2], color=PLUM_COLOR, s=40, zorder=6)
-        ax2.plot([y_cur[0], vec_y[0]], [y_cur[1], vec_y[1]], [y_cur[2], vec_y[2]],
-                 ":", color=RED_COLOR, lw=1.5, alpha=0.7)
+        # Residual and moving candidate elements
+        if is_opt:
+            # Orthogonal residual vector e_hat: from y_hat to y
+            ax2.quiver(y_hat[0], y_hat[1], y_hat[2], e_hat[0], e_hat[1], e_hat[2],
+                       color=RED_COLOR, lw=2.4, arrow_length_ratio=0.12)
+            ax2.scatter(y_hat[0], y_hat[1], y_hat[2], color=TEAL_COLOR, s=45, zorder=6)
+        else:
+            # Moving candidate vector from origin
+            ax2.quiver(0, 0, 0, y_cur[0], y_cur[1], y_cur[2], color=PLUM_COLOR, lw=1.8,
+                       arrow_length_ratio=0.09, alpha=0.75)
+            ax2.scatter(y_cur[0], y_cur[1], y_cur[2], color=PLUM_COLOR, s=45, zorder=6)
+            # Candidate error line from y_cur to y
+            ax2.plot([y_cur[0], vec_y[0]], [y_cur[1], vec_y[1]], [y_cur[2], vec_y[2]],
+                     "--", color=RED_COLOR, lw=1.8, alpha=0.85)
+            # Trace on plane
+            if prog > 0.005:
+                p_track = np.linspace(0, prog, 20)
+                b0_tr = b0_init + p_track * (b0_target - b0_init)
+                b1_tr = b1_init + p_track * (b1_target - b1_init)
+                y_tr = X_mat @ np.column_stack([b0_tr, b1_tr]).T
+                ax2.plot(y_tr[0], y_tr[1], y_tr[2], ":", color=PLUM_COLOR, lw=1.4, alpha=0.7)
 
         # Coordinate axes limits
         ax2.set_xlim(-0.5, 4.0)
@@ -188,9 +231,28 @@ def generate_gif_projection_3d():
         ax2.set_xlabel(r"$y_1$", fontsize=9.0, color=INK_COLOR)
         ax2.set_ylabel(r"$y_2$", fontsize=9.0, color=INK_COLOR)
         ax2.set_zlabel(r"$y_3$", fontsize=9.0, color=INK_COLOR)
-        ax2.set_title(rf"관측공간 $\mathbb{{R}}^3$: 직교사영 ($\hat{{e}} \perp \mathcal{{C}}(X)$)",
+        ax2.set_title(r"관측공간 $\mathbb{R}^3$: 직교사영 ($\hat{e} \perp \mathcal{C}(X)$)",
                       fontsize=11.0, fontweight="bold", color=INK_COLOR, pad=10)
-        ax2.legend(loc="upper left", framealpha=0.90, facecolor=BG_COLOR, edgecolor=GRID_COLOR, fontsize=7.2)
+        ax2.legend(handles=legend_ax2, loc="upper left", framealpha=0.90, facecolor=BG_COLOR,
+                   edgecolor=GRID_COLOR, fontsize=7.2)
+
+        # Badge Right (placed top-right to prevent overlap with tick labels)
+        if is_opt:
+            badge_right = (
+                "[직교사영 성립: " + r"$\hat{e} \perp \mathcal{C}(X)$" + "]\n"
+                + r"$\mathbf{1}'\hat{e} = 0.00,\;\; x'\hat{e} = 0.00$" + "\n"
+                + rf"$\|\hat{{e}}\| = {np.linalg.norm(e_hat):.3f}$  (최소 거리)"
+            )
+        else:
+            badge_right = (
+                rf"$\|y - X\beta\| = {np.linalg.norm(err_cur):.3f}$" + "\n"
+                + rf"$\mathbf{{1}}'e = {vec_1 @ err_cur:+.2f},\;\; x'e = {vec_x @ err_cur:+.2f}$" + "\n"
+                + r"$X'(y - X\beta) \neq \mathbf{0}$  (비직교)"
+            )
+
+        ax2.text2D(0.96, 0.90, badge_right, transform=ax2.transAxes,
+                   fontsize=8.2, va="top", ha="right",
+                   bbox=dict(boxstyle="round,pad=0.35", facecolor=face_c, edgecolor=edge_c, alpha=0.95))
 
         # Save frame to PIL
         fig.canvas.draw()
@@ -199,19 +261,22 @@ def generate_gif_projection_3d():
         frames.append(img)
         plt.close(fig)
 
-    # Save animated GIF
+    # Save animated GIF (50ms per frame = 20 fps fluid playback)
     out_path = os.path.join(GIF_DIR, "ols-projection-3d-geometry.gif")
-    durations = [280] * len(t_vals) + [650] * len(t_hold) + [280] * len(t_back)
-    frames[0].save(
+    durations = [50] * total_frames
+
+    # Quantize frames to adaptive palette for crisp rendering and optimal size
+    q_frames = [f.quantize(colors=192, method=Image.Quantize.MEDIANCUT) for f in frames]
+    q_frames[0].save(
         out_path,
         save_all=True,
-        append_images=frames[1:],
+        append_images=q_frames[1:],
         duration=durations,
         loop=0,
         optimize=True
     )
     size_kb = os.path.getsize(out_path) / 1024
-    print(f"GIF 1 generated: {out_path} ({size_kb:.1f} KB)")
+    print(f"GIF 1 generated: {out_path} ({size_kb:.1f} KB, {total_frames} frames @ 20fps)")
 
 
 # ==============================================================================
