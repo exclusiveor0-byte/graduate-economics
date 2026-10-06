@@ -288,12 +288,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-17.html" class="spoon-card" data-subject="micro" data-round="17">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#17 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 · 일반균형</div>
   <div class="spoon-card__desc">Production set의 convexity와 규모수익(Returns to Scale) 판별, Hotelling's lemma 검증, 생산을 포함한 왈라스 균형 및 왈라스 법칙(Walras' Law) 증명</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -849,12 +852,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-17.html" class="spoon-card" data-subject="micro" data-round="17">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#17 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 · 일반균형</div>
   <div class="spoon-card__desc">Production set의 convexity와 규모수익(Returns to Scale) 판별, Hotelling's lemma 검증, 생산을 포함한 왈라스 균형 및 왈라스 법칙(Walras' Law) 증명</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 

@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -69,6 +69,136 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **technology → convexity → returns to scale → profit maximization → Hotelling**.<br>production set의 convexity와 생산함수의 concavity를 혼동하지 말고 둘의 연결관계를 명확히 쓰시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Producer Theory"}
+::: {.topic}
+Production Set · Convexity · Decreasing Returns · Profit Maximization · Hotelling's Lemma
+:::
+
+#### 1) Production set의 convexity
+
+생산집합은
+$$
+Y = \left\{(y, -x) \in \mathbb{R}^2 : y \le \sqrt{x}, \; x \ge 0\right\}
+$$
+이다.
+
+임의의 두 feasible production plans
+$$
+(y_1, -x_1) \in Y, \qquad (y_2, -x_2) \in Y
+$$
+와 가중치 $\lambda \in [0, 1]$을 잡자. feasibility 조건에 의해
+$$
+y_1 \le \sqrt{x_1}, \qquad y_2 \le \sqrt{x_2}
+$$
+가 성립한다.
+
+양변에 각각 $\lambda \ge 0$, $1 - \lambda \ge 0$를 곱하여 더하면
+$$
+\lambda y_1 + (1 - \lambda) y_2 \le \lambda\sqrt{x_1} + (1 - \lambda)\sqrt{x_2}
+$$
+이다.
+
+이때 생산함수 $f(x) = \sqrt{x}$의 도함수와 이계도함수는
+$$
+f'(x) = \frac{1}{2\sqrt{x}} > 0, \qquad f''(x) = -\frac{1}{4x^{3/2}} < 0 \qquad (\forall x > 0)
+$$
+이므로 $f(x)$는 엄격한 오목함수(strictly concave function)이다. 따라서 함수의 concavity 정의에 의해
+$$
+\lambda\sqrt{x_1} + (1 - \lambda)\sqrt{x_2} \le \sqrt{\lambda x_1 + (1 - \lambda)x_2}
+$$
+가 성립한다.
+
+두 부등식을 결합하면
+$$
+\lambda y_1 + (1 - \lambda) y_2 \le \sqrt{\lambda x_1 + (1 - \lambda)x_2}
+$$
+를 얻는다. 또한 $x_1 \ge 0, x_2 \ge 0$이므로 $\lambda x_1 + (1 - \lambda)x_2 \ge 0$이다.
+
+따라서 임의의 볼록결합(convex combination)
+$$
+\lambda (y_1, -x_1) + (1 - \lambda) (y_2, -x_2) = \left( \lambda y_1 + (1 - \lambda) y_2, \; -(\lambda x_1 + (1 - \lambda) x_2) \right) \in Y
+$$
+역시 feasible production plan이므로 생산집합 $Y$는 볼록집합(convex set)이다:
+$$
+Y \text{ is convex}.
+$$
+
+**[생산함수의 concavity와 생산집합의 convexity의 관계]**
+- 단일 산출물-다요소 투입 모형에서 기술의 상한(production frontier)을 나타내는 생산함수 $f(x)$가 오목(concave)하다는 것은, 생산함수의 하위 그래프(hypograph) $\{(y, x) : y \le f(x), x \ge 0\}$가 볼록집합(convex set)이라는 것과 수학적으로 동치이다.
+- 생산집합 $Y$는 투입물을 음수로 표기한 순산출 벡터(net output vector) 표현 형식이므로, 투입축의 선형 부호 반전($x \mapsto -x$)에 의해 hypograph의 볼록성이 그대로 생산집합 $Y$의 볼록성(convexity)으로 보존된다.
+
+---
+
+#### 2) Returns to scale
+
+생산함수는
+$$
+f(x) = \sqrt{x}
+$$
+이다.
+
+임의의 스케일 팩터 $t > 1$에 대해 모든 투입량을 $t$배 확장할 때의 산출량 $f(tx)$와 산출물의 단순 $t$배 스케일 $t f(x)$를 비교하자:
+$$
+f(tx) = \sqrt{tx} = \sqrt{t}\sqrt{x},
+$$
+$$
+t f(x) = t\sqrt{x}.
+$$
+
+$t > 1$일 때 $\sqrt{t} < t$가 항상 성립하므로 (예: $t = 4$이면 $\sqrt{4} = 2 < 4$),
+$$
+f(tx) = \sqrt{t}\sqrt{x} < t\sqrt{x} = t f(x) \qquad (\forall x > 0)
+$$
+이다.
+
+모든 투입요소를 $t$배 늘렸을 때 산출량은 $t$배보다 적게 증가하므로, 이 기술은 **규모수익체감(Decreasing Returns to Scale, DRS)**을 가진다.
+
+---
+
+#### 3) Profit maximization
+
+산출물 가격을 $p > 0$, 투입요소 가격을 $w > 0$라 하자. 기업의 이윤극대화 문제는
+$$
+\max_{x \ge 0} \; \{ p\sqrt{x} - wx \}
+$$
+이다.
+
+목적함수는 $x$에 대해 엄격히 오목(strictly concave)하므로 내부 1계 조건(interior FOC)이 최적해의 필요충분조건이다:
+$$
+\frac{d}{dx}\left( p\sqrt{x} - wx \right) = \frac{p}{2\sqrt{x}} - w = 0.
+$$
+
+이를 $x$에 대해 풀면 최적 요소수요함수(optimal input demand)는
+$$
+\frac{p}{2\sqrt{x}} = w \implies \sqrt{x} = \frac{p}{2w} \implies x^*(p, w) = \frac{p^2}{4w^2}
+$$
+이다.
+
+최적 공급함수(supply function)는
+$$
+y^s(p, w) = f(x^*(p, w)) = \sqrt{\frac{p^2}{4w^2}} = \frac{p}{2w}
+$$
+이다.
+
+극대화된 이윤을 나타내는 이윤함수(profit function) $\pi(p, w)$는
+$$
+\pi(p, w) = p y^s(p, w) - w x^*(p, w) = p\left(\frac{p}{2w}\right) - w\left(\frac{p^2}{4w^2}\right) = \frac{p^2}{2w} - \frac{p^2}{4w} = \frac{p^2}{4w}
+$$
+이다.
+
+**[Hotelling's Lemma 검증]**
+이윤함수를 가격 $p$와 요소가격 $w$로 각각 편미분하면:
+1. 산출물 가격 $p$에 대한 편미분:
+   $$
+   \frac{\partial \pi(p, w)}{\partial p} = \frac{\partial}{\partial p}\left(\frac{p^2}{4w}\right) = \frac{2p}{4w} = \frac{p}{2w} = y^s(p, w).
+   $$
+2. 요소가격 $w$에 대한 편미분:
+   $$
+   -\frac{\partial \pi(p, w)}{\partial w} = -\frac{\partial}{\partial w}\left(\frac{p^2}{4} w^{-1}\right) = -\left(-\frac{p^2}{4w^2}\right) = \frac{p^2}{4w^2} = x^*(p, w).
+   $$
+따라서 호텔링 보조정리(Hotelling's Lemma)가 정확히 성립함을 확인할 수 있다.
 :::
 :::
 
@@ -139,5 +269,168 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **firm optimization → profit income → consumer demand → market clearing → Walras' law**.<br>이 문제에서는 기업이 사용한 $y$-재화 $z$도 aggregate resource constraint에 포함된다는 점에 유의하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. General Equilibrium with Production"}
+::: {.topic}
+Production Economy · Firm Optimization · Consumer Demand · Market Clearing · Walras' Law
+:::
+
+#### 1) Firm optimization
+
+$y$-재화를 numeraire($p_y = 1$)로 두고 $x$-재화의 가격을 $p > 0$라 하자.
+기업은 $y$-재화 $z$단위를 투입하여 $x_s = \sqrt{z}$단위의 $x$-재화를 생산한다.
+
+기업의 이윤극대화 문제는
+$$
+\max_{z \ge 0} \; \{ p\sqrt{z} - 1 \cdot z \}
+$$
+이다.
+
+내부 1계 조건(FOC)은
+$$
+\frac{p}{2\sqrt{z}} - 1 = 0 \implies \sqrt{z} = \frac{p}{2}.
+$$
+
+따라서
+- 최적 요소 투입량:
+  $$
+  z^*(p) = \frac{p^2}{4}.
+  $$
+- $x$-재화 공급량:
+  $$
+  x_s(p) = \sqrt{z^*(p)} = \frac{p}{2}.
+  $$
+- 극대 이윤(profit function):
+  $$
+  \pi(p) = p x_s(p) - z^*(p) = p\left(\frac{p}{2}\right) - \frac{p^2}{4} = \frac{p^2}{4}.
+  $$
+
+---
+
+#### 2) Consumer wealth and demand
+
+소비자는 $y$-재화 9단위를 초기부존($\omega = (0, 9)$)으로 가지고 기업의 지분을 100% 소유하므로, 기업의 이윤 $\pi(p)$를 전액 배당받는다.
+따라서 소비자의 총소득(wealth) $m(p)$는
+$$
+m(p) = p \cdot 0 + 1 \cdot 9 + \pi(p) = 9 + \frac{p^2}{4}
+$$
+이다.
+
+소비자의 효용극대화 문제는
+$$
+\max_{x_c > 0, \; y_c > 0} \; \{ \ln x_c + \ln y_c \} \qquad \text{s.t.} \qquad p x_c + y_c = m(p) = 9 + \frac{p^2}{4}
+$$
+이다.
+
+대칭 Cobb-Douglas 효용함수의 특성(또는 FOC $MRS = \frac{y_c}{x_c} = p \implies y_c = p x_c$)에 의해 소비자는 소득을 각 재화에 절반씩 지출한다:
+$$
+p x_c = \frac{m(p)}{2} \implies x_c(p) = \frac{m(p)}{2p},
+$$
+$$
+y_c = \frac{m(p)}{2} \implies y_c(p) = \frac{m(p)}{2}.
+$$
+
+소득 $m(p) = 9 + \frac{p^2}{4}$를 대입하면 Marshallian demands는
+$$
+x_c(p) = \frac{9 + \frac{p^2}{4}}{2p} = \frac{9}{2p} + \frac{p}{8},
+$$
+$$
+y_c(p) = \frac{9 + \frac{p^2}{4}}{2} = \frac{9}{2} + \frac{p^2}{8}
+$$
+이다.
+
+---
+
+#### 3) Competitive equilibrium
+
+경쟁균형 가격 $p^*$는 $x$-재화 시장청산조건에서 결정된다:
+$$
+x_c(p) = x_s(p).
+$$
+
+수요와 공급을 대입하면
+$$
+\frac{9}{2p} + \frac{p}{8} = \frac{p}{2}.
+$$
+
+양변에 $8p > 0$를 곱하여 정리하면
+$$
+36 + p^2 = 4p^2 \implies 3p^2 = 36 \implies p^2 = 12.
+$$
+
+가격은 양수($p > 0$)이므로 균형가격은
+$$
+p^* = \sqrt{12} = 2\sqrt{3}
+$$
+이다.
+
+균형에서의 각 경제 변수값을 계산하면:
+- 기업의 요소 투입량:
+  $$
+  z^* = \frac{(p^*)^2}{4} = \frac{12}{4} = 3.
+  $$
+- $x$-재화 균형 생산 및 소비량:
+  $$
+  x_c^* = x_s^* = \frac{p^*}{2} = \frac{2\sqrt{3}}{2} = \sqrt{3}.
+  $$
+- 소비자의 $y$-재화 균형 소비량:
+  $$
+  y_c^* = \frac{9}{2} + \frac{12}{8} = \frac{9}{2} + \frac{3}{2} = 6.
+  $$
+- $y$-재화 총자원제약(resource constraint) 검증:
+  경제 전체의 $y$-재화 초기부존량은 9단위이며, 소비자의 소비량 $y_c^*$와 기업의 생산 투입량 $z^*$의 합은
+  $$
+  y_c^* + z^* = 6 + 3 = 9
+  $$
+  이므로, 별도의 연립방정식을 풀지 않아도 $y$-재화 시장 역시 정확하게 청산된다.
+
+---
+
+#### 4) Walras' law
+
+$x$-재화와 $y$-재화의 총초과수요(aggregate excess demand)를 각각
+$$
+Z_x(p) = x_c(p) - x_s(p),
+$$
+$$
+Z_y(p) = y_c(p) + z^*(p) - 9
+$$
+로 정의하자.
+
+1. 소비자의 예산항등식(budget identity)은 지역 불포족성에 의해 모든 가격에서 정확히 성립한다:
+   $$
+   p x_c(p) + y_c(p) = 9 + \pi(p).
+   $$
+2. 기업의 이윤 정의식(profit identity)은
+   $$
+   \pi(p) = p x_s(p) - z^*(p)
+   $$
+   이다.
+
+기업의 이윤 정의식을 소비자의 예산항등식에 대입하면
+$$
+p x_c(p) + y_c(p) = 9 + p x_s(p) - z^*(p)
+$$
+를 얻는다.
+
+우변의 항들을 좌변으로 이항하여 재화별로 재배열하면
+$$
+p\left(x_c(p) - x_s(p)\right) + \left(y_c(p) + z^*(p) - 9\right) = 0
+$$
+이 성립한다. 초과수요의 정의를 대입하면
+$$
+p Z_x(p) + Z_y(p) = 0 \qquad (\forall p > 0)
+$$
+를 얻는다. 이것이 **왈라스 법칙(Walras' Law)**이다.
+
+**[Walras' Law와 시장청산의 관계]**
+- 왈라스 법칙 $p Z_x(p) + Z_y(p) = 0$은 균형가격뿐 아니라 모든 양의 가격 체계 $p > 0$에서 항등적으로 성립하는 가치 항등식이다.
+- 따라서 $x$-재화 시장이 청산되어 $Z_x(p) = 0$이 달성되면,
+  $$
+  p \cdot 0 + Z_y(p) = 0 \implies Z_y(p) = 0
+  $$
+  이 되어 $y$-재화 시장의 초과수요 역시 필연적으로 0이 된다.
+- 결과적으로 $n$개 재화가 존재하는 일반균형 경제에서는 $n-1$개 시장이 청산되면 나머지 1개 시장의 청산은 자동으로 보장된다. 본 모형에서는 $x$-재화 시장청산조건만으로 일반균형 가격과 모든 경제적 배분이 완전하게 결정된다.
 :::
 :::
