@@ -18,7 +18,7 @@ GRADUATE MACROECONOMICS · DAILY PRACTICE
 [거시경제학]{.chip .chip--macro}
 [총 2문제]{.chip}
 [예상 55–70분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -135,6 +135,194 @@ $$
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Maximum Principle and the Optimal Consumption Path"}
+::: {.topic}
+Present-Value Hamiltonian · Current-Value Hamiltonian · Costate Equation · Euler Equation
+:::
+
+#### Setting
+가계는
+$$
+\max_{\{c(t)\}_{t\ge0}}\int_0^\infty e^{-\rho t}\frac{c(t)^{1-\sigma}-1}{1-\sigma}\,dt
+$$
+를 극대화한다. 자산의 운동법칙은
+$$
+\dot a(t)=ra(t)+w-c(t),\qquad a(0)=a_0
+$$
+이다.
+$$
+u(c)=\frac{c^{1-\sigma}-1}{1-\sigma},\qquad u'(c)=c^{-\sigma}.
+$$
+이 문제에서 $a(t)$는 state variable이고 $c(t)$는 control variable이다.
+
+#### 1) Present-value Hamiltonian과 costate equation
+present-value Hamiltonian은
+$$
+H^P=e^{-\rho t}u(c)+\lambda^P(ra+w-c)
+$$
+이다. control $c$에 대한 1계조건은
+$$
+\frac{\partial H^P}{\partial c}=e^{-\rho t}u'(c)-\lambda^P=0,
+$$
+따라서
+$$
+\lambda^P=e^{-\rho t}c^{-\sigma}.
+$$
+present-value costate equation은
+$$
+\dot\lambda^P=-\frac{\partial H^P}{\partial a}.
+$$
+그런데
+$$
+\frac{\partial H^P}{\partial a}=r\lambda^P
+$$
+이므로
+$$
+\boxed{\dot\lambda^P=-r\lambda^P},\qquad
+\boxed{\frac{\dot\lambda^P}{\lambda^P}=-r}.
+$$
+costate variable은 state $a(t)$ 한 단위의 동태적 shadow value이다.
+
+#### 2) Euler equation
+1계조건에서
+$$
+\lambda^P=e^{-\rho t}c^{-\sigma}.
+$$
+양변에 로그를 취하면
+$$
+\log\lambda^P=-\rho t-\sigma\log c.
+$$
+시간에 대해 미분하면
+$$
+\frac{\dot\lambda^P}{\lambda^P}=-\rho-\sigma\frac{\dot c}{c}.
+$$
+한편 costate equation에 의해
+$$
+\frac{\dot\lambda^P}{\lambda^P}=-r.
+$$
+따라서
+$$
+-\rho-\sigma\frac{\dot c}{c}=-r,
+$$
+즉
+$$
+\boxed{\frac{\dot c}{c}=\frac{r-\rho}{\sigma}}.
+$$
+$r$은 현재소비를 포기하고 저축할 때 얻는 수익률이고, $\rho$는 미래효용에 대한 시간할인율이다. 따라서 $r-\rho$가 클수록 미래소비를 상대적으로 더 선호하게 되어 소비경로가 더 가파르게 증가한다.
+
+#### 3) Current-value Hamiltonian
+current-value costate를
+$$
+\lambda^C(t):=e^{\rho t}\lambda^P(t)
+$$
+로 정의한다. 그러면
+$$
+H^C=u(c)+\lambda^C(ra+w-c)
+$$
+이다.
+$$
+\frac{\partial H^C}{\partial c}=u'(c)-\lambda^C=0
+$$
+이므로
+$$
+\lambda^C=c^{-\sigma}.
+$$
+current-value costate equation은
+$$
+\dot\lambda^C=\rho\lambda^C-\frac{\partial H^C}{\partial a}.
+$$
+여기서
+$$
+\frac{\partial H^C}{\partial a}=r\lambda^C
+$$
+이므로
+$$
+\dot\lambda^C=(\rho-r)\lambda^C,
+\qquad
+\frac{\dot\lambda^C}{\lambda^C}=\rho-r.
+$$
+또한 $\lambda^C=c^{-\sigma}$이므로
+$$
+\frac{\dot\lambda^C}{\lambda^C}=-\sigma\frac{\dot c}{c}.
+$$
+따라서 다시
+$$
+\boxed{\frac{\dot c}{c}=\frac{r-\rho}{\sigma}}
+$$
+를 얻는다. present-value와 current-value formulation은 같은 최적화 문제를 서로 다른 가치단위로 표현한 것이다.
+
+#### 4) 최적 소비경로
+Euler equation에서 우변이 상수이므로
+$$
+\frac{d}{dt}\log c=\frac{r-\rho}{\sigma}.
+$$
+적분하면
+$$
+\boxed{c(t)=c(0)\exp\!\left(\frac{r-\rho}{\sigma}t\right)}.
+$$
+따라서
+$$
+r>\rho\Rightarrow \dot c>0,\qquad
+r=\rho\Rightarrow \dot c=0,\qquad
+r<\rho\Rightarrow \dot c<0.
+$$
+Euler equation은 소비의 성장률을 결정하지만 $c(0)$ 자체는 결정하지 않는다. 초기 소비수준은 초기자산과 lifetime budget constraint, 그리고 적절한 terminal condition을 함께 사용해야 결정된다.
+
+#### 5) 수치계산
+$$
+r=0.06,\qquad \rho=0.03,\qquad \sigma=2,\qquad c(0)=10
+$$
+이므로
+$$
+\frac{\dot c}{c}=\frac{0.06-0.03}{2}=0.015.
+$$
+따라서 연속시간 소비성장률은
+$$
+\boxed{1.5\%}
+$$
+이다. $t=10$에서는
+$$
+c(10)=10e^{0.15}\approx\boxed{11.618}.
+$$
+
+#### 6) $\sigma$와 intertemporal substitution
+CRRA 효용에서
+$$
+\mathrm{EIS}=\frac1\sigma.
+$$
+따라서
+$$
+\sigma\uparrow\Rightarrow \mathrm{EIS}\downarrow\Rightarrow
+\left|\frac{\dot c}{c}\right|\downarrow.
+$$
+즉 $\sigma$가 클수록 가계는 소비를 기간 간에 이동시키는 데 덜 민감하므로, 동일한 $r-\rho$ 변화에 대해 소비성장률의 반응이 작아진다.
+
+#### 7) Costate variable의 경제적 의미
+current-value continuation value를
+$$
+J(a,t)=\max_{\{c(s)\}_{s\ge t}}\int_t^\infty e^{-\rho(s-t)}u(c(s))\,ds
+$$
+라 하면 적절한 regularity condition 아래에서
+$$
+\lambda^C(t)=\frac{\partial J(a,t)}{\partial a}
+$$
+로 해석할 수 있다. 즉 시점 $t$에서 자산을 한 단위 더 주었을 때 continuation utility가 얼마나 증가하는지를 나타낸다.
+
+present-value costate는
+$$
+\lambda^P(t)=e^{-\rho t}\lambda^C(t)
+$$
+이므로 같은 shadow value를 date-0 할인효용 단위로 표시한 것이다. 1회차의 정적 Lagrange multiplier가 제약의 shadow value였다면, 이번 회차의 costate variable은 state variable의 동태적 shadow value이다.
+
+::: {.callout-tip appearance="simple"}
+**핵심 연결**:
+$$
+H_c=0\rightarrow \lambda=u'(c)\rightarrow \text{costate equation}\rightarrow \text{Euler equation}
+$$
+present-value와 current-value costate의 부호와 할인항을 구분하는 것이 중요하다.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. Capital Accumulation, TVC and Optimality
 ::: {.topic}
@@ -199,7 +387,7 @@ $$
    가 성립함을 보이고,
    이를 modified golden rule condition으로 해석하시오.
 
-   $$
+4. $$
    A=1,\qquad
    \alpha=\frac13,\qquad
    \delta=0.05,\qquad
@@ -242,6 +430,237 @@ $$
 
 ::: {.spoon-hint}
 형식: **Maximum Principle → Euler dynamics → steady state → numerical calculation → TVC → prove/disprove → diagnose**. FOC, feasibility, boundary condition, sufficient condition을 서로 다른 논리적 역할로 구분하시오.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Capital Accumulation, TVC and Optimality"}
+::: {.topic}
+Current-Value Hamiltonian · Consumption Dynamics · Modified Golden Rule · TVC · Necessary vs. Sufficient Conditions
+:::
+
+#### Setting
+사회계획자의 문제는
+$$
+\max_{\{c(t)\}_{t\ge0}}\int_0^\infty e^{-\rho t}\log c(t)\,dt
+$$
+subject to
+$$
+\dot k=Ak^\alpha-c-\delta k,\qquad k(0)=k_0>0
+$$
+이다. 여기서 $k$는 state variable이고 $c$는 control variable이다.
+
+#### 1) Current-value Hamiltonian과 1계조건
+current-value Hamiltonian은
+$$
+H^C=\log c+\lambda\left(Ak^\alpha-c-\delta k\right)
+$$
+이다.
+$$
+\frac{\partial H^C}{\partial c}=\frac1c-\lambda=0
+$$
+이므로
+$$
+\boxed{\lambda=\frac1c}.
+$$
+current-value costate equation은
+$$
+\dot\lambda=\rho\lambda-\frac{\partial H^C}{\partial k}.
+$$
+그런데
+$$
+\frac{\partial H^C}{\partial k}=\lambda\left(\alpha Ak^{\alpha-1}-\delta\right)
+$$
+이므로
+$$
+\boxed{\dot\lambda=\lambda\left[\rho+\delta-\alpha Ak^{\alpha-1}\right]}.
+$$
+
+#### 2) 소비동학
+$$
+\lambda=\frac1c
+$$
+이므로 로그미분하면
+$$
+\frac{\dot\lambda}{\lambda}=-\frac{\dot c}{c}.
+$$
+한편 costate equation에서
+$$
+\frac{\dot\lambda}{\lambda}=\rho+\delta-\alpha Ak^{\alpha-1}.
+$$
+따라서
+$$
+\boxed{\frac{\dot c}{c}=\alpha Ak^{\alpha-1}-\delta-\rho}.
+$$
+일반적인 생산함수 $f(k)$를 사용하면
+$$
+\boxed{\frac{\dot c}{c}=f'(k)-\delta-\rho}.
+$$
+자본의 순한계수익률 $f'(k)-\delta$가 시간선호율 $\rho$보다 높으면 소비는 증가하고, 낮으면 감소한다.
+
+#### 3) Steady state와 Modified Golden Rule
+steady state에서는
+$$
+\dot c=0,\qquad \dot k=0
+$$
+이 동시에 성립한다. 먼저 $\dot c=0$에서
+$$
+\alpha A(k^*)^{\alpha-1}=\rho+\delta.
+$$
+따라서
+$$
+\boxed{k^*=\left(\frac{\alpha A}{\rho+\delta}\right)^{\frac1{1-\alpha}}}.
+$$
+또한 $\dot k=0$에서
+$$
+\boxed{c^*=A(k^*)^\alpha-\delta k^*}.
+$$
+조건
+$$
+\boxed{f'(k^*)=\rho+\delta}
+$$
+를 modified golden rule이라 한다.
+
+순수 Golden Rule은 steady-state consumption을 직접 최대화하므로
+$$
+f'(k_{GR})=\delta
+$$
+를 만족한다. $\rho>0$이면
+$$
+f'(k^*)=\rho+\delta>\delta=f'(k_{GR}).
+$$
+$f''(k)<0$이므로
+$$
+\boxed{k^*<k_{GR}}.
+$$
+
+#### 4) 수치계산
+$$
+A=1,\qquad \alpha=\frac13,\qquad \delta=0.05,\qquad \rho=0.03
+$$
+이므로
+$$
+\frac13(k^*)^{-2/3}=0.08.
+$$
+따라서
+$$
+(k^*)^{2/3}=\frac1{0.24}=\frac{25}{6},
+$$
+즉
+$$
+\boxed{k^*=\left(\frac{25}{6}\right)^{3/2}\approx8.505}.
+$$
+또한
+$$
+c^*=(k^*)^{1/3}-0.05k^*.
+$$
+$$
+(k^*)^{1/3}=\left(\frac{25}{6}\right)^{1/2}\approx2.0412,
+\qquad 0.05k^*\approx0.4253.
+$$
+따라서
+$$
+\boxed{c^*\approx1.616}.
+$$
+
+#### 5) Transversality condition
+present-value costate를
+$$
+\lambda^P(t)=e^{-\rho t}\lambda^C(t)
+$$
+라 쓰면 표준적인 TVC는
+$$
+\boxed{\lim_{t\to\infty}\lambda^P(t)k(t)=0}.
+$$
+current-value costate로 쓰면
+$$
+\boxed{\lim_{t\to\infty}e^{-\rho t}\lambda^C(t)k(t)=0}.
+$$
+이 문제에서는
+$$
+\lambda^C=\frac1c
+$$
+이므로
+$$
+\boxed{\lim_{t\to\infty}e^{-\rho t}\frac{k(t)}{c(t)}=0}.
+$$
+$\lambda^P(t)k(t)$는 남아 있는 자본의 present-value shadow value로 해석할 수 있다. 이 극한이 양수라면 무한히 먼 미래에도 양의 가치가 있는 자본을 사용하지 않고 남겨두는 셈이므로, 그 일부를 더 일찍 소비하여 효용을 높일 여지가 남는다. 따라서 TVC는 장기적으로 비최적인 자산축적 경로를 배제하는 boundary condition이다.
+
+#### 6) “FOC를 만족하면 반드시 최적이다” — 거짓
+Hamiltonian 1계조건, state equation, costate equation은 기본적으로 interior optimum의 necessary conditions이다. 따라서
+$$
+H_c=0,\qquad \dot k=H_\lambda,\qquad \dot\lambda=\rho\lambda-H_k
+$$
+를 만족한다고 해서 그 경로가 자동으로 global optimum이 되는 것은 아니다.
+
+무한기간 문제에서는 잘못된 초기 $c(0)$를 선택해도 위 differential equations 자체를 만족하는 경로가 존재할 수 있다. 그러나 그런 경로는 장기적으로 TVC를 위반할 수 있다.
+
+따라서 일반적으로는
+$$
+\text{FOC}+\text{state equation}+\text{costate equation}+\text{boundary/TVC}
+$$
+가 함께 필요하다. 또한 이 조건들이 global optimality의 충분조건이 되려면 목적함수와 feasible set 또는 Hamiltonian에 적절한 concavity 조건이 추가로 필요하다.
+$$
+\boxed{\text{necessary conditions}\neq\text{sufficient conditions}}.
+$$
+
+#### 7) “자본이 적으면 소비가 영원히 증가한다”의 오류
+Euler equation은
+$$
+\frac{\dot c}{c}=f'(k)-\delta-\rho
+$$
+이다. 따라서 특정 시점 $t$에서
+$$
+f'(k_t)>\rho+\delta
+$$
+이면
+$$
+\dot c_t>0
+$$
+이다.
+
+그러나 $k$는 고정된 parameter가 아니라
+$$
+\dot k=f(k)-c-\delta k
+$$
+에 따라 움직이는 state variable이다. 또한
+$$
+f''(k)<0
+$$
+이므로 $k$가 증가하면 $f'(k)$는 감소한다. steady state에서는
+$$
+f'(k^*)=\rho+\delta
+$$
+이므로
+$$
+\frac{\dot c}{c}\to0.
+$$
+
+따라서 $f'(k_t)>\rho+\delta$라는 한 시점의 조건만으로 미래의 모든 시점에서 $\dot c>0$이라고 결론내릴 수 없다. 향후 소비의 움직임을 판단하려면 $k(t)$의 전체 전이경로를 함께 보아야 한다.
+
+#### 8) (A)와 (B)의 구분
+(A)
+$$
+\text{TVC is a boundary condition at infinity.}
+$$
+는 적절한 설명이다. 초기 state는 $k(0)=k_0$로 주어져 있지만, 무한기간 문제에서는 유한한 terminal date가 없다. TVC는 $t\to\infty$에서 허용되는 경로의 장기행동을 제한한다.
+
+반면 (B)
+$$
+\text{TVC by itself is a sufficient condition for global optimality.}
+$$
+는 일반적으로 거짓이다. TVC만 만족한다고 해서 $H_c=0$이나 state equation, costate equation이 자동으로 만족되는 것은 아니다. 또한 nonconcave problem에서는 necessary conditions와 TVC를 모두 만족하는 경로가 존재하더라도 global optimum이 아닐 수 있다.
+
+따라서
+$$
+\boxed{\text{TVC alone}\not\Rightarrow\text{global optimality}}.
+$$
+
+::: {.callout-tip appearance="simple"}
+**핵심 구조**:
+$$
+\text{state equation}+\text{control FOC}+\text{costate equation}+\text{TVC}
+$$
+의 역할을 분리해서 이해하는 것이다. 이 구조가 이후 Ramsey–Cass–Koopmans 모형의 $(k,c)$ 동태계와 saddle-path 분석으로 이어진다.
 :::
 :::
 

@@ -366,12 +366,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-02.html" class="spoon-card" data-subject="macro" data-round="2">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#2 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">동태적 최적화 II · 최대원리</div>
   <div class="spoon-card__desc">현재가치/현가가치 해밀토니안(Hamiltonian), 공변수(Costate) 운동법칙 및 오일러 방정식 유도, 횡단성 조건(TVC)과 수정된 황금률(Modified Golden Rule)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -948,12 +951,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-02.html" class="spoon-card" data-subject="macro" data-round="2">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#2 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">동태적 최적화 II · 최대원리</div>
   <div class="spoon-card__desc">현재가치/현가가치 해밀토니안(Hamiltonian), 공변수(Costate) 운동법칙 및 오일러 방정식 유도, 횡단성 조건(TVC)과 수정된 황금률(Modified Golden Rule)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
