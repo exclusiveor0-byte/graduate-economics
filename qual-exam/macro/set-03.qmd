@@ -18,7 +18,7 @@ GRADUATE MACROECONOMICS · DAILY PRACTICE
 [거시경제학]{.chip .chip--macro}
 [총 2문제]{.chip}
 [예상 55–70분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -132,6 +132,518 @@ interior solution이 존재한다고 하자.
 
 ::: {.spoon-hint}
 형식: **sequential problem → recursive formulation → FOC → envelope → Euler equation → steady state → calculation → compare methods**. Bellman equation을 단순히 적는 데서 끝내지 말고, FOC와 envelope condition의 결합으로 Euler equation을 직접 만들어내시오.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Bellman Equation, Envelope Condition & Euler Equation"}
+::: {.topic}
+Recursive Formulation · First-Order Condition · Envelope Theorem · Euler Equation · Steady State
+:::
+
+#### Setting
+사회계획자의 sequential problem은
+$$
+\max_{\{c_t,k_{t+1}\}_{t=0}^{\infty}}
+\sum_{t=0}^{\infty}\beta^t u(c_t),
+\qquad 0<\beta<1,
+$$
+subject to
+$$
+c_t+k_{t+1}
+=
+f(k_t)+(1-\delta)k_t
+$$
+이다.
+
+$u'(\cdot)>0$, $u''(\cdot)<0$, $f'(\cdot)>0$, $f''(\cdot)<0$이고
+interior solution이 존재한다고 가정한다.
+
+#### 1) State, control과 recursive formulation
+현재 시점 $t$에서 과거의 선택에 의해 이미 주어진 stock은
+$$
+\boxed{k_t}
+$$
+이므로 state variable이다.
+
+현재의 $k_t$가 주어졌을 때 계획자가 선택하는 것은 $c_t$와 $k_{t+1}$이다.
+자원제약 때문에 둘 중 하나를 정하면 다른 하나가 결정되므로
+편의상
+$$
+\boxed{k_{t+1}}
+$$
+을 control variable로 잡을 수 있다.
+
+자원제약에서
+$$
+c_t
+=
+f(k_t)+(1-\delta)k_t-k_{t+1}
+$$
+이므로 sequential problem을 recursive하게 쓰면
+$$
+\boxed{
+V(k)
+=
+\max_{k'}
+\left\{
+u\!\left(f(k)+(1-\delta)k-k'\right)
++
+\beta V(k')
+\right\}
+}.
+$$
+
+여기서 $k$는 현재 state, $k'$는 다음 기 state이자 현재의 control이다.
+Bellman equation의 핵심은 무한한 미래를 직접 한 번에 선택하는 대신
+$$
+\text{현재 payoff}
++
+\beta\times\text{최적 continuation value}
+$$
+로 문제를 재귀적으로 분해하는 것이다.
+
+#### 2) Bellman first-order condition
+현재소비를
+$$
+c
+=
+f(k)+(1-\delta)k-k'
+$$
+라 두자.
+
+Bellman equation은
+$$
+V(k)
+=
+\max_{k'}
+\left\{
+u(c)+\beta V(k')
+\right\}
+$$
+이다.
+
+$k'$를 한 단위 증가시키면 현재소비 $c$가 한 단위 감소하므로
+$$
+\frac{\partial c}{\partial k'}=-1.
+$$
+
+따라서 $k'$에 대한 1계조건은
+$$
+-u'(c)
++
+\beta V'(k')
+=
+0.
+$$
+
+즉
+$$
+\boxed{
+u'(c)
+=
+\beta V'(k')
+}.
+$$
+
+시점표기를 복원하면
+$$
+\boxed{
+u'(c_t)
+=
+\beta V'(k_{t+1})
+}.
+$$
+
+좌변은 $k_{t+1}$을 한 단위 늘리기 위해 현재소비 한 단위를 포기할 때의
+한계효용 손실이고, 우변은 다음 기 state를 한 단위 늘려 얻는
+할인된 continuation value의 한계증가분이다.
+
+#### 3) Envelope condition
+최적 policy를
+$$
+k'=g(k)
+$$
+라 하자. 최적화가 끝난 뒤의 가치함수는
+$$
+V(k)
+=
+u\!\left(
+f(k)+(1-\delta)k-g(k)
+\right)
++
+\beta V(g(k))
+$$
+로 쓸 수 있다.
+
+이를 직접 미분하면 $g'(k)$가 나타나지만,
+최적점에서는 $g(k)$에 대한 1계조건이 성립하므로
+$g'(k)$를 통해 들어오는 간접효과는 서로 상쇄된다.
+이것이 envelope theorem이다.
+
+따라서
+$$
+V'(k)
+=
+u'(c)
+\left[
+f'(k)+1-\delta
+\right].
+$$
+
+즉
+$$
+\boxed{
+V'(k)
+=
+u'(c)
+\left[
+f'(k)+1-\delta
+\right]
+}.
+$$
+
+경제적으로 $V'(k)$는 현재 자본 $k$를 한 단위 더 보유했을 때
+최적 lifetime utility가 얼마나 증가하는지를 나타내는
+state의 marginal value이다.
+
+자본 한 단위가 증가하면 현재 사용 가능한 자원이
+$$
+f'(k)+1-\delta
+$$
+만큼 증가하고, 그 자원의 한계효용이 $u'(c)$이므로 위 식이 성립한다.
+
+#### 4) FOC와 envelope condition에서 Euler equation 유도
+시점 $t$의 Bellman FOC는
+$$
+u'(c_t)
+=
+\beta V'(k_{t+1}).
+$$
+
+한편 시점 $t+1$에서 envelope condition을 적용하면
+$$
+V'(k_{t+1})
+=
+u'(c_{t+1})
+\left[
+f'(k_{t+1})+1-\delta
+\right].
+$$
+
+이를 FOC에 대입하면
+$$
+u'(c_t)
+=
+\beta
+u'(c_{t+1})
+\left[
+f'(k_{t+1})+1-\delta
+\right].
+$$
+
+따라서 Euler equation은
+$$
+\boxed{
+u'(c_t)
+=
+\beta u'(c_{t+1})
+\left[
+f'(k_{t+1})+1-\delta
+\right]
+}.
+$$
+
+이 식은 현재소비 한 단위를 포기하는 한계비용과,
+그것을 자본으로 이전하여 다음 기에 얻는
+할인된 한계편익을 같게 만드는 intertemporal optimality condition이다.
+
+특히
+$$
+f'(k_{t+1})+1-\delta
+$$
+는 다음 기 자본 한 단위의 gross return이다.
+
+#### 5) Cobb–Douglas 생산함수와 steady state
+이제
+$$
+u(c)=\log c,
+\qquad
+f(k)=Ak^\alpha,
+\qquad 0<\alpha<1
+$$
+라 하자.
+
+Euler equation은
+$$
+\frac1{c_t}
+=
+\beta\frac1{c_{t+1}}
+\left[
+\alpha Ak_{t+1}^{\alpha-1}
++
+1-\delta
+\right].
+$$
+
+steady state에서는
+$$
+c_{t+1}=c_t=c^*,
+\qquad
+k_{t+1}=k_t=k^*
+$$
+이므로 $1/c^*$가 양변에서 소거된다.
+
+따라서
+$$
+\boxed{
+1
+=
+\beta
+\left[
+\alpha A(k^*)^{\alpha-1}
++
+1-\delta
+\right]
+}.
+$$
+
+이를 정리하면
+$$
+\alpha A(k^*)^{\alpha-1}
+=
+\frac1\beta-1+\delta.
+$$
+
+따라서
+$$
+(k^*)^{1-\alpha}
+=
+\frac{\alpha A}
+{\beta^{-1}-1+\delta},
+$$
+즉
+$$
+\boxed{
+k^*
+=
+\left[
+\frac{\alpha A}
+{\beta^{-1}-1+\delta}
+\right]^{\frac1{1-\alpha}}
+}.
+$$
+
+steady state의 자원제약은
+$$
+c^*+k^*
+=
+A(k^*)^\alpha+(1-\delta)k^*
+$$
+이므로
+$$
+\boxed{
+c^*
+=
+A(k^*)^\alpha-\delta k^*
+}.
+$$
+
+#### 6) 수치계산
+$$
+A=1,\qquad
+\alpha=\frac13,\qquad
+\beta=0.96,\qquad
+\delta=0.08
+$$
+이다.
+
+먼저
+$$
+\beta^{-1}-1+\delta
+=
+\frac1{0.96}-1+0.08
+=
+0.121666\ldots
+$$
+이다.
+
+따라서
+$$
+\frac13(k^*)^{-2/3}
+=
+0.121666\ldots
+$$
+이고
+$$
+(k^*)^{-2/3}
+=
+0.365.
+$$
+
+따라서
+$$
+k^*
+=
+\left(\frac1{0.365}\right)^{3/2}
+\approx
+\boxed{4.535}.
+$$
+
+steady-state consumption은
+$$
+c^*
+=
+(k^*)^{1/3}
+-
+0.08k^*.
+$$
+
+수치적으로
+$$
+(4.535)^{1/3}
+\approx
+1.655,
+$$
+$$
+0.08(4.535)
+\approx
+0.363,
+$$
+따라서
+$$
+\boxed{
+c^*\approx1.292
+}.
+$$
+
+#### 7) Maximum Principle과 Bellman approach의 대응
+2회차 Maximum Principle에서는 state의 shadow value를 나타내는
+costate variable이 등장했다.
+
+discrete-time recursive problem에서도 같은 경제적 객체가
+가치함수의 미분으로 나타난다.
+즉
+$$
+\boxed{
+V'(k_t)
+=
+\text{state }k_t\text{의 marginal continuation value}
+}.
+$$
+
+현재 자원제약에 multiplier $\lambda_t$를 붙이면
+$$
+\lambda_t=u'(c_t).
+$$
+
+그리고 다음 기 자본에 대한 최적조건은
+$$
+\lambda_t
+=
+\beta V'(k_{t+1})
+$$
+이다.
+
+따라서
+$$
+\boxed{
+u'(c_t)
+=
+\lambda_t
+=
+\beta V'(k_{t+1})
+}.
+$$
+
+한편 다음 기 envelope condition은
+$$
+V'(k_{t+1})
+=
+u'(c_{t+1})
+\left[
+f'(k_{t+1})+1-\delta
+\right].
+$$
+
+이를 결합하면 다시
+$$
+u'(c_t)
+=
+\beta u'(c_{t+1})
+\left[
+f'(k_{t+1})+1-\delta
+\right]
+$$
+를 얻는다.
+
+즉 Maximum Principle의 costate와 Dynamic Programming의 $V'(k)$는
+모두 state 한 단위의 동태적 shadow value라는 동일한 경제적 역할을 한다.
+차이는 문제를 표현하는 방식과 시점/indexing convention에 있다.
+
+#### 8) “Stationary environment이면 optimal control도 시간에 따라 일정하다” — 거짓
+stationary environment란 primitive와 Bellman equation이
+달력시간 $t$에 직접 의존하지 않는다는 뜻이다.
+
+이 경우 optimal policy는 보통
+$$
+k_{t+1}=g(k_t)
+$$
+와 같은 time-invariant policy rule로 나타낼 수 있다.
+
+그러나 이것은
+$$
+k_{t+1}
+$$
+이 매기 같은 숫자라는 뜻이 아니다.
+
+state가 움직이면
+$$
+g(k_t)
+$$
+의 값도 달라질 수 있다.
+
+예를 들어 Problem 2에서는 stationary Bellman equation에서
+$$
+k_{t+1}=\beta A k_t
+$$
+라는 stationary policy가 나온다.
+
+이때
+$$
+k_t=(\beta A)^t k_0
+$$
+이므로 $\beta A\neq1$이면 $k_t$와 $k_{t+1}$는 시간에 따라 변한다.
+
+소비 역시
+$$
+c_t=(1-\beta)Ak_t
+$$
+이므로 시간에 따라 변한다.
+
+따라서
+$$
+\boxed{
+\text{stationary policy rule}
+\neq
+\text{constant time path}
+}.
+$$
+
+명제는 거짓이다.
+
+::: {.callout-tip appearance="simple"}
+**핵심 연결**:
+$$
+\text{Bellman equation}
+\rightarrow
+\text{FOC}
+\rightarrow
+\text{envelope condition}
+\rightarrow
+\text{Euler equation}
+$$
+Dynamic Programming에서는 $V'(k)$가 state의 shadow value 역할을 하며,
+이것이 Maximum Principle의 costate와 대응한다.
 :::
 :::
 
@@ -250,6 +762,571 @@ $$
 
 ::: {.spoon-hint}
 형식: **guess → optimize → obtain policy → substitute back → verify → iterate policy → prove/disprove → diagnose**. guess-and-verify에서는 함수형을 추측했다는 사실과, 그 추측이 Bellman equation 전체를 실제로 만족함을 확인했다는 사실을 구분하시오.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Guess-and-Verify, Policy Function & Verification Logic"}
+::: {.topic}
+Value-Function Guess · Functional Equation · Policy Rule · Verification · Dynamics · Error Diagnosis
+:::
+
+#### Setting
+다음 Bellman equation을 생각하자.
+$$
+V(k)
+=
+\max_{0<k'<Ak}
+\left\{
+\log(Ak-k')
++
+\beta V(k')
+\right\},
+\qquad
+A>0,\quad 0<\beta<1.
+$$
+
+현재소비는
+$$
+c=Ak-k'
+$$
+이다.
+
+#### 1) Value-function guess와 1계조건
+value function이
+$$
+\boxed{
+V(k)=a+b\log k
+}
+$$
+의 형태라고 추측하자.
+
+이를 Bellman equation의 우변에 대입하면
+$$
+a+b\log k
+=
+\max_{k'}
+\left\{
+\log(Ak-k')
++
+\beta a
++
+\beta b\log k'
+\right\}.
+$$
+
+$k'$에 대한 1계조건은
+$$
+-\frac1{Ak-k'}
++
+\frac{\beta b}{k'}
+=
+0.
+$$
+
+따라서
+$$
+\frac{\beta b}{k'}
+=
+\frac1{Ak-k'}.
+$$
+
+교차곱하면
+$$
+\beta b(Ak-k')
+=
+k'.
+$$
+
+따라서
+$$
+\beta bAk
+=
+(1+\beta b)k',
+$$
+즉
+$$
+\boxed{
+k'
+=
+\frac{\beta b}{1+\beta b}Ak
+}.
+$$
+
+#### 2) Policy function 도출
+$b$를 결정하기 위해 Bellman equation의 $\log k$ 계수를 비교한다.
+
+위 최적 $k'$는 현재 $k$에 비례하므로
+Bellman equation 우변에서 $\log k$의 계수는
+$$
+1+\beta b
+$$
+이다.
+
+좌변의 계수는 $b$이므로
+$$
+b=1+\beta b.
+$$
+
+따라서
+$$
+b(1-\beta)=1
+$$
+이고
+$$
+\boxed{
+b=\frac1{1-\beta}
+}.
+$$
+
+이를 앞의 policy 식에 대입하면
+$$
+\beta b
+=
+\frac{\beta}{1-\beta},
+$$
+$$
+1+\beta b
+=
+\frac1{1-\beta}.
+$$
+
+따라서
+$$
+\frac{\beta b}{1+\beta b}
+=
+\beta.
+$$
+
+그러므로 optimal policy function은
+$$
+\boxed{
+k'=g(k)=\beta Ak
+}.
+$$
+
+현재소비는
+$$
+c=Ak-k'
+$$
+이므로
+$$
+c
+=
+Ak-\beta Ak
+=
+\boxed{
+(1-\beta)Ak
+}.
+$$
+
+즉 매기 가용자원의 비율 $\beta$를 저축하고
+$1-\beta$를 소비한다.
+
+#### 3) $a,b$의 결정과 verification
+최적 policy를 Bellman equation에 다시 대입한다.
+
+$$
+k'=\beta Ak,
+\qquad
+c=(1-\beta)Ak.
+$$
+
+따라서
+$$
+V(k)
+=
+\log[(1-\beta)Ak]
++
+\beta
+\left[
+a+b\log(\beta Ak)
+\right].
+$$
+
+전개하면
+$$
+V(k)
+=
+\log(1-\beta)
++
+\log A
++
+\log k
++
+\beta a
++
+\beta b\log\beta
++
+\beta b\log A
++
+\beta b\log k.
+$$
+
+$\log k$의 계수를 비교하면 다시
+$$
+b=1+\beta b
+$$
+이므로
+$$
+\boxed{
+b=\frac1{1-\beta}
+}.
+$$
+
+상수항을 비교하면
+$$
+a
+=
+\log(1-\beta)
++
+\log A
++
+\beta a
++
+\beta b\log\beta
++
+\beta b\log A.
+$$
+
+따라서
+$$
+(1-\beta)a
+=
+\log(1-\beta)
++
+(1+\beta b)\log A
++
+\beta b\log\beta.
+$$
+
+그런데
+$$
+1+\beta b=b
+$$
+이므로
+$$
+(1-\beta)a
+=
+\log(1-\beta)
++
+b\log A
++
+\beta b\log\beta.
+$$
+
+$b=1/(1-\beta)$를 대입하면
+$$
+\boxed{
+a
+=
+\frac{\log(1-\beta)}{1-\beta}
++
+\frac{\log A+\beta\log\beta}{(1-\beta)^2}
+}.
+$$
+
+따라서 후보 value function은
+$$
+\boxed{
+V(k)
+=
+a+\frac1{1-\beta}\log k
+}
+$$
+이며, 위의 $a$를 사용한다.
+
+여기서 guess-and-verify의 논리는
+“형태를 추측했다”에서 끝나는 것이 아니다.
+추측한 함수로부터 policy를 구한 뒤,
+그 policy와 coefficient를 Bellman equation 전체에 다시 대입하여
+실제로 functional equation이 성립하는지 확인해야 한다.
+
+#### 4) Policy의 반복과 자본경로
+optimal policy는
+$$
+k_{t+1}
+=
+\beta A k_t.
+$$
+
+따라서
+$$
+k_1=\beta Ak_0,
+$$
+$$
+k_2=(\beta A)^2k_0,
+$$
+일반적으로
+$$
+\boxed{
+k_t=(\beta A)^t k_0
+}.
+$$
+
+세 경우를 구분하면,
+
+$$
+\beta A<1
+\quad\Rightarrow\quad
+k_t\to0,
+$$
+
+$$
+\beta A=1
+\quad\Rightarrow\quad
+k_t=k_0,
+$$
+
+$$
+\beta A>1
+\quad\Rightarrow\quad
+k_t\to\infty.
+$$
+
+정책함수 자체는
+$$
+g(k)=\beta Ak
+$$
+로 시간에 직접 의존하지 않는 stationary rule이다.
+
+그러나 state $k_t$가 시간에 따라 변하므로
+실제 선택 $k_{t+1}=g(k_t)$ 역시 일반적으로 시간에 따라 변한다.
+
+따라서 다시
+$$
+\boxed{
+\text{time-invariant rule}
+\neq
+\text{constant realized action}
+}
+$$
+이다.
+
+#### 5) 수치계산
+$$
+A=1.10,\qquad
+\beta=0.90,\qquad
+k_0=10.
+$$
+
+먼저
+$$
+\beta A
+=
+0.90\times1.10
+=
+0.99.
+$$
+
+따라서
+$$
+k_1
+=
+0.99(10)
+=
+\boxed{9.9}.
+$$
+
+다음으로
+$$
+k_2
+=
+0.99(9.9)
+=
+\boxed{9.801}.
+$$
+
+소비 policy는
+$$
+c_t
+=
+(1-\beta)Ak_t.
+$$
+
+따라서
+$$
+c_0
+=
+0.10(1.10)(10)
+=
+\boxed{1.10},
+$$
+$$
+c_1
+=
+0.10(1.10)(9.9)
+=
+\boxed{1.089}.
+$$
+
+여기서는
+$$
+\beta A=0.99<1
+$$
+이므로 자본과 소비 모두 시간이 지나면서 서서히 감소한다.
+
+#### 6) “Bellman FOC를 만족하면 global solution이다” — 거짓
+명제는 일반적으로 거짓이다.
+
+Bellman equation의 1계조건은 내부해의 stationary point를 찾는
+necessary condition일 뿐이다.
+목적함수가 concave하지 않다면 stationary point는 maximum이 아니라
+minimum이나 다른 비최적점일 수 있다.
+
+가장 단순한 정적 반례를 생각하면,
+$$
+\max_{x\in[0,2]}(x-1)^2
+$$
+에서 1계조건은
+$$
+2(x-1)=0
+$$
+이므로
+$$
+x=1
+$$
+을 준다.
+
+그러나
+$$
+(1-1)^2=0
+$$
+이고 경계 $x=0,2$에서는 목적값이 $1$이므로,
+$x=1$은 maximum이 아니라 minimum이다.
+
+Dynamic Programming에서도 같은 논리가 적용된다.
+따라서 candidate $V$와 $g$가 단지 Bellman FOC를 만족한다는 사실만으로는 부족하다.
+
+실제 solution을 확인하려면 적어도
+$$
+\boxed{
+\text{feasibility}
++
+\text{global maximization}
++
+\text{Bellman equality}
+}
+$$
+를 확인해야 한다.
+
+목적함수의 concavity가 확보되면 FOC가 global maximizer를 특징짓는 데 유용하지만,
+그 경우에도 candidate value function이 Bellman equation 전체를 만족하는지
+verification해야 한다.
+
+#### 7) “현재 payoff만 매기 최대화하면 된다”의 오류
+Bellman equation은
+$$
+V(k)
+=
+\max_{k'}
+\left\{
+\log(Ak-k')
++
+\beta V(k')
+\right\}
+$$
+이다.
+
+현재 payoff만 생각하면
+$$
+\log(Ak-k')
+$$
+를 최대화하기 위해 가능한 한 $k'$를 작게 선택하고 싶을 것이다.
+
+그러나 $k'$는 단순히 현재소비를 줄이는 변수가 아니라
+다음 기의 state이다.
+
+따라서 $k'$를 변화시키면
+$$
+\beta V(k')
+$$
+도 함께 변한다.
+
+실제 FOC는
+$$
+-\frac1{Ak-k'}
++
+\beta V'(k')
+=
+0
+$$
+이다.
+
+즉 최적선택에서는
+$$
+\boxed{
+\text{현재소비를 포기하는 한계비용}
+=
+\text{미래 state 증가의 할인된 한계가치}
+}
+$$
+가 성립해야 한다.
+
+Dynamic Programming은 매기 myopic optimization을 하는 방법이 아니라,
+미래의 최적행동을 value function에 압축하여 현재 선택에 내재화하는 방법이다.
+
+#### 8) Value function과 policy function의 구분
+value function은
+$$
+\boxed{
+V:k\mapsto
+\text{state }k\text{에서 달성 가능한 최대 lifetime value}
+}
+$$
+이다.
+
+즉
+$$
+V(k)
+$$
+는 “현재 state가 $k$라면 최적으로 행동했을 때 얼마만큼의 가치를 얻는가?”에 답한다.
+
+반면 policy function은
+$$
+\boxed{
+g:k\mapsto k'
+}
+$$
+로,
+“현재 state가 $k$라면 어떤 action을 선택해야 하는가?”에 답한다.
+
+이 문제에서는
+$$
+\boxed{
+g(k)=\beta Ak
+}
+$$
+이다.
+
+두 함수는 밀접하게 연결되어 있지만 서로 다른 객체이다.
+value function은 최적화의 *값*을 나타내고,
+policy function은 그 값을 달성하는 *행동*을 나타낸다.
+
+따라서
+$$
+\boxed{
+\text{optimal value를 아는 것}
+\neq
+\text{optimal action을 아는 것}
+}.
+$$
+
+::: {.callout-tip appearance="simple"}
+**핵심 순서**:
+$$
+\text{guess }V
+\rightarrow
+\text{FOC}
+\rightarrow
+\text{policy}
+\rightarrow
+\text{coefficient matching}
+\rightarrow
+\text{substitute back}
+\rightarrow
+\text{verify}
+$$
+FOC만 맞는 것과 Bellman equation 전체를 만족하는 것은 서로 다른 요구조건이다.
 :::
 :::
 
