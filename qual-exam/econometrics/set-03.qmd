@@ -18,7 +18,7 @@ GRADUATE ECONOMETRICS · DAILY PRACTICE
 [계량경제학]{.chip .chip--metrics}
 [총 2문제]{.chip}
 [예상 60–75분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -167,6 +167,314 @@ $$
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Heteroskedasticity, Robust Inference & GLS"}
+::: {.topic}
+Sandwich Variance · Robust Standard Error · GLS · FGLS
+:::
+
+#### Setting
+$$
+Y_i=X_i'\beta_0+u_i,
+$$
+$$
+E[X_i u_i]=0,\qquad Q:=E[X_iX_i']>0,\qquad E[\|X_i u_i\|^2]<\infty.
+$$
+conditional homoskedasticity는 가정하지 않는다. OLS estimator는
+$$
+\hat\beta=(X'X)^{-1}X'Y
+$$
+이다.
+
+#### 1. OLS decomposition과 점근정규성
+원모형을 대입하면
+$$
+\begin{aligned}
+\hat\beta
+&=(X'X)^{-1}X'(X\beta_0+u)\\
+&=\beta_0+(X'X)^{-1}X'u.
+\end{aligned}
+$$
+따라서
+$$
+\hat\beta-\beta_0=(X'X)^{-1}X'u.
+$$
+양변에 $\sqrt n$을 곱하고 $n$의 차수를 정리하면
+$$
+\boxed{
+\sqrt n(\hat\beta-\beta_0)
+=
+\left(\frac1n\sum_{i=1}^nX_iX_i'\right)^{-1}
+\left(\frac1{\sqrt n}\sum_{i=1}^nX_i u_i\right)
+}.
+$$
+
+첫 번째 항은 LLN과 Continuous Mapping Theorem에 의해
+$$
+\frac1n\sum_{i=1}^nX_iX_i'\xrightarrow{p}Q,
+\qquad
+\left(\frac1n\sum_{i=1}^nX_iX_i'\right)^{-1}\xrightarrow{p}Q^{-1}.
+$$
+
+두 번째 항에 대해
+$$
+E[X_i u_i]=0,
+$$
+그리고
+$$
+\operatorname{Var}(X_i u_i)=E[X_iX_i'u_i^2]=:\Omega.
+$$
+따라서 multivariate CLT에 의해
+$$
+\frac1{\sqrt n}\sum_{i=1}^nX_i u_i\xrightarrow{d}N(0,\Omega).
+$$
+Slutsky theorem을 적용하면
+$$
+\boxed{
+\sqrt n(\hat\beta-\beta_0)
+\xrightarrow{d}
+N\!\left(0,Q^{-1}\Omega Q^{-1}\right)
+}.
+$$
+즉
+$$
+\boxed{V_{\mathrm{OLS}}=Q^{-1}\Omega Q^{-1}}
+$$
+가 heteroskedasticity를 허용한 OLS의 sandwich asymptotic covariance이다.
+
+#### 2. Homoskedasticity 아래의 단순화
+추가로
+$$
+E[u_i^2\mid X_i]=\sigma^2
+$$
+가 성립한다고 하자. 그러면 iterated expectation을 사용하여
+$$
+\begin{aligned}
+\Omega
+&=E[X_iX_i'u_i^2]\\
+&=E\!\left[X_iX_i'E[u_i^2\mid X_i]\right]\\
+&=E[X_iX_i'\sigma^2]\\
+&=\sigma^2Q.
+\end{aligned}
+$$
+따라서
+$$
+Q^{-1}\Omega Q^{-1}
+=Q^{-1}(\sigma^2Q)Q^{-1}
+=\sigma^2Q^{-1}.
+$$
+즉
+$$
+\boxed{
+\operatorname{Avar}\!\left(\sqrt n(\hat\beta-\beta_0)\right)
+=\sigma^2Q^{-1}
+}.
+$$
+
+반대로 heteroskedasticity가 존재하면 일반적으로
+$$
+E[u_i^2\mid X_i]=h(X_i)
+$$
+이므로
+$$
+\Omega=E[X_iX_i'h(X_i)]\neq \sigma^2Q.
+$$
+따라서 conventional homoskedastic OLS variance formula는 일반적으로 올바르지 않다.
+
+여기서 반드시 구분해야 할 점은
+$$
+\boxed{E[X_i u_i]=0}
+$$
+가 유지되는 한 heteroskedasticity가 OLS consistency 자체를 깨지는 않는다는 것이다. 문제는 주로 분산추정과 효율성이다.
+
+#### 3. Heteroskedasticity-robust covariance estimator
+문제의 estimator는
+$$
+\widehat V_{\mathrm{HC}}
+=
+\left(\frac{X'X}{n}\right)^{-1}
+\left(\frac1n\sum_{i=1}^nX_iX_i'\hat u_i^2\right)
+\left(\frac{X'X}{n}\right)^{-1},
+$$
+$$
+\hat u_i=Y_i-X_i'\hat\beta.
+$$
+
+먼저
+$$
+\frac{X'X}{n}=\frac1n\sum_{i=1}^nX_iX_i'\xrightarrow{p}Q,
+$$
+따라서
+$$
+\left(\frac{X'X}{n}\right)^{-1}\xrightarrow{p}Q^{-1}.
+$$
+
+가운데 항의 population target은
+$$
+\Omega=E[X_iX_i'u_i^2].
+$$
+만약 $u_i$를 관찰할 수 있다면 LLN으로
+$$
+\frac1n\sum_{i=1}^nX_iX_i'u_i^2\xrightarrow{p}\Omega.
+$$
+실제로는 residual을 사용한다. 원모형으로부터
+$$
+\hat u_i=u_i-X_i'(\hat\beta-\beta_0).
+$$
+OLS consistency $\hat\beta\xrightarrow{p}\beta_0$와 적절한 moment conditions 아래에서는
+$$
+\frac1n\sum_{i=1}^nX_iX_i'(\hat u_i^2-u_i^2)=o_p(1),
+$$
+따라서
+$$
+\boxed{
+\frac1n\sum_{i=1}^nX_iX_i'\hat u_i^2\xrightarrow{p}\Omega
+}.
+$$
+결국 Slutsky theorem으로
+$$
+\boxed{
+\widehat V_{\mathrm{HC}}\xrightarrow{p}Q^{-1}\Omega Q^{-1}
+}.
+$$
+
+문제의 $\widehat V_{\mathrm{HC}}$는 $\sqrt n(\hat\beta-\beta_0)$의 asymptotic covariance를 추정한다. 따라서 $\hat\beta$ 자체의 covariance estimator는 대략
+$$
+\widehat{\operatorname{Var}}(\hat\beta)=\frac1n\widehat V_{\mathrm{HC}}
+$$
+이다.
+
+#### 4. GLS estimator의 유도
+이제
+$$
+E[u\mid X]=0,
+\qquad
+\operatorname{Var}(u\mid X)=\Omega_X
+$$
+이고 $\Omega_X$가 알려져 있으며 positive definite라고 하자.
+
+GLS는
+$$
+Q(\beta)=(Y-X\beta)'\Omega_X^{-1}(Y-X\beta)
+$$
+를 최소화한다. 미분하면
+$$
+\frac{\partial Q(\beta)}{\partial\beta}
+=-2X'\Omega_X^{-1}(Y-X\beta).
+$$
+FOC는
+$$
+X'\Omega_X^{-1}(Y-X\beta)=0.
+$$
+따라서
+$$
+X'\Omega_X^{-1}X\beta=X'\Omega_X^{-1}Y,
+$$
+즉
+$$
+\boxed{
+\hat\beta_{\mathrm{GLS}}
+=(X'\Omega_X^{-1}X)^{-1}X'\Omega_X^{-1}Y
+}.
+$$
+또한
+$$
+\hat\beta_{\mathrm{GLS}}-\beta_0
+=(X'\Omega_X^{-1}X)^{-1}X'\Omega_X^{-1}u,
+$$
+따라서
+$$
+\boxed{
+\operatorname{Var}(\hat\beta_{\mathrm{GLS}}\mid X)
+=(X'\Omega_X^{-1}X)^{-1}
+}.
+$$
+
+#### 5. GLS는 transformed regression의 OLS
+$$
+\Omega_X=CC'
+$$
+가 되도록 nonsingular $C$를 잡고
+$$
+Y^*=C^{-1}Y,\qquad X^*=C^{-1}X,\qquad u^*=C^{-1}u
+$$
+라 하자. 그러면
+$$
+Y^*=X^*\beta_0+u^*.
+$$
+오차의 조건부분산은
+$$
+\begin{aligned}
+\operatorname{Var}(u^*\mid X)
+&=C^{-1}\Omega_XC^{-T}\\
+&=C^{-1}CC'C^{-T}\\
+&=I.
+\end{aligned}
+$$
+따라서 transformed error는 spherical하다.
+
+이 모형에 OLS를 적용하면
+$$
+\hat\beta^*=(X^{*'}X^*)^{-1}X^{*'}Y^*.
+$$
+그런데
+$$
+X^{*'}X^*=X'C^{-T}C^{-1}X=X'\Omega_X^{-1}X,
+$$
+$$
+X^{*'}Y^*=X'C^{-T}C^{-1}Y=X'\Omega_X^{-1}Y.
+$$
+따라서
+$$
+\boxed{
+\hat\beta^*=\hat\beta_{\mathrm{GLS}}
+}.
+$$
+즉
+$$
+\boxed{\text{GLS}=\text{whitened model에서의 OLS}}.
+$$
+GLS는 error covariance structure를 이용해 자료를 spherical한 문제로 변환한 뒤 OLS를 수행한다. 알려진 $\Omega_X$와 고전적 조건부 선형모형 아래에서는 이 weighting을 통해 OLS보다 효율적인 linear unbiased estimator를 얻는다.
+
+#### 6. FGLS와 consistency · inference · efficiency
+실제로 $\Omega_X$는 대개 알려져 있지 않다. 따라서 first step에서 $\Omega_X$를 추정하고
+$$
+\hat\beta_{\mathrm{FGLS}}
+=
+(X'\widehat\Omega_X^{-1}X)^{-1}X'\widehat\Omega_X^{-1}Y
+$$
+를 사용한다.
+
+문제의 조건처럼 적절한 의미에서
+$$
+\widehat\Omega_X\xrightarrow{p}\Omega_X
+$$
+가 성립하면
+$$
+\widehat\Omega_X^{-1}\xrightarrow{p}\Omega_X^{-1}
+$$
+이고, 추가 regularity conditions 아래 FGLS는 infeasible GLS와 같은 first-order asymptotic behavior를 가질 수 있다.
+
+그러나 “heteroskedasticity가 있으므로 반드시 FGLS를 써야 한다”는 주장은 옳지 않다.
+
+- **Consistency**: 핵심은 $E[X_i u_i]=0$이다. 이 조건이 유지되면 OLS는 heteroskedasticity 아래에서도 consistent할 수 있다.
+- **Inference**: conventional homoskedastic standard error가 잘못될 수 있으므로 OLS에 heteroskedasticity-robust standard error를 사용할 수 있다.
+- **Efficiency**: covariance structure를 정확히 알고 있거나 잘 추정할 수 있을 때 GLS/FGLS가 OLS보다 효율적일 수 있다.
+
+즉 heteroskedasticity는
+$$
+\boxed{
+\text{OLS consistency 문제}\neq
+\text{variance estimation 문제}\neq
+\text{efficiency 문제}
+}
+$$
+로 구분해서 보아야 한다.
+
+::: {.callout-tip appearance="simple"}
+**핵심 요약**: heteroskedasticity가 있을 때도 orthogonality가 유지되면 OLS의 중심은 맞을 수 있지만, covariance가 $\sigma^2Q^{-1}$이 아니라 sandwich form $Q^{-1}\Omega Q^{-1}$가 된다는 점이다. Robust SE는 inference를 수정하고, GLS/FGLS는 covariance structure를 이용해 efficiency를 개선하려는 접근이다.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. Endogeneity, Identification & IV/2SLS
 ::: {.topic}
@@ -306,3 +614,335 @@ $$
 **형식**: **OLS failure → IV moment condition → identification → consistency → 2SLS geometry → weak identification**. instrument의 **exogeneity**와 **relevance**를 별개의 조건으로 구분하시오.
 :::
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Endogeneity, Identification & IV/2SLS"}
+::: {.topic}
+Orthogonality · Relevance · Just Identification · 2SLS · Weak Identification
+:::
+
+#### Setting
+먼저 scalar structural equation
+$$
+Y_i=\beta_0X_i+u_i
+$$
+를 생각한다. $X_i$는 endogenous하여
+$$
+E[X_i u_i]\neq0
+$$
+이고, 대신 instrument $Z_i$가
+$$
+E[Z_i u_i]=0,
+\qquad
+E[Z_iX_i]\neq0
+$$
+를 만족한다고 하자.
+
+#### 1. Endogeneity 아래 OLS의 probability limit
+상수항이 없으므로
+$$
+\hat\beta_{\mathrm{OLS}}
+=\frac{\sum_iX_iY_i}{\sum_iX_i^2}.
+$$
+원모형을 대입하면
+$$
+\begin{aligned}
+\hat\beta_{\mathrm{OLS}}
+&=\frac{\sum_iX_i(\beta_0X_i+u_i)}{\sum_iX_i^2}\\
+&=\beta_0+\frac{\sum_iX_i u_i}{\sum_iX_i^2}.
+\end{aligned}
+$$
+따라서
+$$
+\hat\beta_{\mathrm{OLS}}
+=\beta_0+
+\frac{\frac1n\sum_iX_i u_i}{\frac1n\sum_iX_i^2}.
+$$
+LLN과 Continuous Mapping Theorem으로
+$$
+\boxed{
+\operatorname{plim}\hat\beta_{\mathrm{OLS}}
+=\beta_0+\frac{E[X_i u_i]}{E[X_i^2]}
+}.
+$$
+따라서
+$$
+E[X_i u_i]\neq0
+$$
+이면 일반적으로
+$$
+\boxed{\operatorname{plim}\hat\beta_{\mathrm{OLS}}\neq\beta_0},
+$$
+즉 OLS는 inconsistent하다.
+
+#### 2. IV moment condition과 population identification
+IV는
+$$
+E[Z_i(Y_i-X_i\beta_0)]=0
+$$
+을 사용한다. 이를 전개하면
+$$
+E[Z_iY_i]-\beta_0E[Z_iX_i]=0,
+$$
+따라서
+$$
+E[Z_iY_i]=E[Z_iX_i]\beta_0.
+$$
+만약
+$$
+E[Z_iX_i]\neq0
+$$
+이면
+$$
+\boxed{
+\beta_0=\frac{E[Z_iY_i]}{E[Z_iX_i]}
+},
+$$
+따라서 $\beta_0$가 population moments로부터 uniquely identified된다.
+
+반대로
+$$
+E[Z_i u_i]=0
+$$
+이지만
+$$
+E[Z_iX_i]=0
+$$
+이라고 하자. 참모형에서
+$$
+E[Z_iY_i]
+=\beta_0E[Z_iX_i]+E[Z_i u_i]=0.
+$$
+그러면 임의의 $\beta$에 대해
+$$
+E[Z_i(Y_i-X_i\beta)]
+=E[Z_iY_i]-\beta E[Z_iX_i]=0.
+$$
+즉 moment condition이 모든 $\beta$에 대해 성립하므로 $\beta_0$를 구별하지 못한다.
+
+따라서 IV에는 서로 다른 두 조건이 필요하다.
+$$
+\boxed{\text{Exogeneity: }E[Zu]=0}
+$$
+$$
+\boxed{\text{Relevance: }E[ZX]\neq0}.
+$$
+
+#### 3. Just-identified IV estimator와 consistency
+population moment
+$$
+E[Z_i(Y_i-X_i\beta_0)]=0
+$$
+의 sample analog는
+$$
+\frac1n\sum_{i=1}^nZ_i(Y_i-X_i\beta)=0
+$$
+이다. 이를 $\beta$에 대해 풀면
+$$
+\boxed{
+\hat\beta_{\mathrm{IV}}
+=\frac{\sum_{i=1}^nZ_iY_i}{\sum_{i=1}^nZ_iX_i}
+}.
+$$
+원모형을 대입하면
+$$
+\begin{aligned}
+\hat\beta_{\mathrm{IV}}
+&=\frac{\sum_iZ_i(\beta_0X_i+u_i)}{\sum_iZ_iX_i}\\
+&=\beta_0+\frac{\sum_iZ_i u_i}{\sum_iZ_iX_i}.
+\end{aligned}
+$$
+즉
+$$
+\hat\beta_{\mathrm{IV}}-\beta_0
+=
+\frac{\frac1n\sum_iZ_i u_i}{\frac1n\sum_iZ_iX_i}.
+$$
+LLN으로
+$$
+\frac1n\sum_iZ_i u_i\xrightarrow{p}E[Z_i u_i]=0,
+$$
+$$
+\frac1n\sum_iZ_iX_i\xrightarrow{p}E[Z_iX_i]\neq0.
+$$
+따라서 Continuous Mapping Theorem으로
+$$
+\boxed{\hat\beta_{\mathrm{IV}}\xrightarrow{p}\beta_0}.
+$$
+
+#### 4. Vector case와 rank condition
+이제
+$$
+X_i\in\mathbb R^k,
+\qquad
+Z_i\in\mathbb R^L
+$$
+이고
+$$
+Y_i=X_i'\beta_0+u_i,
+\qquad
+E[Z_i u_i]=0
+$$
+라 하자. 그러면
+$$
+E[Z_i(Y_i-X_i'\beta_0)]=0
+$$
+에서
+$$
+\boxed{
+E[Z_iY_i]=E[Z_iX_i']\beta_0
+}
+$$
+를 얻는다.
+
+$$
+G:=E[Z_iX_i']
+$$
+라 두면 $G$는 $L\times k$ matrix이다. $\beta_0$가 uniquely identified되려면
+$$
+G\beta_1=G\beta_2
+$$
+가
+$$
+\beta_1=\beta_2
+$$
+를 의미해야 한다. 즉
+$$
+G(\beta_1-\beta_2)=0
+$$
+의 유일한 해가 $\beta_1-\beta_2=0$이어야 한다. 따라서
+$$
+\boxed{
+\operatorname{rank}(E[Z_iX_i'])=k
+}.
+$$
+
+구분하면:
+- **Under-identification**: $\operatorname{rank}(E[ZX'])<k$. $L<k$이면 full column rank가 불가능하므로 반드시 underidentified이다.
+- **Exact identification**: $L=k$ 이고 rank $=k$.
+- **Over-identification**: $L>k$ 이고 rank $=k$.
+
+즉 $L$은 이용 가능한 moment의 수이고, rank는 실제 독립적인 identifying information의 수이다.
+
+#### 5. 2SLS estimator
+표본에서
+$$
+P_Z=Z(Z'Z)^{-1}Z'
+$$
+라 하자. 첫 단계에서 $X$를 $Z$의 column space에 projection하면
+$$
+\boxed{\hat X=P_ZX}.
+$$
+두 번째 단계에서 $Y$를 $\hat X$에 OLS 회귀하면
+$$
+\hat\beta_{\mathrm{2SLS}}
+=(\hat X'\hat X)^{-1}\hat X'Y.
+$$
+projection matrix는
+$$
+P_Z'=P_Z,
+\qquad
+P_Z^2=P_Z
+$$
+를 만족하므로
+$$
+\hat X'\hat X
+=X'P_Z'P_ZX
+=X'P_ZX,
+$$
+그리고
+$$
+\hat X'Y=X'P_ZY.
+$$
+따라서
+$$
+\boxed{
+\hat\beta_{\mathrm{2SLS}}
+=(X'P_ZX)^{-1}X'P_ZY
+}.
+$$
+
+즉 2SLS는
+$$
+\boxed{X\longrightarrow \hat X=P_ZX}
+$$
+로 instrument가 설명하는 $X$의 variation만 추출하고,
+$$
+\boxed{Y\text{를 }\hat X\text{에 회귀}}
+$$
+하여 $\beta_0$를 추정한다.
+
+원래 $X$에는 $u$와 관련된 endogenous variation이 들어 있지만, 2SLS는 그 전체를 사용하지 않고 $Z$가 설명하는 부분을 사용한다는 것이 핵심이다.
+
+#### 6. Invalid instrument와 weak instrument
+두 경우를 비교한다.
+
+**Case A.**
+$$
+E[Z_i u_i]\neq0,
+\qquad
+E[Z_iX_i]\neq0.
+$$
+이 경우 relevance는 있지만 exogeneity가 실패한다. scalar IV에서
+$$
+\hat\beta_{\mathrm{IV}}-\beta_0
+=
+\frac{\frac1n\sum_iZ_i u_i}{\frac1n\sum_iZ_iX_i},
+$$
+따라서
+$$
+\operatorname{plim}(\hat\beta_{\mathrm{IV}}-\beta_0)
+=
+\frac{E[Z_i u_i]}{E[Z_iX_i]}\neq0.
+$$
+즉
+$$
+\boxed{\hat\beta_{\mathrm{IV}}\text{는 일반적으로 inconsistent}}.
+$$
+
+**Case B.**
+$$
+E[Z_i u_i]=0
+$$
+이지만
+$$
+E[Z_iX_i]\approx0.
+$$
+이 경우 exogeneity는 만족하지만 relevance가 매우 약하다. 이것이 weak instrument 문제이다.
+
+scalar IV의 오차는
+$$
+\hat\beta_{\mathrm{IV}}-\beta_0
+=
+\frac{\frac1n\sum_iZ_i u_i}{\frac1n\sum_iZ_iX_i}.
+$$
+분모가 작으면 numerator의 작은 sampling fluctuation도 estimator를 크게 움직일 수 있다. 따라서 weak instrument에서는 추정량이 매우 불안정해지고, strong-IV asymptotic normal approximation과 통상적인 Wald형 inference가 크게 왜곡될 수 있다.
+
+중요한 점은, $E[ZX]$가 단순히 작은 고정된 비영 값이면 매우 큰 표본에서 consistency 자체는 가능할 수 있다는 것이다. weak-IV theory에서 더 근본적인 어려움은 first-stage strength가 표본크기와 함께 0으로 접근하는 local-to-zero sequence와 같은 상황에서 나타난다.
+
+따라서 좋은 instrument에는
+$$
+\boxed{\text{Exogeneity}+\text{Relevance}}
+$$
+가 모두 필요하며, vector case에서는 relevance가
+$$
+\boxed{\operatorname{rank}(E[ZX'])=k}
+$$
+라는 형태로 나타난다.
+
+::: {.callout-tip appearance="simple"}
+**핵심 요약**: heteroskedasticity 문제와 달리 $E[Xu]\neq0$ 때문에 OLS의 중심 자체가 틀어진다. 따라서 robust standard error만으로는 해결되지 않는다. 새로운 orthogonality condition $E[Zu]=0$과 함께 relevance/rank condition이 필요하며, 2SLS는 $Z$가 설명하는 $X$의 variation을 이용해 structural parameter를 추정한다.
+:::
+:::
+
+::: {.callout-important title="📌 3회차 핵심 연결: Variance Problem vs. Identification Problem"}
+- **Heteroskedasticity (이분산)**:
+  $E[Xu]=0$이 유지된다면 OLS는 consistent할 수 있다. 다만 $\operatorname{Avar}(\sqrt n(\hat\beta-\beta_0))=Q^{-1}\Omega Q^{-1}$이므로 통상적인 homoskedastic standard error가 왜곡된다. 따라서 robust covariance estimation 또는 GLS/FGLS를 고려한다.
+- **Endogeneity (내생성)**:
+  $E[Xu]\neq0$이면 OLS의 probability limit 자체가 $\beta_0$에서 벗어난다. 이는 단순한 표준오차 문제가 아니라 identification 문제이므로 $E[Zu]=0$인 새로운 moment condition과 $\operatorname{rank}(E[ZX'])=k$인 relevance condition이 필요하다.
+
+**결론**: 3회차의 가장 중요한 구분은 **heteroskedasticity = covariance/inference 문제**와 **endogeneity = identification/consistency 문제**를 명확히 분리해서 파악하는 것이다.
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

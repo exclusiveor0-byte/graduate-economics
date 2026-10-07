@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -49,6 +49,130 @@ Revealed Preference · Direct Revealed Preference · WARP · Rationalizability
 
 ::: {.spoon-hint}
 **형식**: **budget comparison → revealed preference relation → WARP → rationalizability**.<br>선택 bundle끼리 단순히 효용을 비교하는 것이 아니라, 각 시점의 가격에서 다른 bundle이 실제로 구매 가능했는지를 먼저 확인하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Consumer Theory"}
+::: {.topic}
+Budget Comparison · Direct Revealed Preference · WARP
+:::
+
+#### 1) Budget comparison
+
+세 관측은
+$$
+p^A=(2,1),\quad m^A=8,\quad x^A=(3,2),
+$$
+$$
+p^B=(1,2),\quad m^B=8,\quad x^B=(2,3),
+$$
+$$
+p^C=(1,1),\quad m^C=5,\quad x^C=(4,1)
+$$
+로 주어진다.
+
+먼저 각 선택 bundle이 해당 budget line 위에 있는지 확인하면
+$$
+p^A\cdot x^A=2(3)+1(2)=8,
+$$
+$$
+p^B\cdot x^B=1(2)+2(3)=8,
+$$
+$$
+p^C\cdot x^C=1(4)+1(1)=5.
+$$
+
+따라서 세 선택 모두 각자의 budget line 위에 있다.
+
+다른 bundle의 affordability를 비교하면, 관측 $A$에서는
+$$
+p^A\cdot x^B=7<8,
+\qquad
+p^A\cdot x^C=9>8.
+$$
+따라서 $x^B$만 strictly affordable하다.
+
+관측 $B$에서는
+$$
+p^B\cdot x^A=7<8,
+\qquad
+p^B\cdot x^C=6<8.
+$$
+따라서 $x^A,x^C$가 모두 strictly affordable하다.
+
+관측 $C$에서는
+$$
+p^C\cdot x^A=5,
+\qquad
+p^C\cdot x^B=5.
+$$
+따라서 $x^A,x^B$가 모두 equality로 affordable하다.
+
+#### 2) Direct revealed preference
+
+정의에 따라
+$$
+x^t R^D x^s
+\iff
+p^t\cdot x^t\ge p^t\cdot x^s.
+$$
+
+관측 $A$에서는
+$$
+x^A P^D x^B,
+\qquad
+x^A\not R^D x^C.
+$$
+
+관측 $B$에서는
+$$
+x^B P^D x^A,
+\qquad
+x^B P^D x^C.
+$$
+
+관측 $C$에서는 두 bundle이 동일한 비용으로 affordable하므로
+$$
+x^C R^D x^A,
+\qquad
+x^C R^D x^B.
+$$
+
+#### 3) WARP
+
+$A$와 $B$ 사이에서는
+$$
+x^A P^D x^B
+$$
+이고 동시에
+$$
+x^B P^D x^A
+$$
+이다. 따라서 WARP를 위반한다.
+
+또한 $B$와 $C$ 사이에서도
+$$
+x^B P^D x^C
+$$
+이고
+$$
+x^C R^D x^B
+$$
+가 성립하므로 WARP를 위반한다.
+
+따라서
+$$
+\boxed{\text{WARP is violated}}.
+$$
+
+locally nonsatiated preference 아래에서 utility maximization으로 생성된 선택자료라면, strictly affordable한 다른 bundle 대신 선택된 bundle은 그 bundle보다 엄격히 선호되어야 한다. 그런데 이 자료는
+$$
+x^A\succ x^B
+\qquad\text{and}\qquad
+x^B\succ x^A
+$$
+와 같은 모순을 만든다.
+
+따라서 이 선택자료는 locally nonsatiated utility maximization과 양립할 수 없다.
 :::
 :::
 
@@ -99,4 +223,107 @@ $$
 ::: {.spoon-hint}
 **형식**: **backward induction → credibility → commitment → entry deterrence**.<br>단순한 위협과 실제 payoff structure를 바꾸는 사전적 commitment를 구분하시오.
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Market Structure"}
+::: {.topic}
+Entry Game · Backward Induction · Credibility · Capacity Investment · Commitment
 :::
+
+#### 1) Backward induction
+
+진입 후 incumbent의 payoff를 비교하면
+$$
+u_I(\text{Fight})=1,
+\qquad
+u_I(\text{Accommodate})=2.
+$$
+
+따라서 incumbent는
+$$
+\text{Accommodate}
+$$
+를 선택한다.
+
+entrant는 이를 예상한다. 진입하면
+$$
+u_E(\text{Enter})=2
+$$
+이고 진입하지 않으면
+$$
+u_E(\text{Stay Out})=0
+$$
+이므로 entrant는 진입한다.
+
+따라서 SPE의 equilibrium path는
+$$
+\boxed{\text{Enter}\rightarrow\text{Accommodate}}
+$$
+이고 payoff는
+$$
+\boxed{(u_I,u_E)=(2,2)}.
+$$
+
+#### 2) Credibility of threat
+
+incumbent가 사전에
+$$
+\text{“진입하면 Fight하겠다.”}
+$$
+고 선언해도 실제 진입 후에는
+$$
+u_I(\text{Accommodate})=2
+>
+1=u_I(\text{Fight}).
+$$
+
+따라서 Fight는 post-entry subgame에서 최적행동이 아니며 위협은 credible하지 않다.
+
+전략조합
+$$
+(\text{Stay Out},\text{Fight})
+$$
+는 Fight가 equilibrium path 밖의 행동이므로 Nash equilibrium이 될 수 있지만, post-entry subgame에서 Fight가 최적이 아니므로 SPE는 아니다.
+
+SPE는 모든 subgame에서 continuation strategy가 최적이어야 한다.
+
+#### 3) Capacity investment
+
+투자 후 진입이 발생하면 incumbent의 payoff는
+$$
+u_I(\text{Fight})=3,
+\qquad
+u_I(\text{Accommodate})=2.
+$$
+
+따라서 incumbent는 Fight를 선택한다.
+
+entrant는 이를 예상하여
+$$
+u_E(\text{Enter})=-1
+<
+0=u_E(\text{Stay Out})
+$$
+이므로 Stay Out을 선택한다.
+
+투자 후 진입저지가 이루어질 때 incumbent의 payoff는 $3$이고, 투자하지 않는 경우 기존 SPE에서 incumbent의 payoff는 $2$이다. 따라서 incumbent는 investment를 선택한다.
+
+investment는 post-entry payoff ordering을
+$$
+\text{Accommodate}\succ\text{Fight}
+$$
+에서
+$$
+\text{Fight}\succ\text{Accommodate}
+$$
+로 바꾸어 Fight를 credible하게 만든다.
+
+따라서 investment는 commitment device로 작용하고 entry deterrence를 가능하게 한다.
+$$
+\boxed{\text{Investment enables credible entry deterrence}}.
+$$
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

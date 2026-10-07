@@ -303,12 +303,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-18.html" class="spoon-card" data-subject="micro" data-round="18">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#18 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">소비자이론 · 시장의 종류</div>
   <div class="spoon-card__desc">현시선호이론(Direct Revealed Preference)과 WARP 검증 및 효용극대화 정합성, 진입저지 게임의 후진귀납법(SPE)·위협의 신빙성·불가역적 투자 공약(Commitment)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -381,12 +384,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-03.html" class="spoon-card" data-subject="macro" data-round="3">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#3 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">동태적 최적화 III · 벨만방정식</div>
   <div class="spoon-card__desc">순차적 문제의 재귀적(Recursive) 전환, 벨만방정식과 포락선 조건(Envelope Condition), 추측검증법(Guess-and-Verify) 및 정책함수(Policy Function) 검증</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -447,12 +453,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-03.html" class="spoon-card" data-subject="metrics" data-round="3">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#3 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">이분산과 GLS · 도구변수/2SLS</div>
   <div class="spoon-card__desc">샌드위치 분산 및 HC 강건추론, GLS 구면오차 변환과 FGLS, 도구변수 식별조건(Exogeneity/Relevance) 및 2SLS 기하학과 약한 도구변수</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -873,12 +882,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-18.html" class="spoon-card" data-subject="micro" data-round="18">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#18 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">소비자이론 · 시장의 종류</div>
   <div class="spoon-card__desc">현시선호이론(Direct Revealed Preference)과 WARP 검증 및 효용극대화 정합성, 진입저지 게임의 후진귀납법(SPE)·위협의 신빙성·불가역적 투자 공약(Commitment)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -966,12 +978,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-03.html" class="spoon-card" data-subject="macro" data-round="3">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#3 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">동태적 최적화 III · 벨만방정식</div>
   <div class="spoon-card__desc">순차적 문제의 재귀적(Recursive) 전환, 벨만방정식과 포락선 조건(Envelope Condition), 추측검증법(Guess-and-Verify) 및 정책함수(Policy Function) 검증</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1047,12 +1062,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-03.html" class="spoon-card" data-subject="metrics" data-round="3">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#3 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">이분산과 GLS · 도구변수/2SLS</div>
   <div class="spoon-card__desc">샌드위치 분산 및 HC 강건추론, GLS 구면오차 변환과 FGLS, 도구변수 식별조건(Exogeneity/Relevance) 및 2SLS 기하학과 약한 도구변수</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
