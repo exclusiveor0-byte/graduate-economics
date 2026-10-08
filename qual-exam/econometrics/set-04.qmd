@@ -18,7 +18,7 @@ GRADUATE ECONOMETRICS · DAILY PRACTICE
 [계량경제학]{.chip .chip--metrics}
 [총 2문제]{.chip}
 [예상 60–80분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -223,6 +223,352 @@ $$
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Method of Moments, GMM & Efficient Weighting"}
+::: {.topic}
+Moment Conditions · Identification · Asymptotic Variance · Optimal GMM · J-test
+:::
+
+#### Setting
+관측치 $\{W_i\}_{i=1}^n$는 i.i.d.이고, $\theta_0\in\Theta\subset\mathbb R^k$는 다음의 $m$-차원 moment condition을 만족한다고 하자.
+$$
+E[g(W_i,\theta_0)]=0,\qquad
+g(W_i,\theta)\in\mathbb R^m,\qquad m\ge k.
+$$
+Sample moment와 GMM estimator는 각각
+$$
+\bar g_n(\theta)=\frac1n\sum_{i=1}^n g(W_i,\theta),
+\qquad
+\hat\theta=\arg\min_{\theta\in\Theta}
+\bar g_n(\theta)'W_n\bar g_n(\theta)
+$$
+이다. 여기서 $W_n\xrightarrow{p}W>0$,
+$$
+G=E\!\left[\frac{\partial g(W_i,\theta_0)}{\partial\theta'}\right]
+\in\mathbb R^{m\times k},
+\qquad
+\Omega=E[g(W_i,\theta_0)g(W_i,\theta_0)']
+$$
+이고 $G$는 full-column-rank, $\Omega>0$이다. $G$는 moment의 모수 민감도, $\Omega$는 moment의 분산, $W$는 moment에 적용하는 가중행렬이라는 점을 구별한다.
+
+#### 1. Exactly identified GMM에서 weighting matrix의 역할
+Exactly identified case는 $m=k$인 경우이다. 표본 적률방정식
+$$
+\bar g_n(\hat\theta)=0
+$$
+을 만족하는 해가 존재한다고 하자. $W_n$은 positive definite이므로 모든 $\theta$에 대해
+$$
+Q_n(\theta):=\bar g_n(\theta)'W_n\bar g_n(\theta)\ge 0
+$$
+이다. 위 식의 해에서는
+$$
+Q_n(\hat\theta)=0'W_n0=0
+$$
+이므로
+$$
+\boxed{Q_n(\hat\theta)=\min_{\theta\in\Theta}Q_n(\theta)=0}.
+$$
+따라서 정확한 moment root가 존재한다면 그 root는 어떤 positive definite 가중행렬을 사용해도 GMM criterion의 전역 최소점이다.
+
+유일한 root가 존재하면 추정량은 $\bar g_n(\hat\theta)=0$ 자체에 의해 결정된다. 이 방정식에 $W_n$이 등장하지 않으므로 weighting matrix는 해당 추정량의 값을 바꾸지 않는다. 다만 정확한 root가 존재하지 않거나 여러 root가 있는 경우에는 최소점의 존재·유일성에 관한 별도 논의가 필요하다.
+
+Overidentified case인 $m>k$에서는 일반적으로 모든 표본 적률을 동시에 0으로 만들 수 없으므로, moment mismatch를 어떻게 가중할지가 추정량의 선택과 점근분산에 영향을 준다.
+
+#### 2. Identification과 GMM consistency
+Population moment를
+$$
+\mu(\theta)=E[g(W_i,\theta)]
+$$
+로 놓으면 population criterion은
+$$
+Q(\theta)=\mu(\theta)'W\mu(\theta)
+$$
+이다. 참모수에서 $\mu(\theta_0)=0$이므로 $Q(\theta_0)=0$이고, $W>0$이므로 모든 $\theta$에 대해 $Q(\theta)\ge0$이다. Identification에 의해
+$$
+\mu(\theta)=0\quad\Longleftrightarrow\quad\theta=\theta_0
+$$
+이면
+$$
+\boxed{\theta_0=\arg\min_{\theta\in\Theta}Q(\theta)}
+$$
+가 유일하게 성립한다.
+
+표본 목적함수가 적절한 uniform LLN 및 $W_n\xrightarrow{p}W$에 의해
+$$
+\sup_{\theta\in\Theta}|Q_n(\theta)-Q(\theta)|\xrightarrow{p}0
+$$
+로 수렴한다고 하자. 또한 임의의 $\varepsilon>0$에 대해
+$$
+\inf_{\|\theta-\theta_0\|\ge\varepsilon}
+\{Q(\theta)-Q(\theta_0)\}>0
+$$
+라는 separation condition이 성립한다고 하자. 표본 목적함수의 최소점 $\hat\theta$는
+$$
+Q_n(\hat\theta)\le Q_n(\theta_0)
+$$
+를 만족한다. Uniform convergence는 표본 목적함수가 population의 양의 최소값 격차를 확률적으로 보존함을 의미하므로 $\hat\theta$가 $\theta_0$에서 $\varepsilon$ 이상 떨어질 확률은 0으로 수렴한다. 따라서 argmin consistency theorem에 의해
+$$
+\boxed{\hat\theta\xrightarrow{p}\theta_0}.
+$$
+
+- **Identification**은 population moment의 zero를 만족하는 $\theta$가 유일한지를 결정한다.
+- **Weighting matrix**는 moment mismatch를 측정하는 metric을 결정한다.
+- $W>0$일 때 population zero가 유일하다면 어떤 positive definite 가중행렬도 동일한 $\theta_0$를 식별하지만, 점근적 효율성은 달라질 수 있다.
+
+#### 3. GMM first-order condition과 점근정규성
+Sample Jacobian을
+$$
+G_n(\theta)=\frac{\partial\bar g_n(\theta)}{\partial\theta'}
+$$
+로 정의한다. $W_n$이 대칭이고 최적화 변수 $\theta$에 의존하지 않으면, 내부해에서 GMM criterion의 first-order condition은
+$$
+\frac{\partial Q_n(\theta)}{\partial\theta}
+=2G_n(\theta)'W_n\bar g_n(\theta)=0
+$$
+이다. 따라서
+$$
+G_n(\hat\theta)'W_n\bar g_n(\hat\theta)=0.
+$$
+$\theta_0$ 주변에서 sample moment를 선형화한다.
+$$
+\bar g_n(\hat\theta)
+=\bar g_n(\theta_0)
+ +\widetilde G_n(\hat\theta-\theta_0),
+$$
+$$
+\widetilde G_n=
+\int_0^1G_n\bigl(\theta_0+t(\hat\theta-\theta_0)\bigr)\,dt.
+$$
+Consistency와 uniform Jacobian convergence 아래
+$$
+G_n(\hat\theta)\xrightarrow{p}G,\qquad
+\widetilde G_n\xrightarrow{p}G.
+$$
+FOC에 대입하면
+$$
+G_n(\hat\theta)'W_n
+\left\{\bar g_n(\theta_0)+\widetilde G_n(\hat\theta-\theta_0)\right\}=0.
+$$
+따라서
+$$
+\hat\theta-\theta_0=
+-[G_n(\hat\theta)'W_n\widetilde G_n]^{-1}
+ G_n(\hat\theta)'W_n\bar g_n(\theta_0).
+$$
+$G$가 full-column-rank이고 $W>0$이면 $G'WG$는 nonsingular이다. 이를 이용하여
+$$
+\boxed{
+\sqrt n(\hat\theta-\theta_0)
+=-(G'WG)^{-1}G'W
+ \sqrt n\,\bar g_n(\theta_0)+o_p(1)
+}.
+$$
+
+참모수에서 $E[g(W_i,\theta_0)]=0$이며 $\operatorname{Var}(g(W_i,\theta_0))=\Omega$이므로 multivariate CLT에 의해
+$$
+\sqrt n\,\bar g_n(\theta_0)
+=\frac1{\sqrt n}\sum_{i=1}^n g(W_i,\theta_0)
+\xrightarrow{d}N(0,\Omega).
+$$
+$C_W=(G'WG)^{-1}G'W$라 놓으면
+$$
+\sqrt n(\hat\theta-\theta_0)
+=-C_W\sqrt n\,\bar g_n(\theta_0)+o_p(1).
+$$
+따라서 Slutsky theorem과 선형변환의 정규분포 성질에 의해
+$$
+\sqrt n(\hat\theta-\theta_0)\xrightarrow{d}N(0,C_W\Omega C_W').
+$$
+$W$가 대칭이므로
+$$
+\boxed{
+V_W=(G'WG)^{-1}G'W\Omega WG(G'WG)^{-1}
+}
+$$
+이고, 최종적으로
+$$
+\boxed{\sqrt n(\hat\theta-\theta_0)\xrightarrow{d}N(0,V_W)}.
+$$
+이는 표본 적률의 불확실성이 $G$와 $W$를 통한 선형변환을 거쳐 모수의 불확실성으로 전달됨을 의미한다.
+
+#### 4. Optimal weighting과 asymptotic efficiency
+일반적인 GMM의 asymptotic covariance는
+$$
+V_W=(G'WG)^{-1}G'W\Omega WG(G'WG)^{-1}
+$$
+이다. 이제 $W=\Omega^{-1}$를 대입하면
+$$
+\begin{aligned}
+V_{\mathrm{opt}}
+&=(G'\Omega^{-1}G)^{-1}
+  G'\Omega^{-1}\Omega\Omega^{-1}G
+  (G'\Omega^{-1}G)^{-1}\\
+&=(G'\Omega^{-1}G)^{-1}
+  (G'\Omega^{-1}G)
+  (G'\Omega^{-1}G)^{-1}.
+\end{aligned}
+$$
+따라서
+$$
+\boxed{V_{\mathrm{eff}}=(G'\Omega^{-1}G)^{-1}}.
+$$
+
+왜 이것이 최소 분산인지 확인하자. $C_W=(G'WG)^{-1}G'W$ 및 $C_*=(G'\Omega^{-1}G)^{-1}G'\Omega^{-1}$를 정의하면
+$$
+C_WG=C_*G=I_k.
+$$
+$D=C_W-C_*$라 두면 $DG=0$이다. 한편
+$$
+\Omega C_*'=G(G'\Omega^{-1}G)^{-1}
+$$
+이므로 $D\Omega C_*'=0$이다. 따라서
+$$
+\begin{aligned}
+V_W-V_{\mathrm{eff}}
+&=(C_*+D)\Omega(C_*+D)'-C_*\Omega C_*'\\
+&=D\Omega D'\succeq0.
+\end{aligned}
+$$
+결국
+$$
+\boxed{V_W\succeq V_{\mathrm{eff}}}
+$$
+이며, 효율적 가중행렬은 주어진 moment conditions의 GMM 클래스에서 asymptotic covariance를 Loewner ordering 기준으로 최소화한다.
+
+직관적으로 $\Omega^{-1}$는 분산이 큰 적률방향의 영향력을 줄이고, 정밀한 적률방향의 영향력을 높이며, 적률 간 상관관계도 반영한다. 여러 positive definite weighting matrix를 사용하는 GMM 추정량이 모두 consistent하더라도 점근분산은 달라질 수 있다.
+
+#### 5. Two-step GMM
+$\Omega=E[g(W_i,\theta_0)g(W_i,\theta_0)']$는 $\theta_0$가 미지이므로 일반적으로 직접 계산할 수 없다. Two-step GMM은 이 문제를 다음 세 단계로 해결한다.
+
+1. **1단계: 초기 일관추정량 계산.** 임의의 적절한 positive definite $W_n^{(1)}$로
+   $$
+   \boxed{
+   \hat\theta^{(1)}
+   =\arg\min_{\theta\in\Theta}
+   \bar g_n(\theta)'W_n^{(1)}\bar g_n(\theta)
+   }
+   $$
+   를 얻는다. 정칙조건 아래 $\hat\theta^{(1)}\xrightarrow{p}\theta_0$이다.
+2. **2단계: Moment covariance 추정.**
+   $$
+   \boxed{
+   \widehat\Omega
+   =\frac1n\sum_{i=1}^n
+   g(W_i,\hat\theta^{(1)})
+   g(W_i,\hat\theta^{(1)})'
+   }.
+   $$
+   Uniform LLN, 적절한 연속성, 초기추정량의 consistency 아래 $\widehat\Omega\xrightarrow{p}\Omega$, $\widehat\Omega^{-1}\xrightarrow{p}\Omega^{-1}$.
+3. **3단계: 효율적 가중행렬을 사용한 재추정.**
+   $$
+   \boxed{
+   \hat\theta^{(2)}
+   =\arg\min_{\theta\in\Theta}
+   \bar g_n(\theta)'\widehat\Omega^{-1}\bar g_n(\theta)
+   }.
+   $$
+   이때 $\widehat\Omega^{-1}$는 두 번째 minimization 동안 고정한다. 이 가중행렬이 $\Omega^{-1}$로 수렴하므로
+   $$
+   \boxed{
+   \sqrt n(\hat\theta^{(2)}-\theta_0)
+   \xrightarrow{d}
+   N\!\left(0,(G'\Omega^{-1}G)^{-1}\right)
+   }.
+   $$
+
+따라서 two-step GMM은 알 수 없는 optimal weighting matrix를 first-step에서 추정하여 asymptotically efficient GMM을 구현한다.
+
+#### 6. Overidentifying restrictions $J$-test
+$m>k$일 때 효율적 GMM의 overidentification statistic은
+$$
+J_n=n\,\bar g_n(\hat\theta)'
+\widehat\Omega^{-1}\bar g_n(\hat\theta)
+$$
+이다. 올바른 moment specification, full-rank identification, 효율적 가중행렬과 정칙조건 아래
+$$
+\boxed{J_n\xrightarrow{d}\chi^2_{m-k}}.
+$$
+
+자유도가 $m-k$인 이유를 projection으로 확인하자. 먼저
+$$
+Z_n=\Omega^{-1/2}\sqrt n\,\bar g_n(\theta_0)
+\xrightarrow{d}N(0,I_m),
+\qquad
+H=\Omega^{-1/2}G
+$$
+라 두자. $\operatorname{rank}(H)=k$이고
+$$
+P_H=H(H'H)^{-1}H'
+$$
+는 $\operatorname{col}(H)$에 대한 직교사영행렬이다. 따라서 $I_m-P_H$는 rank $m-k$인 대칭·멱등행렬이다. GMM의 점근선형화로부터
+$$
+\Omega^{-1/2}\sqrt n\,\bar g_n(\hat\theta)
+=(I_m-P_H)Z_n+o_p(1)
+$$
+가 성립하므로
+$$
+J_n=Z_n'(I_m-P_H)Z_n+o_p(1).
+$$
+표준정규벡터의 rank $m-k$ 직교사영에 대한 quadratic form은 $\chi^2_{m-k}$를 따르므로 결론이 성립한다.
+
+$m$개의 moment condition 중 $k$개의 독립적인 방향은 모수를 맞추는 데 사용되고, 나머지 $m-k$개 방향의 mismatch가 검정에 남는다는 뜻이다.
+
+**해석상 주의:** $J$-test는 주어진 moment restrictions의 공동 적합성을 검정한다. 기각되더라도 어느 instrument가 무효인지 특정하지 못하며, 기각되지 않았다는 사실 역시 모든 instrument의 개별 유효성을 증명하지 않는다.
+
+#### 7. 2SLS가 GMM의 특수한 경우임을 증명
+선형 IV model
+$$
+Y_i=X_i'\beta_0+u_i,\qquad E[Z_i u_i]=0
+$$
+에서
+$$
+g_i(\beta)=Z_i(Y_i-X_i'\beta),
+\qquad
+\bar g_n(\beta)=\frac1nZ'(Y-X\beta)
+$$
+라 두자. $Z$의 column rank가 $L$이며
+$$
+W_n=\left(\frac{Z'Z}{n}\right)^{-1}
+$$
+를 사용한다. GMM criterion은
+$$
+\begin{aligned}
+Q_n(\beta)
+&=
+\frac1{n^2}(Y-X\beta)'Z
+\left(\frac{Z'Z}{n}\right)^{-1}
+Z'(Y-X\beta)\\
+&=
+\frac1n(Y-X\beta)'Z(Z'Z)^{-1}Z'(Y-X\beta).
+\end{aligned}
+$$
+Projection matrix $P_Z=Z(Z'Z)^{-1}Z'$를 이용하면
+$$
+Q_n(\beta)=\frac1n(Y-X\beta)'P_Z(Y-X\beta).
+$$
+따라서 FOC는
+$$
+-\frac2n X'P_Z(Y-X\beta)=0,
+$$
+즉
+$$
+X'P_ZX\hat\beta=X'P_ZY
+$$
+이다. $X'P_ZX$가 nonsingular이면
+$$
+\boxed{
+\hat\beta=(X'P_ZX)^{-1}X'P_ZY
+=\hat\beta_{\mathrm{2SLS}}
+}.
+$$
+따라서 2SLS는 linear IV-GMM에서 $W_n=(Z'Z/n)^{-1}$을 사용하는 특수한 경우이다.
+
+일반적 heteroskedasticity에서는 optimal GMM weighting이 $\Omega^{-1}$($\Omega=E[Z_iZ_i'u_i^2]$)이므로 2SLS weighting과 같지 않을 수 있다. Homoskedasticity가 성립하면 두 weighting이 비례하여 동일한 first-order efficiency를 얻는다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**: **식별(유일한 population moment root)**, **일치성(uniform convergence + argmin theorem)**, **점근분산(Taylor expansion + CLT)**, **효율성($\Omega^{-1}$ weighting)**을 서로 구별한다. Overidentification $J$-test는 남은 $m-k$차원의 moment mismatch를 검정한다.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. M-estimation, Maximum Likelihood & QMLE
 ::: {.topic}
@@ -423,3 +769,407 @@ $$
 **형식**: **population criterion → consistency → first-order condition → Taylor expansion → MLE specialization → information equality → QMLE**. MLE를 독립된 공식을 외우는 방식보다 일반적인 M-estimation의 특수한 경우로 연결하여 서술하시오.
 :::
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. M-estimation, Maximum Likelihood & QMLE"}
+### Setting
+$\{W_i\}_{i=1}^n$는 i.i.d.이고 M-estimator는
+$$
+\hat\theta=\arg\min_{\theta\in\Theta}Q_n(\theta),
+\qquad
+Q_n(\theta)=\frac1n\sum_{i=1}^n\rho(W_i,\theta)
+$$
+로 정의된다. Population criterion은
+$$
+Q(\theta)=E[\rho(W_i,\theta)]
+$$
+이고, $\theta_0$는 유일한 최소점이다.
+
+Gradient와 Hessian을
+$$
+\psi(W_i,\theta)=\frac{\partial\rho(W_i,\theta)}{\partial\theta},
+\qquad
+H(W_i,\theta)=\frac{\partial^2\rho(W_i,\theta)}{\partial\theta\partial\theta'}
+$$
+라 하자. 또한
+$$
+A=E[H(W_i,\theta_0)],\qquad
+B=E[\psi(W_i,\theta_0)\psi(W_i,\theta_0)']
+$$
+이며 $A$는 nonsingular, $B$는 유한하다. $A$는 criterion의 curvature, $B$는 sample gradient의 sampling variability를 나타낸다.
+
+---
+
+#### 1) M-estimator consistency와 uniform convergence
+Population identification에 의해
+$$
+\theta_0=\arg\min_{\theta\in\Theta}Q(\theta)
+$$
+가 유일하게 성립한다. 적절한 uniform LLN 아래
+$$
+\boxed{
+\sup_{\theta\in\Theta}|Q_n(\theta)-Q(\theta)|
+\xrightarrow{p}0
+}
+$$
+라고 하자. 또한 임의의 $\varepsilon>0$에 대해
+$$
+\delta_\varepsilon=\inf_{\|\theta-\theta_0\|\ge\varepsilon}\{Q(\theta)-Q(\theta_0)\}>0
+$$
+인 separation condition이 성립한다고 가정한다.
+
+$\hat\theta$는 표본 목적함수의 최소점이므로 $Q_n(\hat\theta)\le Q_n(\theta_0)$이다. Uniform approximation error가 $\delta_\varepsilon/3$보다 작아지는 사건에서는 $\theta_0$에서 $\varepsilon$ 이상 떨어진 점이 표본 최소점이 될 수 없다. 따라서
+$$
+P(\|\hat\theta-\theta_0\|\ge\varepsilon)\longrightarrow0.
+$$
+즉
+$$
+\boxed{\hat\theta\xrightarrow{p}\theta_0}.
+$$
+
+**Pointwise convergence만으로 부족할 수 있는 이유:**
+$Q_n(\theta)\to Q(\theta)$가 각 고정된 $\theta$에서 성립하더라도 argmin인 $\hat\theta$는 $n$에 따라 이동한다. 표본 목적함수에 위치가 이동하는 좁고 깊은 함몰부가 있다면 pointwise convergence가 성립하면서도 최소점이 잘못 이동할 수 있다. Uniform convergence는 이러한 가능성을 통제한다.
+
+---
+
+#### 2) Taylor expansion과 M-estimator의 sandwich variance
+내부해이며 미분가능성이 성립한다고 하자. FOC는
+$$
+\boxed{
+0=\frac1n\sum_{i=1}^n\psi(W_i,\hat\theta)=:\bar\psi_n(\hat\theta)
+}
+$$
+이다. $\theta_0$ 근방의 Taylor expansion으로
+$$
+0=\bar\psi_n(\theta_0)+\widetilde A_n(\hat\theta-\theta_0),
+$$
+$$
+\widetilde A_n=\int_0^1\left[\frac1n\sum_{i=1}^n H\bigl(W_i,\theta_0+t(\hat\theta-\theta_0)\bigr)\right]dt
+$$
+이다. 따라서
+$$
+\hat\theta-\theta_0=-\widetilde A_n^{-1}\bar\psi_n(\theta_0).
+$$
+M-estimator consistency, uniform Hessian convergence 및 $A$의 nonsingularity 아래
+$$
+\widetilde A_n\xrightarrow{p}A,\qquad\widetilde A_n^{-1}\xrightarrow{p}A^{-1}.
+$$
+그러므로
+$$
+\boxed{
+\sqrt n(\hat\theta-\theta_0)
+=-A^{-1}\frac1{\sqrt n}\sum_{i=1}^n\psi(W_i,\theta_0)+o_p(1)
+}.
+$$
+
+$\theta_0$가 interior population minimizer이고 미분과 적분의 교환이 허용된다면
+$$
+E[\psi(W_i,\theta_0)]=\nabla Q(\theta_0)=0.
+$$
+Multivariate CLT에 의해
+$$
+\frac1{\sqrt n}\sum_{i=1}^n\psi(W_i,\theta_0)\xrightarrow{d}N(0,B).
+$$
+따라서
+$$
+\sqrt n(\hat\theta-\theta_0)\xrightarrow{d}N(0,A^{-1}BA^{-T}).
+$$
+$A$는 대칭 Hessian의 기댓값이므로 $A^{-T}=A^{-1}$이고,
+$$
+\boxed{
+\sqrt n(\hat\theta-\theta_0)\xrightarrow{d}N(0,A^{-1}BA^{-1})
+}.
+$$
+즉 sampling noise인 $B$가 inverse curvature $A^{-1}$에 의해 모수 추정오차로 증폭되거나 축소된다.
+
+---
+
+#### 3) MLE는 M-estimation의 특수한 경우
+Loss function을 negative log-likelihood로 두자.
+$$
+\rho(W_i,\theta)=-\log f(W_i;\theta).
+$$
+이때
+$$
+\hat\theta=\arg\min_{\theta}\left[-\frac1n\sum_{i=1}^n\log f(W_i;\theta)\right]=\arg\max_{\theta}\frac1n\sum_{i=1}^n\log f(W_i;\theta).
+$$
+따라서 MLE는 M-estimation의 특수한 경우이다.
+
+Log-likelihood contribution $\ell_i(\theta)=\log f(W_i;\theta)$에 대해 score와 Hessian은
+$$
+s_i(\theta)=\frac{\partial\ell_i(\theta)}{\partial\theta},
+\qquad
+\mathcal H_i(\theta)=\frac{\partial^2\ell_i(\theta)}{\partial\theta\partial\theta'}.
+$$
+Negative log-likelihood의 gradient와 Hessian은 각각
+$$
+\psi(W_i,\theta)=-s_i(\theta),\qquad
+H(W_i,\theta)=-\mathcal H_i(\theta).
+$$
+따라서
+$$
+\boxed{
+A=-E[\mathcal H_i(\theta_0)]
+},\qquad
+\boxed{
+B=E[s_i(\theta_0)s_i(\theta_0)']
+}.
+$$
+$B$에서 음수가 사라지는 이유는 $(-s_i)(-s_i)'=s_is_i'$이기 때문이다. 따라서 MLE에도 일반 M-estimation의 sandwich covariance가 적용된다.
+
+---
+
+#### 4) Information matrix equality와 MLE의 asymptotic variance
+Likelihood가 correctly specified되고 확률밀도의 지지집합 및 미분·적분 교환에 관한 표준 정칙조건이 성립한다고 하자. Score는
+$$
+s_i(\theta)=\frac{1}{f(W_i;\theta)}\frac{\partial f(W_i;\theta)}{\partial\theta}
+$$
+이므로
+$$
+\begin{aligned}
+E_\theta[s_i(\theta)]
+&=\int\frac{\partial\log f(w;\theta)}{\partial\theta}f(w;\theta)\,dw\\
+&=\int\frac{\partial f(w;\theta)}{\partial\theta}\,dw\\
+&=\frac{\partial}{\partial\theta}\int f(w;\theta)\,dw=0.
+\end{aligned}
+$$
+따라서
+$$
+\boxed{E_{\theta_0}[s_i(\theta_0)]=0}.
+$$
+이 등식을 $\theta'$에 대해 미분하면
+$$
+0=\int\frac{\partial}{\partial\theta'}[s(w;\theta)f(w;\theta)]\,dw.
+$$
+Product rule과 $\frac{\partial f(w;\theta)}{\partial\theta'}=f(w;\theta)s(w;\theta)'$를 이용하면
+$$
+0=E_\theta[\mathcal H_i(\theta)]+E_\theta[s_i(\theta)s_i(\theta)'].
+$$
+따라서
+$$
+\boxed{
+E_{\theta_0}[s_i(\theta_0)s_i(\theta_0)']=-E_{\theta_0}[\mathcal H_i(\theta_0)]=I(\theta_0)
+}.
+$$
+이 등식을 **information matrix equality**라고 한다.
+
+앞에서 $A=-E[\mathcal H_i(\theta_0)]$, $B=E[s_i(\theta_0)s_i(\theta_0)']$였으므로 correctly specified MLE에서는
+$$
+A=B=I(\theta_0).
+$$
+따라서
+$$
+\begin{aligned}
+A^{-1}BA^{-1}
+&=I(\theta_0)^{-1}I(\theta_0)I(\theta_0)^{-1}\\
+&=I(\theta_0)^{-1}.
+\end{aligned}
+$$
+결국
+$$
+\boxed{
+\sqrt n(\hat\theta_{\mathrm{MLE}}-\theta_0)\xrightarrow{d}N\!\left(0,I(\theta_0)^{-1}\right)
+}.
+$$
+일반 M-estimation의 두 행렬 $A$와 $B$가 likelihood model의 정확한 명시 아래 같아지므로 sandwich variance가 inverse information matrix로 단순화된다.
+
+---
+
+#### 5) Binary logit의 score와 Hessian
+$$
+Y_i\in\{0,1\},\qquad
+p_i=P(Y_i=1\mid X_i)=\Lambda(X_i'\beta),
+\qquad
+\Lambda(t)=\frac{e^t}{1+e^t}
+$$
+라고 하자. Log-likelihood contribution은
+$$
+\ell_i(\beta)=Y_i\log p_i+(1-Y_i)\log(1-p_i)
+$$
+이다.
+
+먼저 logistic function의 derivative를 계산하면
+$$
+\begin{aligned}
+\Lambda'(t)
+&=\frac{e^t(1+e^t)-e^{2t}}{(1+e^t)^2}\\
+&=\frac{e^t}{(1+e^t)^2}=\Lambda(t)[1-\Lambda(t)].
+\end{aligned}
+$$
+따라서 chain rule에 의해
+$$
+\boxed{
+\frac{\partial p_i}{\partial\beta}=p_i(1-p_i)X_i
+}.
+$$
+Score는
+$$
+\begin{aligned}
+s_i(\beta)
+&=Y_i\frac1{p_i}\frac{\partial p_i}{\partial\beta}-(1-Y_i)\frac1{1-p_i}\frac{\partial p_i}{\partial\beta}\\
+&=\left[\frac{Y_i}{p_i}-\frac{1-Y_i}{1-p_i}\right]p_i(1-p_i)X_i.
+\end{aligned}
+$$
+그런데
+$$
+\frac{Y_i}{p_i}-\frac{1-Y_i}{1-p_i}=\frac{Y_i-p_i}{p_i(1-p_i)}
+$$
+이므로
+$$
+\boxed{s_i(\beta)=X_i(Y_i-p_i)}.
+$$
+이제 score를 다시 미분하면
+$$
+\begin{aligned}
+\mathcal H_i(\beta)
+&=\frac{\partial s_i(\beta)}{\partial\beta'}\\
+&=-X_i\frac{\partial p_i}{\partial\beta'}\\
+&=-p_i(1-p_i)X_iX_i'.
+\end{aligned}
+$$
+따라서
+$$
+\boxed{\mathcal H_i(\beta)=-p_i(1-p_i)X_iX_i'}.
+$$
+
+$p_i(1-p_i)\ge0$이므로 Hessian은 negative semidefinite이다. 즉 log-likelihood는 $\beta$에 대해 concave하다. 또한 FOC $\sum_iX_i(Y_i-p_i)=0$는 설명변수와 확률예측오차 사이의 표본 직교조건으로 해석할 수 있다.
+
+Correctly specified conditional logit에서는
+$$
+E[Y_i\mid X_i]=p_i,\qquad
+\operatorname{Var}(Y_i\mid X_i)=p_i(1-p_i),
+$$
+따라서
+$$
+\begin{aligned}
+E[s_i(\beta_0)s_i(\beta_0)'\mid X_i]
+&=X_iX_i'E[(Y_i-p_i)^2\mid X_i]\\
+&=p_i(1-p_i)X_iX_i'\\
+&=-E[\mathcal H_i(\beta_0)\mid X_i].
+\end{aligned}
+$$
+즉 logit에서도 information matrix equality를 직접 확인할 수 있다.
+
+---
+
+#### 6) QMLE, pseudo-true value, robust sandwich variance
+추정에 사용하는 likelihood family $f(w;\theta)$가 실제 데이터생성분포 $P_0$와 일치하지 않는다고 하자. 동일하게
+$$
+\hat\theta_{\mathrm{QMLE}}=\arg\max_{\theta\in\Theta}\frac1n\sum_{i=1}^n\log f(W_i;\theta)
+$$
+를 계산할 수 있다. 그러나 이 추정량의 population target은 일반적으로 true structural parameter가 아니라
+$$
+\boxed{
+\theta^*=\arg\max_{\theta\in\Theta}E_{P_0}[\log f(W_i;\theta)]
+}
+$$
+로 정의되는 **pseudo-true value**이다.
+
+실제 밀도가 $p_0(w)$이고 KL divergence가 적절히 정의된다면
+$$
+\begin{aligned}
+D_{\mathrm{KL}}(p_0\|f_\theta)
+&=\int p_0(w)\log\frac{p_0(w)}{f(w;\theta)}\,dw\\
+&=\int p_0(w)\log p_0(w)\,dw-E_{P_0}[\log f(W_i;\theta)].
+\end{aligned}
+$$
+첫 번째 항은 $\theta$에 의존하지 않으므로
+$$
+\boxed{
+\theta^*=\arg\min_{\theta\in\Theta}D_{\mathrm{KL}}(p_0\|f_\theta)
+}.
+$$
+즉 $\theta^*$는 지정된 likelihood family 내에서 실제 분포를 KL 기준으로 가장 잘 근사하는 parameter이다.
+
+Uniform LLN과 unique maximizer 조건 아래
+$$
+\sup_{\theta\in\Theta}\left|\frac1n\sum_{i=1}^n\log f(W_i;\theta)-E_{P_0}[\log f(W_i;\theta)]\right|\xrightarrow{p}0
+$$
+이므로
+$$
+\boxed{\hat\theta_{\mathrm{QMLE}}\xrightarrow{p}\theta^*}.
+$$
+$\theta^*$가 interior solution이면
+$$
+E_{P_0}[s_i(\theta^*)]=0
+$$
+이고, 다음 두 행렬을 정의한다.
+$$
+A=-E_{P_0}[\mathcal H_i(\theta^*)],\qquad
+B=E_{P_0}[s_i(\theta^*)s_i(\theta^*)'].
+$$
+적절한 nonsingularity 및 CLT 조건 아래
+$$
+\boxed{
+\sqrt n(\hat\theta_{\mathrm{QMLE}}-\theta^*)\xrightarrow{d}N(0,A^{-1}BA^{-1})
+}.
+$$
+Correctly specified MLE에서는 $A=B=I(\theta_0)$였지만, likelihood가 misspecified되면 information matrix equality가 일반적으로 성립하지 않는다. 따라서
+$$
+\boxed{V_{\mathrm{QMLE}}=A^{-1}BA^{-1}}
+$$
+라는 sandwich covariance가 필요하다.
+
+**해석:** QMLE의 consistency는 $\theta^*$에 대한 일치성이며, 이것만으로 원래 관심 있는 structural parameter의 일치성이 확보되는 것은 아니다. 또한 misspecification이 information equality를 항상 깨뜨리는 것은 아니지만, 이를 추가 가정 없이 사용하는 것은 정당화되지 않는다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**: MLE는 loss를 negative log-likelihood로 설정한 M-estimator이고, QMLE는 실제 분포가 likelihood family 안에 반드시 포함될 필요가 없다는 점에서 확장된다.
+$$
+\boxed{\text{General M-estimation: } A^{-1}BA^{-1}}\qquad\boxed{\text{Correct MLE: } I(\theta_0)^{-1}}
+$$
+두 공식의 차이는 정확한 likelihood specification 아래에서만 일반적으로 확보되는 information matrix equality $A=B$에 있다.
+:::
+:::
+
+::: {.callout-important title="📌 4회차 핵심 연결: GMM vs. M-estimation & MLE"}
+### GMM과 M-estimation의 공통 구조
+GMM의 선형화는
+$$
+\sqrt n(\hat\theta-\theta_0)=-(G'WG)^{-1}G'W\sqrt n\,\bar g_n(\theta_0)+o_p(1)
+$$
+이고 점근분산은
+$$
+\boxed{
+V_{\mathrm{GMM}}=(G'WG)^{-1}G'W\Omega WG(G'WG)^{-1}
+}.
+$$
+M-estimation의 선형화는
+$$
+\sqrt n(\hat\theta-\theta_0)=-A^{-1}\frac1{\sqrt n}\sum_{i=1}^n\psi(W_i,\theta_0)+o_p(1)
+$$
+이며 점근분산은
+$$
+\boxed{V_{\mathrm{M}}=A^{-1}BA^{-1}}.
+$$
+두 추정방식 모두 **표본 추정방정식의 확률적 변동을 국소 Jacobian/curvature를 통해 추정량의 확률적 변동으로 변환한다**는 공통 구조를 가진다.
+
+---
+
+### 추정이론의 핵심 개념 구분
+- **Identification:** population criterion이 대상 모수를 유일하게 정하는가?
+- **Consistency:** uniform convergence와 argmin/argmax theorem으로 표본 추정량이 그 대상에 수렴하는가?
+- **Asymptotic normality:** FOC의 Taylor expansion과 CLT가 어떤 limiting covariance를 도출하는가?
+- **Efficiency:** weighting matrix 또는 information equality가 limiting covariance를 얼마나 작게 만드는가?
+
+최종적으로
+$$
+\boxed{
+W_{\mathrm{opt}}=\Omega^{-1}
+\quad\Longrightarrow\quad
+V_{\mathrm{eff}}=(G'\Omega^{-1}G)^{-1}
+}
+$$
+이고
+$$
+\boxed{
+A=B=I(\theta_0)
+\quad\Longrightarrow\quad
+V_{\mathrm{MLE}}=I(\theta_0)^{-1}
+}
+$$
+이다.
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
+
