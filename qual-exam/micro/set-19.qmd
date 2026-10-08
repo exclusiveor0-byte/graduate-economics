@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -63,6 +63,149 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **cost minimization → conditional factor demand → cost function → Shephard → concavity → returns to scale**.<br>cost function의 요소가격에 대한 concavity와 산출량에 대한 convexity는 서로 다른 성질임을 구분하시오.
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Producer Theory"}
+::: {.topic}
+Cost Minimization · Conditional Factor Demand · Shephard's Lemma · Concavity · Returns to Scale
+:::
+
+#### 1) Cost minimization과 conditional factor demand
+생산함수는
+$$
+q=f(L,K)=L^{1/4}K^{1/4},\qquad L,K\ge0,
+$$
+이며 요소가격은 $w>0$, $r>0$이다. 기업은 목표산출량 $q>0$을 최소비용으로 생산하기 위해
+$$
+\min_{L,K\ge0}\;wL+rK
+\qquad\text{s.t.}\qquad
+L^{1/4}K^{1/4}\ge q
+$$
+를 푼다.
+
+요소가격이 양수이므로 최적점에서 생산제약은 결합한다.
+$$
+L^{1/4}K^{1/4}=q
+\quad\Longleftrightarrow\quad LK=q^4.
+$$
+
+Lagrangian을
+$$
+\mathcal L=wL+rK+\lambda\big(q-L^{1/4}K^{1/4}\big)
+$$
+로 쓰면 interior first-order conditions는
+$$
+w=\frac{\lambda}{4}L^{-3/4}K^{1/4},
+\qquad
+r=\frac{\lambda}{4}L^{1/4}K^{-3/4}.
+$$
+두 식을 나누면
+$$
+\frac wr=\frac KL,
+\qquad\text{즉}\qquad K=\frac wr L.
+$$
+
+이를 $LK=q^4$에 대입하면
+$$
+\frac wr L^2=q^4
+\quad\Longrightarrow\quad
+L^c(w,r,q)=q^2\sqrt{\frac rw}.
+$$
+따라서
+$$
+K^c(w,r,q)=q^2\sqrt{\frac wr}.
+$$
+
+최소비용은
+$$
+\begin{aligned}
+C(w,r,q)
+&=wL^c+rK^c\\
+&=wq^2\sqrt{\frac rw}+rq^2\sqrt{\frac wr}\\
+&=2q^2\sqrt{wr}.
+\end{aligned}
+$$
+따라서
+$$
+\boxed{L^c=q^2\sqrt{\frac rw}},\qquad
+\boxed{K^c=q^2\sqrt{\frac wr}},\qquad
+\boxed{C(w,r,q)=2q^2\sqrt{wr}}.
+$$
+
+#### 2) Shephard's lemma
+비용함수를 요소가격으로 미분하면
+$$
+\frac{\partial C}{\partial w}
+=2q^2\cdot\frac12\sqrt{\frac rw}
+=q^2\sqrt{\frac rw}
+=L^c(w,r,q),
+$$
+$$
+\frac{\partial C}{\partial r}
+=2q^2\cdot\frac12\sqrt{\frac wr}
+=q^2\sqrt{\frac wr}
+=K^c(w,r,q).
+$$
+그러므로
+$$
+\boxed{\frac{\partial C}{\partial w}=L^c},
+\qquad
+\boxed{\frac{\partial C}{\partial r}=K^c}
+$$
+가 성립한다. 이는 산출량을 고정한 최소비용의 요소가격에 대한 한계변화가 해당 요소의 조건부 수요량과 일치한다는 의미이다.
+
+#### 3) 요소가격에 대한 concavity와 returns to scale
+먼저 산출량 $q$를 고정하면 비용함수는
+$$
+C(w,r,q)=\inf_{\,L^{1/4}K^{1/4}\ge q}(wL+rK)
+$$
+이다. 임의의 feasible input bundle $(L,K)$에 대해 $wL+rK$는 요소가격 $(w,r)$의 affine function이므로, 그 pointwise infimum인 비용함수는 가격에 대해 concave이다.
+
+Hessian으로도 확인할 수 있다. $q$를 고정하면
+$$
+\nabla^2_{(w,r)}C
+=\frac{q^2}{2\sqrt{wr}}
+\begin{pmatrix}
+-\dfrac rw & 1\\[5pt]
+1 & -\dfrac wr
+\end{pmatrix}.
+$$
+임의의 $(a,b)\in\mathbb R^2$에 대해
+$$
+\begin{aligned}
+\begin{pmatrix}a&b\end{pmatrix}
+\nabla^2 C
+\begin{pmatrix}a\\b\end{pmatrix}
+&=-\frac{q^2}{2\sqrt{wr}}
+\left(\sqrt{\frac rw}\,a-\sqrt{\frac wr}\,b\right)^2\\
+&\le0.
+\end{aligned}
+$$
+따라서 Hessian은 negative semidefinite이고, 비용함수는 요소가격에 대해 concave이다.
+
+생산함수의 규모수익은 $t>1$에 대해
+$$
+\begin{aligned}
+f(tL,tK)
+&=(tL)^{1/4}(tK)^{1/4}\\
+&=t^{1/2}f(L,K)
+< t f(L,K).
+\end{aligned}
+$$
+따라서 **decreasing returns to scale**이다.
+
+평균비용과 한계비용은
+$$
+AC(q)=\frac{C(w,r,q)}q=2q\sqrt{wr},
+$$
+$$
+MC(q)=\frac{\partial C}{\partial q}=4q\sqrt{wr}.
+$$
+따라서 $q>0$에서
+$$
+\boxed{MC(q)=2AC(q)>AC(q)}.
+$$
+산출량이 증가할수록 평균비용과 한계비용이 증가한다. 이는 생산기술의 decreasing returns와 일관된다. 요소가격에 대한 concavity는 $q$에 대한 비용함수의 convexity와 구별된다.
 :::
 :::
 
@@ -115,4 +258,154 @@ $$
 ::: {.spoon-hint}
 **형식**: **firm supply → industry supply → short-run equilibrium → zero-profit condition → free entry → long-run adjustment**.<br>단기에서는 기업 수가 고정되고, 장기에서는 entry와 exit가 기업 수를 조정한다는 점을 분리해서 계산하시오.
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Partial Equilibrium"}
+::: {.topic}
+Short-run Supply · Competitive Equilibrium · Free Entry · Zero Profit · Industry Adjustment
 :::
+
+#### 1) 초기 short-run competitive equilibrium
+개별기업의 total cost가
+$$
+C(q)=16+q^2
+$$
+이므로 variable cost는 $VC(q)=q^2$, marginal cost는
+$$
+MC(q)=2q
+$$
+이다. 고정비용 $16$이 단기에 sunk되어 있으므로, 기업은 산출물 가격 $p$에서
+$$
+\max_{q\ge0}\left\{pq-q^2-16\right\}
+$$
+를 푼다. 양의 가격에서 최적조건 $p=MC(q)$에 의해
+$$
+\boxed{q^s(p)=\frac p2}\qquad(p>0)
+$$
+이다. $p=0$에서는 $q^s=0$이다.
+
+활동기업 수가 $N_0=5$이므로 산업의 단기공급은
+$$
+\boxed{Q_S(p)=5\,q^s(p)=\frac{5p}{2}}.
+$$
+시장수요는 $Q_D(p)=80-p$이다. 시장청산조건을 적용하면
+$$
+80-p=\frac{5p}{2}
+\quad\Longrightarrow\quad
+\boxed{p_0^{SR}=\frac{160}{7}}.
+$$
+따라서 산업 전체 생산량은
+$$
+\boxed{Q_0^{SR}=80-\frac{160}{7}=\frac{400}{7}},
+$$
+개별기업의 생산량은
+$$
+\boxed{q_0^{SR}=\frac{p_0^{SR}}2=\frac{80}{7}}.
+$$
+
+각 기업의 이윤은 fixed cost를 포함하여
+$$
+\begin{aligned}
+\pi_0^{SR}
+&=p_0^{SR}q_0^{SR}-16-(q_0^{SR})^2\\
+&=\frac{160}{7}\cdot\frac{80}{7}-16-\left(\frac{80}{7}\right)^2\\
+&=\boxed{\frac{5616}{49}>0}.
+\end{aligned}
+$$
+따라서 초기 단기균형에서 개별기업은 양의 경제적 이윤을 얻는다.
+
+#### 2) Free-entry long-run equilibrium
+장기에는 고정비용까지 모두 회피할 수 있으므로 평균비용은
+$$
+AC(q)=\frac{16+q^2}{q}=\frac{16}{q}+q,
+\qquad q>0.
+$$
+이를 최소화하면
+$$
+\frac{dAC}{dq}=-\frac{16}{q^2}+1=0
+\quad\Longrightarrow\quad \boxed{q^{LR}=4}.
+$$
+두 번째 도함수는 $\frac{d^2AC}{dq^2}=\frac{32}{q^3}>0$이므로 $q=4$는 average cost의 최소점이다. 그때
+$$
+\min AC=\frac{16}{4}+4=8,
+\qquad MC(4)=2\cdot4=8.
+$$
+
+자유진입 장기균형에서는
+$$
+\boxed{p^{LR}=MC(q^{LR})=AC(q^{LR})=8}
+$$
+이며 개별기업 이윤은
+$$
+\boxed{\pi^{LR}=8\cdot4-(16+4^2)=0}.
+$$
+시장 전체 수요량은
+$$
+\boxed{Q^{LR}=80-8=72}.
+$$
+따라서 기업 수는
+$$
+\boxed{N^{LR}=\frac{Q^{LR}}{q^{LR}}=\frac{72}{4}=18}.
+$$
+
+초기 기업 수 $5$에서 자유진입으로 기업 수가 $18$까지 증가하며, 양의 경제적 이윤이 소멸한다.
+
+#### 3) 수요 증가 이후의 short-run 및 long-run 조정
+수요가 영구적으로 $Q_D'(p)=104-p$로 증가했다고 하자. 수요 증가 직후에는 기업 수가 이전 장기균형 수준인 $N=18$로 고정된다.
+
+따라서 새로운 단기 산업공급은
+$$
+Q_S^{SR}(p)=18\cdot\frac p2=9p.
+$$
+시장청산으로부터
+$$
+104-p=9p
+\quad\Longrightarrow\quad
+\boxed{p_1^{SR}=\frac{52}{5}=10.4}.
+$$
+
+각 기업의 생산량은
+$$
+\boxed{q_1^{SR}=\frac{p_1^{SR}}{2}=\frac{26}{5}=5.2},
+$$
+산업 전체 생산량은
+$$
+\boxed{Q_1^{SR}=18\cdot\frac{26}{5}=\frac{468}{5}=93.6}.
+$$
+각 기업의 이윤은
+$$
+\begin{aligned}
+\pi_1^{SR}
+&=p_1^{SR}q_1^{SR}-16-(q_1^{SR})^2\\
+&=\frac{52}{5}\cdot\frac{26}{5}-16-\left(\frac{26}{5}\right)^2\\
+&=\boxed{\frac{276}{25}=11.04>0}.
+\end{aligned}
+$$
+이처럼 수요 증가 직후에는 가격이 $8$에서 $52/5$로 상승하고 기존 기업들의 이윤이 양수가 되어 추가진입을 유인한다.
+
+새로운 장기균형에서는 기술 및 비용조건이 변하지 않았으므로
+$$
+\boxed{p_1^{LR}=\min AC=8},
+\qquad \boxed{q_1^{LR}=4}.
+$$
+새 수요에서의 산업 전체 생산량은
+$$
+\boxed{Q_1^{LR}=104-8=96}.
+$$
+따라서 장기 기업 수는
+$$
+\boxed{N_1^{LR}=\frac{96}{4}=24}.
+$$
+
+결국 장기균형을 기준으로 비교하면
+$$
+\boxed{p^{LR}:\;8\longrightarrow8},
+\qquad
+\boxed{N^{LR}:\;18\longrightarrow24}
+$$
+이다. 단기에는 기업 수가 고정되어 가격과 개별기업 산출량 및 이윤이 상승하지만, 장기에는 진입으로 산업공급이 확대되어 가격이 최소 평균비용 $8$로 돌아가고 경제적 이윤은 0이 된다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

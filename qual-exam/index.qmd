@@ -318,12 +318,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-19.html" class="spoon-card" data-subject="micro" data-round="19">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#19 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 · 부분균형</div>
   <div class="spoon-card__desc">조건부 요소수요와 비용함수 쌍대성(Shephard's Lemma) 및 요소가격 오목성(Concavity), 완전경쟁 산업의 단기 균형·자유진입 장기 균형 및 수요충격 조정과정</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -399,12 +402,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-04.html" class="spoon-card" data-subject="macro" data-round="4">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#4 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">경제성장이론 I · 솔로우 모형</div>
   <div class="spoon-card__desc">유효노동 단위 집약생산함수, 솔로우 자본축적 방정식과 균제상태(Steady State), 균형성장경로(BGP), 황금률 저축률(s_GR = α) 및 국소 수렴속도</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -468,12 +474,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-04.html" class="spoon-card" data-subject="metrics" data-round="4">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#4 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">GMM · M-추정과 최대우도/QMLE</div>
   <div class="spoon-card__desc">GMM 최적 가중행렬과 overidentification J-검정, 일반 M-추정량의 일치성과 점근분산, MLE 정보행렬 일치와 QMLE 샌드위치 분산</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -897,12 +906,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-19.html" class="spoon-card" data-subject="micro" data-round="19">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#19 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 · 부분균형</div>
   <div class="spoon-card__desc">조건부 요소수요와 비용함수 쌍대성(Shephard's Lemma) 및 요소가격 오목성(Concavity), 완전경쟁 산업의 단기 균형·자유진입 장기 균형 및 수요충격 조정과정</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -993,12 +1005,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-04.html" class="spoon-card" data-subject="macro" data-round="4">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#4 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">경제성장이론 I · 솔로우 모형</div>
   <div class="spoon-card__desc">유효노동 단위 집약생산함수, 솔로우 자본축적 방정식과 균제상태(Steady State), 균형성장경로(BGP), 황금률 저축률(s_GR = α) 및 국소 수렴속도</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1077,12 +1092,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-04.html" class="spoon-card" data-subject="metrics" data-round="4">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#4 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">GMM · M-추정과 최대우도/QMLE</div>
   <div class="spoon-card__desc">GMM 최적 가중행렬과 overidentification J-검정, 일반 M-추정량의 일치성과 점근분산, MLE 정보행렬 일치와 QMLE 샌드위치 분산</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
