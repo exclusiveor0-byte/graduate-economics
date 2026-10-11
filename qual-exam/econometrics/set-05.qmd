@@ -18,7 +18,7 @@ GRADUATE ECONOMETRICS · DAILY PRACTICE
 [계량경제학]{.chip .chip--metrics}
 [종합 1문제]{.chip}
 [예상 65–80분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험형]{.chip}
 :::
 :::
@@ -271,3 +271,234 @@ h. **Hausman Logic**<br>
 **형식**: **Pooled OLS → unobserved heterogeneity → FE → FD → clustered inference → RE → FE vs. RE → Hausman**. 각 추정법을 단순 공식으로 암기하지 말고, **어떤 변동을 사용해 식별하는가, 어떤 가정을 요구하는가, 무엇을 제거하는가, 무엇을 잃는가**를 중심으로 답하시오.
 :::
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Comprehensive Problem. Static Panel Data"}
+### Setting
+다음 static panel model을 생각한다.
+$$
+\boxed{y_{it}=x_{it}'\beta_0+c_i+u_{it}},
+\qquad i=1,\ldots,N,\quad t=1,\ldots,T.
+$$
+여기서 $x_{it}\in\mathbb R^k$는 regressor vector, $c_i$는 시간에 따라 변하지 않는 unobserved individual effect, $u_{it}$는 idiosyncratic error이다. $T$는 고정이고 $N\to\infty$인 fixed-$T$, large-$N$ asymptotics를 사용한다.
+
+핵심은 **어떤 variation이 사용되는가**와 **개인효과 $c_i$를 어떻게 처리하는가**이다.
+
+---
+
+#### a. Pooled OLS와 unobserved heterogeneity
+Composite error를 $v_{it}=c_i+u_{it}$로 두면 pooled regression은 $y_{it}=x_{it}'\beta_0+v_{it}$이다.
+
+**(i) Pooled OLS consistency의 population orthogonality.**
+Pooled OLS 추정량은
+$$
+\hat\beta_{P}=\left(\sum_{i=1}^{N}\sum_{t=1}^{T}x_{it}x_{it}'\right)^{-1}\sum_{i=1}^{N}\sum_{t=1}^{T}x_{it}y_{it}
+$$
+이므로
+$$
+\hat\beta_P-\beta_0=\left(\frac1{NT}\sum_{i,t}x_{it}x_{it}'\right)^{-1}\left(\frac1{NT}\sum_{i,t}x_{it}v_{it}\right).
+$$
+$T$ 고정하에서 개인별 관측벡터에 LLN을 적용하면 $Q_P=\frac1T\sum_{t=1}^{T}E[x_{it}x_{it}']$가 nonsingular일 때
+$$
+\operatorname{plim}\hat\beta_P=\beta_0+Q_P^{-1}\left(\frac1T\sum_{t=1}^{T}E[x_{it}v_{it}]\right).
+$$
+따라서 pooled OLS consistency의 핵심 직교조건은
+$$
+\boxed{\frac1T\sum_{t=1}^{T}E[x_{it}v_{it}]=0}.
+$$
+
+**(ii) 왜 $E[x_{it}c_i]\neq0$가 OVB를 만드는가?**
+$$
+E[x_{it}v_{it}]=E[x_{it}c_i]+E[x_{it}u_{it}].
+$$
+$E[x_{it}u_{it}]=0$이더라도 $E[x_{it}c_i]\neq0$라면 복합오차와 설명변수가 직교하지 않는다.
+$$
+\operatorname{plim}\hat\beta_P-\beta_0=Q_P^{-1}\left(\frac1T\sum_t E[x_{it}c_i]\right)\neq0.
+$$
+이는 회귀식에서 누락된 $c_i$의 효과가 $x_{it}$의 계수로 흡수되는 **omitted-variable bias (OVB)**이다.
+
+**(iii) 왜 $E[x_{it}u_{it}]=0$만으로 불충분한가?**
+Pooled regression의 실제 error는 $u_{it}$가 아니라 $c_i+u_{it}$이다. 그러므로 $E[x_{it}u_{it}]=0 \not\Rightarrow E[x_{it}(c_i+u_{it})]=0$. 따라서 unobserved individual effect와의 직교도 필수적이다.
+
+---
+
+#### b. Fixed Effects / Within Estimator
+개인별 시점 평균을 $\bar y_i=\frac1T\sum_{t=1}^{T}y_{it}, \bar x_i=\frac1T\sum_{t=1}^{T}x_{it}, \bar u_i=\frac1T\sum_{t=1}^{T}u_{it}$로 둔다.
+
+**(i) Within transformation.**
+원모형의 시점 평균은 $\bar y_i = \bar x_i'\beta_0+c_i+\bar u_i$. 각 시점 식에서 이를 빼면
+$$
+y_{it}-\bar y_i=(x_{it}-\bar x_i)'\beta_0+(u_{it}-\bar u_i).
+$$
+따라서
+$$
+\boxed{\ddot y_{it}=\ddot x_{it}'\beta_0+\ddot u_{it}},
+$$
+여기서 $\ddot y_{it}=y_{it}-\bar y_i, \ddot x_{it}=x_{it}-\bar x_i, \ddot u_{it}=u_{it}-\bar u_i$.
+$c_i-c_i=0$이므로, $c_i$가 $x_{it}$와 어떻게 관련되어 있든 within transformation을 통해 완전히 소거된다.
+
+**(ii) FE estimator.**
+Transformed squared residuals를 최소화하면 FOC로부터
+$$
+\boxed{\hat\beta_{FE}=\left(\sum_{i,t}\ddot x_{it}\ddot x_{it}'\right)^{-1}\left(\sum_{i,t}\ddot x_{it}\ddot y_{it}\right)}.
+$$
+이 추정량은 설명변수의 **개인 내 시계열 변동(within-individual time variation)**만으로 $\beta_0$를 식별한다.
+
+**(iii) Strict exogeneity의 의미.**
+$$
+\boxed{E[u_{it}\mid x_{i1},\ldots,x_{iT},c_i]=0 \quad\text{for all }t}.
+$$
+오차 $u_{it}$가 해당 개인의 **과거·현재·미래** 설명변수 전체와 조건부 평균 독립이어야 한다는 뜻이다. $X_i=(x_{i1},\ldots,x_{iT})$에 대해 $E[\ddot u_{it}\mid X_i,c_i]=0$이고, $\ddot x_{it}$는 $X_i$의 함수이므로 $E[\ddot x_{it}\ddot u_{it}]=0$이 보장되어 $\hat\beta_{FE}\xrightarrow{p}\beta_0$가 된다.
+단순 contemporaneous exogeneity $E[u_{it}\mid x_{it},c_i]=0$만으로는 미래 설명변수 피드백(예: 오늘 충격 $u_{it}$가 내일의 $x_{i,t+1}$에 영향)을 배제하지 못해 $\bar x_i$와 $\ddot u_{it}$의 상관이 발생할 수 있다.
+
+**행렬 표현 및 일치성 증명:** Within 사영행렬 $M_T=I_T-\frac1T\mathbf 1_T\mathbf 1_T'$ ($M_T\mathbf 1_T=0$)를 정의하면 $M_Ty_i=M_TX_i\beta_0+M_Tu_i$이고
+$$
+\hat\beta_{FE}-\beta_0=\left(\sum_{i=1}^N X_i'M_TX_i\right)^{-1}\sum_{i=1}^N X_i'M_Tu_i.
+$$
+Strict exogeneity 아래 $E[X_i'M_Tu_i]=0$이므로 $N\to\infty$에서 $\boxed{\hat\beta_{FE}\xrightarrow{p}\beta_0}$이다.
+
+---
+
+#### c. Time-invariant regressors와 식별
+$z_{it}=z_i$인 경우:
+
+**(i) Within transformation 후의 값.**
+$\bar z_i = \frac1T\sum_{t=1}^T z_i = z_i \implies \boxed{z_{it}-\bar z_i=0}$.
+
+**(ii) Coefficient를 FE로 식별할 수 없는 이유.**
+Within regression에서 $(z_i-\bar z_i)\gamma = 0\cdot\gamma = 0$이므로, $\gamma$의 값이 무엇이든 변환된 회귀식에 영향을 미치지 못한다. 즉 transformed design matrix의 해당 열이 영벡터가 되어 **완전 공선성(perfect collinearity)**이 발생하므로 FE는 time-invariant regressor의 계수를 식별하지 못한다.
+
+**(iii) 경제적 중요성에 관한 해석.**
+이는 $z_i$가 종속변수에 영향을 주지 않는다는 뜻이 아니며, 개인 내 시점 간 변동이 없는 변수의 효과를 개인 고유효과 $c_i$와 분리해낼 수 없다는 **FE 방법론의 식별상 한계**일 뿐이다.
+
+---
+
+#### d. First Difference와 FE 비교
+1차 차분식: $\Delta y_{it} = \Delta x_{it}'\beta_0 + \Delta u_{it}$ ($t=2,\ldots,T$).
+
+**(i) 개인효과가 제거되는 이유.**
+$c_i$는 시간에 불변이므로 $c_i - c_i = 0$으로 소거된다.
+
+**(ii) $T=2$에서 FE와 FD의 slope가 동일함.**
+$T=2$이면 $\ddot x_{i1}=-\frac12\Delta x_{i2}, \ddot x_{i2}=\frac12\Delta x_{i2}$이므로
+$$
+\sum_{t=1}^{2}\ddot x_{it}\ddot x_{it}' = \frac12\Delta x_{i2}\Delta x_{i2}',\qquad \sum_{t=1}^{2}\ddot x_{it}\ddot y_{it} = \frac12\Delta x_{i2}\Delta y_{i2}.
+$$
+따라서
+$$
+\hat\beta_{FE}=\left(\frac12\sum_i\Delta x_{i2}\Delta x_{i2}'\right)^{-1}\left(\frac12\sum_i\Delta x_{i2}\Delta y_{i2}\right)=\left(\sum_i\Delta x_{i2}\Delta x_{i2}'\right)^{-1}\left(\sum_i\Delta x_{i2}\Delta y_{i2}\right)=\boxed{\hat\beta_{FD}}.
+$$
+
+**(iii) $T>2$에서는 왜 일반적으로 같지 않은가?**
+FE는 $M_T$ (평균 차감), FD는 1차 차분행렬 $D$를 사용한다. $T>2$에서 오차항의 상관구조에 따라 두 추정량의 가중치가 달라진다.
+- $u_{it}$가 i.i.d.이면 차분오차 $\Delta u_{it}$에 인접 시점 간 음의 자기상관($\operatorname{Cov}(\Delta u_{it},\Delta u_{i,t+1})=-\sigma_u^2$)이 생겨 FE가 더 효율적이다.
+- $u_{it}$가 random walk이면 차분오차가 i.i.d.가 되므로 FD가 더 효율적이다.
+
+**가중치 관계:** 차분된 데이터에 오차 공분산 $\sigma_u^2DD'$를 반영한 GLS를 적용하면 $D'(DD')^{-1}D=M_T$이므로 $\boxed{\hat\beta_{FD\text{-}GLS}=\hat\beta_{FE}}$가 성립한다.
+
+---
+
+#### e. Within transformation과 clustered inference
+변환된 오차는 $\ddot u_{it}=u_{it}-\bar u_i$.
+
+**(i) $\ddot u_{it}$와 $\ddot u_{is}$의 공분산.**
+$u_{it}$가 시점 간 비상관($\operatorname{Var}(u_{it})=\sigma_u^2$)이더라도, 공통된 $\bar u_i$를 차감하므로
+$$
+\boxed{\operatorname{Cov}(\ddot u_{it},\ddot u_{is})=\sigma_u^2\left(\mathbf 1\{t=s\}-\frac1T\right)}.
+$$
+따라서 서로 다른 시점($t\neq s$)에 대해
+$$
+\boxed{\operatorname{Cov}(\ddot u_{it},\ddot u_{is})=-\frac{\sigma_u^2}{T}\neq0}.
+$$
+
+**(ii) 왜 individual-cluster robust inference가 자연스러운가?**
+개인 $i$ 내부의 변환오차는 상관되지만 서로 다른 개인끼리는 독립이므로, 개인 $i$를 하나의 군집(cluster)으로 묶는 **cluster-robust covariance estimator**를 구성해야 한다.
+$$
+\boxed{\widehat{\operatorname{Var}}_{CL}(\hat\beta_{FE})=B_N^{-1}\left(\sum_{i=1}^{N}S_iS_i'\right)B_N^{-1}},\qquad S_i=\sum_{t=1}^{T}\ddot x_{it}\hat{\ddot u}_{it}.
+$$
+Fixed-$T$, large-$N$ asymptotics에서 중심극한정리는 개인 단위의 합 $\sum_i S_i$에 적용된다.
+
+**(iii) Usual i.i.d. OLS standard error를 사용해도 되는가?**
+안 된다. FE는 $c_i$를 제거하지만 $\ddot u_{it}$의 시계열적 의존성을 남기므로, 통상적 OLS 표준오차를 사용하면 분산이 과소추정되어 잘못된 가설검정을 초래한다.
+
+---
+
+#### f. Random Effects와 quasi-demeaning
+가정: $E[c_i\mid X_i]=0$, $E[u_{it}\mid X_i,c_i]=0$, $\operatorname{Var}(c_i)=\sigma_c^2$, $\operatorname{Var}(u_{it})=\sigma_u^2$, $u_{it}$ 상호 비상관.
+
+**(i) Composite error covariance.**
+$v_{it}=c_i+u_{it}$이므로 $\operatorname{Cov}(v_{it},v_{is})=\sigma_c^2+\sigma_u^2$ ($t=s$), $\sigma_c^2$ ($t\neq s$). 따라서
+$$
+\boxed{\Omega=\sigma_u^2I_T+\sigma_c^2\mathbf 1_T\mathbf 1_T'}.
+$$
+
+**(ii) GLS와 quasi-demeaning의 동치.**
+$P=T^{-1}\mathbf 1_T\mathbf 1_T', M=I_T-P$라 두면 $\Omega=\sigma_u^2 M+(\sigma_u^2+T\sigma_c^2)P$. 따라서
+$$
+\Omega^{-1/2}=\frac1{\sigma_u}\left[M+\sqrt{\frac{\sigma_u^2}{\sigma_u^2+T\sigma_c^2}}P\right]=\frac1{\sigma_u}(I_T-\lambda P),
+$$
+$$
+\boxed{\lambda=1-\sqrt{\frac{\sigma_u^2}{\sigma_u^2+T\sigma_c^2}}}.
+$$
+$(I_T-\lambda P)y_i$의 각 원소는 $y_{it}-\lambda\bar y_i$이므로, GLS는 **quasi-demeaned regression**
+$$
+\boxed{y_{it}-\lambda\bar y_i=(x_{it}-\lambda\bar x_i)'\beta_0+v_{it}^*}
+$$
+의 OLS와 동치이다 ($v_{it}^*=(1-\lambda)c_i+u_{it}-\lambda\bar u_i$).
+
+**(iii) Pooled OLS와 FE 사이의 해석.**
+$0\le\lambda<1$이다.
+- $\sigma_c^2=0$이면 $\lambda=0$이므로 Pooled OLS와 일치한다.
+- $\sigma_c^2/\sigma_u^2\to\infty$이면 $\lambda\to1$이므로 FE(within transformation)에 수렴한다.
+따라서 RE는 개인효과의 상대적 분산에 따라 Pooled OLS와 FE 사이를 절충하는 **부분 평균차감(quasi-demeaning)**이다.
+
+---
+
+#### g. FE와 RE의 가정 비교
+- **Case A ($E[c_i\mid X_i]=0$):** FE와 RE 모두 consistent하다. RE는 개인 간 변동(between variation)까지 활용하고 최적 가중치로 결합하므로 **RE가 FE보다 효율적(efficiency gain)**이다.
+- **Case B ($E[c_i\mid X_i]\neq0$):** FE는 $c_i$를 소거하므로 여전히 consistent하다. 반면 RE는 $(1-\lambda)c_i$가 오차에 남아 설명변수와 상관되므로 **RE는 inconsistent**하다.
+- **평가:** *“RE가 FE보다 효율적이므로 항상 RE를 써야 한다”*는 주장은 오류이다. RE의 효율성은 일치성이 보장되는 Case A에서만 의미가 있다. 비일치적 추정량의 작은 분산은 잘못된 모수 주위에서의 정밀도에 불과하므로, **효율성은 일치성을 대신할 수 없다.**
+
+---
+
+#### h. Hausman Logic
+귀무가설 $H_0: E[c_i\mid X_i]=0$.
+
+**(i) $H_0$ 아래의 성질:** FE와 RE 모두 consistent하다 ($\operatorname{plim}\hat\beta_{FE}=\operatorname{plim}\hat\beta_{RE}=\beta_0$). Classical RE 가정 아래 RE가 점근적으로 더 효율적이다.
+
+**(ii) $H_1$ 아래의 성질:** FE는 여전히 consistent하지만, RE는 inconsistent하다 ($\operatorname{plim}\hat\beta_{FE}\neq\operatorname{plim}\hat\beta_{RE}$).
+
+**(iii) $\hat\beta_{FE}-\hat\beta_{RE}$의 역할:** $H_0$ 아래에서 $d_N:=\hat\beta_{FE}-\hat\beta_{RE}\xrightarrow{p}0$이고, $H_1$ 아래에서는 $0$이 아닌 값으로 수렴하므로, 두 추정량의 차이가 specification test의 통계량이 된다.
+
+**(iv) Quadratic-form 검정통계량 및 점근분포:**
+$$
+\boxed{H_N=d_N'\widehat V_d^{-1}d_N \xrightarrow{d} \chi_k^2}.
+$$
+Classical 조건(RE의 최적성) 아래에서는 $\operatorname{Var}(d_N)=\operatorname{Var}(\hat\beta_{FE})-\operatorname{Var}(\hat\beta_{RE})$로 단순화되지만, 이분산이나 군집 내 임의의 상관을 허용할 때는 joint cluster influence functions를 이용한 robust covariance 추정량을 사용해야 한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 핵심 요약**:
+- **Pooled OLS:** $E[x_{it}c_i]\neq0$ 시 OVB 발생.
+- **FE:** Within transformation으로 $c_i$ 완전 제거. Strict exogeneity 필요, time-invariant 변수 식별 불가. 잔차의 시계열 의존성 때문에 Clustered SE 필수.
+- **FD:** 1차 차분으로 $c_i$ 제거. $T=2$에서는 FE와 동일, $T>2$에서는 오차의 자기상관 구조에 따라 상대적 효율성 결정.
+- **RE:** $E[c_i\mid X_i]=0$ 조건 하에 quasi-demeaning($\lambda$). Between 정보 활용으로 효율성 제고.
+- **Hausman:** $H_0$ 하의 FE와 RE 일치성을 이용한 specification test ($\chi_k^2$).
+:::
+:::
+
+::: {.callout-important title="📌 5회차 핵심 개념 정리: Static Panel Data"}
+### 추정방법별 변동과 식별 조건
+- **Pooled OLS:** 개인 간·개인 내 변동을 함께 사용한다. $c_i$가 설명변수와 관련되면 누락변수편의(OVB)가 발생한다.
+- **FE:** $x_{it}-\bar x_i$라는 within variation만 사용한다. $c_i$가 제거되므로 개인효과와 설명변수가 관련되어 있어도 strict exogeneity 아래 consistent하다.
+- **FD:** $x_{it}-x_{i,t-1}$를 사용한다. $T=2$에서는 FE와 같지만 $T>2$에서는 오차의 시간적 구조에 따라 효율성이 달라진다.
+- **RE:** $x_{it}-\lambda\bar x_i$라는 quasi-demeaned variation을 사용한다. $E[c_i\mid X_i]=0$ 및 적절한 공분산 가정 아래 FE보다 효율적이다.
+- **Hausman:** $d_N=\hat\beta_{FE}-\hat\beta_{RE}$가 0에서 유의하게 벗어나는지를 quadratic form으로 검정한다.
+
+### 꼭 구별할 두 가지
+1. **개인효과 제거와 오차의 독립은 다르다:** Within transformation은 $c_i$를 없애지만 $u_{it}-\bar u_i$ 사이의 공분산은 남는다. 따라서 cluster-robust standard errors는 FE 추정과 별개의 필수적 추론 절차다.
+2. **Consistency와 efficiency는 다르다:** 잘못된 RE specification이 만든 편의는 더 작은 분산으로 정당화될 수 없다. 일치성을 먼저 확인한 뒤 상대적 효율성을 논해야 한다.
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
+
