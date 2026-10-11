@@ -333,12 +333,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-20.html" class="spoon-card" data-subject="micro" data-round="20">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#20 회차 (종합)</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 종합문제</div>
   <div class="spoon-card__desc">3요소 생산기술의 규모수익·오목성, 비용최소화와 쌍대성(Shephard), 요소가격 오목성·평균비용 형태, 이윤극대화·호텔링 보조정리 및 비교정태 분석 (7문항 연결)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -417,12 +420,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-05.html" class="spoon-card" data-subject="macro" data-round="5">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#5 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">경제성장이론 II · 램지 모형</div>
   <div class="spoon-card__desc">무한기간 유량 예산제약식 전방반복, 폰지사기 금지조건(No-Ponzi Game)과 현가가치 예산제약, Ramsey–Cass–Koopmans 동태시스템 및 경쟁균형</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -489,12 +495,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-05.html" class="spoon-card" data-subject="metrics" data-round="5">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#5 회차 (종합)</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">정적 패널데이터 종합문제</div>
   <div class="spoon-card__desc">미관측 이질성과 합동 OLS 편의, 고정효과(FE) 내변환과 엄격한 외생성, 1차 차분(FD) 비교, 클러스터 강건추론, 확률효과(RE)와 Hausman 검정</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -921,12 +930,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-20.html" class="spoon-card" data-subject="micro" data-round="20">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#20 회차 (종합)</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">생산자이론 종합문제</div>
   <div class="spoon-card__desc">3요소 생산기술의 규모수익·오목성, 비용최소화와 쌍대성(Shephard), 요소가격 오목성·평균비용 형태, 이윤극대화·호텔링 보조정리 및 비교정태 분석 (7문항 연결)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1020,12 +1032,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-05.html" class="spoon-card" data-subject="macro" data-round="5">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#5 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">경제성장이론 II · 램지 모형</div>
   <div class="spoon-card__desc">무한기간 유량 예산제약식 전방반복, 폰지사기 금지조건(No-Ponzi Game)과 현가가치 예산제약, Ramsey–Cass–Koopmans 동태시스템 및 경쟁균형</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 </div>
@@ -1107,12 +1122,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-05.html" class="spoon-card" data-subject="metrics" data-round="5">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#5 회차 (종합)</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">정적 패널데이터 종합문제</div>
   <div class="spoon-card__desc">미관측 이질성과 합동 OLS 편의, 고정효과(FE) 내변환과 엄격한 외생성, 1차 차분(FD) 비교, 클러스터 강건추론, 확률효과(RE)와 Hausman 검정</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 

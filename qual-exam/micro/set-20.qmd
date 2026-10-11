@@ -19,7 +19,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [단일 종합문제]{.chip}
 [약 30–40분]{.chip}
 [7개 연결 문항]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -157,3 +157,284 @@ $$
 **권장 풀이 순서**: **technology → cost minimization → cost duality → cost curvature → profit maximization → Hotelling → comparative statics**.<br>이번 문제에서는 세 생산요소를 사용하지만, 계산 자체보다 **기술의 성질 → 비용함수 → 이윤함수**가 어떻게 연결되는지를 보는 것이 핵심이다.
 :::
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem. Producer Theory (Technology, Cost Duality, and Profit Duality)"}
+### Setting
+생산함수와 요소가격은
+$$
+q=f(L,K,M)=\sqrt L+\sqrt K+\sqrt M, \qquad L,K,M\ge0,
+$$
+$$
+w>0,\qquad r>0,\qquad s>0,\qquad p>0.
+$$
+이하에서 반복적으로 사용할 기호를
+$$
+S=S(w,r,s)=\frac1w+\frac1r+\frac1s>0
+$$
+로 정의한다. 여기서 $p$는 산출물 가격, $s$는 세 번째 생산요소 $M$의 가격이다.
+
+---
+
+#### 1) Technology: Hessian, convex production set, returns to scale
+생산함수는
+$$
+f(L,K,M)=\sqrt L+\sqrt K+\sqrt M,\qquad (L,K,M)\in\mathbb R_+^3
+$$
+이다. 먼저 내부영역 $\mathbb R_{++}^3$에서 이계미분을 이용해 오목성을 판정한다.
+
+일계편미분을 모으면
+$$
+\nabla f(L,K,M)=
+\begin{pmatrix}
+\dfrac1{2\sqrt L}\\[5pt]
+\dfrac1{2\sqrt K}\\[5pt]
+\dfrac1{2\sqrt M}
+\end{pmatrix}
+$$
+이고, 서로 다른 생산요소 간 교차편미분은 모두 0이다. 따라서 Hessian은
+$$
+\nabla^2 f(L,K,M)=
+\begin{pmatrix}
+-\dfrac1{4L^{3/2}}&0&0\\[7pt]
+0&-\dfrac1{4K^{3/2}}&0\\[7pt]
+0&0&-\dfrac1{4M^{3/2}}
+\end{pmatrix}.
+$$
+
+임의의 $v=(v_1,v_2,v_3)^\top\neq0$에 대해
+$$
+\begin{aligned}
+v^\top\nabla^2 f(L,K,M)v
+&=-\frac14\left(
+\frac{v_1^2}{L^{3/2}}+
+\frac{v_2^2}{K^{3/2}}+
+\frac{v_3^2}{M^{3/2}}
+\right)<0.
+\end{aligned}
+$$
+즉 $\nabla^2 f(L,K,M)\prec0$이므로 $f$는 $\mathbb R_{++}^3$에서 **strictly concave**하다.
+
+$L=0$, $K=0$, $M=0$에서는 Hessian이 정의되지 않으나, 함수 $f$는 $\mathbb R_+^3$ 전체에서 연속이므로 내부의 concavity 부등식은 극한을 취해 경계까지 확장된다. 더욱이 $\sqrt{\cdot}$는 $[0,\infty)$에서 strictly concave하고, 서로 다른 두 투입벡터는 적어도 하나의 좌표가 다르므로 $f$는 $\mathbb R_+^3$ 전체에서 **strictly concave**하다.
+
+순산출벡터 $(q,-L,-K,-M)$로 정의한 production set은
+$$
+Y=\left\{
+(q,-L,-K,-M):
+(L,K,M)\in\mathbb R_+^3,\;
+q\le f(L,K,M)
+\right\}.
+$$
+두 실행가능한 계획 $(q^a,-z^a), (q^b,-z^b)\in Y$와 $\lambda\in[0,1]$에 대해
+$$
+\lambda q^a+(1-\lambda)q^b \le \lambda f(z^a)+(1-\lambda)f(z^b) \le f\big(\lambda z^a+(1-\lambda)z^b\big).
+$$
+또한 $\lambda z^a+(1-\lambda)z^b\in\mathbb R_+^3$이므로 convex combination도 실행가능하며, **production set $Y$는 convex**이다.
+
+다음으로 모든 투입을 $t>1$배 하면
+$$
+f(tL,tK,tM)=\sqrt{tL}+\sqrt{tK}+\sqrt{tM}=\sqrt t\,f(L,K,M).
+$$
+그런데 $\sqrt t< t$이므로 양의 산출을 하는 모든 생산계획에서
+$$
+f(tL,tK,tM)=\sqrt t\,f(L,K,M)< t f(L,K,M).
+$$
+따라서 이 기술은 **decreasing returns to scale (DRS)**를 가진다.
+
+마지막으로 $f$가 각 투입에 대해 단조증가하므로, $q'\le q\le f(L,K,M)$이고 $L'\ge L, K'\ge K, M'\ge M$이면 $q'\le f(L',K',M')$가 성립한다. 따라서 산출물을 버리거나 더 많은 투입을 비효율적으로 사용하는 생산계획도 실행가능하다는 의미의 **free disposal**이 성립한다.
+
+---
+
+#### 2) Cost minimization with three inputs
+목표산출량 $q>0$에 대한 비용최소화 문제는
+$$
+\min_{L,K,M\ge0}\{wL+rK+sM\}\quad\text{s.t.}\quad \sqrt L+\sqrt K+\sqrt M\ge q
+$$
+이다. 요소가격이 모두 양수이므로 최적점에서 생산제약은 등호로 성립한다.
+
+$a=\sqrt L, b=\sqrt K, c=\sqrt M$로 치환하면
+$$
+\min_{a,b,c\ge0}\{wa^2+rb^2+sc^2\}\quad\text{s.t.}\quad a+b+c=q
+$$
+가 된다. 목적함수는 strictly convex이고 제약은 affine이므로 최적해는 유일하다.
+
+Lagrangian은 $\mathcal L = wa^2+rb^2+sc^2+\mu(q-a-b-c)$. 내부해의 일계조건은
+$$
+2wa=\mu,\qquad 2rb=\mu,\qquad 2sc=\mu.
+$$
+따라서 $a=\mu/(2w), b=\mu/(2r), c=\mu/(2s)$. 이를 $a+b+c=q$에 대입하면
+$$
+\frac{\mu}{2}\left(\frac1w+\frac1r+\frac1s\right)=q
+\quad\Longrightarrow\quad
+\mu=\frac{2q}{S}.
+$$
+그러므로
+$$
+a^*=\frac{q}{wS},\qquad b^*=\frac{q}{rS},\qquad c^*=\frac{q}{sS}.
+$$
+이를 원래 투입량으로 되돌리면 **conditional factor demands**는
+$$
+\boxed{L^c(w,r,s,q)=\frac{q^2}{w^2S^2},\qquad K^c(w,r,s,q)=\frac{q^2}{r^2S^2},\qquad M^c(w,r,s,q)=\frac{q^2}{s^2S^2}}.
+$$
+
+최소비용은
+$$
+\begin{aligned}
+C(w,r,s,q)
+&=wL^c+rK^c+sM^c\\
+&=\frac{q^2}{S^2}\left(\frac1w+\frac1r+\frac1s\right)=\frac{q^2}{S}.
+\end{aligned}
+$$
+따라서
+$$
+\boxed{C(w,r,s,q)=\frac{q^2}{\frac1w+\frac1r+\frac1s}}.
+$$
+산출량이 고정되어 있을 때 $L^c/K^c=(r/w)^2, L^c/M^c=(s/w)^2$이므로 상대적으로 저렴한 생산요소의 투입비율이 높아진다.
+
+---
+
+#### 3) Cost duality: Shephard's lemma와 가격 동차성
+비용함수는 $C(w,r,s,q)=q^2S^{-1}$ ($S=1/w+1/r+1/s$). $S$의 각 가격에 대한 편미분은
+$$
+\frac{\partial S}{\partial w}=-\frac1{w^2},\qquad \frac{\partial S}{\partial r}=-\frac1{r^2},\qquad \frac{\partial S}{\partial s}=-\frac1{s^2}.
+$$
+연쇄법칙에 의해
+$$
+\begin{aligned}
+\frac{\partial C}{\partial w}&=-q^2S^{-2}\frac{\partial S}{\partial w}=\frac{q^2}{w^2S^2}=L^c,\\
+\frac{\partial C}{\partial r}&=\frac{q^2}{r^2S^2}=K^c,\\
+\frac{\partial C}{\partial s}&=\frac{q^2}{s^2S^2}=M^c.
+\end{aligned}
+$$
+따라서 **Shephard's lemma**가 세 요소 모두에 대해 성립한다.
+
+요소가격을 동시에 $t>0$배 하면 $S(tw,tr,ts)=\frac1t S(w,r,s)$이므로
+$$
+C(tw,tr,ts,q)=\frac{q^2}{S(tw,tr,ts)}=t\frac{q^2}{S(w,r,s)}=tC(w,r,s,q).
+$$
+즉 $C$는 요소가격 $(w,r,s)$에 대해 **degree 1 homogeneous**이다. 또한 Euler's theorem에 의해 $w\frac{\partial C}{\partial w}+r\frac{\partial C}{\partial r}+s\frac{\partial C}{\partial s}=wL^c+rK^c+sM^c=C$도 확인된다.
+
+---
+
+#### 4) Cost curvature: 요소가격에 대한 concavity, AC와 MC
+목표산출량 $q$를 고정한 비용함수는
+$$
+C(w,r,s,q)=\inf_{(L,K,M)\in V(q)}\{wL+rK+sM\}
+$$
+이다. $C$는 **요소가격의 선형함수들을 점별 최소화한 함수**이므로 요소가격에 대해 concave하다.
+
+산출량에 대한 평균비용과 한계비용은
+$$
+AC(q)=\frac{C}{q}=\frac qS,\qquad MC(q)=\frac{\partial C}{\partial q}=\frac{2q}{S}.
+$$
+따라서
+$$
+\frac{\partial AC}{\partial q}=\frac1S>0,\qquad \frac{\partial MC}{\partial q}=\frac2S>0,\qquad MC(q)=2AC(q)> AC(q).
+$$
+또한 $\frac{\partial^2 C}{\partial q^2}=\frac2S>0$이므로 $C$는 산출량에 대해 strictly convex이고 $AC$, $MC$는 모두 우상향한다. 1번의 DRS에 따라 산출량을 비례적으로 증가시키려면 투입을 더 큰 비율로 늘려야 하므로, 비용함수가 $q$에 대해 2차식으로 증가하는 것과 일치한다.
+
+---
+
+#### 5) Profit maximization과 competitive supply
+경쟁기업의 문제는
+$$
+\max_{q\ge0}\left\{pq-\frac{q^2}{S}\right\}.
+$$
+산출량에 대한 일계조건은
+$$
+\frac{d\pi(q)}{dq}=p-\frac{2q}{S}=0 \quad\Longleftrightarrow\quad p=MC(q).
+$$
+따라서 공급함수는
+$$
+\boxed{q^s(p,w,r,s)=\frac{pS}{2}}.
+$$
+이계조건 $\frac{d^2\pi(q)}{dq^2}=-\frac2S<0$이므로 유일한 전역 최적해이다.
+
+최적 이윤을 계산하면
+$$
+\begin{aligned}
+\pi(p,w,r,s)
+&=p\frac{pS}{2}-\frac1S\left(\frac{pS}{2}\right)^2\\
+&=\frac{p^2S}{2}-\frac{p^2S}{4}=\frac{p^2S}{4}.
+\end{aligned}
+$$
+즉
+$$
+\boxed{\pi(p,w,r,s)=\frac{p^2}{4}\left(\frac1w+\frac1r+\frac1s\right)}.
+$$
+모든 가격을 $t>0$배 하면 $\pi(tp,tw,tr,ts)=\frac{(tp)^2}{4}S(tw,tr,ts)=\frac{t^2p^2}{4}\frac St=t\pi(p,w,r,s)$이므로, profit function은 산출물 및 생산요소의 **모든 가격에 대해 degree 1 homogeneous**이다.
+
+---
+
+#### 6) Hotelling's lemma와 unconditional factor demand
+이윤함수 $\pi(p,w,r,s)=\frac{p^2S}{4}$를 산출물 가격으로 미분하면
+$$
+\frac{\partial\pi}{\partial p}=\frac{pS}{2}=q^s(p,w,r,s).
+$$
+각 요소가격에 대해서는
+$$
+\begin{aligned}
+-\frac{\partial\pi}{\partial w}&=-\frac{p^2}{4}\left(-\frac1{w^2}\right)=\frac{p^2}{4w^2},\\
+-\frac{\partial\pi}{\partial r}&=\frac{p^2}{4r^2},\\
+-\frac{\partial\pi}{\partial s}&=\frac{p^2}{4s^2}.
+\end{aligned}
+$$
+따라서 **unconditional factor demands**는
+$$
+\boxed{L^*(p,w,r,s)=\frac{p^2}{4w^2},\qquad K^*(p,w,r,s)=\frac{p^2}{4r^2},\qquad M^*(p,w,r,s)=\frac{p^2}{4s^2}}.
+$$
+
+2번의 conditional demand $L^c(w,r,s,q)=\frac{q^2}{w^2S^2}$에 $q=q^s=pS/2$를 대입하면
+$$
+L^c(w,r,s,q^s)=\frac{(pS/2)^2}{w^2S^2}=\frac{p^2}{4w^2}=L^*.
+$$
+마찬가지로 $K^c(w,r,s,q^s)=K^*, M^c(w,r,s,q^s)=M^*$가 성립한다. 즉 cost duality와 profit duality가 완전히 일치한다.
+
+---
+
+#### 7) Comparative statics와 요소대체의 경제학적 해석
+경쟁기업의 공급함수는 $q^s(p,w,r,s)=\frac p2\left(\frac1w+\frac1r+\frac1s\right)$이므로
+$$
+\frac{\partial q^s}{\partial p}=\frac S2>0,\qquad \frac{\partial q^s}{\partial w}=-\frac{p}{2w^2}<0.
+$$
+산출물 가격 상승은 공급량을 늘리고, 노동가격 상승은 생산비용을 높여 최적 공급량을 줄인다.
+
+이제 **산출량 $q$를 고정한 conditional factor demands**를 분석한다. $w$가 증가할 때 $S_w=-1/w^2$이므로
+$$
+\begin{aligned}
+\frac{\partial L^c}{\partial w}
+&=-\frac{2q^2}{w^3S^2}+\frac{2q^2}{w^4S^3}
+=-\frac{2q^2}{w^3S^3}\left(S-\frac1w\right)
+=-\frac{2q^2}{w^3S^3}\left(\frac1r+\frac1s\right)<0.
+\end{aligned}
+$$
+반면
+$$
+\frac{\partial K^c}{\partial w}=\frac{2q^2}{r^2w^2S^3}>0,\qquad \frac{\partial M^c}{\partial w}=\frac{2q^2}{s^2w^2S^3}>0.
+$$
+즉
+$$
+\boxed{\frac{\partial L^c}{\partial w}<0,\qquad \frac{\partial K^c}{\partial w}>0,\qquad \frac{\partial M^c}{\partial w}>0}.
+$$
+목표산출량을 유지하면서 $w$만 높아지면 상대적으로 비싸진 노동의 사용을 줄이고, 상대적으로 저렴해진 자본 및 세 번째 요소를 더 사용한다. 이것이 비용최소화에서의 **요소대체 효과**이다.
+
+반면 산출량까지 내생적으로 조정하는 unconditional demand에서는
+$$
+K^*=\frac{p^2}{4r^2},\qquad M^*=\frac{p^2}{4s^2}
+\quad\Longrightarrow\quad
+\frac{\partial K^*}{\partial w}=0,\qquad \frac{\partial M^*}{\partial w}=0.
+$$
+고정산출량에서 나타나는 교차 요소대체 효과가 이 기술에서는 $w$ 상승에 따른 최적 산출량 감소 효과와 정확히 상쇄되기 때문이다. 따라서 conditional demand와 unconditional demand의 비교정태를 엄밀히 구분해야 한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 핵심 요약**:
+- 기술: strictly concave, convex production set, DRS ($\sqrt t < t$).
+- 비용함수: $C(w,r,s,q)=\frac{q^2}{S(w,r,s)}$, $AC=q/S$, $MC=2q/S$. Shephard's lemma 성립, 요소가격에 대해 concave, $q$에 대해 convex.
+- 이윤함수: $\pi(p,w,r,s)=\frac{p^2S}{4}$, $q^s=pS/2$. Hotelling's lemma 성립.
+- 비교정태: conditional demand에서는 교차대체효과 양수($\partial K^c/\partial w>0$), unconditional demand에서는 산출량 효과와 상쇄되어 0($\partial K^*/\partial w=0$).
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
+

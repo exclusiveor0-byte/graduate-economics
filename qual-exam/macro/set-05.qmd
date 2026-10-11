@@ -18,7 +18,7 @@ GRADUATE MACROECONOMICS · DAILY PRACTICE
 [거시경제학]{.chip .chip--macro}
 [총 2문제]{.chip}
 [예상 60–80분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -140,6 +140,166 @@ $$
 
 ::: {.spoon-hint}
 형식: **flow constraint → forward iteration → terminal term → no-Ponzi → present value → prove/disprove → diagnose**. 단순히 무한합 공식을 쓰는 데서 끝내지 말고, terminal asset term이 어떤 경제적 역할을 하는지 설명하시오.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Infinite-Horizon Budget Constraint and Solvency"}
+### Setting
+가계의 자산축적식은
+$$
+a_{t+1}=(1+r)a_t+w_t-c_t,\qquad r>0.
+$$
+이하에서 $R:=1+r>1$로 표기한다. $a_t$는 $t$기 초 자산, $w_t$는 해당 기간의 노동소득, $c_t$는 소비다. 문제에서 제시된 할인시점에 따라 $t$기 소비와 임금은 $R^{t+1}$로 할인된다.
+
+---
+
+#### 1) Forward iteration과 유한기간 현재가치 등식
+예산제약을 $a_t$에 관해 정리하면
+$$
+a_t=\frac{a_{t+1}+c_t-w_t}{R}.
+$$
+$t=0$에서
+$$
+a_0=\frac{c_0-w_0}{R}+\frac{a_1}{R}.
+$$
+한 기 뒤의 $a_1=(a_2+c_1-w_1)/R$를 대입하면
+$$
+a_0=\frac{c_0-w_0}{R}+\frac{c_1-w_1}{R^2}+\frac{a_2}{R^2}.
+$$
+같은 대입을 $T$회 반복하면 일반적으로
+$$
+\boxed{a_0=\sum_{t=0}^{T-1}\frac{c_t-w_t}{R^{t+1}}+\frac{a_T}{R^T}}.
+$$
+**귀납적 확인:** $T$기에 등식이 맞다고 할 때 $a_T=(a_{T+1}+c_T-w_T)/R$를 마지막 항에 대입하면 $T+1$기 식을 얻는다. 이 등식은 매기 flow constraint의 단순한 대수적 결과이며, 아직 종단조건을 사용하지 않았다.
+
+---
+
+#### 2) No-Ponzi condition의 의미
+원문의 조건은
+$$
+\boxed{\liminf_{T\to\infty}\frac{a_T}{R^T}\ge0}.
+$$
+이 조건은 **할인한 채무가 영구히 음의 크기로 남는 것**을 금지한다. 예를 들어 $a_T=-bR^T$ ($b>0$)라면 할인가치는 항상 $-b$다. 원금과 이자를 새로운 채무로 계속 조달하므로, 이 자산경로는 수렴 없이 지속될 수 있으나 경제적 지급능력(solvency)을 충족하지 못한다.
+
+반대로 $a_T/R^T\to b>0$인 경로는 no-Ponzi를 위반하지 않는다. 자산을 남기는 행위 자체는 지급능력 조건에 반하지 않는다.
+판정 기준은 단순히 $a_T$가 음수인가가 아니라, **부채의 할인현재가치가 음의 값으로 영구히 남는가**이다.
+
+---
+
+#### 3) 무한기간 현재가치 예산제약과 lifetime wealth
+1번의 유한기간 등식에 다음 terminal equality를 더한다.
+$$
+\lim_{T\to\infty}\frac{a_T}{R^T}=0.
+$$
+양쪽 무한급수가 수렴한다면 $T\to\infty$ 극한을 취해
+$$
+a_0=\sum_{t=0}^{\infty}\frac{c_t-w_t}{R^{t+1}},
+$$
+따라서
+$$
+\boxed{\sum_{t=0}^{\infty}\frac{c_t}{R^{t+1}}=a_0+\sum_{t=0}^{\infty}\frac{w_t}{R^{t+1}}}.
+$$
+우변은 초기 금융자산 $a_0$와 미래 노동소득의 현재가치(인적자산, human wealth)를 합한 **평생자원(lifetime wealth)**이다. 좌변은 평생소비의 현재가치다.
+
+단, **no-Ponzi만으로는 일반적으로 등식이 나오지 않는다.** 같은 급수의 수렴을 가정하고 no-Ponzi만 적용하면
+$$
+\sum_{t=0}^{\infty}\frac{c_t}{R^{t+1}}\le a_0+\sum_{t=0}^{\infty}\frac{w_t}{R^{t+1}}
+$$
+라는 부등식을 얻는다. 등식에는 별도의 terminal equality 또는 이를 정당화하는 최적화 조건이 필요하다.
+
+---
+
+#### 4) 노동소득이 상수일 때의 인적자산
+$w_t=\bar w$라면 무한등비급수에서
+$$
+\begin{aligned}
+\sum_{t=0}^{\infty}\frac{\bar w}{R^{t+1}}
+&=\bar w\frac{R^{-1}}{1-R^{-1}}\\
+&=\frac{\bar w}{R-1}=\boxed{\frac{\bar w}{r}}.
+\end{aligned}
+$$
+따라서 lifetime wealth는
+$$
+\boxed{W_0=a_0+\frac{\bar w}{r}}.
+$$
+$r>0$이므로 이 무한급수는 수렴한다. 노동소득의 현재가치는 연속시간 공식 $\bar w/r$를 가져온 것이 아니라, 문제의 이산시간 할인시점으로 직접 계산한 결과다.
+
+---
+
+#### 5) Prove or disprove: No-Ponzi와 TVC는 동일한가?
+> The no-Ponzi condition and the transversality condition are exactly the same economic condition.
+
+**판정: 일반적으로 거짓.** 두 조건의 경제적 역할이 다르다.
+
+| 구분 | No-Ponzi condition | Transversality condition (TVC) |
+|:---|:---|:---|
+| **역할** | 허용 가능한 차입·지급능력 경로를 제한 | 최적경로의 무한원점 경계행태를 제한 |
+| **문제에서의 형태** | $\liminf a_T/R^T\ge0$ | 최적화 문제를 정해야 정확한 형태가 결정됨 |
+| **핵심 질문** | 상환 없는 부채 롤오버를 허용하는가? | 소비할 수 있는 가치 있는 자산을 최적경로 끝에 낭비하는가? |
+
+**예시:** 소비효용을 $\sum_{t=0}^{\infty}\beta^t u(c_t)$, $0<\beta<1$로 두고 내점 최적해가 존재한다면 Euler equation은
+$$
+u'(c_t)=\beta R u'(c_{t+1}).
+$$
+이를 반복하면 $\beta^T u'(c_T)=u'(c_0)/R^T$다. 따라서 이 표준 환경에서 TVC를
+$$
+\lim_{T\to\infty}\beta^T u'(c_T)a_T=0
+$$
+로 쓰면, Euler equation 아래에서
+$$
+\lim_{T\to\infty}\frac{a_T}{R^T}=0
+$$
+와 같아진다($0< u'(c_0)<\infty$ 가정). 즉 **추가적인 최적화 조건 아래 표현이 일치할 수 있어도**, 처음부터 no-Ponzi와 TVC가 같은 조건이라는 뜻은 아니다.
+
+특히 $a_T/R^T\to b>0$인 경로는 no-Ponzi를 만족하지만, 위와 같은 내점 최적화 환경의 TVC는 만족하지 않는다. 원문의 예산식 자체에는 효용함수와 할인인자가 주어지지 않았으므로, 구체적 TVC를 원문만으로 단정할 수 없다는 점도 중요하다.
+
+---
+
+#### 6) 두 자산경로의 no-Ponzi 판정
+**Path A:** $a_T=0$이면
+$$
+\frac{a_T}{R^T}=0\longrightarrow0.
+$$
+**Path B:** $a_T=-R^T$이면
+$$
+\frac{a_T}{R^T}=-1\longrightarrow-1.
+$$
+따라서 **Path A는 no-Ponzi를 만족**하고, **Path B는 위반**한다.
+
+이 비교는 자산경로의 종단행태를 판정하는 문제다. 각 경로가 주어진 동일한 $a_0,w_t,c_t$와 일치하는지는 별도로 확인해야 한다. 예를 들어 Path B를 $T=0$부터 정확히 적용하면 $a_0=-1$이 된다.
+
+---
+
+#### 7) 오류진단: Flow constraint만으로 충분한가?
+> “모든 기간의 flow budget constraint가 성립하면 intertemporal budget constraint도 자동으로 성립하므로 terminal condition은 필요 없다.”
+
+**오류:** forward iteration에는 언제나 $a_T/R^T$라는 terminal term이 남는다. 매기 예산등식은 그것이 0으로 수렴할 것을 보장하지 않는다.
+
+실제로 $a_0=0$, $w_t=\bar w>0$인 경제에서
+$$
+c_0=\bar w+R,\qquad c_t=\bar w\quad (t\ge1)
+$$
+를 선택하자. 그러면
+$$
+a_1=-R,\qquad a_T=-R^T\quad(T\ge1)
+$$
+가 되어 모든 시점의 flow constraint를 만족한다. 그러나
+$$
+\lim_{T\to\infty}\frac{a_T}{R^T}=-1<0,
+$$
+즉 no-Ponzi를 위반한다. 평생소비의 현재가치는
+$$
+\sum_{t=0}^{\infty}\frac{c_t}{R^{t+1}}=\frac{\bar w}{r}+1> a_0+\frac{\bar w}{r}.
+$$
+결론적으로 **flow constraint의 기간별 성립은 intertemporal solvency를 보장하지 않는다.** 무한기간 문제에서는 terminal asset term을 통제하는 조건이 별도로 필요하다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+Forward iteration 결과
+$$
+a_0=\sum_{t=0}^{T-1}\frac{c_t-w_t}{(1+r)^{t+1}}+\frac{a_T}{(1+r)^T}.
+$$
+No-Ponzi 조건($\liminf a_T/R^T\ge0$)은 부채의 영구 롤오버를 막는 **지급능력(solvency)** 제약이고, TVC는 자산 낭비를 막는 **최적성(optimality)** 경계조건이다.
 :::
 :::
 
@@ -292,6 +452,289 @@ $f'>0$, $f''<0$, $\delta\ge0$, $\rho>0$, $\theta>0$이고,
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Ramsey–Cass–Koopmans: From Optimization to the Dynamic System"}
+### Setting
+기본 표기는
+$$
+Y=F(K,AL)=AL f(k),\quad k=\frac{K}{AL},\quad \frac{\dot A}{A}=g,\quad \frac{\dot L}{L}=n.
+$$
+$f'(k)>0$, $f''(k)<0$, 완전경쟁, 내점해를 가정한다.
+
+> **원문 표기에 관한 명시적 해석:** 문제에서 유효노동당 소비 $c$를 정의하면서 효용식에 $C(t)$를 사용한다. 여기서는 효용식의 $C(t)$를 **1인당 소비** $x(t)=C_{\mathrm{agg}}(t)/L(t)=A(t)c(t)$로 해석한다. 이 해석에서만 제시된 $e^{-(\rho-n)t}$ 가계효용과 목표 Euler equation이 표준 Ramsey 모형으로 일관되게 연결된다. $\theta=1$에서는 CRRA 효용을 로그효용의 극한으로 이해한다.
+
+---
+
+#### 1) 기업 이윤극대화와 요소가격
+기업이 자본임대가격 $R_t^K$ (감가상각 이전의 단위 자본 사용료)와 노동임금 $w_t$를 주어진 것으로 받아들이면
+$$
+\max_{K,L}\ \Pi=F(K,AL)-R_t^K K-w_t L.
+$$
+내점 일차조건은
+$$
+R_t^K=F_K(K,AL),\qquad w_t=F_L(K,AL).
+$$
+$Y=AL f(K/(AL))$를 미분하면
+$$
+\begin{aligned}
+F_K&=AL f'(k)\frac{1}{AL}=f'(k),\\
+F_L&=A f(k)+AL f'(k)\left(-\frac{K}{AL^2}\right)=A\bigl[f(k)-k f'(k)\bigr].
+\end{aligned}
+$$
+따라서
+$$
+\boxed{R_t^K=f'(k_t),\qquad w_t=A_t[f(k_t)-k_t f'(k_t)]}.
+$$
+가계가 자본을 직접 보유하여 감가상각비를 부담하면 **순자본수익률**은
+$$
+\boxed{r_t=R_t^K-\delta=f'(k_t)-\delta}.
+$$
+즉 Euler equation에 들어가는 객체는 순수익률 $r_t$이다. 이윤은 CRS·완전경쟁에서 Euler 정리에 의해 0이 된다.
+
+---
+
+#### 2) 가계 Maximum Principle과 1인당 소비 Euler equation
+$x_t=A_t c_t$를 1인당 소비, $b_t$를 1인당 금융자산으로 둔다. 이자율 $r_t$와 1인당 임금 $w_t$를 가계가 주어진 가격경로로 받아들이면
+$$
+\max_{\{x_t\}_{t\ge0}}\int_0^\infty e^{-(\rho-n)t}u(x_t)\,dt,
+\qquad u(x)=\frac{x^{1-\theta}-1}{1-\theta},
+$$
+이고 자산제약은 인구증가에 따른 희석을 반영해
+$$
+\dot b_t=(r_t-n)b_t+w_t-x_t.
+$$
+Current-value Hamiltonian을 구성하면
+$$
+\mathcal H=u(x)+\mu[(r-n)b+w-x].
+$$
+소비 선택의 FOC는
+$$
+\frac{\partial\mathcal H}{\partial x}=u'(x)-\mu=0
+\quad\Longrightarrow\quad
+\boxed{\mu=x^{-\theta}}.
+$$
+Current-value 공변수(costate)의 운동방정식은
+$$
+\begin{aligned}
+\dot\mu
+&=(\rho-n)\mu-\frac{\partial\mathcal H}{\partial b}\\
+&=(\rho-n)\mu-(r-n)\mu=(\rho-r)\mu.
+\end{aligned}
+$$
+한편 $\mu=x^{-\theta}$를 로그미분하면 $\dot\mu/\mu=-\theta\dot x/x$이므로
+$$
+-\theta\frac{\dot x}{x}=\rho-r
+\quad\Longrightarrow\quad
+\boxed{\frac{\dot x}{x}=\frac{r-\rho}{\theta}}.
+$$
+자본의 순수익률이 시간선호율보다 크면 최적 1인당 소비가 증가하고, 작으면 감소한다.
+
+---
+
+#### 3) 경쟁균형의 유효노동당 소비성장식
+기업의 factor-price condition에서 $r=f'(k)-\delta$이므로
+$$
+\frac{\dot x}{x}=\frac{f'(k)-\delta-\rho}{\theta}.
+$$
+문제의 변수가 1인당 소비 $x$가 아니라 **유효노동당 소비** $c=x/A$라는 사실을 적용하면
+$$
+\frac{\dot x}{x}=\frac{\dot A}{A}+\frac{\dot c}{c}=g+\frac{\dot c}{c}.
+$$
+따라서
+$$
+\boxed{\frac{\dot c}{c}=\frac{1}{\theta}\bigl[f'(k)-\delta-\rho-\theta g\bigr]}.
+$$
+$g=0$이면 1인당 소비와 유효노동당 소비의 성장률이 같아서 추가항이 사라진다. $g>0$이면 1인당 소비가 $g$만큼 증가하더라도 유효노동당 소비 $c$는 일정할 수 있으므로, 단위변환 과정에서 $-g$, 즉 괄호 안의 $-\theta g$가 등장한다. $\theta g$는 기업의 임의적인 추가 비용이 아니라 **1인당 소비 성장률에서 기술진보율을 빼는 단위변환**의 결과다.
+
+---
+
+#### 4) 자본축적과 2차원 동태계
+닫힌 경제에서 총소비는 $C_{\mathrm{agg}}=Lx=ALc$다. 총자원 제약은
+$$
+\dot K=Y-C_{\mathrm{agg}}-\delta K.
+$$
+$k=K/(AL)$의 미분은
+$$
+\dot k=\frac{\dot K}{AL}-(n+g)k.
+$$
+이를 합치면
+$$
+\begin{aligned}
+\dot k&=\frac{Y}{AL}-\frac{C_{\mathrm{agg}}}{AL}-\delta k-(n+g)k\\
+&=f(k)-c-(n+g+\delta)k.
+\end{aligned}
+$$
+따라서 Ramsey 균형의 2차원 동태계는
+$$
+\boxed{\begin{aligned}
+\dot k&=f(k)-c-(n+g+\delta)k,\\[3pt]
+\dot c&=\frac{c}{\theta}\bigl[f'(k)-\delta-\rho-\theta g\bigr].
+\end{aligned}}
+$$
+자본 $k$는 누적되는 상태변수(state variable)이며 소비 $c$는 가계의 최적선택에 의해 점프 가능한 제어변수(control/jump variable)다.
+
+---
+
+#### 5) 정상상태의 Euler condition과 Solow 비교
+내점 정상상태에서 $c^*>0$이고 $\dot c=0$이므로
+$$
+0=\frac{c^*}{\theta}[f'(k^*)-\delta-\rho-\theta g].
+$$
+따라서
+$$
+\boxed{f'(k^*)=\rho+\delta+\theta g}.
+$$
+이것은 정상상태의 **소비 최적화 조건**이다. 기술진보가 없으면 통상적인 $f'(k^*)=\rho+\delta$가 된다.
+
+반면 저축률 $s$가 외생적으로 주어지는 Solow 모형의 정상상태는
+$$
+\boxed{s f(k^*_{S})=(n+g+\delta)k^*_{S}}
+$$
+로 결정된다. Ramsey에서는 $k^*$가 Euler condition으로 결정되고, 그 다음 자본축적식에서 $c^*$가 정해진다.
+해당 표준 설정에서 Ramsey의 $k^*$ 결정조건에 $n$이 직접 등장하지 않지만, $n$은 $c^*$와 정상상태 투자소요량을 결정하는 자원제약에는 들어간다.
+
+---
+
+#### 6) Cobb–Douglas 정상상태의 해
+$f(k)=k^\alpha$, $0<\alpha<1$로 두면 $f'(k)=\alpha k^{\alpha-1}$이다. 편의상
+$$
+D:=\rho+\delta+\theta g,\qquad d:=n+g+\delta
+$$
+로 쓰자. $D>0$이면 Euler 조건은
+$$
+\alpha(k^*)^{\alpha-1}=D
+\quad\Longleftrightarrow\quad
+(k^*)^{1-\alpha}=\frac{\alpha}{D}.
+$$
+따라서
+$$
+\boxed{k^*=\left(\frac{\alpha}{\rho+\delta+\theta g}\right)^{\frac{1}{1-\alpha}}}.
+$$
+정상상태 자본축적식 $\dot k=0$에서
+$$
+\boxed{c^*=(k^*)^\alpha-(n+g+\delta)k^*}.
+$$
+명시적인 표현은
+$$
+\boxed{c^*=\left(\frac{\alpha}{D}\right)^{\frac{\alpha}{1-\alpha}}-d\left(\frac{\alpha}{D}\right)^{\frac{1}{1-\alpha}}}.
+$$
+(내점 존재조건: $c^*>0 \iff D/\alpha > d$).
+
+---
+
+#### 7) 파라미터를 이용한 수치계산
+주어진 값은
+$$
+\alpha=\frac13,\quad\rho=0.02,\quad\delta=0.06,\quad\theta=2,\quad g=0.02,\quad n=0.01.
+$$
+먼저
+$$
+D=0.02+0.06+2(0.02)=0.12=\frac{3}{25},
+\qquad d=0.01+0.02+0.06=0.09.
+$$
+따라서 정상상태 자본은
+$$
+k^*=\left(\frac{1/3}{0.12}\right)^{3/2}=\left(\frac{25}{9}\right)^{3/2}=\boxed{\frac{125}{27}\approx4.62963}.
+$$
+정상상태 산출은
+$$
+y^*=(k^*)^{1/3}=\left(\frac{125}{27}\right)^{1/3}=\boxed{\frac53\approx1.66667}.
+$$
+자본 유지에 필요한 투자는
+$$
+d k^*=0.09\cdot\frac{125}{27}=\frac{5}{12}\approx0.41667,
+$$
+소비는
+$$
+\boxed{c^*=\frac53-\frac{5}{12}=\frac54=1.25}.
+$$
+**검산:** $f'(k^*)=\tfrac13(k^*)^{-2/3}=\tfrac13\cdot\tfrac9{25}=0.12=D$, $f(k^*)-c^*-d k^*=0$. 두 정상상태 방정식이 모두 정확히 충족된다.
+
+---
+
+#### 8) Prove or disprove: 높은 저축률과 정상상태 자본
+> In the Ramsey model, a higher saving rate necessarily implies a higher steady-state capital stock.
+
+**엄밀한 판정: 조건부 참이나 일반명제로는 거짓.**
+이 문장을 *저축률을 외생적으로 인상하는 비교정태 정책명제*로 해석하면 Ramsey에서는 부적절하다. 다만 *생산함수와 $n,g,\delta$가 고정된 정상상태들을 단순 비교*한다면 저축률과 자본 사이에 양의 관계가 성립한다.
+
+정상상태의 **사후적 저축률**을
+$$
+s^*:=\frac{I^*}{Y^*}=\frac{(n+g+\delta)k^*}{f(k^*)}=\frac{d k^*}{f(k^*)}
+$$
+로 정의하면, Cobb–Douglas에서는
+$$
+\boxed{s^*=d(k^*)^{1-\alpha}}.
+$$
+따라서 $f$와 $d$가 동일한 두 정상상태끼리 비교한다면
+$$
+\frac{ds^*}{dk^*}=d(1-\alpha)(k^*)^{-\alpha}>0.
+$$
+즉 이 제한된 비교에서는 높은 $s^*$와 높은 $k^*$가 함께 관찰된다.
+
+그러나 Ramsey Euler condition을 대입하면
+$$
+\boxed{s^*=\frac{\alpha(n+g+\delta)}{\rho+\delta+\theta g}=\frac{\alpha d}{D}}.
+$$
+서로 다른 $\delta$의 경제를 비교하면 $s^*$가 증가하면서 $k^*$는 감소하는 경우도 가능하다. 예를 들어 다른 파라미터를 유지하면서 $\delta:0.06\to0.08$로 변화시키면:
+
+| 감가상각률 | 정상상태 저축률 $s^*$ | 정상상태 자본 $k^*$ |
+|:---|:---|:---|
+| $\delta=0.06$ | $0.25$ | $4.62963$ |
+| $\delta=0.08$ | $0.26190$ | $3.67389$ |
+
+저축률이 상승하지만 정상상태 자본은 오히려 감소한다. 감가상각 증가로 필요한 대체투자 비중이 늘었기 때문이다.
+결론적으로 **저축률은 Ramsey의 외생변수가 아니며**, 다른 기초 파라미터까지 바뀌는 상황에서 “저축률이 높으니 반드시 정상상태 자본이 높다”는 일반명제는 성립하지 않는다.
+
+---
+
+#### 9) Solow–Swan과 Ramsey–Cass–Koopmans 비교
+| 비교 기준 | Solow–Swan | Ramsey–Cass–Koopmans |
+|:---|:---|:---|
+| **(i) 저축 결정** | $s\in(0,1)$을 외생적 상수로 설정. $c=(1-s)f(k)$. | 가계가 시간에 걸쳐 $c(t)$를 최적화. $s(t)=[f(k)-c]/f(k)$는 균형의 결과. |
+| **(ii) 정상상태 자본** | $s f(k_S^*)=(n+g+\delta)k_S^*$. | $f'(k_R^*)=\rho+\delta+\theta g$. 이후 $c_R^*=f(k_R^*)-(n+g+\delta)k_R^*$. |
+| **(iii) 최적성·후생** | 저축률 자체는 가계 효용극대화로 도출하지 않음. Golden Rule은 정상상태 소비의 기술적 최대화. | Euler equation 및 적절한 TVC에 의해 소비·저축의 기간 간 최적성을 평가. 할인된 효용을 명시. |
+
+**Solow의 동태계:**
+$$
+\dot k=s f(k)-(n+g+\delta)k.
+$$
+**Ramsey의 동태계:**
+$$
+\begin{cases}
+\dot k=f(k)-c-(n+g+\delta)k,\\[4pt]
+\dfrac{\dot c}{c}=\dfrac{f'(k)-\delta-\rho-\theta g}{\theta}.
+\end{cases}
+$$
+비교의 본질은 Ramsey에서 저축이 **가계의 최적 소비경로와 균형 요소가격에 의해 내생적으로 결정**된다는 점이다. Solow의 Golden Rule $f'(k^{GR})=n+g+\delta$와 Ramsey 정상상태 조건 $f'(k_R^*)=\rho+\delta+\theta g$는 일반적으로 서로 같지 않다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+Ramsey 모형의 핵심은 저축의 내생화이다.
+$$
+\boxed{f'(k^*)=\rho+\delta+\theta g},\qquad
+\boxed{c^*=f(k^*)-(n+g+\delta)k^*}.
+$$
+Euler equation이 정상상태 자본량을 유일하게 묶어두고, 자원제약식이 정상상태 소비와 투자를 배분한다.
+:::
+:::
+
+::: {.callout-important title="📌 5회차 핵심 결과 요약"}
+| 개념 | 핵심 결과 |
+|:---|:---|
+| 무한기간 자산 등식 | $a_0=\sum_{t=0}^{T-1}(c_t-w_t)/R^{t+1}+a_T/R^T$ |
+| No-Ponzi | $\liminf_{T\to\infty}a_T/R^T\ge0$: 부채의 영구적 롤오버 배제 |
+| PV 예산등식 | $\sum_{t=0}^\infty c_t/R^{t+1}=a_0+\sum_{t=0}^\infty w_t/R^{t+1}$: terminal equality 필요 |
+| 기업 요소가격 | $r=f'(k)-\delta$, $w=A[f(k)-k f'(k)]$ |
+| Euler (1인당 소비) | $\dot x/x=(r-\rho)/\theta$ |
+| Euler (유효노동당) | $\dot c/c=[f'(k)-\delta-\rho-\theta g]/\theta$ |
+| 자본축적 | $\dot k=f(k)-c-(n+g+\delta)k$ |
+| Ramsey 정상상태 | $f'(k^*)=\rho+\delta+\theta g$, $c^*=f(k^*)-(n+g+\delta)k^*$ |
+| 5회차 수치답 | $k^*=125/27\approx4.62963$, $c^*=5/4=1.25$ |
+
+Problem 1의 TVC 예시는 원문에 없는 효용함수·할인인자를 추가해 개념 차이를 설명한 보충 논증이며, Problem 2의 $C$ 표기 역시 원문의 모호성을 1인당 소비 $x(t)=A(t)c(t)$로 명시적으로 해석하여 도출하였다.
+:::
+
 ---
 
 [← 문제 한 스푼 목록으로 돌아가기](../index.html)
+
