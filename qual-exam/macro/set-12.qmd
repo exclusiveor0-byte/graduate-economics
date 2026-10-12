@@ -1,0 +1,119 @@
+---
+title: "문제 한 스푼 #12"
+subtitle: "발전회계 (Development Accounting — Physical Capital · Human Capital · Productivity)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MACROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #12
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Development Accounting — Physical Capital · Human Capital · Productivity**
+:::
+
+::: {.spoon-hero__tags}
+[거시경제학]{.chip .chip--macro}
+[총 2문제]{.chip}
+[예상 30–40분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Accounting for Cross-Country Income Differences
+::: {.topic}
+Development Accounting · Factor Contributions · Numerical Decomposition
+:::
+
+두 국가의 생산함수가 다음과 같이 주어진다고 하자.
+
+$$
+Y_i=K_i^{\alpha}(A_iH_i)^{1-\alpha},
+\qquad H_i=h_iL_i,\qquad 0<\alpha<1,
+\qquad i\in\{1,2\}.
+$$
+
+여기서 $K_i$는 물적자본, $L_i$는 근로자 수,
+$h_i$는 근로자 1인당 인적자본, $A_i$는 노동증대형 생산성(labor-augmenting efficiency)이다.
+근로자 1인당 산출을 $y_i=Y_i/L_i$로 정의하며,
+모든 변수는 양(+)이라고 가정한다.
+
+1. 주어진 생산함수에서 다음 **development accounting identity**를 유도하시오.
+
+   $$
+   y_i=\left(\frac{K_i}{Y_i}\right)^{\frac{\alpha}{1-\alpha}}A_i h_i.
+   $$
+
+   이를 이용하여 국가 1과 국가 2의 근로자 1인당 소득비율 $y_1/y_2$를
+   물적자본, 인적자본, 생산성 격차의 곱으로 표현하시오.
+
+2. 다음 자료를 사용하여 국가 1의 생산성 수준이 국가 2의 몇 배인지
+   $A_1/A_2$를 계산하시오.
+
+   $$
+   \alpha=\frac13,\qquad
+   \frac{y_1}{y_2}=5,\qquad
+   \frac{K_1/Y_1}{K_2/Y_2}=1.44,\qquad
+   \frac{h_1}{h_2}=1.25.
+   $$
+
+3. 두 국가의 소득비율에 자연로그를 취하여
+
+   $$
+   \ln\!\left(\frac{y_1}{y_2}\right)
+   =\frac{\alpha}{1-\alpha}
+   \ln\!\left(\frac{K_1/Y_1}{K_2/Y_2}\right)
+   +\ln\!\left(\frac{h_1}{h_2}\right)
+   +\ln\!\left(\frac{A_1}{A_2}\right)
+   $$
+
+   를 확인하시오. (2)의 자료를 이용하여 **로그 소득격차**에서
+   물적자본, 인적자본, 생산성이 차지하는 비율을 각각 계산하고 해석하시오.
+
+::: {.spoon-hint}
+**풀이 범위:** 소득수준의 *국가 간 차이*를 분해하는 문제이다.
+시간에 따른 성장률을 계산하는 growth accounting과 구분하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. What Does Development Accounting Explain?
+::: {.topic}
+Growth vs. Development Accounting · Productivity Residual · Causal Interpretation
+:::
+
+경제학자가 Problem 1과 같은 생산함수에 국가별 산출·물적자본·노동·교육 자료를 대입하여
+생산성 $A_i$를 잔차로 계산한다고 하자.
+
+1. **Growth Accounting**과 **Development Accounting**의 분석대상을 구분하시오.
+   각각 무엇을 분해하며, 사용하는 비교의 차원(시간 또는 국가 간 수준)이
+   어떻게 다른지 설명하시오.
+
+2. 발전회계에서 잔차로 계산한 $A_i$에
+   순수한 기술수준의 차이 이외의 요인이 반영될 수 있는 이유를
+   **두 가지** 제시하시오. 이 요인들이 계산된 생산성 격차를
+   어떻게 왜곡하거나 확대할 수 있는지 간략히 설명하시오.
+
+3. 다음 명제를 **prove or disprove** 하시오.
+
+   > A large productivity gap in development accounting proves that
+   > technology differences are the primary causal determinant of
+   > cross-country income differences.
+
+   **회계적 분해(accounting decomposition)**와
+   **인과적 설명(causal explanation)**의 차이에 근거하여 답하시오.
+
+::: {.spoon-hint}
+**풀이 범위:** 발전회계의 결과가 무엇을 보여 주는지, 그리고
+어떤 결론까지는 정당화하지 못하는지를 구분하시오.
+사회적 인프라의 도구변수 추정이나 국가 간 성장회귀는 다루지 않는다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

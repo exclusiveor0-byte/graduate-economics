@@ -303,6 +303,11 @@ book:
     - qual-exam/macro/set-08.qmd
     - qual-exam/macro/set-09.qmd
     - qual-exam/macro/set-10.qmd
+    - qual-exam/macro/set-11.qmd
+    - qual-exam/macro/set-12.qmd
+    - qual-exam/macro/set-13.qmd
+    - qual-exam/macro/set-14.qmd
+    - qual-exam/macro/set-15.qmd
   - part: "문제 한 스푼 · 계량경제학"
     chapters:
     - qual-exam/econometrics/set-01.qmd

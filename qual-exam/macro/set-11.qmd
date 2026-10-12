@@ -1,0 +1,120 @@
+---
+title: "문제 한 스푼 #11"
+subtitle: "경제수렴이론 (Economic Convergence — Catch-up Growth · Absolute Convergence · Conditional Convergence)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MACROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #11
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Economic Convergence — Catch-up Growth · Absolute Convergence · Conditional Convergence**
+:::
+
+::: {.spoon-hero__tags}
+[거시경제학]{.chip .chip--macro}
+[총 2문제]{.chip}
+[예상 30–40분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Catch-up Growth and Absolute Convergence
+::: {.topic}
+Solow Model · Diminishing Returns · Catch-up Dynamics
+:::
+
+두 경제 A와 B는 동일한 Cobb–Douglas 생산기술 및 구조적 모수를 갖는다고 하자.
+유효노동당 자본을 $k$, 유효노동당 산출을 $y$로 표시하면
+
+$$
+y(t)=k(t)^\alpha,\qquad
+\dot k(t)=s k(t)^\alpha-(n+g+\delta)k(t),
+\qquad 0<\alpha<1.
+$$
+
+두 경제의 저축률 $s$, 인구증가율 $n$, 기술진보율 $g$, 감가상각률 $\delta$는
+모두 같고 일정하다. 두 경제의 기술수준도 동일한 경로를 따르며, 초기 유효노동당 자본만 다르다.
+모든 자본수준은 양(+)이라고 가정하시오.
+
+1. 정상상태 유효노동당 자본 $k^*$를 구하시오. 이어
+   $g_k\equiv\dot k/k$, $g_y\equiv\dot y/y$를 각각 $k$의 함수로 나타내고,
+   초기 $k$가 작을수록 유효노동당 산출성장률이 높아지는 이유를 설명하시오.
+
+2. $$
+   \alpha=\frac12,\qquad s=0.20,\qquad
+   n+g+\delta=0.10,
+   \qquad k_A(0)=1,\quad k_B(0)=4
+   $$
+
+   라고 하자. 두 경제의 정상상태 $k^*$ 및 시점 $0$에서의
+   $g_{k,A},g_{k,B},g_{y,A},g_{y,B}$를 계산하시오.
+   어느 경제에서 초기 catch-up growth가 나타나는지 판단하시오.
+
+3. 두 경제의 저축률과 $n+g+\delta$가 동일할 때 다음 식을 보이시오.
+
+   $$
+   \frac{d}{dt}\ln\!\left(\frac{k_A}{k_B}\right)
+   =s\left(k_A^{\alpha-1}-k_B^{\alpha-1}\right).
+   $$
+
+   이를 이용하여 $k_A<k_B$일 때 자본 격차의 *비율*이
+   어느 방향으로 움직이는지 설명하시오.
+   이 결과가 **absolute convergence**와 어떻게 연결되는지도 논하시오.
+
+::: {.spoon-hint}
+**풀이 범위:** 동일한 정상상태를 갖는 경제들 사이의 catch-up 메커니즘에 집중하시오.
+수렴속도의 로그선형화나 half-life 계산은 요구하지 않는다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. When Poorer Countries Grow More Slowly
+::: {.topic}
+Different Steady States · Conditional Convergence · Prove or Disprove
+:::
+
+이번에는 동일한 생산기술을 사용하지만 저축률은 서로 다른 두 경제 P와 R을 생각하자.
+유효노동당 생산함수는 $y=k^{1/2}$이고,
+
+$$
+n+g+\delta=0.10,\qquad
+s_P=0.05,\quad s_R=0.30,\qquad
+k_P(0)=1,\quad k_R(0)=4.
+$$
+
+인구증가율, 기술진보율, 감가상각률과 초기 기술수준은 양국에서 동일하다고 하자.
+국가 P는 초기 유효노동당 소득이 더 낮은 경제이다.
+
+1. 각 경제의 정상상태 유효노동당 자본
+   $k_P^*$, $k_R^*$ 및 산출 $y_P^*$, $y_R^*$를 계산하시오.
+   두 경제가 장기적으로 동일한 소득수준에 도달하는지 판정하시오.
+
+2. 시점 $0$에서 두 경제의 유효노동당 산출성장률
+   $g_{y,P}(0)$와 $g_{y,R}(0)$를 계산하시오.
+   초기 소득이 낮은 P가 오히려 더 느리게 성장할 수 있는 이유를
+   각 경제의 정상상태와 연결하여 설명하시오.
+
+3. 다음 명제를 **prove or disprove** 하시오.
+
+   > Conditional convergence implies that all economies eventually converge
+   > to the same income level, even when their saving rates differ.
+
+   **absolute convergence**와 **conditional convergence**가
+   각각 어떤 조건에서 성립하는 예측인지 구분하여 답하시오.
+
+::: {.spoon-hint}
+**풀이 범위:** 조건부 수렴은 모든 국가의 소득수준이 같아진다는 주장이 아니라,
+각국의 *자신의 정상상태*를 기준으로 한 전이동학의 예측이라는 점에 주목하시오.
+$\beta$-convergence, $\sigma$-convergence 및 성장회귀분석은 다루지 않는다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
