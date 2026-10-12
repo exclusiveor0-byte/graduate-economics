@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [문제당 약 10–15분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -74,6 +74,99 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **market demand − fringe supply → residual demand → dominant-firm optimization → market clearing → monopoly comparison**.<br>dominant firm은 전체 시장수요가 아니라 fringe가 공급하고 남은 residual demand를 마주한다는 점이 핵심이다.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Market Structure (Dominant Firm & Competitive Fringe)"}
+### Setting
+시장 수요: $p = 100 - Q \iff Q^M(p) = \max\{100-p, 0\}$.
+Competitive fringe 공급:
+$$
+Q_F(p) = \begin{cases} 0, & p \le 10, \\[4pt] p - 10, & p > 10. \end{cases}
+$$
+Dominant firm 한계비용: $MC_D = 20$, 고정비용 없음.
+
+---
+
+#### 1) Residual demand의 도출
+Dominant firm이 마주하는 잔여수요(residual demand)는 시장 전체 수요에서 fringe의 공급량을 차감한 것이다:
+$$
+Q_D^R(p) = \max\{Q^M(p) - Q_F(p), 0\}.
+$$
+수요가 양수인 가격 구간별로 정리하면:
+$$
+Q_D^R(p) = \begin{cases}
+100 - p, & 0 \le p \le 10, \\[4pt]
+110 - 2p, & 10 < p < 55, \\[4pt]
+0, & p \ge 55.
+\end{cases}
+$$
+특히 $p > 10$인 양의 잔여수요 구간에서
+$$
+Q_D = 100 - p - (p - 10) = 110 - 2p.
+$$
+이를 가격 $p$에 대해 풀면 잔여 역수요함수(residual inverse demand)는
+$$
+\boxed{P_R(Q_D) = 55 - \frac{Q_D}{2}, \qquad 0 \le Q_D < 90}.
+$$
+가격이 10 이하이면 fringe는 생산하지 않아 잔여수요가 시장 전체수요와 같아진다. 단, 이 구간은 $MC_D=20$보다 낮으므로 최적해가 될 수 없다.
+
+---
+
+#### 2) Dominant firm의 이윤극대화와 시장균형
+Dominant firm은 residual inverse demand에 대해 이윤을 극대화한다:
+$$
+\max_{Q_D \ge 0} \pi_D(Q_D) = \bigl[P_R(Q_D) - 20\bigr]Q_D = \left(35 - \frac{Q_D}{2}\right)Q_D = 35Q_D - \frac{Q_D^2}{2}.
+$$
+일계조건(FOC):
+$$
+\frac{d\pi_D}{dQ_D} = 35 - Q_D = 0 \quad\Longrightarrow\quad \boxed{Q_D^* = 35}.
+$$
+이계미분은 $-1 < 0$이므로 strictly concave하여 유일한 전역 최적해이다 ($0 \le 35 < 90$ 범위 충족).
+
+시장 균형가격은
+$$
+\boxed{p^* = P_R(35) = 55 - \frac{35}{2} = 37.5}.
+$$
+$p^* = 37.5 > 10$이므로 competitive fringe의 총공급량은
+$$
+\boxed{Q_F^* = p^* - 10 = 37.5 - 10 = 27.5}.
+$$
+시장 전체 거래량은
+$$
+\boxed{Q^* = Q_D^* + Q_F^* = 35 + 27.5 = 62.5}.
+$$
+시장수요 검산: $Q^M(37.5) = 100 - 37.5 = 62.5 = Q^*$로 정확히 일치한다.
+(지배기업 이윤: $\pi_D^* = (37.5 - 20) \times 35 = 612.5$).
+
+---
+
+#### 3) Fringe가 없는 순수 독점시장과의 비교
+Competitive fringe가 없다면 dominant firm은 시장 전체 역수요 $p = 100 - Q$를 직면한다:
+$$
+\max_{Q \ge 0} (100 - Q - 20)Q = 80Q - Q^2.
+$$
+FOC: $80 - 2Q = 0 \implies \boxed{Q^M = 40},\quad \boxed{p^M = 100 - 40 = 60},\quad \pi^M = 1600$.
+
+두 시장구조 비교:
+
+| 구분 | 지배기업 + 경쟁적 주변기업 | 순수 독점 (Pure Monopoly) |
+|:---|:---:|:---:|
+| **시장 가격 ($p$)** | **37.5** | **60** |
+| **시장 총거래량 ($Q$)** | **62.5** | **40** |
+| **지배기업 생산량 ($Q_D$)** | **35** | **40** |
+
+따라서 competitive fringe가 존재하면
+$$
+\boxed{p^* < p^M},\qquad \boxed{Q^* > Q^M}.
+$$
+주변기업의 공급이 dominant firm의 잔여수요를 감소시키고 가격탄력성을 높여 시장가격을 낮추고 총거래량을 증가시킨다. 지배기업 자체의 생산량은 40에서 35로 감소하지만, fringe의 추가 공급(27.5)으로 인해 사회 전체의 총산출량은 40에서 62.5로 크게 확대된다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- 잔여수요: $Q_D = Q^M(p) - Q_F(p) \implies P_R(Q_D) = 55 - Q_D/2$.
+- 균형: $MR_D = MC_D \implies Q_D^* = 35, p^* = 37.5, Q_F^* = 27.5, Q^* = 62.5$.
+- 비교: Fringe의 진입·공급은 독점력을 규제하여 가격을 낮추고 총산출량을 늘린다 ($p^* < p^M, Q^* > Q^M$).
 :::
 :::
 
@@ -152,3 +245,137 @@ $$
 **형식**: **quasilinear demand → market clearing → equilibrium allocation → MRS comparison → Pareto efficiency**.<br>Cobb–Douglas와 달리 quasilinear preference에서는 $x$-재화의 interior demand가 wealth와 무관하게 결정되는 구조에 주목하시오.
 :::
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. General Equilibrium (Quasilinear Preferences & Pareto Efficiency)"}
+### Setting
+순수교환경제: 소비자 1, 2와 재화 $x, y$.
+$u_1(x_1,y_1)=2\sqrt{x_1}+y_1, \omega_1=(4,2)$.
+$u_2(x_2,y_2)=4\sqrt{x_2}+y_2, \omega_2=(1,8)$.
+총부존 $(\bar x, \bar y) = (5, 10)$, 가격 체계 $(p_x, p_y) = (p, 1)$.
+
+---
+
+#### 1) Wealth와 Marshallian demand
+각 소비자의 소득(wealth)은 초기부존의 시장가치이므로
+$$
+\boxed{m_1(p) = 4p + 2},\qquad \boxed{m_2(p) = p + 8}.
+$$
+
+**소비자 1의 최적화:**
+$\max_{x_1, y_1 \ge 0} 2\sqrt{x_1} + y_1$ s.t. $px_1 + y_1 \le m_1(p)$.
+$y_1 > 0$인 내부해에서 예산제약 $y_1 = m_1(p) - px_1$을 대입하면
+$$
+\max_{x_1 \ge 0} 2\sqrt{x_1} + m_1(p) - px_1.
+$$
+일계조건(FOC):
+$$
+\frac{1}{\sqrt{x_1}} - p = 0 \quad\Longleftrightarrow\quad \frac{1}{\sqrt{x_1}} = p.
+$$
+이계미분이 $-1/(2x_1^{3/2}) < 0$이므로 유일한 최적해이다:
+$$
+\boxed{x_1(p) = \frac{1}{p^2} = p^{-2}}.
+$$
+예산제약으로부터 $y_1(p)$는
+$$
+\boxed{y_1(p) = m_1(p) - px_1(p) = 4p + 2 - \frac{1}{p}}.
+$$
+
+**소비자 2의 최적화:**
+$\max_{x_2 \ge 0} 4\sqrt{x_2} + m_2(p) - px_2$.
+FOC:
+$$
+\frac{2}{\sqrt{x_2}} - p = 0 \quad\Longleftrightarrow\quad \frac{2}{\sqrt{x_2}} = p.
+$$
+따라서
+$$
+\boxed{x_2(p) = \frac{4}{p^2} = 4p^{-2}}.
+$$
+예산제약으로부터 $y_2(p)$는
+$$
+\boxed{y_2(p) = m_2(p) - px_2(p) = p + 8 - \frac{4}{p}}.
+$$
+
+**특징:** 준선형(quasilinear) 효용의 내부해에서 $x$-재화의 마샬 수요는 개별 소득 $m_i$에 전혀 의존하지 않고 오직 상대가격 $p$와 한계효용 파라미터로만 결정된다 (소득효과 0).
+
+---
+
+#### 2) Competitive equilibrium price와 배분
+$x$-재화의 시장청산조건:
+$$
+x_1(p) + x_2(p) = \bar x = 5 \quad\Longleftrightarrow\quad \frac{1}{p^2} + \frac{4}{p^2} = 5.
+$$
+$$
+\frac{5}{p^2} = 5 \quad\Longleftrightarrow\quad p^2 = 1.
+$$
+가격은 양수이므로 균형가격은
+$$
+\boxed{p^* = 1}.
+$$
+
+균형가격에서 소득과 배분을 계산하면:
+$$
+m_1^* = 4(1) + 2 = 6,\qquad m_2^* = 1 + 8 = 9.
+$$
+$x$-재화 소비:
+$$
+\boxed{x_1^* = \frac{1}{1^2} = 1},\qquad \boxed{x_2^* = \frac{4}{1^2} = 4}.
+$$
+$y$-재화 소비:
+$$
+\boxed{y_1^* = 6 - 1(1) = 5},\qquad \boxed{y_2^* = 9 - 1(4) = 5}.
+$$
+따라서 경쟁균형 배분은
+$$
+\boxed{(x_1^*, y_1^*) = (1, 5),\qquad (x_2^*, y_2^*) = (4, 5)}.
+$$
+
+**검증:**
+- $x$ 실행가능성: $x_1^* + x_2^* = 1 + 4 = 5 = \bar x$.
+- $y$ 실행가능성: $y_1^* + y_2^* = 5 + 5 = 10 = \bar y$.
+- 내부해 조건: $y_1^* = 5 > 0, y_2^* = 5 > 0$ 만족!
+두 시장의 총가치 합 $p(x_1+x_2) + (y_1+y_2) = m_1+m_2 = 5p+10$이 성립하므로 왈라스 법칙(Walras' law)도 성립한다.
+
+---
+
+#### 3) MRS 조건과 Pareto efficiency
+각 소비자의 한계효용:
+$$
+MU_{x_1} = \frac{1}{\sqrt{x_1}},\quad MU_{y_1} = 1 \quad\Longrightarrow\quad MRS_1 = \frac{MU_{x_1}}{MU_{y_1}} = \frac{1}{\sqrt{x_1}}.
+$$
+$$
+MU_{x_2} = \frac{2}{\sqrt{x_2}},\quad MU_{y_2} = 1 \quad\Longrightarrow\quad MRS_2 = \frac{MU_{x_2}}{MU_{y_2}} = \frac{2}{\sqrt{x_2}}.
+$$
+경쟁균형 배분 $(x_1^*, x_2^*) = (1, 4)$에서
+$$
+MRS_1^* = \frac{1}{\sqrt 1} = 1,\qquad MRS_2^* = \frac{2}{\sqrt 4} = 1.
+$$
+따라서
+$$
+\boxed{MRS_1^* = MRS_2^* = p^* = 1}.
+$$
+
+**Pareto efficiency 증명 (사회계획자 문제와의 일치):**
+총효용 극대화 문제:
+$$
+\max_{x_1, x_2 \ge 0} 2\sqrt{x_1} + 4\sqrt{x_2} + 10 \quad\text{s.t.}\quad x_1 + x_2 = 5.
+$$
+$x_2 = 5 - x_1$ 대입 후 FOC:
+$$
+\frac{1}{\sqrt{x_1}} - \frac{2}{\sqrt{5-x_1}} = 0 \quad\Longleftrightarrow\quad \frac{1}{\sqrt{x_1}} = \frac{2}{\sqrt{x_2}} \quad\Longleftrightarrow\quad x_2 = 4x_1.
+$$
+$x_1 + 4x_1 = 5 \implies x_1^{SP} = 1, x_2^{SP} = 4$.
+경쟁균형 배분이 사회계획자의 효율적 배분과 정확히 일치하며, 두 소비자의 한계대체율이 시장 상대가격과 일치하여 $MRS_1 = MRS_2$가 성립하므로, 어느 소비자의 효용도 감소시키지 않고 다른 소비자의 효용을 증대시키는 재배분이 불가능하다. 즉 **후생경제학 제1정리에 의해 경쟁균형 배분은 파레토 효율적(Pareto efficient)**이다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- 준선형 효용: $x_1(p) = p^{-2}, x_2(p) = 4p^{-2}$ (소득효과 없음).
+- 시장청산: $x_1 + x_2 = 5 \implies p^* = 1$.
+- 균형배분: $(x_1^*, y_1^*) = (1, 5), (x_2^*, y_2^*) = (4, 5)$.
+- 파레토 효율성: $MRS_1^* = MRS_2^* = p^* = 1$, 사회계획자 해와 일치.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
+
