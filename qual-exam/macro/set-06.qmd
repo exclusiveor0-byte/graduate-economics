@@ -18,7 +18,7 @@ GRADUATE MACROECONOMICS · DAILY PRACTICE
 [거시경제학]{.chip .chip--macro}
 [총 2문제]{.chip}
 [예상 35–45분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -76,6 +76,104 @@ $$
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Ramsey Phase Diagram"}
+### Setting
+두 동태식은 유효노동당 자본 $k$와 유효노동당 소비 $c$에 관해 다음과 같다.
+$$
+\dot k=f(k)-c-(n+g+\delta)k,
+\qquad
+\frac{\dot c}{c}=\frac{1}{\theta}\left[f'(k)-\delta-\rho-\theta g\right].
+$$
+$f'(k)>0$, $f''(k)<0$, $\theta>0$, $c>0$이고 양의 내부 정상상태가 존재한다고 가정한다. 계산의 편의를 위해
+$$
+m:=n+g+\delta,\qquad h(k):=f(k)-mk,\qquad q:=\delta+\rho+\theta g
+$$
+로 두면
+$$
+\boxed{\dot k=h(k)-c},\qquad \boxed{\dot c=\frac{c}{\theta}[f'(k)-q]}.
+$$
+정상상태 $(k^*,c^*)$는 두 식이 동시에 0인 점이므로
+$$
+\boxed{f'(k^*)=q=\delta+\rho+\theta g},\qquad \boxed{c^*=h(k^*)=f(k^*)-mk^*}.
+$$
+$f''<0$이므로 내부 정상상태 $k^*$는 유일하다.
+
+---
+
+#### 1) 두 nullcline의 도출과 부호 판정
+**① $\dot k=0$ locus.**
+자본축적식으로부터
+$$
+0=f(k)-c-mk \quad\Longleftrightarrow\quad \boxed{c=h(k)=f(k)-mk}.
+$$
+이 곡선의 높이 $h(k)$는 주어진 $k$에서 자본량을 유지하면서 가능한 소비량이다. $\dot k=h(k)-c$이므로
+$$
+\begin{array}{lll}
+c < h(k) & \Longrightarrow & \dot k > 0,\\[3pt]
+c = h(k) & \Longrightarrow & \dot k = 0,\\[3pt]
+c > h(k) & \Longrightarrow & \dot k < 0.
+\end{array}
+$$
+따라서 **$\dot k=0$ 곡선 아래에서는 자본이 증가하고, 위에서는 감소**한다. 이는 같은 자본량에서 투자로 남기는 자원이 소비량보다 충분한지의 문제다.
+
+**② $\dot c=0$ locus.**
+내부 영역 $c>0$에서
+$$
+0=\frac{\dot c}{c}=\frac{f'(k)-q}{\theta} \quad\Longleftrightarrow\quad \boxed{k=k^*,\quad f'(k^*)=q}.
+$$
+이는 $(k,c)$ 평면의 **수직선**이다. $f''(k)<0$이므로
+$$
+\begin{array}{lll}
+k < k^* & \Longrightarrow & f'(k) > f'(k^*)=q \Longrightarrow \dot c > 0,\\[3pt]
+k = k^* & \Longrightarrow & \dot c = 0,\\[3pt]
+k > k^* & \Longrightarrow & f'(k) < q \Longrightarrow \dot c < 0.
+\end{array}
+$$
+따라서 **$\dot c=0$ 선 왼쪽에서는 소비가 증가하고, 오른쪽에서는 감소**한다.
+
+---
+
+#### 2) 네 영역의 방향장(direction field)
+각 영역에서 $\dot k$의 부호와 $\dot c$의 부호를 결합한다 ($k$가 가로축, $c$가 세로축):
+
+| 자본 위치 | 소비 위치 | $\dot k$ | $\dot c$ | 움직임 |
+|:---|:---|:---:|:---:|:---:|
+| $k < k^*$ | $c < h(k)$ | $>0$ | $>0$ | 오른쪽 위 (↗) |
+| $k < k^*$ | $c > h(k)$ | $<0$ | $>0$ | 왼쪽 위 (↖) |
+| $k > k^*$ | $c < h(k)$ | $>0$ | $<0$ | 오른쪽 아래 (↘) |
+| $k > k^*$ | $c > h(k)$ | $<0$ | $<0$ | 왼쪽 아래 (↙) |
+
+- $k < k^*, c > h(k)$이면 $\dot k < 0$ (자본 감소), $\dot c > 0$ (소비 증가)이므로 왼쪽 위(↖)로 움직인다.
+- 두 nullcline 위에서: $c=h(k)$이면 수평 이동 없이 상하 변화만 가능하고, $k=k^*$이면 수직 이동 없이 좌우 변화만 가능하다. 두 조건이 동시에 충족되는 점 $(k^*,c^*)$만 정상상태다.
+- **경제적 해석:** $\dot k$는 현재 생산에서 소비와 자본유지 필요투자를 뺀 잔여자원의 부호이며, $\dot c$는 자본의 한계수익 $f'(k)$이 시간선호·감가상각·성장조정에 따른 기준 $q$를 상회하는지에 의해 결정된다.
+
+---
+
+#### 3) Prove or disprove: $k< k^*$이면 반드시 $\dot k > 0$인가?
+> If $k< k^*$, capital must be increasing.
+
+**판정: 거짓(False).** $k < k^*$는 오직 소비성장률의 부호($\dot c > 0$)만을 결정한다. 반면 자본축적의 부호는 $\dot k=h(k)-c$로 결정된다.
+
+**명시적 반례:** $k_0 < k^*$를 정상상태에 충분히 가깝게 골라 $h(k_0) > 0$가 되도록 하자. 임의의 작은 $\varepsilon > 0$에 대해
+$$
+c_0 = h(k_0) + \varepsilon
+$$
+로 선택하면
+$$
+\boxed{\dot k(0)=h(k_0)-c_0=-\varepsilon < 0},\qquad \dot c(0)>0.
+$$
+즉 자본이 정상상태보다 적은데도 **소비가 자본유지 가능 수준보다 높아서 자본이 감소**한다. 이는 앞서 도출한 왼쪽 위(↖) 방향과 일치한다.
+
+따라서 $k < k^*$는 $\dot c > 0$를 함의하지만 $\dot k$의 부호는 결정하지 못한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- $\dot k=0$: $c=f(k)-(n+g+\delta)k$ (아래에서 $\dot k>0$, 위에서 $\dot k<0$)
+- $\dot c=0$: $k=k^*$ (왼쪽에서 $\dot c>0$, 오른쪽에서 $\dot c<0$)
+- $k<k^*$는 소비 증가($\dot c>0$)를 의미할 뿐 자본 증가($\dot k>0$)를 보장하지 않는다.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. Predetermined Capital and the Saddle Path
 ::: {.topic}
@@ -109,6 +207,97 @@ Problem 1의 Ramsey 경제를 계속 생각하자.
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Predetermined Capital and the Saddle Path"}
+### Setting
+초기자본 $k_0$는 주어져 있으며, 경제는 최적경로를 따라야 한다.
+
+---
+
+#### 1) 자본은 predetermined, 소비는 jump variable인 이유
+**① 자본은 축적된 저량(stock).**
+자본축적식은 $\dot k(t)=f(k(t))-c(t)-mk(t)$이므로, 두 시점 사이의 자본 변화는 누적된 순투자에 의해 결정된다:
+$$
+k(t_2)-k(t_1)=\int_{t_1}^{t_2}\big[f(k(s))-c(s)-mk(s)\big]ds.
+$$
+생산·소비·투자가 유한하고 순간적인 자본의 증발·생성 같은 별도 충격이 없다면, 충격 전후 간격을 0으로 줄였을 때 적분항도 0이 된다. 따라서
+$$
+\boxed{k(0^+)=k(0^-)}.
+$$
+
+**② 소비는 흐름(flow)이자 선택변수(control).**
+가계는 충격으로 미래 수익률이나 자원 전망이 달라지면 그 즉시 소비계획을 재선택할 수 있다. 소비의 수준을 변화시키는 데 자본처럼 별도의 축적법칙을 만족시킬 필요가 없다. 따라서 일반적으로
+$$
+\boxed{c(0^+)\ne c(0^-)\quad\text{일 수 있다}.}
+$$
+소비가 점프하면 그 순간부터 $\dot k$는 다른 값을 갖지만, **$k$ 자체는 연속**이다.
+
+결론적으로 $k_0$는 과거 축적의 결과로 주어진 **상태변수(state variable)**이고, $c_0$는 새 충격과 미래 최적화를 반영해 선택할 수 있는 **제어변수(control/jump variable)**다.
+
+---
+
+#### 2) $k_0< k^*$에서 초기소비 $c_0$는 어떻게 정해지는가?
+**① 초기값의 수가 다르다.**
+두 동태방정식은 $(k,c)$라는 두 변수의 시간경로를 결정한다. 그러나 초기자본 $k_0$만 물리적으로 주어지고, 초기소비 $c_0$는 가계가 선택한다. 임의의 $c_0$를 대입하면 수학적인 해는 만들어지더라도 최적해가 보장되지는 않는다.
+
+**② Saddle path가 허용되는 $c_0$를 선택한다.**
+정상상태로 수렴하는 안정경로를 $c=s(k)$라고 쓰면, 주어진 $k_0$에 대응하는 유일한 초기 소비수준이 지정된다:
+$$
+\boxed{c_0=s(k_0)}.
+$$
+표준적인 내부 Ramsey 경제에서 $k_0 < k^*$인 안정경로는 $\dot k > 0, \dot c > 0$를 만족하며, 자본과 소비가 정상상태로 단조 수렴($k(t)\nearrow k^*, c(t)\nearrow c^*$)한다.
+
+**③ $c_0$가 너무 높으면:**
+안정경로보다 높은 소비를 선택하면 자본축적에 남길 자원이 부족해진다. 그 결과 궤적이 왼쪽 위(↖)로 발산하여 결국 자본이 고갈되거나 실현 불가능한 경로로 이어진다.
+
+**④ $c_0$가 너무 낮으면:**
+안정경로보다 낮은 소비는 과도한 저축과 자본축적을 낳는다. 이 경로는 오른쪽 아래(↘)로 이동하여 자본은 계속 늘어나지만 한계생산 $f'(k)$이 너무 낮아져 비효율적인 과잉축적이 발생하며, 횡단성 조건(TVC)을 위반한다.
+
+따라서 Euler equation과 자원제약은 가능한 모든 궤적을 기술하지만, **초기자본에 대응하는 올바른 초기소비**는 자원 실행가능성과 무한기간 최적화 조건을 함께 충족하는 saddle path에서 유일하게 정해진다.
+
+---
+
+#### 3) Prove or disprove: 주변의 모든 초기점이 정상상태로 수렴하는가?
+> Saddle-path stability means that every initial point sufficiently close to the steady state converges to the steady state.
+
+**판정: 거짓(False).**
+Saddle-path stability의 의미는 정상상태 근방의 모든 점이 수렴한다는 것이 아니라, **수렴하는 초기점들이 특정한 1차원 안정경로(stable path) 위에 놓인다**는 것이다.
+
+**반례:** 임의로 작은 $\varepsilon > 0$에 대해 다음 초기점을 택하자:
+$$
+\boxed{k_0=k^*,\qquad c_0=c^*+\varepsilon}.
+$$
+이 초기점은 $\varepsilon$을 줄이면 정상상태에 임의로 가까워진다. 그러나 초기 순간
+$$
+\dot k(0)=f(k^*)-(c^*+\varepsilon)-mk^*=-\varepsilon < 0,\qquad \dot c(0)=0.
+$$
+따라서 곧 $k(t) < k^*$가 되고, $f''<0$이므로
+$$
+\dot c(t)=\frac{c(t)}{\theta}[f'(k(t))-f'(k^*)] > 0.
+$$
+이후 $k \le k^*, c \ge c^*+\varepsilon$의 영역(왼쪽 위 ↖)을 벗어나 정상상태로 되돌아올 수 없다. 따라서 $c(t)$는 $c^*$로 수렴하지 않고 발산한다.
+
+즉 정상상태에 임의로 가까운 점 중에도 수렴하지 않는 초기조건이 존재한다. Saddle-path stability는 **국소 점근안정성(local asymptotic stability)**과 다르며, 경제는 $c_0$를 안정경로 위로 점프시킴으로써 안장경로 균형을 선택한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- 자본 $k$는 저량(stock)으로서 연속인 기결정 변수(predetermined variable), 소비 $c$는 유량(flow)이자 즉시 점프 가능한 제어변수(jump variable).
+- $c_0$가 너무 높으면 자본 고갈, 너무 낮으면 과잉축적(TVC 위반). 오직 saddle path 상의 $c_0=s(k_0)$만이 최적 수렴경로를 달성.
+- Saddle-path stability는 1차원 부분다양체(stable manifold) 상에서의 수렴을 의미할 뿐, 주변 모든 점의 수렴을 의미하지 않는다.
+:::
+:::
+
+::: {.callout-important title="📌 6회차 핵심 결과 요약"}
+| 문항 | 핵심 결론 |
+|:---|:---|
+| 1-(1) | $\dot k=0$: $c=f(k)-(n+g+\delta)k$. 아래에서 $\dot k>0$, 위에서 $\dot k<0$.<br>$\dot c=0$: $k=k^*$. 왼쪽에서 $\dot c>0$, 오른쪽에서 $\dot c<0$. |
+| 1-(2) | $k<k^*$: $\dot c>0$; $k>k^*$: $\dot c<0$. $c<h(k)$: $\dot k>0$; $c>h(k)$: $\dot k<0$. 결합하여 4개 사분면 방향장 도출. |
+| 1-(3) | **False.** $k_0<k^*, c_0=h(k_0)+\varepsilon$이면 $\dot k(0)=-\varepsilon<0$. |
+| 2-(1) | 자본은 상태변수라 충격 직후 연속($k(0^+)=k(0^-)$). 소비는 통제변수라 새 최적계획에 따라 점프 가능($c(0^+)\ne c(0^-)$). |
+| 2-(2) | 주어진 $k_0$에 대한 $c_0$는 saddle path와 무한기간 최적화 조건에 의해 유일하게 선택된다. |
+| 2-(3) | **False.** 안정경로 위 초기점은 수렴하지만 인근의 모든 초기점이 수렴하지는 않는다 (국소 점근안정성과 구별). |
+:::
+
 ---
 
 [← 문제 한 스푼 목록으로 돌아가기](../index.html)
+

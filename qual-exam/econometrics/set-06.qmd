@@ -18,7 +18,7 @@ GRADUATE ECONOMETRICS · DAILY PRACTICE
 [계량경제학]{.chip .chip--metrics}
 [총 2문제]{.chip}
 [예상 65–80분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -201,6 +201,271 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **pooled OLS failure → FE bias → first difference → endogeneity remains → lagged instruments → difference GMM → specification tests → system GMM motivation**. 핵심은 “$c_i$를 제거했다”와 “내생성 문제가 해결되었다”가 동일한 명제가 아니라는 점이다.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Dynamic Panel Data, Nickell Bias & Arellano–Bond"}
+### Setting
+원문의 dynamic panel model은
+$$
+\boxed{
+y_{it}=\rho_0 y_{i,t-1}+x_{it}'\beta_0+c_i+u_{it},
+\qquad i=1,\ldots,N,\ t=2,\ldots,T
+}
+$$
+이다. $T$는 고정하고 $N\to\infty$인 large-$N$, fixed-$T$ 점근체계를 고려한다. $c_i$는 individual effect, $u_{it}$는 idiosyncratic error다. 기본 가정으로
+$$
+E[u_{it}\mid c_i,y_{i1},x_{i1},\ldots,x_{iT}]=0
+$$
+이 주어져 있다.
+
+> **주의할 점**: 위 조건은 초기값 $y_{i1}$과 $x$ 경로에 대한 직교를 주지만, 모든 시점의 lagged dependent variable이 미래 $u_{it}$와 직교한다는 사실까지 자동으로 보장하지는 않는다. Arellano–Bond의 표준 lag-instrument 정당화에는 과거 정보에 대한 sequential innovation orthogonality를 추가로 사용한다.
+
+---
+
+#### 1. Pooled OLS와 동적 패널의 내생성
+Pooled regression에서 개인효과를 무시하면 복합오차는
+$$
+v_{it}=c_i+u_{it}
+$$
+이다. Lagged dependent variable이 $c_i$를 공유하기 때문에 일반적으로
+$$
+E[y_{i,t-1}c_i]\neq 0.
+$$
+예를 들어 $x_{it}=0$, $|\rho_0|<1$이고 개인별 조건부 정상해가 존재한다면
+$$
+y_{it}=\frac{c_i}{1-\rho_0}+\sum_{j=0}^{\infty}\rho_0^j u_{i,t-j}
+$$
+로 표현되므로, $c_i$와 innovations의 직교 및 $\operatorname{Var}(c_i)>0$ 아래
+$$
+\operatorname{Cov}(y_{i,t-1},c_i)=\frac{\operatorname{Var}(c_i)}{1-\rho_0}\neq 0.
+$$
+따라서 $y_{i,t-1}$는 $c_i+u_{it}$와 일반적으로 직교하지 않는다.
+
+설명변수를 $z_{it}=(y_{i,t-1},x_{it}')'$, 모수를 $\vartheta_0=(\rho_0,\beta_0')'$로 묶으면 pooled OLS는
+$$
+\hat\vartheta_P-\vartheta_0=\left(\sum_{i,t}z_{it}z_{it}'\right)^{-1}\sum_{i,t}z_{it}(c_i+u_{it}).
+$$
+$T$ 고정, 독립적인 개인별 sampling과 적절한 LLN 아래
+$$
+\operatorname{plim}\hat\vartheta_P=\vartheta_0+Q_P^{-1}\frac1{T-1}\sum_{t=2}^{T}E[z_{it}(c_i+u_{it})],
+$$
+여기서 $Q_P=\frac1{T-1}\sum_{t=2}^{T}E[z_{it}z_{it}']$이다.
+
+따라서 pooled OLS의 핵심 직교조건이 성립하지 않아 **일치성(consistency)이 실패**한다. 이는 시간불변의 누락된 $c_i$가 회귀계수에 흡수되는 **omitted-variable bias(OVB)**의 동적 패널 버전이다.
+
+---
+
+#### 2. Within transformation과 Nickell bias
+이 문항의 within 평균은 원모형이 관측되는 $t=2,\ldots,T$의 $T-1$개 시점을 기준으로 정의해야 한다:
+$$
+\bar y_i=\frac1{T-1}\sum_{t=2}^{T}y_{it},\quad
+\bar y_{i,-1}=\frac1{T-1}\sum_{t=2}^{T}y_{i,t-1},\quad
+\bar u_i=\frac1{T-1}\sum_{t=2}^{T}u_{it}
+$$
+이고 $\bar x_i$도 같은 범위로 정의한다. 원모형에서 시점 평균을 빼면
+$$
+\boxed{
+y_{it}-\bar y_i=\rho_0(y_{i,t-1}-\bar y_{i,-1})+(x_{it}-\bar x_i)'\beta_0+(u_{it}-\bar u_i)
+}.
+$$
+$c_i$는 소거되었지만 $\ddot y_{i,t-1}=y_{i,t-1}-\bar y_{i,-1}$와 $\ddot u_{it}=u_{it}-\bar u_i$는 일반적으로 상관된다.
+
+**왜 문제가 남는가?**
+1. 현재 오차 $u_{it}$는 다음 시점의 lag regressor $y_{it}$ 안에 들어간다.
+2. $\bar u_i$에는 $u_{i,t-1}$이 포함되고, $y_{i,t-1}$도 과거 $u_{i,t-1}$을 포함한다.
+3. 즉 demeaning(시간평균 차감)이 서로 다른 시점의 충격을 동일한 관측식에 결합시킨다.
+
+$T=3$, $x_{it}=0$, $u_{i2},u_{i3}$이 서로 비상관이고 분산이 $\sigma_u^2$, $y_{i1},c_i$는 이 충격들과 직교한다고 하자. $t=2$에서
+$$
+\ddot y_{i1}=\frac{y_{i1}-y_{i2}}2,\qquad \ddot u_{i2}=\frac{u_{i2}-u_{i3}}2.
+$$
+$y_{i2}=\rho_0 y_{i1}+c_i+u_{i2}$이므로
+$$
+\boxed{
+\operatorname{Cov}(\ddot y_{i1},\ddot u_{i2})=-\frac{\sigma_u^2}{4}\neq 0
+}.
+$$
+즉 $c_i$를 완전히 제거해도 transformed regressor의 내생성이 남는다.
+
+$T$가 고정되면 시간 평균에 포함되는 오차항의 영향이 $N\to\infty$에서도 사라지지 않으므로 일반적인 FE 추정량의 편의는 0으로 수렴하지 않는다. 이를 **Nickell bias**라 한다. 표준적인 정상 AR(1) 동적 패널에서 편의의 대표적 차수는 $O(T^{-1})$이며, $T$가 고정이면 FE는 **inconsistent**하다.
+
+---
+
+#### 3. First differencing 후에도 남는 내생성
+$t\ge 3$에서 $t$기 식에서 $t-1$기 식을 빼면
+$$
+y_{it}-y_{i,t-1}=\rho_0(y_{i,t-1}-y_{i,t-2})+(x_{it}-x_{i,t-1})'\beta_0+(c_i-c_i)+(u_{it}-u_{i,t-1}).
+$$
+따라서
+$$
+\boxed{\Delta y_{it}=\rho_0\Delta y_{i,t-1}+\Delta x_{it}'\beta_0+\Delta u_{it}}.
+$$
+그러나
+$$
+\Delta y_{i,t-1}=y_{i,t-1}-y_{i,t-2}
+$$
+는 $u_{i,t-1}$을 포함하고,
+$$
+\Delta u_{it}=u_{it}-u_{i,t-1}
+$$
+에도 동일한 $u_{i,t-1}$이 음의 부호로 나타난다.
+
+$x=0$, innovations가 과거와 직교하고 시간 간 비상관이며 분산이 $\sigma_u^2>0$이면
+$$
+\begin{aligned}
+\operatorname{Cov}(\Delta y_{i,t-1},\Delta u_{it})
+&=\operatorname{Cov}(\Delta y_{i,t-1},u_{it})-\operatorname{Cov}(\Delta y_{i,t-1},u_{i,t-1})\\
+&=0-\sigma_u^2=-\sigma_u^2.
+\end{aligned}
+$$
+따라서 differenced equation에 단순 OLS를 적용해도 일반적으로
+$$
+E[\Delta y_{i,t-1}\Delta u_{it}]\neq 0
+$$
+이므로 일치성이 실패한다. **개인효과 제거와 내생성 해결은 전혀 다른 문제**이다.
+
+---
+
+#### 4. Lagged levels가 유효한 도구변수가 되는 이유
+$t\ge 3$에서 $y_{i,t-2}$를 instrument 후보로 사용한다:
+$$
+E[y_{i,t-2}\Delta u_{it}]=E[y_{i,t-2}u_{it}]-E[y_{i,t-2}u_{i,t-1}].
+$$
+표준적인 sequential innovation orthogonality(과거 $y$ 경로·$c_i$와 당시의 현재·미래 충격의 직교)를 가정하면
+$$
+E[y_{i,t-2}u_{it}]=0,\qquad E[y_{i,t-2}u_{i,t-1}]=0.
+$$
+따라서
+$$
+\boxed{E[y_{i,t-2}\Delta u_{it}]=0}.
+$$
+이 논리는 임의의 $s\ge 2$에 확장되어
+$$
+\boxed{E[y_{i,t-s}\Delta u_{it}]=0,\qquad s=2,3,\ldots,t-1}
+$$
+이라는 difference-GMM moment condition을 얻는다.
+
+> **정확한 가정 구분**: $E[u_{it}u_{is}]=0$이라는 선형적인 serial uncorrelatedness만으로는 비선형적인 과거 $y$의 함수와 미래 $u$ 사이의 직교가 일반적으로 따라오지 않는다. 위 moment는 과거 $y$와 혁신의 직교(sequential exogeneity) 아래 정당화된다. 또한 validity뿐 아니라 $y_{i,t-s}$와 $\Delta y_{i,t-1}$의 충분한 relevance(도구변수 관련성)도 실제 추론에 필수적이다.
+
+---
+
+#### 5. 시점별 available lagged-level instruments
+차분식이 존재하는 첫 시점은 $t=3$이다. $\Delta u_{it}=u_{it}-u_{i,t-1}$와 직교하기 위해 level instrument는 최소 두 시점 이전($r\le t-2$)의 값이어야 한다:
+
+| 차분식 시점 | Available instruments | 개수 |
+|:---|:---|:---:|
+| $t=3$ | $y_{i1}$ | 1 |
+| $t=4$ | $y_{i1},\ y_{i2}$ | 2 |
+| $t=5$ | $y_{i1},\ y_{i2},\ y_{i3}$ | 3 |
+
+표본이 $T$까지 관측될 때 시점 $t$에서 도구변수 후보는 $t-2$개이며, 모두 사용할 때 lagged-dependent-variable에 대한 (차분식별) 적률조건의 총 후보 수는
+$$
+\sum_{t=3}^{T}(t-2)=\frac{(T-1)(T-2)}2.
+$$
+시간이 지날수록 과거 관측값이 더 많이 누적되기 때문에 동일한 현재 차분오차와 직교할 수 있는 lagged-level moment의 후보 수도 시점마다 증가한다.
+
+---
+
+#### 6. Strictly exogenous · Predetermined · Endogenous regressors
+차분식에서 임의의 $x_{is}$가 instrument가 되려면
+$$
+E[x_{is}\Delta u_{it}]=E[x_{is}u_{it}]-E[x_{is}u_{i,t-1}]=0
+$$
+이 되어야 한다.
+
+1. **Strictly exogenous:** 모든 시점 쌍 $s,r$에 대해 $E[x_{is}u_{ir}]=0$. 따라서
+   $$
+   \boxed{E[x_{is}\Delta u_{it}]=0\qquad\text{for all }s}.
+   $$
+   현재·과거·미래의 모든 $x$가 차분오차와 직교하는 후보가 된다.
+2. **Predetermined:** 과거 충격에는 반응할 수 있으나 동시점 및 미래 충격과 직교($E[x_{is}u_{ir}]=0$ for $r\ge s$). $t$ 및 $t-1$ 시점 모두와 직교하려면
+   $$
+   \boxed{s\le t-1}
+   $$
+   이면 충분하다. 따라서 $x_{i,t-1}, x_{i,t-2}, \ldots$가 후보가 된다.
+3. **Contemporaneously endogenous:** $x_{is}$와 $u_{is}$가 상관될 수 있으나 이후 오차와는 직교($E[x_{is}u_{ir}]=0$ for $r>s$). $u_{i,t-1}$과의 직교까지 확보하려면
+   $$
+   \boxed{s\le t-2}
+   $$
+   이므로 $x_{i,t-2}, x_{i,t-3}, \ldots$가 instrument 후보가 된다.
+
+| 설명변수의 지위 | 차분식 $t$에서 이용 가능한 시점 |
+|:---|:---|
+| **Strictly exogenous** | 모든 $s$ |
+| **Predetermined** | $s\le t-1$ |
+| **Endogenous** | $s\le t-2$ |
+
+---
+
+#### 7. Arellano–Bond difference GMM의 세 단계
+1. **차분으로 개인효과 제거:**
+   $$
+   \Delta y_{it}=\rho_0\Delta y_{i,t-1}+\Delta x_{it}'\beta_0+\Delta u_{it},\qquad t\ge 3.
+   $$
+   $c_i$는 제거되지만 $\Delta y_{i,t-1}$는 여전히 endogenous이다.
+2. **Lagged levels를 instrument로 사용:**
+   순차적 직교조건과 수준오차의 시간적 비상관 아래
+   $$
+   E[y_{i,t-s}\{\Delta y_{it}-\rho_0\Delta y_{i,t-1}-\Delta x_{it}'\beta_0\}]=0,\qquad s\ge 2
+   $$
+   인 적률조건을 얻고, $x$의 분류에 따라 적절한 lagged instruments를 추가한다.
+3. **모든 유효 moment를 GMM으로 결합:**
+   개인 $i$별 차분오차벡터를 $\Delta u_i(\vartheta)$, 블록형 instrument matrix를 $Z_i$, $\vartheta=(\rho,\beta')'$라 두면
+   $$
+   g_i(\vartheta)=Z_i'\Delta u_i(\vartheta),\qquad \bar g_N(\vartheta)=\frac1N\sum_{i=1}^{N}g_i(\vartheta).
+   $$
+   GMM 추정량은
+   $$
+   \boxed{
+   \hat\vartheta_{AB}=\arg\min_{\vartheta}\bar g_N(\vartheta)'W_N\bar g_N(\vartheta)
+   }.
+   $$
+   $W_N$은 1단계 가중행렬(예: $(N^{-1}\sum Z_i'H Z_i)^{-1}$) 또는 2단계 최적 가중행렬이다.
+
+---
+
+#### 8. Arellano–Bond AR(1) / AR(2) specification tests
+Original level innovations $u_{it}$가 서로 시간적으로 비상관이고 분산이 $\sigma_u^2$라 하자: $\Delta u_{it}=u_{it}-u_{i,t-1}$.
+
+**① AR(1) 기각이 자연스러운 이유:**
+$$
+\begin{aligned}
+\operatorname{Cov}(\Delta u_{it},\Delta u_{i,t-1})
+&=\operatorname{Cov}(u_{it}-u_{i,t-1}, u_{i,t-1}-u_{i,t-2})\\
+&=-\operatorname{Var}(u_{i,t-1})=-\sigma_u^2.
+\end{aligned}
+$$
+Level errors가 비상관이더라도 차분오차에는 기계적인 **negative first-order serial correlation**이 생긴다. 따라서 AR(1) 검정의 기각은 정상적이며, 모형의 오류를 의미하지 않는다.
+
+**② AR(2) 기각이 치명적인 이유:**
+$$
+\operatorname{Cov}(\Delta u_{it},\Delta u_{i,t-2})=\operatorname{Cov}(u_{it}-u_{i,t-1}, u_{i,t-2}-u_{i,t-3})=0.
+$$
+Level errors가 비상관이면 차분오차 간 2차 자기공분산은 0이어야 한다. 만약 AR(2)가 기각되면 $u_{it}$ 자체에 시계열 상관이 존재함을 뜻하며, 이는 $y_{i,t-2}$가 $\Delta u_{it}$와 직교한다는 핵심 적률조건 $E[y_{i,t-2}\Delta u_{it}]=0$의 타당성을 파괴한다.
+
+---
+
+#### 9. System GMM의 동기와 추가 moment conditions
+Difference GMM은 lagged levels로 차분 종속변수 $\Delta y_{i,t-1}$를 instrument한다. 그러나 $\rho_0$가 1에 가까운 highly persistent process에서는 $\Delta y_{i,t-1}$가 작게 변하는 반면 level $y_{i,t-s}$는 큰 지속 성분을 반영하므로 **instrument relevance**가 급격히 약화된다(Weak instruments 문제).
+
+실제로 정상 AR(1)에서 $\operatorname{Cov}(y_{t-2},\Delta y_{t-1})=-\sigma_u^2/(1+\rho)$이지만, $\rho\to 1$일 때 $\operatorname{Var}(y_{t-2})\to\infty$이므로 상관계수가 0으로 수렴한다.
+
+**System GMM의 해법:**
+차분식(Difference equations)과 원래 수준식(Level equations)을 하나의 시스템으로 묶고, 수준식에 대해 **lagged differences**를 instrument로 사용하는 추가 moment conditions를 도입한다:
+$$
+\boxed{E[\Delta y_{i,t-1}(c_i+u_{it})]=0}.
+$$
+이를 위해 $E[\Delta y_{i,t-1}c_i]=0$이라는 초기조건 및 평균 정상성(mean-stationarity) 가정이 추가로 요구된다. Difference GMM보다 강한 가정을 요구하지만, $\rho$가 1에 가까울 때 추정의 정밀도를 대폭 개선한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- **Pooled OLS:** $E[y_{i,t-1}c_i]\neq 0$으로 OVB 발생, inconsistent.
+- **FE (Within):** $c_i$ 소거되나 $\ddot y_{i,t-1}$과 $\ddot u_{it}$의 상관으로 Nickell bias ($O(T^{-1})$) 발생.
+- **FD:** $c_i$ 소거되나 $\operatorname{Cov}(\Delta y_{i,t-1}, \Delta u_{it})=-\sigma_u^2\neq 0$으로 내생성 잔존.
+- **Difference GMM (AB):** $s\ge 2$인 lagged levels $y_{i,t-s}$를 도구변수로 활용 ($E[y_{i,t-s}\Delta u_{it}]=0$).
+- **AR 검정:** $\Delta u$의 AR(1) 기각은 기계적($-\sigma_u^2$) 현상이나, AR(2) 기각은 도구변수 타당성 위반을 시사.
+- **System GMM:** $\rho\to 1$ 시 difference GMM의 약한 도구변수 문제를 해결하기 위해 level 식에 lagged differences를 도구변수로 결합.
 :::
 :::
 
@@ -400,3 +665,204 @@ $$
 **형식**: **stationarity → centering → MA($\infty$) → unconditional moments → ACF → forecasting → AR($p$) stability → unit-root boundary**. 공식을 암기하기보다 각 결과가 $|\rho|<1$에 어떻게 의존하는지 명확히 하시오.
 :::
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Stationary Time Series, AR Processes & Forecasting"}
+### Setting
+다음 AR(1) process를 생각하자:
+$$
+\boxed{y_t=\mu+\rho y_{t-1}+\varepsilon_t}.
+$$
+Innovation 조건은
+$$
+E[\varepsilon_t]=0,\qquad E[\varepsilon_t^2]=\sigma_\varepsilon^2,\qquad E[\varepsilon_t\varepsilon_s]=0\quad(t\neq s)
+$$
+이며, $\varepsilon_t$는 과거 정보와 직교한다. 조건부기댓값 $E[y_{t+h}\mid\mathcal F_t]$ 계산을 위해 $E[\varepsilon_{t+j}\mid\mathcal F_t]=0$ ($j\ge 1$)을 적용한다.
+
+---
+
+#### 1. Covariance stationarity의 정의
+확률과정 $\{y_t\}$가 covariance stationary (weakly stationary)라는 것은 유한한 2차 적률을 갖고 다음 세 조건을 만족함을 뜻한다:
+
+1. **시간에 불변인 평균:**
+   $$
+   \boxed{E[y_t]=\mu_y\qquad\text{for all }t}.
+   $$
+2. **시간에 불변이고 유한한 분산:**
+   $$
+   \boxed{\operatorname{Var}(y_t)=\gamma_0<\infty\qquad\text{for all }t}.
+   $$
+3. **시점 자체가 아니라 시차(lag)에만 의존하는 공분산:**
+   $$
+   \boxed{\operatorname{Cov}(y_t,y_{t-k})=\gamma_k\qquad\text{for all }t\text{ and integer }k}.
+   $$
+이는 결합분포 전체의 이동불변성을 요구하는 strict stationarity보다 완화된 2차 적률 중심의 정상성이다.
+
+---
+
+#### 2. Stationary mean과 중심화된 AR(1)
+$|\rho|<1$이고 covariance stationary solution이 존재한다고 하자. 양변에 기댓값을 취하면
+$$
+E[y_t]=\mu+\rho E[y_{t-1}]+E[\varepsilon_t]=\mu+\rho\mu_y.
+$$
+정상성에 의해 $E[y_t]=\mu_y$이므로
+$$
+(1-\rho)\mu_y=\mu\quad\Longrightarrow\quad \boxed{\mu_y=\frac{\mu}{1-\rho}}.
+$$
+이제 중심화된 변수 $\tilde y_t:=y_t-\mu_y$를 정의하면
+$$
+\tilde y_t=y_t-\mu_y=\mu+\rho y_{t-1}+\varepsilon_t-\mu_y=\rho(y_{t-1}-\mu_y)+\{\mu-(1-\rho)\mu_y\}+\varepsilon_t.
+$$
+중괄호가 0이므로
+$$
+\boxed{\tilde y_t=\rho\tilde y_{t-1}+\varepsilon_t}.
+$$
+
+---
+
+#### 3. 반복대입을 통한 MA($\infty$) representation
+중심화된 식을 $m$번 반복대입하면
+$$
+\tilde y_t=\rho^m\tilde y_{t-m}+\sum_{j=0}^{m-1}\rho^j\varepsilon_{t-j}.
+$$
+$|\rho|<1$이고 유한분산이면 $E[(\rho^m\tilde y_{t-m})^2]=\rho^{2m}\gamma_0\to 0$이므로 초기조건의 영향이 $L^2$에서 소멸한다. 또한 서로 다른 innovation의 직교에 의해
+$$
+E\left[\left(\sum_{j=m}^{M}\rho^j\varepsilon_{t-j}\right)^2\right]=\sigma_\varepsilon^2\sum_{j=m}^{M}\rho^{2j}\xrightarrow{m\to\infty} 0.
+$$
+따라서 무한급수가 $L^2$-수렴하여
+$$
+\boxed{\tilde y_t=\sum_{j=0}^{\infty}\rho^j\varepsilon_{t-j}=\varepsilon_t+\rho\varepsilon_{t-1}+\rho^2\varepsilon_{t-2}+\cdots}.
+$$
+$|\rho|<1$은 $\sum_{j=0}^\infty \rho^{2j}<\infty$를 보장하므로 2차 적률이 유한한 causal stationary solution 성립의 필요충분조건이다.
+
+---
+
+#### 4. Unconditional variance, autocovariance, ACF
+MA($\infty$) 표현으로부터
+$$
+\operatorname{Var}(y_t)=\operatorname{Var}(\tilde y_t)=\sum_{j=0}^{\infty}\rho^{2j}\sigma_\varepsilon^2=\frac{\sigma_\varepsilon^2}{1-\rho^2}.
+$$
+따라서
+$$
+\boxed{\gamma_0=\operatorname{Var}(y_t)=\frac{\sigma_\varepsilon^2}{1-\rho^2}}.
+$$
+$k\ge 1$에 대해 $\varepsilon_t$와 과거 관측값의 직교를 이용하면
+$$
+\gamma_k=\operatorname{Cov}(\tilde y_t,\tilde y_{t-k})=\rho\operatorname{Cov}(\tilde y_{t-1},\tilde y_{t-k})=\rho\gamma_{k-1}.
+$$
+재귀적으로
+$$
+\boxed{\gamma_k=\rho^k\gamma_0=\frac{\rho^k\sigma_\varepsilon^2}{1-\rho^2}\qquad(k\ge 0)}.
+$$
+따라서 자기상관함수(ACF)는
+$$
+\boxed{\operatorname{Corr}(y_t,y_{t-k})=\frac{\gamma_k}{\gamma_0}=\rho^k\qquad(k\ge 0)}.
+$$
+대칭성에 의해 음의 lag에 대해서는 $\operatorname{ACF}(k)=\rho^{|k|}$이다.
+
+---
+
+#### 5. One-step 및 $h$-step conditional forecast
+정보집합을 $\mathcal F_t=\sigma(y_t,y_{t-1},\ldots)$라 하고 $E[\varepsilon_{t+j}\mid\mathcal F_t]=0$ ($j\ge 1$)을 적용하면:
+$$
+E[y_{t+1}\mid\mathcal F_t]=\mu+\rho y_t=\mu_y+\rho(y_t-\mu_y).
+$$
+이를 $h$시점까지 반복하면
+$$
+\boxed{E[y_{t+h}\mid\mathcal F_t]=\mu_y+\rho^h(y_t-\mu_y)}.
+$$
+$|\rho|<1$이면 $\rho^h\to 0$이므로
+$$
+\boxed{E[y_{t+h}\mid\mathcal F_t]\longrightarrow \mu_y\qquad(h\to\infty)}.
+$$
+즉 현재 상태 $y_t$의 예측 영향력은 지수적으로 감쇠하며, 장기 예측치는 무조건부 정상평균 $\mu_y$로 수렴(mean reversion)한다.
+
+---
+
+#### 6. $h$-step forecast error와 분산
+미래 시점 $y_{t+h}$를 전개하면
+$$
+y_{t+h}=\mu_y+\rho^h(y_t-\mu_y)+\sum_{j=0}^{h-1}\rho^j\varepsilon_{t+h-j}.
+$$
+따라서 $h$-step forecast error는
+$$
+\boxed{e_{t+h\mid t}:=y_{t+h}-E[y_{t+h}\mid\mathcal F_t]=\sum_{j=0}^{h-1}\rho^j\varepsilon_{t+h-j}}.
+$$
+미래 innovation들의 상호 직교성에 의해 예측오차의 분산은
+$$
+\boxed{\operatorname{Var}(e_{t+h\mid t})=\sigma_\varepsilon^2\sum_{j=0}^{h-1}\rho^{2j}=\sigma_\varepsilon^2\frac{1-\rho^{2h}}{1-\rho^2}}.
+$$
+$h\to\infty$일 때 $\rho^{2h}\to 0$이므로
+$$
+\boxed{\lim_{h\to\infty}\operatorname{Var}(e_{t+h\mid t})=\frac{\sigma_\varepsilon^2}{1-\rho^2}=\operatorname{Var}(y_t)}.
+$$
+예측 시계가 무한히 길어지면 예측오차 분산은 무조건부 정상분산과 일치하게 된다.
+
+---
+
+#### 7. $\rho$의 부호별 ACF와 mean reversion
+$\operatorname{ACF}(k)=\rho^k$, $E[y_{t+h}\mid\mathcal F_t]-\mu_y=\rho^h(y_t-\mu_y)$이므로:
+
+1. **$0<\rho<1$ (단조로운 평균회귀):** 모든 $k$에 대해 $\rho^k>0$이며 0으로 단조 감쇠. 현재 평균보다 높으면 예측치도 지속적으로 평균 상방에서 점진적으로 수렴.
+2. **$-1<\rho<0$ (진동하는 평균회귀):** $\rho^1<0, \rho^2>0, \rho^3<0, \ldots$로 부호가 매기 교대. 예측치가 평균의 상하를 진동하며 진폭 $|\rho|^h|y_t-\mu_y|$가 감쇠.
+3. **$\rho=0$ (기억 없는 White Noise):** $y_t=\mu+\varepsilon_t$. $k\ge 1$에서 $\operatorname{ACF}(k)=0$이며, 모든 $h\ge 1$에서 예측치는 즉시 $\mu_y=\mu$.
+
+---
+
+#### 8. AR($p$)의 lag polynomial과 stability
+AR($p$) 과정 $y_t=c+\phi_1 y_{t-1}+\cdots+\phi_p y_{t-p}+\varepsilon_t$에 대해 lag operator $L$을 도입하면
+$$
+\boxed{\phi(L)=1-\phi_1L-\cdots-\phi_pL^p},\qquad \phi(L)y_t=c+\varepsilon_t.
+$$
+안정적인 causal covariance-stationary solution이 존재하기 위한 필요충분조건은 lag polynomial의 모든 근(characteristic roots)이 단위원 외부에 위치하는 것이다:
+$$
+\boxed{\phi(z)=0\quad\Longrightarrow\quad |z|>1}.
+$$
+이 조건 하에서 $\phi(L)^{-1}=\sum_{j=0}^\infty \psi_j L^j$ ($\sum |\psi_j|<\infty$)가 수렴하여 stable MA($\infty$) 표현이 성립하며, 정상평균은
+$$
+\boxed{\mu_y=\frac{c}{1-\sum_{j=1}^p\phi_j}=\frac{c}{\phi(1)}}.
+$$
+
+---
+
+#### 9. $\rho=1$: unit root boundary
+$\rho=1$이면 $y_t=\mu+y_{t-1}+\varepsilon_t$ (Random Walk with Drift)이다. 반복대입하면
+$$
+\boxed{y_t=y_0+\mu t+\sum_{j=1}^{t}\varepsilon_j}.
+$$
+$y_0$가 미래 오차와 직교할 때
+$$
+\operatorname{Var}(y_t)=\operatorname{Var}(y_0)+t\sigma_\varepsilon^2.
+$$
+$\sigma_\varepsilon^2>0$이면 분산이 시간 $t$에 비례하여 무한대로 발산하므로 covariance stationarity가 성립하지 않는다.
+등비급수 $\sum_{j=0}^\infty \rho^{2j}=\sum 1 = \infty$이므로 정상분산 공식 $\sigma_\varepsilon^2/(1-\rho^2)$은 정의되지 않으며, 유한분산의 MA($\infty$) 표현도 존재하지 않는다.
+
+반면 1차 차분한 계열은 $\Delta y_t=\mu+\varepsilon_t$로 정상적이다. 이를 $I(1)$ 단위근 과정이라 하며, 과거 충격의 영향이 영구히 누적되는 특성을 가진다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- **Covariance Stationarity:** 불변 평균 $\mu_y$, 유한 불변 분산 $\gamma_0$, 시차 의존 공분산 $\gamma_k$.
+- **정상 평균 및 중심화:** $\mu_y = \mu/(1-\rho)$, $\tilde y_t = \rho\tilde y_{t-1}+\varepsilon_t$.
+- **MA($\infty$) & 모멘트:** $\tilde y_t = \sum_{j=0}^\infty \rho^j\varepsilon_{t-j}$, $\gamma_0 = \sigma_\varepsilon^2/(1-\rho^2)$, $\operatorname{ACF}(k)=\rho^k$.
+- **예측:** $E[y_{t+h}\mid\mathcal F_t] = \mu_y + \rho^h(y_t-\mu_y) \to \mu_y$. 예측오차 분산은 $\sigma_\varepsilon^2(1-\rho^{2h})/(1-\rho^2) \to \gamma_0$.
+- **AR($p$) 안정성:** $\phi(z)=0 \implies |z|>1$ (모든 근이 단위원 밖).
+- **Unit Root ($\rho=1$):** 분산 $t\sigma_\varepsilon^2 \to \infty$, 비정상 $I(1)$ 과정. 충격이 영구히 지속.
+:::
+:::
+
+::: {.callout-important title="📌 6회차 핵심 개념 연결: Dynamic Panel & Time Series"}
+### 동적 패널과 정상 시계열을 관통하는 구조
+두 문제 모두 시점 간 종속성이 만들어내는 추정과 예측의 구조를 다룬다:
+
+1. **Dynamic Panel:** $c_i$를 제거(FE/FD)해도 $\Delta y_{i,t-1}$와 $\Delta u_{it}$의 내생성이 남으므로, $E[Z_i'\Delta u_i]=0$인 타당한 시점별 lagged level 도구변수(Arellano–Bond)를 구축해야 한다.
+2. **Stationary Time Series:** $|\rho|<1$에서는 과거 충격에 부여되는 가중치 $\rho^j$가 지수적으로 감쇠하며, 이 감쇠가 유한분산·ACF 감쇠·장기평균회귀를 동시에 만든다.
+3. **지속성(Persistence)의 영향:** $\rho$가 1에 가까울수록 지속성이 강해진다. 단일 시계열에서는 단위근($\rho=1$) 경계에서 covariance stationarity 자체가 붕괴하며, 동적 패널에서는 $\rho\to 1$일 때 difference GMM의 instrument strength가 약화되어 System GMM이 필요해진다.
+
+### 기억할 핵심 원칙
+- **개인효과 제거와 내생성 해결은 별개이다:** Fixed effect 변환이나 차분은 $c_i$를 제거할 뿐 동적 내생성을 해결하지 못한다.
+- **단순 무상관과 조건부 평균 독립은 다르다:** 선형 예측과 조건부 기댓값 도출 시 요구되는 가정을 정확히 구분해야 한다.
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
+
