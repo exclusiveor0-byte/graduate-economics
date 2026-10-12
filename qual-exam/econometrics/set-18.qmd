@@ -1,0 +1,381 @@
+---
+title: "문제 한 스푼 #18"
+subtitle: "군집 의존성과 시계열 HAC 추론 (Clustered Dependence · Cluster-Robust · Moulton · HAC/Newey–West)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #18
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Clustered Dependence · Cluster-Robust Variance · Moulton Problem · HAC/Newey–West**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 65–80분]{.chip}
+[해설 미포함]{.chip}
+[계산 · 유도 · Prove/Disprove · 진단 혼합]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Clustered Dependence & Cluster-Robust Inference
+::: {.topic}
+Cluster Scores · Sandwich Variance · Within-Cluster Correlation · Moulton Problem · Clustering Level
+:::
+
+cluster $g=1,\ldots,G$와 cluster 내부 관측치 $i=1,\ldots,n_g$에 대해
+
+$$
+Y_{gi}=X_{gi}'\beta_0+u_{gi}
+$$
+
+라고 하자. 서로 다른 cluster는 독립이지만 동일 cluster 내부에서는 arbitrary dependence를 허용한다.
+
+::: {.assumption}
+$$
+E[X_{gi}u_{gi}]=0,
+$$
+
+$$
+\operatorname{Cov}(u_{gi},u_{gj}\mid X)
+\neq0
+\quad\text{may hold for }i\neq j,
+$$
+
+$$
+u_g\perp u_h
+\quad\text{for }g\neq h.
+$$
+:::
+
+1. [유도]{.tag}
+   OLS decomposition
+
+   $$
+   \hat\beta-\beta_0
+   =
+   (X'X)^{-1}X'u
+   $$
+
+   에서
+
+   $$
+   X'u
+   =
+   \sum_{g=1}^G X_g'u_g
+   $$
+
+   로 쓸 수 있음을 보이시오.
+   cluster score를
+
+   $$
+   S_g=X_g'u_g
+   $$
+
+   라 정의할 때, cluster 독립성 아래
+
+   $$
+   \operatorname{Var}\left(\sum_{g=1}^G S_g\right)
+   =
+   \sum_{g=1}^G\operatorname{Var}(S_g)
+   $$
+
+   가 되는 이유를 설명하시오.
+
+2. [유도]{.tag}
+   cluster 내부 covariance matrix를
+
+   $$
+   \Omega_g=E[u_gu_g'\mid X_g]
+   $$
+
+   라 할 때
+
+   $$
+   \operatorname{Var}(S_g\mid X_g)
+   =
+   X_g'\Omega_gX_g
+   $$
+
+   임을 보이시오.
+   $\Omega_g$가 diagonal일 필요가 없다는 점이 ordinary heteroskedasticity-robust covariance와 어떤 차이를 만드는지 설명하시오.
+
+3. [유도]{.tag}
+   cluster-robust covariance estimator가
+
+   $$
+   \widehat{\operatorname{Var}}(\hat\beta)
+   =
+   (X'X)^{-1}
+   \left[
+   \sum_{g=1}^G
+   X_g'\hat u_g\hat u_g'X_g
+   \right]
+   (X'X)^{-1}
+   $$
+
+   형태를 갖는 이유를 sandwich 구조로 설명하시오.
+
+4. [계산]{.tag}
+   두 cluster의 estimated score가
+
+   $$
+   \hat S_1=
+   \begin{pmatrix}
+   2\\1
+   \end{pmatrix},
+   \qquad
+   \hat S_2=
+   \begin{pmatrix}
+   -1\\3
+   \end{pmatrix}
+   $$
+
+   이고
+
+   $$
+   (X'X)^{-1}
+   =
+   \begin{pmatrix}
+   0.2&0\\
+   0&0.1
+   \end{pmatrix}
+   $$
+
+   라고 하자.
+
+   (i) $\hat B=\sum_{g=1}^2\hat S_g\hat S_g'$를 계산하시오.<br>
+   (ii) $\widehat{\operatorname{Var}}(\hat\beta)=(X'X)^{-1}\hat B(X'X)^{-1}$를 계산하시오.
+
+5. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “Eicker–Huber–White heteroskedasticity-robust standard error를 사용하면 arbitrary within-cluster correlation도 자동으로 처리된다.”
+
+   observation 간 cross-covariance term의 존재 여부를 이용하여 답하시오.
+
+6. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “Cluster fixed effects를 포함하면 cluster-robust standard error는 더 이상 필요하지 않다.”
+
+   fixed effects가 제거하는 variation과 residual dependence를 구분하여 답하시오.
+
+7. [Moulton Problem]{.tag}
+   다음 모형을 생각하자.
+
+   $$
+   Y_{gi}=\alpha+\beta D_g+u_{gi},
+   $$
+
+   여기서 $D_g$는 cluster $g$ 내부의 모든 개인에게 동일하다.
+   $u_{gi}$가 cluster 내부에서 양의 상관을 가진다면,
+   개인 관측치 수가 매우 커도 $\hat\beta$의 effective information이 cluster 수 $G$에 더 가깝게 결정될 수 있는 이유를 설명하시오.
+
+8. [판단·진단]{.tag}
+   한 연구가 50개 주(state), 50,000명의 개인자료를 사용한다.
+   정책 $D_g$는 주 단위로 결정되며, 연구자는 individual-level HC standard error만 사용했다.
+   다음을 답하시오.
+
+   (i) treatment variation은 어느 수준에서 발생하는가?<br>
+   (ii) 어떤 종류의 within-group dependence가 예상되는가?<br>
+   (iii) 자연스러운 clustering level은 무엇인가?<br>
+   (iv) 개인 표본이 50,000개라는 사실만으로 매우 정밀한 inference가 보장되는가?
+
+9. [판단]{.tag}
+   “가능한 한 가장 세밀한 수준에서 clustering하면 항상 안전하다”는 주장에 대해 논하시오.
+   dependence structure, treatment assignment level, number of clusters의 관점에서 답하시오.
+
+::: {.spoon-hint}
+**핵심**: **cluster-robust inference는 관측치 수가 아니라 독립적인 score contributions가 어느 수준에서 형성되는지를 추적하는 문제다.**
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Serial Correlation, Long-Run Variance & HAC/Newey–West
+::: {.topic}
+Score Dependence · Long-Run Variance · Bartlett Weights · Lag Truncation · HC vs Cluster vs HAC
+:::
+
+다음 time-series regression을 생각하자.
+
+$$
+Y_t=X_t'\beta_0+u_t,
+\qquad
+t=1,\ldots,T.
+$$
+
+OLS decomposition은
+
+$$
+\sqrt T(\hat\beta-\beta_0)
+=
+\left(
+\frac1T\sum_{t=1}^T X_tX_t'
+\right)^{-1}
+\left(
+\frac1{\sqrt T}\sum_{t=1}^T X_tu_t
+\right).
+$$
+
+score process를 $s_t=X_tu_t$라 하자.
+
+1. [유도]{.tag}
+   serial dependence가 있으면
+
+   $$
+   \operatorname{Cov}(s_t,s_{t-j})\neq0
+   $$
+
+   일 수 있다.
+   이 경우
+
+   $$
+   \operatorname{Var}
+   \left(
+   \frac1{\sqrt T}\sum_{t=1}^T s_t
+   \right)
+   $$
+
+   에 contemporaneous variance뿐 아니라 lagged covariance terms도 포함되는 이유를 전개하시오.
+
+2. [유도]{.tag}
+   stationary score process에 대해
+
+   $$
+   \Gamma_j
+   =
+   E[s_ts_{t-j}']
+   $$
+
+   라 정의하자.
+   long-run variance가
+
+   $$
+   \Omega
+   =
+   \sum_{j=-\infty}^{\infty}\Gamma_j
+   $$
+
+   로 표현되는 이유를 설명하시오.
+   따라서
+
+   $$
+   \sqrt T(\hat\beta-\beta_0)
+   \xrightarrow{d}
+   N(0,Q^{-1}\Omega Q^{-1})
+   $$
+
+   의 구조를 서술하시오.
+
+3. [계산]{.tag}
+   scalar score process에서
+
+   $$
+   \operatorname{Var}(s_t)=4,
+   \qquad
+   \operatorname{Cov}(s_t,s_{t-1})=1
+   $$
+
+   이고 그 이상의 lag covariance는 모두 0이라고 하자.
+   long-run variance $\Omega$를 계산하시오.
+   contemporaneous variance만 사용했을 때와 비교하시오.
+
+4. [유도]{.tag}
+   sample autocovariance를
+
+   $$
+   \hat\Gamma_j
+   =
+   \frac1T
+   \sum_{t=j+1}^{T}
+   \hat s_t\hat s_{t-j}'
+   $$
+
+   라 하자.
+   Newey–West/HAC estimator
+
+   $$
+   \hat\Omega_{HAC}
+   =
+   \hat\Gamma_0
+   +
+   \sum_{j=1}^{L}
+   w_j
+   \left(
+   \hat\Gamma_j+\hat\Gamma_j'
+   \right)
+   $$
+
+   의 각 항이 무엇을 추정하는지 설명하시오.
+
+5. [계산]{.tag}
+   scalar case에서
+
+   $$
+   \hat\Gamma_0=4,\qquad
+   \hat\Gamma_1=1.2,\qquad
+   \hat\Gamma_2=0.6,
+   \qquad
+   L=2
+   $$
+
+   라고 하자.
+   Bartlett weights
+
+   $$
+   w_j=1-\frac{j}{L+1}
+   $$
+
+   를 사용하여 $\hat\Omega_{HAC}$를 직접 계산하시오.
+
+6. [튜닝 판단]{.tag}
+   lag truncation parameter $L$이 너무 작거나 너무 클 때 각각 어떤 문제가 생기는지 설명하시오.
+   이 문제를 #12의 bandwidth choice, #14의 block length choice와 비교하시오.
+
+7. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “$u_t$가 serially correlated하면 OLS는 반드시 inconsistent하다.”
+
+   coefficient consistency와 covariance estimation을 구분하여 답하시오.
+
+8. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “Newey–West procedure는 OLS coefficient 자체를 수정하여 serial correlation을 제거한다.”
+
+   point estimator와 covariance estimator를 구분하여 답하시오.
+
+9. [비교]{.tag}
+   다음 세 covariance estimators를 비교하시오.
+
+   | Estimator | 주로 허용하는 dependence |
+   |:---|:---|
+   | **HC / White** | Heteroskedasticity, observation 간 독립 |
+   | **Cluster-robust** | Cluster 내부 arbitrary dependence, cluster 간 독립 |
+   | **HAC / Newey–West** | 시간순서를 따른 weak serial dependence |
+
+   어느 하나가 항상 “가장 robust”하다고 말하기 어려운 이유를 설명하시오.
+
+10. [판단·진단]{.tag}
+    다음 세 연구상황에 대해 가장 자연스러운 covariance strategy를 선택하고 근거를 제시하시오.
+
+    (i) 단면자료에서 heteroskedasticity만 우려되는 경우,<br>
+    (ii) 학교 단위 treatment와 학생 단위 outcomes가 있는 경우,<br>
+    (iii) 월별 거시시계열 회귀에서 serial correlation이 예상되는 경우.
+
+::: {.spoon-hint}
+**핵심**: **Robust standard error는 단순히 표준오차를 크게 만드는 장치가 아니라, score의 실제 dependence structure에 맞는 long-run sampling variance를 추정하는 방법이다.**
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
