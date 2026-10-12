@@ -1,0 +1,367 @@
+---
+title: "문제 한 스푼 #16"
+subtitle: "고급 추론 · 델타 방법과 가설검정 (Delta Method · Nonlinear Wald · Wald/LM/LR · Local Alternatives · Power)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #16
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Delta Method · Nonlinear Wald · Wald/LM/LR · Local Alternatives · Power**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 65–80분]{.chip}
+[해설 미포함]{.chip}
+[계산 · 증명 · 반례 · 판단 혼합]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Delta Method, Nonlinear Restrictions & Wald Inference
+::: {.topic}
+Asymptotic Linearization · Nonlinear Transformation · Degenerate Delta Method · Wald Test
+:::
+
+$$
+\sqrt n(\hat\theta-\theta_0)
+\xrightarrow{d}
+N(0,V),
+\qquad
+\theta\in\mathbb R^k,
+$$
+
+라고 하자.
+
+1. [증명]{.tag}
+   $g:\mathbb R^k\to\mathbb R$가 $\theta_0$의 근방에서 미분가능하고 $\nabla g(\theta_0)\neq0$라고 하자.
+   Taylor expansion을 이용하여
+
+   $$
+   \sqrt n\{g(\hat\theta)-g(\theta_0)\}
+   \xrightarrow{d}
+   N\left(
+   0,
+   \nabla g(\theta_0)'V\nabla g(\theta_0)
+   \right)
+   $$
+
+   를 증명하시오.
+   remainder term이 $o_p(1)$이 되는 논리를 명시하시오.
+
+2. [계산]{.tag}
+   $$
+   \theta=
+   \begin{pmatrix}\theta_1\\ \theta_2\end{pmatrix},
+   \qquad
+   g(\theta)=\frac{\theta_1}{\theta_2}
+   $$
+
+   이고
+
+   $$
+   \hat\theta=
+   \begin{pmatrix}2\\4\end{pmatrix},
+   \qquad
+   \hat V=
+   \begin{pmatrix}
+   4&1\\
+   1&9
+   \end{pmatrix}
+   $$
+
+   라고 하자.
+
+   (i) $\nabla g(\theta)$를 구하시오.<br>
+   (ii) $g(\hat\theta)$를 계산하시오.<br>
+   (iii) delta method에 따른
+
+   $$
+   \widehat{\operatorname{Avar}}
+   \left(
+   \sqrt n\{g(\hat\theta)-g(\theta_0)\}
+   \right)
+   =
+   \nabla g(\hat\theta)'\hat V\nabla g(\hat\theta)
+   $$
+
+   를 수치로 계산하시오.
+
+3. [Prove or Disprove]{.tag}
+   다음 명제를 증명하거나 반례를 제시하시오.
+
+   > “$\sqrt n(\hat\theta-\theta_0)\Rightarrow N(0,V)$이고 $g$가 연속이면, $\sqrt n\{g(\hat\theta)-g(\theta_0)\}$는 항상 nondegenerate normal distribution으로 수렴한다.”
+
+   필요한 경우
+
+   $$
+   g(\theta)=\theta^2,\qquad \theta_0=0
+   $$
+
+   을 검토하시오.
+
+4. [계산·유도]{.tag}
+   위의 반례에서
+
+   $$
+   \sqrt n\hat\theta\xrightarrow{d}N(0,\sigma^2)
+   $$
+
+   라고 하자.
+
+   $$
+   n\hat\theta^2
+   $$
+
+   의 limiting distribution을 구하시오.
+   이 결과가 first-order delta method가 degenerate한 경우 scaling이 바뀔 수 있음을 어떻게 보여주는지 간단히 서술하시오.
+
+5. [유도]{.tag}
+   이제 nonlinear restriction
+
+   $$
+   H_0:r(\theta_0)=0,
+   \qquad
+   r:\mathbb R^k\to\mathbb R^q
+   $$
+
+   를 생각하자.
+   Jacobian을
+
+   $$
+   R(\theta)
+   =
+   \frac{\partial r(\theta)}
+   {\partial\theta'}
+   $$
+
+   라 할 때, delta method를 사용하여
+
+   $$
+   \sqrt n\,r(\hat\theta)
+   \xrightarrow{d}
+   N\left(
+   0,
+   R(\theta_0)VR(\theta_0)'
+   \right)
+   $$
+
+   를 도출하시오.
+   따라서 Wald statistic
+
+   $$
+   W_n
+   =
+   n\,r(\hat\theta)'
+   \left[
+   R(\hat\theta)\hat V R(\hat\theta)'
+   \right]^{-1}
+   r(\hat\theta)
+   $$
+
+   의 귀무가설 아래 점근분포를 쓰시오.
+
+6. [계산]{.tag}
+   $$
+   H_0:\theta_1\theta_2=1
+   $$
+
+   을 검정하려 한다.
+
+   $$
+   \hat\theta=
+   \begin{pmatrix}
+   1.2\\0.9
+   \end{pmatrix},
+   \qquad
+   \hat V=
+   \begin{pmatrix}
+   0.16&0.04\\
+   0.04&0.09
+   \end{pmatrix},
+   \qquad
+   n=100
+   $$
+
+   라고 하자.
+
+   (i) $r(\theta)$와 $R(\theta)$를 쓰시오.<br>
+   (ii) $r(\hat\theta)$를 계산하시오.<br>
+   (iii) Wald statistic을 계산하시오.<br>
+   (iv) 자유도와 점근적 기준분포를 명시하시오.
+
+7. [판단]{.tag}
+   한 연구자가 nonlinear restriction에 대해
+
+   $$
+   r(\hat\theta)=0.02
+   $$
+
+   로 매우 작으므로 귀무가설을 기각할 수 없다고 주장한다.
+   이 판단이 불충분한 이유를 설명하시오.
+   restriction의 추정불확실성과 covariance scaling이 왜 필요한지 논하시오.
+
+::: {.spoon-hint}
+**핵심**: 이번 문제의 핵심은 **함수변환 자체보다 그 함수의 local sensitivity, 즉 gradient/Jacobian이 추론을 결정한다**는 점이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Wald, LM, LR, Local Alternatives & Power
+::: {.topic}
+Restriction Testing · Asymptotic Equivalence · Local Power · Size Distortion
+:::
+
+정규성 조건 아래 log-likelihood를
+
+$$
+\ell_n(\theta)
+=
+\sum_{i=1}^n \ell_i(\theta)
+$$
+
+라 하고,
+
+$$
+H_0:r(\theta)=0
+$$
+
+을 검정한다고 하자.
+unrestricted MLE를 $\hat\theta$, restricted MLE를 $\tilde\theta$라 하자.
+
+1. [개념 비교]{.tag}
+   Wald, LM(Score), LR test가 각각 어느 추정점에서 어떤 정보를 사용하는지 다음 관점에서 비교하시오.
+
+   | Test | 주로 사용하는 지점/정보 |
+   |:---|:---|
+   | **Wald** | Unrestricted estimate와 restriction 간 거리 |
+   | **LM / Score** | Restricted estimate에서의 score |
+   | **LR** | Restricted vs unrestricted maximized likelihood |
+
+   각 검정의 직관을 자신의 말로 정리하시오.
+
+2. [계산]{.tag}
+   다음 1차원 quadratic log-likelihood를 생각하자.
+
+   $$
+   \ell_n(\theta)
+   =
+   C-\frac{n}{2\sigma^2}(\theta-\hat\theta)^2,
+   \qquad
+   H_0:\theta=0.
+   $$
+
+   (i) restricted estimator $\tilde\theta$를 구하시오.<br>
+   (ii) Wald statistic을 계산하시오.<br>
+   (iii) LM statistic을 계산하시오.<br>
+   (iv) LR statistic $LR=2\{\ell_n(\hat\theta)-\ell_n(\tilde\theta)\}$를 계산하시오.<br>
+   (v) 세 값의 관계를 확인하시오.
+
+3. [Prove or Disprove]{.tag}
+   다음 명제를 증명하거나 반례/논리적 반박을 제시하시오.
+
+   > “Wald, LM, LR statistic은 모든 regular parametric model에서 모든 유한표본 크기 $n$에 대해 동일하다.”
+
+   점근적 equivalence와 finite-sample equality를 구분하여 답하시오.
+
+4. [유도]{.tag}
+   일반적인 regularity conditions 아래
+
+   $$
+   W_n,\ LM_n,\ LR_n
+   \xrightarrow{d}
+   \chi_q^2
+   $$
+
+   가 되는 이유를 quadratic approximation 관점에서 설명하시오.
+   세 검정이 locally 같은 likelihood curvature를 이용한다는 점을 중심으로 서술하시오.
+
+5. [Local Alternative]{.tag}
+   scalar parameter에 대해
+
+   $$
+   H_0:\theta=0,
+   \qquad
+   H_{1n}:\theta_n=\frac{h}{\sqrt n}
+   $$
+
+   를 생각하자.
+   또한
+
+   $$
+   \sqrt n(\hat\theta-\theta_n)
+   \xrightarrow{d}
+   N(0,\sigma^2)
+   $$
+
+   라고 하자.
+
+   $$
+   Z_n=\frac{\sqrt n\hat\theta}{\sigma}
+   $$
+
+   의 limiting distribution을 $H_{1n}$ 아래에서 구하시오.
+
+6. [계산]{.tag}
+   양측검정의 유의수준을 $\alpha=0.05$라 하자.
+   local alternative 아래
+
+   $$
+   \frac{h}{\sigma}=2
+   $$
+
+   이면 asymptotic power를
+
+   $$
+   P\left(
+   |Z+2|>z_{0.975}
+   \right),
+   \qquad Z\sim N(0,1)
+   $$
+
+   형태로 쓰고 수치적으로 근사하시오.
+   표준정규분포의 누적분포함수 값을 사용해도 좋다.
+
+7. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “다른 조건이 모두 같을 때 significance level $\alpha$를 낮추면 power는 항상 증가한다.”
+
+   rejection region의 크기와 Type I/II error의 관계를 이용하여 답하시오.
+
+8. [판단·진단]{.tag}
+   두 검정의 simulation 결과가 다음과 같다고 하자.
+
+   | | Null rejection rate | Alternative rejection rate |
+   |:---|:---:|:---:|
+   | **Test A** | 0.15 | 0.80 |
+   | **Test B** | 0.05 | 0.65 |
+
+   nominal level이 5%라고 하자.
+   “A가 B보다 power가 높으므로 더 좋은 검정이다”라는 결론을 평가하시오.
+   size distortion과 size-adjusted power의 관점에서 답하시오.
+
+9. [응용 판단]{.tag}
+   연구자가 세 검정 중 하나만 계산할 수 있다고 하자.
+   다음 상황에서 Wald, LM, LR 중 어떤 계산이 상대적으로 편리할 수 있는지 각각 설명하시오.
+
+   (i) unrestricted model 추정은 쉽지만 restricted optimization이 복잡한 경우,<br>
+   (ii) restricted model만 추정해도 score와 information을 쉽게 계산할 수 있는 경우,<br>
+   (iii) restricted와 unrestricted likelihood를 모두 안정적으로 최대화할 수 있는 경우.
+
+   “항상 어느 하나가 우월하다”는 결론 대신 계산구조와 점근이론을 구분하여 답하시오.
+
+::: {.spoon-hint}
+**핵심**: 이번 문제의 핵심은 **검정통계량의 크기만 보는 것이 아니라 size, local alternative, power, finite-sample distortion을 함께 판단**하는 것이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

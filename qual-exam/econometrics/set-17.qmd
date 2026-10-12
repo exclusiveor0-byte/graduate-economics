@@ -1,0 +1,357 @@
+---
+title: "문제 한 스푼 #17"
+subtitle: "측정오차와 표본선택 편의 (Measurement Error · Attenuation Bias · IV · Sample Selection · Heckman Two-Step)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #17
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Measurement Error · Attenuation Bias · IV Remedy · Sample Selection · Heckman Two-Step**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[총 2문제]{.chip}
+[예상 65–80분]{.chip}
+[해설 미포함]{.chip}
+[계산 · 유도 · 반례 · 진단 혼합]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Measurement Error, Attenuation Bias & IV Remedy
+::: {.topic}
+Errors-in-Variables · Reliability Ratio · Probability Limit · Instrumental Variables
+:::
+
+진정한 설명변수 $X_i^*$에 대해
+
+$$
+Y_i=\beta_0X_i^*+u_i,
+\qquad
+E[X_i^*u_i]=0
+$$
+
+라고 하자. 그러나 연구자는 $X_i^*$를 관측하지 못하고
+
+$$
+X_i=X_i^*+v_i
+$$
+
+만 관측한다. 평균은 0으로 정규화하고 다음 classical measurement-error assumptions를 둔다.
+
+::: {.assumption}
+$$
+E[v_i]=0,\qquad
+E[X_i^*v_i]=0,\qquad
+E[u_iv_i]=0,
+$$
+
+$$
+\operatorname{Var}(X_i^*)=\sigma_{X^*}^2>0,
+\qquad
+\operatorname{Var}(v_i)=\sigma_v^2>0.
+$$
+:::
+
+1. [유도]{.tag}
+   관측되는 $X_i$를 이용하여 원모형을
+
+   $$
+   Y_i=\beta_0X_i+\tilde u_i
+   $$
+
+   형태로 다시 쓰고
+
+   $$
+   \tilde u_i=u_i-\beta_0v_i
+   $$
+
+   임을 보이시오.
+   이어서
+
+   $$
+   \operatorname{Cov}(X_i,\tilde u_i)
+   $$
+
+   를 직접 계산하여 OLS orthogonality condition이 왜 실패하는지 설명하시오.
+
+2. [계산·유도]{.tag}
+   상수항이 없는 OLS estimator의 probability limit가
+
+   $$
+   \operatorname{plim}\hat\beta_{OLS}
+   =
+   \frac{\operatorname{Cov}(X,Y)}
+   {\operatorname{Var}(X)}
+   $$
+
+   임을 이용하여
+
+   $$
+   \operatorname{plim}\hat\beta_{OLS}
+   =
+   \beta_0
+   \frac{
+   \sigma_{X^*}^2
+   }{
+   \sigma_{X^*}^2+\sigma_v^2
+   }
+   $$
+
+   를 유도하시오.
+
+3. [개념]{.tag}
+   reliability ratio를
+
+   $$
+   \lambda
+   =
+   \frac{
+   \sigma_{X^*}^2
+   }{
+   \sigma_{X^*}^2+\sigma_v^2
+   }
+   $$
+
+   로 정의하자.
+   왜 $0<\lambda<1$이고,
+
+   $$
+   \operatorname{plim}\hat\beta_{OLS}
+   =
+   \lambda\beta_0
+   $$
+
+   가 classical scalar measurement error 아래 attenuation toward zero를 의미하는지 설명하시오.
+
+4. [계산]{.tag}
+   다음 값을 가정하시오.
+
+   $$
+   \beta_0=3,\qquad
+   \sigma_{X^*}^2=4,\qquad
+   \sigma_v^2=2.
+   $$
+
+   (i) reliability ratio $\lambda$를 계산하시오.<br>
+   (ii) $\operatorname{plim}\hat\beta_{OLS}$를 계산하시오.<br>
+   (iii) $\sigma_v^2$가 $8$로 증가하면 probability limit가 어떻게 변하는지 계산하시오.
+
+5. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “종속변수 $Y$에 classical measurement error가 추가되면 OLS slope는 일반적으로 inconsistent해진다.”
+
+   적절한 조건 아래 반례 또는 증명을 제시하고,
+   slope consistency와 estimator variance를 구분하여 답하시오.
+
+6. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “설명변수의 measurement error는 항상 OLS coefficient를 0 방향으로 bias시킨다.”
+
+   classical scalar errors-in-variables와 nonclassical/multiple-regressor settings를 구분하여 답하시오.
+
+7. [IV 유도]{.tag}
+   추가 변수 $Z_i$가
+
+   $$
+   E[Z_iu_i]=0,\qquad
+   E[Z_iv_i]=0,\qquad
+   E[Z_iX_i^*]\neq0
+   $$
+
+   를 만족한다고 하자.
+
+   $$
+   E[Z_i(Y_i-\beta_0X_i)]=0
+   $$
+
+   임을 보이고,
+   왜 $Z_i$가 mismeasured regressor $X_i$의 instrument가 될 수 있는지 설명하시오.
+
+8. [판단·진단]{.tag}
+   한 연구자가 “$X$의 측정오차가 작아 보이므로 OLS bias도 무시할 수 있다”고 주장한다.
+   이 결론을 평가하시오.
+   measurement-error variance 자체뿐 아니라
+
+   $$
+   \frac{\sigma_v^2}{\sigma_{X^*}^2}
+   $$
+
+   의 상대적 크기가 왜 중요한지 설명하시오.
+
+::: {.spoon-hint}
+**핵심**: **설명변수 측정오차는 단순히 noise를 늘리는 것이 아니라 regressor와 composite error를 상관시켜 OLS orthogonality를 파괴한다.**
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Sample Selection, Inverse Mills Ratio & Heckman Two-Step
+::: {.topic}
+Selection Equation · Truncated Normal · OLS Bias · Exclusion Restriction · Two-Step Correction
+:::
+
+latent outcome equation과 selection equation을 각각
+
+$$
+Y_i^*=X_i'\beta_0+u_i,
+$$
+
+$$
+S_i^*=Z_i'\gamma_0+v_i,
+\qquad
+S_i=1\{S_i^*>0\}
+$$
+
+로 두자. $Y_i=Y_i^*$는 $S_i=1$인 경우에만 관측된다.
+오차항은
+
+$$
+\begin{pmatrix}
+u_i\\v_i
+\end{pmatrix}
+\sim
+N\left(
+\begin{pmatrix}
+0\\0
+\end{pmatrix},
+\begin{pmatrix}
+\sigma_u^2&\rho\sigma_u\\
+\rho\sigma_u&1
+\end{pmatrix}
+\right)
+$$
+
+를 따른다고 하자.
+
+1. [유도]{.tag}
+   $S_i=1$이라는 사건이
+
+   $$
+   v_i>-Z_i'\gamma_0
+   $$
+
+   와 동치임을 보이시오.
+   $\rho\neq0$일 때 왜 selected sample에서
+
+   $$
+   E[u_i\mid Z_i,S_i=1]
+   $$
+
+   가 일반적으로 0이 아닌지 설명하시오.
+
+2. [유도]{.tag}
+   standard normal density와 CDF를 각각 $\phi(\cdot)$, $\Phi(\cdot)$라 하자.
+   truncated-normal formula를 이용하여 inverse Mills ratio
+
+   $$
+   \lambda(z)
+   =
+   \frac{\phi(z)}{\Phi(z)}
+   $$
+
+   를 정의하고
+
+   $$
+   E[u_i\mid Z_i,S_i=1]
+   =
+   \rho\sigma_u
+   \lambda(Z_i'\gamma_0)
+   $$
+
+   가 되는 논리를 설명하시오.
+
+3. [모형 변환]{.tag}
+   selected sample에서 conditional mean이
+
+   $$
+   E[Y_i\mid X_i,Z_i,S_i=1]
+   =
+   X_i'\beta_0
+   +
+   \rho\sigma_u
+   \lambda(Z_i'\gamma_0)
+   $$
+
+   형태가 됨을 보이시오.
+   따라서 inverse Mills ratio를 누락한 OLS가 일반적으로 omitted-variable problem을 가지는 이유를 설명하시오.
+
+4. [계산]{.tag}
+   어떤 관측치에서
+
+   $$
+   Z_i'\hat\gamma=0.5,
+   \qquad
+   \phi(0.5)=0.3521,
+   \qquad
+   \Phi(0.5)=0.6915
+   $$
+
+   라고 하자.
+
+   (i) $\hat\lambda_i$를 계산하시오.<br>
+   (ii) 두 번째 단계에서 $\hat\delta=1.2$라면 $\hat\delta\hat\lambda_i$를 계산하시오.
+
+5. [절차 구성]{.tag}
+   Heckman two-step estimator의 절차를 다음 순서로 정리하시오.
+
+   (i) selection equation probit 추정,<br>
+   (ii) $\hat\gamma$를 이용한 $\hat\lambda_i$ 계산,<br>
+   (iii) $S_i=1$ 표본에서
+
+   $$
+   Y_i=X_i'\beta+\delta\hat\lambda_i+e_i
+   $$
+
+   추정.
+
+   각 단계가 어떤 population quantity를 근사하려는 것인지 설명하시오.
+
+6. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “표본선택이 존재하면 selected sample에서 OLS는 항상 inconsistent하다.”
+
+   $\rho=0$인 경우를 고려하여 증명 또는 반례를 제시하시오.
+
+7. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “Selection equation과 outcome equation이 완전히 같은 regressors를 포함하더라도 Heckman correction은 항상 강하게 식별된다.”
+
+   functional-form identification과 exclusion restriction에 의한 identification을 구분하여 논하시오.
+
+8. [판단·진단]{.tag}
+   한 연구자가 다음과 같이 주장한다.
+
+   > “Heckman 2-step에서 inverse Mills ratio coefficient가 통계적으로 유의하지 않았으므로 sample selection 문제는 존재하지 않는다.”
+
+   이 결론을 평가하시오.
+   $\rho\sigma_u$, selection-equation specification, normality, exclusion restriction의 관점에서 답하시오.
+
+9. [비교]{.tag}
+   censoring, truncation, sample selection을 다음 기준으로 비교하시오.
+
+   | 구조 | 관측 메커니즘의 핵심 | 대표적 문제 |
+   |:---|:---|:---|
+   | **Censoring** | 관측치는 남지만 outcome이 경계값으로 기록됨 | Likelihood가 혼합 구조를 가짐 |
+   | **Truncation** | 특정 관측치 자체가 표본에서 제거됨 | 표본분포가 조건부/절단분포로 변함 |
+   | **Sample Selection** | Outcome 관측 여부가 별도의 selection mechanism에 의해 결정됨 | Selection error와 outcome error의 상관 |
+
+   세 경우를 동일한 문제로 취급해서는 안 되는 이유를 설명하시오.
+
+::: {.spoon-hint}
+**핵심**: **selection 자체와 selection bias는 동일하지 않다. 편의의 핵심은 selection mechanism이 outcome error와 어떻게 연결되는가에 있다.**
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

@@ -1,0 +1,332 @@
+---
+title: "문제 한 스푼 #20"
+subtitle: "통합 종합: 패널 · 측정오차 · IV/GMM · 군집 추론 · 델타 방법 (Panel · Measurement Error · IV/GMM · Clustered Inference · Delta Method)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE ECONOMETRICS · DAILY PRACTICE · COMPREHENSIVE
+:::
+
+# 문제 한 스푼 #20
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Panel Data · Measurement Error · IV/GMM · Clustered Inference · Delta Method · Misspecification**
+:::
+
+::: {.spoon-hero__tags}
+[계량경제학]{.chip .chip--metrics}
+[종합 1문제]{.chip}
+[예상 90–110분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험형]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Comprehensive Problem. From Pooled OLS to FE-IV/GMM and Robust Inference
+::: {.topic}
+Unobserved Heterogeneity · Measurement Error · Within Transformation · IV/GMM · Overidentification · Cluster-Robust Variance · Delta Method
+:::
+
+개인 $i=1,\ldots,N$, 시점 $t=1,\ldots,T$에 대해 다음 structural model을 생각하자.
+
+$$
+Y_{it}
+=
+\beta_0 D_{it}^*
++
+X_{it}'\gamma_0
++
+c_i
++
+u_{it}.
+$$
+
+$D_{it}^*$는 실제 treatment 또는 endogenous regressor이지만, 연구자는 noisy measure
+
+$$
+D_{it}=D_{it}^*+v_{it}
+$$
+
+만 관측한다. 또한 $Z_{it}$는 $D_{it}$에 대한 후보 instrument라고 하자.
+
+::: {.assumption}
+$c_i$는 time-invariant unobserved heterogeneity이며, $u_{it}$는 idiosyncratic error이다.
+필요할 경우 적절한 유한 적률, rank, LLN/CLT 조건을 명시적으로 가정하시오.
+일부 문항에서는 cluster $g(i)$ 수준의 dependence를 허용한다.
+:::
+
+A. [유도·판단]{.tag}
+   연구자가 pooled OLS로
+
+   $$
+   Y_{it}
+   =
+   \beta D_{it}
+   +
+   X_{it}'\gamma
+   +
+   e_{it}
+   $$
+
+   를 추정한다고 하자.
+   관측식의 composite error를 적절히 쓰고,
+   pooled OLS가 실패할 수 있는 서로 다른 두 원인으로
+   **unobserved heterogeneity**와 **measurement error**를 구분하여 설명하시오.
+
+B. [유도]{.tag}
+   within transformation
+
+   $$
+   \tilde Y_{it}=Y_{it}-\bar Y_i,
+   \qquad
+   \tilde D_{it}=D_{it}-\bar D_i,
+   \qquad
+   \tilde X_{it}=X_{it}-\bar X_i
+   $$
+
+   를 적용하시오.
+   $c_i$가 제거됨을 보이고 transformed model을 쓰시오.
+
+C. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “Fixed effects를 사용하면 $D_{it}$의 classical measurement error 문제도 제거된다.”
+
+   $$
+   \tilde D_{it}
+   =
+   \tilde D_{it}^*
+   +
+   \tilde v_{it}
+   $$
+
+   를 이용하여 답하시오.
+
+D. [개념·판단]{.tag}
+   within variation $\operatorname{Var}(\tilde D_{it}^*)$이 매우 작고 $\operatorname{Var}(\tilde v_{it})$가 상대적으로 크다고 하자.
+   measurement-error attenuation이 FE transformation 이후 더 심해질 수 있는 직관을 설명하시오.
+
+E. [FE-IV 유도]{.tag}
+   within-transformed instrument를
+
+   $$
+   \tilde Z_{it}=Z_{it}-\bar Z_i
+   $$
+
+   라 하자.
+   valid instrument라면
+
+   $$
+   E\left[
+   \tilde Z_{it}
+   \left(
+   \tilde Y_{it}
+   -
+   \beta_0\tilde D_{it}
+   -
+   \tilde X_{it}'\gamma_0
+   \right)
+   \right]
+   =0
+   $$
+
+   형태의 moment condition을 사용할 수 있다.
+   FE와 IV가 각각 어떤 문제를 해결하는지 구분하여 설명하시오.
+
+F. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “$\tilde Z_{it}$와 $\tilde D_{it}$의 상관이 매우 강하면 $Z_{it}$는 valid instrument이다.”
+
+   relevance와 exogeneity를 구분하고, measurement error가 존재할 때
+
+   $$
+   E[\tilde Z_{it}\tilde v_{it}]=0
+   $$
+
+   조건이 왜 중요할 수 있는지 설명하시오.
+
+G. [계산]{.tag}
+   nuisance regressors는 partialling-out되었다고 하자.
+   within-transformed moment가
+
+   $$
+   g_n(\beta)
+   =
+   \frac1nZ'(Y-D\beta)
+   $$
+
+   이고 sample moments가
+
+   $$
+   \frac1n Z'Z
+   =
+   \begin{pmatrix}
+   2&0\\
+   0&1
+   \end{pmatrix},
+   \qquad
+   \frac1n Z'D
+   =
+   \begin{pmatrix}
+   1\\
+   2
+   \end{pmatrix},
+   \qquad
+   \frac1n Z'Y
+   =
+   \begin{pmatrix}
+   3\\
+   5
+   \end{pmatrix}
+   $$
+
+   라고 하자.
+
+   (i) $W=\left(\frac1nZ'Z\right)^{-1}$를 구하시오.<br>
+   (ii) $\hat\beta=\arg\min_\beta g_n(\beta)'Wg_n(\beta)$를 직접 계산하시오.<br>
+   (iii) 이 값이 2SLS와 연결되는 이유를 설명하시오.
+
+H. [Overidentification]{.tag}
+   위 문제에서 instrument가 2개이고 추정할 endogenous coefficient가 1개라고 하자.
+
+   (i) overidentification degree를 구하시오.<br>
+   (ii) efficient GMM에서
+
+   $$
+   J
+   =
+   n\,
+   \bar g_n(\hat\beta)'
+   \hat W
+   \bar g_n(\hat\beta)
+   $$
+
+   의 기준 점근분포와 자유도를 쓰시오.<br>
+   (iii) $J$-test를 기각하지 못했다는 사실이 모든 instrument의 외생성을 “증명”하는 것은 아닌 이유를 설명하시오.
+
+I. [Clustered Dependence]{.tag}
+   동일 지역 또는 학교 $g$ 안에서 $u_{it}$가 correlated할 수 있다고 하자.
+   GMM score contribution을 cluster 단위로
+
+   $$
+   S_g
+   =
+   \sum_{i\in g}\sum_t
+   Z_{it}u_{it}
+   $$
+
+   로 묶는 이유를 설명하시오.
+   FE-IV를 사용했다는 사실만으로 cluster dependence가 제거되지 않는 이유도 설명하시오.
+
+J. [계산]{.tag}
+   어떤 2차원 parameter estimator의 asymptotic sandwich components가
+
+   $$
+   A=
+   \begin{pmatrix}
+   2&0\\
+   0&1
+   \end{pmatrix},
+   \qquad
+   B_{\text{cluster}}
+   =
+   \begin{pmatrix}
+   5&1\\
+   1&4
+   \end{pmatrix}
+   $$
+
+   라고 하자.
+   $A^{-1}B_{\text{cluster}}A^{-1}$를 계산하시오.
+
+K. [Prove or Disprove]{.tag}
+   다음 명제를 검토하시오.
+
+   > “FE-IV point estimate가 consistent하면 conventional i.i.d. standard error를 사용해도 inference에는 문제가 없다.”
+
+   point identification과 covariance estimation을 구분하여 답하시오.
+
+L. [Delta Method]{.tag}
+   동적 해석을 위해 관심대상이
+
+   $$
+   \tau
+   =
+   g(\beta,\rho)
+   =
+   \frac{\beta}{1-\rho}
+   $$
+
+   인 long-run effect라고 하자.
+
+   (i) $\nabla g(\beta,\rho)$를 구하시오.<br>
+   (ii) $\hat\theta=\begin{pmatrix}\hat\beta\\\hat\rho\end{pmatrix}$, $\widehat{\operatorname{Var}}(\hat\theta)=\hat V$일 때 delta method variance formula를 쓰시오.
+
+M. [계산]{.tag}
+   $$
+   \hat\beta=0.6,
+   \qquad
+   \hat\rho=0.4,
+   \qquad
+   \hat V=
+   \begin{pmatrix}
+   0.04&0.01\\
+   0.01&0.0225
+   \end{pmatrix}
+   $$
+
+   라고 하자.
+
+   (i) $\hat\tau$를 계산하시오.<br>
+   (ii) $\nabla g(\hat\beta,\hat\rho)$를 계산하시오.<br>
+   (iii) $\nabla g(\hat\theta)'\hat V\nabla g(\hat\theta)$를 계산하시오.
+
+N. [Misspecification]{.tag}
+   연구자가 structural relation이 정확히 선형이라고 가정했지만 실제 conditional mean이 비선형일 수 있다고 하자.
+   다음 명제를 검토하시오.
+
+   > “FE-IV estimator가 consistent하다는 사실은 structural conditional mean이 정확히 linear라는 것을 의미한다.”
+
+   moment-condition identification과 correct specification을 구분하여 답하시오.
+
+O. [진단·해석]{.tag}
+   동일한 데이터를 사용한 추정결과가 다음과 같다고 하자.
+
+   | Estimator | Coefficient on $D$ | SE |
+   |:---|:---:|:---:|
+   | **Pooled OLS** | 0.42 | 0.05 |
+   | **FE** | 0.25 | 0.06 |
+   | **FE-IV** | 0.61 | 0.14 |
+   | **FE-IV + Cluster SE** | 0.61 | 0.22 |
+
+   다음을 답하시오.
+
+   (i) pooled OLS와 FE coefficient가 다른 이유로 어떤 mechanism들을 생각할 수 있는가?<br>
+   (ii) FE와 FE-IV coefficient가 다른 이유로 어떤 mechanism들을 생각할 수 있는가?<br>
+   (iii) FE-IV와 FE-IV + Cluster SE의 coefficient가 같고 SE만 다른 이유는 무엇인가?<br>
+   (iv) 위 차이들 중 어떤 것은 point-identification 문제이고 어떤 것은 inference 문제인가?<br>
+   (v) 이 표만으로 어느 estimator가 “진실”이라고 결론내릴 수 있는가?
+
+P. [최종 종합]{.tag}
+   이 문제 전체를 다음 네 층위로 분류하시오.
+
+   | 층위 | 대표 질문 |
+   |:---|:---|
+   | **Identification** | 어떤 population restriction이 $\beta_0$를 유일하게 결정하는가? |
+   | **Point Estimation** | 어떤 estimator가 해당 target에 일관적인가? |
+   | **Variance / Inference** | 실제 dependence structure에 맞는 sampling variance를 어떻게 추정하는가? |
+   | **Specification** | 추정되는 parameter가 structural parameter인가, projection/pseudo-true parameter인가? |
+
+   왜 이 네 질문을 하나의 “모형이 맞는가?”라는 질문으로 뭉뚱그리면 안 되는지 설명하시오.
+
+::: {.spoon-hint}
+**전체 흐름**: **Pooled OLS → FE → Measurement Error → FE-IV → GMM → Overidentification → Clustered Inference → Delta Method → Misspecification**. 이번 회차의 핵심은 **추정량 선택, 식별, 표준오차, specification을 서로 다른 층위로 분리하여 판단하는 것**이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

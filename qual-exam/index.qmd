@@ -695,6 +695,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
     <span class="status">문제 풀기 →</span>
   </div>
 </a>
+
+<a href="econometrics/set-16.html" class="spoon-card" data-subject="metrics" data-round="16">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#16 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">고급 추론 · 델타 방법과 가설검정</div>
+  <div class="spoon-card__desc">델타 방법(Delta Method)과 비선형 제약 Wald 검정, Wald/LM/LR 검정 점근적 동등성 및 계산 비교, 국소 대립가설(Local Alternatives)과 검정력(Power), 크기 왜곡(Size Distortion)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-17.html" class="spoon-card" data-subject="metrics" data-round="17">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#17 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">측정오차 · 표본선택 편의</div>
+  <div class="spoon-card__desc">설명변수 측정오차(Errors-in-Variables)와 감쇠 편의(Attenuation Bias), 도구변수(IV) 교정, 표본선택(Sample Selection) 편의, 역밀스비율(Inverse Mills Ratio)과 Heckman 2단계 추정법</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-18.html" class="spoon-card" data-subject="metrics" data-round="18">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#18 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">군집 의존성 · 시계열 HAC 추론</div>
+  <div class="spoon-card__desc">군집화된 의존성(Clustered Dependence)과 군집-강건 분산(Cluster-Robust SE), Moulton 문제와 군집 수준 결정, 시계열 장기분산(Long-Run Variance) 및 Newey–West/HAC 추정량</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-19.html" class="spoon-card" data-subject="metrics" data-round="19">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#19 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">모형 오지정 · 준최대우도추정(QMLE)</div>
+  <div class="spoon-card__desc">최적 선형 근사와 가사 참값(Pseudo-True Parameter), 비선형 CEF 하 OLS 해석 및 RESET 검정, QMLE의 Argmax 일치성 및 샌드위치 분산(Sandwich Variance), 포아송 QMLE</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-20.html" class="spoon-card" data-subject="metrics" data-round="20">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#20 회차 (종합)</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">패널 · 측정오차 · IV/GMM 통합 종합</div>
+  <div class="spoon-card__desc">고정효과(FE) 내변환과 측정오차 심화, FE-IV/GMM 모멘트 조건 및 과대식별 J-검정, 군집 강건 추론, 장기 효과 델타 방법, 모형 오지정과 추정량 층위별 비교 (종합 16문항)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
 </div>
 ```
 
@@ -1387,6 +1447,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">도구변수와 GMM 종합 심화</div>
   <div class="spoon-card__desc">도구변수 계수식별(Rank)과 2SLS 투영기하, 효율적 GMM과 J-검정, 약한 도구변수(Weak IV) 점근분포 왜곡과 Anderson–Rubin 강건추론, Many Instruments 편의</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-16.html" class="spoon-card" data-subject="metrics" data-round="16">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#16 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">고급 추론 · 델타 방법과 가설검정</div>
+  <div class="spoon-card__desc">델타 방법(Delta Method)과 비선형 제약 Wald 검정, Wald/LM/LR 검정 점근적 동등성 및 계산 비교, 국소 대립가설(Local Alternatives)과 검정력(Power), 크기 왜곡(Size Distortion)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-17.html" class="spoon-card" data-subject="metrics" data-round="17">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#17 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">측정오차 · 표본선택 편의</div>
+  <div class="spoon-card__desc">설명변수 측정오차(Errors-in-Variables)와 감쇠 편의(Attenuation Bias), 도구변수(IV) 교정, 표본선택(Sample Selection) 편의, 역밀스비율(Inverse Mills Ratio)과 Heckman 2단계 추정법</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-18.html" class="spoon-card" data-subject="metrics" data-round="18">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#18 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">군집 의존성 · 시계열 HAC 추론</div>
+  <div class="spoon-card__desc">군집화된 의존성(Clustered Dependence)과 군집-강건 분산(Cluster-Robust SE), Moulton 문제와 군집 수준 결정, 시계열 장기분산(Long-Run Variance) 및 Newey–West/HAC 추정량</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-19.html" class="spoon-card" data-subject="metrics" data-round="19">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#19 회차</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">모형 오지정 · 준최대우도추정(QMLE)</div>
+  <div class="spoon-card__desc">최적 선형 근사와 가사 참값(Pseudo-True Parameter), 비선형 CEF 하 OLS 해석 및 RESET 검정, QMLE의 Argmax 일치성 및 샌드위치 분산(Sandwich Variance), 포아송 QMLE</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="econometrics/set-20.html" class="spoon-card" data-subject="metrics" data-round="20">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#20 회차 (종합)</span>
+    <span class="chip chip--metrics">계량경제학</span>
+  </div>
+  <div class="spoon-card__title">패널 · 측정오차 · IV/GMM 통합 종합</div>
+  <div class="spoon-card__desc">고정효과(FE) 내변환과 측정오차 심화, FE-IV/GMM 모멘트 조건 및 과대식별 J-검정, 군집 강건 추론, 장기 효과 델타 방법, 모형 오지정과 추정량 층위별 비교 (종합 16문항)</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
