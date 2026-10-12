@@ -1,0 +1,108 @@
+---
+title: "문제 한 스푼 #10"
+subtitle: "성장회계와 솔로우 잔차 (Growth Accounting — Factor Accumulation · Total Factor Productivity · Solow Residual)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MACROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #10
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Growth Accounting — Factor Accumulation · Total Factor Productivity · Solow Residual**
+:::
+
+::: {.spoon-hero__tags}
+[거시경제학]{.chip .chip--macro}
+[총 2문제]{.chip}
+[예상 30–40분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Growth Accounting and the Solow Residual
+::: {.topic}
+Growth Accounting Identity · TFP Growth · Numerical Calculation
+:::
+
+경제 전체의 생산함수가 다음 Cobb–Douglas 형태로 주어진다고 하자.
+
+$$
+Y(t)=A(t)K(t)^{\alpha}L(t)^{1-\alpha},
+\qquad 0<\alpha<1.
+$$
+
+$Y$는 실질산출, $K$는 자본투입, $L$은 노동투입,
+$A$는 총요소생산성(TFP)을 나타낸다.
+$g_X\equiv\dot X/X$로 정의하며, $\alpha$는 시간에 따라 일정하다고 가정한다.
+
+1. 생산함수에 로그를 취한 뒤 시간에 대해 미분하여 다음 성장회계 식을 유도하시오.
+
+   $$
+   g_Y=g_A+\alpha g_K+(1-\alpha)g_L.
+   $$
+
+   이를 이용하여 Solow residual $g_A$를 구하는 식을 제시하시오.
+
+2. 다음 자료가 주어졌다고 하자.
+
+   $$
+   g_Y=5\%,\qquad
+   g_K=8\%,\qquad
+   g_L=2\%,\qquad
+   \alpha=\frac13.
+   $$
+
+   Solow residual을 계산하시오.
+
+3. 2번의 결과를 이용하여 산출성장률에 대한
+   **자본축적, 노동투입 증가, TFP 성장의 기여도**를 각각
+   퍼센트포인트(percentage points) 단위로 계산하시오.
+   각 항의 합이 관측된 산출성장률과 일치하는지 확인하고 경제적으로 해석하시오.
+
+::: {.spoon-hint}
+**풀이 범위**: 성장률과 성장기여도를 구분하고,
+성장회계 항등식을 이용해 관측된 산출성장을 분해하는 데 집중하시오.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. What Does the Solow Residual Measure?
+::: {.topic}
+Factor Shares · Identification · Measurement · Prove or Disprove
+:::
+
+Problem 1의 성장회계 식을 계속 이용하자.
+실제 자료에서는 생산함수의 산출탄력성을 직접 관측하기 어려워,
+자본 및 노동의 소득분배율로 대체하는 경우가 많다.
+
+1. 성장회계에서 자본과 노동의 **산출탄력성**을
+   각각의 **요소소득분배율**로 대체할 수 있으려면
+   어떤 경제학적 가정이 필요한지 설명하시오.
+   특히 경쟁적인 요소시장과 한계생산에 따른 요소보수의 역할을 논하시오.
+
+2. 다음 명제를 **prove or disprove** 하시오.
+
+   > The Solow residual measures purely technological progress.
+
+   성장회계 식이 항등식이라는 사실만으로 관측된 residual을
+   순수한 기술진보로 해석할 수 있는지 검토하시오.
+
+3. 관측된 Solow residual에 기술진보 이외의 요인이 반영될 수 있는 이유를
+   **두 가지** 제시하고, 각 요인이 잔차에 포함되는 경로를 설명하시오.
+   예를 들어 생산요소의 활용도, 투입요소의 질, 측정오차 등에서 선택할 수 있다.
+
+::: {.spoon-hint}
+**풀이 범위**: 성장회계에 의한 *성장 기여도 분해*와
+성장의 *인과적 원인 규명*이 동일한 작업인지 구분하시오.
+국가 간 소득수준 비교와 development accounting은 이번 회차에서 다루지 않는다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
