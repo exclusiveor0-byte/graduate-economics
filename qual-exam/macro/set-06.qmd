@@ -1,0 +1,114 @@
+---
+title: "문제 한 스푼 #6"
+subtitle: "경제성장이론 III (Economic Growth III — Ramsey Phase Diagram · Direction Fields · Saddle Path)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MACROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #6
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Ramsey–Cass–Koopmans II — Phase Diagram · Direction Fields · Saddle Path**
+:::
+
+::: {.spoon-hero__tags}
+[거시경제학]{.chip .chip--macro}
+[총 2문제]{.chip}
+[예상 35–45분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Ramsey Phase Diagram
+::: {.topic}
+Nullclines · Direction Fields · Steady State
+:::
+
+다음 Ramsey–Cass–Koopmans 경제의 유효노동 기준 동태계를 생각하자.
+
+$$
+\dot k
+=
+f(k)-c-(n+g+\delta)k,
+$$
+
+$$
+\frac{\dot c}{c}
+=
+\frac{1}{\theta}
+\left[
+  f'(k)-\delta-\rho-\theta g
+\right],
+$$
+
+여기서
+
+$$
+f'(k)>0,
+\qquad
+f''(k)<0,
+\qquad
+\theta>0
+$$
+
+이고 interior steady state가 존재한다고 가정한다.
+
+1. $\dot k=0$ locus와 $\dot c=0$ locus를 각각 구하시오.
+   이어 $\dot k=0$ locus의 위와 아래, 그리고 $\dot c=0$ locus의 왼쪽과 오른쪽에서
+   $\dot k$와 $\dot c$의 부호를 판정하시오.
+
+2. 앞의 결과를 이용하여 $(k,c)$ 평면의 각 영역에서 경제가 어느 방향으로 움직이는지 설명하시오.
+   단순히 방향을 암기하지 말고 원래의 두 동태방정식에서 부호를 직접 확인하시오.
+
+3. 다음 명제를 **prove or disprove** 하시오.
+
+   > If $k< k^*$, capital must be increasing.
+
+   $k$의 위치와 $\dot k$의 부호가 동일한 정보를 주는지 검토하시오.
+
+::: {.spoon-hint}
+**핵심**: 이번 문제의 초점은 **nullcline을 구하고 방향장을 읽는 것**이다. 아직 Jacobian이나 eigenvalue를 이용한 안정성 분석까지 갈 필요는 없다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Predetermined Capital and the Saddle Path
+::: {.topic}
+Predetermined State · Jump Variable · Initial Consumption · Saddle-Path Intuition
+:::
+
+Problem 1의 Ramsey 경제를 계속 생각하자.
+초기자본 $k_0$는 주어져 있으며, 경제는 최적경로를 따라야 한다.
+
+1. 왜 $k_0$는 predetermined variable인 반면 $c_0$는 jump variable일 수 있는지 설명하시오.
+   예상치 못한 충격 직후
+
+   $$
+   k(0^+)=k(0^-)
+   $$
+
+   이어야 하지만 $c$는 즉시 변할 수 있는 경제적 이유를 서술하시오.
+
+2. $k_0< k^*$라고 하자.
+   왜 $c_0$를 임의로 선택할 수 없고, steady state로 수렴하는 saddle path 위에 놓이도록 선택해야 하는지 설명하시오.
+   너무 높은 $c_0$와 너무 낮은 $c_0$를 선택했을 때 어떤 비최적 경로가 나타날 수 있는지도 논하시오.
+
+3. 다음 명제를 **prove or disprove** 하시오.
+
+   > Saddle-path stability means that every initial point sufficiently close to the steady state converges to the steady state.
+
+   “steady state가 saddle-path stable하다”는 말과 “모든 근방의 초기조건이 수렴한다”는 말을 구분하여 답하시오.
+
+::: {.spoon-hint}
+**핵심**: 이번 문제의 초점은 **왜 $k$는 주어지고 $c$가 조정되어야 하는지**, 그리고 saddle path가 최적 초기소비를 어떻게 선택하는지 이해하는 것이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

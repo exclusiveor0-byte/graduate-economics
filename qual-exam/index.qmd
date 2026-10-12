@@ -432,6 +432,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
 </a>
 
+<a href="macro/set-06.html" class="spoon-card" data-subject="macro" data-round="6">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#6 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경제성장이론 III · 위상평면 분석</div>
+  <div class="spoon-card__desc">Ramsey–Cass–Koopmans 위상평면(Phase Diagram)과 동태 방향장, 기결정 상태변수(자본)와 점프변수(소비), 안장경로(Saddle Path) 안정성 직관</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-07.html" class="spoon-card" data-subject="macro" data-round="7">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#7 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">내생적 성장이론 I · AK 모형</div>
+  <div class="spoon-card__desc">자본의 한계생산 불체감과 지속성장 조건, 균형성장경로 성장률(g = sA - δ) 및 수치계산, 솔로우 모형과의 수준효과(Level) vs. 성장효과(Growth) 비교</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-08.html" class="spoon-card" data-subject="macro" data-round="8">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#8 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">내생적 성장이론 II · 지식 외부효과</div>
+  <div class="spoon-card__desc">러닝바이두잉(Learning-by-doing)과 지식 파급효과(Knowledge Spillovers), 개별기업 수확체감과 거시 총체적 수확불체감, 사적 수익률과 사회적 수익률 간 격차(Wedge)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-09.html" class="spoon-card" data-subject="macro" data-round="9">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#9 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">내생적 성장이론 III · R&D 모형</div>
+  <div class="spoon-card__desc">아이디어 축적(A' = η L_A A)과 장기성장률, R&D 노동배분 확대의 단기 산출 감소와 장기 성장 촉진 간 상충관계(Trade-off) 및 추월시점 계산</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-10.html" class="spoon-card" data-subject="macro" data-round="10">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#10 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">성장회계와 솔로우 잔차</div>
+  <div class="spoon-card__desc">Cobb–Douglas 생산함수의 성장회계 분해(g_Y = g_A + α g_K + (1-α) g_L), 솔로우 잔차(Solow Residual) 측정과 성장 기여도 계산, 요소분배율 가정 및 잔차의 한계</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
 <a href="econometrics/set-01.html" class="spoon-card" data-subject="metrics" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
@@ -1041,6 +1101,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   <div class="spoon-card__desc">무한기간 유량 예산제약식 전방반복, 폰지사기 금지조건(No-Ponzi Game)과 현가가치 예산제약, Ramsey–Cass–Koopmans 동태시스템 및 경쟁균형</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 · 해설 수록 →</span>
+  </div>
+</a>
+
+<a href="macro/set-06.html" class="spoon-card" data-subject="macro" data-round="6">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#6 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경제성장이론 III · 위상평면 분석</div>
+  <div class="spoon-card__desc">Ramsey–Cass–Koopmans 위상평면(Phase Diagram)과 동태 방향장, 기결정 상태변수(자본)와 점프변수(소비), 안장경로(Saddle Path) 안정성 직관</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-07.html" class="spoon-card" data-subject="macro" data-round="7">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#7 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">내생적 성장이론 I · AK 모형</div>
+  <div class="spoon-card__desc">자본의 한계생산 불체감과 지속성장 조건, 균형성장경로 성장률(g = sA - δ) 및 수치계산, 솔로우 모형과의 수준효과(Level) vs. 성장효과(Growth) 비교</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-08.html" class="spoon-card" data-subject="macro" data-round="8">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#8 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">내생적 성장이론 II · 지식 외부효과</div>
+  <div class="spoon-card__desc">러닝바이두잉(Learning-by-doing)과 지식 파급효과(Knowledge Spillovers), 개별기업 수확체감과 거시 총체적 수확불체감, 사적 수익률과 사회적 수익률 간 격차(Wedge)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-09.html" class="spoon-card" data-subject="macro" data-round="9">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#9 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">내생적 성장이론 III · R&D 모형</div>
+  <div class="spoon-card__desc">아이디어 축적(A' = η L_A A)과 장기성장률, R&D 노동배분 확대의 단기 산출 감소와 장기 성장 촉진 간 상충관계(Trade-off) 및 추월시점 계산</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-10.html" class="spoon-card" data-subject="macro" data-round="10">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#10 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">성장회계와 솔로우 잔차</div>
+  <div class="spoon-card__desc">Cobb–Douglas 생산함수의 성장회계 분해(g_Y = g_A + α g_K + (1-α) g_L), 솔로우 잔차(Solow Residual) 측정과 성장 기여도 계산, 요소분배율 가정 및 잔차의 한계</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
   </div>
 </a>
 </div>

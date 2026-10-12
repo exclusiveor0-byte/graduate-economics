@@ -1,0 +1,117 @@
+---
+title: "문제 한 스푼 #9"
+subtitle: "내생적 성장이론 III (Endogenous Growth III — R&D · Idea Accumulation · Long-Run Growth)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MACROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #9
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **Endogenous Growth III — R&D · Idea Accumulation · Long-Run Growth**
+:::
+
+::: {.spoon-hero__tags}
+[거시경제학]{.chip .chip--macro}
+[총 2문제]{.chip}
+[예상 30–40분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. R&D and the Accumulation of Ideas
+::: {.topic}
+Idea Production · Balanced Growth · Numerical Calculation
+:::
+
+최종재 생산과 연구개발(R&D) 부문으로 구성된 경제를 생각하자.
+최종재 생산과 아이디어 축적은 다음과 같다.
+
+$$
+Y(t)=A(t)L_Y(t), \qquad
+\dot A(t)=\eta L_A(t)A(t), \qquad \eta>0.
+$$
+
+총노동은 고정되어 있으며
+
+$$
+L=L_Y(t)+L_A(t)
+$$
+
+를 만족한다. 인구증가와 감가상각은 고려하지 않는다.
+이 문제에서는 연구개발 노동 $L_A$와 최종재 생산 노동 $L_Y$가 시간에 따라 일정하다고 가정하시오.
+
+1. 아이디어의 성장률 $g_A=\dot A/A$를 유도하고,
+   초기 아이디어 수준 $A(0)=A_0$가 주어졌을 때
+   $A(t)$와 $Y(t)$의 시간경로를 구하시오.
+   최종재 산출의 성장률 $g_Y$도 구하시오.
+
+2. 다음 값을 사용하시오.
+
+   $$
+   L=100,\qquad L_A=20,\qquad
+   \eta=0.001,\qquad A(0)=1.
+   $$
+
+   $g_A$, $Y(0)$, $Y(10)$을 계산하시오.
+   시간 $t$의 단위는 연(year)이다.
+
+3. 다음 명제를 **prove or disprove** 하시오.
+
+   > If R&D employment remains constant, the number of new ideas
+   > produced per unit of time must also remain constant.
+
+   아이디어의 *성장률*과 아이디어의 *절대적인 증가량*을 구분하시오.
+:::
+
+::: {.spoon-problem}
+### Problem 2. R&D Reallocation and the Growth Trade-off
+::: {.topic}
+Impact Effect · Long-Run Growth · Overtaking Time
+:::
+
+Problem 1의 경제에서 $L=100$, $\eta=0.001$이라고 하자.
+시점 $t=0$에 아이디어 수준은 $A(0)=1$이다.
+
+경제는 원래 $L_A=20$, $L_Y=80$의 노동배분을 유지할 예정이었지만,
+시점 $0$에 예기치 않게 연구개발 노동을 영구적으로 $L_A=30$으로 늘리고
+최종재 생산 노동을 $L_Y=70$으로 줄인다.
+아이디어 $A(t)$는 연속적으로 축적되므로 충격 시점에 점프하지 않는다고 가정하시오.
+
+1. 노동 재배분 직후 $Y(0^+)$는 기존 계획하의 $Y(0)$와 비교하여
+   증가하는가, 감소하는가?
+   반면 재배분 이후의 $g_A$와 $g_Y$는 어떻게 달라지는가?
+   현재 생산과 미래 성장 사이의 상충관계를 설명하시오.
+
+2. 노동 재배분을 하지 않았을 때의 산출경로를 $Y_{\mathrm{old}}(t)$,
+   재배분 이후의 산출경로를 $Y_{\mathrm{new}}(t)$라고 하자.
+   두 경로를 도출하고,
+
+   $$
+   Y_{\mathrm{new}}(T)=Y_{\mathrm{old}}(T)
+   $$
+
+   를 만족하는 추월 시점(overtaking time) $T$를 계산하시오.
+
+3. 다음 명제를 **prove or disprove** 하시오.
+
+   > The overtaking time depends on the initial stock of ideas $A(0)$.
+
+   초기 아이디어 수준이 두 대안 경로에 동일하게 적용된다고 가정하고,
+   Problem 2-(2)의 식을 이용하여 답하시오.
+
+::: {.spoon-hint}
+**문제 범위**: 이번 회차는 R&D 노동배분에 따른
+현재 산출의 변화와 장기성장률의 변화에 집중한다.
+특허, 독점적 경쟁, 최적 R&D 투자 및 후생분석은 다루지 않는다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
