@@ -498,6 +498,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
 </a>
 
+<a href="macro/set-11.html" class="spoon-card" data-subject="macro" data-round="11">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#11 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경제수렴이론 · 절대적·조건부 수렴</div>
+  <div class="spoon-card__desc">솔로우 모형의 수렴동학(Catch-up Growth)과 자본격차 비율 수렴, 절대적 수렴(Absolute Convergence)과 조건부 수렴(Conditional Convergence)의 식별 및 장기 정상상태 비교</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-12.html" class="spoon-card" data-subject="macro" data-round="12">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#12 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">발전회계와 국가 간 소득격차</div>
+  <div class="spoon-card__desc">노동증대형 생산함수와 발전회계 항등식($y = (K/Y)^{\alpha/(1-\alpha)} A h$), 물적자본·인적자본·생산성(A) 기여도 로그 분해, 성장회계와의 차이 및 잔차의 인과적 한계</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-13.html" class="spoon-card" data-subject="macro" data-round="13">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#13 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경기변동의 정형화된 사실 I</div>
+  <div class="spoon-card__desc">실질 GDP의 추세-순환 분해($\log Y = \tau + y^c$)와 성장률 vs 순환 위치, 소비·투자·실업률의 상대적 변동성($\sigma(x^c)/\sigma(y^c)$) 및 경기동행성(Procyclicality)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-14.html" class="spoon-card" data-subject="macro" data-round="14">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#14 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">불확실성하의 소비 I · 확률적 오일러 방정식</div>
+  <div class="spoon-card__desc">2기간 가계의 확률적 오일러 방정식($u'(c_0) = \beta(1+r)E_0[u'(c_1)]$)과 최적 저축 계산, 평균보존확산(Mean-Preserving Spread)과 예방적 저축(Precautionary Saving, $u''' > 0$)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-15.html" class="spoon-card" data-subject="macro" data-round="15">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#15 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">불확실성하의 소비 II · 완비시장과 위험공유</div>
+  <div class="spoon-card__desc">상태조건부 청구권과 파레토 효율적 위험공유 조건, 개별위험(Idiosyncratic Risk) 완전 분산과 순이전액 계산, 총량위험(Aggregate Risk)의 분산 불가능성과 총자원 제약</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
 <a href="econometrics/set-01.html" class="spoon-card" data-subject="metrics" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
@@ -1234,6 +1294,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">성장회계와 솔로우 잔차</div>
   <div class="spoon-card__desc">Cobb–Douglas 생산함수의 성장회계 분해(g_Y = g_A + α g_K + (1-α) g_L), 솔로우 잔차(Solow Residual) 측정과 성장 기여도 계산, 요소분배율 가정 및 잔차의 한계</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-11.html" class="spoon-card" data-subject="macro" data-round="11">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#11 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경제수렴이론 · 절대적·조건부 수렴</div>
+  <div class="spoon-card__desc">솔로우 모형의 수렴동학(Catch-up Growth)과 자본격차 비율 수렴, 절대적 수렴(Absolute Convergence)과 조건부 수렴(Conditional Convergence)의 식별 및 장기 정상상태 비교</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-12.html" class="spoon-card" data-subject="macro" data-round="12">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#12 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">발전회계와 국가 간 소득격차</div>
+  <div class="spoon-card__desc">노동증대형 생산함수와 발전회계 항등식($y = (K/Y)^{\alpha/(1-\alpha)} A h$), 물적자본·인적자본·생산성(A) 기여도 로그 분해, 성장회계와의 차이 및 잔차의 인과적 한계</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-13.html" class="spoon-card" data-subject="macro" data-round="13">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#13 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">경기변동의 정형화된 사실 I</div>
+  <div class="spoon-card__desc">실질 GDP의 추세-순환 분해($\log Y = \tau + y^c$)와 성장률 vs 순환 위치, 소비·투자·실업률의 상대적 변동성($\sigma(x^c)/\sigma(y^c)$) 및 경기동행성(Procyclicality)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-14.html" class="spoon-card" data-subject="macro" data-round="14">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#14 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">불확실성하의 소비 I · 확률적 오일러 방정식</div>
+  <div class="spoon-card__desc">2기간 가계의 확률적 오일러 방정식($u'(c_0) = \beta(1+r)E_0[u'(c_1)]$)과 최적 저축 계산, 평균보존확산(Mean-Preserving Spread)과 예방적 저축(Precautionary Saving, $u''' > 0$)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="macro/set-15.html" class="spoon-card" data-subject="macro" data-round="15">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#15 회차</span>
+    <span class="chip chip--macro">거시경제학</span>
+  </div>
+  <div class="spoon-card__title">불확실성하의 소비 II · 완비시장과 위험공유</div>
+  <div class="spoon-card__desc">상태조건부 청구권과 파레토 효율적 위험공유 조건, 개별위험(Idiosyncratic Risk) 완전 분산과 순이전액 계산, 총량위험(Aggregate Risk)의 분산 불가능성과 총자원 제약</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>
