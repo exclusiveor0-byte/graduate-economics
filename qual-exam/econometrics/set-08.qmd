@@ -18,7 +18,7 @@ GRADUATE ECONOMETRICS · DAILY PRACTICE
 [계량경제학]{.chip .chip--metrics}
 [총 2문제]{.chip}
 [예상 70–85분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -169,6 +169,179 @@ $A$의 모든 eigenvalue가 단위원 내부에 있다고 가정한다.
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. VAR, Granger Causality, IRF & FEVD"}
+### Setting
+기본 모형: $m$-차원 VAR(1) 과정
+$$
+Y_t = c + A Y_{t-1} + \varepsilon_t, \qquad Y_t, c, \varepsilon_t \in \mathbb{R}^m, \quad A \in \mathbb{R}^{m\times m}.
+$$
+$E[\varepsilon_t] = 0$, $E[\varepsilon_t\varepsilon_t'] = \Sigma$, $E[\varepsilon_t\varepsilon_s'] = 0 \;(s \ne t)$, 스펙트럼 반경 $\rho(A) < 1$.
+조건부 예측 및 분산 분해를 위해 마틴게일 차분 혁신 $E[\varepsilon_{t+h}\mid \mathcal F_t] = 0 \;(h \ge 1)$을 전제한다.
+
+---
+
+#### 1. 정상평균과 centering
+공분산 정상성 하에서 무조건부 기댓값은 시점에 무관하므로 $E[Y_t] = E[Y_{t-1}] = \mu_Y$이다.
+VAR(1) 식의 양변에 기댓값을 취하면
+$$
+\mu_Y = c + A\mu_Y \quad\Longrightarrow\quad (I_m - A)\mu_Y = c.
+$$
+가정 $\rho(A) < 1$에 의해 1은 $A$의 고유값이 될 수 없으므로 행렬 $(I_m - A)$는 가역(nonsingular)이다:
+$$
+\boxed{\mu_Y = (I_m - A)^{-1}c}.
+$$
+중심화 변수 $\widetilde Y_t = Y_t - \mu_Y$를 대입하면
+$$
+\begin{aligned}
+\widetilde Y_t &= c + A(\widetilde Y_{t-1} + \mu_Y) + \varepsilon_t - \mu_Y \\
+&= A\widetilde Y_{t-1} + \{c - (I_m - A)\mu_Y\} + \varepsilon_t \\
+&= \boxed{A\widetilde Y_{t-1} + \varepsilon_t}.
+\end{aligned}
+$$
+중괄호 항이 0이므로 상수항이 소거된 순수 자기회귀 동학이 도출된다.
+
+---
+
+#### 2. 반복대입과 MA($\infty$) 표현
+$\widetilde Y_t = A\widetilde Y_{t-1} + \varepsilon_t$를 $q$번 반복 대입하면
+$$
+\begin{aligned}
+\widetilde Y_t &= A(A\widetilde Y_{t-2} + \varepsilon_{t-1}) + \varepsilon_t \\
+&= A^2\widetilde Y_{t-2} + A\varepsilon_{t-1} + \varepsilon_t \\
+&= A^q\widetilde Y_{t-q} + \sum_{j=0}^{q-1} A^j \varepsilon_{t-j}.
+\end{aligned}
+$$
+$\rho(A) < 1$이므로 유한차원 노름 부등식에 따라 $\|A^j\| \le C r^j$ ($r < 1, C < \infty$)가 성립한다.
+따라서 $\lim_{q\to\infty} A^q = 0$이며, 혁신의 상호 무상관성에 의해
+$$
+E\left\|\sum_{j=q}^\infty A^j \varepsilon_{t-j}\right\|^2 \le \operatorname{tr}(\Sigma) \sum_{j=q}^\infty \|A^j\|^2 \xrightarrow{q\to\infty} 0.
+$$
+따라서 평균제곱(mean-square, $L^2$) 의미에서 무한급수가 안정적으로 수렴하여
+$$
+\boxed{\widetilde Y_t = \sum_{j=0}^\infty A^j \varepsilon_{t-j}}.
+$$
+이 MA($\infty$) 표현은 $A$의 고유값들이 단위원 내부에 위치할 때에만 무한합이 수렴하고 과거의 임의 충격이 장기적으로 0으로 소멸함을 보장한다.
+
+---
+
+#### 3. 다기간 예측과 forecast error
+$t+h$기 시점의 중심화 변수는
+$$
+\widetilde Y_{t+h} = A^h \widetilde Y_t + \sum_{j=0}^{h-1} A^j \varepsilon_{t+h-j}.
+$$
+정보집합 $\mathcal F_t = \sigma(Y_t, Y_{t-1}, \ldots)$에 대해 미래 충격의 조건부 기댓값 $E[\varepsilon_{t+h-j}\mid \mathcal F_t] = 0$ ($j = 0, \ldots, h-1$)이므로
+$$
+E[\widetilde Y_{t+h}\mid \mathcal F_t] = A^h \widetilde Y_t \quad\Longrightarrow\quad \boxed{E[Y_{t+h}\mid \mathcal F_t] = \mu_Y + A^h(Y_t - \mu_Y)}.
+$$
+실제값과 조건부 최적 예측값의 차이인 $h$-기간 예측오차(forecast error)는
+$$
+\boxed{Y_{t+h} - E[Y_{t+h}\mid \mathcal F_t] = \sum_{j=0}^{h-1} A^j \varepsilon_{t+h-j}}.
+$$
+$h \to \infty$이면 $A^h \to 0$이므로 장기 예측은 무조건부 평균 $\mu_Y$로 수렴한다.
+
+---
+
+#### 4. VAR($p$)의 companion form과 안정성
+$m$-차원 VAR($p$) 모형 $Y_t = c + A_1 Y_{t-1} + \dots + A_p Y_{t-p} + \varepsilon_t$에 대해 $mp$-차원 상태벡터 $S_t = (Y_t', Y_{t-1}', \ldots, Y_{t-p+1}')'$를 정의하면
+$$
+S_t = b + \mathcal A S_{t-1} + e_t,
+$$
+$$
+\mathcal A = \begin{pmatrix}
+A_1 & A_2 & \cdots & A_{p-1} & A_p \\
+I_m & 0 & \cdots & 0 & 0 \\
+0 & I_m & \cdots & 0 & 0 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & \cdots & I_m & 0
+\end{pmatrix}, \qquad b = \begin{pmatrix} c \\ 0 \\ \vdots \\ 0 \end{pmatrix}, \quad e_t = \begin{pmatrix} \varepsilon_t \\ 0 \\ \vdots \\ 0 \end{pmatrix}.
+$$
+이 companion matrix $\mathcal A$의 모든 고유값이 단위원 내부에 위치($\rho(\mathcal A) < 1$)해야 시스템 전체가 안정적(stable and covariance-stationary)이다. 이는 시차 다항식 행렬식
+$$
+\det(I_m - A_1 z - A_2 z^2 - \dots - A_p z^p) = 0
+$$
+의 모든 근(roots)이 **단위원 바깥($|z| > 1$)**에 존재해야 한다는 고전적 조건과 정확히 동치이다.
+
+---
+
+#### 5. Granger noncausality의 계수 제약과 의미
+이변량 VAR($p$)에서 첫 번째 변수 $y_{1t}$의 방정식은
+$$
+y_{1t} = c_1 + \sum_{\ell=1}^p a_{11,\ell} y_{1,t-\ell} + \sum_{\ell=1}^p a_{12,\ell} y_{2,t-\ell} + \varepsilon_{1t}.
+$$
+과거 $y_2$의 시차 정보가 $y_1$의 자체 시차 정보에 더해 추가적인 선형 예측력을 제공하지 못한다는 그랜저 비인과성(Granger noncausality) 귀무가설은
+$$
+\boxed{H_0: a_{12,1} = a_{12,2} = \dots = a_{12,p} = 0}.
+$$
+이는 선형제약이므로 Wald 검정 또는 $F$-검정을 통해 평가할 수 있다.
+
+**구조적 인과성과의 차이:**
+그랜저 인과성은 오직 **시계열 간 예측 선행성(predictive precedence)**만을 의미한다. 누락변수(omitted variables), 공통 외부 충격, 또는 시장 참여자들의 기대 형성(선행적 가격 반영)에 의해 실제 인과관계가 없음에도 그랜저 인과성이 검정될 수 있다. 정책 개입에 따른 구조적 효과를 의미하는 인과추론(structural causality)과는 근본적으로 구분되어야 한다.
+
+---
+
+#### 6. MA 계수와 reduced-form impulse response
+일반적인 Wold MA 표현이 $Y_t - \mu_Y = \sum_{h=0}^\infty \Theta_h \varepsilon_{t-h}$일 때, VAR(1)에서는
+$$
+\boxed{\Theta_h = A^h, \qquad \Theta_0 = I_m}.
+$$
+$t$기 축약형 혁신에 $\delta e_j$ (단위 충격)을 가하고 다른 혁신을 고정할 때, $h$기 후 $Y_{t+h}$의 반응은
+$$
+\Delta Y_{t+h} = \Theta_h e_j \quad\Longrightarrow\quad \boxed{\operatorname{IRF}_{ij}(h) = e_i' \Theta_h e_j = (\Theta_h)_{ij} = (A^h)_{ij}}.
+$$
+즉, $\Theta_h$의 $(i, j)$번째 원소는 $j$번째 축약형 혁신 $\varepsilon_{jt}$의 1단위 증가가 $h$기간 후 $i$번째 변수 $Y_{i,t+h}$에 미치는 파급효과(reduced-form impulse response)를 나타낸다.
+
+---
+
+#### 7. 동시적 상관과 shock identification 문제
+축약형 공분산행렬 $\Sigma = E[\varepsilon_t\varepsilon_t']$의 비대각 원소가 0이 아니면($\operatorname{Cov}(\varepsilon_{it}, \varepsilon_{jt}) \ne 0$), 축약형 충격들은 동시적으로 상관(contemporaneously correlated)되어 있다.
+어느 한 혁신 $\varepsilon_{jt}$가 발생할 때 다른 혁신들도 함께 변동하므로, 축약형 혁신 하나만 독립적으로 발생시키는 가상 실험(ceteris paribus impulse)은 통계적으로 불가능하다.
+
+직교화된 구조적 충격 $\eta_t$ ($E[\eta_t\eta_t'] = I_m$)를 $\varepsilon_t = B\eta_t$로 모형화할 때, 분산 조건은
+$$
+\Sigma = BB'
+$$
+이다. 그러나 임의의 직교행렬 $Q$ ($Q'Q = I_m$)에 대해 $\widetilde B = BQ$를 정의하면
+$$
+\widetilde B \widetilde B' = B Q Q' B' = BB' = \Sigma
+$$
+가 성립하므로, 축약형 공분산 $\Sigma$만으로는 회전행렬 $Q$를 결정할 수 없어 무수히 많은 구조적 충격이 동일한 $\Sigma$를 생성한다. 따라서 경제이론에 기반한 추가적인 구조적 식별 제약(structural identification restrictions)이 필수적이다.
+
+---
+
+#### 8. Cholesky decomposition과 변수 순서
+$\Sigma$가 양의 정부호(positive definite) 행렬이면 Cholesky 분해 $\Sigma = PP'$ ($P$는 대각원소가 양수인 유일한 하삼각행렬)이 존재한다.
+구조적 충격을 $\eta_t = P^{-1}\varepsilon_t$로 정의하면 $E[\eta_t\eta_t'] = P^{-1}\Sigma P^{-T} = I_m$이 되며, 직교화 충격반응(Orthogonalized IRF)은
+$$
+\boxed{\operatorname{OIRF}(h) = \Theta_h P, \qquad \operatorname{OIRF}_{\cdot j}(h) = \Theta_h P e_j}.
+$$
+
+**변수 순서(Ordering)가 중요한 이유:**
+$P$가 하삼각행렬이라는 것은 상단에 위치한 변수가 하단 변수의 동시적 충격에 반응하지 않는다는 **재귀적(recursive / Wold-causal chain) 구조**를 암묵적으로 강제한다. 변수의 배열 순서를 바꾸면 서로 다른 하삼각행렬 $P$가 도출되며, 그에 따라 구조적 충격의 정의와 OIRF의 궤적이 완전히 달라진다. 따라서 Cholesky 분해는 단순한 기하학적 계산이 아니라 엄격한 경제학적 동시성 식별 가정을 내포한다.
+
+---
+
+#### 9. Forecast error variance와 FEVD
+$h$-기간 예측오차 $e_t(h) = \sum_{j=0}^{h-1} \Theta_j \varepsilon_{t+h-j}$의 무조건부 분산-공분산 행렬은 시점 간 무상관성에 의해
+$$
+\operatorname{Var}(e_t(h)) = \sum_{j=0}^{h-1} \sum_{\ell=0}^{h-1} \Theta_j E[\varepsilon_{t+h-j}\varepsilon_{t+h-\ell}'] \Theta_\ell' = \boxed{\sum_{j=0}^{h-1} \Theta_j \Sigma \Theta_j'}.
+$$
+Cholesky 직교화 $\Sigma = PP'$를 적용하면 $\Theta_j \Sigma \Theta_j' = (\Theta_j P)(\Theta_j P)'$가 된다.
+$i$번째 변수의 $h$-기간 예측오차 총분산 중 $k$번째 직교화 충격이 설명하는 비율인 **예측오차 분산분해(FEVD)**는
+$$
+\boxed{\mathrm{FEVD}_{i\leftarrow k}(h) = \frac{\sum_{j=0}^{h-1} \left(e_i' \Theta_j P e_k\right)^2}{\sum_{j=0}^{h-1} e_i' \Theta_j \Sigma \Theta_j' e_i} = \frac{\sum_{j=0}^{h-1} (\Theta_j P)_{ik}^2}{\sum_{j=0}^{h-1} (\Theta_j \Sigma \Theta_j')_{ii}}}.
+$$
+각 행의 합은 $\sum_{k=1}^m \mathrm{FEVD}_{i\leftarrow k}(h) = 1$이 되며, 특정 변수의 불확실성(예측오차)이 어떤 구조적 충격의 전파에 기인하는지 상대적 기여도를 정량화한다 (단, Cholesky 순서에 따라 분해 결과가 달라짐).
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- 안정성: $\rho(A) < 1 \iff \mu_Y = (I-A)^{-1}c$, 안정적 MA($\infty$) 표현 $\widetilde Y_t = \sum A^j \varepsilon_{t-j}$ 수렴.
+- 예측: $E[Y_{t+h}\mid \mathcal F_t] = \mu_Y + A^h(Y_t - \mu_Y)$, 오차 분산 $\sum \Theta_j \Sigma \Theta_j'$.
+- Granger 인과성: 시차 계수 0 검정 ($H_0: a_{12,\ell} = 0$), 예측 선행성일 뿐 구조적 인과성은 아님.
+- Cholesky 직교화: $\Sigma = PP'$, $\operatorname{OIRF}(h) = \Theta_h P$, 재귀적 식별 가정이므로 변수 순서에 민감.
+- FEVD: 각 구조적 충격이 변수별 예측오차 분산에 기여하는 상대적 비중을 $100\%$로 분해.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. VECM, Cointegration Rank & Johansen Method
 ::: {.topic}
@@ -301,18 +474,161 @@ $$
    왜 Johansen rank test의 critical value가 이러한 trend specification에 의존하는지 설명하시오.
 10. 마지막으로 다음 두 접근을 비교하시오.
 
-   **Engle–Granger:** residual-based single-equation approach<br>
-   **Johansen:** reduced-rank system approach
+    **Engle–Granger:** residual-based single-equation approach<br>
+    **Johansen:** reduced-rank system approach
 
-   각각의 장단점을 다음 관점에서 비교하시오.
-   <br>
-   (i) cointegration rank,<br>
-   (ii) multiple cointegrating vectors,<br>
-   (iii) normalization,<br>
-   (iv) system dynamics,<br>
-   (v) small-system interpretation.
+    각각의 장단점을 다음 관점에서 비교하시오.
+    <br>
+    (i) cointegration rank,<br>
+    (ii) multiple cointegrating vectors,<br>
+    (iii) normalization,<br>
+    (iv) system dynamics,<br>
+    (v) small-system interpretation.
 
 ::: {.spoon-hint}
 **형식**: **VAR in levels → VECM → rank of $\Pi$ → $\alpha\beta'$ decomposition → Johansen eigenvalues → trace test → deterministic specification**. $\beta$와 $\alpha$의 역할을 혼동하지 말고, **long-run equilibrium relation과 short-run adjustment를 분리하여 해석**하시오.
 :::
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. VECM, Cointegration Rank & Johansen Method"}
+### Setting
+$m$-차원 $I(1)$ 벡터 시계열 $Y_t$의 VAR($p$) 표현:
+$$
+Y_t = A_1 Y_{t-1} + A_2 Y_{t-2} + \dots + A_p Y_{t-p} + \varepsilon_t.
+$$
+
+---
+
+#### 1. VAR($p$)에서 VECM으로의 변환
+양변에서 $Y_{t-1}$을 빼면 $\Delta Y_t = (A_1 - I_m)Y_{t-1} + \sum_{\ell=2}^p A_\ell Y_{t-\ell} + \varepsilon_t$.
+시차 수준변수 항등식 $Y_{t-\ell} = Y_{t-1} - \sum_{j=1}^{\ell-1} \Delta Y_{t-j}$를 대입하면:
+$$
+\begin{aligned}
+\Delta Y_t &= (A_1 - I_m)Y_{t-1} + \sum_{\ell=2}^p A_\ell\left(Y_{t-1} - \sum_{j=1}^{\ell-1} \Delta Y_{t-j}\right) + \varepsilon_t \\
+&= \left(\sum_{\ell=1}^p A_\ell - I_m\right)Y_{t-1} - \sum_{\ell=2}^p A_\ell \sum_{j=1}^{\ell-1} \Delta Y_{t-j} + \varepsilon_t \\
+&= \left(\sum_{\ell=1}^p A_\ell - I_m\right)Y_{t-1} - \sum_{j=1}^{p-1}\left(\sum_{\ell=j+1}^p A_\ell\right)\Delta Y_{t-j} + \varepsilon_t.
+\end{aligned}
+$$
+따라서 벡터오차수정모형(VECM) 표현은
+$$
+\boxed{\Delta Y_t = \Pi Y_{t-1} + \sum_{j=1}^{p-1} \Gamma_j \Delta Y_{t-j} + \varepsilon_t},
+$$
+$$
+\boxed{\Pi = \sum_{\ell=1}^p A_\ell - I_m}, \qquad \boxed{\Gamma_j = -\sum_{\ell=j+1}^p A_\ell \quad (j = 1, \ldots, p-1)}.
+$$
+$\Pi Y_{t-1}$은 수준변수의 장기 불균형에 대한 조정 효과를 담당하며, $\Gamma_j$는 과거 변화율이 현재 변화율에 미치는 단기 동학(short-run dynamics)을 포착한다.
+
+---
+
+#### 2. Cointegration rank의 세 경우
+행렬 $\Pi \in \mathbb{R}^{m\times m}$의 계수(rank)를 $r = \operatorname{rank}(\Pi)$라 할 때:
+
+1. **$r = 0$ ($\Pi = 0$):**
+   장기 오차수정항이 완전히 소멸하여 $\Delta Y_t = \sum_{j=1}^{p-1} \Gamma_j \Delta Y_{t-j} + \varepsilon_t$의 순수 차분 VAR 모형이 된다. 공적분 관계가 0개 존재하며, 시스템에는 $m$개의 독립적인 공통 확률추세가 존재한다 (**No Cointegration**).
+2. **$0 < r < m$ (Reduced Rank):**
+   $\Pi$가 축약 랭크를 가지며, $r$개의 선형독립인 정상 공적분 관계가 존재하고 시스템을 견인하는 공통 확률추세는 $m - r$개이다 (**Cointegration**).
+3. **$r = m$ (Full Rank):**
+   $\Pi$가 가역행렬이다. 시스템이 안정적이라면 $\Pi Y_{t-1} \sim I(0)$가 성립해야 하므로, 원계열 $Y_t$ 자체가 차분할 필요가 없는 정상 시계열($I(0)$)이어야 한다 (**Levels Stationarity**; 모든 성분이 $I(1)$이라는 전제와 배치됨).
+
+---
+
+#### 3. $\Pi = \alpha\beta'$ 분해와 두 공간의 역할
+$0 < r < m$일 때 랭크 분해 정리에 의해
+$$
+\boxed{\Pi = \alpha\beta', \qquad \alpha, \beta \in \mathbb{R}^{m\times r}, \quad \operatorname{rank}(\alpha) = \operatorname{rank}(\beta) = r}.
+$$
+- **$\beta$ (Cointegrating Space):** $\beta$의 각 열은 공적분 벡터를 구성하며, $r$-차원 벡터 $\beta'Y_{t-1}$은 장기 균형오차(stationary cointegrating relations)를 나타낸다.
+- **$\alpha$ (Adjustment Matrix):** 가중치 행렬로서, 각 장기 균형오차의 이탈이 시스템 내 각 변수들의 당기 변화율($\Delta Y_t$)에 미치는 조정 속도(speed of adjustment)를 나타낸다.
+- **비유일성:** 임의의 가역행렬 $H$ ($r\times r$)에 대해 $\Pi = (\alpha H^{-T})(\beta H)'$이므로, $\alpha$와 $\beta$의 개별 계수 식별을 위해서는 경제학적 정규화(normalization) 제약이 필요하다.
+
+---
+
+#### 4. Bivariate rank-one 시스템에서 adjustment coefficient 해석
+$m=2, r=1$이고 $\beta' = (1, -\beta_0)$로 정규화하면 장기 균형오차는 $e_{t-1} = y_{1,t-1} - \beta_0 y_{2,t-1}$이다.
+VECM의 두 방정식:
+$$
+\Delta y_{1t} = \alpha_1 e_{t-1} + \text{단기동학} + \varepsilon_{1t},
+$$
+$$
+\Delta y_{2t} = \alpha_2 e_{t-1} + \text{단기동학} + \varepsilon_{2t}.
+$$
+- $e_{t-1} > 0$일 때: $y_1$이 균형보다 높거나 $y_2$가 균형보다 낮음을 의미한다.
+- $y_1$이 균형으로 복귀하기 위해서는 감소해야 하므로 **$\alpha_1 < 0$**이어야 한다.
+- $y_2$가 균형으로 복귀하기 위해서는 증가해야 하므로 ($\beta_0 > 0$일 때) **$\alpha_2 > 0$**이어야 한다.
+- 축약된 오차 동학 $e_t = (1 + \alpha_1 - \beta_0 \alpha_2)e_{t-1}$에서 장기 안정성을 만족하기 위한 필요충분조건은
+  $$
+  \boxed{-2 < \alpha_1 - \beta_0 \alpha_2 < 0} \quad (\text{단조 수렴 조건: } -1 < \alpha_1 - \beta_0 \alpha_2 < 0).
+  $$
+- 만약 특정 변수의 조정계수가 0이면(예: $\alpha_2 = 0$), 해당 변수는 장기 균형오차에 반응하지 않고 자체 동학에 의해서만 움직이므로 **약외생성(weak exogeneity)**을 가진다.
+
+---
+
+#### 5. Johansen 방법의 reduced-rank system estimation
+Johansen(1988, 1991) 방법은 다변량 Gaussian 우도함수에서 단기 동학을 편의(partialling out) 처리한 후, 수준변수 행렬 $\Pi$에 부여된 계수 제약 $\operatorname{rank}(\Pi) = r$ 하에서 시스템 최우추정법(MLE)을 적용한다.
+- **Engle–Granger 한계 극복:** 단일 방정식 잔차 검정은 연구자가 선택한 특정 정규화 종속변수에 의존하며 오직 하나의 공적분 벡터만을 검정할 수 있다.
+- **Johansen 장점:** 시스템 전체의 공분산 구조를 동시에 추정하므로, $m$-변수 체계에서 존재할 수 있는 $r > 1$개의 다중 공적분 벡터와 공적분 공간 전체를 온전히 식별하고 추정할 수 있다.
+
+---
+
+#### 6. Generalized eigenvalues의 역할
+단기 시차 차분항들을 통제하고 잔차화된 변화율 벡터 $R_{0t}$와 잔차화된 수준 벡터 $R_{1t}$의 표본 적률행렬 $S_{ij} = T^{-1}\sum R_{it}R_{jt}'$을 이용해 일반화 고유값 문제
+$$
+|\lambda S_{11} - S_{10} S_{00}^{-1} S_{01}| = 0
+$$
+를 풀면 내림차순 고유값 $1 \ge \hat\lambda_1 \ge \hat\lambda_2 \ge \dots \ge \hat\lambda_m \ge 0$을 얻는다.
+이 고유값들은 수준변수의 특정 선형결합과 변화율 간의 **제곱 정준상관(squared canonical correlations)**을 의미한다. 고유값이 0에서 유의하게 클수록 해당 방향의 수준 선형결합이 정상적인 장기 공적분 관계를 강하게 형성하고 있음을 나타낸다.
+
+---
+
+#### 7. Trace statistic과 순차 rank 결정
+트레이스 검정통계량(Trace Statistic):
+$$
+\boxed{LR_{\mathrm{trace}}(r) = -T \sum_{j=r+1}^m \ln(1 - \hat\lambda_j)}.
+$$
+귀무가설 $H_0: \operatorname{rank}(\Pi) \le r$ (공적분 벡터가 최대 $r$개) 대 $H_1: \operatorname{rank}(\Pi) > r$을 검정한다.
+
+**순차적 검정 절차 (Sequential Testing):**
+1. **$r = 0$ 검정:** $H_0: r=0$ 기각 실패 시 $\hat r = 0$ (공적분 없음)으로 종료. 기각 시 2단계 진행.
+2. **$r = 1$ 검정:** $H_0: r \le 1$ 기각 실패 시 $\hat r = 1$ (1개 공적분)로 종료. 기각 시 다음 단계 진행.
+3. 최초로 귀무가설 $H_0: r \le r_0$를 기각하지 못하는 단계에서 멈추고, 해당 $r_0$를 공적분 랭크로 결정한다.
+
+---
+
+#### 8. Johansen test statistic의 비표준 한계분포
+정규적인 우도비(LR) 검정통계량은 Wilks 정리에 의해 $\chi^2$ 분포를 따르지만, 공적분 검정에서는 귀무가설 하에서 비정상인 $I(1)$ 단위근 성분이 포함된다.
+함수적 중심극한정리에 의해 $I(1)$ 확률추세 성분들은 브라운 운동(Brownian motion) $B(r)$로 수렴하며, 표본 적률행렬 $S_{11}$은 브라운 운동의 확률적분 $\int_0^1 B(r)B(r)'dr$ 형태로 수렴한다.
+따라서 트레이스 통계량은 표준 $\chi^2$ 분포가 아니라 브라운 운동 범함수의 행렬 고유값으로 정의되는 **비표준 요한센(Johansen) 분포**를 따른다.
+
+---
+
+#### 9. Deterministic terms와 임계값의 변화
+VECM에서 상수항과 선형추세는 다음 두 가지 방식으로 진입할 수 있다:
+1. **제약된 결정론적 항 (Restricted):** $\Delta Y_t = \alpha(\beta'Y_{t-1} + \mu_0) + \dots$ 처럼 공적분 관계 내부에만 포함되어 장기 균형의 수준이나 추세를 결정.
+2. **비제약 결정론적 항 (Unrestricted):** $\Delta Y_t = \alpha\beta'Y_{t-1} + \gamma_0 + \dots$ 처럼 외부에 진입하여 원 시계열 $Y_t$의 선형 드리프트(drift)나 이차 추세를 허용.
+
+결정론적 항의 설정 방식에 따라 극한 브라운 운동의 평균 제거(demeaning) 및 추세 제거(detrending) 투영 구조가 달라지므로, **트레이스 통계량의 점근 임계값 역시 deterministic specification(상수/추세 유무 및 제약 여부 5개 케이스)에 따라 완전히 달라진다**. 따라서 경제적 정상상태 가설에 부합하는 모형 스펙을 사전에 엄밀히 선택해야 한다.
+
+---
+
+#### 10. Engle–Granger와 Johansen의 비교
+| 비교 기준 | Engle–Granger 방법 | Johansen 방법 |
+|:---|:---|:---|
+| **(i) Cointegration rank** | 사전 검정 불가 (오직 $r=0$ vs $r=1$ 검정만 가능) | $r=0, 1, \dots, m$까지 시스템적으로 랭크 검정 및 결정 |
+| **(ii) Multiple cointegrating vectors** | 복수($r>1$) 공적분 벡터 동시 추정 불가 | $r>1$인 다중 공적분 벡터를 시스템 차원에서 동시에 추정 |
+| **(iii) Normalization** | 종속변수 선택에 따라 결과가 달라짐 (임의적 정규화) | 공적분 공간 전체를 먼저 추정하므로 임의 정규화 불필요 |
+| **(iv) System dynamics** | 단일 방정식 잔차 중심 (단기 동학 모형화 한계) | $\alpha, \beta, \Gamma_j$를 완전한 다변량 시스템으로 동시 추정 |
+| **(v) Small-system interpretation** | 2변수 직관적 균형식에서 간결하고 소표본에 안정적 | 풍부한 동학을 제공하나, 대규모 모형 및 소표본에서 모수 과다 추정 위험 |
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- VECM: $\Delta Y_t = \Pi Y_{t-1} + \sum \Gamma_j \Delta Y_{t-j} + \varepsilon_t$, $\Pi = \alpha\beta'$ ($\beta$: 장기균형, $\alpha$: 조정속도).
+- Cointegration Rank: $r = \operatorname{rank}(\Pi) \implies r=0$ (공적분 없음), $0<r<m$ (공적분 $r$개, 공통추세 $m-r$개), $r=m$ (수준 정상).
+- Bivariate 안정성: $-2 < \alpha_1 - \beta_0 \alpha_2 < 0$.
+- Johansen 검정: 고유값 $\hat\lambda_j$ 정준상관 기반 순차 트레이스 검정 ($LR_{\mathrm{trace}} = -T\sum \ln(1-\hat\lambda_j)$).
+- 비표준 분포: $I(1)$ 브라운 운동 범함수를 따르므로 deterministic 항 설정에 대응하는 전용 임계값 필수.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

@@ -720,24 +720,30 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-07.html" class="spoon-card" data-subject="metrics" data-round="7">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#7 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">단위근과 가짜회귀 · 공적분과 ECM</div>
   <div class="spoon-card__desc">확률보행과 비표준 점근분포, DF/ADF 및 KPSS 검정, 가짜회귀(Spurious Regression), Engle–Granger 공적분 검정 및 오차수정모형(ECM)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
 <a href="econometrics/set-08.html" class="spoon-card" data-subject="metrics" data-round="8">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#8 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">VAR 충격반응 · VECM과 Johansen 공적분</div>
   <div class="spoon-card__desc">VAR 안정성 조건과 직교화 충격반응함수(OIRF)·예측오차 분산분해(FEVD), Granger 인과성, VECM 축소계수 구조와 Johansen Trace 공적분 검정</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1605,24 +1611,30 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-07.html" class="spoon-card" data-subject="metrics" data-round="7">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#7 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">단위근과 가짜회귀 · 공적분과 ECM</div>
   <div class="spoon-card__desc">확률보행과 비표준 점근분포, DF/ADF 및 KPSS 검정, 가짜회귀(Spurious Regression), Engle–Granger 공적분 검정 및 오차수정모형(ECM)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
 <a href="econometrics/set-08.html" class="spoon-card" data-subject="metrics" data-round="8">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#8 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">VAR 충격반응 · VECM과 Johansen 공적분</div>
   <div class="spoon-card__desc">VAR 안정성 조건과 직교화 충격반응함수(OIRF)·예측오차 분산분해(FEVD), Granger 인과성, VECM 축소계수 구조와 Johansen Trace 공적분 검정</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
