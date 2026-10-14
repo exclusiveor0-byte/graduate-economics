@@ -1,0 +1,193 @@
+---
+title: "문제 한 스푼 #29"
+subtitle: "소비자이론 · 생산자이론 (Endowment Economy & Multi-Output Production)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #29
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **소비자이론 · 생산자이론 (Endowment Economy & Multi-Output Production)**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[예상 25–30분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Consumer Theory
+::: {.topic}
+Endowment Consumer · Gross Demand · Net Demand · Wealth Effect · Walras' Law
+:::
+
+두 재화 $x,y$를 소비하는 소비자의 효용함수와 초기부존은
+
+$$
+u(x,y)=\ln x+\ln y,
+\qquad
+\omega=(2,4)
+$$
+
+로 주어진다. $y$-재화를 numeraire로 두어
+
+$$
+p_y=1,\qquad p_x=p>0
+$$
+
+로 normalize한다. 소비자는 자신의 초기부존을 시장가격으로 거래할 수 있다.
+
+1. 소비자의 wealth
+
+   $$
+   m(p)=p\omega_x+\omega_y
+   $$
+
+   를 구하고 utility maximization problem을 풀어 gross Marshallian demands
+
+   $$
+   x(p),\qquad y(p)
+   $$
+
+   를 구하시오.
+   이어서 각 재화에 대한 net demand를
+
+   $$
+   z_x(p)=x(p)-\omega_x,
+   \qquad
+   z_y(p)=y(p)-\omega_y
+   $$
+
+   로 정의하고 이를 계산하시오.
+
+2. 어떤 상대가격 $p$에서 소비자가 $x$-재화의
+   **net buyer**, **net seller**, 또는 **no-trade consumer**가 되는지 characterize하시오.
+   특히
+
+   $$
+   z_x(p)=0
+   $$
+
+   을 만족하는 가격을 구하고, 같은 가격에서 $z_y(p)$가 어떻게 되는지도 확인하시오.
+   이어서
+
+   $$
+   pz_x(p)+z_y(p)=0
+   $$
+
+   이 성립하는지 직접 확인하고 그 경제적 의미를 설명하시오.
+
+3. $x$-재화 가격 $p$가 상승할 때 gross demand $x(p)$와 wealth $m(p)$가 각각 어떻게 변하는지 계산하시오.
+   초기부존이 없는 fixed-income consumer와 달리, 이 소비자에게서는 $p$의 변화가 동시에
+   **구매가격**과 **초기부존의 시장가치**를 변화시킨다는 점을 설명하시오.
+   마지막으로 net demand $z_x(p)$의 부호 변화를 이용하여, 왜 endowment economy에서 가격변화의 효과를 gross demand만으로 해석해서는 안 되는지 서술하시오.
+
+::: {.spoon-hint}
+**형식**: **endowment value → gross demand → net demand → buyer/seller status → Walras' law**. 초기부존 경제에서는 가격이 예산선의 기울기뿐 아니라 wealth 자체도 변화시킨다는 점이 핵심이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Producer Theory
+::: {.topic}
+Multi-Output Firm · Joint Production Requirement · Profit Function · Hotelling's Lemma
+:::
+
+한 경쟁기업이 하나의 투입요소 $L$을 사용하여 두 산출물 $y_1,y_2$를 생산한다. 기술은
+
+$$
+L\ge y_1^2+y_2^2,
+\qquad
+y_1,y_2\ge0
+$$
+
+로 주어진다. 산출물 가격은
+
+$$
+p_1>0,\qquad p_2>0
+$$
+
+이고 투입요소 가격은 $w>0$이다.
+
+1. 이윤극대화에서 불필요한 투입을 사용하지 않는다는 점을 이용하여
+
+   $$
+   L=y_1^2+y_2^2
+   $$
+
+   로 둘 수 있음을 설명하시오.
+   기업의 profit maximization problem을
+
+   $$
+   \max_{y_1,y_2\ge0}
+   \left\{
+   p_1y_1+p_2y_2-w(y_1^2+y_2^2)
+   \right\}
+   $$
+
+   로 쓰고 optimal outputs
+
+   $$
+   y_1^*(p_1,p_2,w),
+   \qquad
+   y_2^*(p_1,p_2,w)
+   $$
+
+   를 구하시오.
+   이어서 optimal input demand $L^*(p_1,p_2,w)$를 계산하시오.
+
+2. 1번의 최적선택을 이용하여 profit function
+
+   $$
+   \pi(p_1,p_2,w)
+   $$
+
+   을 구하시오.
+   그리고 Hotelling's lemma
+
+   $$
+   \frac{\partial\pi}{\partial p_1}=y_1^*,
+   \qquad
+   \frac{\partial\pi}{\partial p_2}=y_2^*,
+   \qquad
+   -\frac{\partial\pi}{\partial w}=L^*
+   $$
+
+   가 실제로 성립하는지 확인하시오.
+   또한 $\pi$가 모든 가격 $(p_1,p_2,w)$에 대해 degree 1 homogeneous인지 검증하시오.
+
+3. 다음 비교정태를 계산하고 해석하시오.
+
+   $$
+   \frac{\partial y_1^*}{\partial p_1},
+   \qquad
+   \frac{\partial y_1^*}{\partial p_2},
+   \qquad
+   \frac{\partial y_1^*}{\partial w}.
+   $$
+
+   특히 이 기술에서는 $p_2$의 상승이 $y_1^*$에 영향을 주는지 판단하시오.
+   마지막으로
+
+   $$
+   \frac{y_1^*}{y_2^*}
+   $$
+
+   를 구하고, multi-output firm의 산출구성이 두 산출물의 상대가격과 어떻게 연결되는지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **technology → multi-output profit maximization → profit function → Hotelling → comparative statics**. 두 산출물이 하나의 기업 안에서 함께 생산되더라도, 기술의 형태에 따라 한 산출물 가격의 변화가 다른 산출물 공급에 미치는 효과는 달라질 수 있다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

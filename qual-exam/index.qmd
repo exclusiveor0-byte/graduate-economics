@@ -423,6 +423,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
 </a>
 
+<a href="micro/set-27.html" class="spoon-card" data-subject="micro" data-round="27">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#27 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 일반균형</div>
+  <div class="spoon-card__desc">CES 효용함수의 마샬/힉스 수요와 지출함수 쌍대성 및 대체탄력성, 순수교환경제 에지워스 상자의 계약곡선·경쟁균형 및 제2후생정리 분권화(Lump-sum Transfer)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-28.html" class="spoon-card" data-subject="micro" data-round="28">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#28 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">부분균형 · 시장의 종류</div>
+  <div class="spoon-card__desc">대국(Large Country) 관세 부과와 교역조건 이득(Terms of Trade) 및 국내후생 최적관세, 제조업자-소매업자 수직적 구조의 이중마진화(Double Marginalization)와 2부가격제</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-29.html" class="spoon-card" data-subject="micro" data-round="29">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#29 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 생산자이론</div>
+  <div class="spoon-card__desc">초기부존 소비자의 총수요·순수요와 부존소득효과 및 왈라스 법칙, 다품목 생산기업(Multi-Output Firm)의 결합생산 이윤극대화·이윤함수와 호텔링 보조정리</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-30.html" class="spoon-card" data-subject="micro" data-round="30">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#30 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">일반균형 종합문제</div>
+  <div class="spoon-card__desc">생산이 존재하는 2x2 일반균형, 기업 이윤의 가계 배분(지분율 θ)과 시장청산 및 왈라스 법칙, 사회계획자 파레토 최적 배분(파레토 가중치 α)과 효율성·분배의 분리</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-31.html" class="spoon-card" data-subject="micro" data-round="31">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#31 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 부분균형</div>
+  <div class="spoon-card__desc">기대효용이론과 위험회피 소비자의 최적 보험수요(공정보험의 완전보험 vs. 비공정보험), 배출권 거래제(Tradable Permits)의 한계감축비용 균등화와 비용효과성</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
 <a href="macro/set-01.html" class="spoon-card" data-subject="macro" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
@@ -1279,6 +1339,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
   <div class="spoon-card__title">생산자이론 · 시장의 종류</div>
   <div class="spoon-card__desc">레온티에프 고정투입비율 기술의 조건부 요소수요와 비용함수, 무한반복 베르트랑(Bertrand) 과점시장의 Grim Trigger 전략과 담합 유지 임계 할인인자($\delta$)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-27.html" class="spoon-card" data-subject="micro" data-round="27">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#27 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 일반균형</div>
+  <div class="spoon-card__desc">CES 효용함수의 마샬/힉스 수요와 지출함수 쌍대성 및 대체탄력성, 순수교환경제 에지워스 상자의 계약곡선·경쟁균형 및 제2후생정리 분권화(Lump-sum Transfer)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-28.html" class="spoon-card" data-subject="micro" data-round="28">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#28 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">부분균형 · 시장의 종류</div>
+  <div class="spoon-card__desc">대국(Large Country) 관세 부과와 교역조건 이득(Terms of Trade) 및 국내후생 최적관세, 제조업자-소매업자 수직적 구조의 이중마진화(Double Marginalization)와 2부가격제</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-29.html" class="spoon-card" data-subject="micro" data-round="29">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#29 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 생산자이론</div>
+  <div class="spoon-card__desc">초기부존 소비자의 총수요·순수요와 부존소득효과 및 왈라스 법칙, 다품목 생산기업(Multi-Output Firm)의 결합생산 이윤극대화·이윤함수와 호텔링 보조정리</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-30.html" class="spoon-card" data-subject="micro" data-round="30">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#30 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">일반균형 종합문제</div>
+  <div class="spoon-card__desc">생산이 존재하는 2x2 일반균형, 기업 이윤의 가계 배분(지분율 θ)과 시장청산 및 왈라스 법칙, 사회계획자 파레토 최적 배분(파레토 가중치 α)과 효율성·분배의 분리</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-31.html" class="spoon-card" data-subject="micro" data-round="31">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#31 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 부분균형</div>
+  <div class="spoon-card__desc">기대효용이론과 위험회피 소비자의 최적 보험수요(공정보험의 완전보험 vs. 비공정보험), 배출권 거래제(Tradable Permits)의 한계감축비용 균등화와 비용효과성</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 →</span>
   </div>

@@ -1,0 +1,217 @@
+---
+title: "문제 한 스푼 #28"
+subtitle: "부분균형 · 시장의 종류 (Large-Country Tariff & Vertical Structure Double Marginalization)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #28
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **부분균형 · 시장의 종류 (Large-Country Tariff & Vertical Structure Double Marginalization)**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[예상 25–30분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Partial Equilibrium
+::: {.topic}
+Large-Country Tariff · Import Demand · Foreign Export Supply · Terms of Trade · Welfare
+:::
+
+어떤 국가의 국내 inverse demand와 inverse supply가 각각
+
+$$
+p_D(Q_D)=30-Q_D,
+\qquad
+p_S(Q_S)=6+Q_S
+$$
+
+로 주어진다. 이 국가는 세계시장에서 충분히 커서 수입량의 변화가 외국 공급가격에 영향을 줄 수 있다.
+외국의 export supply는 외국 생산자가 받는 가격 $p_f$에 대해
+
+$$
+X^*(p_f)=2p_f-12,
+\qquad
+p_f\ge6
+$$
+
+로 주어진다.
+
+1. 국내 demand와 supply를 이용하여 import demand
+
+   $$
+   M(p)=Q_D(p)-Q_S(p)
+   $$
+
+   를 구하시오.
+   자유무역에서는 국내가격과 외국가격이 같다고 하자.
+
+   $$
+   p=p_f.
+   $$
+
+   import demand와 foreign export supply를 같게 두어 자유무역 균형가격 $p^F$,
+   국내수요량 $Q_D^F$, 국내공급량 $Q_S^F$, 수입량 $M^F$을 구하시오.
+   이어서 자유무역하의 consumer surplus와 producer surplus를 계산하시오.
+
+2. 이제 정부가 단위당
+
+   $$
+   t=3
+   $$
+
+   의 tariff를 부과한다고 하자.
+   국내 소비자가 지불하는 가격을 $p_d$, 외국 생산자가 받는 가격을 $p_f$라 하면
+
+   $$
+   p_d=p_f+t
+   $$
+
+   가 성립한다.
+   tariff하의 import demand와 foreign export supply를 이용하여
+
+   $$
+   p_d^T,\qquad p_f^T,\qquad M^T
+   $$
+
+   를 구하시오.
+   이어서 국내수요량과 국내공급량을 계산하고 tariff revenue를 구하시오.
+
+3. tariff하의 consumer surplus와 producer surplus를 계산하고,
+   tariff revenue를 포함한 domestic welfare를 자유무역과 비교하시오.
+   이어서 tariff로 인해 외국 수취가격이 하락하면서 발생하는
+   **terms-of-trade gain**과, 국내 생산·소비 왜곡에서 발생하는 distortion loss를 각각 계산하시오.
+   마지막으로
+
+   $$
+   \text{domestic welfare change}
+   =
+   \text{terms-of-trade gain}
+   -
+   \text{distortion loss}
+   $$
+
+   가 성립하는지 확인하고, 이 결과가 small-country tariff 분석과 어떻게 다른지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **import demand → foreign export supply → free trade → tariff wedge → terms of trade → domestic welfare**. large country에서는 tariff가 국내 거래량을 왜곡하는 동시에 외국 수취가격을 변화시킬 수 있다는 점이 핵심이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Market Structure
+::: {.topic}
+Vertical Structure · Wholesale Pricing · Backward Induction · Double Marginalization · Vertical Integration
+:::
+
+하나의 upstream manufacturer $M$과 하나의 downstream retailer $R$가 있는 수직적 시장을 생각하자.
+최종소비자의 inverse demand는
+
+$$
+p=20-Q
+$$
+
+이고, manufacturer의 marginal production cost는
+
+$$
+c=4
+$$
+
+로 일정하다. retailer에게는 wholesale payment 이외의 추가비용이 없다.
+
+게임의 순서는 다음과 같다.
+
+1. manufacturer가 단위당 wholesale price $w$를 설정한다.
+2. 이를 관찰한 retailer가 최종소비자 가격 $p$를 설정한다.
+
+아래에서는 backward induction을 사용하시오.
+
+1. 주어진 wholesale price $w$에서 retailer의 profit을
+
+   $$
+   \pi_R=(p-w)(20-p)
+   $$
+
+   로 쓰고, retailer의 optimal retail price
+
+   $$
+   p(w)
+   $$
+
+   와 quantity
+
+   $$
+   Q(w)
+   $$
+
+   를 구하시오.
+   이를 manufacturer의 profit
+
+   $$
+   \pi_M=(w-c)Q(w)
+   $$
+
+   에 대입하여 optimal wholesale price $w^*$를 구하시오.
+   이어서 decentralized vertical equilibrium의
+
+   $$
+   p^*,\qquad Q^*,\qquad \pi_M^*,\qquad \pi_R^*
+   $$
+
+   를 계산하시오.
+
+2. 이제 manufacturer와 retailer가 하나의 vertically integrated firm이라고 하자.
+   integrated firm의 profit maximization problem을 풀어
+
+   $$
+   p^{VI},\qquad Q^{VI},\qquad \pi^{VI}
+   $$
+
+   를 구하시오.
+   이를 1번의 decentralized outcome과 비교하여
+
+   $$
+   p^{VI}\ \text{와}\ p^*,
+   \qquad
+   Q^{VI}\ \text{와}\ Q^*
+   $$
+
+   의 대소관계를 확인하고, 왜 decentralized vertical structure에서
+   **double marginalization**이 발생하는지 설명하시오.
+
+3. manufacturer가 단순한 wholesale price 대신 two-part contract
+
+   $$
+   T(Q)=F+wQ
+   $$
+
+   를 사용할 수 있다고 하자.
+   manufacturer가
+
+   $$
+   w=c
+   $$
+
+   로 설정하면 retailer가 선택하는 retail price와 quantity가 vertically integrated outcome과 일치하는지 확인하시오.
+   이어서 retailer의 participation constraint를 만족시키면서 manufacturer가 설정할 수 있는 최대 fixed fee $F$를 구하시오.
+   이 계약이 double marginalization을 제거하면서 vertical chain의 총이윤을 어떻게 배분할 수 있는지 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **retailer best response → wholesale pricing → decentralized equilibrium → vertical integration → two-part contract**. 각 단계에서 markup이 중첩되면 최종가격이 지나치게 높아지고 거래량이 감소한다는 점이 double marginalization의 핵심이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)

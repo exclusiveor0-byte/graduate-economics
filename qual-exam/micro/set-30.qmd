@@ -1,0 +1,302 @@
+---
+title: "문제 한 스푼 #30"
+subtitle: "일반균형 종합문제 (General Equilibrium with Production, Ownership & Welfare)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #30
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **일반균형 종합문제 (General Equilibrium with Production, Ownership & Welfare)**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[단일 종합문제]{.chip}
+[예상 30–40분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem. General Equilibrium with Production, Firm Ownership, and Welfare
+::: {.topic}
+Firm Optimization · Profit Distribution · Household Demand · Market Clearing · Walras' Law · Social Planner · Welfare
+:::
+
+두 소비자 $i=1,2$, 두 재화 $x,y$, 그리고 하나의 경쟁기업이 있는 경제를 생각하자.
+$y$-재화를 numeraire로 두어
+
+$$
+p_y=1,
+\qquad
+p_x=p>0
+$$
+
+로 normalize한다.
+
+두 소비자의 효용함수는 동일하게
+
+$$
+u_i(x_i,y_i)=\ln x_i+\ln y_i,
+\qquad i=1,2,
+$$
+
+이고 초기부존은
+
+$$
+\omega_1=(0,6),
+\qquad
+\omega_2=(0,6)
+$$
+
+이다.
+
+기업은 $y$-재화 $z$를 투입하여 $x$-재화를 생산하며,
+
+$$
+x_s=2\sqrt z,
+\qquad
+z\ge0
+$$
+
+의 기술을 가진다. 소비자 1은 기업의 지분 $\theta$, 소비자 2는
+$1-\theta$를 소유하며
+
+$$
+0<\theta<1.
+$$
+
+기업의 이윤은 지분비율에 따라 소비자들에게 전액 배분된다.
+
+1. **Firm optimization.**<br>
+   기업의 profit maximization problem을
+
+   $$
+   \max_{z\ge0}\left\{2p\sqrt z-z\right\}
+   $$
+
+   로 쓰고 optimal input demand
+
+   $$
+   z^*(p),
+   $$
+
+   supply
+
+   $$
+   x_s(p),
+   $$
+
+   profit function
+
+   $$
+   \pi(p)
+   $$
+
+   을 구하시오.
+   이어서
+
+   $$
+   \frac{d\pi(p)}{dp}=x_s(p)
+   $$
+
+   가 성립하는지 확인하시오.
+
+2. **Household wealth and demand.**<br>
+   기업이윤이 지분비율에 따라 배분될 때 두 소비자의 wealth가
+
+   $$
+   m_1(p)=6+\theta\pi(p),
+   $$
+
+   $$
+   m_2(p)=6+(1-\theta)\pi(p)
+   $$
+
+   임을 쓰시오.
+   각 소비자의 utility maximization problem을 풀어 Marshallian demands
+
+   $$
+   x_i(p),\qquad y_i(p),
+   \qquad i=1,2
+   $$
+
+   를 구하시오.
+
+3. **Competitive equilibrium.**<br>
+   $x$-재화 시장청산조건
+
+   $$
+   x_1(p)+x_2(p)=x_s(p)
+   $$
+
+   을 이용하여 competitive equilibrium price
+
+   $$
+   p^*
+   $$
+
+   를 구하시오.
+   이어서
+
+   $$
+   z^*,\qquad x_s^*,\qquad \pi^*
+   $$
+
+   를 계산하시오.
+   이때 equilibrium price와 aggregate production이 $\theta$에 의존하는지 판단하시오.
+
+4. **Equilibrium allocation and Walras' law.**<br>
+   3번의 equilibrium에서 각 소비자의 allocation
+
+   $$
+   (x_1^*,y_1^*),
+   \qquad
+   (x_2^*,y_2^*)
+   $$
+
+   을 $\theta$의 함수로 나타내시오.
+   이어서
+
+   $$
+   x_1^*+x_2^*=x_s^*
+   $$
+
+   와
+
+   $$
+   y_1^*+y_2^*+z^*=12
+   $$
+
+   가 성립하는지 확인하시오.
+   aggregate excess demand를
+
+   $$
+   Z_x(p)=x_1(p)+x_2(p)-x_s(p),
+   $$
+
+   $$
+   Z_y(p)=y_1(p)+y_2(p)+z^*(p)-12
+   $$
+
+   로 정의하자.
+   소비자의 budget identities와 기업의 profit identity를 이용하여
+
+   $$
+   pZ_x(p)+Z_y(p)=0
+   $$
+
+   임을 보이고, 이것이 왜 하나의 시장청산조건만으로 나머지 시장청산을 확인할 수 있게 하는지 설명하시오.
+
+5. **Symmetric ownership benchmark.**<br>
+   이제
+
+   $$
+   \theta=\frac12
+   $$
+
+   로 두자.
+   competitive equilibrium allocation을 구하고, 두 소비자의
+
+   $$
+   MRS_i
+   =
+   \frac{\partial u_i/\partial x_i}
+        {\partial u_i/\partial y_i}
+   $$
+
+   를 계산하시오.
+   또한 기업기술의 marginal product
+
+   $$
+   MP_z=\frac{dx_s}{dz}
+   $$
+
+   를 equilibrium input에서 계산하고, 기업의 최적조건
+
+   $$
+   p^*MP_z=1
+   $$
+
+   이 성립하는지 확인하시오.
+
+6. **Social planner.**<br>
+   $\theta=1/2$인 대칭적 경우를 생각하자.
+   사회계획자가
+
+   $$
+   u_1(x_1,y_1)+u_2(x_2,y_2)
+   $$
+
+   를 극대화한다고 하자.
+   다음 resource constraints하에서 planner problem을 설정하시오.
+
+   $$
+   x_1+x_2\le2\sqrt z,
+   $$
+
+   $$
+   y_1+y_2+z\le12.
+   $$
+
+   symmetry를 이용하여 optimal
+
+   $$
+   z^{SP},
+   \qquad
+   (x_1^{SP},y_1^{SP}),
+   \qquad
+   (x_2^{SP},y_2^{SP})
+   $$
+
+   를 구하시오.
+   이를 5번의 competitive equilibrium allocation과 비교하고, 이 결과를 First Welfare Theorem과 연결하여 설명하시오.
+
+7. **Ownership, distribution, and Pareto weights.**<br>
+   다시 일반적인
+
+   $$
+   0<\theta<1
+   $$
+
+   로 돌아가자.
+   Pareto weight $\alpha\in(0,1)$에 대해 사회계획자가
+
+   $$
+   \alpha u_1(x_1,y_1)
+   +(1-\alpha)u_2(x_2,y_2)
+   $$
+
+   를 극대화한다고 하자.
+   planner problem을 풀어 효율적인 allocation을
+
+   $$
+   (x_1^{SP}(\alpha),y_1^{SP}(\alpha)),
+   \qquad
+   (x_2^{SP}(\alpha),y_2^{SP}(\alpha))
+   $$
+
+   의 형태로 나타내시오.
+   이어서 competitive equilibrium allocation과 일치하게 만드는
+
+   $$
+   \alpha=\alpha(\theta)
+   $$
+
+   를 구하시오.
+   마지막으로 이 경제에서 기업소유지분 $\theta$의 변화가 equilibrium price와 aggregate production은 바꾸지 않으면서 소비자 간 분배와 utility는 변화시키는 이유를 설명하고, **효율성과 분배의 구분**이라는 관점에서 해석하시오.
+
+::: {.spoon-hint}
+**권장 풀이 순서**: **firm optimization → profit income → household demand → market clearing → Walras' law → social planner → ownership and distribution**. 생산이 있는 일반균형에서 기업의 이윤이 가계의 wealth로 환류되고, 시장균형의 효율성과 소유권에 따른 분배가 서로 구분된다는 점이 핵심이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
