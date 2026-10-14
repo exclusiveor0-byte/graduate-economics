@@ -360,6 +360,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   </div>
 </a>
 
+<a href="micro/set-22.html" class="spoon-card" data-subject="micro" data-round="22">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#22 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 부분균형</div>
+  <div class="spoon-card__desc">Stone–Geary 효용함수와 최소필요소비 배분, 간접효용·지출함수 및 비동조적(Nonhomothetic) 수요, 소규모 개방경제 수입할당제(Quota)와 관세 동등성 및 렌트 귀속</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-23.html" class="spoon-card" data-subject="micro" data-round="23">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#23 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 생산자이론</div>
+  <div class="spoon-card__desc">완전보완재(Leontief 선호) 마샬/힉스 수요와 지출함수 쌍대성, 완전대체요소 기술의 구석해(Corner Solution) 비용함수 오목성 및 Shephard 보조정리</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-24.html" class="spoon-card" data-subject="micro" data-round="24">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#24 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 · 일반균형</div>
+  <div class="spoon-card__desc">준선형 효용 독점의 이부가격제(Two-Part Tariff)와 잉여 완전추출, 선형효용 순수교환경제의 상대가격별 구석수요·시장청산 및 파레토 효율적 완전특화</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-25.html" class="spoon-card" data-subject="micro" data-round="25">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#25 회차 (종합)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">부분균형 종합문제</div>
+  <div class="spoon-card__desc">종가세(Ad Valorem Tax) 부과와 가격쐐기 균형, 조세 귀착(Incidence)과 상대적 탄력성, 종량세 동등성, 라퍼 곡선 형태의 세수 극대화 세율 비교정태 (7문항 종합)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-26.html" class="spoon-card" data-subject="micro" data-round="26">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#26 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 시장의 종류</div>
+  <div class="spoon-card__desc">레온티에프 고정투입비율 기술의 조건부 요소수요와 비용함수, 무한반복 베르트랑(Bertrand) 과점시장의 Grim Trigger 전략과 담합 유지 임계 할인인자($\delta$)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
 <a href="macro/set-01.html" class="spoon-card" data-subject="macro" data-round="1">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#1 회차</span>
@@ -1143,6 +1203,66 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
   <div class="spoon-card__desc">지배적 기업(Dominant Firm)과 경쟁적 주변기업(Competitive Fringe)의 잔여수요(Residual Demand) 균형, 준선형 효용함수(Quasilinear) 순수교환경제의 경쟁균형과 파레토 효율성</div>
   <div class="spoon-card__footer">
     <span class="status">문제 풀기 · 해설 수록 →</span>
+  </div>
+</a>
+
+<a href="micro/set-22.html" class="spoon-card" data-subject="micro" data-round="22">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#22 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 부분균형</div>
+  <div class="spoon-card__desc">Stone–Geary 효용함수와 최소필요소비 배분, 간접효용·지출함수 및 비동조적(Nonhomothetic) 수요, 소규모 개방경제 수입할당제(Quota)와 관세 동등성 및 렌트 귀속</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-23.html" class="spoon-card" data-subject="micro" data-round="23">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#23 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">소비자이론 · 생산자이론</div>
+  <div class="spoon-card__desc">완전보완재(Leontief 선호) 마샬/힉스 수요와 지출함수 쌍대성, 완전대체요소 기술의 구석해(Corner Solution) 비용함수 오목성 및 Shephard 보조정리</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-24.html" class="spoon-card" data-subject="micro" data-round="24">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#24 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">시장의 종류 · 일반균형</div>
+  <div class="spoon-card__desc">준선형 효용 독점의 이부가격제(Two-Part Tariff)와 잉여 완전추출, 선형효용 순수교환경제의 상대가격별 구석수요·시장청산 및 파레토 효율적 완전특화</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-25.html" class="spoon-card" data-subject="micro" data-round="25">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#25 회차 (종합)</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">부분균형 종합문제</div>
+  <div class="spoon-card__desc">종가세(Ad Valorem Tax) 부과와 가격쐐기 균형, 조세 귀착(Incidence)과 상대적 탄력성, 종량세 동등성, 라퍼 곡선 형태의 세수 극대화 세율 비교정태 (7문항 종합)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
+  </div>
+</a>
+
+<a href="micro/set-26.html" class="spoon-card" data-subject="micro" data-round="26">
+  <div class="spoon-card__header">
+    <span class="spoon-card__round">#26 회차</span>
+    <span class="chip chip--micro">미시경제학</span>
+  </div>
+  <div class="spoon-card__title">생산자이론 · 시장의 종류</div>
+  <div class="spoon-card__desc">레온티에프 고정투입비율 기술의 조건부 요소수요와 비용함수, 무한반복 베르트랑(Bertrand) 과점시장의 Grim Trigger 전략과 담합 유지 임계 할인인자($\delta$)</div>
+  <div class="spoon-card__footer">
+    <span class="status">문제 풀기 →</span>
   </div>
 </a>
 </div>

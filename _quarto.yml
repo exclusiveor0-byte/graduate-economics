@@ -291,6 +291,11 @@ book:
     - qual-exam/micro/set-19.qmd
     - qual-exam/micro/set-20.qmd
     - qual-exam/micro/set-21.qmd
+    - qual-exam/micro/set-22.qmd
+    - qual-exam/micro/set-23.qmd
+    - qual-exam/micro/set-24.qmd
+    - qual-exam/micro/set-25.qmd
+    - qual-exam/micro/set-26.qmd
   - part: "문제 한 스푼 · 거시경제학"
     chapters:
     - qual-exam/macro/set-01.qmd

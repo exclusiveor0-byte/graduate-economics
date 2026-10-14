@@ -1,0 +1,123 @@
+---
+title: "문제 한 스푼 #23"
+subtitle: "소비자이론 · 생산자이론 (Perfect Complements · Perfect Substitutes Technology)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #23
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **소비자이론 · 생산자이론 (Perfect Complements · Perfect Substitutes Technology)**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[총 2문제]{.chip}
+[예상 25–30분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험 감각 유지용]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 1. Consumer Theory
+::: {.topic}
+Perfect Complements · Marshallian Demand · Expenditure Function · Duality
+:::
+
+소비자의 효용함수는
+
+$$
+u(x,y)=\min\{x,2y\}
+$$
+
+로 주어진다. $y$-재화의 가격을 1로 normalize하고, $x$-재화의 가격은 $p>0$, 소득은 $m>0$이다.
+
+1. utility maximization problem을 설정하고, perfect complements의 최적 소비비율을 이용하여 Marshallian demands
+
+   $$
+   x(p,m),\qquad y(p,m)
+   $$
+
+   을 구하시오.
+   이어서 indirect utility function $V(p,m)$을 구하시오.
+
+2. 목표효용 $u>0$가 주어졌을 때 expenditure minimization problem을 설정하고, Hicksian demands
+
+   $$
+   h_x(p,u),\qquad h_y(p,u)
+   $$
+
+   와 expenditure function $e(p,u)$을 구하시오.
+
+3. 다음 duality identities가 실제로 성립하는지 직접 확인하시오.
+
+   $$
+   e(p,V(p,m))=m,
+   $$
+
+   $$
+   h_x(p,V(p,m))=x(p,m),\qquad h_y(p,V(p,m))=y(p,m).
+   $$
+
+   마지막으로 이 선호에서는 가격비가 변하더라도 최적 소비비율이 변하지 않는 이유를 perfect complements의 성질과 연결하여 설명하시오.
+
+::: {.spoon-hint}
+**형식**: **fixed consumption ratio → Marshallian demand → expenditure minimization → duality**. 미분 FOC보다 kink에서의 고정비율 조건을 먼저 이용하는 것이 핵심이다.
+:::
+:::
+
+::: {.spoon-problem}
+### Problem 2. Producer Theory
+::: {.topic}
+Perfect Substitutes · Corner Solution · Cost Function · Shephard's Lemma
+:::
+
+한 기업의 생산함수가
+
+$$
+q=L+2K,\qquad L,K\ge0
+$$
+
+로 주어진다. 노동과 자본의 요소가격은 각각 $w>0, r>0$이다.
+
+1. 목표산출량 $q>0$이 주어졌을 때 cost minimization problem
+
+   $$
+   \min_{L,K\ge0}\{wL+rK\}\qquad\text{s.t.}\qquad L+2K\ge q
+   $$
+
+   을 푸시오.
+   다음 세 경우를 구분하여 conditional factor demand를 characterize하시오.
+
+   $$
+   w<\frac r2,\qquad w>\frac r2,\qquad w=\frac r2.
+   $$
+
+   특히 마지막 경우에는 cost-minimizing input bundle이 하나로 정해지는지 여부를 명시하시오.
+
+2. 1번의 결과를 이용하여 cost function $C(w,r,q)$을 구하고, 이를
+
+   $$
+   C(w,r,q)=q\min\left\{w,\frac r2\right\}
+   $$
+
+   의 형태로 나타내시오.
+   이 cost function이 $(w,r)$에 대해 degree 1 homogeneous이고 concave인지 확인하시오.
+
+3. $w\neq r/2$인 경우 cost function을 직접 미분하여 Shephard's lemma가 성립하는지 확인하시오.
+   이어서 $w=r/2$에서는 cost function이 왜 differentiable하지 않은지 설명하고, 이것이 conditional factor demand가 correspondence가 되는 것과 어떤 관계가 있는지 설명하시오.
+   마지막으로 한 요소의 상대가격이 조금만 변해도 최적 투입구성이 corner에서 다른 corner로 바뀌는 이유를 perfect substitutes technology의 관점에서 해석하시오.
+
+::: {.spoon-hint}
+**형식**: **unit cost comparison → corner solution → cost function → concavity → Shephard at differentiable points**. Cobb–Douglas와 달리 interior FOC가 아니라 각 요소의 단위산출당 비용을 비교하는 것이 핵심이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
