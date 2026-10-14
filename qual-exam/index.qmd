@@ -363,12 +363,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-22.html" class="spoon-card" data-subject="micro" data-round="22">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#22 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">소비자이론 · 부분균형</div>
   <div class="spoon-card__desc">Stone–Geary 효용함수와 최소필요소비 배분, 간접효용·지출함수 및 비동조적(Nonhomothetic) 수요, 소규모 개방경제 수입할당제(Quota)와 관세 동등성 및 렌트 귀속</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -513,24 +516,30 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-07.html" class="spoon-card" data-subject="macro" data-round="7">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#7 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">내생적 성장이론 I · AK 모형</div>
   <div class="spoon-card__desc">자본의 한계생산 불체감과 지속성장 조건, 균형성장경로 성장률(g = sA - δ) 및 수치계산, 솔로우 모형과의 수준효과(Level) vs. 성장효과(Growth) 비교</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
 <a href="macro/set-08.html" class="spoon-card" data-subject="macro" data-round="8">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#8 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">내생적 성장이론 II · 지식 외부효과</div>
   <div class="spoon-card__desc">러닝바이두잉(Learning-by-doing)과 지식 파급효과(Knowledge Spillovers), 개별기업 수확체감과 거시 총체적 수확불체감, 사적 수익률과 사회적 수익률 간 격차(Wedge)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1209,12 +1218,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-22.html" class="spoon-card" data-subject="micro" data-round="22">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#22 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">소비자이론 · 부분균형</div>
   <div class="spoon-card__desc">Stone–Geary 효용함수와 최소필요소비 배분, 간접효용·지출함수 및 비동조적(Nonhomothetic) 수요, 소규모 개방경제 수입할당제(Quota)와 관세 동등성 및 렌트 귀속</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1374,24 +1386,30 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-07.html" class="spoon-card" data-subject="macro" data-round="7">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#7 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">내생적 성장이론 I · AK 모형</div>
   <div class="spoon-card__desc">자본의 한계생산 불체감과 지속성장 조건, 균형성장경로 성장률(g = sA - δ) 및 수치계산, 솔로우 모형과의 수준효과(Level) vs. 성장효과(Growth) 비교</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
 <a href="macro/set-08.html" class="spoon-card" data-subject="macro" data-round="8">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#8 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">내생적 성장이론 II · 지식 외부효과</div>
   <div class="spoon-card__desc">러닝바이두잉(Learning-by-doing)과 지식 파급효과(Knowledge Spillovers), 개별기업 수확체감과 거시 총체적 수확불체감, 사적 수익률과 사회적 수익률 간 격차(Wedge)</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
