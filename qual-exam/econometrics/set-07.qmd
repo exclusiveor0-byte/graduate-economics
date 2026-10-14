@@ -18,7 +18,7 @@ GRADUATE ECONOMETRICS · DAILY PRACTICE
 [계량경제학]{.chip .chip--metrics}
 [총 2문제]{.chip}
 [예상 60–75분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -150,6 +150,162 @@ $y_0$는 유한한 분산을 가진 확률변수라고 하자.
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Unit Root, Spurious Regression & DF/ADF"}
+### Setting
+주어진 시계열 과정은
+$$
+y_t=\rho y_{t-1}+u_t,\qquad t=1,\ldots,T
+$$
+이며, $E[u_t]=0$, $\operatorname{Var}(u_t)=\sigma_u^2 > 0$, $\operatorname{Cov}(u_t,u_s)=0\;(t\ne s)$, $\operatorname{Var}(y_0)<\infty$이다.
+
+---
+
+#### 1. Random walk 표현, 평균과 분산, 비정상성
+$\rho=1$이면 $y_t=y_{t-1}+u_t$이다. 이를 $t=1$부터 순차적으로 반복 대입하면:
+$$
+\begin{aligned}
+y_t &= y_{t-1} + u_t \\
+    &= y_{t-2} + u_{t-1} + u_t \\
+    &\;\vdots \\
+    &= \boxed{y_0 + \sum_{s=1}^t u_s}.
+\end{aligned}
+$$
+$E[u_s]=0$이므로 기댓값은 시점 $t$에 무관하게 초기 기댓값으로 일정하다:
+$$
+\boxed{E[y_t] = E[y_0] =: \mu_0}.
+$$
+분산은 다음과 같이 전개된다 ($\sigma_0^2 = \operatorname{Var}(y_0)$):
+$$
+\operatorname{Var}(y_t) = \operatorname{Var}(y_0) + \operatorname{Var}\left(\sum_{s=1}^t u_s\right) + 2\operatorname{Cov}\left(y_0, \sum_{s=1}^t u_s\right) = \boxed{\sigma_0^2 + t\sigma_u^2 + 2\sum_{s=1}^t \operatorname{Cov}(y_0, u_s)}.
+$$
+표준적인 초기조건 $\operatorname{Cov}(y_0, u_s) = 0$ ($s \ge 1$)을 적용하면
+$$
+\boxed{\operatorname{Var}(y_t) = \sigma_0^2 + t\sigma_u^2}.
+$$
+분산이 시간 $t$에 정비례하여 무한히 발산하므로 공분산 정상성(covariance stationarity)을 만족하지 못한다.
+
+초기값 직교 조건이 없더라도 코시-슈바르츠 부등식 $|\operatorname{Cov}(y_0, \sum u_s)| \le \sigma_0 \sqrt{t}\sigma_u$에 의해
+$$
+\operatorname{Var}(y_t) \ge (\sqrt{t}\sigma_u - \sigma_0)^2 \xrightarrow{t\to\infty} \infty
+$$
+가 성립하므로, 유한한 초기 분산과 양의 혁신 분산 하에서 $y_t$는 반드시 비정상 과정(nonstationary process)이다.
+
+---
+
+#### 2. $I(0)$, $I(1)$, $I(d)$와 stochastic trend
+차분 연산자를 $\Delta = 1 - L$이라 할 때,
+$$
+\Delta y_t = y_t - y_{t-1} = u_t.
+$$
+백색잡음 $\{u_t\}$는 대표적인 $I(0)$ 과정이므로, 1차 차분한 시계열 $\Delta y_t$는 $I(0)$이다. 원계열 $y_t$는 비정상 시계열이므로
+$$
+\boxed{y_t \sim I(1), \qquad \Delta y_t \sim I(0)}.
+$$
+
+- **$I(0)$ (정합차수 0):** 유한한 2차 적률을 가지며 자기공분산이 빠르게 소멸하는 정상(stationary) 시계열이다.
+- **$I(d)$ (정합차수 $d$):** $d$번 차분한 시계열 $\Delta^d y_t$는 $I(0)$가 되지만, $d-1$번 이하 차분으로는 여전히 비정상성이 제거되지 않는 시계열이다.
+- **Stochastic trend (확률적 추세):** $\sum_{s=1}^t u_s$와 같이 매기의 무작위 충격이 누적되어 형성된 추세이다. 개별 충격 $u_s$의 효과가 미래 수준 $y_t$에 영구적(permanent)으로 남는다.
+- **Deterministic trend (확정적 추세):** $y_t = a + bt + \varepsilon_t$의 $bt$처럼 시간 $t$의 알려진 확정적 함수로 표현되는 추세이다. 충격 $\varepsilon_t$는 일시적이며, 확정적 추세를 차감(detrending)하면 정상 시계열을 얻는다. 반면 확률적 추세는 단순 추세 차감으로 제거되지 않으며 반드시 차분(differencing)을 통해 제거해야 한다.
+
+---
+
+#### 3. 독립 random walk 간 spurious regression
+서로 독립인 두 $I(1)$ 과정 $y_t = y_{t-1} + u_t, x_t = x_{t-1} + v_t$에 대해 수준회귀식
+$$
+y_t = \alpha + \beta x_t + e_t
+$$
+를 OLS로 추정할 때의 기울기 계수는
+$$
+\hat\beta = \frac{\sum_{t=1}^T (x_t - \bar x)(y_t - \bar y)}{\sum_{t=1}^T (x_t - \bar x)^2}
+$$
+이다. 정상 시계열에서는 분자가 대수의 법칙에 의해 0으로 확률수렴하지만, 단위근 과정에서는 $x_t, y_t = O_p(\sqrt{T})$이므로 분자와 분모가 모두 $O_p(T^2)$의 확률적 크기를 갖는다.
+
+함수적 중심극한정리(Functional CLT)에 의해 $T^{-1/2}x_{\lfloor Tr\rfloor} \Rightarrow \sigma_v B_x(r)$, $T^{-1/2}y_{\lfloor Tr\rfloor} \Rightarrow \sigma_u B_y(r)$ ($B_x, B_y$는 독립 표준 브라운 운동)이 성립하므로,
+$$
+\boxed{\hat\beta \xrightarrow{d} \frac{\sigma_u}{\sigma_v} \frac{\int_0^1 B_x^c(r)B_y^c(r)\,dr}{\int_0^1 [B_x^c(r)]^2\,dr}}.
+$$
+$\hat\beta$는 참값인 0으로 수렴하지 않고 확률분포로 수렴한다. 나아가 잔차제곱합은 $O_p(T^2)$, 일반적인 잔차분산 추정치 $\hat\sigma_e^2 = O_p(T)$이므로 표준오차 $\operatorname{SE}(\hat\beta) = O_p(T^{-1/2})$가 된다. 그 결과 통상적인 $t$-통계량은 $O_p(\sqrt{T})$로 발산하여 표본이 커질수록 0이라는 귀무가설을 기각하게 되고, 결정계수 $R^2$도 0이 아닌 확률분포로 수렴하여 두 변수가 실제로는 아무 상관이 없음에도 매우 유의한 관계가 있는 것처럼 왜곡되는 **가짜회귀(spurious regression)**가 발생한다.
+
+---
+
+#### 4. Dickey–Fuller의 귀무가설과 비표준 $t$-통계량
+AR(1) 식의 양변에서 $y_{t-1}$을 차감하면
+$$
+\Delta y_t = (\rho - 1)y_{t-1} + u_t = \gamma y_{t-1} + u_t, \qquad \gamma = \rho - 1.
+$$
+검정 가설은
+$$
+\boxed{H_0: \gamma = 0 \;(\rho = 1, \text{단위근 존재}), \qquad H_1: \gamma < 0 \;(\rho < 1, \text{정상 시계열})}.
+$$
+
+**통상적 $t$-분포를 따르지 않는 이유:**
+귀무가설 $H_0$ 하에서 설명변수 $y_{t-1}$은 정상변수가 아닌 $I(1)$ 단위근 과정이다.
+$$
+\hat\gamma = \frac{\sum_{t=1}^T y_{t-1}u_t}{\sum_{t=1}^T y_{t-1}^2}.
+$$
+분모는 $\sum y_{t-1}^2 = O_p(T^2)$이고, 분자는 $\sum y_{t-1}u_t = O_p(T)$이므로 $\hat\gamma = O_p(T^{-1})$로 초일치(superconsistent) 수렴한다.
+FCLT와 Itô 공식($\int_0^1 B\,dB = \frac{1}{2}[B(1)^2 - 1]$)을 적용하면
+$$
+T\hat\gamma \Rightarrow \frac{\int_0^1 B(r)\,dB(r)}{\int_0^1 B(r)^2\,dr}, \qquad t_\gamma \Rightarrow \frac{\int_0^1 B(r)\,dB(r)}{\left\{\int_0^1 B(r)^2\,dr\right\}^{1/2}}.
+$$
+이 극한분포는 표준정규분포나 Student-$t$ 분포가 아니라 음의 비대칭을 띠는 **디키-풀러(Dickey–Fuller) 분포**이다.
+
+---
+
+#### 5. 세 가지 Dickey–Fuller 회귀와 deterministic specification
+1. **(A) $\Delta y_t = \gamma y_{t-1} + u_t$:** 상수항과 추세항이 없는 모형. $H_0$에서 표류가 없는(zero-drift) 순수 random walk가 기준이다.
+2. **(B) $\Delta y_t = \alpha + \gamma y_{t-1} + u_t$:** 상수항 포함 모형. $H_0$ 하에서 non-zero drift를 허용하며, 추정 과정에서 평균이 제거(demeaned)된 브라운 운동 범함수를 따르므로 (A)보다 임계값이 더 음의 방향으로 이동한다.
+3. **(C) $\Delta y_t = \alpha + \delta t + \gamma y_{t-1} + u_t$:** 상수항과 선형시간추세 포함 모형. 선형추세가 제거(detrended)된 브라운 운동 범함수를 따르므로 또 다른 비표준 임계값이 도출된다.
+
+결정론적 성분을 잘못 지정하면 검정력이 급격히 하락하거나 크기 왜곡(size distortion)이 발생하므로, 시계열의 시각적 형태와 이론적 배경에 부합하는 결정론적 항을 신중히 선택해야 한다.
+
+---
+
+#### 6. ADF 회귀에서 lagged differences를 추가하는 이유
+오차항 $u_t$가 시계열 상관(serial correlation)을 가지면 단순 DF 통계량의 점근분포가 오차의 장기 분산에 의존하게 되어 분포가 교란된다.
+ADF 모형:
+$$
+\Delta y_t = \alpha + \delta t + \gamma y_{t-1} + \sum_{j=1}^p \phi_j \Delta y_{t-j} + \varepsilon_t.
+$$
+종속변수의 시차 차분항 $\Delta y_{t-1}, \ldots, \Delta y_{t-p}$를 통제 변수로 포함시킴으로써 잔차 $\varepsilon_t$를 계열상관이 없는 백색잡음으로 정화(whiten)한다.
+검정 대상은 여전히 현재 수준의 시차 계수 $\boxed{H_0: \gamma = 0 \text{ vs. } H_1: \gamma < 0}$이며, 시차 차분항들은 오직 단기 동학(nuisance serial correlation)을 흡수하기 위한 보조 도구이다.
+
+---
+
+#### 7. $t_\gamma = -2.3$과 $-1.96$ 비교의 오류
+연구자의 판단은 **귀무가설 하 검정통계량의 점근분포를 완전히 오지정**한 명백한 오류이다.
+$H_0: \gamma = 0$ 하에서 ADF $t$-통계량은 표준정규분포를 따르지 않고 DF 비표준 분포를 따른다.
+예를 들어 절편이 포함된 모형(B)의 대표본 5% 기각 임계값은 약 **$-2.86$**이며, 추세항이 포함된 모형(C)에서는 약 **$-3.41$**이다.
+따라서 계산된 $t_\gamma = -2.3$은 유의수준 5% 임계값보다 크므로(기각역에 속하지 않음), 단위근 귀무가설을 기각할 수 없다. 표준정규 임계값 $-1.96$을 적용하면 심각한 1종 오류(실제로는 단위근인데 정상으로 오판)를 범하게 된다.
+
+---
+
+#### 8. DF/ADF와 KPSS의 귀무가설 비교
+- **DF/ADF 검정:**
+  $$
+  H_0^{\mathrm{ADF}}: y_t \sim I(1) \;(\text{단위근 존재}), \qquad H_1^{\mathrm{ADF}}: y_t \sim I(0) \;(\text{정상 시계열}).
+  $$
+- **KPSS 검정:**
+  $$
+  H_0^{\mathrm{KPSS}}: y_t \sim I(0) \;(\text{수준 또는 추세 정상}), \qquad H_1^{\mathrm{KPSS}}: y_t \sim I(1) \;(\text{비정상 시계열}).
+  $$
+
+두 검정은 귀무가설과 대립가설의 방향이 정반대이므로 교차 진단에 매우 유용하다:
+1. **ADF 기각 & KPSS 채택:** 시계열이 정상(stationary)이라는 강력하고 일관된 증거.
+2. **ADF 채택 & KPSS 기각:** 시계열이 단위근 $I(1)$이라는 강력한 증거.
+3. **ADF 채택 & KPSS 채택:** 표본 정보 부족 등으로 정상성 여부를 명확히 판정하기 어려움.
+4. **ADF 기각 & KPSS 기각:** 구조변화(structural break)의 존재, 시차 오지정, 또는 장기기억(fractional integration) 가능성을 시사하므로 심층 진단이 필요함.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- Random Walk: $\operatorname{Var}(y_t) = \sigma_0^2 + t\sigma_u^2 \to \infty$ (공분산 비정상, $I(1)$).
+- Spurious Regression: 독립 $I(1)$ 간 수준회귀 시 $\hat\beta$가 확률분포로 수렴하며 $t$-통계량 발산.
+- DF/ADF 검정: $H_0: \gamma=0$, 비표준 DF 점근분포 $\implies$ 정규분포 임계값 사용 불가.
+- 결정론적 성분: 상수/추세 포함 여부에 따라 DF 임계값 상이; 시차 차분항은 단기 자기상관 흡수 목적.
+- KPSS: $H_0$가 정상성이므로 ADF와 병행하여 상호보완적 검정 수행.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. Cointegration, Engle–Granger & Error Correction
 ::: {.topic}
@@ -260,3 +416,127 @@ $$
 **형식**: **$I(1)$ variables → stationary linear combination → cointegration → Engle–Granger → ECM → rank intuition**. 핵심은 **비정상성 자체와 공적분의 존재 여부를 구분**하는 것이다.
 :::
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Cointegration, Engle–Granger & Error Correction"}
+### Setting
+$Y_t = (y_t, x_t)'$의 각 성분이 $I(1)$이며, 수준 관계식은
+$$
+\boxed{y_t = \alpha_0 + \beta_0 x_t + e_t}.
+$$
+
+---
+
+#### 1. Cointegration의 정의와 cointegrating vector
+**공적분(Cointegration)의 정의:**
+각 변수가 $I(1)$인 벡터 시계열 $Y_t$에 대해, 영벡터가 아닌 선형결합 계수벡터 $b \in \mathbb{R}^2$가 존재하여
+$$
+b'Y_t \sim I(0)
+$$
+를 만족할 때 두 변수는 공적분되어 있다고 정의한다.
+수준 관계식을 정리하면
+$$
+y_t - \beta_0 x_t = \alpha_0 + e_t \sim I(0).
+$$
+상수항 $\alpha_0$는 적분 차수를 변화시키지 않으므로
+$$
+\begin{pmatrix} 1 & -\beta_0 \end{pmatrix} \begin{pmatrix} y_t \\ x_t \end{pmatrix} \sim I(0) \quad\Longrightarrow\quad \boxed{b = (1, -\beta_0)' \text{ 는 cointegrating vector}}.
+$$
+임의의 0이 아닌 상수 $c \ne 0$에 대해 $c b = (c, -c\beta_0)'$ 역시 공적분 벡터가 되므로, $y_t$의 계수를 1로 설정한 것은 정규화(normalization)이다.
+
+---
+
+#### 2. Stationary equilibrium error의 경제적 의미
+오차항 $e_t = y_t - \alpha_0 - \beta_0 x_t$는 **장기 균형오차(long-run equilibrium error)**이다.
+- $e_t > 0$: $y_t$가 $x_t$에 의해 규정되는 장기 균형 수준보다 위에 위치함.
+- $e_t < 0$: $y_t$가 장기 균형 수준보다 아래에 위치함.
+
+$e_t \sim I(0)$라는 것은 비록 $y_t$와 $x_t$가 각각 무작위 확률적 추세를 따라 무한히 방황하더라도, 두 변수를 묶어주는 장기 경제적 균형 관계가 존재하여 이탈(disequilibrium)이 영구히 누적되지 않고 평균적으로 안정적인 범위 내에 머문다는 뜻이다.
+두 변수가 공적분되어 있지 않다면 임의의 선형결합도 $I(1)$로 남아 잔차의 분산이 시간에 따라 발산하므로 장기적 균형 관계가 성립하지 않는다.
+
+---
+
+#### 3. Cointegrating regression의 superconsistency와 추론상의 주의
+공적분 관계 $y_t = \alpha_0 + \beta_0 x_t + e_t$ ($e_t \sim I(0)$)에 대해 OLS를 추정하면:
+$$
+\hat\beta - \beta_0 = \frac{\sum_{t=1}^T (x_t - \bar x)e_t}{\sum_{t=1}^T (x_t - \bar x)^2}.
+$$
+$x_t \sim I(1)$이므로 분모는 $O_p(T^2)$의 크기로 급격히 커지며, 분자는 $e_t \sim I(0)$와의 교차합으로서 $O_p(T)$의 크기를 갖는다.
+따라서
+$$
+\boxed{\hat\beta - \beta_0 = O_p(T^{-1})}.
+$$
+통상적인 정상 시계열 회귀에서의 $\sqrt{T}$-수렴($O_p(T^{-1/2})$)보다 훨씬 빠른 $T$-rate로 참값에 수렴하는 현상을 **초일치성(superconsistency)**이라 한다. 설명변수 $x_t$와 오차항 $e_t$ 사이에 동시 내생성이 있더라도 $\hat\beta$는 여전히 일치성을 유지한다.
+
+**추론상의 주의:**
+수렴 속도가 빠르다고 해서 표준적인 OLS $t$-검정이 정당화되는 것은 아니다. $T(\hat\beta - \beta_0)$의 점근분포는 브라운 운동 범함수와 장기 공분산(long-run covariance), $x_t$ 혁신과 $e_t$ 간의 내생적 상관에 따른 2차 편향(second-order bias)에 의존하여 표준정규분포를 따르지 않는다. 따라서 일반적인 OLS 표준오차와 $t$-임계값을 사용하면 유의성 검정에 왜곡이 발생한다.
+
+---
+
+#### 4. Engle–Granger two-step procedure
+- **Step 1 (수준 회귀):** OLS로 장기 수준 관계 $y_t = \alpha + \beta x_t + e_t$를 추정하여 OLS 잔차 $\hat e_t = y_t - \hat\alpha - \hat\beta x_t$를 구한다.
+- **Step 2 (잔차 단위근 검정):** 잔차에 대해 상수항 없이 ADF 검정 회귀식을 추정한다:
+  $$
+  \Delta \hat e_t = \gamma \hat e_{t-1} + \sum_{j=1}^p \varphi_j \Delta \hat e_{t-j} + \nu_t.
+  $$
+- **검정 가설:**
+  $$
+  \boxed{H_0: \gamma = 0 \;(\text{공적분 없음, 잔차가 } I(1)), \qquad H_1: \gamma < 0 \;(\text{공적분 존재, 잔차가 } I(0))}.
+  $$
+
+---
+
+#### 5. Engle–Granger 검정에서 일반 DF 임계값을 사용할 수 없는 이유
+표준 DF 검정은 관측된 실제 시계열의 단위근을 검정한다.
+반면 Engle–Granger 검정의 입력값인 $\hat e_t$는 참 오차가 아니라, **표본에서 잔차제곱합을 최소화하도록 추정된 계수 $(\hat\alpha, \hat\beta)$를 사용해 만들어진 잔차**이다.
+OLS 추정 과정 자체가 두 비정상 시계열 간의 차이를 표본 내에서 최대한 줄여 잔차가 가능한 한 정상 시계열처럼 보이도록 강제하기 때문에, $\hat e_t$의 단위근 검정통계량은 일반 DF 통계량보다 훨씬 더 음(-)의 방향으로 편향된 비표준 분포를 갖는다.
+따라서 일반 DF 임계값 대신 공적분 회귀에 포함된 $I(1)$ 변수의 수와 결정론적 항의 형태에 맞춰 별도로 도출된 **Engle–Granger(또는 Phillips–Ouliaris) 공적분 검정 임계값**을 사용해야 한다 (일반 DF 임계값을 쓰면 공적분이 없는데도 공적분이 있다고 오판하는 1종 오류가 급증함).
+
+---
+
+#### 6. Error-correction mechanism과 안정성 조건
+오차수정모형(ECM):
+$$
+\Delta y_t = \lambda(y_{t-1} - \alpha_0 - \beta_0 x_{t-1}) + \delta \Delta x_t + u_t.
+$$
+1. **$e_{t-1} = y_{t-1} - \alpha_0 - \beta_0 x_{t-1}$:** 직전 기에 발생한 장기 균형으로부터의 이탈량(disequilibrium error).
+2. **$\lambda$ (조정계수, Adjustment Coefficient):** 직전 기의 불균형이 당기 $y_t$의 변화율($\Delta y_t$)을 통해 얼마나 빠르게 교정되는지를 나타내는 피드백 속도.
+3. **안정성 조건:** 장기 균형으로 복귀하기 위해 일반적으로 $\boxed{\lambda < 0}$을 기대한다.
+   - $e_{t-1} > 0$ ($y$가 균형보다 높음)이면 $\lambda e_{t-1} < 0$이 되어 당기 $\Delta y_t$가 감소.
+   - $e_{t-1} < 0$ ($y$가 균형보다 낮음)이면 $\lambda e_{t-1} > 0$이 되어 당기 $\Delta y_t$가 증가.
+   - 구체적으로 오차의 동학 $e_t = (1+\lambda)e_{t-1} + \dots$에서 안정적 수렴을 위한 필요충분조건은 $|1+\lambda| < 1 \iff \boxed{-2 < \lambda < 0}$이며, 오버슈팅 없이 단조롭게 감쇠하려면 $\boxed{-1 < \lambda < 0}$이다.
+
+---
+
+#### 7. 독립 $I(1)$과 공적분 $I(1)$의 levels regression 비교
+- **Case A (독립 $I(1)$ 과정):** 두 변수 사이에 공통 확률추세가 없으므로 선형결합 $y_t - \beta x_t$는 여전히 $I(1)$이다. 수준회귀는 가짜회귀(spurious regression)가 되어 추정계수가 참값 0에 수렴하지 않고 통계량이 왜곡된다.
+- **Case B (공적분 $I(1)$ 과정):** 두 변수가 동일한 확률추세를 공유하므로 $y_t - \beta_0 x_t \sim I(0)$이다. 수준회귀는 진정한 장기 균형관계를 추정하며, $\hat\beta$는 $\beta_0$로 superconsistent 수렴한다.
+
+**명제 평가:**
+> *“두 변수가 모두 $I(1)$이면 levels regression은 항상 spurious하다.”*
+
+**판정: 거짓 (False).** 두 변수가 각각 $I(1)$이더라도 공적분 관계가 존재하면 수준회귀는 가짜회귀가 아니라 장기 균형관계를 포착하는 유효한 회귀분석이 된다. 수준회귀의 타당성은 공적분 존재 여부에 전적으로 달려 있다.
+
+---
+
+#### 8. Cointegration rank와 common stochastic trends의 수
+$m$-차원 $I(1)$ 벡터 시계열 $Y_t$에서, 서로 선형독립인 공적분 벡터가 $r$개 존재할 때의 차원 $r$을 **공적분 랭크(cointegration rank)**라 한다 ($0 < r < m$).
+- $r$개의 독립적인 장기 균형 제약조건($\beta'Y_t \sim I(0)$)이 성립하면, 시스템에 존재하는 원래 $m$개의 무작위 추세 방향 중 $r$개의 비정상 차원이 선형결합에 의해 제거된다.
+- 따라서 경제 시스템을 장기적으로 주도하는 독립적인 **공통 확률추세(common stochastic trends)의 수**는
+  $$
+  \boxed{m - r}.
+  $$
+- 예: $m=3, r=1$이면 1개의 장기 균형관계와 2개의 공통 확률추세가 존재하며, $m=3, r=2$이면 2개의 장기 균형관계와 1개의 공통 확률추세가 시스템 전체를 견인한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- Cointegration: $I(1)$ 시계열들의 선형결합이 $I(0)$가 되는 장기 균형 관계 ($b = (1, -\beta_0)'$).
+- Superconsistency: 공적분 회귀의 OLS 계수는 $T$-rate($O_p(T^{-1})$)로 초일치 수렴 (단, $t$-검정은 비표준).
+- Engle–Granger: 잔차 기반 단위근 검정. 잔차가 추정치이므로 일반 DF가 아닌 전용 EG 임계값 필수.
+- ECM: $\Delta y_t = \lambda e_{t-1} + \dots$, 안정적 오차 교정을 위해 $-2 < \lambda < 0$ (보통 $-1 < \lambda < 0$).
+- Rank & Trends: $m$-변수 시스템에서 공적분 rank가 $r$이면 독립적 공통 확률추세는 $m - r$개.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
