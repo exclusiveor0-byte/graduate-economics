@@ -18,7 +18,7 @@ GRADUATE MACROECONOMICS · DAILY PRACTICE
 [거시경제학]{.chip .chip--macro}
 [총 2문제]{.chip}
 [예상 35–45분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -98,6 +98,88 @@ $$
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. AK Model and Long-Run Growth"}
+### Setting
+AK 생산기술: $Y(t) = AK(t)$, $A > 0$.
+자본축적 방정식: $\dot K(t) = sY(t) - \delta K(t)$, $0 < s < 1, \delta \ge 0$.
+소비: $C(t) = (1-s)Y(t)$.
+생산성 $A$, 저축률 $s$, 감가상각률 $\delta$는 상수로 일정하다.
+
+---
+
+#### 1) 자본·산출·소비의 공통 성장률
+생산함수를 자본축적식에 대입하면
+$$
+\dot K(t) = sAK(t) - \delta K(t) = (sA - \delta)K(t).
+$$
+양변을 $K(t) > 0$으로 나누면 자본의 연속시간 성장률은
+$$
+\boxed{g_K := \frac{\dot K}{K} = sA - \delta}.
+$$
+산출 $Y(t) = AK(t)$에서 $A$가 상수이므로 양변에 로그 미분을 취하면
+$$
+\frac{\dot Y}{Y} = \frac{A\dot K}{AK} = \frac{\dot K}{K} = g_K = sA - \delta.
+$$
+소비 $C(t) = (1-s)Y(t) = (1-s)AK(t)$ 역시 $s, A$가 상수이므로
+$$
+\frac{\dot C}{C} = \frac{(1-s)A\dot K}{(1-s)AK} = \frac{\dot K}{K} = g_K = sA - \delta.
+$$
+따라서 경제의 주요 거시총량변수들은 동일한 일정한 성장률로 성장한다:
+$$
+\boxed{g_K = g_Y = g_C = sA - \delta}.
+$$
+세 변수의 성장률이 일정하며 서로 같고, 자본계수 $Y/K = A$와 소비-자본 비율 $C/K = (1-s)A$도 일정하므로 이 경제는 전이과정(transition) 없이 처음부터 **균형성장경로(Balanced Growth Path, BGP)**를 따른다.
+
+---
+
+#### 2) $sA$와 $\delta$에 따른 장기동학
+성장률 매개변수를 $\gamma := sA - \delta$라 정의하면 자본의 운동방정식은 $\dot K = \gamma K$이다. 이를 $t=0$부터 $t$까지 적분하면
+$$
+\ln K(t) - \ln K(0) = \gamma t \quad\Longrightarrow\quad \boxed{K(t) = K(0)e^{\gamma t}}.
+$$
+이에 따라 산출과 소비의 궤적은
+$$
+Y(t) = AK(0)e^{\gamma t}, \qquad C(t) = (1-s)AK(0)e^{\gamma t}.
+$$
+따라서 세 변수의 장기 경로는 순투자 계수 $\gamma = sA - \delta$의 부호에 따라 결정된다:
+
+1. **$sA > \delta$ ($\gamma > 0$):**
+   투자가 감가상각을 초과하여 순투자가 양(+)이다. 자본, 산출, 소비가 일정한 양의 성장률 $\gamma$로 **영구히 지속적으로 증가(sustained long-run growth)**한다.
+2. **$sA = \delta$ ($\gamma = 0$):**
+   투자가 감가상각과 정확히 일치하여 자본축적이 정체된다. 경제는 초기 수준 $K(0), Y(0), C(0)$을 영구히 유지한다.
+3. **$sA < \delta$ ($\gamma < 0$):**
+   투자가 감가상각을 보전하지 못해 순투자가 음(-)이다. 자본, 산출, 소비가 지수적으로 감소하여 $t \to \infty$에서 0으로 수렴한다.
+
+**경제학적 함의:**
+신고전학파 솔로우 모형에서는 자본이 축적됨에 따라 한계생산이 체감($MPK \to 0$)하여 결국 투자가 감가상각과 일치하는 정상상태에서 1인당 성장이 멈춘다. 반면 AK 모형은 $MPK = A$로 일정하여 자본심화에도 수익률 하락이 없으므로, $sA > \delta$라는 조건만 만족하면 외생적 기술진보 없이도 **내생적으로 영구적인 성장**이 가능하다.
+
+---
+
+#### 3) 수치계산: 성장률과 10년 후 자본
+주어진 파라미터 값:
+$$
+A = 0.20, \qquad s = 0.30, \qquad \delta = 0.04, \qquad K(0) = 100.
+$$
+경제의 공통 성장률은
+$$
+g_K = g_Y = g_C = sA - \delta = (0.30)(0.20) - 0.04 = 0.06 - 0.04 = \boxed{0.02}.
+$$
+즉, 연속시간 기준 순간성장률은 **연 2%**이다.
+
+자본의 궤적 $K(t) = 100e^{0.02t}$에 $t=10$을 대입하면
+$$
+\boxed{K(10) = 100e^{0.02 \times 10} = 100e^{0.2} \approx 122.14}.
+$$
+연속 복리 효과로 인해 10년 동안의 총 자본 증가율은 $e^{0.2} - 1 \approx 22.14\%$가 된다 (단순 합산치인 $2\% \times 10 = 20\%$보다 큼).
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- 성장률: $g_K = g_Y = g_C = sA - \delta$ (완전한 BGP).
+- 장기동학: $sA > \delta \implies$ 지속적 양의 성장, $sA = \delta \implies$ 정체, $sA < \delta \implies$ 0으로 수렴.
+- 수치계산: $g = 0.02$ (2%), $K(10) = 100e^{0.2} \approx 122.14$.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. AK versus Solow
 ::: {.topic}
@@ -149,6 +231,102 @@ $$
 
 ::: {.spoon-hint}
 **핵심**: 이번 문제의 핵심은 **Solow의 수준효과와 AK의 성장률효과**를 구분하는 것이다. knowledge spillover나 R&D까지 확장할 필요는 없다.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. AK versus Solow (Diminishing Returns & Growth vs Level Effects)"}
+### Setting
+솔로우(Solow) 경제: $Y = K^\alpha(AL)^{1-\alpha}$, $0 < \alpha < 1$.
+AK 경제: $Y = BK$, $B > 0$.
+두 모형 모두 기본 자본축적식 $\dot K = sY - \delta K$를 따른다.
+
+---
+
+#### 1) 두 모형의 자본 한계생산 비교
+**솔로우 모형:**
+유효노동 $AL$이 주어진 상태에서 자본 $K$에 대해 편미분하면
+$$
+MPK_{\text{Solow}} = \frac{\partial Y}{\partial K} = \boxed{\alpha K^{\alpha-1}(AL)^{1-\alpha} = \alpha \left(\frac{K}{AL}\right)^{\alpha-1} = \alpha k^{\alpha-1}}.
+$$
+이계미분을 취하면
+$$
+\frac{\partial^2 Y}{\partial K^2} = \alpha(\alpha-1)K^{\alpha-2}(AL)^{1-\alpha} < 0 \quad (\because 0 < \alpha < 1).
+$$
+따라서 솔로우 경제에서는 자본이 축적될수록($K \to \infty$ 또는 $k \to \infty$) 자본의 한계생산이 지속적으로 하락하여 0에 수렴한다 ($\lim_{k\to\infty} MPK = 0$). 즉, **자본에 대한 수확체감(diminishing marginal returns)**이 강력하게 작용한다.
+
+**AK 모형:**
+생산함수가 $K$의 선형함수이므로
+$$
+MPK_{\text{AK}} = \frac{dY}{dK} = \boxed{B}, \qquad \frac{d^2 Y}{dK^2} = 0.
+$$
+자본축적이 아무리 많이 진행되더라도 자본의 한계생산은 상수 $B$로 일정하게 유지되며 체감하지 않는다. 이 근본적인 기술적 차이가 두 모형의 장기 성장 동학을 완전히 다르게 만든다.
+
+---
+
+#### 2) 저축률 상승: Solow의 수준효과와 AK의 성장률효과
+**솔로우 모형 (수준효과, Level Effect):**
+유효노동당 자본 $k = K/(AL)$의 동태방정식은 인구증가율 $n$, 외생적 기술진보율 $g$에 대해
+$$
+\dot k = s k^\alpha - (n + g + \delta)k.
+$$
+정상상태($\dot k = 0$)에서
+$$
+k^* = \left(\frac{s}{n+g+\delta}\right)^{\frac{1}{1-\alpha}}, \qquad y^* = (k^*)^\alpha = \left(\frac{s}{n+g+\delta}\right)^{\frac{\alpha}{1-\alpha}}.
+$$
+저축률이 $s_0$에서 $s_1 > s_0$로 영구히 상승하면 정상상태 유효노동당 산출 수준은 $\left(\frac{s_1}{s_0}\right)^{\frac{\alpha}{1-\alpha}} > 1$배만큼 영구적으로 높아진다.
+그러나 새로운 정상상태에 도달하면 $\dot k / k = 0$이 되므로 1인당 산출($Y/L = Ay$)의 장기 성장률은 원래의 외생적 기술진보율 $g$로 복귀한다.
+즉, 저축률 상승은 전이기간 동안 일시적으로 성장률을 높이지만 장기 균형성장률은 변화시키지 못하며, 오직 경제의 소득 경로를 평행하게 위로 끌어올릴 뿐이다. 이를 **수준효과(level effect)**라 한다.
+
+**AK 모형 (성장률효과, Growth Effect):**
+자본축적식 $\dot K = sBK - \delta K$로부터 산출성장률은 항상
+$$
+g_Y = g_K = \boxed{sB - \delta}.
+$$
+저축률이 $s_0$에서 $s_1 > s_0$로 영구히 상승하면 장기 성장률 자체가
+$$
+\boxed{\Delta g_Y = (s_1 - s_0)B > 0}
+$$
+만큼 영구적으로 상승한다. 두 산출경로의 비율을 보면
+$$
+\frac{Y_{\text{new}}(t)}{Y_{\text{old}}(t)} = \frac{BK_0 e^{(s_1 B - \delta)t}}{BK_0 e^{(s_0 B - \delta)t}} = e^{(s_1 - s_0)Bt} \xrightarrow{t\to\infty} \infty.
+$$
+시간이 흐를수록 두 경로 사이의 격차가 무한히 벌어지며 산출 경로의 기울기(성장률) 자체가 영구히 가팔라진다. 이를 **성장률효과(growth effect)**라 한다.
+
+---
+
+#### 3) Prove or Disprove: 수확체감의 부재가 양의 성장을 보장하는가?
+> *Eliminating diminishing returns to capital is sufficient to guarantee positive long-run growth.*
+
+**판정: 거짓 (Disprove / False).**
+자본에 대한 수확체감이 없다는 것($MPK = B = \text{const}$)은 자본축적에 따라 한계생산이 하락하지 않는다는 기술적 특성일 뿐이며, 경제의 순투자율이 양(+)이 됨을 보장하지 않는다.
+
+**논증 및 반례:**
+AK 모형에서 경제의 성장률은
+$$
+g = sB - \delta
+$$
+이다. 따라서 양의 장기성장($g > 0$)을 달성하기 위한 필요충분조건은
+$$
+\boxed{sB > \delta}.
+$$
+명시적 반례로 다음 파라미터를 고려하자:
+$$
+B = 0.20, \qquad s = 0.10, \qquad \delta = 0.05.
+$$
+- 이 경제는 $Y = 0.20K$로 자본에 대한 수확체감이 전혀 없다 ($MPK = 0.20 = \text{const}$).
+- 그러나 성장률을 계산하면
+  $$
+  g = sB - \delta = (0.10)(0.20) - 0.05 = 0.02 - 0.05 = \boxed{-0.03 < 0}.
+  $$
+자본에 대한 수확체감이 배제되었음에도 불구하고, 저축(신규 투자)이 기존 자본의 감가상각을 충당하지 못하여 경제는 매년 연 3%씩 지속적으로 쇠퇴(음의 성장)한다 ($sB = \delta$인 경우 성장은 0에 머문다).
+
+따라서 자본의 수확체감 부재는 지속 성장을 가능하게 하는 **필요조건**일 수는 있으나, 순투자가 양수가 되는 파라미터 조건($sB > \delta$)이 동반되지 않는 한 양의 성장을 보장하기 위한 **충분조건(sufficient condition)은 아니다**.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- $MPK$: Solow는 자본심화 시 체감($\alpha k^{\alpha-1} \to 0$), AK는 불변($MPK = B$).
+- 저축률 상승: Solow는 일시적 성장 후 수준만 상승(Level Effect), AK는 장기 성장률 영구 상승(Growth Effect, $\Delta g = \Delta s \cdot B$).
+- 수확체감 부재: 양의 성장을 위한 충분조건이 아님 ($sB > \delta$ 조건이 충족되어야 양의 성장 달성).
 :::
 :::
 

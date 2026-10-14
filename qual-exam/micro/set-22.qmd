@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [예상 25–30분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -89,6 +89,144 @@ $$
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Consumer Theory (Stone–Geary Preferences & Dualities)"}
+### Setting
+소비자의 효용함수와 소비영역:
+$$
+u(x,y)=(x-1)^{1/2}(y-2)^{1/2}, \qquad x\ge1,\quad y\ge2.
+$$
+가격 체계: $p_x = p > 0, p_y = 1$, 소득 $m > p + 2$.
+
+---
+
+#### 1) Utility maximization과 Marshallian demand
+최소필요소비(subsistence consumption) $(1, 2)$를 충족하기 위해 필요한 기초 지출은
+$$
+p \cdot 1 + 1 \cdot 2 = p + 2
+$$
+이다. $m > p + 2$이므로 최소필요소비를 충족하고도 양의 소득이 남는다.
+
+각 재화의 최소필요소비를 초과하는 양을
+$$
+X = x - 1 \ge 0, \qquad Y = y - 2 \ge 0
+$$
+이라 두면, 잔여소득(residual income)은
+$$
+R = m - (p + 2) = m - p - 2 > 0
+$$
+이다. 소비자의 효용극대화 문제는 다음과 같이 변환된다:
+$$
+\max_{X \ge 0, Y \ge 0} X^{1/2} Y^{1/2} \quad\text{s.t.}\quad pX + Y \le R.
+$$
+목적함수가 $X, Y$에 대해 순증가하므로 최적점에서 예산제약은 등호($pX + Y = R$)로 성립하며, 내부해($X, Y > 0$)를 갖는다. 단조변환 $\frac{1}{2}\ln X + \frac{1}{2}\ln Y$에 Lagrangian을 적용하면 일계조건(FOC)은
+$$
+\frac{1}{2X} = \lambda p, \qquad \frac{1}{2Y} = \lambda \quad\Longrightarrow\quad \frac{Y}{X} = p \quad\Longleftrightarrow\quad Y = pX.
+$$
+이를 잔여소득 예산제약 $pX + Y = R$에 대입하면
+$$
+pX + pX = R \quad\Longrightarrow\quad \boxed{X^* = \frac{R}{2p}}, \qquad \boxed{Y^* = \frac{R}{2}}.
+$$
+즉, 소비자는 잔여소득 $R$의 절반을 $x$-재화의 초과소비에, 나머지 절반을 $y$-재화의 초과소비에 각각 $1:1$로 지출한다.
+
+원래 소비량으로 환원하면 마샬 수요함수(Marshallian demands)는
+$$
+\boxed{x(p,m) = 1 + \frac{m - p - 2}{2p} = \frac{m + p - 2}{2p}},
+$$
+$$
+\boxed{y(p,m) = 2 + \frac{m - p - 2}{2} = \frac{m - p + 2}{2}}.
+$$
+$R > 0$이므로 $x(p,m) > 1, y(p,m) > 2$로 내부해 가정이 완벽히 만족되며, 예산제약 $px(p,m) + y(p,m) = p(1 + R/2p) + (2 + R/2) = p + 2 + R = m$도 항등적으로 성립한다.
+
+---
+
+#### 2) Indirect utility와 expenditure minimization
+**간접효용함수(Indirect Utility Function):**
+마샬 수요를 효용함수에 대입하면
+$$
+V(p,m) = (x(p,m) - 1)^{1/2}(y(p,m) - 2)^{1/2} = \left(\frac{R}{2p}\right)^{1/2} \left(\frac{R}{2}\right)^{1/2} = \frac{R}{2\sqrt{p}}.
+$$
+따라서
+$$
+\boxed{V(p,m) = \frac{m - p - 2}{2\sqrt{p}}}.
+$$
+
+**지출최소화 문제(Expenditure Minimization Problem)와 지출함수:**
+목표효용 $u > 0$에 대해 지출최소화 문제는
+$$
+e(p,u) = \min_{x\ge1, y\ge2} \{px + y : \sqrt{(x-1)(y-2)} \ge u\}.
+$$
+초과소비 $X = x-1, Y = y-2$로 치환하면
+$$
+e(p,u) = p + 2 + \min_{X\ge0, Y\ge0} \{pX + Y : XY \ge u^2\}.
+$$
+내부 일계조건으로부터 $\frac{MU_X}{MU_Y} = \frac{Y}{X} = p \implies Y = pX$. 효용제약 $XY = u^2$에 대입하면
+$$
+pX^2 = u^2 \quad\Longrightarrow\quad X^h = \frac{u}{\sqrt{p}}, \qquad Y^h = u\sqrt{p}.
+$$
+따라서 힉스 수요함수(Hicksian demands)는
+$$
+\boxed{h_x(p,u) = 1 + \frac{u}{\sqrt{p}}}, \qquad \boxed{h_y(p,u) = 2 + u\sqrt{p}}.
+$$
+최소 지출함수(expenditure function)는
+$$
+e(p,u) = p h_x(p,u) + h_y(p,u) = p\left(1 + \frac{u}{\sqrt{p}}\right) + \left(2 + u\sqrt{p}\right) = \boxed{p + 2 + 2u\sqrt{p}}.
+$$
+
+**소비자 쌍대성 항등식 확인:**
+$$
+e(p, V(p,m)) = p + 2 + 2\sqrt{p}\left(\frac{m - p - 2}{2\sqrt{p}}\right) = p + 2 + (m - p - 2) = \boxed{m}.
+$$
+역방향 항등식 또한
+$$
+V(p, e(p,u)) = \frac{(p + 2 + 2u\sqrt{p}) - p - 2}{2\sqrt{p}} = \frac{2u\sqrt{p}}{2\sqrt{p}} = \boxed{u}.
+$$
+추가로 Shephard's lemma를 확인하면 $\frac{\partial e}{\partial p} = 1 + \frac{u}{\sqrt{p}} = h_x(p,u)$가 성립하며, Roy's identity $-\frac{V_p}{V_m} = -\frac{-\frac{1}{2\sqrt{p}} - \frac{R}{4p^{3/2}}}{\frac{1}{2\sqrt{p}}} = 1 + \frac{R}{2p} = x(p,m)$도 정확히 일치한다.
+
+---
+
+#### 3) Engel curves와 nonhomotheticity
+가격 $p > 0$가 고정되었을 때 엥겔 곡선(소득-소비 궤적)은
+$$
+x(p,m) = \frac{m}{2p} + \frac{p-2}{2p}, \qquad y(p,m) = \frac{m}{2} + \frac{2-p}{2}.
+$$
+소득에 대한 한계소비성향은
+$$
+\frac{\partial x}{\partial m} = \frac{1}{2p} > 0, \qquad \frac{\partial y}{\partial m} = \frac{1}{2} > 0
+$$
+이므로 두 재화 모두 정상재(normal goods)이자 소득에 대한 affine(선형) 함수이다.
+
+각 재화의 지출비중(expenditure shares)을 구하면:
+$$
+s_x(p,m) = \frac{px(p,m)}{m} = \frac{p + R/2}{m} = \frac{1}{2} + \frac{p - 2}{2m},
+$$
+$$
+s_y(p,m) = \frac{y(p,m)}{m} = \frac{2 + R/2}{m} = \frac{1}{2} + \frac{2 - p}{2m}.
+$$
+$p \ne 2$이면 지출비중 $s_x, s_y$가 소득 $m$의 함수로 변동한다.
+예컨대 $p = 1$일 때 $x(1,m) = \frac{m-1}{2}$, $y(1,m) = \frac{m+1}{2}$ ($m > 3$)이므로 두 재화의 소비비율은
+$$
+\frac{x(1,m)}{y(1,m)} = \frac{m-1}{m+1}
+$$
+이 되어 소득이 증가함에 따라 소비비율이 달라진다. 동조적(homothetic) 선호라면 임의의 가격에서 소득이 변화해도 최적 소비묶음의 비율 $x/y$이 일정해야 하므로, **Stone–Geary 선호는 비동조적(nonhomothetic)**이다.
+
+**Cobb–Douglas와의 점근적 관계:**
+소득 $m \to \infty$로 커질수록 최소필요소비에 충당되는 고정지출 $(p+2)$의 비중이 0에 수렴한다:
+$$
+\lim_{m\to\infty} \frac{x(p,m)}{m} = \frac{1}{2p}, \qquad \lim_{m\to\infty} \frac{y(p,m)}{m} = \frac{1}{2},
+$$
+$$
+\lim_{m\to\infty} s_x(p,m) = \frac{1}{2}, \qquad \lim_{m\to\infty} s_y(p,m) = \frac{1}{2}.
+$$
+이는 표준 Cobb–Douglas 효용함수 $u(x,y) = x^{1/2}y^{1/2}$의 수요 $x^{CD} = \frac{m}{2p}, y^{CD} = \frac{m}{2}$와 점근적으로 완전히 일치한다. 즉, 소득이 극단적으로 높아지면 최소필요소비의 제약이 상대적으로 무시할 수 있을 만큼 작아져 표준 Cobb–Douglas 선호에 수렴한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- 마샬 수요: 잔여소득 $R = m-p-2$ 배분 $\implies x(p,m) = 1 + \frac{R}{2p}, y(p,m) = 2 + \frac{R}{2}$.
+- 쌍대성: $V(p,m) = \frac{m-p-2}{2\sqrt{p}} \iff e(p,u) = p + 2 + 2u\sqrt{p}$ 및 $e(p, V(p,m)) = m$.
+- 비동조성: 최소필요소비 $(1,2)$로 인해 엥겔곡선이 원점을 지나지 않으며 $x/y$ 비율이 소득에 따라 변동 ($m\to\infty$ 시 Cobb–Douglas로 수렴).
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. Partial Equilibrium
 ::: {.topic}
@@ -137,6 +275,138 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **free trade → binding quota → domestic price → quota rent → welfare → equivalent tariff**. quota rent의 귀속주체가 domestic welfare 계산에서 중요하다는 점을 반드시 구분하시오.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Partial Equilibrium (Import Quota & Quota Rent Analysis)"}
+### Setting
+국내 수요: $p_D = 30 - Q_D \iff Q_D(p) = 30 - p$.
+국내 공급: $p_S = 6 + Q_S \iff Q_S(p) = p - 6$.
+세계가격: $p_w = 10$ (소국 개방경제, Price-taker).
+
+---
+
+#### 1) 자유무역 균형과 국내후생
+소국 개방경제에서 자유무역 시 국내 균형가격은 세계가격과 동일하다:
+$$
+\boxed{p^F = p_w = 10}.
+$$
+국내 수요량 및 국내 공급량:
+$$
+\boxed{Q_D^F = 30 - 10 = 20}, \qquad \boxed{Q_S^F = 10 - 6 = 4}.
+$$
+자유무역 하 수입량:
+$$
+\boxed{M^F = Q_D^F - Q_S^F = 20 - 4 = 16}.
+$$
+
+**국내 잉여 계산:**
+- 소비자잉여(Consumer Surplus):
+  $$
+  \boxed{CS^F = \frac{1}{2}(30 - p^F)Q_D^F = \frac{1}{2}(30 - 10)(20) = 200}.
+  $$
+- 생산자잉여(Producer Surplus):
+  $$
+  \boxed{PS^F = \frac{1}{2}(p^F - 6)Q_S^F = \frac{1}{2}(10 - 6)(4) = 8}.
+  $$
+- 국내 총잉여(Domestic Total Surplus):
+  $$
+  \boxed{TS^F = CS^F + PS^F = 200 + 8 = 208}.
+  $$
+
+---
+
+#### 2) Binding import quota와 quota rent
+정부가 수입량을 $\bar M = 8$로 제한한다. 자유무역 수입량 $M^F = 16$보다 작으므로 유효한 수입할당(binding quota)이다.
+
+국내 수입수요함수(import demand):
+$$
+M(p) = Q_D(p) - Q_S(p) = (30 - p) - (p - 6) = 36 - 2p.
+$$
+쿼터 하의 국내시장 청산조건 $M(p^Q) = \bar M = 8$:
+$$
+36 - 2p^Q = 8 \quad\Longrightarrow\quad 2p^Q = 28 \quad\Longrightarrow\quad \boxed{p^Q = 14}.
+$$
+이 가격에서 국내 수요량 및 공급량:
+$$
+\boxed{Q_D^Q = 30 - 14 = 16}, \qquad \boxed{Q_S^Q = 14 - 6 = 8}.
+$$
+수입량은 $\boxed{M^Q = 16 - 8 = 8 = \bar M}$로 제한량과 일치한다.
+
+**쿼터 지대(Quota Rent):**
+수입허가권(quota license)을 보유한 자는 세계시장에서 $p_w = 10$에 구매하여 국내시장에 $p^Q = 14$에 판매할 수 있으므로, 단위당 쿼터 렌트는 $p^Q - p_w = 14 - 10 = 4$이다.
+총 쿼터 지대(total quota rent):
+$$
+\boxed{QR = (p^Q - p_w)\bar M = (14 - 10) \times 8 = 32}.
+$$
+문제의 가정대로 허가권이 국내 거주자에게 무상 배분된다면 $QR = 32$ 전액이 국내 경제주체에게 귀속된다.
+
+---
+
+#### 3) Quota의 후생효과와 equivalent tariff
+**쿼터 하의 국내 잉여:**
+- 소비자잉여:
+  $$
+  \boxed{CS^Q = \frac{1}{2}(30 - 14)(16) = 128}.
+  $$
+- 생산자잉여:
+  $$
+  \boxed{PS^Q = \frac{1}{2}(14 - 6)(8) = 32}.
+  $$
+- 쿼터 지대가 국내 귀속될 때의 총잉여:
+  $$
+  \boxed{TS^Q = CS^Q + PS^Q + QR = 128 + 32 + 32 = 192}.
+  $$
+- 자유무역 대비 후생 손실(Deadweight Loss):
+  $$
+  \Delta TS = TS^Q - TS^F = 192 - 208 = -16 \quad\Longrightarrow\quad \boxed{DWL = 16}.
+  $$
+
+**자중손실의 경제학적 분해:**
+가격이 10에서 14로 4만큼 상승함에 따라 발생하는 왜곡:
+- 생산왜곡(Production Distortion Loss): 효율적인 외국 공급 대신 비용이 높은 국내 생산이 4에서 8로 증가
+  $$
+  DWL_P = \frac{1}{2}(p^Q - p_w)(Q_S^Q - Q_S^F) = \frac{1}{2}(14 - 10)(8 - 4) = 8.
+  $$
+- 소비왜곡(Consumption Distortion Loss): 가격 상승으로 인한 소비 감소 (20에서 16으로 위축)
+  $$
+  DWL_C = \frac{1}{2}(p^Q - p_w)(Q_D^F - Q_D^Q) = \frac{1}{2}(14 - 10)(20 - 16) = 8.
+  $$
+- 합계: $DWL = DWL_P + DWL_C = 8 + 8 = 16$.
+
+**동등 관세(Equivalent Tariff) 비교:**
+동일한 수입량 $M = 8$을 유도하는 단위당 관세 $t$는 국내가격을 $p^T = p_w + t = 14$로 만드는 관세이므로
+$$
+\boxed{t = p^Q - p_w = 14 - 10 = 4}.
+$$
+이때 $Q_D^T = 16, Q_S^T = 8, M^T = 8$로 수량과 가격이 쿼터와 완전히 일치한다.
+정부의 관세수입(Tariff Revenue)은
+$$
+TR = t M^T = 4 \times 8 = 32.
+$$
+관세 하 총잉여는
+$$
+TS^T = CS^T + PS^T + TR = 128 + 32 + 32 = 192 = TS^Q.
+$$
+수입허가권 배분 과정에서 로비나 지대추구(rent-seeking) 비용이 없고 경쟁적으로 수입된다면, 정부가 징수하는 관세수입($TR=32$)과 국내 수입업자가 취득하는 쿼터 지대($QR=32$)가 금액상 동일하므로 두 제도의 시장가격, 거래량, 국내 총후생은 완전히 동등하다.
+
+**외국에 쿼터 지대가 귀속되는 경우:**
+외국 수출업자가 수입권을 독점하거나 정부가 무상 허가권을 외국에 배분하는 경우(예: 자율수출규제, VER), $QR = 32$는 국내 잉여에서 제외되어 해외로 유출된다:
+$$
+\boxed{TS^{Q, \text{foreign}} = CS^Q + PS^Q = 128 + 32 = 160}.
+$$
+이 경우 자유무역 대비 국내 후생손실은
+$$
+TS^F - TS^{Q, \text{foreign}} = 208 - 160 = \boxed{48}.
+$$
+즉, 사중손실 $16$에 쿼터 지대 유출분 $32$가 추가되어 국내 경제의 후생 악화는 관세 제도에 비해 훨씬 심각해진다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- 자유무역: $p^F = 10, Q_D^F = 20, Q_S^F = 4, M^F = 16, TS^F = 208$.
+- 쿼터($\bar M=8$): $p^Q = 14, Q_D^Q = 16, Q_S^Q = 8, QR = 32, DWL = 16$ ($DWL_P=8, DWL_C=8$).
+- 관세 동등성: $t = 4$ 부과 시 $p^T = 14, TR = 32 \implies TS^T = TS^Q = 192$.
+- 렌트 귀속: 외국 귀속 시 $QR(32)$ 유출로 국내 후생은 $160$으로 급감 (후생손실 48).
 :::
 :::
 

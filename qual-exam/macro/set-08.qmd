@@ -18,7 +18,7 @@ GRADUATE MACROECONOMICS · DAILY PRACTICE
 [거시경제학]{.chip .chip--macro}
 [총 2문제]{.chip}
 [예상 35–45분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -77,6 +77,104 @@ $$
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Knowledge Spillovers and Aggregate Returns"}
+### Setting
+개별기업 $i$의 생산기술:
+$$
+Y_i = K_i^\alpha (A L_i)^{1-\alpha}, \qquad 0 < \alpha < 1.
+$$
+경제 전체의 지식수준(knowledge spillover):
+$$
+A = \bar K^\phi, \qquad \phi \ge 0.
+$$
+동일한 대칭기업 $N$개, 총자본 $K = \sum_i K_i$, 총노동 $L = \sum_i L_i$ ($N, L$은 고정).
+개별기업은 원자적(atomistic) 경쟁기업으로서 $\bar K$와 $A$를 외생적으로 주어진 것으로 간주한다.
+
+---
+
+#### 1) 개별기업이 직면하는 자본의 한계생산 체감
+개별기업 $i$는 경제 전체의 지식수준 $A$와 자신의 노동투입 $L_i$를 주어진 상수로 보고 자본 $K_i$를 선택한다. 따라서 자본에 대한 사적 한계생산(private marginal product of capital)은
+$$
+MPK_i^{\text{priv}} = \left.\frac{\partial Y_i}{\partial K_i}\right|_{A, L_i} = \alpha K_i^{\alpha-1}(A L_i)^{1-\alpha} = \boxed{\alpha \frac{Y_i}{K_i}}.
+$$
+자본에 대해 다시 한 번 편미분하면
+$$
+\left.\frac{\partial^2 Y_i}{\partial K_i^2}\right|_{A, L_i} = \alpha(\alpha - 1)K_i^{\alpha-2}(A L_i)^{1-\alpha} < 0.
+$$
+여기서 $0 < \alpha < 1$ 조건이 핵심적인 역할을 한다:
+- $\alpha > 0$이므로 한계생산은 양수($MPK > 0$)이다.
+- $\alpha < 1 \iff \alpha - 1 < 0$이므로 이계도함수가 엄격한 음수($\partial^2 Y_i / \partial K_i^2 < 0$)가 된다.
+
+따라서 개별기업이 $A$와 $L_i$를 고정한 채 자신의 자본 $K_i$만을 단독으로 늘릴 때, 산출은 자본 증가 비율보다 작게 증가하며($Y_i(\lambda K_i) = \lambda^\alpha Y_i < \lambda Y_i$), 한계생산은 지속적으로 체감한다.
+(주의: $A$를 고정한 상태에서 $(K_i, L_i)$를 동시에 같은 비율로 늘리면 규모수익불변(CRS)이지만, 단일 생산요소인 자본 $K_i$에 대해서는 강력한 수확체감이 작용한다).
+
+---
+
+#### 2) 대칭균형의 총생산함수와 AK 조건
+대칭균형(symmetric equilibrium)에서는 $N$개 기업이 동일한 양의 자본과 노동을 사용하므로
+$$
+K_i = \frac{K}{N}, \qquad L_i = \frac{L}{N}, \qquad \bar K = \frac{K}{N}, \qquad A = \left(\frac{K}{N}\right)^\phi.
+$$
+각 기업의 산출을 경제 전체에 걸쳐 합산하면 총산출(aggregate output) $Y$는
+$$
+\begin{aligned}
+Y = \sum_{i=1}^N Y_i &= N Y_i = N \left(\frac{K}{N}\right)^\alpha \left[\left(\frac{K}{N}\right)^\phi \frac{L}{N}\right]^{1-\alpha} \\
+&= N \cdot N^{-\alpha} K^\alpha \cdot N^{-\phi(1-\alpha)} K^{\phi(1-\alpha)} \cdot N^{-(1-\alpha)} L^{1-\alpha} \\
+&= \underbrace{N^{-\phi(1-\alpha)} L^{1-\alpha}}_{\Omega > 0} K^{\alpha + \phi(1-\alpha)}.
+\end{aligned}
+$$
+기업 수 $N$과 총노동 $L$이 일정하므로 $\Omega$는 $K$에 의존하지 않는 양의 상수이다. 따라서
+$$
+\boxed{Y \propto K^\gamma, \qquad \gamma = \alpha + \phi(1-\alpha)}.
+$$
+
+총생산기술이 총자본 $K$에 대해 선형(linear, 즉 AK 모형 $Y = \Omega K$)이 되기 위한 지수 조건은 $\gamma = 1$이다:
+$$
+\alpha + \phi(1-\alpha) = 1 \quad\Longleftrightarrow\quad \phi(1-\alpha) = 1 - \alpha.
+$$
+$0 < \alpha < 1$에 의해 $1 - \alpha > 0$이므로 양변을 $1 - \alpha$로 나누면
+$$
+\boxed{\phi = 1}.
+$$
+즉, **러머(Romer, 1986)의 지식확산 탄력성 $\phi = 1$일 때 총생산함수는 정확히 $Y = \Omega K$의 AK 형태**를 띤다.
+개별기업은 투자 시 지식 $A$를 외생적으로 보아 수확체감을 느끼지만, 경제 전체에서 자본이 축적되면 학습 및 지식확산(learning-by-investing spillover)을 통해 $A$가 정확히 비례적으로 증가함으로써 사적 수확체감을 총량 수준에서 완벽하게 상쇄한다.
+
+---
+
+#### 3) Prove or Disprove: 사적 수확체감이 지속성장을 불가능하게 하는가?
+> *If each individual firm faces diminishing returns to its own capital, sustained aggregate growth from capital accumulation is impossible.*
+
+**판정: 거짓 (Disprove / False).**
+개별기업 수준에서 자본의 한계생산이 체감하더라도, 지식 외부효과에 의해 총량 생산함수에서 자본에 대한 수확체감이 상쇄된다면 자본축적만으로도 지속적인 양의 성장이 충분히 가능하다.
+
+**논증 및 반례:**
+$\alpha = 1/3, \phi = 1$인 경제를 고려하자.
+- **사적 기술(Private Technology):**
+  개별기업은 $A$를 주어진 것으로 보므로
+  $$
+  \left.\frac{\partial^2 Y_i}{\partial K_i^2}\right|_{A, L_i} = \frac{1}{3}\left(-\frac{2}{3}\right) K_i^{-5/3}(A L_i)^{2/3} < 0.
+  $$
+  모든 개별기업은 엄격한 자본 수확체감을 직면한다.
+- **총량 기술(Aggregate Technology):**
+  총량 자본 탄력성은 $\gamma = \alpha + \phi(1-\alpha) = 1/3 + 1(2/3) = 1$이므로 총생산함수는 $Y = \Omega K$이다.
+  기업당 노동을 1로 정규화하여 $L = N$이라 두면 $\Omega = N^{-2/3} N^{2/3} = 1$이 되어 $Y = K$이다.
+
+자본축적식 $\dot K = sY - \delta K$에서 저축률 $s = 0.30$, 감가상각률 $\delta = 0.05$라 하면,
+$$
+\boxed{g_K = g_Y = s\Omega - \delta = 0.30(1) - 0.05 = \boxed{0.25 > 0}}.
+$$
+이 경제는 외생적 기술진보나 인구증가가 전혀 없음에도 불구하고, 순수한 자본축적만으로 매년 25%의 영구적이고 지속적인 양의 성장을 달성한다.
+
+개별기업이 내부화하지 않는 지식스톡의 양의 외부효과가 자본심화에 따른 한계생산 하락을 정확히 보상하기 때문에, 사적 수확체감과 총량 수준의 지속 성장은 얼마든지 양립할 수 있다 (단, 실제 성장이 실현되려면 $s\Omega > \delta$가 필요함).
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- 사적 수확체감: $\left.\frac{\partial^2 Y_i}{\partial K_i^2}\right|_A = \alpha(\alpha-1)K_i^{\alpha-2}(AL_i)^{1-\alpha} < 0$ ($0<\alpha<1$).
+- 총생산함수: $Y = \Omega K^{\alpha+\phi(1-\alpha)} \implies \phi = 1$일 때 $Y = \Omega K$ (AK 기술 도출).
+- 지속성장 가능성: 사적 수확체감에도 불구하고 지식스필오버($\phi=1$)를 통해 총량 차원에서 영구적 양의 성장 가능 ($g = s\Omega - \delta > 0$).
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. Private Return versus Social Return
 ::: {.topic}
@@ -115,6 +213,85 @@ $$
 
 ::: {.spoon-hint}
 **핵심**: 이번 문제의 핵심은 **knowledge spillover가 private incentive와 social return 사이에 wedge를 만들 수 있다는 점**이다. R&D, 특허, 독점가격은 이번 회차에서 다루지 않는다.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Private Return versus Social Return (Knowledge Spillover & Externality Wedge)"}
+### Setting
+개별기업 생산함수: $Y_i = K_i^\alpha (AL_i)^{1-\alpha}$, $0 < \alpha < 1$.
+지식 외부효과: $A = \bar K^\phi = (K/N)^\phi$, $\phi > 0$.
+총생산함수: $Y = \Omega K^\gamma$, $\gamma = \alpha + \phi(1-\alpha)$.
+
+---
+
+#### 1) Private marginal return과 social marginal return
+**사적 한계수익 (Private Marginal Return, $MPK^{\text{priv}}$):**
+개별기업은 자신의 자본을 1단위 추가 투입할 때 발생하는 직접적인 산출 증가만을 사적 투자수익으로 평가한다. 이때 경제 전체의 지식수준 $A$는 자신이 통제할 수 없는 외생적 상수로 취급하므로
+$$
+MPK_i^{\text{priv}} = \left.\frac{\partial Y_i}{\partial K_i}\right|_{A, L_i} = \alpha K_i^{\alpha-1}(AL_i)^{1-\alpha} = \alpha \frac{Y_i}{K_i}.
+$$
+대칭균형에서 $Y_i/K_i = Y/K$이므로
+$$
+\boxed{MPK^{\text{priv}} = \alpha \frac{Y}{K}}.
+$$
+
+**사회적 한계수익 (Social Marginal Return, $MPK^{\text{soc}}$):**
+사회계획자(social planner)는 경제 전체의 자본 $K$가 1단위 증가할 때, 직접적인 생산능력 확대뿐만 아니라 평균자본 $\bar K$가 상승하여 지식수준 $A$가 높아지고 그 결과 **모든 기업들의 생산성이 동시에 향상되는 외부효과까지 종합적으로 평가**한다:
+$$
+MPK^{\text{soc}} = \left.\frac{dY}{dK}\right|_{N, L\,\text{fixed}} = \gamma \Omega K^{\gamma-1} = \boxed{[\alpha + \phi(1-\alpha)]\frac{Y}{K}}.
+$$
+
+---
+
+#### 2) Positive knowledge spillover와 한계수익의 차이 (Externality Wedge)
+두 한계수익의 차이를 계산하면
+$$
+MPK^{\text{soc}} - MPK^{\text{priv}} = [\alpha + \phi(1-\alpha)]\frac{Y}{K} - \alpha \frac{Y}{K} = \boxed{\phi(1-\alpha)\frac{Y}{K}}.
+$$
+$\phi > 0$, $0 < \alpha < 1$, $K, Y > 0$이므로
+$$
+\boxed{MPK^{\text{soc}} > MPK^{\text{priv}}}.
+$$
+즉, 양(+)의 지식 외부효과가 존재하는 한 사회적 한계수익은 항상 사적 한계수익보다 **엄격하게 크다**.
+
+**체인룰을 통한 분해와 누락된 효과:**
+총자본에 대한 총미분을 전미분 공식으로 분해하면
+$$
+\frac{dY}{dK} = \underbrace{\left.\frac{\partial Y}{\partial K}\right|_A}_{\text{직접 생산효과}} + \underbrace{\frac{\partial Y}{\partial A} \cdot \frac{dA}{dK}}_{\text{지식확산 외부효과}}.
+$$
+- 첫 번째 항(직접 생산효과): $\alpha \frac{Y}{K} = MPK^{\text{priv}}$. 개별기업의 투자 일계조건(FOC)에 온전히 반영된다.
+- 두 번째 항(지식확산 외부효과): $(1-\alpha)\frac{Y}{A} \cdot \left(\phi \frac{A}{K}\right) = \phi(1-\alpha)\frac{Y}{K}$.
+  개별기업은 자신이 투자할 때 창출되는 지식이 공공재적 성격을 띠고 다른 기업들에게 파급된다는 사실을 자신의 이윤극대화 계산에 전혀 반영하지 않는다(가격기구를 통해 보상받지 못함).
+
+이 누락된 항 $\phi(1-\alpha)\frac{Y}{K}$가 바로 사적 유인과 사회적 최적 사이에 발생하는 **외부성 격차(externality wedge)**이다.
+
+---
+
+#### 3) Prove or Disprove: 외부효과가 있으면 경쟁균형과 계획자 배분이 일치하는가?
+> *A positive knowledge spillover implies that the competitive equilibrium must always coincide with the social planner's allocation.*
+
+**평가 및 판정: 거짓 (Disprove / False).**
+긍정적 지식 외부효과는 경쟁균형과 사회계획자 배분의 일치를 보장하는 것이 아니라, 정반대로 **시장실패를 야기하여 두 배분 사이에 구조적인 괴리를 발생시키는 근본 원인**이 된다.
+
+**논증:**
+1. **사적 유인과 사회적 최적의 괴리:**
+   경쟁균형에서 기업들은 사적 한계생산 $MPK^{\text{priv}} = \alpha \frac{Y}{K}$을 실질이자율(자본비용)과 일치시킨다. 반면 사회계획자는 사회적 한계생산 $MPK^{\text{soc}} = [\alpha + \phi(1-\alpha)]\frac{Y}{K}$을 기준으로 투자를 결정한다.
+   예컨대 $\alpha = 1/3, \phi = 1, Y/K = 1$인 경우:
+   $$
+   MPK^{\text{priv}} = \frac{1}{3}, \qquad MPK^{\text{soc}} = 1.
+   $$
+   기업은 추가 자본 투자의 가치를 사회적 가치의 $1/3$에 불과한 것으로 과소평가한다.
+2. **과소투자(Under-investment) 및 후생 왜곡:**
+   외부효과를 내부화하는 정책(예: 피구세적 투자보조금, R&D 보조금, 특허권 보호 등)이 없는 순수 자유경쟁시장에서는, 개별 경제주체들의 사적 투자 유인이 사회적으로 바람직한 수준보다 낮아져 **자본축적과 장기 경제성장률이 사회적 최적 수준에 미달(suboptimal)**하게 된다.
+
+따라서 positive knowledge spillover가 존재하면 경쟁균형과 사회계획자 배분은 일반적으로 일치하지 않으며, 시장균형은 파레토 비효율적이다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- 사적 한계수익: $MPK^{\text{priv}} = \alpha \frac{Y}{K}$ (지식 $A$ 외생 간주).
+- 사회적 한계수익: $MPK^{\text{soc}} = [\alpha + \phi(1-\alpha)]\frac{Y}{K}$ (지식스필오버 효과 포함).
+- 외부성 격차: $MPK^{\text{soc}} - MPK^{\text{priv}} = \phi(1-\alpha)\frac{Y}{K} > 0$.
+- 배분 평가: 긍정적 외부효과로 인해 경쟁균형은 자본축적 및 성장률이 사회적 최적에 미달하여 계획자 배분과 불일치(과소투자).
 :::
 :::
 
