@@ -1,0 +1,123 @@
+---
+title: "문제 한 스푼 #25"
+subtitle: "부분균형 · 석사 졸업시험형 종합문제 (Ad Valorem Tax · Incidence · Welfare · Specific-Tax Equivalence)"
+---
+
+::: {.spoon-hero}
+::: {.spoon-hero__eyebrow}
+GRADUATE MICROECONOMICS · DAILY PRACTICE
+:::
+
+# 문제 한 스푼 #25
+
+::: {.spoon-hero__desc}
+오늘의 토픽: **부분균형 · 석사 졸업시험형 종합문제 (Ad Valorem Tax · Incidence · Welfare · Specific-Tax Equivalence)**
+:::
+
+::: {.spoon-hero__tags}
+[미시경제학]{.chip .chip--micro}
+[종합 1문제]{.chip}
+[예상 30–40분]{.chip}
+[해설 미포함]{.chip}
+[석사 졸업시험형]{.chip}
+:::
+:::
+
+::: {.spoon-problem}
+### Problem. Ad Valorem Tax, Incidence, and Welfare
+::: {.topic}
+Competitive Equilibrium · Ad Valorem Tax · Tax Incidence · Welfare · Specific-Tax Equivalence · Revenue Comparative Statics
+:::
+
+어떤 경쟁시장의 inverse demand와 inverse supply가 각각
+
+$$
+p_D(Q)=30-Q,\qquad p_S(Q)=6+\frac12Q
+$$
+
+로 주어진다. 외부효과는 없으며, 모든 단위는 동일한 재화라고 하자.
+
+1. **Baseline competitive equilibrium.**<br>
+   조세가 없을 때 경쟁균형의 거래량 $Q^0$와 가격 $p^0$를 구하시오.
+   이어서 consumer surplus, producer surplus, total surplus를 각각 계산하시오.
+
+2. **Ad valorem tax.**<br>
+   정부가 생산자 판매가격에 대해 세율
+
+   $$
+   \tau=\frac12
+   $$
+
+   의 ad valorem tax를 부과한다고 하자.
+   소비자가 지불하는 가격을 $p_c$, 생산자가 세후에 받는 가격을 $p_s$라 하면
+
+   $$
+   p_c=(1+\tau)p_s
+   $$
+
+   가 성립한다.
+   demand, supply, tax wedge를 이용하여 세후 equilibrium quantity $Q^\tau$와 $p_c^\tau, p_s^\tau$를 구하시오.
+
+3. **Tax incidence.**<br>
+   조세 도입 전 가격 $p^0$와 비교하여, 소비자가 단위당 얼마를 추가로 부담하고 생산자가 단위당 얼마를 부담하는지 계산하시오.
+   이를 이용하여 tax burden의 소비자 측과 생산자 측 비중을 구하시오.
+   이어서 조세 도입 전 균형점에서 demand와 supply의 point elasticity를 계산하고, 어느 쪽이 더 큰 세부담을 지는지 상대적 탄력성과 연결하여 설명하시오.
+
+4. **Government revenue and welfare.**<br>
+   ad valorem tax하의 tax revenue를
+
+   $$
+   T=\tau p_s^\tau Q^\tau
+   $$
+
+   로 계산하시오.
+   이어서 조세 부과 후 consumer surplus와 producer surplus를 계산하고, 정부수입을 포함한 total surplus를 구하시오.
+   마지막으로 조세 부과 전과 비교하여 deadweight loss를 계산하고, 이를 거래량 감소와 연결하여 해석하시오.
+
+5. **Equivalent specific tax.**<br>
+   동일한 equilibrium quantity $Q^\tau$를 만들어내는 단위당 specific tax $t$를 구하시오.
+   specific tax에서는
+
+   $$
+   p_c=p_s+t
+   $$
+
+   가 성립한다.
+   이 $t$하에서 $p_c,p_s,Q$를 다시 계산하여 ad valorem tax하의 equilibrium outcome과 일치하는지 확인하시오.
+   또한 동일한 균형에서
+
+   $$
+   t=\tau p_s
+   $$
+
+   관계가 어떻게 나타나는지 설명하시오.
+
+6. **Revenue comparative statics.**<br>
+   이제 ad valorem tax rate를 일반적인 $\tau\ge0$로 두자.
+   거래량이 양수인 범위에서 equilibrium quantity $Q(\tau)$와 생산자 수취가격 $p_s(\tau)$를 구하시오.
+   이를 이용하여 tax revenue
+
+   $$
+   R(\tau)=\tau p_s(\tau)Q(\tau)
+   $$
+
+   를 $\tau$의 함수로 나타내시오.
+   세율이 증가할 때 세수가 항상 증가하는지 판단하고, interior revenue-maximizing tax rate가 존재한다면 이를 구하시오.
+
+7. **Economic interpretation.**<br>
+   다음 주장들을 각각 설명하시오.
+
+   a. 세금을 법적으로 생산자에게 부과하더라도 economic incidence가 전부 생산자에게 귀속되는 것은 아니다.<br>
+   b. 동일한 거래량을 만들어내는 ad valorem tax와 specific tax는 해당 균형에서 동일한 가격 wedge를 만들 수 있다.<br>
+   c. 높은 세율이 반드시 높은 세수를 의미하지는 않는다.
+
+   각 설명은 demand와 supply의 반응, 거래량 감소, tax base의 변화와 연결하여 작성하시오.
+
+::: {.spoon-hint}
+**권장 풀이 순서**: **baseline equilibrium → ad valorem wedge → incidence → welfare → specific-tax equivalence → revenue comparative statics → policy interpretation**. 이번 문제에서는 조세의 법적 부과대상보다 **가격쐐기와 수요·공급의 조정**이 실제 경제적 부담과 후생손실을 결정한다는 점이 핵심이다.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
