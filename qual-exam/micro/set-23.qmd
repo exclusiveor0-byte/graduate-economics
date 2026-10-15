@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [예상 25–30분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -71,6 +71,107 @@ $$
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Consumer Theory (Perfect Complements & Duality)"}
+### Setting
+소비자의 효용함수:
+$$
+u(x,y)=\min\{x,2y\},\qquad x,y\ge0.
+$$
+가격 체계: $p_x = p > 0, p_y = 1$, 소득 $m > 0$.
+
+---
+
+#### 1) Utility maximization과 Marshallian demand
+효용극대화 문제:
+$$
+\max_{x,y\ge0}\;\min\{x,2y\} \quad\text{s.t.}\quad px+y\le m.
+$$
+이 선호는 두 재화를 $x:y = 2:1$의 고정비율로 결합하여 소비할 때에만 효용이 증가하는 **완전보완재(perfect complements / Leontief 선호)**이다.
+- $x > 2y$이면 초과 투입된 $x$는 한계효용이 0이다.
+- $x < 2y$이면 초과 투입된 $y$는 한계효용이 0이다.
+두 재화의 가격이 모두 양수($p>0, 1>0$)이므로, 어느 한 재화의 낭비적 소비를 줄여 다른 재화를 늘림으로써 효용을 엄격히 증가시킬 수 있다. 따라서 최적점은 무차별곡선의 꺾임점(kink)에서 발생한다:
+$$
+x^* = 2y^*.
+$$
+단조성에 의해 예산제약은 등호($px^* + y^* = m$)로 성립하므로, $x^* = 2y^*$를 대입하면
+$$
+p(2y^*) + y^* = m \quad\Longrightarrow\quad (2p+1)y^* = m.
+$$
+따라서 마샬 수요함수(Marshallian demands)는
+$$
+\boxed{y(p,m) = \frac{m}{2p+1}}, \qquad \boxed{x(p,m) = \frac{2m}{2p+1}}.
+$$
+예산 소진 확인: $px(p,m) + y(p,m) = \frac{2pm + m}{2p+1} = m$.
+최적 소비비율: $\frac{x(p,m)}{y(p,m)} = 2$.
+
+**간접효용함수(Indirect Utility Function):**
+$$
+\boxed{V(p,m) = \min\left\{\frac{2m}{2p+1}, 2\cdot\frac{m}{2p+1}\right\} = \frac{2m}{2p+1} = \frac{m}{p + \frac{1}{2}}}.
+$$
+$V(p,m)$은 소득 $m$에 대해 순증가하며 가격 $p$에 대해 순감소한다.
+
+---
+
+#### 2) Expenditure minimization과 Hicksian demand
+목표효용 $\bar u > 0$에 대한 지출최소화 문제:
+$$
+\min_{x,y\ge0}\; px + y \quad\text{s.t.}\quad \min\{x,2y\} \ge \bar u.
+$$
+효용제약 $\min\{x,2y\} \ge \bar u$는 다음 두 조건의 동시 충족과 동치이다:
+$$
+x \ge \bar u, \qquad y \ge \frac{\bar u}{2}.
+$$
+가격이 양수이므로 비용최소화점에서 두 부등식은 모두 등호로 결합한다. 따라서 힉스 수요함수(Hicksian demands)는 상대가격과 무관하게 목표효용에 의해서만 고정된다:
+$$
+\boxed{h_x(p,\bar u) = \bar u}, \qquad \boxed{h_y(p,\bar u) = \frac{\bar u}{2}}.
+$$
+최소 지출함수(expenditure function)는
+$$
+\boxed{e(p,\bar u) = p h_x + h_y = p\bar u + \frac{\bar u}{2} = \left(p + \frac{1}{2}\right)\bar u}.
+$$
+일반적인 두 가격 체계 $(p_x, p_y)$에서도 $e(p_x, p_y, \bar u) = \bar u(p_x + \frac{1}{2}p_y)$가 성립하며, Shephard's lemma $\frac{\partial e}{\partial p_x} = \bar u = h_x$, $\frac{\partial e}{\partial p_y} = \frac{\bar u}{2} = h_y$가 성립한다.
+
+---
+
+#### 3) Duality identities와 요소대체의 부재
+**쌍대성 항등식 확인:**
+$$
+e(p, V(p,m)) = \left(p + \frac{1}{2}\right)\frac{m}{p + \frac{1}{2}} = \boxed{m}.
+$$
+역방향 항등식:
+$$
+V(p, e(p,\bar u)) = \frac{\left(p + \frac{1}{2}\right)\bar u}{p + \frac{1}{2}} = \boxed{\bar u}.
+$$
+힉스-마샬 수요 일치 항등식:
+$$
+h_x(p, V(p,m)) = V(p,m) = \frac{2m}{2p+1} = \boxed{x(p,m)},
+$$
+$$
+h_y(p, V(p,m)) = \frac{V(p,m)}{2} = \frac{m}{2p+1} = \boxed{y(p,m)}.
+$$
+Roy's identity: $-\frac{V_p}{V_m} = -\frac{-\frac{m}{(p+1/2)^2}}{\frac{1}{p+1/2}} = \frac{m}{p+1/2} = \frac{2m}{2p+1} = x(p,m)$.
+
+**대체효과의 부재(No Substitution Effect):**
+완전보완재 선호에서는 두 재화가 언제나 $x:y = 2:1$의 고정 비율로만 결합하여 효용을 생산하므로, 상대가격 $p$가 변하더라도 동일한 효용을 유지하는 한 최적 소비비율은 결코 변하지 않는다.
+따라서 힉스 보상수요의 가격효과인 **대체효과(substitution effect)는 정확히 0**이다:
+$$
+\frac{\partial h_x(p,\bar u)}{\partial p} = 0, \qquad \frac{\partial h_y(p,\bar u)}{\partial p} = 0.
+$$
+Slutsky 방정식 분해:
+$$
+\frac{\partial x}{\partial p} = \underbrace{\frac{\partial h_x}{\partial p}}_{=0} - x\frac{\partial x}{\partial m} = 0 - \frac{2m}{2p+1}\cdot\frac{2}{2p+1} = -\frac{4m}{(2p+1)^2} = \frac{\partial x(p,m)}{\partial p}.
+$$
+따라서 가격 변화에 따른 마샬 수요의 변동은 오직 가격 상승에 따른 실질소득(구매력) 감소 효과인 **소득효과(income effect)**에 의해서만 100% 설명된다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- 마샬 수요: kink $x=2y$와 예산 결합 $\implies x(p,m) = \frac{2m}{2p+1}, y(p,m) = \frac{m}{2p+1}$.
+- 간접효용 & 지출함수: $V(p,m) = \frac{m}{p+1/2} \iff e(p,u) = (p+1/2)u$, $e(p,V(p,m))=m$ 성립.
+- 힉스 수요: 가격 무관 $h_x = u, h_y = u/2$.
+- 슬러츠키 분해: 대체효과 $= 0$, 마샬 수요의 가격 반응은 전적으로 소득효과에 기인.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. Producer Theory
 ::: {.topic}
@@ -115,6 +216,111 @@ $$
 
 ::: {.spoon-hint}
 **형식**: **unit cost comparison → corner solution → cost function → concavity → Shephard at differentiable points**. Cobb–Douglas와 달리 interior FOC가 아니라 각 요소의 단위산출당 비용을 비교하는 것이 핵심이다.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Producer Theory (Perfect Substitutes & Cost Duality)"}
+### Setting
+생산기술: 선형 생산함수(완전대체재)
+$$
+q = L + 2K, \qquad L, K \ge 0.
+$$
+요소가격: $w > 0, r > 0$, 목표산출량 $q > 0$.
+
+---
+
+#### 1) Cost minimization과 conditional factor demand
+비용최소화 문제:
+$$
+\min_{L, K \ge 0} \{wL + rK\} \quad\text{s.t.}\quad L + 2K \ge q.
+$$
+노동 1단위는 산출물 1단위를 생산하므로 단위산출당 비용은 $w$이다.
+자본 1단위는 산출물 2단위를 생산하므로 단위산출당 비용은 $\frac{r}{2}$이다.
+요소가격이 양수이므로 최적점에서 생산제약은 $L + 2K = q \iff K = \frac{q-L}{2}$ ($0 \le L \le q$)로 결합한다.
+총비용을 $L$만의 함수로 나타내면
+$$
+wL + r\left(\frac{q-L}{2}\right) = \frac{rq}{2} + \left(w - \frac{r}{2}\right)L.
+$$
+기울기 $w - \frac{r}{2}$의 부호에 따라 조건부 요소수요가 결정된다:
+
+1. **$w < \frac{r}{2}$ (노동의 단위비용이 더 저렴):**
+   기울기가 음수이므로 $L$을 최대로 투입하는 모퉁이해(corner solution)가 최적이다:
+   $$
+   \boxed{(L^c, K^c) = (q, 0)}.
+   $$
+2. **$w > \frac{r}{2}$ (자본의 단위비용이 더 저렴):**
+   기울기가 양수이므로 $L$을 0으로 줄이고 자본만 사용하는 모퉁이해가 최적이다:
+   $$
+   \boxed{(L^c, K^c) = \left(0, \frac{q}{2}\right)}.
+   $$
+3. **$w = \frac{r}{2}$ (두 요소의 단위비용이 동일):**
+   총비용이 $wL + rK = w(L+2K) = wq$로 모든 실행가능한 투입조합에서 일정하다.
+   따라서 최적 투입조합은 단일한 점이 아니라 $L + 2K = q$ 선분 전체가 되며, 조건부 요소수요는 **대응(correspondence)**이 된다:
+   $$
+   \boxed{\mathcal X^c(w,r,q) = \left\{\left(\ell, \frac{q-\ell}{2}\right) : 0 \le \ell \le q\right\}}.
+   $$
+
+---
+
+#### 2) Cost function, homogeneity와 concavity
+총비용함수(Cost Function):
+$$
+C(w,r,q) = \begin{cases} wq, & w < \frac{r}{2}, \\[4pt] \frac{rq}{2}, & w > \frac{r}{2}, \\[4pt] wq = \frac{rq}{2}, & w = \frac{r}{2} \end{cases} \quad\Longrightarrow\quad \boxed{C(w,r,q) = q\min\left\{w, \frac{r}{2}\right\}}.
+$$
+
+**1차 동차성(Degree 1 Homogeneity):**
+임의의 $t > 0$에 대해
+$$
+C(tw, tr, q) = q\min\left\{tw, \frac{tr}{2}\right\} = t q\min\left\{w, \frac{r}{2}\right\} = t C(w,r,q).
+$$
+따라서 요소가격 $(w,r)$에 대해 1차 동차(degree 1 homogeneous)이다.
+
+**오목성(Concavity in Factor Prices):**
+$C(w,r,q)$는 $(w,r)$에 대한 두 선형(affine) 함수 $g_1(w,r) = qw$와 $g_2(w,r) = \frac{qr}{2}$의 점별 최소(pointwise minimum)이다.
+오목함수(선형함수 포함)들의 점별 최소는 항상 오목함수이므로, $C(w,r,q)$는 요소가격에 대해 **오목(concave)**하다.
+(비용최소화 정의로부터: $C(\lambda v + (1-\lambda)v') = \min [(\lambda v + (1-\lambda)v')\cdot x] \ge \lambda \min(v\cdot x) + (1-\lambda)\min(v'\cdot x) = \lambda C(v) + (1-\lambda)C(v')$).
+
+또한 산출량 $q$에 대해 $AC(q) = MC(q) = \min\{w, r/2\}$로 일정하므로, 선형 생산함수의 규모수익불변(CRS) 특성과 완벽히 부합한다.
+
+---
+
+#### 3) Shephard's lemma, 비미분가능성과 요소대체
+1. **$w < \frac{r}{2}$인 미분가능점:**
+   $C(w,r,q) = wq$이므로
+   $$
+   \frac{\partial C}{\partial w} = q = L^c, \qquad \frac{\partial C}{\partial r} = 0 = K^c.
+   $$
+2. **$w > \frac{r}{2}$인 미분가능점:**
+   $C(w,r,q) = \frac{rq}{2}$이므로
+   $$
+   \frac{\partial C}{\partial w} = 0 = L^c, \qquad \frac{\partial C}{\partial r} = \frac{q}{2} = K^c.
+   $$
+   따라서 $w \ne \frac{r}{2}$인 모든 점에서 Shephard's lemma가 정확히 성립한다.
+
+3. **$w = \frac{r}{2}$에서의 비미분가능성(Kink):**
+   $w = \frac{r}{2}$에서는 두 비용 평면 $qw$와 $\frac{qr}{2}$가 교차하는 꺾임점(kink)이다.
+   $r$을 고정하고 $w$에 대한 좌미분과 우미분을 계산하면
+   $$
+   \lim_{w \to (r/2)^-} \frac{\partial C}{\partial w} = q, \qquad \lim_{w \to (r/2)^+} \frac{\partial C}{\partial w} = 0.
+   $$
+   좌우미분계수가 불일치하므로 일반적인 도함수는 존재하지 않는다(non-differentiable).
+   이때 오목함수의 **초구배(subdifferential / supergradient)** 집합은
+   $$
+   \partial C(w,r,q) = \left\{(L, K) : L \in [0, q], K = \frac{q-L}{2}\right\}
+   $$
+   가 되어, 1번에서 도출한 조건부 요소수요 대응 $\mathcal X^c(w,r,q)$과 정확히 일치한다.
+
+**완전대체재 기술의 경제적 해석:**
+노동과 자본의 기술적 한계대체율은 $MRTS_{LK} = \frac{MP_L}{MP_K} = \frac{1}{2}$로 항상 일정하다.
+등비용선의 기울기 $\frac{w}{r}$가 한계대체율 $\frac{1}{2}$보다 조금이라도 낮으면($w < \frac{r}{2}$) 노동만 전량 투입되고, 조금이라도 높으면($w > \frac{r}{2}$) 자본만 전량 투입되는 극단적인 모퉁이해 전환이 일어난다.
+곡률(curvature)이 없는 선형 등량곡선에서는 두 요소 간의 대체탄력성이 무한대($\sigma = \infty$)이므로, 상대가격의 미세한 변화에도 최적 투입구성이 불연속적으로 점프한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- 조건부 요소수요: $w < r/2 \implies (q, 0)$, $w > r/2 \implies (0, q/2)$, $w=r/2 \implies L+2K=q$ 선분 전체 (대응).
+- 비용함수: $C(w,r,q) = q\min\{w, r/2\}$, $(w,r)$에 대해 1차 동차이자 오목(pointwise minimum).
+- Shephard 보조정리: $w \ne r/2$에서 $\nabla C = (L^c, K^c)$, $w=r/2$의 kink에서는 초구배가 요소수요 대응과 일치.
+- 대체탄력성: $\sigma=\infty$로 인해 $w/r = 1/2$ 경계에서 corner 간 불연속 전환 발생.
 :::
 :::
 

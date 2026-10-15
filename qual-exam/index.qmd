@@ -378,12 +378,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-23.html" class="spoon-card" data-subject="micro" data-round="23">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#23 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">소비자이론 · 생산자이론</div>
   <div class="spoon-card__desc">완전보완재(Leontief 선호) 마샬/힉스 수요와 지출함수 쌍대성, 완전대체요소 기술의 구석해(Corner Solution) 비용함수 오목성 및 Shephard 보조정리</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -606,12 +609,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-09.html" class="spoon-card" data-subject="macro" data-round="9">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#9 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">내생적 성장이론 III · R&D 모형</div>
   <div class="spoon-card__desc">아이디어 축적(A' = η L_A A)과 장기성장률, R&D 노동배분 확대의 단기 산출 감소와 장기 성장 촉진 간 상충관계(Trade-off) 및 추월시점 계산</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -810,12 +816,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-09.html" class="spoon-card" data-subject="metrics" data-round="9">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#9 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">잠재적 결과와 성향점수 · 인과적 IV와 LATE</div>
   <div class="spoon-card__desc">선택편의 분해와 조건부 독립성(Unconfoundedness), 성향점수 회귀조정 및 IPW 가중치, Causal IV의 단조성(Monotonicity)과 LATE 국소인과효과 식별</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1299,12 +1308,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="micro/set-23.html" class="spoon-card" data-subject="micro" data-round="23">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#23 회차</span>
-    <span class="chip chip--micro">미시경제학</span>
+    <div>
+      <span class="chip chip--micro">미시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">소비자이론 · 생산자이론</div>
   <div class="spoon-card__desc">완전보완재(Leontief 선호) 마샬/힉스 수요와 지출함수 쌍대성, 완전대체요소 기술의 구석해(Corner Solution) 비용함수 오목성 및 Shephard 보조정리</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1542,12 +1554,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="macro/set-09.html" class="spoon-card" data-subject="macro" data-round="9">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#9 회차</span>
-    <span class="chip chip--macro">거시경제학</span>
+    <div>
+      <span class="chip chip--macro">거시경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">내생적 성장이론 III · R&D 모형</div>
   <div class="spoon-card__desc">아이디어 축적(A' = η L_A A)과 장기성장률, R&D 노동배분 확대의 단기 산출 감소와 장기 성장 촉진 간 상충관계(Trade-off) 및 추월시점 계산</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
@@ -1761,12 +1776,15 @@ QUALIFYING EXAMINATION · DAILY PRACTICE ARCHIVE
 <a href="econometrics/set-09.html" class="spoon-card" data-subject="metrics" data-round="9">
   <div class="spoon-card__header">
     <span class="spoon-card__round">#9 회차</span>
-    <span class="chip chip--metrics">계량경제학</span>
+    <div>
+      <span class="chip chip--metrics">계량경제학</span>
+      <span class="chip chip--primary" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">해설 수록</span>
+    </div>
   </div>
   <div class="spoon-card__title">잠재적 결과와 성향점수 · 인과적 IV와 LATE</div>
   <div class="spoon-card__desc">선택편의 분해와 조건부 독립성(Unconfoundedness), 성향점수 회귀조정 및 IPW 가중치, Causal IV의 단조성(Monotonicity)과 LATE 국소인과효과 식별</div>
   <div class="spoon-card__footer">
-    <span class="status">문제 풀기 →</span>
+    <span class="status">문제 풀기 · 해설 수록 →</span>
   </div>
 </a>
 
