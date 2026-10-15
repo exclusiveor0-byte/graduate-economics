@@ -18,7 +18,7 @@ GRADUATE MACROECONOMICS · DAILY PRACTICE
 [거시경제학]{.chip .chip--macro}
 [총 2문제]{.chip}
 [예상 30–40분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -69,6 +69,96 @@ $$
    아이디어의 *성장률*과 아이디어의 *절대적인 증가량*을 구분하시오.
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. R&D and the Accumulation of Ideas"}
+### Setting
+최종재 생산기술: $Y(t) = A(t)L_Y(t)$.
+아이디어(지식) 생산기술: $\dot A(t) = \eta L_A(t)A(t)$, $\eta > 0$.
+총노동 제약: $L = L_Y(t) + L_A(t) = \text{const}$.
+연구개발 노동 $L_A$와 최종재 생산 노동 $L_Y$는 상수로 일정하다.
+
+---
+
+#### 1) 아이디어 축적률, 기술수준 및 산출의 시간경로
+아이디어 축적식을 $A(t) > 0$으로 나누면 아이디어의 연속시간 성장률은
+$$
+\boxed{g_A := \frac{\dot A(t)}{A(t)} = \eta L_A}.
+$$
+$\eta$와 $L_A$가 모두 양의 상수이므로 $g_A$ 역시 상수가 된다.
+양변을 $t=0$부터 $t$까지 적분하면
+$$
+\ln A(t) - \ln A_0 = \eta L_A t \quad\Longrightarrow\quad \boxed{A(t) = A_0 e^{\eta L_A t}}.
+$$
+최종재 생산 노동은 $L_Y = L - L_A$이므로 산출의 시간경로는
+$$
+\boxed{Y(t) = A_0(L - L_A)e^{\eta L_A t}}.
+$$
+산출함수 $Y(t) = A(t)L_Y$의 양변에 로그미분을 취하면
+$$
+g_Y = \frac{\dot Y}{Y} = \frac{\dot A}{A} + \frac{\dot L_Y}{L_Y}.
+$$
+노동배분 $L_Y$가 일정하므로 $\dot L_Y = 0$이며, 따라서
+$$
+\boxed{g_Y = g_A = \eta L_A}.
+$$
+즉, 지식수준과 총산출은 동일한 일정한 성장률 $g = \eta L_A$로 영구히 성장하는 균형성장경로(Balanced Growth Path)를 따른다. 기존에 축적된 지식 $A(t)$가 새로운 아이디어 창출에 거인의 어깨(standing on shoulders) 역할을 하므로, 노동인구가 증가하지 않더라도 일정 수준의 R&D 인력만 유지되면 지속적인 경제성장이 가능하다.
+
+---
+
+#### 2) 수치계산: 성장률, 초기 산출 및 10년 후 산출
+주어진 파라미터 값:
+$$
+L = 100, \qquad L_A = 20, \qquad \eta = 0.001, \qquad A(0) = 1.
+$$
+최종재 생산 노동: $L_Y = L - L_A = 100 - 20 = 80$.
+아이디어 및 산출의 공통 성장률:
+$$
+g_A = g_Y = \eta L_A = (0.001) \times 20 = \boxed{0.02 \quad (\text{연 } 2\%)}.
+$$
+초기 시점 산출:
+$$
+\boxed{Y(0) = A(0)L_Y = 1 \times 80 = 80}.
+$$
+산출의 궤적 $Y(t) = 80 e^{0.02t}$에 $t=10$을 대입하면
+$$
+\boxed{Y(10) = 80 e^{0.02 \times 10} = 80 e^{0.2} \approx 97.71}.
+$$
+(참고: $A(10) = e^{0.2} \approx 1.2214$). 연속 복리 효과로 인해 10년 동안 산출과 기술수준은 각각 약 $22.14\%$ 증가한다.
+
+---
+
+#### 3) Prove or Disprove: R&D 노동이 일정하면 새 아이디어 수량도 일정한가?
+> *If R&D employment remains constant, the number of new ideas produced per unit of time must also remain constant.*
+
+**판정: 거짓 (Disprove / False).**
+R&D 노동 $L_A$가 시간에 따라 일정하더라도, 단위시간당 새롭게 생산되는 아이디어의 **절대적 수량($\dot A(t)$)**은 일정하지 않고 시간이 지남에 따라 지수적으로 증가한다.
+
+**논증:**
+아이디어 생산함수는 $\dot A(t) = \eta L_A A(t)$이다. 기술수준 $A(t) = A_0 e^{\eta L_A t}$를 대입하면
+$$
+\boxed{\dot A(t) = \eta L_A A_0 e^{\eta L_A t}}.
+$$
+시간에 대해 미분하면
+$$
+\ddot A(t) = (\eta L_A)^2 A_0 e^{\eta L_A t} > 0 \quad (\because \eta > 0, L_A > 0, A_0 > 0).
+$$
+즉, 신규 아이디어의 절대 생산량 $\dot A(t)$는 시간 $t$에 따라 엄격히 증가한다.
+예컨대 2번 문항의 수치에서
+- $t=0$ 시점의 연간 신규 아이디어 생산량: $\dot A(0) = 0.02$.
+- $t=10$ 시점의 연간 신규 아이디어 생산량: $\dot A(10) = 0.02 e^{0.2} \approx 0.02443$.
+R&D 인력은 20명으로 불변이지만, 과거 지식이 축적되어 연구 생산성이 높아짐에 따라 매년 새로 발명되는 특허/아이디어의 절대 개수는 점점 더 많아진다.
+
+일정하게 유지되는 것은 아이디어의 **상대적 증가율(성장률 $g_A = \dot A/A = \eta L_A$)**이지, 절대적인 증가량($\dot A$)이 아니다.
+따라서 $\text{일정한 성장률} \not\Rightarrow \text{일정한 절대 증가량}$이다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- 성장률: $g_A = g_Y = \eta L_A$ (R&D 노동 투입에 비례).
+- 경로: $A(t) = A_0 e^{\eta L_A t}, Y(t) = A_0(L - L_A)e^{\eta L_A t}$.
+- 수치계산: $g = 2\%, Y(0) = 80, Y(10) = 80e^{0.2} \approx 97.71$.
+- 절대 증가량 vs 성장률: $L_A$ 일정 시 $g_A$는 일정하지만, 지식 누적 효과로 신규 아이디어 절대 생산량 $\dot A(t)$는 지수적으로 증가.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. R&D Reallocation and the Growth Trade-off
 ::: {.topic}
@@ -109,6 +199,103 @@ Problem 1의 경제에서 $L=100$, $\eta=0.001$이라고 하자.
 **문제 범위**: 이번 회차는 R&D 노동배분에 따른
 현재 산출의 변화와 장기성장률의 변화에 집중한다.
 특허, 독점적 경쟁, 최적 R&D 투자 및 후생분석은 다루지 않는다.
+:::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. R&D Reallocation and the Growth Trade-off"}
+### Setting
+총노동 $L = 100$, 아이디어 생산성 $\eta = 0.001$, 초기 지식스톡 $A(0) = 1$.
+- 기존 계획 (Old): $(L_A^{\mathrm{old}}, L_Y^{\mathrm{old}}) = (20, 80)$.
+- 신규 정책 (New): $(L_A^{\mathrm{new}}, L_Y^{\mathrm{new}}) = (30, 70)$ ($t=0$ 시점에 영구 전환).
+아이디어 $A(t)$는 상태변수(state variable)이므로 $t=0$ 시점에 점프하지 않는다 ($A(0^+) = A(0^-) = 1$).
+
+---
+
+#### 1) 연구개발 노동 확대의 충격효과와 성장률효과
+**단기 충격효과 (Impact Effect on Output Level):**
+최종재 생산에 투입되는 노동이 즉시 80명에서 70명으로 10명 감소한다.
+- 충격 직전 산출: $Y(0^-) = A(0)L_Y^{\mathrm{old}} = 1 \times 80 = 80$.
+- 충격 직후 산출: $Y(0^+) = A(0)L_Y^{\mathrm{new}} = 1 \times 70 = 70$.
+따라서 산출 수준은 불연속적으로 급락한다:
+$$
+\boxed{\Delta Y(0) = 70 - 80 = -10 \quad \left(\frac{70-80}{80} \times 100 = -12.5\%\right)}.
+$$
+
+**장기 성장률효과 (Growth Effect):**
+R&D 인력이 늘어남에 따라 아이디어 축적 속도 및 장기 산출 성장률은 영구적으로 가속된다:
+- 기존 성장률: $g^{\mathrm{old}} = \eta L_A^{\mathrm{old}} = 0.001 \times 20 = 0.02$ (연 2%).
+- 신규 성장률: $g^{\mathrm{new}} = \eta L_A^{\mathrm{new}} = 0.001 \times 30 = 0.03$ (연 3%).
+$$
+\boxed{\Delta g_Y = g^{\mathrm{new}} - g^{\mathrm{old}} = 3\% - 2\% = +1\%p}.
+$$
+
+**현재 생산과 미래 성장 사이의 상충관계 (Trade-off):**
+R&D 투입을 늘리기 위해 생산 현장에서 인력을 차출하면, 당장의 최종재 생산능력이 위축되어 현재 세대의 소비 가능 수준이 하락한다(단기 희생). 그러나 가속화된 기술진보가 누적되면서 장기적으로 산출 경로의 기울기가 가팔라져 미래 세대의 풍요를 가져온다. 즉, 현재의 소비 희생과 미래의 고성장 간의 근본적인 동태적 상충관계(dynamic trade-off)가 발생한다.
+
+---
+
+#### 2) 두 산출경로와 추월 시점
+기존 정책 하의 산출 궤적:
+$$
+\boxed{Y_{\mathrm{old}}(t) = 80 e^{0.02t}}.
+$$
+노동 재배분 후의 산출 궤적:
+$$
+\boxed{Y_{\mathrm{new}}(t) = 70 e^{0.03t}}.
+$$
+재배분 이후의 산출 수준이 기존 계획의 산출 수준을 따라잡아 추월하는 시점 $T$는
+$$
+Y_{\mathrm{new}}(T) = Y_{\mathrm{old}}(T) \quad\Longleftrightarrow\quad 70 e^{0.03T} = 80 e^{0.02T}.
+$$
+양변을 $70 e^{0.02T}$로 나누면
+$$
+e^{0.01T} = \frac{80}{70} = \frac{8}{7}.
+$$
+양변에 자연로그를 취하면
+$$
+0.01T = \ln\left(\frac{8}{7}\right) \quad\Longrightarrow\quad \boxed{T = \frac{\ln(8/7)}{0.01} = 100 \times \ln\left(\frac{8}{7}\right) \approx 13.35 \quad (\text{년})}.
+$$
+산출 비율 식을 보면
+$$
+\frac{Y_{\mathrm{new}}(t)}{Y_{\mathrm{old}}(t)} = \frac{7}{8} e^{0.01t}.
+$$
+$t=0$에서 $0.875$로 출발한 산출 비율은 시간이 흐름에 따라 지속적으로 상승하여, 약 **13.35년**이 지난 시점에 정확히 1이 되고 그 이후로는 $Y_{\mathrm{new}}(t) > Y_{\mathrm{old}}(t)$가 영구히 유지된다 ($T$ 시점의 산출량은 $Y(T) \approx 104.49$).
+
+---
+
+#### 3) Prove or Disprove: 추월 시점은 초기 아이디어 수준에 의존하는가?
+> *The overtaking time depends on the initial stock of ideas $A(0)$.*
+
+**판정: 거짓 (Disprove / False).**
+동일한 초기 지식수준 $A_0 > 0$가 두 경로에 공통으로 적용되는 한, 추월 시점 $T$는 $A_0$의 크기에 전혀 영향을 받지 않는다.
+
+**논증:**
+초기 아이디어 스톡을 임의의 양수 $A_0$라 하면 두 경로는
+$$
+Y_{\mathrm{old}}(t) = A_0 \cdot 80 e^{0.02t}, \qquad Y_{\mathrm{new}}(t) = A_0 \cdot 70 e^{0.03t}.
+$$
+추월 조건 $Y_{\mathrm{new}}(T) = Y_{\mathrm{old}}(T)$에서
+$$
+70 A_0 e^{0.03T} = 80 A_0 e^{0.02T}.
+$$
+양변의 $A_0 > 0$가 완전히 약분(cancel out)되어 소거된다:
+$$
+70 e^{0.03T} = 80 e^{0.02T} \quad\Longrightarrow\quad \boxed{T = \frac{\ln(8/7)}{0.01} \approx 13.35 \quad (\text{년})}.
+$$
+일반화 공식:
+$$
+\boxed{T = \frac{\ln\left(\frac{L - L_A^{\mathrm{old}}}{L - L_A^{\mathrm{new}}}\right)}{\eta(L_A^{\mathrm{new}} - L_A^{\mathrm{old}})}}.
+$$
+이 식에서 보듯, 추월 시점 $T$는 오직 **(1) 생산노동의 초기 감소 비율, (2) R&D 인력 증가폭, (3) 아이디어 생산성 파라미터 $\eta$**에 의해서만 결정되며, 경제의 초기 발전 단계나 초기 기술 수준 $A_0$와는 완전히 무관하다.
+
+초기 기술수준이 높으면 두 경로의 산출이 모두 비례적으로 같은 비율만큼 높아질 뿐, 상대적인 산출 비율 곡선 $\frac{Y_{\mathrm{new}}(t)}{Y_{\mathrm{old}}(t)} = \frac{L_Y^{\mathrm{new}}}{L_Y^{\mathrm{old}}}e^{\eta \Delta L_A t}$ 자체는 전혀 이동하지 않기 때문이다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- R&D 인력 확대($20\to30$): 단기 산출 12.5% 즉각 감소($80\to70$), 장기 성장률 1%p 영구 가속($2\%\to3\%$).
+- 동태적 상충관계: 현재 소비 희생 vs. 미래 성장 촉진.
+- 추월 시점: $70e^{0.03T} = 80e^{0.02T} \implies T = \frac{\ln(8/7)}{0.01} \approx 13.35$년.
+- $A(0)$ 무관성: $A_0$가 양변에서 상쇄되므로, 초기 기술수준은 추월 시점에 영향을 미치지 않음.
 :::
 :::
 

@@ -18,7 +18,7 @@ GRADUATE ECONOMETRICS · DAILY PRACTICE
 [계량경제학]{.chip .chip--metrics}
 [총 2문제]{.chip}
 [예상 65–80분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -208,6 +208,191 @@ $$
 :::
 :::
 
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Potential Outcomes, Selection on Observables & Propensity Score"}
+### Setting
+잠재적 결과 체계(Potential Outcomes Framework):
+각 개인 $i$에 대해 처치 여부에 따른 잠재결과 $Y_i(1), Y_i(0)$, 처치 지시변수 $D_i \in \{0, 1\}$.
+관측 결과(Consistency):
+$$
+Y_i = D_i Y_i(1) + (1 - D_i) Y_i(0).
+$$
+
+---
+
+#### 1. Individual treatment effect와 인과추론의 근본 문제
+개별 처치효과(Individual Treatment Effect):
+$$
+\boxed{\tau_i = Y_i(1) - Y_i(0)}.
+$$
+한 개인 $i$에 대해 $D_i = 1$이면 실제 관측값은 $Y_i = Y_i(1)$뿐이며 $Y_i(0)$는 관측 불가능한 반사실(counterfactual)이 된다. 반대로 $D_i = 0$이면 $Y_i(0)$만 관측되고 $Y_i(1)$은 반사실이 된다.
+동일한 개인이 특정 시점에 처치를 받는 상태와 받지 않는 상태를 동시에 경험할 수 없으므로 개별 처치효과 $\tau_i$는 원천적으로 관측 불가능하다. 이를 **인과추론의 근본 문제(Fundamental Problem of Causal Inference)**라 하며, 이로 인해 인과추론은 개별 효과 대신 집단 수준의 평균 처치효과를 식별하는 방향으로 접근한다.
+
+---
+
+#### 2. ATE와 ATT: 서로 다른 대상 모집단
+- **평균 처치효과 (Average Treatment Effect, ATE):**
+  $$
+  \boxed{ATE = E[\tau_i] = E[Y_i(1) - Y_i(0)]}.
+  $$
+  전체 모집단 구성원 모두에게 무작위로 처치를 가했을 때의 1인당 평균 인과효과이다.
+- **처치받은 집단에 대한 평균 처치효과 (Average Treatment Effect on the Treated, ATT):**
+  $$
+  \boxed{ATT = E[\tau_i \mid D_i = 1] = E[Y_i(1) - Y_i(0) \mid D_i = 1]}.
+  $$
+  실제로 처치를 자발적 또는 선별적으로 선택/할당받은 하위집단에서의 평균 인과효과이다.
+
+**불일치 원인 (처치효과의 이질성, Heterogeneity):**
+처치효과 $\tau_i$가 개인의 특성에 따라 상이하다면, 처치 참여에 따른 기대 이득이 큰 개인이 처치를 선택할 가능성이 높다.
+미처치군 평균 처치효과를 $ATU = E[\tau \mid D=0]$, 처치 비율을 $q = P(D=1)$라 하면
+$$
+ATE = q \cdot ATT + (1 - q) \cdot ATU \quad\Longrightarrow\quad ATE - ATT = (1 - q)(ATU - ATT).
+$$
+따라서 처치효과의 이질성($ATT \ne ATU$)이 존재하면 $ATE \ne ATT$가 된다 (단, 모든 개인에게 효과가 동일한 $\tau_i = \tau$인 동질적 환경에서는 $ATE = ATT$).
+
+---
+
+#### 3. 관측 평균차 = ATT + selection bias
+관측 결과의 정의($Y = DY(1) + (1-D)Y(0)$)에 의해
+$$
+E[Y \mid D = 1] = E[Y(1) \mid D = 1], \qquad E[Y \mid D = 0] = E[Y(0) \mid D = 0].
+$$
+두 집단의 단순 관측 평균차에서 반사실 $E[Y(0) \mid D = 1]$을 더하고 빼면:
+$$
+\begin{aligned}
+E[Y \mid D = 1] - E[Y \mid D = 0] &= E[Y(1) \mid D = 1] - E[Y(0) \mid D = 0] \\
+&= \underbrace{E[Y(1) - Y(0) \mid D = 1]}_{ATT} + \underbrace{\left\{E[Y(0) \mid D = 1] - E[Y(0) \mid D = 0]\right\}}_{\text{선택 편향 (Selection Bias)}}.
+\end{aligned}
+$$
+따라서
+$$
+\boxed{\text{관측 평균차} = ATT + \text{Selection Bias}}.
+$$
+선택 편향은 처치집단이 처치를 받지 않았더라도 대조군과 기초 잠재결과에서 차이를 보였을 체계적 괴리를 의미한다. 예를 들어 고학력자가 자발적으로 직업훈련($D=1$)에 참여한 경우, 훈련을 받지 않았더라도 원래 생산성($Y(0)$)이 미참여자보다 높으므로 단순 평균차는 훈련의 순수한 인과효과를 과대평가하게 된다.
+
+---
+
+#### 4. Random assignment가 평균차를 ATE로 만드는 이유
+처치가 무작위 배정(Random Assignment)되면 처치 배정 $D$와 잠재결과가 상호 독립이다:
+$$
+D \perp (Y(1), Y(0)).
+$$
+독립성에 의해 각 $d \in \{0, 1\}$에 대해 $E[Y(d) \mid D = 1] = E[Y(d) \mid D = 0] = E[Y(d)]$가 성립한다.
+따라서 선택 편향은 완전히 소멸한다:
+$$
+\text{Selection Bias} = E[Y(0) \mid D = 1] - E[Y(0) \mid D = 0] = E[Y(0)] - E[Y(0)] = 0.
+$$
+그 결과 단순 관측 평균차는 순수한 인과효과와 정확히 일치한다:
+$$
+E[Y \mid D = 1] - E[Y \mid D = 0] = E[Y(1)] - E[Y(0)] = \boxed{ATE = ATT}.
+$$
+즉, 무작위 배정은 처치군과 대조군 사이의 사전적 특성(잠재결과의 분포)을 평균적으로 완벽히 동일하게 만들어 선택 편향을 제거한다.
+
+---
+
+#### 5. Unconfoundedness와 overlap의 식별 역할
+관측연구(Observational Study)에서는 다음 두 조건이 인과 식별의 기본 기둥이 된다:
+1. **조건부 독립성 (Conditional Independence / Unconfoundedness):**
+   $$
+   \boxed{(Y(1), Y(0)) \perp D \mid X}.
+   $$
+   관측 가능한 공변량 벡터 $X$를 통제한 조건부 상태에서는, 처치 배정 $D$가 마치 무작위로 부여된 것처럼 잠재결과와 독립이라는 가정이다 (Selection on Observables). 즉, 처치 선택과 결과에 동시에 영향을 미치는 모든 교란요인(confounders)이 $X$에 온전히 관측·포함되어 있음을 뜻한다.
+2. **중첩 조건 (Overlap / Positivity):**
+   $$
+   \boxed{0 < P(D = 1 \mid X) < 1 \quad \text{a.s.}}.
+   $$
+   공변량 $X$의 거의 모든 값에서 처치를 받을 확률과 받지 않을 확률이 모두 0보다 크다는 조건이다. 만약 특정 $X=x$에서 $P(D=1 \mid X=x) = 1$이면 대조군이 전혀 존재하지 않고, $0$이면 처치군이 존재하지 않으므로 반사실적 비교가 원천적으로 불가능해진다. 중첩 조건은 모든 공변량 층에서 실증적인 비교 대상이 존재함을 보장한다.
+
+---
+
+#### 6. Regression adjustment의 식별 공식
+조건부 독립성과 consistency에 의해
+$$
+E[Y \mid D = d, X] = E[Y(d) \mid D = d, X] = E[Y(d) \mid X].
+$$
+반복 기댓값의 법칙(Law of Iterated Expectations)을 적용하면
+$$
+\begin{aligned}
+ATE &= E[Y(1) - Y(0)] = E\big[E[Y(1) \mid X] - E[Y(0) \mid X]\big] \\
+&= \boxed{E\big[E[Y \mid D = 1, X] - E[Y \mid D = 0, X]\big]}.
+\end{aligned}
+$$
+조건부 결과 모형을 $m_d(X) = E[Y \mid D = d, X]$ ($d=0,1$)라 두면 $ATE = E[m_1(X) - m_0(X)]$이다.
+이는 각 관측치 $i$에 대해 $X_i$를 대입하여 처치 시 예측치 $\hat m_1(X_i)$와 미처치 시 예측치 $\hat m_0(X_i)$를 각각 구한 뒤, 그 차이의 표본평균 $\frac{1}{n}\sum_{i=1}^n (\hat m_1(X_i) - \hat m_0(X_i))$을 계산하는 **회귀 조정(Regression Adjustment / G-computation)** 추정법의 이론적 기초가 된다.
+
+---
+
+#### 7. Propensity score의 balancing property
+성향점수(Propensity Score)는 공변량 $X$가 주어졌을 때 처치를 받을 조건부 확률이다:
+$$
+p(X) = P(D = 1 \mid X) = E[D \mid X].
+$$
+**균형 성질 (Balancing Property):**
+$$
+\boxed{D \perp X \mid p(X)}.
+$$
+**증명:**
+이진 변수 $D$에 대해 $P(D=1 \mid X, p(X)) = P(D=1 \mid X) = p(X)$이다.
+또한 tower property에 의해 $P(D=1 \mid p(X)) = E[P(D=1 \mid X) \mid p(X)] = E[p(X) \mid p(X)] = p(X)$이다.
+따라서 $P(D=1 \mid X, p(X)) = P(D=1 \mid p(X))$가 성립하므로, 성향점수가 동일한 집단 내에서는 공변량 $X$와 처치 지시자 $D$가 통계적으로 독립이다. 즉, 성향점수는 다차원의 복잡한 공변량 벡터 $X$를 1차원의 스칼라 지표로 완벽하게 축약(dimension reduction)해 주는 역할을 한다.
+
+---
+
+#### 8. Propensity score 조건부 unconfoundedness
+Rosenbaum & Rubin (1983) 정리에 의해, $X$에 대해 조건부 독립성이 성립하면 1차원 성향점수 $p(X)$에 대해서도 잠재결과의 조건부 독립성이 성립한다:
+$$
+\boxed{(Y(1), Y(0)) \perp D \mid p(X)}.
+$$
+**증명:**
+임의의 사건 $A$에 대해
+$$
+\begin{aligned}
+P((Y(1),Y(0)) \in A \mid D=d, p(X)) &= E\big[P((Y(1),Y(0)) \in A \mid D=d, X) \mid D=d, p(X)\big] \\
+&= E\big[P((Y(1),Y(0)) \in A \mid X) \mid D=d, p(X)\big] \quad (\because \text{unconfoundedness given } X) \\
+&= E\big[P((Y(1),Y(0)) \in A \mid X) \mid p(X)\big] \quad (\because D \perp X \mid p(X)) \\
+&= P((Y(1),Y(0)) \in A \mid p(X)).
+\end{aligned}
+$$
+**유용성:** 수십 개의 공변량 $X$를 일대일로 완벽하게 일치시키는 매칭은 차원의 저주(curse of dimensionality)로 인해 불가능에 가깝다. 반면 성향점수 정리 덕분에 오직 단일 스칼라인 $\hat p(X)$ 값이 유사한 개체들을 짝짓거나(Propensity Score Matching) 구간별로 나누어 비교(Stratification)하는 것만으로 다차원 공변량 전체를 통제한 것과 동일한 인과 식별 효과를 얻을 수 있다.
+
+---
+
+#### 9. Inverse probability weighting (IPW) identity
+Consistency에 의해 $DY = DY(1)$이므로
+$$
+E\left[\frac{DY}{p(X)}\right] = E\left[E\left[\frac{DY(1)}{p(X)} \;\middle|\; X\right]\right] = E\left[\frac{1}{p(X)}E[D Y(1) \mid X]\right].
+$$
+조건부 독립성 $D \perp Y(1) \mid X$에 의해 $E[DY(1) \mid X] = E[D \mid X] E[Y(1) \mid X] = p(X)E[Y(1) \mid X]$.
+따라서
+$$
+E\left[\frac{DY}{p(X)}\right] = E\left[\frac{p(X)E[Y(1) \mid X]}{p(X)}\right] = E\big[E[Y(1) \mid X]\big] = \boxed{E[Y(1)]}.
+$$
+마찬가지로 $(1-D)Y = (1-D)Y(0)$이고 $E[1-D \mid X] = 1 - p(X)$이므로
+$$
+E\left[\frac{(1-D)Y}{1-p(X)}\right] = E\left[\frac{1-p(X)}{1-p(X)}E[Y(0) \mid X]\right] = \boxed{E[Y(0)]}.
+$$
+두 식의 차를 구하면 역확률가중(IPW)을 통한 ATE 식별 공식이 완성된다:
+$$
+\boxed{ATE = E\left[\frac{DY}{p(X)} - \frac{(1-D)Y}{1-p(X)}\right]}.
+$$
+이는 처치를 받을 확률이 낮았는데도 처치를 받은 개체에 높은 가중치($1/p(X)$)를 부여하여 가상의 균형 모집단을 재구성(reweighting)하는 원리이다.
+
+---
+
+#### 10. Near-violation of overlap과 IPW 불안정성
+만약 특정 개체의 성향점수가 0에 극도로 가까우면($p(X_i) \to 0$), 처치 관측치에 부여되는 역확률 가중치 $w_i = \frac{1}{p(X_i)}$가 천문학적으로 폭증한다(예: $p=0.001 \implies w=1000$). 반대로 $p(X_i) \to 1$이면 대조군 가중치 $\frac{1}{1-p(X_i)}$가 폭증한다.
+이 경우 극소수의 이상치(outliers)가 전체 가중 표본평균을 지배하게 되어, 추정량의 표본분산이 극단적으로 팽창하고 유한표본 추론이 매우 불안정해진다 ($E[Y(1)^2/p(X)] = \infty$ 가능성).
+따라서 실증분석에서는 가중치를 절단(trimming / clipping)하거나, 이중강건(doubly robust) 추정량, 안정화 가중치(stabilized weights) 등을 활용하여 중첩성 근접 위반 문제를 완화해야 한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 1 핵심 요약**:
+- 인과추론 근본 문제: $Y_i(1), Y_i(0)$ 동시 관측 불가 $\implies$ 관측 평균차 $= ATT + \text{Selection Bias}$.
+- 무작위 배정: $D \perp (Y(1),Y(0)) \implies \text{Selection Bias}=0$, 단순 평균차 $= ATE$.
+- 관측연구 식별: Unconfoundedness ($(Y(1),Y(0))\perp D\mid X$) + Overlap ($0 < p(X) < 1$).
+- 성향점수: $D \perp X \mid p(X)$ (균형성질), $(Y(1),Y(0))\perp D\mid p(X)$ (차원 축소).
+- IPW: $ATE = E\left[\frac{DY}{p(X)} - \frac{(1-D)Y}{1-p(X)}\right]$, overlap 근접 위반 시 가중치 폭증으로 분산 불안정.
+:::
+:::
+
 ::: {.spoon-problem}
 ### Problem 2. Instrumental Variables as Causal Identification & LATE
 ::: {.topic}
@@ -351,3 +536,143 @@ $$
 **형식**: **principal strata → IV assumptions → first stage → reduced form → Wald ratio → LATE → weak first stage**. 핵심은 IV가 단순히 내생성을 “고치는” 도구가 아니라, **어떤 population의 어떤 causal effect를 식별하는지**를 분명히 하는 것이다.
 :::
 :::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. Instrumental Variables as Causal Identification & LATE"}
+### Setting
+이진 처치 $D \in \{0, 1\}$, 이진 도구변수 $Z \in \{0, 1\}$.
+잠재적 처치상태 $D(1), D(0)$, 배제제약 하 잠재결과 $Y(1), Y(0)$.
+관측식: $D = D(Z), Y = Y(D(Z))$.
+
+---
+
+#### 1. 네 principal strata의 행동적 의미
+도구변수 $Z$가 $0$에서 $1$로 변할 때 개인이 처치를 선택하는 잠재적 반응에 따라 4가지 유형으로 분류된다:
+1. **Never-taker ($D(0)=0, D(1)=0$):** 도구변수 배정 여부와 상관없이 절대로 처치를 받지 않는 집단.
+2. **Complier ($D(0)=0, D(1)=1$):** 도구변수가 주어지지 않으면 처치를 받지 않고($Z=0 \implies D=0$), 도구변수가 주어질 때에만 처치를 받는($Z=1 \implies D=1$) 순응 집단.
+3. **Always-taker ($D(0)=1, D(1)=1$):** 도구변수 배정 여부와 무관하게 항상 자발적으로 처치를 받는 집단.
+4. **Defier ($D(0)=1, D(1)=0$):** 도구변수의 의도와 정반대로 행동하여, 배정되면 처치를 거부하고 배정되지 않으면 처치를 받는 반항 집단.
+
+한 개인에 대해 $Z=0$과 $Z=1$인 상황을 동시에 관측할 수 없으므로, 개별 관측치가 어느 stratum에 속하는지는 직접 관측할 수 없다.
+
+---
+
+#### 2. LATE를 위한 네 가지 IV 가정의 역할
+1. **관련성 (Relevance):** $E[D \mid Z=1] \ne E[D \mid Z=0]$. 도구변수가 실제 처치 참여율에 유의미한 변화를 유발해야 한다 (1단계 식별 조건).
+2. **독립성 (Instrument Independence):** $Z \perp \{Y(1), Y(0), D(1), D(0)\}$. 도구변수의 배정이 모든 잠재결과 및 잠재 처치유형과 독립적이어야 한다 (외생적 할당, 무작위 실험 또는 준실험 환경).
+3. **배제 제약 (Exclusion Restriction):** $Y(d, z) = Y(d)$. 도구변수 $Z$는 오직 처치 $D$의 경로를 통해서만 최종 결과 $Y$에 영향을 미치며, 직접적인 우회 경로는 존재하지 않는다.
+4. **단조성 (Monotonicity / No-defiers):** $D(1) \ge D(0)$ a.s. 도구변수가 처치 참여를 유도하는 방향으로만 작용하며, 반대로 행동하는 defier는 존재하지 않는다.
+
+네 가정은 각각 처치변동 유발(Relevance), 외생적 무작위성(Independence), 인과 메커니즘의 단일성(Exclusion), 반응 방향의 일관성(Monotonicity)을 규정하는 상호 독립적인 필수 조건이다.
+
+---
+
+#### 3. Monotonicity와 1단계 처치 변화 (Complier 비율)
+단조성 $D(1) \ge D(0)$는 $D(1) = 0$이면서 $D(0) = 1$인 경우, 즉 Defier 집단의 존재 확률을 완전히 배제한다:
+$$
+P(\text{Defier}) = 0.
+$$
+독립성에 의해 $E[D \mid Z=z] = E[D(z)]$이므로, 1단계(first stage) 처치확률 차이는
+$$
+E[D \mid Z=1] - E[D \mid Z=0] = E[D(1) - D(0)].
+$$
+각 stratum별로 $D(1) - D(0)$ 값을 확인하면:
+- Never-taker: $0 - 0 = 0$
+- Always-taker: $1 - 1 = 0$
+- Complier: $1 - 0 = 1$
+- Defier: 배제됨 ($P=0$)
+
+따라서 기댓값을 취하면
+$$
+\boxed{E[D \mid Z=1] - E[D \mid Z=0] = P(\text{Complier}) = P(C) > 0}.
+$$
+즉, 도구변수에 의한 1단계 처치율 증가분은 **정확히 순응자(Complier) 집단의 모집단 비율**을 의미한다.
+
+---
+
+#### 4. 축약형 차이와 principal strata 분해
+배제제약 하에서 $Y(D(z)) = Y(0) + D(z)[Y(1) - Y(0)]$이다. $\tau = Y(1) - Y(0)$라 두면
+독립성에 의해 축약형(reduced-form / ITT) 결과 차이는
+$$
+\begin{aligned}
+E[Y \mid Z=1] - E[Y \mid Z=0] &= E\big[Y(D(1)) - Y(D(0))\big] \\
+&= E\big[\tau \cdot (D(1) - D(0))\big].
+\end{aligned}
+$$
+유형별 $D(1) - D(0)$ 가중치 적용:
+- Never-taker와 Always-taker는 $Z$가 변해도 실제 처치상태가 변하지 않으므로($D(1)-D(0)=0$), 도구변수 할당의 결과 차이에 전혀 기여하지 못한다.
+- 단조성에 의해 Defier가 없으므로($P(F)=0$), 오직 Complier 집단($D(1)-D(0)=1$)만이 결과 차이를 만들어낸다:
+$$
+\boxed{E[Y \mid Z=1] - E[Y \mid Z=0] = P(C) \cdot E[\tau \mid C] = P(C) \cdot E[Y(1) - Y(0) \mid \text{Complier}]}.
+$$
+
+---
+
+#### 5. Wald ratio의 LATE 식별 증명
+Wald 추정치(Wald estimand)는 축약형 차이를 1단계 처치확률 차이로 나눈 비율이다:
+$$
+\frac{E[Y \mid Z=1] - E[Y \mid Z=0]}{E[D \mid Z=1] - E[D \mid Z=0]} = \frac{P(C) \cdot E[Y(1) - Y(0) \mid C]}{P(C)} = \boxed{E[Y(1) - Y(0) \mid D(1) > D(0)]}.
+$$
+이를 **국소적 평균 처치효과 (Local Average Treatment Effect, LATE)**라 한다.
+Wald 비율은 전체 모집단의 효과가 아니라, **오직 도구변수의 변화에 의해 처치 상태가 유도된 순응자(Complier) 집단에 국한된 평균 인과효과**를 정확히 식별한다.
+
+---
+
+#### 6. LATE를 ATE로 바로 해석할 수 없는 이유
+전체 모집단 평균 효과(ATE)는 전체 유형의 가중평균이다:
+$$
+ATE = P(C)E[\tau \mid C] + P(N)E[\tau \mid N] + P(A)E[\tau \mid A].
+$$
+그러나 도구변수 $Z$는 Never-taker($N$)와 Always-taker($A$)의 처치 행동을 전혀 변경시키지 못하므로, 이 두 집단에 대한 처치효과 $E[\tau \mid N]$과 $E[\tau \mid A]$에 대한 정보는 데이터에 전혀 나타나지 않는다.
+처치효과의 이질성이 존재하여 순응자의 효과가 비순응자의 효과와 다르다면, Wald 추정량 $LATE$는 전체 모집단의 $ATE$와 체계적으로 괴리된다. LATE의 대상 모집단은 오직 **외생적 도구변수 자극에 순응한 Complier 집단**뿐이다.
+
+---
+
+#### 7. Homogeneous effects에서 LATE = ATE
+모든 개인의 처치효과가 $\tau_i = \tau$로 일정하다면, 어떤 하위집단에서도 평균 처치효과는 동일하다:
+$$
+E[\tau \mid C] = E[\tau \mid N] = E[\tau \mid A] = \tau.
+$$
+따라서 이 특수한 경우에는
+$$
+\boxed{LATE = E[\tau \mid C] = \tau = ATE}.
+$$
+전통적인 계량경제학의 상수 계수 모형($Y = \alpha + \beta D + u$)은 효과의 동질성을 암묵적으로 가정하므로 IV 추정량을 전체 효과로 해석했으나, 현대 인과추론에서는 효과의 이질성을 기본으로 전제하므로 LATE로 해석하는 것이 표준적이다.
+
+---
+
+#### 8. Weak first stage와 불안정한 Wald estimator
+1단계 효과가 미약하여 $\Delta_D = E[D \mid Z=1] - E[D \mid Z=0] \approx 0$인 경우, 순응자의 비율 $P(C)$가 거의 0에 가깝다.
+Wald 추정량 $\hat\beta_W = \frac{\hat\Delta_Y}{\hat\Delta_D}$의 분모가 0 근처에 위치하므로, 델타법의 도함수 $\frac{\partial (a/b)}{\partial b} = -\frac{a}{b^2}$에 의해 $\hat\Delta_D$의 작은 표본오차가 추정치 전체를 극단적으로 교란시킨다.
+그 결과 표준적인 정규분포 점근 근사가 무너지고, 추정량의 표본분산이 폭증하며, OLS 방향으로 심각한 유한표본 편향(finite-sample bias)이 발생한다 (**약한 도구변수 문제, Weak Instrument Problem**).
+
+---
+
+#### 9. “상관이 강하면 좋은 도구변수”라는 주장 검토
+이 주장은 **완전히 잘못된(위험한) 판단**이다.
+- $Z$와 $D$의 강한 상관계수는 오직 1단계 관련성(Relevance)만을 입증할 뿐이다.
+- 아무리 상관이 강하더라도, $Z$가 생략된 교란요인과 연결되어 있다면 독립성(Independence)이 위반된다.
+- $Z$가 처치를 통하지 않고 결과에 직접 영향을 주는 우회경로가 존재하면 배제제약(Exclusion)이 붕괴된다.
+- 도구변수에 반대로 반응하는 집단이 존재하면 단조성(Monotonicity)이 위반되어 추정치가 음의 가중치 왜곡을 겪는다.
+따라서 관련성은 도구변수의 필요조건일 뿐이며, 도구변수의 타당성(validity)은 엄밀한 연구설계와 제도적 배경을 바탕으로 독립성, 배제제약, 단조성이 함께 입증되어야 한다.
+
+---
+
+#### 10. Conventional IV moment와 잠재결과 LATE 가정의 비교
+- **전통적 선형 IV ($E[Zu] = 0$):**
+  선형 회귀식 $Y = \alpha + \beta D + u$에서 오차항 $u$와 도구변수 $Z$의 무상관성을 요구하는 순수 통계적 직교조건(Moment Condition)이다. 그러나 효과의 이질성이 존재할 때 추정 계수 $\beta$가 경제학적으로 정확히 누구의 어떤 효과를 나타내는지 설명하지 못한다.
+- **잠재결과 LATE 체계 ($Z \perp \{Y(d), D(z)\}, Y(d,z)=Y(d), D(1)\ge D(0)$):**
+  개인들의 행동적 반응 유형(Principal Strata)을 명시적으로 구분하고, 처치효과의 임의적 이질성을 허용하면서도 Wald 추정량이 정확히 **도구변수에 반응하여 처치상태가 전환된 순응자(Complier) 집단의 국소적 평균 처치효과(LATE)**라는 구체적이고 투명한 인과적 의미를 부여한다.
+
+::: {.callout-tip appearance="simple"}
+**Problem 2 핵심 요약**:
+- Principal Strata: Never-taker, Complier, Always-taker, Defier.
+- 4대 IV 가정: Relevance ($P(C)>0$), Independence ($Z\perp$), Exclusion ($Y(d,z)=Y(d)$), Monotonicity (Defier 배제).
+- LATE 정리: Wald ratio $\frac{\Delta_Y}{\Delta_D} = E[Y(1) - Y(0) \mid D(1) > D(0)] = LATE$ (Complier 평균 효과).
+- ATE와의 관계: 효과가 동질적일 때에만 $LATE = ATE$, 이질적 환경에서는 Complier 효과에 국한.
+- 도구변수 유효성: $Z$-$D$ 상관(Relevance)만으로는 불충분, 외생성(배제제약·독립성)과 단조성이 필수.
+:::
+:::
+
+---
+
+[← 문제 한 스푼 목록으로 돌아가기](../index.html)
