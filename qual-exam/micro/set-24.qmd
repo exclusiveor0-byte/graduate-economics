@@ -18,7 +18,7 @@ GRADUATE MICROECONOMICS · DAILY PRACTICE
 [미시경제학]{.chip .chip--micro}
 [총 2문제]{.chip}
 [예상 25–30분]{.chip}
-[해설 미포함]{.chip}
+[해설 수록 (기본 접힘)]{.chip .chip--primary}
 [석사 졸업시험 감각 유지용]{.chip}
 :::
 :::
@@ -77,6 +77,143 @@ $$
 ::: {.spoon-hint}
 **형식**: **uniform monopoly → consumer surplus → two-part tariff → participation constraint → efficient usage price → surplus extraction**. usage price는 거래량을 결정하고, fixed fee는 참여 여부와 surplus division을 결정한다는 점을 구분하시오.
 :::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 1. Market Structure (Two-Part Tariff & Surplus Extraction)"}
+### Setting & Consumer's Problem
+소비자의 준선형 효용함수(quasilinear utility):
+$$
+U(q,m) = v(q) + m,\qquad v'(q) = 12-q \quad (0\le q\le 12).
+$$
+소비량이 0일 때의 편익을 $v(0)=0$으로 정규화하면
+$$
+v(q) = \int_0^q (12-z)\,dz = 12q - \frac{1}{2}q^2.
+$$
+기업의 한계비용: $MC = 2$, 고정비용 $FC = 0$. Outside option 효용: $\bar U = 0$.
+
+---
+
+#### 1) Uniform monopoly pricing
+**소비자 수요함수 유도:**
+단위당 가격 $p$에서 소비자의 잉여극대화 문제:
+$$
+\max_{0\le q\le 12} \{v(q) - pq\}.
+$$
+내부해($0 < q < 12$)의 일계조건(FOC):
+$$
+v'(q) = p \iff 12 - q = p \implies \boxed{q(p) = 12 - p} \quad (0\le p\le 12).
+$$
+($p \ge 12$이면 $q(p) = 0$).
+
+**독점기업의 이윤극대화:**
+$$
+\pi^U(p) = (p - MC)q(p) = (p - 2)(12 - p) = -p^2 + 14p - 24.
+$$
+일계조건(FOC):
+$$
+\frac{d\pi^U}{dp} = 14 - 2p = 0 \implies \boxed{p^U = 7}.
+$$
+(이계조건: $\frac{d^2\pi^U}{dp^2} = -2 < 0$, 극대점 만족).
+
+이때 최적 생산량은
+$$
+\boxed{q^U = 12 - 7 = 5}.
+$$
+(역수요 $P(q) = 12 - q$에서 $MR(q) = 12 - 2q = MC = 2 \implies q = 5, p = 7$과 동일).
+
+**잉여 및 이윤 계산:**
+- **소비자잉여 (Consumer Surplus):**
+  $$
+  \boxed{CS^U = \frac{1}{2}(12 - 7)\times 5 = \frac{25}{2} = 12.5}.
+  $$
+- **독점 이윤 (Monopoly Profit):**
+  $$
+  \boxed{\pi^U = (7 - 2)\times 5 = 25}.
+  $$
+- **총사회잉여 (Total Surplus):**
+  $$
+  \boxed{TS^U = CS^U + \pi^U = \frac{25}{2} + 25 = \frac{75}{2} = 37.5}.
+  $$
+  (또는 $TS^U = \int_0^5 (12 - z - 2)\,dz = [10z - \frac{1}{2}z^2]_0^5 = 50 - 12.5 = 37.5$).
+
+---
+
+#### 2) Two-part tariff와 participation constraint
+**참여 후 소비량 결정:**
+소비자가 고정가입비 $F$를 내고 시장에 참여하면, 추가적인 1단위에 대해 단위가격 $p$를 지불하므로
+$$
+\max_{0\le q\le 12} \{v(q) - pq - F\}.
+$$
+고정요금 $F$는 한계의사결정에 영향을 주지 않으므로 한계편익과 한계비용 일치조건 $v'(q) = p$에 의해 동일하게
+$$
+\boxed{q(p) = 12 - p}.
+$$
+
+**참여제약 (Participation Constraint / Individual Rationality):**
+소비자가 거래에 참여하여 얻는 순편익이 outside option 효용($0$) 이상이어야 하므로:
+$$
+v(q(p)) - pq(p) - F \ge 0 \iff F \le v(q(p)) - pq(p) \equiv CS(p).
+$$
+주어진 사용가격 $p$에서 고정요금 부과 전 소비자잉여:
+$$
+CS(p) = \int_0^{12-p} (12 - z - p)\,dz = \frac{1}{2}(12 - p)^2.
+$$
+따라서 참여제약식은
+$$
+\boxed{F \le \frac{1}{2}(12 - p)^2}.
+$$
+기업은 이윤을 극대화하기 위해 참여제약이 등호로 결합하도록 고정요금을 설정하므로:
+$$
+F(p) = CS(p) = \frac{1}{2}(12 - p)^2.
+$$
+
+---
+
+#### 3) Optimal two-part tariff와 경제적 메커니즘
+**최적 사용가격 $p^*$와 고정요금 $F^*$:**
+기업의 총이윤 함수는
+$$
+\Pi(p, F) = F + (p - MC)q(p).
+$$
+참여제약 결합 조건 $F = CS(p) = v(q(p)) - pq(p)$를 대입하면:
+$$
+\Pi(p) = \bigl[v(q(p)) - pq(p)\bigr] + (p - 2)q(p) = v(q(p)) - 2q(p) = TS(q(p)).
+$$
+즉, 기업의 이윤은 사회적 총잉여(Total Surplus)와 완벽히 일치한다!
+따라서 거래량 $q$에 대한 이윤극대화:
+$$
+\frac{d\Pi}{dq} = v'(q) - 2 = 0 \implies 12 - q = 2 \implies \boxed{q^* = 10}.
+$$
+소비자가 $q^* = 10$을 선택하도록 유도하는 최적 사용가격(usage price)은
+$$
+\boxed{p^* = MC = 2}.
+$$
+이때 최적 고정요금(fixed fee)은
+$$
+\boxed{F^* = CS(2) = \frac{1}{2}(12 - 2)^2 = 50}.
+$$
+
+**결과 요약 및 비교:**
+- **거래량:** $\boxed{q^* = 10}$
+- **기업 이윤:** $\boxed{\Pi^* = F^* + (p^* - 2)q^* = 50 + (2 - 2)\times 10 = 50}$.
+- **소비자 순잉여:** $\boxed{CS_{\mathrm{net}}^{TP} = CS(p^*) - F^* = 50 - 50 = 0}$.
+- **총잉여:** $\boxed{TS^{TP} = CS_{\mathrm{net}}^{TP} + \Pi^* = 0 + 50 = 50}$.
+
+| 구분 | Uniform Monopoly ($p^U$) | Two-Part Tariff ($p^*, F^*$) | 변화량 ($\Delta$) |
+|:---:|:---:|:---:|:---:|
+| **단위가격 ($p$)** | $7$ | $2$ ($=MC$) | $-5$ |
+| **고정요금 ($F$)** | $0$ | $50$ | $+50$ |
+| **거래량 ($q$)** | $5$ | $10$ | $+5$ (효율적 수량 달성) |
+| **소비자 순잉여 ($CS_{\mathrm{net}}$)** | $12.5$ | $0$ | $-12.5$ |
+| **기업 이윤 ($\Pi$)** | $25$ | $50$ | $+25$ |
+| **총사회잉여 ($TS$)** | $37.5$ | $50$ | $+12.5$ (자중손실 $DWL$ 해소) |
+
+**경제적 메커니즘 및 역할 분담 설명:**
+1. **$p^* = MC$인 이유 (효율적 거래량 유도):**
+   사용가격 $p$는 소비자가 '추가적인 1단위를 소비할지' 결정하는 한계적 인센티브를 통제한다. $p > MC$로 설정하면 소비자가 과소소비하게 되어 자중손실(Deadweight Loss)이 발생하고, 이는 기업이 고정요금으로 추출할 수 있는 파이(잉여의 전체 크기)를 축소시킨다. 따라서 $p = MC$로 설정하여 총사회잉여를 극대화($TS = 50$)하는 것이 기업에게도 최적이다.
+2. **Fixed fee $F$의 역할 (왜곡 없는 잉여 추출):**
+   고정요금 $F$는 거래량 의사결정을 왜곡(distortion)하지 않는 일괄세(lump-sum fee) 역할을 한다. 기업은 $F^* = CS(p^*)$를 통해 극대화된 총잉여 전부를 이윤으로 안전하게 귀속시킬 수 있다.
+   결과적으로 **사용가격 $p$는 효율성(Efficiency, 파이 극대화)**을 담당하고, **고정요금 $F$는 분배/잉여추출(Extraction)**을 전담함으로써 두 목표를 동시에 달성한다.
 :::
 
 ::: {.spoon-problem}
@@ -138,6 +275,148 @@ $$
 ::: {.spoon-hint}
 **형식**: **utility per dollar → corner demand → market clearing → specialization → Pareto efficiency**. linear utility에서는 일반적인 tangency FOC보다 상대가격에 따른 corner choice가 핵심이며, 특정 가격에서는 demand correspondence가 발생할 수 있다.
 :::
+:::
+
+::: {.callout-note collapse="true" title="💡 손풀이 해설 · Problem 2. General Equilibrium (Pure Exchange with Perfect Substitutes)"}
+### Setting
+- 두 소비자의 효용함수 및 초기부존:
+  $$
+  u_1(x_1, y_1) = x_1 + 2y_1, \qquad \omega_1 = (4, 0),
+  $$
+  $$
+  u_2(x_2, y_2) = 2x_2 + y_2, \qquad \omega_2 = (0, 4).
+  $$
+- 총부존: $(\bar x, \bar y) = (4, 4)$.
+- 가격 정규화: $p_y = 1, p_x = p > 0$.
+
+---
+
+#### 1) Wealth와 가격구간별 Marshallian demand
+**소비자별 소득(Wealth):**
+초기부존의 시장가치로 소득이 결정되므로:
+$$
+\boxed{m_1(p) = p\cdot 4 + 1\cdot 0 = 4p}, \qquad \boxed{m_2(p) = p\cdot 0 + 1\cdot 4 = 4}.
+$$
+
+**소비자 1의 단위지출당 한계효용(Utility per Dollar) 및 수요:**
+$$
+\frac{MU_{1x}}{p_x} = \frac{1}{p}, \qquad \frac{MU_{1y}}{p_y} = \frac{2}{1} = 2.
+$$
+- **$p < \frac{1}{2}$ ($\frac{1}{p} > 2$):** $x$-재화의 단위지출당 효용이 엄격히 크므로 전액 $x$-재화만 소비 (Corner solution).
+  $$
+  x_1(p) = \frac{m_1}{p} = \frac{4p}{p} = 4, \quad y_1(p) = 0 \implies \boxed{(x_1(p), y_1(p)) = (4, 0)}.
+  $$
+- **$p > \frac{1}{2}$ ($\frac{1}{p} < 2$):** $y$-재화의 단위지출당 효용이 엄격히 크므로 전액 $y$-재화만 소비 (Corner solution).
+  $$
+  x_1(p) = 0, \quad y_1(p) = \frac{m_1}{1} = 4p \implies \boxed{(x_1(p), y_1(p)) = (0, 4p)}.
+  $$
+- **$p = \frac{1}{2}$ ($\frac{1}{p} = 2$):** 두 재화의 단위지출당 효용이 동일하므로 예산제약선 상의 모든 점이 최적. 이때 $m_1 = 4(1/2) = 2$이므로 수요 대응(demand correspondence):
+  $$
+  \boxed{D_1\left(\frac{1}{2}\right) = \left\{(x_1, y_1)\in\mathbb{R}_+^2 : \frac{1}{2}x_1 + y_1 = 2\right\}}.
+  $$
+
+**소비자 2의 단위지출당 한계효용(Utility per Dollar) 및 수요:**
+$$
+\frac{MU_{2x}}{p_x} = \frac{2}{p}, \qquad \frac{MU_{2y}}{p_y} = \frac{1}{1} = 1.
+$$
+- **$p < 2$ ($\frac{2}{p} > 1$):** $x$-재화의 단위지출당 효용이 엄격히 크므로 전액 $x$-재화만 소비.
+  $$
+  x_2(p) = \frac{m_2}{p} = \frac{4}{p}, \quad y_2(p) = 0 \implies \boxed{(x_2(p), y_2(p)) = \left(\frac{4}{p}, 0\right)}.
+  $$
+- **$p > 2$ ($\frac{2}{p} < 1$):** $y$-재화의 단위지출당 효용이 엄격히 크므로 전액 $y$-재화만 소비.
+  $$
+  x_2(p) = 0, \quad y_2(p) = \frac{m_2}{1} = 4 \implies \boxed{(x_2(p), y_2(p)) = (0, 4)}.
+  $$
+- **$p = 2$ ($\frac{2}{p} = 1$):** 두 재화가 무차별하므로 수요 대응:
+  $$
+  \boxed{D_2(2) = \left\{(x_2, y_2)\in\mathbb{R}_+^2 : 2x_2 + y_2 = 4\right\}}.
+  $$
+
+---
+
+#### 2) Competitive equilibrium ($1/2 < p < 2$) 및 시장청산
+**수요식 및 시장청산:**
+가정된 구간 $\frac{1}{2} < p < 2$에서:
+$$
+(x_1(p), y_1(p)) = (0, 4p), \qquad (x_2(p), y_2(p)) = \left(\frac{4}{p}, 0\right).
+$$
+총수요(Aggregate demand):
+$$
+X^D(p) = x_1(p) + x_2(p) = \frac{4}{p}, \qquad Y^D(p) = y_1(p) + y_2(p) = 4p.
+$$
+$x$-재화 시장 청산 조건:
+$$
+X^D(p) = \bar x \iff \frac{4}{p} = 4 \implies \boxed{p^* = 1}.
+$$
+구한 균형가격 $p^* = 1$은 가정 범위 $\frac{1}{2} < 1 < 2$에 속하므로 정합적이다.
+
+**균형 배분(Equilibrium Allocation):**
+$$
+\boxed{(x_1^*, y_1^*) = (0, 4)}, \qquad \boxed{(x_2^*, y_2^*) = (4, 0)}.
+$$
+
+**두 시장의 동시 청산 확인:**
+- $x$-시장: $x_1^* + x_2^* = 0 + 4 = 4 = \bar x$ $\checkmark$
+- $y$-시장: $y_1^* + y_2^* = 4 + 0 = 4 = \bar y$ $\checkmark$
+
+**Walras' Law 확인:**
+각 소비자의 초과수요(net demand):
+$$
+z_1(p) = (-4, 4p), \qquad z_2(p) = \left(\frac{4}{p}, -4\right).
+$$
+총초과수요: $Z_x(p) = \frac{4}{p} - 4, \; Z_y(p) = 4p - 4$.
+$$
+p Z_x(p) + Z_y(p) = p\left(\frac{4}{p} - 4\right) + (4p - 4) = (4 - 4p) + (4p - 4) = 0.
+$$
+왈라스 법칙이 항상 성립하므로, $x$-시장의 청산($Z_x(1)=0$)은 자동으로 $y$-시장의 청산($Z_y(1)=0$)을 보장한다.
+
+---
+
+#### 3) Gains from trade, 완전특화 및 Pareto efficiency
+**교역의 이득 (Gains from Trade):**
+- 초기부존 상태의 효용:
+  $$
+  u_1(\omega_1) = 4 + 2(0) = 4, \qquad u_2(\omega_2) = 2(0) + 4 = 4.
+  $$
+- 경쟁균형 배분에서의 효용:
+  $$
+  u_1(x_1^*, y_1^*) = 0 + 2(4) = 8, \qquad u_2(x_2^*, y_2^*) = 2(4) + 0 = 8.
+  $$
+- 두 소비자 모두 효용이 $4$에서 $8$로 $2$배 증가하므로, 교역을 통해 **엄격한 후생 개선($u_i^* > u_i(\omega_i)$)**을 얻는다.
+
+**완전특화(Complete Specialization)의 원인:**
+균형 상대가격 $p^* = 1$에서:
+- 소비자 1의 한계대체율: $MRS_1 = \frac{MU_{1x}}{MU_{1y}} = \frac{1}{2} < p^* = 1$.
+  시장가격에 비해 $y$재화를 주관적으로 더 높게 평가하므로($\frac{MU_{1y}}{p_y} = 2 > \frac{MU_{1x}}{p_x} = 1$), 자신이 가진 $x$ 4단위를 모두 팔고 $y$만 4단위 소비한다.
+- 소비자 2의 한계대체율: $MRS_2 = \frac{MU_{2x}}{MU_{2y}} = \frac{2}{1} = 2 > p^* = 1$.
+  시장가격에 비해 $x$재화를 주관적으로 더 높게 평가하므로($\frac{MU_{2x}}{p_x} = 2 > \frac{MU_{2y}}{p_y} = 1$), 자신이 가진 $y$ 4단위를 모두 팔고 $x$만 4단위 소비한다.
+- 따라서 상대가격 $p^*=1$이 두 소비자의 한계대체율 사이에 위치($MRS_1 = \frac{1}{2} < 1 < 2 = MRS_2$)함으로써 두 소비자 모두 각자 상대적으로 더 선호하는 재화로 **완전 소비 특화(complete consumption specialization)**가 일어난다.
+
+**파레토 효율성(Pareto Efficiency)의 직접 증명:**
+임의의 실현가능한 배분(feasible allocation)은 자원제약 $x_1 + x_2 = 4, y_1 + y_2 = 4$ ($x_i, y_i \ge 0$)를 만족한다.
+두 소비자의 효용 합을 계산하면:
+$$
+\begin{aligned}
+u_1 + u_2 &= (x_1 + 2y_1) + (2x_2 + y_2) \\
+&= x_1 + 2(4 - y_2) + 2(4 - x_1) + y_2 \\
+&= 8 - 2y_2 + 8 - x_1 + y_2 \\
+&= 16 - x_1 - y_2.
+\end{aligned}
+$$
+$x_1 \ge 0, y_2 \ge 0$이므로 어떤 실현가능한 배분에서도
+$$
+u_1 + u_2 \le 16.
+$$
+그런데 현재 경쟁균형 배분에서는 $x_1^* = 0, y_2^* = 0$이므로
+$$
+u_1^* + u_2^* = 8 + 8 = 16
+$$
+이 되어 **실현가능한 효용 합의 이론적 상한(최댓값)**을 정확히 달성한다.
+
+만약 균형배분을 파레토 개선(Pareto improvement)하는 다른 실현가능한 배분 $(x_i', y_i')$이 존재한다면,
+한 소비자의 효용을 감소시키지 않으면서 다른 소비자의 효용을 엄격히 증가시켜야 하므로 $u_1' + u_2' > u_1^* + u_2^* = 16$이어야 한다.
+그러나 이는 실현가능성 조건 $u_1 + u_2 \le 16$에 명백히 모순된다.
+따라서 경쟁균형 배분 $( (0,4), (4,0) )$은 **파레토 효율적(Pareto efficient)**이다. (제1후생경제학 정리의 결과와도 일치함).
 :::
 
 ---
