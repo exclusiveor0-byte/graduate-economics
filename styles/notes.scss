@@ -116,6 +116,7 @@ td, th { min-width: 6rem; padding: .7rem !important; }
 .study-card--supplements { grid-column: span 5; border-top: 5px solid #9b5c39; background: #f5e9dc; }
 .study-card--literature { grid-column: span 5; border-top: 5px solid #466b68; background: #e7f0ed; }
 .study-card--qual { grid-column: span 7; border-top: 5px solid #2b5b84; background: #e8f0f8; }
+.study-card--julia { grid-column: span 12; border-top: 5px solid #6c478a; background: #f3edf8; }
 .study-card h3 { margin: .6rem 0 .75rem; font-size: 1.2rem; }
 .study-card p:last-child { margin-bottom: 0; }
 .study-card .status { font-size: .8rem; color: #75665b; }
@@ -127,6 +128,8 @@ td, th { min-width: 6rem; padding: .7rem !important; }
 .study-card--math a { color: #1a365d; }
 .study-card--game-theory .study-card__eyebrow { color: #2e5968; }
 .study-card--game-theory a { color: #1c3c47; }
+.study-card--julia .study-card__eyebrow { color: #6c478a; }
+.study-card--julia a { color: #4b2b68; }
 .study-card__link { margin-top: auto; font-weight: 700; text-decoration: none; }
 .study-card__highlights { margin: .1rem 0 .7rem; color: #654638; font-size: .78rem; line-height: 1.7; }
 .study-card__highlights a { color: #754020; font-weight: 700; text-decoration-color: #c99a78; text-underline-offset: .16em; }
@@ -500,7 +503,7 @@ main :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
   html { font-size: 16px; }
   h1.title { font-size: 1.8rem; }
   .study-grid { grid-template-columns: 1fr; }
-  .study-card--math, .study-card--micro, .study-card--game-theory, .study-card--supplements, .study-card--macro, .study-card--econometrics, .study-card--literature, .study-card--qual { grid-column: 1 / -1; }
+  .study-card--math, .study-card--micro, .study-card--game-theory, .study-card--supplements, .study-card--macro, .study-card--econometrics, .study-card--literature, .study-card--qual, .study-card--julia { grid-column: 1 / -1; }
   .literature-grid { grid-template-columns: 1fr; }
   .home-hero { grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2rem; }
   .home-hero__navigator { padding: 1rem; }

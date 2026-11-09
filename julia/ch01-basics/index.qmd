@@ -1,0 +1,29 @@
+# Chapter 1 · Julia 기초 환경과 핵심 문법 {.unnumbered}
+*Environment Setup · Type System · Multiple Dispatch · Structs · Package Management*
+
+현대 과학 계산과 통계학 연구를 위한 Julia의 기초 실행 환경, 타입 시스템의 핵심 개념, 언어 설계의 정수인 다중 디스패치(Multiple Dispatch), 그리고 계량 연구 워크플로우를 격리하는 패키지 환경을 구축한다.
+
+## Chapter Map
+
+::: {.callout-note title="Reading Roadmap"}
+- **1.1–1.2** Julia의 설계 철학 · Two-Language Problem · 현대적 설치 환경(Juliaup)과 REPL
+- **1.3–1.4** 기본 스칼라 타입 · 제어 흐름 · 함수 정의와 다중 디스패치(Multiple Dispatch)
+- **1.5–1.6** 복합 타입(Struct) · 매개변수화 타입(Parametric Types) · 패키지 관리(Pkg)와 프로젝트 격리
+- **연습문제** 실습 예제와 타입 안정성 점검
+:::
+
+## Sections
+
+- [1.1 Julia의 설계 철학과 Two-Language Problem](contents.html#s11)
+- [1.2 설치 및 개발 환경 (Juliaup, VS Code, REPL)](contents.html#s12)
+- [1.3 기본 문법, 변수 및 타입 계층 구조](contents.html#s13)
+- [1.4 함수의 정의와 다중 디스패치 (Multiple Dispatch)](contents.html#s14)
+- [1.5 복합 타입 (Struct)과 모형 객체 설계](contents.html#s15)
+- [1.6 패키지 관리(Pkg)와 연구 재현성을 위한 Project 격리](contents.html#s16)
+- [실전 실습 및 연습문제](contents.html#exercises)
+- [참고 자료](contents.html#references)
+
+::: {.callout-tip title="본문 읽기"}
+상세 코드 예시와 실행 결과, 문법적 주의사항은 [본문 전체](contents.html)에 수록되어 있습니다.
+위의 Section 링크로 바로 이동하거나 순서대로 읽을 수 있습니다.
+:::
