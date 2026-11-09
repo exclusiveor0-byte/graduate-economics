@@ -8,7 +8,7 @@
     if (!sidebarUl || sidebarUl.dataset.subjectAccordionInit) return;
     sidebarUl.dataset.subjectAccordionInit = "true";
 
-    // 7 primary subject definitions
+    // Primary subject definitions
     // Order matters for fallback prefix matching: specialized/nested paths (qual-exam, supplements, literature)
     // precede generic patterns (econometrics) to prevent false-positive subject matches (e.g., qual-exam/econometrics/).
     const subjectDefs = [
@@ -19,7 +19,8 @@
       { key: "micro", id: "sidebar-subj-micro", pattern: "microeconomics/" },
       { key: "game-theory", id: "sidebar-subj-game-theory", pattern: "game-theory/" },
       { key: "macro", id: "sidebar-subj-macro", pattern: "macroeconomics/" },
-      { key: "metrics", id: "sidebar-subj-metrics", pattern: "econometrics/" }
+      { key: "metrics", id: "sidebar-subj-metrics", pattern: "econometrics/" },
+      { key: "julia", id: "sidebar-subj-julia", pattern: "julia/" }
     ];
 
     const items = Array.from(sidebarUl.children);
