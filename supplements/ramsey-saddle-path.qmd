@@ -260,19 +260,17 @@ Ramsey 모형을 처음 접할 때 가장 빈번히 발생하는 질문은 **"�
 
 ---
 
-## 8. MATLAB 재현 스크립트 안내
+## 8. Julia 재현 스크립트 안내
 
-본 문서의 모든 정적 도표와 4개 GIF 애니메이션은 단 하나의 독립 MATLAB 스크립트 [`supplements/matlab/ramsey_saddle_path.m`](../supplements/matlab/ramsey_saddle_path.m)에 의해 재현된다.
+본 문서의 정상상태 분석, 야코비안 고유치 분해, 역시간 적분(Reverse-Time RK4 Integration) 안장경로 및 소비 도약($\Delta c$) 수치 계산은 단독 실행형 Julia 스크립트 [`supplements/julia/ramsey_saddle_path.jl`](julia/ramsey_saddle_path.jl)을 통해 완전히 재현된다:
 
 ```bash
-# MATLAB R2025b 또는 GNU Octave 환경에서 실행
-matlab -batch "run('supplements/matlab/ramsey_saddle_path.m')"
+# Julia 환경에서 실행 (Stdlib 기반, 외부 패키지 불필요)
+julia supplements/julia/ramsey_saddle_path.jl
 ```
 
 ### 코드 설계의 핵심 기술적 특징
 1. **역시간 적분 (Reverse-Time Integration)**:
    수치적으로 불안정한 안장점 문제를 해결하기 위해, 음의 고유치에 해당하는 고유벡터 방향으로 시간의 부호를 반전($\tau = -t$)시켜 수치 오차 없이 기계 정밀도로 전역 비선형 안장경로를 안정적으로 추출한다.
-2. **배경 객체 불변 원칙**:
-   애니메이션 렌더링 시 quiver 벡터장, nullcline, 축 등 정적 요소를 매 프레임 다시 그리지 않고 상태점 및 궤적 선의 좌표(`XData`, `YData`)만을 갱신하여 깜빡임 없는 최고 화질의 GIF를 생성한다.
-3. **이벤트 함수(ODE Events)**:
-   비선형 궤적이 자본 고갈($k \le 0.08$)이나 상한을 초과할 때 적분을 즉시 중단하도록 `odeset`의 `Events` 속성을 구성하여 수치 발산 및 무한 루프를 방지한다.
+2. **이분법 슈팅 알고리즘 (Bisection Shooting Algorithm)**:
+   사전 결정된 자본 스톡 $k(0)$에서 새로운 안장경로로 착지하는 초기 소비 $c(0^+)$를 이분법 수치 최적화로 탐색하여 자본 고갈 및 소비 급락 경계를 엄밀하게 분리한다.

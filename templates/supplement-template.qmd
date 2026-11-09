@@ -32,7 +32,7 @@ PDF/인쇄용 대표 정적 그림을 삽입한다.
 
 ## Reproducibility
 
-- Source: R / MATLAB / OJS / other
+- Source: Julia / Python / OJS / other
 - Input data:
 - Parameters:
 - Output asset:

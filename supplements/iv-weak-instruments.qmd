@@ -273,6 +273,14 @@ python scripts/generate_iv_gifs.py
   - `generate_gif_iv_geometry_ar()`: 내생성 $\rho$에 따른 OLS 편향 벡터와 2SLS 사영 정화 기하, Wald vs AR 실제 크기 왜곡 곡선 렌더링.
   - `subplots_adjust` 고정 여백 레이아웃을 채택하여 프레임 간 크기 왜곡 현상을 방지한다.
 
+### Julia 기준 몬테카를로 계산 스크립트 연계
+
+Julia 환경을 사용하는 연구자는 단독 실행형 스크립트 [`supplements/julia/iv_weak_instruments.jl`](julia/iv_weak_instruments.jl)을 통해 2,000회 몬테카를로 시뮬레이션, 1단계 $F$-통계량 및 OLS/2SLS 표본분포 메타데이터를 직접 추출할 수 있다:
+
+```bash
+julia supplements/julia/iv_weak_instruments.jl
+```
+
 ---
 
 ## 8. 본문 교재 연계 및 계량경제학 실무 지침
