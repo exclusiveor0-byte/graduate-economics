@@ -290,7 +290,7 @@ MRW(1992)는 물적 자본 외에 **인적 자본(Human Capital, $H$)**을 모�
 
 ---
 
-## 8. 파이썬 및 R 재현 스크립트 안내
+## 8. 파이썬 및 Julia 재현 스크립트 안내
 
 본 보충자료에 수록된 3종의 출판 품질 동적 애니메이션은 프로젝트 루트의 독립 스크립트 [`scripts/generate_solow_gifs.py`](../scripts/generate_solow_gifs.py)를 통해 완전히 재생성된다:
 
@@ -299,10 +299,11 @@ MRW(1992)는 물적 자본 외에 **인적 자본(Human Capital, $H$)**을 모�
 python scripts/generate_solow_gifs.py
 ```
 
-R 환경을 사용하는 연구자는 단독 실행형 스크립트 [`supplements/r/solow-growth.R`](r/solow-growth.R)을 통해 이산시간 전이 시나리오 격자 데이터를 추출할 수 있다:
+Julia 환경을 사용하는 연구자는 단독 실행형 스크립트 [`supplements/julia/solow_growth.jl`](julia/solow_growth.jl)을 통해 이산시간 전이 시나리오 격자(36개 시나리오)와 메타데이터 JSON 및 정적 SVG를 즉시 추출할 수 있다:
 
 ```bash
-Rscript supplements/r/solow-growth.R
+# Solow 성장모형 시나리오 격자 및 정적 SVG 생성 (Julia Stdlib 기반)
+julia supplements/julia/solow_growth.jl
 ```
 
 ---

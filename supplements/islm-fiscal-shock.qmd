@@ -285,7 +285,7 @@ python scripts/generate_islm_gifs.py
 
 ### 본문 챕터 연계
 - [거시경제학 Chapter 지도](../macroeconomics/index.qmd): 단기 균형에서 중장기 물가 조정(AD–AS 모형)으로의 전이.
-- [IS–LM 대화형 도표 원본](matlab/islm_fiscal_animation.m): MATLAB 기준 계산 및 시나리오 경로.
+- [IS–LM 수치 계산 원본](julia/islm_fiscal_shock.jl): Julia 기준 단기 균형 수치해, 시나리오 경로 및 CSV/JSON/SVG 추출.
 
 ### 중장기 동학으로의 확장: 물가 조정과 완전 구축
 단기 IS–LM 모형에서 산출량이 잠재산출량($Y_n$)을 초과($Y^* > Y_n$)하면, 중기적으로 임금과 기대인플레이션이 상승하여 총공급곡선(AS)이 상방 이동한다.

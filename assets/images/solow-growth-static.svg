@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" width="800" height="470">
+  <style>
+    .axis { stroke: #68707a; stroke-width: 1.5; }
+    .grid { stroke: #dfe3e8; stroke-width: 1; stroke-dasharray: 4,4; }
+    .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #17191d; }
+    .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; font-weight: bold; fill: #17191d; }
+    .legend { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; }
+  </style>
+  <rect width="100%" height="100%" fill="#ffffff" />
+  <line x1="80.0" y1="50" x2="80.0" y2="410" class="grid" />
+<text x="80.0" y="430" class="label" text-anchor="middle">0</text>
+  <line x1="247.5" y1="50" x2="247.5" y2="410" class="grid" />
+<text x="247.5" y="430" class="label" text-anchor="middle">10</text>
+  <line x1="415.0" y1="50" x2="415.0" y2="410" class="grid" />
+<text x="415.0" y="430" class="label" text-anchor="middle">20</text>
+  <line x1="582.5" y1="50" x2="582.5" y2="410" class="grid" />
+<text x="582.5" y="430" class="label" text-anchor="middle">30</text>
+  <line x1="750.0" y1="50" x2="750.0" y2="410" class="grid" />
+<text x="750.0" y="430" class="label" text-anchor="middle">40</text>
+  <line x1="80" y1="410.0" x2="750" y2="410.0" class="grid" />
+<text x="68" y="414.0" class="label" text-anchor="end">0.0</text>
+  <line x1="80" y1="335.54177408098815" x2="750" y2="335.54177408098815" class="grid" />
+<text x="68" y="339.54177408098815" class="label" text-anchor="end">0.9</text>
+  <line x1="80" y1="261.0835481619763" x2="750" y2="261.0835481619763" class="grid" />
+<text x="68" y="265.0835481619763" class="label" text-anchor="end">1.8</text>
+  <line x1="80" y1="186.62532224296442" x2="750" y2="186.62532224296442" class="grid" />
+<text x="68" y="190.62532224296442" class="label" text-anchor="end">2.7</text>
+  <line x1="80" y1="112.16709632395253" x2="750" y2="112.16709632395253" class="grid" />
+<text x="68" y="116.16709632395253" class="label" text-anchor="end">3.6</text>
+  <line x1="80" y1="410" x2="750" y2="410" class="axis" />
+  <line x1="80" y1="50" x2="80" y2="410" class="axis" />
+  <text x="415.0" y="455" class="label" text-anchor="middle">Period (t)</text>
+  <text x="25" y="230.0" class="label" text-anchor="middle" transform="rotate(-90, 25, 230.0)">Capital per effective worker (k)</text>
+  <text x="80" y="32" class="title">Solow Transition: Baseline (s = 0.22, δ = 0.06, k₀ = 0.5)</text>
+  <line x1="80" y1="96.95652173913038" x2="750" y2="96.95652173913038" stroke="#a16207" stroke-width="2.5" stroke-dasharray="6,4" />
+  <polyline fill="none" stroke="#087e8b" stroke-width="3.5" points="80.0,368.63 96.75,358.2 113.5,347.6 130.25,336.96 147.0,326.4 163.75,316.0 180.5,305.8 197.25,295.86 214.0,286.2 230.75,276.86 247.5,267.85 264.25,259.17 281.0,250.84 297.75,242.85 314.5,235.2 331.25,227.89 348.0,220.91 364.75,214.26 381.5,207.93 398.25,201.9 415.0,196.16 431.75,190.72 448.5,185.54 465.25,180.64 482.0,175.98 498.75,171.57 515.5,167.4 532.25,163.44 549.0,159.7 565.75,156.15 582.5,152.8 599.25,149.63 616.0,146.64 632.75,143.81 649.5,141.13 666.25,138.61 683.0,136.22 699.75,133.97 716.5,131.84 733.25,129.84 750.0,127.94" />
+  <rect x="550" y="350" width="190" height="52" fill="#ffffff" stroke="#dfe3e8" rx="6" />
+  <line x1="565" y1="368" x2="595" y2="368" stroke="#087e8b" stroke-width="3" />
+  <text x="605" y="372" class="legend" fill="#17191d">k_t (trajectory)</text>
+  <line x1="565" y1="386" x2="595" y2="386" stroke="#a16207" stroke-width="2.5" stroke-dasharray="6,4" />
+  <text x="605" y="390" class="legend" fill="#17191d">k* = 3.784 (SS)</text>
+</svg>

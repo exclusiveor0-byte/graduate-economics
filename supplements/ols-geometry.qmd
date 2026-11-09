@@ -383,12 +383,12 @@ $$
 python scripts/generate_ols_geometry_gifs.py
 ```
 
-### MATLAB 기준 계산 스크립트 연계
+### Julia 기준 계산 스크립트 연계
 
-MATLAB R2025b 환경을 사용하는 연구자는 단독 실행형 스크립트 [`supplements/matlab/ols_geometry_monte_carlo.m`](matlab/ols_geometry_monte_carlo.m)을 통해 동일한 기준 표본 및 몬테카를로 통계량을 추출할 수 있다:
+Julia 환경을 사용하는 연구자는 단독 실행형 스크립트 [`supplements/julia/ols_geometry.jl`](julia/ols_geometry.jl)을 통해 동일한 기준 표본, 잔차 직교성 및 몬테카를로 통계량을 추출할 수 있다:
 
 ```bash
-matlab -batch "run('supplements/matlab/ols_geometry_monte_carlo.m')"
+julia supplements/julia/ols_geometry.jl
 ```
 
 ---
