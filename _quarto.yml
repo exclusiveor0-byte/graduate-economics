@@ -340,6 +340,10 @@ book:
     - qual-exam/econometrics/set-18.qmd
     - qual-exam/econometrics/set-19.qmd
     - qual-exam/econometrics/set-20.qmd
+  - julia/index.qmd
+  - part: julia/ch01-basics/index.qmd
+    chapters:
+    - julia/ch01-basics/contents.qmd
   - references.qmd
   page-footer:
     center: Collaborative graduate economics knowledge base

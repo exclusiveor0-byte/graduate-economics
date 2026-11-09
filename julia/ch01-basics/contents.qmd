@@ -1,0 +1,284 @@
+# 1. Julia 기초 환경과 핵심 문법
+
+이 장은 계량경제학 및 머신러닝 연구를 수행하기 위한 Julia 프로그래밍의 기초 원리와 문법을 다룬다. Julia가 고성능 과학 계산 언어로서 주목받는 이유인 **다중 디스패치(Multiple Dispatch)**와 **타입 시스템(Type System)**의 원리를 이해하고, 재현 가능한 연구 환경을 구성하는 방법을 익힌다.
+
+---
+
+### 1.1 Julia의 설계 철학과 Two-Language Problem {#s11}
+
+경제학과 통계학의 전통적인 수치 계산 환경은 이른바 **양언어 문제(Two-Language Problem)**를 안고 있었다.
+
+::: {.callout-note title="Definition: Two-Language Problem"}
+연구자가 모델의 수학적 논리를 개발하고 탐색적 분석(EDA)을 수행할 때는 생산성과 가독성이 높은 고수준 동적 언어(Python, R, MATLAB)를 사용하지만, 대규모 수치 최적화나 반복 시뮬레이션의 병목 구간에서는 계산 속도를 확보하기 위해 저수준 정적 컴파일 언어(C, C++, Fortran)로 코드를 다시 작성해야 하는 구조적 단절을 의미한다.
+:::
+
+Julia는 고수준 언어의 가독성과 편의성을 유지하면서도 네이티브 C 언어에 필적하는 실행 속도를 제공하기 위해 설계되었다.
+
+::: {.callout-important title="Proposition: Julia가 빠른 이유"}
+Julia는 단순한 인터프리터 언어가 아니며, 다음과 같은 메커니즘을 통해 실행 속도를 극대화한다:
+1. **Just-In-Time (JIT) / Just-Ahead-Of-Time (JAOT) 컴파일**: LLVM 컴파일러 인프라를 바탕으로 함수가 특정 타입 조합으로 처음 호출되는 시점에 최적화된 기계어(Machine Code)를 생성한다.
+2. **타입 추론(Type Inference)과 타입 전문화(Type Specialization)**: 개발자가 명시적으로 타입을 선언하지 않아도 컴파일러가 변수의 흐름을 분석하여 구체적 타입(Concrete Type)을 유추하고 기계어를 특화한다.
+3. **다중 디스패치(Multiple Dispatch)**: 함수 호출 시 모든 전달인자의 런타임 타입을 기반으로 최적의 특화 메서드를 즉시 연결한다.
+:::
+
+---
+
+### 1.2 설치 및 개발 환경 (Juliaup, VS Code, REPL) {#s12}
+
+#### Juliaup: 공식 버전 관리자
+
+Julia 설치는 공식 버전 멀티플렉서인 `juliaup`을 사용하는 것이 표준이다. Windows, macOS, Linux 모두 단일 명령어로 관리된다.
+
+```bash
+# Windows (PowerShell)
+winget install julia
+
+# macOS / Linux
+curl -fsSL https://install.julialang.org | sh
+```
+
+`juliaup`을 통해 손쉽게 최신 안정화 버전(release), 장기지원 버전(lts), 야간 빌드(nightly)를 전환할 수 있다.
+
+```bash
+juliaup status
+juliaup update
+```
+
+#### REPL의 4가지 모드
+
+터미널에서 `julia`를 입력하면 대화형 환경인 REPL(Read-Eval-Print Loop)이 실행된다. Julia REPL은 강력한 4가지 모드를 내장하고 있다:
+
+1. **Julian 모드 (`julia>`)**: 기본 코드를 실행하는 모드
+2. **패키지 모드 (`(@v1.10) pkg>`)**: `]`를 입력하면 진입. 패키지 설치(`add`), 제거(`rm`), 업데이트(`up`), 가상환경 활성화(`activate`)를 수행
+3. **셸 모드 (`shell>`)**: `;`를 입력하면 진입. 터미널 명령어를 즉시 실행
+4. **도움말 모드 (`help?>`)**: `?`를 입력하면 진입. 함수, 매크로, 타입의 공식 독스트링(Docstring)과 사용법 조회
+
+::: {.callout-tip collapse="true" title="Proof: REPL 단축키 팁"}
+- 이전 모드로 복귀: `Backspace` (빈 입력줄에서)
+- 화면 지우기: `Ctrl + L`
+- REPL 종료: `Ctrl + D`
+:::
+
+---
+
+### 1.3 기본 문법, 변수 및 타입 계층 구조 {#s13}
+
+Julia의 타입 시스템은 단일 상속(Single Inheritance) 트리 구조를 이루며, **추상 타입(Abstract Type)**과 **구체적 타입(Concrete Type)**으로 엄격히 구분된다.
+
+::: {.callout-note title="Definition: Concrete Type vs Abstract Type"}
+- **구체적 타입 (Concrete Type)**: 실제 메모리에 인스턴스화될 수 있는 값의 타입 (예: `Float64`, `Int64`, `String`). 구체적 타입은 다른 타입의 부모가 될 수 없다(서브타이핑 불가).
+- **추상 타입 (Abstract Type)**: 값으로 직접 인스턴스화될 수는 없으나, 타입 계층 구조상 관련된 타입들을 묶어 다형성(Polymorphism)을 구현하는 상위 노드 (예: `Number`, `Real`, `Integer`).
+:::
+
+타입 상속 관계는 서브타입 연산자 `<:`로 확인한다:
+
+```julia
+# 타입 계층 관계 확인
+Float64 <: AbstractFloat  # true
+AbstractFloat <: Real     # true
+Real <: Number            # true
+Number <: Any             # true
+```
+
+#### 변수 정의와 유니코드 지원
+
+수학 및 계량경제학 수식을 소스코드에 그대로 옮겨 적을 수 있도록 풍부한 유니코드 입력을 지원한다. LaTeX 문법 뒤에 `Tab` 키를 누르면 자동 변환된다.
+
+```julia
+# LaTeX 기호 입력 (\alpha[Tab], \beta[Tab], \sigma[Tab])
+α = 0.05
+β = [1.2, -0.4, 0.8]
+σ² = 1.44
+
+# 유니코드 첨자 (\hat[Tab], \bar[Tab])
+β̂ = [1.18, -0.39, 0.82]
+```
+
+#### 제어 흐름 (Control Flow)
+
+```julia
+# if-else 조건문
+if α < 0.01
+    println("1% 유의수준에서 기각")
+elseif α < 0.05
+    println("5% 유의수준에서 기각")
+else
+    println("귀무가설 채택")
+end
+
+# for 반복문과 내포 표기(Comprehension)
+squares = [x^2 for x in 1:10 if isodd(x)]
+```
+
+---
+
+### 1.4 함수의 정의와 다중 디스패치 (Multiple Dispatch) {#s14}
+
+Julia의 설계 중심에는 **다중 디스패치(Multiple Dispatch)**가 있다.
+
+::: {.callout-important title="Proposition: Multiple Dispatch의 메커니즘"}
+객체지향 언어(Python, C++, Java)의 단일 디스패치(Single Dispatch)는 메서드 호출 시 첫 번째 인자(`self` 또는 `this`)의 클래스에 종속된다. 반면 Julia의 다중 디스패치는 **함수에 전달된 모든 인자의 구체적 타입 튜플** $(T_1, T_2, \dots, T_k)$을 검사하여 가장 구체적으로 일치하는 메서드를 선택하여 실행한다.
+:::
+
+#### 함수 정의 방식
+
+```julia
+# 1. 축약형 한 줄 정의 (수학 함수 표현에 적합)
+f(x, y) = x^2 + 2x*y + y^2
+
+# 2. 표준 블록 정의
+function loss_function(y, ŷ)
+    residuals = y .- ŷ
+    return sum(residuals .^ 2)
+end
+```
+
+#### 다중 디스패치 실습: 계량 모형 적합
+
+동일한 함수명 `fit_model`에 대해 인자 타입에 따라 완전히 다른 연산 루틴을 배정할 수 있다:
+
+```julia
+# 범용 수학 정의
+function solve_system(A::AbstractMatrix{T}, b::AbstractVector{T}) where T<:Real
+    println("표준 LU 분해를 통한 해 계산")
+    return A \ b
+end
+
+# 대칭 행렬(Symmetric) 특화 메서드
+using LinearAlgebra
+function solve_system(A::Symmetric{T}, b::AbstractVector{T}) where T<:Real
+    println("Cholesky 분해를 통한 고속 해 계산")
+    return cholesky(A) \ b
+end
+```
+
+`A`가 일반 정방행렬일 때는 LU 분해로, 대칭행렬(`Symmetric(A)`)일 때는 Cholesky 분해로 컴파일러가 실행 시점에 오버헤드 없이 적합한 메서드를 자동 호출한다.
+
+::: {.callout-caution title="Caution: Type Piracy를 피하라"}
+다른 사람이 작성한 패키지의 함수에 다른 패키지의 타입을 인자로 하는 메서드를 확장(Type Piracy)하면, 전체 코드베이스의 디스패치 테이블을 오염시켜 예측 불가능한 버그를 유발할 수 있다. 자신이 정의한 함수이거나, 자신이 정의한 타입을 최소 하나 이상 포함할 때 메서드를 정의하는 것이 안전하다.
+:::
+
+---
+
+### 1.5 복합 타입 (Struct)과 모형 객체 설계 {#s15}
+
+데이터와 매개변수를 묶는 객체는 `struct`를 사용해 정의한다. 기본적으로 Julia의 `struct`는 **불변(immutable)**이다.
+
+```julia
+# 불변 구조체: 불필요한 힙 할당을 방지하여 매우 빠름
+struct OLSResult{T<:Real}
+    coef::Vector{T}
+    stderr::Vector{T}
+    t_stat::Vector{T}
+    r_squared::T
+end
+
+# 인스턴스 생성 예시
+res = OLSResult([1.5, -0.8], [0.15, 0.08], [10.0, -10.0], 0.65)
+println("추정 계수: ", res.coef)
+```
+
+만약 값을 실행 중에 변경해야 한다면 `mutable struct`를 선언할 수 있다:
+
+```julia
+mutable struct GradientDescentState
+    iteration::Int
+    current_x::Vector{Float64}
+    current_loss::Float64
+end
+```
+
+::: {.callout-note appearance="simple" title="Remark: Parametric Type의 중요성"}
+구조체 필드에 `Vector{Float64}`처럼 고정하는 대신 `struct Model{T<:Real} params::Vector{T} end`와 같이 매개변수화(Parametric)하면, 단정밀도(`Float32`), 배정밀도(`Float64`), 또는 자동 미분을 위한 이중수(`Dual`) 타입을 모두 지원할 수 있어 코드의 범용성이 획기적으로 향상된다.
+:::
+
+---
+
+### 1.6 패키지 관리(Pkg)와 연구 재현성을 위한 Project 격리 {#s16}
+
+대학원 연구에서 가장 치명적인 문제 중 하나는 몇 달 뒤 코드를 실행했을 때 패키지 버전 업데이트로 인해 결과가 재현되지 않는 것이다. Julia는 내장 패키지 관리자 `Pkg`를 통해 프로젝트 단위 가상환경을 기본 지원한다.
+
+```julia
+using Pkg
+
+# 현재 폴더에 독립 프로젝트 환경 생성 및 활성화
+Pkg.activate(".")
+
+# 연구에 필요한 패키지 추가
+Pkg.add(["DataFrames", "LinearAlgebra", "Statistics", "Optim", "ForwardDiff"])
+```
+
+이 명령을 실행하면 작업 디렉토리에 두 개의 파일이 생성된다:
+- `Project.toml`: 프로젝트에서 명시적으로 요구하는 패키지 이름과 UUID 목록
+- `Manifest.toml`: 설치된 모든 의존성 패키지의 정확한 버전 해시(Exact Version Hash)가 기록된 체크섬 파일
+
+다른 동료나 논문 심사위원이 이 코드를 그대로 재현하려면 프로젝트 폴더에서 다음을 실행하기만 하면 된다:
+
+```julia
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()  # Manifest.toml에 기록된 완벽히 동일한 버전들을 100% 동일하게 복원
+```
+
+---
+
+### 실전 실습 및 연습문제 {#exercises}
+
+#### 문제 1: OLS 정규방정식 함수 작성
+$n$개의 관측치와 $k$개의 설명변수로 이루어진 행렬 $X \in \mathbb{R}^{n \times k}$와 종속변수 $y \in \mathbb{R}^n$가 주어졌을 때:
+1. 정규방정식 $X'X \beta = X'y$를 풀기 위한 함수 `estimate_ols(X, y)`를 작성하라.
+2. 행렬곱 연산자 `*` 및 역행렬 `inv()` 대신 백슬래시 연산자 `\`를 사용하여 수치적 안정성을 확보하라.
+3. 잔차 벡터 $e = y - X\hat{\beta}$와 $R^2$를 계산하여 앞서 정의한 `OLSResult` 구조체로 반환하도록 구현하라.
+
+::: {.callout-tip collapse="true" title="Proof: 모범 답안 예시"}
+```julia
+using LinearAlgebra, Statistics
+
+struct OLSResult{T<:Real}
+    coef::Vector{T}
+    stderr::Vector{T}
+    t_stat::Vector{T}
+    r_squared::T
+end
+
+function estimate_ols(X::AbstractMatrix{T}, y::AbstractVector{T}) where T<:Real
+    n, k = size(X)
+    
+    # 1. 정규방정식 풀이 (X'X \ X'y)
+    XtX = X' * X
+    Xty = X' * y
+    β̂ = XtX \ Xty
+    
+    # 2. 잔차 및 오차 분산 계산
+    e = y - X * β̂
+    s² = sum(e .^ 2) / (n - k)
+    
+    # 3. 분산-공분산 행렬 및 표준오차
+    cov_β = s² * inv(XtX)
+    se = sqrt.(diag(cov_β))
+    t_vals = β̂ ./ se
+    
+    # 4. 결정계수 R²
+    y_bar = mean(y)
+    tss = sum((y .- y_bar) .^ 2)
+    ssr = sum(e .^ 2)
+    r2 = 1.0 - (ssr / tss)
+    
+    return OLSResult(β̂, se, t_vals, r2)
+end
+
+# 테스트
+X = [ones(100) randn(100, 2)]
+y = X * [2.0, -1.5, 0.5] + randn(100) * 0.5
+res = estimate_ols(X, y)
+println("추정 결과: R² = ", round(res.r_squared, digits=4))
+```
+:::
+
+---
+
+### 참고 자료 {#references}
+
+- Bezanson, J., Edelman, A., Karpinski, S., & Shah, V. B. (2017). *Julia: A fresh approach to numerical computing*. SIAM Review, 59(1), 65-98.
+- Julia Language Documentation: <https://docs.julialang.org/en/v1/>
+- QuantEcon Julia Programming Guide: <https://julia.quantecon.org/>

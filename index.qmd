@@ -67,6 +67,11 @@ subtitle: Graduate Economics Knowledge Base
 
 대학원 졸업시험 대비 매일 미시·거시·계량 문제를 풀고 축적하는 아카이브
 :::
+::: {.home-archive-item}
+**줄리아(Julia) 프로그래밍**
+
+계량이론과 머신러닝, 고성능 과학 계산을 위한 Julia 언어 및 응용 아카이브
+:::
 :::
 :::
 
@@ -184,6 +189,20 @@ QUALIFYING EXAM
 [문제 목록 및 검색](qual-exam/index.html){.study-card__link} →
 
 [과목별 탭 구분 · 회차 검색 · 단계별 풀이]{.status}
+:::
+::: {.study-card .study-card--julia}
+::: {.study-card__number}
+09
+:::
+::: {.study-card__eyebrow}
+SCIENTIFIC COMPUTING & ML
+:::
+### [줄리아(Julia) 프로그래밍](julia/index.html)
+기초 환경 · 다중 디스패치 · 고성능 배열 연산 · 수치 최적화 · 계량 시뮬레이션 · 머신러닝
+
+[Chapter 01 읽기](julia/index.html){.study-card__link} →
+
+[계량이론과 머신러닝 연구자를 위한 고성능 Julia 정리노트]{.status}
 :::
 ::::
 

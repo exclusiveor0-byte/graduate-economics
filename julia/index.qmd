@@ -1,0 +1,61 @@
+# 줄리아(Julia) 프로그래밍 {.unnumbered}
+
+## 계량이론과 머신러닝을 위한 고성능 과학 계산
+
+**고성능 수치 계산, 다중 디스패치, 자동 미분, 몬테카를로 시뮬레이션, 그리고 통계적 학습**
+
+이 과정은 계량이론(Econometric Theory), 수치해석, 통계적 학습(Machine Learning)을 연구하는 대학원생을 위한 고성능 과학 계산 언어 **Julia** 정리노트이다. 
+
+연구자가 수치 계산을 수행할 때 겪는 가장 큰 장벽은 프로토타이핑 언어(Python, R, MATLAB)의 생산성과 저수준 언어(C, C++, Fortran)의 연산 속도 간의 괴리, 즉 **양언어 문제(Two-Language Problem)**이다. Julia는 LLVM 기반 JIT 컴파일과 정교한 타입 시스템, 그리고 **다중 디스패치(Multiple Dispatch)**를 통해 고수준의 직관적인 수식 표현과 네이티브 C 수준의 실행 속도를 동시에 달성한다.
+
+본 노트는 기초 프로그래밍 문법에서 시작하여 선형대수 및 행렬 최적화, 비선형 추정량(M-추정량, GMM, MLE)을 위한 수치 최적화, 대규모 몬테카를로 시뮬레이션 및 멀티스레딩, 그리고 최신 머신러닝(MLJ, Flux) 기법까지 체계적으로 다룬다.
+
+---
+
+## Chapter 로드맵 및 편성 현황
+
+| Chapter | 대주제 및 주요 내용 | 상태 |
+|---|---|---|
+| [Chapter 01](ch01-basics/index.html) | **Julia 기초 환경과 핵심 문법** · 설치(Juliaup), REPL·VS Code 환경, 변수와 기본 타입, 다중 디스패치(Multiple Dispatch), 복합 타입(Structs), 함수형 패러다임 | [기초 수록]{.status} |
+| Chapter 02 | **선형대수와 고성능 배열 연산** · 다차원 배열(Array), 브로드캐스팅(`.` 연산), 메모리 뷰(`@views`), BLAS/LAPACK 바인딩, 타입 안정성(Type Stability)과 성능 프로파일링 | [예정]{.status} |
+| Chapter 03 | **수치 최적화와 계량 추정** · 자동 미분(ForwardDiff, Zygote), 비선형 최적화(`Optim.jl`, `JuMP.jl`), 수치적 MLE, 비선형 최소자승법(NLS), GMM 추정기 구현 | [예정]{.status} |
+| Chapter 04 | **몬테카를로 시뮬레이션과 통계적 추론** · 의사난수 생성기, 다중 스레드 병렬화(Multi-threading), 비모수 부트스트랩, 점근 분포 근사 및 크기 왜곡(Size Distortion) 평가 | [예정]{.status} |
+| Chapter 05 | **머신러닝과 통계적 학습** · 데이터 핸들링(`DataFrames.jl`), 회귀분석(`GLM.jl`), 정규화 기법(Lasso, Ridge), 의사결정나무와 앙상블, 신경망 기초(`Flux.jl`), 인과추론 ML | [예정]{.status} |
+
+---
+
+## Chapters
+
+### [Chapter 01 · Julia 기초 환경과 핵심 문법](ch01-basics/index.html)
+
+현대적인 Julia 개발 환경(Juliaup, VS Code 확장, Project 환경 격리)과 언어의 철학, 동적 언어이면서도 정적 컴파일 수준의 최적화를 가능케 하는 다중 디스패치(Multiple Dispatch) 원리, 함수 정의와 복합 타입(Struct) 설계를 다룬다.
+
+[Chapter 01 읽기](ch01-basics/index.html) →
+
+[환경 설정 · 타입 시스템 · 다중 디스패치 · 패키지 관리]{.status}
+
+---
+
+## 계량이론 연구자를 위한 Julia의 강점
+
+::: {.callout-note title="1. Two-Language Problem의 근본적 해결"}
+연구 아이디어를 Python이나 R로 검증한 뒤, 대규모 시뮬레이션이나 중첩 수치 최적화(Nested Fixed Point Algorithm 등)를 위해 C++이나 Fortran으로 재작성하던 번거로움이 사라집니다. Julia는 사람이 읽기 쉬운 수학적 표기법 그대로 C 언어와 동등한 벤치마크 속도를 냅니다.
+:::
+
+::: {.callout-important title="2. 무오차 자동 미분 (Automatic Differentiation)"}
+복잡한 비선형 목적함수(예: GMM 모멘트 조건, 다변수 Log-likelihood)의 그레디언트와 헤시안을 유한차분법(Finite Difference)의 수치오차 없이, 기호 미분(Symbolic Math)의 연산 폭발 없이 기계 정밀도로 즉시 계산합니다.
+:::
+
+::: {.callout-tip title="3. 다중 디스패치와 코드 재사용성"}
+함수의 인자 타입 조합에 따라 최적화된 구현체로 자동 라우팅되는 다중 디스패치를 통해, 새로운 계량 모형이나 통계적 추정량을 정의할 때 기존 라이브러리의 선형대수 및 최적화 루틴을 완벽하게 재활용할 수 있습니다.
+:::
+
+---
+
+## 주요 참고 문헌 및 자료
+
+- Perkel, J. M. (2019). *Julia: come for the syntax, stay for the speed*. Nature, 572(7768), 141-142.
+- Bezanson, J., Edelman, A., Karpinski, S., & Shah, V. B. (2017). *Julia: A fresh approach to numerical computing*. SIAM Review, 59(1), 65-98.
+- Sargent, T. J., & Stachurski, J. (QuantEcon). *Quantitative Economics with Julia*.
+- Storopoli, J., Huijzer, R., & Alonso, L. (2021). *Julia Data Science*.
+- Julia 공식 문서: <https://docs.julialang.org/>
