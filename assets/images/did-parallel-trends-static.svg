@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #fcf9f2; }
+      .grid { stroke: #e5ded3; stroke-width: 1; stroke-dasharray: 4,4; }
+      .axis { stroke: #2d251e; stroke-width: 2; }
+      .text-title { font-family: 'Pretendard', 'Segoe UI', sans-serif; font-size: 18px; font-weight: 700; fill: #2d251e; }
+      .text-sub { font-family: 'Pretendard', 'Segoe UI', sans-serif; font-size: 13px; fill: #75665b; }
+      .text-axis { font-family: 'Pretendard', 'Segoe UI', sans-serif; font-size: 14px; font-weight: 600; fill: #2d251e; }
+      .text-label { font-family: 'Pretendard', 'Segoe UI', sans-serif; font-size: 13px; font-weight: 600; }
+      .line-treat { stroke: #087e8b; stroke-width: 3.5; fill: none; }
+      .line-control { stroke: #75665b; stroke-width: 3.5; fill: none; }
+      .line-counter { stroke: #087e8b; stroke-width: 2.5; stroke-dasharray: 6,6; fill: none; }
+      .line-diff { stroke: #c0392b; stroke-width: 2; marker-start: url(#arrow-up); marker-end: url(#arrow-down); }
+      .pt-treat { fill: #087e8b; stroke: #fcf9f2; stroke-width: 2; }
+      .pt-control { fill: #75665b; stroke: #fcf9f2; stroke-width: 2; }
+      .pt-counter { fill: #ffffff; stroke: #087e8b; stroke-width: 2.5; }
+      .box-att { fill: #fcedec; stroke: #c0392b; stroke-width: 1.5; rx: 6; }
+    </style>
+    <marker id="arrow-down" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b"/>
+    </marker>
+    <marker id="arrow-up" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#c0392b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="520" class="bg"/>
+
+  <!-- Title & Subtitle -->
+  <text x="50" y="45" class="text-title">이중차분법(DiD)의 기하학: 반사실적(Counterfactual) 궤적과 ATT 식별</text>
+  <text x="50" y="70" class="text-sub">평행추세 가정이 성립할 때 통제집단의 전후 변화를 이용해 처치집단의 가상적 미처치 궤적을 복원한다</text>
+
+  <!-- Axes -->
+  <line x1="120" y1="440" x2="820" y2="440" class="axis"/>
+  <line x1="120" y1="100" x2="120" y2="440" class="axis"/>
+
+  <!-- Grid lines -->
+  <line x1="280" y1="100" x2="280" y2="440" class="grid"/>
+  <line x1="660" y1="100" x2="660" y2="440" class="grid"/>
+  <line x1="120" y1="360" x2="820" y2="360" class="grid"/>
+  <line x1="120" y1="280" x2="820" y2="280" class="grid"/>
+  <line x1="120" y1="200" x2="820" y2="200" class="grid"/>
+  <line x1="120" y1="130" x2="820" y2="130" class="grid"/>
+
+  <!-- Axis Labels -->
+  <text x="280" y="470" text-anchor="middle" class="text-axis">사전 시점 (Post = 0)</text>
+  <text x="660" y="470" text-anchor="middle" class="text-axis">사후 시점 (Post = 1)</text>
+  <text x="470" y="500" text-anchor="middle" class="text-sub">시점 t (정책 개입 발생: t*)</text>
+  <text x="70" y="270" text-anchor="middle" transform="rotate(-90 70 270)" class="text-axis">결과변수 Y</text>
+
+  <!-- Intervention Line -->
+  <line x1="470" y1="100" x2="470" y2="440" stroke="#b46f45" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="475" y="120" fill="#b46f45" font-family="'Pretendard', sans-serif" font-size="12px" font-weight="700">정책 개입 시점 (t*)</text>
+
+  <!-- Coordinates:
+       Treated: Pre(280, 260) -> Post(660, 130)
+       Control: Pre(280, 380) -> Post(660, 300)
+       Counterfactual for Treated: Pre(280, 260) -> Post(660, 180)  [dy = -80, same as control]
+  -->
+  
+  <!-- Trend Lines -->
+  <!-- Control Group Line -->
+  <line x1="280" y1="380" x2="660" y2="300" class="line-control"/>
+  <!-- Counterfactual Line (Parallel) -->
+  <line x1="280" y1="260" x2="660" y2="180" class="line-counter"/>
+  <!-- Treated Group Observed Line -->
+  <line x1="280" y1="260" x2="660" y2="130" class="line-treat"/>
+
+  <!-- Vertical Brackets / ATT Indicator -->
+  <line x1="660" y1="135" x2="660" y2="175" class="line-diff"/>
+
+  <!-- Data Points -->
+  <!-- Control Points -->
+  <circle cx="280" cy="380" r="6" class="pt-control"/>
+  <circle cx="660" cy="300" r="6" class="pt-control"/>
+
+  <!-- Treated Points -->
+  <circle cx="280" cy="260" r="6" class="pt-treat"/>
+  <circle cx="660" cy="130" r="6" class="pt-treat"/>
+
+  <!-- Counterfactual Point -->
+  <circle cx="660" cy="180" r="6" class="pt-counter"/>
+
+  <!-- Point Annotations -->
+  <text x="265" y="385" text-anchor="end" class="text-label" fill="#75665b">E[Y₀₀]</text>
+  <text x="680" y="305" text-anchor="start" class="text-label" fill="#75665b">E[Y₀₁] (통제 관측치)</text>
+
+  <text x="265" y="265" text-anchor="end" class="text-label" fill="#087e8b">E[Y₁₀]</text>
+  <text x="680" y="130" text-anchor="start" class="text-label" fill="#087e8b">E[Y₁₁] (처치 관측치)</text>
+
+  <text x="680" y="185" text-anchor="start" class="text-label" fill="#087e8b">E[Y₁₁(0)] = E[Y₁₀] + ΔY₀ (반사실적)</text>
+
+  <!-- ATT Callout Box -->
+  <g transform="translate(690, 140)">
+    <rect width="170" height="50" class="box-att"/>
+    <text x="85" y="22" text-anchor="middle" fill="#c0392b" font-family="'Pretendard', sans-serif" font-size="12px" font-weight="700">처치 효과 (ATT: τ)</text>
+    <text x="85" y="38" text-anchor="middle" fill="#c0392b" font-family="'Pretendard', sans-serif" font-size="11px">E[Y₁₁] - E[Y₁₁(0)]</text>
+  </g>
+
+  <!-- Parallel slope explanation -->
+  <g transform="translate(340, 310)">
+    <text x="0" y="0" fill="#75665b" font-family="'Pretendard', sans-serif" font-size="12px" font-style="italic">자연적 시간 추세 (ΔY₀ = E[Y₀₁] - E[Y₀₀])</text>
+    <path d="M 20 10 L 80 -8" stroke="#75665b" stroke-width="1" fill="none" marker-end="url(#arrow-down)"/>
+  </g>
+
+  <!-- Legend Box -->
+  <g transform="translate(140, 120)">
+    <rect width="210" height="90" fill="#ffffff" stroke="#e5ded3" stroke-width="1.5" rx="4"/>
+    <line x1="15" y1="22" x2="45" y2="22" class="line-treat"/>
+    <circle cx="30" cy="22" r="4" class="pt-treat"/>
+    <text x="55" y="26" class="text-sub" font-weight="600">처치집단 실제 관측선</text>
+
+    <line x1="15" y1="47" x2="45" y2="47" class="line-counter"/>
+    <circle cx="30" cy="47" r="4" class="pt-counter"/>
+    <text x="55" y="51" class="text-sub" font-weight="600">반사실적 잠재 추세선</text>
+
+    <line x1="15" y1="72" x2="45" y2="72" class="line-control"/>
+    <circle cx="30" cy="72" r="4" class="pt-control"/>
+    <text x="55" y="76" class="text-sub" font-weight="600">통제집단 실제 관측선</text>
+  </g>
+</svg>
