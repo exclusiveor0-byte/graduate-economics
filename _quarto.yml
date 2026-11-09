@@ -4,8 +4,7 @@ project:
   resources:
     - assets/**
     - supplements/interactive/**
-    - supplements/r/**
-    - supplements/matlab/**
+    - supplements/julia/**
     - styles/macro-content.scss
     - styles/econometrics-content.scss
     - styles/game-theory-content.scss
@@ -251,6 +250,7 @@ book:
     - supplements/ols-projection-geometry.qmd
     - supplements/iv-weak-instruments.qmd
     - supplements/classical-testing-trinity.qmd
+    - supplements/did-parallel-trends.qmd
   - part: "보충자료 · 가이드"
     chapters:
     - supplements/visualization-guide.qmd

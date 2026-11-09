@@ -1,6 +1,6 @@
 ---
 title: "계산·시각화 보충자료 (Supplements)"
-subtitle: "대학원 경제학 18대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
+subtitle: "대학원 경제학 19대 핵심 모형의 수치 시뮬레이션 및 동적 기하학 포털"
 ---
 
 ::: {.spoon-hero}
@@ -11,7 +11,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 # 계산·시각화 보충자료 (Supplements)
 
 ::: {.spoon-hero__desc}
-본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 18대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학, 게임이론, 경제학을 위한 수학의 핵심 정리와 위상도, 직교사영 기하를 39종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
+본문의 수리 이론과 경제학적 직관을 유기적으로 연결하는 대학원 경제학 19대 핵심 모형의 고해상도 수치 시뮬레이션 및 동적 기하학 아카이브이다. 미시경제학, 거시경제학, 계량경제학, 게임이론, 경제학을 위한 수학의 핵심 정리와 위상도, 직교사영 기하를 42종의 고해상도 애니메이션과 엄밀한 수학적 전개로 탐색할 수 있다.
 :::
 
 ::: {.spoon-hero__tags}
@@ -19,8 +19,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 [미시경제학 (5편)]{.chip .chip--micro}
 [게임이론 (2편)]{.chip .chip--gt}
 [거시경제학 (4편)]{.chip .chip--macro}
-[계량경제학 (4편)]{.chip .chip--metrics}
-[39종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
+[계량경제학 (5편)]{.chip .chip--metrics}
+[42종 고해상도 동적 시뮬레이션]{.chip .chip--gif}
 [엄밀한 수리 증명]{.chip .chip--primary}
 [재현 가능 수치 코드]{.chip}
 :::
@@ -28,7 +28,7 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 
 ::: {.spoon-search-wrapper}
 ::: {.spoon-search-box}
-<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 주제어, 모형, 정리 검색 (예: 닫힌집합, 폐포, 도집합, KKT, 승수, 그림자 가격, Slutsky, Solow, Ramsey, OLS, 사영, FWL, 후생정리, 도구변수, Wald, LR, LM, Folk Theorem, Grim Trigger, Centipede, 지네 게임...)" autocomplete="off">
+<input type="text" id="spoon-search" class="spoon-search-input" placeholder="🔍 주제어, 모형, 정리 검색 (예: 닫힌집합, 폐포, 도집합, KKT, 승수, 그림자 가격, Slutsky, Solow, Ramsey, OLS, 사영, FWL, 후생정리, 도구변수, Wald, LR, LM, DiD, 평행추세, 이중차분법, Folk Theorem, Grim Trigger, Centipede, 지네 게임...)" autocomplete="off">
 <span id="spoon-search-count" class="spoon-count-badge">실시간 검색 대기 중</span>
 :::
 :::
@@ -38,8 +38,8 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
 ### 전체 보기
 
 ::: {.spoon-guide-box}
-**📚 대학원 경제학 18대 계산·시각화 보충자료 통합 포털**
-미시·거시·계량·수리경제학·게임이론 전 분야의 계산·시각화 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 Python/Julia 수치 시뮬레이션으로 제작된 보충자료 18편은 상단 검색창에서 즉시 필터링할 수 있다.
+**📚 대학원 경제학 19대 계산·시각화 보충자료 통합 포털**
+미시·거시·계량·수리경제학·게임이론 전 분야의 계산·시각화 보충자료를 한 곳에서 연결한다. 엄밀한 수리 전개와 Python/Julia 수치 시뮬레이션으로 제작된 보충자료 19편은 상단 검색창에서 즉시 필터링할 수 있다.
 :::
 
 ::: {.spoon-empty-msg}
@@ -462,6 +462,30 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 계량 1권 제9장 정확추론(Exact Inference) 및 제10장 대표본이론</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Metrics 5: Difference-in-Differences & Parallel Trends -->
+<a href="did-parallel-trends.html" class="spoon-card" data-subject="metrics">
+  <div class="spoon-card__header">
+    <span class="chip chip--metrics">계량경제학</span>
+    <span class="chip chip--gif">3종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">이중차분법(DiD)과 평행추세: 식별 메커니즘, 동태적 이벤트 스터디 및 가정 위반 진단</div>
+  <div class="spoon-card__desc">처치효과(ATT)의 인과적 식별 원리와 반사실적(Counterfactual) 분해, 다기간 패널 이원고정효과(TWFE) 모형, 동태적 이벤트 스터디(Event Study) 사전추세 검정, 그리고 차별적 추세에 따른 편향을 Julia 수치 시뮬레이션 및 인터랙티브 시각화와 함께 다룬다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">이중차분법(DiD)</span>
+    <span class="chip chip--topic">평행추세 가정</span>
+    <span class="chip chip--topic">반사실적 상태</span>
+    <span class="chip chip--topic">이벤트 스터디</span>
+    <span class="chip chip--topic">TWFE 고정효과</span>
+    <span class="chip chip--topic">차별적 추세 편향</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 계량 1권 제3장 타깃 모형과 식별 및 제10장 대표본이론</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>
@@ -962,6 +986,30 @@ COMPUTATIONAL & VISUALIZATION SUPPLEMENTS · INTERACTIVE PORTAL
   </div>
   <div class="spoon-card__chapter">
     <span>📖 연계: 계량 1권 제9장 정확추론(Exact Inference) 및 제10장 대표본이론</span>
+  </div>
+  <div class="spoon-card__footer">
+    <span class="status">보충자료 탐색하기 →</span>
+  </div>
+</a>
+
+<!-- Metrics 5: Difference-in-Differences & Parallel Trends -->
+<a href="did-parallel-trends.html" class="spoon-card" data-subject="metrics">
+  <div class="spoon-card__header">
+    <span class="chip chip--metrics">계량경제학</span>
+    <span class="chip chip--gif">3종 동적 시뮬레이션</span>
+  </div>
+  <div class="spoon-card__title">이중차분법(DiD)과 평행추세: 식별 메커니즘, 동태적 이벤트 스터디 및 가정 위반 진단</div>
+  <div class="spoon-card__desc">처치효과(ATT)의 인과적 식별 원리와 반사실적(Counterfactual) 분해, 다기간 패널 이원고정효과(TWFE) 모형, 동태적 이벤트 스터디(Event Study) 사전추세 검정, 그리고 차별적 추세에 따른 편향을 Julia 수치 시뮬레이션 및 인터랙티브 시각화와 함께 다룬다.</div>
+  <div class="spoon-card__topics">
+    <span class="chip chip--topic">이중차분법(DiD)</span>
+    <span class="chip chip--topic">평행추세 가정</span>
+    <span class="chip chip--topic">반사실적 상태</span>
+    <span class="chip chip--topic">이벤트 스터디</span>
+    <span class="chip chip--topic">TWFE 고정효과</span>
+    <span class="chip chip--topic">차별적 추세 편향</span>
+  </div>
+  <div class="spoon-card__chapter">
+    <span>📖 연계: 계량 1권 제3장 타깃 모형과 식별 및 제10장 대표본이론</span>
   </div>
   <div class="spoon-card__footer">
     <span class="status">보충자료 탐색하기 →</span>

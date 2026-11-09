@@ -4,7 +4,7 @@
 # =============================================================================
 
 println("="^70)
-println("Running All 6 Graduate Economics Computational Supplements in Julia")
+println("Running All 7 Graduate Economics Computational Supplements in Julia")
 println("="^70)
 
 scripts = [
@@ -13,7 +13,8 @@ scripts = [
     "iv_weak_instruments.jl",
     "ols_geometry.jl",
     "ols_projection.jl",
-    "ramsey_saddle_path.jl"
+    "ramsey_saddle_path.jl",
+    "did_parallel_trends.jl"
 ]
 
 julia_dir = @__DIR__
@@ -26,5 +27,5 @@ for (idx, script) in enumerate(scripts)
 end
 
 println("\n" * "="^70)
-println("All 6 Julia computational supplements executed with 0 errors!")
+println("All 7 Julia computational supplements executed with 0 errors!")
 println("="^70)

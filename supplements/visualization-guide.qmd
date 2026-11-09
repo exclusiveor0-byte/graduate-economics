@@ -17,6 +17,7 @@
 - [코어(Core)와 경쟁균형 수렴: 에지워스 상자에서 Debreu–Scarf 복제경제 동학](core-competitive-convergence.qmd): 2인 에지워스 상자에서의 코어 선분, r-복제경제에서의 불균등 연합 블로킹, 그리고 왈라스 경쟁균형으로의 Debreu–Scarf 수렴 동학을 고해상도 시뮬레이션으로 확인한다.
 - [실물경기변동(RBC) 모형: 기술충격과 동태적 충격반응(IRF) 전파](rbc-technology-shock.qmd): 표준 RBC 모형에서 1% 기술충격에 따른 노동시장 균형(기간간 대체)과 자원배분(소비 평활화 vs 투자 변동성), 내생적 자본축적, 그리고 6대 거시변수 충격반응함수(IRF)와 충격 지속성 비교를 확인한다.
 - [3대 고전 가설검정의 기하학: Wald, 우도비(LR), 라그랑주 승수(LM/Score)](classical-testing-trinity.qmd): 로그우도 곡면 위에서 Wald의 모수 수평거리, LR의 우도 높이갭, LM의 접선경사를 비교하고 선형회귀에서의 W ≥ LR ≥ LM 부등식 및 비선형 불변성 상충을 시뮬레이션한다.
+- [이중차분법(DiD)과 평행추세: 식별 메커니즘, 동태적 이벤트 스터디 및 가정 위반 진단](did-parallel-trends.qmd): 2x2 반사실적(Counterfactual) 분해, TWFE 다기간 이벤트 스터디 사전추세 검정, 차별적 추세에 따른 편향을 Julia 수치 시뮬레이션 및 Python 애니메이션으로 비교한다.
 - [위상수학 기초: 닫힌집합(Closed Set)·폐포(Closure)·도집합(Derived Set)](topology-closed-sets-closure.qmd): 2차원 평면에서의 수열적 수렴과 극한점, 도집합과 폐포의 3대 동치 특성화, 닫힌집합 판별, 그리고 바이어슈트라스 극값정리와 경제학적 최적화의 수학적 토대를 해부한다.
 
 ## 선택 기준
